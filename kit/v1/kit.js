@@ -300,10 +300,14 @@ function choiceList(options, onPick) {
 const TYPES = {
   multiple_choice(item, ctx) {
     const list = choiceList(item.options, ctx.changed);
+    /* если озвучка совпадает с правильным ответом, даём послушать только после проверки — иначе это подсказка */
+    const spoiler = !!item.say && norm(item.say) === norm(item.options[item.answer]);
+    const el = h('div', {}, item.say && !spoiler ? sayLine(item.say) : null, h('p', { class: 'ak-prompt', text: item.prompt }), list.el);
     return {
-      el: h('div', {}, item.say ? sayLine(item.say) : null, h('p', { class: 'ak-prompt', text: item.prompt }), list.el),
+      el,
       ready: () => list.get() >= 0,
       check: () => {
+        if (spoiler) el.append(sayLine(item.say));
         const ok = list.get() === item.answer;
         list.btns.forEach((b, i) => b.classList.toggle('is-right', i === item.answer));
         if (!ok) list.btns[list.get()]?.classList.add('is-wrong');
