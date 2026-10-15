@@ -72,15 +72,32 @@
   .vw-btn:disabled { opacity: .35; cursor: default; }
   .vw-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 
-  /* ---------- полоска прогресса и маршрут ---------- */
-  .vw-progress { position: fixed; z-index: 40; top: 0; left: 0; right: 0; height: 4px; background: var(--lime); transform-origin: 0 50%; transform: scaleX(0); display: none; }
-  .has-gsap .vw-progress { display: block; }
-  .vw-route { position: sticky; top: 0; z-index: 20; display: flex; gap: 8px; overflow-x: auto; padding: calc(10px + env(safe-area-inset-top)) 16px 10px; background: rgba(255, 255, 255, .96); scrollbar-width: none; box-shadow: 0 8px 18px -16px rgba(0, 0, 0, .5); }
-  .vw-route::-webkit-scrollbar { display: none; }
-  .vw-route a { flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--fog); color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 600; }
-  .vw-route a b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; }
-  .vw-route a.is-on { background: var(--lime); }
-  @media (min-width: 900px) { .vw-route { justify-content: center; } }
+  /* ---------- свой скроллбар: мяч катится по газону к лунке ---------- */
+  .vw-sb { --p: 0; position: fixed; z-index: 25; top: calc(env(safe-area-inset-top) + 6px); left: 10px; right: 10px; height: 32px; border-radius: 999px; background: repeating-linear-gradient(90deg, var(--grass-a) 0 22px, var(--grass-b) 22px 44px); box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .35), inset 0 0 0 2px rgba(0, 0, 0, .08); }
+  .vw-sb__track { position: absolute; inset: 0 40px 0 18px; cursor: pointer; touch-action: none; }
+  .vw-sb__path { position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed rgba(255, 255, 255, .45); }
+  .vw-sb__fill { position: absolute; left: 0; top: calc(50% - 2px); width: 100%; height: 4px; border-radius: 4px; background: #fff; transform-origin: 0 50%; transform: scaleX(var(--p)); }
+  .vw-sb__mark { position: absolute; left: calc(var(--m, 0) * 100%); top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .vw-sb__mark::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px var(--ink); }
+  .vw-sb__mark.is-read::before { background: var(--amber); }
+  .vw-sb__ball { position: absolute; z-index: 1; left: calc(var(--p) * 100%); top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 32px; height: 32px; cursor: grab; touch-action: none; }
+  .vw-sb__ball:active { cursor: grabbing; }
+  .vw-sb__ball i { width: 22px; height: 22px; border-radius: 50%; rotate: calc(var(--p) * 1800deg); background: radial-gradient(circle at 50% 22%, var(--ink) 0 2px, transparent 2.5px), radial-gradient(circle at 30% 26%, rgba(255, 255, 255, .7), transparent 40%), radial-gradient(circle, rgba(0, 0, 0, .12) 1px, transparent 1.6px) 0 0 / 5px 5px, radial-gradient(circle, #fff 0, #e4e5df 75%, #c9cac4 100%); box-shadow: 0 3px 6px rgba(0, 0, 0, .35); }
+  .vw-sb__hole { position: absolute; right: 8px; top: 0; bottom: 0; width: 26px; pointer-events: none; }
+  .vw-sb__hole svg { width: 100%; height: 100%; overflow: visible; }
+  .vw-sb.is-in .vw-sb__ball i { scale: .55; filter: brightness(.7); }
+  @media (min-width: 768px) {
+    .vw-sb { top: 16px; bottom: 16px; left: auto; right: 8px; width: 40px; height: auto; background: repeating-linear-gradient(180deg, var(--grass-a) 0 26px, var(--grass-b) 26px 52px); }
+    .vw-sb__track { inset: 20px 0 52px; }
+    .vw-sb__path { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 2px dashed rgba(255, 255, 255, .45); }
+    .vw-sb__fill { left: calc(50% - 2px); top: 0; width: 4px; height: 100%; transform-origin: 50% 0; transform: scaleY(var(--p)); }
+    .vw-sb__mark { left: 50%; top: calc(var(--m, 0) * 100%); }
+    .vw-sb__ball { left: 50%; top: calc(var(--p) * 100%); width: 40px; height: 40px; }
+    .vw-sb__ball i { width: 26px; height: 26px; }
+    .vw-sb__hole { left: 0; right: 0; top: auto; bottom: 6px; width: auto; height: 44px; }
+    header.vw-hero { padding-top: 10px; padding-right: clamp(16px, calc(60px + (1100px - 100vw) / 2), 56px); }
+    main { padding-right: clamp(16px, calc(888px - 100vw), 56px); }
+  }
 
   /* ---------- мячи: цвет = твёрдая/мягкая, размер = широкая/узкая ---------- */
   .vw-ball {
@@ -106,7 +123,7 @@
   .vw-ball.is-twin { outline: 3px solid var(--amber); outline-offset: 3px; }
 
   /* ---------- первый экран: газон ---------- */
-  .vw-hero { max-width: 1100px; margin: 0 auto; padding: 10px 16px 0; }
+  .vw-hero { max-width: 1100px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 48px) 16px 0; }
   .vw-lawn { position: relative; border-radius: 36px; overflow: hidden; padding: clamp(14px, 4vw, 40px); background: repeating-linear-gradient(90deg, var(--grass-a) 0 12.5%, var(--grass-b) 12.5% 25%); }
   .vw-lawn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255, 255, 255, .18), transparent 45%); pointer-events: none; }
   .vw-screen { position: relative; z-index: 1; background: var(--paper); border-radius: 26px; padding: clamp(18px, 5vw, 44px) clamp(16px, 5vw, 48px) clamp(14px, 4vw, 28px); text-align: center; }
@@ -304,7 +321,7 @@
 
   @media (hover: hover) {
     .vw-ball:hover { scale: 1.07; }
-    .vw-route a:hover, .vw-words button:hover { background: #e6e7e2; }
+    .vw-words button:hover { background: #e6e7e2; }
     .vw-green button:hover, .vw-hole.is-pickable:hover { background: rgba(255, 255, 255, .26); }
     .vw-btn:hover { scale: 1.03; }
   }
@@ -315,7 +332,13 @@
 </style>
 </head>
 <body>
-<div class="vw-progress" data-progress aria-hidden="true"></div>
+<div class="vw-sb" data-scrollbar>
+  <div class="vw-sb__track" data-sb-track>
+    <span class="vw-sb__path"></span><span class="vw-sb__fill"></span>
+    <span class="vw-sb__ball" data-sb-ball role="slider" aria-label="Где я в уроке" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i></i></span>
+  </div>
+  <span class="vw-sb__hole" aria-hidden="true"><svg viewBox="0 0 26 32"><ellipse cx="11" cy="23" rx="9" ry="4" fill="#13240c"/><line x1="17" y1="23" x2="17" y2="3" stroke="#0b0b0b" stroke-width="2"/><path data-sb-flag d="M18 3 L26 6.5 L18 10 Z" fill="#ffcc00"/></svg></span>
+</div>
 
 <header class="vw-hero">
   <div class="vw-lawn">
@@ -368,16 +391,6 @@
   </div>
 </header>
 
-<nav class="vw-route" aria-label="Маршрут урока" data-route>
-  <a href="#story"><b>0</b>Стадион</a>
-  <a href="#pairs"><b>1</b>Пары</a>
-  <a href="#width"><b>2</b>Рот</a>
-  <a href="#lab"><b>3</b>Лунки</a>
-  <a href="#scene"><b>4</b>Паром</a>
-  <a href="#traps"><b>5</b>Ловушки</a>
-  <a href="#practice"><b>6</b>Практика</a>
-  <a href="#cheat"><b>7</b>Шпаргалка</a>
-</nav>
 
 <main>
 
@@ -740,6 +753,19 @@
 
 </main>
 
+<template data-achievement data-title="Все восемь в лунках" data-text="Отличаешь твёрдые гласные от мягких, узкие от широких — и göl от gol.">
+  <svg viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
+    <defs><clipPath id="bd-lawn"><circle cx="80" cy="80" r="76"/></clipPath></defs>
+    <g clip-path="url(#bd-lawn)"><rect width="160" height="160" fill="#4fa22b"/><rect x="0" width="20" height="160" fill="#5cb432"/><rect x="40" width="20" height="160" fill="#5cb432"/><rect x="80" width="20" height="160" fill="#5cb432"/><rect x="120" width="20" height="160" fill="#5cb432"/></g>
+    <circle cx="80" cy="80" r="76" fill="none" stroke="#0b0b0b" stroke-width="4"/>
+    <g class="bd-dots"><circle cx="34" cy="44" r="6" fill="#ffcc00"/><circle cx="130" cy="96" r="5" fill="#fff"/><circle cx="40" cy="122" r="5" fill="#fff"/><circle cx="70" cy="30" r="4" fill="#0b0b0b"/></g>
+    <ellipse cx="96" cy="114" rx="26" ry="9" fill="#13240c"/>
+    <line x1="112" y1="114" x2="112" y2="34" stroke="#0b0b0b" stroke-width="4" stroke-linecap="round"/>
+    <path class="bd-flag" d="M114 34 L146 46 L114 58 Z" fill="#ffcc00" stroke="#0b0b0b" stroke-width="3" stroke-linejoin="round"/>
+    <g class="bd-ball"><circle cx="88" cy="104" r="15" fill="#fff" stroke="#0b0b0b" stroke-width="3"/><circle cx="82" cy="98" r="3" fill="#0b0b0b"/><circle cx="94" cy="98" r="3" fill="#0b0b0b"/><circle cx="88" cy="109" r="5" fill="none" stroke="#0b0b0b" stroke-width="2.5"/></g>
+  </svg>
+</template>
+
 <script src="../kit/v1/gsap.min.js"></script>
 <script type="module" src="../kit/v1/kit.js"></script>
 <script src="../kit/v1/tracker.js" defer></script>
@@ -822,23 +848,75 @@ addEventListener('DOMContentLoaded', () => {
     whileVisible($('.vw-putt'), () => putt.play(), () => putt.pause());
   }
 
-  /* полоска прогресса и маршрут */
-  if (anim) {
-    ScrollTrigger.config({ ignoreMobileResize: true });
-    G.to('[data-progress]', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: 'main', start: 'top top', end: 'bottom bottom', scrub: .3 } });
+  /* ---------- свой скроллбар: мяч катится к лунке ---------- */
+  if (anim) ScrollTrigger.config({ ignoreMobileResize: true });
+  const sb = $('[data-scrollbar]'), track = $('[data-sb-track]'), sbBall = $('[data-sb-ball]'), sbFlag = $('[data-sb-flag]');
+  const SB = { story: 'Стадион', pairs: 'Пары', width: 'Рот', lab: 'Лунки', scene: 'Паром', traps: 'Ловушки', video: 'Видео', practice: 'Практика', check: 'Проверка', cheat: 'Шпаргалка' };
+  const secs = $$('[data-section]');
+  const marks = new Map();
+  secs.forEach((s) => {
+    const k = s.dataset.section;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'vw-sb__mark'; b.setAttribute('aria-label', `Перейти: ${SB[k] || k}`);
+    b.addEventListener('click', (e) => { e.stopPropagation(); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    track.insertBefore(b, sbBall);
+    marks.set(k, b);
+  });
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const maxY = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  function sbLayout() {
+    const m = maxY();
+    secs.forEach((s) => marks.get(s.dataset.section).style.setProperty('--m', Math.min(1, Math.max(0, (s.getBoundingClientRect().top + scrollY) / m)).toFixed(4)));
+    sbUpdate();
   }
-  const route = $('[data-route]');
-  const links = new Map($$('a', route).map((a) => [a.getAttribute('href').slice(1), a]));
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver((ents) => ents.forEach((e) => {
-      if (!e.isIntersecting) return;
-      const a = links.get(e.target.id);
-      if (!a) return;
-      links.forEach((x) => x.classList.toggle('is-on', x === a));
-      route.scrollTo({ left: a.offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth' });
-    }), { rootMargin: '-45% 0px -50% 0px' });
-    $$('main section[id]').forEach((s) => io.observe(s));
+  let holed = false;
+  function sbUpdate() {
+    const p = Math.min(1, Math.max(0, scrollY / maxY()));
+    sb.style.setProperty('--p', p.toFixed(4));
+    sbBall.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+    const inHole = p > .995;
+    if (inHole === holed) return;
+    holed = inHole;
+    sb.classList.toggle('is-in', inHole);
+    if (inHole && anim) G.fromTo(sbFlag, { rotation: 0 }, { rotation: -18, svgOrigin: '18 6.5', duration: .18, yoyo: true, repeat: 3, ease: 'sine.inOut' });
   }
+  addEventListener('scroll', sbUpdate, { passive: true });
+  /* страховка, если scroll приходит с опозданием */
+  let sbLastY = -1;
+  setInterval(() => { if (scrollY !== sbLastY) { sbLastY = scrollY; sbUpdate(); } }, 150);
+  addEventListener('resize', sbLayout);
+  addEventListener('load', sbLayout);
+  document.fonts?.ready.then(sbLayout);
+  const ratioAt = (e) => { const r = track.getBoundingClientRect(); return Math.min(1, Math.max(0, vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width)); };
+  track.addEventListener('click', (e) => { if (sbBall.contains(e.target)) return; window.scrollTo({ top: ratioAt(e) * maxY(), behavior: reduce ? 'auto' : 'smooth' }); });
+  let dragging = false;
+  sbBall.addEventListener('pointerdown', (e) => { dragging = true; sbBall.setPointerCapture(e.pointerId); e.preventDefault(); });
+  sbBall.addEventListener('pointermove', (e) => { if (dragging) window.scrollTo(0, ratioAt(e) * maxY()); });
+  const drop = (e) => { dragging = false; sbBall.releasePointerCapture?.(e.pointerId); };
+  sbBall.addEventListener('pointerup', drop);
+  sbBall.addEventListener('pointercancel', drop);
+  sbBall.addEventListener('keydown', (e) => {
+    const step = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05 }[e.key];
+    if (step) { e.preventDefault(); window.scrollTo(0, scrollY + step * maxY()); }
+  });
+  addEventListener('alterna:read', (e) => {
+    const b = marks.get(e.detail?.key);
+    if (!b || b.classList.contains('is-read')) return;
+    b.classList.add('is-read');
+    if (anim) G.fromTo(b, { scale: .3 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' });
+  });
+  sbLayout();
+
+  /* ---------- ачивка: мяч с двумя точками закатывается в лунку ---------- */
+  addEventListener('alterna:achievement', (e) => {
+    const { timeline: tl, badge } = e.detail || {};
+    if (!tl || !badge || !window.gsap) return;
+    const q = (s) => badge.querySelector(s);
+    tl.from(q('.bd-ball'), { x: -78, y: -6, rotation: -540, svgOrigin: '88 104', duration: .8, ease: 'power2.out' }, .9);
+    tl.to(q('.bd-ball'), { y: 10, scale: .8, svgOrigin: '88 104', duration: .25, ease: 'power2.in' }, 1.7);
+    tl.fromTo(q('.bd-flag'), { rotation: 0 }, { rotation: -14, svgOrigin: '112 40', duration: .2, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 1.75);
+    tl.from(q('.bd-dots').children, { scale: 0, transformOrigin: '50% 50%', duration: .35, ease: 'back.out(3)', stagger: .06 }, 1.85);
+  });
 
   /* ---------- «сначала угадай» ---------- */
   $$('[data-guess]').forEach((box) => {
