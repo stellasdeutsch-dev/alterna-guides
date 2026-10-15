@@ -1,0 +1,1165 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#E9F5FD">
+<meta name="alterna:topic" content="lib.verbs">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Турецкий глагол: инфинитив и первые 30 глаголов</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  :root {
+    --ink: #394C53;
+    --ink-soft: #52707E;
+    --muted: #5d7d8a;
+    --blue: #3FA9F5;
+    --blue-deep: #1B8BDD;
+    --red: #F24C47;
+    --yellow: #FFD166;
+    --bg: #E9F5FD;
+    --bg-soft: #F4FAFE;
+    --line: #E3EDF3;
+    --chip: #F3F7FA;
+    --white: #fff;
+    --r-lg: 28px;
+    --r-md: 20px;
+    --r-sm: 14px;
+    --shadow-s: 0 2px 10px rgba(57,76,83,.06);
+    --shadow-m: 0 6px 28px rgba(57,76,83,.08);
+
+    --ak-bg: #ffffff;
+    --ak-surface: var(--chip);
+    --ak-ink: var(--ink);
+    --ak-muted: var(--muted);
+    --ak-line: var(--line);
+    --ak-accent: var(--blue-deep);
+    --ak-accent-soft: #dcefff;
+    --ak-radius: 20px;
+    --ak-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--ak-text)/1.55 var(--ak-font); overflow-x: clip; }
+  main { padding: 18px 16px calc(64px + env(safe-area-inset-bottom)); }
+  section { max-width: 760px; margin: 0 auto; padding: clamp(30px, 6vw, 56px) 0 0; }
+  h1, h2, h3 { margin: 0; font-weight: 750; letter-spacing: -.02em; line-height: 1.12; }
+  h1 { font-size: clamp(28px, 8.4vw, 58px); }
+  h2 { font-size: clamp(24px, 6.6vw, 38px); margin-bottom: 4px; }
+  h3 { font-size: 19px; }
+  p { margin: 0 0 12px; max-width: 65ch; }
+  button { font: inherit; color: inherit; }
+  .vb-accent { color: var(--red); font-style: italic; }
+  .vb-blue { color: var(--blue-deep); }
+  .vb-red { color: var(--red); }
+  .vb-eyebrow { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+  .vb-eyebrow::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); flex: none; }
+  .vb-uline { display: block; width: min(220px, 60%); height: 12px; margin: 2px 0 14px; overflow: visible; }
+  .vb-uline path { fill: none; stroke: var(--red); stroke-width: 3; stroke-linecap: round; }
+  .vb-card { background: var(--white); border-radius: var(--r-lg); padding: clamp(18px, 4.5vw, 30px); box-shadow: var(--shadow-m); margin-top: 14px; position: relative; }
+  .vb-beat p { font-size: 17px; line-height: 1.5; }
+  .vb-note { font-size: 15px; color: var(--muted); }
+  .vb-tr { font-weight: 700; color: var(--ink); }
+  .vb-btn { min-height: 44px; padding: 10px 18px; border-radius: 999px; border: 2px solid var(--blue); background: var(--white); color: var(--blue-deep); font-weight: 650; cursor: pointer; }
+  .vb-btn.is-on, .vb-btn[aria-pressed="true"] { background: var(--blue); color: #fff; }
+  .vb-btn--red { border-color: var(--red); color: var(--red); }
+  .vb-btn--red.is-on { background: var(--red); color: #fff; }
+  .vb-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  button:focus-visible, input:focus-visible { outline: 3px solid var(--blue-deep); outline-offset: 2px; }
+  @media (hover: hover) { .vb-btn:hover { scale: 1.04; } }
+
+  /* ---------- первый экран ---------- */
+  .vb-hero { background: var(--white); border-radius: var(--r-lg); padding: 28px 20px 24px; box-shadow: var(--shadow-m); position: relative; overflow: hidden; }
+  .vb-hero > *:not(.vb-letters) { position: relative; z-index: 1; }
+  .vb-letters { position: absolute; inset: 0; pointer-events: none; }
+  .vb-letters i { position: absolute; font-style: normal; font-weight: 800; animation: vb-float 8s ease-in-out infinite; }
+  @keyframes vb-float { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-14px) rotate(14deg); } }
+  .vb-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .vb-tag { font-size: 13px; padding: 6px 13px; border-radius: 999px; background: var(--chip); color: var(--ink-soft); font-weight: 600; }
+  .vb-tag--dark { background: var(--ink); color: #fff; }
+  .vb-hero h1 { animation: vb-rise .7s cubic-bezier(.2,1.4,.4,1) both; }
+  .vb-hero h1 .vb-accent { display: block; }
+  @keyframes vb-rise { from { transform: translateY(26px) rotate(2deg); } to { transform: none; } }
+  .vb-sub { margin-top: 16px; color: var(--ink-soft); }
+  .vb-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+  .vb-fact { background: var(--white); border-radius: var(--r-md); padding: 14px; box-shadow: var(--shadow-s); }
+  .vb-fact b { display: block; font-size: 22px; color: var(--ink); }
+  .vb-fact span { font-size: 14px; color: var(--muted); }
+  .vb-fact--accent { background: var(--blue); }
+  .vb-fact--accent b, .vb-fact--accent span { color: #fff; }
+  .vb-route { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .vb-route button { min-height: 44px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--bg-soft); color: var(--ink-soft); font-size: 14px; cursor: pointer; }
+  @media (min-width: 768px) { .vb-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } .vb-hero { padding: 40px 36px 32px; } }
+
+  /* тетрадь: 200 слов, из них 4 глагола */
+  .vb-dots { display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: 4px; max-width: 340px; margin: 14px auto 8px; }
+  .vb-dots i { aspect-ratio: 1; border-radius: 50%; background: var(--blue); }
+  .vb-dots.is-done i { background: #cfdde5; }
+  .vb-dots.is-done i.is-verb { background: var(--red); transform: scale(1.8); }
+  .vb-counter { text-align: center; font-weight: 700; min-height: 1.6em; }
+  .vb-verbtags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 8px; }
+  .vb-verbtags span { padding: 6px 12px; border-radius: 999px; background: #fde7e6; color: var(--red); font-weight: 700; }
+
+  /* мотор и кузов */
+  .vb-car { display: block; width: 100%; max-width: 420px; margin: 8px auto 0; overflow: visible; }
+  .vb-car__body { fill: var(--blue); }
+  .vb-car__roof { fill: #7FC8F8; }
+  .vb-car__motor { fill: #cfdde5; }
+  .vb-car.is-on .vb-car__motor { fill: var(--red); }
+  .vb-car text { font: 700 15px var(--ak-font); fill: #fff; }
+  .vb-car .vb-car__mt { fill: var(--ink); }
+  .vb-car.is-on .vb-car__mt { fill: #fff; }
+  .vb-car__wheel circle { fill: var(--ink); }
+  .vb-car__wheel line { stroke: #fff; stroke-width: 3; }
+  .vb-car__road { stroke: var(--line); stroke-width: 4; stroke-dasharray: 14 10; }
+  .vb-motto { text-align: center; font-size: 20px; font-weight: 750; margin-top: 10px; }
+
+  /* ---------- разрез инфинитива ---------- */
+  .vb-split { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 0; padding: 46px 0 22px; font-size: clamp(44px, 14vw, 84px); font-weight: 800; letter-spacing: -.01em; line-height: 1; }
+  .vb-root { color: var(--ink); display: inline-block; }
+  .vb-suf { color: var(--blue-deep); display: inline-block; }
+  .vb-split.is-cut .vb-suf { transform: translate(14px, 30px) rotate(12deg); opacity: .4; }
+  .vb-split.is-cut .vb-root { color: var(--blue-deep); }
+  .vb-cut { position: absolute; top: 34px; bottom: 10px; width: 0; border-left: 3px dashed var(--red); transform-origin: top; }
+  .vb-scissors { position: absolute; top: 4px; width: 30px; height: 30px; overflow: visible; }
+  .vb-scissors circle, .vb-scissors line { fill: none; stroke: var(--red); stroke-width: 2.2; stroke-linecap: round; }
+  .vb-phases { display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+  .vb-phases button { min-height: 40px; min-width: 44px; padding: 6px 12px; border: 0; border-radius: 999px; background: var(--chip); color: var(--muted); font-size: 14px; cursor: pointer; }
+  .vb-phases button.is-done { color: var(--ink); }
+  .vb-phases button.is-on { background: var(--red); color: #fff; }
+  .vb-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; font-size: 14px; color: var(--muted); }
+  .vb-legend div { background: var(--bg-soft); border-radius: var(--r-sm); padding: 10px 12px; }
+  .vb-legend b { display: block; color: var(--ink); }
+  .vb-legend div:last-child b { color: var(--blue-deep); }
+  .vb-verbs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+  .vb-verbs button { min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--white); font-weight: 650; cursor: pointer; }
+  .vb-verbs button.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .vb-caption { text-align: center; margin-top: 12px; color: var(--muted); }
+
+  /* ---------- гармония ---------- */
+  .vb-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .vb-group { border-radius: var(--r-md); padding: 14px 12px; background: var(--bg-soft); border: 2px solid transparent; }
+  .vb-group h3 { font-size: 13px; letter-spacing: .06em; color: var(--muted); margin-bottom: 8px; }
+  .vb-group.is-lit { border-color: var(--blue); background: #e3f2fd; }
+  .vb-group--soft.is-lit { border-color: var(--red); background: #fde7e6; }
+  .vb-vowels { display: flex; gap: 6px; flex-wrap: wrap; }
+  .vb-vowels span { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--white); font-weight: 800; font-size: 19px; box-shadow: var(--shadow-s); }
+  .vb-group__res { margin-top: 8px; font-size: 14px; }
+  .vb-word { text-align: center; font-size: clamp(40px, 12vw, 64px); font-weight: 800; margin: 18px 0 4px; }
+  .vb-word .vb-hi { color: var(--red); display: inline-block; }
+  .vb-verdict { text-align: center; min-height: 3em; }
+  .vb-spark { position: absolute; z-index: 5; width: 36px; height: 36px; display: grid; place-items: center; border-radius: 50%; background: var(--red); color: #fff; font-weight: 800; pointer-events: none; }
+  .vb-guess { display: grid; gap: 8px; justify-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .vb-guess__root { font-size: 30px; font-weight: 800; }
+  .vb-guess__fb { min-height: 1.5em; text-align: center; }
+  .vb-ugh { text-decoration: line-through; text-decoration-color: var(--red); color: var(--red); font-weight: 700; }
+
+  /* ---------- конструктор ---------- */
+  .vb-builder { display: grid; gap: 14px; }
+  .vb-builder__row > span { display: block; font-size: 12px; letter-spacing: .08em; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+  .vb-opts { display: flex; flex-wrap: wrap; gap: 6px; }
+  .vb-opt { min-height: 44px; padding: 6px 12px; border-radius: 14px; border: 1px solid var(--line); background: var(--white); cursor: pointer; font-weight: 700; text-align: left; line-height: 1.15; }
+  .vb-opt small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+  .vb-opt.is-on { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .vb-opt.is-on small { color: #cfe3ec; }
+  .vb-tline { display: block; width: 100%; max-width: 420px; margin: 16px auto 0; overflow: visible; }
+  .vb-tline line { stroke: var(--line); stroke-width: 4; stroke-linecap: round; }
+  .vb-tline .vb-tick { fill: #cfdde5; }
+  .vb-tline #tdot { fill: var(--red); }
+  .vb-tline text { font: 600 12px var(--ak-font); fill: var(--muted); }
+  .vb-assembly { text-align: center; margin-top: 10px; padding: 16px 8px; border-radius: var(--r-md); background: var(--bg-soft); }
+  .vb-bricks { display: flex; justify-content: center; align-items: center; gap: 4px; flex-wrap: wrap; min-height: 64px; }
+  .vb-brick { display: inline-grid; padding: 8px 12px; border-radius: 12px; font-weight: 800; font-size: 22px; line-height: 1.1; }
+  .vb-brick small { font-size: 11px; font-weight: 600; opacity: .85; }
+  .vb-brick--r { background: var(--ink); color: #fff; }
+  .vb-brick--t { background: var(--blue); color: #fff; }
+  .vb-brick--p { background: var(--red); color: #fff; }
+  .vb-plus { color: var(--muted); font-weight: 700; }
+  .vb-out { font-size: clamp(34px, 10vw, 52px); font-weight: 800; margin-top: 8px; display: inline-block; }
+  .vb-out-ru { color: var(--muted); }
+  .vb-play { display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .vb-play svg { width: 18px; height: 18px; fill: currentColor; }
+  .vb-hint { min-height: 1.4em; font-size: 14px; color: var(--red); margin-top: 6px; }
+
+  /* ---------- воронка ---------- */
+  .vb-funnel { display: grid; gap: 14px; }
+  .vb-fn { display: grid; gap: 4px; }
+  .vb-fn__track { height: 16px; border-radius: 999px; background: var(--chip); overflow: hidden; }
+  .vb-fn__bar { display: block; height: 100%; width: var(--w); border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--red)); transform-origin: left; }
+  .vb-fn b { font-size: 24px; }
+  .vb-fn em { font-style: normal; color: var(--muted); margin-left: 6px; }
+  .vb-steps { display: flex; gap: 6px; margin-top: 18px; }
+  .vb-steps button { flex: 1; min-height: 52px; border-radius: 16px; border: 1px solid var(--line); background: var(--white); font-weight: 800; font-size: 18px; cursor: pointer; color: var(--muted); }
+  .vb-steps button[aria-selected="true"] { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .vb-step { margin-top: 12px; padding: 16px; border-radius: var(--r-md); background: var(--bg-soft); }
+  .vb-step h3 { margin-bottom: 6px; }
+
+  /* ---------- топ-30 ---------- */
+  .vb-search { width: 100%; min-height: 48px; padding: 10px 16px; font-size: 16px; border-radius: 999px; border: 2px solid var(--line); background: var(--bg-soft); color: var(--ink); }
+  .vb-filter { display: flex; gap: 6px; margin: 10px 0 12px; flex-wrap: wrap; }
+  .vb-filter button { min-height: 40px; min-width: 44px; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--white); cursor: pointer; font-weight: 650; }
+  .vb-filter button[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .vb-vlist { display: grid; gap: 6px; }
+  @media (min-width: 640px) { .vb-vlist { grid-template-columns: 1fr 1fr; } }
+  .vb-vrow { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 48px; padding: 8px 12px; border-radius: 14px; border: 1px solid var(--line); background: var(--white); cursor: pointer; text-align: left; }
+  .vb-vrow .vb-tr { flex: none; }
+  .vb-vrow .vb-vru { flex: 1; color: var(--muted); font-size: 15px; }
+  .vb-vrow .vb-ic { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; }
+  .vb-vrow .vb-ic svg { width: 12px; height: 12px; fill: #fff; margin-left: 2px; }
+  .vb-vrow mark { background: none; color: var(--blue-deep); }
+  .vb-empty { text-align: center; color: var(--muted); margin-top: 10px; }
+
+  /* ---------- поездка ---------- */
+  .vb-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .vb-tabs button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 8px; border-radius: 16px; border: 1px solid var(--line); background: var(--white); font-weight: 700; cursor: pointer; font-size: 15px; }
+  .vb-tabs button[aria-selected="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .vb-tabs svg { width: 22px; height: 22px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .vb-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .vb-chip { display: inline-block; padding: 8px 12px; border-radius: 12px; background: var(--chip); font-size: 15px; }
+  .vb-chip b { color: var(--ink); }
+
+  /* ---------- ловушка ---------- */
+  .vb-trap { background: #fff3f2; border: 2px solid #fbd0ce; }
+  .vb-badge { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: .08em; padding: 6px 12px; border-radius: 999px; background: var(--red); color: #fff; margin-bottom: 12px; }
+  .vb-sent { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 26px 0 8px; }
+  .vb-sw { position: relative; min-height: 52px; padding: 8px 14px; border-radius: 14px; border: 2px solid var(--line); background: var(--white); font-size: 22px; font-weight: 800; cursor: pointer; }
+  .vb-sw__lab { position: absolute; left: 50%; bottom: calc(100% + 4px); translate: -50% 0; white-space: nowrap; font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 8px; background: var(--ink); color: #fff; visibility: hidden; }
+  .vb-sw.is-open .vb-sw__lab { visibility: visible; }
+  .vb-sw.is-open { border-color: var(--red); }
+  .vb-literal { text-align: center; color: var(--ink-soft); }
+
+  /* ---------- вопросы ---------- */
+  .vb-faq { display: grid; gap: 8px; }
+  .vb-fq { background: var(--white); border-radius: var(--r-md); box-shadow: var(--shadow-s); }
+  .vb-fq > button { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-height: 52px; padding: 12px 16px; border: 0; background: none; text-align: left; font-weight: 700; cursor: pointer; }
+  .vb-fq > button svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--blue-deep); stroke-width: 2.5; stroke-linecap: round; }
+  .vb-fq__a { overflow: hidden; height: 0; }
+  .vb-fq__a p { padding: 0 16px 14px; margin: 0; color: var(--ink-soft); }
+  .vb-fq.is-open .vb-fq__a { height: auto; }
+
+  /* ---------- шпаргалка ---------- */
+  .vb-cheat { background: var(--ink); color: #fff; }
+  .vb-cheat h2 { color: #fff; }
+  .vb-crow { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 10px; width: 100%; min-height: 48px; padding: 10px 4px; border: 0; border-bottom: 1px solid rgba(255,255,255,.14); background: none; color: #fff; text-align: left; cursor: pointer; }
+  .vb-crow .k { font-weight: 800; color: var(--yellow); }
+  .vb-crow .v { color: #d9e8ef; }
+  .vb-final { text-align: center; font-size: clamp(24px, 7vw, 36px); font-weight: 800; margin-top: 18px; line-height: 1.2; }
+  .vb-cheat .vb-car text { fill: #fff; }
+  .vb-cheat .vb-car__road { stroke: rgba(255,255,255,.2); }
+  .vb-cheat .vb-btn { background: transparent; color: #fff; border-color: #fff; }
+
+  /* ---------- нестандартное упражнение: ножницы ---------- */
+  .vb-cutter { display: flex; justify-content: center; flex-wrap: nowrap; gap: 3px; margin: 18px 0 8px; }
+  .vb-letter { width: clamp(30px, 9vw, 46px); min-height: 52px; padding: 0; border-radius: 10px; border: 2px solid var(--line); background: var(--white); font-size: clamp(20px, 6vw, 28px); font-weight: 800; cursor: pointer; }
+  .vb-letter.is-root { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .vb-letter.is-tail { background: #e3f2fd; color: var(--blue-deep); border-color: var(--blue); }
+  .vb-letter.is-miss { border-color: var(--red); background: #fde7e6; }
+  .vb-cut-status { min-height: 3em; text-align: center; color: var(--ink-soft); }
+  .vb-cut-plate { text-align: center; color: var(--muted); font-size: 15px; }
+
+  /* ---------- свой скроллбар: ножницы режут по пунктиру ---------- */
+  .vb-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 6px; pointer-events: none; }
+  .vb-sb__track { position: absolute; inset: 0; pointer-events: auto; touch-action: none; background: repeating-linear-gradient(90deg, rgba(57,76,83,.35) 0 8px, transparent 8px 14px); }
+  .vb-sb__cut { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: var(--red); border-radius: 0 6px 6px 0; }
+  .vb-sb__sc { position: absolute; top: -2px; left: clamp(12px, calc(var(--p, 0) * 100%), calc(100% - 12px)); width: 24px; height: 24px; translate: -50% 0; rotate: 90deg; pointer-events: none; overflow: visible; }
+  .vb-sb__sc circle, .vb-sb__sc line { fill: none; stroke: var(--red); stroke-width: 2.4; stroke-linecap: round; }
+  .vb-sb__sc .vb-sb__bg { fill: var(--white); stroke: none; }
+  .vb-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .vb-sb__mark::after { content: ''; position: absolute; inset: 10px; border-radius: 50%; background: var(--white); box-shadow: inset 0 0 0 2px var(--ink-soft); }
+  .vb-sb__mark.is-read::after { background: var(--red); box-shadow: none; }
+  @media (min-width: 768px) {
+    .vb-sb { left: auto; right: 16px; top: 50%; translate: 0 -50%; width: 8px; height: min(60dvh, 520px); }
+    .vb-sb__track { border-radius: 8px; background: repeating-linear-gradient(180deg, rgba(57,76,83,.35) 0 8px, transparent 8px 14px); }
+    .vb-sb__cut { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); border-radius: 8px; }
+    .vb-sb__sc { top: clamp(12px, calc(var(--p, 0) * 100%), calc(100% - 12px)); left: 50%; translate: -50% -50%; rotate: 180deg; }
+    .vb-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+    main { padding-right: 40px; padding-left: 40px; }
+  }
+  @media (min-width: 1024px) { section { padding-top: 72px; } }
+  @media (prefers-reduced-motion: reduce) { .vb-letters i, .vb-hero h1 { animation: none !important; } }
+</style>
+</head>
+<body>
+<main>
+
+  <section data-section="story" data-words="107" id="s-story">
+    <div class="vb-hero">
+      <div class="vb-letters" aria-hidden="true"></div>
+      <div class="vb-tags"><span class="vb-tag vb-tag--dark">A1</span><span class="vb-tag">библиотека</span><span class="vb-tag">глаголы</span></div>
+      <h1>Турецкие глаголы <span class="vb-accent">их всего тридцать</span></h1>
+      <p class="vb-sub">Самое главное про глаголы. Без «откройте страницу 42».</p>
+      <nav class="vb-route" aria-label="Маршрут гайда">
+        <button type="button" data-go="infinitive">Хвост</button>
+        <button type="button" data-go="harmony">Два хвоста</button>
+        <button type="button" data-go="lab">Конструктор</button>
+        <button type="button" data-go="top">Тридцать</button>
+        <button type="button" data-go="traps">Ловушка</button>
+        <button type="button" data-go="practice">Практика</button>
+      </nav>
+    </div>
+
+    <div class="vb-facts">
+      <div class="vb-fact"><b><span data-count="2">2</span> хвоста</b><span>-mak и -mek</span></div>
+      <div class="vb-fact"><b>1 корень</b><span>на все времена</span></div>
+      <div class="vb-fact"><b><span data-count="30">30</span> штук</b><span>на первый месяц</span></div>
+      <div class="vb-fact vb-fact--accent"><b>200–300</b><span>хватит на всю жизнь</span></div>
+    </div>
+
+    <div class="vb-card vb-beat">
+      <p>Кафе в Анталье. Первый месяц. Ты знаешь двести слов.</p>
+      <p>Существительные знаешь. Прилагательные знаешь. Числа до тысячи. Подходит официант, спрашивает что-то длинное.</p>
+      <p>Ты показываешь пальцем.</p>
+      <p>Пальцем. С двумястами словами в голове.</p>
+      <p>Вечером открываешь тетрадь и считаешь глаголы.</p>
+      <div class="vb-dots" aria-hidden="true"></div>
+      <p class="vb-counter" aria-live="polite">200 слов</p>
+      <div class="vb-btns"><button type="button" class="vb-btn vb-btn--red" data-count-verbs>Посчитать глаголы</button></div>
+      <div class="vb-verbtags" hidden><span data-say="almak">almak</span><span data-say="içmek">içmek</span><span data-say="gitmek">gitmek</span><span data-say="istemek">istemek</span></div>
+    </div>
+
+    <div class="vb-card vb-beat">
+      <p>Иностранцу в любой точке мира хватит сказать «беру», «пить», «едем». Его поймут и так.</p>
+      <p>А «красивый большой стол» не приведёт никуда. Даже к столу.</p>
+      <svg class="vb-car" data-car viewBox="0 0 320 124" role="img" aria-label="Машина: кузов и мотор">
+        <g class="vb-car__g">
+          <path class="vb-car__roof" d="M78 42 L104 16 H176 L204 42 Z"/>
+          <rect class="vb-car__body" x="36" y="40" width="196" height="48" rx="14"/>
+          <rect class="vb-car__motor" x="228" y="50" width="62" height="36" rx="9"/>
+          <text x="134" y="70" text-anchor="middle">кузов</text>
+          <text class="vb-car__mt" x="259" y="73" text-anchor="middle">мотор</text>
+          <g class="vb-car__wheel"><circle cx="82" cy="92" r="16"/><line x1="82" y1="80" x2="82" y2="104"/></g>
+          <g class="vb-car__wheel"><circle cx="212" cy="92" r="16"/><line x1="212" y1="80" x2="212" y2="104"/></g>
+        </g>
+        <line class="vb-car__road" x1="0" y1="114" x2="320" y2="114"/>
+      </svg>
+      <div class="vb-btns">
+        <button type="button" class="vb-btn" data-car-off>Без глагола</button>
+        <button type="button" class="vb-btn vb-btn--red" data-car-on>С глаголом</button>
+      </div>
+      <p class="vb-motto">Глагол это мотор. Всё остальное кузов.</p>
+    </div>
+  </section>
+
+  <section data-section="infinitive" data-words="68" id="s-infinitive">
+    <div class="vb-eyebrow">шаг первый</div>
+    <h2>Начальную форму видно <span class="vb-accent">за метр</span></h2>
+    <p>Турецкий глагол в словаре всегда кончается на <b class="vb-blue">-mak</b> или <b class="vb-blue">-mek</b>. Других вариантов нет. Отрезал хвост — получил корень.</p>
+
+    <div class="vb-card">
+      <div class="vb-split" id="split">
+        <span class="vb-root" id="mRoot" lang="tr">git</span><span class="vb-suf" id="mSuf" lang="tr">mek</span>
+        <span class="vb-cut" id="cutline" aria-hidden="true"></span>
+        <svg class="vb-scissors" id="scissors" viewBox="0 0 24 24" aria-hidden="true">
+          <g class="vb-blade-a"><circle cx="6" cy="19" r="3"/><line x1="8.1" y1="16.9" x2="19" y2="4"/></g>
+          <g class="vb-blade-b"><circle cx="18" cy="19" r="3"/><line x1="15.9" y1="16.9" x2="5" y2="4"/></g>
+        </svg>
+      </div>
+      <div class="vb-phases" id="phases">
+        <button type="button" data-p="1">слово</button>
+        <button type="button" data-p="2">хвост</button>
+        <button type="button" data-p="3">разрез</button>
+        <button type="button" data-p="4">корень</button>
+      </div>
+      <div class="vb-legend">
+        <div><b>корень</b>смысл, остаётся</div>
+        <div><b>хвост</b>знак словаря, отрезаем</div>
+      </div>
+      <div class="vb-verbs" id="vswitch">
+        <button type="button" class="is-on" data-r="git" data-s="mek" data-ru="идти">gitmek</button>
+        <button type="button" data-r="al" data-s="mak" data-ru="брать">almak</button>
+        <button type="button" data-r="sev" data-s="mek" data-ru="любить">sevmek</button>
+        <button type="button" data-r="oku" data-s="mak" data-ru="читать">okumak</button>
+        <button type="button" data-r="gör" data-s="mek" data-ru="видеть">görmek</button>
+      </div>
+      <p class="vb-caption" id="splitRu"><span lang="tr">gitmek</span> — идти</p>
+    </div>
+
+    <div class="vb-beat" style="margin-top:18px">
+      <p>Никаких go — went — gone. Никаких трёх форм, которые учат ночами перед экзаменом.</p>
+      <p>Корень <b lang="tr">git-</b> остаётся собой в прошлом, в будущем и через десять лет. Турецкий тут честный.</p>
+      <p class="vb-note">Одна мелочь: перед гласной t в <b lang="tr">git-</b> смягчается в d — <a-say>gidiyorum</a-say>. Это не другое слово, просто звук.</p>
+    </div>
+  </section>
+
+  <section data-section="harmony" data-words="66" id="s-harmony">
+    <div class="vb-eyebrow">шаг второй</div>
+    <h2>Почему хвоста <span class="vb-blue">два</span></h2>
+    <p>Почему одни глаголы на -mak, другие на -mek? Ответ простой и немного обидный. Турецкий смотрит на последнюю гласную корня и подбирает хвост под неё.</p>
+
+    <div class="vb-card" id="harmonyCard">
+      <div class="vb-groups">
+        <div class="vb-group vb-group--hard is-lit" id="gHard">
+          <h3>ТОЛСТЫЕ</h3>
+          <div class="vb-vowels"><span data-say="a">a</span><span data-say="ı">ı</span><span data-say="o">o</span><span data-say="u">u</span></div>
+          <div class="vb-group__res">→ хвост <b>-mak</b></div>
+        </div>
+        <div class="vb-group vb-group--soft" id="gSoft">
+          <h3>ТОНКИЕ</h3>
+          <div class="vb-vowels"><span data-say="e">e</span><span data-say="i">i</span><span data-say="ö">ö</span><span data-say="ü">ü</span></div>
+          <div class="vb-group__res">→ хвост <b>-mek</b></div>
+        </div>
+      </div>
+
+      <div class="vb-word" id="hWord" lang="tr">y<span class="vb-hi">a</span>z</div>
+      <div class="vb-verdict" id="hVerdict" aria-live="polite">последняя гласная <b>a</b> — толстая → <b lang="tr">yazmak</b>, писать</div>
+      <div class="vb-verbs" id="hswitch">
+        <button type="button" class="is-on" data-w="yaz" data-v="a" data-t="hard" data-ru="писать">yaz-</button>
+        <button type="button" data-w="gel" data-v="e" data-t="soft" data-ru="приходить">gel-</button>
+        <button type="button" data-w="bul" data-v="u" data-t="hard" data-ru="находить">bul-</button>
+        <button type="button" data-w="gör" data-v="ö" data-t="soft" data-ru="видеть">gör-</button>
+        <button type="button" data-w="çalış" data-v="ı" data-t="hard" data-ru="работать">çalış-</button>
+        <button type="button" data-w="yürü" data-v="ü" data-t="soft" data-ru="ходить пешком">yürü-</button>
+      </div>
+
+      <div class="vb-guess">
+        <span class="vb-note">Теперь угадай сам:</span>
+        <span class="vb-guess__root" id="guessRoot" lang="tr">bak-</span>
+        <div class="vb-btns" style="margin-top:0">
+          <button type="button" class="vb-btn" data-guess="mak">-mak</button>
+          <button type="button" class="vb-btn vb-btn--red" data-guess="mek">-mek</button>
+        </div>
+        <p class="vb-guess__fb" id="guessFb" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="vb-beat" style="margin-top:18px">
+      <p>Это гармония гласных. Два списка букв — и всё.</p>
+      <p>Дальше она сама начнёт работать в ухе. Через месяц ты будешь морщиться от <span class="vb-ugh" lang="tr">gelmak</span> так же, как русский морщится от «ложить».</p>
+    </div>
+  </section>
+
+  <section data-section="lab" data-words="73" id="s-lab">
+    <div class="vb-eyebrow">шаг третий</div>
+    <h2>Глагол собирается <span class="vb-accent">как конструктор</span></h2>
+    <p>Берёшь корень. Прикручиваешь суффикс времени. Сверху лепишь окончание лица. Каждый кирпич отвечает за одно значение, и порядок всегда один.</p>
+    <p class="vb-note">Это превью. Времена подробно разбираются в темах маршрута, здесь — увидеть, как всё складывается.</p>
+
+    <div class="vb-card">
+      <div class="vb-builder">
+        <div class="vb-builder__row"><span>1 · КОРЕНЬ</span><div class="vb-opts" id="bRoots"></div></div>
+        <div class="vb-builder__row"><span>2 · ВРЕМЯ</span><div class="vb-opts" id="bTenses"></div></div>
+        <div class="vb-builder__row"><span>3 · ЛИЦО</span><div class="vb-opts" id="bPersons"></div></div>
+      </div>
+      <svg class="vb-tline" viewBox="0 0 320 46" aria-hidden="true">
+        <line x1="20" y1="14" x2="300" y2="14"/>
+        <circle class="vb-tick" cx="40" cy="14" r="5"/><circle class="vb-tick" cx="160" cy="14" r="5"/><circle class="vb-tick" cx="280" cy="14" r="5"/>
+        <circle id="tdot" cx="160" cy="14" r="9"/>
+        <text x="40" y="40" text-anchor="middle">прошлое</text><text x="160" y="40" text-anchor="middle">сейчас</text><text x="280" y="40" text-anchor="middle">будущее</text>
+      </svg>
+      <div class="vb-assembly">
+        <div class="vb-bricks" id="bricks"></div>
+        <div class="vb-out" id="bOut" lang="tr">geliyorum</div>
+        <div class="vb-out-ru" id="bOutRu">я прихожу</div>
+        <div class="vb-hint" id="bHint"></div>
+        <button type="button" class="vb-btn vb-play" id="bSay" data-say="geliyorum"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg>Послушать</button>
+      </div>
+    </div>
+
+    <div class="vb-beat" style="margin-top:18px">
+      <p>Один корень. Три времени. Ноль зубрёжки.</p>
+      <p>Русский тратит на это приставки, суффиксы и настроение. Турецкий складывает кирпичи в одном и том же порядке. Каждый раз.</p>
+    </div>
+  </section>
+
+  <section data-section="order" data-words="130" id="s-order">
+    <div class="vb-eyebrow">порядок</div>
+    <h2>Что учить <span class="vb-blue">первым</span></h2>
+    <p>Родители не начинали с тобой с «рефлексировать» и «прокрастинировать». Даже если потом эти слова стали девизом. Сначала было «кушать», «пить», «дай». С турецким так же.</p>
+
+    <div class="vb-card">
+      <div class="vb-funnel" id="funnel">
+        <div class="vb-fn" style="--w:100%"><div><b data-fn="150000">150 000</b><em>слов в турецком</em></div><div class="vb-fn__track"><span class="vb-fn__bar"></span></div></div>
+        <div class="vb-fn" style="--w:44%"><div><b data-fn="300">300</b><em>глаголов на бытовую жизнь</em></div><div class="vb-fn__track"><span class="vb-fn__bar"></span></div></div>
+        <div class="vb-fn" style="--w:13%"><div><b data-fn="30">30</b><em>чтобы заговорить в первый месяц</em></div><div class="vb-fn__track"><span class="vb-fn__bar"></span></div></div>
+      </div>
+      <p class="vb-note" style="margin-top:12px">Схема, не масштаб. Страшная цифра сверху к делу не относится.</p>
+      <div class="vb-btns"><button type="button" class="vb-btn" id="fnAgain">↻ Сузить ещё раз</button></div>
+
+      <div class="vb-steps" role="tablist" aria-label="Три ступени">
+        <button type="button" role="tab" aria-selected="true" data-step="0">01</button>
+        <button type="button" role="tab" aria-selected="false" data-step="1">02</button>
+        <button type="button" role="tab" aria-selected="false" data-step="2">03</button>
+      </div>
+      <div class="vb-step" data-steppanel="0"><h3>Тридцать на выживание</h3><p>Быть, делать, идти, приходить, брать, давать, хотеть, знать. Без них не построить ни одного предложения. С ними ты уже находишь дорогу, узнаёшь цену и спрашиваешь время.</p></div>
+      <div class="vb-step" data-steppanel="1" hidden><h3>Ещё семьдесят на разговор</h3><p>Ждать, открывать, закрывать, начинать, находить, использовать. Они всплывают на второй неделе. Учи их не списком, а по одному, когда упёрся.</p></div>
+      <div class="vb-step" data-steppanel="2" hidden><h3>Всё остальное — потом</h3><p>В турецком больше 150 тысяч слов, глаголов среди них не меньше пятой части. Цифра пугает зря. Турки сами обходятся малым: для разговора хватает 200–300 базовых.</p></div>
+    </div>
+  </section>
+
+  <section data-section="top" data-words="36" id="s-top">
+    <div class="vb-eyebrow">база</div>
+    <h2>Тридцать глаголов, <span class="vb-accent">с которых всё начинается</span></h2>
+    <p>Выучи их — и найдёшь дорогу в магазин, узнаешь цену и уточнишь время у прохожего. Нажми на глагол, чтобы услышать.</p>
+
+    <div class="vb-card">
+      <input class="vb-search" id="vSearch" type="search" placeholder="Поиск: gitmek, идти, gel…" aria-label="Поиск по глаголам" autocomplete="off">
+      <div class="vb-filter" role="group" aria-label="Фильтр по хвосту">
+        <button type="button" aria-pressed="true" data-f="all">все</button>
+        <button type="button" aria-pressed="false" data-f="mak">-mak</button>
+        <button type="button" aria-pressed="false" data-f="mek">-mek</button>
+      </div>
+      <div class="vb-vlist" id="vlist"></div>
+      <p class="vb-empty" id="vempty" hidden>Ничего не нашлось. Проверь раскладку.</p>
+    </div>
+  </section>
+
+  <section data-section="trip" data-words="70" id="s-trip">
+    <div class="vb-eyebrow">отдельный набор</div>
+    <h2>Если едешь <span class="vb-blue">на две недели</span></h2>
+    <p>Тут другая история. В обиходе эти глаголы не нужны, а в аэропорту нужны позарез. Их можно не учить месяцами — просто прочитай перед вылетом.</p>
+
+    <div class="vb-card">
+      <div class="vb-tabs" role="tablist" aria-label="Наборы">
+        <button type="button" role="tab" aria-selected="true" data-tab="air"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 16l20-6-3-3-7 3-5-5-2 1 3 6-4 2-2-1z"/></svg>Аэропорт, отель</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="shop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h16l-2 11H6z"/><path d="M9 9l3-5 3 5"/></svg>Магазин, рынок</button>
+      </div>
+      <div class="vb-chips" data-panel="air">
+        <span class="vb-chip" data-say="kiralamak"><b lang="tr">kiralamak</b> — арендовать</span>
+        <span class="vb-chip" data-say="ayırtmak"><b lang="tr">ayırtmak</b> — бронировать</span>
+        <span class="vb-chip" data-say="taşımak"><b lang="tr">taşımak</b> — нести, везти</span>
+        <span class="vb-chip" data-say="ödemek"><b lang="tr">ödemek</b> — платить</span>
+        <span class="vb-chip" data-say="beklemek"><b lang="tr">beklemek</b> — ждать</span>
+        <span class="vb-chip" data-say="inmek"><b lang="tr">inmek</b> — выходить из транспорта</span>
+        <span class="vb-chip" data-say="binmek"><b lang="tr">binmek</b> — садиться в транспорт</span>
+        <span class="vb-chip" data-say="kalmak"><b lang="tr">kalmak</b> — оставаться, жить где-то</span>
+      </div>
+      <div class="vb-chips" data-panel="shop" hidden>
+        <span class="vb-chip" data-say="satmak"><b lang="tr">satmak</b> — продавать</span>
+        <span class="vb-chip" data-say="satın almak"><b lang="tr">satın almak</b> — покупать</span>
+        <span class="vb-chip" data-say="denemek"><b lang="tr">denemek</b> — примерять, пробовать</span>
+        <span class="vb-chip" data-say="seçmek"><b lang="tr">seçmek</b> — выбирать</span>
+        <span class="vb-chip" data-say="indirmek"><b lang="tr">indirmek</b> — сбавлять цену</span>
+        <span class="vb-chip" data-say="tartmak"><b lang="tr">tartmak</b> — взвешивать</span>
+        <span class="vb-chip" data-say="değiştirmek"><b lang="tr">değiştirmek</b> — менять</span>
+        <span class="vb-chip" data-say="istemek"><b lang="tr">istemek</b> — хотеть, просить</span>
+      </div>
+      <p class="vb-note" style="margin-top:12px">Нажми на слово — услышишь. Заметь: хвост везде подчиняется последней гласной.</p>
+    </div>
+  </section>
+
+  <section data-section="traps" data-words="62" id="s-traps">
+    <div class="vb-card vb-trap">
+      <span class="vb-badge">ЗДЕСЬ СПОТЫКАЮТСЯ ВСЕ</span>
+      <h2>Слово <span class="vb-red" lang="tr">yemek</span> — это ловушка</h2>
+      <div class="vb-beat" style="margin-top:12px">
+        <p><b lang="tr">yemek</b> значит «есть». И <b lang="tr">yemek</b> значит «еда». Один набор букв, две разные части речи.</p>
+        <p>Поэтому «хочу поесть» по-турецки звучит как заикание. И это норма. Нажми на каждое слово.</p>
+      </div>
+      <div class="vb-sent" id="trapSent">
+        <button type="button" class="vb-sw" lang="tr">Yemek<span class="vb-sw__lab" lang="ru">еду · что?</span></button>
+        <button type="button" class="vb-sw" lang="tr">yemek<span class="vb-sw__lab" lang="ru">есть · делать что?</span></button>
+        <button type="button" class="vb-sw" lang="tr">istiyorum.<span class="vb-sw__lab" lang="ru">хочу</span></button>
+      </div>
+      <p class="vb-literal"><a-say>Yemek yemek istiyorum.</a-say></p>
+      <p class="vb-literal">Буквально: «еду есть хочу». Так и говорят, никто не смеётся.</p>
+      <div class="vb-btns"><button type="button" class="vb-btn vb-btn--red" id="trapAll">Показать всё</button></div>
+      <div class="vb-beat" style="margin-top:14px">
+        <p>Многие месяц обходят эту фразу стороной: кажется, где-то ошибка. Ошибки нет. Турецкий иногда выглядит странно и отлично работает.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="faq" data-words="125" id="s-faq">
+    <div class="vb-eyebrow">частые вопросы</div>
+    <h2>Что спрашивают <span class="vb-blue">чаще всего</span></h2>
+    <div class="vb-faq" id="faq">
+      <div class="vb-fq"><button type="button" aria-expanded="false">Сколько глаголов реально надо знать?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vb-fq__a"><p>Для первого месяца хватает тридцати из списка выше. Для спокойного общения — 200–300 базовых. Дальше словарь растёт сам, из разговоров, а не из списков.</p></div></div>
+      <div class="vb-fq"><button type="button" aria-expanded="false">Есть неправильные глаголы, как в английском?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vb-fq__a"><p>Таких, как в английском, нет. Корень не превращается в другое слово, суффиксы клеятся по одним правилам. Самое большее — звук смягчается, как в <b lang="tr">git → gid</b>.</p></div></div>
+      <div class="vb-fq"><button type="button" aria-expanded="false">Почему у одних -mak, у других -mek?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vb-fq__a"><p>Смотри на последнюю гласную корня. Толстая (a, ı, o, u) → -mak. Тонкая (e, i, ö, ü) → -mek.</p></div></div>
+      <div class="vb-fq"><button type="button" aria-expanded="false">Учить списком или в предложениях?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vb-fq__a"><p>В предложениях. Десять слов в день списком — это мусор: знаешь десять, а сказать не можешь. Лучше один глагол, но в десяти фразах в тот же день.</p></div></div>
+      <div class="vb-fq"><button type="button" aria-expanded="false">Когда переходить к временам?<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="vb-fq__a"><p>Сразу. Не жди, пока «выучишь слова». Тридцать глаголов и настоящее время — уже бытовой разговор в первый месяц.</p></div></div>
+    </div>
+  </section>
+
+  <section data-section="video" data-words="14" id="s-video">
+    <h2>Послушай носителя</h2>
+    <p>Обрати внимание, как он отрезает хвост и смотрит на последнюю гласную корня.</p>
+    <a-video yt="sZG73DA91f4" start="0" end="124" title="Неопределённая форма глагола — инфинитив" channel="Турецкий за 5 минут"></a-video>
+  </section>
+
+  <section data-section="practice" data-words="1" id="s-practice">
+    <h2>Практика</h2>
+    <a-exercise ref="lib.verbs.ex1"></a-exercise>
+    <a-exercise ref="lib.verbs.ex2"></a-exercise>
+    <a-exercise ref="lib.verbs.ex3"></a-exercise>
+    <a-exercise ref="lib.verbs.ex4"></a-exercise>
+
+    <a-exercise ref="lib.verbs.ex5" class="ak-ex">
+      <div class="ak-ex__head"><span class="ak-ex__title">Ножницы: отрежь хвост</span><span class="ak-ex__count" data-cut-count>1 / 6</span></div>
+      <p class="vb-cut-plate">Нажми на первую букву хвоста — там пройдут ножницы.</p>
+      <div class="vb-cutter" data-cutter></div>
+      <p class="vb-cut-status" data-cut-status aria-live="polite"></p>
+    </a-exercise>
+  </section>
+
+  <section data-section="check" data-words="6" id="s-check">
+    <h2>Мини-проверка</h2>
+    <p>Без шпаргалки перед глазами. Пять вопросов.</p>
+    <a-quiz ref="lib.verbs.check1"></a-quiz>
+  </section>
+
+  <section data-section="cheat" data-words="56" id="s-cheat">
+    <div class="vb-card vb-cheat">
+      <h2>Короткая шпаргалка</h2>
+      <p style="color:#d9e8ef">Нажми строку — услышишь пример.</p>
+      <button type="button" class="vb-crow" data-say="almak, gelmek"><span class="k">-mak / -mek</span><span class="v">хвост словарной формы</span></button>
+      <button type="button" class="vb-crow" data-say="gel, al, oku"><span class="k">отрезал хвост</span><span class="v">получил корень, он остаётся</span></button>
+      <button type="button" class="vb-crow" data-say="yazmak"><span class="k">a ı o u</span><span class="v">толстые гласные → -mak</span></button>
+      <button type="button" class="vb-crow" data-say="gelmek"><span class="k">e i ö ü</span><span class="v">тонкие гласные → -mek</span></button>
+      <button type="button" class="vb-crow" data-say="geliyorum"><span class="k">корень + время + лицо</span><span class="v">готовое слово, порядок всегда один</span></button>
+      <button type="button" class="vb-crow" data-say="Yemek yemek istiyorum."><span class="k">yemek yemek</span><span class="v">«еду есть» — так и говорят</span></button>
+      <button type="button" class="vb-crow" data-say="gitmek"><span class="k">30 глаголов</span><span class="v">это уже разговор, а не пальцем в меню</span></button>
+      <svg class="vb-car" data-car viewBox="0 0 320 124" aria-hidden="true">
+        <g class="vb-car__g">
+          <path class="vb-car__roof" d="M78 42 L104 16 H176 L204 42 Z"/>
+          <rect class="vb-car__body" x="36" y="40" width="196" height="48" rx="14"/>
+          <rect class="vb-car__motor" x="228" y="50" width="62" height="36" rx="9"/>
+          <text x="134" y="70" text-anchor="middle">кузов</text>
+          <text class="vb-car__mt" x="259" y="73" text-anchor="middle">мотор</text>
+          <g class="vb-car__wheel"><circle cx="82" cy="92" r="16"/><line x1="82" y1="80" x2="82" y2="104"/></g>
+          <g class="vb-car__wheel"><circle cx="212" cy="92" r="16"/><line x1="212" y1="80" x2="212" y2="104"/></g>
+        </g>
+        <line class="vb-car__road" x1="0" y1="114" x2="320" y2="114"/>
+      </svg>
+      <div class="vb-btns"><button type="button" class="vb-btn" data-car-on>Завести мотор</button></div>
+      <p class="vb-final">Слова это словарь.<br>Глаголы это речь.</p>
+      <p style="color:#d9e8ef;text-align:center">Официант снова подходит. Пальцем показывать больше не нужно.</p>
+    </div>
+  </section>
+
+</main>
+
+<nav class="vb-sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="vb-sb__track">
+    <span class="vb-sb__cut"></span>
+    <svg class="vb-sb__sc" viewBox="0 0 24 24" aria-hidden="true">
+      <circle class="vb-sb__bg" cx="12" cy="12" r="12"/>
+      <g class="vb-sb__a"><circle cx="6" cy="19" r="3"/><line x1="8.1" y1="16.9" x2="19" y2="4"/></g>
+      <g class="vb-sb__b"><circle cx="18" cy="19" r="3"/><line x1="15.9" y1="16.9" x2="5" y2="4"/></g>
+    </svg>
+  </div>
+</nav>
+
+<template data-achievement data-title="Мотор заведён" data-text="Ты находишь корень, выбираешь ‑mak или ‑mek и знаешь тридцать глаголов на первый месяц.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#3FA9F5"/>
+    <circle cx="60" cy="60" r="45" fill="#ffffff"/>
+    <text class="ach-root" x="48" y="68" text-anchor="end" font-size="24" font-weight="800" fill="#394C53" font-family="system-ui, sans-serif">gel</text>
+    <text class="ach-suf" x="52" y="68" text-anchor="start" font-size="24" font-weight="800" fill="#1B8BDD" font-family="system-ui, sans-serif">mek</text>
+    <line class="ach-cut" x1="50" y1="34" x2="50" y2="84" stroke="#F24C47" stroke-width="3" stroke-dasharray="5 4"/>
+    <g class="ach-sc" transform="translate(70 42) rotate(180) scale(1.5)">
+      <g class="ach-a"><circle cx="6" cy="19" r="3" fill="none" stroke="#F24C47" stroke-width="2.4"/><line x1="8.1" y1="16.9" x2="19" y2="4" stroke="#F24C47" stroke-width="2.4" stroke-linecap="round"/></g>
+      <g class="ach-b"><circle cx="18" cy="19" r="3" fill="none" stroke="#F24C47" stroke-width="2.4"/><line x1="15.9" y1="16.9" x2="5" y2="4" stroke="#F24C47" stroke-width="2.4" stroke-linecap="round"/></g>
+    </g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const ST = window.ScrollTrigger || null;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { if (window.AlternaKit) AlternaKit.speak(t); };
+  if (G) {
+    try { G.registerPlugin(...[ST, window.SplitText, window.MotionPathPlugin].filter(Boolean)); } catch (e) { /* уже зарегистрированы */ }
+    if (ST) ST.config({ ignoreMobileResize: true });
+  }
+
+  /* ---------- маршрут ---------- */
+  const goTo = (key) => document.querySelector(`[data-section="${key}"]`)?.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  $$('.vb-route button').forEach((b) => b.addEventListener('click', () => goTo(b.dataset.go)));
+
+  /* ---------- первый экран: буквы плавают (CSS), цифры считаются ---------- */
+  const lettersBox = $('.vb-letters');
+  const colors = ['#3FA9F5', '#F24C47', '#FFD166', '#7FC8F8', '#FF8A85'];
+  ['ç', 'ş', 'ğ', 'ı', 'ö', 'ü', 'İ', 'ç', 'ş', 'ğ', 'ü', 'ö'].forEach((ch, i) => {
+    const s = document.createElement('i');
+    s.textContent = ch;
+    s.style.left = ((i * 37) % 90 + 4) + '%';
+    s.style.top = ((i * 53) % 80 + 8) + '%';
+    s.style.color = colors[i % colors.length];
+    s.style.fontSize = (18 + (i * 7) % 22) + 'px';
+    s.style.opacity = (0.14 + (i % 4) * 0.05).toFixed(2);
+    s.style.animationDelay = (i * 0.5).toFixed(1) + 's';
+    lettersBox.append(s);
+  });
+  if (anim) {
+    $$('[data-count]').forEach((el) => {
+      const obj = { v: 0 };
+      G.to(obj, { v: Number(el.dataset.count), duration: 1.2, ease: 'power2.out', delay: .3, onUpdate: () => { el.textContent = Math.round(obj.v); } });
+    });
+    G.from('.vb-fact', { y: 30, rotation: 3, duration: .6, stagger: .08, ease: 'back.out(2)', delay: .2 });
+  }
+
+  /* ---------- заголовки: слова встают, росчерк дорисовывается ---------- */
+  const ULINE = '<svg class="vb-uline" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M3 8 C 38 2, 74 11, 110 5 S 172 3, 197 7"/></svg>';
+  $$('section:not([data-section="story"]):not([data-section="traps"]):not([data-section="cheat"]) > h2').forEach((h) => h.insertAdjacentHTML('afterend', ULINE));
+  if (anim && ST) {
+    $$('section > h2').forEach((h) => {
+      if (!window.SplitText) return;
+      const st = new SplitText(h, { type: 'words' });
+      G.from(st.words, { yPercent: 55, rotation: 5, duration: .6, stagger: .06, ease: 'back.out(2)', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    $$('.vb-uline path').forEach((p) => { p.style.strokeDasharray = 230; p.style.strokeDashoffset = 230; });
+    ScrollTrigger.batch('.vb-uline', { start: 'top 90%', once: true, onEnter: (els) => G.to(els.map((e) => e.querySelector('path')), { strokeDashoffset: 0, duration: .9, ease: 'power2.out', stagger: .1 }) });
+    ScrollTrigger.batch('.vb-card, .vb-fq', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { y: 40, scale: .97, duration: .6, ease: 'power3.out', stagger: .08 }) });
+  }
+
+  /* ---------- тетрадь: 200 слов, глаголов четыре ---------- */
+  const dotsBox = $('.vb-dots');
+  const VERB_AT = [17, 63, 118, 171];
+  for (let i = 0; i < 200; i++) {
+    const d = document.createElement('i');
+    if (VERB_AT.includes(i)) d.className = 'is-verb';
+    dotsBox.append(d);
+  }
+  const counter = $('.vb-counter');
+  const verbTags = $('.vb-verbtags');
+  function countVerbs() {
+    counter.innerHTML = 'Из двухсот слов глаголов четыре. <b class="vb-red">Четыре.</b> Остальное мебель.';
+    verbTags.hidden = false;
+    if (!anim) { dotsBox.classList.add('is-done'); return; }
+    const all = $$('i', dotsBox);
+    const verbs = all.filter((d) => d.classList.contains('is-verb'));
+    G.set(all, { clearProps: 'all' });
+    G.to(all.filter((d) => !verbs.includes(d)), { backgroundColor: '#cfdde5', scale: .7, duration: .4, stagger: { amount: .9, from: 'random' } });
+    G.to(verbs, { backgroundColor: '#F24C47', scale: 1.9, duration: .5, ease: 'back.out(3)', delay: 1, stagger: .12 });
+    G.fromTo(counter, { scale: .8 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)', delay: 1.2 });
+    G.from($$('span', verbTags), { y: 20, rotation: -8, scale: .4, duration: .5, stagger: .1, ease: 'back.out(2.5)', delay: 1.4 });
+  }
+  $('[data-count-verbs]').addEventListener('click', countVerbs);
+  if (anim && ST) ScrollTrigger.create({ trigger: dotsBox, start: 'top 80%', once: true, onEnter: () => G.from($$('i', dotsBox), { scale: 0.3, duration: .4, stagger: { amount: .8, from: 'start' }, ease: 'back.out(2)' }) });
+
+  /* ---------- машина: кузов без мотора не едет ---------- */
+  function drive(svg, on) {
+    const g = $('.vb-car__g', svg);
+    const mt = $('.vb-car__mt', svg);
+    const wheels = $$('.vb-car__wheel', svg);
+    svg.classList.toggle('is-on', on);
+    mt.textContent = on ? 'gitmek' : 'мотор';
+    if (on) say('gitmek');
+    if (!anim) return;
+    G.killTweensOf([g, ...wheels]);
+    G.set(g, { x: 0, rotation: 0 });
+    if (!on) {
+      G.fromTo(g, { x: -3 }, { x: 3, duration: .06, repeat: 7, yoyo: true, ease: 'none', onComplete: () => G.set(g, { x: 0 }) });
+      G.fromTo(g, { rotation: -1 }, { rotation: 1, svgOrigin: '160 90', duration: .08, repeat: 5, yoyo: true, onComplete: () => G.set(g, { rotation: 0 }) });
+      return;
+    }
+    G.to(wheels, { rotation: 720, transformOrigin: '50% 50%', duration: 1.6, ease: 'power1.inOut' });
+    G.to(g, { x: 26, duration: .8, ease: 'power2.in', yoyo: true, repeat: 1 });
+  }
+  $$('[data-car-on]').forEach((b) => b.addEventListener('click', () => drive(b.closest('.vb-card').querySelector('[data-car]'), true)));
+  $$('[data-car-off]').forEach((b) => b.addEventListener('click', () => drive(b.closest('.vb-card').querySelector('[data-car]'), false)));
+  if (anim && ST) ScrollTrigger.create({ trigger: '[data-car]', start: 'top 75%', once: true, onEnter: () => G.from('[data-car] .vb-car__g', { x: -60, duration: 1, ease: 'power3.out' }) });
+
+  /* ---------- разрез инфинитива: слово → хвост → разрез → корень ---------- */
+  const split = $('#split'), mRoot = $('#mRoot'), mSuf = $('#mSuf'), cut = $('#cutline'), sc = $('#scissors'), splitRu = $('#splitRu');
+  const phaseBtns = $$('#phases button');
+  let splitTl = null;
+  const markPhase = (n) => phaseBtns.forEach((b) => { const p = Number(b.dataset.p); b.classList.toggle('is-on', p === n); b.classList.toggle('is-done', p < n); });
+  function placeCut() {
+    const x = mRoot.offsetLeft + mRoot.offsetWidth;
+    cut.style.left = (x - 1) + 'px';
+    sc.style.left = (x - 15) + 'px';
+  }
+  function runSplit(root, suf, ru, speak) {
+    mRoot.textContent = root;
+    mSuf.textContent = suf;
+    splitRu.innerHTML = `<span lang="tr">${root}${suf}</span> — ${ru}`;
+    placeCut();
+    if (speak) say(root + suf);
+    if (!anim) { split.classList.add('is-cut'); markPhase(4); return; }
+    split.classList.remove('is-cut');
+    if (splitTl) splitTl.kill();
+    G.set(mSuf, { x: 0, y: 0, rotation: 0, opacity: 1, color: '#1B8BDD' });
+    G.set(mRoot, { color: '#394C53', scale: 1 });
+    G.set(cut, { scaleY: 0 });
+    splitTl = G.timeline();
+    splitTl.addLabel('p1').call(() => markPhase(1))
+      .fromTo([mRoot, mSuf], { y: 20, scale: .85 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2.5)', stagger: .05 })
+      .addLabel('p2', '+=.15').call(() => markPhase(2), null, 'p2')
+      .to(mSuf, { color: '#F24C47', scale: 1.15, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }, 'p2')
+      .addLabel('p3', '+=.15').call(() => markPhase(3), null, 'p3')
+      .to(cut, { scaleY: 1, duration: .3, ease: 'power2.out' }, 'p3')
+      .fromTo($('.vb-blade-a', sc), { rotation: -22 }, { rotation: 0, svgOrigin: '12 12.4', duration: .16, repeat: 1, yoyo: true }, 'p3')
+      .fromTo($('.vb-blade-b', sc), { rotation: 22 }, { rotation: 0, svgOrigin: '12 12.4', duration: .16, repeat: 1, yoyo: true }, 'p3')
+      .addLabel('p4', '+=.1').call(() => markPhase(4), null, 'p4')
+      .to(mSuf, { x: 14, y: 30, rotation: 12, opacity: .4, duration: .7, ease: 'bounce.out' }, 'p4')
+      .to(mRoot, { color: '#1B8BDD', scale: 1.06, duration: .4, ease: 'back.out(3)' }, 'p4+=.2');
+  }
+  const vBtns = $$('#vswitch button');
+  vBtns.forEach((b) => b.addEventListener('click', () => {
+    vBtns.forEach((x) => x.classList.toggle('is-on', x === b));
+    runSplit(b.dataset.r, b.dataset.s, b.dataset.ru, true);
+  }));
+  phaseBtns.forEach((b) => b.addEventListener('click', () => {
+    if (!splitTl) { const on = $('#vswitch .is-on'); runSplit(on.dataset.r, on.dataset.s, on.dataset.ru, false); }
+    if (splitTl) splitTl.play('p' + b.dataset.p);
+  }));
+  addEventListener('resize', placeCut);
+  placeCut();
+  markPhase(4);
+  split.classList.add('is-cut');
+  if (anim && ST) ScrollTrigger.create({ trigger: split, start: 'top 75%', once: true, onEnter: () => { const on = $('#vswitch .is-on'); runSplit(on.dataset.r, on.dataset.s, on.dataset.ru, false); } });
+
+  /* ---------- гармония: гласная летит в свою группу ---------- */
+  const hWord = $('#hWord'), hVerdict = $('#hVerdict'), gHard = $('#gHard'), gSoft = $('#gSoft'), hCard = $('#harmonyCard');
+  function runHarmony(w, v, hard, ru) {
+    const i = w.lastIndexOf(v);
+    hWord.innerHTML = `${w.slice(0, i)}<span class="vb-hi">${v}</span>${w.slice(i + 1)}`;
+    const own = hard ? gHard : gSoft, other = hard ? gSoft : gHard;
+    const suf = hard ? 'mak' : 'mek';
+    const verdict = () => {
+      other.classList.remove('is-lit');
+      own.classList.add('is-lit');
+      hVerdict.innerHTML = `последняя гласная <b>${v}</b> — ${hard ? 'толстая' : 'тонкая'} → <b lang="tr">${w}${suf}</b>, ${ru}`;
+      say(w + suf);
+    };
+    if (!anim) { verdict(); return; }
+    const from = $('.vb-hi', hWord);
+    const target = $$('.vb-vowels span', own).find((n) => n.textContent === v);
+    G.fromTo(from, { y: 0 }, { y: -18, duration: .2, yoyo: true, repeat: 1, ease: 'power2.out' });
+    const base = hCard.getBoundingClientRect(), a = from.getBoundingClientRect(), b = target.getBoundingClientRect();
+    const spark = document.createElement('div');
+    spark.className = 'vb-spark';
+    spark.textContent = v;
+    spark.style.left = (a.left - base.left + a.width / 2 - 18) + 'px';
+    spark.style.top = (a.top - base.top + a.height / 2 - 18) + 'px';
+    hCard.append(spark);
+    const dx = b.left - a.left + (b.width - a.width) / 2, dy = b.top - a.top + (b.height - a.height) / 2;
+    const path = [{ x: 0, y: 0 }, { x: dx / 2, y: Math.min(dy, 0) / 2 - 60 }, { x: dx, y: dy }];
+    const motion = window.MotionPathPlugin ? { motionPath: { path, curviness: 1.4 } } : { x: dx, y: dy };
+    G.to(spark, { ...motion, scale: .9, duration: .7, ease: 'power1.inOut', onComplete: () => {
+      spark.remove();
+      verdict();
+      G.fromTo(target, { scale: 1.5, rotation: -10 }, { scale: 1, rotation: 0, duration: .5, ease: 'elastic.out(1, .45)' });
+      G.fromTo(own, { scale: .96 }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+    } });
+  }
+  const hBtns = $$('#hswitch button');
+  hBtns.forEach((b) => b.addEventListener('click', () => {
+    hBtns.forEach((x) => x.classList.toggle('is-on', x === b));
+    runHarmony(b.dataset.w, b.dataset.v, b.dataset.t === 'hard', b.dataset.ru);
+  }));
+  if (anim && ST) ScrollTrigger.create({ trigger: hCard, start: 'top 70%', once: true, onEnter: () => G.from($$('.vb-vowels span'), { y: -30, rotation: 20, scale: .4, duration: .5, stagger: .06, ease: 'back.out(2.5)' }) });
+
+  /* угадай хвост */
+  const GUESS = [['bak', 'mak', 'смотреть'], ['iç', 'mek', 'пить'], ['dur', 'mak', 'стоять'], ['sev', 'mek', 'любить'], ['konuş', 'mak', 'разговаривать'], ['bil', 'mek', 'знать']];
+  let gi = 0;
+  const gRoot = $('#guessRoot'), gFb = $('#guessFb');
+  $$('[data-guess]').forEach((b) => b.addEventListener('click', () => {
+    const [r, s, ru] = GUESS[gi];
+    const ok = b.dataset.guess === s;
+    gFb.innerHTML = ok ? `Да: <b lang="tr">${r}${s}</b> — ${ru}.` : `Почти. Последняя гласная корня решает: <b lang="tr">${r}${s}</b> — ${ru}.`;
+    say(r + s);
+    if (anim) G.fromTo(gFb, { y: 10, scale: .9 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2.5)' });
+    gi = (gi + 1) % GUESS.length;
+    setTimeout(() => {
+      gRoot.textContent = GUESS[gi][0] + '-';
+      if (anim) G.fromTo(gRoot, { rotation: -8, scale: .5 }, { rotation: 0, scale: 1, duration: .5, ease: 'back.out(3)' });
+    }, reduce ? 0 : 900);
+  }));
+
+  /* ---------- конструктор ---------- */
+  const ROOTS = [{ k: 'gel', ru: 'приходить' }, { k: 'git', ru: 'идти' }, { k: 'yap', ru: 'делать' }, { k: 'al', ru: 'брать' }, { k: 'oku', ru: 'читать' }];
+  const TENSES = [{ k: 'past', label: 'прошлое', hint: '-di' }, { k: 'now', label: 'сейчас', hint: '-iyor' }, { k: 'fut', label: 'будущее', hint: '-ecek' }];
+  const PERSONS = [{ k: 'i', label: 'я' }, { k: 'you', label: 'ты' }, { k: 'he', label: 'он' }, { k: 'we', label: 'мы' }];
+  const FORMS = {
+    gel: {
+      now: { i: ['geliyorum', 'я прихожу', 'gel|iyor|um'], you: ['geliyorsun', 'ты приходишь', 'gel|iyor|sun'], he: ['geliyor', 'он приходит', 'gel|iyor|—'], we: ['geliyoruz', 'мы приходим', 'gel|iyor|uz'] },
+      past: { i: ['geldim', 'я пришёл', 'gel|di|m'], you: ['geldin', 'ты пришёл', 'gel|di|n'], he: ['geldi', 'он пришёл', 'gel|di|—'], we: ['geldik', 'мы пришли', 'gel|di|k'] },
+      fut: { i: ['geleceğim', 'я приду', 'gel|eceğ|im'], you: ['geleceksin', 'ты придёшь', 'gel|ecek|sin'], he: ['gelecek', 'он придёт', 'gel|ecek|—'], we: ['geleceğiz', 'мы придём', 'gel|eceğ|iz'] }
+    },
+    git: {
+      now: { i: ['gidiyorum', 'я иду', 'gid|iyor|um'], you: ['gidiyorsun', 'ты идёшь', 'gid|iyor|sun'], he: ['gidiyor', 'он идёт', 'gid|iyor|—'], we: ['gidiyoruz', 'мы идём', 'gid|iyor|uz'] },
+      past: { i: ['gittim', 'я пошёл', 'git|ti|m'], you: ['gittin', 'ты пошёл', 'git|ti|n'], he: ['gitti', 'он пошёл', 'git|ti|—'], we: ['gittik', 'мы пошли', 'git|ti|k'] },
+      fut: { i: ['gideceğim', 'я пойду', 'gid|eceğ|im'], you: ['gideceksin', 'ты пойдёшь', 'gid|ecek|sin'], he: ['gidecek', 'он пойдёт', 'gid|ecek|—'], we: ['gideceğiz', 'мы пойдём', 'gid|eceğ|iz'] }
+    },
+    yap: {
+      now: { i: ['yapıyorum', 'я делаю', 'yap|ıyor|um'], you: ['yapıyorsun', 'ты делаешь', 'yap|ıyor|sun'], he: ['yapıyor', 'он делает', 'yap|ıyor|—'], we: ['yapıyoruz', 'мы делаем', 'yap|ıyor|uz'] },
+      past: { i: ['yaptım', 'я сделал', 'yap|tı|m'], you: ['yaptın', 'ты сделал', 'yap|tı|n'], he: ['yaptı', 'он сделал', 'yap|tı|—'], we: ['yaptık', 'мы сделали', 'yap|tı|k'] },
+      fut: { i: ['yapacağım', 'я сделаю', 'yap|acağ|ım'], you: ['yapacaksın', 'ты сделаешь', 'yap|acak|sın'], he: ['yapacak', 'он сделает', 'yap|acak|—'], we: ['yapacağız', 'мы сделаем', 'yap|acağ|ız'] }
+    },
+    al: {
+      now: { i: ['alıyorum', 'я беру', 'al|ıyor|um'], you: ['alıyorsun', 'ты берёшь', 'al|ıyor|sun'], he: ['alıyor', 'он берёт', 'al|ıyor|—'], we: ['alıyoruz', 'мы берём', 'al|ıyor|uz'] },
+      past: { i: ['aldım', 'я взял', 'al|dı|m'], you: ['aldın', 'ты взял', 'al|dı|n'], he: ['aldı', 'он взял', 'al|dı|—'], we: ['aldık', 'мы взяли', 'al|dı|k'] },
+      fut: { i: ['alacağım', 'я возьму', 'al|acağ|ım'], you: ['alacaksın', 'ты возьмёшь', 'al|acak|sın'], he: ['alacak', 'он возьмёт', 'al|acak|—'], we: ['alacağız', 'мы возьмём', 'al|acağ|ız'] }
+    },
+    oku: {
+      now: { i: ['okuyorum', 'я читаю', 'oku|yor|um'], you: ['okuyorsun', 'ты читаешь', 'oku|yor|sun'], he: ['okuyor', 'он читает', 'oku|yor|—'], we: ['okuyoruz', 'мы читаем', 'oku|yor|uz'] },
+      past: { i: ['okudum', 'я прочитал', 'oku|du|m'], you: ['okudun', 'ты прочитал', 'oku|du|n'], he: ['okudu', 'он прочитал', 'oku|du|—'], we: ['okuduk', 'мы прочитали', 'oku|du|k'] },
+      fut: { i: ['okuyacağım', 'я прочитаю', 'oku|yacağ|ım'], you: ['okuyacaksın', 'ты прочитаешь', 'oku|yacak|sın'], he: ['okuyacak', 'он прочитает', 'oku|yacak|—'], we: ['okuyacağız', 'мы прочитаем', 'oku|yacağ|ız'] }
+    }
+  };
+  const state = { root: 'gel', tense: 'now', person: 'i' };
+  const TDOT = { past: 40, now: 160, fut: 280 };
+  function chips(box, items, key, render) {
+    box.textContent = '';
+    items.forEach((it) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'vb-opt' + (state[key] === it.k ? ' is-on' : '');
+      b.setAttribute('aria-pressed', String(state[key] === it.k));
+      b.innerHTML = render(it);
+      b.addEventListener('click', () => { state[key] = it.k; buildAll(); renderVerb(true); });
+      box.append(b);
+    });
+  }
+  function buildAll() {
+    chips($('#bRoots'), ROOTS, 'root', (x) => `<span lang="tr">${x.k}-</span><small>${x.ru}</small>`);
+    chips($('#bTenses'), TENSES, 'tense', (x) => `${x.label}<small lang="tr">${x.hint}</small>`);
+    chips($('#bPersons'), PERSONS, 'person', (x) => x.label);
+    if (anim) G.to('#tdot', { attr: { cx: TDOT[state.tense] }, duration: .6, ease: 'back.out(2)' });
+    else $('#tdot').setAttribute('cx', TDOT[state.tense]);
+  }
+  function renderVerb(speak) {
+    const [word, ru, parts] = FORMS[state.root][state.tense][state.person];
+    const [p1, p2, p3] = parts.split('|');
+    const last = p3 !== '—' ? `${p3}<small>лицо</small>` : '∅<small>он — пусто</small>';
+    $('#bricks').innerHTML = `<span class="vb-brick vb-brick--r">${p1}<small>корень</small></span><span class="vb-plus">+</span><span class="vb-brick vb-brick--t">${p2}<small>время</small></span><span class="vb-plus">+</span><span class="vb-brick vb-brick--p">${last}</span>`;
+    $('#bOut').textContent = word;
+    $('#bOutRu').textContent = ru;
+    $('#bSay').dataset.say = word;
+    $('#bHint').textContent = p1 === 'gid' ? 't → d перед гласной: git- звучит как gid-' : '';
+    if (speak) say(word);
+    if (!anim) return;
+    G.from('#bricks .vb-brick', { y: -60, rotation: -8, duration: .55, stagger: .13, ease: 'bounce.out' });
+    G.from('#bricks .vb-plus', { scale: .3, duration: .3, stagger: .13, delay: .1 });
+    G.fromTo('#bOut', { scale: .6, y: 10 }, { scale: 1, y: 0, duration: .5, delay: .55, ease: 'back.out(3)' });
+  }
+  buildAll();
+  renderVerb(false);
+  $('#bSay').addEventListener('click', () => { if (anim) G.fromTo('#bOut', { scale: 1.12 }, { scale: 1, duration: .4, ease: 'elastic.out(1, .45)' }); });
+  if (anim && ST) ScrollTrigger.create({ trigger: '#bricks', start: 'top 80%', once: true, onEnter: () => renderVerb(false) });
+
+  /* ---------- воронка ---------- */
+  const fnBars = $$('.vb-fn__bar'), fnNums = $$('[data-fn]');
+  function runFunnel() {
+    if (!anim) return;
+    G.fromTo(fnBars, { scaleX: 0 }, { scaleX: 1, duration: 1, stagger: .25, ease: 'power3.out' });
+    fnNums.forEach((el, i) => {
+      const obj = { v: 0 };
+      G.to(obj, { v: Number(el.dataset.fn), duration: 1.1, delay: i * .25, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(obj.v).toLocaleString('ru-RU'); } });
+    });
+  }
+  if (anim && ST) ScrollTrigger.create({ trigger: '#funnel', start: 'top 75%', once: true, onEnter: runFunnel });
+  $('#fnAgain').addEventListener('click', runFunnel);
+  const stepBtns = $$('[data-step]'), stepPanels = $$('[data-steppanel]');
+  stepBtns.forEach((b) => b.addEventListener('click', () => {
+    stepBtns.forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+    stepPanels.forEach((p) => { p.hidden = p.dataset.steppanel !== b.dataset.step; });
+    if (anim) G.from(stepPanels[Number(b.dataset.step)], { y: 16, rotation: .6, duration: .4, ease: 'back.out(2)' });
+  }));
+
+  /* ---------- топ-30 ---------- */
+  const VERBS = [
+    ['olmak', 'быть, становиться'], ['yapmak', 'делать'], ['gitmek', 'идти'], ['görmek', 'видеть'],
+    ['gelmek', 'приходить'], ['vermek', 'давать'], ['almak', 'брать'], ['söylemek', 'говорить, сказать'],
+    ['bilmek', 'знать'], ['istemek', 'хотеть'], ['yemek', 'есть'], ['içmek', 'пить'],
+    ['çalışmak', 'работать'], ['kullanmak', 'использовать'], ['sevmek', 'любить'], ['anlamak', 'понимать'],
+    ['beklemek', 'ждать'], ['yürümek', 'ходить пешком'], ['yaşamak', 'жить'], ['konuşmak', 'разговаривать'],
+    ['okumak', 'читать'], ['yazmak', 'писать'], ['açmak', 'открывать'], ['kapatmak', 'закрывать'],
+    ['bakmak', 'смотреть'], ['koymak', 'класть'], ['durmak', 'стоять'], ['oturmak', 'сидеть'],
+    ['bulmak', 'находить'], ['başlamak', 'начинать']
+  ];
+  const PLAY = '<svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg>';
+  const vlist = $('#vlist'), vempty = $('#vempty'), vSearch = $('#vSearch');
+  let filter = 'all';
+  function drawVerbs() {
+    const q = vSearch.value.trim().toLowerCase();
+    const rows = VERBS.filter(([tr, ru]) => (filter === 'all' || tr.endsWith(filter)) && (!q || tr.includes(q) || ru.includes(q)));
+    vlist.innerHTML = rows.map(([tr, ru]) => `<button type="button" class="vb-vrow" data-say="${tr}" aria-label="Послушать: ${tr}"><span class="vb-tr" lang="tr">${tr.slice(0, -3)}<mark>${tr.slice(-3)}</mark></span><span class="vb-vru">${ru}</span><span class="vb-ic">${PLAY}</span></button>`).join('');
+    vempty.hidden = rows.length > 0;
+    if (anim) G.from($$('.vb-vrow', vlist), { y: 14, scale: .96, duration: .35, stagger: .015, ease: 'power2.out' });
+  }
+  drawVerbs();
+  vSearch.addEventListener('input', drawVerbs);
+  const fBtns = $$('[data-f]');
+  fBtns.forEach((b) => b.addEventListener('click', () => {
+    filter = b.dataset.f;
+    fBtns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    drawVerbs();
+  }));
+  vlist.addEventListener('click', (e) => {
+    const row = e.target.closest('.vb-vrow');
+    if (row && anim) G.fromTo($('.vb-ic', row), { scale: 1.4 }, { scale: 1, duration: .4, ease: 'elastic.out(1, .45)' });
+  });
+  if (anim && ST) ScrollTrigger.create({ trigger: vlist, start: 'top 85%', once: true, onEnter: () => G.from($$('.vb-ic', vlist), { rotation: -90, scale: .3, duration: .4, stagger: .02, ease: 'back.out(2)' }) });
+
+  /* ---------- поездка ---------- */
+  const tabBtns = $$('[data-tab]'), panels = $$('[data-panel]');
+  tabBtns.forEach((b) => b.addEventListener('click', () => {
+    tabBtns.forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+    panels.forEach((p) => { p.hidden = p.dataset.panel !== b.dataset.tab; });
+    if (anim) G.from($$('.vb-chip', $(`[data-panel="${b.dataset.tab}"]`)), { scale: .6, rotation: -6, duration: .45, stagger: .05, ease: 'back.out(2.5)' });
+  }));
+  if (anim && ST) ScrollTrigger.create({ trigger: '[data-panel="air"]', start: 'top 82%', once: true, onEnter: () => G.from('[data-panel="air"] .vb-chip', { y: 24, rotation: 4, duration: .45, stagger: .05, ease: 'back.out(2)' }) });
+
+  /* ---------- ловушка ---------- */
+  const words = $$('#trapSent .vb-sw');
+  const openWord = (w) => {
+    w.classList.add('is-open');
+    if (anim) G.fromTo($('.vb-sw__lab', w), { scale: .3, y: 10 }, { scale: 1, y: 0, duration: .45, ease: 'back.out(3)' });
+  };
+  words.forEach((w) => w.addEventListener('click', () => { openWord(w); say(w.firstChild.textContent.trim()); }));
+  $('#trapAll').addEventListener('click', () => { words.forEach((w, i) => setTimeout(() => openWord(w), reduce ? 0 : i * 250)); say('Yemek yemek istiyorum.'); });
+  if (anim && ST) ScrollTrigger.create({ trigger: '#trapSent', start: 'top 80%', once: true, onEnter: () => G.from(words, { y: -40, rotation: (i) => (i - 1) * 8, duration: .6, stagger: .15, ease: 'bounce.out' }) });
+
+  /* ---------- вопросы ---------- */
+  $$('#faq .vb-fq').forEach((fq) => {
+    const q = $('button', fq), a = $('.vb-fq__a', fq), ch = $('svg', q);
+    q.addEventListener('click', () => {
+      const open = !fq.classList.contains('is-open');
+      fq.classList.toggle('is-open', open);
+      q.setAttribute('aria-expanded', String(open));
+      if (!anim) return;
+      if (open) G.fromTo(a, { height: 0 }, { height: 'auto', duration: .35, ease: 'power2.out' });
+      else G.fromTo(a, { height: a.offsetHeight }, { height: 0, duration: .3, ease: 'power2.in' });
+      G.to(ch, { rotation: open ? 180 : 0, duration: .3 });
+    });
+  });
+
+  /* ---------- шпаргалка ---------- */
+  $$('.vb-crow').forEach((r) => r.addEventListener('click', () => { if (anim) G.fromTo($('.k', r), { x: -8 }, { x: 0, duration: .4, ease: 'elastic.out(1, .45)' }); }));
+  if (anim && ST) {
+    ScrollTrigger.create({ trigger: '.vb-cheat', start: 'top 75%', once: true, onEnter: () => G.from('.vb-crow', { x: -30, rotation: -1, duration: .45, stagger: .07, ease: 'back.out(2)' }) });
+    ScrollTrigger.create({ trigger: '.vb-final', start: 'top 90%', once: true, onEnter: () => G.from('.vb-final', { scale: .5, rotation: -4, duration: .7, ease: 'elastic.out(1, .45)' }) });
+  }
+
+  /* ---------- свой скроллбар: ножницы режут по пунктиру ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.vb-sb__track', bar);
+  const bladeA = $('.vb-sb__a', bar), bladeB = $('.vb-sb__b', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'vb-sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => {
+    bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+    if (!reduce) {
+      const ang = Math.sin(scrollY / 40) * 16;
+      bladeA.setAttribute('transform', `rotate(${-Math.abs(ang)} 12 12.4)`);
+      bladeB.setAttribute('transform', `rotate(${Math.abs(ang)} 12 12.4)`);
+    }
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.vb-sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', () => { layout(); if (ST) ST.refresh(); });
+  if (document.fonts && ST) document.fonts.ready.then(() => ST.refresh());
+  addEventListener('orientationchange', () => { layout(); if (ST) ST.refresh(); });
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (anim) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout();
+  progress();
+
+  /* ---------- ачивка: ножницы отрезают хвост ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .from(b.querySelector('.ach-sc'), { y: -24, rotation: -30, duration: .4, ease: 'back.out(2)' }, .9)
+      .fromTo(b.querySelector('.ach-a'), { rotation: -24 }, { rotation: 0, svgOrigin: '52 23.4', duration: .15, repeat: 3, yoyo: true }, 1.2)
+      .fromTo(b.querySelector('.ach-b'), { rotation: 24 }, { rotation: 0, svgOrigin: '52 23.4', duration: .15, repeat: 3, yoyo: true }, 1.2)
+      .from(b.querySelector('.ach-cut'), { scaleY: 0, transformOrigin: '50% 0%', duration: .3 }, 1.25)
+      .to(b.querySelector('.ach-suf'), { x: 6, y: 14, rotation: 14, opacity: .45, duration: .6, ease: 'bounce.out' }, 1.55)
+      .fromTo(b.querySelector('.ach-root'), { scale: 1 }, { scale: 1.15, transformOrigin: '100% 50%', duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }, 1.9);
+  });
+
+  /* ---------- нестандартное упражнение «Ножницы» (lib.verbs.ex5) ---------- */
+  (async () => {
+    const EX = 'lib.verbs.ex5';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    const cutter = $('[data-cutter]', root), countEl = $('[data-cut-count]', root), statusEl = $('[data-cut-status]', root);
+    const ex = await AlternaKit.exercise(EX);
+    const items = ex.items;
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      const word = items[i].word;
+      cutter.textContent = '';
+      [...word].forEach((ch, k) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'vb-letter';
+        b.textContent = ch;
+        b.lang = 'tr';
+        b.setAttribute('aria-label', `Резать перед буквой ${ch}, позиция ${k + 1}`);
+        b.addEventListener('click', () => pick(k));
+        cutter.append(b);
+      });
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      statusEl.textContent = '';
+      if (anim) G.from($$('.vb-letter', cutter), { y: -24, rotation: -10, duration: .4, stagger: .04, ease: 'back.out(2.5)' });
+      t0 = performance.now();
+      locked = false;
+    }
+    function pick(k) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const item = items[i];
+      const at = item.word.length - 3;
+      const ok = k === at;
+      if (ok) correct++;
+      const letters = $$('.vb-letter', cutter);
+      if (!ok && letters[k]) letters[k].classList.add('is-miss');
+      letters.forEach((l, n) => l.classList.add(n < at ? 'is-root' : 'is-tail'));
+      if (anim) G.to(letters.slice(at), { y: 22, rotation: 10, duration: .5, stagger: .05, ease: 'bounce.out' });
+      statusEl.innerHTML = ok ? `Чисто. Корень — <b lang="tr">${item.answer}-</b>, хвост <b lang="tr">-${item.word.slice(at)}</b>.` : `Резать надо перед хвостом: <b lang="tr">${item.answer}-</b> | <b lang="tr">${item.word.slice(at)}</b>. ${item.explanation}`;
+      say(item.word);
+      AlternaTracker.answer({ exerciseId: EX, itemId: item.id, correct: ok, answer: item.word.slice(0, k), timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          cutter.textContent = '';
+          countEl.textContent = 'готово';
+          statusEl.textContent = `${correct} из ${items.length}. Все хвосты отрезаны.`;
+        }
+      }, reduce ? 300 : 1400);
+    }
+    AlternaKit.registerSolver(EX, async () => {
+      while (i < items.length) {
+        if (!locked) pick(items[i].word.length - 3);
+        await new Promise((r) => setTimeout(r, reduce ? 320 : 1420));
+      }
+    });
+    show();
+  })();
+});
+</script>
+</body>
+</html>
