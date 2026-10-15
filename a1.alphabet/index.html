@@ -89,8 +89,6 @@
   .ab-brand i { width: 26px; height: 26px; border-radius: 9px; background: var(--green); display: grid; place-items: center; color: var(--cream); font: 700 15px/1 var(--tr); font-style: normal; }
   .ab-top nav { display: flex; gap: 6px; }
   .ab-top .ab-btn { min-height: 38px; padding: 0 14px; font-size: 14px; }
-  .ab-bar { height: 3px; background: transparent; }
-  .ab-bar span { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, var(--blue), var(--orange)); transform-origin: 0 50%; transform: scaleX(0); }
   @media (max-width: 400px) { .ab-top .ab-btn--ghost { display: none; } }
 
   /* ---------- первый экран ---------- */
@@ -313,6 +311,89 @@
   .ab-practice .ak-ex, .ab-check .ak-ex { max-width: 760px; margin-left: auto; margin-right: auto; box-shadow: var(--shadow); border-color: transparent; }
   .ab-video .ak-video { max-width: 820px; }
 
+  /* ---------- свой скроллбар: рейл с биркой-буквой ---------- */
+  .ab-top__sb { height: 34px; }
+  html { scroll-padding-top: 96px; }
+  .ab-sb { position: fixed; z-index: 30; top: calc(env(safe-area-inset-top) + 54px); left: 12px; right: 12px; height: 30px; }
+  .ab-sb__track { position: relative; width: 100%; height: 100%; cursor: pointer; }
+  .ab-sb__line { position: absolute; left: 0; right: 0; top: 50%; border-top: 2px dashed #b9c8de; }
+  .ab-sb__fill { position: absolute; left: 0; top: calc(50% - 2px); width: 100%; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--green), var(--orange)); transform-origin: 0 50%; transform: scaleX(var(--p, 0)); }
+  .ab-sb__mark { position: absolute; left: calc(var(--m, 0) * 100%); top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .ab-sb__mark::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px #9fb0c8; }
+  .ab-sb__mark.is-read::before { background: var(--green); box-shadow: inset 0 0 0 2px var(--green); }
+  .ab-sb__thumb { position: absolute; left: calc(var(--p, 0) * 100%); top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 9px; background: var(--ink); color: var(--cream); box-shadow: 0 6px 14px rgba(15, 23, 32, .25); cursor: grab; touch-action: none; }
+  .ab-sb__thumb b { display: block; font: 700 17px/1 var(--tr); }
+  .ab-sb__thumb svg { display: none; }
+  .ab-sb__thumb:active { cursor: grabbing; }
+  @media (min-width: 768px) {
+    .ab-top__sb { display: none; }
+    html { scroll-padding-top: 64px; }
+    .ab-sb { top: 92px; bottom: 32px; left: auto; right: 14px; width: 44px; height: auto; }
+    .ab-sb__line { left: 50%; right: auto; top: 0; bottom: 0; border-top: 0; border-left: 2px dashed #b9c8de; }
+    .ab-sb__fill { left: calc(50% - 2px); top: 0; width: 4px; height: 100%; background: linear-gradient(180deg, var(--green), var(--orange)); transform-origin: 50% 0; transform: scaleY(var(--p, 0)); }
+    .ab-sb__mark { left: 50%; top: calc(var(--m, 0) * 100%); }
+    .ab-sb__thumb { left: 50%; top: calc(var(--p, 0) * 100%); width: 40px; height: 40px; border-radius: 12px; }
+    .ab-sb__thumb b { font-size: 22px; }
+    .ab-sb__thumb svg { display: block; position: absolute; top: -15px; left: 50%; translate: -50% 0; width: 26px; height: 16px; }
+  }
+  @media (min-width: 768px) and (max-width: 1279px) { .ab-wrap { padding-right: 70px; } }
+
+  /* ---------- иконки ---------- */
+  .ic { width: 1.15em; height: 1.15em; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; vertical-align: -.2em; }
+  .ab-pill--ic::before { display: none; }
+  .ab-pill--ic .ic { color: var(--blue); }
+  .ab-pill--ic.ab-pill--o .ic { color: var(--orange); }
+  .ab-btn .ic { width: 18px; height: 18px; }
+  .ab-tile-ic { display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 20px; background: var(--cream); color: var(--green); box-shadow: var(--shadow); }
+  .ab-tile-ic .ic { width: 32px; height: 32px; stroke-width: 1.8; }
+  .ab-tile-ic--b { background: var(--blue-soft); color: var(--blue); }
+  .ab-tile-ic--o { background: var(--orange-soft); color: var(--orange); }
+  .ab-lab .ab-tile-ic { margin: 0 0 10px; }
+  .ab-tale p.who-l { display: flex; gap: 8px; align-items: flex-start; }
+  .ab-av { display: inline-grid; place-items: center; flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--blue-soft); color: var(--blue); margin-top: 1px; }
+  .ab-av .ic { width: 16px; height: 16px; }
+  .ab-av--w { background: var(--cream); color: var(--green); }
+  .ab-dialog .ln { display: flex; gap: 10px; align-items: flex-start; }
+  .ab-legend .ic { width: 15px; height: 15px; }
+  .ab-legend span::before { display: none; }
+  .ab-legend .is-alt { color: var(--blue); } .ab-legend .is-acc { color: var(--orange); }
+  .ab-mnemo { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .ab-mnemo .ic { width: 22px; height: 22px; color: #ffcf8a; }
+  .ab-flip__f > span:nth-child(2) .ic, .ab-flip__b > span:nth-child(2) .ic { margin-right: 4px; }
+  .ab-flip__f .ic { color: var(--orange); }
+  .ab-flip__b .ic { color: #9fe0b8; }
+
+  /* маршрут урока */
+  .ab-route { position: relative; z-index: 3; margin: -18px auto 0; padding: 14px 14px 10px; border-radius: 24px; background: #fff; box-shadow: var(--shadow); max-width: 1108px; }
+  .ab-route__h { display: flex; align-items: center; gap: 8px; margin: 0 4px 10px; font-weight: 700; }
+  .ab-route__h .ic { color: var(--orange); }
+  .ab-route__list { position: relative; display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px 2px 6px; scroll-snap-type: x proximity; }
+  .ab-route__list::-webkit-scrollbar { display: none; }
+  .ab-route__list::before { content: ''; position: absolute; left: 30px; right: 30px; top: 25px; border-top: 2px dashed #c9d5e6; }
+  .ab-stop { position: relative; display: grid; justify-items: center; gap: 6px; flex: 1 0 74px; min-height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer; font-size: 12.5px; font-weight: 600; color: #2b3542; scroll-snap-align: start; }
+  .ab-stop__i { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 16px; background: #f3f7fc; color: var(--green); box-shadow: 0 0 0 4px #fff; }
+  .ab-stop__i .ic { width: 22px; height: 22px; }
+  .ab-stop.is-done .ab-stop__i { background: var(--green); color: var(--cream); }
+  .ab-stop.is-here .ab-stop__i { background: var(--orange); color: #fff; }
+  @media (hover: hover) { .ab-stop:hover .ab-stop__i { translate: 0 -3px; } }
+  .ab-hero { padding-bottom: 26px; }
+
+  /* фоновые буквы */
+  [data-section="letters"] { overflow: clip; }
+  .ab-ghost { position: absolute; z-index: 0; font: 700 clamp(120px, 22vw, 260px)/1 var(--tr); color: var(--blue); opacity: .06; pointer-events: none; animation: ab-ghost 12s ease-in-out infinite alternate; }
+  .ab-ghost--1 { top: 40px; right: -2%; } .ab-ghost--2 { bottom: 60px; left: -3%; color: var(--orange); animation-delay: -5s; }
+  @keyframes ab-ghost { to { transform: translateY(-30px) rotate(-6deg); } }
+  [data-section="letters"] .ab-wrap { position: relative; z-index: 1; }
+  .is-off .ab-ghost { animation-play-state: paused; }
+
+  /* финал: что умеешь */
+  .ab-can { display: grid; gap: 8px; max-width: 520px; margin: 18px auto 6px; padding: 16px 18px; border-radius: 20px; background: #fff; box-shadow: var(--shadow); text-align: left; list-style: none; }
+  .ab-can__h { display: flex; align-items: center; gap: 8px; font-weight: 700; }
+  .ab-can__h .ic { color: var(--orange); width: 22px; height: 22px; }
+  .ab-can li { display: flex; gap: 10px; align-items: flex-start; }
+  .ab-can .ab-can__h .ic { background: none; color: var(--orange); padding: 0; }
+  .ab-can li:not(.ab-can__h) .ic { color: #fff; background: var(--green); border-radius: 50%; padding: 3px; width: 22px; height: 22px; margin-top: 1px; }
+
   /* ---------- читалка ---------- */
   .ab-reader { margin-top: 18px; padding: clamp(16px, 4vw, 26px); display: grid; gap: 12px; }
   .ab-reader__head { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
@@ -356,8 +437,6 @@
   @keyframes ab-gull2 { from { transform: translate(-80px, 10px); } to { transform: translate(680px, -30px); } }
   .is-off .ab-balloon, .is-off .ab-rays, .is-off .ab-waves, .is-off .ab-sail, .is-off .ab-gull2, .is-off .ab-swing, .is-off .ab-badge::after { animation-play-state: paused; }
 
-  .ab-bar { position: relative; }
-  .ab-boat { position: absolute; left: 0; bottom: 1px; width: 26px; height: 16px; will-change: transform; }
 
   .ab-stall { display: block; width: min(560px, 100%); height: auto; margin: 6px auto 0; overflow: visible; }
   .ab-swing { animation: ab-swing 2.8s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: 50% 0; }
@@ -381,32 +460,39 @@
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-coffee" viewBox="0 0 24 24"><path d="M10 2v2M14 2v2M6 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/></symbol><symbol id="i-ship" viewBox="0 0 24 24"><path d="M12 10.19V14M12 2v3"/><path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/><path d="M19.38 20A11.6 11.6 0 0 0 21 14l-8.19-3.64a2 2 0 0 0-1.62 0L3 14a11.6 11.6 0 0 0 2.81 7.76"/><path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"/></symbol><symbol id="i-type" viewBox="0 0 24 24"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></symbol><symbol id="i-shirt" viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .25.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.76-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.45 15h11.1M8.5 2h7"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></symbol><symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4M12 17h.01"/></symbol><symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.17 6.81a1 1 0 0 0-3.99-3.99L3.84 16.17a2 2 0 0 0-.5.83l-1.32 4.35a.5.5 0 0 0 .62.62l4.35-1.32a2 2 0 0 0 .83-.5z"/><path d="m15 5 4 4"/></symbol><symbol id="i-ccheck" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-user" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 17v2M13 11v2"/></symbol><symbol id="i-xcircle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6M9 9l6 6"/></symbol><symbol id="i-undo" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5A2 2 0 0 0 8.5 14.06l-6.14-1.58a.5.5 0 0 1 0-.96L8.5 9.94A2 2 0 0 0 9.94 8.5l1.58-6.14a.5.5 0 0 1 .96 0L14.06 8.5a2 2 0 0 0 1.44 1.44l6.14 1.58a.5.5 0 0 1 0 .96L15.5 14.06a2 2 0 0 0-1.44 1.44l-1.58 6.14a.5.5 0 0 1-.96 0z"/></symbol><symbol id="i-map" viewBox="0 0 24 24"><path d="M14.1 5.55a2 2 0 0 0 1.8 0l3.65-1.83A1 1 0 0 1 21 4.62v12.76a1 1 0 0 1-.55.9l-4.56 2.27a2 2 0 0 1-1.78 0l-4.22-2.1a2 2 0 0 0-1.78 0l-3.66 1.83A1 1 0 0 1 3 19.38V6.62a1 1 0 0 1 .55-.9l4.56-2.27a2 2 0 0 1 1.78 0z"/><path d="M15 5.76v15M9 3.24v15"/></symbol><symbol id="i-ear" viewBox="0 0 24 24"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></symbol><symbol id="i-gem" viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6M2 9h20"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol><symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></symbol><symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol><symbol id="i-clip" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol><symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 4.7a.7.7 0 0 0-1.2-.5L6.41 7.59A1.4 1.4 0 0 1 5.42 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.42a1.4 1.4 0 0 1 1 .41l3.38 3.39a.7.7 0 0 0 1.2-.5z"/><path d="M16 9a5 5 0 0 1 0 6M19.36 18.36a9 9 0 0 0 0-12.72"/></symbol></svg>
 <header class="ab-top">
   <div class="ab-wrap ab-top__in">
     <span class="ab-brand"><i lang="tr">Ç</i><span lang="tr">Türk alfabesi</span></span>
     <nav aria-label="Быстрый переход">
-      <a class="ab-btn ab-btn--ghost" href="#practice">Практика</a>
-      <a class="ab-btn" href="#cheat">Шпаргалка</a>
+      <a class="ab-btn ab-btn--ghost" href="#practice"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg>Практика</a>
+      <a class="ab-btn" href="#cheat"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg>Шпаргалка</a>
     </nav>
   </div>
-  <div class="ab-bar" aria-hidden="true"><span data-bar></span><svg class="ab-boat" viewBox="0 0 26 16" data-boat><path d="M2 9h22l-4 6H6z" fill="#0f1720"/><rect x="6" y="4" width="14" height="5" rx="1.5" fill="#4677FF"/><rect x="11" y="0" width="4" height="4" fill="#F46907"/></svg></div>
+  <div class="ab-top__sb" aria-hidden="true"></div>
 </header>
+<div class="ab-sb" data-scrollbar>
+  <div class="ab-sb__track" data-sb-track>
+    <span class="ab-sb__line"></span><span class="ab-sb__fill"></span>
+    <span class="ab-sb__thumb" data-sb-thumb role="slider" aria-label="Где я в уроке" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><svg viewBox="0 0 26 16" aria-hidden="true"><path d="M13 1c-3 0-3 4 0 4L1 15h24L13 5" fill="none" stroke="#2A5945" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><b lang="tr" data-sb-letter>Ç</b></span>
+  </div>
+</div>
 
 <main>
 
   <!-- 1. Крючок -->
-  <section class="ab-hero" data-section="story" data-words="61">
+  <section class="ab-hero" data-section="story" data-words="73">
     <div class="ab-wrap ab-hero__grid">
       <div class="ab-hero__text">
-        <span class="ab-pill">A1 · Стамбул · алфавит и чтение</span>
+        <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>A1 · Стамбул · алфавит и чтение</span>
         <h1><span class="w" style="--i:0">Турецкий</span> <span class="w" style="--i:1">читается</span> <span class="w" style="--i:2">как</span> <span class="w" style="--i:3">пишется.</span> <span class="w" style="--i:4">Почти.</span></h1>
         <div class="ab-tale">
           <p>Кадыкёй. Кафе. Ты садишься у окна.</p>
           <p>На стене меню. Первая строчка — <b class="tr" data-say="çay">ÇAY</b>.</p>
-          <p>Официант подходит. Ты говоришь, кай.</p>
-          <p><span class="who">Официант говорит,</span> кай?</p>
-          <p>Ты говоришь, ну. Кай. Один.</p>
-          <p><span class="who">Он говорит,</span> <a-say>çay</a-say>. И приносит чай.</p>
+          <p class="who-l"><span class="ab-av"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></span><span>Официант подходит. Ты говоришь, кай.</span></p>
+          <p class="who-l"><span class="ab-av ab-av--w"><svg class="ic" aria-hidden="true"><use href="#i-coffee"/></svg></span><span><span class="who">Официант говорит,</span> кай?</span></p>
+          <p class="who-l"><span class="ab-av"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></span><span>Ты говоришь, ну. Кай. Один.</span></p>
+          <p class="who-l"><span class="ab-av ab-av--w"><svg class="ic" aria-hidden="true"><use href="#i-coffee"/></svg></span><span><span class="who">Он говорит,</span> <a-say>çay</a-say>. И приносит чай.</span></p>
           <p>Под буквой C висел хвостик. Крошечный. Он и сделал из «кай» чай.</p>
         </div>
         <div class="ab-guess" data-guess>
@@ -469,14 +555,32 @@
         </div>
       </div>
     </div>
+    <div class="ab-wrap">
+      <nav class="ab-route" aria-label="Маршрут урока">
+        <div class="ab-route__h"><svg class="ic" aria-hidden="true"><use href="#i-map"/></svg>Маршрут урока</div>
+        <div class="ab-route__list" data-route>
+          <button type="button" class="ab-stop" data-go="letters"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-type"/></svg></span>Буквы</button>
+          <button type="button" class="ab-stop" data-go="wardrobe"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-shirt"/></svg></span>Аксессуары</button>
+          <button type="button" class="ab-stop" data-go="lab"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg></span>Примерочная</button>
+          <button type="button" class="ab-stop" data-go="vowels"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-mic"/></svg></span>Гласные</button>
+          <button type="button" class="ab-stop" data-go="traps"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg></span>Ловушки</button>
+          <button type="button" class="ab-stop" data-go="scene"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-ship"/></svg></span>Пристань</button>
+          <button type="button" class="ab-stop" data-go="video"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></span>Видео</button>
+          <button type="button" class="ab-stop" data-go="practice"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg></span>Практика</button>
+          <button type="button" class="ab-stop" data-go="check"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg></span>Проверка</button>
+          <button type="button" class="ab-stop" data-go="cheat"><span class="ab-stop__i"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span>Шпаргалка</button>
+        </div>
+      </nav>
+    </div>
   </section>
 
   <!-- 2. 29 букв -->
-  <section class="ab-sec" data-section="letters" data-words="92">
+  <section class="ab-sec" data-section="letters" data-words="91">
+    <span class="ab-ghost ab-ghost--1" aria-hidden="true">Ç</span><span class="ab-ghost ab-ghost--2" aria-hidden="true">Ğ</span>
     <div class="ab-wrap">
       <div class="ab-letters__head">
         <div>
-          <span class="ab-pill">Остановка 1 · 29 букв</span>
+          <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-type"/></svg>Остановка 1 · 29 букв</span>
           <h2>Латиница. Почти знакомая.</h2>
         </div>
         <div>
@@ -485,7 +589,7 @@
         </div>
       </div>
       <div class="ab-legend">
-        <span>как ждёшь</span><span class="is-alt">знакомая, но читай иначе</span><span class="is-acc">в аксессуаре</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>как ждёшь</span><span class="is-alt"><svg class="ic" aria-hidden="true"><use href="#i-ear"/></svg>знакомая, но читай иначе</span><span class="is-acc"><svg class="ic" aria-hidden="true"><use href="#i-gem"/></svg>в аксессуаре</span>
       </div>
       <div class="ab-grid" data-grid>
         <button type="button" class="ab-tile ab-pop" data-say="ada" data-w="ada" data-r="ада" data-ru="остров"><span class="ab-tile__l" lang="tr">Aa</span><span class="ab-tile__r">а</span></button>
@@ -527,7 +631,7 @@
         </div>
         <div class="ab-reader__stage" data-reader-stage></div>
         <p class="ab-reader__out" aria-live="polite" data-reader-out></p>
-        <div class="ab-reader__ctrl"><button type="button" class="ab-btn" data-reader-next>Дальше →</button><button type="button" class="ab-btn ab-btn--ghost" data-reader-all>Всё сразу</button></div>
+        <div class="ab-reader__ctrl"><button type="button" class="ab-btn" data-reader-next>Дальше<svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></button><button type="button" class="ab-btn ab-btn--ghost" data-reader-all><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Всё сразу</button></div>
       </div>
     </div>
   </section>
@@ -536,7 +640,7 @@
   <section class="ab-sec ab-wardrobe" data-section="wardrobe" data-words="83">
     <div class="ab-wrap">
       <div class="ab-center">
-        <span class="ab-pill ab-pill--o">Остановка 2 · Аксессуары</span>
+        <span class="ab-pill ab-pill--ic ab-pill--o"><svg class="ic" aria-hidden="true"><use href="#i-shirt"/></svg>Остановка 2 · Аксессуары</span>
         <h2>Латиница сходила на базар</h2>
         <p class="ab-lead">И купила четыре аксессуара. Каждый меняет звук. Всегда одинаково.</p>
         <svg class="ab-stall" viewBox="0 0 560 150" aria-hidden="true">
@@ -582,7 +686,7 @@
           <button type="button" class="again" data-replay="breve">↻ ещё раз</button>
         </article>
       </div>
-      <p class="ab-mnemo">Хвостик шипит. Точки вытягивают губы. Без точки — «ы». В шапочке — молчок.</p>
+      <p class="ab-mnemo"><svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg><span>Хвостик шипит. Точки вытягивают губы. Без точки — «ы». В шапочке — молчок.</span></p>
     </div>
   </section>
 
@@ -590,15 +694,16 @@
   <section class="ab-sec ab-lab" data-section="lab" data-words="40">
     <div class="ab-wrap ab-lab__grid">
       <div>
-        <span class="ab-pill">Остановка 3 · Сам</span>
+        <span class="ab-tile-ic ab-tile-ic--b ab-pop" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg></span>
+        <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-flask"/></svg>Остановка 3 · Сам</span>
         <h2>Примерочная</h2>
         <p class="ab-lead">Выбери букву. Угадай, как она зазвучит в аксессуаре. Потом проверь.</p>
         <p>Ошибся — не страшно. Тут никто не смотрит. Даже официант.</p>
         <div class="ab-notes" aria-hidden="true">
-          <span class="ab-pill ab-pill--o">c, s → хвостик</span>
-          <span class="ab-pill ab-pill--o">o, u → точки</span>
-          <span class="ab-pill ab-pill--o">i → без точки</span>
-          <span class="ab-pill ab-pill--o">g → шапочка</span>
+          <span class="ab-pill ab-pill--ic ab-pill--o"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>c, s → хвостик</span>
+          <span class="ab-pill ab-pill--ic ab-pill--o"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>o, u → точки</span>
+          <span class="ab-pill ab-pill--ic ab-pill--o"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>i → без точки</span>
+          <span class="ab-pill ab-pill--ic ab-pill--o"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>g → шапочка</span>
         </div>
       </div>
       <div class="ab-phone" data-lab>
@@ -618,7 +723,7 @@
             <button type="button" data-l="c">c</button><button type="button" data-l="s">s</button><button type="button" data-l="o">o</button><button type="button" data-l="u">u</button><button type="button" data-l="i">i</button><button type="button" data-l="g">g</button>
           </div>
           <div class="ab-lab__words" data-lab-words></div>
-          <button type="button" class="ab-lab__reset" data-lab-reset>↺ снять аксессуар</button>
+          <button type="button" class="ab-lab__reset" data-lab-reset><svg class="ic" aria-hidden="true"><use href="#i-undo"/></svg> снять аксессуар</button>
         </div>
       </div>
     </div>
@@ -627,7 +732,8 @@
   <!-- 5. Гласные -->
   <section class="ab-sec" data-section="vowels" data-words="41">
     <div class="ab-wrap ab-center">
-      <span class="ab-pill">Остановка 4 · Гласные</span>
+      <span class="ab-tile-ic ab-tile-ic--b ab-pop" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-mic"/></svg></span>
+        <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-mic"/></svg>Остановка 4 · Гласные</span>
       <h2>Восемь гласных. Четыре пары.</h2>
       <p class="ab-lead">Гласные ходят парами. Сверху без точек. Снизу — с точками.</p>
       <div class="ab-card ab-vow" lang="tr">
@@ -650,33 +756,33 @@
     <div class="ab-wrap">
       <div class="ab-center">
         <svg class="ab-cone" viewBox="0 0 74 64" aria-hidden="true"><path d="M30 6h14l14 46H16z" fill="#F46907"/><path d="M26 20h22l3 10H23zM21 36h32l3 9H18z" fill="#fff"/><rect x="6" y="52" width="62" height="8" rx="4" fill="#2A5945"/></svg>
-        <span class="ab-pill ab-pill--o ab-badge">Остановка 5 · Ловушки</span>
+        <span class="ab-pill ab-pill--ic ab-pill--o ab-badge"><svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg>Остановка 5 · Ловушки</span>
         <h2>Где спотыкаются все</h2>
         <p class="ab-lead">Это не ошибки. Это привычка из русского и английского. Лечится за минуту. Нажми на карточку.</p>
       </div>
       <div class="ab-traps__grid">
         <button type="button" class="ab-flip ab-pop" aria-pressed="false" data-flip>
           <span class="ab-flip__in">
-            <span class="ab-flip__f"><span class="big" lang="tr">cami</span><span>Читают <span class="no">«ками»</span>. Или <span class="no">«цами»</span>.</span><small>мечеть · нажми</small></span>
-            <span class="ab-flip__b"><span class="big"><span class="rd">«джами»</span></span><span>c — это «дж». Всегда. Без исключений.</span></span>
+            <span class="ab-flip__f"><span class="big" lang="tr">cami</span><span><svg class="ic" aria-hidden="true"><use href="#i-xcircle"/></svg>Читают <span class="no">«ками»</span>. Или <span class="no">«цами»</span>.</span><small>мечеть · нажми</small></span>
+            <span class="ab-flip__b"><span class="big"><span class="rd">«джами»</span></span><span><svg class="ic" aria-hidden="true"><use href="#i-ccheck"/></svg>c — это «дж». Всегда. Без исключений.</span></span>
           </span>
         </button>
         <button type="button" class="ab-flip ab-pop" aria-pressed="false" data-flip>
           <span class="ab-flip__in">
-            <span class="ab-flip__f"><span class="big" lang="tr">dağ</span><span>Читают <span class="no">«даг»</span>.</span><small>гора · нажми</small></span>
-            <span class="ab-flip__b"><span class="big"><span class="rd">«даа»</span></span><span>ğ молчит. Просто тянет a. Как будто задумался.</span></span>
+            <span class="ab-flip__f"><span class="big" lang="tr">dağ</span><span><svg class="ic" aria-hidden="true"><use href="#i-xcircle"/></svg>Читают <span class="no">«даг»</span>.</span><small>гора · нажми</small></span>
+            <span class="ab-flip__b"><span class="big"><span class="rd">«даа»</span></span><span><svg class="ic" aria-hidden="true"><use href="#i-ccheck"/></svg>ğ молчит. Просто тянет a. Как будто задумался.</span></span>
           </span>
         </button>
         <button type="button" class="ab-flip ab-pop" aria-pressed="false" data-flip>
           <span class="ab-flip__in">
-            <span class="ab-flip__f"><span class="big" lang="tr">İstanbul</span><span>Пишут <span class="no" lang="tr">Istanbul</span>.</span><small>Стамбул · нажми</small></span>
-            <span class="ab-flip__b"><span class="big" lang="tr">I · İ</span><span>Большая I без точки — это «ы». Большая İ с точкой — это «и». Без точки выйдет «Ыстанбул».</span></span>
+            <span class="ab-flip__f"><span class="big" lang="tr">İstanbul</span><span><svg class="ic" aria-hidden="true"><use href="#i-xcircle"/></svg>Пишут <span class="no" lang="tr">Istanbul</span>.</span><small>Стамбул · нажми</small></span>
+            <span class="ab-flip__b"><span class="big" lang="tr">I · İ</span><span><svg class="ic" aria-hidden="true"><use href="#i-ccheck"/></svg>Большая I без точки — это «ы». Большая İ с точкой — это «и». Без точки выйдет «Ыстанбул».</span></span>
           </span>
         </button>
         <button type="button" class="ab-flip ab-pop" aria-pressed="false" data-flip>
           <span class="ab-flip__in">
-            <span class="ab-flip__f"><span class="big" lang="tr">yok</span><span>Читают <span class="no">«ик»</span> или <span class="no">«ёк»</span>.</span><small>нет · нажми</small></span>
-            <span class="ab-flip__b"><span class="big"><span class="rd">«йок»</span></span><span>y — это «й». А j — это «ж»: <span lang="tr">jeton</span>, жетон.</span></span>
+            <span class="ab-flip__f"><span class="big" lang="tr">yok</span><span><svg class="ic" aria-hidden="true"><use href="#i-xcircle"/></svg>Читают <span class="no">«ик»</span> или <span class="no">«ёк»</span>.</span><small>нет · нажми</small></span>
+            <span class="ab-flip__b"><span class="big"><span class="rd">«йок»</span></span><span><svg class="ic" aria-hidden="true"><use href="#i-ccheck"/></svg>y — это «й». А j — это «ж»: <span lang="tr">jeton</span>, жетон.</span></span>
           </span>
         </button>
       </div>
@@ -686,7 +792,7 @@
   <!-- 7. Сцена -->
   <section class="ab-sec ab-scene" data-section="scene" data-words="59">
     <div class="ab-wrap">
-      <span class="ab-pill">Остановка 6 · В городе</span>
+      <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-ship"/></svg>Остановка 6 · В городе</span>
       <h2>Пристань Кадыкёй</h2>
       <div class="ab-scene__grid">
         <div>
@@ -702,14 +808,15 @@
           </div>
         </div>
         <div class="ab-dialog">
-          <p class="ln">Окошко кассы. Кассир говорит, <a-say>Buyurun</a-say>. Это «слушаю».</p>
-          <p class="ln">Ты говоришь, <a-say>Eminönü, lütfen</a-say>. Это «пожалуйста».</p>
-          <p class="ln">Он говорит, <a-say>Eminönü</a-say>? Ты говоришь, <a-say>evet</a-say>. Это «да».</p>
-          <p class="ln">Он кивает. Жетон твой. Без переспросов.</p>
-          <p class="ln">Паром, кстати, опоздал на семь минут. Но это уже не про алфавит.</p>
+          <p class="ln"><span class="ab-av ab-av--w"><svg class="ic" aria-hidden="true"><use href="#i-ticket"/></svg></span><span>Окошко кассы. Кассир говорит, <a-say>Buyurun</a-say>. Это «слушаю».</span></p>
+          <p class="ln"><span class="ab-av"><svg class="ic" aria-hidden="true"><use href="#i-user"/></svg></span><span>Ты говоришь, <a-say>Eminönü, lütfen</a-say>. Это «пожалуйста».</span></p>
+          <p class="ln"><span class="ab-av ab-av--w"><svg class="ic" aria-hidden="true"><use href="#i-ticket"/></svg></span><span>Он говорит, <a-say>Eminönü</a-say>? Ты говоришь, <a-say>evet</a-say>. Это «да».</span></p>
+          <p class="ln"><span class="ab-av"><svg class="ic" aria-hidden="true"><use href="#i-ccheck"/></svg></span><span>Он кивает. Жетон твой. Без переспросов.</span></p>
+          <p class="ln"><span class="ab-av ab-av--w"><svg class="ic" aria-hidden="true"><use href="#i-ship"/></svg></span><span>Паром, кстати, опоздал на семь минут. Но это уже не про алфавит.</span></p>
           <svg class="ab-scene__art" viewBox="0 0 600 150" aria-hidden="true">
             <path d="M0 70 H600 V150 H0Z" fill="#4677FF"/>
             <g stroke="#8fb0ff" stroke-width="3" stroke-linecap="round"><g class="ab-waves"><path d="M40 96h60M220 120h70M420 92h80M560 110h60M700 96h50"/></g></g>
+            <g aria-hidden="true"><path d="M478 70c10-14 52-14 64 0z" fill="#3f8a5c"/><rect x="496" y="34" width="22" height="38" fill="#FBF1CC"/><path d="M492 36l15-22 15 22z" fill="#F46907"/><rect x="503" y="44" width="8" height="10" rx="4" fill="#4677FF"/><rect x="488" y="58" width="38" height="12" fill="#fff"/></g>
             <g class="ab-gull2" fill="none" stroke="#1d2b25" stroke-width="3" stroke-linecap="round"><path d="M0 30q7-7 14 0q7-7 14 0"/><path d="M34 14q5-5 10 0q5-5 10 0"/></g>
             <g class="ab-sail"><g class="ab-ferry"><path d="M190 84h220l-20 30H210z" fill="#fff"/><rect x="214" y="56" width="160" height="30" rx="6" fill="#fff"/><g fill="#4677FF"><rect x="228" y="64" width="18" height="12" rx="2"/><rect x="254" y="64" width="18" height="12" rx="2"/><rect x="280" y="64" width="18" height="12" rx="2"/><rect x="306" y="64" width="18" height="12" rx="2"/><rect x="332" y="64" width="18" height="12" rx="2"/></g><rect x="194" y="92" width="212" height="7" fill="#F46907"/><rect x="286" y="32" width="22" height="26" rx="3" fill="#F46907"/></g></g>
           </svg>
@@ -721,7 +828,8 @@
   <!-- 8. Видео -->
   <section class="ab-sec ab-video" data-section="video" data-words="17">
     <div class="ab-wrap ab-center">
-      <span class="ab-pill">Остановка 7 · Послушай носителя</span>
+      <span class="ab-tile-ic ab-tile-ic--b ab-pop" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg></span>
+        <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-play"/></svg>Остановка 7 · Послушай носителя</span>
       <h2>Тот же алфавит, живым голосом</h2>
       <p>Обрати внимание на ç, ğ и ü: как они звучат в словах.</p>
       <a-video yt="UiVieF03H24" start="62" end="220" title="Турецкий алфавит" channel="Турецкий за 5 минут"></a-video>
@@ -732,7 +840,8 @@
   <section class="ab-sec ab-practice" id="practice" data-section="practice" data-words="9">
     <div class="ab-wrap">
       <div class="ab-center">
-        <span class="ab-pill">Практика</span>
+        <span class="ab-tile-ic ab-pop" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg></span>
+        <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-pencil"/></svg>Практика</span>
         <h2>Теперь читаешь ты</h2>
         <p>Ошибёшься — покажу почему. Это нормально.</p>
       </div>
@@ -757,7 +866,8 @@
   <section class="ab-sec ab-check" data-section="check" data-words="11" style="padding-top:0">
     <div class="ab-wrap">
       <div class="ab-center">
-        <span class="ab-pill ab-pill--o">Мини-проверка</span>
+        <span class="ab-tile-ic ab-tile-ic--o ab-pop" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg></span>
+        <span class="ab-pill ab-pill--ic ab-pill--o"><svg class="ic" aria-hidden="true"><use href="#i-clip"/></svg>Мини-проверка</span>
         <h2>Пять вопросов без подсказок</h2>
         <p>Шпаргалка ниже. Не подглядывай. Ну, честно.</p>
       </div>
@@ -766,10 +876,11 @@
   </section>
 
   <!-- 11. Шпаргалка и финал -->
-  <section class="ab-sec ab-cheat" id="cheat" data-section="cheat" data-words="56">
+  <section class="ab-sec ab-cheat" id="cheat" data-section="cheat" data-words="80">
     <div class="ab-wrap">
       <div class="ab-center">
-        <span class="ab-pill">Шпаргалка · сохрани скриншотом</span>
+        <span class="ab-tile-ic ab-tile-ic--o ab-pop" aria-hidden="true"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg></span>
+        <span class="ab-pill ab-pill--ic"><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg>Шпаргалка · сохрани скриншотом</span>
         <h2>Весь алфавит на одном экране</h2>
       </div>
       <div class="ab-card ab-sheet">
@@ -790,6 +901,12 @@
         <p class="ab-pun">Помнишь меню? Теперь ты читаешь <span class="tr">ÇAY</span> с первого раза.</p>
         <p>И любое слово. Даже незнакомое. Особенно меню.</p>
         <p>Сахар, кстати, принесут отдельно. Два кубика. Всегда два.</p>
+        <ul class="ab-can">
+          <li class="ab-can__h"><svg class="ic" aria-hidden="true"><use href="#i-trophy"/></svg>Что ты теперь умеешь</li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Читаешь любое турецкое слово вслух. Даже незнакомое.</span></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Отличаешь c от ç и s от ş. По хвостику.</span></li>
+          <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Знаешь, где молчит ğ и где прячется «ы».</span></li>
+        </ul>
         <svg class="ab-tea" viewBox="0 0 320 170" aria-hidden="true">
           <path class="ab-steam" d="M146 52c-10-12 8-18-2-32" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
           <path class="ab-steam" d="M172 52c-10-12 8-18-2-32" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
@@ -805,6 +922,20 @@
   </section>
 
 </main>
+
+<template data-achievement data-title="Хвостик приносит чай" data-text="Читаешь любое турецкое слово вслух: хвостики, точки и шапочки больше не пугают.">
+  <svg class="bd" viewBox="0 0 160 160" width="160" height="160" aria-hidden="true">
+    <circle cx="80" cy="80" r="76" fill="#FBF1CC"/>
+    <g class="bd-dots"><circle cx="30" cy="52" r="6" fill="#4677FF"/><circle cx="132" cy="44" r="5" fill="#F46907"/><circle cx="136" cy="112" r="6" fill="#6fb36b"/><circle cx="26" cy="116" r="5" fill="#F46907"/></g>
+    <g class="bd-tag">
+      <path d="M80 10v10" stroke="#2A5945" stroke-width="5" stroke-linecap="round"/>
+      <path d="M80 20c-7 0-7 9 0 9L42 50h76L80 29" fill="none" stroke="#2A5945" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="44" y="54" width="72" height="76" rx="18" fill="#2A5945"/>
+      <text x="80" y="110" text-anchor="middle" font-family="Instrument Sans, Inter, sans-serif" font-weight="700" font-size="60" fill="#FBF1CC">c</text>
+      <path class="bd-ced" d="M80 112v5c0 3 8 3 8 8.5S82 134 74 133" fill="none" stroke="#F46907" stroke-width="6" stroke-linecap="round"/>
+    </g>
+  </svg>
+</template>
 
 <script src="../kit/v1/gsap.min.js"></script>
 <script type="module" src="../kit/v1/kit.js"></script>
@@ -840,25 +971,94 @@ addEventListener('DOMContentLoaded', () => {
     if (window.ScrollTrigger) ScrollTrigger.config({ ignoreMobileResize: true });
   }
 
-  /* ---------- полоска прогресса в шапке ---------- */
-  const bar = $('[data-bar]');
-  const boat = $('[data-boat]');
-  let ticking = false;
-  addEventListener('scroll', () => {
-    if (ticking) return; ticking = true;
-    requestAnimationFrame(() => {
-      const de = document.documentElement;
-      const p = de.scrollHeight > innerHeight ? scrollY / (de.scrollHeight - innerHeight) : 0;
-      const q = Math.min(1, Math.max(0, p));
-      bar.style.transform = `scaleX(${q})`;
-      boat.style.transform = `translateX(${q * (bar.parentNode.clientWidth - 26)}px)`;
-      ticking = false;
-    });
-  }, { passive: true });
+  /* ---------- свой скроллбар: бирка-буква едет по рейлу ---------- */
+  const sb = $('[data-scrollbar]'), track = $('[data-sb-track]'), thumb = $('[data-sb-thumb]'), sbLetter = $('[data-sb-letter]');
+  const SB = { story: ['Ç', 'Начало'], letters: ['A', 'Буквы'], wardrobe: ['Ş', 'Аксессуары'], lab: ['Ğ', 'Примерочная'], vowels: ['Ö', 'Гласные'], traps: ['İ', 'Ловушки'], scene: ['Ü', 'Пристань'], video: ['V', 'Видео'], practice: ['P', 'Практика'], check: ['K', 'Проверка'], cheat: ['Z', 'Шпаргалка'] };
+  const secs = $$('[data-section]');
+  const marks = new Map();
+  secs.forEach((s) => {
+    const k = s.dataset.section;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'ab-sb__mark'; b.setAttribute('aria-label', `Перейти: ${SB[k]?.[1] || k}`);
+    b.addEventListener('click', (e) => { e.stopPropagation(); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    track.insertBefore(b, thumb);
+    marks.set(k, b);
+  });
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const maxY = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  function sbLayout() {
+    const m = maxY();
+    secs.forEach((s) => marks.get(s.dataset.section).style.setProperty('--m', Math.min(1, Math.max(0, (s.getBoundingClientRect().top + scrollY) / m)).toFixed(4)));
+    sbUpdate();
+  }
+  let curKey = '';
+  function sbUpdate() {
+    const p = Math.min(1, Math.max(0, scrollY / maxY()));
+    sb.style.setProperty('--p', p.toFixed(4));
+    thumb.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+    let key = secs[0].dataset.section;
+    for (const s of secs) if (s.getBoundingClientRect().top < innerHeight * .4) key = s.dataset.section;
+    if (key !== curKey) {
+      curKey = key;
+      sbLetter.textContent = SB[key]?.[0] || '·';
+      if (anim) G.fromTo(sbLetter, { rotationY: 90, scale: .6 }, { rotationY: 0, scale: 1, duration: .45, ease: 'back.out(2.5)' });
+    }
+  }
+  addEventListener('scroll', sbUpdate, { passive: true });
+  /* страховка для браузеров, где событие scroll приходит с опозданием: сверяем позицию по таймеру */
+  let sbLastY = -1;
+  setInterval(() => { if (scrollY !== sbLastY) { sbLastY = scrollY; sbUpdate(); } }, 120);
+  if (window.ScrollTrigger) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: sbUpdate });
+  addEventListener('resize', sbLayout);
+  addEventListener('load', sbLayout);
+  document.fonts?.ready.then(sbLayout);
+  const ratioAt = (e) => { const r = track.getBoundingClientRect(); return Math.min(1, Math.max(0, vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width)); };
+  track.addEventListener('click', (e) => { if (e.target === thumb || thumb.contains(e.target)) return; window.scrollTo({ top: ratioAt(e) * maxY(), behavior: reduce ? 'auto' : 'smooth' }); });
+  let dragging = false;
+  thumb.addEventListener('pointerdown', (e) => { dragging = true; thumb.setPointerCapture(e.pointerId); e.preventDefault(); });
+  thumb.addEventListener('pointermove', (e) => { if (dragging) window.scrollTo(0, ratioAt(e) * maxY()); });
+  thumb.addEventListener('pointerup', (e) => { dragging = false; thumb.releasePointerCapture?.(e.pointerId); });
+  thumb.addEventListener('keydown', (e) => {
+    const step = { ArrowDown: .05, ArrowRight: .05, ArrowUp: -.05, ArrowLeft: -.05 }[e.key];
+    if (step) { e.preventDefault(); window.scrollTo(0, scrollY + step * maxY()); }
+  });
+  addEventListener('alterna:read', (e) => {
+    const b = marks.get(e.detail?.key);
+    if (!b || b.classList.contains('is-read')) return;
+    b.classList.add('is-read');
+    if (anim) G.fromTo(b, { scale: .4 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' });
+  });
+  sbLayout();
+
+  /* ---------- ачивка: бирка качается, хвостик падает на букву ---------- */
+  addEventListener('alterna:achievement', (e) => {
+    const { timeline: tl, badge } = e.detail || {};
+    if (!tl || !badge || !window.gsap) return;
+    const q = (s) => badge.querySelector(s);
+    tl.from(q('.bd-tag'), { rotation: -28, svgOrigin: '80 10', duration: 1, ease: 'elastic.out(1, .35)' }, .9);
+    tl.from(q('.bd-ced'), { y: -70, scale: .4, transformOrigin: '50% 50%', duration: .7, ease: 'bounce.out' }, 1.1);
+    tl.from(q('.bd-dots').children, { scale: 0, transformOrigin: '50% 50%', duration: .4, ease: 'back.out(3)', stagger: .08 }, 1.5);
+  });
 
   /* ---------- циклы — на паузе вне экрана ---------- */
   const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-off', !e.isIntersecting)));
   $$('.ab-hero, .ab-scene, .ab-cheat, .ab-wardrobe, [data-section="traps"], [data-section="letters"]').forEach((el) => io.observe(el));
+
+  /* ---------- маршрут урока: переход и отметки ---------- */
+  const stops = $$('[data-go]');
+  stops.forEach((b) => b.addEventListener('click', () => {
+    $(`[data-section="${b.dataset.go}"]`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (anim) G.fromTo($('.ab-stop__i', b), { rotation: -12, scale: .8 }, { rotation: 0, scale: 1, duration: .6, ease: 'elastic.out(1, .4)' });
+  }));
+  const seen = new Set();
+  const stopIO = new IntersectionObserver((es) => es.forEach((e) => {
+    if (!e.isIntersecting) return;
+    const key = e.target.dataset.section;
+    stops.forEach((b) => b.classList.toggle('is-here', b.dataset.go === key));
+    const i = stops.findIndex((b) => b.dataset.go === key);
+    stops.forEach((b, k) => { if (k < i) { if (!seen.has(k) && anim) G.fromTo($('.ab-stop__i', b), { scale: .7 }, { scale: 1, duration: .5, ease: 'back.out(3)' }); seen.add(k); b.classList.add('is-done'); } });
+  }), { rootMargin: '-45% 0px -45% 0px' });
+  stops.forEach((b) => { const s = $(`[data-section="${b.dataset.go}"]`); if (s) stopIO.observe(s); });
 
   /* ---------- «сначала угадай» ---------- */
   const guess = $('[data-guess]');
@@ -1179,6 +1379,9 @@ addEventListener('DOMContentLoaded', () => {
       G.fromTo('.ab-vow__link i', { scaleY: .3 }, { scaleY: 1, transformOrigin: '50% 0', duration: .5, ease: 'power2.out', stagger: .1 });
     } });
     /* смысловые сцены по скроллу */
+    ScrollTrigger.create({ trigger: '.ab-route', start: 'top 95%', once: true, onEnter: () => G.fromTo('.ab-stop__i', { y: 24, scale: .5 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2.6)', stagger: .05 }) });
+    ScrollTrigger.batch('.ab-tile-ic', { start: 'top 90%', once: true, onEnter: (els) => G.fromTo(els, { rotation: -18, scale: .5 }, { rotation: 0, scale: 1, duration: .8, ease: 'elastic.out(1, .45)', stagger: .08 }) });
+    ScrollTrigger.create({ trigger: '.ab-can', start: 'top 90%', once: true, onEnter: () => G.fromTo('.ab-can li', { x: -24 }, { x: 0, duration: .6, ease: 'back.out(2)', stagger: .12 }) });
     ScrollTrigger.create({ trigger: '.ab-cone', start: 'top 88%', once: true, onEnter: () => G.fromTo('.ab-cone', { y: -70, rotation: -20 }, { y: 0, rotation: 0, duration: 1, ease: 'bounce.out' }) });
     ScrollTrigger.create({ trigger: '.ab-stall', start: 'top 85%', once: true, onEnter: () => G.fromTo('.ab-stall .ab-swing', { y: -40 }, { y: 0, duration: .9, ease: 'bounce.out', stagger: .12 }) });
     ScrollTrigger.create({ trigger: '[data-lab]', start: 'top 85%', once: true, onEnter: () => G.fromTo('[data-lab]', { y: 60, rotation: 6 }, { y: 0, rotation: 0, duration: 1, ease: 'back.out(1.6)' }) });
@@ -1188,7 +1391,7 @@ addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.create({ trigger: '.ab-dialog', start: 'top 85%', once: true, onEnter: () => G.fromTo('.ab-dialog .ln', { x: (i) => (i % 2 ? 40 : -40) }, { x: 0, duration: .7, ease: 'back.out(1.8)', stagger: .12 }) });
     ScrollTrigger.create({ trigger: '.ab-rules', start: 'top 88%', once: true, onEnter: () => G.fromTo('.ab-rules li', { x: -30, scale: .95 }, { x: 0, scale: 1, duration: .6, ease: 'back.out(2)', stagger: .07 }) });
     ScrollTrigger.create({ trigger: '.ab-tea', start: 'top 92%', once: true, onEnter: () => G.fromTo('.ab-tea', { y: 40, scale: .6 }, { y: 0, scale: 1, duration: 1, ease: 'elastic.out(1, .5)' }) });
-    ScrollTrigger.batch('.ab-pop:not(.ab-tile)', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 26, scale: .96 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2)', stagger: .04 }) });
+    ScrollTrigger.batch('.ab-pop:not(.ab-tile):not(.ab-tile-ic)', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 26, scale: .96 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2)', stagger: .04 }) });
     if (window.SplitText) {
       $$('.ab-sec h2').forEach((h) => {
         const st = new SplitText(h, { type: 'words' });
