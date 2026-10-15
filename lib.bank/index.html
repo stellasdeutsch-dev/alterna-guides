@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="lib.bank">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Турецкий в банке</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  :root {
+    --ink: #010101; --ink-2: #111111; --ink-3: #1b1b1b; --ink-4: #2a2a2a;
+    --mint: #00ffcc; --mint-d: #00d4aa; --mint-t: #00775f; --mint-glow: rgba(0, 255, 204, .35);
+    --paper: #ffffff; --paper-2: #f2f2f2; --paper-3: #e7e7e7;
+    --mute: #8d8d8d; --mute-d: #5f5f5f;
+    --line-d: rgba(255, 255, 255, .14); --line-l: rgba(0, 0, 0, .12);
+    --r: 22px; --r-sm: 14px; --gut: 16px; --max: 1080px;
+    --ak-accent: #00d4aa; --ak-accent-ink: #010101; --ak-accent-soft: #ccfff3;
+    --ak-ink: #010101; --ak-surface: #f2f2f2; --ak-line: #e2e2e2; --ak-bg: #ffffff;
+    --ak-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--paper); }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--ak-text)/1.5 var(--ak-font); overflow-x: clip; -webkit-font-smoothing: antialiased; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+  b { font-weight: 650; }
+  p { margin: 0 0 12px; }
+  h1, h2, h3 { margin: 0; }
+  :focus-visible { outline: 2px solid var(--mint-d); outline-offset: 3px; border-radius: 8px; }
+  .ic { width: 1em; height: 1em; flex: none; }
+  .ak-say__btn { background: var(--mint); color: var(--ink); }
+
+  /* секции: тёмные и светлые чередуются, как в старом гайде */
+  .bk-sec { padding: 72px var(--gut); position: relative; overflow-x: clip; }
+  .bk-sec > * { max-width: var(--max); margin-left: auto; margin-right: auto; }
+  .dark { background: var(--ink); color: var(--paper); }
+  .light { background: var(--paper); color: var(--ink); }
+  .grid-lines { background-image: repeating-linear-gradient(to bottom, transparent 0 119px, rgba(0, 0, 0, .06) 119px 120px); }
+  .head { margin-bottom: 30px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .pill { display: inline-flex; align-items: center; height: 24px; padding: 0 11px; border: 1px solid var(--line-d); border-radius: 999px; font-size: 11px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: #d9d9d9; white-space: nowrap; }
+  .light .pill { border-color: var(--line-l); color: #333; }
+  .h2 { font-size: clamp(30px, 8.6vw, 60px); line-height: 1; letter-spacing: -.045em; font-weight: 650; max-width: 17ch; }
+  .sub { margin-top: 20px; font-size: 17px; color: #3d3d3d; max-width: 60ch; }
+  .dark .sub { color: #bdbdbd; }
+  .small { font-size: 13px; color: var(--mute); margin-top: 10px; }
+  .tr { cursor: pointer; border-bottom: 1.5px dashed currentColor; }
+  .cy { font-size: 13px; color: var(--mute); }
+  .say { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-d); font-size: 15px; font-weight: 600; text-align: left; }
+  .light .say { border-color: var(--line-l); }
+  .say .ic { width: 18px; height: 18px; color: var(--mint-d); }
+  .say--lg { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .say--lg .ic { color: var(--ink); }
+  .ak-speaking { box-shadow: 0 0 0 3px var(--mint-glow); }
+  .again { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px dashed currentColor; font-size: 14px; font-weight: 600; }
+
+  /* первый экран: только CSS-анимации */
+  .hero { min-height: 100svh; padding: 28px var(--gut) 36px; display: flex; flex-direction: column; overflow: hidden; }
+  .hero > * { width: 100%; }
+  .kicker { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mint); margin-bottom: 14px; }
+  .stage { position: relative; height: clamp(230px, 64vw, 420px); display: grid; place-items: center; perspective: 1000px; margin: 8px auto 4px; }
+  .stage__word { position: absolute; inset: auto 0; text-align: center; font-weight: 800; letter-spacing: -.08em; font-size: clamp(90px, 30vw, 320px); line-height: .8; background: linear-gradient(180deg, var(--mint) 0%, rgba(0, 255, 204, .16) 70%, transparent 100%); -webkit-background-clip: text; background-clip: text; color: transparent; opacity: .5; user-select: none; animation: bkFloat 9s ease-in-out infinite; }
+  .stage__glow { position: absolute; width: 70%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(0, 255, 204, .4), rgba(0, 255, 204, .05) 45%, transparent 70%); }
+  .card3d { position: relative; width: min(76vw, 370px); aspect-ratio: 1.586; animation: bkCardIn 1.1s cubic-bezier(.2, .8, .2, 1) both; }
+  .card3d__in { position: absolute; inset: 0; border-radius: 18px; background: linear-gradient(135deg, #232323 0%, #0b0b0b 45%, #1c1c1c 100%); border: 1px solid rgba(255, 255, 255, .12); box-shadow: 0 40px 80px -20px rgba(0, 0, 0, .8), 0 0 60px -10px var(--mint-glow), inset 0 1px 0 rgba(255, 255, 255, .15); padding: 18px 20px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; transform: rotate(-6deg); }
+  .card3d__chip { width: 44px; height: 34px; border-radius: 7px; background: linear-gradient(135deg, #d8d8d8, #8a8a8a 60%, #cfcfcf); }
+  .card3d__nfc { position: absolute; top: 18px; right: 20px; width: 30px; height: 30px; color: var(--mint); }
+  .card3d__num { font-size: clamp(15px, 4.4vw, 20px); letter-spacing: .12em; color: #e9e9e9; font-variant-numeric: tabular-nums; }
+  .card3d__row { display: flex; justify-content: space-between; font-size: 10px; letter-spacing: .14em; color: #9a9a9a; font-weight: 650; }
+  .hero h1 { font-size: clamp(38px, 8.6vw, 88px); line-height: .96; letter-spacing: -.05em; font-weight: 650; max-width: 13ch; }
+  .hero h1 em { font-style: normal; color: var(--mint); }
+  .lead { margin-top: 14px; font-size: 18px; color: #c9c9c9; max-width: 46ch; }
+  .keys { margin-top: 26px; }
+  .keys__hint { font-size: 13px; color: var(--mute); margin-bottom: 10px; }
+  .keys__row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .key { width: 44px; height: 44px; border: 1px solid var(--line-d); border-radius: 10px; font-size: 18px; font-weight: 650; display: grid; place-items: center; background: rgba(255, 255, 255, .03); }
+  .key.is-on { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .keys__out { margin-top: 10px; font-size: 15px; color: #d9d9d9; min-height: 24px; }
+  .keys__out b { color: var(--mint); }
+  @keyframes bkFloat { 50% { transform: translateY(-10px); } }
+  @keyframes bkCardIn { from { transform: translateY(40px) rotate(8deg) scale(.86); } }
+
+  .ticker { overflow: hidden; background: var(--mint); color: var(--ink); padding: 12px 0; font-weight: 700; letter-spacing: -.02em; white-space: nowrap; }
+  .ticker__row { display: inline-flex; gap: 22px; align-items: center; animation: bkTick 38s linear infinite; padding-left: 22px; }
+  .ticker.is-off .ticker__row { animation-play-state: paused; }
+  .ticker i { width: 7px; height: 7px; border-radius: 50%; background: var(--ink); display: inline-block; }
+  @keyframes bkTick { to { transform: translateX(-50%); } }
+
+  /* история */
+  .ps { display: grid; gap: 14px; }
+  .ps__card { border-radius: var(--r); padding: 26px 22px; position: relative; overflow: hidden; }
+  .ps__card--dark { background: var(--ink-3); border: 1px solid var(--line-d); }
+  .ps__card--mint { background: var(--mint); color: var(--ink); }
+  .ps__label { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+  .ps__card h2 { font-size: clamp(24px, 6.4vw, 36px); line-height: 1.05; letter-spacing: -.04em; font-weight: 650; margin-bottom: 18px; }
+  .prose p { font-size: 17px; color: #cfcfcf; }
+  .ps__card--mint .prose p { color: #1c1c1c; }
+  .ask { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 4px 0 14px; }
+  .ask__ru { display: block; width: 100%; font-size: 15px; color: var(--mint); min-height: 22px; }
+  .nod { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
+  .nod svg { width: 64px; height: 64px; flex: none; }
+
+  /* маршрут */
+  .route { position: relative; padding-left: 56px; }
+  .route__svg { position: absolute; left: 20px; top: 0; width: 16px; height: 100%; overflow: visible; }
+  .route__bg { stroke: var(--line-d); stroke-width: 3; fill: none; }
+  .route__fg { stroke: var(--mint); stroke-width: 3; fill: none; stroke-dasharray: 1000; stroke-dashoffset: 1000; }
+  .route__dot { position: absolute; left: 21px; top: 0; width: 14px; height: 14px; margin: -7px 0 0 -6px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 6px rgba(0, 255, 204, .2), 0 0 20px var(--mint); }
+  .route__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+  .stop { display: grid; grid-template-columns: 46px 1fr; gap: 10px; color: #8a8a8a; }
+  .stop.is-on { color: var(--paper); }
+  .stop__n { align-self: start; font-size: 30px; font-weight: 750; letter-spacing: -.06em; line-height: 1; }
+  .stop.is-on .stop__n { color: var(--mint); }
+  .stop b { display: block; font-size: 22px; letter-spacing: -.03em; }
+  .stop small { display: block; font-size: 14px; color: var(--mute); margin-bottom: 8px; }
+  .stop em { display: block; font-style: normal; font-size: 14px; margin-top: 6px; color: #bdbdbd; }
+
+  /* чит-коды */
+  .formula { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; font-size: clamp(20px, 5.4vw, 32px); font-weight: 700; letter-spacing: -.03em; }
+  .formula__a { padding: 8px 14px; border-radius: 14px; background: var(--paper-2); border: 1px solid var(--line-l); }
+  .formula__a i { font-style: normal; color: var(--mint-t); }
+  .formula__b { padding: 8px 14px; border-radius: 14px; background: var(--ink); color: var(--mint); }
+  .formula__plus { color: var(--mute); }
+  .builder { background: var(--ink); color: var(--paper); border-radius: var(--r); padding: 22px; }
+  .builder__label { font-size: 13px; color: var(--mute); margin-bottom: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-d); font-size: 15px; font-weight: 550; }
+  .chip.is-on { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .builder__out { margin-top: 20px; padding-top: 20px; border-top: 1px dashed var(--line-d); display: grid; gap: 8px; justify-items: start; }
+  .builder__tr { font-size: clamp(26px, 7vw, 46px); font-weight: 650; letter-spacing: -.04em; line-height: 1.05; }
+  .builder__tr span { display: inline-block; }
+  .mintmark { color: var(--mint); }
+  .builder__ru { font-size: 17px; color: #d0d0d0; }
+  .minis { display: grid; gap: 10px; }
+  .mini { display: grid; gap: 4px; text-align: left; padding: 16px 18px; border-radius: var(--r-sm); background: var(--paper-2); border: 1px solid var(--line-l); min-height: 64px; }
+  .mini b { font-size: 18px; letter-spacing: -.02em; }
+  .mini span { font-size: 15px; color: var(--mute-d); }
+
+  /* зоны и карточки */
+  .zones { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding-bottom: 6px; margin-bottom: 14px; }
+  .zones::-webkit-scrollbar { display: none; }
+  .zone { flex: none; text-align: left; padding: 10px 14px; border-radius: 14px; border: 1px solid var(--line-d); min-height: 56px; }
+  .zone small { display: block; font-size: 11px; color: var(--mute); letter-spacing: .08em; text-transform: uppercase; }
+  .zone b { font-size: 15px; }
+  .zone.is-on { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .zone.is-on small { color: #05473a; }
+  .zone-note { font-size: 16px; color: #cfcfcf; border-left: 3px solid var(--mint); padding: 4px 0 4px 14px; margin-bottom: 18px; max-width: 62ch; }
+  .zone-note b { color: var(--mint); }
+  .words { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .wc { perspective: 900px; height: 158px; position: relative; cursor: pointer; }
+  .wc__in { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2, .8, .2, 1); }
+  .wc.is-flip .wc__in { transform: rotateY(180deg); }
+  .wc__f, .wc__b { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--r-sm); padding: 14px; display: flex; flex-direction: column; justify-content: space-between; }
+  .wc__f { background: var(--ink-3); border: 1px solid var(--line-d); }
+  .wc__b { background: var(--mint); color: var(--ink); transform: rotateY(180deg); }
+  .wc__tr { font-size: 19px; font-weight: 650; letter-spacing: -.03em; line-height: 1.1; overflow-wrap: anywhere; }
+  .wc__ru { font-size: 16px; font-weight: 650; line-height: 1.15; }
+  .wc__ex { font-size: 12px; line-height: 1.3; color: #073f33; }
+  .wc__spk { position: absolute; right: 6px; bottom: 6px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: var(--mint); z-index: 3; }
+  .wc__spk .ic { width: 18px; height: 18px; }
+  .wc.is-flip .wc__spk { color: var(--ink); }
+
+  /* приложение банка */
+  .app-wrap { display: grid; gap: 30px; align-items: center; }
+  .toggle { display: inline-flex; padding: 4px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--line-l); margin: 16px 0 12px; }
+  .toggle__b { min-height: 44px; padding: 0 18px; border-radius: 999px; font-weight: 650; }
+  .toggle__b.is-on { background: var(--ink); color: var(--mint); }
+  .tip { font-size: 16px; min-height: 48px; }
+  .tip b { color: var(--mint-t); }
+  .phone { justify-self: center; width: min(78vw, 320px); aspect-ratio: 9 / 18.5; border-radius: 44px; background: #0c0c0c; padding: 11px; box-shadow: 0 50px 90px -30px rgba(0, 0, 0, .55), inset 0 0 0 2px #333, 0 0 0 1px #bbb; position: relative; }
+  .phone__notch { position: absolute; top: 18px; left: 50%; translate: -50% 0; width: 88px; height: 24px; border-radius: 20px; background: #000; z-index: 3; }
+  .phone__scr { height: 100%; border-radius: 34px; background: #0a0a0a; color: #fff; overflow: hidden; padding: 50px 14px 12px; display: flex; flex-direction: column; gap: 11px; font-size: 14px; }
+  .phone .t { cursor: pointer; border-radius: 6px; }
+  .phone .t.is-on { background: rgba(0, 255, 204, .2); color: var(--mint); }
+  .ap-top { display: flex; align-items: center; gap: 10px; }
+  .ap-ava { width: 34px; height: 34px; border-radius: 50%; background: var(--mint); color: var(--ink); display: grid; place-items: center; font-weight: 800; }
+  .ap-top small { display: block; color: #9a9a9a; font-size: 12px; }
+  .ap-card { border-radius: 18px; padding: 16px; background: radial-gradient(circle at 80% 10%, rgba(0, 255, 204, .45), transparent 60%), #161616; display: grid; gap: 4px; }
+  .ap-card strong { font-size: 26px; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .ap-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .ap-b { min-height: 40px; border-radius: 12px; background: #1d1d1d; color: #fff; font-size: 13px; font-weight: 650; }
+  .ap-b--mint { background: var(--mint); color: var(--ink); }
+  .ap-h { font-size: 12px; color: #9a9a9a; letter-spacing: .06em; text-transform: uppercase; }
+  .ap-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .ap-list li { display: flex; justify-content: space-between; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid #1f1f1f; }
+  .ap-list em { font-style: normal; font-variant-numeric: tabular-nums; color: #cfcfcf; white-space: nowrap; }
+  .ap-list em.plus { color: var(--mint); }
+  .ap-nav { margin-top: auto; display: flex; justify-content: space-around; font-size: 12px; color: #9a9a9a; padding-top: 8px; border-top: 1px solid #1f1f1f; }
+
+  /* IBAN */
+  .iban { background: var(--ink-3); border: 1px solid var(--line-d); border-radius: var(--r); padding: 22px 16px; }
+  .iban__code { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ib { display: grid; gap: 4px; padding: 8px 10px; border-radius: 12px; border: 1px solid var(--line-d); text-align: left; min-height: 44px; }
+  .ib span { font-size: clamp(17px, 4.6vw, 26px); font-weight: 650; letter-spacing: .04em; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .ib small { font-size: 11px; color: var(--mute); text-transform: uppercase; letter-spacing: .08em; }
+  .ib.is-on { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .ib.is-on small { color: #05473a; }
+  .ch { display: inline-block; }
+  .iban__bars { display: flex; gap: 3px; height: 10px; margin: 18px 0 14px; }
+  .iban__bars i { flex: var(--g) 1 0; border-radius: 5px; background: var(--ink-4); transform-origin: left center; }
+  .iban__bars i.is-on { background: var(--mint); }
+  .iban__info { min-height: 72px; color: #d0d0d0; font-size: 16px; }
+  .iban__info b { display: block; color: var(--mint); margin-bottom: 4px; }
+
+  /* три брата */
+  .bros { display: grid; gap: 12px; }
+  .bro { position: relative; border-radius: var(--r); padding: 24px 20px 20px; background: var(--ink-3); border: 1px solid var(--line-d); overflow: hidden; }
+  .bro::before { content: attr(data-n); position: absolute; right: 14px; top: 4px; font-size: 80px; font-weight: 800; letter-spacing: -.06em; color: rgba(255, 255, 255, .05); }
+  .bro h3 { font-size: 32px; letter-spacing: -.05em; font-weight: 750; }
+  .bro__role { font-size: 13px; color: var(--mint); font-weight: 650; margin-bottom: 10px; }
+  .bro p { color: #cfcfcf; }
+  .bro small { display: block; margin-top: 8px; color: var(--mute); font-size: 13px; }
+  .bro--mint { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .bro--mint::before { color: rgba(0, 0, 0, .08); }
+  .bro--mint .bro__role { color: #05473a; }
+  .bro--mint p, .bro--mint small { color: #123; }
+  .bro--mint .say { border-color: rgba(0, 0, 0, .25); }
+  .bro--mint .say .ic { color: var(--ink); }
+  .net, .hours { margin-top: 14px; background: var(--ink-2); border: 1px solid var(--line-d); border-radius: var(--r); padding: 18px 14px; }
+  .net__top, .hours__top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; align-items: center; margin-bottom: 10px; }
+  .net__h { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #cfcfcf; }
+  .seg { display: inline-flex; flex-wrap: wrap; gap: 4px; padding: 4px; border-radius: 999px; background: #1d1d1d; }
+  .seg__b { min-height: 40px; padding: 0 12px; border-radius: 999px; font-size: 13px; font-weight: 650; color: #cfcfcf; }
+  .seg__b.is-on { background: var(--mint); color: var(--ink); }
+  .light .seg { background: var(--paper-2); border: 1px solid var(--line-l); }
+  .light .seg__b { color: #333; }
+  .light .seg__b.is-on { background: var(--ink); color: var(--mint); }
+  .net__svg { width: 100%; max-width: 560px; height: auto; display: block; margin: 0 auto; }
+  .net__bank rect { fill: #1d1d1d; stroke: rgba(255, 255, 255, .2); }
+  .net__bank text { fill: #cfcfcf; font-size: 13px; text-anchor: middle; font-weight: 600; }
+  .net__bank .net__big { font-size: 30px; fill: var(--paper); font-weight: 800; }
+  .net__p { fill: none; stroke: rgba(255, 255, 255, .25); stroke-width: 2; stroke-dasharray: 5 6; }
+  .net__p--fast { stroke: var(--mint); stroke-dasharray: none; }
+  .net__lbl { fill: #cfcfcf; font-size: 12px; font-weight: 700; text-anchor: middle; letter-spacing: .08em; }
+  .net__lbl--m { fill: var(--mint); }
+  .net__gate rect { fill: #3a1d1d; stroke: #ff7a59; }
+  .net__gate text { fill: #ffb3a1; font-size: 9px; text-anchor: middle; font-weight: 700; }
+  .net__pk { fill: var(--paper); }
+  .net__pk--m { fill: var(--mint); }
+  .net__cap { color: #cfcfcf; font-size: 15px; margin-top: 8px; min-height: 44px; }
+  .hr { display: grid; grid-template-columns: 64px 1fr; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .hr__name { font-size: 12px; font-weight: 750; letter-spacing: .06em; }
+  .hr__tracks { display: grid; gap: 4px; }
+  .hr__lab { font-size: 11px; color: var(--mute); }
+  .hr__track { position: relative; height: 12px; border-radius: 6px; background: #1d1d1d; }
+  .hr__bar { position: absolute; top: 0; bottom: 0; border-radius: 6px; background: var(--mint); transform-origin: left center; }
+  .hr__bar--off { background: repeating-linear-gradient(45deg, #3a1d1d 0 6px, #2a1515 6px 12px); }
+  .hours__axis { display: flex; justify-content: space-between; margin-left: 72px; font-size: 11px; color: var(--mute); }
+  .hours__now { font-size: 13px; color: var(--mint); }
+  .hours__line { position: absolute; top: -3px; bottom: -3px; width: 2px; background: #fff; border-radius: 2px; }
+
+  /* ловушки */
+  .traps { display: grid; gap: 12px; }
+  .trap { border-radius: var(--r); padding: 22px 20px; background: var(--paper-2); border: 1px solid var(--line-l); }
+  .trap--ink { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .trap.trap--ink p { color: #cfcfcf; }
+  .trap__n { font-size: 12px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; color: var(--mute-d); margin-bottom: 12px; }
+  .trap--ink .trap__n { color: var(--mint); }
+  .trap h3 { font-size: clamp(24px, 6.6vw, 36px); letter-spacing: -.045em; line-height: 1.05; font-weight: 650; display: inline; border-bottom-width: 2px; }
+  .trap .cy { margin: 10px 0 12px; }
+  .trap p { font-size: 16px; color: #2e2e2e; }
+  .atm { display: flex; gap: 14px; align-items: center; margin-top: 8px; flex-wrap: wrap; }
+  .atm svg { width: 96px; height: 96px; flex: none; }
+  .atm__ui { display: grid; gap: 8px; }
+  .atm__msg { font-size: 15px; min-height: 22px; }
+  .money-trap { margin-top: 12px; border-radius: var(--r); padding: 24px 20px; background: var(--mint); color: var(--ink); position: relative; overflow: hidden; }
+  .money-trap .trap__n { color: #05473a; }
+  .money-trap__big { font-size: clamp(26px, 7.6vw, 52px); font-weight: 650; letter-spacing: -.05em; line-height: 1.05; margin-bottom: 14px; }
+  .coin { position: absolute; right: 18px; top: 18px; padding: 6px 12px; border-radius: 999px; background: var(--ink); color: #ff8f73; font-weight: 750; }
+  .nodbar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .nodbar .again { border-color: rgba(0, 0, 0, .4); }
+  .board { margin-top: 12px; border-radius: var(--r); padding: 20px 16px; background: var(--paper-2); border: 1px solid var(--line-l); }
+  .board__top { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .board__panel { background: #0c0c0c; color: #f2f2f2; border-radius: 14px; padding: 10px 12px; font-variant-numeric: tabular-nums; }
+  .board__row { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 8px; padding: 8px 4px; border-bottom: 1px solid #1f1f1f; font-size: 17px; font-weight: 650; }
+  .board__row:last-child { border-bottom: 0; }
+  .board__head { font-size: 12px; letter-spacing: .1em; color: #9a9a9a; }
+  .board [data-col] { border-radius: 6px; padding: 0 4px; }
+  .board [data-col].is-on { background: rgba(0, 255, 204, .2); color: var(--mint); }
+  .board__calc { margin-top: 12px; }
+  .spread { display: grid; grid-template-columns: auto 1fr auto; gap: 8px; align-items: center; font-size: 13px; font-weight: 650; margin-top: 6px; }
+  .spread__gap { text-align: center; border-top: 2px dashed #ff8f73; padding-top: 4px; color: var(--mute-d); font-weight: 500; }
+
+  /* диалог */
+  .chat { background: var(--ink-2); border: 1px solid var(--line-d); border-radius: var(--r); overflow: hidden; max-width: 720px; }
+  .chat__bar { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 14px; border-bottom: 1px solid var(--line-d); font-size: 13px; }
+  .chat__who { display: flex; align-items: center; gap: 8px; color: #cfcfcf; }
+  .chat__who i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px var(--mint); }
+  .sw { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; color: #cfcfcf; }
+  .sw input { width: 20px; height: 20px; accent-color: var(--mint-d); }
+  .chat__log { padding: 16px 12px; display: flex; flex-direction: column; gap: 10px; min-height: 240px; max-height: 60dvh; overflow-y: auto; }
+  .chat__empty { margin: auto; text-align: center; color: var(--mute); display: grid; gap: 12px; justify-items: center; }
+  .chat__empty svg { width: 72px; height: 72px; }
+  .msg { max-width: 88%; padding: 11px 14px; border-radius: 18px; }
+  .msg--them { align-self: flex-start; background: #222; border-bottom-left-radius: 6px; }
+  .msg--me { align-self: flex-end; background: var(--mint); color: var(--ink); border-bottom-right-radius: 6px; }
+  .msg__tr { font-size: 16px; font-weight: 650; cursor: pointer; }
+  .msg__ru { font-size: 13px; opacity: .75; margin-top: 4px; }
+  .chat.no-ru .msg__ru { display: none; }
+  .msg__note { align-self: center; font-size: 13px; color: var(--mint); background: rgba(0, 255, 204, .08); border: 1px dashed rgba(0, 255, 204, .4); padding: 10px 14px; border-radius: 12px; max-width: 94%; }
+  .typing { align-self: flex-start; display: flex; gap: 4px; padding: 14px; background: #222; border-radius: 18px; }
+  .typing i { width: 7px; height: 7px; border-radius: 50%; background: #9a9a9a; }
+  .chat__opts { display: grid; gap: 8px; padding: 12px; border-top: 1px solid var(--line-d); }
+  .opt { text-align: left; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--line-d); min-height: 48px; }
+  .opt small { display: block; color: var(--mute); font-size: 13px; }
+  .opt--go { background: var(--mint); color: var(--ink); border-color: var(--mint); font-weight: 700; }
+
+  /* видео и практика */
+  .note-line { font-size: 16px; color: #3d3d3d; border-left: 3px solid var(--mint-d); padding-left: 12px; margin-bottom: 16px; }
+  .light a-exercise, .light a-quiz, .light a-video { display: block; margin-bottom: 18px; }
+  .disp__card { border-radius: 16px; padding: 16px; background: var(--ink); color: #fff; min-height: 86px; font-size: 17px; font-weight: 600; display: grid; align-content: center; }
+  .disp__svg { width: 100%; max-width: 520px; height: auto; display: block; margin: 10px auto; }
+  .disp__svg .bank rect { fill: var(--paper-2); stroke: #cfcfcf; }
+  .disp__svg .bank text { font-size: 12px; font-weight: 700; text-anchor: middle; fill: #333; }
+  .disp__svg path { fill: none; stroke: #cfcfcf; stroke-width: 2; stroke-dasharray: 4 5; }
+  .disp__svg path.is-on { stroke: var(--mint-d); stroke-dasharray: none; stroke-width: 3; }
+  .disp__pk { fill: var(--ink); }
+  .disp__btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .disp__b { min-height: 52px; border-radius: 14px; border: 2px solid var(--ink); font-weight: 800; letter-spacing: .02em; background: #fff; color: var(--ink); }
+  .disp__b small { display: block; font-weight: 500; font-size: 11px; color: var(--mute-d); }
+  .disp__b.is-hit { background: var(--ak-good-soft); border-color: var(--ak-good); }
+  .disp__b.is-miss { background: var(--ak-bad-soft); border-color: var(--ak-bad); }
+  .disp__status { min-height: 48px; margin-top: 10px; color: var(--mute-d); }
+
+  /* шпаргалка */
+  .mintpanel { background: var(--mint); border-radius: var(--r); padding: 16px 0 24px; color: var(--ink); overflow: hidden; }
+  .mintpanel__top { display: flex; justify-content: space-between; font-size: 11px; font-weight: 750; letter-spacing: .06em; padding: 0 16px 14px; }
+  .posts { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 6px 16px 10px; scrollbar-width: none; }
+  .posts::-webkit-scrollbar { display: none; }
+  .post { flex: none; width: min(74vw, 290px); scroll-snap-align: center; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px -24px rgba(0, 0, 0, .5); text-align: left; padding: 0; }
+  .post__h { display: flex; align-items: center; gap: 8px; padding: 10px 12px; font-size: 12px; font-weight: 650; }
+  .post__h svg { width: 22px; height: 22px; }
+  .post__body { aspect-ratio: 4 / 3.6; padding: 20px 18px; display: flex; flex-direction: column; justify-content: flex-end; background: var(--paper-2); }
+  .post__body--ink { background: radial-gradient(circle at 70% 20%, rgba(0, 255, 204, .35), transparent 55%), var(--ink); color: #fff; }
+  .post__big { font-size: 36px; font-weight: 750; letter-spacing: -.06em; line-height: .95; }
+  .post__mid { font-size: 20px; font-weight: 650; letter-spacing: -.03em; color: var(--mint-t); margin-top: 8px; }
+  .post__body--ink .post__mid { color: var(--mint); }
+  .post__sm { font-size: 13px; margin-top: 8px; opacity: .8; }
+  .final { margin-top: 22px; display: grid; gap: 12px; }
+  .final__q { display: grid; gap: 8px; }
+  .punch { font-size: clamp(26px, 7vw, 52px); font-weight: 650; letter-spacing: -.045em; line-height: 1.05; max-width: 20ch; }
+  .punch em { font-style: normal; color: var(--mint); }
+
+  /* свой скроллбар: номерок очереди едет к окошку. Телефон — сверху, от 768 px — справа */
+  .sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 6px; pointer-events: none; }
+  .sb__track { position: absolute; inset: 0; background: rgba(0, 212, 170, .22); pointer-events: auto; touch-action: none; cursor: pointer; }
+  .sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: var(--mint); box-shadow: 0 0 10px var(--mint-glow); }
+  .sb__thumb { position: absolute; top: 9px; left: clamp(34px, calc(var(--p, 0) * 100%), calc(100% - 34px)); translate: -50% 0; padding: 2px 8px; border-radius: 6px; background: var(--ink); color: var(--mint); border: 1px solid var(--mint-d); font: 750 11px/1.5 var(--ak-font); letter-spacing: .04em; white-space: nowrap; pointer-events: none; }
+  .sb__mark { position: absolute; left: calc(14px + var(--at, 0) * (100% - 28px)); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .sb__mark::after { content: ''; position: absolute; inset: 10px; border-radius: 2px; background: var(--ink); box-shadow: 0 0 0 1.5px var(--mint-d); }
+  .sb__mark.is-read::after { background: var(--mint); }
+  @media (min-width: 768px) {
+    .sb { left: auto; right: 16px; top: 50%; translate: 0 -50%; width: 8px; height: min(62dvh, 540px); }
+    .sb__track { border-radius: 8px; }
+    .sb__fill { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); border-radius: 8px; }
+    .sb__thumb { top: calc(var(--p, 0) * 100%); left: auto; right: 16px; translate: 0 -50%; }
+    .sb__mark { left: 50%; top: calc(14px + var(--at, 0) * (100% - 28px)); }
+  }
+
+  @media (min-width: 640px) {
+    .words { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .minis { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 900px) {
+    .bk-sec { padding: 96px 40px; }
+    .hero { padding: 40px 40px 48px; }
+    .ps, .bros, .traps { grid-template-columns: repeat(2, 1fr); }
+    .bros { grid-template-columns: repeat(3, 1fr); }
+    .traps { grid-template-columns: repeat(3, 1fr); }
+    .app-wrap { grid-template-columns: 1fr 1fr; }
+    .words { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 30px; align-items: center; }
+  }
+  @media (hover: hover) {
+    .chip:hover, .zone:hover, .key:hover, .opt:hover, .mini:hover { border-color: var(--mint-d); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="spk" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="arr" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="nfc" viewBox="0 0 24 24"><path d="M8 7a7 7 0 0 1 0 10M12 4.5a11 11 0 0 1 0 15M16 2a15 15 0 0 1 0 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="tick" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<main>
+
+  <!-- 1. Крючок -->
+  <section data-section="story" data-words="143" class="dark">
+    <div class="hero">
+      <div class="hero__grid">
+        <div class="stage" aria-hidden="true">
+          <div class="stage__word" lang="tr">banka</div>
+          <div class="stage__glow"></div>
+          <div class="card3d" id="card3d">
+            <div class="card3d__in">
+              <div class="card3d__chip"></div>
+              <svg class="card3d__nfc"><use href="#nfc"/></svg>
+              <div class="card3d__num" lang="tr">TR•• 0010 •••• 2026</div>
+              <div class="card3d__row" lang="tr"><span>BANKA KARTI</span><span>A2</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="kicker"><svg class="ic"><use href="#tick"/></svg> Ситуация · A2 · Библиотека</p>
+          <h1>В турецком банке <em>без паники.</em></h1>
+          <p class="lead">Счёт, карта, перевод, банкомат, обмен. Сорок слов, два чит-кода и один диалог у окошка. Всё с озвучкой.</p>
+          <div class="keys">
+            <p class="keys__hint">Семь букв, которых нет в английском. Жми — услышишь банковское слово.</p>
+            <div class="keys__row" id="keys" role="group" aria-label="Турецкие буквы"></div>
+            <p class="keys__out" id="keysOut" aria-live="polite">&nbsp;</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ticker" id="ticker" aria-hidden="true"><div class="ticker__row" lang="tr"><span>şube</span><i></i><span>sıra numarası</span><i></i><span>gişe</span><i></i><span>hesap açmak</span><i></i><span>vergi numarası</span><i></i><span>imza</span><i></i><span>şifre</span><i></i><span>dekont</span><i></i><span>masraf</span><i></i><span>havale</span><i></i><span>döviz</span><i></i></div></div>
+
+    <div class="bk-sec">
+      <div class="ps">
+        <article class="ps__card ps__card--dark rv">
+          <p class="ps__label">Проблема</p>
+          <h2>Кивнул. Уверенно. И пришёл в банк ещё два раза.</h2>
+          <div class="prose">
+            <p>Первая неделя в Турции. Нужен счёт: на него придёт зарплата или стипендия.</p>
+            <p>У входа автомат. Выплёвывает бумажку с номером. Над окошками мигают цифры. Вызывают тебя, а ты не понимаешь, что это тебя.</p>
+            <p>Подходишь. Сотрудница спрашивает:</p>
+          </div>
+          <div class="ask">
+            <b class="tr" lang="tr" data-say="Vergi numaranız var mı?">Vergi numaranız var mı?</b>
+            <button class="again" type="button" id="askBtn">Что она спросила?</button>
+            <span class="ask__ru" id="askRu" aria-live="polite"></span>
+          </div>
+          <div class="nod">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><g id="nodHead"><circle cx="32" cy="28" r="18" fill="#2a2a2a" stroke="#00ffcc" stroke-width="2"/><circle cx="25" cy="25" r="2.4" fill="#fff"/><circle cx="39" cy="25" r="2.4" fill="#fff"/><path d="M25 36q7 4 14 0" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></g><path d="M16 60q16-14 32 0" fill="#2a2a2a"/></svg>
+            <div class="prose"><p>Ты киваешь. Кивать проще, чем признаться. А это был налоговый номер. Его у тебя не было.</p></div>
+          </div>
+        </article>
+        <article class="ps__card ps__card--mint rv">
+          <p class="ps__label">Решение</p>
+          <h2>Банк в Турции не страшный. Страшно кивать на слова, которых не знаешь.</h2>
+          <div class="prose">
+            <p>Хорошая новость. Банковский турецкий очень узкий. Одни и те же сорок слов. Одни и те же пять ситуаций. Два шаблона фраз.</p>
+            <p>Выучил один раз — работает в любом банке, от Стамбула до Антальи.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Маршрут по банку -->
+  <section data-section="route" data-words="70" class="dark bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Инфографика</span><span class="pill">Маршрут</span></div>
+      <h2 class="h2 split">Твой путь по банку. Шесть остановок.</h2>
+      <p class="sub">Листай вниз. Точка идёт по маршруту, остановки загораются. На каждой — фраза, которую там услышишь.</p>
+    </div>
+    <div class="route" id="routeBox">
+      <svg class="route__svg" viewBox="0 0 16 1000" preserveAspectRatio="none" aria-hidden="true">
+        <path class="route__bg" d="M8 0 V1000"/>
+        <path class="route__fg" id="routePath" d="M8 0 V1000" pathLength="1000"/>
+      </svg>
+      <span class="route__dot" id="routeDot"></span>
+      <ol class="route__list">
+        <li class="stop"><span class="stop__n">01</span><div><b lang="tr">Sıramatik</b><small>автомат у входа</small><button class="say" type="button" data-say="Bireysel işlemler"><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Bireysel işlemler</span></button><em>Жми «операции для частных лиц»</em></div></li>
+        <li class="stop"><span class="stop__n">02</span><div><b lang="tr">Sıra numarası</b><small>номерок, ждёшь табло</small><button class="say" type="button" data-say="A 047 numaralı müşteri, 3 numaralı gişeye."><svg class="ic"><use href="#spk"/></svg> <span lang="tr">A047 … 3 numaralı gişeye</span></button><em>«Клиент A047 — к окну №3». Это тебя.</em></div></li>
+        <li class="stop"><span class="stop__n">03</span><div><b lang="tr">Gişe</b><small>окошко, консультант</small><button class="say" type="button" data-say="Hesap açmak istiyorum."><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Hesap açmak istiyorum.</span></button><em>Чит-код №1 в деле</em></div></li>
+        <li class="stop"><span class="stop__n">04</span><div><b lang="tr">Kimlik + vergi no</b><small>паспорт и налоговый номер</small><button class="say" type="button" data-say="Pasaportum ve vergi numaram burada."><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Pasaportum ve vergi numaram burada.</span></button><em>Вот паспорт и налоговый номер</em></div></li>
+        <li class="stop"><span class="stop__n">05</span><div><b lang="tr">İmza + şifre</b><small>подписи и PIN</small><button class="say" type="button" data-say="Buraya imza atar mısınız?"><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Buraya imza atar mısınız?</span></button><em>Подпишите здесь. Потом задашь PIN.</em></div></li>
+        <li class="stop"><span class="stop__n">06</span><div><b lang="tr">Kart + dekont</b><small>карта и бумажка</small><button class="say" type="button" data-say="Teşekkürler, iyi çalışmalar!"><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Teşekkürler, iyi çalışmalar!</span></button><em>Спасибо, хорошей работы! Ты свободен.</em></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. Два чит-кода -->
+  <section data-section="codes" data-words="93" class="light grid-lines bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Чит-код №1</span><span class="pill" lang="tr">-mak istiyorum</span></div>
+      <h2 class="h2 split">Одна конструкция открывает почти все двери в банке.</h2>
+      <p class="sub">Берёшь глагол целиком, как в словаре, с <b lang="tr">-mak/-mek</b> на конце. Ставишь после него <b lang="tr">istiyorum</b>. Всё, ты сказал «я хочу…». Сам глагол спрягать не надо. Турецкий иногда бывает добрым.</p>
+    </div>
+    <div class="formula" id="formula" aria-label="Схема: глагол с -mak плюс istiyorum">
+      <span class="formula__a" lang="tr">hesap aç<i>mak</i></span><span class="formula__plus">+</span><span class="formula__b" lang="tr">istiyorum</span>
+    </div>
+    <p style="text-align:center"><button class="again" type="button" id="formulaAgain">↻ Собрать ещё раз</button></p>
+
+    <div class="builder rv">
+      <p class="builder__label">Собери фразу. Тапни действие:</p>
+      <div class="chips" id="verbChips" role="group" aria-label="Выбор действия"></div>
+      <div class="builder__out">
+        <div class="builder__tr" lang="tr"><span id="bVerb">Hesap açmak</span> <span class="mintmark" id="bIst">istiyorum.</span></div>
+        <div class="builder__ru" id="bRu">Я хочу открыть счёт.</div>
+        <div class="cy" id="bCy" data-ui>хесап ачмак истийорум</div>
+        <button class="say say--lg" id="bSay" type="button"><svg class="ic"><use href="#spk"/></svg> Послушать</button>
+      </div>
+    </div>
+
+    <div class="head" style="margin-top:56px">
+      <div class="pills"><span class="pill">Чит-код №2</span><span class="pill" lang="tr">alabilir miyim?</span></div>
+      <h2 class="h2">А это вежливое «можно мне…?»</h2>
+      <p class="sub">Существительное плюс <b lang="tr">alabilir miyim?</b> Работает с любой бумажкой, которую хочешь унести из банка. И с ручкой. Ручка в турецком банке всегда на цепочке. Не спрашивай.</p>
+    </div>
+    <div class="minis">
+      <button class="mini" type="button" data-say="Sıra numarası alabilir miyim?"><b lang="tr">Sıra numarası alabilir miyim?</b><span>Можно номерок очереди?</span></button>
+      <button class="mini" type="button" data-say="Dekont alabilir miyim?"><b lang="tr">Dekont alabilir miyim?</b><span>Можно квитанцию о переводе?</span></button>
+      <button class="mini" type="button" data-say="Bir kalem alabilir miyim?"><b lang="tr">Bir kalem alabilir miyim?</b><span>Можно ручку? (та, что на цепочке)</span></button>
+      <button class="mini" type="button" data-say="Hesap özeti alabilir miyim?"><b lang="tr">Hesap özeti alabilir miyim?</b><span>Можно выписку по счёту?</span></button>
+    </div>
+  </section>
+
+  <!-- 4. Пять зон, сорок слов -->
+  <section data-section="zones" data-words="90" class="dark bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Лексика</span><span class="pill">5 зон</span><span class="pill">40 слов</span></div>
+      <h2 class="h2 split">Банк — это пять зон. Проходим по порядку.</h2>
+      <p class="sub">Тапни карточку, чтобы перевернуть. Тапни динамик, чтобы услышать. Кириллица под словом — чтобы не читать «ı» как «и».</p>
+    </div>
+    <div class="zones" id="zones" role="tablist" aria-label="Зоны банка"></div>
+    <div class="zone-note" id="zoneNote"></div>
+    <div class="words" id="wordGrid"></div>
+  </section>
+
+  <!-- 5. Приложение банка -->
+  <section data-section="app" data-words="25" class="light bk-sec">
+    <div class="app-wrap">
+      <div>
+        <div class="pills"><span class="pill">Приложение</span><span class="pill">10 слов</span></div>
+        <h2 class="h2 split">Приложение банка. Создано, чтобы пугать иностранцев.</h2>
+        <p class="sub">Шучу. Там десять слов. Тапни любой элемент на экране — увидишь перевод. Или переключи язык целиком.</p>
+        <div class="toggle" role="group" aria-label="Язык интерфейса">
+          <button class="toggle__b is-on" data-lang="tr" type="button">Türkçe</button>
+          <button class="toggle__b" data-lang="ru" type="button">Русский</button>
+        </div>
+        <p class="tip" id="appTip" aria-live="polite">Тапни «<span lang="tr">Toplam bakiye</span>».</p>
+      </div>
+      <div class="phone" id="phone">
+        <div class="phone__notch"></div>
+        <div class="phone__scr" lang="tr">
+          <div class="ap-top"><div class="ap-ava">D</div><div><small class="t" data-tr="Hoş geldin" data-ru="Добро пожаловать" data-cy="хош гельдин">Hoş geldin</small><b>Deniz</b></div></div>
+          <div class="ap-card"><span class="t" data-tr="Toplam bakiye" data-ru="Общий баланс" data-cy="топлам бакийе">Toplam bakiye</span><strong id="bal">₺0,00</strong></div>
+          <div class="ap-btns">
+            <button class="ap-b ap-b--mint t" type="button" data-tr="Para iste" data-ru="Запросить деньги" data-cy="пара исте">Para iste</button>
+            <button class="ap-b t" type="button" data-tr="Para gönder" data-ru="Отправить деньги" data-cy="пара гёндер">Para gönder</button>
+          </div>
+          <div class="ap-h t" data-tr="Son işlemler" data-ru="Последние операции" data-cy="сон ишлемлер">Son işlemler</div>
+          <ul class="ap-list">
+            <li><span class="t" data-tr="Burs" data-ru="Стипендия" data-cy="бурс">Burs</span><em class="plus">+₺7.500</em></li>
+            <li><span class="t" data-tr="Kira" data-ru="Аренда" data-cy="кира">Kira</span><em>−₺12.000</em></li>
+            <li><span class="t" data-tr="Market alışverişi" data-ru="Покупки в супермаркете" data-cy="маркет алышверишы">Market alışverişi</span><em>−₺1.440</em></li>
+            <li><span class="t" data-tr="Gelen havale" data-ru="Входящий перевод" data-cy="гелен хавале">Gelen havale</span><em class="plus">+₺750</em></li>
+            <li><span class="t" data-tr="Hesap işletim ücreti" data-ru="Плата за обслуживание счёта" data-cy="хесап ишлетим юджрети">Hesap işletim ücreti</span><em>−₺85</em></li>
+          </ul>
+          <nav class="ap-nav"><span class="t" data-tr="Ana sayfa" data-ru="Главная" data-cy="ана сайфа">Ana sayfa</span><span class="t" data-tr="Kartlarım" data-ru="Мои карты" data-cy="картларым">Kartlarım</span><span class="t" data-tr="Ödemeler" data-ru="Платежи" data-cy="ёдемелер">Ödemeler</span></nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Анатомия IBAN -->
+  <section data-section="iban" data-words="37" class="dark bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Анатомия</span><span class="pill">IBAN</span><span class="pill">26 знаков</span></div>
+      <h2 class="h2 split">IBAN — не случайные цифры. Разбираем по косточкам.</h2>
+      <p class="sub">Арендодатель скажет: <b class="tr" lang="tr" data-say="IBAN'ınızı gönderir misiniz?">IBAN'ınızı gönderir misiniz?</b> — «Пришлёте IBAN?» Тапни кусок номера — узнаешь, что он значит. Номер — учебный пример.</p>
+    </div>
+    <div class="iban" id="ibanBox">
+      <div class="iban__code" id="ibanCode" role="group" aria-label="Части IBAN"></div>
+      <div class="iban__bars" id="ibanBars" aria-hidden="true"></div>
+      <div class="iban__info" id="ibanInfo" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 7. Три брата: havale, FAST, EFT -->
+  <section data-section="brothers" data-words="150" class="dark bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Ловушка №1</span><span class="pill">Переводы</span></div>
+      <h2 class="h2 split">Жили-были три брата. Havale, EFT и FAST.</h2>
+      <p class="sub">Все трое переводят деньги. Но характеры разные. Перепутаешь — перевод придёт в понедельник.</p>
+    </div>
+    <div class="bros">
+      <article class="bro rv" data-n="01">
+        <h3 lang="tr">HAVALE</h3><p class="bro__role">Младший. Домосед.</p>
+        <p>Из своего банка никуда не выходит. Перевод внутри одного банка. Быстро, без драмы.</p>
+        <button class="say" type="button" data-say="Arkadaşıma havale yaptım."><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Arkadaşıma havale yaptım.</span></button>
+        <small>Я перевёл другу (в тот же банк).</small>
+      </article>
+      <article class="bro bro--mint rv" data-n="02">
+        <h3 lang="tr">FAST</h3><p class="bro__role">Средний. Спортсмен.</p>
+        <p>Бегает между банками. Мгновенно, даже ночью и в воскресенье. Но есть лимит по сумме. Что не поднял — отдаёт старшему.</p>
+        <button class="say" type="button" data-say="Parayı FAST ile gönderdim."><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Parayı FAST ile gönderdim.</span></button>
+        <small>Отправил деньги через FAST.</small>
+      </article>
+      <article class="bro rv" data-n="03">
+        <h3 lang="tr">EFT</h3><p class="bro__role">Старший. Чиновник.</p>
+        <p>Между разными банками. Любую сумму. Но работает по графику. Отправил в пятницу вечером — жди рабочий день.</p>
+        <button class="say" type="button" data-say="Başka bankaya EFT yaptım."><svg class="ic"><use href="#spk"/></svg> <span lang="tr">Başka bankaya EFT yaptım.</span></button>
+        <small>Сделал EFT в другой банк.</small>
+      </article>
+    </div>
+
+    <div class="net" id="netBox">
+      <div class="net__top">
+        <p class="net__h">Схема: кто куда бегает</p>
+        <div class="seg" role="group" aria-label="Когда отправляешь">
+          <button class="seg__b is-on" data-mode="day" type="button">Будни, день</button>
+          <button class="seg__b" data-mode="night" type="button">Ночь</button>
+          <button class="seg__b" data-mode="weekend" type="button">Выходные</button>
+        </div>
+      </div>
+      <svg class="net__svg" viewBox="0 0 360 250" role="img" aria-labelledby="netT">
+        <title id="netT">Схема переводов: havale внутри одного банка, FAST и EFT между банками</title>
+        <g class="net__bank" transform="translate(12 78)"><rect width="96" height="96" rx="18"/><text x="48" y="44">Banka</text><text x="48" y="74" class="net__big">A</text></g>
+        <g class="net__bank" transform="translate(252 78)"><rect width="96" height="96" rx="18"/><text x="48" y="44">Banka</text><text x="48" y="74" class="net__big">B</text></g>
+        <path id="pHav" class="net__p" d="M40 78 C 10 20, 90 20, 72 78"/>
+        <path id="pFast" class="net__p net__p--fast" d="M108 100 C 170 55, 190 55, 252 100"/>
+        <path id="pEft" class="net__p" d="M108 152 C 170 200, 190 200, 252 152"/>
+        <text x="56" y="20" class="net__lbl">HAVALE</text>
+        <text x="180" y="54" class="net__lbl net__lbl--m">FAST ⚡</text>
+        <text x="180" y="226" class="net__lbl">EFT</text>
+        <g id="gate" class="net__gate" transform="translate(180 192)"><rect x="-28" y="-8" width="56" height="16" rx="8"/><text y="3">ЖДЁТ</text></g>
+        <circle r="6" class="net__pk" id="pkHav" cx="40" cy="78"/>
+        <circle r="6" class="net__pk net__pk--m" id="pkFast" cx="108" cy="100"/>
+        <circle r="6" class="net__pk" id="pkEft" cx="108" cy="152"/>
+      </svg>
+      <p class="net__cap" id="netCap">Будни, день: бегут все трое. EFT — не торопясь, но доходит.</p>
+    </div>
+
+    <div class="hours" id="hours">
+      <div class="hours__top"><p class="net__h">Когда работает каждый брат</p><p class="hours__now" id="hoursNow"></p></div>
+      <div id="hoursGrid"></div>
+      <div class="hours__axis" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+      <p class="small">Время по Стамбулу. Часы EFT примерные, у банков чуть отличаются. Лимит FAST меняют — смотри в приложении. А IBAN у всех братьев общий: <b class="tr" lang="tr" data-say="IBAN numaranızı alabilir miyim?">IBAN numaranızı alabilir miyim?</b> — «Можно ваш IBAN?»</p>
+    </div>
+  </section>
+
+  <!-- 8. Ловушки -->
+  <section data-section="traps" data-words="130" class="light grid-lines bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Ловушки</span><span class="pill">2–6</span></div>
+      <h2 class="h2 split">Слова, на которых все спотыкаются.</h2>
+    </div>
+    <div class="traps">
+      <article class="trap rv">
+        <p class="trap__n">02 · Банкомат-людоед</p>
+        <h3 class="tr" lang="tr" data-say="ATM kartımı yuttu.">ATM kartımı yuttu.</h3>
+        <p class="cy" data-ui>атэмэ картымы ютту</p>
+        <p>Дословно: «банкомат проглотил мою карту». Не «не вернул», не «задержал». Съел. Честная турецкая формулировка.</p>
+        <div class="atm">
+          <svg viewBox="0 0 96 96" aria-hidden="true"><rect x="12" y="6" width="72" height="84" rx="10" fill="#1b1b1b"/><rect x="22" y="16" width="52" height="30" rx="4" fill="#0f2f29"/><text id="atmScr" x="48" y="35" text-anchor="middle" font-size="10" font-weight="700" fill="#00ffcc">ŞİFRE</text><rect x="26" y="56" width="44" height="5" rx="2.5" fill="#000"/><g id="atmCard"><rect x="34" y="62" width="28" height="20" rx="3" fill="#00ffcc"/><rect x="38" y="66" width="7" height="5" rx="1" fill="#0b5"/></g></svg>
+          <div class="atm__ui">
+            <button class="again" type="button" id="atmTry">Ввести неверный <span lang="tr">şifre</span></button>
+            <p class="atm__msg" id="atmMsg" aria-live="polite">Попыток: 0 из 3</p>
+          </div>
+        </div>
+      </article>
+      <article class="trap trap--ink rv">
+        <p class="trap__n">03 · Сломанные деньги</p>
+        <h3 class="tr" lang="tr" data-say="Bozuk paranız var mı?">Bozuk paranız var mı?</h3>
+        <p class="cy" data-ui>бозук параныз вар мы</p>
+        <p><b lang="tr">Bozuk</b> — это «сломанный». <b lang="tr">Bozuk para</b> — мелочь. Для турка сдача — просто сломанные деньги.</p>
+        <p>Отсюда <b lang="tr">bozdurmak</b> — «разменять, обменять». <b class="tr" lang="tr" data-say="Dolar bozdurmak istiyorum.">Dolar bozdurmak istiyorum.</b> — Хочу обменять доллары. Видишь? Снова чит-код №1.</p>
+        <button class="again" type="button" id="breakBtn">Сломать купюру <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      </article>
+      <article class="trap rv">
+        <p class="trap__n">04 · Национальный спорт</p>
+        <h3 class="tr" lang="tr" data-say="Kaç taksit yapabilirsiniz?">Kaç taksit yapabilirsiniz?</h3>
+        <p class="cy" data-ui>кач таксит япабилирсиниз</p>
+        <p><b lang="tr">Taksit</b> — рассрочка. В рассрочку берут телефон, диван, иногда кажется, что и хлеб. На кассе спросят: <b class="tr" lang="tr" data-say="Tek çekim mi, taksit mi?">Tek çekim mi, taksit mi?</b> — Одним платежом или в рассрочку?</p>
+        <p>Спокойно отвечай <b lang="tr">tek çekim</b>. Если, конечно, это не диван.</p>
+        <svg viewBox="0 0 220 40" width="100%" height="40" aria-hidden="true" id="taksitSvg"><g fill="#00d4aa"><rect class="tk" x="0" y="10" width="40" height="20" rx="6"/><rect class="tk" x="45" y="10" width="40" height="20" rx="6"/><rect class="tk" x="90" y="10" width="40" height="20" rx="6"/><rect class="tk" x="135" y="10" width="40" height="20" rx="6"/><rect class="tk" x="180" y="10" width="40" height="20" rx="6"/></g></svg>
+      </article>
+    </div>
+
+    <div class="money-trap rv" id="moneyTrap">
+      <p class="trap__n">05 · Ловушка, которая стоит денег</p>
+      <p class="money-trap__big"><span class="tr" lang="tr" data-say="masraf">masraf</span> = <span class="tr" lang="tr" data-say="komisyon">komisyon</span> = комиссия</p>
+      <p>Если в окошке прозвучало <b lang="tr">masraf</b>, а ты кивнул — ты только что согласился заплатить. Спрашивай до, а не после: <b class="tr" lang="tr" data-say="Masraf var mı?">Masraf var mı?</b> — Есть комиссия?</p>
+      <div class="nodbar">
+        <button class="again" type="button" id="nodBtn">Кивнуть</button>
+        <button class="again" type="button" id="askMasraf" data-say="Masraf var mı?">Спросить заранее</button>
+      </div>
+      <span class="coin" id="coin" aria-hidden="true">−₺85</span>
+    </div>
+
+    <div class="board rv" id="board">
+      <div class="board__top">
+        <p class="trap__n" style="margin:0">06 · Табло обменника</p>
+        <div class="seg" role="group" aria-label="Что делаешь">
+          <button class="seg__b is-on" data-side="alis" type="button">Я продаю $</button>
+          <button class="seg__b" data-side="satis" type="button">Я покупаю $</button>
+        </div>
+      </div>
+      <div class="board__panel" lang="tr">
+        <div class="board__row board__head"><span>DÖVİZ</span><span data-col="alis">ALIŞ</span><span data-col="satis">SATIŞ</span></div>
+        <div class="board__row"><span>USD</span><span class="flip" data-col="alis" data-v="40,00">40,00</span><span class="flip" data-col="satis" data-v="41,00">41,00</span></div>
+        <div class="board__row"><span>EUR</span><span class="flip" data-col="alis" data-v="46,00">46,00</span><span class="flip" data-col="satis" data-v="47,00">47,00</span></div>
+      </div>
+      <div class="board__calc">
+        <p id="boardTxt"></p>
+        <div class="spread" aria-hidden="true"><span lang="tr">alış 40,00</span><span class="spread__gap">разница = заработок обменника</span><span lang="tr">satış 41,00</span></div>
+      </div>
+      <p class="small">Курсы условные — только чтобы показать логику. Реальный курс смотри в день обмена.</p>
+    </div>
+  </section>
+
+  <!-- 9. Диалог у окошка -->
+  <section data-section="dialog" data-words="30" class="dark bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Диалог</span><span class="pill">У окошка</span><span class="pill">Выбирай ответ</span></div>
+      <h2 class="h2 split">Открываем счёт. Вживую.</h2>
+      <p class="sub">Сотрудник говорит. Ты выбираешь ответ. Каждую реплику можно послушать — тапни по ней. Перевод — по переключателю.</p>
+    </div>
+    <div class="chat" id="chat">
+      <div class="chat__bar">
+        <span class="chat__who" lang="tr"><i></i> Gişe 3 · Müşteri temsilcisi</span>
+        <label class="sw"><input type="checkbox" id="chatRu" checked> <span>Перевод</span></label>
+      </div>
+      <div class="chat__log" id="chatLog" aria-live="polite">
+        <div class="chat__empty" id="chatEmpty">
+          <svg viewBox="0 0 72 72" aria-hidden="true"><rect x="8" y="14" width="56" height="44" rx="10" fill="#1b1b1b" stroke="#00ffcc" stroke-width="2"/><text x="36" y="42" text-anchor="middle" font-size="16" font-weight="800" fill="#00ffcc">A047</text></svg>
+          <span>Твой номер на табло.</span>
+        </div>
+      </div>
+      <div class="chat__opts" id="chatOpts"><button class="opt opt--go" type="button" id="chatGo">Подойти к окошку №3</button></div>
+    </div>
+  </section>
+
+  <!-- 10. Видео -->
+  <section data-section="video" data-words="10" class="light bk-sec">
+    <div class="head">
+      <div class="pills"><span class="pill">Видео</span><span class="pill">Носитель</span></div>
+      <h2 class="h2">Банк на слух.</h2>
+    </div>
+    <p class="note-line">Лови знакомое: <span lang="tr">hesap açmak</span>, <span lang="tr">döviz bozdurmak</span> — и как отвечает сотрудник.</p>
+    <a-video yt="JpDx7LKLr_4" start="0" end="180" title="Banka Diyalogları — At the Bank" channel="Learn Turkish with Hamza"></a-video>
+  </section>
+
+  <!-- 11. Практика -->
+  <section data-section="practice" data-words="1" class="light bk-sec">
+    <div class="head"><h2 class="h2">Практика</h2></div>
+    <a-exercise ref="lib.bank.ex1"></a-exercise>
+    <a-exercise ref="lib.bank.ex2"></a-exercise>
+    <a-exercise ref="lib.bank.ex3"></a-exercise>
+
+    <a-exercise ref="lib.bank.ex4" class="ak-ex">
+      <div class="ak-ex__head"><span class="ak-ex__title">Диспетчер переводов: какой брат донесёт деньги?</span><span class="ak-ex__count" data-disp-count>1 / 5</span></div>
+      <div class="disp__card" data-disp-card aria-live="polite"></div>
+      <svg class="disp__svg" viewBox="0 0 320 120" aria-hidden="true">
+        <g class="bank" transform="translate(6 34)"><rect width="70" height="52" rx="12"/><text x="35" y="31">Ты</text></g>
+        <g class="bank" transform="translate(244 34)"><rect width="70" height="52" rx="12"/><text x="35" y="31">Кому</text></g>
+        <path data-lane="havale" d="M76 46 C 130 6, 190 6, 244 46"/>
+        <path data-lane="fast" d="M76 60 L 244 60"/>
+        <path data-lane="eft" d="M76 74 C 130 114, 190 114, 244 74"/>
+        <circle class="disp__pk" data-disp-pk r="7" cx="76" cy="60"/>
+      </svg>
+      <div class="disp__btns">
+        <button type="button" class="disp__b" data-bro="havale"><span lang="tr">HAVALE</span><small>(1)</small></button>
+        <button type="button" class="disp__b" data-bro="fast"><span lang="tr">FAST</span><small>(2)</small></button>
+        <button type="button" class="disp__b" data-bro="eft"><span lang="tr">EFT</span><small>(3)</small></button>
+      </div>
+      <p class="disp__status" data-disp-status></p>
+    </a-exercise>
+  </section>
+
+  <!-- 12. Мини-проверка -->
+  <section data-section="check" data-words="4" class="light bk-sec">
+    <div class="head"><h2 class="h2">Проверим, будешь ли ты кивать.</h2></div>
+    <a-quiz ref="lib.bank.check1"></a-quiz>
+  </section>
+
+  <!-- 13. Шпаргалка и финал -->
+  <section data-section="cheat" data-words="60" class="dark bk-sec">
+    <div class="mintpanel">
+      <div class="mintpanel__top"><span>ШПАРГАЛКА · БАНК</span><span>3 карточки</span></div>
+      <div class="posts" id="posts">
+        <button class="post" type="button" data-say="Hesap açmak istiyorum.">
+          <span class="post__h"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#010101"/><path d="M7 12h10M12 7v10" stroke="#00ffcc" stroke-width="2.4" stroke-linecap="round"/></svg>Чит-коды</span>
+          <span class="post__body post__body--ink" style="display:flex"><span class="post__big">Хочу X</span><span class="post__mid" lang="tr">X-mak istiyorum.</span><span class="post__sm" lang="tr">hesap açmak · para çekmek · para yatırmak · dolar bozdurmak</span></span>
+        </button>
+        <button class="post" type="button" data-say="havale, FAST, EFT">
+          <span class="post__h"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#010101"/><path d="M5 9h12l-3-3M19 15H7l3 3" stroke="#00ffcc" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Переводы</span>
+          <span class="post__body" style="display:flex"><span class="post__big">Три брата</span><span class="post__mid" lang="tr">havale · FAST · EFT</span><span class="post__sm">свой банк · мгновенно между банками · между банками по графику</span></span>
+        </button>
+        <button class="post" type="button" data-say="masraf, şifre, imza">
+          <span class="post__h"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#010101"/><path d="M12 6v8M12 17.5v.5" stroke="#ff8f73" stroke-width="2.6" stroke-linecap="round"/></svg>Не кивай</span>
+          <span class="post__body post__body--ink" style="display:flex"><span class="post__big">Не кивай на</span><span class="post__mid" lang="tr">masraf · şifre · imza</span><span class="post__sm">комиссия · PIN-код · подпись. Три слова, которые стоят денег и нервов.</span></span>
+        </button>
+      </div>
+    </div>
+    <div class="final">
+      <p class="sub">Помнишь вопрос из начала? Теперь у тебя есть ответ.</p>
+      <div class="final__q">
+        <a-say lang="tr">Vergi numaranız var mı?</a-say>
+        <a-say lang="tr">Hayır, yok. Nereden alabilirim?</a-say>
+        <span class="cy">— У вас есть налоговый номер? — Нет. Где его можно получить?</span>
+      </div>
+      <p class="punch rv">В следующий раз ты не киваешь. <em>Ты отвечаешь.</em></p>
+    </div>
+  </section>
+
+</main>
+
+<nav class="sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="sb__track"><span class="sb__fill"></span><span class="sb__thumb" aria-hidden="true" id="sbThumb">sıra 12</span></div>
+</nav>
+
+<template data-achievement data-title="Не киваешь. Отвечаешь." data-text="Счёт, карта, перевод и обмен — теперь ты справишься с ними по-турецки.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#010101"/>
+    <circle class="ring" cx="60" cy="60" r="48" fill="none" stroke="#00ffcc" stroke-width="3" stroke-dasharray="302" stroke-dashoffset="0"/>
+    <g class="card"><rect x="22" y="38" width="76" height="48" rx="8" fill="#1f1f1f" stroke="#00ffcc" stroke-width="1.5"/><rect class="chipb" x="31" y="47" width="16" height="12" rx="2" fill="#d8d8d8"/><rect x="31" y="70" width="44" height="4" rx="2" fill="#5a5a5a"/></g>
+    <g class="stamp"><circle cx="86" cy="80" r="16" fill="#00ffcc"/><path d="M78 80l6 6 10-11" fill="none" stroke="#010101" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = !reduce && window.gsap ? window.gsap : null;
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const say = (t) => { if (window.AlternaKit) AlternaKit.speak(t); };
+  if (G && window.ScrollTrigger) {
+    G.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    addEventListener('load', () => ScrollTrigger.refresh());
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+  }
+
+  /* мягкое появление карточек — фон */
+  if (G) ScrollTrigger.batch('.rv', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 40, rotation: 1.5, duration: .7, ease: 'back.out(1.6)', stagger: .1 }) });
+
+  /* заголовки: слова поднимаются */
+  if (G && window.SplitText) $$('.split').forEach((h) => {
+    const split = new SplitText(h, { type: 'words' });
+    G.from(split.words, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
+  });
+
+  /* ---------- 1. крючок ---------- */
+  const KEYS = [
+    ['Ç', 'ч', 'çekmek', 'чекмек', 'снимать (деньги)'],
+    ['Ğ', 'не читается, тянет гласную', 'doğrulama', 'доорулама', 'подтверждение'],
+    ['I', 'ы', 'sıra', 'сыра', 'очередь'],
+    ['İ', 'и', 'imza', 'имза', 'подпись'],
+    ['Ö', 'ё', 'ödeme', 'ёдеме', 'платёж'],
+    ['Ş', 'ш', 'şifre', 'шифре', 'PIN-код'],
+    ['Ü', 'ю', 'ücret', 'юджрет', 'плата'],
+  ];
+  const keysRow = $('#keys'), keysOut = $('#keysOut');
+  KEYS.forEach(([k, snd, w, cy, ru]) => {
+    const b = document.createElement('button');
+    b.className = 'key'; b.type = 'button'; b.textContent = k; b.lang = 'tr';
+    b.setAttribute('aria-label', `${k}: ${snd}. Пример: ${w}`);
+    b.addEventListener('click', () => {
+      $$('.key').forEach((x) => x.classList.remove('is-on'));
+      b.classList.add('is-on');
+      keysOut.innerHTML = `<b lang="tr">${k}</b> = ${esc(snd)} · <b lang="tr">${w}</b> <span data-ui>[${cy}]</span> — ${ru}`;
+      say(w);
+      if (G) G.fromTo(b, { y: 0 }, { y: -8, duration: .18, yoyo: true, repeat: 1, ease: 'power2.out' });
+    });
+    keysRow.append(b);
+  });
+
+  const cardIn = $('.card3d__in'), stage = $('.stage');
+  if (G) {
+    const rx = G.quickTo(cardIn, 'rotationX', { duration: .6, ease: 'power3.out' });
+    const ry = G.quickTo(cardIn, 'rotationY', { duration: .6, ease: 'power3.out' });
+    const idle = G.to(cardIn, { rotationY: 14, rotationX: 6, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    G.set(cardIn, { transformPerspective: 900, rotation: -6 });
+    ScrollTrigger.create({ trigger: stage, start: 'top bottom', end: 'bottom top', onToggle: (s) => (s.isActive ? idle.play() : idle.pause()) });
+    stage.addEventListener('pointermove', (e) => {
+      const r = stage.getBoundingClientRect();
+      idle.pause();
+      ry(((e.clientX - r.left) / r.width - .5) * 30);
+      rx(-((e.clientY - r.top) / r.height - .5) * 24);
+    });
+    stage.addEventListener('pointerleave', () => idle.play());
+  }
+  const ticker = $('#ticker');
+  $('.ticker__row', ticker).innerHTML += $('.ticker__row', ticker).innerHTML;
+  new IntersectionObserver(([en]) => ticker.classList.toggle('is-off', !en.isIntersecting)).observe(ticker);
+
+  $('#askBtn').addEventListener('click', () => {
+    $('#askRu').textContent = '«У вас есть налоговый номер?» А ты кивнул.';
+    say('Vergi numaranız var mı?');
+    if (G) {
+      G.fromTo('#askRu', { y: 12, scale: .9 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(2.5)' });
+      G.fromTo('#nodHead', { y: 0 }, { y: 6, duration: .22, yoyo: true, repeat: 3, ease: 'sine.inOut', transformOrigin: '50% 50%' });
+    }
+  });
+  if (G) G.to('#nodHead', { y: 5, duration: .3, yoyo: true, repeat: 3, ease: 'sine.inOut', scrollTrigger: { trigger: '.nod', start: 'top 80%', once: true } });
+
+  /* ---------- 2. маршрут ---------- */
+  const routeBox = $('#routeBox'), routeFg = $('#routePath'), routeDot = $('#routeDot'), stops = $$('.stop');
+  const routeSet = (p) => {
+    routeFg.style.strokeDashoffset = String(1000 - p * 1000);
+    const h = routeBox.offsetHeight;
+    routeDot.style.transform = `translateY(${p * h}px)`;
+    stops.forEach((st) => st.classList.toggle('is-on', st.offsetTop + 16 <= p * h + 2));
+  };
+  if (G) {
+    ScrollTrigger.create({ trigger: routeBox, start: 'top 60%', end: 'bottom 60%', scrub: true, onUpdate: (s) => routeSet(s.progress) });
+    G.from('.stop__n', { scale: .4, rotation: -20, duration: .5, ease: 'back.out(3)', stagger: .12, scrollTrigger: { trigger: routeBox, start: 'top 75%', once: true } });
+  } else routeSet(1);
+  stops.forEach((st) => $('.say', st).addEventListener('click', () => { if (G) G.fromTo($('.stop__n', st), { scale: 1.4 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' }); }));
+
+  /* ---------- 3. чит-коды ---------- */
+  function playFormula() {
+    if (!G) return;
+    G.fromTo('.formula__a', { x: -60, rotation: -6 }, { x: 0, rotation: 0, duration: .6, ease: 'back.out(2)' });
+    G.fromTo('.formula__b', { x: 80, rotation: 8 }, { x: 0, rotation: 0, duration: .6, delay: .25, ease: 'back.out(2.5)' });
+    G.fromTo('.formula__a i', { scale: 1 }, { scale: 1.35, duration: .25, yoyo: true, repeat: 1, delay: .8 });
+    G.fromTo('.formula__plus', { rotation: 0 }, { rotation: 180, duration: .5, delay: .5, ease: 'power2.out' });
+  }
+  if (G) ScrollTrigger.create({ trigger: '#formula', start: 'top 80%', once: true, onEnter: playFormula });
+  $('#formulaAgain').addEventListener('click', () => { playFormula(); say('Hesap açmak istiyorum.'); });
+
+  const VERBS = [
+    ['Hesap açmak', 'Я хочу открыть счёт.', 'хесап ачмак'],
+    ['Para çekmek', 'Я хочу снять деньги.', 'пара чекмек'],
+    ['Para yatırmak', 'Я хочу положить деньги.', 'пара ятырмак'],
+    ['Dolar bozdurmak', 'Я хочу обменять доллары.', 'долар боздурмак'],
+    ['Havale yapmak', 'Я хочу сделать перевод.', 'хавале япмак'],
+    ['Şifremi değiştirmek', 'Я хочу сменить PIN-код.', 'шифреми дэиштирмек'],
+    ['Kartımı iptal etmek', 'Я хочу аннулировать карту.', 'картымы иптал этмек'],
+  ];
+  const chips = $('#verbChips'), bVerb = $('#bVerb'), bRu = $('#bRu'), bCy = $('#bCy');
+  VERBS.forEach(([tr, ru, cy], i) => {
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'chip' + (i === 0 ? ' is-on' : ''); c.textContent = tr.toLowerCase(); c.lang = 'tr';
+    c.setAttribute('aria-pressed', String(i === 0));
+    c.addEventListener('click', () => {
+      $$('.chip', chips).forEach((x) => { x.classList.remove('is-on'); x.setAttribute('aria-pressed', 'false'); });
+      c.classList.add('is-on'); c.setAttribute('aria-pressed', 'true');
+      bVerb.textContent = tr; bRu.textContent = ru; bCy.textContent = cy + ' истийорум';
+      say(tr + ' istiyorum.');
+      if (G) {
+        G.fromTo(bVerb, { y: 30, rotation: 6, scale: .6 }, { y: 0, rotation: 0, scale: 1, duration: .5, ease: 'back.out(2.5)' });
+        G.fromTo('#bIst', { x: 30 }, { x: 0, duration: .45, delay: .1, ease: 'elastic.out(1, .45)' });
+      }
+    });
+    chips.append(c);
+  });
+  $('#bSay').addEventListener('click', () => say(bVerb.textContent + ' istiyorum.'));
+  $$('.mini').forEach((m) => m.addEventListener('click', () => { if (G) G.fromTo(m, { scale: .94 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)' }); }));
+  if (G) G.from('.mini', { y: 30, rotation: -2, duration: .6, ease: 'back.out(2)', stagger: .1, scrollTrigger: { trigger: '.minis', start: 'top 85%', once: true } });
+
+  /* ---------- 4. зоны ---------- */
+  const ZONES = [
+    { t: 'Вход и очередь', n: '01',
+      note: 'Сначала автомат у входа — <b lang="tr">sıramatik</b>. Жмёшь <b lang="tr">Bireysel</b> (для частных лиц), берёшь номерок и смотришь на табло над окошками.',
+      w: [
+        ['şube', 'шубе', 'отделение банка', 'En yakın şube nerede?', 'Где ближайшее отделение?'],
+        ['sıramatik', 'сыраматик', 'автомат с номерками', 'Sıramatikten numara alın.', 'Возьмите номер в автомате.'],
+        ['sıra numarası', 'сыра нумарасы', 'номер в очереди', 'Sıra numaranız kaç?', 'Какой у вас номер?'],
+        ['bireysel', 'бирейсель', 'для частных лиц', 'Bireysel işlemler', 'операции для частных лиц'],
+        ['gişe', 'гише', 'окошко', 'Üç numaralı gişeye buyurun.', 'Пройдите к окну №3.'],
+        ['vezne', 'везне', 'касса (наличные)', 'Vezneye gidin.', 'Пройдите в кассу.'],
+        ['müşteri temsilcisi', 'мюштери темсилджиси', 'консультант', 'Müşteri temsilcisiyle görüşmek istiyorum.', 'Хочу поговорить с консультантом.'],
+        ['buyurun', 'буюрун', 'слушаю вас, проходите', 'Buyurun, nasıl yardımcı olabilirim?', 'Слушаю, чем помочь?'],
+      ] },
+    { t: 'Счёт и документы', n: '02',
+      note: 'Для счёта обычно просят паспорт и <b lang="tr">vergi numarası</b> — налоговый номер. Иногда ещё <b lang="tr">ikamet</b>. Зависит от банка.',
+      w: [
+        ['hesap', 'хесап', 'счёт', 'Hesap açmak istiyorum.', 'Хочу открыть счёт.'],
+        ['vadesiz hesap', 'вадесиз хесап', 'текущий счёт', 'Vadesiz hesap yeterli.', 'Текущего хватит.'],
+        ['vadeli hesap', 'вадели хесап', 'вклад на срок', 'Vadeli hesapta faiz var.', 'На вкладе есть проценты.'],
+        ['faiz', 'фаиз', 'процент, ставка', 'Faiz oranı ne kadar?', 'Какая ставка?'],
+        ['kimlik', 'кимлик', 'удостоверение личности', 'Kimliğinizi alabilir miyim?', 'Можно ваше удостоверение?'],
+        ['ikamet izni', 'икамет изни', 'вид на жительство', 'İkamet iznim var.', 'У меня есть ВНЖ.'],
+        ['vergi numarası', 'верги нумарасы', 'налоговый номер', 'Vergi numaranız var mı?', 'Есть налоговый номер?'],
+        ['imza', 'имза', 'подпись', 'Buraya imza atar mısınız?', 'Распишитесь здесь.'],
+      ] },
+    { t: 'Деньги туда-сюда', n: '03',
+      note: 'Арендодатель попросит <b lang="tr">dekont</b> — квитанцию о переводе. Её кидают в WhatsApp как доказательство. Привыкай.',
+      w: [
+        ['para yatırmak', 'пара ятырмак', 'положить деньги', 'Hesabıma para yatırmak istiyorum.', 'Хочу положить деньги на счёт.'],
+        ['para çekmek', 'пара чекмек', 'снять деньги', "ATM'den para çektim.", 'Снял в банкомате.'],
+        ['havale', 'хавале', 'перевод (свой банк)', 'Arkadaşıma havale yaptım.', 'Перевёл другу.'],
+        ['IBAN', 'ибан', 'номер счёта IBAN', "IBAN'ınızı gönderir misiniz?", 'Пришлёте IBAN?'],
+        ['dekont', 'деконт', 'квитанция о переводе', "Dekontu WhatsApp'tan attım.", 'Скинул квитанцию в WhatsApp.'],
+        ['bakiye', 'бакийе', 'баланс', 'Bakiyem yetersiz.', 'Недостаточно средств.'],
+        ['masraf', 'масраф', 'комиссия, расход', 'Masraf var mı?', 'Есть комиссия?'],
+        ['nakit', 'накит', 'наличные', 'Nakit mi, kart mı?', 'Наличными или картой?'],
+      ] },
+    { t: 'Карта и банкомат', n: '04',
+      note: 'Три раза ошибся с <b lang="tr">şifre</b> — карта уходит в <b lang="tr">bloke</b>. Банкомат может её <b lang="tr">yutmak</b> — съесть. Буквально.',
+      w: [
+        ['banka kartı', 'банка карты', 'дебетовая карта', 'Banka kartım gelmedi.', 'Карта не пришла.'],
+        ['kredi kartı', 'креди карты', 'кредитная карта', 'Kredi kartı başvurusu', 'заявка на кредитку'],
+        ['şifre', 'шифре', 'PIN-код, пароль', 'Şifremi unuttum.', 'Я забыл PIN.'],
+        ['bloke olmak', 'блоке олмак', 'заблокироваться', 'Kartım bloke oldu.', 'Карта заблокирована.'],
+        ['yutmak', 'ютмак', 'проглотить', 'ATM kartımı yuttu.', 'Банкомат съел карту.'],
+        ['taksit', 'таксит', 'рассрочка', 'Üç taksit yapabilir misiniz?', 'Можно в три платежа?'],
+        ['temassız', 'темассыз', 'бесконтактный', 'Temassız ödeme', 'бесконтактная оплата'],
+        ['doğrulama kodu', 'доорулама коду', 'код подтверждения', 'Doğrulama kodu gelmedi.', 'Код не пришёл.'],
+      ] },
+    { t: 'Валюта', n: '05',
+      note: 'На табло обменника два столбца. <b lang="tr">Alış</b> — почём купят у тебя. <b lang="tr">Satış</b> — почём продадут тебе. Не перепутай, это твои деньги.',
+      w: [
+        ['döviz', 'дёвиз', 'валюта', 'Döviz bürosu nerede?', 'Где обменник?'],
+        ['kur', 'кур', 'курс', 'Bugün kur ne kadar?', 'Какой сегодня курс?'],
+        ['bozdurmak', 'боздурмак', 'обменять, разменять', 'Dolar bozdurmak istiyorum.', 'Хочу обменять доллары.'],
+        ['bozuk para', 'бозук пара', 'мелочь', 'Bozuk paranız var mı?', 'Есть мелочь?'],
+        ['alış', 'алыш', 'покупка (курс)', 'Alış fiyatı', 'курс покупки'],
+        ['satış', 'сатыш', 'продажа (курс)', 'Satış fiyatı', 'курс продажи'],
+        ['Dolar kaç?', 'долар кач', 'почём доллар?', 'Bugün dolar kaç?', 'Почём сегодня доллар?'],
+        ['avro', 'авро', 'евро', 'Avro bozdurmak istiyorum.', 'Хочу обменять евро.'],
+      ] },
+  ];
+  const zonesEl = $('#zones'), grid = $('#wordGrid'), zoneNote = $('#zoneNote');
+  function renderZone(i) {
+    $$('.zone', zonesEl).forEach((z, j) => { z.classList.toggle('is-on', j === i); z.setAttribute('aria-selected', String(j === i)); });
+    zoneNote.innerHTML = ZONES[i].note;
+    grid.innerHTML = '';
+    ZONES[i].w.forEach(([tr, cy, ru, ex, exRu]) => {
+      const c = document.createElement('div');
+      c.className = 'wc'; c.tabIndex = 0; c.setAttribute('role', 'button');
+      c.setAttribute('aria-label', `${tr} — нажми, чтобы увидеть перевод`);
+      c.innerHTML = `<div class="wc__in">
+          <div class="wc__f"><span class="wc__tr" lang="tr">${esc(tr)}</span><span class="cy" data-ui>${esc(cy)}</span></div>
+          <div class="wc__b"><span class="wc__ru">${esc(ru)}</span><span class="wc__ex"><span lang="tr">${esc(ex)}</span> — ${esc(exRu)}</span></div>
+        </div>
+        <button class="wc__spk" type="button" aria-label="Послушать: ${esc(tr)}" data-say="${esc(tr)}. ${esc(ex)}"><svg class="ic"><use href="#spk"/></svg></button>`;
+      const flip = () => c.classList.toggle('is-flip');
+      c.addEventListener('click', (e) => { if (!e.target.closest('.wc__spk')) flip(); });
+      c.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); } });
+      grid.append(c);
+    });
+    if (G) G.from($$('.wc', grid), { y: 26, scale: .9, rotation: -2, duration: .45, ease: 'back.out(2)', stagger: .04 });
+  }
+  ZONES.forEach((z, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'zone'; b.setAttribute('role', 'tab');
+    b.innerHTML = `<small>Зона ${z.n}</small><b>${z.t}</b>`;
+    b.addEventListener('click', () => { renderZone(i); b.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'center', block: 'nearest' }); });
+    zonesEl.append(b);
+  });
+  renderZone(0);
+  if (G) G.from('.zone', { x: 40, duration: .5, ease: 'back.out(2)', stagger: .07, scrollTrigger: { trigger: zonesEl, start: 'top 85%', once: true } });
+
+  /* ---------- 5. приложение ---------- */
+  const phone = $('#phone'), tip = $('#appTip');
+  $$('.toggle__b').forEach((b) => b.addEventListener('click', () => {
+    const lang = b.dataset.lang;
+    $$('.toggle__b').forEach((x) => x.classList.toggle('is-on', x === b));
+    $$('.t', phone).forEach((t) => { t.textContent = t.dataset[lang]; });
+    tip.innerHTML = lang === 'ru' ? 'Видишь? Ничего страшного. Верни <b lang="tr">Türkçe</b> и потренируйся.' : 'Тапни любой элемент на экране.';
+    if (G) G.fromTo($$('.t', phone), { rotationX: 90 }, { rotationX: 0, duration: .4, stagger: .03, ease: 'back.out(2)' });
+  }));
+  $$('.t', phone).forEach((t) => {
+    if (t.tagName !== 'BUTTON') { t.tabIndex = 0; t.setAttribute('role', 'button'); }
+    const act = () => {
+      $$('.t', phone).forEach((x) => x.classList.remove('is-on'));
+      t.classList.add('is-on');
+      tip.innerHTML = `<b lang="tr">${esc(t.dataset.tr)}</b> <span data-ui>[${esc(t.dataset.cy)}]</span> — ${esc(t.dataset.ru)}`;
+      say(t.dataset.tr);
+      if (G) G.fromTo(t, { scale: .9 }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+    };
+    t.addEventListener('click', act);
+    t.addEventListener('keydown', (e) => { if (e.key === 'Enter') act(); });
+  });
+  const bal = $('#bal');
+  const fmtBal = (v) => '₺' + v.toLocaleString('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  if (G) {
+    const o = { v: 0 };
+    G.to(o, { v: 200250, duration: 1.6, ease: 'power3.out', onUpdate: () => { bal.textContent = fmtBal(o.v); }, scrollTrigger: { trigger: phone, start: 'top 70%', once: true } });
+    G.from(phone, { rotation: 5, y: 60, duration: 1, ease: 'back.out(1.4)', scrollTrigger: { trigger: phone, start: 'top 90%', once: true } });
+    G.to(phone, { rotation: -3, duration: .8, ease: 'power2.out', scrollTrigger: { trigger: phone, start: 'top 50%', once: true } });
+  } else bal.textContent = fmtBal(200250);
+
+  /* ---------- 6. IBAN ---------- */
+  const IBAN = [
+    ['TR', 'Страна', 'Первые две буквы любого IBAN — код страны. Видишь TR — значит, счёт турецкий.', 2],
+    ['33', 'Контроль', 'Две контрольные цифры. По ним банк проверяет, что ты не ошибся при вводе.', 2],
+    ['00061', 'Банк', 'Пять цифр — код банка. По ним видно, свой это банк (тогда havale) или чужой (FAST или EFT).', 5],
+    ['0', 'Резерв', 'Одна резервная цифра. В Турции это ноль. Просто есть.', 1],
+    ['0519786457841326', 'Счёт', 'Шестнадцать цифр — номер самого счёта. Их арендодатель и ждёт.', 16],
+  ];
+  const ibCode = $('#ibanCode'), ibBars = $('#ibanBars'), ibInfo = $('#ibanInfo');
+  const plural = (n) => (n === 1 ? 'знак' : n < 5 ? 'знака' : 'знаков');
+  IBAN.forEach(([v, lab, txt, n], i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'ib';
+    b.innerHTML = `<span>${[...v].map((ch) => `<i class="ch" style="font-style:normal">${ch}</i>`).join('')}</span><small>${lab}</small>`;
+    const bar = document.createElement('i'); bar.style.setProperty('--g', n); ibBars.append(bar);
+    const pick = () => {
+      $$('.ib', ibCode).forEach((x) => x.classList.remove('is-on')); $$('i', ibBars).forEach((x) => x.classList.remove('is-on'));
+      b.classList.add('is-on'); bar.classList.add('is-on');
+      ibInfo.innerHTML = `<b>${lab} · ${n} ${plural(n)}</b>${txt}`;
+      if (G) {
+        G.fromTo(bar, { scaleY: .4 }, { scaleY: 1, duration: .5, ease: 'elastic.out(1, .45)' });
+        G.fromTo($$('.ch', b), { y: -8 }, { y: 0, duration: .4, stagger: .02, ease: 'bounce.out' });
+        G.fromTo(ibInfo, { x: 16 }, { x: 0, duration: .35, ease: 'power2.out' });
+      }
+    };
+    b.addEventListener('click', pick);
+    ibCode.append(b);
+    if (i === 0) pick();
+  });
+  if (G) {
+    G.from('#ibanCode .ch', { y: -30, rotation: 20, duration: .5, ease: 'back.out(2.5)', stagger: .025, scrollTrigger: { trigger: '#ibanBox', start: 'top 80%', once: true } });
+    G.from('#ibanBars i', { scaleX: .3, duration: .6, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '#ibanBox', start: 'top 80%', once: true } });
+  }
+
+  /* ---------- 7. три брата: схема ---------- */
+  const paths = { hav: $('#pHav'), fast: $('#pFast'), eft: $('#pEft') };
+  const pks = { hav: $('#pkHav'), fast: $('#pkFast'), eft: $('#pkEft') };
+  const place = (k, p) => { const path = paths[k], pt = path.getPointAtLength(path.getTotalLength() * p); pks[k].setAttribute('cx', pt.x); pks[k].setAttribute('cy', pt.y); };
+  const CAP = {
+    day: 'Будни, день: бегут все трое. EFT — не торопясь, но доходит.',
+    night: 'Ночь: havale и FAST работают. EFT стоит у шлагбаума до утра.',
+    weekend: 'Выходные: FAST и havale спокойно бегают. EFT ждёт понедельника.',
+  };
+  let mode = 'day';
+  const runs = {};
+  const gate = $('#gate');
+  if (G) {
+    ['hav', 'fast', 'eft'].forEach((k) => {
+      const st = { p: 0 };
+      runs[k] = G.to(st, { p: 1, duration: { hav: 1.6, fast: .9, eft: 4.2 }[k], repeat: -1, ease: 'none', paused: true, onUpdate: () => place(k, st.p) });
+    });
+    G.set(gate, { scale: .3, transformOrigin: '50% 50%' });
+    ScrollTrigger.create({ trigger: '#netBox', start: 'top bottom', end: 'bottom top', onToggle: (s) => {
+      ['hav', 'fast'].forEach((k) => (s.isActive ? runs[k].play() : runs[k].pause()));
+      if (s.isActive && mode === 'day') runs.eft.play(); else runs.eft.pause();
+    } });
+  } else { place('hav', .5); place('fast', .5); place('eft', .46); }
+  $$('.seg__b[data-mode]').forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('.seg__b[data-mode]').forEach((x) => x.classList.toggle('is-on', x === b));
+    $('#netCap').textContent = CAP[mode];
+    if (!G) return;
+    if (mode === 'day') { runs.eft.play(); G.to(gate, { scale: .3, duration: .3 }); }
+    else { runs.eft.pause(); G.to(runs.eft, { progress: .46, duration: .4 }); G.to(gate, { scale: 1, duration: .5, ease: 'back.out(3)' }); }
+    G.fromTo('#netCap', { y: 10 }, { y: 0, duration: .35, ease: 'back.out(2)' });
+  }));
+  $$('.bro .say').forEach((b) => b.addEventListener('click', () => { if (G) G.fromTo(b.closest('.bro'), { rotation: -1.5 }, { rotation: 0, duration: .6, ease: 'elastic.out(1, .45)' }); }));
+
+  /* часы работы и «сейчас в Стамбуле» */
+  const hoursGrid = $('#hoursGrid');
+  const ROWS = [['HAVALE', [[0, 24]], [[0, 24]]], ['FAST', [[0, 24]], [[0, 24]]], ['EFT', [[9, 17]], []]];
+  ROWS.forEach(([name, wd, we]) => {
+    const row = document.createElement('div'); row.className = 'hr';
+    const track = (segs, lab) => `<div><div class="hr__lab">${lab}</div><div class="hr__track">${segs.length ? segs.map(([a, c]) => `<span class="hr__bar" style="left:${a / 24 * 100}%;width:${(c - a) / 24 * 100}%"></span>`).join('') : '<span class="hr__bar hr__bar--off" style="left:0;width:100%"></span>'}</div></div>`;
+    row.innerHTML = `<span class="hr__name" lang="tr">${name}</span><div class="hr__tracks">${track(wd, 'Будни')}${track(we, 'Выходные')}</div>`;
+    hoursGrid.append(row);
+  });
+  try {
+    const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Istanbul', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date()).map((p) => [p.type, p.value]));
+    const h = (+parts.hour % 24) + (+parts.minute) / 60;
+    const weekend = parts.weekday === 'Sat' || parts.weekday === 'Sun';
+    const eftOn = !weekend && h >= 9 && h < 17;
+    $('#hoursNow').textContent = `Сейчас в Стамбуле ${parts.hour}:${parts.minute}. EFT ${eftOn ? 'работает' : 'спит — отправляй через FAST'}`;
+    $$('.hr').forEach((row) => {
+      const line = document.createElement('span'); line.className = 'hours__line'; line.style.left = `calc(${h / 24 * 100}% - 1px)`;
+      $$('.hr__track', row)[weekend ? 1 : 0].append(line);
+    });
+  } catch { /* без часового пояса — просто схема */ }
+  if (G) G.from('.hr__bar', { scaleX: .3, duration: .8, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '#hours', start: 'top 80%', once: true } });
+
+  /* ---------- 8. ловушки ---------- */
+  let tries = 0;
+  const atmMsg = $('#atmMsg'), atmScr = $('#atmScr');
+  $('#atmTry').addEventListener('click', () => {
+    if (tries >= 3) {
+      tries = 0; atmMsg.textContent = 'Попыток: 0 из 3'; atmScr.textContent = 'ŞİFRE';
+      if (G) G.to('#atmCard', { y: 0, scaleY: 1, duration: .5, ease: 'back.out(2)' });
+      return;
+    }
+    tries++;
+    if (G) G.fromTo('#atmScr', { x: -3 }, { x: 3, duration: .06, repeat: 5, yoyo: true, clearProps: 'x' });
+    if (tries < 3) { atmMsg.textContent = `Попыток: ${tries} из 3`; atmScr.textContent = 'HATALI'; return; }
+    atmScr.textContent = 'BLOKE';
+    atmMsg.innerHTML = 'Карту съели. Скажи: <b lang="tr">Kartım bloke oldu.</b> Нажми ещё раз — вернём.';
+    say('Kartım bloke oldu.');
+    if (G) G.to('#atmCard', { y: -12, scaleY: .3, transformOrigin: '50% 0%', duration: .6, ease: 'power3.in' });
+  });
+  $('#breakBtn').addEventListener('click', (e) => {
+    say('bozuk para');
+    if (G) G.fromTo(e.currentTarget.querySelector('svg'), { rotation: 0, scale: 1 }, { rotation: 360, scale: 1.6, duration: .6, ease: 'back.out(3)', yoyo: true, repeat: 1 });
+  });
+  if (G) G.from('#taksitSvg .tk', { y: -12, rotation: -15, duration: .6, ease: 'bounce.out', stagger: .12, scrollTrigger: { trigger: '#taksitSvg', start: 'top 85%', once: true } });
+  const coin = $('#coin');
+  if (G) G.set(coin, { scale: .3, y: -60 });
+  $('#nodBtn').addEventListener('click', () => {
+    if (G) G.fromTo(coin, { y: -60, scale: .3 }, { y: 0, scale: 1.2, duration: .8, ease: 'bounce.out' });
+  });
+  $('#askMasraf').addEventListener('click', () => { if (G) G.to(coin, { y: -60, scale: .3, duration: .4, ease: 'power2.in' }); });
+
+  const board = $('#board');
+  const TXT = {
+    alis: 'Ты <b>продаёшь</b> доллары → смотри столбец <b lang="tr">ALIŞ</b> (они покупают). 100 $ × 40,00 = <b>4 000 ₺</b>.',
+    satis: 'Ты <b>покупаешь</b> доллары → смотри столбец <b lang="tr">SATIŞ</b> (они продают). 100 $ × 41,00 = <b>4 100 ₺</b>.',
+  };
+  const setSide = (side) => {
+    $$('.seg__b[data-side]', board).forEach((x) => x.classList.toggle('is-on', x.dataset.side === side));
+    $$('[data-col]', board).forEach((c) => c.classList.toggle('is-on', c.dataset.col === side));
+    $('#boardTxt').innerHTML = TXT[side];
+    if (G) G.fromTo($$(`[data-col="${side}"]`, board), { scale: .8 }, { scale: 1, duration: .4, ease: 'back.out(3)', stagger: .06 });
+  };
+  $$('.seg__b[data-side]', board).forEach((b) => b.addEventListener('click', () => { setSide(b.dataset.side); say(b.dataset.side === 'alis' ? 'alış' : 'satış'); }));
+  setSide('alis');
+  if (G) ScrollTrigger.create({ trigger: board, start: 'top 80%', once: true, onEnter: () => {
+    $$('.flip', board).forEach((f, i) => {
+      const target = f.dataset.v;
+      G.to({}, { duration: .7 + i * .2, onUpdate: () => { f.textContent = [...target].map((ch) => (/\d/.test(ch) ? Math.floor(Math.random() * 10) : ch)).join(''); }, onComplete: () => { f.textContent = target; } });
+    });
+  } });
+
+  /* ---------- 9. диалог ---------- */
+  const CHAT = {
+    start: { them: ['Hoş geldiniz, buyurun.', 'Добро пожаловать, слушаю вас.'],
+      opts: [['Merhaba. Hesap açmak istiyorum.', 'Здравствуйте. Хочу открыть счёт.', 'n2'], ['Şey… hesap… istemek?', 'Ну… счёт… хотеть?', 'n1b']] },
+    n1b: { note: 'Почти. Вспомни чит-код №1: глагол целиком + istiyorum.', them: ['Hesap açmak mı istiyorsunuz?', 'Вы хотите открыть счёт?'],
+      opts: [['Evet, hesap açmak istiyorum.', 'Да, хочу открыть счёт.', 'n2']] },
+    n2: { them: ['Tabii. Kimliğiniz ya da pasaportunuz var mı?', 'Конечно. У вас есть удостоверение или паспорт?'],
+      opts: [['Pasaportum burada.', 'Вот мой паспорт.', 'n3']] },
+    n3: { them: ['Vergi numaranız var mı?', 'У вас есть налоговый номер?'],
+      opts: [['Evet, var.', 'Да, есть.', 'n5'], ['Hayır, yok. Nereden alabilirim?', 'Нет. Где его можно получить?', 'n4'], ['(кивнуть с умным видом)', '', 'n3nod']] },
+    n3nod: { note: 'Вот так и приходят в банк три раза. Не кивай. Отвечай.', them: ['Vergi numaranız var mı?', 'У вас есть налоговый номер?'],
+      opts: [['Evet, var.', 'Да, есть.', 'n5'], ['Hayır, yok. Nereden alabilirim?', 'Нет. Где его можно получить?', 'n4']] },
+    n4: { them: ['Vergi dairesinden alabilirsiniz. Pasaportunuzu götürün.', 'Можно получить в налоговой. Возьмите паспорт.'],
+      after: 'Налоговый номер иностранцу дают в vergi dairesi по паспорту. Бывает и онлайн.',
+      opts: [['Tamam, yarın gelirim.', 'Хорошо, приду завтра.', 'n4b']] },
+    n4b: { note: 'Следующий день. Снова окошко. Уже с номером.', them: ['Tekrar hoş geldiniz! Vergi numaranızı aldınız mı?', 'С возвращением! Получили налоговый номер?'],
+      opts: [['Evet, aldım.', 'Да, получил.', 'n5']] },
+    n5: { them: ['Harika. Vadesiz mi, vadeli mi hesap istiyorsunuz?', 'Отлично. Вам текущий или срочный счёт?'],
+      opts: [['Vadesiz, lütfen.', 'Текущий, пожалуйста.', 'n6'], ['Vadeli ne demek?', 'А что значит vadeli?', 'n5q']] },
+    n5q: { them: ['Vadeli hesapta para belli bir süre durur, faiz alırsınız.', 'На срочном счёте деньги лежат определённый срок, вы получаете проценты.'],
+      opts: [['Anladım. Vadesiz, lütfen.', 'Понял. Текущий, пожалуйста.', 'n6']] },
+    n6: { them: ['Banka kartı da ister misiniz?', 'Карту тоже хотите?'],
+      opts: [['Evet, lütfen. Masraf var mı?', 'Да, пожалуйста. Есть комиссия?', 'n7'], ['Evet.', 'Да.', 'n6x']] },
+    n6x: { note: 'Работает. Но ты не спросил про masraf. Иногда карта бесплатная, иногда нет. Спрашивай до, а не после.', next: 'n7' },
+    n7: { them: ['Kart ücretsiz. Buraya ve buraya imza atar mısınız?', 'Карта бесплатная. Распишитесь здесь и здесь?'],
+      opts: [['Tabii.', 'Конечно.', 'n8']] },
+    n8: { them: ['Şifrenizi belirleyin lütfen. Kartınız birkaç gün içinde şubeye gelecek.', 'Задайте PIN, пожалуйста. Карта придёт в отделение через несколько дней.'],
+      opts: [['Teşekkür ederim, iyi çalışmalar!', 'Спасибо, хорошей работы!', 'end'], ['Teşekkürler, görüşürüz.', 'Спасибо, до встречи.', 'end2']] },
+    end: { them: ['Çok teşekkürler, size de iyi günler!', 'Большое спасибо, и вам хорошего дня!'],
+      after: '«İyi çalışmalar» — «хорошей работы». Говорят любому, кто работает. Сотрудник это запомнит. Ты больше не турист.', fin: true },
+    end2: { them: ['İyi günler!', 'Хорошего дня!'],
+      after: 'Норм. А в следующий раз скажи «iyi çalışmalar» — «хорошей работы». Турки это обожают.', fin: true },
+  };
+  const log = $('#chatLog'), opts = $('#chatOpts'), chatBox = $('#chat');
+  $('#chatRu').addEventListener('change', (e) => chatBox.classList.toggle('no-ru', !e.target.checked));
+  const wait = (ms) => new Promise((r) => setTimeout(r, reduce ? 0 : ms));
+  const scrollLog = () => { log.scrollTop = log.scrollHeight; };
+  const pop = (el) => { if (G) G.from(el, { y: 16, scale: .9, duration: .4, ease: 'back.out(2.5)' }); };
+  function bubble(who, tr, ru) {
+    const m = document.createElement('div');
+    m.className = 'msg msg--' + who;
+    m.innerHTML = `<div class="msg__tr" lang="tr" data-say="${esc(tr)}">${esc(tr)}</div>${ru ? `<div class="msg__ru">${esc(ru)}</div>` : ''}`;
+    log.append(m); pop(m); scrollLog();
+  }
+  function note(txt) { const n = document.createElement('div'); n.className = 'msg__note'; n.textContent = txt; log.append(n); pop(n); scrollLog(); }
+  async function go(id) {
+    const node = CHAT[id];
+    opts.innerHTML = '';
+    if (node.note && !node.them) { note(node.note); await wait(500); return go(node.next); }
+    if (node.note) { note(node.note); await wait(600); }
+    const ty = document.createElement('div'); ty.className = 'typing'; ty.innerHTML = '<i></i><i></i><i></i>';
+    log.append(ty); scrollLog();
+    if (G) G.to(ty.children, { y: -4, duration: .3, yoyo: true, repeat: 3, stagger: .1 });
+    await wait(900);
+    ty.remove();
+    bubble('them', ...node.them);
+    say(node.them[0]);
+    if (node.after) { await wait(500); note(node.after); }
+    if (node.fin) {
+      const b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button'; b.innerHTML = '<b>Пройти ещё раз ↻</b><small>Попробуй другие ответы</small>';
+      b.addEventListener('click', () => { log.innerHTML = ''; go('start'); });
+      opts.append(b);
+      return;
+    }
+    node.opts.forEach(([tr, ru, next]) => {
+      const b = document.createElement('button');
+      b.className = 'opt'; b.type = 'button';
+      b.innerHTML = `<b${tr.startsWith('(') ? '' : ' lang="tr"'}>${esc(tr)}</b>${ru ? `<small>${esc(ru)}</small>` : ''}`;
+      b.addEventListener('click', () => {
+        if (tr.startsWith('(')) note('*кивает*'); else { bubble('me', tr, ru); say(tr); }
+        opts.innerHTML = '';
+        setTimeout(() => go(next), reduce ? 0 : 500);
+      });
+      opts.append(b);
+    });
+    if (G) G.from(opts.children, { x: 30, duration: .35, stagger: .06, ease: 'back.out(2)' });
+    scrollLog();
+  }
+  $('#chatGo').addEventListener('click', () => { log.innerHTML = ''; go('start'); });
+  if (G) G.from('#chatEmpty svg', { scale: .4, rotation: -12, duration: .7, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: chatBox, start: 'top 80%', once: true } });
+
+  /* ---------- 13. шпаргалка ---------- */
+  $$('.post').forEach((p) => p.addEventListener('click', () => { if (G) G.fromTo(p, { rotation: -3, y: -8 }, { rotation: 0, y: 0, duration: .6, ease: 'elastic.out(1, .45)' }); }));
+  if (G) {
+    G.from('.post', { y: 80, rotation: (i) => [-8, 4, 10][i], duration: .8, ease: 'back.out(1.6)', stagger: .12, scrollTrigger: { trigger: '#posts', start: 'top 85%', once: true } });
+    G.from('.punch em', { scale: .5, rotation: -6, duration: .7, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: '.punch', start: 'top 90%', once: true } });
+  }
+
+  /* ---------- нестандартное упражнение: диспетчер переводов ---------- */
+  (async () => {
+    const EX = 'lib.bank.ex4';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    const cardEl = root.querySelector('[data-disp-card]');
+    const countEl = root.querySelector('[data-disp-count]');
+    const statusEl = root.querySelector('[data-disp-status]');
+    const pk = root.querySelector('[data-disp-pk]');
+    const btns = [...root.querySelectorAll('[data-bro]')];
+    const NAMES = { havale: 'HAVALE', fast: 'FAST', eft: 'EFT' };
+    const { items } = await AlternaKit.exercise(EX);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      cardEl.textContent = items[i].situation;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      btns.forEach((b) => b.classList.remove('is-hit', 'is-miss'));
+      root.querySelectorAll('[data-lane]').forEach((p) => p.classList.remove('is-on'));
+      pk.setAttribute('cx', 76); pk.setAttribute('cy', 60);
+      if (G) G.fromTo(cardEl, { rotationX: 70, y: 10 }, { rotationX: 0, y: 0, duration: .5, ease: 'back.out(2)' });
+      t0 = performance.now(); locked = false;
+    }
+    function fly(lane) {
+      const path = root.querySelector(`[data-lane="${lane}"]`);
+      path.classList.add('is-on');
+      const L = path.getTotalLength();
+      const st = { p: 0 };
+      const put = () => { const pt = path.getPointAtLength(L * st.p); pk.setAttribute('cx', pt.x); pk.setAttribute('cy', pt.y); };
+      if (G) G.to(st, { p: 1, duration: .7, ease: 'power2.inOut', onUpdate: put }); else { st.p = 1; put(); }
+    }
+    function pick(bro) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const item = items[i];
+      const ok = bro === item.answer;
+      if (ok) correct++;
+      root.querySelector(`[data-bro="${bro}"]`).classList.add(ok ? 'is-hit' : 'is-miss');
+      if (!ok) root.querySelector(`[data-bro="${item.answer}"]`).classList.add('is-hit');
+      fly(item.answer);
+      statusEl.textContent = ok ? `Верно: ${NAMES[item.answer]}. ${item.explanation}` : `Здесь нужен ${NAMES[item.answer]}. ${item.explanation}`;
+      AlternaTracker.answer({ exerciseId: EX, itemId: item.id, correct: ok, answer: bro, timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          cardEl.textContent = `Доставлено: ${correct} из ${items.length}`;
+          countEl.textContent = 'готово';
+          if (G) G.fromTo(cardEl, { scale: .9 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' });
+        }
+      }, reduce ? 300 : 1400);
+    }
+    btns.forEach((b) => b.addEventListener('click', () => pick(b.dataset.bro)));
+    root.addEventListener('keydown', (e) => { const k = { 1: 'havale', 2: 'fast', 3: 'eft' }[e.key]; if (k) pick(k); });
+    AlternaKit.registerSolver(EX, async () => {
+      for (const item of items.slice(i)) { pick(item.answer); await new Promise((r) => setTimeout(r, reduce ? 320 : 1420)); }
+    });
+    show();
+  })();
+
+  /* ---------- свой скроллбар: номерок очереди ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.sb__track', bar), thumb = $('#sbThumb');
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'sb__mark'; b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, k) => b.style.setProperty('--at', Math.min(1, secs[k].offsetTop / maxScroll()).toFixed(4)));
+  let lastN = -1;
+  const progress = () => {
+    const p = Math.min(1, scrollY / maxScroll());
+    bar.style.setProperty('--p', p.toFixed(4));
+    const n = Math.round((1 - p) * 12);
+    if (n !== lastN) {
+      lastN = n;
+      thumb.textContent = n > 0 ? `sıra ${n}` : 'gişe ✓';
+      if (G) G.fromTo(thumb, { scale: .85 }, { scale: 1, duration: .3, ease: 'back.out(3)' });
+    }
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (G) G.fromTo(m, { scale: 1.6 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' });
+  });
+  layout(); progress();
+
+  /* ---------- ачивка: карта выезжает, чип блестит, печать «готово» ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.ring'), { strokeDashoffset: 302 }, { strokeDashoffset: 0, duration: .9, ease: 'power2.out' }, .9)
+      .from(b.querySelector('.card'), { x: -40, rotation: -14, duration: .6, ease: 'back.out(2)', transformOrigin: '50% 50%' }, 1)
+      .fromTo(b.querySelector('.chipb'), { fill: '#d8d8d8' }, { fill: '#00ffcc', duration: .25, yoyo: true, repeat: 1 }, 1.4)
+      .from(b.querySelector('.stamp'), { scale: 2.4, rotation: 30, duration: .5, ease: 'back.out(3)', transformOrigin: '86px 80px' }, 1.5);
+  });
+});
+</script>
+</body>
+</html>
