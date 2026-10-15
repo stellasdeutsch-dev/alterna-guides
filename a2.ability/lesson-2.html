@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a2.ability">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="2">
+<title>Могу / не могу: -(y)Abil, -(y)AmA · урок 2</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  /* Монохромная фотография, туман, узкий гротеск капсом, неоново-жёлтый акцент, [ скобки ] */
+  :root {
+    --paper: #e8e8e4;
+    --paper2: #f4f4f1;
+    --ink: #0c0c0c;
+    --ink2: #1b1b19;
+    --mute: #5d5d59;
+    --line: rgba(12, 12, 12, .16);
+    --y: #f6f10b;
+    --red: #d8402f;
+    --ok: #3c8a2a;
+    --display: "Oswald", "Arial Narrow", "sans-serif-condensed", "Roboto Condensed", "Avenir Next Condensed", "Helvetica Neue", Arial, sans-serif;
+    --ak-bg: #fbfbf8;
+    --ak-surface: #f1f1ed;
+    --ak-ink: #0c0c0c;
+    --ak-muted: #5d5d59;
+    --ak-line: rgba(12, 12, 12, .16);
+    --ak-accent: #0c0c0c;
+    --ak-accent-ink: #f6f10b;
+    --ak-accent-soft: #f6f10b;
+    --ak-radius: 4px;
+    --ak-radius-sm: 3px;
+    --ak-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --ak-font-display: var(--display);
+    --ease: cubic-bezier(.2, .8, .2, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+  body {
+    margin: 0; color: var(--ink); background-color: var(--paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.07'/%3E%3C/svg%3E");
+    font: 400 var(--ak-text)/1.6 var(--ak-font); overflow-x: clip;
+  }
+  main { padding: 0 16px calc(64px + env(safe-area-inset-bottom)); }
+  section { max-width: 760px; margin: 0 auto; padding: clamp(56px, 10vw, 96px) 0 0; position: relative; }
+  p { margin: 0 0 12px; max-width: 65ch; }
+  h1, h2, h3, .ab-disp { font-family: var(--display); font-stretch: condensed; text-transform: uppercase; font-weight: 500; letter-spacing: -.005em; line-height: .95; margin: 0; }
+  h2 { font-size: clamp(32px, 8.6vw, 72px); margin-bottom: 16px; }
+  h2 .y { background: var(--y); padding: 0 .12em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  h3 { font-size: 22px; margin-bottom: 10px; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  button { font: inherit; color: inherit; }
+  .ab-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; border-top: 1px solid var(--line); padding-top: 10px; margin-bottom: 20px; }
+  .ab-num { font: 500 14px/1 var(--display); letter-spacing: .05em; }
+  .ab-lbl { font: 600 11px/1.35 var(--ak-font); text-transform: uppercase; letter-spacing: .05em; color: var(--mute); }
+  .ab-kicker { font-size: 18px; line-height: 1.5; color: var(--ink2); }
+  .tr { font-weight: 700; }
+  [data-say] { cursor: pointer; }
+  .ak-speaking { background: var(--y) !important; color: var(--ink) !important; }
+
+  /* кнопки в скобках */
+  .ab-br { display: inline-flex; align-items: center; justify-content: center; gap: .5em; min-height: 44px; padding: 0 .5em; border: 0; background: none; cursor: pointer;
+    font: 500 16px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; color: var(--ink); white-space: nowrap; }
+  .ab-br::before { content: "["; translate: 0 0; transition: translate .3s var(--ease); }
+  .ab-br::after { content: "]"; translate: 0 0; transition: translate .3s var(--ease); }
+  @media (hover: hover) { .ab-br:hover::before { translate: -5px 0; } .ab-br:hover::after { translate: 5px 0; } }
+  .ab-br.is-on { background: var(--ink); color: var(--y); }
+  .ab-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+
+  /* карточки */
+  .ab-card { background: var(--paper2); border: 1px solid var(--line); border-radius: 3px; padding: clamp(16px, 4vw, 26px); margin: 16px 0; position: relative; }
+  .ab-card--ink { background: var(--ink); color: #f1f1ee; border-color: var(--ink); }
+  .ab-card--ink .ab-lbl { color: #a5a5a0; }
+  .ab-card--y { background: var(--y); border-color: var(--y); }
+  .ab-card ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .ab-card li { padding-left: 22px; position: relative; }
+  .ab-card li::before { content: "—"; position: absolute; left: 0; color: var(--mute); }
+  .ab-card--ink li::before { color: var(--y); }
+
+  /* кирпичи формы */
+  .ab-bricks { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 4px; min-height: 70px; margin: 10px 0; }
+  .ab-b { display: inline-block; padding: 8px 10px; font: 500 clamp(22px, 6.4vw, 34px)/1 var(--display); border: 2px solid var(--ink); background: #fff; color: var(--ink); border-radius: 2px; }
+  .ab-b.s { background: var(--ink); color: #f1f1ee; }
+  .ab-b.d { background: var(--ink); color: var(--y); }
+  .ab-b.y { border-style: dashed; background: transparent; }
+  .ab-b.k { background: var(--y); }
+  .ab-b.n { background: var(--red); border-color: var(--red); color: #fff; }
+  .ab-b.t { background: #d4d4cf; }
+  .ab-b.q { border-style: dotted; background: var(--paper2); }
+  .ab-b.ghost { opacity: .35; text-decoration: line-through; }
+  .ab-word { text-align: center; font: 500 clamp(28px, 8vw, 48px)/1.05 var(--display); overflow-wrap: anywhere; }
+  .ab-word small { display: block; font: 400 15px/1.4 var(--ak-font); color: var(--mute); text-transform: none; margin-top: 6px; }
+
+  /* hero */
+  .ab-hero { margin: 0 -16px; padding: 0; max-width: none; min-height: min(100svh, 900px); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; }
+  .ab-hero__scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .ab-hero__in { position: relative; padding: 64px 16px 124px; max-width: 760px; margin: 0 auto; width: 100%; }
+  .ab-hero h1 { font-size: clamp(40px, 8.6vw, 104px); color: #fff; text-shadow: 0 2px 30px rgba(0,0,0,.25); }
+  .ab-ln { display: block; overflow: hidden; padding-bottom: .04em; }
+  .ab-ln > span { display: inline-block; animation: abUp 1s var(--ease) both; }
+  .ab-ln:nth-child(2) > span { animation-delay: .12s; }
+  .ab-ln:nth-child(3) > span { animation-delay: .24s; }
+  @keyframes abUp { from { transform: translateY(105%) rotate(4deg); } to { transform: none; } }
+  .ab-tags { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 16px; }
+  .ab-tags span { font: 600 11px/1 var(--ak-font); letter-spacing: .06em; text-transform: uppercase; background: var(--paper2); padding: 6px 8px; }
+  .ab-hero__sub { color: #fff; font-size: 17px; max-width: 34ch; margin-top: 14px; text-shadow: 0 1px 12px rgba(0,0,0,.45); }
+
+  /* история */
+  .ab-story p { font-size: 17px; }
+  .ab-story .short { font: 500 clamp(24px, 6vw, 34px)/1.1 var(--display); text-transform: uppercase; margin: 18px 0 12px; }
+  .ab-story .end { font-style: italic; }
+  .ab-guess { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0 16px; }
+  .ab-guess button { min-height: 56px; border: 2px solid var(--ink); background: #fff; border-radius: 2px; cursor: pointer; font: 600 17px/1.2 var(--ak-font); padding: 8px; }
+  .ab-guess button small { display: block; font-weight: 400; font-size: 13px; color: var(--mute); }
+  .ab-guess button.is-pick { background: var(--y); }
+  .ab-more { display: none; }
+  .ab-more.is-open { display: block; }
+  .ab-board { width: 100%; max-width: 520px; height: auto; margin: 6px auto 18px; display: block; }
+
+  /* пошаговая сборка */
+  .ab-stepnote { min-height: 3.2em; text-align: center; color: var(--ink2); margin: 6px auto 8px; max-width: 46ch; }
+  .ab-step-ctrl { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; }
+  .ab-card--ink .ab-stepnote { color: #e8e8e4; }
+  .ab-card--y .ak-say__btn { background: var(--ink); color: var(--y); }
+  .ab-dots { display: flex; justify-content: center; gap: 6px; margin-top: 6px; }
+  .ab-dots i { width: 22px; height: 4px; background: var(--line); }
+  .ab-dots i.on { background: var(--ink); }
+  .ab-ex3 { display: grid; gap: 6px; margin: 12px 0; }
+  .ab-ex3 button { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 2px 10px; border: 1px solid var(--line); background: #fff; padding: 10px 14px; text-align: left; cursor: pointer; min-height: 48px; border-radius: 2px; }
+  .ab-ex3 .w { font: 500 24px/1.1 var(--display); }
+  .ab-bil { background: var(--y); display: inline-block; padding: 0 2px; }
+  .ab-ex3 small { color: var(--mute); }
+  .ab-reveal-q { display: none; }
+  .ab-reveal-q.is-open { display: block; }
+
+  /* приказ ↔ просьба */
+  .ab-switch { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--ink); border-radius: 2px; overflow: hidden; margin: 10px 0; }
+  .ab-switch button { min-height: 46px; border: 0; background: #fff; cursor: pointer; font: 500 16px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; }
+  .ab-switch button[aria-pressed="true"] { background: var(--ink); color: var(--y); }
+  .ab-morph { perspective: 600px; text-align: center; padding: 18px 8px; }
+  .ab-morph__w { display: inline-block; font: 500 clamp(30px, 8vw, 50px)/1.05 var(--display); }
+  .ab-morph__ru { display: block; color: var(--mute); margin-top: 8px; }
+  .ab-says { display: grid; gap: 8px; grid-template-columns: 1fr; }
+  .ab-say { display: block; text-align: left; border: 1px solid var(--line); background: #fff; padding: 12px 14px 12px 46px; border-radius: 2px; cursor: pointer; position: relative; min-height: 52px; }
+  .ab-say svg { position: absolute; left: 12px; top: 14px; width: 22px; height: 22px; }
+  .ab-say b { display: block; font-size: 17px; }
+  .ab-say small { color: var(--mute); }
+
+  /* bil ломается */
+  .ab-break { text-align: center; }
+  .ab-break .ab-bricks { min-height: 84px; }
+  .ab-table { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 14px 0; }
+  .ab-table button { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; border: 1px solid var(--line); background: #fff; padding: 10px 12px; cursor: pointer; min-height: 48px; border-radius: 2px; text-align: left; }
+  .ab-table button span:first-child { color: var(--mute); font-size: 14px; }
+  .ab-table button b { font: 500 19px/1.1 var(--display); overflow-wrap: anywhere; }
+  .ab-table button.is-y b { box-shadow: inset 0 -.45em 0 var(--y); }
+  .ab-flips { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0; }
+  .ab-flip { position: relative; height: 150px; perspective: 900px; border: 0; padding: 0; background: none; cursor: pointer; width: 100%; }
+  .ab-flip__in { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .ab-flip__f, .ab-flip__b { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 14px; border-radius: 3px; text-align: center; }
+  .ab-flip__f { background: var(--ink); color: #f1f1ee; }
+  .ab-flip__b { background: var(--y); color: var(--ink); transform: rotateY(180deg); }
+  .ab-flip .w { font: 500 clamp(28px, 8vw, 40px)/1 var(--display); }
+  .ab-flip .w u { text-decoration: none; background: var(--y); color: var(--ink); padding: 0 3px; }
+  .ab-flip .hint { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; opacity: .7; margin-top: 8px; }
+  .ab-flip.is-on .ab-flip__in { transform: rotateY(180deg); }
+
+  /* конструктор */
+  .ab-lab { display: grid; gap: 16px; }
+  .ab-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ab-chip { min-height: 44px; padding: 6px 12px; border: 1px solid var(--ink); background: #fff; border-radius: 2px; cursor: pointer; display: inline-flex; flex-direction: column; align-items: flex-start; justify-content: center; line-height: 1.15; }
+  .ab-chip small { font-size: 12px; color: var(--mute); }
+  .ab-chip.is-on { background: var(--ink); color: var(--y); }
+  .ab-chip.is-on small { color: #cfcfca; }
+  .ab-card--ink .ab-chip { color: var(--ink); border-color: #f1f1ee; }
+  .ab-card--ink .ab-chip.is-on { background: var(--y); color: var(--ink); border-color: var(--y); }
+  .ab-out { background: var(--paper2); border: 1px solid var(--line); padding: 16px; border-radius: 3px; }
+  .ab-out__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .ab-play { width: 46px; height: 46px; border-radius: 50%; border: 0; background: var(--ink); color: var(--y); display: grid; place-items: center; cursor: pointer; flex: none; }
+  .ab-play svg { width: 20px; height: 20px; }
+  .ab-why { display: grid; gap: 6px; margin-top: 12px; font-size: 15px; }
+  .ab-why div { border-left: 3px solid var(--y); padding-left: 10px; }
+  .ab-conj { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 12px; }
+  .ab-conj button { display: flex; justify-content: space-between; gap: 6px; border: 0; border-bottom: 1px solid var(--line); background: none; padding: 8px 4px; cursor: pointer; min-height: 44px; align-items: center; text-align: left; }
+  .ab-conj button span:first-child { color: var(--mute); font-size: 13px; }
+  .ab-conj button span:last-child { font-weight: 600; overflow-wrap: anywhere; }
+  .ab-conj button.is-cur { background: var(--y); }
+  .ab-lbl-row { display: block; margin-bottom: 8px; }
+  @media (min-width: 900px) { .ab-lab { grid-template-columns: 1fr 1.1fr; align-items: start; } }
+
+  /* сцена — переписка */
+  .ab-phone { background: var(--ink); border-radius: 26px; padding: 14px 10px 12px; max-width: 420px; margin: 12px auto; }
+  .ab-phone__bar { color: #cfcfca; font-size: 13px; text-align: center; padding-bottom: 8px; border-bottom: 1px solid #2c2c29; margin-bottom: 10px; }
+  .ab-chat { display: grid; gap: 8px; min-height: 120px; padding: 0 4px; }
+  .ab-bub { max-width: 86%; padding: 9px 12px; border-radius: 14px; background: #2a2a27; color: #f1f1ee; justify-self: start; }
+  .ab-bub--me { justify-self: end; background: var(--y); color: var(--ink); }
+  .ab-bub small { display: block; font-size: 13px; opacity: .75; }
+  .ab-bub--dots { letter-spacing: 3px; }
+  .ab-replies { display: grid; gap: 6px; margin-top: 10px; }
+  .ab-replies button { min-height: 46px; border: 1px solid #f1f1ee55; background: #1b1b19; color: #f1f1ee; border-radius: 12px; cursor: pointer; padding: 8px 12px; text-align: left; }
+  .ab-replies button small { display: block; color: #b9b9b4; font-size: 13px; }
+
+  /* ловушки */
+  .ab-traps { display: grid; gap: 10px; grid-template-columns: 1fr; }
+  .ab-trap { border: 2px solid var(--ink); background: #fff; border-radius: 3px; padding: 14px; cursor: pointer; text-align: left; position: relative; min-height: 96px; width: 100%; }
+  .ab-trap .bad { font: 500 24px/1.1 var(--display); position: relative; display: inline-block; color: var(--red); }
+  .ab-trap .bad svg { position: absolute; left: -4px; right: -4px; top: 50%; width: calc(100% + 8px); height: 12px; translate: 0 -50%; overflow: visible; }
+  .ab-trap .good { font: 500 24px/1.1 var(--display); display: none; }
+  .ab-trap .why { display: none; color: var(--mute); font-size: 15px; margin-top: 6px; }
+  .ab-trap.is-open .good, .ab-trap.is-open .why { display: block; }
+  .ab-trap .tap { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--mute); display: block; margin-top: 6px; }
+  .ab-trap.is-open .tap { display: none; }
+
+  /* шпаргалка */
+  .ab-cheat { display: grid; gap: 10px; grid-template-columns: 1fr; }
+  .ab-st { border-top: 4px solid var(--ink); background: var(--paper2); padding: 14px; cursor: pointer; text-align: left; border-left: 0; border-right: 0; border-bottom: 0; width: 100%; }
+  .ab-st .big { font: 500 28px/1 var(--display); margin: 6px 0; display: block; }
+  .ab-st p { margin: 0; font-size: 15px; color: var(--ink2); }
+  .ab-summit { width: 100%; max-width: 560px; height: auto; display: block; margin: 20px auto 0; }
+  .ab-final { font: 500 clamp(24px, 6vw, 36px)/1.1 var(--display); text-transform: uppercase; margin-top: 14px; }
+  @media (min-width: 700px) {
+    .ab-says, .ab-traps, .ab-cheat { grid-template-columns: 1fr 1fr; }
+    .ab-flips { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* нестандартное упражнение: восхождение */
+  .ab-climb svg { width: 100%; height: auto; display: block; max-height: 150px; }
+  .ab-climb__task { font-weight: 600; text-align: center; margin: 6px 0; min-height: 1.6em; }
+  .ab-climb__word { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; margin: 10px 0; }
+  .ab-climb__word .slot { min-width: 54px; text-align: center; color: var(--mute); }
+  .ab-climb__opts { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; }
+  .ab-climb__opts button { min-height: 48px; min-width: 76px; border: 2px solid var(--ink); background: #fff; border-radius: 2px; cursor: pointer; font: 500 20px/1 var(--display); padding: 6px 12px; }
+  .ab-climb__opts button small { font: 400 12px/1 var(--ak-font); color: var(--mute); margin-left: 6px; }
+  .ab-climb__opts button:disabled { opacity: .4; text-decoration: line-through; cursor: default; }
+  .ab-climb__status { min-height: 3em; text-align: center; color: var(--ink2); margin: 10px 0 0; }
+
+  /* свой скроллбар: путник идёт к вершине. Телефон — полоска сверху, от 768 px — справа снизу вверх */
+  .sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 30px; pointer-events: none; }
+  .sb__track { position: absolute; left: 0; right: 0; top: 0; height: 30px; pointer-events: auto; touch-action: none; }
+  .sb__track::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: rgba(12,12,12,.14); }
+  .sb__fill { position: absolute; left: 0; top: 0; height: 4px; width: calc(var(--p, 0) * 100%); background: var(--ink); }
+  .sb__man { position: absolute; top: 4px; left: clamp(10px, calc(var(--p, 0) * 100%), calc(100% - 10px)); translate: -50% 0; width: 18px; height: 22px; }
+  .sb__flag { position: absolute; right: 2px; top: 4px; width: 14px; height: 16px; }
+  .sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: -12px; translate: -50% 0; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .sb__mark::after { content: ""; position: absolute; left: 10px; top: 10px; width: 8px; height: 8px; background: var(--paper); box-shadow: inset 0 0 0 2px var(--ink); transform: rotate(45deg); }
+  .sb__mark.is-read::after { background: var(--y); }
+  @media (min-width: 768px) {
+    .sb { left: auto; right: 12px; top: 50%; translate: 0 -50%; width: 30px; height: min(62dvh, 540px); }
+    .sb__track { left: 0; right: 0; top: 0; bottom: 0; height: auto; width: 30px; }
+    .sb__track::before { left: 13px; right: auto; top: 0; bottom: 0; width: 4px; height: auto; }
+    .sb__fill { left: 13px; top: auto; bottom: 0; width: 4px; height: calc(var(--p, 0) * 100%); }
+    .sb__man { left: 6px; top: auto; bottom: clamp(0px, calc(var(--p, 0) * 100% - 11px), calc(100% - 22px)); translate: 0 0; }
+    .sb__flag { right: auto; left: 15px; top: -18px; }
+    .sb__mark { left: 1px; top: auto; bottom: calc(var(--at, 0) * 100%); translate: 0 50%; }
+  }
+
+  .ab-rv { will-change: transform; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  /* урок 2: лес в тумане, лента времени, измеритель уверенности */
+  .ab-tree { fill: #6f6f6b; }
+  .ab-tree--near { fill: #0c0c0c; }
+  .ab-callbox { display: flex; align-items: center; gap: 12px; background: var(--ink); color: #f1f1ee; border-radius: 18px; padding: 12px 14px; max-width: 420px; margin: 10px 0 16px; }
+  .ab-callbox svg { width: 40px; height: 40px; flex: none; }
+  .ab-callbox__txt { flex: 1; font-size: 15px; }
+  .ab-callbox__txt b { display: block; font-size: 17px; }
+  .ab-callbox button { min-height: 44px; border: 0; border-radius: 22px; background: var(--y); color: var(--ink); padding: 0 14px; cursor: pointer; font-weight: 700; }
+  .ab-time { width: 100%; height: auto; display: block; margin: 6px 0; }
+  .ab-range { width: 100%; accent-color: var(--ink); min-height: 44px; }
+  .ab-range-lbl { display: flex; justify-content: space-between; font-size: 13px; color: var(--mute); }
+  .ab-vs { display: grid; grid-template-columns: 1fr; gap: 10px; margin: 14px 0; }
+  .ab-vs button { border: 2px solid var(--ink); background: #fff; border-radius: 3px; padding: 14px; cursor: pointer; text-align: left; min-height: 96px; }
+  .ab-vs button.is-on { background: var(--y); }
+  .ab-vs .w { font: 500 26px/1.1 var(--display); display: block; }
+  .ab-vs small { color: var(--ink2); }
+  .ab-promise { margin: 14px 0; }
+  .ab-promise__out { text-align: center; padding: 14px 6px; }
+  .ab-gauge svg { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto; }
+  .ab-gauge__read { text-align: center; min-height: 3.6em; }
+  .ab-gauge__read .w { font: 500 clamp(26px, 7vw, 38px)/1.05 var(--display); display: block; }
+  .ab-gauge__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
+  .ab-gauge__btns button { min-height: 52px; border: 1px solid var(--ink); background: #fff; border-radius: 2px; cursor: pointer; padding: 6px 8px; }
+  .ab-gauge__btns button.is-on { background: var(--ink); color: var(--y); }
+  .ab-gauge__btns small { display: block; font-size: 12px; color: var(--mute); }
+  .ab-gauge__btns button.is-on small { color: #cfcfca; }
+  .ab-meter__sit { font-weight: 600; text-align: center; min-height: 3em; margin: 8px 0; }
+  .ab-meter__pick { text-align: center; font: 500 26px/1.1 var(--display); min-height: 1.2em; }
+  .ab-meter__ctrl { display: flex; justify-content: center; margin-top: 8px; }
+  .ab-meter__ctrl button { min-height: 48px; padding: 0 22px; border: 0; background: var(--ink); color: var(--y); border-radius: 2px; cursor: pointer; font: 500 18px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; }
+  .ab-meter__status { min-height: 3em; text-align: center; color: var(--ink2); margin: 10px 0 0; }
+  @media (min-width: 700px) { .ab-vs { grid-template-columns: 1fr 1fr; } .ab-gauge__btns { grid-template-columns: repeat(4, 1fr); } }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ============ КРЮЧОК ============ -->
+  <section data-section="story" data-words="63" class="ab-story">
+    <div class="ab-hero">
+      <svg class="ab-hero__scene" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="abSky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9f9f9b"/><stop offset=".6" stop-color="#d0d0cc"/><stop offset="1" stop-color="#e8e8e4"/></linearGradient>
+          <radialGradient id="abFog2" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="1440" height="900" fill="url(#abSky2)"/>
+        <g id="abTreesFar"></g>
+        <ellipse class="ab-fog" cx="400" cy="640" rx="560" ry="110" fill="url(#abFog2)"/>
+        <g id="abTreesNear"></g>
+        <ellipse class="ab-fog ab-fog--2" cx="1100" cy="760" rx="520" ry="100" fill="url(#abFog2)"/>
+        <rect y="860" width="1440" height="40" fill="#0c0c0c"/>
+      </svg>
+      <div class="ab-hero__in">
+        <div class="ab-tags"><span>A2 · Измир</span><span>урок 2 из 2</span><span>9 минут</span></div>
+        <h1><span class="ab-ln"><span>Смог.</span></span><span class="ab-ln"><span>Не смог.</span></span><span class="ab-ln"><span>Может быть.</span></span></h1>
+        <p class="ab-hero__sub">Прошлое, «сейчас не могу», «могу и не» — и как -abil умеет гадать.</p>
+      </div>
+    </div>
+
+    <div class="ab-head"><span class="ab-num">[ 00 ]</span><span class="ab-lbl">Сосед не отвечает</span></div>
+    <p>Сосед по общежитию, Эмре, не берёт трубку. Звонишь — тишина.</p>
+    <div class="ab-callbox">
+      <svg viewBox="0 0 40 40" aria-hidden="true" class="ab-phone-ico"><rect x="11" y="3" width="18" height="34" rx="4" fill="#f6f10b"/><rect x="14" y="8" width="12" height="20" fill="#0c0c0c"/><circle cx="20" cy="32" r="2" fill="#0c0c0c"/></svg>
+      <span class="ab-callbox__txt"><b lang="tr">Emre</b><span data-calls data-ui>Нет ответа</span></span>
+      <button type="button" data-call data-ui>Позвонить</button>
+    </div>
+    <div class="ab-more" data-more>
+      <p>Пишешь общему другу: <a-say>Emre nerede?</a-say></p>
+      <p>Друг отвечает: <a-say>Uyuyor olabilir.</a-say> — «Может, спит».</p>
+      <p>Через три часа друг тоже перестал отвечать.</p>
+      <p>Эмре проснулся в шесть вечера: <a-say>Ne oldu?</a-say></p>
+      <p class="short">Ничего. Мы тренировали -abil.</p>
+      <p class="end">Сегодня — «смог», «не смог», «сейчас не могу» и «может быть».</p>
+    </div>
+  </section>
+
+  <!-- ============ ПРОШЛОЕ ============ -->
+  <section data-section="past" data-words="48">
+    <div class="ab-head"><span class="ab-num">[ 01 ]</span><span class="ab-lbl">Смог · не смог</span></div>
+    <h2>Вчера: <span class="y">ir → di</span></h2>
+    <p>Прошлое строится так же. Только вместо <b lang="tr">ir</b> встаёт <b lang="tr">di</b>. А в «не смог» <b lang="tr">bil</b> снова выпадает.</p>
+    <p>В русском «смог» — тоже прошлое от «могу». Логика та же: меняется время, а смысл стоит на месте. Лица — как в обычном прошлом.</p>
+    <div class="ab-switch" role="group" aria-label="Смог или не смог" data-ui>
+      <button type="button" aria-pressed="true" data-pmode="bildi">Смог</button>
+      <button type="button" aria-pressed="false" data-pmode="amadi">Не смог</button>
+    </div>
+    <div class="ab-card">
+      <svg class="ab-time" viewBox="0 0 520 70" aria-hidden="true">
+        <line x1="20" y1="40" x2="500" y2="40" stroke="#0c0c0c" stroke-width="3"/>
+        <path d="M500 40 L488 32 L488 48Z" fill="#0c0c0c"/>
+        <circle class="ab-time__dot" cx="140" cy="40" r="11" fill="#f6f10b" stroke="#0c0c0c" stroke-width="3"/>
+        <text x="140" y="18" text-anchor="middle" font-family="Arial Narrow, Arial" font-size="17" fill="#0c0c0c">dün</text>
+        <text x="380" y="18" text-anchor="middle" font-family="Arial Narrow, Arial" font-size="17" fill="#5d5d59">bugün</text>
+        <line x1="380" y1="30" x2="380" y2="50" stroke="#5d5d59" stroke-width="3"/>
+      </svg>
+      <div class="ab-bricks" data-past-b lang="tr"></div>
+      <div class="ab-word" data-past-w lang="tr"></div>
+      <p style="text-align:center;color:var(--mute);margin:4px 0 8px" data-past-ru data-ui></p>
+      <label class="ab-lbl" for="abPastP" data-ui>Лицо</label>
+      <input class="ab-range" id="abPastP" type="range" min="0" max="5" step="1" value="0" data-past-p>
+      <div class="ab-range-lbl" lang="tr"><span>ben</span><span>sen</span><span>o</span><span>biz</span><span>siz</span><span>onlar</span></div>
+    </div>
+    <p>Самая нужная фраза недели: <a-say>Dün gelemedim, özür dilerim.</a-say> — «Вчера не смог прийти, извини».</p>
+  </section>
+
+  <!-- ============ СЕЙЧАС ============ -->
+  <section data-section="now" data-words="46">
+    <div class="ab-head"><span class="ab-num">[ 02 ]</span><span class="ab-lbl">Сейчас не могу · уже получается</span></div>
+    <h2>Сейчас: <span class="y">yor</span></h2>
+    <p>Телефон звонит на встрече. Ты не можешь говорить именно сейчас. Это <b lang="tr">-yor</b>.</p>
+    <div class="ab-card ab-card--ink ab-break">
+      <div class="ab-bricks" data-now-b lang="tr"></div>
+      <p class="ab-stepnote" data-now-note data-ui></p>
+      <div class="ab-step-ctrl" data-ui>
+        <button type="button" class="ab-br" style="color:var(--y)" data-now-go>Добавить yor</button>
+        <button type="button" class="ab-br" style="color:#f1f1ee" data-now-back>Сначала</button>
+      </div>
+    </div>
+    <p>Перед <b lang="tr">yor</b> гласная <b lang="tr">a/e</b> превращается в <b lang="tr">ı/i</b>. Сравни две формы:</p>
+    <div class="ab-vs">
+      <button type="button" data-vs data-say="Konuşamam."><span class="w" lang="tr">konuşamam</span><small>Не могу говорить вообще. Или: не смогу.</small></button>
+      <button type="button" data-vs data-say="Şu an konuşamıyorum."><span class="w" lang="tr">konuşamıyorum</span><small>Не могу говорить прямо сейчас.</small></button>
+    </div>
+    <p>А с плюсом — «уже получается»: <a-say>Artık Türkçe konuşabiliyorum!</a-say> — «Я уже могу говорить по-турецки!»</p>
+  </section>
+
+  <!-- ============ МОГУ НЕ ============ -->
+  <section data-section="maybe" data-words="47">
+    <div class="ab-head"><span class="ab-num">[ 03 ]</span><span class="ab-lbl">Могу и не · может, не</span></div>
+    <h2>Могу <span class="y">и не</span></h2>
+    <p>Третья похожая форма. Отрицание стоит до <b lang="tr">-yebil</b>, а не вместо него. Получается «могу и не прийти». Вежливый способ ничего не обещать.</p>
+    <div class="ab-flips">
+      <button type="button" class="ab-flip" data-flip data-say="Gelebilirim."><span class="ab-flip__in"><span class="ab-flip__f"><span class="w" lang="tr">gel<u>ebil</u>irim</span><span class="hint" data-ui>нажми ↻</span></span><span class="ab-flip__b"><span class="w">Могу прийти</span><span>Или «может, приду».</span></span></span></button>
+      <button type="button" class="ab-flip" data-flip data-say="Gelemem."><span class="ab-flip__in"><span class="ab-flip__f"><span class="w" lang="tr">gel<u>eme</u>m</span><span class="hint" data-ui>нажми ↻</span></span><span class="ab-flip__b"><span class="w">Не могу прийти</span><span>bil исчез.</span></span></span></button>
+      <button type="button" class="ab-flip" data-flip data-say="Gelmeyebilirim."><span class="ab-flip__in"><span class="ab-flip__f"><span class="w" lang="tr">gel<u>me</u>yebilirim</span><span class="hint" data-ui>нажми ↻</span></span><span class="ab-flip__b"><span class="w">Могу не прийти</span><span>«Может, не приду».</span></span></span></button>
+    </div>
+    <div class="ab-card ab-promise">
+      <span class="ab-lbl">Насколько ты обещаешь прийти? Двигай</span>
+      <input class="ab-range" type="range" min="0" max="2" step="1" value="0" data-promise aria-label="Насколько обещаешь">
+      <div class="ab-range-lbl" data-ui><span>точно да</span><span>не знаю</span><span>точно нет</span></div>
+      <div class="ab-promise__out"><span class="ab-word" data-promise-w lang="tr">Gelebilirim.</span><span style="display:block;color:var(--mute)" data-promise-ru data-ui>Могу прийти.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ МОЖЕТ БЫТЬ ============ -->
+  <section data-section="guess" data-words="45">
+    <div class="ab-head"><span class="ab-num">[ 04 ]</span><span class="ab-lbl">Может быть · не может быть</span></div>
+    <h2>-abil <span class="y">гадает</span></h2>
+    <p>У -abil есть ещё одна работа — догадка. <span lang="tr">olmak</span> + <span lang="tr">abil</span> = <a-say>olabilir</a-say>, «может быть». Нажми на фразу и смотри на стрелку.</p>
+    <p>Русское «может быть» — тоже от «мочь». Турецкий думает так же. Чем правее стрелка, тем сильнее уверенность.</p>
+    <div class="ab-card ab-gauge">
+      <svg viewBox="0 0 400 230" aria-hidden="true">
+        <path d="M40 200 A160 160 0 0 1 360 200" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="22"/>
+        <path class="ab-gauge__arc" d="M40 200 A160 160 0 0 1 360 200" fill="none" stroke="#0c0c0c" stroke-width="22" stroke-dasharray="503" stroke-dashoffset="503"/>
+        <text x="40" y="226" font-family="Arial Narrow, Arial" font-size="14" fill="#5d5d59">0%</text>
+        <text x="342" y="226" font-family="Arial Narrow, Arial" font-size="14" fill="#5d5d59">100%</text>
+        <g class="ab-gauge__needle"><line x1="200" y1="200" x2="200" y2="62" stroke="#0c0c0c" stroke-width="4"/><circle cx="200" cy="200" r="11" fill="#0c0c0c"/><circle cx="200" cy="200" r="4" fill="#f6f10b"/></g>
+      </svg>
+      <div class="ab-gauge__read" data-ui><span class="w" data-g-w lang="tr">Evde olabilir.</span><span data-g-ru>Может, он дома.</span></div>
+      <div class="ab-gauge__btns" data-g-btns></div>
+    </div>
+    <p>Одним словом — тоже работает: <a-say>Olabilir.</a-say> — «Возможно». <a-say>Olamaz!</a-say> — «Не может быть!»</p>
+  </section>
+
+  <!-- ============ КОНСТРУКТОР ============ -->
+  <section data-section="lab" data-words="16">
+    <div class="ab-head"><span class="ab-num">[ 05 ]</span><span class="ab-lbl">8 глаголов · 5 режимов · 6 лиц</span></div>
+    <h2>Конструктор <span class="y">240 форм</span></h2>
+    <p>Прошлое, «сейчас» и «могу и не». Выбирай — кирпичи падают, внизу объяснение.</p>
+    <div class="ab-lab" data-ui>
+      <div>
+        <span class="ab-lbl ab-lbl-row">Глагол</span>
+        <div class="ab-chips" data-lab-v lang="tr"></div>
+        <span class="ab-lbl ab-lbl-row" style="margin-top:14px">Режим</span>
+        <div class="ab-chips" data-lab-m></div>
+        <span class="ab-lbl ab-lbl-row" style="margin-top:14px">Лицо</span>
+        <div class="ab-chips" data-lab-p lang="tr"></div>
+      </div>
+      <div class="ab-out">
+        <div class="ab-out__top"><span class="ab-lbl" data-lab-tag>Сборка</span>
+          <button type="button" class="ab-play" data-lab-play aria-label="Послушать форму"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="currentColor"/></svg></button></div>
+        <div class="ab-bricks" data-lab-b lang="tr"></div>
+        <div class="ab-word" data-lab-w lang="tr"></div>
+        <p style="text-align:center;color:var(--mute);margin:4px 0 0" data-lab-ru></p>
+        <div class="ab-why" data-lab-why></div>
+        <div class="ab-conj" data-lab-c></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ СЦЕНА ============ -->
+  <section data-section="scene" data-words="38">
+    <div class="ab-head"><span class="ab-num">[ 06 ]</span><span class="ab-lbl">Измир · Каршияка · суббота</span></div>
+    <h2>Сцена: <span class="y">паром</span></h2>
+    <p>Подруга живёт в Каршияке, за заливом. Туда ходит паром. Она зовёт на день рождения. Выбирай ответы.</p>
+    <p>Паром идёт через залив минут двадцать. Как раз успеешь решить: «могу», «может, не приду» или «не смог».</p>
+    <div class="ab-phone">
+      <div class="ab-phone__bar" data-ui>Дениз · в сети</div>
+      <div class="ab-chat" data-chat data-ui aria-live="polite"></div>
+      <div class="ab-replies" data-replies data-ui></div>
+    </div>
+  </section>
+
+  <!-- ============ ЛОВУШКИ ============ -->
+  <section data-section="traps" data-words="29">
+    <div class="ab-head"><span class="ab-num">[ 07 ]</span><span class="ab-lbl">Где спотыкаются все</span></div>
+    <h2>Ещё четыре <span class="y">ловушки</span></h2>
+    <p>Нажми на карточку — увидишь правильную форму и почему.</p>
+    <div class="ab-traps">
+      <button type="button" class="ab-trap" data-trap data-say="Gelemedim."><span class="bad" lang="tr">gelebilmedim<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 L100 4" stroke="#d8402f" stroke-width="3" fill="none" stroke-dasharray="110" stroke-dashoffset="0"/></svg></span><span class="good" lang="tr">gelemedim</span><span class="why">И в прошлом bil выпадает.</span><span class="tap" data-ui>как правильно?</span></button>
+      <button type="button" class="ab-trap" data-trap data-say="Gelemiyorum."><span class="bad" lang="tr">gelemeyorum<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 L100 4" stroke="#d8402f" stroke-width="3" fill="none" stroke-dasharray="110" stroke-dashoffset="0"/></svg></span><span class="good" lang="tr">gelemiyorum</span><span class="why">Перед yor e становится i.</span><span class="tap" data-ui>как правильно?</span></button>
+      <button type="button" class="ab-trap" data-trap data-say="Gitmeyebilirim."><span class="bad" lang="tr">gidmeyebilirim<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 L100 4" stroke="#d8402f" stroke-width="3" fill="none" stroke-dasharray="110" stroke-dashoffset="0"/></svg></span><span class="good" lang="tr">gitmeyebilirim</span><span class="why">После корня согласная m — t остаётся.</span><span class="tap" data-ui>как правильно?</span></button>
+      <button type="button" class="ab-trap" data-trap data-say="Evde olamaz."><span class="bad" lang="tr">Evde olabilmez<svg viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8 L100 4" stroke="#d8402f" stroke-width="3" fill="none" stroke-dasharray="110" stroke-dashoffset="0"/></svg></span><span class="good" lang="tr">Evde olamaz</span><span class="why">«Не может быть» — тоже без bil.</span><span class="tap" data-ui>как правильно?</span></button>
+    </div>
+  </section>
+
+  <!-- ============ ВИДЕО ============ -->
+  <section data-section="video" data-words="14">
+    <div class="ab-head"><span class="ab-num">[ 08 ]</span><span class="ab-lbl">Послушай носителя</span></div>
+    <p>Обрати внимание на прошлое: <span lang="tr">yapabildim, yapamadım</span>. Будущее время в конце — бонус.</p>
+    <a-video yt="ncCRNLOX_2k" start="15" end="200" title="A2 · Yeterlik Fiili Diğer Zamanlarda" channel="Yunus Emre Enstitüsü"></a-video>
+  </section>
+
+  <!-- ============ ПРАКТИКА ============ -->
+  <section data-section="practice" data-words="2">
+    <div class="ab-head"><span class="ab-num">[ 09 ]</span><span class="ab-lbl">Практика</span></div>
+    <a-exercise ref="a2.ability.ex5"></a-exercise>
+    <a-exercise ref="a2.ability.ex6"></a-exercise>
+    <a-exercise ref="a2.ability.ex7"></a-exercise>
+
+    <a-exercise ref="a2.ability.ex8" class="ak-ex ab-gauge">
+      <div class="ak-ex__head"><span class="ak-ex__title">Измеритель уверенности: поставь стрелку</span><span class="ak-ex__count" data-m-count>1 / 4</span></div>
+      <svg viewBox="0 0 400 230" aria-hidden="true">
+        <path d="M40 200 A160 160 0 0 1 360 200" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="22"/>
+        <g font-family="Arial Narrow, Arial" font-size="15" fill="#0c0c0c" text-anchor="middle"><text x="34" y="225">olamaz</text><text x="105" y="70">olmayabilir</text><text x="295" y="70">olabilir</text><text x="366" y="225">Evde.</text></g>
+        <g class="ab-m-needle"><line x1="200" y1="200" x2="200" y2="70" stroke="#0c0c0c" stroke-width="4"/><circle cx="200" cy="200" r="11" fill="#0c0c0c"/><circle cx="200" cy="200" r="4" fill="#f6f10b"/></g>
+      </svg>
+      <p class="ab-meter__sit" data-m-sit></p>
+      <div class="ab-meter__pick" data-m-pick lang="tr"></div>
+      <input class="ab-range" type="range" min="0" max="3" step="1" value="1" data-m-range aria-label="Стрелка измерителя">
+      <div class="ab-meter__ctrl"><button type="button" data-m-check>Проверить</button></div>
+      <p class="ab-meter__status" data-m-status aria-live="polite"></p>
+    </a-exercise>
+  </section>
+
+  <!-- ============ МИНИ-ПРОВЕРКА ============ -->
+  <section data-section="check" data-words="8">
+    <div class="ab-head"><span class="ab-num">[ 10 ]</span><span class="ab-lbl">Мини-проверка</span></div>
+    <h2>Проверь <span class="y">себя</span></h2>
+    <p>Пять вопросов. Шпаргалка ниже — не подглядывай.</p>
+    <a-quiz ref="a2.ability.check2"></a-quiz>
+  </section>
+
+  <!-- ============ ШПАРГАЛКА ============ -->
+  <section data-section="cheat" data-words="57">
+    <div class="ab-head"><span class="ab-num">[ 11 ]</span><span class="ab-lbl">Шпаргалка</span></div>
+    <h2>Вся тема <span class="y">на одном экране</span></h2>
+    <div class="ab-cheat">
+      <button type="button" class="ab-st" data-say="Gelebildim. Gelemedim."><span class="ab-lbl">Смог · не смог</span><span class="big" lang="tr">gelebildim · gelemedim</span><p>Вместо ir — di. В «не смог» bil выпадает.</p></button>
+      <button type="button" class="ab-st" data-say="Gelemiyorum."><span class="ab-lbl">Сейчас не могу</span><span class="big" lang="tr">gelemiyorum</span><p>Перед yor a/e → ı/i. С плюсом — «уже получается».</p></button>
+      <button type="button" class="ab-st" data-say="Gelmeyebilirim."><span class="ab-lbl">Могу и не</span><span class="big" lang="tr">gelmeyebilirim</span><p>Отрицание до -yebil. Ничего не обещаю.</p></button>
+      <button type="button" class="ab-st" data-say="Olabilir. Olamaz."><span class="ab-lbl">Догадка</span><span class="big" lang="tr">olabilir · olamaz</span><p>«Может быть» и «не может быть».</p></button>
+    </div>
+    <svg class="ab-summit" viewBox="0 -40 560 210" aria-hidden="true">
+      <path d="M0 170 L210 40 L280 70 L360 10 L560 170Z" fill="#0c0c0c"/>
+      <g class="ab-sm-flag"><line x1="360" y1="10" x2="360" y2="-30" stroke="#0c0c0c" stroke-width="3"/><path d="M360 -30 L400 -20 L360 -10Z" fill="#f6f10b" stroke="#0c0c0c" stroke-width="2"/></g>
+      <g class="ab-sm-man" transform="translate(120 170)"><circle cx="0" cy="-30" r="6" fill="#f6f10b" stroke="#0c0c0c" stroke-width="2"/><path d="M0 -24 L0 -10 M0 -10 L-6 0 M0 -10 L6 0 M0 -20 L-7 -14 M0 -20 L7 -14" stroke="#f6f10b" stroke-width="3" stroke-linecap="round"/></g>
+    </svg>
+    <p>Эмре не отвечал. <a-say>Uyuyor olabilir.</a-say> — «Может, спит». Так и было: проспал до шести.</p>
+    <p class="ab-final">Могу, не могу, смог, не смог, может быть — теперь это всё твоё.</p>
+  </section>
+
+</main>
+
+<nav class="sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="sb__track">
+    <span class="sb__fill"></span>
+    <svg class="sb__flag" viewBox="0 0 14 16" aria-hidden="true"><line x1="1" y1="0" x2="1" y2="16" stroke="#0c0c0c" stroke-width="2"/><path d="M1 1 L13 4 L1 8Z" fill="#f6f10b" stroke="#0c0c0c"/></svg>
+    <svg class="sb__man" viewBox="0 0 18 22" aria-hidden="true"><circle cx="9" cy="5" r="4" fill="#f6f10b" stroke="#0c0c0c" stroke-width="1.5"/><path d="M9 9 L9 15 M9 15 L5 21 M9 15 L13 21 M9 11 L4 14 M9 11 L14 13" stroke="#0c0c0c" stroke-width="2" stroke-linecap="round"/></svg>
+  </div>
+</nav>
+
+<template data-achievement data-title="Смог — и знаешь как" data-text="Теперь ты говоришь «смог», «не смог», «сейчас не могу» и «может быть».">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#0c0c0c"/>
+    <path d="M24 92 A44 44 0 0 1 96 92" fill="none" stroke="#3a3a37" stroke-width="10"/>
+    <path class="achv-arc" d="M24 92 A44 44 0 0 1 96 92" fill="none" stroke="#f6f10b" stroke-width="10" stroke-dasharray="113" stroke-dashoffset="0"/>
+    <g class="achv-needle"><line x1="60" y1="92" x2="60" y2="50" stroke="#e8e8e4" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="92" r="6" fill="#e8e8e4"/></g>
+    <text class="achv-txt" x="60" y="36" text-anchor="middle" font-family="Arial Narrow, Arial" font-size="15" font-weight="700" fill="#f6f10b">-ebildim</text>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => window.AlternaKit?.speak(t);
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  /* ---------- формы урока 2 ---------- */
+  const VOW = 'aeıioöuü', BACK = 'aıou';
+  const lastV = (s) => [...s].filter((c) => VOW.includes(c)).pop();
+  const I4 = (v) => ('aı'.includes(v) ? 'ı' : 'ei'.includes(v) ? 'i' : 'ou'.includes(v) ? 'u' : 'ü');
+  const VERBS = [
+    { s: 'gel', ru: 'прийти', tr: 'приходить' }, { s: 'yap', ru: 'сделать', tr: 'делать' },
+    { s: 'oku', ru: 'читать', tr: 'читать' }, { s: 'git', v: 'gid', ru: 'пойти', tr: 'идти' },
+    { s: 'konuş', ru: 'говорить', tr: 'говорить' }, { s: 'bekle', ru: 'подождать', tr: 'ждать' },
+    { s: 'iç', ru: 'выпить', tr: 'пить' }, { s: 'gör', ru: 'увидеть', tr: 'видеть' },
+  ];
+  const PERS = ['ben', 'sen', 'o', 'biz', 'siz', 'onlar'];
+  function stemParts(V) {
+    if (/[aeıioöuü]$/.test(V.s)) return [{ t: V.s, c: 's' }, { t: 'y', c: 'y' }];
+    if (V.v) return [{ t: V.v, c: 'd' }];
+    return [{ t: V.s, c: 's' }];
+  }
+  function form(V, m, p) {
+    const A = BACK.includes(lastV(V.s)) ? 'a' : 'e';
+    const i4 = I4(A);
+    const st = stemParts(V);
+    const YOR = ['um', 'sun', '', 'uz', 'sunuz', 'lar'][p];
+    let parts;
+    if (m === 'bildi') parts = [...st, { t: A + 'bil', c: 'k' }, { t: 'di', c: 't' }, { t: ['m', 'n', '', 'k', 'niz', 'ler'][p], c: 'p' }];
+    if (m === 'amadi') parts = [...st, { t: A, c: 'k' }, { t: 'm' + A, c: 'n' }, { t: 'd' + i4, c: 't' }, { t: ['m', 'n', '', 'k', 'n' + i4 + 'z', 'l' + A + 'r'][p], c: 'p' }];
+    if (m === 'biliyor') parts = [...st, { t: A + 'bil', c: 'k' }, { t: 'iyor', c: 't' }, { t: YOR, c: 'p' }];
+    if (m === 'amiyor') parts = [...st, { t: A, c: 'k' }, { t: 'm' + i4, c: 'n' }, { t: 'yor', c: 't' }, { t: YOR, c: 'p' }];
+    if (m === 'mayabil') parts = [{ t: V.s, c: 's' }, { t: 'm' + A, c: 'n' }, { t: 'y', c: 'y' }, { t: A + 'bil', c: 'k' }, { t: 'ir', c: 't' }, { t: ['im', 'sin', '', 'iz', 'siniz', 'ler'][p], c: 'p' }];
+    parts = parts.filter((x) => x.t);
+    return { parts, w: parts.map((x) => x.t).join('') };
+  }
+  const bricks = (box, parts) => { box.innerHTML = parts.map((x) => `<b class="ab-b ${x.c}">${esc(x.t)}</b>`).join(''); return [...box.children]; };
+
+  /* ---------- общие анимации ---------- */
+  if (G) {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    addEventListener('orientationchange', () => ScrollTrigger.refresh());
+    addEventListener('load', () => ScrollTrigger.refresh());
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  }
+  if (anim) {
+    ScrollTrigger.batch('.ab-card, .ab-st, .ab-trap, .ab-vs button', {
+      start: 'top 88%', once: true,
+      onEnter: (b) => G.fromTo(b, { y: 40, rotation: 1.2 }, { y: 0, rotation: 0, duration: .7, ease: 'power3.out', stagger: .08 }),
+    });
+    $$('section h2').forEach((h) => {
+      const split = new SplitText(h, { type: 'words' });
+      ScrollTrigger.create({ trigger: h, start: 'top 85%', once: true,
+        onEnter: () => G.from(split.words, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .06 }) });
+    });
+  }
+
+  /* ---------- крючок: лес в тумане и звонок ---------- */
+  const NS = 'http://www.w3.org/2000/svg';
+  function trees(g, n, y0, h0, cls, seed) {
+    let s = seed;
+    const rnd = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
+    for (let k = 0; k < n; k++) {
+      const x = (k + rnd() * .6) * (1440 / n), h = h0 * (.7 + rnd() * .6), w = h * .32;
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', `M${x} ${y0 - h} L${x + w / 2} ${y0} L${x - w / 2} ${y0}Z`);
+      p.setAttribute('class', cls);
+      g.append(p);
+    }
+  }
+  trees($('#abTreesFar'), 22, 760, 320, 'ab-tree', 7);
+  trees($('#abTreesNear'), 12, 880, 520, 'ab-tree ab-tree--near', 3);
+  if (anim) {
+    G.to('.ab-fog', { x: 180, duration: 24, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    G.to('.ab-fog--2', { x: -240, duration: 28, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    G.to('#abTreesFar', { y: 60, ease: 'none', scrollTrigger: { trigger: '.ab-hero', start: 'top top', end: 'bottom top', scrub: true } });
+    G.to('#abTreesNear', { y: -40, ease: 'none', scrollTrigger: { trigger: '.ab-hero', start: 'top top', end: 'bottom top', scrub: .6 } });
+  }
+  let calls = 0;
+  const more = $('[data-more]'), callsEl = $('[data-calls]');
+  $('[data-call]').addEventListener('click', () => {
+    calls++;
+    callsEl.textContent = calls < 3 ? `Нет ответа · звонков: ${calls}` : 'Нет ответа. Пора писать другу';
+    if (anim) G.fromTo('.ab-phone-ico', { rotation: -14 }, { rotation: 0, duration: .6, ease: 'elastic.out(1, .3)' });
+    if (calls >= 2 && !more.classList.contains('is-open')) {
+      more.classList.add('is-open');
+      if (anim) G.fromTo(more.children, { y: 26, rotation: 1 }, { y: 0, rotation: 0, duration: .55, ease: 'power3.out', stagger: .12 });
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    }
+  });
+
+  /* ---------- прошлое: ir → di ---------- */
+  let pmode = 'bildi';
+  const pastB = $('[data-past-b]'), pastW = $('[data-past-w]'), pastRu = $('[data-past-ru]'), pastP = $('[data-past-p]');
+  const SUBJ = ['я', 'ты', 'он/она', 'мы', 'вы', 'они'];
+  const COULD = ['смог(ла)', 'смог(ла)', 'смог(ла)', 'смогли', 'смогли', 'смогли'];
+  const CAN = ['могу', 'можешь', 'может', 'можем', 'можете', 'могут'];
+  const cap = (s) => s[0].toUpperCase() + s.slice(1);
+  function pastRender(sound) {
+    const p = +pastP.value;
+    const f = form(VERBS[0], pmode, p);
+    const els = bricks(pastB, f.parts);
+    pastW.textContent = `${PERS[p]} ${f.w}`;
+    pastRu.textContent = cap(`${SUBJ[p]} ${pmode === 'amadi' ? 'не ' : ''}${COULD[p]} прийти.`);
+    if (anim) {
+      const t = els.find((e) => e.classList.contains('t'));
+      G.fromTo(t, { y: -50, rotation: -12 }, { y: 0, rotation: 0, duration: .6, ease: 'bounce.out' });
+      G.fromTo('.ab-time__dot', { scale: .4, transformOrigin: '50% 50%' }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+    }
+    if (sound) say(f.w);
+  }
+  $$('[data-pmode]').forEach((b) => b.addEventListener('click', () => {
+    pmode = b.dataset.pmode;
+    $$('[data-pmode]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    pastRender(true);
+  }));
+  pastP.addEventListener('input', () => pastRender(true));
+  pastRender(false);
+  if (anim) ScrollTrigger.create({ trigger: pastB, start: 'top 75%', once: true,
+    onEnter: () => G.from(pastB.children, { y: -60, rotation: -8, duration: .7, ease: 'bounce.out', stagger: .12 }) });
+
+  /* ---------- сейчас: a → ı перед yor ---------- */
+  const nowB = $('[data-now-b]'), nowNote = $('[data-now-note]');
+  function nowStart() {
+    nowB.innerHTML = '<b class="ab-b s">konuş</b><b class="ab-b k">a</b><b class="ab-b n" data-vow>ma</b>';
+    nowNote.textContent = 'konuş + a + ma… Нажми «Добавить yor».';
+  }
+  nowStart();
+  let nowDone = false;
+  function nowGo() {
+    if (nowDone) return;
+    nowDone = true;
+    const v = $('[data-vow]', nowB);
+    const finish = () => {
+      v.textContent = 'mı';
+      nowB.insertAdjacentHTML('beforeend', '<b class="ab-b t">yor</b><b class="ab-b p">um</b>');
+      nowNote.textContent = 'konuşamıyorum — «не могу говорить сейчас». ma → mı.';
+      if (anim) {
+        G.fromTo(v, { rotationX: -90 }, { rotationX: 0, duration: .45, ease: 'back.out(2)' });
+        G.fromTo($$('.ab-b.t, .ab-b.p', nowB), { x: 60, rotation: 8 }, { x: 0, rotation: 0, duration: .6, ease: 'back.out(1.8)', stagger: .15 });
+      }
+      say('Konuşamıyorum.');
+    };
+    if (anim) G.to(v, { rotationX: 90, duration: .25, ease: 'power2.in', onComplete: finish });
+    else finish();
+  }
+  $('[data-now-go]').addEventListener('click', nowGo);
+  $('[data-now-back]').addEventListener('click', () => {
+    nowDone = false; nowStart();
+    if (anim) G.fromTo(nowB.children, { x: -12 }, { x: 0, duration: .5, ease: 'elastic.out(1, .45)', stagger: .05 });
+  });
+  if (anim) ScrollTrigger.create({ trigger: nowB, start: 'top 65%', once: true, onEnter: () => setTimeout(nowGo, 700) });
+  $$('[data-vs]').forEach((b) => b.addEventListener('click', () => {
+    $$('[data-vs]').forEach((x) => x.classList.toggle('is-on', x === b));
+    if (anim) G.fromTo(b, { scale: .95 }, { scale: 1, duration: .45, ease: 'back.out(3)' });
+  }));
+
+  /* ---------- могу и не: карточки и «обещание» ---------- */
+  $$('[data-flip]').forEach((f) => f.addEventListener('click', () => {
+    const on = f.classList.toggle('is-on');
+    const inner = $('.ab-flip__in', f);
+    if (anim) {
+      if (on) G.fromTo(inner, { rotationY: 0 }, { rotationY: 180, duration: .6, ease: 'back.out(1.4)' });
+      else G.to(inner, { rotationY: 0, duration: .5, ease: 'power2.out' });
+    } else inner.style.transform = on ? 'rotateY(180deg)' : '';
+  }));
+  const PROM = [['Gelebilirim.', 'Могу прийти.'], ['Gelmeyebilirim.', 'Может, не приду.'], ['Gelemem.', 'Не могу прийти.']];
+  const promise = $('[data-promise]'), promW = $('[data-promise-w]'), promRu = $('[data-promise-ru]');
+  promise.addEventListener('input', () => {
+    const [w, r] = PROM[+promise.value];
+    promW.textContent = w; promRu.textContent = r;
+    if (anim) G.fromTo(promW, { y: 14, scale: .9 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2.5)' });
+    say(w);
+  });
+  if (anim) ScrollTrigger.create({ trigger: '.ab-flips', start: 'top 80%', once: true,
+    onEnter: () => G.from('.ab-flip', { y: 50, rotation: -3, duration: .6, ease: 'back.out(1.6)', stagger: .12 }) });
+
+  /* ---------- может быть: измеритель ---------- */
+  const GA = [['Evde olamaz.', 'Не может быть, что он дома.', 0, 'olamaz'], ['Evde olmayabilir.', 'Может, его нет дома.', 35, 'olmayabilir'],
+    ['Evde olabilir.', 'Может, он дома.', 65, 'olabilir'], ['Evde.', 'Он дома. Точно.', 100, 'точно']];
+  const gBtns = $('[data-g-btns]'), needle = $('.ab-gauge__needle'), arc = $('.ab-gauge__arc');
+  gBtns.innerHTML = GA.map((g, i) => `<button type="button" data-i="${i}" class="${i === 2 ? 'is-on' : ''}"><span lang="tr">${g[3]}</span><small>≈ ${g[2]}%</small></button>`).join('');
+  function gauge(i, sound, instant) {
+    const [w, r, pct] = GA[i];
+    $('[data-g-w]').textContent = w; $('[data-g-ru]').textContent = r;
+    $$('button', gBtns).forEach((b, k) => b.classList.toggle('is-on', k === i));
+    if (anim && !instant) {
+      G.to(needle, { rotation: -90 + pct * 1.8, svgOrigin: '200 200', duration: 1, ease: 'elastic.out(1, .45)' });
+      G.to(arc, { strokeDashoffset: 503 * (1 - pct / 100), duration: .8, ease: 'power2.out' });
+    } else if (G) {
+      G.set(needle, { rotation: -90 + pct * 1.8, svgOrigin: '200 200' });
+      G.set(arc, { strokeDashoffset: 503 * (1 - pct / 100) });
+    } else {
+      needle.setAttribute('transform', `rotate(${-90 + pct * 1.8} 200 200)`);
+      arc.style.strokeDashoffset = 503 * (1 - pct / 100);
+    }
+    if (sound) say(w);
+  }
+  gBtns.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) gauge(+b.dataset.i, true); });
+  gauge(2, false, true);
+  if (anim) ScrollTrigger.create({ trigger: '.ab-gauge', start: 'top 70%', once: true, onEnter: () => {
+    G.fromTo(needle, { rotation: -90 }, { rotation: -90 + 65 * 1.8, svgOrigin: '200 200', duration: 1.2, ease: 'elastic.out(1, .45)' });
+    G.fromTo(arc, { strokeDashoffset: 503 }, { strokeDashoffset: 503 * .35, duration: 1, ease: 'power2.out' });
+  } });
+
+  /* ---------- конструктор ---------- */
+  const MODES = [['bildi', 'Смог', 'bil + di'], ['amadi', 'Не смог', 'без bil'], ['biliyor', 'Получается', 'bil + iyor'], ['amiyor', 'Сейчас не могу', 'a → ı + yor'], ['mayabil', 'Могу и не', 'ma + yabil']];
+  const ruOf = (m, V, p) => {
+    if (m === 'bildi') return cap(`${SUBJ[p]} ${COULD[p]} ${V.ru}.`);
+    if (m === 'amadi') return cap(`${SUBJ[p]} не ${COULD[p]} ${V.ru}.`);
+    if (m === 'biliyor') return cap(`${SUBJ[p]} уже ${CAN[p]} ${V.ru}.`);
+    if (m === 'amiyor') return cap(`${SUBJ[p]} сейчас не ${CAN[p]} ${V.ru}.`);
+    return cap(`${SUBJ[p]} ${CAN[p]} и не ${V.ru}.`);
+  };
+  function why(m, V) {
+    const v = lastV(V.s), A = BACK.includes(v) ? 'a' : 'e', out = [];
+    out.push(`Последняя гласная корня — ${v}, поэтому ${A}-вариант.`);
+    if (/[aeıioöuü]$/.test(V.s) && m !== 'mayabil') out.push(`Корень на гласную — встаёт y: ${V.s}y-.`);
+    if (V.v && m !== 'mayabil') out.push('git перед гласной: t → d, gid-.');
+    if (V.v && m === 'mayabil') out.push('После git идёт согласная m — t остаётся.');
+    if (m === 'bildi') out.push('Вместо ir — di. Лица как в прошлом: -m, -n, -k.');
+    if (m === 'amadi') out.push('«Не смог» — без bil: a/e + ma/me + dı/di.');
+    if (m === 'biliyor') out.push('bil + iyor: «уже получается», «сейчас могу».');
+    if (m === 'amiyor') out.push(`Перед yor ${A === 'a' ? 'ma → mı' : 'me → mi'}.`);
+    if (m === 'mayabil') out.push('Отрицание стоит до yabil: «могу и не».');
+    return out;
+  }
+  const st = { v: 0, m: 0, p: 0 };
+  const vBox = $('[data-lab-v]'), mBox = $('[data-lab-m]'), pBox = $('[data-lab-p]');
+  vBox.innerHTML = VERBS.map((V, i) => `<button type="button" class="ab-chip" data-i="${i}">${V.s}<small>${V.tr}</small></button>`).join('');
+  mBox.innerHTML = MODES.map((m, i) => `<button type="button" class="ab-chip" data-i="${i}">${m[1]}<small>${m[2]}</small></button>`).join('');
+  pBox.innerHTML = PERS.map((p, i) => `<button type="button" class="ab-chip" data-i="${i}">${p}</button>`).join('');
+  function labRender(sound) {
+    const V = VERBS[st.v], m = MODES[st.m][0], f = form(V, m, st.p);
+    [[vBox, st.v], [mBox, st.m], [pBox, st.p]].forEach(([box, k]) => $$('.ab-chip', box).forEach((c, i) => c.classList.toggle('is-on', i === k)));
+    $('[data-lab-tag]').textContent = `${V.s} · ${MODES[st.m][1]} · ${PERS[st.p]}`;
+    const bBox = $('[data-lab-b]');
+    const els = bricks(bBox, f.parts);
+    const w = $('[data-lab-w]');
+    w.textContent = `${PERS[st.p]} ${f.w}`;
+    $('[data-lab-ru]').textContent = ruOf(m, V, st.p);
+    const whyBox = $('[data-lab-why]');
+    whyBox.innerHTML = why(m, V).map((t) => `<div>${esc(t)}</div>`).join('');
+    const cBox = $('[data-lab-c]');
+    cBox.innerHTML = PERS.map((p, i) => `<button type="button" class="${i === st.p ? 'is-cur' : ''}" data-i="${i}"><span lang="tr">${p}</span><span lang="tr">${form(V, m, i).w}</span></button>`).join('');
+    if (anim) {
+      G.fromTo(els, { y: -50, rotation: -6 }, { y: 0, rotation: 0, duration: .6, ease: 'bounce.out', stagger: .09 });
+      G.fromTo(w, { scale: .85 }, { scale: 1, duration: .5, delay: .3, ease: 'back.out(2.5)' });
+      G.from(whyBox.children, { x: 20, duration: .4, delay: .35, stagger: .08, ease: 'power2.out' });
+    }
+    if (sound) say(f.w);
+  }
+  const pick = (box, key) => box.addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { st[key] = +b.dataset.i; labRender(true); } });
+  pick(vBox, 'v'); pick(mBox, 'm'); pick(pBox, 'p');
+  $('[data-lab-c]').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) { st.p = +b.dataset.i; labRender(true); } });
+  $('[data-lab-play]').addEventListener('click', () => say(form(VERBS[st.v], MODES[st.m][0], st.p).w));
+  labRender(false);
+  if (anim) ScrollTrigger.create({ trigger: mBox, start: 'top 85%', once: true,
+    onEnter: () => G.from($$('.ab-chip', mBox), { y: 24, rotation: 4, duration: .5, ease: 'back.out(2)', stagger: .05 }) });
+
+  /* ---------- сцена: паром в Каршияку ---------- */
+  const chat = $('[data-chat]'), replies = $('[data-replies]');
+  const SCENE = {
+    start: { them: ['Cumartesi Karşıyaka\'da doğum günüm var. Gelebilir misin?', 'В субботу у меня день рождения в Каршияке. Сможешь прийти?'],
+      opts: [['Gelebilirim! Vapurla gelirim.', 'Могу! Приеду на пароме.', 'yes'], ['Gelmeyebilirim, işim var.', 'Может, не приду — есть дела.', 'maybe']] },
+    yes: { them: ['Harika! Pasta alabilir misin?', 'Отлично! Сможешь купить торт?'],
+      opts: [['Alabilirim.', 'Могу.', 'end1'], ['Alamam, ama çiçek alabilirim.', 'Торт не могу, но могу купить цветы.', 'end1']] },
+    maybe: { them: ['Tamam, haber ver.', 'Ладно, дай знать.'],
+      opts: [['Dün gelemedim, özür dilerim.', '(в воскресенье) Вчера не смог прийти, прости.', 'end2']] },
+    end1: { them: ['Süper. Cumartesi görüşürüz!', 'Супер. Увидимся в субботу!'] },
+    end2: { them: ['Sorun yok. Bir dahaki sefere!', 'Ничего. В следующий раз!'] },
+  };
+  function bubble(me, tr, ru) {
+    const d = document.createElement('div');
+    d.className = 'ab-bub' + (me ? ' ab-bub--me' : '');
+    d.innerHTML = `<span lang="tr">${esc(tr)}</span><small>${esc(ru)}</small>`;
+    d.dataset.say = tr;
+    chat.append(d);
+    if (anim) G.fromTo(d, { y: 18, scale: .9 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2.2)' });
+  }
+  function step(key) {
+    const s = SCENE[key];
+    replies.dataset.key = key;
+    replies.innerHTML = '';
+    const dots = document.createElement('div');
+    dots.className = 'ab-bub ab-bub--dots';
+    dots.textContent = '•••';
+    chat.append(dots);
+    const dotsTween = anim ? G.to(dots, { opacity: .3, duration: .3, yoyo: true, repeat: -1 }) : null;
+    setTimeout(() => {
+      dotsTween?.kill(); dots.remove();
+      bubble(false, s.them[0], s.them[1]);
+      say(s.them[0]);
+      replies.innerHTML = s.opts
+        ? s.opts.map((o, i) => `<button type="button" data-i="${i}"><span lang="tr">${esc(o[0])}</span><small>${esc(o[1])}</small></button>`).join('')
+        : '<button type="button" data-again>Сначала ↻</button>';
+      if (anim) G.from(replies.children, { y: 14, duration: .35, stagger: .08, ease: 'power2.out' });
+    }, anim ? 900 : 100);
+  }
+  replies.addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.hasAttribute('data-again')) { chat.innerHTML = ''; step('start'); return; }
+    const o = SCENE[replies.dataset.key].opts[+b.dataset.i];
+    bubble(true, o[0], o[1]);
+    say(o[0]);
+    step(o[2]);
+  });
+  /* первое сообщение видно сразу, дальше — по ответам ученика */
+  replies.dataset.key = 'start';
+  bubble(false, SCENE.start.them[0], SCENE.start.them[1]);
+  replies.innerHTML = SCENE.start.opts.map((o, i) => `<button type="button" data-i="${i}"><span lang="tr">${esc(o[0])}</span><small>${esc(o[1])}</small></button>`).join('');
+  if (anim) ScrollTrigger.create({ trigger: '.ab-phone', start: 'top 85%', once: true,
+    onEnter: () => G.fromTo('.ab-phone', { rotation: 3, y: 40 }, { rotation: 0, y: 0, duration: .8, ease: 'back.out(1.6)' }) });
+
+  /* ---------- ловушки ---------- */
+  $$('[data-trap]').forEach((t) => t.addEventListener('click', () => {
+    const open = t.classList.toggle('is-open');
+    if (!anim) return;
+    if (open) {
+      G.fromTo($('.bad path', t), { strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: .4, ease: 'power2.out' });
+      G.fromTo($('.good', t), { y: 14, scale: .8 }, { y: 0, scale: 1, duration: .5, delay: .2, ease: 'back.out(3)' });
+    } else G.fromTo(t, { rotation: -1.5 }, { rotation: 0, duration: .4, ease: 'elastic.out(1, .45)' });
+  }));
+
+  /* ---------- шпаргалка: вершина ---------- */
+  if (anim) {
+    const man = $('.ab-sm-man');
+    const sp = { x: 120 };
+    G.to(sp, { x: 350, ease: 'none', scrollTrigger: { trigger: '.ab-summit', start: 'top 90%', end: 'bottom 45%', scrub: .5 },
+      onUpdate: () => {
+        const x = sp.x;
+        const y = x < 210 ? 170 - (x * 130) / 210 : x < 280 ? 40 + ((x - 210) * 30) / 70 : 70 - ((x - 280) * 60) / 80;
+        man.setAttribute('transform', `translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+      } });
+    G.fromTo('.ab-sm-flag', { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: .8, ease: 'elastic.out(1, .45)',
+      scrollTrigger: { trigger: '.ab-summit', start: 'top 55%' } });
+  }
+  $$('.ab-st').forEach((c) => c.addEventListener('click', () => { if (anim) G.fromTo(c, { y: -6 }, { y: 0, duration: .5, ease: 'bounce.out' }); }));
+
+  /* ---------- свой скроллбар ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2, .ab-lbl')?.textContent || s.dataset.section).trim()}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? 1 - (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', () => { layout(); progress(); });
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (anim) G.fromTo(m, { scale: 1.6 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout(); progress();
+  new ResizeObserver(layout).observe(document.body);
+
+  /* ---------- ачивка: стрелка уверенности уходит в 100% ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.achv-arc'), { strokeDashoffset: 113 }, { strokeDashoffset: 0, duration: .7, ease: 'power2.out' }, .9)
+      .fromTo(b.querySelector('.achv-needle'), { rotation: -90, svgOrigin: '60 92' }, { rotation: 90, svgOrigin: '60 92', duration: .8, ease: 'elastic.out(1, .45)' }, 1)
+      .fromTo(b.querySelector('.achv-txt'), { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .35, ease: 'back.out(2.5)' }, 1.4);
+  });
+
+  /* ---------- нестандартное упражнение «Измеритель уверенности» (a2.ability.ex8) ---------- */
+  (async () => {
+    const EX = 'a2.ability.ex8';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const sitEl = $('[data-m-sit]', root), pickEl = $('[data-m-pick]', root), range = $('[data-m-range]', root);
+    const statusEl = $('[data-m-status]', root), countEl = $('[data-m-count]', root), mNeedle = $('.ab-m-needle', root);
+    const KEYS = ['olamaz', 'olmayabilir', 'olabilir', 'evde'];
+    const PHRASE = ['Evde olamaz.', 'Evde olmayabilir.', 'Evde olabilir.', 'Evde.'];
+    const ANG = [-80, -35, 35, 80];
+    let data;
+    try { data = await AlternaKit.exercise(EX); } catch { statusEl.textContent = 'Не удалось загрузить упражнение.'; return; }
+    const items = data.items;
+    let i = 0, correct = 0, t0 = performance.now(), busy = false;
+    window.AlternaTracker?.start(EX, 'practice');
+    function needleTo(k) {
+      pickEl.textContent = PHRASE[k];
+      if (anim) G.to(mNeedle, { rotation: ANG[k], svgOrigin: '200 200', duration: .7, ease: 'elastic.out(1, .5)' });
+      else mNeedle.setAttribute('transform', `rotate(${ANG[k]} 200 200)`);
+    }
+    function draw() {
+      sitEl.textContent = items[i].situation;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      if (anim) G.fromTo(sitEl, { y: 16 }, { y: 0, duration: .45, ease: 'power3.out' });
+    }
+    function check(k) {
+      if (busy || i >= items.length) return;
+      busy = true;
+      const item = items[i];
+      const ok = KEYS[k] === item.answer;
+      if (ok) correct++;
+      const right = PHRASE[KEYS.indexOf(item.answer)];
+      statusEl.textContent = ok ? `Да! ${right}` : `Не совсем. ${item.explanation}`;
+      if (!ok) { range.value = KEYS.indexOf(item.answer); needleTo(+range.value); }
+      say(right);
+      window.AlternaTracker?.answer({ exerciseId: EX, itemId: item.id, correct: ok, answer: KEYS[k], timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++; busy = false; t0 = performance.now();
+        if (i < items.length) { draw(); statusEl.textContent = ''; }
+        else {
+          window.AlternaTracker?.complete({ exerciseId: EX, correct, total: items.length });
+          sitEl.textContent = `Готово: ${correct} из ${items.length}.`;
+          countEl.textContent = 'готово';
+        }
+      }, reduce ? 300 : (ok ? 1200 : 2400));
+    }
+    range.addEventListener('input', () => needleTo(+range.value));
+    $('[data-m-check]', root).addEventListener('click', () => check(+range.value));
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); check(+range.value); }
+      const n = Number(e.key);
+      if (n >= 1 && n <= 4) { range.value = n - 1; needleTo(n - 1); }
+    });
+    AlternaKit.registerSolver(EX, async () => {
+      while (i < items.length) {
+        if (busy) { await new Promise((r) => setTimeout(r, 150)); continue; }
+        const k = KEYS.indexOf(items[i].answer);
+        range.value = k; needleTo(k);
+        check(k);
+        await new Promise((r) => setTimeout(r, 60));
+      }
+    });
+    needleTo(+range.value);
+    draw();
+  })();
+});
+</script>
+</body>
+</html>
