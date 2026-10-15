@@ -1,0 +1,1520 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="lib.cases">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Восемь падежей: обзор</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+/* ═══════════ ТОКЕНЫ ═══════════ */
+:root{
+  --green:#42A86B; --green-l:#5FC486; --green-d:#2E8552; --green-soft:#EDF7F1; --green-line:#BFE3CD;
+  --ink:#1C1D1B; --ink-2:#55575A; --ink-3:#7A7C7F; --ink-4:#B4B6B4;
+  --cream:#F3F2ED; --cream-2:#FAF9F6; --line:#E5E4DE; --line-2:#EFEEE9;
+  --sky-1:#F4FAFD; --sky-2:#EAF4F8; --amber:#C9903B; --rust:#B9743A; --rust-soft:#FDF1E8; --red:#C4643C;
+  --r-xl:28px; --r-lg:22px; --r-md:16px; --r-sm:12px;
+  --sh-soft:0 1px 2px rgba(28,29,27,.03),0 8px 28px rgba(28,29,27,.055);
+  --sh-green:0 6px 18px rgba(66,168,107,.28);
+  --pad:16px;
+  --serif:Georgia,'Times New Roman','PT Serif',serif;
+  --sans:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+  --ak-accent:#2E8552; --ak-accent-soft:#EDF7F1; --ak-ink:#1C1D1B; --ak-surface:#FAF9F6; --ak-line:#E5E4DE;
+  --ak-font:var(--sans); --ak-font-display:var(--serif); --ak-bg:#ffffff;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;background:#fff;color-scheme:light}
+body{margin:0;background:#fff;color:var(--ink);font:400 var(--ak-text)/1.62 var(--sans);overflow-x:clip;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+a{color:inherit}
+main{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--pad)}
+.narrow{max-width:720px;margin-left:auto;margin-right:auto}
+@media(min-width:768px){:root{--pad:32px}}
+@media(min-width:1100px){:root{--pad:40px}}
+
+h1,h2,h3,h4{margin:0;font-family:var(--serif);font-weight:400;letter-spacing:-.005em;line-height:1.14}
+h1{font-size:clamp(32px,8.6vw,60px);line-height:1.06}
+h2{font-size:clamp(25px,6.4vw,42px);line-height:1.12}
+h3{font-size:clamp(20px,4.6vw,28px)}
+h4{font-size:clamp(18px,3.8vw,22px)}
+p{margin:0 0 1em;max-width:65ch}
+p:last-child{margin-bottom:0}
+.lead{color:var(--ink-2);font-size:clamp(15px,3.8vw,17.5px);margin-top:14px}
+.sub{color:var(--ink-3);font-size:14.5px;line-height:1.55}
+.tiny{font-size:12.5px;color:var(--ink-3);letter-spacing:.02em}
+.g{color:var(--green-d)}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--green-d);font-weight:600;margin-bottom:12px}
+b[lang="tr"],i[lang="tr"]{font-family:var(--serif)}
+.dashline{display:flex;align-items:center;gap:14px;margin:14px 0 0}
+.dashline::before{content:"";flex:0 0 34px;height:1px;background:var(--green)}
+.dashline span{font-family:var(--serif);font-size:clamp(15px,3.9vw,21px);color:var(--ink-2);line-height:1.3}
+
+.sec{padding:56px 0}
+@media(min-width:768px){.sec{padding:84px 0}}
+.sec--cream{background:var(--cream-2);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+
+/* ═══════════ БЛОКИ ═══════════ */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:22px 18px;margin-top:18px}
+@media(min-width:768px){.card{padding:30px 28px}}
+.card--cream{background:var(--cream);border:0;border-radius:var(--r-xl)}
+.story{max-width:34em;margin-top:22px}
+.story p{margin:0 0 .9em;font-size:clamp(16px,4.1vw,17.5px);line-height:1.62}
+.story .beat{font-weight:600}
+.story .kick{font-family:var(--serif);font-size:clamp(19px,4.8vw,24px);line-height:1.3;margin-top:1em}
+.story-mark{width:30px;height:1px;background:var(--green);margin:0 0 20px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:11px 20px;border-radius:999px;border:0;font-weight:600;font-size:14px;letter-spacing:.04em;background:linear-gradient(180deg,var(--green-l),var(--green));color:#fff;box-shadow:var(--sh-green)}
+.btn--ghost{background:#fff;color:var(--green-d);box-shadow:none;border:1px solid var(--green-line)}
+@media(hover:hover){.btn:hover{filter:brightness(1.05)}.btn--ghost:hover{background:var(--green-soft)}}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chip{min-height:44px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;font-family:var(--serif);font-size:16px;color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;box-shadow:var(--sh-green)}
+@media(hover:hover){.chip:hover{border-color:var(--green-line)}}
+.chip--sans{font-family:var(--sans);font-size:14px}
+
+/* ═══════════ ПЕРВЫЙ ЭКРАН ═══════════ */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--sky-1),var(--sky-2) 50%,#F7FBF8)}
+.hero-in{padding-top:44px}
+.hero h1{max-width:15ch;animation:heroIn .8s cubic-bezier(.2,1.3,.4,1) both}
+.hero .dashline{animation:heroIn .8s .12s cubic-bezier(.2,1.3,.4,1) both}
+@keyframes heroIn{from{transform:translateY(18px) rotate(1.5deg)}to{transform:none}}
+.pricetag{display:inline-flex;flex-direction:column;line-height:1.2;background:#fff;border-radius:999px;padding:9px 18px;box-shadow:var(--sh-soft);margin-top:22px}
+.pricetag b{font-family:var(--serif);font-size:15px}
+.pricetag span{font-size:11px;color:var(--ink-3)}
+.hero-art{margin:22px calc(var(--pad) * -1) 0}
+.hero-art svg{width:100%;height:auto;display:block}
+@media(min-width:900px){.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:28px;align-items:center}.hero-art{margin:0}}
+#ferry{animation:sail 30s linear infinite}
+@keyframes sail{from{transform:translate(-80px,302px)}to{transform:translate(660px,302px)}}
+.gull{animation:fly linear infinite}
+@keyframes fly{50%{transform:translate(26px,-13px)}}
+.gull-wing{animation:flap 1.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes flap{50%{transform:scaleY(.42)}}
+.guess{margin-top:26px}
+.guess__q{font-family:var(--serif);font-size:clamp(19px,4.8vw,24px);line-height:1.3}
+.guess__a{min-height:3.2em;margin-top:12px;color:var(--ink-2);font-size:15px;text-align:center}
+.guess .chip.is-right{background:var(--green);border-color:var(--green);color:#fff}
+.guess .chip.is-wrong{background:var(--rust-soft);border-color:#EBD3BE;color:var(--rust)}
+
+/* ═══════════ ПРЕДЛОГ → ХВОСТ ═══════════ */
+.flip{background:linear-gradient(180deg,#FBFAF7,#F3F2ED);border:1px solid var(--line-2);border-radius:var(--r-xl);padding:24px 14px 18px;margin-top:24px;overflow:hidden}
+.flip__r{display:flex;align-items:center;justify-content:center;gap:8px;min-height:60px}
+.flip__tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-4);width:24px;text-align:right;flex:0 0 24px}
+.fw{font-family:var(--serif);font-size:clamp(22px,6.4vw,36px);line-height:1.1;padding:4px 12px;border-radius:11px;white-space:nowrap}
+.fw--base{background:#fff;border:1px solid var(--line)}
+.fw--pre{background:var(--rust-soft);border:1px solid #EBD3BE;color:var(--rust)}
+.fw--suf{background:var(--green-soft);border:1px solid var(--green-line);color:var(--green-d)}
+.flip__mid{display:flex;align-items:center;justify-content:center;gap:9px;color:var(--ink-3);font-size:12.5px;margin:12px 0;text-align:center}
+.flip__mid::before,.flip__mid::after{content:"";height:1px;width:28px;background:var(--line);flex:none}
+.flip__ru{text-align:center;color:var(--ink-2);font-size:14px;margin-top:14px;min-height:22px}
+.dots{display:flex;gap:2px;justify-content:center;margin-top:8px}
+.dots button{width:36px;height:36px;border:0;background:none;padding:0;display:grid;place-items:center}
+.dots button::after{content:"";width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots button[aria-current="true"]::after{background:var(--green);scale:1.35}
+.qlist{list-style:none;margin:22px 0 0;padding:0}
+.qlist li{position:relative;padding-left:18px;margin-bottom:8px;color:var(--ink-2);font-size:15px}
+.qlist li::before{content:"•";position:absolute;left:0;color:var(--green)}
+
+/* ═══════════ ДОМ ═══════════ */
+.scene{background:linear-gradient(180deg,#F6FBF8,#EDF6F1);border:1px solid var(--line-2);border-radius:var(--r-xl);padding:16px 12px 20px;margin-top:22px;overflow:hidden}
+.scene svg{width:100%;height:auto;display:block;max-width:560px;margin:0 auto}
+.scene__cap{text-align:center;margin-top:14px;min-height:64px}
+.scene__cap b{font-family:var(--serif);font-size:clamp(22px,5.6vw,28px);display:block;font-weight:400}
+.scene__cap b em{font-style:normal;color:var(--green-d)}
+.scene__cap span{display:block;font-size:14px;color:var(--ink-2);margin-top:4px}
+.train{display:block;width:100%;max-width:520px;height:auto;margin:18px auto 0}
+
+/* ═══════════ ГАРМОНИЯ ═══════════ */
+.harm{display:grid;gap:10px;margin-top:12px}
+.harm--two{grid-template-columns:1fr 1fr}
+.harm--four{grid-template-columns:1fr 1fr}
+@media(min-width:620px){.harm--four{grid-template-columns:repeat(4,1fr)}}
+.hcell{border:1px solid var(--line);border-radius:var(--r-md);padding:12px 8px;background:#fff;text-align:center}
+.hcell.lit{border-color:var(--green);background:var(--green-soft)}
+.hcell .vw{font-family:var(--serif);font-size:14px;color:var(--ink-3);letter-spacing:.12em}
+.hcell .ar{color:var(--ink-4);font-size:12px;margin:4px 0}
+.hcell .rs{display:inline-block;font-family:var(--serif);font-size:28px;color:var(--green-d);line-height:1}
+.vpick{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.vbtn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;font-family:var(--serif);font-size:19px;color:var(--ink-2)}
+.vbtn[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.lbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;text-align:center;margin:20px 0 0}
+
+/* ═══════════ ЗВУКИ ═══════════ */
+.fistik{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin:16px 0 4px}
+.fistik span{width:32px;height:40px;border-radius:9px;border:1px solid var(--line);display:grid;place-items:center;font-family:var(--serif);font-size:18px;background:#fff;color:var(--ink-3)}
+.fistik span.hard{background:var(--green);border-color:var(--green);color:#fff}
+.fistik span.gap{border:0;background:none;width:10px}
+.cons-out{text-align:center;font-family:var(--serif);font-size:clamp(26px,7vw,38px);margin-top:14px;min-height:1.3em}
+.cons-out u{text-decoration:none;color:var(--green-d);display:inline-block}
+.cons-out u i{font-style:normal;display:inline-block}
+.cons-why{text-align:center;color:var(--ink-2);font-size:14px;min-height:2.6em}
+.buffer{display:flex;align-items:center;justify-content:center;gap:0;margin-top:16px;font-family:var(--serif);font-size:clamp(24px,6.4vw,34px);min-height:58px}
+.buffer span{display:inline-block}
+.buffer .v1,.buffer .v2{color:var(--green-d)}
+.buffer .y{color:var(--rust);font-weight:600}
+.soft{display:flex;justify-content:center;align-items:baseline;font-family:var(--serif);font-size:clamp(28px,7.6vw,40px);margin-top:14px;min-height:1.3em}
+.soft span{display:inline-block}
+.soft .c{color:var(--rust)}
+.soft .a{color:var(--green-d)}
+
+/* ═══════════ КАРУСЕЛЬ ═══════════ */
+.rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--pad) 8px;margin:18px calc(var(--pad) * -1) 0;scrollbar-width:none;overscroll-behavior-x:contain}
+.rail::-webkit-scrollbar{display:none}
+.rcard{flex:0 0 78%;max-width:300px;scroll-snap-align:start;border-radius:var(--r-md);position:relative;text-decoration:none;background:linear-gradient(155deg,#EFF6F2,#E3EFE8 55%,#DCEBE4);border:1px solid var(--line-2);min-height:220px;display:flex;flex-direction:column;justify-content:space-between;padding:16px}
+@media(min-width:700px){.rcard{flex-basis:260px}}
+.rcard svg{width:40px;height:40px}
+.rcard h4{font-size:20px;margin-bottom:2px}
+.rcard .tr{font-family:var(--serif);font-size:15px;color:var(--green-d)}
+.rcard .q{font-size:12.5px;color:var(--ink-2);line-height:1.45;margin:6px 0 10px}
+.rcard .n{position:absolute;top:12px;right:14px;font-family:var(--serif);font-size:44px;line-height:1;color:rgba(66,168,107,.18)}
+.pill{display:inline-block;background:var(--green-d);color:#fff;border-radius:999px;padding:6px 13px;font-size:13px;font-weight:600;align-self:flex-start}
+.rprog{height:3px;background:var(--line);border-radius:2px;margin-top:16px;overflow:hidden}
+.rprog i{display:block;height:100%;background:var(--green);width:25%}
+
+/* ═══════════ ПАДЕЖИ ═══════════ */
+.case{padding:44px 0;border-top:1px solid var(--line-2)}
+@media(min-width:768px){.case{padding:68px 0}}
+.case-no{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.case-no b{width:34px;height:34px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-family:var(--serif);font-size:16px;font-weight:400;flex:none}
+.case-no span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.case h2 .tr{display:block;font-style:italic;color:var(--green-d);font-size:.52em;margin-top:8px}
+.rulebox{background:var(--cream-2);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 16px;margin-top:20px}
+@media(min-width:768px){.rulebox{padding:26px 24px}}
+.formula{display:flex;flex-wrap:wrap;align-items:center;gap:7px;font-size:14px;color:var(--ink-2);margin-bottom:14px}
+.tok{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 11px;font-weight:500;color:var(--ink)}
+.tok--aff{background:var(--green-soft);border-color:var(--green-line);color:var(--green-d);font-family:var(--serif);font-size:16px}
+.op{color:var(--ink-4);font-size:16px}
+.ex{margin-top:18px;display:grid;gap:9px}
+.exline{background:#fff;border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px}
+.exline .tr{font-size:16px;line-height:1.4}
+.exline .tr u{text-decoration:none;color:var(--green-d);background:var(--green-soft);border-radius:5px;padding:0 1px}
+.exline .ru{font-size:13.5px;color:var(--ink-2);margin-top:3px}
+.exline .qq{font-size:11.5px;color:var(--ink-3);margin-top:3px;letter-spacing:.02em}
+.note{margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink-2)}
+.note b{color:var(--ink)}
+.stage{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 14px;margin-top:20px;text-align:center}
+.stage svg{display:block;width:100%;max-width:420px;height:auto;margin:0 auto}
+.stage__word{font-family:var(--serif);font-size:clamp(28px,8vw,44px);line-height:1.15;min-height:1.3em;display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:0 2px}
+.stage__word span{display:inline-block}
+.stage__word .aff{color:var(--green-d)}
+.stage__word .bad{color:var(--rust)}
+.stage__ru{color:var(--ink-2);font-size:14.5px;margin-top:6px;min-height:2.6em}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--cream-2);margin:6px 4px 0}
+.seg button{min-height:40px;border:0;background:none;border-radius:999px;padding:6px 14px;font-size:14px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.grid4{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.grid4 div{border:1px solid var(--line);border-radius:12px;padding:10px 6px;font-size:13px;color:var(--ink-3);background:#fff}
+.grid4 div b{display:block;font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink-2)}
+.grid4 div.lit{border-color:var(--green);background:var(--green-soft)}
+.grid4 div.lit b{color:var(--green-d)}
+.langs{display:flex;flex-wrap:wrap;gap:7px;justify-content:center}
+.quote{font-family:var(--serif);font-size:clamp(20px,5vw,26px);line-height:1.3}
+
+/* ═══════════ КОНСТРУКТОР ═══════════ */
+.builder{background:var(--cream);border-radius:var(--r-xl);padding:22px 14px;margin-top:22px}
+@media(min-width:768px){.builder{padding:32px 30px}}
+.bopts{display:flex;flex-wrap:wrap;gap:6px}
+.bopt{min-height:44px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:14px}
+.bopt small{color:var(--ink-3);font-size:12px}
+.bopt[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.bopt[aria-pressed="true"] small{color:#ddd}
+.blbl{font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px;font-weight:600}
+.bout{background:#fff;border-radius:var(--r-lg);padding:22px 14px;margin-top:20px;text-align:center;box-shadow:var(--sh-soft)}
+.bword{font-family:var(--serif);font-size:clamp(30px,9vw,52px);line-height:1.1;word-break:break-word;cursor:pointer}
+.bword span{display:inline-block}
+.bword .m1{color:var(--green-d)}
+.bword .m2{color:var(--amber)}
+.bmorph{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:12px}
+.bmorph i{font-style:normal;font-size:12px;color:var(--ink-3);background:var(--cream-2);border:1px solid var(--line);border-radius:7px;padding:3px 8px}
+.bru{margin-top:12px;font-size:15px;color:var(--ink-2)}
+.bwhy{margin-top:12px;font-size:13.5px;color:var(--ink-3);line-height:1.5;border-top:1px dashed var(--line);padding-top:12px}
+
+/* ═══════════ ЛОВУШКИ ═══════════ */
+.traps{display:grid;gap:12px;margin-top:20px}
+@media(min-width:700px){.traps{grid-template-columns:1fr 1fr}}
+.trap{position:relative;text-align:left;min-height:150px;border:1px solid var(--line);border-radius:var(--r-lg);background:#fff;padding:16px;perspective:600px}
+.trap__front,.trap__back{display:block}
+.trap__back{display:none}
+.trap.open .trap__front{display:none}
+.trap.open .trap__back{display:block}
+.trap.open{border-color:var(--green-line);background:var(--green-soft)}
+.trap s{color:var(--red);font-family:var(--serif);font-size:22px}
+.trap .fix{font-family:var(--serif);font-size:22px;color:var(--green-d)}
+.trap small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:8px}
+.trap p{font-size:14.5px;color:var(--ink-2);margin:6px 0 0}
+
+/* ═══════════ ШПАРГАЛКА ═══════════ */
+.tablewrap{overflow-x:auto;margin:20px calc(var(--pad) * -1) 0;padding:0 var(--pad);overscroll-behavior-x:contain}
+.cheat{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+.cheat th{text-align:left;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:0 10px 10px;border-bottom:1px solid var(--line)}
+.cheat td{padding:12px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+.cheat .nm{font-weight:600;white-space:nowrap}
+.cheat .nm i{display:block;font-style:italic;font-family:var(--serif);color:var(--green-d);font-weight:400;font-size:13px}
+.cheat .af{font-family:var(--serif);color:var(--green-d);font-size:15px;white-space:nowrap}
+.cheat .sm{color:var(--ink-3);font-size:12.5px}
+.cheat .exw{font-family:var(--serif);font-size:16px}
+.cheat.hide .af span{color:transparent;background:var(--green-soft);border-radius:6px;border:1px dashed var(--green-line)}
+.cheat.hide .exw b{color:transparent;background:var(--green-soft);border-radius:4px}
+
+/* ═══════════ НЕСТАНДАРТНОЕ: ПАРОМ ХВОСТОВ ═══════════ */
+.ferryx{margin-top:18px}
+.ferryx__sea{position:relative;height:150px;border-radius:var(--r-md);overflow:hidden;background:linear-gradient(180deg,#EAF4F8,#CFE6EC 62%,#BCD9DD)}
+.ferryx__boat{position:absolute;left:0;right:0;bottom:14px;width:min(300px,86%);margin:0 auto}
+.ferryx__boat svg{width:100%;height:auto;display:block}
+.ferryx__word{position:absolute;left:0;right:0;top:-6%;text-align:center;font-family:var(--serif);font-size:clamp(22px,6vw,30px);color:var(--ink);white-space:nowrap}
+.ferryx__word span{display:inline-block}
+.ferryx__word .t{color:var(--green-d)}
+.ferryx__word .t.bad{color:var(--red)}
+.ferryx__hint{text-align:center;color:var(--ink-2);font-size:15px;margin:12px 0 0;min-height:1.6em}
+.ferryx__opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.ferryx__opts button{min-height:52px;border:1px solid var(--line);border-radius:14px;background:#fff;font-family:var(--serif);font-size:20px}
+.ferryx__opts button.is-hit{border-color:var(--ak-good);background:var(--ak-good-soft)}
+.ferryx__opts button.is-miss{border-color:var(--ak-bad);background:var(--ak-bad-soft)}
+.ferryx__opts button small{font-family:var(--sans);font-size:11px;color:var(--ink-3);margin-left:4px}
+.ferryx__status{min-height:2.8em;color:var(--ink-2);font-size:14.5px;margin-top:10px}
+
+/* ═══════════ СВОЙ СКРОЛЛБАР: паром идёт через пролив ═══════════ */
+.sb{position:fixed;z-index:50;top:env(safe-area-inset-top);left:0;right:0;height:6px;pointer-events:none}
+.sb__track{position:absolute;inset:0;background:linear-gradient(90deg,#CFE6EC,#BCD9DD);pointer-events:auto;touch-action:none}
+.sb__fill{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p,0) * 100%);background:var(--green)}
+.sb__boat{position:absolute;top:4px;left:clamp(16px,calc(var(--p,0) * 100%),calc(100% - 16px));translate:-50% 0;width:30px;height:18px;pointer-events:none}
+.sb__boat svg{width:100%;height:100%;display:block}
+.sb__mark{position:absolute;left:calc(var(--at,0) * 100%);top:50%;translate:-50% -50%;width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer}
+.sb__mark::after{content:"";position:absolute;inset:10px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--green-d)}
+.sb__mark.is-read::after{background:var(--green-d)}
+.sb__mark:not(.major){display:none}
+@media(min-width:768px){
+  .sb{left:auto;right:14px;top:50%;translate:0 -50%;width:8px;height:min(64dvh,560px)}
+  .sb__track{border-radius:8px;background:linear-gradient(180deg,#CFE6EC,#BCD9DD)}
+  .sb__fill{width:auto;right:0;bottom:auto;height:calc(var(--p,0) * 100%);border-radius:8px}
+  .sb__boat{top:clamp(10px,calc(var(--p,0) * 100%),calc(100% - 10px));left:auto;right:12px;translate:0 -50%}
+  .sb__mark{left:50%;top:calc(var(--at,0) * 100%)}
+  .sb__mark:not(.major){display:block}
+  .sb__mark:not(.major)::after{inset:11px}
+}
+@media(prefers-reduced-motion:reduce){
+  #ferry,.gull,.gull-wing,.hero h1,.hero .dashline{animation:none}
+}
+</style>
+</head>
+<body>
+<main>
+
+<!-- ═══════════ 1. КРЮЧОК ═══════════ -->
+<section class="hero" data-section="story" data-words="81">
+  <div class="wrap hero-in">
+    <div class="hero-grid">
+      <div>
+        <h1>Восемь падежей турецкого языка</h1>
+        <div class="dashline"><span><i lang="tr">İsmin hâlleri</i> — восемь хвостов, которые решают всё</span></div>
+        <div class="pricetag"><b>Ни одного предлога</b><span>всё приклеивается сзади</span></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#CFE6EC"/><stop offset="100%" stop-color="#E8F3F1"/></linearGradient>
+            <linearGradient id="msq" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#DFE9E5"/></linearGradient>
+            <linearGradient id="twr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F4F8F6"/><stop offset="100%" stop-color="#D9E6E0"/></linearGradient>
+            <linearGradient id="hill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E6F1EA"/><stop offset="100%" stop-color="#D4E7DC"/></linearGradient>
+          </defs>
+          <path d="M0 268 Q90 236 168 258 T330 250 T486 262 T620 244 L620 400 L0 400Z" fill="url(#hill)" opacity=".85"/>
+          <g fill="url(#twr)" opacity=".9"><rect x="40" y="196" width="26" height="76" rx="4"/><rect x="76" y="216" width="20" height="56" rx="3"/><rect x="524" y="186" width="30" height="86" rx="5"/><rect x="562" y="212" width="22" height="60" rx="4"/></g>
+          <g>
+            <rect x="214" y="112" width="9" height="160" fill="url(#msq)"/><path d="M214 148h9v6h-9z" fill="#CBDDD4"/><path d="M218.5 92 226 116h-15z" fill="#EAF2EE"/><path d="M218.5 84v9" stroke="#9FC4B0" stroke-width="1.6" stroke-linecap="round"/>
+            <rect x="384" y="112" width="9" height="160" fill="url(#msq)"/><path d="M384 148h9v6h-9z" fill="#CBDDD4"/><path d="M388.5 92 396 116h-15z" fill="#EAF2EE"/><path d="M388.5 84v9" stroke="#9FC4B0" stroke-width="1.6" stroke-linecap="round"/>
+            <rect x="238" y="206" width="132" height="66" rx="4" fill="url(#msq)"/>
+            <path d="M238 206a34 34 0 0 1 68 0z" fill="#F2F7F4"/><path d="M302 206a34 34 0 0 1 68 0z" fill="#F2F7F4"/>
+            <path d="M248 208a56 56 0 0 1 112 0z" fill="url(#msq)"/>
+            <path d="M304 138v-13" stroke="#9FC4B0" stroke-width="1.8" stroke-linecap="round"/><circle cx="304" cy="122" r="3.4" fill="none" stroke="#9FC4B0" stroke-width="1.6"/>
+            <g fill="#D3E4DA"><rect x="256" y="228" width="7" height="16" rx="3.5"/><rect x="275" y="228" width="7" height="16" rx="3.5"/><rect x="294" y="228" width="7" height="16" rx="3.5"/><rect x="313" y="228" width="7" height="16" rx="3.5"/><rect x="332" y="228" width="7" height="16" rx="3.5"/><rect x="351" y="228" width="7" height="16" rx="3.5"/></g>
+          </g>
+          <g fill="url(#twr)"><rect x="120" y="230" width="42" height="42" rx="4"/><rect x="170" y="242" width="32" height="30" rx="4"/><rect x="410" y="228" width="46" height="44" rx="4"/><rect x="464" y="244" width="34" height="28" rx="4"/></g>
+          <rect x="0" y="272" width="620" height="128" fill="url(#sea)"/>
+          <g stroke="#BCD9DD" stroke-width="1.6" stroke-linecap="round" opacity=".75"><path d="M36 300h50M104 300h30M420 296h56M498 296h34M70 322h44M300 316h60M170 336h50M470 330h60M240 350h44"/></g>
+          <g id="ferry">
+            <path d="M0 0h58l-7 13H7z" fill="#FFFFFF" stroke="#CBDDD4" stroke-width="1.2"/>
+            <rect x="14" y="-13" width="30" height="13" rx="2.5" fill="#FFFFFF" stroke="#CBDDD4" stroke-width="1.2"/>
+            <rect x="27" y="-24" width="3.4" height="11" fill="#9FC4B0"/>
+            <path d="M-4 13h66" stroke="#BCD9DD" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <g stroke="#8FA9A2" stroke-width="2.1" fill="none" stroke-linecap="round">
+            <g class="gull" style="animation-duration:7s"><g class="gull-wing"><path d="M84 78q11-11 21 0"/><path d="M105 78q11-11 21 0"/></g></g>
+            <g class="gull" style="animation-duration:9s;animation-delay:-2s"><g class="gull-wing" style="animation-duration:1.8s"><path d="M470 62q9-9 17 0"/><path d="M487 62q9-9 17 0"/></g></g>
+            <g class="gull" style="animation-duration:11s;animation-delay:-5s"><g class="gull-wing" style="animation-duration:2.1s"><path d="M540 128q7-7 13 0"/><path d="M553 128q7-7 13 0"/></g></g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="narrow story" data-reveal>
+      <div class="story-mark"></div>
+      <p>Вы снимаете квартиру в Кадыкёе. Хозяина зовут Хакан. Он не говорит по-английски. Вы — по-турецки.</p>
+      <p>Первые месяцы вы объясняетесь одними существительными. <b lang="tr">Su. Kapı. Işık. Yok.</b> Хакан всё понимает: приходит, чинит, уходит.</p>
+      <p>Потом вы учите падежи. За один вечер — там восемь строчек, чего там учить.</p>
+      <p class="beat">И ещё долго говорите неправильно.</p>
+      <p class="kick">Выучить восемь строчек и понять, зачем они, — два разных дела.</p>
+    </div>
+
+    <div class="narrow card guess" data-reveal>
+      <p class="guess__q">Хакан звонит: <a-say>Neredesin?</a-say> — «где ты?». Вы дома. Что ответите?</p>
+      <div class="row" role="group" aria-label="Варианты ответа">
+        <button type="button" class="chip" data-guess="ev">Ev.</button>
+        <button type="button" class="chip" data-guess="evde">Evde.</button>
+        <button type="button" class="chip" data-guess="eve">Eve.</button>
+      </div>
+      <p class="guess__a" id="guessA" aria-live="polite">Угадайте. Ошибиться здесь не страшно.</p>
+    </div>
+  </div>
+  <div style="height:48px"></div>
+</section>
+
+<!-- ═══════════ 2. МЕХАНИЗМ ═══════════ -->
+<section class="sec" data-section="mechanism" data-words="95">
+  <div class="wrap narrow">
+    <div class="eyebrow">Механизм</div>
+    <h2 data-split>Русский ставит слово спереди. Турецкий приклеивает сзади.</h2>
+    <p class="lead">В русском смысл держат предлоги: <em>в</em> доме, <em>из</em> дома, <em>к</em> дому. В турецком предлогов нет. Ни одного. Смысл держат хвосты.</p>
+
+    <div class="flip" id="flip">
+      <div class="flip__r"><span class="flip__tag">ру</span><span class="fw fw--pre" id="fPre">в</span><span class="fw fw--base" id="fRuW">доме</span></div>
+      <div class="flip__mid">предлог уезжает назад и становится хвостом</div>
+      <div class="flip__r"><span class="flip__tag">тр</span><span class="fw fw--base" id="fTrW" lang="tr">ev</span><span class="fw fw--suf" id="fSuf" lang="tr">de</span></div>
+      <div class="flip__ru" id="fRu">evde — «дом-в». Местный падеж.</div>
+      <div class="dots" id="fDots" role="group" aria-label="Примеры"></div>
+      <div class="row"><button type="button" class="btn btn--ghost" id="fAgain">↻ Ещё раз</button></div>
+    </div>
+
+    <p class="sub" style="margin-top:22px">Пока хвосты не встанут, фраза не едет. И в голове копятся вопросы:</p>
+    <ul class="qlist">
+      <li>Почему <b lang="tr">balık</b> — «рыба», а <b lang="tr">balığı</b> — «та самая рыба»?</li>
+      <li>Куда пропала <b lang="tr">k</b>, если слово было <b lang="tr">balık</b>?</li>
+      <li>Почему <b lang="tr">-da</b> иногда становится <b lang="tr">-ta</b>?</li>
+      <li>Откуда в <b lang="tr">Ankara'ya</b> буква <b lang="tr">y</b>?</li>
+      <li>И почему <b lang="tr">Türkçe</b> — это падеж?</li>
+    </ul>
+    <p class="sub">Ответ на каждый — ниже. Не таблица, а механизм: как турок выбирает хвост и почему выбора у него на самом деле нет.</p>
+  </div>
+</section>
+
+<!-- ═══════════ 3. ДОМ ═══════════ -->
+<section class="sec" data-section="house" data-words="65" style="padding-top:0">
+  <div class="wrap narrow">
+    <div class="eyebrow">Главная идея за 30 секунд</div>
+    <h2 data-split>Один дом. Шесть хвостов.</h2>
+    <p class="lead">Слово <b lang="tr">ev</b> — дом. Оно не меняется. Меняется только то, что приклеено сзади. Нажимайте и смотрите на человечка.</p>
+
+    <div class="scene">
+      <svg viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Человек и дом: где он относительно дома">
+        <defs>
+          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#EDF3F0"/></linearGradient>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFE9A8" stop-opacity=".9"/><stop offset="100%" stop-color="#FFE9A8" stop-opacity="0"/></radialGradient>
+        </defs>
+        <path d="M0 212h520" stroke="#C9DED4" stroke-width="2" stroke-linecap="round"/>
+        <g opacity=".8"><rect x="446" y="176" width="6" height="36" rx="3" fill="#BFD5C8"/><circle cx="449" cy="166" r="22" fill="#DCEDE3"/><circle cx="434" cy="176" r="14" fill="#E6F3EA"/><circle cx="464" cy="176" r="13" fill="#E6F3EA"/></g>
+        <circle id="hGlow" cx="265" cy="160" r="86" fill="url(#glow)" opacity="0"/>
+        <g>
+          <rect x="196" y="132" width="138" height="80" rx="6" fill="url(#wall)" stroke="#CBDDD4" stroke-width="1.6"/>
+          <path d="M186 134 265 82l79 52z" fill="#F4F8F6" stroke="#CBDDD4" stroke-width="1.6" stroke-linejoin="round"/>
+          <rect x="248" y="164" width="34" height="48" rx="3" fill="#E3EFE8" stroke="#CBDDD4" stroke-width="1.4"/>
+          <rect x="212" y="152" width="26" height="24" rx="3" fill="#E9F2EE" stroke="#CBDDD4" stroke-width="1.4"/>
+          <rect x="294" y="152" width="26" height="24" rx="3" fill="#E9F2EE" stroke="#CBDDD4" stroke-width="1.4"/>
+        </g>
+        <rect id="hRing" x="176" y="70" width="178" height="152" rx="16" fill="none" stroke="#42A86B" stroke-width="2.4" stroke-dasharray="7 7" opacity="0"/>
+        <g id="hKey" opacity="0"><circle cx="372" cy="106" r="11" fill="none" stroke="#C9903B" stroke-width="2.6"/><path d="M372 117v22M372 130h9M372 136h7" stroke="#C9903B" stroke-width="2.6" stroke-linecap="round"/></g>
+        <g id="hArrow" opacity="0"><path d="M96 96h96" stroke="#42A86B" stroke-width="2.6" stroke-linecap="round"/><path id="hHead" d="M184 88l10 8-10 8" fill="none" stroke="#42A86B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g id="hFriend" opacity="0"><circle cx="150" cy="168" r="9" fill="#C9903B"/><path d="M150 178v18M150 183l-9 7M150 183l9 7M150 196l-8 12M150 196l8 12" stroke="#C9903B" stroke-width="4" stroke-linecap="round"/></g>
+        <g id="hWalker">
+          <circle cx="70" cy="164" r="11" fill="#42A86B"/>
+          <path d="M70 176v22" stroke="#42A86B" stroke-width="5.5" stroke-linecap="round"/>
+          <path d="M70 182l-11 9M70 182l11 9" stroke="#42A86B" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M70 198l-10 14M70 198l10 14" stroke="#42A86B" stroke-width="4.5" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="row" role="group" aria-label="Падежи слова ev">
+        <button type="button" class="chip" data-case="ev" aria-pressed="true">ev</button>
+        <button type="button" class="chip" data-case="evi" aria-pressed="false">evi</button>
+        <button type="button" class="chip" data-case="eve" aria-pressed="false">eve</button>
+        <button type="button" class="chip" data-case="evde" aria-pressed="false">evde</button>
+        <button type="button" class="chip" data-case="evden" aria-pressed="false">evden</button>
+        <button type="button" class="chip" data-case="evin" aria-pressed="false">evin</button>
+      </div>
+      <div class="scene__cap" id="hCap" aria-live="polite"><b lang="tr">ev<em></em></b><span>дом · просто слово из словаря, без хвоста</span></div>
+    </div>
+
+    <div class="story">
+      <p>Слово <b lang="tr">ev</b> не изменилось ни разу. Изменился только хвост. Один суффикс — один смысл.</p>
+      <p class="kick">Турецкое слово — это поезд. Корень впереди, вагоны сзади. Порядок вагонов не обсуждается.</p>
+    </div>
+    <svg class="train" viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Поезд: корень и вагоны-хвосты">
+      <path d="M0 78h520" stroke="#C9DED4" stroke-width="2"/>
+      <g id="loco"><rect x="20" y="26" width="120" height="44" rx="10" fill="#2E8552"/><rect x="30" y="16" width="36" height="16" rx="4" fill="#2E8552"/><text x="80" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#fff">ev</text><circle cx="48" cy="74" r="7" fill="#1C1D1B"/><circle cx="112" cy="74" r="7" fill="#1C1D1B"/></g>
+      <g class="wagon"><rect x="150" y="30" width="96" height="40" rx="8" fill="#EDF7F1" stroke="#BFE3CD"/><text x="198" y="57" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="#2E8552">-ler</text><circle cx="170" cy="74" r="6" fill="#55575A"/><circle cx="226" cy="74" r="6" fill="#55575A"/></g>
+      <g class="wagon"><rect x="256" y="30" width="96" height="40" rx="8" fill="#EDF7F1" stroke="#BFE3CD"/><text x="304" y="57" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="#2E8552">-im</text><circle cx="276" cy="74" r="6" fill="#55575A"/><circle cx="332" cy="74" r="6" fill="#55575A"/></g>
+      <g class="wagon"><rect x="362" y="30" width="96" height="40" rx="8" fill="#FDF1E8" stroke="#EBD3BE"/><text x="410" y="57" text-anchor="middle" font-family="Georgia,serif" font-size="20" fill="#B9743A">-de</text><circle cx="382" cy="74" r="6" fill="#55575A"/><circle cx="438" cy="74" r="6" fill="#55575A"/></g>
+    </svg>
+    <p class="tiny" style="text-align:center"><b lang="tr">evlerimde</b> — в моих домах. Падеж всегда едет последним вагоном.</p>
+    <div class="row"><button type="button" class="btn btn--ghost" id="trainBtn" data-say="evlerimde">↻ Собрать поезд</button></div>
+  </div>
+</section>
+
+<!-- ═══════════ 4. ГАРМОНИЯ ═══════════ -->
+<section class="sec sec--cream" data-section="harmony" data-words="85">
+  <div class="wrap narrow">
+    <div class="eyebrow">Фундамент</div>
+    <h2 data-split>Сначала — два закона. Без них падежи не выучить.</h2>
+    <div class="story">
+      <p>Ученик спрашивает преподавательницу, почему в одном слове <b lang="tr">-da</b>, а в другом <b lang="tr">-de</b>.</p>
+      <p>«Послушай, как звучит». Звучит одинаково. «Значит, пока не слышишь. Через полгода услышишь».</p>
+      <p class="beat">Через полгода он слышит.</p>
+      <p class="kick">Турку не надо выбирать хвост — он его слышит. Мы пока выбираем. Вот по этим двум таблицам.</p>
+    </div>
+
+    <div class="card">
+      <p class="sub" style="text-align:center;margin:0 auto">Нажмите последнюю гласную слова</p>
+      <div class="vpick" role="group" aria-label="Последняя гласная слова">
+        <button type="button" class="vbtn" data-v="a" aria-pressed="true">a</button>
+        <button type="button" class="vbtn" data-v="ı" aria-pressed="false">ı</button>
+        <button type="button" class="vbtn" data-v="o" aria-pressed="false">o</button>
+        <button type="button" class="vbtn" data-v="u" aria-pressed="false">u</button>
+        <button type="button" class="vbtn" data-v="e" aria-pressed="false">e</button>
+        <button type="button" class="vbtn" data-v="i" aria-pressed="false">i</button>
+        <button type="button" class="vbtn" data-v="ö" aria-pressed="false">ö</button>
+        <button type="button" class="vbtn" data-v="ü" aria-pressed="false">ü</button>
+      </div>
+      <p class="lbl">Гармония на «2» — дательный, местный, исходный, творительный, восьмой</p>
+      <div class="harm harm--two">
+        <div class="hcell" data-set2="a"><div class="vw" lang="tr">a · ı · o · u</div><div class="ar">▼</div><div class="rs" lang="tr">a</div></div>
+        <div class="hcell" data-set2="e"><div class="vw" lang="tr">e · i · ö · ü</div><div class="ar">▼</div><div class="rs" lang="tr">e</div></div>
+      </div>
+      <p class="lbl">Гармония на «4» — винительный и родительный</p>
+      <div class="harm harm--four">
+        <div class="hcell" data-set4="ı"><div class="vw" lang="tr">a · ı</div><div class="ar">▼</div><div class="rs" lang="tr">ı</div></div>
+        <div class="hcell" data-set4="i"><div class="vw" lang="tr">e · i</div><div class="ar">▼</div><div class="rs" lang="tr">i</div></div>
+        <div class="hcell" data-set4="u"><div class="vw" lang="tr">o · u</div><div class="ar">▼</div><div class="rs" lang="tr">u</div></div>
+        <div class="hcell" data-set4="ü"><div class="vw" lang="tr">ö · ü</div><div class="ar">▼</div><div class="rs" lang="tr">ü</div></div>
+      </div>
+      <p class="sub" style="margin:20px auto 0;text-align:center">Правило одно: гласная хвоста повторяет то, что делает язык на последней гласной корня. Впереди рта — впереди. Сзади — сзади.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 5. ЗВУКИ ═══════════ -->
+<section class="sec" data-section="sounds" data-words="84">
+  <div class="wrap narrow">
+    <div class="eyebrow">Три мелочи, которые всё объясняют</div>
+    <h2 data-split>Глухая согласная, буква-спасатель и мягкая k</h2>
+
+    <div class="card">
+      <h4 style="text-align:center">Глухая согласная делает хвост глухим</h4>
+      <p class="sub" style="text-align:center;margin:10px auto 0">Слово кончается на глухую — и <b lang="tr">d</b> в хвосте становится <b lang="tr">t</b>. Все глухие спрятаны в одной фразе:</p>
+      <div class="fistik" id="fistik" aria-hidden="true">
+        <span data-h>f</span><span>ı</span><span data-h>s</span><span data-h>t</span><span>ı</span><span data-h>k</span><span data-h>ç</span><span>ı</span><span class="gap"></span><span data-h>ş</span><span>a</span><span data-h>h</span><span>a</span><span data-h>p</span>
+      </div>
+      <p class="tiny" style="text-align:center"><span lang="tr">fıstıkçı şahap</span> — «продавец фисташек Шахап». Его согласные и есть все глухие.</p>
+      <p class="lbl">Проверьте сами: где?</p>
+      <div class="row" role="group" aria-label="Слова">
+        <button type="button" class="chip" data-cons="ev">ev</button>
+        <button type="button" class="chip" data-cons="uçak">uçak</button>
+        <button type="button" class="chip" data-cons="okul">okul</button>
+        <button type="button" class="chip" data-cons="kitap">kitap</button>
+        <button type="button" class="chip" data-cons="gün">gün</button>
+        <button type="button" class="chip" data-cons="sınıf">sınıf</button>
+      </div>
+      <div class="cons-out" id="consOut" lang="tr">ev<u><i>d</i>e</u></div>
+      <p class="cons-why" id="consWhy">в доме · <b lang="tr">v</b> звонкая, поэтому <b lang="tr">-de</b></p>
+    </div>
+
+    <div class="card">
+      <h4 style="text-align:center">Буква-спасатель <span class="g">y</span></h4>
+      <p class="sub" style="text-align:center;margin:10px auto 0">Две гласные подряд турецкий не терпит. Слово кончается на гласную, хвост начинается с гласной — между ними встаёт <b lang="tr">y</b>.</p>
+      <div class="buffer" id="buffer" lang="tr"><span class="w" id="bufW">Ankar</span><span class="v1" id="bufV1">a'</span><span class="y" id="bufY">y</span><span class="v2" id="bufV2">a</span></div>
+      <p class="tiny" id="bufNote" style="text-align:center;min-height:2.6em">Ankara'ya — в Анкару</p>
+      <div class="row"><button type="button" class="btn btn--ghost" id="bufBtn">Следующий пример</button></div>
+    </div>
+
+    <div class="card">
+      <h4 style="text-align:center">Конечная <span class="g">k</span> перед гласной смягчается</h4>
+      <p class="sub" style="text-align:center;margin:10px auto 0">Хвост начинается с гласной — <b lang="tr">k</b> становится <b lang="tr">ğ</b>, а <b lang="tr">p</b> становится <b lang="tr">b</b>. Отсюда <b lang="tr">balığı</b>.</p>
+      <div class="soft" id="soft" lang="tr"><span>balı</span><span class="c" id="softC">ğ</span><span class="a" id="softA">ı</span></div>
+      <p class="tiny" id="softNote" style="text-align:center;min-height:1.6em">balık → balığı · ту самую рыбу</p>
+      <div class="row"><button type="button" class="btn btn--ghost" id="softBtn">Следующее слово</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 6. МАРШРУТ ═══════════ -->
+<section class="sec sec--cream" data-section="route" data-words="42">
+  <div class="wrap">
+    <div class="narrow" style="margin-left:0">
+      <h2 data-split>Восемь падежей — по порядку</h2>
+      <p class="sub" style="margin-top:10px">Листайте вбок. Нажмите на карточку — перейдёте к падежу.</p>
+    </div>
+    <div class="rail" id="rail">
+      <a class="rcard" href="#p1"><span class="n">01</span><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="8" y="12" width="24" height="18" rx="4" fill="none" stroke="#2E8552" stroke-width="2.4"/></svg><span><h4>Именительный</h4><span class="tr" lang="tr">Yalın hal</span><div class="q"><span lang="tr">Kim? Ne?</span> — Кто? Что?</div><span class="pill">—</span></span></a>
+      <a class="rcard" href="#p2"><span class="n">02</span><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="12" fill="none" stroke="#2E8552" stroke-width="2.4" stroke-dasharray="4 4"/><circle cx="20" cy="20" r="4" fill="#2E8552"/></svg><span><h4>Винительный</h4><span class="tr" lang="tr">Belirtme hali</span><div class="q"><span lang="tr">Kimi? Neyi?</span> — Кого? Что именно?</div><span class="pill" lang="tr">-ı · -i · -u · -ü</span></span></a>
+      <a class="rcard" href="#p3"><span class="n">03</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 20h24M24 13l7 7-7 7" fill="none" stroke="#2E8552" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><h4>Дательный</h4><span class="tr" lang="tr">Yönelme hali</span><div class="q"><span lang="tr">Kime? Nereye?</span> — Кому? Куда?</div><span class="pill" lang="tr">-a · -e</span></span></a>
+      <a class="rcard" href="#p4"><span class="n">04</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 18 20 8l12 10v14H8z" fill="none" stroke="#2E8552" stroke-width="2.4" stroke-linejoin="round"/><circle cx="20" cy="24" r="3" fill="#2E8552"/></svg><span><h4>Местный</h4><span class="tr" lang="tr">Bulunma hali</span><div class="q"><span lang="tr">Nerede? Kimde?</span> — Где? У кого?</div><span class="pill" lang="tr">-da · -de · -ta · -te</span></span></a>
+      <a class="rcard" href="#p5"><span class="n">05</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M34 20H10M16 13l-7 7 7 7" fill="none" stroke="#2E8552" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><h4>Исходный</h4><span class="tr" lang="tr">Ayrılma hali</span><div class="q"><span lang="tr">Nereden? Kimden?</span> — Откуда? От кого?</div><span class="pill" lang="tr">-dan · -den · -tan · -ten</span></span></a>
+      <a class="rcard" href="#p6"><span class="n">06</span><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="14" cy="20" r="7" fill="none" stroke="#2E8552" stroke-width="2.4"/><circle cx="26" cy="20" r="7" fill="none" stroke="#2E8552" stroke-width="2.4"/></svg><span><h4>Творительный</h4><span class="tr" lang="tr">Vasıta hali</span><div class="q"><span lang="tr">Kiminle? Ne ile?</span> — С кем? На чём?</div><span class="pill" lang="tr">-la · -le</span></span></a>
+      <a class="rcard" href="#p7"><span class="n">07</span><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="15" cy="15" r="6" fill="none" stroke="#2E8552" stroke-width="2.4"/><path d="M15 21v13M15 28h6M15 33h5" stroke="#2E8552" stroke-width="2.4" stroke-linecap="round"/></svg><span><h4>Родительный</h4><span class="tr" lang="tr">İlgi hali</span><div class="q"><span lang="tr">Kimin? Neyin?</span> — Чей? Чего?</div><span class="pill" lang="tr">-ın · -in · -un · -ün</span></span></a>
+      <a class="rcard" href="#p8"><span class="n">08</span><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M8 12h24v14H18l-6 6v-6H8z" fill="none" stroke="#2E8552" stroke-width="2.4" stroke-linejoin="round"/></svg><span><h4>Падеж мнения</h4><span class="tr" lang="tr">Eşitlik hali</span><div class="q"><span lang="tr">Kimce? Nece?</span> — По-чьему? Как?</div><span class="pill" lang="tr">-ca · -ce</span></span></a>
+    </div>
+    <div class="rprog"><i id="railBar"></i></div>
+  </div>
+</section>
+
+<!-- ═══════════ 01 ИМЕНИТЕЛЬНЫЙ ═══════════ -->
+<section class="case" id="p1" data-section="nom" data-words="66" style="border-top:0">
+  <div class="wrap narrow">
+    <div class="case-no"><b>1</b><span>Именительный · <i lang="tr">Yalın hal</i></span></div>
+    <h2 data-split>Слово без хвоста<span class="tr" lang="tr">Yalın hal</span></h2>
+    <div class="story">
+      <p>Первое турецкое слово почти у всех — <b lang="tr">çay</b>. Çay в меню, çay в словаре, çay в голове. Ничего не приклеено.</p>
+      <p>Это и есть именительный падеж. Голая форма. В словаре все слова стоят в нём.</p>
+      <p class="kick">Хороший падеж. Учить нечего.</p>
+    </div>
+    <div class="stage">
+      <div class="stage__word" id="nomWord" lang="tr"><span>çay</span><span class="bad" id="nomTail"></span></div>
+      <p class="stage__ru" id="nomRu">чай · словарная форма</p>
+      <div class="row"><button type="button" class="btn btn--ghost" id="nomBtn">Попробовать приклеить хвост</button></div>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">существительное</span><span class="op">+</span><span class="tok tok--aff">ничего</span></div>
+      <p class="sub" style="margin:0">Отвечает на <b lang="tr">Kim?</b> (кто?) и <b lang="tr">Ne?</b> (что?).</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Dün çay içtim."><span class="say-t">Dün <u>çay</u> içtim.</span></a-say></div><div class="ru">Вчера я пил чай.</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Ahmet futbolu seviyor."><span class="say-t"><u>Ahmet</u> futbolu seviyor.</span></a-say></div><div class="ru">Ахмет любит футбол.</div></div>
+      </div>
+      <div class="note"><b lang="tr">Ahmet</b> стоит голым, а <b lang="tr">futbol</b> уже с хвостом — <b lang="tr">futbolu</b>. Почему — прямо ниже.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 02 ВИНИТЕЛЬНЫЙ ═══════════ -->
+<section class="case" id="p2" data-section="acc" data-words="121">
+  <div class="wrap narrow">
+    <div class="case-no"><b>2</b><span>Винительный · <i lang="tr">Belirtme hali</i></span></div>
+    <h2 data-split>Не «рыба». Вот эта рыба.<span class="tr" lang="tr">Belirtme hali</span></h2>
+    <div class="story">
+      <p>Рыбный рынок в Кадыкёе. Вы говорите продавцу: <b lang="tr">balık istiyorum</b>. Он обводит рукой весь прилавок: выбирайте.</p>
+      <p>Вы показываете на одну рыбу: <b lang="tr">balık</b>. Он снова обводит прилавок. Сзади кто-то подсказывает: <b lang="tr">balığı</b>. Продавец берёт ту самую рыбу.</p>
+      <p class="beat">Один хвост — и «какая-нибудь рыба» стала «вот этой».</p>
+      <p class="kick">В русском «купил рыбу» и «купил ту рыбу» — одно слово. У турка — два разных.</p>
+    </div>
+    <div class="stage">
+      <svg viewBox="0 0 360 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Три стакана воды">
+        <path d="M20 104h320" stroke="#E5E4DE" stroke-width="3" stroke-linecap="round"/>
+        <g class="glass"><path d="M60 34h50l-6 68H66z" fill="#EAF4F8" stroke="#9FC4B0" stroke-width="2"/><path d="M63 56h44l-4 46H67z" fill="#CFE6EC"/></g>
+        <g class="glass"><path d="M155 34h50l-6 68h-38z" fill="#EAF4F8" stroke="#9FC4B0" stroke-width="2"/><path d="M158 56h44l-4 46h-36z" fill="#CFE6EC"/></g>
+        <g class="glass"><path d="M250 34h50l-6 68h-38z" fill="#EAF4F8" stroke="#9FC4B0" stroke-width="2"/><path d="M253 56h44l-4 46h-36z" fill="#CFE6EC"/></g>
+        <rect id="accRing" x="140" y="20" width="80" height="94" rx="14" fill="none" stroke="#42A86B" stroke-width="2.6" stroke-dasharray="7 6" opacity="0"/>
+      </svg>
+      <div class="seg" role="group" aria-label="Две фразы">
+        <button type="button" data-acc="0" aria-pressed="true" lang="tr">Su içtim.</button>
+        <button type="button" data-acc="1" aria-pressed="false" lang="tr">Suyu içtim.</button>
+      </div>
+      <p class="stage__ru" id="accRu">Я попил воды — какой-то, неважно какой.</p>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">слово</span><span class="op">+</span><span class="tok tok--aff">-ı / -i / -u / -ü</span><span class="op">·</span><span>гармония на 4</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Kimi?</b> (кого?) и <b lang="tr">Neyi?</b> (что именно?). Ставится, только когда предмет конкретный.</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Ben mimarı aradım."><span class="say-t">Ben mimar<u>ı</u> aradım.</span></a-say></div><div class="ru">Я позвонил тому самому архитектору.</div><div class="qq">после a → ı</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="İstanbul'u özledim."><span class="say-t">İstanbul'<u>u</u> özledim.</span></a-say></div><div class="ru">Я соскучился по Стамбулу.</div><div class="qq">после u → u · имя собственное через апостроф</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="O tabloyu çizdim."><span class="say-t">O tablo<u>yu</u> çizdim.</span></a-say></div><div class="ru">Я нарисовал ту картину.</div><div class="qq">слово на гласную → буфер y</div></div>
+      </div>
+      <div class="note">Простая проверка: если перед русским словом можно поставить <b>этот, тот, вот этот</b> и смысл не сломается — нужен хвост. Нельзя — хвоста нет.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 03 ДАТЕЛЬНЫЙ ═══════════ -->
+<section class="case" id="p3" data-section="dat" data-words="88">
+  <div class="wrap narrow">
+    <div class="case-no"><b>3</b><span>Дательный · <i lang="tr">Yönelme hali</i></span></div>
+    <h2 data-split>Куда<span class="tr" lang="tr">Yönelme hali</span></h2>
+    <div class="story">
+      <p>Вы садитесь в долмуш — микроавтобус, который едет, когда наполнится. Водитель: <b lang="tr">nereye?</b> Вы: <b lang="tr">Kadıköy</b>.</p>
+      <p>Он ждёт. Вы ждёте. Долмуш стоит. Наконец он переспрашивает: <b lang="tr">Kadıköy'e mi?</b> <b lang="tr">Evet</b>. Поехали.</p>
+      <p class="kick">Вы назвали место. Он ждал направление. Между ними — одна буква <b lang="tr">e</b>.</p>
+    </div>
+    <div class="stage">
+      <svg viewBox="0 0 360 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Долмуш на дороге">
+        <path d="M0 96h360" stroke="#C9DED4" stroke-width="3"/>
+        <path d="M20 100h40M90 100h40M160 100h40M230 100h40M300 100h40" stroke="#fff" stroke-width="2"/>
+        <g id="dolmus">
+          <rect x="30" y="40" width="110" height="46" rx="10" fill="#F2C94C"/>
+          <rect x="40" y="48" width="22" height="16" rx="3" fill="#EAF4F8"/><rect x="68" y="48" width="22" height="16" rx="3" fill="#EAF4F8"/><rect x="96" y="48" width="22" height="16" rx="3" fill="#EAF4F8"/>
+          <rect x="122" y="48" width="12" height="22" rx="3" fill="#EAF4F8"/>
+          <circle cx="56" cy="88" r="9" fill="#1C1D1B"/><circle cx="118" cy="88" r="9" fill="#1C1D1B"/>
+        </g>
+        <g id="dBubble" opacity="0"><rect x="150" y="8" width="96" height="30" rx="12" fill="#fff" stroke="#E5E4DE"/><text x="198" y="28" text-anchor="middle" font-family="Georgia,serif" font-size="15" fill="#55575A">nereye?</text></g>
+        <g opacity=".85"><rect x="300" y="30" width="8" height="66" fill="#BFD5C8"/><rect x="276" y="20" width="62" height="18" rx="4" fill="#2E8552"/><text x="307" y="33" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#fff">Kadıköy</text></g>
+      </svg>
+      <div class="row" role="group" aria-label="Что сказать водителю">
+        <button type="button" class="chip" data-dat="0">Kadıköy</button>
+        <button type="button" class="chip" data-dat="1">Kadıköy'e</button>
+      </div>
+      <p class="stage__ru" id="datRu">Скажите водителю, куда ехать.</p>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">слово</span><span class="op">+</span><span class="tok tok--aff">-a / -e</span><span class="op">·</span><span>гармония на 2</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Kime?</b> (кому?), <b lang="tr">Neye?</b> (чему?), <b lang="tr">Nereye?</b> (куда?). Точка, к которой направлено действие.</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Yarın Ankara'ya gidiyoruz."><span class="say-t">Yarın Ankara'<u>ya</u> gidiyoruz.</span></a-say></div><div class="ru">Завтра мы едем в Анкару.</div><div class="qq">слово на гласную → <span lang="tr">-ya</span></div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Evde çocuğa bakıyorum."><span class="say-t">Evde çocu<u>ğa</u> bakıyorum.</span></a-say></div><div class="ru">Дома я смотрю за ребёнком.</div><div class="qq">k смягчилась в ğ</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Denize bakıyorum."><span class="say-t">Deniz<u>e</u> bakıyorum.</span></a-say></div><div class="ru">Я смотрю на море.</div><div class="qq">глагол <span lang="tr">bakmak</span> всегда требует этот падеж</div></div>
+      </div>
+      <div class="note"><b>Два исключения на первую неделю.</b> Не <s lang="tr">bene</s>, а <b lang="tr">bana</b> — мне. Не <s lang="tr">sene</s>, а <b lang="tr">sana</b> — тебе. Больше исключений здесь нет.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 04 МЕСТНЫЙ ═══════════ -->
+<section class="case" id="p4" data-section="loc" data-words="94">
+  <div class="wrap narrow">
+    <div class="case-no"><b>4</b><span>Местный · <i lang="tr">Bulunma hali</i></span></div>
+    <h2 data-split>Где<span class="tr" lang="tr">Bulunma hali</span></h2>
+    <div class="story">
+      <p>Помните звонок Хакана? <b lang="tr">Neredesin</b> — где ты? Ответ <b lang="tr">ev</b> значит просто «дом». Хакан приедет выяснять, чей дом. А нужно «в доме» — <b lang="tr">evde</b>.</p>
+      <p class="kick">Две буквы отделяют человека, который дома, от человека, который зачем-то говорит в трубку слово «дом».</p>
+    </div>
+    <div class="stage">
+      <p class="sub" style="margin:0 auto">Соберите хвост из двух вопросов</p>
+      <div>
+        <div class="seg" role="group" aria-label="Последняя гласная">
+          <button type="button" data-locv="a" aria-pressed="true" lang="tr">a ı o u</button>
+          <button type="button" data-locv="e" aria-pressed="false" lang="tr">e i ö ü</button>
+        </div>
+        <div class="seg" role="group" aria-label="Последняя согласная">
+          <button type="button" data-locc="d" aria-pressed="true">звонкая</button>
+          <button type="button" data-locc="t" aria-pressed="false">глухая</button>
+        </div>
+      </div>
+      <div class="grid4" lang="tr">
+        <div data-loc="da"><b>-da</b>okul<b style="display:inline;font-size:inherit">da</b></div>
+        <div data-loc="de"><b>-de</b>ev<b style="display:inline;font-size:inherit">de</b></div>
+        <div data-loc="ta"><b>-ta</b>uçak<b style="display:inline;font-size:inherit">ta</b></div>
+        <div data-loc="te"><b>-te</b>köpek<b style="display:inline;font-size:inherit">te</b></div>
+      </div>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">слово</span><span class="op">+</span><span class="tok tok--aff">-da / -de / -ta / -te</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Nerede?</b> (где?), <b lang="tr">Kimde?</b> (у кого?). Гармония на 2 плюс правило глухих.</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Uçakta çok az kişi vardı."><span class="say-t">Uça<u>kta</u> çok az kişi vardı.</span></a-say></div><div class="ru">В самолёте было очень мало людей.</div><div class="qq">глухая k → <span lang="tr">-ta</span></div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Arkadaşlarımda kitap yoktu."><span class="say-t">Arkadaşlarım<u>da</u> kitap yoktu.</span></a-say></div><div class="ru">У друзей не было книг.</div><div class="qq">у кого? · m звонкая, гласная a → <span lang="tr">-da</span></div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Ben İstanbul'da yaşıyorum."><span class="say-t">Ben İstanbul'<u>da</u> yaşıyorum.</span></a-say></div><div class="ru">Я живу в Стамбуле.</div><div class="qq">имя собственное через апостроф</div></div>
+      </div>
+      <div class="note"><b>Бонус.</b> Этим же падежом турецкий говорит «у меня есть»: <a-say>Bende para var.</a-say> Буквально «во мне деньги есть». Отдельного глагола «иметь» нет.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 05 ИСХОДНЫЙ ═══════════ -->
+<section class="case" id="p5" data-section="abl" data-words="73">
+  <div class="wrap narrow">
+    <div class="case-no"><b>5</b><span>Исходный · <i lang="tr">Ayrılma hali</i></span></div>
+    <h2 data-split>Откуда<span class="tr" lang="tr">Ayrılma hali</span></h2>
+    <div class="story">
+      <p>Второй вопрос незнакомца в Турции — <b lang="tr">nerelisin?</b> Откуда ты? Многие называют страну: <b lang="tr">Rusya</b>. Человек кивает и ждёт продолжения.</p>
+      <p>Хороший ответ — <b lang="tr">Rusya'danım</b>. Одно слово: страна, «из» и «я».</p>
+      <p class="kick">Русский тратит на это три слова. Турецкий — одно.</p>
+    </div>
+    <div class="stage">
+      <div class="stage__word" id="nedenW" lang="tr" data-say="neden"><span class="p1">ne</span><span class="aff p2">den</span></div>
+      <p class="stage__ru" id="nedenRu">почему?</p>
+      <div class="row"><button type="button" class="btn btn--ghost" id="nedenBtn">Разрезать слово</button></div>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">слово</span><span class="op">+</span><span class="tok tok--aff">-dan / -den / -tan / -ten</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Nereden?</b> (откуда?), <b lang="tr">Kimden?</b> (от кого?). Те же правила, что у местного: гармония на 2 и глухие.</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Okuldan geliyorum."><span class="say-t">Okul<u>dan</u> geliyorum.</span></a-say></div><div class="ru">Я иду из школы.</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Gazeteyi arkadaşımdan alıyorum."><span class="say-t">Gazeteyi arkadaşım<u>dan</u> alıyorum.</span></a-say></div><div class="ru">Я беру газету у друга.</div><div class="qq">по-русски «у друга», по-турецки «от друга»</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Köpekten korkuyorum."><span class="say-t">Köpek<u>ten</u> korkuyorum.</span></a-say></div><div class="ru">Я боюсь собаки.</div><div class="qq">буквально «от собаки» · глухая k → <span lang="tr">-ten</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 06 ТВОРИТЕЛЬНЫЙ ═══════════ -->
+<section class="case" id="p6" data-section="ins" data-words="79">
+  <div class="wrap narrow">
+    <div class="case-no"><b>6</b><span>Творительный · <i lang="tr">Vasıta hali</i></span></div>
+    <h2 data-split>С кем и на чём<span class="tr" lang="tr">Vasıta hali</span></h2>
+    <div class="story">
+      <p>Первое занятие на курсе. Просят рассказать о себе. Вы говорите: <b lang="tr">Üniversiteye gidiyorum. Kardeşim. Otobüs.</b></p>
+      <p>Преподаватель поправляет: <b lang="tr">kardeşimle, otobüsle</b>.</p>
+      <p class="beat">Две буквы — и «брат, автобус» стало «с братом, на автобусе».</p>
+      <p class="kick">«С кем» и «на чём» — один хвост. Человек, автобус, телефон — для языка всё это средство.</p>
+    </div>
+    <div class="stage">
+      <div class="stage__word" id="ileW" lang="tr"><span>kardeşim</span><span class="sp">&nbsp;</span><span class="aff i1">i</span><span class="aff i2">le</span></div>
+      <p class="stage__ru" id="ileRu">раздельно — звучит книжно</p>
+      <div class="row"><button type="button" class="btn btn--ghost" id="ileBtn">Склеить</button></div>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">слово</span><span class="op">+</span><span class="tok tok--aff">-la / -le</span><span class="op">·</span><span>гармония на 2</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Kiminle?</b> (с кем?), <b lang="tr">Ne ile?</b> (с чем? на чём?).</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Üniversiteye kardeşimle gidiyorum."><span class="say-t">Üniversiteye kardeşim<u>le</u> gidiyorum.</span></a-say></div><div class="ru">Я хожу в университет с братом.</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Onlarla telefonla konuşuyoruz."><span class="say-t">Onlarla telefon<u>la</u> konuşuyoruz.</span></a-say></div><div class="ru">Мы говорим с ними по телефону.</div><div class="qq">телефон — тоже средство</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Arabayla geldim."><span class="say-t">Araba<u>yla</u> geldim.</span></a-say></div><div class="ru">Я приехал на машине.</div><div class="qq">слово на гласную → <span lang="tr">-yla</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 07 РОДИТЕЛЬНЫЙ ═══════════ -->
+<section class="case" id="p7" data-section="gen" data-words="85">
+  <div class="wrap narrow">
+    <div class="case-no"><b>7</b><span>Родительный · <i lang="tr">İlgi hali</i></span></div>
+    <h2 data-split>Чей<span class="tr" lang="tr">İlgi hali</span></h2>
+    <div class="story">
+      <p>Вы снимаете комнату у Айше. У Айше есть кошка по имени <b lang="tr">Şeker</b>. Хотите сказать «кошка Айше» и говорите: <b lang="tr">Ayşe kedi</b>.</p>
+      <p>Айше поправляет: <b lang="tr">Ayşe'nin kedisi</b>. Зачем хвост ещё и на кошке? Потому что кошка — её.</p>
+      <p class="kick">Принадлежность отмечают оба: владелец и вещь. Как расписка в двух экземплярах.</p>
+    </div>
+    <div class="stage">
+      <div class="stage__word" id="izW" lang="tr"><span class="z0">Ayşe</span><span class="aff z1">'nin</span><span class="z2">&nbsp;kedi</span><span class="aff z3">si</span></div>
+      <p class="stage__ru" id="izRu">кошка Айше · «Айше-чья кошка-её»</p>
+      <div class="row">
+        <button type="button" class="btn btn--ghost" id="izBack">Сначала</button>
+        <button type="button" class="btn" id="izNext">Дальше</button>
+      </div>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">владелец</span><span class="op">+</span><span class="tok tok--aff">-ın / -in / -un / -ün</span><span class="op">·</span><span class="tok">вещь</span><span class="op">+</span><span class="tok tok--aff">-ı / -i / -u / -ü</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Kimin?</b> (чей?), <b lang="tr">Neyin?</b> (чего?). Гармония на 4 — с обеих сторон.</p>
+      <div class="note" style="border-top:0;padding-top:0">Владелец на гласную — <b lang="tr">-nın/-nin/-nun/-nün</b>. Вещь на гласную — <b lang="tr">-sı/-si/-su/-sü</b>.</div>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Ayşe'nin kedisi"><span class="say-t">Ayşe'<u>nin</u> kedi<u>si</u></span></a-say></div><div class="ru">кошка Айше</div><div class="qq">оба слова на гласную → <span lang="tr">nin</span> и <span lang="tr">si</span></div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Amcamın evi çok güzeldi."><span class="say-t">Amcam<u>ın</u> ev<u>i</u> çok güzeldi.</span></a-say></div><div class="ru">Дом моего дяди был очень красивым.</div><div class="qq">оба слова на согласную</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Türkiye'nin başkenti Ankara."><span class="say-t">Türkiye'<u>nin</u> başkent<u>i</u> Ankara.</span></a-say></div><div class="ru">Столица Турции — Анкара.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ 08 ПАДЕЖ МНЕНИЯ ═══════════ -->
+<section class="case" id="p8" data-section="equ" data-words="80">
+  <div class="wrap narrow">
+    <div class="case-no"><b>8</b><span>Падеж мнения · <i lang="tr">Eşitlik hali</i></span></div>
+    <h2 data-split>По-моему<span class="tr" lang="tr">Eşitlik hali</span></h2>
+    <div class="story">
+      <p>В турецком офисе в каждом споре звучит <b lang="tr">bence</b>. Легко решить, что это «короче».</p>
+      <p>Скажете <b lang="tr">bence</b> и замолчите — все будут ждать.</p>
+      <p class="kick">Потому что <b lang="tr">bence</b> — не «короче», а «по-моему». После него положено что-то сказать.</p>
+    </div>
+    <div class="rulebox">
+      <div class="formula" data-formula><span class="tok">слово</span><span class="op">+</span><span class="tok tok--aff">-ca / -ce</span><span class="op">·</span><span>гармония на 2</span></div>
+      <p class="sub" style="margin:0">Вопросы <b lang="tr">Kimce?</b> (по-чьему?), <b lang="tr">Nece?</b> (на каком языке?). Передаёт точку зрения. После глухой — <b lang="tr">-ça / -çe</b>.</p>
+      <div class="ex">
+        <div class="exline"><div class="tr"><a-say data-text="Sence İstanbul güzel mi?"><span class="say-t">Sen<u>ce</u> İstanbul güzel mi?</span></a-say></div><div class="ru">По-твоему, Стамбул красивый?</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Bence evet."><span class="say-t">Ben<u>ce</u> evet.</span></a-say></div><div class="ru">По-моему, да.</div></div>
+        <div class="exline"><div class="tr"><a-say data-text="Rusça biliyorum."><span class="say-t">Rus<u>ça</u> biliyorum.</span></a-say></div><div class="ru">Я знаю русский.</div><div class="qq">s глухая → <span lang="tr">-ça</span></div></div>
+      </div>
+    </div>
+    <div class="stage card--cream" style="border:0">
+      <p class="quote">Türkçe — это тоже падеж.</p>
+      <p class="sub" style="margin:8px auto 12px">Народ, поставленный в падеж мнения, — это язык. Нажмите на народ:</p>
+      <div class="langs" role="group" aria-label="Народы">
+        <button type="button" class="chip" data-lang="Türk">Türk</button>
+        <button type="button" class="chip" data-lang="Rus">Rus</button>
+        <button type="button" class="chip" data-lang="Alman">Alman</button>
+        <button type="button" class="chip" data-lang="İngiliz">İngiliz</button>
+        <button type="button" class="chip" data-lang="Arap">Arap</button>
+        <button type="button" class="chip" data-lang="Japon">Japon</button>
+      </div>
+      <div class="stage__word" id="langW" lang="tr" style="margin-top:14px"><span>Türk</span><span class="aff">çe</span></div>
+      <p class="stage__ru" id="langRu">по-турецки · k глухая → <b lang="tr">-çe</b></p>
+      <p class="sub" style="margin:0 auto">Вы говорили в этом падеже с первого дня. Просто не знали.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ЛАБОРАТОРИЯ ═══════════ -->
+<section class="sec sec--cream" data-section="lab" data-words="43">
+  <div class="wrap narrow">
+    <div class="eyebrow">Соберите сами</div>
+    <h2 data-split>Конструктор хвостов</h2>
+    <p class="lead">Выберите слово и падеж. Форма соберётся на глазах, а ниже будет написано, почему выбрался именно этот хвост.</p>
+    <div class="builder">
+      <p class="blbl">Слово</p>
+      <div class="bopts" id="bWords"></div>
+      <p class="blbl" style="margin-top:16px">Падеж</p>
+      <div class="bopts" id="bCases"></div>
+      <div class="bout">
+        <div class="bword" id="bWord" lang="tr"></div>
+        <div class="bmorph" id="bMorph"></div>
+        <div class="bru" id="bRu"></div>
+        <div class="row"><button type="button" class="btn btn--ghost" id="bSay">Послушать</button></div>
+        <div class="bwhy" id="bWhy"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ЛОВУШКИ ═══════════ -->
+<section class="sec" data-section="traps" data-words="44">
+  <div class="wrap narrow">
+    <div class="eyebrow">На этом спотыкаются все</div>
+    <h2 data-split>Четыре ловушки</h2>
+    <p class="lead">Нажмите на ошибку — карточка покажет, как правильно.</p>
+    <div class="traps">
+      <button type="button" class="trap" data-say="Bana su ver.">
+        <span class="trap__front"><s lang="tr">Bene su ver.</s><small>«Дай мне воды»</small></span>
+        <span class="trap__back"><span class="fix" lang="tr">Bana su ver.</span><p>У <b lang="tr">ben</b> и <b lang="tr">sen</b> дательный неправильный: <b lang="tr">bana</b>, <b lang="tr">sana</b>.</p></span>
+      </button>
+      <button type="button" class="trap" data-say="Uçakta">
+        <span class="trap__front"><s lang="tr">Uçakda</s><small>«в самолёте»</small></span>
+        <span class="trap__back"><span class="fix" lang="tr">Uçakta</span><p><b lang="tr">k</b> из <span lang="tr">fıstıkçı şahap</span> — глухая, поэтому <b lang="tr">d</b> становится <b lang="tr">t</b>.</p></span>
+      </button>
+      <button type="button" class="trap" data-say="Ayşe'nin kedisi">
+        <span class="trap__front"><s lang="tr">Ayşe kedi</s><small>«кошка Айше»</small></span>
+        <span class="trap__back"><span class="fix" lang="tr">Ayşe'nin kedisi</span><p>Хвост нужен обоим: владельцу и вещи.</p></span>
+      </button>
+      <button type="button" class="trap" data-say="Suyu içtim.">
+        <span class="trap__front"><s lang="tr">Su içtim.</s><small>«я выпил ту воду»</small></span>
+        <span class="trap__back"><span class="fix" lang="tr">Suyu içtim.</span><p>Вода конкретная — нужен винительный и буфер <b lang="tr">y</b>.</p></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ ВИДЕО ═══════════ -->
+<section class="sec sec--cream" data-section="video" data-words="10">
+  <div class="wrap narrow">
+    <h2>Послушайте преподавателя</h2>
+    <p class="lead">Обратите внимание, как гласная хвоста подстраивается под слово.</p>
+    <a-video yt="hz6nM1DMM3k" start="0" end="180" title="Все турецкие падежи за 5 минут" channel="Диалог: школа турецкого языка"></a-video>
+  </div>
+</section>
+
+<!-- ═══════════ ПРАКТИКА ═══════════ -->
+<section class="sec" data-section="practice" data-words="1">
+  <div class="wrap narrow">
+    <h2>Практика</h2>
+    <a-exercise ref="lib.cases.ex1"></a-exercise>
+    <a-exercise ref="lib.cases.ex2"></a-exercise>
+    <a-exercise ref="lib.cases.ex3"></a-exercise>
+    <a-exercise ref="lib.cases.ex4"></a-exercise>
+
+    <a-exercise ref="lib.cases.ex5" class="ak-ex">
+      <div class="ak-ex__head"><span class="ak-ex__title">Паром хвостов: прицепите нужный хвост</span><span class="ak-ex__count" data-fx-count>1 / 6</span></div>
+      <div class="ferryx">
+        <div class="ferryx__sea" aria-live="polite">
+          <div class="ferryx__boat" data-fx-boat>
+            <svg viewBox="0 0 300 110" aria-hidden="true">
+              <path d="M10 70h280l-26 30H36z" fill="#fff" stroke="#9FC4B0" stroke-width="2"/>
+              <rect x="70" y="44" width="160" height="26" rx="5" fill="#fff" stroke="#9FC4B0" stroke-width="2"/>
+              <rect x="140" y="24" width="10" height="20" fill="#2E8552"/>
+              <path d="M0 102h300" stroke="#9FC4B0" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+            <div class="ferryx__word" data-fx-word><span data-fx-stem>ev</span><span class="t" data-fx-tail></span></div>
+          </div>
+        </div>
+        <p class="ferryx__hint" data-fx-hint>«в доме»</p>
+        <div class="ferryx__opts" data-fx-opts></div>
+        <p class="ferryx__status" data-fx-status></p>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<!-- ═══════════ МИНИ-ПРОВЕРКА ═══════════ -->
+<section class="sec sec--cream" data-section="check" data-words="6">
+  <div class="wrap narrow">
+    <h2>Мини-проверка</h2>
+    <p class="lead">Без шпаргалки. Пять вопросов вперемешку.</p>
+    <a-quiz ref="lib.cases.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ═══════════ ШПАРГАЛКА ═══════════ -->
+<section class="sec" data-section="cheat" data-words="75">
+  <div class="wrap">
+    <div class="narrow" style="margin-left:0">
+      <div class="eyebrow">Одним экраном</div>
+      <h2 data-split>Вся таблица целиком</h2>
+      <p class="lead">Нажмите «Спрятать хвосты» и вспомните каждый сами.</p>
+      <div class="row" style="justify-content:flex-start"><button type="button" class="btn btn--ghost" id="hideBtn" aria-pressed="false">Спрятать хвосты</button></div>
+    </div>
+    <div class="tablewrap">
+      <table class="cheat" id="cheat">
+        <thead><tr><th>Падеж</th><th>Вопросы</th><th>Хвост</th><th>Пример</th><th>Что делает</th></tr></thead>
+        <tbody>
+          <tr><td class="nm">Именительный<i lang="tr">Yalın hal</i></td><td class="sm" lang="tr">Kim? Ne?</td><td class="af" lang="tr"><span>—</span></td><td class="exw" lang="tr" data-say="ev">ev</td><td class="sm">словарная форма</td></tr>
+          <tr><td class="nm">Винительный<i lang="tr">Belirtme hali</i></td><td class="sm" lang="tr">Kimi? Neyi?</td><td class="af" lang="tr"><span>-ı -i -u -ü</span></td><td class="exw" lang="tr" data-say="evi">ev<b>i</b></td><td class="sm">тот самый предмет</td></tr>
+          <tr><td class="nm">Дательный<i lang="tr">Yönelme hali</i></td><td class="sm" lang="tr">Kime? Nereye?</td><td class="af" lang="tr"><span>-a -e</span></td><td class="exw" lang="tr" data-say="eve">ev<b>e</b></td><td class="sm">куда, кому</td></tr>
+          <tr><td class="nm">Местный<i lang="tr">Bulunma hali</i></td><td class="sm" lang="tr">Nerede? Kimde?</td><td class="af" lang="tr"><span>-da -de -ta -te</span></td><td class="exw" lang="tr" data-say="evde">ev<b>de</b></td><td class="sm">где, у кого</td></tr>
+          <tr><td class="nm">Исходный<i lang="tr">Ayrılma hali</i></td><td class="sm" lang="tr">Nereden? Kimden?</td><td class="af" lang="tr"><span>-dan -den -tan -ten</span></td><td class="exw" lang="tr" data-say="evden">ev<b>den</b></td><td class="sm">откуда, от кого</td></tr>
+          <tr><td class="nm">Творительный<i lang="tr">Vasıta hali</i></td><td class="sm" lang="tr">Kiminle? Ne ile?</td><td class="af" lang="tr"><span>-la -le</span></td><td class="exw" lang="tr" data-say="evle">ev<b>le</b></td><td class="sm">с кем, на чём</td></tr>
+          <tr><td class="nm">Родительный<i lang="tr">İlgi hali</i></td><td class="sm" lang="tr">Kimin? Neyin?</td><td class="af" lang="tr"><span>-ın -in -un -ün</span></td><td class="exw" lang="tr" data-say="evin">ev<b>in</b></td><td class="sm">чей</td></tr>
+          <tr><td class="nm">Мнения<i lang="tr">Eşitlik hali</i></td><td class="sm" lang="tr">Kimce? Nece?</td><td class="af" lang="tr"><span>-ca -ce</span></td><td class="exw" lang="tr" data-say="Türkçe">Türk<b>çe</b></td><td class="sm">по-моему, по-турецки</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tiny" style="margin-top:10px">Плюс три мелочи: глухие → <b lang="tr">t</b>, буфер <b lang="tr">y</b>, <b lang="tr">k → ğ</b> перед гласной.</p>
+    <div class="narrow story" style="margin-left:0;margin-top:30px">
+      <p>Восемь строчек, которые многие учат за вечер.</p>
+      <p>Только теперь за каждой стоит сцена: рынок, долмуш, звонок Хакану и кошка по имени <b lang="tr">Şeker</b>.</p>
+      <p class="kick">Грамматика запоминается не таблицей. Она запоминается сценой, в которой вы ошиблись.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<nav class="sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="sb__track"><span class="sb__fill"></span>
+    <span class="sb__boat" aria-hidden="true"><svg viewBox="0 0 30 18"><path d="M1 10h28l-4 7H5z" fill="#fff" stroke="#2E8552" stroke-width="1.6"/><rect x="8" y="4" width="14" height="6" rx="1.5" fill="#fff" stroke="#2E8552" stroke-width="1.6"/><rect x="14" y="0" width="2.4" height="4" fill="#2E8552"/></svg></span>
+  </div>
+</nav>
+
+<template data-achievement data-title="Восемь хвостов на месте" data-text="Теперь вы видите, зачем каждый хвост, и собираете форму сами.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#2E8552"/>
+    <circle cx="60" cy="60" r="45" fill="#EAF4F8"/>
+    <path class="sea" d="M15 74q11-6 22 0t22 0 22 0 22 0" fill="none" stroke="#9FC4B0" stroke-width="3" stroke-linecap="round"/>
+    <g class="boat"><path d="M34 62h52l-7 11H41z" fill="#fff" stroke="#2E8552" stroke-width="2.4"/><rect x="46" y="52" width="26" height="10" rx="2" fill="#fff" stroke="#2E8552" stroke-width="2.4"/><rect x="57" y="44" width="4" height="8" fill="#2E8552"/></g>
+    <g font-family="Georgia,serif" font-size="11" text-anchor="middle" fill="#2E8552">
+      <text class="tail" x="30" y="40">-i</text><text class="tail" x="44" y="30">-e</text><text class="tail" x="60" y="26">-de</text><text class="tail" x="77" y="30">-den</text><text class="tail" x="91" y="40">-le</text>
+      <text class="tail" x="36" y="96">-in</text><text class="tail" x="60" y="100">-ce</text><text class="tail" x="84" y="96">ø</text>
+    </g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const $ = (s, c) => (c || document).querySelector(s);
+  const $$ = (s, c) => [...(c || document).querySelectorAll(s)];
+  const say = (t) => { try { window.AlternaKit && AlternaKit.speak(t); } catch (e) { /* без озвучки */ } };
+  const ST = anim ? window.ScrollTrigger : null;
+  if (ST) { G.registerPlugin(ST); ST.config({ ignoreMobileResize: true }); }
+
+  /* ── заголовки по словам и мягкое появление блоков ── */
+  if (anim) {
+    $$('[data-split]').forEach((h) => {
+      let targets = h;
+      try { if (window.SplitText) { G.registerPlugin(SplitText); targets = new SplitText(h, { type: 'words' }).words; } } catch (e) { targets = h; }
+      ScrollTrigger.create({ trigger: h, start: 'top 88%', once: true, onEnter: () => G.from(targets, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .05 }) });
+    });
+    ScrollTrigger.batch('.exline, .card, .rulebox, .stage, .trap', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: 26, scale: .97, duration: .6, ease: 'power3.out', stagger: .07 }) });
+    ScrollTrigger.batch('[data-formula]', { start: 'top 85%', once: true, onEnter: (els) => els.forEach((f) => {
+      G.fromTo(f.querySelectorAll('.tok'), { y: -18, rotation: -6 }, { y: 0, rotation: 0, duration: .55, ease: 'back.out(2.6)', stagger: .12 });
+      G.fromTo(f.querySelectorAll('.tok--aff'), { x: 40 }, { x: 0, duration: .7, ease: 'elastic.out(1,.45)', delay: .25 });
+    }) });
+  }
+
+  if (anim) {
+    ScrollTrigger.batch('.case-no b', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { scale: .3, rotation: -90, duration: .7, ease: 'back.out(2.5)' }) });
+    ScrollTrigger.batch('.qlist li', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { x: -24, duration: .5, ease: 'power3.out', stagger: .08 }) });
+    ScrollTrigger.create({ trigger: '.guess', start: 'top 85%', once: true, onEnter: () => G.from('.guess .chip', { y: 18, scale: .7, duration: .5, ease: 'back.out(3)', stagger: .1 }) });
+  }
+
+  /* ── крючок: угадай ── */
+  const GUESS = {
+    ev: 'Так ответите — и Хакан приедет выяснять, чей дом. ev — просто «дом».',
+    evde: 'Да! evde — «в доме». Почему именно -de, станет ясно ниже.',
+    eve: 'eve — «в дом, домой». Это направление, а спросили «где».',
+  };
+  $$('[data-guess]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.guess;
+    $$('[data-guess]').forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+    b.classList.add(k === 'evde' ? 'is-right' : 'is-wrong');
+    $('#guessA').textContent = GUESS[k];
+    say(k);
+    if (anim) G.fromTo(b, { scale: .8 }, { scale: 1, duration: .5, ease: k === 'evde' ? 'back.out(3)' : 'elastic.out(1,.45)' });
+  }));
+
+  /* ── предлог → хвост ── */
+  const FLIP = [
+    { pre: 'в', ruw: 'доме', trw: 'ev', suf: 'de', cap: 'evde — «дом-в». Местный падеж.' },
+    { pre: 'из', ruw: 'дома', trw: 'ev', suf: 'den', cap: 'evden — «дом-из». Исходный падеж.' },
+    { pre: 'к', ruw: 'дому', trw: 'ev', suf: 'e', cap: 'eve — «дом-к». Дательный падеж.' },
+    { pre: 'на', ruw: 'машине', trw: 'araba', suf: 'yla', cap: 'arabayla — «машина-с». Творительный падеж.' },
+    { pre: 'с', ruw: 'братом', trw: 'kardeşim', suf: 'le', cap: 'kardeşimle — «брат-мой-с». Творительный падеж.' },
+  ];
+  let fi = 0, fTimer = null;
+  const fDots = $('#fDots');
+  FLIP.forEach((_, j) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-label', `Пример ${j + 1}`);
+    b.addEventListener('click', () => { stopFlip(); renderFlip(j); say(FLIP[j].trw + FLIP[j].suf); });
+    fDots.append(b);
+  });
+  function renderFlip(i) {
+    fi = i;
+    const f = FLIP[i];
+    $('#fPre').textContent = f.pre; $('#fRuW').textContent = f.ruw;
+    $('#fTrW').textContent = f.trw; $('#fSuf').textContent = f.suf; $('#fRu').textContent = f.cap;
+    $$('button', fDots).forEach((b, j) => b.setAttribute('aria-current', String(j === i)));
+    if (!anim) return;
+    G.fromTo('#fSuf', { x: -90, y: -70, rotation: -9 }, { x: 0, y: 0, rotation: 0, duration: .95, ease: 'back.out(1.6)', delay: .25 });
+    G.fromTo('#fPre', { opacity: 1, scale: 1 }, { opacity: .25, scale: .85, duration: .8, delay: .25 });
+    G.fromTo('#fTrW', { x: 0 }, { x: -4, duration: .15, yoyo: true, repeat: 1, delay: 1.1 });
+  }
+  function stopFlip() { if (fTimer) { clearInterval(fTimer); fTimer = null; } }
+  $('#fAgain').addEventListener('click', () => { stopFlip(); renderFlip(fi); say(FLIP[fi].trw + FLIP[fi].suf); });
+  renderFlip(0);
+  if (anim && 'IntersectionObserver' in window) {
+    new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting && !fTimer) fTimer = setInterval(() => renderFlip((fi + 1) % FLIP.length), 3600);
+      else if (!e.isIntersecting) stopFlip();
+    }), { threshold: .45 }).observe($('#flip'));
+  }
+
+  /* ── один дом, шесть хвостов ── */
+  const SCENE = {
+    ev: { aff: '', ru: 'дом · просто слово из словаря, без хвоста', x: 0 },
+    evi: { aff: 'i', ru: 'тот самый дом · винительный', x: 0, ring: 1 },
+    eve: { aff: 'e', ru: 'в дом, к дому · дательный, направление', x: 174, arrow: 'r' },
+    evde: { aff: 'de', ru: 'в доме · местный, где', x: 195, glow: 1 },
+    evden: { aff: 'den', ru: 'из дома · исходный, откуда', x: -44, arrow: 'l' },
+    evin: { aff: 'in', ru: 'дома (чей?) · родительный, владелец', x: 0, key: 1 },
+  };
+  function setScene(k) {
+    const s = SCENE[k];
+    $$('[data-case]').forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.case === k)));
+    $('#hCap').innerHTML = `<b lang="tr">ev<em>${s.aff}</em></b><span>${s.ru}</span>`;
+    if (s.arrow) $('#hHead').setAttribute('d', s.arrow === 'r' ? 'M184 88l10 8-10 8' : 'M104 88l-10 8 10 8');
+    const set = { '#hGlow': s.glow ? 1 : 0, '#hRing': s.ring ? 1 : 0, '#hKey': s.key ? 1 : 0, '#hArrow': s.arrow ? 1 : 0 };
+    if (!anim) {
+      $('#hWalker').setAttribute('transform', `translate(${s.x},0)`);
+      Object.entries(set).forEach(([sel, o]) => { $(sel).style.opacity = o; });
+      return;
+    }
+    G.to('#hWalker', { x: s.x, opacity: s.glow ? .45 : 1, duration: .85, ease: 'power2.inOut' });
+    G.to('#hGlow', { opacity: set['#hGlow'], duration: .5 });
+    G.to('#hRing', { opacity: set['#hRing'], rotation: s.ring ? 360 : 0, transformOrigin: '50% 50%', duration: .8 });
+    G.to('#hKey', { opacity: set['#hKey'], y: s.key ? 0 : -10, duration: .5, ease: 'back.out(3)' });
+    G.to('#hArrow', { opacity: set['#hArrow'], duration: .4 });
+    G.from('#hCap em', { scale: .3, duration: .5, ease: 'back.out(3)' });
+  }
+  $$('[data-case]').forEach((c) => c.addEventListener('click', () => { setScene(c.dataset.case); say(c.dataset.case); }));
+  setScene('ev');
+
+  /* поезд: вагоны цепляются к паровозу */
+  function playTrain() {
+    if (!anim) return;
+    G.fromTo('.train .wagon', { x: 260 }, { x: 0, duration: .8, ease: 'power3.out', stagger: .25 });
+    G.fromTo('#loco', { x: -30 }, { x: 0, duration: .6, ease: 'back.out(2)' });
+  }
+  if (ST) ScrollTrigger.create({ trigger: '.train', start: 'top 85%', once: true, onEnter: playTrain });
+  $('#trainBtn').addEventListener('click', playTrain);
+
+  /* ── гармония ── */
+  const H4 = { a: 'ı', ı: 'ı', e: 'i', i: 'i', o: 'u', u: 'u', ö: 'ü', ü: 'ü' };
+  const A2 = { a: 'a', ı: 'a', o: 'a', u: 'a', e: 'e', i: 'e', ö: 'e', ü: 'e' };
+  function litVowel(v) {
+    $$('.vbtn').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+    $$('[data-set2]').forEach((c) => c.classList.toggle('lit', c.dataset.set2 === A2[v]));
+    $$('[data-set4]').forEach((c) => c.classList.toggle('lit', c.dataset.set4 === H4[v]));
+    if (anim) G.fromTo('.hcell.lit .rs', { scale: .5, y: -10 }, { scale: 1, y: 0, duration: .5, ease: 'back.out(3)', stagger: .1 });
+  }
+  $$('.vbtn').forEach((b) => b.addEventListener('click', () => litVowel(b.dataset.v)));
+  litVowel('a');
+  if (ST) ScrollTrigger.create({ trigger: '.vpick', start: 'top 80%', once: true, onEnter: () => G.from('.vbtn', { y: 20, scale: .6, duration: .5, ease: 'back.out(2.5)', stagger: .05 }) });
+
+  /* ── fıstıkçı şahap ── */
+  const hardEls = $$('#fistik [data-h]');
+  if (anim) {
+    const tl = G.timeline({ paused: true, repeat: -1, repeatDelay: 1.4 });
+    tl.to(hardEls, { y: -5, backgroundColor: '#42A86B', color: '#fff', borderColor: '#42A86B', duration: .25, stagger: .3 })
+      .to(hardEls, { y: 0, backgroundColor: '#fff', color: '#7A7C7F', borderColor: '#E5E4DE', duration: .3, delay: 1 });
+    ScrollTrigger.create({ trigger: '#fistik', start: 'top 85%', end: 'bottom 10%', onToggle: (self) => (self.isActive ? tl.play() : tl.pause()) });
+  } else hardEls.forEach((s) => s.classList.add('hard'));
+
+  const CONS = {
+    ev: { stem: 'ev', t: 'd', v: 'e', ru: 'в доме · <b lang="tr">v</b> звонкая, поэтому <b lang="tr">-de</b>' },
+    uçak: { stem: 'uçak', t: 't', v: 'a', ru: 'в самолёте · <b lang="tr">k</b> глухая, поэтому <b lang="tr">-ta</b>' },
+    okul: { stem: 'okul', t: 'd', v: 'a', ru: 'в школе · <b lang="tr">l</b> звонкая, поэтому <b lang="tr">-da</b>' },
+    kitap: { stem: 'kitap', t: 't', v: 'a', ru: 'в книге · <b lang="tr">p</b> глухая, поэтому <b lang="tr">-ta</b>' },
+    gün: { stem: 'gün', t: 'd', v: 'e', ru: 'в день · <b lang="tr">n</b> звонкая, поэтому <b lang="tr">-de</b>' },
+    sınıf: { stem: 'sınıf', t: 't', v: 'a', ru: 'в классе · <b lang="tr">f</b> глухая, поэтому <b lang="tr">-ta</b>' },
+  };
+  $$('[data-cons]').forEach((b) => b.addEventListener('click', () => {
+    const c = CONS[b.dataset.cons];
+    $$('[data-cons]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('#consOut').innerHTML = `${c.stem}<u><i>${c.t}</i>${c.v}</u>`;
+    $('#consWhy').innerHTML = c.ru;
+    say(c.stem + c.t + c.v);
+    if (anim) {
+      G.fromTo('#consOut u', { x: 50, rotation: 8 }, { x: 0, rotation: 0, duration: .6, ease: 'back.out(2)' });
+      G.fromTo('#consOut u i', { rotationX: 90 }, { rotationX: 0, duration: .5, delay: .35, ease: 'back.out(3)' });
+    }
+  }));
+
+  /* ── буфер y ── */
+  const BUF = [
+    { w: 'Ankar', v1: 'a', ap: "'", v2: 'a', full: "Ankara'ya", ru: 'в Анкару · дательный' },
+    { w: 'arab', v1: 'a', ap: '', v2: 'ı', full: 'arabayı', ru: 'ту машину · винительный' },
+    { w: 'tabl', v1: 'o', ap: '', v2: 'u', full: 'tabloyu', ru: 'ту картину · винительный' },
+    { w: 'kap', v1: 'ı', ap: '', v2: 'a', full: 'kapıya', ru: 'к двери · дательный' },
+    { w: 'od', v1: 'a', ap: '', v2: 'a', full: 'odaya', ru: 'в комнату · дательный' },
+  ];
+  let bi = 0;
+  function playBuf() {
+    const e = BUF[bi % BUF.length]; bi++;
+    $('#bufW').textContent = e.w; $('#bufV1').textContent = e.v1 + e.ap; $('#bufV2').textContent = e.v2;
+    $('#bufNote').textContent = `${e.w}${e.v1} + ${e.v2} → две гласные подряд, так нельзя`;
+    const done = () => { $('#bufNote').textContent = `${e.full} — ${e.ru}`; say(e.full); };
+    if (!anim) { done(); return; }
+    G.timeline()
+      .set('#bufY', { scale: .3 })
+      .fromTo('#bufV1', { x: 0 }, { x: 8, color: '#C4643C', duration: .35, ease: 'power2.in' })
+      .fromTo('#bufV2', { x: 0 }, { x: -8, color: '#C4643C', duration: .35, ease: 'power2.in' }, '<')
+      .to('#bufV1, #bufV2', { x: 0, color: '#2E8552', duration: .3, delay: .35 })
+      .to('#bufY', { scale: 1, duration: .55, ease: 'elastic.out(1,.45)', onComplete: done }, '<');
+  }
+  $('#bufBtn').addEventListener('click', playBuf);
+  if (ST) ScrollTrigger.create({ trigger: '#buffer', start: 'top 75%', once: true, onEnter: () => { bi = 0; playBuf(); } });
+
+  /* ── смягчение k → ğ ── */
+  const SOFT = [
+    { st: 'balı', c: 'ğ', from: 'k', a: 'ı', ru: 'balık → balığı · ту самую рыбу' },
+    { st: 'çocu', c: 'ğ', from: 'k', a: 'a', ru: 'çocuk → çocuğa · ребёнку' },
+    { st: 'köpe', c: 'ğ', from: 'k', a: 'i', ru: 'köpek → köpeği · ту собаку' },
+    { st: 'kita', c: 'b', from: 'p', a: 'ı', ru: 'kitap → kitabı · ту книгу' },
+  ];
+  let si = 0;
+  $('#softBtn').addEventListener('click', () => {
+    si = (si + 1) % SOFT.length;
+    const s = SOFT[si];
+    $('#soft').firstElementChild.textContent = s.st;
+    $('#softC').textContent = s.from; $('#softA').textContent = '';
+    $('#softNote').textContent = s.ru;
+    const fin = () => { $('#softC').textContent = s.c; $('#softA').textContent = s.a; say(s.st + s.c + s.a); };
+    if (!anim) { fin(); return; }
+    G.timeline()
+      .fromTo('#softC', { rotationX: 0 }, { rotationX: 90, duration: .3, delay: .4, onComplete: fin })
+      .to('#softC', { rotationX: 0, duration: .35, ease: 'back.out(3)' })
+      .fromTo('#softA', { x: 30, scale: .4 }, { x: 0, scale: 1, duration: .5, ease: 'back.out(2.5)' }, '<');
+  });
+
+  /* ── карусель ── */
+  const rail = $('#rail'), rbar = $('#railBar');
+  const railProg = () => {
+    const max = rail.scrollWidth - rail.clientWidth, vis = rail.clientWidth / rail.scrollWidth;
+    const p = max > 0 ? rail.scrollLeft / max : 0;
+    rbar.style.width = `${((vis + p * (1 - vis)) * 100).toFixed(1)}%`;
+  };
+  rail.addEventListener('scroll', railProg, { passive: true });
+  addEventListener('resize', railProg);
+  railProg();
+  if (ST) ScrollTrigger.batch('.rcard', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { x: 60, rotation: 3, duration: .7, ease: 'back.out(1.6)', stagger: .08 }) });
+
+  /* ── 1. именительный: хвост отскакивает ── */
+  $('#nomBtn').addEventListener('click', () => {
+    const t = $('#nomTail');
+    t.textContent = '-?';
+    $('#nomRu').textContent = 'Не прилипает: именительный — без хвоста. Учить нечего.';
+    say('çay');
+    if (!anim) { t.textContent = ''; return; }
+    G.timeline()
+      .fromTo(t, { x: 80, rotation: 20 }, { x: 0, rotation: 0, duration: .45, ease: 'power2.in' })
+      .to(t, { x: 90, y: -30, rotation: 40, duration: .6, ease: 'power2.out' })
+      .to(t, { scale: .3, duration: .2, onComplete: () => { t.textContent = ''; G.set(t, { clearProps: 'all' }); } });
+  });
+
+  /* ── 2. винительный: какая-то вода или та самая ── */
+  const ACC = ['Я попил воды — какой-то, неважно какой.', 'Я выпил ту воду — ту, о которой мы говорили.'];
+  $$('[data-acc]').forEach((b) => b.addEventListener('click', () => {
+    const on = b.dataset.acc === '1';
+    $$('[data-acc]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('#accRu').textContent = ACC[+on];
+    say(on ? 'Suyu içtim.' : 'Su içtim.');
+    if (!anim) { $('#accRing').style.opacity = on ? 1 : 0; return; }
+    G.to('#accRing', { opacity: on ? 1 : 0, scale: on ? 1 : .8, transformOrigin: '50% 50%', duration: .5, ease: 'back.out(2)' });
+    G.fromTo('.glass', { y: 0 }, { y: on ? 0 : -6, duration: .2, yoyo: true, repeat: 1, stagger: .08 });
+  }));
+
+  /* ── 3. дательный: долмуш едет только с направлением ── */
+  $$('[data-dat]').forEach((b) => b.addEventListener('click', () => {
+    const go = b.dataset.dat === '1';
+    $('#datRu').textContent = go ? 'Kadıköy\'e — в Кадыкёй. Поехали!' : 'Водитель ждёт: это место, а не направление.';
+    say(go ? "Kadıköy'e" : 'Kadıköy');
+    if (!anim) return;
+    if (go) {
+      G.to('#dBubble', { opacity: 0, duration: .2 });
+      G.timeline().to('#dolmus', { x: 190, duration: 1.1, ease: 'power2.in' }).to('#dolmus', { x: 0, duration: .01, delay: .5 });
+    } else {
+      G.fromTo('#dolmus', { x: 0 }, { x: 4, duration: .08, yoyo: true, repeat: 5 });
+      G.fromTo('#dBubble', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .4, ease: 'back.out(3)' });
+    }
+  }));
+
+  /* ── 4. местный: хвост из двух вопросов ── */
+  let lv = 'a', lc = 'd';
+  function renderLoc() {
+    $$('[data-locv]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.locv === lv)));
+    $$('[data-locc]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.locc === lc)));
+    const key = lc + lv;
+    $$('[data-loc]').forEach((d) => d.classList.toggle('lit', d.dataset.loc === key));
+    if (anim) G.fromTo(`[data-loc="${key}"] b`, { scale: .4, rotation: -10 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(3)' });
+  }
+  $$('[data-locv]').forEach((b) => b.addEventListener('click', () => { lv = b.dataset.locv; renderLoc(); }));
+  $$('[data-locc]').forEach((b) => b.addEventListener('click', () => { lc = b.dataset.locc; renderLoc(); say({ da: 'okulda', de: 'evde', ta: 'uçakta', te: 'köpekte' }[lc + lv]); }));
+  renderLoc();
+
+  /* ── 5. исходный: neden = ne + den ── */
+  let cut = false;
+  $('#nedenBtn').addEventListener('click', () => {
+    cut = !cut;
+    $('#nedenRu').textContent = cut ? 'ne — что, den — от/из: «от чего». Причина — точка, откуда всё поехало.' : 'почему?';
+    $('#nedenBtn').textContent = cut ? 'Склеить обратно' : 'Разрезать слово';
+    say(cut ? 'ne… den' : 'neden');
+    if (!anim) { $('#nedenW .p2').style.marginLeft = cut ? '.4em' : '0'; return; }
+    G.to('#nedenW .p1', { x: cut ? -14 : 0, rotation: cut ? -6 : 0, duration: .5, ease: 'back.out(2)' });
+    G.to('#nedenW .p2', { x: cut ? 14 : 0, rotation: cut ? 6 : 0, duration: .5, ease: 'back.out(2)' });
+  });
+
+  /* ── 6. творительный: ile → -le ── */
+  let glued = false;
+  $('#ileBtn').addEventListener('click', () => {
+    glued = !glued;
+    $('#ileRu').textContent = glued ? 'приклеено — так говорят в жизни' : 'раздельно — звучит книжно';
+    $('#ileBtn').textContent = glued ? 'Расклеить' : 'Склеить';
+    say(glued ? 'kardeşimle' : 'kardeşim ile');
+    const sp = $('#ileW .sp'), i1 = $('#ileW .i1');
+    if (!anim) { sp.style.display = i1.style.display = glued ? 'none' : ''; return; }
+    if (glued) G.timeline().to(i1, { scale: .3, y: -20, duration: .35 }).set([sp, i1], { display: 'none' }).fromTo('#ileW .i2', { x: 20 }, { x: 0, duration: .5, ease: 'elastic.out(1,.45)' });
+    else { G.set([sp, i1], { display: '' }); G.fromTo(i1, { scale: .3, y: -20 }, { scale: 1, y: 0, duration: .5, ease: 'back.out(3)' }); }
+  });
+
+  /* ── 7. родительный: сборка по шагам ── */
+  const IZ = [
+    { show: ['z0'], ru: 'Ayşe — просто имя' },
+    { show: ['z0', 'z1'], ru: "Ayşe'nin — чья? Айше. Имя на гласную → -nin" },
+    { show: ['z0', 'z1', 'z2'], ru: 'kedi — кошка. Но пока непонятно, что она чья-то' },
+    { show: ['z0', 'z1', 'z2', 'z3'], ru: 'kedisi — «её кошка». Расписка в двух экземплярах' },
+  ];
+  let zi = 3;
+  function renderIz(animate) {
+    const s = IZ[zi];
+    ['z0', 'z1', 'z2', 'z3'].forEach((c) => { $(`#izW .${c}`).style.display = s.show.includes(c) ? '' : 'none'; });
+    $('#izRu').textContent = s.ru;
+    if (animate && anim) G.fromTo(`#izW .${s.show[s.show.length - 1]}`, { y: -30, scale: .4 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2.6)' });
+  }
+  $('#izNext').addEventListener('click', () => { zi = Math.min(3, zi + 1); renderIz(true); if (zi === 3) say("Ayşe'nin kedisi"); });
+  $('#izBack').addEventListener('click', () => { zi = 0; renderIz(true); say('Ayşe'); });
+  renderIz(false);
+
+  /* ── 8. падеж мнения: народ → язык ── */
+  const LANG = {
+    Türk: ['çe', 'по-турецки · k глухая → -çe'], Rus: ['ça', 'по-русски · s глухая → -ça'],
+    Alman: ['ca', 'по-немецки · n звонкая → -ca'], İngiliz: ['ce', 'по-английски · z звонкая → -ce'],
+    Arap: ['ça', 'по-арабски · p глухая → -ça'], Japon: ['ca', 'по-японски · n звонкая → -ca'],
+  };
+  $$('[data-lang]').forEach((b) => b.addEventListener('click', () => {
+    const n = b.dataset.lang, [aff, ru] = LANG[n];
+    $$('[data-lang]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('#langW').innerHTML = `<span>${n}</span><span class="aff">${aff}</span>`;
+    $('#langRu').textContent = ru;
+    say(n + aff);
+    if (anim) G.fromTo('#langW .aff', { x: 60, y: -20, rotation: 15 }, { x: 0, y: 0, rotation: 0, duration: .7, ease: 'elastic.out(1,.45)' });
+  }));
+
+  /* ── конструктор хвостов ── */
+  const WORDS = [
+    { w: 'ev', ru: 'дом', v: 'e', vow: false, hard: false, soft: null, g: ['дом', 'этот дом', 'в дом, к дому', 'в доме', 'из дома', 'с домом', 'дома (чей?)'] },
+    { w: 'okul', ru: 'школа', v: 'u', vow: false, hard: false, soft: null, g: ['школа', 'эту школу', 'в школу', 'в школе', 'из школы', 'со школой', 'школы (чей?)'] },
+    { w: 'araba', ru: 'машина', v: 'a', vow: true, hard: false, soft: null, g: ['машина', 'эту машину', 'к машине', 'в машине', 'из машины', 'на машине', 'машины (чей?)'] },
+    { w: 'kapı', ru: 'дверь', v: 'ı', vow: true, hard: false, soft: null, g: ['дверь', 'эту дверь', 'к двери', 'на двери', 'от двери', 'дверью', 'двери (чей?)'] },
+    { w: 'uçak', ru: 'самолёт', v: 'a', vow: false, hard: true, soft: 'uçağ', g: ['самолёт', 'этот самолёт', 'к самолёту', 'в самолёте', 'из самолёта', 'на самолёте', 'самолёта (чей?)'] },
+    { w: 'köpek', ru: 'собака', v: 'e', vow: false, hard: true, soft: 'köpeğ', g: ['собака', 'эту собаку', 'собаке', 'у собаки', 'от собаки', 'с собакой', 'собаки (чей?)'] },
+    { w: 'kitap', ru: 'книга', v: 'a', vow: false, hard: true, soft: 'kitab', g: ['книга', 'эту книгу', 'к книге', 'в книге', 'из книги', 'с книгой', 'книги (чей?)'] },
+    { w: 'İstanbul', ru: 'Стамбул', v: 'u', vow: false, hard: false, soft: null, prop: true, g: ['Стамбул', 'Стамбул (тот самый)', 'в Стамбул', 'в Стамбуле', 'из Стамбула', 'со Стамбулом', 'Стамбула (чей?)'] },
+  ];
+  const CASES = ['именительный', 'винительный', 'дательный', 'местный', 'исходный', 'творительный', 'родительный'];
+  let bw = 0, bc = 3;
+  function build(W, ci) {
+    let stem = W.w, aff = '';
+    const why = [], morph = [];
+    if ([1, 2, 6].includes(ci) && W.soft) { stem = W.soft; morph.push(`${W.w} → ${W.soft}`); why.push(`Хвост начинается с гласной — конечная согласная смягчается: ${W.w} → ${W.soft}.`); }
+    if (ci === 1) { aff = (W.vow ? 'y' : '') + H4[W.v]; why.push(`Гармония на 4: «${W.v}» → «${H4[W.v]}».`); if (W.vow) why.push('Слово на гласную — встаёт буфер y.'); }
+    else if (ci === 2) { aff = (W.vow ? 'y' : '') + A2[W.v]; why.push(`Гармония на 2: «${W.v}» → «${A2[W.v]}».`); if (W.vow) why.push('Слово на гласную — встаёт буфер y.'); }
+    else if (ci === 3 || ci === 4) { aff = (W.hard ? 't' : 'd') + A2[W.v] + (ci === 4 ? 'n' : ''); why.push(`Гармония на 2 даёт «${A2[W.v]}».`); why.push(W.hard ? 'Слово на глухую согласную — d превращается в t.' : 'Конечный звук не глухой — остаётся d.'); }
+    else if (ci === 5) { aff = (W.vow ? 'y' : '') + 'l' + A2[W.v]; why.push(`Гармония на 2: «${A2[W.v]}».`); if (W.vow) why.push('После гласной — форма -yla/-yle.'); }
+    else if (ci === 6) { aff = (W.vow ? 'n' : '') + H4[W.v] + 'n'; why.push(`Гармония на 4: «${H4[W.v]}».`); why.push(W.vow ? 'Слово на гласную — форма с n.' : 'Слово на согласную — короткая форма.'); why.push('У вещи потом будет свой хвост.'); }
+    else why.push('Словарная форма. Ничего не приклеивается — с неё всё начинается.');
+    const sep = W.prop && aff ? "'" : '';
+    if (sep) why.push('Имя собственное — хвост через апостроф.');
+    if (aff) morph.push(`-${aff} · ${CASES[ci]}`);
+    return { stem, sep, aff, full: stem + sep + aff, ru: W.g[ci], why, morph };
+  }
+  function renderBuilder() {
+    const r = build(WORDS[bw], bc);
+    $('#bWord').innerHTML = `<span>${r.stem}</span>${r.sep ? `<span class="m2">${r.sep}</span>` : ''}${r.aff ? `<span class="m1">${r.aff}</span>` : ''}`;
+    $('#bWord').dataset.say = r.full;
+    $('#bMorph').innerHTML = r.morph.map((m) => `<i lang="tr">${m}</i>`).join('');
+    $('#bRu').textContent = r.ru;
+    $('#bWhy').innerHTML = r.why.join('<br>');
+    $('#bSay').dataset.full = r.full;
+    $$('#bWords .bopt').forEach((b, i) => b.setAttribute('aria-pressed', String(i === bw)));
+    $$('#bCases .bopt').forEach((b, i) => b.setAttribute('aria-pressed', String(i === bc)));
+    if (anim) G.fromTo('#bWord span', { y: 14, rotation: 4 }, { y: 0, rotation: 0, duration: .45, ease: 'back.out(2.5)', stagger: .09 });
+  }
+  WORDS.forEach((w, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'bopt';
+    b.innerHTML = `<span lang="tr">${w.w}</span> <small>· ${w.ru}</small>`;
+    b.addEventListener('click', () => { bw = i; renderBuilder(); });
+    $('#bWords').append(b);
+  });
+  CASES.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'bopt'; b.textContent = c;
+    b.addEventListener('click', () => { bc = i; renderBuilder(); say(build(WORDS[bw], i).full); });
+    $('#bCases').append(b);
+  });
+  $('#bSay').addEventListener('click', () => say($('#bSay').dataset.full));
+  renderBuilder();
+  if (ST) ScrollTrigger.create({ trigger: '.builder', start: 'top 80%', once: true, onEnter: () => G.from('.bopt', { scale: .5, duration: .4, ease: 'back.out(3)', stagger: .03 }) });
+
+  /* ── ловушки: карточки переворачиваются ── */
+  $$('.trap').forEach((t) => t.addEventListener('click', () => {
+    const open = !t.classList.contains('open');
+    if (!anim) { t.classList.toggle('open', open); return; }
+    G.timeline().to(t, { rotationY: 90, duration: .2, ease: 'power1.in', onComplete: () => t.classList.toggle('open', open) }).to(t, { rotationY: 0, duration: .35, ease: 'back.out(2)' });
+  }));
+
+  /* ── шпаргалка: спрятать хвосты ── */
+  $('#hideBtn').addEventListener('click', () => {
+    const hide = !$('#cheat').classList.contains('hide');
+    $('#cheat').classList.toggle('hide', hide);
+    $('#hideBtn').setAttribute('aria-pressed', String(hide));
+    $('#hideBtn').textContent = hide ? 'Показать хвосты' : 'Спрятать хвосты';
+    if (anim) G.fromTo('#cheat .af span', { scale: .6 }, { scale: 1, duration: .4, ease: 'back.out(3)', stagger: .05 });
+  });
+  if (ST) ScrollTrigger.batch('#cheat tbody tr', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { x: -30, duration: .5, ease: 'power3.out', stagger: .06 }) });
+
+  /* ── свой скроллбар: паром идёт через пролив ── */
+  const bar = $('[data-scrollbar]'), track = $('.sb__track', bar);
+  const secs = $$('[data-section]');
+  const MAJOR = ['story', 'mechanism', 'harmony', 'route', 'lab', 'practice', 'check', 'cheat'];
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sb__mark' + (MAJOR.includes(s.dataset.section) ? ' major' : '');
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2')?.textContent || s.dataset.section).replace(/\s+/g, ' ').trim().slice(0, 60)}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', () => { layout(); progress(); });
+  addEventListener('load', () => { layout(); progress(); if (ST) ST.refresh(); });
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (anim) G.fromTo(m, { scale: .5 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout(); progress();
+  if (ST) {
+    document.fonts?.ready.then(() => ST.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ST.refresh(), 300));
+  }
+
+  /* ── ачивка: паром отплывает, хвосты разлетаются по кругу ── */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.boat'), { x: -40 }, { x: 0, duration: .8, ease: 'back.out(1.6)' }, .9)
+      .fromTo(b.querySelector('.sea'), { x: -10 }, { x: 0, duration: .8, ease: 'sine.inOut' }, .9)
+      .from(b.querySelectorAll('.tail'), { scale: .3, y: 10, transformOrigin: '50% 50%', duration: .45, ease: 'back.out(3)', stagger: .08 }, 1.1);
+  });
+
+  /* ── нестандартное упражнение «Паром хвостов» (lib.cases.ex5) ── */
+  (async () => {
+    const EX = 'lib.cases.ex5';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    if (!root || !window.AlternaKit) return;
+    const stemEl = $('[data-fx-stem]', root), tailEl = $('[data-fx-tail]', root), hintEl = $('[data-fx-hint]', root);
+    const optsEl = $('[data-fx-opts]', root), statusEl = $('[data-fx-status]', root), countEl = $('[data-fx-count]', root), boat = $('[data-fx-boat]', root);
+    let data;
+    try { data = await AlternaKit.exercise(EX); } catch (e) { statusEl.textContent = 'Упражнение не загрузилось.'; return; }
+    const items = data.items;
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    window.AlternaTracker?.start?.(EX, 'practice');
+
+    function show() {
+      const it = items[i];
+      stemEl.textContent = it.word; tailEl.textContent = ''; tailEl.classList.remove('bad');
+      hintEl.textContent = it.hint;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      statusEl.textContent = '';
+      optsEl.replaceChildren(...it.options.map((o, k) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.dataset.opt = o;
+        b.innerHTML = `<span lang="tr">-${o}</span><small>${k + 1}</small>`;
+        return b;
+      }));
+      if (anim) G.fromTo(boat, { x: -320 }, { x: 0, duration: .7, ease: 'power2.out' });
+      t0 = performance.now(); locked = false;
+    }
+    function pick(opt) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i], ok = opt === it.answer;
+      if (ok) correct++;
+      $$('button', optsEl).forEach((b) => { b.disabled = true; if (b.dataset.opt === it.answer) b.classList.add('is-hit'); else if (b.dataset.opt === opt) b.classList.add('is-miss'); });
+      tailEl.textContent = it.answer;
+      statusEl.textContent = ok ? `Верно: ${it.word}${it.answer}. ${it.explanation}` : `Не совсем: ${it.word}${it.answer}. ${it.explanation}`;
+      say(it.word + it.answer);
+      if (anim) G.fromTo(tailEl, { x: 40, y: -26, scale: .4 }, { x: 0, y: 0, scale: 1, duration: .55, ease: 'back.out(2.6)' });
+      window.AlternaTracker?.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: opt, timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) { show(); return; }
+        window.AlternaTracker?.complete({ exerciseId: EX, correct, total: items.length });
+        countEl.textContent = 'готово';
+        hintEl.textContent = `${correct} из ${items.length}`;
+        optsEl.replaceChildren();
+        const again = document.createElement('button');
+        again.type = 'button'; again.className = 'ak-btn ak-btn--ghost'; again.textContent = 'Ещё раз';
+        again.addEventListener('click', () => { i = 0; correct = 0; window.AlternaTracker?.start?.(EX, 'practice'); show(); });
+        optsEl.append(again);
+      }, ok ? (reduce ? 700 : 1300) : (reduce ? 1600 : 2600));
+    }
+    optsEl.addEventListener('click', (e) => { const b = e.target.closest('[data-opt]'); if (b) pick(b.dataset.opt); });
+    root.addEventListener('keydown', (e) => {
+      if (/^[1-4]$/.test(e.key)) { const o = items[i]?.options[+e.key - 1]; if (o) { pick(o); e.preventDefault(); } }
+    });
+    root.tabIndex = 0;
+    AlternaKit.registerSolver(EX, async () => {
+      while (i < items.length) { const idx = i; pick(items[i].answer); while (i === idx) await new Promise((r) => setTimeout(r, 100)); }
+    });
+    show();
+  })();
+});
+</script>
+</body>
+</html>
