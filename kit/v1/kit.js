@@ -36,6 +36,7 @@ const norm = (s) => String(s ?? '').normalize('NFC').replace(/[’‘`´]/g, "'"
 const ICON = {
   say: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>',
   play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>',
+  voice: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14v-4M8 17V7M12 20V4M16 16V8M20 13v-2"/></svg>',
 };
 
 /* ---------- данные упражнений ---------- */
@@ -62,26 +63,120 @@ const findExercise = async (id) => {
   return x;
 };
 
-/* ---------- озвучка ---------- */
-let trVoice = null;
-const pickVoice = () => {
-  const vs = window.speechSynthesis?.getVoices() || [];
-  trVoice = vs.find((v) => /^tr(-|_|$)/i.test(v.lang)) || null;
-};
-if (window.speechSynthesis) { pickVoice(); speechSynthesis.addEventListener?.('voiceschanged', pickVoice); }
+/* ---------- озвучка: голос и скорость выбирает ученик ---------- */
+/* Голоса — как у Azure: Эмель (tr-TR-EmelNeural) и Ахмет (tr-TR-AhmetNeural).
+   Пока нет mp3 — голос браузера: ищем на устройстве турецкий голос нужного пола.
+   data-audio — путь без расширения: content:publish кладёт рядом <путь>.emel.mp3 и <путь>.ahmet.mp3. */
+const VOICES = [{ id: 'emel', name: 'Эмель', note: 'женский' }, { id: 'ahmet', name: 'Ахмет', note: 'мужской' }];
+const RATES = [{ id: 1, name: 'Обычно', note: 'как в жизни' }, { id: 0.7, name: 'Медленно', note: 'по слогам' }];
+const SAMPLE = 'Merhaba! Türkçe öğreniyoruz.';
+const embedded = window.parent !== window;
+const parentOrigin = document.querySelector('script[src*="kit/v1/tracker.js"]')?.dataset.parentOrigin || location.origin;
+const settings = { voice: 'emel', rate: 1, picker: true, achievement: true };
+try {
+  const saved = JSON.parse(localStorage.getItem('alterna:voice') || '{}');
+  if (VOICES.some((v) => v.id === saved.voice)) settings.voice = saved.voice;
+  if (RATES.some((r) => r.id === saved.rate)) settings.rate = saved.rate;
+} catch { /* приватный режим — живём без сохранения */ }
 
-function speak(text, audio) {
-  track('event', 'audio_play', { text });
-  if (audio) { new Audio(audio).play().catch(() => {}); return true; }
+let trVoices = [];
+const MALE = /ahmet|cem|tolga|erkek|\bmale/i;
+const loadVoices = () => { trVoices = (window.speechSynthesis?.getVoices() || []).filter((v) => /^tr(-|_|$)/i.test(v.lang)); };
+if (window.speechSynthesis) { loadVoices(); speechSynthesis.addEventListener?.('voiceschanged', loadVoices); }
+const bestVoice = (list) => list.find((v) => /natural|neural|enhanced|premium/i.test(v.name)) || list[0] || null;
+function deviceVoice() {
+  const male = settings.voice === 'ahmet';
+  const same = trVoices.filter((v) => MALE.test(v.name) === male);
+  /* нужного пола на устройстве нет — берём любой турецкий и сдвигаем высоту */
+  return same.length ? { voice: bestVoice(same), pitch: 1 } : { voice: bestVoice(trVoices), pitch: male ? 0.72 : 1.15 };
+}
+
+function speakTTS(text) {
   if (!window.speechSynthesis) return false;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
+  const d = deviceVoice();
   u.lang = 'tr-TR';
-  if (trVoice) u.voice = trVoice;
-  u.rate = 0.9;
+  if (d.voice) u.voice = d.voice;
+  u.pitch = d.pitch;
+  u.rate = 0.9 * settings.rate;
   speechSynthesis.speak(u);
   return true;
 }
+
+let playing = null;
+function speak(text, audio, { silent = false } = {}) {
+  if (!silent) track('event', 'audio_play', { text, voice: settings.voice, rate: settings.rate });
+  if (!audio) return speakTTS(text);
+  const src = /\.(mp3|m4a|ogg|wav)(\?|$)/i.test(audio) ? audio : `${audio}.${settings.voice}.mp3`;
+  playing?.pause();
+  playing = new Audio(src);
+  playing.playbackRate = settings.rate;
+  playing.play().catch(() => speakTTS(text));
+  return true;
+}
+
+function setVoice(patch, fromPlayer = false) {
+  if (VOICES.some((v) => v.id === patch.voice)) settings.voice = patch.voice;
+  if (RATES.some((r) => r.id === Number(patch.rate))) settings.rate = Number(patch.rate);
+  try { localStorage.setItem('alterna:voice', JSON.stringify({ voice: settings.voice, rate: settings.rate })); } catch { /* ignore */ }
+  /* плеер платформы сохранит выбор в профиль */
+  if (embedded && !fromPlayer) {
+    try { window.parent.postMessage({ source: 'alterna-guide', type: 'settings', voice: settings.voice, rate: settings.rate }, parentOrigin); } catch { /* ignore */ }
+  }
+  syncPicker();
+}
+
+let picker = null;
+function syncPicker() {
+  if (!picker) return;
+  picker.querySelectorAll('.ak-voice__opt').forEach((b) => {
+    b.setAttribute('aria-pressed', String(String(settings[b.dataset.key]) === b.dataset.val));
+  });
+  const v = VOICES.find((x) => x.id === settings.voice);
+  const r = RATES.find((x) => x.id === settings.rate);
+  picker._fab.setAttribute('aria-label', `Озвучка: ${v.name}, ${r.name.toLowerCase()}`);
+  picker._fab.dataset.slow = String(settings.rate < 1);
+}
+
+function mountPicker() {
+  if (picker || !settings.picker || !document.querySelector('a-say, a-word, [data-say]')) return;
+  const fab = h('button', { type: 'button', class: 'ak-voice__fab', 'aria-expanded': 'false', 'aria-controls': 'ak-voice-panel' });
+  fab.innerHTML = ICON.voice;
+  const panel = h('div', { class: 'ak-voice__panel', id: 'ak-voice-panel', role: 'dialog', 'aria-label': 'Озвучка', hidden: true });
+  for (const [label, key, items] of [['Голос', 'voice', VOICES], ['Скорость', 'rate', RATES]]) {
+    const group = h('div', { class: 'ak-voice__group', role: 'group', 'aria-label': label }, h('span', { class: 'ak-voice__label', text: label }));
+    for (const it of items) {
+      group.append(h('button', {
+        type: 'button', class: 'ak-voice__opt', 'data-key': key, 'data-val': String(it.id),
+        onclick: () => { setVoice({ [key]: it.id }); speak(SAMPLE, null, { silent: true }); },
+      }, h('b', { text: it.name }), h('small', { text: it.note })));
+    }
+    panel.append(group);
+  }
+  const toggle = (open) => {
+    panel.hidden = !open;
+    fab.setAttribute('aria-expanded', String(open));
+    if (open) panel.querySelector('[aria-pressed="true"]')?.focus({ preventScroll: true });
+  };
+  fab.addEventListener('click', () => toggle(panel.hidden));
+  document.addEventListener('pointerdown', (e) => { if (!panel.hidden && !picker.contains(e.target)) toggle(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { toggle(false); fab.focus(); } });
+  picker = h('div', { class: 'ak-voice' }, panel, fab);
+  picker._fab = fab;
+  document.body.append(picker);
+  syncPicker();
+}
+
+/* плеер платформы передаёт настройки из профиля и может спрятать свои кнопки */
+addEventListener('message', (ev) => {
+  if (ev.source !== window.parent || ev.origin !== parentOrigin) return;
+  const m = ev.data || {};
+  if (m.source !== 'alterna-player' || m.type !== 'settings') return;
+  if ('achievement' in m) settings.achievement = !!m.achievement;
+  if ('picker' in m) { settings.picker = !!m.picker; if (!settings.picker) { picker?.remove(); picker = null; } else mountPicker(); }
+  setVoice(m, true);
+});
 
 class ASay extends HTMLElement {
   connectedCallback() {
@@ -540,6 +635,138 @@ document.addEventListener('click', (e) => {
   setTimeout(() => el.classList.remove('ak-speaking'), 700);
 });
 
+/* ---------- ачивка: урок пройден ---------- */
+/* Трекер шлёт alterna:complete (прочитано ≥ 80% и мини-проверка ≥ 80%) → kit показывает ачивку.
+   Значок и надпись — из <template data-achievement data-title data-text> гайда.
+   Свою анимацию гайд добавляет в alterna:achievement: detail.timeline — пауза-таймлайн GSAP, detail.badge — значок. */
+const DEFAULT_BADGE = '<svg viewBox="0 0 120 120" aria-hidden="true"><path d="M40 72 28 112l19-9 12 15 9-38z" fill="var(--ak-accent)"/><path d="m80 72 12 40-19-9-12 15-9-38z" fill="var(--ak-accent)"/><circle cx="60" cy="52" r="40" fill="#f5b700"/><circle cx="60" cy="52" r="31" fill="#ffd34d"/><path d="m60 31 6.4 13 14.3 2.1-10.3 10 2.4 14.3L60 63.7l-12.8 6.7 2.4-14.3-10.3-10 14.3-2.1z" fill="#fff"/></svg>';
+const CONFETTI = ['var(--ak-accent)', 'var(--ak-good)', '#f5b700', '#ff7a59', '#7c5cff', '#21b8c9'];
+let achvShown = false;
+
+/* три ноты; AudioContext создаём сразу в обработчике нажатия — так iPhone разрешает звук */
+function chime(delay) {
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const ac = new AC();
+    const t0 = ac.currentTime + delay;
+    [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+      const o = ac.createOscillator();
+      const g = ac.createGain();
+      const t = t0 + i * 0.09;
+      o.type = 'triangle';
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.1, t + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.5);
+      o.connect(g).connect(ac.destination);
+      o.start(t);
+      o.stop(t + 0.55);
+    });
+    setTimeout(() => ac.close(), (delay + 1.5) * 1000);
+  } catch { /* без звука */ }
+}
+
+function burst(fx, x, y) {
+  const gsap = window.gsap;
+  const tl = gsap.timeline();
+  for (let i = 0; i < 36; i++) {
+    const p = h('i', { style: `left:${x}px;top:${y}px;--c:${CONFETTI[i % CONFETTI.length]}` });
+    fx.append(p);
+    const a = (Math.PI * 2 * i) / 36 + Math.random() * 0.4;
+    const d = 110 + Math.random() * 170;
+    tl.fromTo(p, { x: 0, y: 0, scale: 0, rotation: 0 },
+      { x: Math.cos(a) * d, y: Math.sin(a) * d - 40, scale: 0.6 + Math.random() * 0.8, rotation: Math.random() * 540, duration: 0.7, ease: 'power3.out' }, 0)
+      .to(p, { y: `+=${180 + Math.random() * 160}`, rotation: '+=180', opacity: 0, duration: 1.3 + Math.random() * 0.6, ease: 'power1.in' }, 0.7);
+  }
+  return tl;
+}
+
+function showAchievement(detail = {}) {
+  const preview = !!detail.preview;
+  if ((achvShown || !settings.achievement) && !preview) return;
+  achvShown = true;
+  document.querySelector('.ak-achv')?.remove();
+  const st = window.AlternaTracker?.state?.() || {};
+  const quiz = Object.values(st.exercises || {}).find((x) => x.kind === 'check' && x.done);
+  const tpl = document.querySelector('template[data-achievement]');
+  const lesson = detail.lesson ?? st.lesson ?? 1;
+  const nums = [
+    [detail.readPct ?? st.readPct ?? 100, '%', 'прочитано'],
+    [detail.checkPct ?? quiz?.scorePct ?? null, '%', 'проверка'],
+    [Math.max(1, Math.round((detail.activeSeconds ?? st.activeSeconds ?? 60) / 60)), ' мин', 'в уроке'],
+  ].filter(([n]) => n != null);
+
+  const badge = h('div', { class: 'ak-achv__badge' });
+  if (tpl) badge.append(tpl.content.cloneNode(true)); else badge.innerHTML = DEFAULT_BADGE;
+  const rays = h('div', { class: 'ak-achv__rays', 'aria-hidden': 'true' });
+  const stats = h('div', { class: 'ak-achv__stats' }, nums.map(([n, unit, label]) =>
+    h('div', { class: 'ak-achv__stat' }, h('b', { 'data-to': n, 'data-unit': unit, text: `${n}${unit}` }), h('span', { text: label }))));
+  const btn = h('button', { type: 'button', class: 'ak-btn ak-achv__btn' }, 'Продолжить');
+  const card = h('div', { class: 'ak-achv__card' },
+    h('div', { class: 'ak-achv__stage' }, rays, badge),
+    h('p', { class: 'ak-achv__kicker', text: `Урок ${lesson} пройден` }),
+    h('h2', { class: 'ak-achv__title', id: 'ak-achv-title', text: tpl?.dataset.title || 'Урок пройден!' }),
+    tpl?.dataset.text ? h('p', { class: 'ak-achv__text', text: tpl.dataset.text }) : null,
+    stats, btn);
+  const bg = h('div', { class: 'ak-achv__bg' });
+  const fx = h('div', { class: 'ak-achv__fx', 'aria-hidden': 'true' });
+  const root = h('div', { class: 'ak-achv', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'ak-achv-title' }, bg, card, fx);
+  document.body.append(root);
+
+  const back = document.activeElement;
+  const gsap = window.gsap;
+  const calm = !gsap || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let idle = null;
+  const onKey = (e) => {
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); btn.focus(); }
+  };
+  const close = () => {
+    removeEventListener('keydown', onKey);
+    idle?.kill();
+    const done = () => { root.remove(); back?.focus?.({ preventScroll: true }); };
+    if (calm) done(); else gsap.to(root, { opacity: 0, duration: 0.25, onComplete: done });
+  };
+  btn.addEventListener('click', close);
+  bg.addEventListener('click', close);
+  addEventListener('keydown', onKey);
+  btn.focus({ preventScroll: true });
+  if (calm) return;
+
+  const r = badge.getBoundingClientRect();
+  const tl = gsap.timeline({ paused: true });
+  tl.from(bg, { opacity: 0, duration: 0.35 })
+    .from(card, { y: 48, scale: 0.86, opacity: 0, duration: 0.6, ease: 'back.out(1.6)' }, 0.05)
+    .from(rays, { scale: 0, opacity: 0, duration: 0.9, ease: 'expo.out' }, 0.3)
+    .from(badge, { scale: 0, rotation: -30, duration: 1, ease: 'elastic.out(1, 0.5)' }, 0.3)
+    .add(burst(fx, r.left + r.width / 2, r.top + r.height / 2), 0.4)
+    .from(card.querySelectorAll('.ak-achv__kicker, .ak-achv__title, .ak-achv__text'), { y: 14, opacity: 0, stagger: 0.08, duration: 0.4 }, 0.55)
+    .from(stats.children, { y: 18, opacity: 0, stagger: 0.1, duration: 0.45, ease: 'back.out(2)' }, 0.75)
+    .from(btn, { scale: 0.85, opacity: 0, duration: 0.4, ease: 'back.out(2)' }, 1.05);
+  stats.querySelectorAll('b').forEach((b, i) => {
+    const o = { n: 0 };
+    tl.to(o, { n: Number(b.dataset.to), duration: 0.9, ease: 'power2.out', onUpdate: () => { b.textContent = `${Math.round(o.n)}${b.dataset.unit}`; } }, 0.8 + i * 0.1);
+  });
+  idle = gsap.to(rays, { rotation: 360, duration: 24, repeat: -1, ease: 'none' });
+  /* своя анимация гайда: добавляет твины в detail.timeline или анимирует detail.badge */
+  dispatchEvent(new CustomEvent('alterna:achievement', { detail: { root, card, badge, timeline: tl, lesson, preview } }));
+  tl.play();
+}
+
+addEventListener('alterna:complete', (e) => {
+  if (achvShown || !settings.achievement) return;
+  chime(1.2);
+  setTimeout(() => showAchievement(e.detail), 1200); // сначала ученик видит результат мини-проверки
+});
+
+/* ?achievement — посмотреть ачивку сразу, без прохождения урока */
+const startUi = () => {
+  mountPicker();
+  if (new URLSearchParams(location.search).has('achievement')) setTimeout(() => showAchievement({ preview: true, checkPct: 100, readPct: 100, activeSeconds: 420 }), 400);
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', startUi); else startUi();
+
 customElements.define('a-say', ASay);
 customElements.define('a-word', AWord);
 customElements.define('a-video', AVideo);
@@ -548,7 +775,10 @@ customElements.define('a-quiz', AQuiz);
 
 /* ---------- API для гайдов ---------- */
 window.AlternaKit = {
-  speak,
+  speak: (text, audio) => speak(text, audio),
+  voice: () => ({ voice: settings.voice, rate: settings.rate }),
+  /* показать ачивку вручную, например для превью дизайна: AlternaKit.achievement({ preview: true }) */
+  achievement: (detail = { preview: true }) => showAchievement(detail),
   exercise: findExercise,
   /* нестандартное упражнение регистрирует функцию, которая проходит его правильно — нужна автопроверке */
   registerSolver: (id, fn) => solvers.set(id, fn),

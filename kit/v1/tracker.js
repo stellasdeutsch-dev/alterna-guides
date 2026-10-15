@@ -52,6 +52,8 @@
     if (debug) { flush(); renderPanel(); }
     return e;
   }
+  /* DOM-события для гайда и kit: свой скроллбар отмечает прочитанное, kit показывает ачивку */
+  const fire = (n, detail) => dispatchEvent(new CustomEvent(`alterna:${n}`, { detail }));
 
   function flush() {
     if (!queue.length) return;
@@ -137,6 +139,7 @@
       completed = true;
       emit('guide_complete', { readPct: pct, activeSeconds, checkPassed });
       flush();
+      fire('complete', { readPct: pct, activeSeconds, checkPassed, lesson });
     }
   }
 
@@ -151,6 +154,7 @@
       if (!current.read && current.seconds >= needSeconds(current)) {
         current.read = true;
         emit('section_read', { key: current.key, seconds: current.seconds, readPct: readPct() });
+        fire('read', { key: current.key, readPct: readPct() });
         maybeComplete();
       }
     }

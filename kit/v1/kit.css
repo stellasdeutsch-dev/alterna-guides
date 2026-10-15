@@ -169,6 +169,77 @@
   .ak-opt:hover, .ak-tile:hover, .ak-tok:hover, .ak-match__l:hover, .ak-match__r:hover { border-color: var(--ak-accent); }
   .ak-btn:not(:disabled):hover { filter: brightness(1.08); }
 }
+/* ---------- свой скроллбар гайда: системный прячем, гайд рисует свой [data-scrollbar] ---------- */
+html:has([data-scrollbar]) { scrollbar-width: none; }
+html:has([data-scrollbar])::-webkit-scrollbar { display: none; }
+
+/* ---------- выбор озвучки: левый нижний угол занят kit ---------- */
+.ak-voice {
+  position: fixed; z-index: 900; font-family: var(--ak-font);
+  left: max(12px, env(safe-area-inset-left)); bottom: max(12px, env(safe-area-inset-bottom));
+}
+.ak-voice__fab {
+  position: relative; display: grid; place-items: center; width: var(--ak-tap); height: var(--ak-tap);
+  border: 1px solid var(--ak-line); border-radius: 50%; cursor: pointer;
+  background: var(--ak-bg); color: var(--ak-accent); box-shadow: 0 4px 16px rgba(14, 21, 34, .14);
+}
+.ak-voice__fab svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.ak-voice__fab[aria-expanded="true"] { background: var(--ak-accent); color: var(--ak-accent-ink); }
+.ak-voice__fab[data-slow="true"]::after {
+  content: '0.7'; position: absolute; right: -6px; top: -6px; padding: 1px 5px; border-radius: 999px;
+  background: var(--ak-accent); color: var(--ak-accent-ink); font: 700 10px/1.4 var(--ak-font);
+}
+.ak-voice__panel {
+  position: absolute; left: 0; bottom: calc(100% + 10px); display: grid; gap: 12px;
+  width: min(290px, calc(100vw - 24px)); padding: 14px; border-radius: var(--ak-radius);
+  border: 1px solid var(--ak-line); background: var(--ak-bg); color: var(--ak-ink);
+  box-shadow: 0 14px 40px rgba(14, 21, 34, .2);
+}
+.ak-voice__panel[hidden] { display: none; }
+.ak-voice__group { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.ak-voice__label { grid-column: 1 / -1; font-size: 12px; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--ak-muted); }
+.ak-voice__opt {
+  display: grid; gap: 1px; min-height: var(--ak-tap); padding: 8px 10px; text-align: left; cursor: pointer;
+  border: 1.5px solid var(--ak-line); border-radius: var(--ak-radius-sm); background: var(--ak-bg); color: var(--ak-ink); font: inherit; font-size: 15px;
+}
+.ak-voice__opt small { color: var(--ak-muted); font-size: 12px; }
+.ak-voice__opt[aria-pressed="true"] { border-color: var(--ak-accent); background: var(--ak-accent-soft); }
+@media print { .ak-voice { display: none; } }
+
+/* ---------- ачивка: урок пройден ---------- */
+.ak-achv {
+  position: fixed; inset: 0; z-index: 2000; display: grid; place-items: center;
+  padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom));
+  font-family: var(--ak-font); font-size: var(--ak-text);
+}
+.ak-achv__bg {
+  position: absolute; inset: 0; background: color-mix(in srgb, var(--ak-ink) 55%, transparent);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.ak-achv__fx { position: fixed; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+.ak-achv__fx i { position: absolute; width: 9px; height: 14px; margin: -7px 0 0 -4px; border-radius: 2px; background: var(--c); }
+.ak-achv__card {
+  position: relative; z-index: 1; width: min(400px, 100%); max-height: calc(100dvh - 32px); overflow: auto;
+  padding: 6px clamp(18px, 5vw, 28px) 22px; border-radius: 28px; text-align: center;
+  background: var(--ak-bg); color: var(--ak-ink); box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+}
+.ak-achv__stage { position: relative; display: grid; place-items: center; height: clamp(160px, 42vw, 196px); }
+.ak-achv__rays {
+  position: absolute; width: 240px; max-width: 100%; aspect-ratio: 1; border-radius: 50%;
+  background: repeating-conic-gradient(color-mix(in srgb, var(--ak-accent) 24%, transparent) 0 9deg, transparent 9deg 22deg);
+  -webkit-mask: radial-gradient(circle, #000 28%, transparent 70%); mask: radial-gradient(circle, #000 28%, transparent 70%);
+}
+.ak-achv__badge { position: relative; display: grid; place-items: center; width: clamp(124px, 34vw, 150px); aspect-ratio: 1; }
+.ak-achv__badge > svg, .ak-achv__badge > img { width: 100%; height: 100%; overflow: visible; }
+.ak-achv__kicker { margin: 2px 0 4px; font-size: 13px; font-weight: 650; letter-spacing: .08em; text-transform: uppercase; color: var(--ak-accent); }
+.ak-achv__title { margin: 0 0 8px; font-family: var(--ak-font-display); font-size: clamp(24px, 6.5vw, 30px); line-height: 1.15; text-wrap: balance; }
+.ak-achv__text { margin: 0 auto 6px; max-width: 32ch; color: var(--ak-muted); }
+.ak-achv__stats { display: flex; gap: 8px; margin: 16px 0 20px; }
+.ak-achv__stat { flex: 1; min-width: 0; padding: 10px 4px; border-radius: var(--ak-radius-sm); background: var(--ak-surface); }
+.ak-achv__stat b { display: block; font-size: 22px; line-height: 1.15; font-variant-numeric: tabular-nums; }
+.ak-achv__stat span { font-size: 12px; color: var(--ak-muted); }
+.ak-achv__btn { width: 100%; }
+
 @media (prefers-reduced-motion: reduce) {
   .ak-ex__bar span, .ak-say__btn { transition: none; }
 }
