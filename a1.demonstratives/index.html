@@ -242,6 +242,60 @@
 
   .dm-hide { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+  /* ---------- живые элементы ---------- */
+  .dm-tap { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--violet); }
+  .dm-tap::before { content: ''; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 0 rgba(67, 57, 224, .45); animation: dm-ping 1.8s ease-out infinite; }
+  @keyframes dm-ping { to { box-shadow: 0 0 0 12px rgba(67, 57, 224, 0); } }
+  .dm-title__o { cursor: pointer; }
+  .dm-bro { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .dm-bro.is-talk { border-color: var(--c); box-shadow: 0 0 0 3px var(--c); }
+
+  .dm-objs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .dm-obj { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px; border-radius: 14px; border: 1.5px solid var(--ak-line); background: #fff; font-weight: 800; cursor: pointer; }
+  .dm-obj svg { width: 28px; height: 28px; flex: none; }
+  .dm-obj[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .dm-track { touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; }
+  .dm-track.is-drag { cursor: grabbing; }
+  .dm-track__hint { position: absolute; left: 104px; bottom: 44px; z-index: 4; padding: 4px 10px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 12px; font-weight: 800; animation: dm-nudge 1.4s ease-in-out infinite; pointer-events: none; }
+  .dm-track__hint.is-used { display: none; }
+  @keyframes dm-nudge { 50% { translate: 8px 0; } }
+  .dm-track__waves { position: absolute; left: 0; top: 58%; width: 200%; height: 12px; animation: dm-waves 6s linear infinite; }
+  @keyframes dm-waves { to { translate: -50% 0; } }
+  .dm-track__far { animation: dm-float 3s ease-in-out infinite; }
+  @keyframes dm-float { 50% { translate: 0 -4px; rotate: -3deg; } }
+
+  .dm-tray { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; min-height: 52px; }
+  .dm-tok { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 4px 12px 4px 6px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; font-weight: 800; cursor: pointer; position: relative; z-index: 2; }
+  .dm-tok svg { width: 30px; height: 30px; flex: none; }
+  .dm-drop { display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start; min-height: 100px; padding: 6px; border-radius: 14px; border: 2px dashed rgba(0, 0, 0, .22); }
+  .dm-col--ne .dm-drop { border-color: rgba(255, 255, 255, .4); }
+  .dm-drop .dm-tok { border-color: transparent; font-size: 14px; cursor: pointer; min-height: 40px; color: var(--ink); }
+  .dm-flyline { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; min-height: 48px; margin-bottom: 8px; }
+  .dm-flyline__say { font: 800 clamp(16px, 4.6vw, 20px)/1.3 var(--ak-font-display); }
+  .dm-swap { perspective: 700px; }
+  .dm-swap__p { transform-origin: 50% 50%; }
+
+  .dm-msg { position: relative; }
+  .dm-msg__pic { float: right; width: 42px; height: 42px; margin: -4px -6px 0 10px; }
+
+  .dm-bad { position: relative; text-decoration: none; }
+  .dm-strike { position: absolute; left: -3px; right: -3px; top: 52%; height: 3px; border-radius: 3px; background: var(--ak-bad); transform-origin: 0 50%; }
+  .dm-stamp { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ak-good); color: #fff; font-weight: 900; vertical-align: middle; rotate: -8deg; }
+  .dm-who { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; margin-top: 4px; padding: 4px 14px 4px 6px; border-radius: 999px; border: 2px solid var(--ink); background: var(--lav); font: 800 20px var(--ak-font-display); cursor: pointer; }
+  .dm-who svg { width: 40px; height: 40px; }
+  .dm-who small { font: 700 16px var(--ak-font); }
+
+  .dm-ruler { width: 100%; height: auto; max-width: 480px; overflow: visible; }
+  .dm-ruler text { font: 800 15px var(--ak-font-display); }
+  .dm-ruler__dot { cursor: pointer; outline: none; }
+  .dm-ruler__dot:focus-visible circle { stroke: #fff; stroke-width: 3; }
+  .dm-chip-say { border: 0; cursor: pointer; min-height: 40px; min-width: 52px; }
+  .dm-final__ask { display: flex; align-items: center; gap: 14px; margin: 6px 0 12px; }
+  .dm-cagla { width: 64px; height: 64px; flex: none; }
+  .dm-final__btn { min-height: 48px; padding: 0 20px; border-radius: 999px; border: 2px solid #fff; background: #fff; color: var(--ink); font: 800 20px var(--ak-font-display); cursor: pointer; }
+  .dm-final { position: relative; overflow: hidden; }
+  .dm-conf { position: absolute; left: 50%; top: 60%; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; }
+
   @media (min-width: 768px) {
     .dm-bros { grid-template-columns: repeat(3, 1fr); }
     .dm-bro { grid-template-columns: 1fr; justify-items: start; }
@@ -256,8 +310,8 @@
     section { padding-top: 96px; }
   }
   @media (hover: hover) {
-    .dm-zone:hover, .dm-chip:hover:not(:disabled), .dm-guess__btn:hover { scale: 1.03; }
-    .dm-zone, .dm-chip, .dm-guess__btn { transition: scale .2s ease; }
+    .dm-zone:hover, .dm-chip:hover:not(:disabled), .dm-guess__btn:hover, .dm-obj:hover, .dm-who:hover, .dm-bro:hover { scale: 1.03; }
+    .dm-zone, .dm-chip, .dm-guess__btn, .dm-obj, .dm-who, .dm-bro { transition: scale .2s ease; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -343,13 +397,13 @@
 
 <main>
 
-  <section id="story" data-section="story" data-words="46" class="dm-hero">
+  <section id="story" data-section="story" data-words="51" class="dm-hero">
     <svg class="dm-squiggle" viewBox="0 0 120 80" aria-hidden="true"><path d="M8 60c18-30 34 10 50-14s10-34 26-20 12 30 30 6"/><path d="M70 72c8-6 16-6 24 0"/></svg>
     <span class="dm-sticker">A1 · Стамбул · 6 минут</span>
     <h1 class="dm-title" aria-label="Bu, şu, o">
       <span class="dm-title__w" lang="tr">Bu,</span>
       <span class="dm-title__w" lang="tr">şu,</span>
-      <span class="dm-title__o" aria-hidden="true"><svg viewBox="0 0 120 120"><use href="#i-blob" style="color:var(--coral)"/><path d="M44 66c3-5 9-5 12 0M66 66c3-5 9-5 12 0" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/><circle cx="61" cy="86" r="6" fill="none" stroke="#161616" stroke-width="5"/></svg></span>
+      <span class="dm-title__o" aria-hidden="true" data-say="o" data-hero><svg viewBox="0 0 120 120"><g data-hero-body><use href="#i-blob" style="color:var(--coral)"/><g data-hero-eyes><circle cx="48" cy="64" r="11" fill="#fff" stroke="#161616" stroke-width="4"/><circle cx="74" cy="64" r="11" fill="#fff" stroke="#161616" stroke-width="4"/><g data-hero-pupils><circle cx="48" cy="64" r="5" fill="#161616"/><circle cx="74" cy="64" r="5" fill="#161616"/></g></g><circle cx="61" cy="90" r="5" fill="none" stroke="#161616" stroke-width="4.5"/></g></svg></span>
     </h1>
     <p class="dm-sub">Как показать на вещь и спросить «что это?» и «кто это?».</p>
 
@@ -373,38 +427,39 @@
     <p class="dm-swipe">листай вправо →</p>
   </section>
 
-  <section id="brothers" data-section="brothers" data-words="60">
+  <section id="brothers" data-section="brothers" data-words="70">
     <span class="dm-kicker">Правило 1 · расстояние</span>
     <h2>Жили-были три брата</h2>
     <p>Все трое показывают на вещи. Разница одна. Расстояние.</p>
 
     <div class="dm-bros">
-      <article class="dm-bro dm-bro--bu dm-pop">
-        <svg viewBox="0 0 130 120" aria-hidden="true"><use href="#i-blob" style="color:var(--c-bu)"/><path d="M40 66c4-6 10-6 14 0M64 66c4-6 10-6 14 0M50 82c7 6 15 6 22 0" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/><use href="#i-cay" x="70" y="62" width="46" height="46"/></svg>
+      <article class="dm-bro dm-bro--bu dm-pop" data-bro="bu" data-say="bu" tabindex="0" role="button" aria-label="Брат bu: послушать">
+        <svg viewBox="0 0 130 120" aria-hidden="true"><g data-bro-body><use href="#i-blob" style="color:var(--c-bu)"/><path d="M40 66c4-6 10-6 14 0M64 66c4-6 10-6 14 0M50 82c7 6 15 6 22 0" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/></g><g data-cup><use href="#i-cay" x="70" y="62" width="46" height="46"/></g></svg>
         <div>
-          <h3 lang="tr" data-say="bu">bu</h3>
+          <h3 lang="tr">bu</h3>
           <p>Домосед. Всё, что у него в руках. Это.</p>
           <div class="dm-bro__meter">дальность <i></i></div>
         </div>
       </article>
-      <article class="dm-bro dm-bro--su dm-pop">
-        <svg viewBox="0 0 130 120" aria-hidden="true"><use href="#i-blob" style="color:var(--c-su)"/><path d="M40 66c4-6 10-6 14 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="71" cy="64" r="5" fill="#fff"/><path d="M50 80c7 5 15 4 22-2M104 76l20-14" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/><circle cx="125" cy="61" r="4" fill="#161616"/></svg>
+      <article class="dm-bro dm-bro--su dm-pop" data-bro="su" data-say="şu" tabindex="0" role="button" aria-label="Брат şu: послушать">
+        <svg viewBox="0 0 130 120" aria-hidden="true"><g data-bro-body><use href="#i-blob" style="color:var(--c-su)"/><path d="M40 66c4-6 10-6 14 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="71" cy="64" r="5" fill="#fff"/><path d="M50 80c7 5 15 4 22-2" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/></g><g data-arm><path d="M104 76l20-14" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/><circle cx="125" cy="61" r="4" fill="#161616"/></g></svg>
         <div>
-          <h3 lang="tr" data-say="şu">şu</h3>
+          <h3 lang="tr">şu</h3>
           <p>Показывает пальцем. Вон то, рядом с тобой.</p>
           <div class="dm-bro__meter">дальность <i></i></div>
         </div>
       </article>
-      <article class="dm-bro dm-bro--o dm-pop">
-        <svg viewBox="0 0 130 120" aria-hidden="true"><use href="#i-blob" style="color:var(--c-o)"/><circle cx="62" cy="62" r="6" fill="#161616"/><circle cx="84" cy="62" r="6" fill="#161616"/><circle cx="64" cy="60" r="2" fill="#fff"/><circle cx="86" cy="60" r="2" fill="#fff"/><circle cx="76" cy="84" r="5" fill="none" stroke="#161616" stroke-width="4"/><path class="dm-sight" d="M96 58c14-8 24-12 34-12" data-sight/></svg>
+      <article class="dm-bro dm-bro--o dm-pop" data-bro="o" data-say="o" tabindex="0" role="button" aria-label="Брат o: послушать">
+        <svg viewBox="0 0 130 120" aria-hidden="true"><g data-bro-body><use href="#i-blob" style="color:var(--c-o)"/><g data-o-eyes><circle cx="62" cy="62" r="6" fill="#161616"/><circle cx="84" cy="62" r="6" fill="#161616"/><circle cx="64" cy="60" r="2" fill="#fff"/><circle cx="86" cy="60" r="2" fill="#fff"/></g><circle cx="76" cy="84" r="5" fill="none" stroke="#161616" stroke-width="4"/></g><path class="dm-sight" d="M96 58c14-8 24-12 34-12" data-sight/></svg>
         <div>
-          <h3 lang="tr" data-say="o">o</h3>
+          <h3 lang="tr">o</h3>
           <p>Мечтатель. Смотрит вдаль. То, что далеко или вообще не здесь.</p>
           <div class="dm-bro__meter">дальность <i></i></div>
         </div>
       </article>
     </div>
 
+    <p class="dm-tap">Нажми на брата. Он скажет своё слово.</p>
     <p>Братья встают прямо перед словом. Как русское «этот» и «тот».</p>
     <ul class="dm-pairs">
       <li><span class="w-bu">bu</span> <a-say>bu çay</a-say> <span class="ru">этот чай, у меня</span></li>
@@ -413,10 +468,10 @@
     </ul>
   </section>
 
-  <section id="lab" data-section="lab" data-words="24">
+  <section id="lab" data-section="lab" data-words="25">
     <span class="dm-kicker">Своими руками</span>
     <h2>Дальномер</h2>
-    <p>Тяни чай от себя к горизонту. Смотри, какой брат проснётся.</p>
+    <p>Тащи стакан пальцем к горизонту. Или ползунком. Смотри, какой брат проснётся.</p>
 
     <div class="dm-card dm-lab" data-lab>
       <div class="dm-faces" aria-hidden="true">
@@ -425,12 +480,20 @@
         <div class="dm-face" data-face="2"><svg viewBox="0 0 120 120"><use href="#i-blob" style="color:var(--c-o)"/><circle cx="62" cy="62" r="6" fill="#161616"/><circle cx="84" cy="62" r="6" fill="#161616"/><circle cx="76" cy="84" r="5" fill="none" stroke="#161616" stroke-width="4"/></svg><span lang="tr">o</span></div>
       </div>
 
+      <div class="dm-objs" role="group" aria-label="Что двигаем">
+        <button type="button" class="dm-obj" data-obj="cay" aria-pressed="true"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-cay"/></svg><span lang="tr">çay</span></button>
+        <button type="button" class="dm-obj" data-obj="simit" aria-pressed="false"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-simit"/></svg><span lang="tr">simit</span></button>
+        <button type="button" class="dm-obj" data-obj="kedi" aria-pressed="false"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kedi"/></svg><span lang="tr">kedi</span></button>
+      </div>
+
       <div class="dm-track" data-track>
         <div class="dm-track__zone"></div><div class="dm-track__zone"></div><div class="dm-track__zone"></div>
         <span class="dm-track__sun"></span>
-        <svg class="dm-track__far" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-vapur"/></svg>
+        <svg class="dm-track__far" viewBox="0 0 64 64" aria-hidden="true" data-ferry><use href="#i-vapur"/></svg>
+        <svg class="dm-track__waves" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6c12-6 22-6 34 0s22 6 34 0 22-6 34 0 22 6 34 0 22-6 34 0 22 6 34 0" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".8"/></svg>
         <svg class="dm-track__me" viewBox="0 0 120 120" aria-hidden="true"><use href="#i-blob" style="color:var(--coral)"/><path d="M40 66c4-6 10-6 14 0M64 66c4-6 10-6 14 0M50 82c7 6 15 6 22 0" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/></svg>
-        <svg class="dm-track__glass" viewBox="0 0 64 64" aria-hidden="true" data-glass><use href="#i-cay"/></svg>
+        <svg class="dm-track__glass" viewBox="0 0 64 64" aria-hidden="true" data-glass><use href="#i-cay" data-glass-use/></svg>
+        <span class="dm-track__hint" aria-hidden="true" data-track-hint>тащи →</span>
       </div>
 
       <input class="dm-range" type="range" min="0" max="100" value="6" step="1" data-range aria-label="Расстояние до чая">
@@ -448,7 +511,7 @@
     </div>
   </section>
 
-  <section id="nekim" data-section="nekim" data-words="51">
+  <section id="nekim" data-section="nekim" data-words="62">
     <span class="dm-kicker">Правило 2 · вопрос</span>
     <h2>Ne или kim?</h2>
     <p><span class="w-ne">ne</span> это «что». <span class="w-kim">kim</span> это «кто».</p>
@@ -465,52 +528,55 @@
       <p class="dm-guess__fb" data-guess-fb aria-live="polite"></p>
     </div>
 
+    <p class="dm-tap">Нажми на слово. Оно само улетит в свою колонку.</p>
+    <div class="dm-tray" data-tray>
+      <button type="button" class="dm-tok" data-to="kim" data-say="öğretmen" data-line="Bu kim? — Bu bir öğretmen."><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ogretmen"/></svg><span lang="tr">öğretmen</span></button>
+      <button type="button" class="dm-tok" data-to="ne" data-say="kitap" data-line="Bu ne? — Bu bir kitap."><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kitap"/></svg><span lang="tr">kitap</span></button>
+      <button type="button" class="dm-tok" data-to="kim" data-say="kaptan" data-line="Bu kim? — Bu kaptan."><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan"/></svg><span lang="tr">kaptan</span></button>
+      <button type="button" class="dm-tok" data-to="ne" data-say="simit" data-line="Bu ne? — Bu bir simit."><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-simit"/></svg><span lang="tr">simit</span></button>
+      <button type="button" class="dm-tok" data-to="kim" data-say="Ali" data-line="Bu kim? — Bu Ali."><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ali"/></svg><span lang="tr">Ali</span></button>
+      <button type="button" class="dm-tok" data-to="ne" data-say="kedi" data-line="Bu ne? — Bu bir kedi."><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kedi"/></svg><span lang="tr">kedi</span></button>
+    </div>
     <div class="dm-cols">
-      <div class="dm-col dm-col--kim dm-pop">
+      <div class="dm-col dm-col--kim">
         <h3 lang="tr" data-say="kim">kim</h3>
         <small>только люди</small>
-        <ul>
-          <li><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ogretmen"/></svg><a-say>öğretmen</a-say></li>
-          <li><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan"/></svg><a-say>kaptan</a-say></li>
-          <li><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ali"/></svg><a-say>Ali</a-say></li>
-        </ul>
+        <div class="dm-drop" data-drop="kim"></div>
       </div>
-      <div class="dm-col dm-col--ne dm-pop">
+      <div class="dm-col dm-col--ne">
         <h3 lang="tr" data-say="ne">ne</h3>
         <small>всё остальное</small>
-        <ul>
-          <li><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kitap"/></svg><a-say>kitap</a-say></li>
-          <li><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-simit"/></svg><a-say>simit</a-say></li>
-          <li><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kedi"/></svg><a-say>kedi</a-say></li>
-        </ul>
+        <div class="dm-drop" data-drop="ne"></div>
       </div>
     </div>
+    <div class="dm-flyline"><span class="dm-flyline__say" lang="tr" data-fly-say aria-live="polite"></span><button class="dm-replay" type="button" data-fly-reset hidden>↻ ещё раз</button></div>
     <p>Учитель, капитан, Али: <span lang="tr">kim</span>. Книга, бублик и кот: <span lang="tr">ne</span>.</p>
 
     <h3>Ответ встаёт на место вопроса</h3>
     <div class="dm-card dm-swap" data-swap>
-      <div class="dm-swap__row" lang="tr" data-say="Bu ne?"><span>Bu</span> <span class="dm-slot dm-slot--q" data-slot-q>ne?</span></div>
+      <div class="dm-swap__row" lang="tr" data-say="Bu ne?" data-swap-q><span class="dm-swap__p w-bu" data-slot-p>Bu</span> <span class="dm-slot dm-slot--q" data-slot-q>ne?</span></div>
       <div class="dm-swap__arrow" aria-hidden="true">↓</div>
-      <div class="dm-swap__row" lang="tr" data-say="Bu bir kitap."><span>Bu</span> <span class="dm-slot dm-slot--a" data-slot-a>bir kitap.</span></div>
-      <button class="dm-replay" type="button" data-swap-replay>↻ ещё раз</button>
+      <div class="dm-swap__row" lang="tr" data-say="Bu bir kitap." data-swap-a><span class="dm-swap__p w-bu" data-slot-p2>Bu</span> <span class="dm-slot dm-slot--a" data-slot-a>bir kitap.</span></div>
+      <button class="dm-replay" type="button" data-swap-next>Ещё пример →</button>
     </div>
     <p>Порядок слов не меняется. Никакого «есть». <span lang="tr">bir</span> как английское «a». Можно и без него.</p>
     <p><a-say>O kim?</a-say> Кто он? <a-say>O öğretmen.</a-say> Он учитель.</p>
   </section>
 
-  <section id="scene" data-section="scene" data-words="40">
+  <section id="scene" data-section="scene" data-words="38">
     <span class="dm-kicker">Сцена</span>
     <h2>Эминёню. Тележка с симитами</h2>
-    <div class="dm-chat">
-      <div class="dm-msg dm-msg--me dm-pop"><span class="dm-msg__who">ты</span><a-say>Bu ne?</a-say><small>Что это? (тычешь в бублик)</small></div>
-      <div class="dm-msg dm-msg--them dm-pop"><span class="dm-msg__who">продавец</span><a-say>Bu bir simit.</a-say><small>Это симит. Бублик с кунжутом.</small></div>
-      <div class="dm-msg dm-msg--me dm-pop"><span class="dm-msg__who">ты</span><a-say>Şu ne?</a-say><small>А вон то, у вас?</small></div>
-      <div class="dm-msg dm-msg--them dm-pop"><span class="dm-msg__who">продавец</span><a-say>Şu bir poğaça.</a-say><small>Вон то пирожок.</small></div>
-      <div class="dm-msg dm-msg--me dm-pop"><span class="dm-msg__who">ты</span><a-say>O ne?</a-say><small>А то, вдали?</small></div>
-      <div class="dm-msg dm-msg--them dm-pop"><span class="dm-msg__who">продавец</span><a-say>O bir vapur.</a-say><small>Это паром. Тебе на него.</small></div>
-      <div class="dm-msg dm-msg--me dm-pop"><span class="dm-msg__who">ты</span><a-say>O kim?</a-say><small>А он кто?</small></div>
-      <div class="dm-msg dm-msg--them dm-pop"><span class="dm-msg__who">продавец</span><a-say>O kaptan.</a-say><small>Он капитан.</small></div>
+    <div class="dm-chat" data-chat>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">ты</span><a-say>Bu ne?</a-say><small>Что это? (тычешь в бублик)</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-simit"/></svg><span class="dm-msg__who">продавец</span><a-say>Bu bir simit.</a-say><small>Это симит. Бублик с кунжутом.</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">ты</span><a-say>Şu ne?</a-say><small>А вон то, у вас?</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-pogaca"/></svg><span class="dm-msg__who">продавец</span><a-say>Şu bir poğaça.</a-say><small>Вон то пирожок.</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">ты</span><a-say>O ne?</a-say><small>А то, вдали?</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-vapur"/></svg><span class="dm-msg__who">продавец</span><a-say>O bir vapur.</a-say><small>Это паром. Тебе на него.</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">ты</span><a-say>O kim?</a-say><small>А он кто?</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan"/></svg><span class="dm-msg__who">продавец</span><a-say>O kaptan.</a-say><small>Он капитан.</small></div>
     </div>
+    <button class="dm-replay" type="button" data-chat-replay>↻ ещё раз</button>
   </section>
 
   <section id="traps" data-section="traps" data-words="52">
@@ -519,12 +585,13 @@
     <div class="dm-traps">
       <div class="dm-trap dm-pop">
         <p><b>Кот это не kim.</b> Даже если он тут главный.</p>
-        <p><span class="dm-bad" lang="tr">Bu kim?</span> про кота. Режет слух.</p>
-        <p class="dm-good">Как надо: <a-say>Bu ne?</a-say></p>
+        <p><span class="dm-bad" lang="tr">Bu kim?<i class="dm-strike" aria-hidden="true"></i></span> про кота. Режет слух.</p>
+        <p class="dm-good">Как надо: <a-say>Bu ne?</a-say> <span class="dm-stamp" aria-hidden="true">✓</span></p>
       </div>
       <div class="dm-trap dm-pop">
         <p><b>У o нет пола.</b> <a-say>O kim?</a-say> Это и «кто он?», и «кто она?».</p>
         <p>Кто именно, подскажет ситуация.</p>
+        <button type="button" class="dm-who" data-who data-say="O kim?" aria-label="O kim? Сменить человека"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan" data-who-use/></svg><span lang="tr">O</span><small>↻</small></button>
       </div>
       <div class="dm-trap dm-pop">
         <p><b>Şu не значит «далеко».</b> Şu это то, на что показываешь пальцем. Рядом с тобой или с собеседником.</p>
@@ -533,14 +600,14 @@
     </div>
   </section>
 
-  <section id="video" data-section="video" data-words="13">
+  <section id="video" data-section="video" data-words="10">
     <h2>Послушай носителей</h2>
     <p>Обрати внимание, где стоит вещь, когда звучит bu, şu или o.</p>
     <a-video yt="-u7Sp_-oLNM" start="0" end="70" title="İzle, Eğlen, Öğren: «Bu», «Şu», «O»" channel="Yunus Emre Enstitüsü"></a-video>
     <a-video yt="2Hhm6W2_iIY" start="0" end="63" title="İzle, Eğlen, Öğren: Bu kim? Şu kim?" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
 
-  <section id="practice" data-section="practice" data-words="9">
+  <section id="practice" data-section="practice" data-words="6">
     <h2>Практика</h2>
     <p>Сначала разминка. Потом палуба парома.</p>
     <a-exercise ref="a1.demonstratives.ex1"></a-exercise>
@@ -573,7 +640,7 @@
     <a-exercise ref="a1.demonstratives.ex4"></a-exercise>
   </section>
 
-  <section id="check" data-section="check" data-words="6">
+  <section id="check" data-section="check" data-words="5">
     <h2>Мини-проверка</h2>
     <p>Без шпаргалки. Пять вопросов.</p>
     <a-quiz ref="a1.demonstratives.check1"></a-quiz>
@@ -582,20 +649,32 @@
   <section id="cheat" data-section="cheat" data-words="57">
     <div class="dm-card dm-cheat">
       <h2>Шпаргалка</h2>
+      <svg class="dm-ruler" viewBox="0 0 320 84" role="img" aria-label="Расстояние: bu, şu, o" data-ruler>
+        <path d="M14 52H300" stroke="#555" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 8"/>
+        <path d="M292 44l10 8-10 8" fill="none" stroke="#555" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <g class="dm-ruler__dot" data-say="bu" data-dot="0" tabindex="0" role="button" aria-label="bu"><circle cx="44" cy="52" r="20" fill="#ff6a58"/><text x="44" y="58" text-anchor="middle" fill="#fff">bu</text></g>
+        <g class="dm-ruler__dot" data-say="şu" data-dot="1" tabindex="0" role="button" aria-label="şu"><circle cx="156" cy="52" r="20" fill="#4339e0"/><text x="156" y="58" text-anchor="middle" fill="#fff">şu</text></g>
+        <g class="dm-ruler__dot" data-say="o" data-dot="2" tabindex="0" role="button" aria-label="o"><circle cx="268" cy="52" r="20" fill="#dbf05c"/><text x="268" y="58" text-anchor="middle" fill="#161616">o</text></g>
+        <g fill="#aaa" font-size="11" font-weight="700" text-anchor="middle"><text x="44" y="16">✋</text><text x="156" y="16">👉</text><text x="268" y="16">👀</text></g>
+      </svg>
       <div class="dm-cheat__grid">
-        <span class="w-bu" lang="tr">bu</span><span>этот, в руке</span>
-        <span class="w-su" lang="tr">şu</span><span>вон тот, показываю пальцем</span>
-        <span class="w-o" lang="tr">o</span><span>тот, далеко · он, она</span>
-        <span class="w-ne" lang="tr">ne</span><span>что? Вещи и звери</span>
-        <span class="w-kim" lang="tr">kim</span><span>кто? Только люди</span>
+        <button type="button" class="w-bu dm-chip-say" lang="tr" data-say="bu çay">bu</button><span>этот, в руке</span>
+        <button type="button" class="w-su dm-chip-say" lang="tr" data-say="şu simit">şu</button><span>вон тот, показываю пальцем</span>
+        <button type="button" class="w-o dm-chip-say" lang="tr" data-say="o vapur">o</button><span>тот, далеко · он, она</span>
+        <button type="button" class="w-ne dm-chip-say" lang="tr" data-say="Bu ne?">ne</button><span>что? Вещи и звери</span>
+        <button type="button" class="w-kim dm-chip-say" lang="tr" data-say="O kim?">kim</button><span>кто? Только люди</span>
       </div>
       <div class="dm-cheat__formula" lang="tr">Bu ne? → Bu bir kitap.<br>O kim? → O kaptan.</div>
       <p class="dm-cheat__save">Сохрани скриншотом</p>
     </div>
 
-    <div class="dm-final">
+    <div class="dm-final" data-final>
       <p>Кадыкёй. Рынок. Зелёная пушистая штука.</p>
-      <p><a-say>Bu ne?</a-say> <a-say>Bu çağla.</a-say> Зелёный миндаль. Едят с солью.</p>
+      <div class="dm-final__ask">
+        <svg class="dm-cagla" viewBox="0 0 64 64" aria-hidden="true" data-cagla><path d="M33 8c2-4 6-5 9-4-1 4-5 6-9 4z" fill="#5d8a2a"/><path d="M32 10c14 4 22 18 18 32-3 11-12 16-19 16-10 0-18-8-18-20 0-15 8-25 19-28z" fill="#a9cf5c" stroke="#161616" stroke-width="2.5"/><path d="M22 26c2-5 6-8 10-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".7"/><g fill="#7ea83d"><circle cx="38" cy="30" r="1.4"/><circle cx="28" cy="40" r="1.4"/><circle cx="40" cy="44" r="1.4"/><circle cx="33" cy="50" r="1.4"/></g></svg>
+        <button type="button" class="dm-final__btn" data-final-ask data-say="Bu ne?" lang="tr">Bu ne?</button>
+      </div>
+      <p><a-say>Bu çağla.</a-say> Зелёный миндаль. Едят с солью.</p>
       <p>Два слова. И ты на рынке свой.</p>
     </div>
     <ul class="dm-can">
@@ -619,7 +698,7 @@ addEventListener('DOMContentLoaded', () => {
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
   if (anim) {
-    if (window.SplitText) G.registerPlugin(ScrollTrigger, SplitText); else G.registerPlugin(ScrollTrigger);
+    G.registerPlugin(...[window.ScrollTrigger, window.SplitText, window.MotionPathPlugin].filter(Boolean));
     ScrollTrigger.config({ ignoreMobileResize: true });
     const refresh = () => ScrollTrigger.refresh();
     addEventListener('load', refresh);
@@ -666,48 +745,175 @@ addEventListener('DOMContentLoaded', () => {
   }, { rootMargin: '-45% 0px -45% 0px' });
   $$('main > section[id]').forEach((s) => io.observe(s));
 
+  /* пауза циклов, когда блок не на экране */
+  const onScreen = (el, tween) => {
+    if (!anim) return;
+    tween.pause();
+    ScrollTrigger.create({ trigger: el, start: 'top bottom', end: 'bottom top', onToggle: (st) => (st.isActive ? tween.resume() : tween.pause()) });
+  };
+
+  /* ---------- герой: глаза следят за пальцем, моргает, пружинит по нажатию ---------- */
+  (() => {
+    const hero = $('[data-hero]');
+    const pupils = $('[data-hero-pupils]', hero);
+    const eyes = $('[data-hero-eyes]', hero);
+    const body = $('[data-hero-body]', hero);
+    if (anim) {
+      const px = G.quickTo(pupils, 'x', { duration: .35, ease: 'power3.out' });
+      const py = G.quickTo(pupils, 'y', { duration: .35, ease: 'power3.out' });
+      const look = (e) => {
+        const r = hero.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        const d = Math.hypot(dx, dy) || 1;
+        const k = Math.min(1, d / 260);
+        px((dx / d) * 5 * k); py((dy / d) * 5 * k);
+      };
+      addEventListener('pointermove', look, { passive: true });
+      addEventListener('pointerdown', look, { passive: true });
+      const blink = G.timeline({ repeat: -1, repeatDelay: 2.8 })
+        .to(eyes, { scaleY: .1, transformOrigin: '50% 50%', duration: .08 })
+        .to(eyes, { scaleY: 1, duration: .14 });
+      onScreen(hero, blink);
+    }
+    hero.addEventListener('click', () => {
+      if (anim) G.fromTo(body, { scaleX: 1.2, scaleY: .8, transformOrigin: '50% 100%' }, { scaleX: 1, scaleY: 1, duration: .8, ease: 'elastic.out(1, .35)' });
+    });
+  })();
+
+  /* ---------- братья: дышат, по нажатию говорят и показывают свой жест ---------- */
+  $$('[data-bro]').forEach((card, i) => {
+    const body = $('[data-bro-body]', card);
+    if (anim) onScreen(card, G.to(body, { y: -4, duration: 1.3 + i * .3, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    card.addEventListener('click', () => {
+      card.classList.add('is-talk');
+      setTimeout(() => card.classList.remove('is-talk'), 900);
+      if (!anim) return;
+      G.fromTo(body, { scaleX: 1.15, scaleY: .85, transformOrigin: '50% 100%' }, { scaleX: 1, scaleY: 1, duration: .8, ease: 'elastic.out(1, .35)' });
+      const k = card.dataset.bro;
+      if (k === 'bu') G.fromTo($('[data-cup]', card), { rotation: -20, transformOrigin: '50% 100%' }, { rotation: 0, duration: 1, ease: 'elastic.out(1, .3)' });
+      if (k === 'su') G.fromTo($('[data-arm]', card), { rotation: -28, transformOrigin: '0% 100%' }, { rotation: 0, duration: 1, ease: 'elastic.out(1, .3)' });
+      if (k === 'o') {
+        const p = $('[data-sight]', card);
+        G.fromTo(p, { strokeDashoffset: p.getTotalLength() }, { strokeDashoffset: 0, duration: 1, ease: 'power2.out' });
+        G.fromTo($('[data-o-eyes]', card), { x: -5 }, { x: 4, duration: .5, ease: 'power2.out', yoyo: true, repeat: 1 });
+      }
+    });
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+  });
+
+  /* шкалы дальности заполняются, цветные слова в парах отъезжают на своё расстояние */
+  if (anim) {
+    const bros = $$('[data-bro]');
+    const D = ['14%', '52%', '100%'];
+    ScrollTrigger.create({ trigger: '.dm-bros', start: 'top 70%', once: true, onEnter: () => {
+      bros.forEach((c, i) => G.fromTo(c, { '--d': '0%' }, { '--d': D[i], duration: 1.1, delay: .2 + i * .2, ease: 'power2.out' }));
+    } });
+    const chips = $$('.dm-pairs li > span:first-child');
+    ScrollTrigger.create({ trigger: '.dm-pairs', start: 'top 85%', once: true, onEnter: () => {
+      G.fromTo(chips, { x: 0 }, { x: (i) => [6, 26, 52][i], duration: .6, ease: 'power2.out', stagger: .15, yoyo: true, repeat: 1, repeatDelay: .5 });
+    } });
+    const cat = $('[data-guess] svg');
+    G.fromTo(cat, { y: 30, rotation: -20, scale: .5 }, { y: 0, rotation: 0, scale: 1, duration: .9, ease: 'elastic.out(1, .4)', scrollTrigger: { trigger: '[data-guess]', start: 'top 80%', once: true } });
+  }
+
   /* ---------- дальномер ---------- */
   (() => {
     const lab = $('[data-lab]');
     const range = $('[data-range]', lab);
     const glass = $('[data-glass]', lab);
+    const glassUse = $('[data-glass-use]', lab);
     const track = $('[data-track]', lab);
+    const hint = $('[data-track-hint]', lab);
     const phrase = $('[data-phrase]', lab);
     const ru = $('[data-ru]', lab);
     const faces = $$('[data-face]', lab);
     const zones = $$('.dm-zone', lab);
+    const objs = $$('[data-obj]', lab);
+    const OBJ = { cay: { tr: 'çay', ru: 'чай' }, simit: { tr: 'simit', ru: 'симит' }, kedi: { tr: 'kedi', ru: 'кот' } };
     const Z = [
-      { w: 'bu', cls: 'w-bu', ru: 'этот чай, в руке' },
-      { w: 'şu', cls: 'w-su', ru: 'вон тот чай, рядом с тобой' },
-      { w: 'o', cls: 'w-o', ru: 'тот чай, далеко' },
+      { w: 'bu', cls: 'w-bu', ru: (n) => `этот ${n}, в руке` },
+      { w: 'şu', cls: 'w-su', ru: (n) => `вон тот ${n}, рядом с тобой` },
+      { w: 'o', cls: 'w-o', ru: (n) => `тот ${n}, далеко` },
     ];
     const zoneOf = (v) => (v < 34 ? 0 : v < 67 ? 1 : 2);
     let cur = -1;
-    const qx = anim ? G.quickTo(glass, 'x', { duration: .45, ease: 'power3.out' }) : null;
-    const qs = anim ? G.quickTo(glass, 'scale', { duration: .45, ease: 'power3.out' }) : null;
+    let obj = 'cay';
     function place(v) {
-      const max = track.clientWidth - glass.offsetLeft - glass.offsetWidth - 8;
+      /* у SVG нет offsetLeft: берём отступ и ширину из CSS (.dm-track__glass: left 44px, width 56px) */
+      const max = track.clientWidth - 44 - 56 - 8;
       const x = Math.max(0, (v / 100) * max);
       const s = 1 - (v / 100) * 0.55;
-      if (anim) { qx(x); qs(s); } else glass.style.transform = `translateX(${x}px) scale(${s})`;
+      if (anim) G.to(glass, { x, scale: s, duration: .45, ease: 'power3.out', overwrite: 'auto' });
+      else glass.style.transform = `translateX(${x}px) scale(${s})`;
     }
-    function render(v) {
+    function render(v, force) {
       place(v);
       const z = zoneOf(v);
-      if (z === cur) return;
+      if (z === cur && !force) return;
+      const jump = z !== cur;
       cur = z;
-      phrase.innerHTML = `<b class="${Z[z].cls}">${Z[z].w}</b> çay`;
-      phrase.dataset.say = `${Z[z].w} çay`;
-      ru.textContent = Z[z].ru;
+      phrase.innerHTML = `<b class="${Z[z].cls}">${Z[z].w}</b> ${OBJ[obj].tr}`;
+      phrase.dataset.say = `${Z[z].w} ${OBJ[obj].tr}`;
+      ru.textContent = Z[z].ru(OBJ[obj].ru);
       faces.forEach((f, i) => f.classList.toggle('is-on', i === z));
       zones.forEach((b, i) => b.setAttribute('aria-pressed', String(i === z)));
-      if (anim) G.fromTo(phrase.firstElementChild, { scale: .4, rotation: -12 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .45)' });
+      if (!anim) return;
+      G.fromTo(phrase.firstElementChild, { scale: .4, rotation: -12 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .45)' });
+      if (jump) G.fromTo($('svg', faces[z]), { y: -16 }, { y: 0, duration: .7, ease: 'bounce.out' });
     }
-    range.addEventListener('input', () => render(+range.value));
+    let demo = null;
+    const used = () => { hint.classList.add('is-used'); demo?.kill(); demo = null; };
+    if (anim) {
+      const st = { v: 6 };
+      const step = () => { range.value = Math.round(st.v); render(st.v); };
+      demo = G.timeline({ paused: true, delay: .3 })
+        .to(st, { v: 94, duration: 1.8, ease: 'power1.inOut', onUpdate: step })
+        .to(st, { v: 6, duration: 1.3, ease: 'power1.inOut', onUpdate: step });
+      ScrollTrigger.create({ trigger: track, start: 'top 70%', once: true, onEnter: () => demo?.play() });
+    }
+    range.addEventListener('input', () => { used(); render(+range.value); });
     zones.forEach((b) => b.addEventListener('click', () => {
+      used();
       range.value = [6, 50, 94][+b.dataset.z];
       render(+range.value);
     }));
+    objs.forEach((b) => b.addEventListener('click', () => {
+      used();
+      obj = b.dataset.obj;
+      objs.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      glassUse.setAttribute('href', `#i-${obj}`);
+      render(+range.value, true);
+      if (anim) G.fromTo(glass, { rotation: -25 }, { rotation: 0, duration: .8, ease: 'elastic.out(1, .35)' });
+    }));
+
+    /* тащить предмет пальцем или мышью: горизонтальный жест — тянем, вертикальный — страница скроллится */
+    let down = null;
+    let dragging = false;
+    const fromPointer = (e) => {
+      const r = track.getBoundingClientRect();
+      const v = Math.round(Math.max(0, Math.min(100, ((e.clientX - r.left - 70) / Math.max(1, r.width - 120)) * 100)));
+      range.value = v;
+      render(v);
+    };
+    track.addEventListener('pointerdown', (e) => { down = { x: e.clientX, y: e.clientY, id: e.pointerId }; });
+    track.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      if (!dragging && Math.abs(e.clientX - down.x) > 6 && Math.abs(e.clientX - down.x) > Math.abs(e.clientY - down.y)) {
+        dragging = true;
+        track.setPointerCapture(down.id);
+        track.classList.add('is-drag');
+        used();
+      }
+      if (dragging) fromPointer(e);
+    });
+    const stop = (e) => {
+      if (down && !dragging && e.type === 'pointerup') { used(); fromPointer(e); }
+      down = null; dragging = false;
+      track.classList.remove('is-drag');
+    };
+    track.addEventListener('pointerup', stop);
+    track.addEventListener('pointercancel', stop);
     addEventListener('resize', () => place(+range.value));
     render(+range.value);
   })();
@@ -721,22 +927,178 @@ addEventListener('DOMContentLoaded', () => {
       $$('[data-guess-opt]', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
       b.classList.add(ok ? 'is-right' : 'is-wrong');
       fb.textContent = ok ? 'Да. Кот это ne. Kim только про людей.' : 'На этом спотыкаются все. Kim только про людей. Кот это ne.';
-      if (anim) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+      if (!anim) return;
+      if (ok) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+      else G.fromTo(b, { x: -10 }, { x: 0, duration: .6, ease: 'elastic.out(1, .3)' });
     }));
   })();
 
-  /* ---------- ответ встаёт на место вопроса ---------- */
+  /* ---------- перелёт: слово само летит в колонку kim или ne ---------- */
   (() => {
+    const tray = $('[data-tray]');
+    const say = $('[data-fly-say]');
+    const reset = $('[data-fly-reset]');
+    const toks = $$('.dm-tok', tray);
+    const home = new Map(toks.map((t, i) => [t, i]));
+    function fly(t) {
+      if (t.parentElement !== tray) return;
+      const drop = $(`[data-drop="${t.dataset.to}"]`);
+      const a = t.getBoundingClientRect();
+      drop.append(t);
+      const b = t.getBoundingClientRect();
+      say.textContent = t.dataset.line;
+      say.dataset.say = t.dataset.line.replace(' — ', ' ');
+      if (!tray.children.length) reset.hidden = false;
+      if (!anim) return;
+      const dx = a.left - b.left;
+      const dy = a.top - b.top;
+      G.set(t, { x: dx, y: dy, rotation: -12 });
+      const path = window.MotionPathPlugin
+        ? { motionPath: { path: [{ x: dx, y: dy }, { x: dx / 2, y: Math.min(dy, 0) - 70 }, { x: 0, y: 0 }], curviness: 1.4 } }
+        : { x: 0, y: 0 };
+      G.to(t, { ...path, rotation: 0, duration: .8, ease: 'power2.inOut', onComplete: () => G.fromTo(t, { scale: 1.25 }, { scale: 1, duration: .5, ease: 'back.out(3)' }) });
+      G.fromTo(say, { y: 10, scale: .9 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)' });
+    }
+    toks.forEach((t) => t.addEventListener('click', () => fly(t)));
+    reset.addEventListener('click', () => {
+      toks.sort((x, y) => home.get(x) - home.get(y)).forEach((t, i) => {
+        tray.append(t);
+        if (anim) G.fromTo(t, { x: 0, y: -30, scale: .5 }, { y: 0, scale: 1, duration: .5, delay: i * .05, ease: 'back.out(2.5)' });
+      });
+      reset.hidden = true;
+      say.textContent = '';
+      delete say.dataset.say;
+    });
+  })();
+
+  /* ---------- барабан: ответ встаёт на место вопроса ---------- */
+  (() => {
+    const EXS = [
+      { p: 'Bu', c: 'w-bu', q: 'ne?', a: 'bir kitap.' },
+      { p: 'O', c: 'w-o', q: 'kim?', a: 'öğretmen.' },
+      { p: 'Şu', c: 'w-su', q: 'ne?', a: 'bir simit.' },
+      { p: 'O', c: 'w-o', q: 'ne?', a: 'bir vapur.' },
+    ];
+    const p1 = $('[data-slot-p]');
+    const p2 = $('[data-slot-p2]');
     const q = $('[data-slot-q]');
     const a = $('[data-slot-a]');
+    const rowQ = $('[data-swap-q]');
+    const rowA = $('[data-swap-a]');
+    let k = 0;
+    function apply() {
+      const e = EXS[k];
+      [p1, p2].forEach((x) => { x.textContent = e.p; x.className = `dm-swap__p ${e.c}`; });
+      q.textContent = e.q;
+      a.textContent = e.a;
+      rowQ.dataset.say = `${e.p} ${e.q}`;
+      rowA.dataset.say = `${e.p} ${e.a}`;
+    }
     function play() {
       if (!anim) return;
       G.timeline()
-        .fromTo(q, { scale: 1 }, { scale: 1.2, duration: .25, yoyo: true, repeat: 1, ease: 'power2.inOut' })
-        .fromTo(a, { rotationX: -90, y: -30 }, { rotationX: 0, y: 0, duration: .9, ease: 'elastic.out(1, .45)' }, '-=.05');
+        .fromTo([p1, q], { rotationX: 90 }, { rotationX: 0, duration: .45, ease: 'back.out(2)', stagger: .08 })
+        .fromTo(q, { scale: 1 }, { scale: 1.2, duration: .2, yoyo: true, repeat: 1, ease: 'power2.inOut' })
+        .fromTo(p2, { rotationX: 90 }, { rotationX: 0, duration: .4, ease: 'back.out(2)' }, '-=.1')
+        .fromTo(a, { rotationX: -90, y: -30 }, { rotationX: 0, y: 0, duration: .9, ease: 'elastic.out(1, .45)' }, '-=.25');
     }
     if (anim) ScrollTrigger.create({ trigger: '[data-swap]', start: 'top 75%', once: true, onEnter: play });
-    $('[data-swap-replay]').addEventListener('click', play);
+    $('[data-swap-next]').addEventListener('click', () => { k = (k + 1) % EXS.length; apply(); play(); });
+  })();
+
+  /* ---------- сцена: реплики появляются по очереди, картинки товара прыгают ---------- */
+  (() => {
+    const chat = $('[data-chat]');
+    const msgs = $$('.dm-msg', chat);
+    const pics = $$('.dm-msg__pic', chat);
+    function play() {
+      if (!anim) return;
+      G.fromTo(msgs,
+        { y: 24, scale: .6, rotation: (i) => (i % 2 ? -4 : 4), transformOrigin: (i) => (i % 2 ? '0% 100%' : '100% 100%') },
+        { y: 0, scale: 1, rotation: 0, duration: .55, ease: 'back.out(2.4)', stagger: .38 });
+      G.fromTo(pics, { scale: .3, rotation: -30 }, { scale: 1, rotation: 0, duration: .7, ease: 'elastic.out(1, .45)', stagger: .76, delay: .5 });
+    }
+    if (anim) {
+      G.set(msgs, { y: 24, scale: .85 });
+      ScrollTrigger.create({ trigger: chat, start: 'top 75%', once: true, onEnter: play });
+    }
+    $('[data-chat-replay]').addEventListener('click', play);
+  })();
+
+  /* ---------- ловушки: зачёркивание, печать, он/она ---------- */
+  (() => {
+    const strike = $('.dm-strike');
+    const stamp = $('.dm-stamp');
+    const card = strike.closest('.dm-trap');
+    function play() {
+      if (!anim) return;
+      G.timeline()
+        .fromTo(strike, { scaleX: 0 }, { scaleX: 1, duration: .5, ease: 'power2.out' })
+        .fromTo(stamp, { scale: 3, rotation: -40 }, { scale: 1, rotation: 0, duration: .7, ease: 'bounce.out' });
+    }
+    if (anim) ScrollTrigger.create({ trigger: card, start: 'top 70%', once: true, onEnter: play });
+    card.addEventListener('click', (e) => { if (!e.target.closest('a-say')) play(); });
+
+    const who = $('[data-who]');
+    const use = $('[data-who-use]');
+    let w = 0;
+    who.addEventListener('click', () => {
+      w ^= 1;
+      use.setAttribute('href', w ? '#i-ogretmen' : '#i-kaptan');
+      if (anim) G.fromTo($('svg', who), { rotationY: 90 }, { rotationY: 0, duration: .5, ease: 'back.out(2)' });
+    });
+  })();
+
+  /* ---------- шпаргалка: линейка расстояния собирается, кнопки звучат ---------- */
+  (() => {
+    const ruler = $('[data-ruler]');
+    const dots = $$('[data-dot]', ruler);
+    function play() {
+      if (!anim) return;
+      G.fromTo(dots, { x: (i) => -[0, 112, 224][i], scale: .4, transformOrigin: '50% 50%' }, { x: 0, scale: 1, duration: .9, ease: 'back.out(1.8)', stagger: .18 });
+    }
+    if (anim) ScrollTrigger.create({ trigger: ruler, start: 'top 85%', once: true, onEnter: play });
+    dots.forEach((d) => {
+      d.addEventListener('click', () => { if (anim) G.fromTo(d, { y: -14 }, { y: 0, duration: .7, ease: 'bounce.out' }); });
+      d.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); d.dispatchEvent(new MouseEvent('click', { bubbles: true })); } });
+    });
+    $$('.dm-chip-say').forEach((b) => b.addEventListener('click', () => {
+      if (anim) G.fromTo(b, { scale: .7, rotation: -10 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .4)' });
+    }));
+  })();
+
+  /* ---------- финал: шпаргалка выезжает, конфетти из кляксочек ---------- */
+  (() => {
+    const fin = $('[data-final]');
+    const COLORS = ['#4339e0', '#dbf05c', '#c7b8f5', '#ffffff', '#161616'];
+    function burst() {
+      if (!anim) return;
+      for (let i = 0; i < 22; i++) {
+        const d = document.createElement('span');
+        d.className = 'dm-conf';
+        d.style.background = COLORS[i % COLORS.length];
+        fin.append(d);
+        const ang = (i / 22) * Math.PI * 2 + Math.random() * .3;
+        const dist = 70 + Math.random() * 150;
+        G.fromTo(d, { x: 0, y: 0, scale: .4 + Math.random() }, {
+          x: Math.cos(ang) * dist, y: Math.sin(ang) * dist * .6 - 30, rotation: Math.random() * 360,
+          duration: 1 + Math.random() * .5, ease: 'power3.out',
+          onComplete: () => G.to(d, { y: '+=60', scale: 0, duration: .5, ease: 'power1.in', onComplete: () => d.remove() }),
+        });
+      }
+    }
+    if (anim) {
+      ScrollTrigger.create({ trigger: fin, start: 'top 70%', once: true, onEnter: burst });
+      const rows = [...$$('.dm-cheat__grid > *'), ...$$('.dm-can li')];
+      G.set(rows, { x: -20, rotation: -2 });
+      ScrollTrigger.batch(rows, { start: 'top 95%', once: true, onEnter: (b) => G.to(b, { x: 0, rotation: 0, duration: .5, ease: 'back.out(2.5)', stagger: .06 }) });
+    }
+    const cagla = $('[data-cagla]');
+    if (anim) onScreen(fin, G.to(cagla, { rotation: 8, y: -3, duration: 1.1, ease: 'sine.inOut', yoyo: true, repeat: -1, transformOrigin: '50% 90%' }));
+    $('[data-final-ask]').addEventListener('click', () => {
+      burst();
+      if (anim) G.fromTo(cagla, { scale: .6 }, { scale: 1, duration: .8, ease: 'elastic.out(1, .35)' });
+    });
   })();
 
   /* ---------- нестандартное упражнение «Палуба парома» — ответы в exercises.json (ex3) ---------- */
@@ -798,11 +1160,13 @@ addEventListener('DOMContentLoaded', () => {
         a.className = 'dm-bubble__a'; a.lang = 'tr'; a.textContent = it.reply; a.dataset.say = it.reply;
         bubble.append(a);
         if (anim) G.fromTo(a, { scale: .3, rotation: -10 }, { scale: 1, rotation: 0, duration: .6, ease: 'back.out(3)' });
+        if (anim) G.fromTo(obj, { y: 0 }, { y: -26, duration: .22, yoyo: true, repeat: 3, ease: 'power2.out' });
       } else {
         fbEl.className = 'dm-deck-fb is-wrong';
         fbEl.innerHTML = '';
         const b = document.createElement('b'); b.textContent = `Правильно: ${right} `;
         fbEl.append(b, document.createTextNode(it.explanation));
+        if (anim) G.fromTo(obj, { x: -10 }, { x: 0, duration: .7, ease: 'elastic.out(1, .25)' });
       }
       go.textContent = i + 1 < items.length ? 'Дальше' : 'Результат';
       go.disabled = false;
