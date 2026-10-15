@@ -1,0 +1,1345 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="lib.postpositions">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Послелоги: üstünde, altında, yanında</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  :root {
+    --coral: #FB5B5B; --coral-d: #E64A4A; --coral-soft: #FFECEC;
+    --green: #B4CE7C; --green-d: #9CBB5F; --green-dk: #5E7A2A; --green-soft: #F0F5E3;
+    --ink: #16181B; --ink-2: #565C64; --ink-3: #757B84; --line: #EBEBE6; --card: #FAFAF7;
+    /* одна роль — один цвет: слово, родительный, притяжательный, буфер, падеж */
+    --c-root: #2B4BB0; --c-root-bg: #EFF3FF;
+    --c-gen: #D93C3C; --c-gen-bg: #FFECEC;
+    --c-pos: #7038B8; --c-pos-bg: #F6EDFF;
+    --c-buf: #A35F00; --c-buf-bg: #FFF2D6;
+    --c-case: #5E7A2A; --c-case-bg: #F0F5E3;
+    --r-lg: 28px; --r-md: 20px; --r-sm: 14px;
+    --shadow: 0 2px 3px rgba(20,22,26,.03), 0 10px 26px rgba(20,22,26,.06);
+    --pad: 16px;
+    --ak-accent: #E64A4A; --ak-accent-ink: #fff; --ak-accent-soft: #FFECEC;
+    --ak-ink: #16181B; --ak-muted: #565C64; --ak-line: #EBEBE6; --ak-surface: #FAFAF7;
+    --ak-good: #5E7A2A; --ak-good-soft: #F0F5E3; --ak-bad: #D93C3C; --ak-bad-soft: #FFECEC;
+    --ak-radius: 20px;
+    --ak-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: #fff; }
+  body { margin: 0; background: #fff; color: var(--ink); font: 400 16.5px/1.6 var(--ak-font); overflow-x: clip; }
+  button { font: inherit; color: inherit; cursor: pointer; }
+  :focus-visible { outline: 3px solid var(--coral-d); outline-offset: 2px; }
+  main { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .pp-wrap { max-width: 780px; margin: 0 auto; padding: 0 var(--pad); }
+  section[data-section] { padding: 56px 0 0; }
+  section[data-section="story"] { padding-top: 0 !important; }
+  @media (min-width: 768px) { :root { --pad: 32px; } section[data-section] { padding-top: 84px; } }
+
+  h1, h2, h3 { margin: 0; font-weight: 800; letter-spacing: -.028em; text-transform: lowercase; }
+  h1 { font-size: clamp(30px, 8.6vw, 76px); line-height: .98; }
+  h2 { font-size: clamp(26px, 7.4vw, 50px); line-height: 1; margin-bottom: 16px; }
+  h3 { font-size: clamp(20px, 5.2vw, 28px); line-height: 1.1; margin: 28px 0 12px; }
+  p { margin: 0 0 14px; max-width: 65ch; }
+  .pp-lead { font-size: clamp(16.5px, 4.2vw, 19px); color: var(--ink-2); line-height: 1.55; }
+  .pp-lead b { color: var(--ink); }
+  .pp-tag { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 14px; }
+  .pp-tr { font-weight: 700; color: var(--green-dk); }
+  .pp-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 18px; margin-top: 18px; }
+  .pp-box { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-lg); padding: 18px 14px; margin-top: 20px; overflow: hidden; }
+  @media (min-width: 768px) { .pp-box { padding: 28px; } }
+  .pp-cap { min-height: 66px; display: block; text-align: center; margin: 10px auto 0; font-size: 15px; line-height: 1.45; color: var(--ink-2); padding: 0 4px; }
+  .pp-cap b { color: var(--ink); }
+  .pp-row { display: flex; gap: 8px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 12px; }
+  .pp-btn { min-height: 44px; min-width: 44px; padding: 10px 16px; border-radius: 12px; background: #fff; border: 1.5px solid var(--line); font-weight: 700; font-size: 14.5px; color: var(--ink); }
+  .pp-btn--main { background: var(--coral-d); border-color: var(--coral-d); color: #fff; }
+  .pp-btn:disabled { opacity: .4; cursor: default; }
+  @media (hover: hover) { .pp-btn:hover:not(:disabled) { border-color: #cfcfc7; } .pp-btn--main:hover:not(:disabled) { border-color: var(--ink); } }
+  .pp-dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+  .pp-dots i { width: 7px; height: 7px; border-radius: 4px; background: #DCDCD6; display: block; }
+  .pp-dots i.on { background: var(--coral); width: 22px; }
+  .pp-spk { width: 44px; height: 44px; border-radius: 12px; background: var(--green-soft); border: 1.5px solid #DCE8C0; display: inline-grid; place-items: center; flex: none; padding: 0; vertical-align: middle; }
+  .pp-spk svg { width: 20px; height: 20px; }
+
+  /* морфемы: цвет = роль */
+  .m { display: inline-block; padding: 7px 12px; border-radius: 11px; font-weight: 800; letter-spacing: -.01em; border: 1.5px solid transparent; white-space: nowrap; font-size: clamp(18px, 5.4vw, 28px); line-height: 1.2; }
+  .m-root { background: var(--c-root-bg); color: var(--c-root); border-color: #D6E1FF; }
+  .m-gen { background: var(--c-gen-bg); color: var(--c-gen); border-color: #FFD3D3; }
+  .m-pos { background: var(--c-pos-bg); color: var(--c-pos); border-color: #E6D6FA; }
+  .m-buf { background: var(--c-buf-bg); color: var(--c-buf); border-color: #F5DDA6; }
+  .m-case { background: var(--c-case-bg); color: var(--c-case); border-color: #DAE7BC; }
+  .m-res { background: var(--green); color: #fff; border-color: var(--green-d); }
+  .m-op { padding: 0 1px; color: var(--ink-3); font-weight: 600; background: none; }
+  .m-pron { background: #fff; color: var(--ink-2); border-color: var(--line); }
+  .pp-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0 0; }
+  .pp-legend .m { font-size: 13px; padding: 4px 9px; }
+  .gen { color: var(--c-gen); font-weight: 800; } .pos { color: var(--c-pos); font-weight: 800; } .buf { color: var(--c-buf); font-weight: 800; } .cas { color: var(--c-case); font-weight: 800; }
+
+  /* ---------- hero + история ---------- */
+  .pp-hero { background: var(--coral-d); color: #fff; padding: calc(44px + env(safe-area-inset-top)) 0 0; position: relative; overflow: hidden; }
+  .pp-hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(-38deg, rgba(255,255,255,.05) 0 2px, transparent 2px 26px); }
+  .pp-hero .pp-wrap { position: relative; z-index: 2; }
+  .pp-hero .pp-tag { color: rgba(255,255,255,.8); }
+  .pp-hero h1 em { font-style: normal; display: inline-block; position: relative; }
+  .pp-hero h1 em::after { content: ""; position: absolute; left: 0; right: 0; bottom: .06em; height: .1em; background: rgba(255,255,255,.45); border-radius: 3px; transform: scaleX(0); transform-origin: left; animation: pp-ul 1s .4s cubic-bezier(.2,.8,.3,1) forwards; }
+  @keyframes pp-ul { to { transform: scaleX(1); } }
+  .pp-hero .pp-lead { color: rgba(255,255,255,.94); margin: 18px 0 22px; max-width: 40ch; }
+  .pp-hero .pp-lead b { color: #fff; }
+  .pp-go { min-height: 48px; padding: 12px 22px; border-radius: 14px; background: #fff; color: var(--coral-d); border: 0; font-weight: 800; box-shadow: 0 8px 22px rgba(0,0,0,.12); }
+  .pp-morph { background: #fff; color: var(--ink); border-radius: var(--r-lg) var(--r-lg) 0 0; margin-top: 30px; padding: 22px 0 18px; position: relative; z-index: 3; }
+  .pp-loop { min-height: 96px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; align-items: center; padding: 0 12px; }
+  .pp-loop-cap { text-align: center; font-size: 13.5px; font-weight: 600; color: var(--ink-3); min-height: 40px; display: flex; align-items: center; justify-content: center; padding: 0 12px; }
+  .pp-story { max-width: 640px; margin: 0 auto; }
+  .pp-story p { font-size: clamp(17px, 4.5vw, 20px); line-height: 1.52; margin: 0 0 16px; letter-spacing: -.01em; }
+  .pp-story .pp-punch { font-weight: 800; font-size: clamp(19px, 5vw, 25px); line-height: 1.22; margin: 24px 0; }
+  .pp-sep { width: 36px; height: 3px; background: var(--coral); border-radius: 2px; margin: 26px 0; }
+  .pp-fridge-btn { display: block; margin: 8px auto 22px; padding: 0; border: 0; background: none; width: min(220px, 60%); }
+  .pp-fridge-btn svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .pp-guess { display: grid; gap: 8px; margin-top: 10px; }
+  @media (min-width: 560px) { .pp-guess { grid-template-columns: repeat(3, 1fr); } }
+  .pp-opt { min-height: 48px; padding: 12px 14px; border-radius: var(--r-sm); background: #fff; border: 1.5px solid var(--line); font-weight: 700; text-align: center; }
+  .pp-opt.is-ok { background: var(--green-soft); border-color: var(--green); color: var(--green-dk); }
+  .pp-opt.is-no { background: var(--coral-soft); border-color: var(--coral); color: var(--coral-d); }
+
+  /* ---------- переворот ---------- */
+  .pp-swap svg { width: 100%; max-width: 420px; margin: 0 auto; display: block; height: auto; font-family: var(--ak-font); }
+
+  /* ---------- конструктор и буфер ---------- */
+  .pp-cons-word { min-height: 64px; display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; align-items: center; }
+  .pp-cons-gloss { text-align: center; font-size: 14.5px; color: var(--ink-2); margin-top: 8px; min-height: 22px; }
+  .pp-clash { height: 96px; display: flex; align-items: center; justify-content: center; position: relative; }
+  .pp-clash .m { position: relative; }
+  .pp-cl-n { position: absolute !important; inset: 0; margin: auto; width: fit-content; height: fit-content; }
+  .pp-cl-mark { position: absolute; left: 0; right: 0; top: 0; margin: 0 auto; width: 26px; }
+  .pp-cl-mark svg { width: 26px; height: 26px; display: block; }
+
+  /* ---------- лаборатория: комната ---------- */
+  .pp-modes { display: flex; gap: 4px; padding: 4px; background: #fff; border: 1.5px solid var(--line); border-radius: 14px; margin-bottom: 14px; }
+  .pp-modes button { flex: 1; min-height: 44px; border: 0; background: none; border-radius: 10px; font-weight: 700; font-size: 14px; color: var(--ink-3); }
+  .pp-modes button[aria-selected="true"] { background: var(--ink); color: #fff; }
+  .pp-room svg { width: 100%; height: auto; display: block; border-radius: var(--r-md); background: linear-gradient(180deg, #fff 0%, #F4F6EE 100%); }
+  .pp-pills { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
+  .pp-pill { min-height: 44px; padding: 9px 15px; border-radius: 999px; background: #fff; border: 1.5px solid var(--line); font-size: 14px; font-weight: 700; white-space: nowrap; }
+  .pp-pill.on { background: var(--green); border-color: var(--green-d); color: #fff; }
+  .pp-pill.is-no { background: var(--coral-soft); border-color: var(--coral); color: var(--coral-d); }
+  .pp-room-out { margin-top: 14px; padding: 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-sm); }
+  .pp-room-tr { font-size: clamp(19px, 5.4vw, 26px); font-weight: 800; color: var(--green-dk); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .pp-room-ru { font-weight: 600; margin: 4px 0; }
+  .pp-room-gl { font-size: 13.5px; color: var(--ink-3); font-style: italic; }
+  .pp-room-task { min-height: 24px; font-weight: 700; color: var(--coral-d); margin-bottom: 6px; }
+
+  /* ---------- корни ---------- */
+  .pp-tbl { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; background: #fff; margin-top: 20px; }
+  .pp-tbl table { border-collapse: collapse; width: 100%; }
+  .pp-tbl th { text-align: left; font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3); padding: 12px 14px; background: var(--card); border-bottom: 1px solid var(--line); }
+  .pp-tbl td { padding: 11px 14px; border-bottom: 1px solid #F3F3EF; font-size: 15px; vertical-align: top; }
+  .pp-tbl tr:last-child td { border-bottom: 0; }
+  .pp-tbl td:first-child { font-weight: 800; color: var(--c-root); white-space: nowrap; }
+  .pp-tbl .ak-say { font-size: 13.5px; color: var(--ink-2); }
+  .pp-tbl tr.is-hid { display: none; }
+  .pp-tbl.is-open tr.is-hid { display: table-row; }
+  .pp-more { width: 100%; min-height: 48px; background: var(--card); border: 0; border-top: 1px solid var(--line); font-weight: 700; font-size: 14px; color: var(--ink-2); display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .pp-more svg { width: 16px; height: 16px; }
+  .pp-fcs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+  @media (min-width: 640px) { .pp-fcs { grid-template-columns: repeat(3, 1fr); } }
+  .pp-fc { perspective: 800px; height: 108px; padding: 0; border: 0; background: none; text-align: center; }
+  .pp-fc-in { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; }
+  .pp-fc-f, .pp-fc-b { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--r-md); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; gap: 2px; }
+  .pp-fc-f { background: #fff; border: 1.5px solid var(--line); box-shadow: var(--shadow); }
+  .pp-fc-f b { font-size: 19px; color: var(--green-dk); }
+  .pp-fc-f small { font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+  .pp-fc-b { background: var(--green); color: #fff; transform: rotateY(180deg); }
+  .pp-fc-b b { font-size: 17px; }
+  .pp-fc-b small { font-size: 12px; line-height: 1.3; }
+  .pp-fc.is-flip .pp-fc-in { transform: rotateY(180deg); }
+
+  /* ---------- изафет ---------- */
+  .pp-green { background: #6E8C34; color: #fff; border-radius: var(--r-lg); padding: 28px 18px; position: relative; overflow: hidden; }
+  .pp-green::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(-38deg, rgba(255,255,255,.1) 0 3px, transparent 3px 30px); }
+  .pp-green > * { position: relative; }
+  .pp-green h2 { color: #fff; }
+  .pp-green > p { color: #fff; font-size: clamp(16px, 4.2vw, 18px); }
+  .pp-green .pp-tag { color: rgba(255,255,255,.9); }
+  @media (min-width: 768px) { .pp-green { padding: 44px 40px; } }
+  .pp-inner { background: #fff; color: var(--ink); border-radius: 20px; padding: 18px; margin-top: 14px; }
+  .pp-inner p { font-size: 15px; color: var(--ink-2); }
+  .pp-green .pp-inner .pp-tag { color: var(--ink-3); }
+  .pp-harm { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .pp-harm .pp-pill.on { background: var(--ink); border-color: var(--ink); }
+  .pp-vh { position: relative; }
+  .pp-vh-word { min-height: 52px; line-height: 52px; text-align: center; font-size: clamp(22px, 6vw, 30px); font-weight: 800; color: var(--c-root); }
+  .pp-vh-v { color: var(--coral-d); display: inline-block; }
+  .pp-vh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .pp-vh-cell { padding: 12px 8px; border-radius: 14px; background: #fff; border: 1.5px solid var(--line); text-align: center; }
+  .pp-vh-cell b { display: block; font-size: 14px; color: var(--ink-3); letter-spacing: .04em; }
+  .pp-vh-cell span { display: block; font-size: 17px; font-weight: 800; color: var(--c-gen); }
+  .pp-vh-cell.on { background: var(--green-soft); border-color: var(--green); }
+  .pp-vh-fly { position: absolute; left: 0; top: 0; pointer-events: none; visibility: hidden; font-size: clamp(22px, 6vw, 30px); font-weight: 800; color: var(--coral-d); z-index: 3; }
+  .pp-vh-res { margin-top: 10px; padding: 14px; border-radius: 14px; background: var(--green-soft); border: 1.5px solid #DCE8C0; text-align: center; min-height: 76px; }
+  .pp-vh-res .big { font-size: clamp(19px, 5.4vw, 24px); font-weight: 800; color: var(--green-dk); }
+  .pp-vh-res .sm { font-size: 13.5px; color: var(--ink-2); margin-top: 4px; }
+  .pp-snap { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; min-height: 64px; align-items: center; }
+  .pp-snap .m { font-size: clamp(17px, 4.8vw, 24px); }
+  .pp-snap-aff { display: inline-block; }
+  .pp-brace { display: block; width: 100%; max-width: 340px; margin: 2px auto 0; height: auto; }
+  .pp-ex-tbl td:first-child { color: var(--green-dk); white-space: normal; }
+  .pp-sub { display: block; font-size: 13px; color: var(--ink-3); font-weight: 600; margin-top: 2px; }
+
+  /* ---------- падежи ---------- */
+  .pp-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; margin: 20px 0 14px; scrollbar-width: none; }
+  .pp-tabs::-webkit-scrollbar { display: none; }
+  .pp-tab { flex: none; min-height: 44px; padding: 10px 15px; border-radius: 12px; background: #fff; border: 1.5px solid var(--line); font-weight: 700; font-size: 14px; white-space: nowrap; }
+  .pp-tab small { opacity: .7; font-weight: 600; }
+  .pp-tab[aria-selected="true"] { background: var(--coral-d); border-color: var(--coral-d); color: #fff; }
+  .pp-scene { background: var(--card); border: 1px solid var(--line); border-radius: var(--r-md); padding: 12px 10px 6px; margin-bottom: 14px; }
+  .pp-scene svg { width: 100%; max-width: 340px; margin: 0 auto; display: block; height: auto; }
+  .pp-case-panel[hidden] { display: none; }
+  .pp-ex { padding: 14px 16px; background: #fff; border: 1px solid var(--line); border-radius: var(--r-sm); margin-bottom: 10px; }
+  .pp-ex .ak-say { font-weight: 800; color: var(--green-dk); }
+  .pp-ex div { font-size: 14.5px; color: var(--ink-2); }
+
+  /* ---------- местоимения ---------- */
+  .pp-switch { display: inline-flex; background: var(--card); border: 1.5px solid var(--line); border-radius: 12px; padding: 4px; gap: 3px; margin: 16px 0 12px; }
+  .pp-switch button { min-height: 40px; padding: 8px 14px; border-radius: 9px; border: 0; background: none; font-size: 14px; font-weight: 700; color: var(--ink-3); }
+  .pp-switch button[aria-pressed="true"] { background: #fff; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+  .pp-persons { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pp-pers-out { min-height: 70px; display: flex; gap: 5px; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 14px; }
+  .pp-pers-ru { text-align: center; color: var(--ink-2); font-weight: 600; min-height: 26px; }
+  .pp-pron .pp-short { display: none; }
+  .is-short .pp-pron .pp-full { display: none; }
+  .is-short .pp-pron .pp-short { display: inline; }
+
+  /* ---------- ловушки ---------- */
+  .pp-traps { display: grid; gap: 12px; margin-top: 18px; }
+  @media (min-width: 700px) { .pp-traps { grid-template-columns: 1fr 1fr; } }
+  .pp-trap { background: #fff; border: 1.5px solid var(--line); border-radius: var(--r-md); padding: 16px; }
+  .pp-trap-bad { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--coral-d); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .pp-trap-bad svg { width: 24px; height: 24px; flex: none; }
+  .pp-trap-good { display: none; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); }
+  .pp-trap.is-open .pp-trap-good { display: block; }
+  .pp-trap-good b { color: var(--green-dk); font-size: 18px; }
+  .pp-trap-good p { margin: 6px 0 0; font-size: 14.5px; color: var(--ink-2); }
+  .pp-trap .pp-btn { margin-top: 10px; }
+
+  /* ---------- нестандартное: где ключи ---------- */
+  .pp-kx-say { display: flex; align-items: center; gap: 10px; font-size: clamp(17px, 4.6vw, 21px); margin: 6px 0 10px; }
+  .pp-kx-say b { color: var(--green-dk); }
+  .pp-kx-scene { position: relative; }
+  .pp-kx-scene svg { width: 100%; height: auto; display: block; border-radius: 16px; background: linear-gradient(180deg, #fff, #F4F6EE); }
+  .pp-spot { position: absolute; width: 44px; height: 44px; translate: -50% -50%; border-radius: 50%; border: 2.5px dashed var(--coral-d); background: rgba(255,255,255,.88); color: var(--coral-d); font-weight: 800; font-size: 15px; padding: 0; }
+  .pp-spot.is-hit { border-style: solid; border-color: var(--green-dk); background: var(--green-soft); color: var(--green-dk); }
+  .pp-spot.is-miss { border-style: solid; background: var(--coral-soft); }
+  .pp-kx-status { min-height: 48px; color: var(--ink-2); margin: 10px 0 0; font-size: 15px; }
+
+  /* ---------- шпаргалка ---------- */
+  .pp-coral { background: var(--coral-d); color: #fff; border-radius: var(--r-lg); padding: 28px 18px; position: relative; overflow: hidden; }
+  .pp-coral::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(-38deg, rgba(255,255,255,.08) 0 3px, transparent 3px 30px); }
+  .pp-coral > * { position: relative; }
+  .pp-coral h2 { color: #fff; }
+  @media (min-width: 768px) { .pp-coral { padding: 44px 40px; } }
+  .pp-cheat { display: grid; gap: 10px; counter-reset: c; margin: 0; padding: 0; list-style: none; }
+  .pp-cheat li { display: flex; gap: 12px; align-items: flex-start; padding: 14px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.26); border-radius: var(--r-sm); font-size: 15.5px; line-height: 1.45; }
+  .pp-cheat li::before { counter-increment: c; content: counter(c); flex: none; width: 26px; height: 26px; border-radius: 8px; background: #fff; color: var(--coral-d); display: grid; place-items: center; font-weight: 800; font-size: 13px; }
+  .pp-formula { background: #fff; border-radius: 18px; padding: 14px 10px; margin-top: 14px; color: var(--ink); }
+  .pp-formula .pp-cons-word { min-height: 56px; }
+  .pp-formula .pp-cons-word { gap: 3px; }
+  .pp-formula .m { font-size: clamp(14px, 4vw, 22px); padding: 6px 7px; }
+  .pp-end { margin-top: 30px; }
+  .pp-keys-btn { display: inline-grid; place-items: center; width: 56px; height: 56px; border-radius: 16px; border: 1.5px solid var(--line); background: #fff; padding: 0; }
+  .pp-keys-btn svg { width: 34px; height: 34px; }
+
+  /* ---------- свой скроллбар: мяч катится по полке ---------- */
+  .pp-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 6px; pointer-events: none; }
+  .pp-sb__track { position: absolute; inset: 0; background: color-mix(in srgb, var(--coral) 16%, transparent); pointer-events: auto; touch-action: none; }
+  .pp-sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: var(--coral); border-radius: 0 6px 6px 0; }
+  .pp-sb__ball { position: absolute; top: 8px; left: clamp(26px, calc(var(--p, 0) * 100%), calc(100% - 46px)); translate: -50% 0; display: flex; align-items: center; gap: 4px; pointer-events: none; }
+  .pp-sb__ball i { width: 12px; height: 12px; border-radius: 50%; background: var(--coral-d); box-shadow: inset -2px -2px 0 rgba(0,0,0,.15); display: block; }
+  .pp-sb__ball span { padding: 1px 7px; border-radius: 999px; background: var(--ink); color: #fff; font: 700 11px/1.5 var(--ak-font); white-space: nowrap; }
+  .pp-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; }
+  .pp-sb__mark::after { content: ''; position: absolute; inset: 10px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px var(--coral-d); }
+  .pp-sb__mark.is-read::after { background: var(--green-dk); box-shadow: none; }
+  @media (min-width: 768px) {
+    .pp-sb { left: auto; right: 14px; top: 50%; translate: 0 -50%; width: 8px; height: min(62dvh, 540px); }
+    .pp-sb__track { border-radius: 8px; }
+    .pp-sb__fill { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); border-radius: 8px; }
+    .pp-sb__ball { top: calc(var(--p, 0) * 100%); left: auto; right: -2px; translate: 0 -50%; flex-direction: row-reverse; }
+    .pp-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+  }
+  @media (prefers-reduced-motion: reduce) { .pp-hero h1 em::after { animation: none; transform: none; } }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ======================= ИСТОРИЯ ======================= -->
+  <section data-section="story" data-words="124">
+    <header class="pp-hero">
+      <div class="pp-wrap">
+        <span class="pp-tag">Библиотека · послелоги места · A1</span>
+        <h1>послелоги<br>в турецком <em>языке</em></h1>
+        <p class="pp-lead">«На столе» по-турецки — это «стола&nbsp;верх-его-в». Три хвоста вместо одного предлога. Посмотрим, откуда они берутся, — и дальше любую такую фразу вы соберёте сами.</p>
+        <button type="button" class="pp-go" data-go="story-text">Начать с истории ↓</button>
+      </div>
+      <div class="pp-morph">
+        <div class="pp-loop" id="ppLoop" aria-live="off"><span class="m m-res" lang="tr">masanın</span><span class="m m-res" lang="tr">üstünde</span></div>
+        <div class="pp-loop-cap" id="ppLoopCap" data-ui>Готово — «на столе»</div>
+        <div class="pp-row"><button type="button" class="pp-btn" id="ppLoopToggle" aria-pressed="false">Пауза</button></div>
+      </div>
+    </header>
+    <div class="pp-wrap" id="story-text">
+      <div class="pp-story" style="padding-top:34px">
+        <p>Стамбул, съёмная квартира. На холодильнике лежат ключи. Ключи не ваши — соседа.</p>
+        <button type="button" class="pp-fridge-btn" id="ppFridge" data-say="Anahtarlar buzdolabının üstünde." aria-label="Ключи на холодильнике — послушать">
+          <svg viewBox="0 0 220 200" aria-hidden="true">
+            <line x1="20" y1="192" x2="200" y2="192" stroke="#EBEBE6" stroke-width="4" stroke-linecap="round"/>
+            <rect x="60" y="32" width="100" height="160" rx="12" fill="#fff" stroke="#16181B" stroke-width="3"/>
+            <line x1="60" y1="92" x2="160" y2="92" stroke="#16181B" stroke-width="3"/>
+            <rect x="141" y="50" width="6" height="26" rx="3" fill="#16181B"/>
+            <rect x="141" y="106" width="6" height="36" rx="3" fill="#16181B"/>
+            <g id="ppKeys">
+              <circle cx="96" cy="20" r="8" fill="none" stroke="#E64A4A" stroke-width="4"/>
+              <path d="M104 20h24M120 20v7M126 20v5" stroke="#E64A4A" stroke-width="4" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+        </button>
+        <p>Вы спускаетесь к соседу Мехмету. Говорите: «Мехмет, ключи. <span lang="tr">Buzdolabı</span>». И показываете рукой сверху вниз.</p>
+        <p>Мехмет отвечает: <a-say>Buzdolabının üstünde.</a-say> Вы: «Чего?» Он повторяет. Вы: «А почему так длинно?»</p>
+        <p>Мехмет пожимает плечами. Он не знает, что такое послелог. Он просто сорок лет говорит по-турецки.</p>
+        <div class="pp-sep"></div>
+        <p>Многие учат такую фразу целиком. Как заклинание. Не понимая ни одного хвоста.</p>
+        <p>Через месяц нужно сказать «под кроватью». Заклинание не помогает.</p>
+        <p class="pp-punch">Потому что выучена фраза, а не механизм.</p>
+        <p>Механизм один. Один на все корни места. Сначала угадайте: как сказать «на столе»?</p>
+        <div class="pp-guess" id="ppGuess">
+          <button type="button" class="pp-opt" data-ok="0" lang="tr">üstünde masa</button>
+          <button type="button" class="pp-opt" data-ok="1" lang="tr">masanın üstünde</button>
+          <button type="button" class="pp-opt" data-ok="0" lang="tr">masaya üst</button>
+        </div>
+        <p class="pp-cap" id="ppGuessFb" data-ui aria-live="polite">Ошибиться здесь не страшно — это разминка.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ПЕРЕВОРОТ ======================= -->
+  <section data-section="flip" data-words="50">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ шаг 1 · переворот ]</span>
+      <h2>сначала переверните<br>слово</h2>
+      <p class="pp-lead">В русском слово-помощник стоит <b>перед</b> существительным. В турецком — <b>после</b>. Нажимайте «дальше» и смотрите, как слова меняются местами.</p>
+      <div class="pp-box pp-swap">
+        <svg viewBox="0 0 340 194" role="img" aria-label="Схема: слово и помощник меняются местами">
+          <text x="14" y="18" font-size="9" font-weight="800" letter-spacing="1.6" fill="#757B84">РУССКИЙ</text>
+          <g id="swRu1"><rect x="14" y="26" width="74" height="42" rx="11" fill="#FFECEC" stroke="#FFD3D3" stroke-width="1.5"/><text x="51" y="53" font-size="19" font-weight="800" text-anchor="middle" fill="#D93C3C">на</text></g>
+          <g id="swRu2"><rect x="96" y="26" width="112" height="42" rx="11" fill="#FAFAF7" stroke="#EBEBE6" stroke-width="1.5"/><text x="152" y="53" font-size="19" font-weight="800" text-anchor="middle" fill="#16181B">столе</text></g>
+          <path id="swP1" d="M152 70 C152 104 61 98 61 112" fill="none" stroke="#9CBB5F" stroke-width="2.5" stroke-linecap="round" pathLength="100" stroke-dasharray="100"/>
+          <path id="swH1" d="M55 110 L61 124 L67 110 Z" fill="#9CBB5F"/>
+          <path id="swP2" d="M51 70 C51 110 186 96 186 112" fill="none" stroke="#FB5B5B" stroke-width="2.5" stroke-linecap="round" pathLength="100" stroke-dasharray="100"/>
+          <path id="swH2" d="M180 110 L186 124 L192 110 Z" fill="#FB5B5B"/>
+          <text x="14" y="140" font-size="9" font-weight="800" letter-spacing="1.6" fill="#757B84">ТУРЕЦКИЙ</text>
+          <g id="swTr1"><rect x="14" y="148" width="94" height="42" rx="11" fill="#EFF3FF" stroke="#D6E1FF" stroke-width="1.5"/><text x="61" y="175" font-size="19" font-weight="800" text-anchor="middle" fill="#2B4BB0">masa</text></g>
+          <g id="swTr2"><rect x="116" y="148" width="140" height="42" rx="11" fill="#F0F5E3" stroke="#DAE7BC" stroke-width="1.5"/><text x="186" y="175" font-size="19" font-weight="800" text-anchor="middle" fill="#5E7A2A">üstünde</text></g>
+        </svg>
+        <div class="pp-cap" id="swCap" data-ui>Отсюда и название: не предлог, а <b>послелог</b></div>
+        <div class="pp-dots" id="swDots"></div>
+        <div class="pp-row">
+          <button type="button" class="pp-btn" id="swPrev" aria-label="Шаг назад">←</button>
+          <button type="button" class="pp-btn pp-btn--main" id="swNext">Дальше</button>
+          <button type="button" class="pp-btn" id="swAgain">↻ Ещё раз</button>
+        </div>
+      </div>
+      <div class="pp-card">
+        <p style="margin:0">Это половина ответа. Вторая половина — почему <span class="pp-tr" lang="tr">üstünde</span>, а не просто <span class="pp-tr" lang="tr">üst</span>. И откуда в <span class="pp-tr" lang="tr">masanın</span> взялся хвост.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= КОНСТРУКТОР ======================= -->
+  <section data-section="noun" data-words="47">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ шаг 2 · конструктор ]</span>
+      <h2>послелог —<br>это существительное</h2>
+      <p class="pp-lead"><span class="pp-tr" lang="tr">üst</span> — это не «на». Это <b>«верх»</b>, обычное существительное, как «крышка» или «спина». Поэтому фраза строится как притяжательная связка: «стола верх-его-в».</p>
+      <div class="pp-legend" aria-label="Цвета ролей">
+        <span class="m m-root">слово</span><span class="m m-gen">родительный</span><span class="m m-pos">«его»</span><span class="m m-buf">буфер n</span><span class="m m-case">падеж</span>
+      </div>
+      <div class="pp-box">
+        <div class="pp-cons-word" id="consWord"><span class="m m-res" lang="tr">masanın</span><span class="m m-res" lang="tr">üstünde</span></div>
+        <div class="pp-cons-gloss" id="consGloss" data-ui>дословно: «сто́ла верх-его-в»</div>
+        <p class="pp-cap" id="consNote" data-ui>Готово: masanın üstünde — «на столе».</p>
+        <div class="pp-dots" id="consDots"></div>
+        <div class="pp-row">
+          <button type="button" class="pp-btn" id="consPrev" aria-label="Шаг назад">←</button>
+          <button type="button" class="pp-btn pp-btn--main" id="consNext">Дальше</button>
+        </div>
+      </div>
+
+      <h3>почему вылезает<br>лишняя «n»</h3>
+      <div class="pp-box">
+        <div class="pp-clash" id="clash">
+          <span class="m m-pos" id="clA" lang="tr">üstü</span>
+          <span class="m m-buf pp-cl-n" id="clN" lang="tr">n</span>
+          <span class="m m-case" id="clB" lang="tr">de</span>
+          <span class="pp-cl-mark" id="clX" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19" stroke="#D93C3C" stroke-width="3" stroke-linecap="round"/></svg></span>
+          <span class="pp-cl-mark" id="clOk" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke="#5E7A2A" stroke-width="3" fill="none" stroke-linecap="round"/></svg></span>
+        </div>
+        <p class="pp-cap" id="clCap" data-ui><b>üstünde</b> — «на его верхе». Вот и вся лишняя «n».</p>
+        <div class="pp-dots" id="clDots"></div>
+        <div class="pp-row">
+          <button type="button" class="pp-btn pp-btn--main" id="clPlay">▶ Показать стык</button>
+          <button type="button" class="pp-btn" id="clStep">Шаг за шагом</button>
+        </div>
+      </div>
+      <div class="pp-card">
+        <p style="margin:0">После «его» буфер встаёт всегда: <span class="pp-tr" lang="tr">içinde</span>, <span class="pp-tr" lang="tr">altında</span>, <span class="pp-tr" lang="tr">yanında</span>, <span class="pp-tr" lang="tr">arkasında</span>. Запомните один раз — и вопрос закрыт.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ЛАБОРАТОРИЯ: КОМНАТА ======================= -->
+  <section data-section="lab" data-words="41">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ шаг 3 · где что лежит ]</span>
+      <h2>потрогайте руками</h2>
+      <p class="pp-lead">Нажимайте на послелог — мяч переедет. Внизу — фраза, перевод и дословная разборка.</p>
+      <p>Три режима. «Смотри» — двигаете мяч сами. «Угадай» — мяч прыгает, а вы называете место. «На слух» — слушаете фразу и ищете место.</p>
+      <div class="pp-box pp-room">
+        <div class="pp-modes" role="tablist" aria-label="Режим лаборатории">
+          <button type="button" role="tab" aria-selected="true" data-mode="look">Смотри</button>
+          <button type="button" role="tab" aria-selected="false" data-mode="guess">Угадай</button>
+          <button type="button" role="tab" aria-selected="false" data-mode="ear">На слух</button>
+        </div>
+        <svg viewBox="0 0 400 264" role="img" aria-label="Комната: стол, коробка и мяч">
+          <rect x="0" y="212" width="400" height="52" fill="#E9EEDC"/>
+          <line x1="0" y1="212" x2="400" y2="212" stroke="#D2DCBB" stroke-width="2"/>
+          <rect x="24" y="42" width="86" height="62" rx="8" fill="#F3F4EE" stroke="#E3E5DA" stroke-width="2"/>
+          <line x1="67" y1="42" x2="67" y2="104" stroke="#E3E5DA" stroke-width="2"/>
+          <rect x="104" y="140" width="176" height="13" rx="5" fill="#C8A57D"/>
+          <rect x="116" y="153" width="12" height="59" rx="4" fill="#B08F68"/>
+          <rect x="256" y="153" width="12" height="59" rx="4" fill="#B08F68"/>
+          <rect x="306" y="166" width="66" height="46" rx="6" fill="#EBD9BE" stroke="#D8C2A0" stroke-width="2"/>
+          <line x1="306" y1="180" x2="372" y2="180" stroke="#D8C2A0" stroke-width="2"/>
+          <text x="339" y="203" font-size="11" font-weight="700" text-anchor="middle" fill="#8A6F48">kutu</text>
+          <text x="138" y="133" font-size="11" font-weight="700" text-anchor="middle" fill="#8A6F48">masa</text>
+          <rect id="hlMasa" x="98" y="122" width="188" height="96" rx="12" fill="none" stroke="#FB5B5B" stroke-width="2" stroke-dasharray="7 5"/>
+          <rect id="hlKutu" x="299" y="159" width="80" height="59" rx="12" fill="none" stroke="#FB5B5B" stroke-width="2" stroke-dasharray="7 5" opacity="0"/>
+          <g id="ball" transform="translate(192 126)">
+            <g id="ballIn">
+              <ellipse cx="0" cy="19" rx="13" ry="3.5" fill="#000" opacity=".08"/>
+              <circle r="15" fill="#FB5B5B" stroke="#E64A4A" stroke-width="2"/>
+              <path d="M-9 -5 q9 6 18 0" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".85"/>
+            </g>
+          </g>
+        </svg>
+        <div class="pp-pills" id="roomPills"></div>
+        <div class="pp-room-out">
+          <div class="pp-room-task" id="roomTask" data-ui aria-live="polite"></div>
+          <div class="pp-room-tr"><span id="roomTr" lang="tr">masanın üstünde</span><button type="button" class="pp-spk" id="roomSpk" data-say="masanın üstünde" aria-label="Послушать фразу"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#5E7A2A"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="#5E7A2A" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button></div>
+          <div class="pp-room-ru" id="roomRu" data-ui>на столе</div>
+          <div class="pp-room-gl" id="roomGl" data-ui>дословно: «сто́ла верх-его-в»</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= КОРНИ ======================= -->
+  <section data-section="roots" data-words="64">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ словарь ]</span>
+      <h2>восемнадцать корней</h2>
+      <p class="pp-lead">Все они работают по схеме из конструктора. Выучите корни — получите все послелоги места разом.</p>
+      <div class="pp-tbl" id="rootsBox">
+        <table>
+          <thead><tr><th>Корень</th><th>Значение и пример</th></tr></thead>
+          <tbody>
+            <tr><td lang="tr">üst</td><td>верх, на<br><a-say>masanın üstünde</a-say></td></tr>
+            <tr><td lang="tr">alt</td><td>низ, под<br><a-say>ağacın altında</a-say></td></tr>
+            <tr><td lang="tr">iç</td><td>внутри<br><a-say>evin içinde</a-say></td></tr>
+            <tr><td lang="tr">dış</td><td>снаружи, за<br><a-say>şehrin dışında</a-say></td></tr>
+            <tr><td lang="tr">ön</td><td>перед<br><a-say>okulun önünde</a-say></td></tr>
+            <tr><td lang="tr">arka</td><td>позади, за<br><a-say>binanın arkasında</a-say></td></tr>
+            <tr><td lang="tr">yan</td><td>рядом с<br><a-say>kapının yanında</a-say></td></tr>
+            <tr><td lang="tr">ara</td><td>между<br><a-say>iki ev arasında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">orta</td><td>посередине<br><a-say>sınıfın ortasında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">karşı</td><td>напротив<br><a-say>otelin karşısında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">etraf</td><td>вокруг<br><a-say>masanın etrafında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">çevre</td><td>вокруг, в округе<br><a-say>gölün çevresinde</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">kenar</td><td>край, обочина<br><a-say>yolun kenarında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">üzer</td><td>поверх, на<br><a-say>masanın üzerinde</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">baş</td><td>начало, во главе<br><a-say>masanın başında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">son</td><td>конец<br><a-say>ayın sonunda</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">sağ</td><td>справа<br><a-say>kapının sağında</a-say></td></tr>
+            <tr class="is-hid"><td lang="tr">sol</td><td>слева<br><a-say>kapının solunda</a-say></td></tr>
+          </tbody>
+        </table>
+        <button type="button" class="pp-more" id="rootsMore" aria-expanded="false"><span id="rootsMoreTxt">Показать всё</span><svg viewBox="0 0 16 16" aria-hidden="true" id="rootsChev"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button>
+      </div>
+      <h3>шесть карточек</h3>
+      <p>Нажмите, чтобы перевернуть и услышать.</p>
+      <div class="pp-fcs" id="ppCards">
+        <button type="button" class="pp-fc" data-word="içinde"><span class="pp-fc-in"><span class="pp-fc-f"><b lang="tr">içinde</b><small>нажмите</small></span><span class="pp-fc-b"><b>внутри</b><small lang="tr">evin içinde</small></span></span></button>
+        <button type="button" class="pp-fc" data-word="altında"><span class="pp-fc-in"><span class="pp-fc-f"><b lang="tr">altında</b><small>нажмите</small></span><span class="pp-fc-b"><b>под</b><small lang="tr">masanın altında</small></span></span></button>
+        <button type="button" class="pp-fc" data-word="karşısında"><span class="pp-fc-in"><span class="pp-fc-f"><b lang="tr">karşısında</b><small>нажмите</small></span><span class="pp-fc-b"><b>напротив</b><small lang="tr">otelin karşısında</small></span></span></button>
+        <button type="button" class="pp-fc" data-word="etrafında"><span class="pp-fc-in"><span class="pp-fc-f"><b lang="tr">etrafında</b><small>нажмите</small></span><span class="pp-fc-b"><b>вокруг</b><small lang="tr">masanın etrafında</small></span></span></button>
+        <button type="button" class="pp-fc" data-word="arasında"><span class="pp-fc-in"><span class="pp-fc-f"><b lang="tr">arasında</b><small>нажмите</small></span><span class="pp-fc-b"><b>между</b><small lang="tr">iki ev arasında</small></span></span></button>
+        <button type="button" class="pp-fc" data-word="dışında"><span class="pp-fc-in"><span class="pp-fc-f"><b lang="tr">dışında</b><small>нажмите</small></span><span class="pp-fc-b"><b>снаружи</b><small lang="tr">şehrin dışında</small></span></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ИЗАФЕТ ======================= -->
+  <section data-section="izafet" data-words="72">
+    <div class="pp-wrap">
+      <div class="pp-green">
+        <span class="pp-tag">[ фундамент ]</span>
+        <h2>двухаффиксный<br>изафет</h2>
+        <p>Изафет — связка двух существительных, где одно определяет другое. Первое получает <b>родительный</b> аффикс, второе — <b>притяжательный</b>. Эта связка лежит под каждым послелогом.</p>
+        <div class="pp-inner">
+          <span class="pp-tag">[ шаг а · родительный на первом слове ]</span>
+          <p>Аффикс выбирается по последней гласной. Нажмите на слово:</p>
+          <div class="pp-harm" id="harmPills"></div>
+          <div class="pp-vh" id="vh">
+            <div class="pp-vh-word" id="vhWord" lang="tr">mas<span class="pp-vh-v">a</span></div>
+            <div class="pp-vh-grid" id="vhGrid">
+              <div class="pp-vh-cell on"><b lang="tr">a · ı</b><span lang="tr">-ın</span></div>
+              <div class="pp-vh-cell"><b lang="tr">e · i</b><span lang="tr">-in</span></div>
+              <div class="pp-vh-cell"><b lang="tr">o · u</b><span lang="tr">-un</span></div>
+              <div class="pp-vh-cell"><b lang="tr">ö · ü</b><span lang="tr">-ün</span></div>
+            </div>
+            <div class="pp-vh-fly" id="vhFly" aria-hidden="true">a</div>
+            <div class="pp-vh-res" id="vhRes" data-ui><div class="big" lang="tr">masa + nın = masanın</div><div class="sm">«сто́ла» · слово кончается на гласную, поэтому перед аффиксом встаёт -n-</div></div>
+          </div>
+        </div>
+        <div class="pp-inner">
+          <span class="pp-tag">[ шаг б · притяжательный на втором ]</span>
+          <div class="pp-snap" id="snap" lang="tr">
+            <span class="m m-root" id="snA">kedi<span class="pp-snap-aff gen" id="snAAff">nin</span></span>
+            <span class="m m-root" id="snB"><span id="snBCore">oyuncağ</span><span class="pp-snap-aff pos" id="snBAff">ı</span></span>
+          </div>
+          <svg class="pp-brace" id="snBrace" viewBox="0 0 340 30" aria-hidden="true"><path d="M28 4 C28 24 120 24 170 24 C220 24 312 24 312 4" fill="none" stroke="#5E7A2A" stroke-width="2.5" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"/></svg>
+          <p class="pp-cap" id="snCap" data-ui>Связка собрана — «игрушка кошки»</p>
+          <div class="pp-dots" id="snDots"></div>
+          <div class="pp-row">
+            <button type="button" class="pp-btn pp-btn--main" id="snNext">Дальше</button>
+            <button type="button" class="pp-btn" id="snPair">Другая пара</button>
+          </div>
+          <div class="pp-tbl pp-ex-tbl">
+            <table>
+              <thead><tr><th>Турецкий</th><th>Русский</th></tr></thead>
+              <tbody>
+                <tr><td><a-say>Kedinin oyuncağı</a-say><span class="pp-sub" lang="tr">kedi<span class="gen">nin</span> + oyuncağ<span class="pos">ı</span></span></td><td>игрушка кошки</td></tr>
+                <tr><td><a-say>Arabanın anahtarı</a-say><span class="pp-sub" lang="tr">araba<span class="gen">nın</span> + anahtar<span class="pos">ı</span></span></td><td>ключ от машины</td></tr>
+                <tr><td><a-say>Evin kapısı</a-say><span class="pp-sub" lang="tr">ev<span class="gen">in</span> + kapı<span class="pos">sı</span></span></td><td>дверь дома</td></tr>
+                <tr><td><a-say>Masanın üstü</a-say><span class="pp-sub" lang="tr">masa<span class="gen">nın</span> + üst<span class="pos">ü</span></span></td><td>верх стола</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="margin:14px 0 0;font-size:14px">После гласной притяжательный берёт прокладку <b>-s-</b>: <span lang="tr">kapı → kapı<b>sı</b>, karşı → karşı<b>sı</b>, orta → orta<b>sı</b></span>.</p>
+        </div>
+        <p style="margin:22px 0 0;font-weight:700">Последняя строка таблицы — уже наш послелог. Изафет и послелог — одно и то же.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ПАДЕЖИ ======================= -->
+  <section data-section="cases" data-words="60">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ шаг 4 · направление ]</span>
+      <h2>где, куда, откуда</h2>
+      <p class="pp-lead">Корень и «его» не меняются. Меняется только последний хвост — падежный. Буфер <b>-n-</b> стоит перед любым из них. Переключайте:</p>
+      <div class="pp-tabs" id="caseTabs" role="tablist" aria-label="Падеж">
+        <button type="button" class="pp-tab" role="tab" aria-selected="true" data-case="0">где? <small lang="tr">-de / -da</small></button>
+        <button type="button" class="pp-tab" role="tab" aria-selected="false" data-case="1">куда? <small lang="tr">-e / -a</small></button>
+        <button type="button" class="pp-tab" role="tab" aria-selected="false" data-case="2">откуда? <small lang="tr">-den / -dan</small></button>
+        <button type="button" class="pp-tab" role="tab" aria-selected="false" data-case="3">что? <small lang="tr">-ı / -i / -u / -ü</small></button>
+      </div>
+      <div class="pp-scene">
+        <svg viewBox="0 0 320 122" role="img" aria-label="Сцена: точка относительно дома">
+          <line x1="12" y1="106" x2="308" y2="106" stroke="#DEDED8" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 10"/>
+          <g id="scHouse">
+            <path d="M120 56 L160 26 L200 56 Z" fill="#B4CE7C"/>
+            <rect x="130" y="54" width="60" height="52" rx="8" fill="#F0F5E3" stroke="#B4CE7C" stroke-width="2.5"/>
+            <rect x="150" y="78" width="20" height="28" rx="3" fill="#fff" stroke="#B4CE7C" stroke-width="2"/>
+          </g>
+          <g id="scTable" style="display:none">
+            <rect x="110" y="56" width="100" height="10" rx="4" fill="#C8A57D"/>
+            <rect x="120" y="66" width="9" height="40" rx="3" fill="#B08F68"/>
+            <rect x="191" y="66" width="9" height="40" rx="3" fill="#B08F68"/>
+            <rect id="scSweep" x="112" y="44" width="96" height="8" rx="4" fill="#FB5B5B" opacity=".85"/>
+          </g>
+          <g id="scDot" transform="translate(160 82)">
+            <circle id="scRing" r="8" fill="none" stroke="#FB5B5B" stroke-width="2.5"/>
+            <circle r="8" fill="#FB5B5B"/>
+          </g>
+        </svg>
+      </div>
+      <div class="pp-case-panel" data-panel="0">
+        <div class="pp-ex"><a-say>Evin içinde oturuyorum.</a-say><div>Я сижу в доме.</div></div>
+        <div class="pp-ex"><a-say>Kedi masanın altında.</a-say><div>Кошка под столом.</div></div>
+      </div>
+      <div class="pp-case-panel" data-panel="1" hidden>
+        <div class="pp-ex"><a-say>Kedi masanın altına girdi.</a-say><div>Кошка залезла под стол.</div></div>
+        <div class="pp-ex"><a-say>Şehrin dışına çıkalım.</a-say><div>Давайте выедем за город.</div></div>
+      </div>
+      <div class="pp-case-panel" data-panel="2" hidden>
+        <div class="pp-ex"><a-say>Ormanın içinden geçtik.</a-say><div>Мы прошли через лес.</div></div>
+        <div class="pp-ex"><a-say>Kedi masanın altından çıktı.</a-say><div>Кошка вылезла из-под стола.</div></div>
+      </div>
+      <div class="pp-case-panel" data-panel="3" hidden>
+        <div class="pp-ex"><a-say>Masanın üstünü sildim.</a-say><div>Я протёр стол сверху.</div></div>
+        <div class="pp-ex"><a-say>Kutunun içini gördüm.</a-say><div>Я увидел, что в коробке.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= МЕСТОИМЕНИЯ ======================= -->
+  <section data-section="persons" data-words="65">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ шаг 5 · с местоимениями ]</span>
+      <h2>рядом со мной,<br>перед тобой</h2>
+      <p class="pp-lead">С местоимениями схема та же: местоимение в родительном + послелог с «моим», «твоим», «его» по лицу. В разговоре первую половину почти всегда выбрасывают.</p>
+      <div class="pp-persons" id="persons" role="tablist" aria-label="Лицо"></div>
+      <div id="persBox">
+        <div class="pp-switch" role="group" aria-label="Форма">
+          <button type="button" aria-pressed="true" data-short="0">Полная форма</button>
+          <button type="button" aria-pressed="false" data-short="1">Как говорят</button>
+        </div>
+        <div class="pp-pers-out" id="persOut" lang="tr"><span class="m m-pron">benim</span><span class="m m-root">yan</span><span class="m m-pos">ım</span><span class="m m-case">da</span></div>
+        <div class="pp-pers-ru" id="persRu" data-ui>рядом со мной</div>
+        <div class="pp-tbl">
+          <table class="pp-pron">
+            <thead><tr><th>Турецкий</th><th>Русский</th></tr></thead>
+            <tbody>
+              <tr><td lang="tr"><span class="pp-full">Benim yanımda</span><span class="pp-short">yanımda</span></td><td>рядом со мной</td></tr>
+              <tr><td lang="tr"><span class="pp-full">Senin önünde</span><span class="pp-short">önünde</span></td><td>перед тобой</td></tr>
+              <tr><td lang="tr"><span class="pp-full">Onun arkasında</span><span class="pp-short">arkasında</span></td><td>позади него</td></tr>
+              <tr><td lang="tr"><span class="pp-full">Bizim içimizde</span><span class="pp-short">içimizde</span></td><td>внутри нас</td></tr>
+              <tr><td lang="tr"><span class="pp-full">Sizin üstünüzde</span><span class="pp-short">üstünüzde</span></td><td>на вас</td></tr>
+              <tr><td lang="tr"><span class="pp-full">Onların arasında</span><span class="pp-short">aralarında</span></td><td>среди них</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:14px;color:var(--ink-2)">Буфер <b class="buf">-n-</b> появляется только после «его» и «их»: <span lang="tr">arka<span class="pos">sı</span><span class="buf">n</span>da, ara<span class="pos">ları</span><span class="buf">n</span>da</span>. После «моего» и «твоего» его нет: <span lang="tr">yan<span class="pos">ım</span>da</span>.</p>
+    </div>
+  </section>
+
+  <!-- ======================= ЛОВУШКИ ======================= -->
+  <section data-section="traps" data-words="62">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ ловушки ]</span>
+      <h2>четыре ловушки</h2>
+      <p class="pp-lead">На этом спотыкаются все, кто думает по-русски. Нажмите «почему?» — карточка покажет верный вариант.</p>
+      <div class="pp-traps">
+        <div class="pp-trap">
+          <div class="pp-trap-bad" lang="tr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFECEC"/><path d="M8 8l8 8M16 8l-8 8" stroke="#D93C3C" stroke-width="2.5" stroke-linecap="round"/></svg>üstünde masa</div>
+          <div class="pp-trap-good"><b lang="tr">masanın üstünde</b><p>Русская привычка ставить помощника вперёд. В турецком он всегда в конце.</p></div>
+          <button type="button" class="pp-btn">почему?</button>
+        </div>
+        <div class="pp-trap">
+          <div class="pp-trap-bad" lang="tr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFECEC"/><path d="M8 8l8 8M16 8l-8 8" stroke="#D93C3C" stroke-width="2.5" stroke-linecap="round"/></svg>masaya üstünde</div>
+          <div class="pp-trap-good"><b lang="tr">masanın üstünde</b><p>Первое слово всегда в родительном. «Куда» живёт только на послелоге: <span lang="tr">masanın üstüne</span>.</p></div>
+          <button type="button" class="pp-btn">почему?</button>
+        </div>
+        <div class="pp-trap">
+          <div class="pp-trap-bad" lang="tr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFECEC"/><path d="M8 8l8 8M16 8l-8 8" stroke="#D93C3C" stroke-width="2.5" stroke-linecap="round"/></svg>masanın üstüde</div>
+          <div class="pp-trap-good"><b lang="tr">masanın üstünde</b><p>Без буфера стык не звучит. После «его» перед падежом встаёт <b class="buf">-n-</b>.</p></div>
+          <button type="button" class="pp-btn">почему?</button>
+        </div>
+        <div class="pp-trap">
+          <div class="pp-trap-bad" lang="tr"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FFECEC"/><path d="M8 8l8 8M16 8l-8 8" stroke="#D93C3C" stroke-width="2.5" stroke-linecap="round"/></svg>benim yanında</div>
+          <div class="pp-trap-good"><b lang="tr">benim yanımda</b><p>Лицо на послелоге совпадает с местоимением: <span lang="tr">ben</span> — значит <span lang="tr">-ım</span>. <span lang="tr">yanında</span> — это «рядом с ним».</p></div>
+          <button type="button" class="pp-btn">почему?</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ВИДЕО ======================= -->
+  <section data-section="video" data-words="20">
+    <div class="pp-wrap">
+      <span class="pp-tag">[ послушайте ]</span>
+      <h2>на живом примере</h2>
+      <p>Обратите внимание: в каждой фразе первое слово с хвостом <span class="gen" lang="tr">-ın</span>, а послелог — с <span class="buf" lang="tr">n</span> перед падежом.</p>
+      <a-video yt="bs67IysB0OM" start="0" end="94" title="Türkçe Öğreniyorum A1 — Altında / Üstünde / Önünde / Arkasında" channel="Altay TÖMER"></a-video>
+    </div>
+  </section>
+
+  <!-- ======================= ПРАКТИКА ======================= -->
+  <section data-section="practice" data-words="6">
+    <div class="pp-wrap">
+      <h2>практика</h2>
+      <p>Сначала узнать, потом собрать самому.</p>
+      <a-exercise ref="lib.postpositions.ex1"></a-exercise>
+      <a-exercise ref="lib.postpositions.ex2"></a-exercise>
+      <a-exercise ref="lib.postpositions.ex3"></a-exercise>
+      <a-exercise ref="lib.postpositions.ex4" class="ak-ex">
+        <div class="ak-ex__head"><span class="ak-ex__title">Где ключи? Нажмите на место</span><span class="ak-ex__count" data-k-count>1 / 5</span></div>
+        <div class="pp-kx-say"><button type="button" class="pp-spk" data-k-say aria-label="Послушать фразу"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#5E7A2A"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="#5E7A2A" stroke-width="2" fill="none" stroke-linecap="round"/></svg></button><b lang="tr" data-k-phrase>…</b></div>
+        <div class="pp-kx-scene">
+          <svg viewBox="0 0 480 240" role="img" aria-label="Кухня: холодильник, стол, коробка, дверь">
+            <line x1="0" y1="214" x2="480" y2="214" stroke="#D2DCBB" stroke-width="3"/>
+            <rect x="24" y="50" width="84" height="164" rx="10" fill="#fff" stroke="#16181B" stroke-width="3"/>
+            <line x1="24" y1="108" x2="108" y2="108" stroke="#16181B" stroke-width="3"/>
+            <rect x="92" y="66" width="5" height="24" rx="2.5" fill="#16181B"/>
+            <rect x="92" y="122" width="5" height="34" rx="2.5" fill="#16181B"/>
+            <rect x="160" y="128" width="130" height="12" rx="5" fill="#C8A57D"/>
+            <rect x="170" y="140" width="10" height="74" rx="4" fill="#B08F68"/>
+            <rect x="270" y="140" width="10" height="74" rx="4" fill="#B08F68"/>
+            <rect x="318" y="166" width="66" height="48" rx="6" fill="#EBD9BE" stroke="#D8C2A0" stroke-width="2"/>
+            <line x1="318" y1="180" x2="384" y2="180" stroke="#D8C2A0" stroke-width="2"/>
+            <rect x="418" y="40" width="54" height="174" rx="4" fill="#F3F4EE" stroke="#C9CDBF" stroke-width="2.5"/>
+            <circle cx="428" cy="130" r="4" fill="#8A9099"/>
+            <g id="kxKeys" transform="translate(240 22)">
+              <circle cx="-8" cy="0" r="7" fill="none" stroke="#E64A4A" stroke-width="4"/>
+              <path d="M-1 0h18M11 0v6M16 0v4" stroke="#E64A4A" stroke-width="4" fill="none" stroke-linecap="round"/>
+            </g>
+          </svg>
+          <button type="button" class="pp-spot" data-spot="fridge-top" style="left:13.75%;top:12%" aria-label="1: на холодильнике">1</button>
+          <button type="button" class="pp-spot" data-spot="table-top" style="left:46.9%;top:43%" aria-label="2: на столе">2</button>
+          <button type="button" class="pp-spot" data-spot="table-under" style="left:46.9%;top:78%" aria-label="3: под столом">3</button>
+          <button type="button" class="pp-spot" data-spot="box-in" style="left:73.1%;top:81%" aria-label="4: в коробке">4</button>
+          <button type="button" class="pp-spot" data-spot="door-side" style="left:81.5%;top:40%" aria-label="5: рядом с дверью">5</button>
+        </div>
+        <p class="pp-kx-status" data-k-status aria-live="polite">Слушайте или читайте фразу и нажмите на место. Клавиши 1–5 тоже работают.</p>
+      </a-exercise>
+    </div>
+  </section>
+
+  <!-- ======================= МИНИ-ПРОВЕРКА ======================= -->
+  <section data-section="check" data-words="8">
+    <div class="pp-wrap">
+      <h2>мини-проверка</h2>
+      <p>Пять вопросов. Без шпаргалки перед глазами.</p>
+      <a-quiz ref="lib.postpositions.check1"></a-quiz>
+    </div>
+  </section>
+
+  <!-- ======================= ШПАРГАЛКА ======================= -->
+  <section data-section="cheat" data-words="76">
+    <div class="pp-wrap">
+      <div class="pp-coral">
+        <span class="pp-tag" style="color:rgba(255,255,255,.85)">[ шпаргалка ]</span>
+        <h2>всё правило<br>в четырёх строках</h2>
+        <ol class="pp-cheat">
+          <li><span>Помощник стоит <b>после</b> слова, а не перед ним.</span></li>
+          <li><span>Послелог — это <b>существительное места</b>: <span lang="tr">üst</span> «верх», <span lang="tr">iç</span> «нутро», <span lang="tr">yan</span> «бок».</span></li>
+          <li><span>Схема одна: <b>слово + родительный</b> → <b>послелог + «его»</b> → <b>падеж</b>.</span></li>
+          <li><span>После «его» перед падежом встаёт буфер <b>-n-</b>: <span lang="tr">üstünde, içinde, altında</span>.</span></li>
+        </ol>
+        <div class="pp-formula">
+          <div class="pp-cons-word" id="fmWord" lang="tr"><span class="m m-root">masa</span><span class="m m-gen">nın</span><span class="m m-root">üst</span><span class="m m-pos">ü</span><span class="m m-buf">n</span><span class="m m-case">de</span></div>
+          <div class="pp-row"><button type="button" class="pp-btn" id="fmPlay">↻ Собрать ещё раз</button><button type="button" class="pp-btn" data-say="masanın üstünde">Послушать</button></div>
+        </div>
+        <p style="margin:20px 0 0;font-weight:700">Восемнадцать корней × одна схема = все послелоги места.</p>
+      </div>
+      <div class="pp-story pp-end">
+        <div class="pp-sep"></div>
+        <p>Послелоги выглядят страшно, пока их учат списком. Списком там восемнадцать пунктов и сотня форм.</p>
+        <p>Механизмом там один пункт.</p>
+        <p class="pp-punch">Слово в родительный, послелог в «его», сверху падеж.</p>
+        <p><button type="button" class="pp-keys-btn" id="ppEndKeys" data-say="Anahtarlar hâlâ buzdolabının üstünde." aria-label="Ключи — послушать"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="12" cy="20" r="7" fill="none" stroke="#E64A4A" stroke-width="3.5"/><path d="M19 20h16M30 20v6M35 20v4" stroke="#E64A4A" stroke-width="3.5" fill="none" stroke-linecap="round"/></svg></button> Мехмет, кстати, ключи так и не забрал.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="pp-sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="pp-sb__track"><span class="pp-sb__fill"></span><span class="pp-sb__ball" aria-hidden="true"><i></i><span id="sbWord">üstünde</span></span></div>
+</nav>
+
+<template data-achievement data-title="Механизм пойман" data-text="Теперь вы сами соберёте «на столе», «под кроватью» и «рядом со мной».">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#FB5B5B"/>
+    <circle cx="60" cy="60" r="45" fill="#fff"/>
+    <rect class="tbl" x="26" y="70" width="68" height="7" rx="3" fill="#C8A57D"/>
+    <rect class="tbl" x="32" y="77" width="6" height="22" rx="2" fill="#B08F68"/>
+    <rect class="tbl" x="82" y="77" width="6" height="22" rx="2" fill="#B08F68"/>
+    <circle class="ball" cx="60" cy="60" r="10" fill="#E64A4A"/>
+    <text class="word" x="60" y="40" text-anchor="middle" font-size="15" font-weight="800" fill="#5E7A2A">üstünde</text>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !!ST && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const speak = (t) => { if (window.AlternaKit) AlternaKit.speak(t); };
+  const chip = (t, c) => { const s = document.createElement('span'); s.className = 'm ' + c; s.textContent = t; return s; };
+  const dots = (host, n) => {
+    host.innerHTML = '';
+    for (let i = 0; i < n; i++) host.append(document.createElement('i'));
+    return (k) => [...host.children].forEach((d, j) => d.classList.toggle('on', j === k));
+  };
+  const caption = (el, html) => {
+    el.innerHTML = html;
+    if (anim) G.fromTo(el, { y: 8 }, { y: 0, duration: .35, ease: 'power2.out' });
+  };
+  /* цикл живёт, только пока блок на экране */
+  const whileVisible = (el, on, off) => {
+    if (anim) ScrollTrigger.create({ trigger: el, start: 'top bottom', end: 'bottom top', onToggle: (s) => (s.isActive ? on() : off()) });
+  };
+
+  if (anim && ST) {
+    ST.config({ ignoreMobileResize: true });
+    addEventListener('load', () => ST.refresh());
+    document.fonts?.ready.then(() => ST.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ST.refresh(), 300));
+    /* мягкое появление блоков — только трансформами, текст виден и без анимации */
+    ScrollTrigger.batch('.pp-box, .pp-card, .pp-tbl, .pp-trap, .pp-inner, .pp-ex', {
+      once: true, start: 'top 90%',
+      onEnter: (els) => G.from(els, { y: 26, rotation: .6, duration: .6, stagger: .08, ease: 'back.out(1.5)' }),
+    });
+    /* заголовки: слова выпрыгивают снизу */
+    if (window.SplitText) $$('h2').forEach((h) => {
+      const split = new SplitText(h, { type: 'words' });
+      ScrollTrigger.create({ trigger: h, start: 'top 88%', once: true, onEnter: () => G.from(split.words, { yPercent: 55, rotation: 5, duration: .55, stagger: .06, ease: 'back.out(2)' }) });
+    });
+  }
+
+  /* ---------- первый экран: бесконечная сборка masanın üstünde ---------- */
+  const loopStages = [
+    ['Два обычных существительных: «стол» и «верх»', [['masa', 'm-root'], ['üst', 'm-root']]],
+    ['Шаг 1 — первое слово уходит в родительный', [['masa', 'm-root'], ['+', 'm-op'], ['nın', 'm-gen', 1]]],
+    ['masanın — «сто́ла»', [['masanın', 'm-res', 1]]],
+    ['Шаг 2 — послелог берёт «его»', [['üst', 'm-root'], ['+', 'm-op'], ['ü', 'm-pos', 1]]],
+    ['Шаг 3 — буфер -n- и падеж -de', [['üstü', 'm-pos'], ['+', 'm-op'], ['n', 'm-buf', 1], ['+', 'm-op'], ['de', 'm-case', 1]]],
+    ['Готово — «на столе»', [['masanın', 'm-res', 1], ['üstünde', 'm-res', 1]]],
+  ];
+  const loop = $('#ppLoop'), loopCap = $('#ppLoopCap'), loopBtn = $('#ppLoopToggle');
+  let loopI = 0, loopCall = null, loopPaused = false;
+  function loopDraw() {
+    const [cap, parts] = loopStages[loopI];
+    loop.replaceChildren(...parts.map(([t, c]) => chip(t, c)));
+    loopCap.textContent = cap;
+    if (anim) {
+      const fresh = parts.map((p, j) => (p[2] ? loop.children[j] : null)).filter(Boolean);
+      const old = parts.map((p, j) => (p[2] ? null : loop.children[j])).filter(Boolean);
+      G.from(fresh, { y: -26, rotation: -6, scale: .7, duration: .5, stagger: .07, ease: 'back.out(2.5)' });
+      if (old.length) G.from(old, { y: 8, scale: .92, duration: .4, ease: 'power2.out' });
+      G.fromTo(loopCap, { y: 6 }, { y: 0, duration: .3 });
+    }
+    loopI = (loopI + 1) % loopStages.length;
+  }
+  const loopPlay = () => { if (loopCall || loopPaused || !anim) return; loopDraw(); loopCall = setInterval(loopDraw, 2300); };
+  const loopStop = () => { clearInterval(loopCall); loopCall = null; };
+  loopBtn.addEventListener('click', () => {
+    loopPaused = !loopPaused;
+    loopBtn.textContent = loopPaused ? 'Дальше' : 'Пауза';
+    loopBtn.setAttribute('aria-pressed', String(loopPaused));
+    if (loopPaused) loopStop(); else if (anim) loopPlay(); else loopDraw();
+  });
+  whileVisible($('.pp-morph'), loopPlay, loopStop);
+  $('[data-go]').addEventListener('click', (e) => $('#' + e.currentTarget.dataset.go).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+
+  /* холодильник: ключи подпрыгивают */
+  const keys = $('#ppKeys');
+  $('#ppFridge').addEventListener('click', () => {
+    if (anim) G.fromTo(keys, { y: 0, rotation: 0 }, { y: -14, rotation: -12, transformOrigin: '50% 50%', duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' });
+  });
+  if (anim) ScrollTrigger.create({ trigger: $('#ppFridge'), start: 'top 78%', once: true, onEnter: () => G.from(keys, { y: -60, rotation: 40, transformOrigin: '50% 50%', duration: .9, ease: 'bounce.out' }) });
+
+  /* угадайка до правила */
+  const guessFb = $('#ppGuessFb');
+  $$('#ppGuess .pp-opt').forEach((b) => b.addEventListener('click', () => {
+    $$('#ppGuess .pp-opt').forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    const ok = b.dataset.ok === '1';
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    if (!ok) $('#ppGuess [data-ok="1"]').classList.add('is-ok');
+    caption(guessFb, ok ? 'Да! Пока это интуиция. Через пять минут это будет механизм.' : 'Почти все сначала выбирают так. Верно — <b>masanın üstünde</b>. Сейчас станет ясно почему.');
+    speak('masanın üstünde');
+    if (anim) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' });
+  }));
+
+  /* ---------- переворот ---------- */
+  const swCaps = [
+    'В русском помощник стоит <b>перед</b> словом: на столе',
+    'Само слово переезжает в начало: <b>masa</b>',
+    'А помощник уходит в конец и обрастает хвостами: <b>üstünde</b>',
+    'Отсюда и название: не предлог, а <b>послелог</b>',
+  ];
+  const sw = Object.fromEntries(['swRu1', 'swRu2', 'swP1', 'swH1', 'swP2', 'swH2', 'swTr1', 'swTr2'].map((id) => [id, document.getElementById(id)]));
+  const swSet = dots($('#swDots'), 4);
+  let swK = 3;
+  function swShow(k, play) {
+    swK = k; swSet(k); caption($('#swCap'), swCaps[k]);
+    $('#swPrev').disabled = k === 0; $('#swNext').disabled = k === 3;
+    const vis = { swRu1: 1, swRu2: 1, swP1: k >= 1, swH1: k >= 1, swTr1: k >= 1, swP2: k >= 2, swH2: k >= 2, swTr2: k >= 2 };
+    if (!anim) {
+      for (const id in sw) sw[id].style.visibility = vis[id] ? 'visible' : 'hidden';
+      sw.swP1.style.strokeDashoffset = k >= 1 ? 0 : 100; sw.swP2.style.strokeDashoffset = k >= 2 ? 0 : 100;
+      return;
+    }
+    G.set([sw.swTr1, sw.swH1], { autoAlpha: k >= 1 ? 1 : 0 });
+    G.set([sw.swTr2, sw.swH2], { autoAlpha: k >= 2 ? 1 : 0 });
+    if (!play) { G.set(sw.swP1, { strokeDashoffset: k >= 1 ? 0 : 100 }); G.set(sw.swP2, { strokeDashoffset: k >= 2 ? 0 : 100 }); return; }
+    if (k === 0) { G.set([sw.swP1, sw.swP2], { strokeDashoffset: 100 }); G.from([sw.swRu1, sw.swRu2], { y: 10, scale: .8, transformOrigin: '50% 50%', stagger: .15, duration: .45, ease: 'back.out(2.5)' }); }
+    if (k === 1) { G.fromTo(sw.swP1, { strokeDashoffset: 100 }, { strokeDashoffset: 0, duration: .8, ease: 'power2.inOut' }); G.from(sw.swTr1, { scale: .5, transformOrigin: '50% 50%', duration: .55, delay: .6, ease: 'back.out(2.5)' }); }
+    if (k === 2) { G.fromTo(sw.swP2, { strokeDashoffset: 100 }, { strokeDashoffset: 0, duration: .8, ease: 'power2.inOut' }); G.from(sw.swTr2, { scale: .5, transformOrigin: '50% 50%', duration: .55, delay: .6, ease: 'back.out(2.5)' }); }
+    if (k === 3) G.fromTo([sw.swTr1, sw.swTr2], { y: 0 }, { y: -6, duration: .25, yoyo: true, repeat: 1, stagger: .1 });
+  }
+  let swAuto = null;
+  function swPlayAll() {
+    clearTimeout(swAuto); swShow(0, true);
+    let k = 0;
+    const next = () => { k++; if (k <= 3) { swShow(k, true); swAuto = setTimeout(next, 1500); } };
+    swAuto = setTimeout(next, 1200);
+  }
+  $('#swNext').addEventListener('click', () => { clearTimeout(swAuto); if (swK < 3) swShow(swK + 1, true); });
+  $('#swPrev').addEventListener('click', () => { clearTimeout(swAuto); if (swK > 0) swShow(swK - 1, false); });
+  $('#swAgain').addEventListener('click', swPlayAll);
+  swShow(3, false);
+  if (anim) ScrollTrigger.create({ trigger: $('.pp-swap'), start: 'top 78%', once: true, onEnter: swPlayAll });
+
+  /* ---------- конструктор ---------- */
+  const steps = [
+    { p: [['masa', 'm-root'], ['üst', 'm-root']], g: '<b>masa</b> — стол · <b>üst</b> — верх', n: 'Два обычных существительных. Предлогов в турецком нет — есть слово «верх».' },
+    { p: [['masa', 'm-root'], ['+', 'm-op'], ['nın', 'm-gen']], g: '<b>masanın</b> — сто́ла', n: 'Шаг 1. Первое слово уходит в родительный: -ın / -in / -un / -ün. После гласной добавляется -n-: masa → masa<b>nın</b>.' },
+    { p: [['üst', 'm-root'], ['+', 'm-op'], ['ü', 'm-pos']], g: '<b>üstü</b> — его верх', n: 'Шаг 2. Послелог получает «его»: -ı / -i / -u / -ü. Буквально «верх его».' },
+    { p: [['üst', 'm-root'], ['ü', 'm-pos'], ['+', 'm-op'], ['n', 'm-buf'], ['+', 'm-op'], ['de', 'm-case']], g: '<b>üstünde</b> — на его верхе', n: 'Шаг 3. Сверху падеж: местный -de. Между «его» и падежом встаёт буфер <b>-n-</b>.' },
+    { p: [['masanın', 'm-res'], ['üstünde', 'm-res']], g: 'дословно: «сто́ла верх-его-в»', n: 'Готово: <b>masanın üstünde</b> — «на столе». Та же схема работает со всеми корнями места.' },
+  ];
+  const consWord = $('#consWord'), consSet = dots($('#consDots'), steps.length);
+  let ci = steps.length - 1, consAuto = null;
+  function renderCons() {
+    const st = steps[ci];
+    consWord.replaceChildren(...st.p.map(([t, c]) => chip(t, c)));
+    $('#consGloss').innerHTML = st.g;
+    caption($('#consNote'), st.n);
+    consSet(ci);
+    $('#consPrev').disabled = ci === 0; $('#consNext').disabled = ci === steps.length - 1;
+    if (anim) G.from(consWord.children, { y: 14, scale: .8, duration: .45, stagger: .07, ease: 'back.out(2.5)' });
+  }
+  $('#consPrev').addEventListener('click', () => { clearInterval(consAuto); if (ci > 0) { ci--; renderCons(); } });
+  $('#consNext').addEventListener('click', () => { clearInterval(consAuto); if (ci < steps.length - 1) { ci++; renderCons(); } });
+  consSet(ci); $('#consNext').disabled = true;
+  if (anim) ScrollTrigger.create({ trigger: consWord, start: 'top 78%', once: true, onEnter: () => { ci = 0; renderCons(); consAuto = setInterval(() => { if (ci < steps.length - 1) { ci++; renderCons(); } else clearInterval(consAuto); }, 2100); } });
+
+  /* ---------- буфер -n-: столкновение ---------- */
+  const clA = $('#clA'), clB = $('#clB'), clN = $('#clN'), clX = $('#clX'), clOk = $('#clOk');
+  const clCaps = [
+    '<b>üstü</b> — «его верх». <b>de</b> — падежное окончание «в».',
+    'Ставим их вплотную…',
+    '<b>üstüde</b> — так не говорят. Две гласные бьются лбами.',
+    'Между ними встаёт буфер <b>-n-</b>',
+    '<b>üstünde</b> — «на его верхе». Вот и вся лишняя «n».',
+  ];
+  const clSet = dots($('#clDots'), 5);
+  let clK = 4;
+  function clState(k, t = .5) {
+    clK = k; clSet(k); caption($('#clCap'), clCaps[k]);
+    const gap = [58, 0, 6, 26, 26][k];
+    const set = (el, v) => (anim ? G.to(el, { ...v, duration: t, ease: 'back.out(1.6)' }) : Object.assign(el.style, { transform: `translateX(${v.x}px)`, visibility: v.autoAlpha === 0 ? 'hidden' : 'visible' }));
+    set(clA, { x: -gap - 6 });
+    set(clB, { x: gap + 6 });
+    if (anim) {
+      G.to(clN, { autoAlpha: k >= 3 ? 1 : 0, scale: k >= 3 ? 1 : .2, y: k >= 3 ? 0 : -40, duration: t, ease: 'back.out(3)' });
+      G.to(clX, { autoAlpha: k === 2 ? 1 : 0, scale: k === 2 ? 1 : .4, duration: .3 });
+      G.to(clOk, { autoAlpha: k === 4 ? 1 : 0, scale: k === 4 ? 1 : .4, duration: .3 });
+      if (k === 2) G.fromTo([clA, clB], { rotation: -4 }, { rotation: 0, duration: .5, ease: 'elastic.out(1, .3)' });
+    } else {
+      clN.style.visibility = k >= 3 ? 'visible' : 'hidden';
+      clX.style.visibility = k === 2 ? 'visible' : 'hidden';
+      clOk.style.visibility = k === 4 ? 'visible' : 'hidden';
+    }
+  }
+  let clT = [];
+  function clPlay() {
+    clT.forEach(clearTimeout); clT = [];
+    [0, 1, 2, 3, 4].forEach((k, i) => clT.push(setTimeout(() => clState(k), i * 1300)));
+  }
+  $('#clPlay').addEventListener('click', clPlay);
+  $('#clStep').addEventListener('click', () => { clT.forEach(clearTimeout); clState((clK + 1) % 5); });
+  clState(4, 0);
+  if (anim) ScrollTrigger.create({ trigger: $('#clash'), start: 'top 78%', once: true, onEnter: clPlay });
+
+  /* ---------- лаборатория: комната ---------- */
+  const room = [
+    { k: 'üstünde', tr: 'masanın üstünde', ru: 'на столе', gl: '«сто́ла верх-его-в»', x: 192, y: 126, o: 'm' },
+    { k: 'altında', tr: 'masanın altında', ru: 'под столом', gl: '«сто́ла низ-его-в»', x: 192, y: 192, o: 'm' },
+    { k: 'önünde', tr: 'masanın önünde', ru: 'перед столом', gl: '«сто́ла перёд-его-в»', x: 192, y: 238, o: 'm' },
+    { k: 'arkasında', tr: 'masanın arkasında', ru: 'позади стола', gl: '«сто́ла зад-его-в»', x: 236, y: 120, o: 'm', s: .7 },
+    { k: 'yanında', tr: 'masanın yanında', ru: 'рядом со столом', gl: '«сто́ла бок-его-в»', x: 72, y: 196, o: 'm' },
+    { k: 'içinde', tr: 'kutunun içinde', ru: 'внутри коробки', gl: '«коробки нутро-его-в»', x: 339, y: 190, o: 'k' },
+    { k: 'arasında', tr: 'masa ile kutu arasında', ru: 'между столом и коробкой', gl: '«стол с коробка промежуток-в»', x: 292, y: 196, o: 'mk' },
+  ];
+  const ball = $('#ball'), ballIn = $('#ballIn'), pills = $('#roomPills'), task = $('#roomTask');
+  let mode = 'look', target = 0, cur = 0;
+  function moveBall(i) {
+    const d = room[i];
+    cur = i;
+    if (anim) {
+      G.to(ball, { x: d.x, y: d.y, scale: d.s || 1, duration: .6, ease: 'back.out(1.4)' });
+      G.fromTo(ballIn, { scaleX: 1.25, scaleY: .78 }, { scaleX: 1, scaleY: 1, transformOrigin: '50% 50%', duration: .6, delay: .45, ease: 'elastic.out(1, .45)' });
+      G.to('#hlMasa', { opacity: d.o.includes('m') ? 1 : 0, duration: .3 });
+      G.to('#hlKutu', { opacity: d.o.includes('k') ? 1 : 0, duration: .3 });
+    } else {
+      ball.setAttribute('transform', `translate(${d.x} ${d.y}) scale(${d.s || 1})`);
+      $('#hlMasa').setAttribute('opacity', d.o.includes('m') ? 1 : 0);
+      $('#hlKutu').setAttribute('opacity', d.o.includes('k') ? 1 : 0);
+    }
+  }
+  function showPhrase(i) {
+    const d = room[i];
+    $('#roomTr').textContent = d.tr; $('#roomSpk').dataset.say = d.tr;
+    $('#roomRu').textContent = d.ru; $('#roomGl').textContent = 'дословно: ' + d.gl;
+    if (anim) G.fromTo('#roomTr', { y: 10, scale: .94 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2)' });
+  }
+  const pillBtns = room.map((d, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pp-pill'; b.textContent = d.k; b.lang = 'tr';
+    b.addEventListener('click', () => pick(i));
+    pills.append(b);
+    return b;
+  });
+  const markPill = (i, cls) => pillBtns.forEach((b, j) => { b.classList.remove('on', 'is-no'); if (j === i) b.classList.add(cls); });
+  function newTask() {
+    let n; do { n = Math.floor(Math.random() * room.length); } while (n === target && room.length > 1);
+    target = n;
+    markPill(-1);
+    if (mode === 'guess') { moveBall(n); task.textContent = 'Где мяч? Выберите послелог.'; $('#roomTr').textContent = '…'; $('#roomRu').textContent = ''; $('#roomGl').textContent = ''; }
+    if (mode === 'ear') { task.textContent = 'Слушайте фразу и выберите послелог. Ещё раз — кнопка звука.'; $('#roomTr').textContent = '…'; $('#roomSpk').dataset.say = room[n].tr; $('#roomRu').textContent = ''; $('#roomGl').textContent = ''; speak(room[n].tr); }
+  }
+  function pick(i) {
+    if (mode === 'look') { markPill(i, 'on'); moveBall(i); showPhrase(i); return; }
+    if (i === target) {
+      markPill(i, 'on'); if (mode === 'ear') moveBall(i); showPhrase(i);
+      task.textContent = 'Верно! Следующий — через секунду.';
+      speak(room[i].tr);
+      setTimeout(newTask, 1600);
+    } else {
+      markPill(i, 'is-no');
+      task.textContent = `Это «${room[i].ru}». Попробуйте ещё.`;
+      if (anim) G.fromTo(pillBtns[i], { x: -6 }, { x: 0, duration: .4, ease: 'elastic.out(1, .3)' });
+    }
+  }
+  $$('.pp-modes [data-mode]').forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('.pp-modes [data-mode]').forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+    if (mode === 'look') { task.textContent = ''; pick(cur); } else newTask();
+  }));
+  if (anim) G.set(ball, { x: 192, y: 126 });
+  markPill(0, 'on');
+  if (anim) ScrollTrigger.create({ trigger: $('.pp-room'), start: 'top 78%', once: true, onEnter: () => { [1, 4, 0].forEach((i, k) => setTimeout(() => { moveBall(i); markPill(i, 'on'); showPhrase(i); }, 400 + k * 900)); } });
+
+  /* ---------- корни и карточки ---------- */
+  const rootsBox = $('#rootsBox');
+  $('#rootsMore').addEventListener('click', (e) => {
+    const open = rootsBox.classList.toggle('is-open');
+    e.currentTarget.setAttribute('aria-expanded', String(open));
+    $('#rootsMoreTxt').textContent = open ? 'Свернуть' : 'Показать всё';
+    if (anim) {
+      G.to('#rootsChev', { rotation: open ? 180 : 0, transformOrigin: '50% 50%', duration: .3 });
+      if (open) G.from($$('tr.is-hid', rootsBox), { x: -18, duration: .4, stagger: .04, ease: 'power2.out' });
+    }
+  });
+  if (anim) ScrollTrigger.create({ trigger: rootsBox, start: 'top 78%', once: true, onEnter: () => G.from($$('tbody tr:not(.is-hid) td:first-child', rootsBox), { x: -20, scale: .8, duration: .45, stagger: .06, ease: 'back.out(2)' }) });
+  $$('.pp-fc').forEach((c) => c.addEventListener('click', () => {
+    const flip = !c.classList.contains('is-flip');
+    if (anim) {
+      c.classList.toggle('is-flip', flip);
+      G.fromTo(c.firstElementChild, { rotationY: flip ? 0 : 180 }, { rotationY: flip ? 180 : 0, duration: .6, ease: 'back.out(1.4)', clearProps: 'transform' });
+    } else c.classList.toggle('is-flip', flip);
+    if (flip) speak(c.dataset.word);
+  }));
+  if (anim) ScrollTrigger.create({ trigger: $('#ppCards'), start: 'top 78%', once: true, onEnter: () => G.from($$('.pp-fc'), { rotationY: -90, duration: .6, stagger: .08, ease: 'back.out(1.6)' }) });
+
+  /* ---------- изафет: гармония с летящей гласной ---------- */
+  const harm = [
+    { w: 'masa', v: 'a', g: 0, aff: 'nın', res: 'masanın', ru: 'сто́ла', buf: 1 },
+    { w: 'ev', v: 'e', g: 1, aff: 'in', res: 'evin', ru: 'до́ма' },
+    { w: 'okul', v: 'u', g: 2, aff: 'un', res: 'okulun', ru: 'шко́лы' },
+    { w: 'göz', v: 'ö', g: 3, aff: 'ün', res: 'gözün', ru: 'гла́за' },
+    { w: 'kedi', v: 'i', g: 1, aff: 'nin', res: 'kedinin', ru: 'ко́шки', buf: 1 },
+    { w: 'orman', v: 'a', g: 0, aff: 'ın', res: 'ormanın', ru: 'ле́са' },
+    { w: 'köy', v: 'ö', g: 3, aff: 'ün', res: 'köyün', ru: 'дере́вни' },
+    { w: 'araba', v: 'a', g: 0, aff: 'nın', res: 'arabanın', ru: 'маши́ны', buf: 1 },
+  ];
+  const vh = $('#vh'), vhWord = $('#vhWord'), vhFly = $('#vhFly'), vhRes = $('#vhRes'), cells = [...$('#vhGrid').children];
+  const harmBtns = harm.map((d, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pp-pill'; b.textContent = d.w; b.lang = 'tr';
+    b.addEventListener('click', () => setHarm(i));
+    $('#harmPills').append(b);
+    return b;
+  });
+  function setHarm(i) {
+    const d = harm[i];
+    harmBtns.forEach((b, j) => b.classList.toggle('on', j === i));
+    const k = d.w.lastIndexOf(d.v);
+    vhWord.innerHTML = `${d.w.slice(0, k)}<span class="pp-vh-v">${d.v}</span>${d.w.slice(k + 1)}`;
+    const resHtml = `<div class="big" lang="tr">${d.w} + ${d.aff} = ${d.res}</div><div class="sm">«${d.ru}»${d.buf ? ' · слово кончается на гласную, поэтому перед аффиксом встаёт -n-' : ''}</div>`;
+    speak(d.res);
+    if (!anim) { cells.forEach((c, j) => c.classList.toggle('on', j === d.g)); vhRes.innerHTML = resHtml; return; }
+    cells.forEach((c) => c.classList.remove('on'));
+    const v = $('.pp-vh-v', vhWord);
+    const host = vh.getBoundingClientRect(), from = v.getBoundingClientRect(), to = cells[d.g].getBoundingClientRect();
+    vhFly.textContent = d.v;
+    const tl = G.timeline();
+    tl.fromTo(v, { scale: 1 }, { scale: 1.45, duration: .25, yoyo: true, repeat: 1 })
+      .fromTo(vhFly, { autoAlpha: 1, x: from.left - host.left, y: from.top - host.top, scale: 1 },
+        { x: to.left - host.left + to.width / 2 - from.width / 2, y: to.top - host.top + 6, scale: 1.3, duration: .6, ease: 'power2.inOut' })
+      .to(vhFly, { autoAlpha: 0, duration: .2 })
+      .add(() => cells[d.g].classList.add('on'))
+      .fromTo(cells[d.g], { scale: .9 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' })
+      .add(() => { vhRes.innerHTML = resHtml; })
+      .fromTo(vhRes, { y: 10 }, { y: 0, duration: .35, ease: 'back.out(2)' });
+  }
+  harmBtns[0].classList.add('on');
+  if (anim) ScrollTrigger.create({ trigger: vh, start: 'top 78%', once: true, onEnter: () => setHarm(0) });
+
+  /* ---------- изафет: сцепка двух слов ---------- */
+  const pairs = [
+    { a: 'kedi', aAff: 'nin', b: 'oyuncak', bSoft: 'oyuncağ', bAff: 'ı', ru: 'игрушка кошки', note: 'На стыке <b>k</b> смягчается в <b>ğ</b>: oyuncak → oyuncağ<b>ı</b>' },
+    { a: 'araba', aAff: 'nın', b: 'anahtar', bAff: 'ı', ru: 'ключ от машины', note: 'Согласная на конце твёрдая — ничего не меняется' },
+    { a: 'ev', aAff: 'in', b: 'kapı', bAff: 'sı', ru: 'дверь дома', note: 'Слово кончается на гласную, поэтому «его» берёт прокладку <b>-s-</b>' },
+  ];
+  const snA = $('#snA'), snAAff = $('#snAAff'), snBCore = $('#snBCore'), snBAff = $('#snBAff'), brace = $('#snBrace path'), snCap = $('#snCap');
+  const snSet = dots($('#snDots'), 4);
+  let snI = 0, snK = 3;
+  function snShow(k) {
+    snK = k; snSet(k);
+    const d = pairs[snI];
+    snA.firstChild.textContent = d.a; snAAff.textContent = d.aAff;
+    snBCore.textContent = k >= 2 && d.bSoft ? d.bSoft : d.b; snBAff.textContent = d.bAff;
+    snAAff.style.display = k >= 1 ? 'inline-block' : 'none';
+    snBAff.style.display = k >= 2 ? 'inline-block' : 'none';
+    const txt = [`Два обычных слова: <b>${d.a}</b> и <b>${d.b}</b>`, `Первое уходит в родительный: <b>${d.a}${d.aAff}</b>`, `Второе берёт «его». ${d.note}`, `Связка собрана — «${d.ru}»`][k];
+    caption(snCap, txt);
+    if (anim) {
+      if (k === 1) G.from(snAAff, { scale: 0, rotation: -25, duration: .5, ease: 'back.out(3)' });
+      if (k === 2) G.from(snBAff, { scale: 0, rotation: 25, duration: .5, ease: 'back.out(3)' });
+      G.to(brace, { strokeDashoffset: k === 3 ? 0 : 100, duration: k === 3 ? .8 : .2, ease: 'power2.inOut' });
+      if (k === 3) G.fromTo([snA, $('#snB')], { y: 0 }, { y: -6, duration: .2, yoyo: true, repeat: 1, stagger: .1 });
+    } else brace.style.strokeDashoffset = k === 3 ? 0 : 100;
+    if (k === 3) speak(`${d.a}${d.aAff} ${d.bSoft || d.b}${d.bAff}`);
+  }
+  $('#snNext').addEventListener('click', () => snShow((snK + 1) % 4));
+  $('#snPair').addEventListener('click', () => { snI = (snI + 1) % pairs.length; snShow(0); });
+  snSet(3);
+  if (anim) ScrollTrigger.create({ trigger: $('#snap'), start: 'top 78%', once: true, onEnter: () => { snShow(0); [1, 2, 3].forEach((k) => setTimeout(() => snShow(k), k * 1500)); } });
+
+  /* ---------- падежи: точка и дом ---------- */
+  const dot = $('#scDot'), ring = $('#scRing');
+  let caseTl = null, caseIdx = 0;
+  function caseScene(i) {
+    caseTl?.kill();
+    const what = i === 3;
+    $('#scHouse').style.display = what ? 'none' : '';
+    $('#scTable').style.display = what ? '' : 'none';
+    if (!anim) { dot.setAttribute('transform', what ? 'translate(160 36)' : 'translate(160 82)'); return; }
+    G.set(ring, { scale: 1, opacity: 1, transformOrigin: '50% 50%' });
+    caseTl = G.timeline({ repeat: -1, repeatDelay: .4 });
+    if (i === 0) { G.set(dot, { x: 160, y: 82, autoAlpha: 1 }); caseTl.fromTo(ring, { scale: 1, opacity: .7 }, { scale: 3, opacity: 0, duration: 1.6, ease: 'power1.out' }); }
+    if (i === 1) caseTl.fromTo(dot, { x: 20, y: 98, autoAlpha: 0 }, { x: 160, autoAlpha: 1, duration: 1.4, ease: 'power2.inOut' }).to(dot, { y: 82, duration: .4, ease: 'back.out(2)' }).to(dot, { autoAlpha: 0, duration: .3, delay: .4 });
+    if (i === 2) caseTl.fromTo(dot, { x: 160, y: 82, autoAlpha: 0 }, { autoAlpha: 1, duration: .3 }).to(dot, { y: 98, duration: .4 }).to(dot, { x: 300, duration: 1.4, ease: 'power2.inOut' }).to(dot, { autoAlpha: 0, duration: .3 });
+    if (i === 3) { G.set(dot, { x: 160, y: 36, autoAlpha: 1 }); caseTl.fromTo('#scSweep', { y: -8 }, { y: 0, duration: .8, yoyo: true, repeat: 1, ease: 'sine.inOut' }); }
+  }
+  function setCase(i) {
+    caseIdx = i;
+    $$('#caseTabs [data-case]').forEach((b, j) => b.setAttribute('aria-selected', String(j === i)));
+    $$('.pp-case-panel').forEach((p) => { p.hidden = Number(p.dataset.panel) !== i; });
+    caseScene(i);
+    const t = $(`#caseTabs [data-case="${i}"]`);
+    $('#caseTabs').scrollTo({ left: Math.max(0, t.offsetLeft - 20), behavior: reduce ? 'auto' : 'smooth' });
+    if (anim) G.from($$(`.pp-case-panel[data-panel="${i}"] .pp-ex`), { x: 24, duration: .4, stagger: .08, ease: 'power2.out' });
+  }
+  $$('#caseTabs [data-case]').forEach((b) => b.addEventListener('click', () => setCase(Number(b.dataset.case))));
+  caseScene(0);
+  whileVisible($('.pp-scene'), () => caseTl?.play(), () => caseTl?.pause());
+
+  /* ---------- местоимения ---------- */
+  const persons = [
+    { who: 'ben', pron: 'benim', root: 'yan', pos: 'ım', buf: '', cas: 'da', ru: 'рядом со мной' },
+    { who: 'sen', pron: 'senin', root: 'ön', pos: 'ün', buf: '', cas: 'de', ru: 'перед тобой' },
+    { who: 'o', pron: 'onun', root: 'arka', pos: 'sı', buf: 'n', cas: 'da', ru: 'позади него' },
+    { who: 'biz', pron: 'bizim', root: 'iç', pos: 'imiz', buf: '', cas: 'de', ru: 'внутри нас' },
+    { who: 'siz', pron: 'sizin', root: 'üst', pos: 'ünüz', buf: '', cas: 'de', ru: 'на вас' },
+    { who: 'onlar', pron: 'onların', root: 'ara', pos: 'ları', buf: 'n', cas: 'da', ru: 'среди них' },
+  ];
+  const persBox = $('#persBox'), persOut = $('#persOut');
+  let pI = 0, short = false;
+  const persBtns = persons.map((p, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pp-pill'; b.textContent = p.who; b.lang = 'tr';
+    b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', String(i === 0));
+    b.addEventListener('click', () => setPerson(i));
+    $('#persons').append(b);
+    return b;
+  });
+  function renderPerson(animate) {
+    const p = persons[pI];
+    const parts = [[p.pron, 'm-pron'], [p.root, 'm-root'], [p.pos, 'm-pos'], [p.buf, 'm-buf'], [p.cas, 'm-case']].filter(([t]) => t);
+    persOut.replaceChildren(...parts.map(([t, c]) => chip(t, c)));
+    const pron = persOut.firstChild;
+    $('#persRu').textContent = p.ru;
+    if (short) pron.style.display = 'none';
+    if (anim && animate) G.from([...persOut.children].filter((c) => c.style.display !== 'none'), { y: -16, scale: .7, duration: .45, stagger: .07, ease: 'back.out(2.5)' });
+  }
+  function setPerson(i) {
+    pI = i;
+    persBtns.forEach((b, j) => { b.classList.toggle('on', j === i); b.setAttribute('aria-selected', String(j === i)); });
+    renderPerson(true);
+    const p = persons[i];
+    speak(short ? `${p.root}${p.pos}${p.buf}${p.cas}` : `${p.pron} ${p.root}${p.pos}${p.buf}${p.cas}`);
+  }
+  $$('.pp-switch [data-short]').forEach((b) => b.addEventListener('click', () => {
+    short = b.dataset.short === '1';
+    $$('.pp-switch [data-short]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    persBox.classList.toggle('is-short', short);
+    const pron = persOut.firstChild;
+    if (anim && short) G.to(pron, { scale: 0, duration: .3, ease: 'back.in(2)', onComplete: () => { pron.style.display = 'none'; G.set(pron, { scale: 1 }); } });
+    else { pron.style.display = short ? 'none' : ''; if (anim) G.from(pron, { scale: 0, duration: .4, ease: 'back.out(2.5)' }); }
+  }));
+  persBtns[0].classList.add('on');
+  if (anim) ScrollTrigger.create({ trigger: persOut, start: 'top 78%', once: true, onEnter: () => renderPerson(true) });
+
+  /* ---------- ловушки ---------- */
+  $$('.pp-trap').forEach((t) => {
+    const btn = $('.pp-btn', t), good = $('.pp-trap-good', t);
+    btn.addEventListener('click', () => {
+      const open = t.classList.toggle('is-open');
+      btn.textContent = open ? 'спрятать' : 'почему?';
+      if (open) { speak($('b', good).textContent); if (anim) G.from(good, { rotationX: -70, y: -10, transformOrigin: '50% 0', duration: .5, ease: 'back.out(1.8)' }); }
+    });
+  });
+  if (anim) ScrollTrigger.create({ trigger: $('.pp-traps'), start: 'top 78%', once: true, onEnter: () => G.from($$('.pp-trap-bad svg'), { scale: 0, rotation: -90, transformOrigin: '50% 50%', duration: .5, stagger: .12, ease: 'back.out(3)' }) });
+
+  /* ---------- шпаргалка: формула и финал ---------- */
+  function fmPlay() {
+    if (!anim) return;
+    G.fromTo($$('#fmWord .m'), { y: -30, rotation: -8, scale: .6 }, { y: 0, rotation: 0, scale: 1, duration: .5, stagger: .14, ease: 'back.out(2.5)' });
+  }
+  $('#fmPlay').addEventListener('click', fmPlay);
+  if (anim) ScrollTrigger.create({ trigger: $('#fmWord'), start: 'top 78%', once: true, onEnter: fmPlay });
+  if (anim) ScrollTrigger.create({ trigger: $('.pp-cheat'), start: 'top 78%', once: true, onEnter: () => G.from($$('.pp-cheat li'), { x: -24, duration: .5, stagger: .1, ease: 'back.out(1.6)' }) });
+  $('#ppEndKeys').addEventListener('click', (e) => {
+    if (anim) G.fromTo(e.currentTarget.firstElementChild, { rotation: 0 }, { rotation: 18, duration: .12, yoyo: true, repeat: 5, transformOrigin: '30% 50%' });
+  });
+
+  /* ---------- нестандартное упражнение «Где ключи?» ---------- */
+  (async () => {
+    const EX = 'lib.postpositions.ex4';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    if (!root || !window.AlternaKit || !window.AlternaTracker) return;
+    const phraseEl = $('[data-k-phrase]', root), countEl = $('[data-k-count]', root), statusEl = $('[data-k-status]', root);
+    const spots = $$('[data-spot]', root), kx = $('#kxKeys');
+    const XY = { 'fridge-top': [66, 34], 'table-top': [225, 116], 'table-under': [225, 196], 'box-in': [351, 196], 'door-side': [398, 200] };
+    const { items } = await AlternaKit.exercise(EX);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    const keysTo = (spot, dur) => {
+      const [x, y] = spot ? XY[spot] : [240, 22];
+      if (anim) G.to(kx, { x, y, duration: dur, ease: spot ? 'bounce.out' : 'power2.out' });
+      else kx.setAttribute('transform', `translate(${x} ${y})`);
+    };
+    function show() {
+      phraseEl.textContent = items[i].phrase;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      spots.forEach((s) => s.classList.remove('is-hit', 'is-miss'));
+      keysTo(null, .4);
+      if (anim) G.fromTo(phraseEl, { y: 12, scale: .9 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2)' });
+      t0 = performance.now(); locked = false;
+    }
+    function pick(spot) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const item = items[i];
+      const ok = spot === item.answer;
+      if (ok) correct++;
+      root.querySelector(`[data-spot="${spot}"]`).classList.add(ok ? 'is-hit' : 'is-miss');
+      if (!ok) root.querySelector(`[data-spot="${item.answer}"]`).classList.add('is-hit');
+      keysTo(item.answer, .7);
+      statusEl.textContent = ok ? `Верно: ${item.ru}.` : `Не совсем. ${item.explanation}`;
+      AlternaTracker.answer({ exerciseId: EX, itemId: item.id, correct: ok, answer: spot, timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          phraseEl.textContent = `${correct} из ${items.length}`;
+          countEl.textContent = 'готово';
+          statusEl.textContent = correct === items.length ? 'Все ключи найдены. Мехмет был бы доволен.' : 'Ключи найдены. Перечитайте ошибки выше — и ещё раз в лабораторию.';
+        }
+      }, reduce ? 300 : 1300);
+    }
+    spots.forEach((s) => s.addEventListener('click', () => pick(s.dataset.spot)));
+    $('[data-k-say]', root).addEventListener('click', () => { if (i < items.length) speak(items[i].phrase); });
+    root.addEventListener('keydown', (e) => { const n = Number(e.key); if (n >= 1 && n <= spots.length) pick(spots[n - 1].dataset.spot); });
+    /* для автопроверки: проходит упражнение правильными ответами */
+    AlternaKit.registerSolver(EX, async () => {
+      for (const item of items.slice(i)) { pick(item.answer); await new Promise((r) => setTimeout(r, reduce ? 320 : 1320)); }
+    });
+    show();
+  })();
+
+  /* ---------- свой скроллбар: мяч катится, ярлык показывает послелог ---------- */
+  const bar = $('[data-scrollbar]'), track = $('.pp-sb__track', bar), sbWord = $('#sbWord');
+  const secs = $$('[data-section]');
+  const WORDS = ['üstünde', 'önünde', 'içinde', 'yanında', 'altında', 'arasında', 'arkasında', 'yanımda', 'dışında', 'karşısında', 'etrafında', 'ortasında', 'sonunda'];
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pp-sb__mark'; b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  let lastIdx = -1;
+  const progress = () => {
+    bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+    let idx = 0;
+    secs.forEach((s, i) => { if (s.offsetTop - innerHeight / 2 <= scrollY) idx = i; });
+    if (idx !== lastIdx) {
+      lastIdx = idx; sbWord.textContent = WORDS[idx % WORDS.length];
+      if (anim) G.fromTo(sbWord, { y: -6 }, { y: 0, duration: .3, ease: 'back.out(3)' });
+    }
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.pp-sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (anim) G.fromTo(m, { scale: 1.6 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)' });
+  });
+  layout(); progress();
+
+  /* ---------- ачивка: мяч падает на стол — üstünde ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.ball'), { y: -60 }, { y: 0, duration: .8, ease: 'bounce.out' }, 1)
+      .from(b.querySelectorAll('.tbl'), { scaleX: 0, transformOrigin: '50% 50%', duration: .4, stagger: .08, ease: 'back.out(2)' }, .9)
+      .from(b.querySelector('.word'), { scale: 0, transformOrigin: '50% 50%', duration: .5, ease: 'back.out(3)' }, 1.5);
+  });
+});
+</script>
+</body>
+</html>
