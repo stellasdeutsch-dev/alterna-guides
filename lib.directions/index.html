@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="lib.directions">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Как спросить дорогу</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+:root{
+  --ink:#373c45; --ink2:#5b616c; --muted:#8a909a; --line:#e7eaf0;
+  --card:#f6f8fb; --bg:#ffffff;
+  --gold:#d8a53a; --gold2:#f3c552; --goldL:#ffe9a6; --goldD:#a8741a;
+  --sky:#e8eefc; --lav:#eeeafc; --mint:#eaf4ec; --sea:#cfe4f7;
+  --good:#3a9a55; --bad:#d0584a;
+  --serif:"Playfair Display", Georgia, "Times New Roman", serif;
+  --ak-accent:#d8a53a; --ak-accent-soft:#fff6dc; --ak-accent-ink:#43361c;
+  --ak-ink:#373c45; --ak-surface:#f6f8fb; --ak-line:#e7eaf0; --ak-bg:#ffffff;
+  --ak-font:Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ak-font-display:var(--serif);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip}
+body{margin:0;font-family:var(--ak-font);color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px;overflow-x:clip}
+main{padding:0 16px calc(72px + env(safe-area-inset-bottom))}
+section{position:relative;max-width:1060px;margin:0 auto;padding:clamp(48px,9vw,96px) 0 0}
+svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,[role="button"]:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+p{margin:12px 0 0;max-width:62ch}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.06em;color:var(--muted);margin-bottom:12px;text-transform:uppercase}
+.eyebrow::before{content:"";width:26px;height:1.5px;background:var(--ink2);opacity:.6}
+h1,h2{font-weight:400;margin:0;color:var(--ink)}
+h1{text-transform:uppercase;letter-spacing:.05em;font-size:clamp(28px,8.4vw,54px);line-height:1.08}
+h2{font-weight:300;letter-spacing:.02em;font-size:clamp(24px,6.4vw,40px);line-height:1.2}
+.gold{font-family:var(--serif);font-weight:500;color:#c58f22}
+.lead{color:var(--ink2);font-size:15px}
+.small{font-size:13px;color:var(--muted)}
+.tr{font-weight:600;color:var(--ink)}
+.center{text-align:center}.center p{margin-left:auto;margin-right:auto}
+.card{background:var(--card);border-radius:20px;box-shadow:0 24px 60px -34px rgba(38,56,110,.35)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border:0;border-radius:12px;
+  background:linear-gradient(180deg,var(--goldL),#f8d774 45%,var(--gold2));color:#43361c;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;
+  box-shadow:0 14px 26px -14px rgba(232,172,40,.75)}
+.btn-o{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border:1.5px solid #cfd4dc;border-radius:10px;background:#fff;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+.btn-o[aria-pressed="true"]{border-color:var(--gold2);background:#fff8e3;color:var(--ink)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.spk{flex:none;width:44px;height:44px;border-radius:50%;border:0;display:grid;place-items:center;background:linear-gradient(180deg,#fde69a,#f2c24c);box-shadow:0 8px 14px -8px rgba(230,170,40,.9)}
+.spk svg{width:16px;height:16px}
+.ak-speaking{box-shadow:0 0 0 4px rgba(243,197,82,.45)!important}
+[data-say]{cursor:pointer}
+@media (hover:hover){.btn:hover{translate:0 -2px}.btn-o:hover{border-color:var(--gold);color:var(--goldD)}}
+
+/* ---------- hero ---------- */
+.hero-g{display:grid;gap:22px}
+.hero .sub{color:var(--ink2);font-size:15px;margin-top:12px}
+.ticks{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin:18px 0 0;padding:0;list-style:none}
+.ticks li{display:flex;gap:8px;font-size:13px;color:var(--ink2);line-height:1.35}
+.ticks li::before{content:"";flex:none;width:9px;height:9px;border:1.3px solid var(--ink2);border-radius:50%;margin-top:4px}
+.map-card{position:relative;border-radius:24px;background:linear-gradient(180deg,#fbfcff,#f1f4fb);box-shadow:0 40px 80px -40px rgba(38,56,110,.45);overflow:hidden}
+.hseg{fill:none;stroke:url(#gg);stroke-width:6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1}
+.hbld{transition:fill .4s}
+.hbld.on{fill:#f7e3a8}
+.cap{display:flex;align-items:center;gap:12px;padding:12px 14px;margin:12px;border-radius:16px;background:#fff;box-shadow:0 14px 30px -18px rgba(38,56,110,.5)}
+.cap b{display:block;font-size:17px}
+.cap span{display:block;font-size:13px;color:var(--muted)}
+.cap .n{margin-left:auto;font-family:var(--serif);color:var(--goldD)}
+.hctl{display:flex;gap:8px;justify-content:space-between;padding:0 12px 12px}
+.hctl .btn-o{flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{border:0;background:#fff;border-radius:12px;padding:8px 12px;min-height:44px;box-shadow:0 10px 22px -14px rgba(38,56,110,.5);font-size:13px;font-weight:600;text-align:left}
+.chip small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.chip[aria-current="true"]{box-shadow:0 0 0 2px var(--gold2),0 10px 22px -14px rgba(38,56,110,.5)}
+
+/* ---------- story ---------- */
+.story-g{display:grid;gap:26px;align-items:start}
+.story p b{color:var(--ink)}
+.chat{padding:18px 14px;display:flex;flex-direction:column;gap:10px;background:linear-gradient(180deg,#fff,#f5f7fc)}
+.chat .top{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.chat .ava{width:36px;height:36px;border-radius:50%;flex:none}
+.chat .top b{font-size:14px;display:block}.chat .top span{font-size:12px;color:var(--muted)}
+.bub{max-width:88%;padding:10px 14px;border-radius:16px;font-size:14px;line-height:1.45;transform-origin:left bottom}
+.bub.me{align-self:flex-end;background:linear-gradient(180deg,#fde8a4,#f5cd5f);border-bottom-right-radius:5px;color:#43361c;transform-origin:right bottom}
+.bub.him{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px}
+.bub .fast{letter-spacing:-.03em}
+.bub small{display:block;font-size:12px;opacity:.75;margin-top:3px}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:#fff;border:1px solid var(--line);border-radius:16px}
+.typing i{width:6px;height:6px;border-radius:50%;background:#c9ced8}
+.again{border:0;background:none;color:var(--goldD);font-weight:600;min-height:44px;padding:0 4px;align-self:flex-start}
+.tl{position:relative;display:grid;gap:18px;margin-top:34px;padding-left:34px}
+.tl-line{position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:#e9ecf2;border-radius:2px}
+.tl-fill{position:absolute;inset:0;background:linear-gradient(180deg,var(--gold2),var(--gold));transform-origin:top;transform:scaleY(1)}
+.tl-i{position:relative;border:0;background:none;text-align:left;padding:0;min-height:44px}
+.tl-i::before{content:"";position:absolute;left:-30px;top:4px;width:14px;height:14px;border-radius:50%;background:#fff8e3;border:2px solid var(--gold2)}
+.tl-i.last::before{background:#bfe0f7;border-color:#8fc3ea}
+.tl-i b{font-family:var(--serif);font-size:22px;font-weight:500;display:block;line-height:1}
+.tl-i span{font-size:14px;color:var(--ink2)}
+
+/* ---------- ask ---------- */
+.ph-g{display:grid;gap:26px}
+.ph-list{display:grid;gap:10px}
+.ph{display:flex;gap:12px;align-items:center;padding:14px 16px;border-radius:16px;background:var(--card)}
+.ph .t{flex:1;min-width:0}
+.ph .tr{display:block;font-size:15px}
+.ph .tx{display:block;color:var(--muted);font-size:13px}
+.ph .ru{display:block;font-size:14px;color:var(--ink2)}
+.hide-ru .ph .ru{visibility:hidden}
+.ph .ico{width:22px;height:22px;flex:none}
+.guess{padding:18px 16px;margin-top:18px}
+.guess .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.opt{border:1.5px solid var(--line);background:#fff;border-radius:22px;padding:8px 14px;min-height:44px;font-size:14px}
+.opt.ok{border-color:#8fd19e;background:#f1fbf3}.opt.no{border-color:#f3b0a7;background:#fff4f2}
+.guess .fb{min-height:24px;font-size:14px;color:var(--ink2)}
+.note{margin-top:16px;padding:14px 16px;border-left:3px solid var(--gold2);background:linear-gradient(90deg,#fff8e6,transparent);border-radius:0 14px 14px 0;font-size:14px;color:var(--ink2)}
+
+/* ---------- answer: crossroad ---------- */
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:6px 2px 10px;margin:22px 0 10px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;padding:10px 16px;min-height:44px;border-radius:12px;border:1.5px solid transparent;background:transparent;font-family:var(--serif);font-size:15px;letter-spacing:.05em;color:var(--ink2)}
+.tab[aria-selected="true"]{border-color:#f0cf7a;background:#fff;box-shadow:0 10px 24px -16px rgba(200,150,40,.8);color:var(--ink)}
+.dir-g{display:grid;gap:22px;align-items:center}
+.scene{max-width:400px;width:100%;margin:0 auto}
+.bld{transition:fill .4s}
+.bld.hl{fill:url(#gb)}
+.lbl{font:600 12px var(--ak-font);fill:var(--ink);visibility:hidden}
+.lbl.on{visibility:visible}
+.dpath{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.walker{fill:#fff;stroke:var(--ink);stroke-width:3}
+.dir-info .k{font-size:13px;color:var(--muted)}
+.dir-info .big{font-family:var(--serif);font-size:clamp(28px,8vw,42px);line-height:1.1;margin:6px 0}
+.dir-info .tx{color:var(--ink2)}
+.dir-info .nt{font-size:14px;color:var(--ink2);margin:12px 0 4px;padding-top:12px;border-top:1px solid var(--line)}
+
+/* ---------- lab ---------- */
+.gr-g{display:grid;gap:26px;align-items:start}
+.cases{display:grid;gap:10px;margin:18px 0 0}
+.case{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:#fff;border:1.5px solid transparent;box-shadow:0 14px 30px -24px rgba(38,56,110,.6);text-align:left;width:100%}
+.case[aria-pressed="true"]{border-color:var(--gold2)}
+.case .sfx{flex:none;min-width:76px;font-family:var(--serif);font-size:21px;color:var(--goldD);line-height:1.15}
+.case b{display:block;font-size:14px}
+.case span{font-size:13px;color:var(--ink2)}
+.builder{padding:20px 16px}
+.builder h3{font-weight:400;font-size:19px;margin:0}
+.lbl2{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:16px 0 8px}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pill{padding:8px 12px;min-height:44px;border-radius:10px;background:#fff;border:1.5px solid var(--line);font-size:14px}
+.pill small{color:var(--muted);font-size:11px;margin-left:4px}
+.pill[aria-pressed="true"]{border-color:var(--gold2);background:#fff8e3}
+.morph{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:20px 0 8px;min-height:54px}
+.m{padding:9px 13px;border-radius:12px;font-weight:600;font-size:17px}
+.m.root{background:#fff;border:1.5px solid var(--line);box-shadow:0 4px 0 #d2d7df}
+.m.buf{background:#eef2fb;color:#4c63a8;border:1.5px dashed #aab8e0}
+.m.sfx{background:linear-gradient(180deg,#fde8a4,#f5cd5f);color:#43361c;box-shadow:0 4px 0 #d9a432}
+.m.op{padding:0 2px;font-weight:400;color:var(--muted);font-size:18px}
+.m.res{font-family:var(--serif);font-size:24px;padding:0 4px;border:0;background:none}
+.why{font-size:14px;color:var(--ink2);background:#fff;border-radius:12px;padding:12px 14px;margin-top:8px}
+.ex{display:flex;gap:12px;align-items:center;margin-top:12px}
+.ex .tr{display:block}.ex span{font-size:13px;color:var(--ink2)}
+
+/* ---------- dialog ---------- */
+.dlg{display:grid;gap:10px;max-width:720px;margin:24px auto 0}
+.dl{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:var(--card)}
+.dl.me{background:#fff8e4;margin-left:24px}
+.dl.on{box-shadow:0 0 0 2px var(--gold2)}
+.dl .who{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;background:#fff;border:1.5px solid var(--line)}
+.dl.me .who{background:linear-gradient(135deg,#ffe9a6,#e2ad3c);border:0;color:#5b4413}
+.dl .t{flex:1;min-width:0}
+.dl .tr{display:block;font-size:15px;line-height:1.45}
+.dl .ru{display:block;font-size:13px;color:var(--ink2)}
+.hide-ru .dl .ru{visibility:hidden}
+.dlg-ctl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+
+/* ---------- traps ---------- */
+.tips{display:grid;gap:14px;margin-top:24px}
+.tip{padding:20px 18px;background:#fff;border-radius:18px;box-shadow:0 24px 60px -34px rgba(38,56,110,.35);position:relative;overflow:hidden}
+.tip .n{font-family:var(--serif);font-size:56px;line-height:1;color:#f1f3f7;position:absolute;right:14px;top:6px}
+.tip>b{display:block;font-size:15px;margin-bottom:6px;position:relative}
+.tip p{font-size:14px;color:var(--ink2);position:relative;margin-top:6px}
+.tip .ic{width:48px;height:48px;margin-bottom:10px}
+.tip .ic svg{overflow:visible}
+.say-chip{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:#fff;border-radius:22px;padding:6px 12px;min-height:44px;font-weight:600;margin-top:10px;position:relative}
+.sw{display:flex;gap:6px;margin-top:10px;position:relative}
+.sw button{flex:1;min-height:44px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:600}
+.sw button[aria-pressed="true"]{border-color:var(--gold2);background:#fff8e3}
+.swv{margin-top:10px;position:relative}
+
+/* ---------- quest ---------- */
+.qs-g{display:grid;gap:16px;align-items:start;margin-top:12px}
+.qmap{padding:10px;background:var(--card);border-radius:18px}
+.qmap svg{width:100%;height:auto;border-radius:12px}
+.qpin{cursor:pointer}
+.qpin.ok circle{fill:#7fcf8e}.qpin.bad circle{fill:#f19a8f}.qpin.dim{opacity:.35}
+.qpin:focus-visible{outline:none}.qpin:focus-visible circle{stroke:#373c45;stroke-width:3}
+.qcard{padding:16px;background:#fff;border:1px solid var(--ak-line);border-radius:18px}
+.qbar{height:6px;border-radius:6px;background:#e9ecf2;margin:8px 0 14px;overflow:hidden}
+.qbar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--goldL),var(--gold2));transform-origin:left;transform:scaleX(0)}
+.qinstr{font-family:var(--serif);font-size:20px;line-height:1.35}
+.qfb{margin-top:12px;font-size:14px;color:var(--ink2);min-height:44px}
+.qfb.good b{color:var(--good)}.qfb.bad b{color:var(--bad)}
+.qpick{display:flex;gap:8px;margin-top:12px}
+.qpick button{flex:1;min-height:44px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:700}
+
+/* ---------- cheat ---------- */
+.fc-g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.fc{perspective:900px;height:168px;border:0;padding:0;background:none;text-align:left}
+.fc-in{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.fc-f,.fc-b{position:absolute;inset:0;border-radius:18px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:14px;overflow:hidden}
+.fc-f{background:#fff;box-shadow:0 18px 36px -24px rgba(38,56,110,.55)}
+.fc-f svg{width:42px;height:42px}
+.fc-f b{display:block;font-size:15px;line-height:1.25}
+.fc-f .sm{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.fc-b{transform:rotateY(180deg);background:linear-gradient(160deg,#fde8a4,#f2c24c);color:#43361c}
+.fc-b b{display:block;font-family:var(--serif);font-size:18px;line-height:1.2;font-weight:500}
+.fc-b>span{display:block;font-size:12px;opacity:.8}
+.fin{margin-top:36px;padding:20px 16px}
+.fin-map{max-width:420px;margin:12px auto 0}
+.chunks{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chunk{padding:6px 10px;border-radius:10px;background:#fff;border:1.5px solid var(--line);font-size:14px}
+.chunk.on{border-color:var(--gold2);background:#fff8e3}
+.chunk small{display:block;font-size:12px;color:var(--ink2)}
+
+/* ---------- scrollbar: путь от вокзала до цели ---------- */
+.sb{position:fixed;z-index:50;top:env(safe-area-inset-top);left:0;right:0;height:8px;pointer-events:none}
+.sb__track{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#e9ecf2 0 10px,transparent 10px 16px);pointer-events:auto;touch-action:none}
+.sb__fill{position:absolute;left:0;top:2px;height:4px;width:calc(var(--p,0)*100%);background:linear-gradient(90deg,var(--goldL),var(--gold));border-radius:0 4px 4px 0}
+.sb__walker{position:absolute;top:-2px;left:clamp(8px,calc(var(--p,0)*100%),calc(100% - 8px));width:12px;height:12px;translate:-50% 0;border-radius:50%;background:#fff;border:3px solid var(--ink)}
+.sb__mark{position:absolute;left:calc(var(--at,0)*100%);top:50%;translate:-50% -50%;width:28px;height:28px;padding:0;border:0;background:none;cursor:pointer}
+.sb__mark::after{content:"";position:absolute;inset:10px;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 2px var(--gold)}
+.sb__mark.is-read::after{background:var(--gold)}
+.sb__pin{position:absolute;right:2px;top:-4px;width:12px;height:16px}
+@media (min-width:768px){
+  .sb{left:auto;right:14px;top:50%;translate:0 -50%;width:10px;height:min(64dvh,540px)}
+  .sb__track{background:repeating-linear-gradient(180deg,#e9ecf2 0 10px,transparent 10px 16px);border-radius:6px}
+  .sb__fill{left:3px;top:0;width:4px;height:calc(var(--p,0)*100%);border-radius:4px}
+  .sb__walker{left:50%;top:clamp(8px,calc(var(--p,0)*100%),calc(100% - 8px));translate:-50% -50%;width:16px;height:16px}
+  .sb__mark{left:50%;top:calc(var(--at,0)*100%)}
+  .sb__pin{right:auto;left:50%;top:auto;bottom:-20px;translate:-50% 0;width:16px;height:22px}
+}
+
+/* ---------- wider ---------- */
+@media (min-width:768px){
+  main{padding-right:40px}
+  .tips{grid-template-columns:repeat(2,1fr)}
+  .fc-g{grid-template-columns:repeat(4,1fr)}
+  .fc{height:190px}
+  .tl{grid-template-columns:repeat(4,1fr);padding-left:0;padding-top:30px}
+  .tl-line{left:6px;right:6px;top:11px;bottom:auto;width:auto;height:2px}
+  .tl-fill{transform-origin:left;transform:scaleX(1)}
+  .tl-i::before{left:0;top:-26px}
+}
+@media (min-width:960px){
+  .hero-g{grid-template-columns:1.05fr 1fr;align-items:center}
+  .story-g{grid-template-columns:1.1fr .9fr}
+  .ph-g{grid-template-columns:.9fr 1.1fr;align-items:start}
+  .dir-g{grid-template-columns:1.1fr .9fr}
+  .gr-g{grid-template-columns:.95fr 1.05fr}
+  .qs-g{grid-template-columns:1.1fr .9fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#ffe29a"/><stop offset="1" stop-color="#e0a936"/></linearGradient>
+  <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe9a6"/><stop offset="1" stop-color="#efbe45"/></linearGradient>
+  <linearGradient id="gi" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3c552"/><stop offset="1" stop-color="#c98f25"/></linearGradient>
+  <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#eef1f6" stroke-width="1"/></pattern>
+  <symbol id="spk" viewBox="0 0 24 24"><path d="M3 9v6h4l5 4V5L7 9zM16 8a5 5 0 0 1 0 8M18.5 5.5a9 9 0 0 1 0 13" stroke="#5b4413" stroke-width="2" fill="none"/></symbol>
+</defs></svg>
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero" data-section="hero" data-words="36">
+  <div class="hero-g">
+    <div>
+      <div class="eyebrow">Ситуация · A1</div>
+      <h1 class="split">Спросить дорогу по-турецки</h1>
+      <p class="sub">и понять, что вам ответили. Второе сложнее. Об этом урок.</p>
+      <ul class="ticks">
+        <li>10 фраз, чтобы спросить</li>
+        <li>6 слов, чтобы понять ответ</li>
+        <li>3 окончания вместо таблиц</li>
+        <li>Квест по карте у моря</li>
+      </ul>
+      <div class="chips" id="hchips">
+        <button type="button" class="chip" data-step="0"><span lang="tr">Düz gidin</span><small>идите прямо</small></button>
+        <button type="button" class="chip" data-step="1"><span lang="tr">Işıklardan sola</span><small>на светофоре налево</small></button>
+        <button type="button" class="chip" data-step="4"><span lang="tr">Kaleiçi sağda</span><small>Калеичи справа</small></button>
+      </div>
+    </div>
+    <div class="map-card" id="heroCard">
+      <svg viewBox="0 0 400 400" id="heroMap" role="img" aria-label="Карта: маршрут до старого города">
+        <rect width="400" height="400" fill="url(#grid)"/>
+        <path d="M0 330 C120 300 260 360 400 320 V400 H0Z" fill="#dfeefa"/>
+        <text x="290" y="380" font-size="11" fill="#7ea2c5" letter-spacing="2" lang="tr">AKDENİZ</text>
+        <g stroke="#fff" stroke-width="16" stroke-linecap="round" fill="none">
+          <path d="M40 60H370M40 160H370M40 250H370M80 30V300M200 30V310M320 30V300"/>
+        </g>
+        <g fill="#e9edf4">
+          <rect class="hbld" id="hb-kule" x="96" y="76" width="88" height="66" rx="8"/><rect class="hbld" id="hb-kale" x="216" y="76" width="88" height="66" rx="8"/>
+          <rect x="96" y="176" width="88" height="58" rx="8"/><rect x="216" y="176" width="88" height="58" rx="8"/>
+          <rect x="336" y="76" width="40" height="66" rx="8"/><rect x="336" y="176" width="40" height="58" rx="8"/>
+          <rect x="30" y="76" width="34" height="66" rx="8"/><rect x="30" y="176" width="34" height="58" rx="8"/>
+        </g>
+        <g font-size="10" fill="#8e949e" lang="tr">
+          <text x="104" y="98">Saat Kulesi</text><text x="226" y="98">Kaleiçi</text><text x="226" y="198">Eczane</text><text x="106" y="198">Otogar</text>
+        </g>
+        <g id="hlight" transform="translate(206 128)"><rect width="10" height="24" rx="3" fill="#373c45"/><circle cx="5" cy="5" r="2.6" fill="#f18a7a"/><circle cx="5" cy="12" r="2.6" fill="#f2c24c"/><circle cx="5" cy="19" r="2.6" fill="#7fcf8e"/></g>
+        <path class="hseg" pathLength="1" d="M200 300V160"/>
+        <path class="hseg" pathLength="1" d="M200 160H80"/>
+        <path class="hseg" pathLength="1" d="M80 160V60"/>
+        <path class="hseg" pathLength="1" d="M80 60H250"/>
+        <circle cx="200" cy="300" r="8" fill="#fff" stroke="#373c45" stroke-width="3"/>
+        <g id="hpin"><path d="M250 58C246 50 236 42 236 32a14 14 0 0 1 28 0C264 42 254 50 250 58z" fill="url(#gb)" stroke="#d49a2a" stroke-width="1.5"/><circle cx="250" cy="32" r="5" fill="#fff"/></g>
+        <circle id="hwalker" cx="200" cy="300" r="9" fill="#373c45" stroke="#fff" stroke-width="3"/>
+      </svg>
+      <div class="cap" id="hcap">
+        <button type="button" class="spk" id="hsay" data-say="Düz gidin" aria-label="Послушать"><svg><use href="#spk"/></svg></button>
+        <div><b lang="tr" id="hcapTr">Düz gidin</b><span id="hcapRu" data-ui>Идите прямо</span></div>
+        <div class="n" id="hcapN" data-ui>1/5</div>
+      </div>
+      <div class="hctl">
+        <button type="button" class="btn-o" id="hprev" data-ui>← назад</button>
+        <button type="button" class="btn-o" id="hnext" data-ui>дальше →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STORY ===== -->
+<section class="story" data-section="story" data-words="96">
+  <div class="story-g">
+    <div>
+      <div class="eyebrow">История</div>
+      <h2 class="split">Вы спросили дорогу. <span class="gold">Вам ответили</span></h2>
+      <p>Первая неделя в Анталье. Турецкая симка ещё не работает. Интернета нет.</p>
+      <p>Вам нужно на автовокзал. <b lang="tr">Otogar</b>. Фразу вы выучили заранее: <b lang="tr">Otogar nerede?</b></p>
+      <p>Вы подходите к дедушке у магазина. Дедушка улыбается. Говорит. Быстро. Секунд двенадцать. Руками показывает.</p>
+      <p>Вы киваете, говорите <b lang="tr">teşekkürler</b> и идёте прямо. Потому что из всего ответа поняли одно слово. <b lang="tr">Düz.</b></p>
+      <p>Через сорок минут вы у моря. Красиво. Но это не <span lang="tr">otogar</span>.</p>
+      <p>Спросить дорогу — половина дела. Вторая половина — понять ответ. Сегодня разберём обе.</p>
+    </div>
+    <div class="card chat" id="chat">
+      <div class="top"><svg class="ava" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="18" fill="#f3c552"/><path d="M18 8c-5 0-8 3.6-8 8 0 6 8 13 8 13s8-7 8-13c0-4.4-3-8-8-8z" fill="#fff"/><circle cx="18" cy="16" r="3" fill="#f3c552"/></svg><div><b>Анталья, первая неделя</b><span>как это было</span></div></div>
+      <div class="bub me" data-say="Affedersiniz, otogar nerede?"><span lang="tr">Affedersiniz, otogar nerede?</span><small>Извините, где автовокзал?</small></div>
+      <div class="typing" id="typing" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="bub him" data-say="Otogar mı? Çok kolay! Düz gidin, ikinci ışıklardan sola dönün, köprüyü geçin, sonra sağda."><span class="fast" lang="tr">Otogar mı? Çok kolay! Düz gidin, ikinci ışıklardan sola dönün, köprüyü geçin, sonra sağda…</span><small>…</small></div>
+      <div class="bub me" data-say="Tamam… teşekkürler!"><span lang="tr">Tamam… teşekkürler!</span><small>Понятно… спасибо! (не понятно)</small></div>
+      <div class="bub him" data-say="Rica ederim! Beş dakika!"><span lang="tr">Rica ederim! Beş dakika!</span><small>Не за что! Пять минут!</small></div>
+      <div class="bub me"><svg viewBox="0 0 60 20" width="60" height="20" aria-hidden="true"><path id="wave" d="M2 12c6-8 10 8 16 0s10 8 16 0 10 8 16 0" fill="none" stroke="#43361c" stroke-width="2.4" stroke-linecap="round"/></svg><small>через сорок минут — море</small></div>
+      <button type="button" class="again" id="chatAgain">↻ ещё раз</button>
+    </div>
+  </div>
+  <div class="tl" id="tl">
+    <div class="tl-line"><div class="tl-fill"></div></div>
+    <button type="button" class="tl-i" data-say="Affedersiniz, otogar nerede?"><b>0:00</b><span lang="tr">Affedersiniz, otogar nerede?</span></button>
+    <button type="button" class="tl-i"><b>0:12</b><span>Дедушка закончил объяснять</span></button>
+    <button type="button" class="tl-i"><b>0:13</b><span><span lang="tr">Teşekkürler.</span> Понятно одно слово</span></button>
+    <button type="button" class="tl-i last"><b>40:00</b><span>Море. Красиво. Не <span lang="tr">otogar</span></span></button>
+  </div>
+</section>
+
+<!-- ===== ASK ===== -->
+<section data-section="ask" data-words="88">
+  <div class="ph-g">
+    <div>
+      <div class="eyebrow">Шаг 1 · спросить</div>
+      <h2 class="split">Как <span class="gold">спросить дорогу</span></h2>
+      <div class="card guess" id="guess">
+        <b>Сначала угадайте.</b> <span class="small">Что значит <b lang="tr">nerede</b>?</span>
+        <div class="opts">
+          <button type="button" class="opt" data-ok="0">куда</button>
+          <button type="button" class="opt" data-ok="1">где</button>
+          <button type="button" class="opt" data-ok="0">сколько</button>
+        </div>
+        <p class="fb" id="guessFb" aria-live="polite"></p>
+      </div>
+      <p class="lead">Спросить — легко. Нужны одно слово и один вопрос.</p>
+      <p class="lead"><b lang="tr">Affedersiniz</b> — это «извините». Им вы останавливаете человека. Дальше — место и <b lang="tr">nerede</b>. <b lang="tr">Otogar nerede?</b> Всё. Вы спросили.</p>
+      <p class="lead">Теперь начинается сложное. Вам отвечают.</p>
+      <div class="note"><b>Совет.</b> Заучите последние три фразы списка раньше первых. Они спасают, когда ответ оказался длиннее, чем вы рассчитывали.</div>
+      <div class="row"><button type="button" class="btn-o" id="askHide" aria-pressed="false">Скрыть перевод</button></div>
+    </div>
+    <div class="ph-list" id="askList">
+      <div class="ph" role="button" tabindex="0" data-say="Affedersiniz!"><div class="t"><span class="tr" lang="tr">Affedersiniz!</span><span class="tx" data-ui>аффедэрсиниз</span><span class="ru">Извините! — чтобы остановить человека</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Otogar nerede?"><div class="t"><span class="tr" lang="tr">Otogar nerede?</span><span class="tx" data-ui>отогар нэрэдэ?</span><span class="ru">Где автовокзал? — любое место + nerede</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Havalimanına nasıl gidebilirim?"><div class="t"><span class="tr" lang="tr">Havalimanına nasıl gidebilirim?</span><span class="tx" data-ui>хавалиманына насыл гидэбилирим?</span><span class="ru">Как добраться до аэропорта?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Buralarda eczane var mı?"><div class="t"><span class="tr" lang="tr">Buralarda eczane var mı?</span><span class="tx" data-ui>бураларда эджзанэ вар мы?</span><span class="ru">Здесь поблизости есть аптека?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Yakın mı, uzak mı?"><div class="t"><span class="tr" lang="tr">Yakın mı, uzak mı?</span><span class="tx" data-ui>якын мы, узак мы?</span><span class="ru">Близко или далеко?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Yürüyerek kaç dakika?"><div class="t"><span class="tr" lang="tr">Yürüyerek kaç dakika?</span><span class="tx" data-ui>юрюйерэк кач дакика?</span><span class="ru">Сколько минут пешком?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Kayboldum."><div class="t"><span class="tr" lang="tr">Kayboldum.</span><span class="tx" data-ui>кайболдум</span><span class="ru">Я заблудился / заблудилась</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Haritada gösterir misiniz?"><div class="t"><span class="tr" lang="tr">Haritada gösterir misiniz?</span><span class="tx" data-ui>харитада гёстэрир мисиниз?</span><span class="ru">Покажете на карте?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Daha yavaş söyler misiniz?"><div class="t"><span class="tr" lang="tr">Daha yavaş söyler misiniz?</span><span class="tx" data-ui>даха яваш сёйлер мисиниз?</span><span class="ru">Можно помедленнее?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+      <div class="ph" role="button" tabindex="0" data-say="Tekrar eder misiniz?"><div class="t"><span class="tr" lang="tr">Tekrar eder misiniz?</span><span class="tx" data-ui>тэкрар эдэр мисиниз?</span><span class="ru">Повторите, пожалуйста?</span></div><svg class="ico" aria-hidden="true"><use href="#spk"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ANSWER ===== -->
+<section data-section="answer" data-words="35">
+  <div class="center">
+    <div class="eyebrow" style="justify-content:center">Шаг 2 · понять ответ</div>
+    <h2 class="split">Шесть слов <span class="gold">любого ответа</span></h2>
+    <p class="lead">Турок отвечает быстро. Руками. Не останавливаясь. Хорошая новость: слов у него немного. Шесть. Выучите их, и дедушка у магазина больше не загадка.</p>
+  </div>
+  <div class="tabs" id="tabs" role="tablist" aria-label="Направления">
+    <button type="button" class="tab" role="tab" data-i="0" lang="tr">Düz</button>
+    <button type="button" class="tab" role="tab" data-i="1" lang="tr">Sağa</button>
+    <button type="button" class="tab" role="tab" data-i="2" lang="tr">Sola</button>
+    <button type="button" class="tab" role="tab" data-i="3" lang="tr">İkinci soldan</button>
+    <button type="button" class="tab" role="tab" data-i="4" lang="tr">Karşıda</button>
+    <button type="button" class="tab" role="tab" data-i="5" lang="tr">Geri</button>
+  </div>
+  <div class="dir-g">
+    <div class="scene">
+      <svg viewBox="0 0 300 300" id="scene" role="img" aria-label="Перекрёсток и маршрут">
+        <rect width="300" height="300" rx="18" fill="#f4f6fa"/>
+        <g fill="#dfe3ea"><rect x="137" y="0" width="26" height="300"/><rect x="0" y="189" width="300" height="22"/><rect x="0" y="89" width="300" height="22"/></g>
+        <g stroke="#fff" stroke-width="2" stroke-dasharray="8 8"><path d="M150 0V300M0 200H300M0 100H300"/></g>
+        <rect class="bld" id="b-lb" x="18" y="226" width="104" height="58" rx="8" fill="#e6eaf1"/>
+        <rect class="bld" id="b-rb" x="178" y="226" width="104" height="58" rx="8" fill="#e9e6f4"/>
+        <rect class="bld" id="b-lm" x="18" y="124" width="104" height="52" rx="8" fill="#e7f0ea"/>
+        <rect class="bld" id="b-rm" x="178" y="124" width="104" height="52" rx="8" fill="#e6eaf1"/>
+        <rect class="bld" id="b-lt" x="18" y="16" width="104" height="60" rx="8" fill="#e9e6f4"/>
+        <rect class="bld" id="b-rt" x="178" y="16" width="104" height="60" rx="8" fill="#e7f0ea"/>
+        <g lang="tr">
+          <text class="lbl" id="l-0" x="190" y="50">Otogar</text><text class="lbl" id="l-1" x="190" y="260">Market</text>
+          <text class="lbl" id="l-2" x="30" y="260">Eczane</text><text class="lbl" id="l-3" x="30" y="155">Cami</text>
+          <text class="lbl" id="l-4" x="190" y="155">Banka</text><text class="lbl" id="l-5" x="190" y="260">Otel</text>
+        </g>
+        <path class="dpath" id="dpath" pathLength="1" d="M150 272V30"/>
+        <circle class="walker" id="dwalker" cx="150" cy="272" r="9"/>
+      </svg>
+    </div>
+    <div class="dir-info" id="dirInfo"></div>
+  </div>
+</section>
+
+<!-- ===== LAB ===== -->
+<section data-section="lab" data-words="80">
+  <div class="gr-g">
+    <div>
+      <div class="eyebrow">Шаг 3 · механика</div>
+      <h2 class="split">Три окончания. <span class="gold">Куда, где, откуда</span></h2>
+      <p>В русском мы говорим «на светофоре направо». Турок говорит «<b>от</b> светофора направо». <b lang="tr">Işıklardan sağa.</b></p>
+      <p>Звучит странно. Работает всегда.</p>
+      <p>Весь маршрут держится на трёх окончаниях. Буква <b>a</b> или <b>e</b> выбирается по последней гласной слова: <b lang="tr">a ı o u</b> — берём a, <b lang="tr">e i ö ü</b> — берём e.</p>
+      <div class="cases">
+        <button type="button" class="case" data-c="0"><span class="sfx" lang="tr">-a / -e</span><span><b>Куда?</b><span><span lang="tr">Sağa dönün</span> — поверните направо.</span></span></button>
+        <button type="button" class="case" data-c="1"><span class="sfx" lang="tr">-da / -de</span><span><b>Где?</b><span><span lang="tr">Eczane köşede</span> — аптека на углу.</span></span></button>
+        <button type="button" class="case" data-c="2"><span class="sfx" lang="tr">-dan / -den</span><span><b>Откуда, через что?</b><span><span lang="tr">Işıklardan sola</span> — на светофоре налево.</span></span></button>
+      </div>
+    </div>
+    <div class="card builder" id="builder">
+      <h3>Конструктор: соберите <span class="gold">маршрут</span></h3>
+      <div class="lbl2">1 · Место</div>
+      <div class="pills" id="gwords">
+        <button type="button" class="pill" data-w="0"><span lang="tr">otogar</span><small>автовокзал</small></button>
+        <button type="button" class="pill" data-w="1"><span lang="tr">müze</span><small>музей</small></button>
+        <button type="button" class="pill" data-w="2"><span lang="tr">eczane</span><small>аптека</small></button>
+        <button type="button" class="pill" data-w="3"><span lang="tr">durak</span><small>остановка</small></button>
+        <button type="button" class="pill" data-w="4"><span lang="tr">havalimanı</span><small>аэропорт</small></button>
+        <button type="button" class="pill" data-w="5"><span lang="tr">ışıklar</span><small>светофор</small></button>
+        <button type="button" class="pill" data-w="6"><span lang="tr">köprü</span><small>мост</small></button>
+        <button type="button" class="pill" data-w="7"><span lang="tr">market</span><small>магазин</small></button>
+      </div>
+      <div class="lbl2">2 · Что хотим сказать</div>
+      <div class="pills" id="gcases">
+        <button type="button" class="pill" data-c="0">куда<small>-a/-e</small></button>
+        <button type="button" class="pill" data-c="1">где<small>-da/-de</small></button>
+        <button type="button" class="pill" data-c="2">откуда<small>-dan/-den</small></button>
+      </div>
+      <div class="morph" id="morph" lang="tr" aria-live="polite"></div>
+      <div class="why" id="why"></div>
+      <div class="ex" id="gex"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DIALOG ===== -->
+<section data-section="dialog" data-words="58">
+  <div class="center">
+    <div class="eyebrow" style="justify-content:center">Шаг 4 · целиком</div>
+    <h2 class="split">Полный диалог. <span class="gold" lang="tr">Kaleiçi</span></h2>
+    <p class="lead">Старый город Антальи. Туристы теряются там каждый день. Вы — нет.</p>
+  </div>
+  <div class="dlg" id="dlg">
+    <div class="dl me" data-say="Affedersiniz, Kaleiçi'ne nasıl gidebilirim?"><div class="who" data-ui>Вы</div><div class="t"><span class="tr" lang="tr">Affedersiniz, Kaleiçi'ne nasıl gidebilirim?</span><span class="ru">Извините, как пройти в Калеичи?</span></div></div>
+    <div class="dl" data-say="Kaleiçi mi? Çok yakın. Düz gidin, ikinci ışıklardan sola dönün."><div class="who">TR</div><div class="t"><span class="tr" lang="tr">Kaleiçi mi? Çok yakın. Düz gidin, ikinci ışıklardan sola dönün.</span><span class="ru">Калеичи? Совсем рядом. Идите прямо, на втором светофоре налево.</span></div></div>
+    <div class="dl me" data-say="İkinci ışıklardan sola, değil mi?"><div class="who" data-ui>Вы</div><div class="t"><span class="tr" lang="tr">İkinci ışıklardan sola, değil mi?</span><span class="ru">На втором светофоре налево, да?</span></div></div>
+    <div class="dl" data-say="Evet. Sonra Saat Kulesi'ni göreceksiniz. Kaleiçi, Saat Kulesi'nin arkasında."><div class="who">TR</div><div class="t"><span class="tr" lang="tr">Evet. Sonra Saat Kulesi'ni göreceksiniz. Kaleiçi, Saat Kulesi'nin arkasında.</span><span class="ru">Да. Потом увидите Часовую башню. Калеичи — за ней.</span></div></div>
+    <div class="dl me" data-say="Yürüyerek kaç dakika?"><div class="who" data-ui>Вы</div><div class="t"><span class="tr" lang="tr">Yürüyerek kaç dakika?</span><span class="ru">Сколько минут пешком?</span></div></div>
+    <div class="dl" data-say="On dakika. Ama hava sıcak, tramvaya binin."><div class="who">TR</div><div class="t"><span class="tr" lang="tr">On dakika. Ama hava sıcak, tramvaya binin.</span><span class="ru">Десять минут. Но жарко, садитесь на трамвай.</span></div></div>
+    <div class="dl me" data-say="Çok teşekkür ederim!"><div class="who" data-ui>Вы</div><div class="t"><span class="tr" lang="tr">Çok teşekkür ederim!</span><span class="ru">Большое спасибо!</span></div></div>
+    <div class="dl" data-say="Rica ederim. İyi gezmeler!"><div class="who">TR</div><div class="t"><span class="tr" lang="tr">Rica ederim. İyi gezmeler!</span><span class="ru">Не за что. Хорошей прогулки!</span></div></div>
+  </div>
+  <div class="dlg-ctl">
+    <button type="button" class="btn" id="dlgNext" data-ui>Следующая реплика ▶</button>
+    <button type="button" class="btn-o" id="dlgHide" aria-pressed="false" data-ui>Скрыть перевод</button>
+  </div>
+  <p class="lead center">Посмотрите на третью реплику. <b lang="tr">İkinci ışıklardan sola, değil mi?</b> Переспросить не стыдно. Это тоже навык.</p>
+  <div class="row" style="justify-content:center"><button type="button" class="btn-o" id="dlgThird" data-ui>Показать реплику</button></div>
+</section>
+
+<!-- ===== TRAPS ===== -->
+<section data-section="traps" data-words="78">
+  <div class="center">
+    <div class="eyebrow" style="justify-content:center">Ловушки и лайфхаки</div>
+    <h2 class="split">Чего нет <span class="gold">в учебнике</span></h2>
+  </div>
+  <div class="tips">
+    <div class="tip"><div class="n">01</div><div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#c98f25" stroke-width="2.4" stroke-linecap="round"><path class="arrow-to" d="M6 22h22M22 16l6 6-6 6"/><circle class="dot-at" cx="36" cy="22" r="4" fill="#f3c552" stroke="none"/></svg></div>
+      <b>Одна буква — другой смысл</b>
+      <p><b lang="tr">Sağa</b> — куда: поверните направо. <b lang="tr">Sağda</b> — где: справа. Переключите и посмотрите на стрелку.</p>
+      <div class="sw" role="group" aria-label="sağa или sağda"><button type="button" aria-pressed="true" data-sw="0" lang="tr">sağa</button><button type="button" aria-pressed="false" data-sw="1" lang="tr">sağda</button></div>
+      <p class="swv" id="swv"><b lang="tr">Sağa dönün</b> — поверните направо.</p>
+    </div>
+    <div class="tip"><div class="n">02</div><div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#c98f25" stroke-width="2.4" stroke-linecap="round"><g class="pp1"><circle cx="13" cy="13" r="5"/><path d="M4 32c1-6 5-9 9-9s8 3 9 9"/></g><g class="pp2"><circle cx="31" cy="15" r="5"/><path d="M22 34c1-6 5-9 9-9s8 3 9 9"/></g><path d="M8 40h28" stroke="#f3c552"/></svg></div>
+      <b>Спрашивайте двоих</b>
+      <p>Ответ «не знаю» звучит редко. Чаще вам покажут дорогу. Иногда правильную. Если двое показали в одну сторону, идите.</p>
+      <button type="button" class="say-chip" data-say="Bilmiyorum"><svg width="16" height="16" aria-hidden="true"><use href="#spk"/></svg><span lang="tr">Bilmiyorum</span></button>
+    </div>
+    <div class="tip"><div class="n">03</div><div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#c98f25" stroke-width="2.4" stroke-linecap="round"><circle cx="22" cy="22" r="18"/><path class="clock-m" d="M22 22V9"/><path class="clock-h" d="M22 22h8" stroke="#f3c552"/></svg></div>
+      <b><span lang="tr">Beş dakika</span> — это расстояние</b>
+      <p>Пять минут по-турецки означают «недалеко». Иногда это пятнадцать. Спросите сколько пешком и прибавьте запас.</p>
+      <button type="button" class="say-chip" data-say="Yürüyerek kaç dakika?"><svg width="16" height="16" aria-hidden="true"><use href="#spk"/></svg><span lang="tr">Yürüyerek kaç dakika?</span></button>
+    </div>
+    <div class="tip"><div class="n">04</div><div class="ic"><svg viewBox="0 0 44 44" fill="none" stroke="#c98f25" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><g class="hand"><path d="M6 24h18M18 18l6 6-6 6"/><path d="M26 16v16" stroke="#f3c552"/></g><path d="M34 10l6 4-6 4" opacity=".5"/></svg></div>
+      <b>Смотрите на руку</b>
+      <p><b lang="tr">Şurada</b> — «вон там», и дальше жест. Слово вам ничего не скажет, рука скажет. Слушайте <span lang="tr">düz, sağ, sol</span>, а направление берите у жеста.</p>
+      <button type="button" class="say-chip" data-say="Şurada"><svg width="16" height="16" aria-hidden="true"><use href="#spk"/></svg><span lang="tr">Şurada</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VIDEO ===== -->
+<section data-section="video" data-words="12">
+  <h2>Послушайте ещё раз</h2>
+  <p>Обратите внимание, как звучат «направо», «налево» и «прямо» в быстрой речи.</p>
+  <a-video yt="L7XFiijXjxQ" start="0" end="180" title="Турецкий язык: как спросить направление" channel="Language Club TV"></a-video>
+</section>
+
+<!-- ===== PRACTICE ===== -->
+<section data-section="practice" data-words="1">
+  <h2>Практика</h2>
+  <a-exercise ref="lib.directions.ex1"></a-exercise>
+  <a-exercise ref="lib.directions.ex2"></a-exercise>
+  <a-exercise ref="lib.directions.ex3"></a-exercise>
+  <a-exercise ref="lib.directions.ex4"></a-exercise>
+
+  <a-exercise ref="lib.directions.ex5" class="ak-ex">
+    <div class="ak-ex__head"><span class="ak-ex__title">Квест: дойдите до цели без навигатора</span><span class="ak-ex__count" id="qstep">1 / 4</span></div>
+    <p class="small">Вам объясняют дорогу по-турецки. Вы стоите у белого кружка, лицом вверх. Нажмите пин, где окажетесь.</p>
+    <div class="qs-g">
+      <div class="qmap">
+        <svg viewBox="0 0 360 400" id="qsvg" role="img" aria-label="Карта квартала у моря">
+          <rect width="360" height="400" fill="#f6f7fa"/>
+          <g fill="#e9ecf2">
+            <rect x="0" y="0" width="46" height="46" rx="6"/><rect x="74" y="0" width="92" height="46" rx="6"/><rect x="194" y="0" width="92" height="46" rx="6"/><rect x="314" y="0" width="46" height="46" rx="6"/>
+            <rect x="0" y="74" width="46" height="92" rx="6"/><rect x="74" y="74" width="92" height="92" rx="6"/><rect x="194" y="74" width="92" height="92" rx="6"/><rect x="314" y="74" width="46" height="92" rx="6"/>
+            <rect x="0" y="194" width="46" height="92" rx="6"/><rect x="74" y="194" width="92" height="92" rx="6"/><rect x="194" y="194" width="92" height="92" rx="6"/><rect x="314" y="194" width="46" height="92" rx="6"/>
+            <rect x="0" y="314" width="166" height="26" rx="6"/><rect x="194" y="314" width="166" height="26" rx="6"/>
+          </g>
+          <g fill="#dde1e8"><rect x="46" y="0" width="28" height="340"/><rect x="166" y="0" width="28" height="400"/><rect x="286" y="0" width="28" height="340"/><rect x="0" y="46" width="360" height="28"/><rect x="0" y="166" width="360" height="28"/><rect x="0" y="286" width="360" height="28"/></g>
+          <rect x="0" y="342" width="360" height="22" fill="#cfe4f7"/>
+          <rect x="162" y="338" width="36" height="30" rx="4" fill="#c7ccd6"/>
+          <text x="204" y="358" font-size="9" fill="#6f8fb3" lang="tr">köprü</text>
+          <rect x="0" y="366" width="360" height="34" fill="#f8ecd0"/>
+          <text x="14" y="387" font-size="9" fill="#b89455" letter-spacing="1.5" lang="tr">PLAJ · AKDENİZ</text>
+          <g transform="translate(196 140)"><rect width="10" height="22" rx="3" fill="#373c45"/><circle cx="5" cy="5" r="2.5" fill="#f18a7a"/><circle cx="5" cy="11" r="2.5" fill="#f2c24c"/><circle cx="5" cy="17" r="2.5" fill="#7fcf8e"/></g>
+          <text x="210" y="152" font-size="8.5" fill="#8e949e" lang="tr">ışıklar</text>
+          <path id="qpath" d="M0 0" fill="none" stroke="#e0a936" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <g id="qpins"></g>
+          <g id="qstart"><circle r="10" fill="#fff" stroke="#373c45" stroke-width="3"/><path d="M0 -20 L6 -12 H-6Z" fill="#373c45"/></g>
+          <circle id="qwalker" r="7" fill="#373c45" opacity="0"/>
+        </svg>
+      </div>
+      <div class="qcard">
+        <div class="qbar"><i id="qbar"></i></div>
+        <div class="row" style="margin:0 0 8px"><button type="button" class="spk" id="qsay" aria-label="Послушать"><svg><use href="#spk"/></svg></button><span class="small">Сначала послушайте, потом читайте</span></div>
+        <div class="qinstr" id="qinstr" lang="tr"></div>
+        <div class="qpick" id="qpick"><button type="button" data-p="0">A <small>(1)</small></button><button type="button" data-p="1">B <small>(2)</small></button><button type="button" data-p="2">C <small>(3)</small></button></div>
+        <div class="qfb" id="qfb" aria-live="polite"></div>
+      </div>
+    </div>
+  </a-exercise>
+</section>
+
+<!-- ===== CHECK ===== -->
+<section data-section="check" data-words="10">
+  <h2>Проверьте, <span class="gold">дойдёте ли вы</span></h2>
+  <p>Пять вопросов. Без шпаргалки перед глазами.</p>
+  <a-quiz ref="lib.directions.check1"></a-quiz>
+</section>
+
+<!-- ===== CHEAT ===== -->
+<section data-section="cheat" data-words="64">
+  <div class="center">
+    <div class="eyebrow" style="justify-content:center">Шпаргалка</div>
+    <h2 class="split">Восемь карточек. <span class="gold">Переверните</span></h2>
+    <p class="lead">Сначала вспомните перевод сами. Потом переверните. Так слово держится дольше.</p>
+  </div>
+  <div class="fc-g" id="fcg">
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40V10M12 22 24 10l12 12"/></svg><span><b lang="tr">Düz gidin</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Düz gidin"><b>Идите прямо</b><span data-ui>дюз гидин</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38V22h24M26 14l8 8-8 8"/></svg><span><b lang="tr">Sağa dönün</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Sağa dönün"><b>Поверните направо</b><span data-ui>саа дёнюн</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M38 38V22H14M22 14l-8 8 8 8"/></svg><span><b lang="tr">Sola dönün</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Sola dönün"><b>Поверните налево</b><span data-ui>сола дёнюн</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V18a8 8 0 0 1 16 0v4M20 16l8 8 8-8"/></svg><span><b lang="tr">Geri dönün</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Geri dönün"><b>Вернитесь назад</b><span data-ui>гэри дёнюн</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 30h36M6 18h36" stroke-dasharray="4 4"/><path d="M24 40V8M18 14l6-6 6 6"/></svg><span><b lang="tr">Karşıda</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Karşıda"><b>Напротив, через дорогу</b><span data-ui>каршыда</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V14h26"/><circle cx="12" cy="14" r="4"/></svg><span><b lang="tr">Köşede</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Köşede"><b>На углу</b><span data-ui>кёшэдэ</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 40V14h20M30 6l8 8-8 8"/></svg><span><b lang="tr">İlk sağdan</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="İlk sağdan"><b>Первый поворот направо</b><span data-ui>ильк саадан</span></span></span></button>
+    <button type="button" class="fc"><span class="fc-in"><span class="fc-f"><svg viewBox="0 0 48 48" fill="none" stroke="url(#gi)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 40V14M16 22l8-8 8 8M16 8h16"/></svg><span><b lang="tr">Biraz ileride</b><span class="sm" data-ui>нажмите</span></span></span><span class="fc-b" data-say="Biraz ileride"><b>Чуть дальше впереди</b><span data-ui>бираз илэридэ</span></span></span></button>
+  </div>
+  <div class="card fin" id="fin">
+    <h2 class="split">А теперь — <span class="gold">дедушка ещё раз</span></h2>
+    <p>Помните ответ за двенадцать секунд? Нажимайте по кусочку. Теперь вы понимаете каждый.</p>
+    <div class="chunks" id="chunks">
+      <span class="chunk" lang="tr">Otogar mı? Çok kolay!</span>
+      <span class="chunk" lang="tr">Düz gidin,</span>
+      <span class="chunk" lang="tr">ikinci ışıklardan sola dönün,</span>
+      <span class="chunk" lang="tr">köprüyü geçin,</span>
+      <span class="chunk" lang="tr">sonra sağda.</span>
+    </div>
+    <p id="chunkRu" class="small" aria-live="polite">Автовокзал? Очень просто!</p>
+    <svg viewBox="0 0 320 160" class="fin-map" id="finMap" role="img" aria-label="Маршрут до автовокзала">
+      <rect width="320" height="160" rx="14" fill="#f4f6fa"/>
+      <rect x="140" y="0" width="22" height="160" fill="#cfe4f7"/>
+      <g stroke="#fff" stroke-width="12" stroke-linecap="round"><path d="M280 150V10M200 84H310M14 40H310M220 10V150"/></g>
+      <rect x="134" y="31" width="34" height="18" rx="3" fill="#c7ccd6"/>
+      <text x="136" y="64" font-size="9" fill="#6f8fb3" lang="tr">köprü</text>
+      <g transform="translate(290 70)"><rect width="7" height="16" rx="2" fill="#373c45"/><circle cx="3.5" cy="4" r="1.8" fill="#f18a7a"/><circle cx="3.5" cy="8" r="1.8" fill="#f2c24c"/><circle cx="3.5" cy="12" r="1.8" fill="#7fcf8e"/></g>
+      <g transform="translate(290 46)"><rect width="7" height="16" rx="2" fill="#373c45"/><circle cx="3.5" cy="4" r="1.8" fill="#f18a7a"/><circle cx="3.5" cy="8" r="1.8" fill="#f2c24c"/><circle cx="3.5" cy="12" r="1.8" fill="#7fcf8e"/></g>
+      <rect id="finOtogar" x="40" y="6" width="60" height="24" rx="6" fill="#f7e3a8"/><text x="50" y="22" font-size="10" fill="#8a6418" lang="tr">Otogar</text>
+      <path id="finRoute" d="M280 140V40H70" fill="none" stroke="url(#gg)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <circle id="finWalker" cx="280" cy="140" r="7" fill="#373c45" stroke="#fff" stroke-width="2"/>
+    </svg>
+    <div class="row" style="justify-content:center"><button type="button" class="btn" id="chunkNext" data-ui>Дальше ▶</button><button type="button" class="btn-o" id="chunkSay" data-ui>Послушать целиком</button></div>
+    <p>Спросить — две фразы. Понять — шесть слов и три окончания. Море подождёт.</p>
+  </div>
+</section>
+
+</main>
+
+<nav class="sb" data-scrollbar aria-label="Маршрут урока">
+  <div class="sb__track"><span class="sb__fill"></span><span class="sb__walker" aria-hidden="true"></span><svg class="sb__pin" viewBox="0 0 16 22" aria-hidden="true"><path d="M8 21S1 13 1 8a7 7 0 0 1 14 0c0 5-7 13-7 13z" fill="#f3c552" stroke="#c98f25"/><circle cx="8" cy="8" r="2.6" fill="#fff"/></svg></div>
+</nav>
+
+<template data-achievement data-title="Дорога найдена" data-text="Теперь вы спросите дорогу и поймёте быстрый ответ — без навигатора.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#f3c552"/>
+    <circle cx="60" cy="60" r="45" fill="#fbfcff"/>
+    <path d="M24 60h72M60 24v72" stroke="#e3e7ee" stroke-width="8"/>
+    <path class="a-route" d="M36 92V60h28V36h20" fill="none" stroke="#e0a936" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0"/>
+    <circle cx="36" cy="92" r="5" fill="#fff" stroke="#373c45" stroke-width="3"/>
+    <g class="a-pin"><path d="M84 40s-9-10-9-16a9 9 0 0 1 18 0c0 6-9 16-9 16z" fill="#f3c552" stroke="#c98f25" stroke-width="1.5"/><circle cx="84" cy="24" r="3.4" fill="#fff"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = !reduce && window.gsap ? window.gsap : null;
+  const ST = window.ScrollTrigger;
+  if (window.gsap) {
+    const plugins = [window.ScrollTrigger, window.SplitText, window.MotionPathPlugin].filter(Boolean);
+    if (plugins.length) gsap.registerPlugin(...plugins);
+    if (ST) ST.config({ ignoreMobileResize: true });
+  }
+  const speak = (t) => window.AlternaKit && AlternaKit.speak(t);
+  const esc = (s) => s.replace(/"/g, '&quot;');
+
+  /* ---------- общие появления ---------- */
+  if (G && ST) {
+    $$('h2.split').forEach((h) => {
+      if (!window.SplitText) return;
+      const sp = new SplitText(h, { type: 'words' });
+      G.from(sp.words, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
+    });
+    ScrollTrigger.batch('.ph, .dl, .tip, .case, .fc', {
+      start: 'top 90%', once: true,
+      onEnter: (els) => G.fromTo(els, { y: 26, scale: .97 }, { y: 0, scale: 1, duration: .6, ease: 'power3.out', stagger: .06, overwrite: true }),
+    });
+    addEventListener('load', () => ST.refresh());
+    document.fonts && document.fonts.ready.then(() => ST.refresh());
+    addEventListener('orientationchange', () => ST.refresh());
+  }
+
+  /* ---------- hero: маршрут по шагам ---------- */
+  const HP = [[200, 300], [200, 160], [80, 160], [80, 60], [250, 60]];
+  const HS = [
+    { tr: 'Düz gidin', ru: 'Идите прямо' },
+    { tr: 'Işıklardan sola dönün', ru: 'На светофоре налево' },
+    { tr: 'İlk sağdan dönün', ru: 'На первом повороте направо' },
+    { tr: 'Sonra sağa dönün', ru: 'Потом направо' },
+    { tr: 'Kaleiçi sağda', ru: 'Калеичи справа' },
+  ];
+  const hsegs = $$('#heroMap .hseg');
+  const hw = $('#hwalker'), hpin = $('#hpin'), hkale = $('#hb-kale');
+  let hi = -1;
+  function heroGo(i, anim = true) {
+    i = Math.max(0, Math.min(HS.length - 1, i));
+    const back = i < hi; hi = i;
+    const s = HS[i];
+    $('#hcapTr').textContent = s.tr; $('#hcapRu').textContent = s.ru; $('#hcapN').textContent = `${i + 1}/${HS.length}`;
+    $('#hsay').dataset.say = s.tr;
+    $$('#hchips .chip').forEach((c) => c.setAttribute('aria-current', String(+c.dataset.step === i)));
+    const p = HP[Math.min(i + 1, HP.length - 1)];
+    hkale.classList.toggle('on', i === 4);
+    if (G && anim) {
+      hsegs.forEach((seg, k) => G.to(seg, { strokeDashoffset: k <= i ? 0 : 1, duration: back ? .3 : .9, ease: 'power2.inOut' }));
+      G.to(hw, { attr: { cx: p[0], cy: p[1] }, duration: back ? .3 : .9, ease: 'power2.inOut' });
+      G.fromTo('#hcap', { y: 10 }, { y: 0, duration: .45, ease: 'back.out(2.5)' });
+      if (i === 4) G.fromTo(hpin, { y: -40, scale: .6, transformOrigin: '50% 100%' }, { y: 0, scale: 1, duration: .8, delay: .5, ease: 'bounce.out' });
+      if (i === 1) G.fromTo('#hlight', { scale: 1 }, { scale: 1.35, transformOrigin: '50% 50%', duration: .25, yoyo: true, repeat: 3 });
+    } else {
+      hsegs.forEach((seg, k) => { seg.style.strokeDashoffset = k <= i ? 0 : 1; });
+      hw.setAttribute('cx', p[0]); hw.setAttribute('cy', p[1]);
+    }
+  }
+  $('#hnext').addEventListener('click', () => heroGo(hi >= HS.length - 1 ? 0 : hi + 1));
+  $('#hprev').addEventListener('click', () => heroGo(hi - 1));
+  $$('#hchips .chip').forEach((c) => c.addEventListener('click', () => { heroGo(+c.dataset.step); speak(HS[+c.dataset.step].tr); }));
+  heroGo(0, false);
+  if (G) {
+    G.from('.ticks li', { x: -24, duration: .6, stagger: .1, ease: 'power3.out', delay: .2 });
+    G.from('#heroCard', { y: 40, rotation: -2, duration: 1, ease: 'power3.out' });
+    G.to(hpin, { y: -6, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: { trigger: '#heroCard', toggleActions: 'play pause resume pause' } });
+  }
+
+  /* ---------- история: чат и таймлайн ---------- */
+  const bubs = $$('#chat .bub'), typing = $('#typing');
+  function playChat() {
+    if (!G) return;
+    const tl = G.timeline();
+    tl.set(bubs, { scale: .4, y: 16 }).set(typing, { scale: 1 });
+    tl.to(bubs[0], { scale: 1, y: 0, duration: .45, ease: 'back.out(2.5)' })
+      .fromTo(typing.children, { y: 0 }, { y: -4, duration: .2, yoyo: true, repeat: 5, stagger: .1 }, '+=.2')
+      .to(bubs[1], { scale: 1, y: 0, duration: .5, ease: 'back.out(2.5)' })
+      .to(bubs[2], { scale: 1, y: 0, duration: .45, ease: 'back.out(2.5)' }, '+=.7')
+      .to(bubs[3], { scale: 1, y: 0, duration: .45, ease: 'back.out(2.5)' }, '+=.6')
+      .to(bubs[4], { scale: 1, y: 0, duration: .45, ease: 'back.out(2.5)' }, '+=.8')
+      .fromTo('#wave', { x: -6 }, { x: 6, duration: .5, yoyo: true, repeat: 3, ease: 'sine.inOut' });
+  }
+  if (G && ST) ScrollTrigger.create({ trigger: '#chat', start: 'top 70%', once: true, onEnter: playChat });
+  $('#chatAgain').addEventListener('click', playChat);
+  if (G && ST) {
+    const vertical = !matchMedia('(min-width: 768px)').matches;
+    G.fromTo('.tl-fill', vertical ? { scaleY: 0 } : { scaleX: 0 }, { ...(vertical ? { scaleY: 1 } : { scaleX: 1 }), duration: 2.2, ease: 'power2.inOut', scrollTrigger: { trigger: '#tl', start: 'top 80%', once: true } });
+    G.from('.tl-i', { x: -14, y: 6, duration: .5, stagger: .5, ease: 'power2.out', scrollTrigger: { trigger: '#tl', start: 'top 80%', once: true } });
+  }
+  $$('.tl-i').forEach((b) => b.addEventListener('click', () => { if (G) G.fromTo(b, { scale: 1 }, { scale: 1.08, duration: .18, yoyo: true, repeat: 1 }); }));
+
+  /* ---------- спросить ---------- */
+  $$('#guess .opt').forEach((o) => o.addEventListener('click', () => {
+    const ok = o.dataset.ok === '1';
+    o.classList.add(ok ? 'ok' : 'no');
+    $('#guessFb').textContent = ok ? 'Да! Nerede — «где». Место + nerede = вопрос готов.' : 'Почти. Nerede — «где». Ошибиться тут не страшно.';
+    if (G) G.fromTo(o, { x: ok ? 0 : -6 }, { x: 0, scale: ok ? 1.08 : 1, duration: ok ? .35 : .4, ease: ok ? 'back.out(3)' : 'elastic.out(1, .3)', yoyo: ok, repeat: ok ? 1 : 0 });
+    if (ok) speak('Otogar nerede?');
+  }));
+  $('#askHide').addEventListener('click', (e) => {
+    const on = $('#askList').classList.toggle('hide-ru');
+    e.currentTarget.setAttribute('aria-pressed', String(on));
+    e.currentTarget.textContent = on ? 'Показать перевод' : 'Скрыть перевод';
+  });
+  $$('#askList .ph').forEach((p) => {
+    p.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); speak(p.dataset.say); } });
+    p.addEventListener('click', () => { if (G) G.fromTo(p.querySelector('.ico'), { scale: 1 }, { scale: 1.4, duration: .2, yoyo: true, repeat: 1, ease: 'power2.out' }); });
+  });
+
+  /* ---------- понять ответ: перекрёсток ---------- */
+  const D = [
+    { tr: 'Düz gidin', tx: 'дюз гидин', ru: 'Идите прямо', path: 'M150 272V30', b: 'rt', l: '0', nt: 'Усилить: <b lang="tr">dümdüz gidin</b> — прямо-прямо, никуда не сворачивая.' },
+    { tr: 'Sağa dönün', tx: 'саа дёнюн', ru: 'Поверните направо', path: 'M150 272V200H290', b: 'rb', l: '1', nt: '<b lang="tr">Sağa</b> — куда, направо. <b lang="tr">Sağda</b> — где, справа. Одна буква, другой смысл.' },
+    { tr: 'Sola dönün', tx: 'сола дёнюн', ru: 'Поверните налево', path: 'M150 272V200H10', b: 'lb', l: '2', nt: '<b lang="tr">Solda</b> — слева. Буква ğ в <b lang="tr">sağ</b> не читается: «саа», а не «саг».' },
+    { tr: 'İkinci soldan dönün', tx: 'икинджи солдан дёнюн', ru: 'Второй поворот налево', path: 'M150 272V100H10', b: 'lm', l: '3', nt: 'Буквально: «со второго левого поверните». <b lang="tr">İlk</b> — первый, <b lang="tr">ikinci</b> — второй.' },
+    { tr: 'Banka karşıda', tx: 'банка каршыда', ru: 'Банк напротив, через дорогу', path: 'M150 272V218', b: 'rm', l: '4', nt: '<b lang="tr">Karşıda</b> — напротив. Часто звучит с жестом рукой через улицу.' },
+    { tr: 'Geri dönün', tx: 'гэри дёнюн', ru: 'Вернитесь назад', path: 'M143 272V160C143 140 161 140 161 160V272', b: 'rb', l: '5', nt: 'Самая обидная фраза маршрута. Значит, вы прошли мимо.' },
+  ];
+  const dpath = $('#dpath'), dw = $('#dwalker');
+  let di = 0;
+  function drawDir(i, animate = true) {
+    di = i; const d = D[i];
+    $$('#tabs .tab').forEach((t, k) => t.setAttribute('aria-selected', String(k === i)));
+    $$('#scene .bld').forEach((b) => b.classList.remove('hl'));
+    $$('#scene .lbl').forEach((l) => l.classList.remove('on'));
+    $('#b-' + d.b).classList.add('hl'); $('#l-' + d.l).classList.add('on');
+    dpath.setAttribute('d', d.path);
+    const L = dpath.getTotalLength();
+    const put = (k) => { const pt = dpath.getPointAtLength(L * k); dw.setAttribute('cx', pt.x); dw.setAttribute('cy', pt.y); dpath.style.strokeDashoffset = 1 - k; };
+    if (G && animate) {
+      const pr = { k: 0 };
+      G.to(pr, { k: 1, duration: 1.5, ease: 'power2.inOut', onUpdate: () => put(pr.k) });
+      G.fromTo('#b-' + d.b, { scale: .9, transformOrigin: '50% 50%' }, { scale: 1, duration: .6, delay: 1, ease: 'back.out(3)' });
+    } else put(1);
+    $('#dirInfo').innerHTML = `<div class="k">${d.ru}</div><div class="big" lang="tr">${d.tr}</div><div class="tx" data-ui>${d.tx}</div><p class="nt">${d.nt}</p>
+      <div class="row"><button type="button" class="btn" data-say="${esc(d.tr)}" data-ui>Слушать</button><button type="button" class="btn-o" id="dirNext" data-ui>Следующее →</button></div>`;
+    $('#dirNext').addEventListener('click', () => drawDir((di + 1) % D.length));
+    if (G && animate) G.from('#dirInfo > *', { y: 12, duration: .45, stagger: .05, ease: 'power2.out' });
+  }
+  $$('#tabs .tab').forEach((t) => t.addEventListener('click', () => drawDir(+t.dataset.i)));
+  drawDir(0, false);
+  if (G && ST) ScrollTrigger.create({ trigger: '#scene', start: 'top 70%', once: true, onEnter: () => drawDir(0) });
+
+  /* ---------- лаборатория: конструктор ---------- */
+  const W = [
+    { f: ['otogara', 'otogarda', 'otogardan'], s: [['otogar', '', 'a'], ['otogar', '', 'da'], ['otogar', '', 'dan']], r: ['до автовокзала', 'на автовокзале', 'от автовокзала'],
+      why: ['Последняя гласная <b>a</b> → берём <b>a</b>. Слово на согласную — окончание сразу.', 'Гласная <b>a</b> → <b>-da</b>.', 'Гласная <b>a</b> → <b>-dan</b>.'] },
+    { f: ['müzeye', 'müzede', 'müzeden'], s: [['müze', 'y', 'e'], ['müze', '', 'de'], ['müze', '', 'den']], r: ['до музея', 'в музее', 'от музея'],
+      why: ['Слово кончается на гласную. Две гласные подряд турецкий не любит — вставляем буфер <b>y</b>.', 'Гласная <b>e</b> → <b>-de</b>. Буфер не нужен: окончание начинается с согласной.', 'Гласная <b>e</b> → <b>-den</b>.'] },
+    { f: ['eczaneye', 'eczanede', 'eczaneden'], s: [['eczane', 'y', 'e'], ['eczane', '', 'de'], ['eczane', '', 'den']], r: ['до аптеки', 'в аптеке', 'от аптеки'],
+      why: ['На гласную → буфер <b>y</b>.', 'Гласная <b>e</b> → <b>-de</b>.', 'Гласная <b>e</b> → <b>-den</b>.'] },
+    { f: ['durağa', 'durakta', 'duraktan'], s: [['durağ', '', 'a'], ['durak', '', 'ta'], ['durak', '', 'tan']], r: ['до остановки', 'на остановке', 'от остановки'],
+      why: ['Ловушка! <b>k</b> между гласными смягчается в <b>ğ</b>. Читается «дураа».', '<b>k</b> — глухая. После глухих d превращается в <b>t</b>.', 'Та же история: глухая k → <b>-tan</b>.'] },
+    { f: ['havalimanına', 'havalimanında', 'havalimanından'], s: [['havalimanı', 'n', 'a'], ['havalimanı', 'n', 'da'], ['havalimanı', 'n', 'dan']], r: ['до аэропорта', 'в аэропорту', 'от аэропорта'],
+      why: ['Составное слово: в конце уже есть окончание -ı. Поэтому буфер <b>n</b>, а не y.', 'Тот же буфер <b>n</b>.', 'Буфер <b>n</b>.'] },
+    { f: ['ışıklara', 'ışıklarda', 'ışıklardan'], s: [['ışıklar', '', 'a'], ['ışıklar', '', 'da'], ['ışıklar', '', 'dan']], r: ['до светофора', 'у светофора', 'на светофоре'],
+      why: ['Светофор турки говорят во множественном числе: «огни». Гласная <b>a</b> → <b>-a</b>.', 'Гласная <b>a</b> → <b>-da</b>.', 'Главная фраза урока: на светофоре направо.'] },
+    { f: ['köprüye', 'köprüde', 'köprüden'], s: [['köprü', 'y', 'e'], ['köprü', '', 'de'], ['köprü', '', 'den']], r: ['до моста', 'на мосту', 'после моста'],
+      why: ['Гласная <b>ü</b> → ряд e. На гласную → буфер <b>y</b>.', 'Гласная <b>ü</b> → <b>-de</b>.', 'Гласная <b>ü</b> → <b>-den</b>.'] },
+    { f: ['markete', 'markette', 'marketten'], s: [['market', '', 'e'], ['market', '', 'te'], ['market', '', 'ten']], r: ['до магазина', 'в магазине', 'от магазина'],
+      why: ['Последняя гласная <b>e</b>, не a → <b>-e</b>.', '<b>t</b> — глухая → <b>-te</b>. Получается две t.', 'Глухая t → <b>-ten</b>.'] },
+  ];
+  const EX = [
+    (f, r) => [`${cap(f)} nasıl gidebilirim?`, `Как дойти ${r}?`],
+    (f, r) => [`${cap(f)} bekliyorum.`, `Жду вас ${r}.`],
+    (f, r) => [`${cap(f)} sağa dönün.`, `${r[0].toUpperCase() + r.slice(1)} поверните направо.`],
+  ];
+  function cap(s) { return s.replace(/^./, (c) => (c === 'ı' ? 'I' : c === 'i' ? 'İ' : c.toLocaleUpperCase('tr'))); }
+  let gw = 3, gc = 0;
+  function renderG(animate = true) {
+    $$('#gwords .pill').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.w === gw)));
+    $$('#gcases .pill').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.c === gc)));
+    $$('.cases .case').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.c === gc)));
+    const x = W[gw], [r, b, s] = x.s[gc], f = x.f[gc];
+    $('#morph').innerHTML = `<span class="m root">${r}</span>` + (b ? `<span class="m op">+</span><span class="m buf">${b}</span>` : '') + `<span class="m op">+</span><span class="m sfx">${s}</span><span class="m op">=</span><span class="m res">${f}</span>`;
+    $('#why').innerHTML = x.why[gc];
+    const [t, ru] = EX[gc](f, x.r[gc]);
+    $('#gex').innerHTML = `<button type="button" class="spk" data-say="${esc(t)}" aria-label="Послушать"><svg><use href="#spk"/></svg></button><div><span class="tr" lang="tr">${t}</span><span>${ru}</span></div>`;
+    if (G && animate) {
+      G.from('#morph .m:not(.op)', { y: -30, rotationX: 75, transformPerspective: 400, duration: .55, stagger: .12, ease: 'back.out(2)' });
+      G.from('#morph .buf', { scale: .3, duration: .5, delay: .15, ease: 'elastic.out(1, .45)' });
+      G.from('#why', { y: 10, duration: .4, ease: 'power2.out' });
+    }
+  }
+  $$('#gwords .pill').forEach((b) => b.addEventListener('click', () => { gw = +b.dataset.w; renderG(); }));
+  $$('#gcases .pill').forEach((b) => b.addEventListener('click', () => { gc = +b.dataset.c; renderG(); }));
+  $$('.cases .case').forEach((b) => b.addEventListener('click', () => { gc = +b.dataset.c; renderG(); if (G) G.fromTo('#builder', { y: 0 }, { y: -6, duration: .15, yoyo: true, repeat: 1 }); }));
+  renderG(false);
+  if (G && ST) ScrollTrigger.create({ trigger: '#builder', start: 'top 70%', once: true, onEnter: () => renderG() });
+
+  /* ---------- диалог ---------- */
+  const lines = $$('#dlg .dl');
+  let li = -1;
+  function lineOn(i) {
+    lines.forEach((l, k) => l.classList.toggle('on', k === i));
+    if (G) G.fromTo(lines[i], { x: lines[i].classList.contains('me') ? 12 : -12 }, { x: 0, duration: .4, ease: 'back.out(2.5)' });
+  }
+  $('#dlgNext').addEventListener('click', () => { li = (li + 1) % lines.length; lineOn(li); speak(lines[li].dataset.say); });
+  lines.forEach((l, k) => l.addEventListener('click', () => { li = k; lineOn(k); }));
+  $('#dlgHide').addEventListener('click', (e) => {
+    const on = $('#dlg').classList.toggle('hide-ru');
+    e.currentTarget.setAttribute('aria-pressed', String(on));
+    e.currentTarget.textContent = on ? 'Показать перевод' : 'Скрыть перевод';
+  });
+  if (G && ST) ScrollTrigger.create({ trigger: '#dlg', start: 'top 60%', once: true, onEnter: () => { li = 0; lineOn(0); } });
+  $('#dlgThird').addEventListener('click', () => { li = 2; lines[2].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' }); lineOn(2); });
+
+  /* ---------- ловушки ---------- */
+  const SW = [
+    { html: '<b lang="tr">Sağa dönün</b> — поверните направо.' },
+    { html: '<b lang="tr">Market sağda</b> — магазин справа.' },
+  ];
+  $$('.sw button').forEach((b) => b.addEventListener('click', () => {
+    const k = +b.dataset.sw;
+    $$('.sw button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('#swv').innerHTML = SW[k].html;
+    speak(k ? 'Market sağda' : 'Sağa dönün');
+    if (G) {
+      G.to('.arrow-to', { x: k ? -6 : 0, opacity: k ? .3 : 1, duration: .4 });
+      G.to('.dot-at', { scale: k ? 1.6 : 1, transformOrigin: '50% 50%', duration: .5, ease: 'back.out(3)' });
+      G.from('#swv', { y: 8, duration: .35 });
+    }
+  }));
+  if (G && ST) {
+    const loop = (sel, vars) => G.to(sel, { ...vars, repeat: -1, scrollTrigger: { trigger: '.tips', toggleActions: 'play pause resume pause' } });
+    loop('.hand', { x: 6, yoyo: true, duration: .9, ease: 'sine.inOut' });
+    loop('.clock-m', { rotation: 360, svgOrigin: '22 22', duration: 12, ease: 'none' });
+    loop('.clock-h', { rotation: 360, svgOrigin: '22 22', duration: 3, ease: 'none' });
+    loop('.pp1', { y: -3, yoyo: true, duration: .8, ease: 'sine.inOut' });
+    loop('.pp2', { y: -3, yoyo: true, duration: .8, delay: .4, ease: 'sine.inOut' });
+    loop('.arrow-to', { x: 3, yoyo: true, duration: .7, ease: 'sine.inOut' });
+  }
+  $$('.say-chip').forEach((c) => c.addEventListener('click', () => { if (G) G.fromTo(c, { rotation: -4 }, { rotation: 0, duration: .5, ease: 'elastic.out(1, .45)' }); }));
+
+  /* ---------- шпаргалка: карточки ---------- */
+  const cards = $$('#fcg .fc');
+  function flip(c, on) {
+    c.classList.toggle('flip', on);
+    if (G) G.fromTo(c.querySelector('.fc-in'), { rotationY: on ? 0 : 180 }, { rotationY: on ? 180 : 0, duration: .8, ease: 'back.out(1.6)', onComplete: () => G.set(c.querySelector('.fc-in'), { clearProps: 'transform' }) });
+  }
+  cards.forEach((c) => c.addEventListener('click', () => {
+    const on = !c.classList.contains('flip');
+    flip(c, on);
+    if (on) speak(c.querySelector('.fc-b').dataset.say);
+  }));
+  if (G && ST) ScrollTrigger.create({ trigger: '#fcg', start: 'top 70%', once: true, onEnter: () => {
+    cards.forEach((c, i) => { G.delayedCall(.3 + i * .12, () => flip(c, true)); G.delayedCall(1.6 + i * .12, () => flip(c, false)); });
+  } });
+
+  /* ---------- финал: понять дедушку ---------- */
+  const CH = ['Автовокзал? Очень просто!', 'Идите прямо,', 'на втором светофоре налево,', 'перейдите мост,', 'потом справа. Это и есть otogar.'];
+  const CP = [[280, 140], [280, 84], [280, 40], [150, 40], [70, 40]];
+  const CK = [0, .18, .32, .74, 1];
+  const chunks = $$('#chunks .chunk');
+  let ci = 0;
+  function chunkGo(i) {
+    ci = i;
+    chunks.forEach((c, k) => c.classList.toggle('on', k <= i));
+    $('#chunkRu').textContent = CH[i];
+    if (G) {
+      G.to('#finRoute', { strokeDashoffset: 1 - CK[i], duration: .8, ease: 'power2.inOut' });
+      G.to('#finWalker', { attr: { cx: CP[i][0], cy: CP[i][1] }, duration: .8, ease: 'power2.inOut' });
+      G.fromTo(chunks[i], { y: -8 }, { y: 0, duration: .4, ease: 'back.out(3)' });
+      if (i === chunks.length - 1) G.fromTo('#finOtogar', { scale: 1 }, { scale: 1.15, transformOrigin: '50% 50%', duration: .3, yoyo: true, repeat: 1, delay: .7 });
+    } else {
+      $('#finRoute').style.strokeDashoffset = 1 - CK[i];
+      $('#finWalker').setAttribute('cx', CP[i][0]); $('#finWalker').setAttribute('cy', CP[i][1]);
+    }
+    speak(chunks[i].textContent);
+  }
+  $('#chunkNext').addEventListener('click', () => chunkGo(ci >= chunks.length - 1 ? 0 : ci + 1));
+  $('#chunkSay').addEventListener('click', () => speak(chunks.map((c) => c.textContent).join(' ')));
+  chunks.forEach((c, k) => { c.setAttribute('role', 'button'); c.tabIndex = 0; c.addEventListener('click', () => chunkGo(k)); });
+  chunks[0].classList.add('on');
+  if (G && ST) ScrollTrigger.create({ trigger: '#finMap', start: 'top 85%', once: true, onEnter: () => G.fromTo('#finWalker', { scale: .3, transformOrigin: '50% 50%' }, { scale: 1, duration: .7, ease: 'elastic.out(1, .45)' }) });
+
+  /* ---------- свой скроллбар: пешеход идёт к пину ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = bar.querySelector('.sb__track');
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const verticalBar = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'sb__mark'; b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = verticalBar() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (G) G.fromTo(m, { scale: 1.6 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout(); progress();
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.a-route'), { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: .8, ease: 'power2.inOut' }, .9)
+      .from(b.querySelector('.a-pin'), { y: -30, scale: .5, transformOrigin: '50% 100%', duration: .6, ease: 'bounce.out' }, 1.5);
+  });
+
+  /* ---------- нестандартное упражнение: квест по карте ---------- */
+  (async () => {
+    const EXID = 'lib.directions.ex5';
+    const root = document.querySelector(`a-exercise[ref="${EXID}"]`);
+    const { items } = await AlternaKit.exercise(EXID);
+    const qpath = $('#qpath', root), qw = $('#qwalker', root), pins = $('#qpins', root);
+    let qi = 0, correct = 0, locked = false, t0 = performance.now(), done = false;
+    AlternaTracker.start(EXID, 'practice');
+    const NS = 'http://www.w3.org/2000/svg';
+    function render() {
+      const q = items[qi]; locked = false; t0 = performance.now();
+      $('#qstep', root).textContent = `${qi + 1} / ${items.length}`;
+      $('#qinstr', root).textContent = q.instr;
+      $('#qfb', root).className = 'qfb'; $('#qfb', root).textContent = 'Выберите пин A, B или C.';
+      $('#qsay', root).dataset.say = q.instr;
+      $('#qstart', root).setAttribute('transform', `translate(${q.start[0]} ${q.start[1]})`);
+      qpath.setAttribute('d', 'M0 0'); qpath.style.strokeDashoffset = 1; qw.setAttribute('opacity', 0);
+      pins.replaceChildren(...q.pins.map((pt, i) => {
+        const g = document.createElementNS(NS, 'g');
+        g.setAttribute('class', 'qpin'); g.setAttribute('transform', `translate(${pt[0]} ${pt[1]})`);
+        g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', `Пин ${'ABC'[i]}`); g.dataset.i = i;
+        g.innerHTML = `<circle r="13" fill="url(#gb)" stroke="#c98f25" stroke-width="1.5"/><text y="4.5" text-anchor="middle" font-weight="700" font-size="12" fill="#5b4413">${'ABC'[i]}</text>`;
+        return g;
+      }));
+      if (G) G.from($$('.qpin', pins), { y: -24, duration: .6, stagger: .1, ease: 'bounce.out' });
+      if (G) G.to('#qbar', { scaleX: qi / items.length, duration: .5 });
+    }
+    function pick(i) {
+      if (locked || done) return;
+      locked = true;
+      const q = items[qi], ok = i === q.answer;
+      if (ok) correct++;
+      $$('.qpin', pins).forEach((g, k) => { g.classList.toggle('ok', k === q.answer); g.classList.toggle('bad', k === i && !ok); if (k !== q.answer && k !== i) g.classList.add('dim'); });
+      qpath.setAttribute('d', q.path); qw.setAttribute('opacity', 1);
+      const L = qpath.getTotalLength();
+      const put = (k) => { const pt = qpath.getPointAtLength(L * k); qw.setAttribute('cx', pt.x); qw.setAttribute('cy', pt.y); qpath.style.strokeDashoffset = 1 - k; };
+      if (G) { const pr = { k: 0 }; G.to(pr, { k: 1, duration: 1.2, ease: 'power1.inOut', onUpdate: () => put(pr.k) }); } else put(1);
+      const fb = $('#qfb', root);
+      fb.className = 'qfb ' + (ok ? 'good' : 'bad');
+      fb.innerHTML = `<b>${ok ? 'Evet! Дошли.' : 'Hayır. Вы оказались не там.'}</b> ${q.ru}<br><span class="small">${q.explanation}</span>`;
+      AlternaTracker.answer({ exerciseId: EXID, itemId: q.id, correct: ok, answer: 'ABC'[i], timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        qi++;
+        if (qi < items.length) render();
+        else {
+          done = true;
+          AlternaTracker.complete({ exerciseId: EXID, correct, total: items.length });
+          if (G) G.to('#qbar', { scaleX: 1, duration: .5 }); else $('#qbar').style.transform = 'scaleX(1)';
+          $('#qstep', root).textContent = 'готово';
+          $('#qinstr', root).textContent = `${correct} из ${items.length}`;
+          fb.className = 'qfb';
+          fb.innerHTML = correct === items.length ? '<b>Tebrikler!</b> Дедушка у магазина вам больше не страшен.' : '<b>Нормально для первого раза.</b> В первую неделю многие доходят до моря.';
+        }
+      }, reduce ? 300 : 2400);
+    }
+    pins.addEventListener('click', (e) => { const g = e.target.closest('.qpin'); if (g) pick(+g.dataset.i); });
+    pins.addEventListener('keydown', (e) => { const g = e.target.closest('.qpin'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); pick(+g.dataset.i); } });
+    $$('#qpick button', root).forEach((b) => b.addEventListener('click', () => pick(+b.dataset.p)));
+    root.addEventListener('keydown', (e) => { if (['1', '2', '3'].includes(e.key)) pick(+e.key - 1); });
+    $('#qsay', root).addEventListener('click', () => { if (G) G.fromTo('#qinstr', { y: 6 }, { y: 0, duration: .3 }); });
+    AlternaKit.registerSolver(EXID, async () => {
+      for (const q of items.slice(qi)) { pick(q.answer); await new Promise((r) => setTimeout(r, reduce ? 320 : 2450)); }
+    });
+    if (G && ST) ScrollTrigger.create({ trigger: '#qsvg', start: 'top 80%', once: true, onEnter: () => G.fromTo('#qstart circle', { scale: .3, transformOrigin: '50% 50%' }, { scale: 1, duration: .7, ease: 'elastic.out(1, .45)' }) });
+    render();
+  })();
+});
+</script>
+</body>
+</html>
