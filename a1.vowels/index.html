@@ -1,0 +1,755 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.vowels">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Гласные: твёрдые и мягкие, узкие и широкие</title>
+<link rel="preload" href="media/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  @font-face { font-family: 'Onest'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(media/onest-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: 'Onest'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(media/onest-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Onest'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(media/onest-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  :root {
+    color-scheme: light;
+    --lime: #27eb62;
+    --lime-deep: #12a144;
+    --amber: #ffcc00;
+    --ink: #0b0b0b;
+    --paper: #ffffff;
+    --fog: #f3f3f1;
+    --muted: #6e736c;
+    --grass-a: #5cb432;
+    --grass-b: #4fa22b;
+    --ak-bg: #ffffff;
+    --ak-surface: var(--fog);
+    --ak-ink: var(--ink);
+    --ak-muted: var(--muted);
+    --ak-line: #e4e5e0;
+    --ak-accent: var(--lime);
+    --ak-accent-ink: var(--ink);
+    --ak-accent-soft: #e1fbe8;
+    --ak-good: var(--lime-deep);
+    --ak-good-soft: #e1fbe8;
+    --ak-bad: #e0483e;
+    --ak-bad-soft: #fdebea;
+    --ak-radius: 24px;
+    --ak-radius-sm: 16px;
+    --ak-font: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--paper); overflow-x: clip; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--ak-text)/1.55 var(--ak-font); overflow-x: clip; }
+  main { padding: 0 16px calc(56px + env(safe-area-inset-bottom)); }
+  section { max-width: 760px; margin: 0 auto; padding: clamp(44px, 9vw, 88px) 0 0; }
+  h1, h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; margin: 0 0 16px; }
+  h1 { font-size: clamp(30px, 8.6vw, 72px); line-height: 1; }
+  h2 { font-size: clamp(24px, 6.4vw, 42px); line-height: 1.06; }
+  p { margin: 0 0 10px; max-width: 62ch; }
+  b, strong { font-weight: 700; }
+  [lang="tr"] { font-weight: 650; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+  /* метка-точка, как «● About Us» */
+  .vw-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 12px; }
+  .vw-tag::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--lime); box-shadow: inset -2px -2px 0 rgba(0, 0, 0, .12); }
+  .vw-tag--amber::before { background: var(--amber); }
+  .vw-tag--ink::before { background: var(--ink); }
+  .vw-card { background: var(--fog); border-radius: 32px; padding: clamp(18px, 4.5vw, 32px); }
+  .vw-punch { font-weight: 700; font-size: 1.12em; margin-top: 16px; }
+
+  /* ---------- мячи: цвет = твёрдая/мягкая, размер = широкая/узкая ---------- */
+  .vw-ball {
+    --s: 58px;
+    width: var(--s); height: var(--s); flex: none; border-radius: 50%; border: 0; padding: 0;
+    display: inline-grid; place-items: center; font-weight: 750; font-size: calc(var(--s) * .44); line-height: 1;
+    background:
+      radial-gradient(circle at 30% 26%, rgba(255, 255, 255, .55), transparent 34%),
+      radial-gradient(circle, rgba(0, 0, 0, .07) 1.1px, transparent 1.7px) 0 0 / 7px 7px,
+      radial-gradient(circle at 50% 50%, #fff 0, #ececE8 72%, #d3d4ce 100%);
+    color: var(--ink); box-shadow: 0 10px 22px rgba(0, 0, 0, .12), inset -4px -6px 10px rgba(0, 0, 0, .08);
+    cursor: pointer;
+  }
+  .vw-ball--k {
+    background:
+      radial-gradient(circle at 30% 26%, rgba(255, 255, 255, .28), transparent 34%),
+      radial-gradient(circle, rgba(255, 255, 255, .08) 1.1px, transparent 1.7px) 0 0 / 7px 7px,
+      radial-gradient(circle at 50% 50%, #3a3a38 0, #141414 70%, #000 100%);
+    color: #fff;
+  }
+  .vw-ball--d { --s: 44px; }
+  @media (min-width: 768px) { .vw-ball { --s: 68px; } .vw-ball--d { --s: 50px; } }
+
+  /* ---------- первый экран: газон ---------- */
+  .vw-hero { max-width: 1100px; margin: 12px auto 0; padding: calc(10px + env(safe-area-inset-top)) 0 0; }
+  .vw-lawn {
+    position: relative; border-radius: 36px; overflow: hidden; padding: clamp(14px, 4vw, 40px);
+    background: repeating-linear-gradient(90deg, var(--grass-a) 0 12.5%, var(--grass-b) 12.5% 25%);
+  }
+  .vw-lawn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255, 255, 255, .18), transparent 45%); pointer-events: none; }
+  .vw-screen { position: relative; z-index: 1; background: var(--paper); border-radius: 26px; padding: clamp(18px, 5vw, 44px) clamp(16px, 5vw, 48px) clamp(20px, 5vw, 40px); text-align: center; }
+  .vw-nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: clamp(18px, 5vw, 36px); }
+  .vw-logo { display: inline-flex; align-items: center; gap: 6px; font-weight: 750; font-size: 15px; }
+  .vw-logo i { width: 10px; height: 10px; border-radius: 50%; background: var(--ink); box-shadow: 8px -5px 0 -1px var(--lime), 8px 5px 0 -1px var(--amber); margin-right: 8px; }
+  .vw-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: 999px; background: var(--lime); font-size: 13px; font-weight: 650; }
+  .vw-chip--amber { background: var(--amber); }
+  .vw-hero h1 span { display: inline-block; animation: vw-rise .8s cubic-bezier(.2, 1.4, .4, 1) both; }
+  .vw-hero h1 span:nth-child(2) { animation-delay: .08s; }
+  .vw-hero h1 span:nth-child(3) { animation-delay: .16s; }
+  .vw-o { display: inline-grid !important; place-items: center; width: .95em; height: .95em; border-radius: 50%; background: var(--amber); vertical-align: -.08em; }
+  .vw-sub { color: var(--muted); margin: 0 auto 18px; max-width: 36ch; font-size: .95em; }
+  .vw-hero__balls { display: grid; grid-template-columns: repeat(4, auto); justify-content: center; align-items: center; justify-items: center; gap: 8px clamp(6px, 2vw, 12px); margin-top: 18px; }
+  @media (min-width: 768px) { .vw-hero__balls { grid-template-columns: repeat(8, auto); } }
+  .vw-hero__balls .vw-ball { animation: vw-drop .9s cubic-bezier(.3, 1.6, .5, 1) both; }
+  .vw-hero__balls .vw-ball:nth-child(2) { animation-delay: .06s; } .vw-hero__balls .vw-ball:nth-child(3) { animation-delay: .12s; }
+  .vw-hero__balls .vw-ball:nth-child(4) { animation-delay: .18s; } .vw-hero__balls .vw-ball:nth-child(5) { animation-delay: .24s; }
+  .vw-hero__balls .vw-ball:nth-child(6) { animation-delay: .3s; } .vw-hero__balls .vw-ball:nth-child(7) { animation-delay: .36s; }
+  .vw-hero__balls .vw-ball:nth-child(8) { animation-delay: .42s; }
+  @keyframes vw-rise { from { transform: translateY(55%) rotate(5deg); } to { transform: none; } }
+  @keyframes vw-drop { from { transform: translateY(-60px) scale(.6); } 60% { transform: translateY(6px); } to { transform: none; } }
+
+  /* лента пилюль */
+  .vw-marquee { position: relative; z-index: 1; margin-top: 16px; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .vw-marquee__track { display: flex; gap: 10px; width: max-content; animation: vw-slide 32s linear infinite; }
+  .vw-marquee.is-off .vw-marquee__track { animation-play-state: paused; }
+  @keyframes vw-slide { to { transform: translateX(calc(-50% - 5px)); } }
+  .vw-pill { display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 22px; border-radius: 999px; background: var(--paper); font-weight: 700; font-size: 18px; white-space: nowrap; }
+  .vw-pill::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--lime); }
+  .vw-pill small { font-weight: 400; color: var(--muted); font-size: 15px; }
+  .vw-pill--ink { background: var(--ink); color: #fff; } .vw-pill--ink small { color: #b9bcb6; }
+  .vw-pill--lime { background: var(--lime); } .vw-pill--lime::before { background: var(--ink); } .vw-pill--lime small { color: #155c2b; }
+  .vw-pill--amber { background: var(--amber); } .vw-pill--amber::before { background: var(--ink); } .vw-pill--amber small { color: #6b5600; }
+
+  /* маршрут */
+  .vw-route { max-width: 760px; margin: 18px auto 0; display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: none; }
+  .vw-route::-webkit-scrollbar { display: none; }
+  .vw-route a { flex: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--fog); color: var(--ink); text-decoration: none; font-size: 15px; font-weight: 600; }
+  .vw-route a b { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; font-size: 12px; }
+
+  /* история */
+  .vw-story p { font-size: 1.06em; margin-bottom: 6px; }
+  .vw-say-pair { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+
+  /* «сначала угадай» */
+  .vw-guess { margin: 16px 0; padding: 16px; border-radius: 24px; border: 2px dashed #d9dad4; }
+  .vw-guess p { margin-bottom: 10px; font-weight: 600; }
+  .vw-guess__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .vw-guess__opts button { min-height: 48px; min-width: 64px; padding: 0 18px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; font-weight: 700; font-size: 18px; cursor: pointer; }
+  .vw-guess__opts button.is-right { background: var(--lime); border-color: var(--lime); }
+  .vw-guess__opts button.is-wrong { background: var(--ak-bad-soft); border-color: var(--ak-bad); }
+  .vw-guess__out { min-height: 1.5em; margin: 10px 0 0; color: var(--muted); font-weight: 400 !important; }
+
+  /* ---------- пары ---------- */
+  .vw-pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 18px 0; }
+  @media (min-width: 768px) { .vw-pairs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .vw-pair { position: relative; display: flex; align-items: center; justify-content: center; gap: 4px; min-height: 104px; border-radius: 26px; background: var(--fog); }
+  .vw-pair__rail { width: 18px; height: 2px; background: repeating-linear-gradient(90deg, var(--ink) 0 4px, transparent 4px 7px); opacity: .4; }
+  .vw-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; color: var(--muted); margin: -4px 0 14px; }
+  .vw-legend span { display: inline-flex; align-items: center; gap: 8px; }
+  .vw-legend .vw-ball { --s: 22px; cursor: default; box-shadow: none; }
+  .vw-legend .vw-ball--d { --s: 15px; }
+  .vw-mnemo { background: var(--amber); border-radius: 28px; padding: 18px 20px; margin: 16px 0; }
+  .vw-mnemo p { margin: 0; }
+  .vw-again { border: 0; background: none; min-height: 44px; padding: 0 4px; font-weight: 650; color: var(--lime-deep); cursor: pointer; }
+
+  /* ---------- рот ---------- */
+  .vw-mouth { display: grid; gap: 14px; align-items: center; }
+  @media (min-width: 768px) { .vw-mouth { grid-template-columns: 1fr 1.1fr; } }
+  .vw-mouth svg { width: 100%; max-width: 300px; height: auto; margin: 0 auto; display: block; }
+  .vw-mouth__keys { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; justify-items: center; align-items: center; }
+  .vw-mouth__keys .vw-ball[aria-pressed="true"] { outline: 3px solid var(--lime); outline-offset: 3px; }
+  .vw-mouth__out { text-align: center; font-weight: 650; min-height: 1.6em; margin: 6px 0 0; }
+  .vw-formula { display: grid; gap: 8px; margin: 16px 0; }
+  .vw-formula div { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; padding: 12px 16px; border-radius: 999px; background: var(--fog); }
+  .vw-formula b { min-width: 86px; }
+  .vw-formula span[lang] { font-size: 1.15em; letter-spacing: .12em; }
+
+  /* ---------- лаборатория: поле на четыре лунки ---------- */
+  .vw-field { display: grid; grid-template-columns: 56px repeat(2, minmax(0, 1fr)); gap: 8px; padding: 10px; border-radius: 32px; background: repeating-linear-gradient(90deg, var(--grass-a) 0 25%, var(--grass-b) 25% 50%); }
+  .vw-field__h { display: grid; place-items: center; min-height: 34px; color: #fff; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; text-align: center; }
+  .vw-field__h--row { writing-mode: vertical-rl; transform: rotate(180deg); min-height: 0; }
+  .vw-hole { position: relative; display: grid; place-items: center; align-content: center; gap: 6px; min-height: 128px; border-radius: 24px; background: rgba(255, 255, 255, .16); border: 2px solid rgba(255, 255, 255, .28); padding: 10px 6px; }
+  .vw-hole__cup { width: 54px; height: 18px; border-radius: 50%; background: #13240c; box-shadow: inset 0 4px 6px rgba(0, 0, 0, .6); }
+  .vw-hole__flag { position: absolute; top: 10px; right: 12px; width: 2px; height: 30px; background: #fff; }
+  .vw-hole__flag::after { content: ''; position: absolute; left: 2px; top: 0; border-left: 14px solid var(--amber); border-top: 6px solid transparent; border-bottom: 6px solid transparent; }
+  .vw-hole__balls { display: flex; gap: 6px; align-items: center; min-height: 50px; }
+  .vw-hole__balls .vw-ball { --s: 42px; }
+  .vw-hole__balls .vw-ball--d { --s: 32px; }
+  .vw-hole.is-hit { background: rgba(255, 255, 255, .42); border-color: #fff; }
+  .vw-words { display: flex; gap: 8px; overflow-x: auto; padding: 14px 2px 6px; scrollbar-width: none; }
+  .vw-words::-webkit-scrollbar { display: none; }
+  .vw-words button { flex: none; min-height: 48px; padding: 0 18px; border-radius: 999px; border: 0; background: var(--fog); font-weight: 700; font-size: 18px; cursor: pointer; }
+  .vw-words button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .vw-tee { display: flex; justify-content: center; gap: 2px; min-height: 64px; align-items: center; font-size: clamp(34px, 9vw, 52px); font-weight: 800; letter-spacing: .02em; margin: 6px 0; }
+  .vw-tee span { display: inline-block; padding: 0 2px; border-radius: 12px; }
+  .vw-tee .is-vowel { text-decoration: underline; text-decoration-thickness: 4px; text-underline-offset: 8px; text-decoration-color: #c9cac4; }
+  .vw-tee .is-last { background: var(--amber); text-decoration: none; }
+  .vw-data { background: var(--ink); color: #fff; border-radius: 28px; padding: 18px 20px; margin-top: 12px; }
+  .vw-data__row { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-bottom: 1px solid #2a2a2a; font-size: 15px; }
+  .vw-data__row:last-child { border-bottom: 0; }
+  .vw-data__row span { color: #a7aaa4; }
+  .vw-data__row b { color: #fff; text-align: right; }
+  .vw-data__row b.is-amber { color: var(--amber); }
+  .vw-fly { position: fixed; left: 0; top: 0; z-index: 30; pointer-events: none; }
+
+  /* ---------- сцена: паром ---------- */
+  .vw-chat { display: grid; gap: 10px; margin: 16px 0; }
+  .vw-msg { max-width: 86%; padding: 12px 16px; border-radius: 22px 22px 22px 8px; background: var(--fog); }
+  .vw-msg--me { justify-self: end; background: var(--lime); border-radius: 22px 22px 8px 22px; }
+  .vw-msg small { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+  .vw-msg--me small { color: #155c2b; }
+  .vw-v { display: inline-block; min-width: 1.05em; text-align: center; border-radius: 6px; padding: 0 1px; }
+  .vw-v--k { background: var(--ink); color: #fff; }
+  .vw-v--i { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+
+  /* ---------- ловушки ---------- */
+  .vw-traps { display: grid; gap: 12px; }
+  @media (min-width: 768px) { .vw-traps { grid-template-columns: 1fr 1fr; } }
+  .vw-trap { position: relative; border-radius: 30px; padding: 20px 20px 22px; background: var(--ink); color: #fff; }
+  .vw-trap:nth-child(even) { background: var(--amber); color: var(--ink); }
+  .vw-trap h3 { margin: 0 44px 10px 0; font-size: 19px; line-height: 1.25; font-weight: 700; }
+  .vw-trap p { margin: 0; color: inherit; opacity: .92; }
+  .vw-trap__n { position: absolute; top: 18px; right: 20px; font-weight: 700; font-size: 18px; }
+  .vw-trap .ak-say__btn { background: rgba(255, 255, 255, .16); color: inherit; }
+  .vw-trap:nth-child(even) .ak-say__btn { background: rgba(0, 0, 0, .1); }
+
+  /* ---------- нестандартное упражнение: мини-гольф ---------- */
+  .vw-golf__tee { display: grid; justify-items: center; gap: 2px; margin: 14px 0 10px; }
+  .vw-golf__word { font-size: clamp(34px, 9vw, 48px); font-weight: 800; line-height: 1.1; }
+  .vw-golf__ru { color: var(--muted); font-size: 15px; }
+  .vw-golf__ball { width: 22px; height: 22px; border-radius: 50%; margin-top: 6px; background: radial-gradient(circle at 32% 28%, #fff, #dcdcd6 75%); box-shadow: 0 4px 10px rgba(0, 0, 0, .18); }
+  .vw-green { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 8px; border-radius: 28px; background: repeating-linear-gradient(90deg, var(--grass-a) 0 25%, var(--grass-b) 25% 50%); }
+  .vw-green button { position: relative; display: grid; justify-items: center; align-content: center; gap: 6px; min-height: 104px; padding: 10px 6px; border-radius: 22px; border: 2px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .15); color: #fff; font-weight: 700; font-size: 15px; line-height: 1.2; cursor: pointer; }
+  .vw-green button small { font-weight: 500; opacity: .9; }
+  .vw-green button .vw-hole__cup { width: 44px; height: 15px; }
+  .vw-green button .vw-key { position: absolute; top: 8px; left: 10px; font-size: 12px; opacity: .8; }
+  .vw-green button.is-hit { background: rgba(255, 255, 255, .45); border-color: #fff; color: var(--ink); }
+  .vw-green button.is-miss { background: rgba(224, 72, 62, .55); border-color: #fff; }
+  .vw-golf__status { min-height: 3em; margin: 12px 0 0; color: var(--muted); }
+
+  /* ---------- шпаргалка ---------- */
+  .vw-cheat { background: var(--ink); color: #fff; border-radius: 34px; padding: clamp(18px, 5vw, 36px); }
+  .vw-cheat .vw-tag { color: #a7aaa4; }
+  .vw-mini { display: grid; grid-template-columns: auto repeat(2, minmax(0, 1fr)); gap: 6px; margin: 6px 0 18px; }
+  .vw-mini div { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; border-radius: 18px; background: repeating-linear-gradient(90deg, var(--grass-a) 0 50%, var(--grass-b) 50% 100%); font-weight: 700; font-size: 14px; }
+  .vw-mini .vw-mini__h { background: none; color: #a7aaa4; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: .04em; min-height: 30px; }
+  .vw-mini .vw-ball { --s: 38px; cursor: default; }
+  .vw-mini .vw-ball--d { --s: 28px; }
+  .vw-rules { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .vw-rules li { padding: 12px 16px; border-radius: 18px; background: #1d1d1c; }
+  .vw-rules li b { color: var(--lime); }
+  .vw-final { margin-top: 26px; }
+
+  @media (hover: hover) {
+    .vw-ball:hover { scale: 1.07; }
+    .vw-route a:hover, .vw-words button:hover { background: #e6e7e2; }
+    .vw-green button:hover { background: rgba(255, 255, 255, .26); }
+  }
+  @media (min-width: 1024px) { section { padding-top: 96px; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="vw-hero">
+  <div class="vw-lawn">
+    <div class="vw-screen">
+      <div class="vw-nav">
+        <span class="vw-logo"><i></i>A1 · Стамбул</span>
+        <span class="vw-chip">6 минут</span>
+      </div>
+      <h1><span lang="tr">G<span class="vw-o">Ö</span>L</span> <span>или</span> <span lang="tr">GOL?</span></h1>
+      <p class="vw-sub">Восемь турецких гласных. Две точки, которые меняют всё.</p>
+      <div class="vw-hero__balls" aria-hidden="true">
+        <span class="vw-ball vw-ball--k">a</span><span class="vw-ball">e</span>
+        <span class="vw-ball vw-ball--k vw-ball--d">ı</span><span class="vw-ball vw-ball--d">i</span>
+        <span class="vw-ball vw-ball--k">o</span><span class="vw-ball">ö</span>
+        <span class="vw-ball vw-ball--k vw-ball--d">u</span><span class="vw-ball vw-ball--d">ü</span>
+      </div>
+    </div>
+    <div class="vw-marquee" aria-hidden="true">
+      <div class="vw-marquee__track">
+        <span class="vw-pill vw-pill--ink">göl <small>озеро</small></span>
+        <span class="vw-pill">gol <small>гол</small></span>
+        <span class="vw-pill vw-pill--lime">kır <small>загород</small></span>
+        <span class="vw-pill vw-pill--amber">kir <small>грязь</small></span>
+        <span class="vw-pill">çay <small>чай</small></span>
+        <span class="vw-pill vw-pill--ink">köprü <small>мост</small></span>
+        <span class="vw-pill vw-pill--lime">deniz <small>море</small></span>
+        <span class="vw-pill">simit <small>бублик</small></span>
+        <span class="vw-pill vw-pill--ink">göl <small>озеро</small></span>
+        <span class="vw-pill">gol <small>гол</small></span>
+        <span class="vw-pill vw-pill--lime">kır <small>загород</small></span>
+        <span class="vw-pill vw-pill--amber">kir <small>грязь</small></span>
+        <span class="vw-pill">çay <small>чай</small></span>
+        <span class="vw-pill vw-pill--ink">köprü <small>мост</small></span>
+        <span class="vw-pill vw-pill--lime">deniz <small>море</small></span>
+        <span class="vw-pill">simit <small>бублик</small></span>
+      </div>
+    </div>
+  </div>
+  <nav class="vw-route" aria-label="Маршрут урока">
+    <a href="#pairs"><b>1</b>Пары</a>
+    <a href="#width"><b>2</b>Рот</a>
+    <a href="#lab"><b>3</b>Лунки</a>
+    <a href="#traps"><b>4</b>Ловушки</a>
+    <a href="#practice"><b>5</b>Практика</a>
+    <a href="#cheat"><b>6</b>Шпаргалка</a>
+  </nav>
+</header>
+
+<main>
+
+  <section id="story" class="vw-story" data-section="story" data-words="45">
+    <span class="vw-tag">История · Кадыкёй, стадион</span>
+    <p>Кадыкёй. Стадион. Наши забивают.</p>
+    <p>Вскакиваешь и орёшь, <b lang="tr">GÖL!</b></p>
+    <p>Сосед смотрит. Долго. Говорит, <span lang="tr">göl?</span></p>
+    <p>Говоришь, ну да. <span lang="tr">Göl.</span></p>
+    <p>Он говорит, <span lang="tr">göl</span> это озеро. А гол это <span lang="tr">gol</span>.</p>
+    <div class="vw-say-pair">
+      <a-word tr="göl" ru="озеро"></a-word>
+      <a-word tr="gol" ru="гол"></a-word>
+    </div>
+    <p class="vw-punch">Две точки над o. Озеро вместо гола.</p>
+    <p>Почему o и ö звучат по-разному? Сейчас разложим восемь турецких гласных по четырём лункам. Шесть минут, кстати.</p>
+  </section>
+
+  <section id="pairs" data-section="pairs" data-words="82">
+    <span class="vw-tag">Остановка 1 · твёрдые и мягкие</span>
+    <h2>У каждой гласной есть двойник</h2>
+
+    <div class="vw-guess" data-guess>
+      <p>Сначала угадай. Кто пара для <b lang="tr">o</b>?</p>
+      <div class="vw-guess__opts">
+        <button type="button" lang="tr" data-pick="a">a</button>
+        <button type="button" lang="tr" data-pick="ö" data-right>ö</button>
+        <button type="button" lang="tr" data-pick="u">u</button>
+      </div>
+      <p class="vw-guess__out" aria-live="polite" data-yes="Да. Та же o, только язык уехал вперёд." data-no="Почти. Смотри на точки. Пара для o это ö."></p>
+    </div>
+
+    <div class="vw-pairs" data-pairs>
+      <div class="vw-pair"><button type="button" class="vw-ball vw-ball--k" data-say="a" aria-label="a, твёрдая">a</button><span class="vw-pair__rail"></span><button type="button" class="vw-ball" data-say="e" data-twin aria-label="e, мягкая">e</button></div>
+      <div class="vw-pair"><button type="button" class="vw-ball vw-ball--k vw-ball--d" data-say="ı" aria-label="ı, твёрдая">ı</button><span class="vw-pair__rail"></span><button type="button" class="vw-ball vw-ball--d" data-say="i" data-twin aria-label="i, мягкая">i</button></div>
+      <div class="vw-pair"><button type="button" class="vw-ball vw-ball--k" data-say="o" aria-label="o, твёрдая">o</button><span class="vw-pair__rail"></span><button type="button" class="vw-ball" data-say="ö" data-twin aria-label="ö, мягкая">ö</button></div>
+      <div class="vw-pair"><button type="button" class="vw-ball vw-ball--k vw-ball--d" data-say="u" aria-label="u, твёрдая">u</button><span class="vw-pair__rail"></span><button type="button" class="vw-ball vw-ball--d" data-say="ü" data-twin aria-label="ü, мягкая">ü</button></div>
+    </div>
+    <div class="vw-legend">
+      <span><i class="vw-ball vw-ball--k"></i>чёрный мяч: твёрдая</span>
+      <span><i class="vw-ball"></i>белый мяч: мягкая</span>
+      <button type="button" class="vw-again" data-replay-pairs>↻ ещё раз</button>
+    </div>
+
+    <p>Гласных восемь. Пар четыре. Слева твёрдая, справа её мягкий двойник. Нажми мяч, послушай.</p>
+    <p>Скажи a, потом e. Язык поехал вперёд, к зубам. С остальными парами то же самое.</p>
+    <p>Турки, кстати, зовут твёрдые <span lang="tr">kalın</span>, толстые. А мягкие <span lang="tr">ince</span>, тонкие. Честно.</p>
+    <p>Русский тоже так умеет. А и я, у и ю.</p>
+    <div class="vw-mnemo">
+      <p><b>Нет точек, значит твёрдая. Есть точки, значит мягкая.</b></p>
+      <p>Исключение одно: <b lang="tr">e</b>. Точек нет, а она мягкая.</p>
+    </div>
+  </section>
+
+  <section id="width" data-section="width" data-words="51">
+    <span class="vw-tag">Остановка 2 · узкие и широкие</span>
+    <h2>Палец на подбородок</h2>
+    <p>Серьёзно. Положи палец на подбородок.</p>
+    <p>Говоришь <b lang="tr">a</b>. Челюсть уехала вниз. Рот открыт широко.</p>
+    <p>Говоришь <b lang="tr">ı</b>. Челюсть на месте. Рот почти закрыт.</p>
+
+    <div class="vw-card vw-mouth">
+      <svg viewBox="0 0 300 200" role="img" aria-label="Рот: открывается широко или почти закрыт">
+        <circle cx="150" cy="96" r="92" fill="#fff"/>
+        <ellipse data-lips cx="150" cy="104" rx="62" ry="34" fill="#e2564b"/>
+        <ellipse data-mouth cx="150" cy="104" rx="50" ry="24" fill="#2a0f0d"/>
+        <rect data-teeth x="112" y="80" width="76" height="10" rx="4" fill="#fff"/>
+        <g data-jaw>
+          <path d="M70 150 Q150 196 230 150" fill="none" stroke="#0b0b0b" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="150" cy="176" r="9" fill="#ffcc00" stroke="#0b0b0b" stroke-width="3"/>
+        </g>
+      </svg>
+      <div>
+        <div class="vw-mouth__keys" data-mouth-keys>
+          <button type="button" class="vw-ball vw-ball--k" data-v="a">a</button>
+          <button type="button" class="vw-ball" data-v="e">e</button>
+          <button type="button" class="vw-ball vw-ball--k" data-v="o">o</button>
+          <button type="button" class="vw-ball" data-v="ö">ö</button>
+          <button type="button" class="vw-ball vw-ball--k vw-ball--d" data-v="ı">ı</button>
+          <button type="button" class="vw-ball vw-ball--d" data-v="i">i</button>
+          <button type="button" class="vw-ball vw-ball--k vw-ball--d" data-v="u">u</button>
+          <button type="button" class="vw-ball vw-ball--d" data-v="ü">ü</button>
+        </div>
+        <p class="vw-mouth__out" aria-live="polite" data-mouth-out>Нажми мяч. Рот покажет.</p>
+      </div>
+    </div>
+
+    <div class="vw-formula">
+      <div><b>Широкие</b><span lang="tr">a e o ö</span><small>челюсть вниз</small></div>
+      <div><b>Узкие</b><span lang="tr">ı i u ü</span><small>челюсть на месте</small></div>
+    </div>
+    <p>Поэтому широкие мячи у нас большие, а узкие маленькие.</p>
+
+    <div class="vw-guess" data-guess>
+      <p>Проверь себя. <b lang="tr">u</b> узкая или широкая?</p>
+      <div class="vw-guess__opts">
+        <button type="button" data-pick="dar" data-right>узкая</button>
+        <button type="button" data-pick="genis">широкая</button>
+      </div>
+      <p class="vw-guess__out" aria-live="polite" data-yes="Узкая. Челюсть стоит, губы трубочкой." data-no="Проверь пальцем. На u челюсть не двигается. Узкая."></p>
+    </div>
+  </section>
+
+  <section id="lab" data-section="lab" data-words="64">
+    <span class="vw-tag vw-tag--amber">Остановка 3 · лаборатория</span>
+    <h2>Четыре лунки. Восемь мячей</h2>
+    <p>Два вопроса к любой гласной. Твёрдая или мягкая? Узкая или широкая? Два ответа дают адрес лунки.</p>
+    <p>Нажми слово. Его последняя гласная полетит в свою лунку. Сначала угадай, в какую.</p>
+
+    <div class="vw-field" data-field>
+      <span></span><span class="vw-field__h">твёрдые</span><span class="vw-field__h">мягкие</span>
+      <span class="vw-field__h vw-field__h--row">широкие</span>
+      <div class="vw-hole" data-hole="k-g"><span class="vw-hole__flag"></span><div class="vw-hole__balls"><button type="button" class="vw-ball vw-ball--k" data-say="a">a</button><button type="button" class="vw-ball vw-ball--k" data-say="o">o</button></div><span class="vw-hole__cup"></span></div>
+      <div class="vw-hole" data-hole="i-g"><span class="vw-hole__flag"></span><div class="vw-hole__balls"><button type="button" class="vw-ball" data-say="e">e</button><button type="button" class="vw-ball" data-say="ö">ö</button></div><span class="vw-hole__cup"></span></div>
+      <span class="vw-field__h vw-field__h--row">узкие</span>
+      <div class="vw-hole" data-hole="k-d"><span class="vw-hole__flag"></span><div class="vw-hole__balls"><button type="button" class="vw-ball vw-ball--k vw-ball--d" data-say="ı">ı</button><button type="button" class="vw-ball vw-ball--k vw-ball--d" data-say="u">u</button></div><span class="vw-hole__cup"></span></div>
+      <div class="vw-hole" data-hole="i-d"><span class="vw-hole__flag"></span><div class="vw-hole__balls"><button type="button" class="vw-ball vw-ball--d" data-say="i">i</button><button type="button" class="vw-ball vw-ball--d" data-say="ü">ü</button></div><span class="vw-hole__cup"></span></div>
+    </div>
+
+    <div class="vw-words" role="group" aria-label="Слова для лаборатории" data-lab-words>
+      <button type="button" data-w="göl" data-ru="озеро">göl</button>
+      <button type="button" data-w="gol" data-ru="гол">gol</button>
+      <button type="button" data-w="kır" data-ru="загород">kır</button>
+      <button type="button" data-w="kir" data-ru="грязь">kir</button>
+      <button type="button" data-w="güzel" data-ru="красивый">güzel</button>
+      <button type="button" data-w="Boğaz" data-ru="Босфор">Boğaz</button>
+      <button type="button" data-w="kuş" data-ru="птица">kuş</button>
+      <button type="button" data-w="gün" data-ru="день">gün</button>
+    </div>
+    <div class="vw-tee" lang="tr" aria-live="polite" data-tee><span>?</span></div>
+    <div class="vw-data" data-lab-card>
+      <div class="vw-data__row"><span>Слово</span><b data-o="word">выбери слово</b></div>
+      <div class="vw-data__row"><span>Последняя гласная</span><b class="is-amber" data-o="vowel">…</b></div>
+      <div class="vw-data__row"><span>Твёрдая или мягкая</span><b data-o="kind">…</b></div>
+      <div class="vw-data__row"><span>Узкая или широкая</span><b data-o="width">…</b></div>
+    </div>
+    <p class="vw-punch">Зачем последняя? Дальше почти все турецкие окончания смотрят именно на неё. Сейчас ты учишься её видеть.</p>
+  </section>
+
+  <section id="scene" data-section="scene" data-words="42">
+    <span class="vw-tag vw-tag--ink">Сцена · паром в Кадыкёй</span>
+    <h2>Чай на палубе</h2>
+    <p>Паром. Чайки. Мужик с подносом идёт по палубе и кричит.</p>
+    <div class="vw-chat" data-vowels>
+      <div class="vw-msg"><a-say>Simit! Çay!</a-say><small>Бублик! Чай!</small></div>
+      <div class="vw-msg vw-msg--me"><a-say>Bir çay, bir simit.</a-say><small>Один чай, один бублик.</small></div>
+      <div class="vw-msg"><a-say>Buyurun.</a-say><small>Держите.</small></div>
+    </div>
+    <p>Посмотри на гласные. В <span lang="tr">çay</span> одна a: твёрдая и широкая. В <span lang="tr">simit</span> две i: мягкие и узкие.</p>
+    <p class="vw-punch">Чайки, кстати, тоже хотят бублик.</p>
+  </section>
+
+  <section id="traps" data-section="traps" data-words="49">
+    <span class="vw-tag vw-tag--amber">Ловушки</span>
+    <h2>Четыре места, где спотыкаются все</h2>
+    <div class="vw-traps">
+      <article class="vw-trap"><span class="vw-trap__n">01</span><h3><span lang="tr">ı</span> без точки это не <span lang="tr">i</span></h3><p><a-say>kır</a-say> загород. <a-say>kir</a-say> грязь. Одна точка, и пикник превращается в грязь.</p></article>
+      <article class="vw-trap"><span class="vw-trap__n">02</span><h3>Большая <span lang="tr">I</span> это <span lang="tr">ı</span></h3><p>Без точки, значит твёрдая. <a-say>İstanbul</a-say> пишут с точкой: там мягкая i.</p></article>
+      <article class="vw-trap"><span class="vw-trap__n">03</span><h3><span lang="tr">e</span> мягкая без всяких точек</h3><p>Единственное исключение. Запомни её в лицо.</p></article>
+      <article class="vw-trap"><span class="vw-trap__n">04</span><h3>Последняя гласная, а не последняя буква</h3><p>В <a-say>göl</a-say> последняя буква l. Последняя гласная ö.</p></article>
+    </div>
+  </section>
+
+  <section id="video" data-section="video" data-words="15">
+    <span class="vw-tag">Видео</span>
+    <h2>Послушай школьный урок</h2>
+    <p>Урок для турецких школьников. Слушай, как звучат подряд твёрдые и мягкие.</p>
+    <a-video yt="78nBV0QSOMc" start="0" end="139" title="Kalın ve İnce Ünlüler" channel="SENDE YAP"></a-video>
+  </section>
+
+  <section id="practice" data-section="practice" data-words="3">
+    <span class="vw-tag">Остановка 5 · практика</span>
+    <h2>Практика</h2>
+    <a-exercise ref="a1.vowels.ex1"></a-exercise>
+    <a-exercise ref="a1.vowels.ex2"></a-exercise>
+
+    <a-exercise ref="a1.vowels.ex3" class="ak-ex" data-golf>
+      <div class="ak-ex__head"><span class="ak-ex__title">Мини-гольф: загони мяч в лунку</span><span class="ak-ex__count" data-golf-count>1 / 8</span></div>
+      <div class="vw-golf__tee">
+        <span class="vw-golf__word" lang="tr" data-golf-word>çay</span>
+        <span class="vw-golf__ru" data-golf-ru>чай</span>
+        <span class="vw-golf__ball" data-golf-ball></span>
+      </div>
+      <div class="vw-green" role="group" aria-label="Лунки">
+        <button type="button" data-hole-pick="k-g"><span class="vw-key">1</span>твёрдая<small>широкая</small><span class="vw-hole__cup"></span></button>
+        <button type="button" data-hole-pick="i-g"><span class="vw-key">2</span>мягкая<small>широкая</small><span class="vw-hole__cup"></span></button>
+        <button type="button" data-hole-pick="k-d"><span class="vw-key">3</span>твёрдая<small>узкая</small><span class="vw-hole__cup"></span></button>
+        <button type="button" data-hole-pick="i-d"><span class="vw-key">4</span>мягкая<small>узкая</small><span class="vw-hole__cup"></span></button>
+      </div>
+      <p class="vw-golf__status" aria-live="polite" data-golf-status>Найди последнюю гласную и выбери лунку.</p>
+    </a-exercise>
+
+    <a-exercise ref="a1.vowels.ex4"></a-exercise>
+  </section>
+
+  <section id="check" data-section="check" data-words="6">
+    <span class="vw-tag vw-tag--ink">Мини-проверка</span>
+    <h2>Пять вопросов</h2>
+    <p>Шпаргалку не подглядывай.</p>
+    <a-quiz ref="a1.vowels.check1"></a-quiz>
+  </section>
+
+  <section id="cheat" data-section="cheat" data-words="69">
+    <div class="vw-cheat">
+      <span class="vw-tag">Сохрани скриншотом</span>
+      <h2>Вся тема на одном экране</h2>
+      <div class="vw-mini" aria-label="Четыре лунки">
+        <div class="vw-mini__h"></div><div class="vw-mini__h">твёрдые</div><div class="vw-mini__h">мягкие</div>
+        <div class="vw-mini__h">широкие</div>
+        <div><i class="vw-ball vw-ball--k" data-say="a">a</i><i class="vw-ball vw-ball--k" data-say="o">o</i></div>
+        <div><i class="vw-ball" data-say="e">e</i><i class="vw-ball" data-say="ö">ö</i></div>
+        <div class="vw-mini__h">узкие</div>
+        <div><i class="vw-ball vw-ball--k vw-ball--d" data-say="ı">ı</i><i class="vw-ball vw-ball--k vw-ball--d" data-say="u">u</i></div>
+        <div><i class="vw-ball vw-ball--d" data-say="i">i</i><i class="vw-ball vw-ball--d" data-say="ü">ü</i></div>
+      </div>
+      <ul class="vw-rules">
+        <li><b>Нет точек</b>, значит твёрдая. Кроме e.</li>
+        <li><b>Челюсть вниз</b>, значит широкая.</li>
+        <li><b>Большая I</b> без точки это ı. С точкой İ это i.</li>
+        <li><b>Смотри</b> на последнюю гласную, а не на последнюю букву.</li>
+      </ul>
+    </div>
+    <div class="vw-final">
+      <p>Кадыкёй. Стадион. Наши снова забивают.</p>
+      <p>Вскакиваешь и орёшь, <b lang="tr">GOL!</b> Без точек.</p>
+      <p>Сосед кивает. Обнимает.</p>
+      <p>Теперь ты отличаешь твёрдые от мягких и узкие от широких. И видишь последнюю гласную в любом слове.</p>
+      <p class="vw-punch">Озеро, кстати, тоже красивое.</p>
+    </div>
+  </section>
+
+</main>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  /* гласные: k — твёрдая (kalın), g — широкая (geniş) */
+  const V = { a: [1, 1], e: [0, 1], o: [1, 1], 'ö': [0, 1], 'ı': [1, 0], i: [0, 0], u: [1, 0], 'ü': [0, 0] };
+  const lower = (w) => w.toLocaleLowerCase('tr');
+  const holeOf = (v) => `${V[v][0] ? 'k' : 'i'}-${V[v][1] ? 'g' : 'd'}`;
+  const lastVowel = (w) => { const s = lower(w); for (let i = s.length - 1; i >= 0; i--) if (V[s[i]]) return { v: s[i], i }; return null; };
+
+  /* лента пилюль стоит, когда её не видно */
+  const marquee = $('.vw-marquee');
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => marquee.classList.toggle('is-off', !e.isIntersecting)).observe(marquee);
+
+  /* «сначала угадай»: ошибка не наказывается, просто объясняем */
+  $$('[data-guess]').forEach((box) => {
+    const out = $('.vw-guess__out', box);
+    $$('[data-pick]', box).forEach((b) => b.addEventListener('click', () => {
+      const ok = b.hasAttribute('data-right');
+      $$('[data-pick]', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      if (!ok) $('[data-right]', box).classList.add('is-right');
+      out.textContent = ok ? out.dataset.yes : out.dataset.no;
+      if (anim) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+    }));
+  });
+
+  /* гласные в репликах сцены: чёрная плашка — твёрдая, белая — мягкая */
+  $$('[data-vowels] a-say').forEach((say) => {
+    /* a-say — флекс: весь текст держим в одном span, иначе буквы разъедутся */
+    const el = document.createElement('span');
+    [...say.childNodes].filter((n) => !(n.classList?.contains('ak-say__btn'))).forEach((n) => el.append(n));
+    say.append(el);
+    const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      if (!/[aeıioöuü]/i.test(n.nodeValue)) return;
+      const frag = document.createDocumentFragment();
+      for (const ch of n.nodeValue) {
+        const v = lower(ch);
+        if (V[v]) { const s = document.createElement('span'); s.className = `vw-v vw-v--${V[v][0] ? 'k' : 'i'}`; s.textContent = ch; frag.append(s); }
+        else frag.append(ch);
+      }
+      n.replaceWith(frag);
+    });
+  });
+
+  /* пары: мягкий двойник выкатывается из-за твёрдого */
+  const twins = $$('[data-twin]');
+  function rollTwins() {
+    if (!anim) return;
+    G.fromTo(twins, { x: -46, rotation: -200, scale: .7 }, { x: 0, rotation: 0, scale: 1, duration: .9, ease: 'back.out(2)', stagger: .14 });
+  }
+  $('[data-replay-pairs]').addEventListener('click', rollTwins);
+
+  /* рот: широкая — челюсть вниз, узкая — на месте; o ö u ü — губы круглее */
+  const mouth = $('[data-mouth]'), lips = $('[data-lips]'), jaw = $('[data-jaw]'), teeth = $('[data-teeth]');
+  const outMouth = $('[data-mouth-out]');
+  const ROUND = { o: 1, 'ö': 1, u: 1, 'ü': 1 };
+  function shapeMouth(v) {
+    const wide = V[v][1], round = ROUND[v];
+    const st = { mry: wide ? 34 : 7, mrx: round ? (wide ? 34 : 22) : 52, lry: wide ? 46 : 18, lrx: round ? (wide ? 46 : 34) : 64, jaw: wide ? 22 : 0 };
+    if (anim) {
+      G.to(mouth, { attr: { ry: st.mry, rx: st.mrx }, duration: .45, ease: 'elastic.out(1, .45)' });
+      G.to(lips, { attr: { ry: st.lry, rx: st.lrx }, duration: .45, ease: 'elastic.out(1, .45)' });
+      G.to(jaw, { y: st.jaw, duration: .45, ease: 'back.out(2.5)' });
+      G.to(teeth, { opacity: wide ? 1 : .35, duration: .3 });
+    } else {
+      mouth.setAttribute('ry', st.mry); mouth.setAttribute('rx', st.mrx);
+      lips.setAttribute('ry', st.lry); lips.setAttribute('rx', st.lrx);
+      jaw.setAttribute('transform', `translate(0 ${st.jaw})`);
+    }
+    outMouth.textContent = `${v}: ${wide ? 'широкая, челюсть уехала вниз' : 'узкая, челюсть на месте'}`;
+  }
+  $$('[data-mouth-keys] [data-v]').forEach((b) => b.addEventListener('click', () => {
+    $$('[data-mouth-keys] [data-v]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    shapeMouth(b.dataset.v);
+    AlternaKit?.speak(b.dataset.v);
+  }));
+
+  /* лаборатория: последняя гласная слова летит в свою лунку */
+  const tee = $('[data-tee]');
+  const card = Object.fromEntries($$('[data-lab-card] [data-o]').map((el) => [el.dataset.o, el]));
+  function flyBall(fromEl, toEl, v, done) {
+    const a = fromEl.getBoundingClientRect(), b = toEl.getBoundingClientRect();
+    if (!anim || !a.width || !b.width) { done(); return; }
+    const ball = document.createElement('span');
+    ball.className = `vw-ball vw-fly ${V[v][0] ? 'vw-ball--k' : ''} ${V[v][1] ? '' : 'vw-ball--d'}`;
+    ball.textContent = v;
+    document.body.append(ball);
+    const s = ball.offsetWidth;
+    const x0 = a.left + a.width / 2 - s / 2, y0 = a.top + a.height / 2 - s / 2;
+    const x1 = b.left + b.width / 2 - s / 2, y1 = b.top + b.height / 2 - s / 2;
+    const top = Math.min(y0, y1) - Math.max(90, Math.abs(y1 - y0) * .35);
+    G.set(ball, { x: x0, y: y0, scale: .5 });
+    G.to(ball, { duration: .95, ease: 'power1.inOut', scale: 1, rotation: 540,
+      motionPath: { path: [{ x: x0, y: y0 }, { x: (x0 + x1) / 2, y: top }, { x: x1, y: y1 }], curviness: 1.4 },
+      onComplete: () => { G.to(ball, { scale: .2, duration: .25, ease: 'power2.in', onComplete: () => { ball.remove(); done(); } }); } });
+  }
+  $$('[data-lab-words] [data-w]').forEach((btn) => btn.addEventListener('click', () => {
+    $$('[data-lab-words] [data-w]').forEach((x) => x.setAttribute('aria-pressed', String(x === btn)));
+    const w = btn.dataset.w, lv = lastVowel(w);
+    tee.replaceChildren(...[...w].map((ch, i) => {
+      const s = document.createElement('span');
+      s.textContent = ch;
+      if (V[lower(ch)]) s.classList.add('is-vowel');
+      if (i === lv.i) s.classList.add('is-last');
+      return s;
+    }));
+    tee.dataset.say = w;
+    AlternaKit?.speak(w);
+    $$('[data-hole]').forEach((h) => h.classList.remove('is-hit'));
+    card.word.textContent = `${w} · ${btn.dataset.ru}`;
+    card.vowel.textContent = '…'; card.kind.textContent = '…'; card.width.textContent = '…';
+    const hole = $(`[data-hole="${holeOf(lv.v)}"]`);
+    const show = () => {
+      hole.classList.add('is-hit');
+      card.vowel.textContent = lv.v;
+      card.kind.textContent = V[lv.v][0] ? 'твёрдая' : 'мягкая';
+      card.width.textContent = V[lv.v][1] ? 'широкая' : 'узкая';
+      if (anim) G.fromTo($(`[data-say="${lv.v}"]`, hole), { scale: 1.5 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)' });
+    };
+    if (anim) G.fromTo(tee.children, { yPercent: 40, rotation: 6 }, { yPercent: 0, rotation: 0, duration: .45, stagger: .04, ease: 'back.out(2)' });
+    setTimeout(() => flyBall(tee.children[lv.i], $('.vw-hole__cup', hole), lv.v, show), anim ? 450 : 0);
+  }));
+
+  /* появления по скроллу: только трансформы, текст виден и без анимации */
+  if (anim) {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    $$('main h2').forEach((h) => {
+      const split = new SplitText(h, { type: 'words' });
+      G.from(split.words, { yPercent: 55, rotation: 5, duration: .7, stagger: .05, ease: 'back.out(2)', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    ScrollTrigger.batch('.vw-pair, .vw-trap, .vw-hole, .vw-msg, .vw-formula div, .vw-rules li', {
+      start: 'top 90%', once: true,
+      onEnter: (els) => G.from(els, { y: 36, rotation: 2, scale: .96, duration: .7, stagger: .08, ease: 'back.out(2)' }),
+    });
+    ScrollTrigger.create({ trigger: '[data-pairs]', start: 'top 80%', once: true, onEnter: rollTwins });
+    ScrollTrigger.create({ trigger: '.vw-mouth', start: 'top 75%', once: true, onEnter: () => { shapeMouth('a'); setTimeout(() => shapeMouth('ı'), 900); } });
+    const refresh = () => ScrollTrigger.refresh();
+    addEventListener('load', refresh);
+    document.fonts?.ready.then(refresh);
+    addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  }
+
+  /* ---------- нестандартное упражнение «Мини-гольф» — ответы в exercises.json (a1.vowels.ex3) ---------- */
+  (async () => {
+    const EX = 'a1.vowels.ex3';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const wordEl = $('[data-golf-word]', root), ruEl = $('[data-golf-ru]', root), ballEl = $('[data-golf-ball]', root);
+    const countEl = $('[data-golf-count]', root), statusEl = $('[data-golf-status]', root);
+    const holes = $$('[data-hole-pick]', root);
+    const { items } = await AlternaKit.exercise(EX);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+
+    function show() {
+      const it = items[i];
+      wordEl.textContent = it.word; ruEl.textContent = it.ru;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      holes.forEach((b) => b.classList.remove('is-hit', 'is-miss'));
+      statusEl.textContent = 'Найди последнюю гласную и выбери лунку.';
+      if (anim) G.fromTo(wordEl, { yPercent: 50, rotation: 4 }, { yPercent: 0, rotation: 0, duration: .5, ease: 'back.out(2)' });
+      t0 = performance.now(); locked = false;
+    }
+    function finishItem() {
+      i++;
+      if (i < items.length) { show(); return; }
+      AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+      wordEl.textContent = `${correct} из ${items.length}`;
+      ruEl.textContent = correct === items.length ? 'Все мячи в лунках.' : 'Хороший раунд. Можно пройти урок дальше.';
+      countEl.textContent = 'готово';
+      statusEl.textContent = '';
+    }
+    function pick(id) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i], ok = id === it.answer;
+      if (ok) correct++;
+      const btn = $(`[data-hole-pick="${id}"]`, root), right = $(`[data-hole-pick="${it.answer}"]`, root);
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: id, timeMs: Math.round(performance.now() - t0) });
+      const after = () => {
+        btn.classList.add(ok ? 'is-hit' : 'is-miss');
+        if (!ok) right.classList.add('is-hit');
+        statusEl.textContent = ok ? `В лунке. ${it.word}: последняя гласная ${it.vowel}.` : `Мимо. ${it.explanation}`;
+        setTimeout(finishItem, reduce ? 300 : ok ? 1100 : 2600);
+      };
+      flyBall(ballEl, $('.vw-hole__cup', btn), it.vowel, after);
+    }
+    holes.forEach((b) => b.addEventListener('click', () => pick(b.dataset.holePick)));
+    root.addEventListener('keydown', (e) => { const k = Number(e.key); if (k >= 1 && k <= 4) { pick(holes[k - 1].dataset.holePick); e.preventDefault(); } });
+    root.tabIndex = 0;
+    /* для автопроверки: проходит упражнение правильными ответами */
+    AlternaKit.registerSolver(EX, async () => {
+      const wait = () => new Promise((r) => setTimeout(r, 100));
+      while (i < items.length) {
+        while (locked && i < items.length) await wait();
+        if (i < items.length) pick(items[i].answer);
+        await wait();
+      }
+    });
+    show();
+  })();
+});
+</script>
+</body>
+</html>
