@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="b2.participle-oldugu">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>olduğu: yaşamakta olduğumuz şehir</title>
+<link rel="preload" href="media/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  @font-face { font-family: 'Onest'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(media/onest-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: 'Onest'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(media/onest-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Onest'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(media/onest-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  :root {
+    color-scheme: light;
+    --lime: #27eb62;
+    --lime-deep: #12a144;
+    --amber: #ffcc00;
+    --ink: #0b0b0b;
+    --paper: #ffffff;
+    --fog: #f3f3f1;
+    --muted: #6e736c;
+    --board: #121212;
+    --t-now: #27eb62;
+    --t-done: #ffcc00;
+    --t-fut: #7cc4ff;
+    --ak-bg: #ffffff;
+    --ak-surface: var(--fog);
+    --ak-ink: var(--ink);
+    --ak-muted: var(--muted);
+    --ak-line: #e4e5e0;
+    --ak-accent: var(--lime);
+    --ak-accent-ink: var(--ink);
+    --ak-accent-soft: #e1fbe8;
+    --ak-good: var(--lime-deep);
+    --ak-good-soft: #e1fbe8;
+    --ak-bad: #e0483e;
+    --ak-bad-soft: #fdebea;
+    --ak-radius: 24px;
+    --ak-radius-sm: 16px;
+    --ak-font: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--paper); overflow-x: clip; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 400 var(--ak-text)/1.55 var(--ak-font); overflow-x: clip; padding-top: calc(56px + env(safe-area-inset-top)); }
+  main { padding: 0 16px calc(64px + env(safe-area-inset-bottom)); }
+  section { max-width: 760px; margin: 0 auto; padding: clamp(44px, 9vw, 88px) 0 0; scroll-margin-top: 70px; }
+  h1, h2 { font-weight: 800; text-transform: uppercase; letter-spacing: -.01em; margin: 0 0 16px; }
+  h1 { font-size: clamp(30px, 8.6vw, 72px); line-height: 1; }
+  h2 { font-size: clamp(24px, 6.4vw, 42px); line-height: 1.06; }
+  p { margin: 0 0 10px; max-width: 62ch; }
+  b, strong { font-weight: 700; }
+  [lang="tr"] { font-weight: 650; }
+  button { font: inherit; color: inherit; }
+  svg { display: block; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+  .ob-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 12px; }
+  .ob-tag::before { content: ''; width: 12px; height: 12px; border-radius: 50%; background: var(--lime); }
+  .ob-tag--amber::before { background: var(--amber); }
+  .ob-tag--ink::before { background: var(--ink); }
+  .ob-card { background: var(--fog); border-radius: 32px; padding: clamp(18px, 4.5vw, 32px); margin: 16px 0; }
+  .ob-punch { font-weight: 700; font-size: 1.1em; margin-top: 14px; }
+  .ob-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 999px; border: 0; background: var(--lime); color: var(--ink); font-weight: 700; cursor: pointer; }
+  .ob-btn--ink { background: var(--ink); color: #fff; }
+  .ob-btn--ghost { background: #fff; box-shadow: inset 0 0 0 2px var(--ink); }
+  .ob-btn[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .ob-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .ob-row--c { justify-content: center; }
+  .ob-ru { color: var(--muted); font-size: .95em; }
+
+  /* время: один цвет — одно время, везде одинаково */
+  .is-now { --t: var(--t-now); }
+  .is-done { --t: var(--t-done); }
+  .is-fut { --t: var(--t-fut); }
+  .ob-time { display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; background: var(--t, #ddd); color: var(--ink); font-size: 13px; font-weight: 700; white-space: nowrap; }
+  .ob-hl { background: color-mix(in srgb, var(--t, #ddd) 55%, transparent); border-radius: 8px; padding: 0 4px; }
+  .ob-person { background: var(--ink); color: #fff; border-radius: 8px; padding: 0 4px; }
+
+  /* ---------- свой скроллбар: рельсы и поезд ---------- */
+  .ob-rail { position: fixed; z-index: 50; top: calc(8px + env(safe-area-inset-top)); left: 50%; translate: -50% 0; width: min(calc(100% - 20px), 860px); height: 40px; border-radius: 999px; background: var(--ink); box-shadow: 0 8px 20px -10px rgba(0, 0, 0, .5); touch-action: none; cursor: pointer; }
+  .ob-rail__track { position: absolute; left: 22px; right: 22px; top: 50%; height: 4px; translate: 0 -50%; border-radius: 4px; background: repeating-linear-gradient(90deg, #4a4a48 0 8px, transparent 8px 12px); }
+  .ob-rail__fill { position: absolute; left: 22px; top: 50%; height: 4px; width: calc(100% - 44px); translate: 0 -50%; border-radius: 4px; background: var(--lime); transform-origin: 0 50%; transform: scaleX(0); }
+  .ob-rail__st { position: absolute; top: 50%; width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%; border: 0; padding: 0; background: transparent; cursor: pointer; }
+  .ob-rail__st::after { content: ''; position: absolute; inset: 8px; border-radius: 50%; background: #2c2c2a; box-shadow: inset 0 0 0 2px #6d6f6a; }
+  .ob-rail__st.is-read::after { background: var(--lime); box-shadow: none; }
+  .ob-rail__train { position: absolute; left: 22px; top: 50%; width: 46px; height: 24px; margin: -12px 0 0 -23px; pointer-events: none; }
+  @media (min-width: 1024px) { .ob-rail { height: 44px; } }
+
+  /* ---------- первый экран ---------- */
+  .ob-hero { max-width: 1100px; margin: 0 auto; padding: 8px 16px 0; }
+  .ob-hero__box { position: relative; overflow: hidden; border-radius: 36px; background: var(--lime); padding: clamp(18px, 5vw, 48px); }
+  .ob-hero__top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 18px; font-weight: 700; font-size: 15px; }
+  .ob-chip { display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: 999px; background: #fff; font-size: 13px; font-weight: 700; }
+  .ob-hero h1 > span { display: inline-block; animation: ob-rise .8s cubic-bezier(.2, 1.4, .4, 1) both; }
+  .ob-hero h1 > span:nth-child(2) { animation-delay: .1s; }
+  .ob-hero h1 > span:nth-child(3) { animation-delay: .2s; }
+  @keyframes ob-rise { from { transform: translateY(55%) rotate(5deg); } to { transform: none; } }
+  .ob-hero__sub { font-size: 1.05em; max-width: 34ch; margin-bottom: 18px; }
+  .ob-hero__train { width: 100%; height: auto; margin: 6px 0 -8px; }
+  .ob-statuses { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+  .ob-status { display: grid; gap: 2px; padding: 12px 10px; border-radius: 20px; background: var(--board); color: #fff; font-size: 12px; }
+  .ob-ico { width: 32px; height: 20px; color: var(--t); overflow: visible; }
+  .ob-time .ob-ico { width: 22px; height: 14px; color: var(--ink); }
+  .ob-buildrail { width: 100%; height: 14px; margin: -2px 0 8px; }
+  .ob-board__name { display: inline-flex; align-items: center; gap: 6px; }
+  .ob-board__name svg { width: 16px; height: 16px; }
+  .ob-status b { font-size: clamp(10px, 2.8vw, 18px); color: var(--t); font-weight: 750; white-space: nowrap; letter-spacing: -.01em; }
+  .ob-status { min-width: 0; }
+  .ob-status span { color: #a7aaa4; }
+
+  /* ---------- табло ---------- */
+  .ob-board { position: relative; background: var(--board); color: #fff; border-radius: 30px; padding: 18px clamp(14px, 4vw, 26px); margin: 16px 0; overflow: hidden; }
+  .ob-board__head { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #a7aaa4; margin-bottom: 10px; }
+  .ob-flaps { display: flex; flex-wrap: wrap; gap: 4px 10px; min-height: 48px; align-items: center; perspective: 600px; }
+  .ob-flap { display: inline-block; padding: 4px 8px; border-radius: 8px; background: linear-gradient(#262625 0 49%, #161616 51%); color: var(--amber); font-weight: 750; font-size: clamp(17px, 4.6vw, 24px); line-height: 1.25; }
+  .ob-flap.is-noun { color: #fff; }
+  .ob-board__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin-top: 12px; }
+  .ob-board__ru { color: #d7d8d2; font-size: 15px; }
+
+  /* объявление */
+  .ob-announce { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; background: var(--fog); border-radius: 28px; padding: 16px; margin: 14px 0; }
+  .ob-announce svg { width: 54px; height: 54px; }
+  .ob-announce p { margin: 0; }
+  .ob-split { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 4px; }
+  .ob-piece { display: grid; justify-items: center; gap: 2px; padding: 8px 10px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 2px var(--ink); font-weight: 750; font-size: 20px; }
+  .ob-piece small { font-size: 11px; font-weight: 600; color: var(--muted); }
+
+  /* «сначала угадай» */
+  .ob-guess { margin: 16px 0; padding: 16px; border-radius: 24px; border: 2px dashed #d9dad4; }
+  .ob-guess p { margin-bottom: 10px; font-weight: 600; }
+  .ob-guess__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ob-guess__opts button { min-height: 46px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--ink); background: #fff; font-weight: 700; cursor: pointer; }
+  .ob-guess__opts button.is-right { background: var(--lime); border-color: var(--lime); }
+  .ob-guess__opts button.is-wrong { background: var(--ak-bad-soft); border-color: var(--ak-bad); }
+  .ob-guess__out { min-height: 1.5em; margin: 10px 0 0; color: var(--muted); font-weight: 400 !important; }
+
+  /* часы: переключатель времени */
+  .ob-clock { display: grid; gap: 14px; align-items: center; }
+  @media (min-width: 640px) { .ob-clock { grid-template-columns: 150px 1fr; } }
+  .ob-clock svg { width: 140px; height: 140px; margin: 0 auto; }
+  .ob-seg { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: #fff; }
+  .ob-seg button { flex: 1; min-height: 44px; border: 0; border-radius: 999px; background: none; font-weight: 700; cursor: pointer; font-size: 15px; }
+  .ob-seg button[aria-pressed="true"] { background: var(--t); }
+  .ob-phrase { font-size: clamp(22px, 5.6vw, 32px); font-weight: 750; margin: 12px 0 4px; }
+  .ob-phrase span { display: inline-block; }
+
+  /* сборка: вагоны */
+  .ob-train { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 6px; min-height: 92px; margin: 10px 0; }
+  .ob-wagon { position: relative; display: grid; justify-items: center; gap: 2px; padding: 10px 12px 14px; border-radius: 16px 16px 10px 10px; background: #fff; box-shadow: inset 0 0 0 2px var(--ink); font-weight: 750; font-size: clamp(18px, 4.8vw, 24px); }
+  .ob-wagon small { font-size: 11px; color: var(--muted); font-weight: 600; }
+  .ob-wagon::after { content: ''; position: absolute; bottom: -7px; left: 18%; right: 18%; height: 12px; background: radial-gradient(circle, var(--ink) 5px, transparent 6px) 0 0 / 50% 100% repeat-x; }
+  .ob-wagon--time { background: var(--t); }
+  .ob-wagon--who { background: var(--ink); color: #fff; } .ob-wagon--who small { color: #b9bcb6; }
+  .ob-steps { display: flex; justify-content: center; gap: 6px; margin: 4px 0 10px; }
+  .ob-steps i { width: 10px; height: 10px; border-radius: 50%; background: #d6d7d1; }
+  .ob-steps i.is-on { background: var(--ink); }
+  .ob-persons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 10px; }
+  @media (min-width: 640px) { .ob-persons { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+  .ob-persons button { min-height: 52px; border: 0; border-radius: 16px; background: #fff; cursor: pointer; font-weight: 700; line-height: 1.15; }
+  .ob-persons button small { display: block; font-weight: 500; color: var(--muted); font-size: 12px; }
+  .ob-persons button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .ob-persons button[aria-pressed="true"] small { color: #b9bcb6; }
+
+  /* olan / olduğu */
+  .ob-who { display: grid; gap: 12px; }
+  .ob-who svg { width: 100%; max-width: 420px; height: auto; margin: 0 auto; }
+  .ob-who__line { font-size: clamp(20px, 5.4vw, 28px); font-weight: 750; text-align: center; margin: 0; }
+  .ob-who__ru { text-align: center; margin: 0; }
+  .ob-rule { display: grid; gap: 8px; margin: 16px 0; }
+  .ob-rule div { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; padding: 12px 16px; border-radius: 22px; background: var(--fog); }
+  .ob-rule b[lang] { font-size: 1.1em; }
+
+  /* лаборатория */
+  .ob-tabs { display: flex; gap: 6px; padding: 5px; border-radius: 999px; background: var(--fog); margin: 10px 0 12px; }
+  .ob-tabs button { flex: 1; min-height: 44px; border: 0; border-radius: 999px; background: none; font-weight: 700; cursor: pointer; font-size: 14px; }
+  .ob-tabs button[aria-selected="true"] { background: var(--ink); color: #fff; }
+  .ob-pick { display: grid; gap: 8px; margin-top: 12px; }
+  .ob-pick__row { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+  .ob-pick__row::-webkit-scrollbar { display: none; }
+  .ob-pick__row button { flex: none; min-height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--fog); font-weight: 700; cursor: pointer; font-size: 15px; }
+  .ob-pick__row button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .ob-pick__row button.is-now[aria-pressed="true"], .ob-pick__row button.is-done[aria-pressed="true"], .ob-pick__row button.is-fut[aria-pressed="true"] { background: var(--t); color: var(--ink); }
+  [data-dep-times], [data-dep-persons], [data-pick-time], [data-pick-person] { flex-wrap: wrap; overflow: visible; }
+  .ob-pick__label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  .ob-answers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .ob-answers button { min-height: 54px; border: 0; border-radius: 18px; background: var(--fog); font-weight: 750; cursor: pointer; line-height: 1.15; font-size: 14px; }
+  .ob-answers button.is-right { background: var(--lime); }
+  .ob-answers button.is-wrong { background: var(--ak-bad-soft); box-shadow: inset 0 0 0 2px var(--ak-bad); }
+  .ob-labout { min-height: 1.5em; margin: 10px 0 0; color: var(--muted); }
+
+  /* сцена: письмо */
+  .ob-mail { background: #fff; border-radius: 28px; box-shadow: inset 0 0 0 2px var(--ink); padding: 16px 18px; margin: 14px 0; }
+  .ob-mail__head { display: flex; align-items: center; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--ak-line); margin-bottom: 10px; }
+  .ob-mail__head svg { width: 44px; height: 44px; flex: none; }
+  .ob-mail__head b { display: block; }
+  .ob-mail__head span { color: var(--muted); font-size: 14px; }
+  .ob-mail__line { display: grid; gap: 4px; padding: 10px 0; border-bottom: 1px dashed var(--ak-line); }
+  .ob-mail__line:last-child { border-bottom: 0; }
+  .ob-tap { border: 0; padding: 0 4px; border-radius: 8px; background: var(--t); font: inherit; font-weight: 750; cursor: pointer; }
+  .ob-mail__ru { color: var(--muted); font-size: 15px; min-height: 1.4em; }
+
+  /* ловушки */
+  .ob-traps { display: grid; gap: 12px; }
+  @media (min-width: 768px) { .ob-traps { grid-template-columns: 1fr 1fr; } }
+  .ob-trap { position: relative; display: grid; gap: 10px; align-content: start; border-radius: 30px; padding: 20px 20px 18px; background: var(--ink); color: #fff; }
+  .ob-trap:nth-child(even) { background: var(--amber); color: var(--ink); }
+  .ob-trap h3 { margin: 0 44px 0 0; font-size: 19px; line-height: 1.25; font-weight: 700; }
+  .ob-trap p { margin: 0; }
+  .ob-trap__n { position: absolute; top: 18px; right: 20px; font-weight: 700; font-size: 18px; }
+  .ob-trap__ex { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 10px 14px; border-radius: 18px; background: rgba(255, 255, 255, .1); }
+  .ob-trap:nth-child(even) .ob-trap__ex { background: rgba(255, 255, 255, .45); }
+  .ob-trap__ex svg { width: 36px; height: 36px; flex: none; }
+  .ob-trap__txt { font-size: 18px; font-weight: 750; }
+  .ob-trap__txt s { text-decoration-thickness: 3px; text-decoration-color: var(--ak-bad); }
+  .ob-trap .ob-btn { min-height: 44px; padding: 0 16px; font-size: 15px; justify-self: start; }
+  .ob-trap:nth-child(even) .ob-btn { background: var(--ink); color: #fff; }
+  .ob-trap .ak-say__btn { background: rgba(255, 255, 255, .16); color: inherit; }
+  .ob-trap:nth-child(even) .ak-say__btn { background: rgba(0, 0, 0, .1); }
+
+  /* нестандартное упражнение: табло */
+  .ob-dep { background: var(--board); color: #fff; border-radius: 22px; padding: 14px 16px; margin: 12px 0; overflow: hidden; }
+  .ob-dep__task { color: #d7d8d2; font-size: 15px; margin-bottom: 8px; }
+  .ob-dep__task b { color: #fff; }
+  .ob-dep__line { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-end; min-height: 58px; }
+  .ob-dep__slot { min-width: 96px; min-height: 44px; display: grid; place-items: center; padding: 0 10px; border-radius: 12px; border: 2px dashed #4a4a48; color: #8b8e88; font-weight: 750; font-size: 18px; }
+  .ob-dep__slot.is-filled { border: 0; background: var(--t, #fff); color: var(--ink); }
+  .ob-dep__slot.is-who.is-filled { background: #fff; }
+  .ob-dep__noun { font-weight: 750; font-size: 18px; color: var(--amber); padding-bottom: 10px; }
+  .ob-dep__status { min-height: 3em; margin: 10px 0 0; color: var(--muted); }
+
+  /* шпаргалка */
+  .ob-cheat { background: var(--board); color: #fff; border-radius: 34px; padding: clamp(18px, 5vw, 36px); }
+  .ob-cheat .ob-tag { color: #a7aaa4; }
+  .ob-cheat__formula { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 4px 0 14px; font-weight: 750; }
+  .ob-cheat__formula span { padding: 6px 10px; border-radius: 12px; background: #262625; }
+  .ob-cheat__rows { display: grid; gap: 8px; margin: 0 0 14px; }
+  .ob-cheat__row { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; width: 100%; padding: 12px 14px; border: 0; border-radius: 18px; background: #1d1d1c; color: #fff; text-align: left; cursor: pointer; }
+  .ob-cheat__row small { grid-column: 2; color: #a7aaa4; }
+  .ob-cheat__rule { padding: 12px 14px; border-radius: 18px; background: #1d1d1c; margin: 0 0 8px; }
+  .ob-cheat__rule b { color: var(--lime); }
+  .ob-final { margin-top: 24px; }
+
+  .ob-fly { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; }
+  .ob-spark { position: fixed; left: 0; top: 0; z-index: 61; width: 9px; height: 9px; border-radius: 3px; pointer-events: none; }
+
+  @media (hover: hover) {
+    .ob-btn:hover { scale: 1.03; }
+    .ob-pick__row button:hover, .ob-answers button:hover { background: #e6e7e2; }
+  }
+  @media (min-width: 1024px) { section { padding-top: 96px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="ob-rail" data-scrollbar role="navigation" aria-label="Маршрут урока">
+  <div class="ob-rail__track"></div>
+  <div class="ob-rail__fill" data-rail-fill></div>
+  <svg class="ob-rail__train" viewBox="0 0 46 24" data-rail-train aria-hidden="true">
+    <path d="M2 18 V8 Q2 3 8 3 H34 Q44 3 44 14 V18 Z" fill="#27eb62"/>
+    <rect x="8" y="7" width="7" height="6" rx="1.5" fill="#0b0b0b"/><rect x="18" y="7" width="7" height="6" rx="1.5" fill="#0b0b0b"/><path d="M30 7 H36 Q40 8 40 13 H30 Z" fill="#0b0b0b"/>
+    <circle cx="11" cy="20" r="3" fill="#fff"/><circle cx="33" cy="20" r="3" fill="#fff"/>
+  </svg>
+</div>
+
+<header class="ob-hero">
+  <div class="ob-hero__box">
+    <div class="ob-hero__top"><span>B2 · Анкара · вокзал</span><span class="ob-chip">10 минут</span></div>
+    <h1><span lang="tr">yaşamakta</span> <span lang="tr">olduğumuz</span> <span lang="tr">şehir</span></h1>
+    <p class="ob-hero__sub">Причастие с часами. Город, в котором мы живём прямо сейчас.</p>
+    <svg class="ob-hero__train" viewBox="0 0 600 90" aria-hidden="true">
+      <path d="M0 80 H600" stroke="#0b0b0b" stroke-width="4"/>
+      <path d="M0 86 H600" stroke="#0b0b0b" stroke-width="2" stroke-dasharray="10 14"/>
+      <g data-hero-train>
+        <path d="M20 72 V36 Q20 22 34 22 H150 Q190 22 196 54 V72 Z" fill="#0b0b0b"/>
+        <rect x="36" y="32" width="26" height="18" rx="4" fill="#27eb62"/><rect x="70" y="32" width="26" height="18" rx="4" fill="#27eb62"/><rect x="104" y="32" width="26" height="18" rx="4" fill="#27eb62"/>
+        <path d="M150 32 H170 Q186 34 188 52 H150 Z" fill="#ffcc00"/>
+        <rect x="208" y="30" width="150" height="42" rx="10" fill="#fff" stroke="#0b0b0b" stroke-width="3"/>
+        <text x="283" y="57" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0b0b">olduğumuz</text>
+        <rect x="368" y="30" width="110" height="42" rx="10" fill="#ffcc00" stroke="#0b0b0b" stroke-width="3"/>
+        <text x="423" y="57" text-anchor="middle" font-size="16" font-weight="800" fill="#0b0b0b">şehir</text>
+        <g fill="#0b0b0b"><circle cx="50" cy="76" r="7"/><circle cx="170" cy="76" r="7"/><circle cx="235" cy="76" r="7"/><circle cx="330" cy="76" r="7"/><circle cx="395" cy="76" r="7"/><circle cx="450" cy="76" r="7"/></g>
+      </g>
+    </svg>
+    <div class="ob-statuses">
+      <div class="ob-status is-now"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="now"><path d="M2 15 V7 Q2 3 6 3 H22 Q30 3 30 12 V15 Z" fill="currentColor"/><circle cx="8" cy="17" r="2.5" fill="currentColor"/><circle cx="24" cy="17" r="2.5" fill="currentColor"/><path d="M-6 9 H0 M-8 13 H-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><b>В ПУТИ</b><span lang="tr">-mAktA olduğu</span></div>
+      <div class="ob-status is-done"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="done"><path d="M6 18 V2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M7 3 H24 L20 7.5 L24 12 H7 Z" fill="currentColor"/></svg><b>ПРИБЫЛ</b><span lang="tr">-mIş olduğu</span></div>
+      <div class="ob-status is-fut"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="fut"><circle cx="16" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5 V10 L20 12.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg><b>ОТПРАВИТСЯ</b><span lang="tr">-(y)AcAk olduğu</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="story" data-section="story" data-words="74">
+    <span class="ob-tag">История · Анкара, вокзал</span>
+    <div data-story>
+      <p>Анкара. Вокзал. Сидишь, ждёшь поезд в Стамбул.</p>
+      <p>Объявление. Женский голос. Очень вежливый.</p>
+    </div>
+    <div class="ob-announce">
+      <svg viewBox="0 0 54 54" data-speaker aria-hidden="true">
+        <circle cx="27" cy="27" r="26" fill="#0b0b0b"/>
+        <path d="M14 22 H20 L29 14 V40 L20 32 H14 Z" fill="#ffcc00"/>
+        <path data-wave d="M34 20 Q39 27 34 34 M38 16 Q46 27 38 38" fill="none" stroke="#27eb62" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <p><a-say>Sayın yolcularımız, beklemekte olduğunuz İstanbul treni on dakika gecikecektir.</a-say></p>
+        <p class="ob-ru">Уважаемые пассажиры, поезд на Стамбул, который вы ждёте, задержится на десять минут.</p>
+      </div>
+    </div>
+    <div data-story>
+      <p>Ты понял <span lang="tr">İstanbul</span>. И <span lang="tr">on dakika</span>.</p>
+      <p>Спрашиваешь соседа, что сказали? Он говорит, твой поезд опаздывает.</p>
+      <p>Говоришь, а <span lang="tr">beklemekte olduğunuz</span> это кто? Он говорит, это ты. Ты ждёшь.</p>
+    </div>
+    <div class="ob-split" data-split lang="tr" aria-live="polite">
+      <span class="ob-piece">beklemekte<small data-ui>ждать</small></span>
+      <span class="ob-piece">olduğunuz<small data-ui>вы</small></span>
+    </div>
+    <div class="ob-row"><button type="button" class="ob-btn ob-btn--ink" data-split-go>Разобрать по вагонам</button></div>
+    <p class="ob-punch">Поезд, кстати, опоздал на сорок минут. Объявление было про оптимизм.</p>
+    <p>Сегодня разбираем, как турки вешают на причастие часы. Десять минут. Без опозданий.</p>
+  </section>
+
+  <section id="clock" data-section="clock" data-words="72">
+    <span class="ob-tag">Остановка 1 · зачем olduğu</span>
+    <h2>У -DIk нет часов</h2>
+    <div class="ob-guess" data-guess>
+      <p>Сначала угадай. <span lang="tr">okuduğum kitap</span> — книга, которую я…</p>
+      <div class="ob-guess__opts">
+        <button type="button" data-pick>читаю</button>
+        <button type="button" data-pick>прочитал(а)</button>
+        <button type="button" data-pick data-right>и то и то</button>
+      </div>
+      <p class="ob-guess__out" aria-live="polite" data-yes="Да. -DIk времени не говорит. Турку всё равно." data-no="Можно и так. Но -DIk не уточняет. Это и читаю, и прочитал(а)."></p>
+    </div>
+    <p><span lang="tr">-DIk</span> ты уже знаешь. Книга, которую я читаю. Или читал. Без разницы.</p>
+    <p>Обычно контекст разберётся. Но иногда надо точно. В новостях, в письмах, на вокзале.</p>
+    <p>Тогда время вешают на сам глагол. А <span lang="tr">-DIk</span> переезжает на <span lang="tr">olmak</span>.</p>
+
+    <div class="ob-card ob-clock" data-clock>
+      <svg viewBox="0 0 140 140" aria-hidden="true">
+        <circle cx="70" cy="70" r="64" fill="#fff" stroke="#0b0b0b" stroke-width="5"/>
+        <path data-clock-arc d="M70 70 L70 10 A60 60 0 0 1 122 100 Z" fill="var(--t-now)"/>
+        <g stroke="#0b0b0b" stroke-width="3" stroke-linecap="round"><path d="M70 12 V22 M128 70 H118 M70 128 V118 M12 70 H22"/></g>
+        <line data-clock-hand x1="70" y1="70" x2="70" y2="24" stroke="#0b0b0b" stroke-width="6" stroke-linecap="round"/>
+        <circle cx="70" cy="70" r="7" fill="#0b0b0b"/>
+      </svg>
+      <div>
+        <div class="ob-seg" role="group" aria-label="Время" data-clock-seg>
+          <button type="button" class="is-now" data-time="now" aria-pressed="true">сейчас</button>
+          <button type="button" class="is-done" data-time="done" aria-pressed="false">уже</button>
+          <button type="button" class="is-fut" data-time="fut" aria-pressed="false">потом</button>
+        </div>
+        <p class="ob-phrase" lang="tr" data-clock-phrase><span class="ob-hl is-now">okumakta</span> <span>olduğum</span> <span>kitap</span></p>
+        <p class="ob-ru" data-clock-ru>книга, которую я сейчас читаю</p>
+        <span class="ob-time is-now" data-clock-status>В ПУТИ · -mAktA</span>
+      </div>
+    </div>
+    <p><b lang="tr">-mAktA</b> — процесс, сейчас. <b lang="tr">-mIş</b> — уже готово. <b lang="tr">-(y)AcAk</b> — потом.</p>
+    <p>Книга, которую я уже прочитал? <span lang="tr">okumuş olduğum kitap</span>. Без вариантов.</p>
+  </section>
+
+  <section id="build" data-section="build" data-words="61">
+    <span class="ob-tag">Остановка 2 · сборка</span>
+    <h2>Два вагона и груз</h2>
+    <p>Первый вагон — глагол со временем. Второй — <span lang="tr">olduğ-</span> и хвост лица. В конце груз, существительное.</p>
+    <div class="ob-card" data-builder>
+      <div class="ob-steps" data-build-steps><i class="is-on"></i><i></i><i></i><i></i></div>
+      <div class="ob-train" lang="tr" data-build-train aria-live="polite"></div>
+      <svg class="ob-buildrail" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 4 H600" stroke="#0b0b0b" stroke-width="3"/><path data-sleepers d="M0 10 H600" stroke="#0b0b0b" stroke-width="6" stroke-dasharray="6 18"/></svg>
+      <p class="ob-ru" data-build-cap>Шаг 1. Глагол <span lang="tr">yaşamak</span>, жить.</p>
+      <div class="ob-row ob-row--c">
+        <button type="button" class="ob-btn ob-btn--ghost" data-build-prev>← назад</button>
+        <button type="button" class="ob-btn" data-build-next>прицепить →</button>
+      </div>
+      <div class="ob-persons" role="group" aria-label="Кто" data-persons></div>
+    </div>
+    <p>Смотри на хвост. Он говорит, кто живёт. Город просто стоит.</p>
+    <p>Время живёт в первом вагоне. Лицо во втором. Глагол сам хвоста лица не получает никогда.</p>
+    <p>Хвосты те же, что у <span lang="tr">okuduğum</span>. Только <span lang="tr">oldukları</span>: перед согласной <span lang="tr">k</span> не мягчает.</p>
+  </section>
+
+  <section id="who" data-section="who" data-words="57">
+    <span class="ob-tag">Остановка 3 · olan или olduğu</span>
+    <h2>Кто едет, а кого ждут</h2>
+    <p><span lang="tr">olan</span> ты знаешь. Поезд едет сам. <span lang="tr">olduğu</span> — поезд стоит, его ждут.</p>
+    <div class="ob-card ob-who" data-who>
+      <svg viewBox="0 0 420 150" aria-hidden="true">
+        <path d="M0 132 H420" stroke="#0b0b0b" stroke-width="4"/>
+        <g data-who-train>
+          <path d="M150 124 V70 Q150 54 166 54 H262 Q296 54 300 90 V124 Z" fill="#0b0b0b"/>
+          <rect x="166" y="66" width="24" height="18" rx="4" fill="#27eb62"/><rect x="198" y="66" width="24" height="18" rx="4" fill="#27eb62"/><rect x="230" y="66" width="24" height="18" rx="4" fill="#27eb62"/>
+          <circle cx="180" cy="128" r="7" fill="#0b0b0b"/><circle cx="270" cy="128" r="7" fill="#0b0b0b"/>
+        </g>
+        <g data-who-people>
+          <circle cx="44" cy="74" r="12" fill="#ffcc00" stroke="#0b0b0b" stroke-width="3"/><path d="M28 124 Q30 92 44 90 Q58 92 60 124 Z" fill="#ffcc00" stroke="#0b0b0b" stroke-width="3"/>
+          <circle cx="86" cy="80" r="11" fill="#7cc4ff" stroke="#0b0b0b" stroke-width="3"/><path d="M71 124 Q73 96 86 94 Q99 96 101 124 Z" fill="#7cc4ff" stroke="#0b0b0b" stroke-width="3"/>
+        </g>
+        <g data-who-arrow-train><path d="M310 40 H392" stroke="#12a144" stroke-width="6" stroke-linecap="round"/><path d="M380 28 L396 40 L380 52" fill="none" stroke="#12a144" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g data-who-arrow-people style="visibility:hidden"><path d="M110 60 Q128 30 146 48" fill="none" stroke="#12a144" stroke-width="6" stroke-linecap="round"/><path d="M134 44 L148 50 L142 34" fill="none" stroke="#12a144" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+      </svg>
+      <div class="ob-seg" role="group" aria-label="Кто действует" data-who-seg>
+        <button type="button" class="is-now" data-who-mode="olan" aria-pressed="true">действует поезд</button>
+        <button type="button" class="is-done" data-who-mode="oldugu" aria-pressed="false">действуем мы</button>
+      </div>
+      <p class="ob-who__line" lang="tr" data-who-line>Ankara'ya gelmekte <span class="ob-person">olan</span> tren</p>
+      <p class="ob-who__ru ob-ru" data-who-ru>поезд, который едет в Анкару</p>
+      <div class="ob-row ob-row--c"><button type="button" class="ob-btn ob-btn--ghost" data-who-next>ещё пример →</button></div>
+    </div>
+    <div class="ob-rule">
+      <div><b lang="tr">olan</b><span>слово само делает действие</span></div>
+      <div><b lang="tr">olduğ- + лицо</b><span>делает кто-то другой, хвост говорит кто</span></div>
+    </div>
+    <p>Задай вопрос: кто делает? Если само слово, то <span lang="tr">olan</span>. Если кто-то другой, то <span lang="tr">olduğ-</span> и его хвост.</p>
+    <p>Как <span lang="tr">-An</span> и <span lang="tr">-DIk</span>. Только с часами.</p>
+  </section>
+
+  <section id="lab" data-section="lab" data-words="47">
+    <span class="ob-tag ob-tag--amber">Остановка 4 · лаборатория</span>
+    <h2>Табло вокзала</h2>
+    <p>Собери строку для табло. Табло перевернётся и скажет вслух. Потом проверь себя в двух других режимах.</p>
+    <p>Во втором режиме смотри только на первый вагон. В третьем — на того, кто действует.</p>
+    <div class="ob-tabs" role="tablist" aria-label="Режим лаборатории" data-lab-tabs>
+      <button type="button" role="tab" aria-selected="true" data-mode="build">Собрать</button>
+      <button type="button" role="tab" aria-selected="false" data-mode="time">Какое время?</button>
+      <button type="button" role="tab" aria-selected="false" data-mode="who">olan / olduğu</button>
+    </div>
+    <div class="ob-board" data-board>
+      <div class="ob-board__head"><span class="ob-board__name"><svg viewBox="0 0 20 20" aria-hidden="true" data-board-clock><circle cx="10" cy="10" r="8" fill="none" stroke="#ffcc00" stroke-width="2"/><path data-board-hand d="M10 10 V5" stroke="#ffcc00" stroke-width="2" stroke-linecap="round"/></svg>Ankara Garı</span><span data-board-status>—</span></div>
+      <div class="ob-flaps" lang="tr" data-board-flaps aria-live="polite"></div>
+      <div class="ob-board__foot"><span class="ob-board__ru" data-board-ru></span><button type="button" class="ob-btn" data-board-say>Объявить</button></div>
+    </div>
+    <div class="ob-pick" data-lab-build>
+      <span class="ob-pick__label" data-ui>глагол</span><div class="ob-pick__row" data-pick-verb></div>
+      <span class="ob-pick__label" data-ui>время</span><div class="ob-pick__row" data-pick-time></div>
+      <span class="ob-pick__label" data-ui>кто</span><div class="ob-pick__row" data-pick-person></div>
+    </div>
+    <div data-lab-quiz hidden>
+      <div class="ob-answers" data-lab-answers></div>
+      <p class="ob-labout" aria-live="polite" data-lab-out></p>
+      <div class="ob-row" style="margin-top:8px"><button type="button" class="ob-btn ob-btn--ghost" data-lab-next>следующая строка →</button></div>
+    </div>
+  </section>
+
+  <section id="scene" data-section="scene" data-words="46">
+    <span class="ob-tag ob-tag--ink">Сцена · офис в Анкаре</span>
+    <h2>Письмо от начальницы</h2>
+    <p>Понедельник. Офис. Приходит письмо. Начальница пишет очень официально.</p>
+    <div class="ob-mail" data-mail>
+      <div class="ob-mail__head">
+        <svg viewBox="0 0 44 44" data-envelope aria-hidden="true"><rect x="3" y="9" width="38" height="27" rx="5" fill="#ffcc00" stroke="#0b0b0b" stroke-width="3"/><path data-flapline d="M5 12 L22 25 L39 12" fill="none" stroke="#0b0b0b" stroke-width="3" stroke-linejoin="round"/></svg>
+        <div><b>Toplantı hakkında</b><span>о встрече · 09:12</span></div>
+      </div>
+      <div class="ob-mail__line">
+        <p lang="tr"><button type="button" class="ob-tap is-now" data-mail-tap="0">Hazırlamakta olduğunuz</button> sunum çok önemli.</p>
+        <span class="ob-mail__ru" data-mail-ru="0"></span>
+      </div>
+      <div class="ob-mail__line">
+        <p lang="tr"><button type="button" class="ob-tap is-done" data-mail-tap="1">Bitirmiş olduğunuz</button> raporu okudum. Teşekkürler!</p>
+        <span class="ob-mail__ru" data-mail-ru="1"></span>
+      </div>
+      <div class="ob-mail__line">
+        <p lang="tr"><button type="button" class="ob-tap is-fut" data-mail-tap="2">Katılacak olduğumuz</button> toplantı yarın saat onda.</p>
+        <span class="ob-mail__ru" data-mail-ru="2"></span>
+      </div>
+    </div>
+    <p>Нажми на подсвеченное. Три строки, три времени: сейчас, уже, потом.</p>
+    <p>Читаешь второй раз. Понимаешь. Начальница не злая. Она просто пишет по правилам.</p>
+    <p class="ob-punch">Ответить можно коротко. <span lang="tr">Tamam.</span> Начальницы, кстати, любят коротко.</p>
+  </section>
+
+  <section id="traps" data-section="traps" data-words="61">
+    <span class="ob-tag ob-tag--amber">Ловушки</span>
+    <h2>Четыре места, где сходят с рельсов</h2>
+    <div class="ob-traps">
+      <article class="ob-trap" data-trap>
+        <span class="ob-trap__n">01</span>
+        <h3><span lang="tr">olan</span> там, где ждём мы</h3>
+        <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="beklemekte olan tren" data-fix="beklemekte olduğumuz tren">beklemekte olan tren</span></div>
+        <p>Так поезд сам кого-то ждёт. Ждём мы, значит <span lang="tr">olduğumuz</span>.</p>
+        <button type="button" class="ob-btn" data-trap-fix>Исправить</button>
+      </article>
+      <article class="ob-trap" data-trap>
+        <span class="ob-trap__n">02</span>
+        <h3>Хвост лица не на глаголе</h3>
+        <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="okumaktayım olduğum kitap" data-fix="okumakta olduğum kitap">okumaktayım olduğum kitap</span></div>
+        <p>Лицо ставим один раз, на <span lang="tr">olduğ-</span>. Глагол остаётся голым.</p>
+        <button type="button" class="ob-btn" data-trap-fix>Исправить</button>
+      </article>
+      <article class="ob-trap" data-trap>
+        <span class="ob-trap__n">03</span>
+        <h3><span lang="tr">oldukları</span>, а не <span lang="tr">olduğları</span></h3>
+        <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="yazacak olduğları rapor" data-fix="yazacak oldukları rapor">yazacak olduğları rapor</span></div>
+        <p><span lang="tr">k</span> мягчает только перед гласной. Перед <span lang="tr">-ları</span> держится.</p>
+        <button type="button" class="ob-btn" data-trap-fix>Исправить</button>
+      </article>
+      <article class="ob-trap" data-trap>
+        <span class="ob-trap__n">04</span>
+        <h3>Не каждый поезд с часами</h3>
+        <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#0b0b0b"/><path d="M18 9 V18 L24 22" stroke="#ffcc00" stroke-width="4" stroke-linecap="round" fill="none"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="okuyacak olduğum kitap" data-fix="okuyacağım kitap">okuyacak olduğum kitap</span></div>
+        <p>В разговоре хватит <span lang="tr">okuduğum</span> и <span lang="tr">okuyacağım</span>. Форма с <span lang="tr">olduğu</span> — для точности и официального тона.</p>
+        <button type="button" class="ob-btn" data-trap-fix>Как проще</button>
+      </article>
+    </div>
+  </section>
+
+  <section id="practice" data-section="practice" data-words="2">
+    <span class="ob-tag">Практика</span>
+    <h2>Практика</h2>
+    <a-exercise ref="b2.participle-oldugu.ex1"></a-exercise>
+    <a-exercise ref="b2.participle-oldugu.ex2"></a-exercise>
+
+    <a-exercise ref="b2.participle-oldugu.ex3" class="ak-ex" data-dep-ex>
+      <div class="ak-ex__head"><span class="ak-ex__title">Табло: собери строку</span><span class="ak-ex__count" data-dep-count>1 / 6</span></div>
+      <div class="ob-dep">
+        <div class="ob-dep__task">Нужно: <b data-dep-ru>…</b></div>
+        <div class="ob-dep__line" lang="tr">
+          <span class="ob-dep__slot" data-dep-slot="time">вагон 1</span>
+          <span class="ob-dep__slot is-who" data-dep-slot="who">вагон 2</span>
+          <span class="ob-dep__noun" data-dep-noun>…</span>
+        </div>
+      </div>
+      <div class="ob-pick">
+        <span class="ob-pick__label">вагон 1 · время (1–3)</span><div class="ob-pick__row" data-dep-times></div>
+        <span class="ob-pick__label">вагон 2 · кто (4–6)</span><div class="ob-pick__row" data-dep-persons></div>
+      </div>
+      <p class="ob-dep__status" aria-live="polite" data-dep-status>Выбери два вагона.</p>
+    </a-exercise>
+
+    <a-exercise ref="b2.participle-oldugu.ex4"></a-exercise>
+  </section>
+
+  <section id="check" data-section="check" data-words="9">
+    <span class="ob-tag ob-tag--ink">Мини-проверка</span>
+    <h2>Пять вопросов</h2>
+    <p>Табло в шпаргалке пока не смотри.</p>
+    <a-quiz ref="b2.participle-oldugu.check1"></a-quiz>
+  </section>
+
+  <section id="cheat" data-section="cheat" data-words="60">
+    <div class="ob-cheat">
+      <span class="ob-tag">Сохрани скриншотом</span>
+      <h2>Табло на одном экране</h2>
+      <div class="ob-cheat__formula" lang="tr"><span>глагол + время</span>+<span>olduğ- + лицо</span>+<span>существительное</span></div>
+      <div class="ob-cheat__rows">
+        <button type="button" class="ob-cheat__row is-now" data-say="yaşamakta olduğumuz şehir"><span class="ob-time"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="now"><path d="M2 15 V7 Q2 3 6 3 H22 Q30 3 30 12 V15 Z" fill="currentColor"/><circle cx="8" cy="17" r="2.5" fill="currentColor"/><circle cx="24" cy="17" r="2.5" fill="currentColor"/><path d="M-6 9 H0 M-8 13 H-1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>В ПУТИ</span><b lang="tr">yaşamakta olduğumuz şehir</b><small>город, в котором мы живём</small></button>
+        <button type="button" class="ob-cheat__row is-done" data-say="bitirmiş olduğum iş"><span class="ob-time"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="done"><path d="M6 18 V2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M7 3 H24 L20 7.5 L24 12 H7 Z" fill="currentColor"/></svg>ПРИБЫЛ</span><b lang="tr">bitirmiş olduğum iş</b><small>работа, которую я уже закончил(а)</small></button>
+        <button type="button" class="ob-cheat__row is-fut" data-say="okuyacak oldukları kitap"><span class="ob-time"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="fut"><circle cx="16" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5 V10 L20 12.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>ОТПРАВИТСЯ</span><b lang="tr">okuyacak oldukları kitap</b><small>книга, которую они прочитают</small></button>
+      </div>
+      <p class="ob-cheat__rule"><b>olan</b> — слово действует само. <b>olduğ-</b> — действует кто-то другой.</p>
+      <p class="ob-cheat__rule"><b lang="tr">olduğum · olduğun · olduğu · olduğumuz · olduğunuz · oldukları</b></p>
+    </div>
+    <div class="ob-final" data-final>
+      <p>Анкара. Вокзал. Объявление.</p>
+      <p><a-say>Beklemekte olduğunuz İstanbul treni on dakika gecikecektir.</a-say></p>
+      <p>Ты понимаешь каждое слово. Кто ждёт, что ждёт, когда.</p>
+      <div class="ob-row" style="margin:12px 0"><button type="button" class="ob-btn ob-btn--ink" data-final-go>Отправить поезд</button></div>
+      <p>Теперь ты вешаешь на причастие часы и не путаешь <span lang="tr">olan</span> с <span lang="tr">olduğu</span>.</p>
+      <p class="ob-punch">Поезд, кстати, опять опоздает. Это уже не грамматика.</p>
+    </div>
+  </section>
+
+</main>
+
+<template data-achievement data-title="Поезд прибыл" data-text="Ты ставишь время в причастие: yaşamakta, yaşamış, yaşayacak olduğumuz şehir.">
+  <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+    <rect class="ob-tk" x="10" y="30" width="100" height="62" rx="12" fill="#ffcc00" stroke="#0b0b0b" stroke-width="4"/>
+    <path d="M78 30 V92" stroke="#0b0b0b" stroke-width="3" stroke-dasharray="5 5"/>
+    <text x="44" y="50" text-anchor="middle" font-size="12" font-weight="800" fill="#0b0b0b">ANKARA</text>
+    <text x="44" y="64" text-anchor="middle" font-size="10" font-weight="700" fill="#0b0b0b">→ İSTANBUL</text>
+    <g class="ob-tk-train"><path d="M84 72 V58 Q84 52 90 52 H100 Q106 52 106 60 V72 Z" fill="#0b0b0b"/><rect x="88" y="56" width="6" height="5" fill="#27eb62"/></g>
+    <g class="ob-tk-stamp"><circle cx="58" cy="79" r="10" fill="#fff" stroke="#12a144" stroke-width="3"/><path d="M53 79 L57 83 L64 75" fill="none" stroke="#12a144" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => window.AlternaKit?.speak(t);
+
+  /* ---------- данные: глаголы, время, лица ---------- */
+  const PERSONS = ['olduğum', 'olduğun', 'olduğu', 'olduğumuz', 'olduğunuz', 'oldukları'];
+  const PRON_TR = ['ben', 'sen', 'o', 'biz', 'siz', 'onlar'];
+  const PRON_RU = ['я', 'ты', 'он(а)', 'мы', 'вы', 'они'];
+  const TIMES = { now: { label: 'сейчас', status: 'В ПУТИ', aff: '-mAktA' }, done: { label: 'уже', status: 'ПРИБЫЛ', aff: '-mIş' }, fut: { label: 'потом', status: 'ОТПРАВИТСЯ', aff: '-(y)AcAk' } };
+  const VERBS = {
+    oku: { inf: 'okumak', noun: 'kitap', head: 'книга, которую', form: { now: 'okumakta', done: 'okumuş', fut: 'okuyacak' },
+      ru: { now: ['читаю', 'читаешь', 'читает', 'читаем', 'читаете', 'читают'], done: ['уже прочитал(а)', 'уже прочитал(а)', 'уже прочитал(а)', 'уже прочитали', 'уже прочитали', 'уже прочитали'], fut: ['прочитаю', 'прочитаешь', 'прочитает', 'прочитаем', 'прочитаете', 'прочитают'] } },
+    yaşa: { inf: 'yaşamak', noun: 'şehir', head: 'город, в котором', form: { now: 'yaşamakta', done: 'yaşamış', fut: 'yaşayacak' },
+      ru: { now: ['живу', 'живёшь', 'живёт', 'живём', 'живёте', 'живут'], done: ['жил(а)', 'жил(а)', 'жил(а)', 'жили', 'жили', 'жили'], fut: ['буду жить', 'будешь жить', 'будет жить', 'будем жить', 'будете жить', 'будут жить'] } },
+    yaz: { inf: 'yazmak', noun: 'rapor', head: 'отчёт, который', form: { now: 'yazmakta', done: 'yazmış', fut: 'yazacak' },
+      ru: { now: ['пишу', 'пишешь', 'пишет', 'пишем', 'пишете', 'пишут'], done: ['уже написал(а)', 'уже написал(а)', 'уже написал(а)', 'уже написали', 'уже написали', 'уже написали'], fut: ['напишу', 'напишешь', 'напишет', 'напишем', 'напишете', 'напишут'] } },
+    bekle: { inf: 'beklemek', noun: 'tren', head: 'поезд, который', form: { now: 'beklemekte', done: 'beklemiş', fut: 'bekleyecek' },
+      ru: { now: ['жду', 'ждёшь', 'ждёт', 'ждём', 'ждёте', 'ждут'], done: ['ждал(а)', 'ждал(а)', 'ждал(а)', 'ждали', 'ждали', 'ждали'], fut: ['буду ждать', 'будешь ждать', 'будет ждать', 'будем ждать', 'будете ждать', 'будут ждать'] } },
+  };
+  const phraseTr = (v, t, p) => `${VERBS[v].form[t]} ${PERSONS[p]} ${VERBS[v].noun}`;
+  const phraseRu = (v, t, p) => `${VERBS[v].head} ${PRON_RU[p]} ${VERBS[v].ru[t][p]}`;
+
+  /* ---------- общие эффекты ---------- */
+  function whileVisible(el, start, stop) {
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop())).observe(el);
+  }
+  function burst(el, colors = ['#27eb62', '#ffcc00', '#0b0b0b', '#7cc4ff']) {
+    if (!anim || !el) return;
+    const r = el.getBoundingClientRect();
+    for (let k = 0; k < 14; k++) {
+      const s = document.createElement('i');
+      s.className = 'ob-spark';
+      s.style.background = colors[k % colors.length];
+      document.body.append(s);
+      const ang = (Math.PI * 2 * k) / 14, d = 40 + Math.random() * 50;
+      G.set(s, { x: r.left + r.width / 2, y: r.top + r.height / 2, rotation: Math.random() * 180 });
+      G.to(s, { x: `+=${Math.cos(ang) * d}`, y: `+=${Math.sin(ang) * d - 30}`, rotation: '+=240', scale: .3, duration: .8, ease: 'power3.out', onComplete: () => s.remove() });
+    }
+  }
+  function shake(el) { if (anim) G.fromTo(el, { x: -10 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' }); }
+  /* табло: каждое слово переворачивается, как пластинка */
+  function flapTo(box, words) {
+    box.replaceChildren(...words.map(([w, cls]) => {
+      const s = document.createElement('span');
+      s.className = `ob-flap ${cls || ''}`;
+      s.textContent = w;
+      return s;
+    }));
+    if (anim) G.fromTo(box.children, { rotationX: -90 }, { rotationX: 0, duration: .45, stagger: .09, ease: 'back.out(2)' });
+  }
+
+  /* ---------- свой скроллбар: поезд едет по рельсам ---------- */
+  const rail = $('[data-scrollbar]'), railFill = $('[data-rail-fill]'), railTrain = $('[data-rail-train]');
+  const sections = $$('main [data-section]');
+  const TITLES = { story: 'История', clock: 'Зачем olduğu', build: 'Сборка', who: 'olan или olduğu', lab: 'Табло', scene: 'Письмо', traps: 'Ловушки', practice: 'Практика', check: 'Мини-проверка', cheat: 'Шпаргалка' };
+  const marks = new Map();
+  sections.forEach((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'ob-rail__st'; b.setAttribute('aria-label', TITLES[s.dataset.section] || s.dataset.section);
+    b.addEventListener('click', (e) => { e.stopPropagation(); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    rail.append(b);
+    marks.set(s.dataset.section, b);
+  });
+  const docMax = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  function placeMarks() {
+    const w = rail.clientWidth - 44;
+    sections.forEach((s) => {
+      const p = Math.min(1, Math.max(0, (s.getBoundingClientRect().top + scrollY - 80) / docMax()));
+      marks.get(s.dataset.section).style.left = `${22 + p * w}px`;
+    });
+  }
+  function paintRail() {
+    const p = Math.min(1, scrollY / docMax());
+    railFill.style.transform = `scaleX(${p})`;
+    railTrain.style.transform = `translateX(${p * (rail.clientWidth - 44)}px)`;
+  }
+  addEventListener('scroll', paintRail, { passive: true });
+  addEventListener('resize', () => { placeMarks(); paintRail(); });
+  addEventListener('load', () => { placeMarks(); paintRail(); });
+  placeMarks(); paintRail();
+  addEventListener('alterna:read', (e) => {
+    const m = marks.get(e.detail?.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (anim) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' });
+  });
+  let dragging = false;
+  const jumpTo = (x) => { const r = rail.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (x - r.left - 22) / (r.width - 44))); scrollTo({ top: p * docMax() }); };
+  rail.addEventListener('pointerdown', (e) => { if (e.target.closest('.ob-rail__st')) return; dragging = true; rail.setPointerCapture?.(e.pointerId); jumpTo(e.clientX); });
+  rail.addEventListener('pointermove', (e) => { if (dragging) jumpTo(e.clientX); });
+  rail.addEventListener('pointerup', () => { dragging = false; });
+  rail.addEventListener('pointercancel', () => { dragging = false; });
+
+  /* ---------- первый экран ---------- */
+  if (anim) {
+    G.from('[data-hero-train]', { x: -620, duration: 1.6, ease: 'power3.out', delay: .3 });
+    G.from('.ob-status', { y: 30, rotation: 3, duration: .7, stagger: .12, delay: .9, ease: 'back.out(2)' });
+    const idle = G.to('[data-hero-train]', { y: -2, duration: .18, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true });
+    whileVisible($('.ob-hero__train'), () => idle.play(), () => idle.pause());
+    const icons = G.timeline({ repeat: -1, paused: true });
+    icons.to('.ob-status [data-ico="now"]', { x: 4, duration: .4, yoyo: true, repeat: 3, ease: 'sine.inOut' }, 0)
+      .fromTo('.ob-status [data-ico="done"]', { rotation: 0 }, { rotation: -10, transformOrigin: '20% 100%', duration: .25, yoyo: true, repeat: 3 }, 0)
+      .to('.ob-status [data-ico="fut"] path', { rotation: 360, svgOrigin: '16 10', duration: 1.6, ease: 'none' }, 0);
+    whileVisible($('.ob-statuses'), () => icons.play(), () => icons.pause());
+    const boardClock = G.to('[data-board-hand]', { rotation: 360, svgOrigin: '10 10', duration: 6, ease: 'none', repeat: -1, paused: true });
+    whileVisible($('[data-board]'), () => boardClock.play(), () => boardClock.pause());
+  }
+
+  /* ---------- «сначала угадай» ---------- */
+  $$('[data-guess]').forEach((box) => {
+    const out = $('.ob-guess__out', box);
+    $$('[data-pick]', box).forEach((b) => b.addEventListener('click', () => {
+      const ok = b.hasAttribute('data-right');
+      $$('[data-pick]', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      if (!ok) { $('[data-right]', box).classList.add('is-right'); shake(b); } else burst(b);
+      out.textContent = ok ? out.dataset.yes : out.dataset.no;
+    }));
+  });
+
+  /* ---------- история: объявление и разбор по вагонам ---------- */
+  const split = $('[data-split]');
+  const PIECES = [['bekle', 'ждать'], ['mekte', 'сейчас'], ['ol', 'связка'], ['duğ', 'причастие'], ['unuz', 'вы']];
+  let splitDone = false;
+  $('[data-split-go]').addEventListener('click', (e) => {
+    splitDone = !splitDone;
+    const parts = splitDone ? PIECES : [['beklemekte', 'ждать'], ['olduğunuz', 'вы']];
+    split.replaceChildren(...parts.map(([t, ru], i) => {
+      const s = document.createElement('span');
+      s.className = 'ob-piece' + (splitDone && i === 1 ? ' is-now' : '') ;
+      if (splitDone && i === 1) s.style.background = 'var(--t-now)';
+      if (splitDone && i === 4) { s.style.background = 'var(--ink)'; s.style.color = '#fff'; }
+      s.innerHTML = `${t}<small data-ui>${ru}</small>`;
+      return s;
+    }));
+    e.currentTarget.textContent = splitDone ? 'Собрать обратно' : 'Разобрать по вагонам';
+    say('beklemekte olduğunuz');
+    if (anim) G.fromTo(split.children, { y: -24, rotation: () => G.utils.random(-12, 12) }, { y: 0, rotation: 0, duration: .55, stagger: .08, ease: 'bounce.out' });
+  });
+  $('[data-speaker]').addEventListener('click', () => say('Sayın yolcularımız, beklemekte olduğunuz İstanbul treni on dakika gecikecektir.'));
+  if (anim) {
+    G.to('[data-wave]', { scale: 1.15, transformOrigin: '0% 50%', duration: .5, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    G.from('[data-story] p', { x: -36, rotation: -2, duration: .55, stagger: .14, ease: 'back.out(2)', scrollTrigger: { trigger: '[data-story]', start: 'top 85%', once: true } });
+    G.from('.ob-announce', { scale: .85, rotation: -2, duration: .7, ease: 'back.out(2.2)', scrollTrigger: { trigger: '.ob-announce', start: 'top 85%', once: true } });
+  }
+
+  /* ---------- часы: сейчас / уже / потом ---------- */
+  const ARC = { now: 'M70 70 L70 10 A60 60 0 0 1 122 100 Z', done: 'M70 70 L70 10 A60 60 0 1 1 18 100 Z', fut: 'M70 70 L70 10 A60 60 0 0 1 130 70 Z' };
+  const HAND = { now: 120, done: 300, fut: 60 };
+  const clock = $('[data-clock]'), phrase = $('[data-clock-phrase]'), clockRu = $('[data-clock-ru]'), clockStatus = $('[data-clock-status]');
+  function setClock(t) {
+    $$('[data-clock-seg] button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.time === t)));
+    clock.className = `ob-card ob-clock is-${t}`;
+    phrase.innerHTML = `<span class="ob-hl is-${t}">${VERBS.oku.form[t]}</span> <span>olduğum</span> <span>kitap</span>`;
+    clockRu.textContent = phraseRu('oku', t, 0);
+    clockStatus.className = `ob-time is-${t}`;
+    clockStatus.textContent = `${TIMES[t].status} · ${TIMES[t].aff}`;
+    $('[data-clock-arc]').setAttribute('d', ARC[t]);
+    $('[data-clock-arc]').setAttribute('fill', `var(--t-${t})`);
+    say(phraseTr('oku', t, 0));
+    if (anim) {
+      G.to('[data-clock-hand]', { rotation: HAND[t], svgOrigin: '70 70', duration: .8, ease: 'elastic.out(1, .5)' });
+      G.fromTo(phrase.children[0], { rotationX: -90 }, { rotationX: 0, duration: .45, ease: 'back.out(2)' });
+      G.fromTo(clockStatus, { scale: .6 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+    } else if (G) G.set('[data-clock-hand]', { rotation: HAND[t], svgOrigin: '70 70' });
+  }
+  $$('[data-clock-seg] button').forEach((b) => b.addEventListener('click', () => setClock(b.dataset.time)));
+  clock.classList.add('is-now');
+  if (G) G.set('[data-clock-hand]', { rotation: HAND.now, svgOrigin: '70 70' });
+
+  /* ---------- сборка: вагоны по шагам ---------- */
+  const train = $('[data-build-train]'), buildCap = $('[data-build-cap]'), stepDots = $$('[data-build-steps] i');
+  let bStep = 0, bPerson = 3;
+  const wagon = (tr, ru, cls) => `<span class="ob-wagon ${cls}">${tr}<small data-ui>${ru}</small></span>`;
+  function drawBuild(animateLast) {
+    const parts = [wagon('yaşa', 'жить', '')];
+    if (bStep >= 1) parts[0] = wagon('yaşa<b>makta</b>', 'жить · сейчас', 'ob-wagon--time is-now');
+    if (bStep >= 2) parts.push(wagon(bStep >= 3 ? PERSONS[bPerson] : 'olduğ-', bStep >= 3 ? PRON_TR[bPerson] : 'причастие', 'ob-wagon--who'));
+    if (bStep >= 3) parts.push(wagon('şehir', 'город', ''));
+    train.innerHTML = parts.join('');
+    stepDots.forEach((d, i) => d.classList.toggle('is-on', i === bStep));
+    const caps = [
+      'Шаг 1. Глагол <span lang="tr">yaşamak</span>, жить. Берём основу.',
+      'Шаг 2. Первый вагон получает время: <span lang="tr">-makta</span>, сейчас.',
+      'Шаг 3. Второй вагон: <span lang="tr">ol + duğ</span>. Кто — пока неизвестно.',
+      `Шаг 4. Хвост лица и груз: ${phraseRu('yaşa', 'now', bPerson)}.`,
+    ];
+    buildCap.innerHTML = caps[bStep];
+    $('[data-build-next]').textContent = bStep === 3 ? '↻ сначала' : 'прицепить →';
+    $('[data-persons]').hidden = bStep < 3;
+    if (anim && animateLast && train.lastElementChild) {
+      G.fromTo(train.lastElementChild, { x: 80, rotation: 6 }, { x: 0, rotation: 0, duration: .6, ease: 'back.out(2)' });
+      G.fromTo('[data-sleepers]', { strokeDashoffset: 0 }, { strokeDashoffset: -48, duration: .6, ease: 'power2.out' });
+    }
+    if (bStep === 3) say(phraseTr('yaşa', 'now', bPerson));
+  }
+  $('[data-build-next]').addEventListener('click', () => { bStep = bStep === 3 ? 0 : bStep + 1; drawBuild(true); });
+  $('[data-build-prev]').addEventListener('click', () => { bStep = Math.max(0, bStep - 1); drawBuild(false); });
+  const personsBox = $('[data-persons]');
+  PERSONS.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.dataset.p = i; b.setAttribute('aria-pressed', String(i === bPerson));
+    b.innerHTML = `${PRON_TR[i]}<small lang="tr">${p}</small>`;
+    personsBox.append(b);
+  });
+  personsBox.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-p]');
+    if (!b) return;
+    bPerson = Number(b.dataset.p);
+    $$('[data-p]', personsBox).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    drawBuild(false);
+    if (anim) G.fromTo('.ob-wagon--who', { y: -20, rotation: -6 }, { y: 0, rotation: 0, duration: .5, ease: 'bounce.out' });
+  });
+  drawBuild(false);
+
+  /* ---------- olan или olduğu ---------- */
+  const WHO = [
+    { olan: ["Ankara'ya gelmekte", 'tren', 'поезд, который едет в Анкару'], oldugu: ['beklemekte', 'tren', 'поезд, который мы ждём'] },
+    { olan: ['bitmiş', 'proje', 'проект, который закончился'], oldugu: ['bitirmiş', 'proje', 'проект, который мы закончили'] },
+    { olan: ['beklemekte', 'adam', 'человек, который ждёт'], oldugu: ['beklemekte', 'adam', 'человек, которого мы ждём'] },
+  ];
+  let whoIdx = 0, whoMode = 'olan';
+  function drawWho() {
+    const [left, noun, ru] = WHO[whoIdx][whoMode];
+    const tail = whoMode === 'olan' ? 'olan' : 'olduğumuz';
+    $('[data-who-line]').innerHTML = `${left} <span class="ob-person">${tail}</span> ${noun}`;
+    $('[data-who-ru]').textContent = ru;
+    $$('[data-who-seg] button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.whoMode === whoMode)));
+    $('[data-who-arrow-train]').style.visibility = whoMode === 'olan' ? 'visible' : 'hidden';
+    $('[data-who-arrow-people]').style.visibility = whoMode === 'olan' ? 'hidden' : 'visible';
+    say(`${left} ${tail} ${noun}`);
+    if (anim) {
+      if (whoMode === 'olan') G.fromTo('[data-who-train]', { x: -40 }, { x: 0, duration: .8, ease: 'power2.out' });
+      else G.fromTo('[data-who-people]', { y: -16 }, { y: 0, duration: .6, ease: 'bounce.out' });
+      G.fromTo('.ob-who__line .ob-person', { scale: 1.6 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+    }
+  }
+  $$('[data-who-seg] button').forEach((b) => b.addEventListener('click', () => { whoMode = b.dataset.whoMode; drawWho(); }));
+  $('[data-who-next]').addEventListener('click', () => { whoIdx = (whoIdx + 1) % WHO.length; whoMode = 'olan'; drawWho(); });
+
+  /* ---------- лаборатория: табло ---------- */
+  const flaps = $('[data-board-flaps]'), boardRu = $('[data-board-ru]'), boardStatus = $('[data-board-status]');
+  const lab = { verb: 'yaşa', time: 'now', person: 3, mode: 'build', quiz: null, n: 0 };
+  const verbRow = $('[data-pick-verb]'), timeRow = $('[data-pick-time]'), personRow = $('[data-pick-person]');
+  Object.entries(VERBS).forEach(([k, v]) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.v = k; b.lang = 'tr'; b.textContent = `${v.inf} · ${v.noun}`; verbRow.append(b); });
+  Object.entries(TIMES).forEach(([k, t]) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.t = k; b.className = `is-${k}`; b.textContent = t.label; timeRow.append(b); });
+  PRON_TR.forEach((p, i) => { const b = document.createElement('button'); b.type = 'button'; b.dataset.p = i; b.lang = 'tr'; b.textContent = p; personRow.append(b); });
+  function showBoard(v, t, p, speak = true) {
+    flapTo(flaps, [[VERBS[v].form[t], ''], [PERSONS[p], ''], [VERBS[v].noun, 'is-noun']]);
+    boardRu.textContent = phraseRu(v, t, p);
+    boardStatus.textContent = TIMES[t].status;
+    if (speak) say(phraseTr(v, t, p));
+  }
+  function paintPicks() {
+    $$('button', verbRow).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.v === lab.verb)));
+    $$('button', timeRow).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.t === lab.time)));
+    $$('button', personRow).forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.p) === lab.person)));
+  }
+  $('[data-lab-build]').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    if (b.dataset.v) lab.verb = b.dataset.v;
+    if (b.dataset.t) lab.time = b.dataset.t;
+    if (b.dataset.p) lab.person = Number(b.dataset.p);
+    paintPicks();
+    showBoard(lab.verb, lab.time, lab.person);
+  });
+  $('[data-board-say]').addEventListener('click', () => {
+    say($$('.ob-flap', flaps).map((f) => f.textContent).join(' '));
+    if (anim) G.fromTo(flaps.children, { y: -6 }, { y: 0, duration: .4, stagger: .06, ease: 'bounce.out' });
+  });
+  const WHO_QUIZ = [
+    ['поезд, который едет в Анкару', 'olan', [["Ankara'ya gelmekte", ''], ['olan', ''], ['tren', 'is-noun']]],
+    ['люди, которые живут в Анкаре', 'olan', [["Ankara'da yaşamakta", ''], ['olan', ''], ['insanlar', 'is-noun']]],
+    ['отчёт, который ты написал(а)', 'oldugu', [['yazmış', ''], ['olduğun', ''], ['rapor', 'is-noun']]],
+    ['проект, который закончился', 'olan', [['bitmiş', ''], ['olan', ''], ['proje', 'is-noun']]],
+    ['поезд, который вы ждёте', 'oldugu', [['beklemekte', ''], ['olduğunuz', ''], ['tren', 'is-noun']]],
+  ];
+  const answersBox = $('[data-lab-answers]'), labOut = $('[data-lab-out]');
+  function nextQuiz() {
+    labOut.textContent = '';
+    if (lab.mode === 'time') {
+      const keys = Object.keys(VERBS), v = keys[lab.n % keys.length], t = ['done', 'now', 'fut', 'now', 'fut', 'done'][lab.n % 6], p = (lab.n * 2 + 1) % 6;
+      lab.quiz = { v, t, p };
+      flapTo(flaps, [[VERBS[v].form[t], ''], [PERSONS[p], ''], [VERBS[v].noun, 'is-noun']]);
+      boardRu.textContent = 'Какое время? Выбери статус.';
+      boardStatus.textContent = '?';
+      answersBox.innerHTML = Object.entries(TIMES).map(([k, x]) => `<button type="button" class="is-${k}" data-a="${k}">${x.status}<br><small>${x.label}</small></button>`).join('');
+    } else {
+      const q = WHO_QUIZ[lab.n % WHO_QUIZ.length];
+      lab.quiz = q;
+      flapTo(flaps, [['?', ''], ['?', ''], [q[2][2][0], 'is-noun']]);
+      boardRu.textContent = q[0];
+      boardStatus.textContent = 'olan / olduğu';
+      answersBox.innerHTML = '<button type="button" data-a="olan">olan<br><small>действует само слово</small></button><button type="button" data-a="oldugu">olduğ- + лицо<br><small>действует кто-то другой</small></button>';
+    }
+    lab.n++;
+  }
+  answersBox.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-a]');
+    if (!b || !lab.quiz || b.disabled) return;
+    $$('button', answersBox).forEach((x) => { x.disabled = true; });
+    let ok, right;
+    if (lab.mode === 'time') {
+      const { v, t, p } = lab.quiz;
+      ok = b.dataset.a === t; right = t;
+      boardStatus.textContent = TIMES[t].status;
+      boardRu.textContent = phraseRu(v, t, p);
+      labOut.textContent = ok ? `Да. ${VERBS[v].form[t]}: ${TIMES[t].aff}, ${TIMES[t].label}.` : `Смотри на первый вагон: ${VERBS[v].form[t]}. Это ${TIMES[t].aff}, ${TIMES[t].label}.`;
+      say(phraseTr(v, t, p));
+    } else {
+      const q = lab.quiz;
+      ok = b.dataset.a === q[1]; right = q[1];
+      flapTo(flaps, q[2]);
+      labOut.textContent = ok ? 'Верно.' : (q[1] === 'olan' ? 'Слово действует само, поэтому olan.' : 'Действует кто-то другой, поэтому olduğ- с хвостом.');
+      say(q[2].map((x) => x[0]).join(' '));
+    }
+    b.classList.add(ok ? 'is-right' : 'is-wrong');
+    if (!ok) { $(`[data-a="${right}"]`, answersBox).classList.add('is-right'); shake(b); } else burst(b);
+  });
+  $('[data-lab-next]').addEventListener('click', nextQuiz);
+  function setLabMode(m) {
+    lab.mode = m;
+    $$('[data-lab-tabs] [data-mode]').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.mode === m)));
+    $('[data-lab-build]').hidden = m !== 'build';
+    $('[data-lab-quiz]').hidden = m === 'build';
+    if (m === 'build') { paintPicks(); showBoard(lab.verb, lab.time, lab.person, false); } else { lab.n = 0; nextQuiz(); }
+    if (anim) G.fromTo('[data-board]', { scale: .96, rotation: -1 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(2)' });
+  }
+  $$('[data-lab-tabs] [data-mode]').forEach((t) => t.addEventListener('click', () => setLabMode(t.dataset.mode)));
+  setLabMode('build');
+
+  /* ---------- сцена: письмо ---------- */
+  const MAIL = [
+    ['Презентация, которую вы готовите, очень важна.', 'сейчас · -mAktA'],
+    ['Я прочитала отчёт, который вы закончили. Спасибо!', 'уже · -mIş'],
+    ['Встреча, в которой мы участвуем, завтра в десять.', 'потом · -(y)AcAk'],
+  ];
+  $$('[data-mail-tap]').forEach((b) => b.addEventListener('click', () => {
+    const i = Number(b.dataset.mailTap), out = $(`[data-mail-ru="${i}"]`);
+    out.textContent = `${MAIL[i][0]} (${MAIL[i][1]})`;
+    say(b.closest('p').textContent);
+    if (anim) { G.fromTo(out, { x: -16 }, { x: 0, duration: .45, ease: 'back.out(2)' }); G.fromTo(b, { scale: 1.15 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)' }); }
+  }));
+  $('[data-envelope]').addEventListener('click', () => { if (anim) G.fromTo('[data-flapline]', { y: 0 }, { y: -6, duration: .2, yoyo: true, repeat: 1 }); });
+
+  /* ---------- ловушки: исправить ---------- */
+  $$('[data-trap]').forEach((card) => {
+    const txt = $('[data-trap-txt]', card), btn = $('[data-trap-fix]', card), icon = $('[data-trap-icon]', card);
+    let fixed = false;
+    const wrongHtml = `<s>${txt.dataset.wrong}</s>`;
+    txt.innerHTML = wrongHtml;
+    btn.addEventListener('click', () => {
+      fixed = !fixed;
+      txt.innerHTML = fixed ? txt.dataset.fix : wrongHtml;
+      btn.textContent = fixed ? 'Показать ошибку' : (btn.dataset.label || 'Исправить');
+      icon.querySelector('circle').setAttribute('fill', fixed ? '#12a144' : (card.matches(':last-child') ? '#0b0b0b' : '#e0483e'));
+      if (fixed) say(txt.dataset.fix);
+      if (anim) { G.fromTo(txt, { rotationX: -90 }, { rotationX: 0, duration: .5, ease: 'back.out(2)' }); G.fromTo(icon, { rotation: -90, scale: .5 }, { rotation: 0, scale: 1, duration: .6, ease: 'elastic.out(1, .45)' }); }
+    });
+    btn.dataset.label = btn.textContent;
+  });
+
+  /* ---------- шпаргалка и финал ---------- */
+  $('[data-final-go]').addEventListener('click', () => {
+    say('Beklemekte olduğunuz İstanbul treni on dakika gecikecektir.');
+    if (anim) { G.fromTo('.ob-cheat__row', { x: 0 }, { x: 18, duration: .2, yoyo: true, repeat: 1, stagger: .08 }); burst($('[data-final-go]')); }
+  });
+  $$('.ob-cheat__row').forEach((r) => r.addEventListener('click', () => { if (anim) G.fromTo(r, { scale: .96 }, { scale: 1, duration: .4, ease: 'back.out(3)' }); }));
+
+  /* ---------- ачивка: билет компостируется ---------- */
+  addEventListener('alterna:achievement', (e) => {
+    const { timeline, badge } = e.detail || {};
+    if (!timeline || !badge || !G) return;
+    timeline.from(badge.querySelector('.ob-tk-train'), { x: -60, duration: .6, ease: 'power3.out' }, 0.9)
+      .from(badge.querySelector('.ob-tk-stamp'), { scale: 3, rotation: -40, svgOrigin: '58 79', opacity: 0, duration: .45, ease: 'back.out(3)' }, 1.2)
+      .to(badge.querySelector('.ob-tk'), { rotation: 3, transformOrigin: '50% 50%', duration: .12, yoyo: true, repeat: 1 }, 1.45);
+  });
+
+  /* ---------- сцены по скроллу ---------- */
+  if (anim) {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    $$('main h2').forEach((h) => {
+      const st = new SplitText(h, { type: 'words' });
+      G.from(st.words, { yPercent: 55, rotation: 5, duration: .7, stagger: .05, ease: 'back.out(2)', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    ScrollTrigger.batch('.ob-trap, .ob-rule div, .ob-mail__line, .ob-cheat__row, .ob-guess', {
+      start: 'top 90%', once: true,
+      onEnter: (els) => G.from(els, { y: 36, rotation: 2, scale: .96, duration: .7, stagger: .08, ease: 'back.out(2)' }),
+    });
+    ScrollTrigger.create({ trigger: '[data-clock]', start: 'top 70%', once: true, onEnter: () => { setTimeout(() => setClock('done'), 300); setTimeout(() => setClock('now'), 1700); } });
+    ScrollTrigger.create({ trigger: '[data-builder]', start: 'top 70%', once: true, onEnter: () => { [1, 2, 3].forEach((k) => setTimeout(() => { bStep = k; drawBuild(true); }, 500 * k)); } });
+    ScrollTrigger.create({ trigger: '[data-who]', start: 'top 70%', once: true, onEnter: () => G.from('[data-who-train]', { x: -300, duration: 1.2, ease: 'power3.out' }) });
+    ScrollTrigger.create({ trigger: '[data-board]', start: 'top 75%', once: true, onEnter: () => showBoard(lab.verb, lab.time, lab.person, false) });
+    ScrollTrigger.create({ trigger: '[data-mail]', start: 'top 75%', once: true, onEnter: () => G.from('[data-envelope]', { y: -40, rotation: -20, duration: .8, ease: 'bounce.out' }) });
+    ScrollTrigger.create({ trigger: '.ob-cheat__formula', start: 'top 85%', once: true, onEnter: () => G.from('.ob-cheat__formula span', { x: 60, duration: .6, stagger: .15, ease: 'back.out(2)' }) });
+    ScrollTrigger.create({ trigger: '[data-final]', start: 'top 80%', once: true, onEnter: () => G.from('[data-final] p', { x: -30, duration: .5, stagger: .12, ease: 'back.out(2)' }) });
+    ScrollTrigger.create({ trigger: '.ob-cheat__rows', start: 'top 85%', once: true, onEnter: () => G.from('.ob-cheat__row .ob-ico', { scale: 0, rotation: -90, duration: .6, stagger: .15, ease: 'back.out(3)' }) });
+    ScrollTrigger.create({ trigger: '.ob-traps', start: 'top 80%', once: true, onEnter: () => G.from('[data-trap-icon]', { scale: 0, rotation: 180, duration: .7, stagger: .12, ease: 'back.out(2.5)' }) });
+    const refresh = () => { ScrollTrigger.refresh(); placeMarks(); };
+    addEventListener('load', refresh);
+    document.fonts?.ready.then(refresh);
+    addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  }
+
+  /* ---------- нестандартное упражнение «Табло» — ответы в exercises.json (b2.participle-oldugu.ex3) ---------- */
+  (async () => {
+    const EX = 'b2.participle-oldugu.ex3';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const ruEl = $('[data-dep-ru]', root), nounEl = $('[data-dep-noun]', root), countEl = $('[data-dep-count]', root), statusEl = $('[data-dep-status]', root);
+    const slotT = $('[data-dep-slot="time"]', root), slotW = $('[data-dep-slot="who"]', root);
+    const timesRow = $('[data-dep-times]', root), personsRow = $('[data-dep-persons]', root);
+    const { items } = await AlternaKit.exercise(EX);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false, pickT = null, pickP = null;
+    AlternaTracker.start(EX, 'practice');
+
+    function show() {
+      const it = items[i], v = VERBS[it.verb];
+      pickT = null; pickP = null; locked = false; t0 = performance.now();
+      ruEl.textContent = it.ru; nounEl.textContent = v.noun;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      slotT.className = 'ob-dep__slot'; slotT.textContent = 'вагон 1';
+      slotW.className = 'ob-dep__slot is-who'; slotW.textContent = 'вагон 2';
+      timesRow.innerHTML = ['now', 'done', 'fut'].map((t, k) => `<button type="button" class="is-${t}" data-dt="${t}" aria-pressed="false">${k + 1} · ${v.form[t]}</button>`).join('');
+      personsRow.innerHTML = it.persons.map((p, k) => `<button type="button" data-dp="${p}" aria-pressed="false">${k + 4} · ${PERSONS[p]}</button>`).join('');
+      statusEl.textContent = 'Выбери два вагона.';
+      if (anim) G.fromTo(ruEl, { y: 10 }, { y: 0, duration: .4, ease: 'back.out(2)' });
+    }
+    function tryCheck() {
+      if (pickT == null || pickP == null || locked) return;
+      locked = true;
+      const it = items[i], answer = `${pickT}|${pickP}`, ok = answer === it.answer;
+      if (ok) correct++;
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer, timeMs: Math.round(performance.now() - t0) });
+      statusEl.textContent = ok ? `Поехали. ${phraseTr(it.verb, pickT, pickP)}.` : `Не тот вагон. ${it.explanation}`;
+      if (ok) { say(phraseTr(it.verb, pickT, pickP)); burst(slotW); } else shake($('.ob-dep__line', root));
+      const next = () => { i++; if (i < items.length) show(); else finish(); };
+      if (anim && ok) G.to([slotT, slotW, nounEl], { x: 40, duration: .5, ease: 'power2.in', stagger: .05, onComplete: () => { G.set([slotT, slotW, nounEl], { x: 0 }); setTimeout(next, 400); } });
+      else setTimeout(next, reduce ? 300 : ok ? 900 : 2600);
+    }
+    function finish() {
+      AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+      ruEl.textContent = correct === items.length ? 'Все поезда ушли по расписанию.' : `${correct} из ${items.length}. Табло засчитало.`;
+      countEl.textContent = 'готово';
+      statusEl.textContent = '';
+      timesRow.innerHTML = ''; personsRow.innerHTML = '';
+    }
+    function pickTime(t) {
+      if (locked || i >= items.length) return;
+      pickT = t;
+      $$('[data-dt]', timesRow).forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.dt === t)));
+      slotT.className = `ob-dep__slot is-filled is-${t}`; slotT.textContent = VERBS[items[i].verb].form[t];
+      if (anim) G.fromTo(slotT, { y: -20 }, { y: 0, duration: .45, ease: 'bounce.out' });
+      tryCheck();
+    }
+    function pickPerson(p) {
+      if (locked || i >= items.length) return;
+      pickP = p;
+      $$('[data-dp]', personsRow).forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.dp) === p)));
+      slotW.className = 'ob-dep__slot is-who is-filled'; slotW.textContent = PERSONS[p];
+      if (anim) G.fromTo(slotW, { y: -20 }, { y: 0, duration: .45, ease: 'bounce.out' });
+      tryCheck();
+    }
+    timesRow.addEventListener('click', (e) => { const b = e.target.closest('[data-dt]'); if (b) pickTime(b.dataset.dt); });
+    personsRow.addEventListener('click', (e) => { const b = e.target.closest('[data-dp]'); if (b) pickPerson(Number(b.dataset.dp)); });
+    root.addEventListener('keydown', (e) => {
+      const k = Number(e.key);
+      if (k >= 1 && k <= 3) { pickTime(['now', 'done', 'fut'][k - 1]); e.preventDefault(); }
+      else if (k >= 4 && k <= 6 && items[i]) { pickPerson(items[i].persons[k - 4]); e.preventDefault(); }
+    });
+    root.tabIndex = 0;
+    /* для автопроверки: проходит упражнение правильными ответами */
+    AlternaKit.registerSolver(EX, async () => {
+      const wait = () => new Promise((r) => setTimeout(r, 100));
+      while (i < items.length) {
+        while (locked && i < items.length) await wait();
+        if (i >= items.length) break;
+        const [t, p] = items[i].answer.split('|');
+        pickTime(t); pickPerson(Number(p));
+        await wait();
+      }
+    });
+    show();
+  })();
+});
+</script>
+</body>
+</html>
