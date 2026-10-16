@@ -1,0 +1,1448 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="lib.how-turkish-works">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Турецкий работает как часы: пять правил</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  :root {
+    --bg: #f4f2f0;
+    --ink: #191919;
+    --ink2: #4a4a4a;
+    --mute: #7d7873;
+    --line: #e6e2df;
+    --pink: #ed3482;
+    --pink-l: #f9569b;
+    --pink-xl: #ffd0e4;
+    --pink-d: #c81f68;
+    --taupe: #9a7b6c;
+    --taupe-l: #c8b3a7;
+    --dark: #121212;
+    --dark2: #1d1d1d;
+    --good: #1d9e57;
+    --r: 22px;
+    --sh: 0 18px 44px rgba(24, 20, 18, .09);
+    --f-body: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --f-disp: 'Oswald', 'Bebas Neue', 'Roboto Condensed', 'Arial Narrow', 'Helvetica Neue', Impact, sans-serif;
+    --f-scr: Georgia, 'Times New Roman', serif;
+    --ak-accent: #ed3482;
+    --ak-accent-ink: #ffffff;
+    --ak-accent-soft: #ffe3ef;
+    --ak-ink: #191919;
+    --ak-muted: #6f6a66;
+    --ak-line: #e6e2df;
+    --ak-surface: #faf8f7;
+    --ak-bg: #ffffff;
+    --ak-font: var(--f-body);
+    --ak-font-display: var(--f-disp);
+    --ak-radius: 20px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--ak-text)/1.6 var(--f-body); overflow-x: clip; -webkit-font-smoothing: antialiased; }
+  main { overflow-x: clip; padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
+  button { font: inherit; color: inherit; }
+  h1, h2, h3 { margin: 0; line-height: 1.04; }
+  p { margin: 0 0 12px; }
+  svg { display: block; max-width: 100%; }
+  .tw-wrap { width: 100%; max-width: 1060px; margin: 0 auto; padding: 0 16px; }
+  section[data-section] { padding: clamp(56px, 11vw, 110px) 0 0; position: relative; }
+  [lang="tr"] { font-weight: 600; }
+
+  /* ---------- типографика ---------- */
+  .tw-chip { display: inline-block; padding: 7px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); }
+  .tw-kicker { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 14px; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+  .tw-kicker i { font-style: normal; background: var(--pink); color: #fff; padding: 4px 10px; border-radius: 999px; letter-spacing: .12em; }
+  .tw-h2 { font-family: var(--f-disp); font-stretch: condensed; font-weight: 600; text-transform: uppercase; letter-spacing: .01em; font-size: clamp(28px, 8.2vw, 60px); margin: 0 0 22px; }
+  .tw-h2 span { display: block; }
+  .tw-h3 { font-family: var(--f-disp); font-stretch: condensed; font-weight: 600; text-transform: uppercase; font-size: clamp(20px, 5.6vw, 28px); letter-spacing: .02em; }
+  .tw-script { font-family: var(--f-scr); font-style: italic; color: var(--pink); font-size: clamp(22px, 6vw, 34px); line-height: 1.1; }
+  .tw-lead { font-size: clamp(16px, 4.2vw, 19px); color: var(--ink2); max-width: 58ch; }
+  .tw-chrome {
+    background: linear-gradient(180deg, #fff 0%, #ededed 9%, #a8a8a8 24%, #5a5a5a 40%, #333 48%, #fff 51%, #e0e0e0 56%, #7d7d7d 70%, #454545 84%, #b9b9b9 94%, #6e6e6e 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  }
+  .tw-pink { color: var(--pink); }
+
+  /* ---------- кнопки ---------- */
+  .tw-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 12px 22px; border-radius: 999px; border: 0; cursor: pointer; font-weight: 700; font-size: 15px; letter-spacing: .02em; text-decoration: none; }
+  .tw-btn--dark { background: var(--ink); color: #fff; box-shadow: 0 12px 28px rgba(0, 0, 0, .2); }
+  .tw-btn--pink { background: linear-gradient(180deg, var(--pink-l), var(--pink)); color: #fff; box-shadow: 0 12px 28px rgba(237, 52, 130, .3); }
+  .tw-btn--ghost { background: transparent; color: var(--ink); border: 1.5px solid rgba(25, 25, 25, .22); }
+  .tw-btn--sm { min-height: 44px; padding: 10px 16px; font-size: 14px; }
+  .tw-btn:disabled { opacity: .45; cursor: default; }
+  .tw-btn:focus-visible, .tw-pick:focus-visible, .tw-car:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+  @media (hover: hover) { .tw-btn:hover { scale: 1.03; } .tw-btn { transition: scale .2s ease; } }
+
+  /* ---------- первый экран ---------- */
+  .tw-hero { position: relative; padding: calc(68px + env(safe-area-inset-top)) 0 34px; overflow: hidden; background: radial-gradient(120% 80% at 50% 0%, #fdfcfc 0%, var(--bg) 62%); }
+  .tw-hero__in { position: relative; z-index: 2; }
+  .tw-hero h1 { font-family: var(--f-disp); font-stretch: condensed; font-weight: 700; text-transform: uppercase; font-size: clamp(40px, 8.6vw, 128px); line-height: .94; margin: 18px 0 18px; letter-spacing: .005em; }
+  .tw-hero h1 .ln { display: block; padding-top: .14em; margin-top: -.14em; animation: twRise .9s cubic-bezier(.22, .9, .28, 1) both; }
+  .tw-hero h1 .ln:nth-child(2) { animation-delay: .1s; }
+  .tw-hero h1 .ln:nth-child(3) { animation-delay: .2s; }
+  @keyframes twRise { from { transform: translateY(40%) rotate(3deg); } to { transform: none; } }
+  .tw-hero__sub { max-width: 34ch; font-size: clamp(17px, 4.4vw, 21px); color: var(--ink2); }
+  .tw-hero__cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+  .tw-badge { position: absolute; right: 10px; bottom: 26px; width: clamp(84px, 22vw, 150px); z-index: 1; }
+  .tw-badge svg { width: 100%; height: auto; }
+  .tw-badge text { font: 700 10.5px var(--f-body); letter-spacing: .2em; fill: var(--ink); }
+  .tw-badge__core { font-family: var(--f-disp); font-weight: 700; font-size: 34px; fill: var(--pink); }
+  .tw-squiggle { position: absolute; left: -40px; right: -40px; top: 40%; z-index: 0; opacity: .6; pointer-events: none; }
+  .tw-stickers { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .tw-stk { position: absolute; width: clamp(38px, 10vw, 84px); }
+  .tw-stk--1 { right: 4%; top: 7%; }
+  .tw-stk--2 { left: 58%; top: 10%; width: clamp(28px, 7vw, 56px); }
+  .tw-stk--3 { right: 30%; bottom: 4%; }
+  .tw-stk--4 { left: 4%; bottom: 2%; width: clamp(30px, 8vw, 64px); }
+  .tw-stk--5 { right: 2%; top: 46%; width: clamp(28px, 7vw, 52px); }
+
+  /* живое слово */
+  .tw-morph { margin: 28px 0 0; padding: 22px 16px 18px; border-radius: var(--r); background: var(--dark); color: #fff; text-align: center; box-shadow: var(--sh); }
+  .tw-morph__lbl { font-family: var(--f-scr); font-style: italic; color: var(--pink-l); font-size: 20px; }
+  .tw-morph__word { min-height: 1.3em; margin: 8px 0 4px; font-family: var(--f-disp); font-weight: 700; font-size: clamp(30px, 9vw, 64px); letter-spacing: .02em; overflow-wrap: anywhere; cursor: pointer; }
+  .tw-morph__word span { display: inline-block; }
+  .tw-morph__word span:nth-child(n+2) { color: var(--pink-l); }
+  .tw-morph__word span.is-old { color: #fff; }
+  .tw-morph__tr { color: #cfcac6; min-height: 1.6em; }
+  .tw-morph__dots { display: flex; justify-content: center; gap: 8px; margin: 10px 0 12px; }
+  .tw-morph__dots i { width: 9px; height: 9px; border-radius: 50%; background: #444; }
+  .tw-morph__dots i.on { background: var(--pink); }
+  .tw-morph .tw-btn--ghost { color: #fff; border-color: rgba(255, 255, 255, .35); }
+
+  /* чат в бюфе */
+  .tw-chat { display: grid; gap: 10px; margin: 18px 0; max-width: 560px; }
+  .tw-msg { max-width: 86%; padding: 10px 14px; border-radius: 18px 18px 18px 6px; background: #fff; border: 1px solid var(--line); box-shadow: 0 6px 16px rgba(0, 0, 0, .04); }
+  .tw-msg small { display: block; color: var(--mute); font-size: 14px; }
+  .tw-msg--me { justify-self: end; border-radius: 18px 18px 6px 18px; background: var(--pink-xl); border-color: #f7b6d2; }
+  .tw-msg__who { display: block; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--taupe); }
+  .tw-msg.is-wait { display: none; }
+  .tw-beat { font-family: var(--f-disp); font-stretch: condensed; text-transform: uppercase; font-weight: 600; font-size: clamp(22px, 6vw, 32px); line-height: 1.1; color: var(--pink); margin: 16px 0; }
+
+  /* ---------- карточка механизма ---------- */
+  .tw-mech { margin: 26px 0 0; padding: clamp(18px, 4.5vw, 30px); border-radius: var(--r); background: #fff; border: 1px solid var(--line); box-shadow: var(--sh); }
+  .tw-mech__head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 12px; margin-bottom: 16px; }
+  .tw-mech__lbl { font-size: 11px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; color: var(--pink); }
+  .tw-note { margin: 16px 0 0; font-size: 15px; color: var(--ink2); max-width: 62ch; }
+  .tw-note b { color: var(--ink); }
+  .tw-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+  .tw-story { max-width: 60ch; }
+  .tw-story p { font-size: clamp(16px, 4.2vw, 18px); }
+
+  /* бары надёжности */
+  .tw-bars { display: grid; gap: 12px; }
+  .tw-bar { display: grid; grid-template-columns: minmax(0, 8.5em) 1fr 3em; gap: 10px; align-items: center; }
+  .tw-bar__name { font-size: 14px; font-weight: 600; line-height: 1.25; }
+  .tw-bar__name i { display: block; font-style: normal; font-weight: 400; color: var(--mute); font-size: 13px; }
+  .tw-bar__track { height: 12px; border-radius: 99px; background: #f1edea; overflow: hidden; }
+  .tw-bar__fill { height: 100%; width: calc(var(--v) * 1%); border-radius: 99px; background: linear-gradient(90deg, var(--taupe-l), var(--taupe)); transform-origin: left center; }
+  .tw-bar__fill--pink { background: linear-gradient(90deg, var(--pink-l), var(--pink)); }
+  .tw-bar__num { font-weight: 800; font-variant-numeric: tabular-nums; text-align: right; font-size: 15px; }
+
+  /* станок вопросов */
+  .tw-belt { position: relative; height: 112px; overflow: hidden; border-radius: 16px; background: repeating-linear-gradient(90deg, #ece7e3 0 18px, #e3ddd8 18px 36px); }
+  .tw-belt__rail { position: absolute; left: 0; right: 0; bottom: 18px; height: 6px; background: #cfc6bf; }
+  .tw-belt__machine { position: absolute; left: 50%; top: 0; translate: -50% 0; width: 116px; padding: 8px 6px 10px; border-radius: 0 0 16px 16px; background: var(--dark); color: #fff; text-align: center; z-index: 2; font-size: 12px; line-height: 1.2; }
+  .tw-belt__machine b { display: block; color: var(--pink-l); font-size: 13px; }
+  .tw-bword { position: absolute; left: 0; bottom: 30px; padding: 8px 14px; border-radius: 12px; background: #fff; font-weight: 700; font-size: 20px; white-space: nowrap; box-shadow: 0 6px 16px rgba(0, 0, 0, .1); z-index: 1; }
+  .tw-bword em { font-style: normal; color: var(--pink); }
+  .tw-map { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-top: 14px; }
+  .tw-map button { min-height: 56px; border: 1px solid var(--line); border-radius: 14px; background: var(--ak-surface); cursor: pointer; line-height: 1.2; padding: 6px 4px; }
+  .tw-map b { display: block; color: var(--pink); font-size: 18px; }
+  .tw-map small { color: var(--mute); font-size: 13px; }
+  .tw-stats { display: flex; gap: 22px; margin-top: 12px; }
+  .tw-stats b { display: block; font-family: var(--f-disp); font-size: 30px; line-height: 1; }
+  .tw-stats small { color: var(--mute); font-size: 13px; }
+
+  /* спряжение */
+  .tw-picks { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tw-pick { min-height: 44px; padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font-weight: 700; }
+  .tw-pick.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .tw-conj { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 6px; max-width: 560px; }
+  .tw-conj li { display: grid; grid-template-columns: 4.2em minmax(0, 1fr) 5em; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: var(--ak-surface); font-size: clamp(16px, 4.4vw, 19px); }
+  .tw-conj__pron { color: var(--mute); }
+  .tw-conj__stem { font-weight: 700; overflow-wrap: anywhere; }
+  .tw-conj__end { font-weight: 800; color: #fff; background: var(--pink); border-radius: 8px; text-align: center; padding: 2px 6px; }
+
+  /* поезд */
+  .tw-train__word { display: block; font-family: var(--f-disp); font-weight: 700; font-size: clamp(30px, 9vw, 58px); text-align: center; letter-spacing: .02em; overflow-wrap: anywhere; cursor: pointer; }
+  .tw-train__word span { display: inline-block; color: var(--pink); }
+  .tw-train__tr { text-align: center; color: var(--ink2); min-height: 1.6em; }
+  .tw-cars { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 8px; padding: 14px 0 22px; }
+  .tw-cars::after { content: ''; position: absolute; left: 0; right: 0; bottom: 8px; height: 4px; background: repeating-linear-gradient(90deg, #bdb3ab 0 10px, transparent 10px 16px); }
+  .tw-car { position: relative; min-width: 64px; min-height: 58px; padding: 6px 10px; border-radius: 12px 12px 6px 6px; border: 2px solid var(--line); background: #fff; cursor: pointer; line-height: 1.1; }
+  .tw-car b { display: block; font-size: 18px; }
+  .tw-car small { font-size: 12px; color: var(--mute); }
+  .tw-car--loco { background: var(--ink); color: #fff; border-color: var(--ink); cursor: default; }
+  .tw-car--loco small { color: #bbb; }
+  .tw-car.is-next { border-color: var(--pink); border-style: dashed; }
+  .tw-car.is-on:not(.tw-car--loco) { background: var(--pink); border-color: var(--pink); color: #fff; }
+  .tw-car.is-on small { color: #ffe3ef; }
+  .tw-train__note { text-align: center; color: var(--ink2); font-size: 15px; min-height: 3em; }
+  .tw-vs2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .tw-vs2 > div { padding: 12px; border-radius: 14px; background: var(--ak-surface); text-align: center; }
+  .tw-vs2 svg { width: 72px; height: 54px; margin: 0 auto 6px; }
+
+  /* падежи */
+  .tw-case__pic { width: 100%; max-width: 360px; margin: 0 auto; }
+  .tw-case__ground { stroke: #cfc6bf; stroke-width: 3; }
+  .tw-case__house path, .tw-case__house rect { fill: #f1edea; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+  .tw-case__house.lit path { fill: var(--pink-xl); }
+  .tw-case__arrow { fill: none; stroke: var(--pink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .tw-case__dot { fill: var(--pink); }
+  .tw-case__word { display: block; text-align: center; font-family: var(--f-disp); font-weight: 700; font-size: clamp(30px, 8vw, 48px); cursor: pointer; }
+  .tw-case__word span { color: var(--pink); }
+  .tw-case__tr { text-align: center; color: var(--ink2); margin: 0; }
+  .tw-case__name { text-align: center; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--taupe); margin-top: 8px; }
+  .tw-case__chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+
+  /* порядок слов */
+  .tw-sov__row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; min-height: 64px; align-items: center; }
+  .tw-tok { display: inline-block; padding: 10px 16px; border-radius: 14px; background: var(--ak-surface); border: 1.5px solid var(--line); font-size: clamp(18px, 5vw, 24px); font-weight: 700; }
+  .tw-tok--v { background: #fff0f0; border-color: #e88; color: #b0303a; }
+  .tw-tok--ok { background: var(--pink); border-color: var(--pink); color: #fff; }
+  .tw-sov__ru { text-align: center; color: var(--mute); margin: 10px 0 0; }
+  .tw-verdict { text-align: center; font-size: 15px; color: var(--ink2); min-height: 3em; margin-top: 12px; }
+  .tw-verdict.ok { color: var(--good); font-weight: 600; }
+  .tw-und { display: grid; gap: 16px; }
+  .tw-und__flag { font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--taupe); margin: 0 0 6px; }
+  .tw-und__cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .tw-ucol { display: grid; gap: 6px; justify-items: center; }
+  .tw-ucol__tok { font-weight: 700; padding: 4px 6px; border-radius: 8px; white-space: nowrap; font-size: clamp(13px, 3.9vw, 17px); text-align: center; }
+  .tw-ucol__tok.key { background: var(--pink); color: #fff; }
+  .tw-ucol__meter { position: relative; width: 100%; height: 70px; border-radius: 10px; background: #f1edea; overflow: hidden; }
+  .tw-ucol__meter i { position: absolute; left: 0; right: 0; bottom: 0; height: calc(var(--u, 0) * 1%); background: linear-gradient(0deg, var(--pink), var(--pink-l)); }
+  .tw-ucol__meter b { position: absolute; inset: auto 0 4px; text-align: center; font-size: 13px; z-index: 1; }
+
+  /* род: тёмная секция */
+  .tw-dark { background: var(--dark); color: #f3f0ee; padding-bottom: 56px; margin-top: clamp(56px, 11vw, 110px); }
+  section.tw-dark[data-section] { padding-top: clamp(48px, 9vw, 90px); }
+  .tw-dark .tw-kicker { color: #9d958f; }
+  .tw-dark .tw-story p { color: #e6e1dd; }
+  .tw-dark .tw-mech { background: var(--dark2); border-color: #2c2c2c; box-shadow: none; }
+  .tw-dark .tw-note { color: #c9c3be; }
+  .tw-dark .tw-note b { color: #fff; }
+  .tw-dark .tw-btn--ghost { color: #fff; border-color: rgba(255, 255, 255, .3); }
+  .tw-dark .tw-msg { background: #262626; border-color: #333; color: #fff; }
+  .tw-dark .tw-msg small { color: #aaa; }
+  .tw-dark .tw-msg--me { background: #3a1a2a; border-color: #5a2440; }
+  .tw-dark .tw-chrome, .tw-final .tw-chrome { background-image: linear-gradient(180deg, #fff, #e9e9e9 22%, #b9b9b9 42%, #f4f4f4 52%, #a5a5a5 66%, #fdfdfd 84%, #c4c4c4 100%); }
+  .tw-dark .ak-say__btn { background: #3a1a2a; color: var(--pink-l); }
+  .tw-vs { display: grid; gap: 14px; }
+  .tw-vs__side { padding: 14px; border-radius: 16px; background: #262626; }
+  .tw-vs__side--win { background: #2e1622; }
+  .tw-vs__flag { font-size: 12px; font-weight: 800; letter-spacing: .2em; color: #9d958f; margin: 0 0 8px; }
+  .tw-vs__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .tw-vs__grid span { padding: 6px 4px; border-radius: 8px; background: #333; font-size: 13px; text-align: center; }
+  .tw-vs__one { display: grid; place-items: center; height: 96px; font-family: var(--f-disp); font-size: 64px; color: var(--pink-l); cursor: pointer; }
+  .tw-vs__count { margin: 10px 0 0; font-size: 14px; color: #cfc8c2; }
+  .tw-vs__count b { font-size: 22px; color: #fff; }
+  .tw-one__subj { text-align: center; }
+  .tw-one__subj b { display: block; font-family: var(--f-disp); font-size: clamp(32px, 9vw, 48px); color: var(--pink-l); }
+  .tw-one__subj i { color: #aaa; }
+  .tw-one__lines { display: grid; gap: 10px; margin-top: 14px; }
+  .tw-one__line { display: grid; gap: 2px; padding: 12px 14px; border-radius: 14px; background: #262626; }
+  .tw-one__line--tr { background: #2e1622; }
+  .tw-one__flag { font-size: 11px; font-weight: 800; letter-spacing: .2em; color: #9d958f; text-transform: uppercase; }
+  .tw-one__txt { font-size: 22px; font-weight: 700; }
+  .tw-one__mark { font-style: normal; font-size: 13px; color: #ff9db8; }
+  .tw-one__mark--ok { color: #7ee2a4; }
+
+  /* гармония: куб */
+  .tw-cube svg { width: 100%; max-width: 380px; margin: 0 auto; }
+  .tw-cube__edges path { stroke: #d8d0ca; stroke-width: 2.5; fill: none; }
+  .tw-cube__plane polygon { fill: rgba(237, 52, 130, .12); stroke: var(--pink); stroke-width: 2; stroke-dasharray: 6 5; }
+  .tw-cube__nodes text { font: 700 18px var(--f-body); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .tw-cube__nodes circle { cursor: pointer; }
+  .tw-cube__cap { margin: 12px 0 0; min-height: 4.8em; font-size: 15px; color: var(--ink2); }
+  .tw-cube__cap b { color: var(--pink); }
+
+  /* игра */
+  .tw-game { margin-top: 26px; padding: clamp(16px, 4.5vw, 28px); border-radius: var(--r); background: var(--dark); color: #fff; position: relative; overflow: hidden; }
+  .tw-game__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+  .tw-game__stats { display: flex; gap: 16px; }
+  .tw-game__stats b { display: block; font-family: var(--f-disp); font-size: 26px; line-height: 1; }
+  .tw-game__stats small { font-size: 12px; color: #aaa; }
+  .tw-game__field { position: relative; height: 240px; margin: 14px 0; border-radius: 16px; background: #1d1d1d; overflow: hidden; }
+  .tw-game__start { position: absolute; inset: 0; display: grid; place-content: center; gap: 12px; padding: 16px; text-align: center; color: #ddd; }
+  .tw-gword { position: absolute; left: 50%; top: 0; translate: -50% 0; padding: 8px 16px; border-radius: 12px; background: #fff; color: var(--ink); font-weight: 800; font-size: 22px; white-space: nowrap; }
+  .tw-gword.hit { background: #7ee2a4; }
+  .tw-gword.miss { background: #ff8f8f; }
+  .tw-game__pads { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .tw-pad { min-height: 60px; border-radius: 16px; border: 0; font-size: 22px; font-weight: 800; cursor: pointer; }
+  .tw-pad--ler { background: var(--pink); color: #fff; }
+  .tw-pad--lar { background: #fff; color: var(--ink); }
+  .tw-pad:disabled { opacity: .4; }
+  .tw-game__msg { min-height: 1.6em; margin: 10px 0 0; font-size: 15px; color: #ddd; }
+
+  /* упражнение-станок */
+  .tw-stamp { position: relative; height: 104px; overflow: hidden; border-radius: 16px; background: repeating-linear-gradient(90deg, #ece7e3 0 18px, #e3ddd8 18px 36px); margin: 12px 0; }
+  .tw-stamp__word { position: absolute; left: 50%; top: 50%; translate: -50% -50%; padding: 10px 18px; border-radius: 14px; background: #fff; font-size: 26px; font-weight: 800; white-space: nowrap; box-shadow: 0 6px 16px rgba(0, 0, 0, .1); }
+  .tw-stamp__word em { font-style: normal; color: var(--pink); }
+  .tw-stamps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .tw-stampbtn { min-height: 56px; border-radius: 14px; border: 2px dashed var(--line); background: #fff; font-size: 20px; font-weight: 800; cursor: pointer; color: var(--ink); }
+  .tw-stampbtn small { display: block; font-size: 11px; color: var(--mute); font-weight: 600; }
+  .tw-stampbtn.is-hit { border-style: solid; border-color: var(--ak-good); background: var(--ak-good-soft); }
+  .tw-stampbtn.is-miss { border-style: solid; border-color: var(--ak-bad); background: var(--ak-bad-soft); }
+  .tw-stampbtn:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+  .tw-stamp-status { min-height: 3em; color: var(--ink2); margin: 10px 0 0; }
+
+  /* шпаргалка */
+  .tw-cheat { display: grid; gap: 18px; }
+  .tw-dial { display: grid; gap: 16px; align-items: center; }
+  .tw-dial svg { width: min(100%, 320px); margin: 0 auto; }
+  .tw-dial__num { cursor: pointer; }
+  .tw-dial__num circle { fill: #fff; stroke: var(--ink); stroke-width: 2.5; }
+  .tw-dial__num.is-on circle { fill: var(--pink); stroke: var(--pink); }
+  .tw-dial__num text { font: 800 18px var(--f-body); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+  .tw-dial__num.is-on text { fill: #fff; }
+  .tw-dial__card { padding: 16px; border-radius: 16px; background: var(--ak-surface); min-height: 7em; }
+  .tw-rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; counter-reset: r; }
+  .tw-rules li { counter-increment: r; display: grid; grid-template-columns: 2em 1fr; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #fff; border: 1px solid var(--line); font-size: 15px; }
+  .tw-rules li::before { content: counter(r); display: grid; place-items: center; width: 1.8em; height: 1.8em; border-radius: 50%; background: var(--pink); color: #fff; font-weight: 800; }
+  .tw-final { text-align: center; padding: 26px 16px; border-radius: var(--r); background: var(--dark); color: #fff; position: relative; overflow: hidden; }
+  .tw-final h3 { font-family: var(--f-disp); text-transform: uppercase; font-size: clamp(28px, 8vw, 56px); margin: 6px 0 12px; }
+  .tw-letters { position: relative; height: 90px; margin-top: 12px; }
+  .tw-letters span { position: absolute; bottom: 0; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; font-weight: 800; font-size: 20px; background: linear-gradient(180deg, #fff, #c9c9c9 40%, #f2f2f2 55%, #8a8a8a); color: #222; cursor: pointer; }
+  .tw-letters span:nth-child(3n) { background: linear-gradient(180deg, #ff92c2, var(--pink) 55%, #b81a5f); color: #fff; }
+
+  /* ---------- свой скроллбар: часовая стрелка бежит по ремешку ---------- */
+  .tw-sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 34px; pointer-events: none; }
+  .tw-sb__track { position: absolute; left: 10px; right: 10px; top: 8px; height: 6px; border-radius: 6px; background: rgba(25, 25, 25, .08); pointer-events: auto; touch-action: none; cursor: pointer; }
+  .tw-sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); border-radius: 6px; background: linear-gradient(90deg, var(--pink-l), var(--pink), var(--pink-d)); }
+  .tw-sb__clock { position: absolute; top: -10px; left: calc(var(--p, 0) * 100%); translate: -50% 0; width: 26px; height: 26px; pointer-events: none; }
+  .tw-sb__hand { transform-origin: 13px 13px; transform: rotate(calc(var(--p, 0) * 720deg)); }
+  .tw-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .tw-sb__mark::after { content: ''; position: absolute; inset: 10px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px var(--pink); }
+  .tw-sb__mark.is-read::after { background: var(--pink); }
+  @media (min-width: 768px) {
+    .tw-sb { left: auto; right: 12px; top: 50%; translate: 0 -50%; width: 30px; height: min(64dvh, 540px); }
+    .tw-sb__track { left: 12px; right: auto; top: 0; bottom: 0; width: 6px; height: auto; }
+    .tw-sb__fill { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); }
+    .tw-sb__clock { top: calc(var(--p, 0) * 100%); left: 50%; translate: -50% -50%; }
+    .tw-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+  }
+
+  @media (min-width: 768px) {
+    .tw-vs { grid-template-columns: 1.4fr 1fr; }
+    .tw-dial { grid-template-columns: 320px 1fr; }
+    .tw-badge { right: 4%; bottom: auto; top: 80px; }
+    .tw-chat--ladder { max-width: none; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+    .tw-chat--ladder .tw-msg { max-width: none; }
+  }
+  @media (min-width: 1024px) {
+    .tw-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; align-items: start; }
+  }
+  @media (max-width: 380px) {
+    .tw-conj li { grid-template-columns: 3.4em minmax(0, 1fr) 4.4em; padding: 8px; }
+    .tw-bar { grid-template-columns: minmax(0, 7em) 1fr 2.8em; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tw-hero h1 .ln { animation: none; }
+    * { scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="twChrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/><stop offset="18%" stop-color="#d9d9d9"/><stop offset="38%" stop-color="#8d8d8d"/>
+      <stop offset="50%" stop-color="#efefef"/><stop offset="62%" stop-color="#6f6f6f"/><stop offset="82%" stop-color="#cfcfcf"/><stop offset="100%" stop-color="#9a9a9a"/>
+    </linearGradient>
+    <linearGradient id="twPinkG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd0e4"/><stop offset="35%" stop-color="#f9569b"/><stop offset="65%" stop-color="#ed3482"/><stop offset="100%" stop-color="#c81f68"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<main>
+
+  <!-- ============ КРЮЧОК ============ -->
+  <section data-section="story" data-words="95" id="top">
+    <header class="tw-hero">
+      <svg class="tw-squiggle" viewBox="0 0 600 300" fill="none" aria-hidden="true"><path id="twSquiggle" d="M30 210 C 120 60, 250 30, 340 120 S 470 260, 560 130" stroke="#ed3482" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <div class="tw-stickers" aria-hidden="true">
+        <svg class="tw-stk tw-stk--1" viewBox="0 0 100 100"><path d="M50 88C22 68 8 52 8 34 8 20 19 10 32 10c8 0 15 4 18 10 3-6 10-10 18-10 13 0 24 10 24 24 0 18-14 34-42 54z" fill="none" stroke="url(#twChrome)" stroke-width="7"/></svg>
+        <svg class="tw-stk tw-stk--2" viewBox="0 0 100 100"><path d="M50 6l12 27 30 3-22 20 6 30-26-15-26 15 6-30-22-20 30-3z" fill="none" stroke="url(#twChrome)" stroke-width="7" stroke-linejoin="round"/></svg>
+        <svg class="tw-stk tw-stk--3" viewBox="0 0 100 100"><path d="M56 4L20 56h24l-8 40 40-56H52z" fill="none" stroke="url(#twPinkG)" stroke-width="7" stroke-linejoin="round"/></svg>
+        <svg class="tw-stk tw-stk--4" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="url(#twChrome)" stroke-width="7"/><path d="M50 22v28l18 12" fill="none" stroke="url(#twPinkG)" stroke-width="7" stroke-linecap="round"/></svg>
+        <svg class="tw-stk tw-stk--5" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="url(#twPinkG)" stroke-width="7"/><path d="M50 30v40M34 44l16-16 16 16" fill="none" stroke="url(#twPinkG)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="tw-badge" aria-hidden="true">
+        <svg viewBox="0 0 120 120"><g id="twBadgeRing"><path id="twCirc" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0" fill="none"/>
+          <text><textPath href="#twCirc">ПЯТЬ ПРАВИЛ · БЕЗ ЗУБРЁЖКИ · </textPath></text></g>
+          <text class="tw-badge__core" x="60" y="72" text-anchor="middle">5</text></svg>
+      </div>
+      <div class="tw-wrap tw-hero__in">
+        <span class="tw-chip">Библиотека · обзор · 12 минут</span>
+        <h1><span class="ln tw-chrome">Турецкий</span><span class="ln tw-chrome">работает</span><span class="ln tw-chrome">как часы</span></h1>
+        <p class="tw-hero__sub">Пять правил — и ни одной таблицы, которую надо зубрить. Смотрим, как он устроен внутри.</p>
+        <div class="tw-hero__cta">
+          <button class="tw-btn tw-btn--dark" type="button" data-goto="clock">Завести часы</button>
+          <button class="tw-btn tw-btn--ghost" type="button" data-goto="cheat">Все пять правил сразу</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="tw-wrap">
+      <div class="tw-morph" aria-label="Как растёт турецкое слово">
+        <p class="tw-morph__lbl">одно слово. пять смыслов.</p>
+        <div class="tw-morph__word" id="twMorphWord" data-say="evlerimdeki" lang="tr"><span>ev</span><span>ler</span><span>im</span><span>de</span><span>ki</span></div>
+        <p class="tw-morph__tr" id="twMorphTr" data-ui>тот, который в моих домах</p>
+        <div class="tw-morph__dots" id="twMorphDots"></div>
+        <button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twMorphGo">Собрать заново</button>
+      </div>
+
+      <div class="tw-story" style="margin-top:34px">
+        <p>Анталия. Рядом с домом — бюфе. За стойкой Мурат.</p>
+        <p>Ты три дня готовил одну фразу. Подходишь и говоришь:</p>
+      </div>
+      <div class="tw-chat" id="twChat">
+        <div class="tw-msg tw-msg--me"><span class="tw-msg__who">ты</span><a-say>Bir dürüm, lütfen.</a-say><small>Один дюрюм, пожалуйста.</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Мурат</span><a-say>Bir dürüm mü?</a-say><small>Один дюрюм?</small></div>
+        <div class="tw-msg tw-msg--me"><span class="tw-msg__who">ты</span><a-say>Evet.</a-say><small>Да.</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Мурат</span><a-say>İki dürüm?</a-say><small>Два дюрюма?</small></div>
+        <div class="tw-msg tw-msg--me"><span class="tw-msg__who">ты</span><a-say>Hayır, bir!</a-say><small>Нет, один!</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Мурат</span><a-say>Üç?</a-say><small>Три?</small></div>
+      </div>
+      <button class="tw-btn tw-btn--pink tw-btn--sm" type="button" id="twChatNext">Дальше</button>
+      <div class="tw-story" style="margin-top:18px">
+        <p>Он над тобой смеётся. А ты не понимаешь почему.</p>
+        <p class="tw-beat">Вся шутка — в маленьком <span lang="tr">mü</span>.</p>
+        <p>Через пять правил ты её поймёшь. И заодно увидишь, почему турецкий работает как часы.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРАВИЛО 1 ============ -->
+  <section data-section="clock" data-words="155" id="clock">
+    <div class="tw-wrap">
+      <p class="tw-kicker"><i>Правило 1</i> швейцарские часы</p>
+      <h2 class="tw-h2"><span>Выучил правило —</span><span class="tw-pink">оно не предаёт</span></h2>
+      <div class="tw-story">
+        <p><span lang="tr">Mü</span> у Мурата — это вопрос. Отдельный кусочек, который приклеивается к слову.</p>
+        <p>Приклеивается он всегда одинаково. У этого правила нет исключений.</p>
+        <p class="tw-beat">Ни одного.</p>
+        <p>В русском «человек» во множественном — «люди». Не «человеки». «Ребёнок» — «дети». Запомни отдельно, потому что так.</p>
+        <p>В турецком — правило, которое просто работает: <a-say>insan → insanlar</a-say>, <a-say>çocuk → çocuklar</a-say>.</p>
+      </div>
+
+      <div class="tw-split">
+        <div class="tw-mech">
+          <div class="tw-mech__head"><span class="tw-mech__lbl">Механизм</span><h3 class="tw-h3">Насколько надёжно каждое правило</h3></div>
+          <div class="tw-bars" id="twBars">
+            <div class="tw-bar" style="--v:100"><span class="tw-bar__name">Мн. число<i lang="tr">-lar / -ler</i></span><div class="tw-bar__track"><div class="tw-bar__fill tw-bar__fill--pink"></div></div><span class="tw-bar__num" data-ui>100%</span></div>
+            <div class="tw-bar" style="--v:100"><span class="tw-bar__name">Лицо глагола<i lang="tr">-um, -sun, -uz…</i></span><div class="tw-bar__track"><div class="tw-bar__fill tw-bar__fill--pink"></div></div><span class="tw-bar__num" data-ui>100%</span></div>
+            <div class="tw-bar" style="--v:99"><span class="tw-bar__name">Падежи<i>шесть основных</i></span><div class="tw-bar__track"><div class="tw-bar__fill tw-bar__fill--pink"></div></div><span class="tw-bar__num" data-ui>99%</span></div>
+            <div class="tw-bar" style="--v:95"><span class="tw-bar__name">Гармония<i>кроме заимствований</i></span><div class="tw-bar__track"><div class="tw-bar__fill"></div></div><span class="tw-bar__num" data-ui>95%</span></div>
+            <div class="tw-bar" style="--v:90"><span class="tw-bar__name">Смягчение<i lang="tr">p ç t k → b c d ğ</i></span><div class="tw-bar__track"><div class="tw-bar__fill"></div></div><span class="tw-bar__num" data-ui>90%</span></div>
+          </div>
+          <button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twBarsGo" style="margin-top:14px">Пересчитать</button>
+          <p class="tw-note">Доля случаев, когда правило срабатывает без отдельного списка. Последние два спотыкаются только на заимствованиях и коротком известном списке. <b>Это не «турецкий лёгкий».</b> Это «выученное правило не подводит».</p>
+        </div>
+
+        <div class="tw-mech">
+          <div class="tw-mech__head"><span class="tw-mech__lbl">Смотри</span><h3 class="tw-h3">Станок, который не ломается</h3></div>
+          <div class="tw-belt" id="twBelt" aria-hidden="true">
+            <div class="tw-belt__machine" data-ui>вопрос<b lang="tr">mı mi mu mü</b></div>
+            <div class="tw-belt__rail"></div>
+          </div>
+          <div class="tw-stats" data-ui>
+            <div><b id="twBeltDone">0</b><small>слов прошло</small></div>
+            <div><b>0</b><small>исключений</small></div>
+          </div>
+          <div class="tw-map" id="twMap" role="group" aria-label="Какая частица после какой гласной">
+            <button type="button" data-say="kitap mı"><b lang="tr">mı</b><small lang="tr">a · ı</small></button>
+            <button type="button" data-say="ev mi"><b lang="tr">mi</b><small lang="tr">e · i</small></button>
+            <button type="button" data-say="okul mu"><b lang="tr">mu</b><small lang="tr">o · u</small></button>
+            <button type="button" data-say="göz mü"><b lang="tr">mü</b><small lang="tr">ö · ü</small></button>
+          </div>
+          <div class="tw-row"><button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twBeltToggle">Пауза</button></div>
+          <p class="tw-note">Слово заезжает в станок и выезжает с частицей вопроса. Её гласная подстраивается под последнюю гласную слова. Счётчик исключений стоит на нуле — <b>ему нечего считать</b>.</p>
+        </div>
+      </div>
+
+      <div class="tw-mech">
+        <div class="tw-mech__head"><span class="tw-mech__lbl">Попробуй</span><h3 class="tw-h3">Один набор окончаний на все глаголы</h3></div>
+        <div class="tw-picks" id="twConjPick" role="group" aria-label="Выбери глагол">
+          <button class="tw-pick is-on" type="button" data-stem="geliyor">gelmek <small>· приходить</small></button>
+          <button class="tw-pick" type="button" data-stem="yapıyor">yapmak <small>· делать</small></button>
+          <button class="tw-pick" type="button" data-stem="gidiyor">gitmek <small>· идти</small></button>
+          <button class="tw-pick" type="button" data-stem="içiyor">içmek <small>· пить</small></button>
+        </div>
+        <ul class="tw-conj" id="twConj" data-ui></ul>
+        <p class="tw-note">Меняй глагол сколько хочешь — <b>розовый столбец стоит на месте</b>. Двух спряжений нет, а неправильных глаголов — горстка. В <span lang="tr">gidiyor</span> t стала d: это тоже правило, смягчение из пятой строки.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРАВИЛО 2 ============ -->
+  <section data-section="train" data-words="118" id="train">
+    <div class="tw-wrap">
+      <p class="tw-kicker"><i>Правило 2</i> агглютинация</p>
+      <h2 class="tw-h2"><span>Слово — не слово.</span><span class="tw-pink">Это поезд</span></h2>
+      <div class="tw-story">
+        <p>Бармен Керем учит тебя словам. Говорит слово и каждый раз добавляет кусок.</p>
+      </div>
+      <div class="tw-chat tw-chat--ladder">
+        <div class="tw-msg"><span class="tw-msg__who">Керем</span><a-say>ev</a-say><small>Дом.</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Керем</span><a-say>evler</a-say><small>Дома.</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Керем</span><a-say>evlerim</a-say><small>Мои дома.</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Керем</span><a-say>evlerimde</a-say><small>В моих домах.</small></div>
+        <div class="tw-msg"><span class="tw-msg__who">Керем</span><a-say>evlerimdeki</a-say><small>Тот, который в моих домах. И это одно слово.</small></div>
+      </div>
+      <div class="tw-story">
+        <p>Турецкое слово — поезд. Спереди локомотив, это корень. Дальше вагоны, у каждого свой смысл.</p>
+        <p>Вагоны цепляются всегда в одном порядке. Как в депо.</p>
+        <p>Русское слово — чемодан. Всё утрамбовали, защёлкнули, снаружи не разберёшь, где что.</p>
+        <p class="tw-beat">Турецкое — поезд. Видно каждый вагон.</p>
+      </div>
+
+      <div class="tw-mech">
+        <div class="tw-mech__head"><span class="tw-mech__lbl">Попробуй</span><h3 class="tw-h3">Собери поезд</h3></div>
+        <output class="tw-train__word" id="twTrainWord" data-say="ev" lang="tr">ev</output>
+        <p class="tw-train__tr" id="twTrainTr" data-ui>дом</p>
+        <div class="tw-cars" id="twCars">
+          <button class="tw-car tw-car--loco is-on" type="button" disabled><b lang="tr">ev</b><small>корень</small></button>
+          <button class="tw-car" type="button" data-sfx="ler" data-tr="дома" data-note="множественное число"><b lang="tr">+ler</b><small>много</small></button>
+          <button class="tw-car" type="button" data-sfx="im" data-tr="мои дома" data-note="мой"><b lang="tr">+im</b><small>мой</small></button>
+          <button class="tw-car" type="button" data-sfx="de" data-tr="в моих домах" data-note="где"><b lang="tr">+de</b><small>в, на</small></button>
+          <button class="tw-car" type="button" data-sfx="ki" data-tr="тот, который в моих домах" data-note="который"><b lang="tr">+ki</b><small>который</small></button>
+        </div>
+        <p class="tw-train__note" id="twTrainNote" data-ui>Нажимай вагоны по порядку. Порядок нарушить нельзя — в этом весь смысл.</p>
+        <div class="tw-row" style="justify-content:center"><button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twTrainReset">Расцепить</button></div>
+        <div class="tw-vs2">
+          <div>
+            <svg viewBox="0 0 72 54" aria-hidden="true"><rect x="6" y="14" width="60" height="36" rx="6" fill="#c8b3a7"/><path d="M26 14v-6h20v6" fill="none" stroke="#9a7b6c" stroke-width="4"/><path d="M6 30h60" stroke="#9a7b6c" stroke-width="3"/></svg>
+            <b>чемодан</b><br><small>«в моих домах» — где тут «мой»?</small>
+          </div>
+          <div>
+            <svg viewBox="0 0 72 54" aria-hidden="true"><rect x="2" y="16" width="20" height="26" rx="4" fill="#191919"/><rect x="26" y="20" width="14" height="22" rx="3" fill="#ed3482"/><rect x="43" y="20" width="12" height="22" rx="3" fill="#f9569b"/><rect x="58" y="20" width="12" height="22" rx="3" fill="#ffd0e4"/><circle cx="10" cy="46" r="4" fill="#555"/><circle cx="33" cy="46" r="4" fill="#555"/><circle cx="50" cy="46" r="4" fill="#555"/><circle cx="64" cy="46" r="4" fill="#555"/></svg>
+            <b>поезд</b><br><small>каждый вагон виден отдельно</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="tw-mech">
+        <div class="tw-mech__head"><span class="tw-mech__lbl">Попробуй</span><h3 class="tw-h3">Шесть падежей на одном слове</h3></div>
+        <svg class="tw-case__pic" viewBox="0 0 260 120" role="img" aria-label="Схема: где точка относительно дома">
+          <path class="tw-case__ground" d="M10 100 H250"/>
+          <g class="tw-case__house" id="twHouse"><path d="M96 100 V58 L130 34 L164 58 V100 Z"/><rect x="120" y="74" width="20" height="26" rx="2"/></g>
+          <path class="tw-case__arrow" id="twCaseArrow" d="M0 0"/>
+          <circle class="tw-case__dot" id="twCaseDot" cx="130" cy="86" r="7"/>
+        </svg>
+        <output class="tw-case__word" id="twCaseWord" data-say="ev" lang="tr">ev</output>
+        <p class="tw-case__tr" id="twCaseTr" data-ui>дом</p>
+        <p class="tw-case__name" id="twCaseName" data-ui>основной падеж</p>
+        <div class="tw-case__chips" id="twCaseChips" role="group" aria-label="Падежи">
+          <button class="tw-pick is-on" type="button" data-sfx="" data-tr="дом" data-pos="in" data-name="основной">ev</button>
+          <button class="tw-pick" type="button" data-sfx="i" data-tr="дом (именно этот)" data-pos="lit" data-name="винительный">+i</button>
+          <button class="tw-pick" type="button" data-sfx="e" data-tr="в дом, домой" data-pos="to" data-name="направительный">+e</button>
+          <button class="tw-pick" type="button" data-sfx="de" data-tr="в доме" data-pos="in" data-name="местный">+de</button>
+          <button class="tw-pick" type="button" data-sfx="den" data-tr="из дома" data-pos="from" data-name="исходный">+den</button>
+          <button class="tw-pick" type="button" data-sfx="in" data-tr="дома (чей-то)" data-pos="lit" data-name="родительный">+in</button>
+        </div>
+        <p class="tw-note">Корень не меняется никогда. Меняется только хвост, и хвост подобран по гармонии. Шесть падежей — <b>шесть кусочков</b>, а не шесть таблиц.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРАВИЛО 3 ============ -->
+  <section data-section="order" data-words="132" id="order">
+    <div class="tw-wrap">
+      <p class="tw-kicker"><i>Правило 3</i> порядок слов</p>
+      <h2 class="tw-h2"><span>Глагол уходит</span><span class="tw-pink">в конец</span></h2>
+      <div class="tw-story">
+        <p>Стамбул, аэропорт, кафе. До рейса три часа. Ты собираешь фразу так, как собрал бы по-русски: <s lang="tr">Ben istiyorum çay</s>.</p>
+        <p>Официант улыбается и переспрашивает: <a-say>Ben çay istiyorum?</a-say></p>
+        <p>Он тебя не исправлял. Он просто переставил глагол в конец.</p>
+        <p>В турецком глагол — это точка. Пока он не прозвучал, предложение не закончилось. Поэтому турок дослушивает до конца: у него нет выбора.</p>
+        <p>По-русски можно «я читаю книгу», «книгу я читаю», «читаю я книгу». Всё сработает.</p>
+        <p class="tw-beat">В турецком базовый порядок один. Меньше свободы — меньше способов ошибиться.</p>
+      </div>
+
+      <div class="tw-split">
+        <div class="tw-mech">
+          <div class="tw-mech__head"><span class="tw-mech__lbl">Попробуй</span><h3 class="tw-h3">Переставь глагол</h3></div>
+          <div class="tw-sov__row" id="twSovRow" lang="tr"></div>
+          <p class="tw-sov__ru" id="twSovRu" data-ui></p>
+          <div class="tw-row" style="justify-content:center">
+            <button class="tw-btn tw-btn--pink tw-btn--sm" type="button" id="twSovFix">Глагол — в конец</button>
+            <button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twSovNext">Другое предложение</button>
+          </div>
+          <p class="tw-verdict" id="twSovVerdict" data-ui></p>
+        </div>
+
+        <div class="tw-mech">
+          <div class="tw-mech__head"><span class="tw-mech__lbl">Смотри</span><h3 class="tw-h3">Когда становится понятно</h3></div>
+          <div class="tw-und" id="twUnd">
+            <div data-lang="ru"><p class="tw-und__flag">русский</p><div class="tw-und__cols"></div></div>
+            <div data-lang="tr"><p class="tw-und__flag">турецкий</p><div class="tw-und__cols"></div></div>
+          </div>
+          <div class="tw-row"><button class="tw-btn tw-btn--pink tw-btn--sm" type="button" id="twUndGo">Проиграть оба</button></div>
+          <p class="tw-note">По-русски смысл набирается по дороге: услышал «читаю» — уже ясно, что происходит. По-турецки до последнего слова <b>непонятно главное</b>. Поэтому турка бесполезно перебивать.</p>
+          <p class="tw-note">В живой речи слово иногда выносят за глагол — для эмоции. Но глагол в конце никогда не будет ошибкой.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРАВИЛО 4 ============ -->
+  <section data-section="gender" data-words="185" id="gender" class="tw-dark">
+    <div class="tw-wrap">
+      <p class="tw-kicker"><i>Правило 4</i> род и артикли</p>
+      <h2 class="tw-h2"><span class="tw-chrome">Ни рода.</span><span class="tw-pink">Ни артиклей</span></h2>
+      <div class="tw-story"><p>Попробуй объяснить турку русский. Начни с простого: стол, дверь, ложка.</p></div>
+      <div class="tw-chat">
+        <div class="tw-msg"><span class="tw-msg__who">турок</span>Почему «мой стол», но «моя дверь»?</div>
+        <div class="tw-msg tw-msg--me"><span class="tw-msg__who">ты</span>У стола мужской род, у двери женский.</div>
+        <div class="tw-msg"><span class="tw-msg__who">турок</span>У двери есть пол?</div>
+        <div class="tw-msg tw-msg--me"><span class="tw-msg__who">ты</span>Ну да. И у ложки. И у ночи.</div>
+        <div class="tw-msg"><span class="tw-msg__who">турок</span>А как понять, какой?</div>
+        <div class="tw-msg tw-msg--me"><span class="tw-msg__who">ты</span>Никак. Просто запомнить.</div>
+      </div>
+      <div class="tw-story">
+        <p>В турецком рода нет вообще. Ни у чего. Нет «он» и «она» — есть <span lang="tr">o</span>. Одно слово на всех.</p>
+        <p>Артиклей тоже нет. <a-say>O güzel.</a-say> Он красивый. Она красивая. Оно красивое.</p>
+        <p>Одна фраза. Ноль способов ошибиться.</p>
+        <p class="tw-beat">Понимаешь это в трамвае — и улыбаешься. Соседка напротив пересаживается.</p>
+      </div>
+
+      <div class="tw-mech">
+        <div class="tw-mech__head"><span class="tw-mech__lbl">Механизм</span><h3 class="tw-h3 tw-chrome">Сколько форм надо помнить</h3></div>
+        <div class="tw-vs">
+          <div class="tw-vs__side">
+            <p class="tw-vs__flag">РУССКИЙ</p>
+            <div class="tw-vs__grid" id="twDeGrid">
+              <span>мой стол</span><span>моя дверь</span><span>моё окно</span>
+              <span>этот стол</span><span>эта дверь</span><span>это окно</span>
+              <span>большой стол</span><span>большая дверь</span><span>большое окно</span>
+              <span>он красивый</span><span>она красивая</span><span>оно красивое</span>
+            </div>
+            <p class="tw-vs__count"><b id="twDeCount" data-ui>12</b> форм только для трёх слов</p>
+          </div>
+          <div class="tw-vs__side tw-vs__side--win">
+            <p class="tw-vs__flag">ТУРЕЦКИЙ</p>
+            <div class="tw-vs__one" id="twOneO" data-say="o" lang="tr">o</div>
+            <p class="tw-vs__count"><b>1</b> слово на он, она, оно, этот, тот</p>
+          </div>
+        </div>
+        <div class="tw-row"><button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twDeGo">Пересчитать формы</button></div>
+        <p class="tw-note">Дело не в том, что турецкий лучше. Дело в том, куда уходит память в первые полгода. В русском её съедает согласование. <b>В турецком согласовывать нечего</b> — память уходит в слова.</p>
+      </div>
+
+      <div class="tw-mech">
+        <div class="tw-mech__head"><span class="tw-mech__lbl">Смотри</span><h3 class="tw-h3 tw-chrome">Одна фраза на всех</h3></div>
+        <div class="tw-one__subj"><b id="twOneSubj" lang="tr">çocuk</b><i id="twOneSubjRu" data-ui>ребёнок</i></div>
+        <div class="tw-one__lines">
+          <div class="tw-one__line"><span class="tw-one__flag">русский</span><b class="tw-one__txt" id="twOneRu" data-ui>Он красивый.</b><em class="tw-one__mark">форма меняется</em></div>
+          <div class="tw-one__line tw-one__line--tr"><span class="tw-one__flag">турецкий</span><b class="tw-one__txt" lang="tr" data-say="O güzel.">O güzel.</b><em class="tw-one__mark tw-one__mark--ok">не изменилась <span id="twOneCount" data-ui>0</span> раз подряд</em></div>
+        </div>
+        <div class="tw-row" style="justify-content:center"><button class="tw-btn tw-btn--ghost tw-btn--sm" type="button" id="twOneGo">Другое слово</button></div>
+        <p class="tw-note">Слева предмет тянет за собой всю фразу. Справа не меняется ничего. Жми сколько хочешь — счётчик будет только расти.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ПРАВИЛО 5 ============ -->
+  <section data-section="harmony" data-words="104" id="harmony">
+    <div class="tw-wrap">
+      <p class="tw-kicker"><i>Правило 5</i> гармония гласных</p>
+      <h2 class="tw-h2"><span>Окончания не учат.</span><span class="tw-pink">Их слышат</span></h2>
+      <div class="tw-story">
+        <p>Даже если медведь наступил на ухо — турецкий зайдёт. Он про слух.</p>
+        <p>Гласная корня решает, какой будет гласная окончания. Это гармония гласных: <a-say>ev → evler</a-say>, <a-say>kitap → kitaplar</a-say>.</p>
+        <p>Так решила не академия. Просто иначе неудобно рту. Скажи вслух <s lang="tr">evlar</s> — рот сопротивляется. Вот и всё правило.</p>
+        <p class="tw-beat">Угадаешь окончание у незнакомого слова — захочется позвонить маме. Даже в три ночи.</p>
+      </div>
+
+      <div class="tw-split">
+        <div class="tw-mech tw-cube">
+          <div class="tw-mech__head"><span class="tw-mech__lbl">Механизм</span><h3 class="tw-h3">Восемь гласных на одном кубе</h3></div>
+          <svg viewBox="0 0 320 260" role="img" aria-label="Куб турецких гласных: восемь гласных по трём признакам">
+            <g class="tw-cube__edges" stroke-linecap="round">
+              <path d="M60 90 L200 90 M200 90 L200 200 M200 200 L60 200 M60 200 L60 90"/>
+              <path d="M120 50 L260 50 M260 50 L260 160 M260 160 L120 160 M120 160 L120 50"/>
+              <path d="M60 90 L120 50 M200 90 L260 50 M200 200 L260 160 M60 200 L120 160"/>
+            </g>
+            <g class="tw-cube__plane" id="twCubePlane"><polygon points="0,0 0,0 0,0 0,0"/></g>
+            <g class="tw-cube__nodes" id="twCubeNodes"></g>
+          </svg>
+          <div class="tw-picks" id="twCubeCtrl" role="group" aria-label="Признаки гласных" style="justify-content:center">
+            <button class="tw-pick is-on" type="button" data-axis="front">Ряд</button>
+            <button class="tw-pick" type="button" data-axis="round">Губы</button>
+            <button class="tw-pick" type="button" data-axis="high">Подъём</button>
+          </div>
+          <p class="tw-cube__cap" id="twCubeCap" data-ui></p>
+          <p class="tw-note">Восемь гласных — куб из трёх признаков. Для множественного числа важна одна ось: <b>передний ряд → -ler</b>, <b>задний → -lar</b>. Смотришь на последнюю гласную слова — и всё. Исключения — в основном заимствования: <a-say>saat → saatler</a-say>.</p>
+        </div>
+
+        <div class="tw-game" id="twGame">
+          <div class="tw-game__head">
+            <div><span class="tw-mech__lbl">Мини-игра</span><h3 class="tw-h3">Поймай окончание</h3></div>
+            <div class="tw-game__stats" data-ui>
+              <div><b id="twGScore">0</b><small>очков</small></div>
+              <div><b id="twGStreak">0</b><small>подряд</small></div>
+              <div><b id="twGLives">3</b><small>жизни</small></div>
+            </div>
+          </div>
+          <div class="tw-game__field" id="twGameField">
+            <div class="tw-game__start" id="twGameStart">
+              <p style="margin:0">Слова падают. Жми <b lang="tr">-ler</b> или <b lang="tr">-lar</b> по последней гласной. С клавиатуры — стрелки.</p>
+              <button class="tw-btn tw-btn--pink" type="button" id="twGameGo">Играть</button>
+            </div>
+          </div>
+          <div class="tw-game__pads">
+            <button class="tw-pad tw-pad--ler" type="button" data-ans="ler" disabled>-ler</button>
+            <button class="tw-pad tw-pad--lar" type="button" data-ans="lar" disabled>-lar</button>
+          </div>
+          <p class="tw-game__msg" id="twGameMsg" data-ui></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ВИДЕО ============ -->
+  <section data-section="video" data-words="20" id="video">
+    <div class="tw-wrap">
+      <h2 class="tw-h2"><span>Послушай носителя</span></h2>
+      <p>Обрати внимание, как звучат гласные переднего и заднего ряда — и как окончание подстраивается само.</p>
+      <a-video yt="ANWMB_xfd6Q" start="0" end="180" title="Гармония гласных в турецком языке · A1" channel="Турецкий за 5 минут"></a-video>
+    </div>
+  </section>
+
+  <!-- ============ ПРАКТИКА ============ -->
+  <section data-section="practice" data-words="8" id="practice">
+    <div class="tw-wrap">
+      <h2 class="tw-h2"><span>Практика</span></h2>
+      <p>Пять правил — четыре задания. Ошибки тут бесплатные.</p>
+      <a-exercise ref="lib.how-turkish-works.ex1"></a-exercise>
+      <a-exercise ref="lib.how-turkish-works.ex2"></a-exercise>
+      <a-exercise ref="lib.how-turkish-works.ex3"></a-exercise>
+
+      <a-exercise ref="lib.how-turkish-works.ex4" class="ak-ex">
+        <div class="ak-ex__head"><span class="ak-ex__title">Станок вопросов: поставь нужную частицу</span><span class="ak-ex__count" data-stamp-count>1 / 6</span></div>
+        <p style="margin:6px 0 0">Слово заехало в станок. Выбери штамп по последней гласной. Клавиши 1–4.</p>
+        <div class="tw-stamp" aria-live="polite"><span class="tw-stamp__word" data-stamp-word lang="tr">kitap</span></div>
+        <div class="tw-stamps">
+          <button type="button" class="tw-stampbtn" data-stamp="mı">mı<small>1</small></button>
+          <button type="button" class="tw-stampbtn" data-stamp="mi">mi<small>2</small></button>
+          <button type="button" class="tw-stampbtn" data-stamp="mu">mu<small>3</small></button>
+          <button type="button" class="tw-stampbtn" data-stamp="mü">mü<small>4</small></button>
+        </div>
+        <p class="tw-stamp-status" data-stamp-status data-ui></p>
+      </a-exercise>
+    </div>
+  </section>
+
+  <!-- ============ ПРОВЕРКА ============ -->
+  <section data-section="check" data-words="12" id="check">
+    <div class="tw-wrap">
+      <h2 class="tw-h2"><span>Мини-проверка</span></h2>
+      <p>Пять вопросов вперемешку. Шпаргалка — ниже, не подглядывай.</p>
+      <a-quiz ref="lib.how-turkish-works.check1"></a-quiz>
+    </div>
+  </section>
+
+  <!-- ============ ШПАРГАЛКА ============ -->
+  <section data-section="cheat" data-words="67" id="cheat">
+    <div class="tw-wrap tw-cheat">
+      <h2 class="tw-h2"><span>Пять правил</span><span class="tw-pink">на одном циферблате</span></h2>
+      <div class="tw-dial">
+        <svg viewBox="0 0 240 240" role="img" aria-label="Циферблат: пять правил турецкого">
+          <circle cx="120" cy="120" r="108" fill="#fff" stroke="#191919" stroke-width="4"/>
+          <circle cx="120" cy="120" r="96" fill="none" stroke="#e6e2df" stroke-width="2" stroke-dasharray="2 12"/>
+          <g id="twDialNums"></g>
+          <g id="twDialHand"><path d="M120 120 L120 46" stroke="#ed3482" stroke-width="6" stroke-linecap="round"/><path d="M120 120 L160 120" stroke="#191919" stroke-width="5" stroke-linecap="round"/></g>
+          <circle cx="120" cy="120" r="8" fill="#191919"/>
+        </svg>
+        <div class="tw-dial__card" id="twDialCard" aria-live="polite" data-ui></div>
+      </div>
+      <ol class="tw-rules">
+        <li><span><b>Правила без исключений.</b> Частица вопроса, мн. число, лица глагола — всегда одинаково: <span lang="tr">kitap mı, ev mi</span>.</span></li>
+        <li><span><b>Слово — поезд.</b> Корень + вагоны в одном порядке: <span lang="tr">ev-ler-im-de-ki</span>.</span></li>
+        <li><span><b>Глагол в конце.</b> <span lang="tr">Ben çay istiyorum.</span></span></li>
+        <li><span><b>Ни рода, ни артиклей.</b> <span lang="tr">o</span> — он, она, оно.</span></li>
+        <li><span><b>Гармония гласных.</b> Передний ряд → <span lang="tr">-ler</span>, задний → <span lang="tr">-lar</span>.</span></li>
+      </ol>
+      <div class="tw-final">
+        <p class="tw-script">а теперь — Мурат</p>
+        <h3 class="tw-chrome">Шутка понятна</h3>
+        <p><a-say>Bir dürüm mü?</a-say> — «Один дюрюм?» Последняя гласная <span lang="tr">ü</span>, значит, <span lang="tr">mü</span>. Вопрос, приклеенный по правилу.</p>
+        <p>А «два? три?» — просто бюфе-юмор. Теперь ты бы ответил: <a-say>Bir, bir!</a-say></p>
+        <p>Часы заведены. Дальше тикают сами.</p>
+        <div class="tw-letters" id="twLetters" aria-hidden="true"><span>ç</span><span>ğ</span><span>ı</span><span>ö</span><span>ş</span><span>ü</span></div>
+        <button class="tw-btn tw-btn--pink tw-btn--sm" type="button" id="twShake">Встряхнуть буквы</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tw-sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="tw-sb__track">
+    <span class="tw-sb__fill"></span>
+    <svg class="tw-sb__clock" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="11.5" fill="#fff" stroke="#191919" stroke-width="2"/><g class="tw-sb__hand"><path d="M13 13 L13 5" stroke="#ed3482" stroke-width="2.4" stroke-linecap="round"/></g><circle cx="13" cy="13" r="2" fill="#191919"/></svg>
+  </div>
+</nav>
+
+<template data-achievement data-title="Часы заведены" data-text="Ты знаешь пять правил, на которых держится весь турецкий.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="52" fill="#191919"/>
+    <circle cx="60" cy="60" r="44" fill="#f4f2f0"/>
+    <g class="tw-a-ticks" fill="#ed3482">
+      <circle cx="60" cy="24" r="5"/><circle cx="94" cy="49" r="5"/><circle cx="81" cy="89" r="5"/><circle cx="39" cy="89" r="5"/><circle cx="26" cy="49" r="5"/>
+    </g>
+    <g class="tw-a-hand"><path d="M60 60 L60 30" stroke="#ed3482" stroke-width="5" stroke-linecap="round"/></g>
+    <g class="tw-a-hand2"><path d="M60 60 L82 60" stroke="#191919" stroke-width="5" stroke-linecap="round"/></g>
+    <circle cx="60" cy="60" r="5" fill="#191919"/>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = !reduce && window.gsap ? window.gsap : null;
+  const ST = G ? window.ScrollTrigger : null;
+  const $ = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const speak = (t) => window.AlternaKit && window.AlternaKit.speak(t);
+  const NS = 'http://www.w3.org/2000/svg';
+  const onScreen = (el, on, off) => {
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? on() : off && off()), { threshold: 0.2 });
+    io.observe(el);
+  };
+
+  if (G) {
+    G.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    addEventListener('load', () => ScrollTrigger.refresh());
+    document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+
+    /* мягкое появление карточек и строк — фон, без opacity */
+    ScrollTrigger.batch('.tw-mech, .tw-game, .tw-chat .tw-msg:not(.is-wait), .tw-rules li', {
+      start: 'top 88%', once: true,
+      onEnter: (els) => G.from(els, { y: 36, rotation: 1.5, duration: .7, ease: 'power3.out', stagger: .08 })
+    });
+    /* заголовки секций: слова поднимаются */
+    $$('.tw-h2').forEach((h) => {
+      G.from(h.children, { yPercent: 55, rotation: 5, duration: .8, ease: 'back.out(2)', stagger: .12, scrollTrigger: { trigger: h, start: 'top 85%', once: true } });
+    });
+    $$('.tw-kicker i').forEach((k) => {
+      G.from(k, { scale: .4, rotation: -12, duration: .6, ease: 'back.out(3)', scrollTrigger: { trigger: k, start: 'top 90%', once: true } });
+    });
+    $$('.tw-beat').forEach((b) => {
+      G.fromTo(b, { y: 18, rotation: -3 }, { y: 0, rotation: 0, duration: .7, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: b, start: 'top 85%', once: true } });
+    });
+
+    /* первый экран: линия рисуется, стикеры уплывают, значок крутится */
+    const sq = $('#twSquiggle');
+    const len = sq.getTotalLength();
+    G.fromTo(sq, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.tw-hero', start: 'top top', end: 'bottom top', scrub: true } });
+    $$('.tw-stk').forEach((s, i) => {
+      G.to(s, { y: -(60 + i * 30), rotation: 20 + i * 12, ease: 'none', scrollTrigger: { trigger: '.tw-hero', start: 'top top', end: 'bottom top', scrub: true } });
+    });
+    const ring = G.to('#twBadgeRing', { rotation: 360, svgOrigin: '60 60', duration: 18, ease: 'none', repeat: -1 });
+    onScreen($('.tw-badge'), () => ring.play(), () => ring.pause());
+  }
+  document.querySelectorAll('[data-goto]').forEach((b) => b.addEventListener('click', () => {
+    document.getElementById(b.dataset.goto).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }));
+
+  /* ---------- живое слово ev → evlerimdeki ---------- */
+  (() => {
+    const word = $('#twMorphWord'), tr = $('#twMorphTr'), dots = $('#twMorphDots');
+    const STEPS = [['ev', 'дом'], ['ler', 'дома'], ['im', 'мои дома'], ['de', 'в моих домах'], ['ki', 'тот, который в моих домах']];
+    STEPS.forEach(() => dots.append(document.createElement('i')));
+    let timer = 0, i = 0;
+    function step() {
+      if (i === 0) word.textContent = '';
+      $$('span', word).forEach((s) => s.classList.add('is-old'));
+      const seg = document.createElement('span');
+      seg.textContent = STEPS[i][0];
+      word.append(seg);
+      tr.textContent = STEPS[i][1];
+      $$('i', dots).forEach((d, k) => d.classList.toggle('on', k <= i));
+      if (G) G.from(seg, { y: -30, scale: .4, rotation: -10, duration: .55, ease: 'back.out(3)' });
+      i++;
+      if (i < STEPS.length) timer = setTimeout(step, 1100);
+      else { $$('span', word).forEach((s, k) => s.classList.toggle('is-old', k === 0)); i = 0; }
+    }
+    function run() { clearTimeout(timer); i = 0; step(); }
+    if (G) ScrollTrigger.create({ trigger: word, start: 'top 85%', once: true, onEnter: run });
+    else $$('i', dots).forEach((d) => d.classList.add('on'));
+    $('#twMorphGo').addEventListener('click', run);
+  })();
+
+  /* ---------- чат в бюфе: реплики по одной ---------- */
+  (() => {
+    const msgs = $$('#twChat .tw-msg');
+    const next = $('#twChatNext');
+    let shown = 2;
+    msgs.forEach((m, k) => m.classList.toggle('is-wait', k >= shown));
+    next.addEventListener('click', () => {
+      const m = msgs[shown];
+      if (!m) return;
+      m.classList.remove('is-wait');
+      if (G) G.from(m, { scale: .6, y: 20, rotation: m.classList.contains('tw-msg--me') ? 4 : -4, duration: .5, ease: 'back.out(2.5)', transformOrigin: m.classList.contains('tw-msg--me') ? 'right bottom' : 'left bottom' });
+      shown++;
+      if (shown >= msgs.length) { next.disabled = true; next.textContent = 'Он смеётся'; }
+    });
+  })();
+
+  /* ---------- бары надёжности ---------- */
+  (() => {
+    const bars = $$('#twBars .tw-bar');
+    function play() {
+      bars.forEach((b, i) => {
+        const v = parseFloat(b.style.getPropertyValue('--v'));
+        const num = $('.tw-bar__num', b);
+        if (!G) { num.textContent = v + '%'; return; }
+        const o = { n: 0 };
+        G.fromTo($('.tw-bar__fill', b), { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: 'power3.out', delay: i * .12 });
+        G.to(o, { n: v, duration: 1.2, delay: i * .12, ease: 'power3.out', onUpdate: () => { num.textContent = Math.round(o.n) + '%'; } });
+      });
+    }
+    if (G) ScrollTrigger.create({ trigger: '#twBars', start: 'top 80%', once: true, onEnter: play });
+    $('#twBarsGo').addEventListener('click', play);
+  })();
+
+  /* ---------- станок вопросов ---------- */
+  (() => {
+    const belt = $('#twBelt'), done = $('#twBeltDone'), machine = $('.tw-belt__machine', belt), toggle = $('#twBeltToggle');
+    const WORDS = [['kitap', 'mı'], ['ev', 'mi'], ['okul', 'mu'], ['göz', 'mü'], ['yol', 'mu'], ['şehir', 'mi'], ['gün', 'mü'], ['kız', 'mı'], ['araba', 'mı'], ['deniz', 'mi'], ['köy', 'mü'], ['kuş', 'mu']];
+    let wi = 0, count = 0, timer = 0, visible = false, paused = false;
+    const tweens = new Set();
+    function spawn() {
+      const [w, q] = WORDS[wi++ % WORDS.length];
+      const el = document.createElement('div');
+      el.className = 'tw-bword';
+      el.textContent = w;
+      belt.append(el);
+      const W = belt.clientWidth;
+      let stamped = false;
+      if (!G) { el.innerHTML = `${w} <em>${q}</em>`; el.style.left = '50%'; el.style.translate = '-50% 0'; return; }
+      const t = G.fromTo(el, { x: -140 }, {
+        x: W + 40, duration: 4.4, ease: 'none',
+        onUpdate() {
+          if (!stamped && G.getProperty(el, 'x') + el.offsetWidth / 2 >= W / 2) {
+            stamped = true;
+            el.innerHTML = `${w} <em>${q}</em>`;
+            G.fromTo(machine, { y: -6 }, { y: 0, duration: .35, ease: 'bounce.out' });
+            G.from(el, { scale: .7, duration: .3, ease: 'back.out(3)' });
+            done.textContent = ++count;
+          }
+        },
+        onComplete() { el.remove(); tweens.delete(t); }
+      });
+      tweens.add(t);
+    }
+    function loop() { if (!visible || paused) return; spawn(); timer = setTimeout(loop, 1500); }
+    function start() { if (!visible) { visible = true; tweens.forEach((t) => t.resume()); loop(); } }
+    function stop() { visible = false; clearTimeout(timer); tweens.forEach((t) => t.pause()); }
+    if (G) onScreen(belt, start, stop);
+    else { spawn(); }
+    toggle.addEventListener('click', () => {
+      paused = !paused;
+      toggle.textContent = paused ? 'Пуск' : 'Пауза';
+      if (paused) { clearTimeout(timer); tweens.forEach((t) => t.pause()); }
+      else { tweens.forEach((t) => t.resume()); if (visible) loop(); }
+    });
+    $$('#twMap button').forEach((b) => b.addEventListener('pointerdown', () => {
+      if (G) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+    }));
+  })();
+
+  /* ---------- спряжение ---------- */
+  (() => {
+    const list = $('#twConj');
+    const P = [['ben', 'um'], ['sen', 'sun'], ['o', ''], ['biz', 'uz'], ['siz', 'sunuz'], ['onlar', 'lar']];
+    function draw(stem) {
+      list.innerHTML = '';
+      P.forEach(([p, e]) => {
+        const li = document.createElement('li');
+        li.dataset.say = stem + e;
+        li.innerHTML = `<span class="tw-conj__pron" lang="tr">${p}</span><span class="tw-conj__stem" lang="tr">${stem}</span><span class="tw-conj__end" lang="tr">${e ? '-' + e : '—'}</span>`;
+        list.append(li);
+      });
+      if (G) {
+        G.from($$('.tw-conj__stem', list), { x: -30, rotation: -3, duration: .45, ease: 'power3.out', stagger: .05 });
+        G.fromTo($$('.tw-conj__end', list), { scale: 1.25 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)', stagger: .04 });
+      }
+    }
+    $$('#twConjPick .tw-pick').forEach((b) => b.addEventListener('click', () => {
+      $$('#twConjPick .tw-pick').forEach((o) => o.classList.toggle('is-on', o === b));
+      draw(b.dataset.stem);
+    }));
+    draw('geliyor');
+  })();
+
+  /* ---------- поезд ---------- */
+  (() => {
+    const word = $('#twTrainWord'), tr = $('#twTrainTr'), note = $('#twTrainNote');
+    const cars = $$('#twCars .tw-car:not(.tw-car--loco)');
+    let step = 0;
+    const mark = () => cars.forEach((c, i) => c.classList.toggle('is-next', i === step));
+    function reset() {
+      step = 0;
+      word.textContent = 'ev'; word.dataset.say = 'ev'; tr.textContent = 'дом';
+      note.textContent = 'Нажимай вагоны по порядку. Порядок нарушить нельзя — в этом весь смысл.';
+      cars.forEach((c) => c.classList.remove('is-on'));
+      if (G) G.fromTo(cars, { x: 30 }, { x: 0, duration: .5, ease: 'back.out(2)', stagger: .06 });
+      mark();
+    }
+    cars.forEach((c, i) => c.addEventListener('click', () => {
+      if (i < step) return;
+      if (i !== step) {
+        note.textContent = 'Не по порядку. Вагоны цепляются только слева направо — в этом и правило.';
+        if (G) G.fromTo(c, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' });
+        return;
+      }
+      c.classList.add('is-on');
+      const s = document.createElement('span');
+      s.textContent = c.dataset.sfx;
+      word.append(s);
+      word.dataset.say = word.textContent;
+      tr.textContent = c.dataset.tr;
+      note.textContent = `Прицепили вагон «${c.dataset.note}». Слово длиннее, смысл точнее.`;
+      if (G) {
+        G.from(s, { x: 60, rotation: 12, scale: .5, duration: .6, ease: 'back.out(2)' });
+        G.fromTo(c, { y: -10 }, { y: 0, duration: .5, ease: 'bounce.out' });
+      }
+      step++;
+      mark();
+      if (step === cars.length) {
+        note.textContent = 'Одно слово — пять смыслов. По-русски на это ушла бы фраза. Нажми на слово, чтобы послушать.';
+        if (G) G.fromTo(word, { scale: 1.12 }, { scale: 1, duration: .8, ease: 'elastic.out(1, .45)' });
+      }
+    }));
+    $('#twTrainReset').addEventListener('click', reset);
+    mark();
+    if (G) ScrollTrigger.create({ trigger: '#twCars', start: 'top 85%', once: true, onEnter: () => G.from('#twCars .tw-car', { x: -80, rotation: -4, duration: .6, ease: 'power3.out', stagger: .08 }) });
+  })();
+
+  /* ---------- падежи ---------- */
+  (() => {
+    const word = $('#twCaseWord'), tr = $('#twCaseTr'), name = $('#twCaseName');
+    const dot = $('#twCaseDot'), arrow = $('#twCaseArrow'), house = $('#twHouse');
+    const ARROW = { to: 'M30 92 H104 M94 85 L104 92 L94 99', from: 'M156 92 H228 M218 85 L228 92 L218 99' };
+    function apply(b) {
+      const sfx = b.dataset.sfx, pos = b.dataset.pos;
+      word.innerHTML = 'ev' + (sfx ? `<span>${sfx}</span>` : '');
+      word.dataset.say = 'ev' + sfx;
+      tr.textContent = b.dataset.tr;
+      name.textContent = b.dataset.name + ' падеж';
+      house.classList.toggle('lit', pos === 'lit');
+      arrow.setAttribute('d', ARROW[pos] || 'M0 0');
+      const from = pos === 'to' ? { x: -96, y: 6 } : { x: 0, y: 0 };
+      const to = pos === 'from' ? { x: 96, y: 6 } : { x: 0, y: 0 };
+      if (G) {
+        G.fromTo(dot, from, { ...to, duration: .7, ease: 'power2.inOut' });
+        if (ARROW[pos]) G.fromTo(arrow, { strokeDasharray: 140, strokeDashoffset: 140 }, { strokeDashoffset: 0, duration: .6, ease: 'power2.out' });
+        if (sfx) G.from(word.querySelector('span'), { y: -20, scale: .4, duration: .5, ease: 'back.out(3)' });
+        if (pos === 'lit') G.fromTo(house, { scale: 1.08, svgOrigin: '130 70' }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)' });
+      } else {
+        dot.setAttribute('transform', `translate(${to.x} ${to.y})`);
+      }
+    }
+    $$('#twCaseChips .tw-pick').forEach((b) => b.addEventListener('click', () => {
+      $$('#twCaseChips .tw-pick').forEach((o) => o.classList.toggle('is-on', o === b));
+      apply(b);
+    }));
+  })();
+
+  /* ---------- порядок слов ---------- */
+  (() => {
+    const row = $('#twSovRow'), ru = $('#twSovRu'), fix = $('#twSovFix'), verdict = $('#twSovVerdict');
+    const DATA = [
+      [['Ben', 'istiyorum', 'çay'], 'Я хочу чай.'],
+      [['Ben', 'okuyorum', 'kitap'], 'Я читаю книгу.'],
+      [['O', 'gidiyor', 'eve'], 'Он идёт домой.'],
+      [['Biz', 'içiyoruz', 'kahve'], 'Мы пьём кофе.'],
+    ];
+    let idx = 0;
+    function render() {
+      const [toks, r] = DATA[idx];
+      row.innerHTML = '';
+      toks.forEach((t, i) => {
+        const s = document.createElement('span');
+        s.className = 'tw-tok' + (i === 1 ? ' tw-tok--v' : '');
+        s.textContent = t;
+        row.append(s);
+      });
+      ru.textContent = r;
+      fix.disabled = false;
+      verdict.className = 'tw-verdict';
+      verdict.textContent = 'Красным — глагол. Он стоит там, где его поставил бы русскоязычный.';
+      if (G) G.from($$('.tw-tok', row), { y: 24, rotation: -6, duration: .5, ease: 'back.out(2)', stagger: .07 });
+    }
+    fix.addEventListener('click', () => {
+      const toks = $$('.tw-tok', row);
+      const before = toks.map((t) => t.getBoundingClientRect().left);
+      const verb = toks[1];
+      row.append(verb);
+      toks.forEach((t, i) => {
+        const dx = before[i] - t.getBoundingClientRect().left;
+        if (G && Math.abs(dx) > 1) G.fromTo(t, { x: dx }, { x: 0, duration: .7, ease: 'power3.inOut', y: 0 });
+      });
+      if (G) G.fromTo(verb, { y: -26 }, { y: 0, duration: .7, ease: 'bounce.out' });
+      verb.classList.replace('tw-tok--v', 'tw-tok--ok');
+      fix.disabled = true;
+      verdict.className = 'tw-verdict ok';
+      verdict.textContent = 'Вот так. Глагол прозвучал последним — предложение закончено.';
+      speak($$('.tw-tok', row).map((t) => t.textContent).join(' '));
+    });
+    $('#twSovNext').addEventListener('click', () => { idx = (idx + 1) % DATA.length; render(); });
+    render();
+  })();
+
+  /* ---------- шкала понимания ---------- */
+  (() => {
+    const box = $('#twUnd'), go = $('#twUndGo');
+    const ROWS = { ru: [['Я', 15], ['читаю', 70, 1], ['книгу', 100]], tr: [['Ben', 8], ['kitap', 16], ['okuyorum', 100, 1]] };
+    $$('[data-lang]', box).forEach((r) => {
+      const cols = $('.tw-und__cols', r);
+      ROWS[r.dataset.lang].forEach(([w]) => {
+        const c = document.createElement('div');
+        c.className = 'tw-ucol';
+        c.innerHTML = `<span class="tw-ucol__tok" ${r.dataset.lang === 'tr' ? 'lang="tr"' : 'data-ui'}>${w}</span><div class="tw-ucol__meter"><i></i><b data-ui>0%</b></div>`;
+        cols.append(c);
+      });
+    });
+    function play() {
+      $$('[data-lang]', box).forEach((r) => {
+        const data = ROWS[r.dataset.lang];
+        $$('.tw-ucol', r).forEach((c, k) => {
+          const [, v, key] = data[k];
+          const tok = $('.tw-ucol__tok', c), bar = $('i', c), lbl = $('b', c);
+          tok.classList.toggle('key', !!key);
+          if (!G) { bar.style.setProperty('--u', v); lbl.textContent = v + '%'; return; }
+          const o = { u: 0 };
+          G.to(o, { u: v, duration: .7, delay: .3 + k * .9, ease: 'power2.out', onUpdate: () => { bar.style.setProperty('--u', o.u); lbl.textContent = Math.round(o.u) + '%'; } });
+          G.fromTo(tok, { scale: .6 }, { scale: 1, duration: .5, delay: .3 + k * .9, ease: 'back.out(3)' });
+        });
+      });
+    }
+    go.addEventListener('click', play);
+    if (G) ScrollTrigger.create({ trigger: box, start: 'top 75%', once: true, onEnter: play });
+    else play();
+  })();
+
+  /* ---------- русский против турецкого ---------- */
+  (() => {
+    const cells = $$('#twDeGrid span'), cnt = $('#twDeCount'), o = $('#twOneO');
+    function play() {
+      if (!G) return;
+      G.from(cells, { scale: .3, rotation: () => G.utils.random(-20, 20), duration: .5, ease: 'back.out(2.5)', stagger: .06 });
+      const n = { v: 0 };
+      G.to(n, { v: 12, duration: 1.2, ease: 'power2.out', onUpdate: () => { cnt.textContent = Math.round(n.v); } });
+      G.fromTo(o, { scale: .3 }, { scale: 1, duration: 1, delay: .8, ease: 'elastic.out(1, .45)' });
+    }
+    if (G) ScrollTrigger.create({ trigger: '#twDeGrid', start: 'top 80%', once: true, onEnter: play });
+    $('#twDeGo').addEventListener('click', play);
+    o.addEventListener('click', () => { if (G) G.fromTo(o, { rotation: -15 }, { rotation: 0, duration: .8, ease: 'elastic.out(1, .4)' }); });
+  })();
+
+  /* ---------- одна фраза на всех ---------- */
+  (() => {
+    const ITEMS = [['çocuk', 'ребёнок', 'Он красивый.'], ['kapı', 'дверь', 'Она красивая.'], ['deniz', 'море', 'Оно красивое.'], ['kedi', 'кошка', 'Она красивая.'], ['ev', 'дом', 'Он красивый.'], ['gece', 'ночь', 'Она красивая.'], ['güneş', 'солнце', 'Оно красивое.'], ['şehir', 'город', 'Он красивый.']];
+    const subj = $('#twOneSubj'), subjRu = $('#twOneSubjRu'), ru = $('#twOneRu'), cnt = $('#twOneCount');
+    let i = 0, streak = 0;
+    $('#twOneGo').addEventListener('click', () => {
+      i = (i + 1) % ITEMS.length;
+      const [t, r, f] = ITEMS[i];
+      subj.textContent = t; subjRu.textContent = r; ru.textContent = f;
+      subj.dataset.say = t;
+      cnt.textContent = ++streak;
+      if (G) {
+        G.fromTo(subj, { rotationX: 90 }, { rotationX: 0, duration: .5, ease: 'back.out(2)' });
+        G.fromTo(ru, { x: -16 }, { x: 0, duration: .5, ease: 'elastic.out(1, .4)' });
+        G.fromTo(cnt, { scale: 1.8 }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+      }
+    });
+    subj.addEventListener('click', () => speak(subj.textContent));
+  })();
+
+  /* ---------- куб гласных ---------- */
+  (() => {
+    const nodes = $('#twCubeNodes'), cap = $('#twCubeCap'), poly = $('#twCubePlane polygon');
+    const P = { a: [60, 200], o: [60, 90], 'ı': [200, 200], u: [200, 90], e: [120, 160], 'ö': [120, 50], i: [260, 160], 'ü': [260, 50] };
+    const V = [['a', 0, 0, 0], ['o', 0, 1, 0], ['ı', 0, 0, 1], ['u', 0, 1, 1], ['e', 1, 0, 0], ['ö', 1, 1, 0], ['i', 1, 0, 1], ['ü', 1, 1, 1]]
+      .map(([c, front, round, high]) => ({ c, front, round, high, p: P[c] }));
+    V.forEach((v) => {
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', v.p[0]); c.setAttribute('cy', v.p[1]); c.setAttribute('r', 19);
+      c.setAttribute('stroke', '#fff'); c.setAttribute('stroke-width', '2.5');
+      c.dataset.say = v.c;
+      const t = document.createElementNS(NS, 'text');
+      t.setAttribute('x', v.p[0]); t.setAttribute('y', v.p[1]);
+      t.textContent = v.c;
+      nodes.append(c, t);
+      v.el = c; v.t = t;
+    });
+    const AX = {
+      front: { test: (v) => v.front, poly: ['ö', 'ü', 'i', 'e'], cap: 'Передний ряд — <b>e, i, ö, ü</b>. Язык впереди. Такому слову достаётся <b>-ler</b>, остальным четырём — <b>-lar</b>.' },
+      round: { test: (v) => v.round, poly: ['o', 'u', 'ü', 'ö'], cap: 'Огубленные — <b>o, u, ö, ü</b>. Губы трубочкой. Эта ось нужна частице вопроса: <b>mu, mü</b> после них.' },
+      high: { test: (v) => v.high, poly: ['ı', 'u', 'ü', 'i'], cap: 'Узкие — <b>ı, i, u, ü</b>. Язык у нёба. Вместе с губами дают четыре варианта: <b>mı / mi / mu / mü</b>.' },
+    };
+    function apply(name) {
+      const ax = AX[name];
+      poly.setAttribute('points', ax.poly.map((c) => P[c].join(',')).join(' '));
+      cap.innerHTML = ax.cap;
+      V.forEach((v) => {
+        const on = ax.test(v);
+        v.el.setAttribute('fill', on ? '#ed3482' : '#efeceA');
+        v.t.setAttribute('fill', on ? '#ffffff' : '#a9a29c');
+        if (G) G.to(v.el, { attr: { r: on ? 22 : 16 }, duration: .5, ease: on ? 'back.out(3)' : 'power2.out' });
+        else v.el.setAttribute('r', on ? 22 : 16);
+      });
+      if (G) G.fromTo(poly, { strokeDashoffset: 60 }, { strokeDashoffset: 0, duration: .8, ease: 'power2.out' });
+    }
+    $$('#twCubeCtrl .tw-pick').forEach((b) => b.addEventListener('click', () => {
+      $$('#twCubeCtrl .tw-pick').forEach((o) => o.classList.toggle('is-on', o === b));
+      apply(b.dataset.axis);
+    }));
+    apply('front');
+    if (G) ScrollTrigger.create({ trigger: nodes, start: 'top 80%', once: true, onEnter: () => G.from(V.map((v) => v.el), { attr: { r: 2 }, duration: .6, ease: 'back.out(3)', stagger: .07 }) });
+  })();
+
+  /* ---------- игра «Поймай окончание» ---------- */
+  (() => {
+    const field = $('#twGameField'), startBox = $('#twGameStart'), msg = $('#twGameMsg');
+    const sEl = $('#twGScore'), stEl = $('#twGStreak'), lvEl = $('#twGLives');
+    const pads = $$('.tw-pad');
+    const WORDS = [['ev', 'ler'], ['kitap', 'lar'], ['göz', 'ler'], ['yol', 'lar'], ['gün', 'ler'], ['kız', 'lar'], ['okul', 'lar'], ['şehir', 'ler'], ['araba', 'lar'], ['deniz', 'ler'], ['köy', 'ler'], ['kuş', 'lar'], ['dil', 'ler'], ['masa', 'lar'], ['öğretmen', 'ler'], ['çocuk', 'lar'], ['ülke', 'ler'], ['soru', 'lar'], ['ağaç', 'lar'], ['güneş', 'ler']];
+    let running = false, score = 0, streak = 0, lives = 3, cur = null, y = 0, speed = 1, raf = 0, last = 0;
+    function pick() {
+      const [w, a] = WORDS[Math.floor(Math.random() * WORDS.length)];
+      const el = document.createElement('div');
+      el.className = 'tw-gword';
+      el.textContent = w;
+      field.append(el);
+      cur = { el, w, a, done: false };
+      y = -46;
+      if (G) G.from(el, { scale: .5, rotation: -8, duration: .35, ease: 'back.out(3)' });
+    }
+    function resolve(ok) {
+      if (!cur || cur.done) return;
+      cur.done = true;
+      cur.el.classList.add(ok ? 'hit' : 'miss');
+      if (ok) { score += 10 + streak * 2; streak++; msg.textContent = `${cur.w} → ${cur.w}${cur.a}. Верно.`; }
+      else { streak = 0; lives--; msg.textContent = `Было ${cur.w} → ${cur.w}${cur.a}. Смотри на последнюю гласную.`; }
+      sEl.textContent = score; stEl.textContent = streak; lvEl.textContent = Math.max(lives, 0);
+      const dead = cur.el;
+      if (G) G.to(dead, { scale: ok ? 1.4 : .6, rotation: ok ? 0 : 20, duration: .3, ease: 'power2.out', onComplete: () => dead.remove() });
+      else setTimeout(() => dead.remove(), 300);
+      if (G) G.fromTo(ok ? sEl : lvEl, { scale: 1.6 }, { scale: 1, duration: .4, ease: 'back.out(3)' });
+      cur = null;
+      if (lives <= 0) return stop();
+      speed = 1 + Math.min(score / 260, 1.5);
+      setTimeout(() => running && pick(), 380);
+    }
+    function frame(t) {
+      if (!running) return;
+      const dt = Math.min(48, t - (last || t)); last = t;
+      if (cur && !cur.done) {
+        y += speed * dt / 16;
+        cur.el.style.top = y + 'px';
+        if (y > field.clientHeight - 40) resolve(false);
+      }
+      raf = requestAnimationFrame(frame);
+    }
+    function start() {
+      running = true; score = 0; streak = 0; lives = 3; speed = 1; last = 0;
+      sEl.textContent = '0'; stEl.textContent = '0'; lvEl.textContent = '3';
+      msg.textContent = 'Передние гласные (e i ö ü) → -ler. Задние (a ı o u) → -lar.';
+      startBox.hidden = true;
+      pads.forEach((p) => { p.disabled = false; });
+      pick();
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(frame);
+    }
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+      pads.forEach((p) => { p.disabled = true; });
+      $$('.tw-gword', field).forEach((g) => g.remove());
+      startBox.hidden = false;
+      $('p', startBox).textContent = `Набрано ${score} очков. Правило одно, и оно ни разу не поменялось.`;
+      $('#twGameGo').textContent = 'Ещё раз';
+    }
+    pads.forEach((p) => p.addEventListener('click', () => { if (running && cur) resolve(p.dataset.ans === cur.a); }));
+    $('#twGameGo').addEventListener('click', start);
+    $('#twGame').addEventListener('keydown', (e) => {
+      if (!running || !cur) return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); resolve(cur.a === 'ler'); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); resolve(cur.a === 'lar'); }
+    });
+    onScreen(field, () => {}, () => { if (running) stop(); });
+  })();
+
+  /* ---------- шпаргалка: циферблат ---------- */
+  (() => {
+    const g = $('#twDialNums'), card = $('#twDialCard'), hand = $('#twDialHand');
+    const RULES = [
+      ['Правила без исключений', 'Частица вопроса, мн. число и лица глагола приклеиваются всегда одинаково.', 'kitap mı?'],
+      ['Слово — поезд', 'Корень + вагоны, всегда в одном порядке.', 'evlerimdeki'],
+      ['Глагол в конце', 'Пока глагол не прозвучал, предложение не закончено.', 'Ben çay istiyorum.'],
+      ['Ни рода, ни артиклей', 'Одно o на он, она и оно.', 'O güzel.'],
+      ['Гармония гласных', 'Последняя гласная решает: -ler или -lar.', 'evler, kitaplar'],
+    ];
+    const btns = RULES.map((r, i) => {
+      const a = (-90 + i * 72) * Math.PI / 180;
+      const x = 120 + Math.cos(a) * 80, y = 120 + Math.sin(a) * 80;
+      const b = document.createElementNS(NS, 'g');
+      b.setAttribute('class', 'tw-dial__num');
+      b.setAttribute('role', 'button');
+      b.setAttribute('tabindex', '0');
+      b.setAttribute('aria-label', `Правило ${i + 1}: ${r[0]}`);
+      const c = document.createElementNS(NS, 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', y); c.setAttribute('r', 20);
+      const t = document.createElementNS(NS, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y); t.textContent = i + 1;
+      b.append(c, t);
+      g.append(b);
+      return b;
+    });
+    function show(i) {
+      btns.forEach((b, k) => b.classList.toggle('is-on', k === i));
+      const [h, d, ex] = RULES[i];
+      card.innerHTML = `<b>${i + 1}. ${h}</b><p style="margin:6px 0">${d}</p><span data-say="${ex}" lang="tr" style="color:var(--pink);font-weight:700">${ex}</span>`;
+      if (G) {
+        G.to(hand, { rotation: i * 72, svgOrigin: '120 120', duration: .8, ease: 'elastic.out(1, .5)' });
+        G.from(card, { y: 14, rotation: 1, duration: .45, ease: 'back.out(2)' });
+      } else hand.setAttribute('transform', `rotate(${i * 72} 120 120)`);
+    }
+    btns.forEach((b, i) => {
+      b.addEventListener('click', () => show(i));
+      b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(i); } });
+    });
+    show(0);
+    if (G) ScrollTrigger.create({ trigger: g, start: 'top 80%', once: true, onEnter: () => G.from(btns, { scale: 0, svgOrigin: '120 120', duration: .6, ease: 'back.out(3)', stagger: .1 }) });
+  })();
+
+  /* ---------- финал: буквы падают ---------- */
+  (() => {
+    const box = $('#twLetters'), letters = $$('span', box);
+    letters.forEach((l, i) => { l.style.left = `calc(${(i + .5) * (100 / letters.length)}% - 22px)`; l.dataset.say = l.textContent; });
+    function drop() {
+      if (!G) return;
+      G.fromTo(letters, { y: -140, rotation: () => G.utils.random(-90, 90) }, { y: 0, rotation: 0, duration: 1.1, ease: 'bounce.out', stagger: .09 });
+    }
+    if (G) ScrollTrigger.create({ trigger: box, start: 'top 90%', once: true, onEnter: drop });
+    $('#twShake').addEventListener('click', drop);
+  })();
+
+  /* ---------- свой скроллбар ---------- */
+  (() => {
+    const bar = $('[data-scrollbar]'), track = $('.tw-sb__track', bar);
+    const secs = $$('[data-section]');
+    const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const vertical = () => matchMedia('(min-width: 768px)').matches;
+    const marks = secs.map((s) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tw-sb__mark';
+      b.dataset.key = s.dataset.section;
+      const h = s.querySelector('h2, h1');
+      b.setAttribute('aria-label', `К разделу «${h ? h.textContent.trim() : s.dataset.section}»`);
+      b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+      track.append(b);
+      return b;
+    });
+    const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll())));
+    const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+    const seek = (e) => {
+      const r = track.getBoundingClientRect();
+      const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+      scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+    };
+    track.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.tw-sb__mark')) return;
+      track.setPointerCapture(e.pointerId);
+      seek(e);
+    });
+    track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+    addEventListener('scroll', progress, { passive: true });
+    addEventListener('resize', layout);
+    addEventListener('load', layout);
+    addEventListener('alterna:read', (e) => {
+      const m = marks.find((b) => b.dataset.key === e.detail.key);
+      if (!m) return;
+      m.classList.add('is-read');
+      if (G) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+    });
+    layout();
+    progress();
+  })();
+
+  /* ---------- ачивка: стрелки делают круг, пять отметок загораются ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.tw-a-hand'), { rotation: -360, svgOrigin: '60 60' }, { rotation: 0, svgOrigin: '60 60', duration: 1.1, ease: 'power3.out' }, 0.9)
+      .fromTo(b.querySelector('.tw-a-hand2'), { rotation: -720, svgOrigin: '60 60' }, { rotation: 0, svgOrigin: '60 60', duration: 1.1, ease: 'power3.out' }, 0.9)
+      .from(b.querySelectorAll('.tw-a-ticks circle'), { scale: 0, transformOrigin: '50% 50%', stagger: .1, duration: .35, ease: 'back.out(3)' }, 1.1);
+  });
+
+  /* ---------- нестандартное упражнение «Станок вопросов» (ответы — в exercises.json, ex4) ---------- */
+  (async () => {
+    const EX = 'lib.how-turkish-works.ex4';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    const wordEl = root.querySelector('[data-stamp-word]');
+    const countEl = root.querySelector('[data-stamp-count]');
+    const statusEl = root.querySelector('[data-stamp-status]');
+    const btns = [...root.querySelectorAll('[data-stamp]')];
+    const { items } = await AlternaKit.exercise(EX);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      wordEl.textContent = items[i].word;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      btns.forEach((b) => b.classList.remove('is-hit', 'is-miss'));
+      if (G) G.fromTo(wordEl, { xPercent: -260 }, { xPercent: -50, duration: .6, ease: 'power2.out' });
+      t0 = performance.now(); locked = false;
+    }
+    function pick(val) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const item = items[i];
+      const ok = val === item.answer;
+      if (ok) correct++;
+      root.querySelector(`[data-stamp="${val}"]`).classList.add(ok ? 'is-hit' : 'is-miss');
+      wordEl.innerHTML = `${item.word} <em>${item.answer}</em>`;
+      if (G) G.fromTo(wordEl, { scale: 1.25 }, { scale: 1, duration: .45, ease: 'back.out(3)' });
+      statusEl.textContent = ok ? `Верно: ${item.word} ${item.answer}?` : `Не совсем: ${item.word} ${item.answer}? ${item.explanation}`;
+      AlternaTracker.answer({ exerciseId: EX, itemId: item.id, correct: ok, answer: val, timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          wordEl.textContent = `${correct} из ${items.length}`;
+          countEl.textContent = 'готово';
+        }
+      }, reduce ? 300 : 1100);
+    }
+    btns.forEach((b) => b.addEventListener('click', () => pick(b.dataset.stamp)));
+    root.addEventListener('keydown', (e) => { const k = { 1: 'mı', 2: 'mi', 3: 'mu', 4: 'mü' }[e.key]; if (k) pick(k); });
+    AlternaKit.registerSolver(EX, async () => {
+      for (const item of items.slice(i)) { pick(item.answer); await new Promise((r) => setTimeout(r, reduce ? 320 : 1120)); }
+    });
+    show();
+  })();
+});
+</script>
+</body>
+</html>
