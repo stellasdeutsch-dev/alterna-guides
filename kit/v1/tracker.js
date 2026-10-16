@@ -178,7 +178,11 @@
     if (ev.source !== window.parent || ev.origin !== parentOrigin) return;
     const m = ev.data || {};
     if (m.source !== 'alterna-player') return;
-    if (m.type === 'goto' && byKey.has(m.section)) byKey.get(m.section).el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    /* гайд с вкладками сначала открывает нужную вкладку (alterna:goto), потом прокручиваем к секции */
+    if (m.type === 'goto' && byKey.has(m.section)) {
+      fire('goto', { section: m.section });
+      requestAnimationFrame(() => byKey.get(m.section).el.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
     if (m.type === 'flush') flush();
   });
 
