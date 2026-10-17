@@ -377,6 +377,26 @@ button { font: inherit; color: inherit; }
   .sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
 }
 
+
+/* ---------- v2: бегущие строки, рисованные линии, декор ---------- */
+.band { position: relative; z-index: 1; overflow: hidden; margin: clamp(56px, 10vw, 110px) 0 0; padding: 10px 0; transform: rotate(-2deg); background: var(--paper); color: var(--on-paper); }
+.band--dark { background: #262625; color: var(--ink); transform: rotate(1.5deg); margin-top: -6px; }
+.band__row { display: flex; width: max-content; white-space: nowrap; font: 400 clamp(34px, 8vw, 86px)/1.05 var(--serif); letter-spacing: -.01em; }
+.band__row span { padding-right: .5em; }
+.band__row i { font-style: italic; font-weight: 300; }
+.band .aff--li { color: var(--li-deep); } .band .aff--siz { color: var(--siz-deep); }
+.band--dark .aff--li { color: var(--li); } .band--dark .aff--siz { color: var(--siz); }
+.pen { position: absolute; z-index: 0; pointer-events: none; width: min(560px, 90%); height: auto; overflow: visible; }
+.pen path { fill: none; stroke: var(--pen); stroke-width: 2; stroke-linecap: round; opacity: .75; }
+.pen--tr { top: 10px; right: -4%; } .pen--bl { bottom: -40px; left: -6%; } .pen--mid { top: 40%; right: -10%; }
+.deco { position: absolute; z-index: 0; width: 44px; height: 44px; pointer-events: none; opacity: .9; }
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(46%, 150px), 1fr)); gap: 8px; margin-top: 18px; }
+.wall button { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 48px; padding: 6px 8px 6px 14px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255,255,255,.04); cursor: pointer; font-weight: 650; font-size: 16px; }
+.wall button i { flex: none; width: 34px; height: 20px; border-radius: 99px; background: var(--siz-soft); position: relative; }
+.wall button i::after { content: ''; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--siz); transition: translate .3s cubic-bezier(.5,1.6,.4,1), background-color .3s; }
+.wall button.is-on i { background: var(--li-soft); }
+.wall button.is-on i::after { translate: 14px 0; background: var(--li); }
+.confetti-cube { position: absolute; width: 26px; height: 26px; pointer-events: none; }
 @media (min-width: 1024px) and (hover: hover) { .glass { backdrop-filter: blur(10px); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
@@ -485,9 +505,13 @@ button { font: inherit; color: inherit; }
   </div>
 </section>
 
+<div class="band" aria-hidden="true" data-band><div class="band__row" lang="tr" data-ui><span>şeker<span class="aff--li">li</span></span><span>tuz<span class="aff--siz">suz</span></span><span>süt<span class="aff--li">lü</span></span><span>gaz<span class="aff--siz">sız</span></span><span>limon<span class="aff--li">lu</span></span><span>peynir<span class="aff--siz">siz</span></span><span>acı<span class="aff--li">lı</span></span><span>köpük<span class="aff--siz">süz</span></span></div></div>
+<div class="band band--dark" aria-hidden="true" data-band><div class="band__row" lang="tr" data-ui><span>balkon<span class="aff--li">lu</span></span><span>asansör<span class="aff--siz">süz</span></span><span>klima<span class="aff--li">lı</span></span><span>bahçe<span class="aff--siz">siz</span></span><span>şemsiye<span class="aff--li">li</span></span><span>uyku<span class="aff--siz">suz</span></span><span>bilet<span class="aff--siz">siz</span></span><span>susam<span class="aff--li">lı</span></span></div></div>
 <!-- ============ STORY ============ -->
 <section class="s" id="story" data-section="story" data-words="51">
   <div class="s__in">
+    <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M10 120 C 90 20, 170 20, 210 80 S 300 150, 360 70 S 480 10, 590 60"/></svg>
+    <svg class="deco" style="left:-6px;top:120px" viewBox="0 0 60 60" aria-hidden="true" data-bob><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg>
     <p class="kicker" data-ui>01 · История</p>
     <h2 class="h2"><span lang="tr">Siz şeker</span> <em>в восемь утра</em></h2>
     <div class="comic" data-comic>
@@ -586,6 +610,7 @@ button { font: inherit; color: inherit; }
 <!-- ============ RULE ============ -->
 <section class="s" id="rule" data-section="rule" data-words="44">
   <div class="s__in">
+    <svg class="deco" style="right:2%;top:-10px" viewBox="0 0 60 60" aria-hidden="true" data-bob><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg>
     <p class="kicker" data-ui>04 · Правило</p>
     <h2 class="h2">Как прилипает <em>хвост</em></h2>
     <p class="p">Четыре шага. Нажимай «дальше». Или включи автопилот и смотри, как буквы падают сами. Гласную хвоста не выбирают. Её копируют.</p>
@@ -636,6 +661,7 @@ button { font: inherit; color: inherit; }
 <!-- ============ HARMONY ============ -->
 <section class="s" id="harmony" data-section="harmony" data-words="39">
   <div class="s__in">
+    <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M20 30 C 120 140, 220 140, 260 70 C 300 0, 380 10, 420 80 C 450 130, 540 140, 590 100"/></svg>
     <p class="kicker" data-ui>05 · Восемь форм</p>
     <h2 class="h2">Восемь форм. <em>Одна логика.</em></h2>
     <p class="p">Гласная хвоста — эхо последней гласной слова. Как в гармонии на четыре варианта.</p>
@@ -699,6 +725,8 @@ button { font: inherit; color: inherit; }
 <!-- ============ TREE ============ -->
 <section class="s" id="tree" data-section="tree" data-words="40">
   <div class="s__in">
+    <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M10 80 C 60 10, 140 10, 160 60 C 180 110, 120 140, 100 100 C 80 60, 200 30, 300 70 S 520 120, 590 40"/></svg>
+    <svg class="deco" style="right:4%;top:60px;width:30px" viewBox="0 0 60 60" aria-hidden="true" data-bob><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg>
     <p class="kicker" data-ui>07 · Алгоритм</p>
     <h2 class="h2">Два вопроса — <em>и готово</em></h2>
     <p class="p">Спроси себя по порядку. Есть или нет? Какая гласная последняя? Выбери слово — точка пробежит путь.</p>
@@ -766,6 +794,7 @@ button { font: inherit; color: inherit; }
   </div>
 </section>
 
+<div class="band" aria-hidden="true" data-band><div class="band__row" lang="tr" data-ui><span>balkon<span class="aff--li">lu</span></span><span>asansör<span class="aff--siz">süz</span></span><span>klima<span class="aff--li">lı</span></span><span>bahçe<span class="aff--siz">siz</span></span><span>şemsiye<span class="aff--li">li</span></span><span>uyku<span class="aff--siz">suz</span></span><span>bilet<span class="aff--siz">siz</span></span><span>susam<span class="aff--li">lı</span></span></div></div>
 <!-- ============ MNEMO ============ -->
 <section class="s" id="mnemo" data-section="mnemo" data-words="30">
   <div class="s__in">
@@ -794,6 +823,7 @@ button { font: inherit; color: inherit; }
 <!-- ============ CITY ============ -->
 <section class="s" id="city" data-section="city" data-words="37">
   <div class="s__in">
+    <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M10 80 C 60 10, 140 10, 160 60 C 180 110, 120 140, 100 100 C 80 60, 200 30, 300 70 S 520 120, 590 40"/></svg>
     <p class="kicker" data-ui>10 · Кадыкёй</p>
     <h2 class="h2">Пристань. <em>Все чего-то хотят.</em></h2>
     <p class="p">Утро. Паром гудит. Чайки делят симит. Все что-то заказывают.</p>
@@ -807,6 +837,7 @@ button { font: inherit; color: inherit; }
         <g data-city-ferry><path d="M440 236h220l-20 28H460z" fill="#e9e5dc"/><rect x="480" y="210" width="140" height="26" rx="4" fill="#f1eee8"/><rect x="500" y="216" width="18" height="12" fill="#3a3f47"/><rect x="526" y="216" width="18" height="12" fill="#3a3f47"/><rect x="552" y="216" width="18" height="12" fill="#3a3f47"/><rect x="578" y="216" width="18" height="12" fill="#3a3f47"/><rect x="540" y="188" width="14" height="22" fill="#c94a3c"/></g>
         <rect y="300" width="800" height="120" fill="#3b3a37"/>
         <path d="M0 300h800" stroke="#55534e" stroke-width="3"/>
+        <g data-gulls><path d="M0 0 q8 -8 16 0 q8 -8 16 0" fill="none" stroke="#e9e5dc" stroke-width="3" stroke-linecap="round"/><path d="M40 18 q6 -6 12 0 q6 -6 12 0" fill="none" stroke="#c8c3b9" stroke-width="2.5" stroke-linecap="round"/></g>
         <g data-city-rain><path d="M118 40l-6 16M140 52l-6 16M162 38l-6 16M184 50l-6 16M206 40l-6 16" stroke="#9fb8ea" stroke-width="2" stroke-linecap="round"/><ellipse cx="160" cy="34" rx="56" ry="18" fill="#4a4f58"/></g>
         <g><rect x="60" y="300" width="84" height="62" rx="6" fill="#c94a3c"/><rect x="66" y="286" width="72" height="18" rx="4" fill="#e9e5dc"/><circle cx="78" cy="296" r="8" fill="none" stroke="#b07a3c" stroke-width="5"/><circle cx="102" cy="296" r="8" fill="none" stroke="#b07a3c" stroke-width="5"/><circle cx="126" cy="296" r="8" fill="none" stroke="#b07a3c" stroke-width="5"/><circle cx="72" cy="370" r="9" fill="#222"/><circle cx="132" cy="370" r="9" fill="#222"/></g>
         <g><rect x="200" y="250" width="110" height="112" rx="6" fill="#e9e5dc"/><rect x="200" y="240" width="110" height="16" rx="4" fill="#c94a3c"/><rect x="212" y="266" width="86" height="40" fill="#2e3238"/><rect x="220" y="272" width="12" height="28" rx="3" fill="#9fb8ea"/><rect x="238" y="272" width="12" height="28" rx="3" fill="#e8b56b"/><rect x="256" y="272" width="12" height="28" rx="3" fill="#72d29c"/></g>
@@ -868,12 +899,15 @@ button { font: inherit; color: inherit; }
       <button type="button" class="card" data-flip data-say="Kolsuz bir tişört."><span class="card__f"><svg aria-hidden="true"><use href="#i-shirt"/></svg><span><span class="card__w" lang="tr">kolsuz tişört</span><br><span class="ru" data-ui>футболка без рукавов</span></span><span class="card__turn" data-ui>↻ перевернуть</span></span><span class="card__b"><span class="card__w" lang="tr">Kolsuz bir tişört.</span><span class="ru" data-ui>Футболка без рукавов.</span></span></button>
       <button type="button" class="card" data-flip data-say="Uykusuz bir gece."><span class="card__f"><svg aria-hidden="true"><use href="#i-moon"/></svg><span><span class="card__w" lang="tr">uykusuz gece</span><br><span class="ru" data-ui>бессонная ночь</span></span><span class="card__turn" data-ui>↻ перевернуть</span></span><span class="card__b"><span class="card__w" lang="tr">Uykusuz bir gece.</span><span class="ru" data-ui>Бессонная ночь.</span></span></button>
     </div>
+    <div class="wall" data-wall role="group" aria-label="Стена тумблеров" data-ui></div>
   </div>
 </section>
 
 <!-- ============ LAB ============ -->
-<section class="s" id="lab" data-section="lab" data-words="39">
+<section class="s" id="lab" data-section="lab" data-words="38">
   <div class="s__in">
+    <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M20 30 C 120 140, 220 140, 260 70 C 300 0, 380 10, 420 80 C 450 130, 540 140, 590 100"/></svg>
+    <svg class="deco" style="left:30%;top:-20px;width:34px" viewBox="0 0 60 60" aria-hidden="true" data-bob><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg>
     <p class="kicker" data-ui>12 · Лаборатория</p>
     <h2 class="h2">Мастерская <em>хвостов</em></h2>
     <p class="p">Четыре режима. Крути, пока не станет скучно. Обычно это не происходит.</p>
@@ -940,6 +974,7 @@ button { font: inherit; color: inherit; }
 <!-- ============ TRAPS ============ -->
 <section class="s" id="traps" data-section="traps" data-words="47">
   <div class="s__in">
+    <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M10 120 C 90 20, 170 20, 210 80 S 300 150, 360 70 S 480 10, 590 60"/></svg>
     <p class="kicker" data-ui>13 · Ловушки</p>
     <h2 class="h2">Здесь <em>спотыкаются все</em></h2>
     <p class="p">Это нормально. Нажми на карточку — ошибка исправится сама.</p>
@@ -1011,6 +1046,7 @@ button { font: inherit; color: inherit; }
   </div>
 </section>
 
+<div class="band band--dark" aria-hidden="true" data-band><div class="band__row" lang="tr" data-ui><span>şeker<span class="aff--li">li</span></span><span>tuz<span class="aff--siz">suz</span></span><span>süt<span class="aff--li">lü</span></span><span>gaz<span class="aff--siz">sız</span></span><span>limon<span class="aff--li">lu</span></span><span>peynir<span class="aff--siz">siz</span></span><span>acı<span class="aff--li">lı</span></span><span>köpük<span class="aff--siz">süz</span></span></div></div>
 <!-- ============ CHEAT ============ -->
 <section class="s" id="cheat" data-section="cheat" data-words="54">
   <div class="s__in">
@@ -1018,6 +1054,7 @@ button { font: inherit; color: inherit; }
     <div class="poster paper" data-poster>
       <p class="hand" style="color:#4a57d6;margin:0" data-ui>сохрани скриншотом</p>
       <h2 class="h2" style="color:var(--on-paper)">С и без <em style="color:var(--on-paper-2)">на одном экране</em></h2>
+      <svg class="confetti-cube" style="left:70%;top:20px" viewBox="0 0 60 60" aria-hidden="true" data-conf><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg><svg class="confetti-cube" style="left:84%;top:60px" viewBox="0 0 60 60" aria-hidden="true" data-conf><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg><svg class="confetti-cube" style="left:92%;top:10px" viewBox="0 0 60 60" aria-hidden="true" data-conf><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg><svg class="confetti-cube" style="left:60%;top:90px" viewBox="0 0 60 60" aria-hidden="true" data-conf><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg><svg class="confetti-cube" style="left:78%;top:120px" viewBox="0 0 60 60" aria-hidden="true" data-conf><path d="M30 4 54 17v26L30 56 6 43V17z" fill="#f4f1ea"/><path d="M6 17l24 13v26L6 43z" fill="#d9d3c6"/><path d="M54 17 30 30v26l24-13z" fill="#bfb8aa"/></svg>
       <div class="poster__grid">
         <div class="poster__box">
           <h3>Есть → хвост на <span lang="tr">l</span></h3>
@@ -1705,6 +1742,90 @@ addEventListener('DOMContentLoaded', () => {
   $('[data-bento-tgl]').addEventListener('click', () => { if (A) G.fromTo('[data-cell]', { backgroundColor: bHas ? '#f6e6c8' : '#dde6f7' }, { backgroundColor: '#f1eee8', duration: .9, ease: 'power2.out', stagger: .06 }); });
   $('[data-b-rand]').addEventListener('click', (e) => { if (A) G.fromTo(e.currentTarget, { rotation: -20 }, { rotation: 0, duration: .6, ease: 'elastic.out(1, .4)' }); });
   $('[data-notice]').addEventListener('pointerdown', (e) => { if (A) G.fromTo(e.currentTarget, { scale: .92 }, { scale: 1, duration: .4, ease: 'back.out(3)' }); });
+
+  /* ================= v2: бегущие строки ================= */
+  $$('[data-band]').forEach((band, bi) => {
+    const row = $('.band__row', band);
+    row.innerHTML += row.innerHTML;
+    if (!A) return;
+    const loop = G.fromTo(row, { xPercent: bi % 2 ? -50 : 0 }, { xPercent: bi % 2 ? 0 : -50, duration: 38 + bi * 6, ease: 'none', repeat: -1 });
+    whenVisible(band, loop);
+    ScrollTrigger.create({ trigger: band, start: 'top bottom', end: 'bottom top', onUpdate: (self) => {
+      G.to(loop, { timeScale: Math.max(1, Math.min(6, Math.abs(self.getVelocity()) / 220)), duration: .25, overwrite: true });
+      G.to(loop, { timeScale: 1, duration: 1.2, delay: .3, ease: 'power2.out' });
+    } });
+    G.fromTo(band, { rotation: bi % 2 ? 4 : -5 }, { rotation: bi % 2 ? 1.5 : -2, ease: 'none', scrollTrigger: { trigger: band, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+  $$('[data-band] .band__row > span').forEach((w) => w.addEventListener('pointerenter', () => { if (A) G.fromTo(w, { y: -10 }, { y: 0, duration: .6, ease: 'bounce.out' }); }));
+
+  /* ================= v2: рисованные линии ================= */
+  $$('[data-pen] path').forEach((p) => {
+    const L = p.getTotalLength();
+    p.style.strokeDasharray = L;
+    if (!A) return;
+    G.fromTo(p, { strokeDashoffset: L }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p.closest('section'), start: 'top 85%', end: 'center 40%', scrub: true } });
+  });
+
+  /* ================= v2: кубики парят ================= */
+  if (A) $$('[data-bob]').forEach((c, i) => {
+    const tl = G.timeline({ repeat: -1, yoyo: true });
+    tl.to(c, { y: -18, rotation: i % 2 ? 24 : -24, duration: 2 + i * .3, ease: 'sine.inOut' });
+    whenVisible(c.closest('section'), tl);
+    G.to(c, { y: -120, ease: 'none', scrollTrigger: { trigger: c.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  /* ================= v2: телефон в hero наклоняется за курсором ================= */
+  const heroPhone = $('.hero__phone .phone');
+  if (A && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const rx = G.quickTo(heroPhone, 'rotationX', { duration: .8, ease: 'power3' }), ry = G.quickTo(heroPhone, 'rotationY', { duration: .8, ease: 'power3' });
+    $('.hero').addEventListener('pointermove', (e) => { const r = $('.hero').getBoundingClientRect(); ry((e.clientX - r.left) / r.width * 16 - 8); rx(-((e.clientY - r.top) / r.height * 12 - 6)); });
+    $('.hero').addEventListener('pointerleave', () => { rx(0); ry(0); });
+  }
+  if (A) {
+    const wave = G.timeline({ repeat: -1, yoyo: true });
+    wave.to(dLiquid, { scaleY: 1.03, skewX: 2, transformOrigin: '50% 100%', duration: 1.4, ease: 'sine.inOut' });
+    whenVisible($('.hero'), wave);
+    G.from('.stat', { y: 60, rotation: (i) => (i % 2 ? 6 : -6), scale: .8, duration: 1, ease: 'back.out(2)', stagger: .15, delay: .6 });
+  }
+
+  /* ================= v2: чайки над пристанью ================= */
+  if (A) {
+    const gulls = G.timeline({ repeat: -1 });
+    gulls.fromTo('[data-gulls]', { x: -80, y: 120 }, { duration: 14, ease: 'none', motionPath: { path: [{ x: -80, y: 120 }, { x: 260, y: 60 }, { x: 520, y: 110 }, { x: 860, y: 40 }], curviness: 1.4 } });
+    const flap = G.timeline({ repeat: -1, yoyo: true });
+    flap.to('[data-gulls] path', { scaleY: .4, transformOrigin: '50% 50%', duration: .35, ease: 'sine.inOut', stagger: .15 });
+    whenVisible($('[data-city]'), gulls); whenVisible($('[data-city]'), flap);
+    const bob = G.timeline({ repeat: -1, yoyo: true });
+    bob.to('[data-city-ferry]', { y: 4, rotation: .6, transformOrigin: '50% 100%', duration: 1.8, ease: 'sine.inOut' });
+    whenVisible($('[data-city]'), bob);
+  }
+
+  /* ================= v2: стена тумблеров ================= */
+  const wall = $('[data-wall]');
+  const WALL = ['şeker', 'tuz', 'süt', 'gaz', 'limon', 'peynir', 'acı', 'buz', 'köpük', 'kafein', 'balkon', 'asansör', 'klima', 'bahçe', 'şemsiye', 'bilet'];
+  const wallBtns = WALL.map((w, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.lang = 'tr';
+    let on = i % 3 !== 0;
+    const draw = () => { b.classList.toggle('is-on', on); b.innerHTML = `<span>${w}<span class="aff ${on ? 'aff--li' : 'aff--siz'}">${tail(w, on)}</span></span><i aria-hidden="true"></i>`; b.dataset.say = w + tail(w, on); };
+    b.flip = () => { on = !on; draw(); if (A) G.fromTo($('.aff', b), { yPercent: -90, rotation: -12 }, { yPercent: 0, rotation: 0, duration: .55, ease: 'back.out(3)' }); };
+    b.addEventListener('click', () => { b.flip(); });
+    draw(); wall.append(b);
+    return b;
+  });
+  let wallTimer = null;
+  new IntersectionObserver(([e]) => {
+    clearInterval(wallTimer);
+    if (e.isIntersecting && A) wallTimer = setInterval(() => wallBtns[Math.floor(Math.random() * wallBtns.length)].flip(), 1400);
+  }).observe(wall);
+  if (A) ScrollTrigger.batch('[data-wall] button', { start: 'top 95%', once: true, onEnter: (b) => G.from(b, { y: 30, scale: .7, duration: .5, ease: 'back.out(2.5)', stagger: .04 }) });
+
+  /* ================= v2: кубики сыплются в шпаргалку ================= */
+  if (A) {
+    G.fromTo('[data-conf]', { y: -220, rotation: () => G.utils.random(-120, 120) }, { y: 0, rotation: () => G.utils.random(-30, 30), ease: 'none', stagger: .05, scrollTrigger: { trigger: '[data-poster]', start: 'top bottom', end: 'top 25%', scrub: true } });
+    G.from('.mnemo__big', { scale: .85, transformOrigin: '0 50%', duration: 1, ease: 'elastic.out(1, .5)', scrollTrigger: { trigger: '.mnemo', start: 'top 75%', once: true } });
+    G.from('.sb', { x: 40, duration: 1, ease: 'back.out(2)', delay: 1 });
+  }
 
   /* ================= свой скроллбар: bilgisiz → bilgili ================= */
   const bar = $('[data-scrollbar]'), track = $('.sb__track', bar), sbAff = $('[data-sb-aff]');
