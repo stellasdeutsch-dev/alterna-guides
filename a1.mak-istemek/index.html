@@ -356,6 +356,25 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
   .sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
 }
 @media (min-width: 1024px) { [data-section] { padding-left: 32px; padding-right: 56px; } }
+
+/* ---------- v2: печати разделов, декор на полях, бегущая строка ---------- */
+.st-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 10px; }
+.st { width: 44px; height: 44px; flex: none; }
+.st-t { font: 800 11px/1.2 var(--ak-font); letter-spacing: .16em; text-transform: uppercase; color: var(--red2); }
+.dark .st-t { color: #E5C27A; }
+[data-section] { overflow: clip; }
+.dc { position: absolute; z-index: 0; pointer-events: none; opacity: .55; }
+.dc-cloud { width: clamp(90px, 16vw, 190px); top: 34px; }
+.dc-lotus { width: clamp(60px, 9vw, 110px); bottom: 26px; }
+.dc--l { left: -18px; } .dc--r { right: -18px; } .dc--l2 { left: 6px; } .dc--r2 { right: 6px; }
+.dark .dc { opacity: .18; }
+[data-section] > .wrap, .hero { position: relative; z-index: 1; }
+.tick { overflow: hidden; border-block: 2px solid var(--brown); background: var(--cream); padding: 12px 0; white-space: nowrap; margin-top: 28px; }
+.tick__in { display: inline-flex; gap: 42px; font: 800 clamp(18px, 4.6vw, 28px)/1 var(--ak-font); color: var(--brown); }
+.tick__in b { color: var(--red); }
+.crane2 { position: absolute; width: 70px; height: 30px; fill: var(--ink); z-index: -1; top: 30%; left: -80px; }
+@media (max-width: 767px) { .dc-cloud { width: 80px; opacity: .35; } .dc-lotus { display: none; } }
+
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 @supports not (color: color-mix(in srgb, red, blue)) { body::before { content: 'Обновите браузер'; display: block; padding: 8px; background: var(--red); color: #fff; text-align: center; } }
 </style>
@@ -375,6 +394,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ STORY: hero + крючок ============ -->
 <section data-section="story" data-words="74">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="hero">
     <div class="hero__sun" aria-hidden="true"></div>
     <svg class="hero__far" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
@@ -407,6 +427,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
     <svg class="crane c1" viewBox="0 0 56 24" aria-hidden="true"><use href="#bird"/></svg>
     <svg class="crane c2" viewBox="0 0 56 24" aria-hidden="true"><use href="#bird"/></svg>
     <svg class="crane c3" viewBox="0 0 56 24" aria-hidden="true"><use href="#bird"/></svg>
+    <svg class="crane2 cr-a" viewBox="0 0 56 24" aria-hidden="true"><use href="#bird"/></svg>
+    <svg class="crane2 cr-b" viewBox="0 0 56 24" aria-hidden="true" style="top:22%;width:48px"><use href="#bird"/></svg>
+    <svg class="float3d f3" viewBox="0 0 120 90" aria-hidden="true" style="left:20%;top:70%;width:52px"><use href="#lotus"/></svg>
     <svg class="float3d f1" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
     <svg class="float3d f2" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
 
@@ -436,9 +459,11 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
     </div>
   </div>
 
+  <div class="tick" aria-hidden="true" data-ui><div class="tick__in" lang="tr"><span>içmek <b>istiyorum</b></span><span>okumak <b>istiyorsun</b></span><span>uyumak <b>istiyor</b></span><span>yüzmek <b>istiyoruz</b></span><span>yemek <b>istiyorsunuz</b></span><span>dans etmek <b>istiyorlar</b></span><span>beklemek <b>istemiyorum</b></span><span>kahve içmek <b>istiyor musun?</b></span></div></div>
   <div class="wrap story-grid">
     <div class="story-text">
-      <h2>Утро на Кадыкёе</h2>
+      <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 01 · крючок</span></div>
+    <h2>Утро на Кадыкёе</h2>
       <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
       <p>Ты в чайной на Кадыкёе. Утро. Паромы гудят. Чайки делят симит.</p>
       <p>Ты знаешь два слова. <a-say>çay</a-say> — чай. <a-say>istiyorum</a-say> — хочу.</p>
@@ -471,7 +496,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ GUESS ============ -->
 <section data-section="guess" data-words="38">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 02 · разведка</span></div>
     <h2>Сначала угадай</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Правила пока нет. Есть интуиция. Ошибка здесь бесплатная. Второй чай не принесут.</p>
@@ -503,7 +530,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ NOUN vs ACTION ============ -->
 <section data-section="noun" data-words="38" class="dark">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 03 · предмет или дело</span></div>
     <h2>Хочу что — или хочу делать?</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Хочешь предмет — называешь предмет. Потом <a-say>istiyorum</a-say>. Хочешь действие — между ними встаёт глагол.</p>
@@ -530,8 +559,10 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ INFINITIVE -mak / -mek ============ -->
 <section data-section="infinitive" data-words="48">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="rain" aria-hidden="true" data-rain></div>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 04 · паспорт</span></div>
     <h2>Глагол в паспорте: -mak или -mek</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">В словаре каждый турецкий глагол кончается на -mak или -mek. Это его паспорт. В паспорте он и встаёт перед <a-say>istiyorum</a-say>. Не в <span lang="tr">-yor</span>. В паспорте.</p>
@@ -575,7 +606,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ BUILD: пошаговый плеер ============ -->
 <section data-section="build" data-words="54">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 05 · сборка</span></div>
     <h2>Сборка в четыре шага</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Нажми «Играть». Или листай шаги сам. Плеер не обидится. Он видел учеников и медленнее.</p>
@@ -611,7 +644,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ COMPARE ============ -->
 <section data-section="compare" data-words="43" class="dark">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 06 · порядок</span></div>
     <h2>Русский ставит «хочу» вперёд</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">По-русски: я хочу пить чай. «Хочу» — почти в начале. По-турецки наоборот. Сначала чай. Потом пить. Потом хочу.</p>
@@ -635,7 +670,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ FORMS: да / нет / вопрос ============ -->
 <section data-section="forms" data-words="41" class="dark">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 07 · да, нет, вопрос</span></div>
     <h2>Да, нет, вопрос</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">«Не» живёт в <span lang="tr">istemek</span>. Первый глагол не трогаешь. Он в паспорте, у него иммунитет.</p>
@@ -664,7 +701,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ TREE ============ -->
 <section data-section="tree" data-words="34">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 08 · развилки</span></div>
     <h2>Три вопроса по порядку</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Задаёшь вопросы сверху вниз. Отвечаешь кнопками. Точка бежит по твоему пути. В конце — готовая фраза. Первое «да» ведёт дальше, второе — ещё дальше.</p>
@@ -699,7 +738,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ MNEMONIC ============ -->
 <section data-section="mnemonic" data-words="24">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap mn">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 09 · печать</span></div>
     <h2>Свиток и печать</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Дело пишут на свитке. «Хочу» ставят печатью внизу. Без печати свиток — просто бумага. Печать без свитка — просто красный кружок. Вместе — документ.</p>
@@ -723,7 +764,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ SCENE ============ -->
 <section data-section="scene" data-words="35" class="dark">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 10 · пристань</span></div>
     <h2>Пристань Эминёню</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Нажимай на точки. Тут каждый чего-то хочет. Как все в этом городе. Чайки — особенно.</p>
@@ -770,7 +813,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ GALLERY ============ -->
 <section data-section="gallery" data-words="29">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 11 · галерея</span></div>
     <h2>Желания по часам</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Один день в Стамбуле. Нажимай на часы. Потом переворачивай карточки — сзади турецкий и звук.</p>
@@ -791,7 +836,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ LAB ============ -->
 <section data-section="lab" data-words="27" class="dark">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 12 · лаборатория</span></div>
     <h2>Лаборатория желаний</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Четыре режима. Крути, собирай, слушай. Ошибиться можно. Лаборатория всё равно покажет почему.</p>
@@ -846,7 +893,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ TRAPS ============ -->
 <section data-section="traps" data-words="51">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 13 · ловушки</span></div>
     <h2>Пять ловушек</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">На этом спотыкаются все. Это не стыдно. Стыдно — третий чай.</p>
@@ -894,7 +943,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ VIDEO ============ -->
 <section data-section="video" data-words="13">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 14 · видео</span></div>
     <h2>Послушай ещё раз</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Обрати внимание: первый глагол в -mak или -mek, второй меняется по лицам.</p>
@@ -904,7 +955,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ PRACTICE ============ -->
 <section data-section="practice" data-words="11">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 15 · практика</span></div>
     <h2>Практика</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Пять заданий. От узнавания к своей фразе. Последнее — на пристани.</p>
@@ -925,7 +978,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ CHECK ============ -->
 <section data-section="check" data-words="5">
+  <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 16 · проверка</span></div>
     <h2>Мини-проверка</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Пять вопросов. Без шпаргалки.</p>
@@ -935,7 +990,9 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <!-- ============ CHEAT + финал ============ -->
 <section data-section="cheat" data-words="53">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">свиток 17 · финал</span></div>
     <h2>Шпаргалка</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead" data-ui>Сохрани скриншотом.</p>
@@ -1844,6 +1901,113 @@ addEventListener('DOMContentLoaded', () => {
       .fromTo(b.querySelectorAll('.a-petal'), { scale: 0, transformOrigin: '70px 78px' }, { scale: 1, duration: 0.4, stagger: 0.1, ease: 'back.out(2.5)' }, 1.2)
       .fromTo(b.querySelector('.a-ring'), { rotation: -120, transformOrigin: '70px 70px' }, { rotation: 0, duration: 0.9, ease: 'power3.out' }, 1);
   });
+
+
+  /* ---------- v2: сцены по скроллу для каждого свитка ---------- */
+  if (G) {
+    G.fromTo('[data-section="story"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="story"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="story"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="story"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="story"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="story"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="story"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="guess"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="guess"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="guess"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="guess"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="guess"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="guess"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="guess"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="noun"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="noun"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="noun"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="noun"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="noun"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="noun"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="noun"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="noun"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="noun"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="noun"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="infinitive"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="infinitive"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="infinitive"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="infinitive"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="infinitive"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="infinitive"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="infinitive"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="infinitive"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="infinitive"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="infinitive"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="build"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="build"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="build"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="build"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="build"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="build"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="build"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="build"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="build"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="build"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="compare"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="compare"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="compare"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="compare"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="compare"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="compare"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="compare"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="compare"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="compare"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="compare"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="forms"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="forms"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="forms"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="forms"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="forms"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="forms"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="forms"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="forms"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="forms"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="forms"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="tree"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="tree"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="tree"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="tree"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="tree"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="tree"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="tree"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="tree"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="tree"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="tree"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="mnemonic"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="mnemonic"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="mnemonic"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="mnemonic"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="mnemonic"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="mnemonic"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="mnemonic"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="mnemonic"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="mnemonic"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="mnemonic"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="scene"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="scene"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="scene"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="scene"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="scene"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="scene"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="scene"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="gallery"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="gallery"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="gallery"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="gallery"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="gallery"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="gallery"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="gallery"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="lab"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="lab"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="lab"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="lab"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="lab"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="lab"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="lab"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="lab"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="lab"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="lab"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="traps"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="traps"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="traps"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="traps"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="traps"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="traps"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="traps"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="traps"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="traps"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="traps"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="video"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="video"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="video"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="video"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="video"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="video"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="video"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="video"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="video"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="video"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="practice"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="practice"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="practice"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="practice"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="practice"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="practice"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="practice"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="practice"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="practice"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="practice"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="check"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="check"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="check"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="check"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="check"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="check"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="check"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="check"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="check"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="check"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="cheat"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="cheat"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="cheat"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="cheat"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="cheat"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="cheat"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="cheat"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="cheat"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="cheat"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="cheat"]', toggleActions: 'play pause resume pause' } });
+    G.to('.cr-a', { x: '120vw', y: -60, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    G.to('.cr-b', { x: '110vw', y: -30, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 } });
+    G.to('.f3', { rotationY: 360, y: -10, duration: 7, ease: 'none', repeat: -1, scrollTrigger: { trigger: '.hero', toggleActions: 'play pause resume pause' } });
+    const tk = document.querySelector('.tick__in'); tk.innerHTML += tk.innerHTML;
+    G.to('.tick__in', { xPercent: -50, duration: 34, ease: 'none', repeat: -1, scrollTrigger: { trigger: '.tick', toggleActions: 'play pause resume pause' } });
+    G.from('.pcard, .bcol, .fc', { rotationX: -25, transformPerspective: 700, duration: 0.8, ease: 'back.out(1.6)', stagger: 0.03, scrollTrigger: { trigger: '.pcard', start: 'top 90%', once: true } });
+  }
+  if (G && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.frame, .trap, .pbox, .poll').forEach((c) => {
+      c.addEventListener('pointermove', (e) => {
+        const r = c.getBoundingClientRect();
+        G.to(c, { rotationY: ((e.clientX - r.left) / r.width - 0.5) * 6, rotationX: -((e.clientY - r.top) / r.height - 0.5) * 6, transformPerspective: 900, duration: 0.5, ease: 'power2.out' });
+      });
+      c.addEventListener('pointerleave', () => G.to(c, { rotationY: 0, rotationX: 0, duration: 0.6, ease: 'power3.out' }));
+    });
+    $$('.rib, .chip').forEach((p) => p.addEventListener('pointerdown', () => G.fromTo(p, { scale: 0.93 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' })));
+  }
+  $$('.st').forEach((st) => st.addEventListener('click', () => { spark(st, 10); if (G) G.fromTo(st, { rotation: -30 }, { rotation: 0, duration: 0.7, ease: 'elastic.out(1, .4)' }); }));
 
   /* ---------- нестандартное упражнение «Свитки на пристани» (a1.mak-istemek.ex5) ---------- */
   (async () => {
