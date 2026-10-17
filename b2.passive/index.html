@@ -316,6 +316,21 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 .sec{isolation:isolate}
 .float{z-index:-1}
 @media (max-width:767px){.float.cube{width:38px!important;height:38px!important}.hero{padding-top:64px}}
+.reelstrip{position:relative;z-index:2;margin:0 -12px;padding:16px 0;background:#1e1f26;overflow:hidden;transform:rotate(-1.4deg)}
+.reelstrip--r{transform:rotate(1.4deg);background:linear-gradient(90deg,#8445e8,#2450d6)}
+.reelstrip::before,.reelstrip::after{content:'';position:absolute;left:0;right:0;height:6px;background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(255,255,255,.7) 10px 18px,transparent 18px 28px)}
+.reelstrip::before{top:4px}.reelstrip::after{bottom:4px}
+.reelstrip__in{display:flex;width:max-content;animation:rs 30s linear infinite}
+.reelstrip__in span{flex:none;margin-right:12px;padding:10px 18px;border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font:700 clamp(15px,3.4vw,22px)/1 var(--ak-font);white-space:nowrap}
+.reelstrip__in b{color:#c48cff}
+.reelstrip--r .reelstrip__in b{color:#ffd36b}
+@keyframes rs{to{transform:translateX(-50%)}}
+.spot{position:absolute;left:10%;top:-40px;width:min(80vw,620px);height:auto;z-index:0;pointer-events:none;opacity:.55}
+.tripod{position:absolute;right:2%;top:30px;width:clamp(90px,14vw,150px);height:auto;z-index:-1;pointer-events:none}
+@media (max-width:767px){.tripod{top:8px;right:-10px;opacity:.5}}
+.tc{display:inline-flex;align-items:center;gap:8px;margin:0 0 12px;padding:6px 12px;border-radius:999px;background:#1e1f26;color:#fff;font:700 12px/1 var(--ak-font);letter-spacing:.12em}
+.tc i{width:8px;height:8px;border-radius:50%;background:#e3489a;animation:hb 1.2s infinite}
+.sec .kick svg{transform-origin:50% 50%}
 
 </style>
 </head>
@@ -385,11 +400,13 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 <main>
 
 <section class="sec hero" data-section="hero" data-words="45">
+  <svg class="spot" viewBox="0 0 400 400" aria-hidden="true"><defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><path d="M180 0 h40 L380 400 H20 Z" fill="url(#spg)"/></svg>
   <span class="float cube" style="--s:74px;--r:22deg;left:4%;top:16%" data-sp="-90"></span>
   <span class="float cube cube--v" style="--s:46px;--r:-14deg;right:6%;top:9%" data-sp="70"></span>
   <span class="float cube cube--w" style="--s:58px;--r:30deg;left:46%;bottom:6%" data-sp="-50"></span>
   <div class="wrap hero__g">
     <div class="hero__txt">
+      <p class="tc" id="tc" data-ui><i></i> REC 00:00</p>
       <div class="hero__stats" data-ui>
         <span><b>B2</b><small>Анкара</small></span>
         <span><b data-count="10">10</b><small>минут</small></span>
@@ -440,8 +457,10 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
     </div>
   </div>
 </section>
+<div class="reelstrip" aria-hidden="true"><div class="reelstrip__in" lang="tr"><span>Köprü <b>yapıldı</b></span><span>Kitap <b>okundu</b></span><span>Bilet <b>alındı</b></span><span>Kapı <b>açıldı</b></span><span>Çay <b>getirildi</b></span><span>Köprü <b>yapıldı</b></span><span>Kitap <b>okundu</b></span><span>Bilet <b>alındı</b></span><span>Kapı <b>açıldı</b></span><span>Çay <b>getirildi</b></span></div></div>
 
 <section class="sec" data-section="story" data-words="90">
+  <svg class="float filmdeco" style="--w:420px;right:-110px;bottom:6%" data-sp="60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#e3d4fb" stroke-width="24" stroke-linecap="round"/><path d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="7 9"/></svg>
   <div class="wrap grid2">
     <div class="txt">
       <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-clap"/></svg>кадр 01 · крючок</p>
@@ -468,6 +487,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 </section>
 
 <section class="sec" data-section="guess" data-words="40">
+  <svg class="float filmdeco" style="--w:420px;left:-120px;top:10%" data-sp="60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#cfe2ff" stroke-width="24" stroke-linecap="round"/><path d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="7 9"/></svg>
   <div class="wrap">
     <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-q"/></svg>кадр 02 · угадай</p>
     <h2>Угадай до правила</h2>
@@ -602,6 +622,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
     </div>
   </div>
 </section>
+<div class="reelstrip reelstrip--r" aria-hidden="true"><div class="reelstrip__in" lang="tr"><span>Telefon <b>çalındı</b></span><span>Pasta <b>yendi</b></span><span>Su <b>içildi</b></span><span>Anahtar <b>bulundu</b></span><span>Hesap <b>ödendi</b></span><span>Telefon <b>çalındı</b></span><span>Pasta <b>yendi</b></span><span>Su <b>içildi</b></span><span>Anahtar <b>bulundu</b></span><span>Hesap <b>ödendi</b></span></div></div>
 
 <section class="sec" data-section="tree" data-words="47">
   <div class="wrap grid2">
@@ -660,6 +681,8 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 </section>
 
 <section class="sec" data-section="scene" data-words="52">
+  <svg class="float filmdeco" style="--w:420px;left:-130px;bottom:2%" data-sp="60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#e3d4fb" stroke-width="24" stroke-linecap="round"/><path d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="7 9"/></svg>
+  <svg class="tripod" viewBox="0 0 120 170" aria-hidden="true"><path d="M60 70 L24 168 M60 70 L96 168 M60 70 V168" stroke="#3d3f48" stroke-width="5" stroke-linecap="round"/><g class="tp-cam"><rect x="22" y="34" width="62" height="36" rx="8" fill="#1e1f26"/><path d="M84 44 L108 32 V72 L84 60 Z" fill="#3d3f48"/><circle cx="40" cy="24" r="12" fill="#1e1f26"/><circle cx="66" cy="24" r="12" fill="#1e1f26"/><circle class="tp-rec" cx="32" cy="44" r="4" fill="#e3489a"/></g></svg>
   <div class="wrap">
     <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-pin"/></svg>кадр 08 · город</p>
     <h2>Анкара говорит пассивом</h2>
@@ -693,6 +716,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 </section>
 
 <section class="sec" data-section="gallery" data-words="36">
+  <svg class="float filmdeco" style="--w:420px;right:-120px;top:2%" data-sp="60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#cfe2ff" stroke-width="24" stroke-linecap="round"/><path d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="7 9"/></svg>
   <div class="wrap">
     <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-film"/></svg>кадр 09 · галерея</p>
     <h2>Перевёртыши</h2>
@@ -702,6 +726,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
     <div class="flips" id="flips"></div>
   </div>
 </section>
+<div class="reelstrip" aria-hidden="true"><div class="reelstrip__in" lang="tr"><span>Yol <b>kapatıldı</b></span><span>Masa <b>temizlendi</b></span><span>Simitler <b>satıldı</b></span><span>Film <b>çekildi</b></span><span>Mektup <b>yazıldı</b></span><span>Yol <b>kapatıldı</b></span><span>Masa <b>temizlendi</b></span><span>Simitler <b>satıldı</b></span><span>Film <b>çekildi</b></span><span>Mektup <b>yazıldı</b></span></div></div>
 
 <section class="sec" data-section="lab" data-words="64">
   <svg class="float filmdeco" style="--w:440px;right:-80px;bottom:3%" data-sp="-60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 180 C 100 60, 200 220, 300 90 S 400 40, 420 60" fill="none" stroke="#e3d4fb" stroke-width="26" stroke-linecap="round"/><path d="M-10 180 C 100 60, 200 220, 300 90 S 400 40, 420 60" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="7 9"/></svg>
@@ -1765,6 +1790,61 @@ safe('scenes', () => {
   g.fromTo('.bubble', { x: -30 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '#city', start: 'center bottom', end: 'bottom center', scrub: true } });
   g.fromTo('.score', { x: -40 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.guess', start: 'top bottom', end: 'bottom center', scrub: true } });
   g.fromTo('.mn__big', { letterSpacing: '.12em' }, { letterSpacing: '0em', ease: 'none', scrollTrigger: { trigger: '.mn__big', start: 'top bottom', end: 'top 50%', scrub: true } });
+});
+
+/* ---------- слой визуала v2: плёнки, прожектор, камера, таймкод, наклоны ---------- */
+safe('extras', () => {
+  /* киноплёнки-ленты: сдвиг и наклон от скорости прокрутки */
+  $$('.reelstrip').forEach((s, i) => {
+    const inner = $('.reelstrip__in', s);
+    g.fromTo(s, { xPercent: i % 2 ? 5 : -5 }, { xPercent: 0, ease: 'none', scrollTrigger: { trigger: s, start: 'top bottom', end: 'bottom top', scrub: true } });
+    if (ST) ScrollTrigger.create({ trigger: s, start: 'top bottom', end: 'bottom top', onUpdate: (self) => { G.to(inner, { skewX: Math.max(-14, Math.min(14, self.getVelocity() / -180)), duration: 0.3, overwrite: true }); } });
+  });
+  g.from('.reelstrip__in span', { y: 40, rotation: 6, duration: 0.6, stagger: 0.03, ease: 'back.out(2)', scrollTrigger: { trigger: '.reelstrip', start: 'top 95%', once: true } });
+  /* прожектор в первом экране качается */
+  const spot = g.fromTo('.spot', { rotation: -10, transformOrigin: '50% 0%' }, { rotation: 10, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  loopWhenVisible($('.hero'), spot);
+  g.to('.spot', { opacity: 0.15, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  /* камера на штативе поворачивается по скроллу */
+  g.fromTo('.tripod .tp-cam', { rotation: -18, transformOrigin: '60px 52px' }, { rotation: 14, ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+  const recBlink = g.to('.tripod .tp-rec', { opacity: 0.2, duration: 0.5, yoyo: true, repeat: -1 });
+  loopWhenVisible($('[data-section="scene"]'), recBlink);
+  g.from('.tripod', { y: -120, rotation: -20, duration: 1, ease: 'bounce.out', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top 80%', once: true } });
+  /* плёнки рисуются по мере прокрутки */
+  g.fromTo('[data-section="story"] .filmdeco .fd', { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top 85%', end: 'bottom 40%', scrub: true } });
+  g.fromTo('[data-section="guess"] .filmdeco .fd', { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top 85%', end: 'bottom 40%', scrub: true } });
+  g.fromTo('[data-section="scene"] .filmdeco .fd', { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top 85%', end: 'bottom 40%', scrub: true } });
+  g.fromTo('[data-section="gallery"] .filmdeco .fd', { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top 85%', end: 'bottom 40%', scrub: true } });
+  /* иконки в подписях секций крутятся при входе */
+  if (ST) $$('.kick svg').forEach((k) => ScrollTrigger.create({ trigger: k, start: 'top 90%', once: true, onEnter: () => G.fromTo(k, { rotation: -200, scale: 0.3 }, { rotation: 0, scale: 1, duration: 0.8, ease: 'back.out(2.5)' }) }));
+  /* таймкод REC растёт с прокруткой */
+  const tc = $('#tc');
+  if (tc) {
+    const upd = () => { const p = Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight)); const s = Math.round(p * 600); tc.lastChild.textContent = ` REC ${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+    addEventListener('scroll', upd, { passive: true });
+    upd();
+  }
+  /* карточки наклоняются за курсором на компьютере */
+  if (ON && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('#bento .bx, .gq, .trap, .legend li, .poster__c').forEach((c) => {
+      c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); G.to(c, { rotationY: ((e.clientX - r.left) / r.width - 0.5) * 12, rotationX: -((e.clientY - r.top) / r.height - 0.5) * 9, transformPerspective: 700, duration: 0.3 }); });
+      c.addEventListener('pointerleave', () => G.to(c, { rotationY: 0, rotationX: 0, duration: 0.6, ease: 'elastic.out(1, .5)' }));
+    });
+    $$('.tkt').forEach((b) => {
+      b.addEventListener('pointermove', (e) => { const r = b.getBoundingClientRect(); G.to(b, { x: (e.clientX - r.left - r.width / 2) * 0.25, y: (e.clientY - r.top - r.height / 2) * 0.35, duration: 0.3 }); });
+      b.addEventListener('pointerleave', () => G.to(b, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, .4)' }));
+    });
+  }
+  /* ещё немного жизни по скроллу */
+  g.fromTo('.hero__phone .reel__v', { scale: 1.08 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+  g.fromTo('.final p', { x: -40 }, { x: 0, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'top 50%', scrub: true } });
+  g.fromTo('.lab__seg', { x: 40 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.lab__seg', start: 'top bottom', end: 'top 60%', scrub: true } });
+  g.fromTo('.city', { rotationX: 14, transformPerspective: 900 }, { rotationX: 0, ease: 'none', scrollTrigger: { trigger: '.city', start: 'top bottom', end: 'center center', scrub: true } });
+  g.fromTo('[data-section="video"] a-video', { rotation: -2 }, { rotation: 0, ease: 'none', scrollTrigger: { trigger: '[data-section="video"]', start: 'top bottom', end: 'center center', scrub: true } });
+  g.from('.hero__stats span', { y: 30, scale: 0.6, duration: 0.6, ease: 'back.out(3)', stagger: 0.1, delay: 0.4 });
+  g.from('.tc', { x: -40, duration: 0.6, ease: 'back.out(2)', delay: 0.6 });
+  $$('.legend li').forEach((li) => li.addEventListener('click', () => { g.fromTo(li, { x: 14 }, { x: 0, duration: 0.6, ease: 'elastic.out(1, .4)' }); sparks(li, 8); }));
+  $$('.hero__stats span').forEach((sp) => sp.addEventListener('click', () => g.fromTo(sp, { rotationY: 0, transformPerspective: 500 }, { rotationY: 360, duration: 0.8, ease: 'power3.inOut' })));
 });
 
 });
