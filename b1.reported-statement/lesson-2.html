@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="b1.reported-statement">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="2">
+<title>Косвенная речь: duydum, biliyorum</title>
+<link rel="preload" href="media/intertight-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+  @font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 400 900; font-display: swap; src: url(media/intertight-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 400 900; font-display: swap; src: url(media/intertight-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+  @font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 400 900; font-display: swap; src: url(media/intertight-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+  /* ---------- токены: журнальная вёрстка — гигантский гротеск, плоские кислотные плашки, тонкие линейки ---------- */
+  :root {
+    --bb-ink: #0b0b0b;
+    --bb-paper: #ffffff;
+    --bb-grey: #8a8a8a;
+    --bb-line: rgba(11, 11, 11, .16);
+    --bb-orange: #ff4a0a;
+    --bb-pink: #f481ff;
+    --bb-yellow: #ffef2e;
+    --bb-cyan: #4ff0f0;
+    --bb-green: #55ee55;
+    --bb-cream: #fff6e3;
+    --bb-red: #ff2a1a;
+    /* одна роль — один цвет во всём гайде */
+    --r-root: #ffffff;
+    --r-tense: #ff4a0a;
+    --r-person: #f481ff;
+    --r-case: #4ff0f0;
+    --r-verb: #55ee55;
+    --r-gen: #ffef2e;
+
+    --ak-bg: #ffffff;
+    --ak-surface: #f4f4f2;
+    --ak-ink: #0b0b0b;
+    --ak-muted: #6b6b6b;
+    --ak-line: #dcdcd8;
+    --ak-accent: #0b0b0b;
+    --ak-accent-ink: #ffffff;
+    --ak-accent-soft: #fff1e9;
+    --ak-radius: 6px;
+    --ak-radius-sm: 4px;
+    --ak-font: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --ak-font-display: 'Inter Tight', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--bb-paper); overflow-x: clip; }
+  body { margin: 0; background: var(--bb-paper); color: var(--bb-ink); font: 500 var(--ak-text)/1.5 var(--ak-font); overflow-x: clip; letter-spacing: -.005em; }
+  main { padding: 0 0 calc(80px + env(safe-area-inset-bottom)); }
+  p { margin: 0 0 10px; max-width: 60ch; }
+  button { font-family: inherit; }
+  [lang="tr"] { font-weight: 700; }
+  [hidden] { display: none !important; }
+
+  /* ---------- секции-развороты ---------- */
+  .bb-sec { position: relative; overflow: hidden; padding: 0 16px 40px; }
+  .bb-in { max-width: 1040px; margin: 0 auto; position: relative; }
+  .bb-white { background: var(--bb-paper); }
+  .bb-black { background: var(--bb-ink); color: #fff; --bb-line: rgba(255,255,255,.2); }
+  .bb-orange { background: var(--bb-orange); }
+  .bb-pink { background: var(--bb-pink); }
+  .bb-yellow { background: var(--bb-yellow); }
+  .bb-cyan { background: var(--bb-cyan); }
+  .bb-green { background: var(--bb-green); }
+  .bb-meta { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; padding: 14px 0 10px; font: 600 11px/1.3 var(--ak-font); letter-spacing: .01em; }
+  .bb-meta > :nth-child(2) { display: flex; align-items: center; gap: 8px; }
+  .bb-meta > :nth-child(2)::before { content: ''; width: 34px; height: 1px; background: currentColor; }
+  .bb-meta > :last-child { text-align: right; }
+  .bb-rule { height: 1px; background: currentColor; opacity: .9; margin: 0 0 18px; }
+  .bb-no { font: 600 11px/1 var(--ak-font); opacity: .7; }
+  h1, h2 { font-family: var(--ak-font); margin: 0 0 20px; line-height: 1; letter-spacing: -.045em; }
+  h1 { font-size: clamp(32px, 8.4vw, 76px); font-weight: 800; }
+  h2 { font-size: clamp(30px, 8.4vw, 72px); font-weight: 500; }
+  h2 sup, .bb-sup { font-size: 12px; font-weight: 600; letter-spacing: 0; vertical-align: top; margin-left: 4px; position: relative; top: .5em; }
+  .wd { display: inline-block; }
+  .bb-lead { font-size: 1.08em; font-weight: 600; max-width: 34ch; }
+  .bb-small { font: 600 11px/1.35 var(--ak-font); letter-spacing: .01em; }
+  .bb-grey { color: var(--bb-grey); }
+  .bb-black .bb-grey { color: #a8a8a8; }
+  .bb-giant { display: block; font-weight: 500; letter-spacing: -.06em; line-height: .8; font-size: clamp(64px, 23vw, 230px); white-space: nowrap; margin: 0 -2vw; }
+  .bb-giant--bold { font-weight: 900; letter-spacing: -.07em; }
+  .bb-sq { display: inline-block; width: .55em; height: .55em; background: var(--bb-red); vertical-align: baseline; }
+  .bb-ast { font-weight: 900; letter-spacing: -.1em; }
+  .bb-two { display: grid; gap: 18px; }
+  @media (min-width: 900px) { .bb-two { grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; } .bb-sec { padding: 0 32px 64px; } }
+
+  /* ---------- кнопки: тонкие пилюли ---------- */
+  .bb-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 18px; border: 1.5px solid currentColor; border-radius: 999px; background: transparent; color: inherit; font: 700 14px/1 var(--ak-font); letter-spacing: -.01em; cursor: pointer; touch-action: manipulation; transition: background-color .15s ease, color .15s ease; }
+  .bb-btn--fill, .bb-btn.is-on, .bb-btn[aria-pressed="true"], .bb-btn[aria-selected="true"] { background: var(--bb-ink); color: #fff; border-color: var(--bb-ink); }
+  .bb-black .bb-btn--fill, .bb-black .bb-btn.is-on, .bb-black .bb-btn[aria-pressed="true"], .bb-black .bb-btn[aria-selected="true"] { background: #fff; color: var(--bb-ink); border-color: #fff; }
+  .bb-btn:focus-visible, .bb-pick:focus-visible, .bb-tile:focus-visible, .bb-row:focus-visible { outline: 3px solid var(--bb-orange); outline-offset: 3px; }
+  .bb-row-btns { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+  /* ---------- морфемы: роль = цвет ---------- */
+  .bb-m { display: inline-block; padding: 2px 5px 3px; margin: 0 1px; font-weight: 800; color: var(--bb-ink); background: var(--c, #fff); border: 1.5px solid var(--bb-ink); line-height: 1.1; }
+  .bb-m[data-r="root"] { --c: var(--r-root); } .bb-m[data-r="tense"] { --c: var(--r-tense); } .bb-m[data-r="person"] { --c: var(--r-person); }
+  .bb-m[data-r="case"] { --c: var(--r-case); } .bb-m[data-r="verb"] { --c: var(--r-verb); } .bb-m[data-r="gen"] { --c: var(--r-gen); }
+  .bb-m[data-r="word"] { --c: transparent; border-color: transparent; padding-left: 0; padding-right: 3px; }
+  .bb-m[data-r="cut"] { --c: #fff; text-decoration: line-through; opacity: .5; }
+  .bb-black .bb-m[data-r="word"] { color: #fff; }
+  .bb-black :is(.l1-lab, .l2-lab, .bb-paper-ctx) .bb-m[data-r="word"] { color: var(--bb-ink); }
+  .bb-legend { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 8px 0 14px; }
+  .bb-legend span { display: inline-flex; gap: 6px; align-items: center; font: 600 12px/1 var(--ak-font); }
+  .bb-legend i { width: 14px; height: 14px; border: 1.5px solid currentColor; background: var(--c); }
+  .bb-line-tr { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 2px; font-size: clamp(19px, 5.4vw, 30px); letter-spacing: -.02em; min-height: 1.6em; }
+
+  /* ---------- плакаты ---------- */
+  .bb-poster { position: relative; padding: 14px 14px 12px; color: var(--bb-ink); display: flex; flex-direction: column; gap: 10px; min-height: 100%; }
+  .bb-poster__head { display: flex; justify-content: space-between; align-items: center; font: 900 17px/1 var(--ak-font); letter-spacing: -.03em; padding-bottom: 8px; border-bottom: 1.5px solid currentColor; }
+  .bb-poster__head i { width: 56px; height: 7px; border-top: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; }
+  .bb-poster__big { font-weight: 900; letter-spacing: -.055em; line-height: .88; font-size: clamp(38px, 12vw, 70px); }
+  .bb-poster__foot { display: flex; justify-content: space-between; margin-top: auto; font: 600 10px/1.2 var(--ak-font); padding-top: 8px; }
+  .bb-portrait { display: block; width: 100%; height: auto; }
+
+  /* ---------- журнальная таблица ---------- */
+  .bb-table { width: 100%; border-top: 1px solid var(--bb-line); }
+  .bb-row { display: grid; grid-template-columns: 56px 1fr auto; gap: 10px; align-items: center; width: 100%; min-height: 46px; padding: 8px 6px; border: 0; border-bottom: 1px solid var(--bb-line); background: none; color: inherit; font: 500 14px/1.25 var(--ak-font); text-align: left; cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+  .bb-row.is-on { background: var(--bb-ink); color: #fff; }
+  .bb-black .bb-row.is-on { background: #fff; color: var(--bb-ink); }
+  .bb-row b { font-weight: 800; }
+  .bb-row .bb-small { opacity: .7; }
+
+  /* ---------- титры: мелкая подпись + крупное имя ---------- */
+  .bb-credits { font-size: clamp(18px, 4.8vw, 26px); font-weight: 800; letter-spacing: -.035em; line-height: 1.15; }
+  .bb-credits small { font: 600 10px/1 var(--ak-font); letter-spacing: 0; margin: 0 4px 0 10px; vertical-align: middle; }
+  .bb-credits small:first-child { margin-left: 0; }
+
+  /* ---------- карточки-перевёртыши (ловушки) ---------- */
+  .bb-traps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+  .bb-flip { position: relative; min-height: 170px; border: 0; padding: 0; background: none; cursor: pointer; perspective: 1000px; text-align: left; font: inherit; color: var(--bb-ink); }
+  .bb-flip__in { position: relative; display: block; width: 100%; min-height: 170px; transform-style: preserve-3d; }
+  .bb-flip__f, .bb-flip__b { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 6px; padding: 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .bb-flip__f { background: var(--bb-paper); }
+  .bb-flip__b { background: var(--bb-green); transform: rotateY(180deg); }
+  .bb-flip big { font-size: 22px; font-weight: 800; letter-spacing: -.03em; line-height: 1.05; }
+  .bb-flip__tag { font: 800 11px/1 var(--ak-font); letter-spacing: .06em; text-transform: uppercase; }
+  .bb-flip__f .bb-flip__tag { color: var(--bb-orange); }
+  .bb-flip__hint { margin-top: auto; font: 600 11px/1 var(--ak-font); opacity: .6; }
+  .bb-flip--noflip .bb-flip__b { position: relative; transform: none; }
+  .bb-flip--noflip .bb-flip__f { position: relative; }
+
+  /* ---------- плитки и билеты ---------- */
+  .bb-tray, .bb-ticket { display: flex; flex-wrap: wrap; gap: 8px; min-height: 54px; padding: 8px; }
+  .bb-tray { background: rgba(11,11,11,.05); }
+  .bb-black .bb-tray { background: rgba(255,255,255,.08); }
+  .bb-ticket { border: 1.5px dashed currentColor; margin: 8px 0; }
+  .bb-ticket.is-good { border-style: solid; background: var(--bb-green); color: var(--bb-ink); }
+  .bb-ticket.is-bad { border-style: solid; background: #ffd9cf; color: var(--bb-ink); }
+  .bb-tile { min-height: 44px; padding: 6px 14px; border: 1.5px solid var(--bb-ink); background: #fff; color: var(--bb-ink); font: 800 17px/1 var(--ak-font); letter-spacing: -.02em; cursor: pointer; }
+  .bb-ticket .bb-tile { cursor: default; }
+  .bb-pick { min-height: 44px; padding: 8px 14px; border: 1.5px solid currentColor; background: transparent; color: inherit; font: 700 15px/1.2 var(--ak-font); cursor: pointer; text-align: left; }
+  .bb-pick.is-good { background: var(--bb-green); color: var(--bb-ink); border-color: var(--bb-ink); }
+  .bb-pick.is-bad { background: #ffd9cf; color: var(--bb-ink); border-color: var(--bb-ink); }
+  .bb-status { min-height: 1.5em; font-weight: 700; margin-top: 8px; }
+
+  /* ---------- вау-слой ---------- */
+  .bb-confetti { position: fixed; inset: 0; pointer-events: none; z-index: 70; overflow: hidden; }
+  .bb-confetti i { position: absolute; width: 9px; height: 14px; }
+  .bb-marquee { overflow: hidden; white-space: nowrap; border-top: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; padding: 8px 0; font: 800 14px/1 var(--ak-font); letter-spacing: .02em; text-transform: uppercase; }
+  .bb-scrubword { overflow: hidden; padding: 18px 0 8px; color: #fff; }
+  .bb-stamp { position: absolute; right: 10px; top: 10px; width: 54px; height: 54px; rotate: 12deg; }
+  .bb-marquee__t { display: inline-block; padding-right: 24px; }
+
+  /* ---------- свой скроллбар: колонтитул журнала — номер страницы и красный квадрат ---------- */
+  .bb-sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 34px; pointer-events: none; background: linear-gradient(var(--bb-paper) 60%, transparent); }
+  .bb-sb__track { position: absolute; left: 12px; right: 64px; top: 16px; height: 2px; background: rgba(11,11,11,.18); pointer-events: auto; touch-action: none; cursor: pointer; }
+  .bb-sb__track::before { content: ''; position: absolute; left: 0; right: 0; top: -13px; bottom: -13px; }
+  .bb-sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: var(--bb-ink); }
+  .bb-sb__sq { position: absolute; top: 50%; left: calc(var(--p, 0) * 100%); width: 12px; height: 12px; translate: -50% -50%; background: var(--bb-red); pointer-events: none; }
+  .bb-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; border: 0; padding: 0; background: none; cursor: pointer; }
+  .bb-sb__mark::after { content: ''; position: absolute; left: 13px; top: 8px; width: 2px; height: 12px; background: var(--bb-ink); opacity: .35; }
+  .bb-sb__mark.is-read::after { opacity: 1; background: var(--bb-orange); width: 4px; left: 12px; }
+  .bb-sb__page { position: absolute; right: 12px; top: 9px; font: 800 12px/1 var(--ak-font); letter-spacing: -.01em; color: var(--bb-ink); }
+  @media (min-width: 768px) {
+    .bb-sb { left: auto; right: 8px; top: 50%; translate: 0 -50%; width: 46px; height: min(62dvh, 520px); background: none; }
+    .bb-sb__track { left: 22px; right: auto; top: 0; bottom: 34px; width: 2px; height: auto; }
+    .bb-sb__track::before { left: -13px; right: -13px; top: 0; bottom: 0; }
+    .bb-sb__fill { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); }
+    .bb-sb__sq { left: 50%; top: calc(var(--p, 0) * 100%); }
+    .bb-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+    .bb-sb__mark::after { left: 8px; top: 13px; width: 12px; height: 2px; }
+    .bb-sb__mark.is-read::after { left: 6px; top: 12px; width: 16px; height: 4px; }
+    .bb-sb__page { top: auto; bottom: 0; right: 4px; }
+  }
+  @media (hover: hover) {
+    .bb-btn:hover { background: var(--bb-ink); color: #fff; }
+    .bb-black .bb-btn:hover { background: #fff; color: var(--bb-ink); }
+    .bb-row:hover { background: rgba(11,11,11,.06); }
+    .bb-tile:hover, .bb-pick:hover { translate: 0 -2px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+  /* ---------- урок 2 ---------- */
+  .l2-hero { padding-top: 34px; }
+  .l2-hero__big { position: relative; margin: 6px -16px 0; }
+  .l2-hero__big span { animation: l2In 1s cubic-bezier(.2, .9, .2, 1) both; }
+  .l2-hero__big span:nth-child(2) { animation-delay: .12s; }
+  @keyframes l2In { from { transform: translateY(30%); } to { transform: none; } }
+  .l2-strip { display: flex; gap: 4px; overflow: hidden; margin: 10px -16px; }
+  .l2-strip svg { flex: 0 0 auto; width: 64px; height: 64px; }
+  .l2-chat { display: grid; gap: 8px; }
+  .l2-bub { max-width: 88%; padding: 10px 12px; background: #fff; color: var(--bb-ink); }
+  .l2-bub--me { justify-self: end; background: var(--bb-yellow); }
+  .l2-bub small { display: block; font: 700 10px/1.2 var(--ak-font); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; opacity: .7; }
+  .bb-js .l2-chat .l2-bub:not(.is-on) { display: none; }
+  .l2-cat { width: 110px; height: auto; }
+
+  .l2-list { display: grid; }
+  .l2-item { display: flex; align-items: baseline; gap: 6px; border: 0; background: none; padding: 0; cursor: pointer; color: var(--bb-ink); font: 900 clamp(44px, 14vw, 92px)/.9 var(--ak-font); letter-spacing: -.06em; text-align: left; min-height: 44px; }
+  .l2-item sup { font: 700 12px/1 var(--ak-font); letter-spacing: 0; }
+  .l2-item.is-on { color: #fff; -webkit-text-stroke: 2px var(--bb-ink); }
+  .l2-vcard { background: var(--bb-paper); padding: 14px; min-height: 180px; }
+  .l2-vcard big { display: block; font: 900 clamp(26px, 7vw, 40px)/1 var(--ak-font); letter-spacing: -.045em; margin-bottom: 8px; }
+
+  .l2-scene { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: end; margin: 12px 0; }
+  .l2-fig { display: grid; justify-items: center; gap: 4px; }
+  .l2-fig svg { width: 100%; max-width: 140px; height: auto; }
+  .l2-fig b { font: 800 14px/1 var(--ak-font); }
+  .l2-arrow { width: 100%; height: 40px; margin: -6px 0 6px; }
+
+  .l2-mirror { position: relative; display: grid; grid-template-columns: 1fr 26px 1fr; gap: 8px; align-items: center; background: var(--bb-paper); color: var(--bb-ink); padding: 16px 12px; }
+  .l2-mirror__bar { width: 4px; height: 100%; min-height: 90px; background: var(--bb-ink); justify-self: center; }
+  .l2-mirror__col { display: grid; gap: 8px; justify-items: center; text-align: center; }
+  .l2-mirror__col big { font: 900 clamp(24px, 7vw, 40px)/1 var(--ak-font); letter-spacing: -.045em; }
+
+  .l2-lanes { display: grid; gap: 10px; margin-top: 12px; }
+  .l2-lane { display: grid; grid-template-columns: 1fr; gap: 6px; padding: 12px; color: var(--bb-ink); }
+  .l2-lane__q { font: 900 clamp(22px, 6vw, 34px)/1 var(--ak-font); letter-spacing: -.04em; }
+  .l2-lane__a { font: 800 clamp(17px, 4.6vw, 24px)/1.15 var(--ak-font); letter-spacing: -.02em; min-height: 1.3em; }
+  .l2-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .l2-lab { background: var(--bb-paper); color: var(--bb-ink); padding: 14px; }
+  .l2-chain { display: grid; gap: 10px; margin-top: 10px; }
+  .l2-link { display: grid; grid-template-columns: 54px 1fr; gap: 10px; align-items: center; padding: 10px; background: #f4f4f2; }
+  .l2-link svg { width: 54px; height: 54px; }
+  .l2-link .bb-line-tr { font-size: clamp(16px, 4.4vw, 22px); }
+  .l2-amb { display: grid; gap: 8px; }
+  .l2-amb__out { font: 900 clamp(22px, 6vw, 34px)/1.05 var(--ak-font); letter-spacing: -.04em; min-height: 1.2em; }
+
+  .l2-x8 .l2-bub { background: #f4f4f2; }
+  .l2-x8 .l2-bub--me { background: var(--bb-yellow); }
+  .l2-x8__opts { display: grid; gap: 6px; margin-top: 8px; }
+
+  .l2-cheat__f { font: 900 clamp(24px, 7vw, 46px)/1 var(--ak-font); letter-spacing: -.045em; }
+  .l2-cheat ul { margin: 0; padding-left: 18px; }
+  .l2-cheat li { margin: 4px 0; }
+  @media (prefers-reduced-motion: reduce) { .l2-hero__big span { animation: none; } }
+</style>
+</head>
+<body>
+<main>
+
+  <!-- ================= КРЮЧОК: СЛОМАННЫЙ ТЕЛЕФОН ================= -->
+  <section data-section="story" data-words="72" class="bb-sec bb-white l2-hero">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>ANTALYA</span><span>Issue No. 26 · Part 2</span><span>B1 · Ders 2</span></div>
+      <div class="l2-hero__big" aria-hidden="true" lang="tr"><span class="bb-giant" data-drift="5">Duydum</span><span class="bb-giant bb-giant--bold" data-drift="-5">ki…<span class="bb-sq"></span></span></div>
+      <div class="l2-strip" aria-hidden="true"><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#ff4a0a"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#f481ff"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#ffef2e"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#4ff0f0"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#55ee55"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#ff4a0a"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#f481ff"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg><svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#ffef2e"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg></div>
+      <h1>Сломанный телефон</h1>
+      <p class="bb-credits" aria-hidden="true"><small>Söyleyen</small>Elif <small>Duyan</small>Murat <small>Anlatan</small>Sen <small>Bilen</small>Antalya</p>
+      <div class="bb-two" style="margin-top:14px">
+        <div class="l2-chat" data-chat>
+          <div class="l2-bub is-on"><small>Элиф</small><p>Элиф говорит Мурату: <a-say>Seni seviyorum.</a-say> Я тебя люблю.</p></div>
+          <div class="l2-bub l2-bub--me"><small>Мурат → тебе</small><p>Мурат бежит к тебе. Говорит: <a-say>Elif beni sevdiğini söyledi.</a-say> Элиф сказала, что любит меня.</p></div>
+          <div class="l2-bub"><small>Ты → Айше</small><p>Ты рассказываешь Айше: <a-say>Elif'in Murat'ı sevdiğini duydum.</a-say> Я слышал, что Элиф любит Мурата.</p></div>
+          <div class="l2-bub l2-bub--me"><small>Анталья</small><p>К вечеру это знает весь квартал. Элиф, кстати, говорила это коту. Кота зовут Мурат.</p></div>
+        </div>
+        <div>
+          <svg class="l2-cat" viewBox="0 0 120 110" aria-hidden="true"><defs><pattern id="ct1" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.3" fill="#0b0b0b"/></pattern></defs><path d="M20 108c0-30 14-50 40-50s40 20 40 50z" fill="#0b0b0b"/><path d="M22 30l10-26 18 18zM98 30 88 4 70 22z" fill="#0b0b0b"/><circle cx="60" cy="40" r="32" fill="#0b0b0b"/><circle cx="60" cy="40" r="32" fill="url(#ct1)" opacity=".3"/><ellipse class="l2-eye" cx="48" cy="38" rx="5" ry="7" fill="#ffef2e"/><ellipse class="l2-eye" cx="72" cy="38" rx="5" ry="7" fill="#ffef2e"/><path d="M84 96c20 0 30-12 26-30" stroke="#0b0b0b" stroke-width="8" fill="none" stroke-linecap="round"/></svg>
+          <p>Одна фраза. Три пересказа. И в каждом что-то поменялось: <span lang="tr">seni</span> стало <span lang="tr">beni</span>, появились <span lang="tr">Elif'in</span> и <span lang="tr">duydum</span>.</p>
+          <p>Пересказ меняет не только глагол. Он меняет местоимения, падежи и даже глагол речи.</p>
+          <div class="bb-row-btns"><button type="button" class="bb-btn bb-btn--fill" data-chatnext data-ui>Дальше →</button><button type="button" class="bb-btn" data-chatall data-ui>Показать всё</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bb-marquee bb-orange" data-marquee aria-hidden="true"><span class="bb-marquee__t" lang="tr">söyledi / duydum / biliyorum / Elif'in geldiğini / beni sevdiğini / gelmemi söyledi / geleceğini söyledi / </span></div>
+
+  <!-- ================= ТРИ ГЛАГОЛА ================= -->
+  <section data-section="verbs" data-words="34" class="bb-sec bb-pink">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>World</span><span>Verbs of legends</span><span>p. 02</span></div>
+      <div class="bb-two">
+        <div>
+          <h2>Не только <span lang="tr">söyledi</span></h2>
+          <p class="bb-lead">Та же форма работает и с другими глаголами. Нажми на слово.</p>
+          <p>Меняется только последний глагол. Он говорит, откуда ты знаешь новость: тебе сказали, до тебя дошло или ты и так в курсе.</p>
+          <div class="l2-list" role="group" aria-label="Глаголы" lang="tr">
+            <button type="button" class="l2-item is-on" data-v="0">Söyledi<sup>(сказал)</sup></button>
+            <button type="button" class="l2-item" data-v="1">Duydum<sup>(слышал)</sup></button>
+            <button type="button" class="l2-item" data-v="2">Biliyorum<sup>(знаю)</sup></button>
+          </div>
+        </div>
+        <div class="l2-vcard" aria-live="polite">
+          <big lang="tr" data-vtr></big>
+          <p data-vru data-ui style="font-weight:700"></p>
+          <p class="bb-small bb-grey" data-vnote data-ui></p>
+          <div class="bb-row-btns"><button type="button" class="bb-btn bb-btn--fill" data-vsay data-ui>Послушать</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= КТО СДЕЛАЛ ================= -->
+  <section data-section="whose" data-words="38" class="bb-sec bb-white">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Story 02</span><span>Meet our producers</span><span>p. 03</span></div>
+      <h2>Кто это сделал<span class="bb-sq" aria-hidden="true"></span></h2>
+      <div class="bb-two">
+        <div>
+          <p class="bb-lead">Если говорит один, а сделал другой — у другого появляется <span lang="tr">-nin</span>.</p>
+          <p>Как «книга Али»: <span lang="tr">Ali'nin kitabı</span>. Только вместо книги — действие: <span lang="tr">Ali'nin geldiği</span>.</p>
+          <p>Говорящий и деятель — один человек? Тогда <span lang="tr">-nin</span> не нужен. Разные — нужен. Переключи и посмотри на стрелку.</p>
+          <div class="bb-row-btns" role="group" aria-label="Кто сделал"><button type="button" class="bb-btn is-on" data-wmode="self" data-ui>Али про себя</button><button type="button" class="bb-btn" data-wmode="other" data-ui>Я про Али</button></div>
+        </div>
+        <div>
+          <div class="l2-scene">
+            <div class="l2-fig"><svg viewBox="0 0 140 160" aria-hidden="true"><rect width="140" height="160" fill="#ffef2e"/><circle cx="70" cy="60" r="26" fill="#0b0b0b"/><path d="M20 160c4-36 24-56 50-56s46 20 50 56z" fill="#0b0b0b"/></svg><b data-wfig1>Говорит Али</b></div>
+            <div class="l2-fig"><svg viewBox="0 0 140 160" aria-hidden="true"><rect width="140" height="160" fill="#4ff0f0"/><circle cx="70" cy="60" r="26" fill="#0b0b0b"/><path d="M20 160c4-36 24-56 50-56s46 20 50 56z" fill="#0b0b0b"/></svg><b data-wfig2>Пришёл Али</b></div>
+          </div>
+          <svg class="l2-arrow" viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><path data-warrow d="M70 6 C 120 40, 180 40, 230 6" stroke="#ff4a0a" stroke-width="4" fill="none" stroke-dasharray="8 6"/></svg>
+          <div class="bb-line-tr" data-wline lang="tr" aria-live="polite"></div>
+          <p class="bb-small bb-grey" data-wru data-ui></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ЗЕРКАЛО МЕСТОИМЕНИЙ ================= -->
+  <section data-section="shift" data-words="42" class="bb-sec bb-black">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Story 03</span><span>Reflective surfaces</span><span>p. 04</span></div>
+      <h2>Зеркало</h2>
+      <div class="bb-two">
+        <div>
+          <p class="bb-lead">Пересказ — это зеркало. «Тебя» в чужих устах становится «меня».</p>
+          <p>Элиф сказала Мурату «тебя». Мурат пересказывает — и говорит «меня». Иначе выйдет, что Элиф любит тебя.</p>
+          <p>Проверь себя одним вопросом: кто сейчас говорит? От его лица и выбирай «меня» или «тебя».</p>
+          <div class="bb-row-btns" role="group" aria-label="Пара"><button type="button" class="bb-btn is-on" data-mi="0" lang="tr">seni → beni</button><button type="button" class="bb-btn" data-mi="1" lang="tr">sana → bana</button><button type="button" class="bb-btn" data-mi="2" lang="tr">beni → seni</button></div>
+        </div>
+        <div>
+          <div class="l2-mirror" data-mirror>
+            <div class="l2-mirror__col"><span class="bb-small">ЦИТАТА</span><big lang="tr" data-ma></big><span class="bb-small" data-mar data-ui></span></div>
+            <div class="l2-mirror__bar" aria-hidden="true"></div>
+            <div class="l2-mirror__col"><span class="bb-small">ПЕРЕСКАЗ</span><big lang="tr" data-mb></big><span class="bb-small" data-mbr data-ui></span></div>
+          </div>
+          <div class="bb-line-tr" data-mline lang="tr" style="margin-top:12px"></div>
+          <div class="bb-row-btns" style="margin-top:8px"><button type="button" class="bb-btn" data-mflip data-ui>Отразить ещё раз</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРИКАЗ ИЛИ СООБЩЕНИЕ ================= -->
+  <section data-section="command" data-words="39" class="bb-sec bb-white">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Story 04</span><span>Two optical choices</span><span>p. 05</span></div>
+      <h2>Приказ или новость</h2>
+      <p class="bb-lead">Ты уже знаешь <span lang="tr">gelmemi söyledi</span> — «сказал мне прийти». Это приказ. Новость — другая форма.</p>
+      <div class="l2-switch" role="group" aria-label="Цитата"><button type="button" class="bb-btn is-on" data-cq="0" lang="tr">“Gel!”</button><button type="button" class="bb-btn" data-cq="1" lang="tr">“Geleceğim.”</button><button type="button" class="bb-btn" data-cq="2" lang="tr">“Gelme!”</button><button type="button" class="bb-btn" data-cq="3" lang="tr">“Gelmeyeceğim.”</button></div>
+      <div class="l2-lanes">
+        <div class="l2-lane bb-orange" data-lane="cmd"><span class="bb-small">ПРИКАЗ · -mAk</span><span class="l2-lane__a" lang="tr" data-la="cmd"></span></div>
+        <div class="l2-lane bb-green" data-lane="news"><span class="bb-small">НОВОСТЬ · -DIk / -AcAk</span><span class="l2-lane__a" lang="tr" data-la="news"></span></div>
+      </div>
+      <p style="margin-top:12px">Приказ смотрит вперёд: сделай. Новость смотрит на факт: сделал, сделает. Отсюда и разные хвосты.</p>
+      <p>Спроси себя: мне велели или мне сообщили? Велели — <span lang="tr">-mAyI</span>. Сообщили — <span lang="tr">-DIğI / -AcAğI</span>.</p>
+    </div>
+  </section>
+
+  <!-- ================= ЛАБОРАТОРИЯ ================= -->
+  <section data-section="lab" data-words="29" class="bb-sec bb-cyan">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Story 05</span><span>The studio</span><span>p. 06</span></div>
+      <h2>Студия слухов<sup>(3)</sup></h2>
+      <p class="bb-lead">Три режима. Фраза идёт по цепочке, а ты смотришь, что с ней происходит.</p>
+      <div class="bb-row-btns" role="tablist" aria-label="Режимы" style="margin:10px 0 14px">
+        <button type="button" class="bb-btn" role="tab" aria-selected="true" data-lm="chain" data-ui>Цепочка</button>
+        <button type="button" class="bb-btn" role="tab" aria-selected="false" data-lm="amb" data-ui>Чьё?</button>
+        <button type="button" class="bb-btn" role="tab" aria-selected="false" data-lm="speed" data-ui>Приказ или новость</button>
+      </div>
+      <div class="l2-lab">
+        <div data-lp="chain">
+          <p class="bb-small" data-ui>Выбери, что сказала Айше.</p>
+          <div class="bb-row-btns" data-cq2 role="group" aria-label="Цитата"></div>
+          <div class="l2-chain" data-chain></div>
+          <div class="bb-row-btns" style="margin-top:10px"><button type="button" class="bb-btn bb-btn--fill" data-chainplay data-ui>Пустить по цепочке</button></div>
+        </div>
+        <div data-lp="amb" hidden>
+          <p><span lang="tr">geldiğini</span> — «что он пришёл» или «что ты пришёл»? Форма одна. Добавь слово — и станет ясно.</p>
+          <div class="l2-amb">
+            <div class="l2-amb__out" lang="tr" data-ambout></div>
+            <p class="bb-small bb-grey" data-ambru data-ui></p>
+            <div class="bb-row-btns"><button type="button" class="bb-btn" data-amb="" lang="tr">без слова</button><button type="button" class="bb-btn" data-amb="onun" lang="tr">onun</button><button type="button" class="bb-btn" data-amb="senin" lang="tr">senin</button><button type="button" class="bb-btn" data-amb="Ali'nin" lang="tr">Ali'nin</button></div>
+          </div>
+        </div>
+        <div data-lp="speed" hidden>
+          <p class="bb-small" data-ui>Быстро: это приказ или новость?</p>
+          <div class="l2-amb__out" lang="tr" data-spq></div>
+          <div class="l2-switch" style="margin-top:10px"><button type="button" class="bb-btn" data-sp="cmd" data-ui>Приказ</button><button type="button" class="bb-btn" data-sp="news" data-ui>Новость</button></div>
+          <p class="bb-status" data-spout data-ui></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <div class="bb-scrubword bb-black" aria-hidden="true"><span class="bb-giant bb-giant--bold" lang="tr" data-scrubword>DUYDUM.</span></div>
+
+  <!-- ================= ЛОВУШКИ ================= -->
+  <section data-section="traps" data-words="73" class="bb-sec bb-yellow">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Errata</span><span>Collections launched</span><span>p. 07</span></div>
+      <h2>Ловушки<span class="bb-ast" aria-hidden="true">**</span></h2>
+      <p class="bb-lead">Четыре ошибки, которые делают все. Переверни.</p>
+      <div class="bb-traps">
+        <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
+          <span class="bb-flip__f"><span class="bb-flip__tag">Так не говорят</span><big lang="tr">Ali geldiğini duydum</big><span>Я слышал, что пришёл Али?</span><span class="bb-flip__hint">перевернуть →</span></span>
+          <span class="bb-flip__b"><span class="bb-flip__tag">Так говорят</span><big lang="tr">Ali'nin geldiğini duydum</big><span>Слышал я, пришёл Али. У Али — <span lang="tr">-nin</span>.</span></span>
+        </span></button>
+        <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
+          <span class="bb-flip__f"><span class="bb-flip__tag">Путают</span><big lang="tr">Elif seni sevdiğini söyledi</big><span>Мурат пересказывает Элиф.</span><span class="bb-flip__hint">перевернуть →</span></span>
+          <span class="bb-flip__b"><span class="bb-flip__tag">Разница</span><big lang="tr">Elif beni sevdiğini söyledi</big><span>Мурат говорит о себе — «меня». С <span lang="tr">seni</span> выйдет, что любят тебя.</span></span>
+        </span></button>
+        <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
+          <span class="bb-flip__f"><span class="bb-flip__tag">Путают</span><big lang="tr">gelmemi söyledi</big><span>Он сказал, что я пришёл?</span><span class="bb-flip__hint">перевернуть →</span></span>
+          <span class="bb-flip__b"><span class="bb-flip__tag">Разница</span><big lang="tr">geldiğimi söyledi</big><span>Это новость: сказал, что я пришёл. <span lang="tr">gelmemi</span> — велел мне прийти.</span></span>
+        </span></button>
+        <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
+          <span class="bb-flip__f"><span class="bb-flip__tag">Путают</span><big lang="tr">gelmeyeceğini söylemedi</big><span>Хотели сказать: сказал, что не придёт.</span><span class="bb-flip__hint">перевернуть →</span></span>
+          <span class="bb-flip__b"><span class="bb-flip__tag">Так говорят</span><big lang="tr">gelmeyeceğini söyledi</big><span>«Не» живёт внутри: <span lang="tr">gel-me-yeceğ</span>. <span lang="tr">söylemedi</span> — значит, вообще молчал.</span></span>
+        </span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ВИДЕО ================= -->
+  <section data-section="video" data-words="19" class="bb-sec bb-white">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Video</span><span>Yunus Emre Enstitüsü</span><span>p. 08</span></div>
+      <h2>Ещё примеры</h2>
+      <div class="bb-two">
+        <div class="bb-poster bb-cyan">
+          <div class="bb-poster__head"><span lang="tr">Ders.</span><i></i></div>
+          <svg class="bb-portrait" viewBox="0 0 200 240" aria-hidden="true"><defs><pattern id="qa1" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.6" fill="#ffffff"/></pattern></defs><rect width="200" height="240" fill="#4ff0f0"/><rect width="200" height="240" fill="url(#qa1)" opacity=".35"/><g fill="#0b0b0b"><path d="M28 240c4-46 34-74 72-74s68 28 72 74z"/><rect x="86" y="128" width="28" height="44"/><ellipse cx="98" cy="96" rx="36" ry="44"/><path d="M56 104c-6-40 10-74 44-76 32-2 50 26 44 70-6-22-22-34-44-36-20-1-36 14-44 42z"/></g><path d="M40 240c6-30 26-52 60-56" stroke="#ffffff" stroke-width="3" fill="none" opacity=".5"/></svg>
+          <div class="bb-poster__foot"><span>Ankara</span><span>Part 2</span></div>
+        </div>
+        <div>
+          <p>Послушай, как учитель пересказывает две фразы сразу: «не видел» и «не знаю». Обе уходят в одну форму.</p>
+          <a-video yt="ippmTr68TdQ" start="741" end="809" title="B2 - Dolaylı Anlatım" channel="Yunus Emre Enstitüsü"></a-video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ПРАКТИКА ================= -->
+  <section data-section="practice" data-words="1" class="bb-sec bb-white">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Practice</span><span>Live show today</span><span>p. 09</span></div>
+      <h2>Практика</h2>
+      <a-exercise ref="b1.reported-statement.ex5"></a-exercise>
+      <a-exercise ref="b1.reported-statement.ex6"></a-exercise>
+      <a-exercise ref="b1.reported-statement.ex7"></a-exercise>
+      <a-exercise ref="b1.reported-statement.ex8" class="ak-ex l2-x8">
+        <div class="ak-ex__head"><span class="ak-ex__title">Сломанный телефон: передай дальше</span><span class="ak-ex__count" data-x8count>1 / 4</span></div>
+        <div class="l2-chat" data-x8chat></div>
+        <div class="l2-x8__opts" data-x8opts lang="tr"></div>
+        <p class="bb-status" data-x8status></p>
+      </a-exercise>
+    </div>
+  </section>
+
+  <!-- ================= МИНИ-ПРОВЕРКА ================= -->
+  <section data-section="check" data-words="1" class="bb-sec bb-white">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Check</span><span>80% to pass</span><span>p. 10</span></div>
+      <h2>Мини-проверка</h2>
+      <a-quiz ref="b1.reported-statement.check2"></a-quiz>
+    </div>
+  </section>
+
+  <!-- ================= ШПАРГАЛКА ================= -->
+  <section data-section="cheat" data-words="40" class="bb-sec bb-black">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Cheat sheet</span><span>Save as screenshot</span><span>p. 11</span></div>
+      <h2>Шпаргалка</h2>
+      <div class="bb-two">
+        <div class="l2-cheat" data-cheat>
+          <div class="l2-cheat__f" lang="tr" data-cheatf><span class="bb-m" data-r="gen">Ali'nin</span> <span class="bb-m" data-r="root">gel</span><span class="bb-m" data-r="tense">diğ</span><span class="bb-m" data-r="person">i</span><span class="bb-m" data-r="case">ni</span> <span class="bb-m" data-r="verb">duydum</span></div>
+          <ul>
+            <li><span lang="tr">söyledi</span> — сказал, <span lang="tr">duydum</span> — слышал, <span lang="tr">biliyorum</span> — знаю.</li>
+            <li>Сделал другой — у него <span lang="tr">-nin</span>.</li>
+            <li>Местоимения отражаются: <span lang="tr">seni → beni</span>.</li>
+            <li>Велели — <span lang="tr">gelmemi</span>. Сообщили — <span lang="tr">geldiğimi, geleceğimi</span>.</li>
+            <li>«Не» внутри глагола: <span lang="tr">gelmediğini, gelmeyeceğini</span>.</li>
+          </ul>
+          <p>Это всё. Теперь ты пересказываешь слухи по-турецки. Аккуратнее, чем весь квартал.</p>
+          <div class="bb-row-btns"><button type="button" class="bb-btn bb-btn--fill" data-cheatplay data-ui>Собрать заново</button></div>
+        </div>
+        <div class="bb-poster bb-green">
+          <div class="bb-poster__head"><span lang="tr">Final.</span><i></i></div>
+          <svg class="bb-portrait" viewBox="0 0 200 240" aria-hidden="true"><defs><pattern id="qa2" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.6" fill="#ffffff"/></pattern></defs><rect width="200" height="240" fill="#55ee55"/><rect width="200" height="240" fill="url(#qa2)" opacity=".35"/><g fill="#0b0b0b"><path d="M28 240c4-46 34-74 72-74s68 28 72 74z"/><rect x="86" y="128" width="28" height="44"/><ellipse cx="100" cy="92" rx="38" ry="46"/><path d="M62 84c0-36 20-56 42-56 26 0 40 22 38 52-10-14-30-22-50-18-12 3-22 10-30 22z" /></g><path d="M40 240c6-30 26-52 60-56" stroke="#ffffff" stroke-width="3" fill="none" opacity=".5"/></svg>
+          <p style="font-weight:800">Кот Мурат слышал всё. Никому не пересказал.</p>
+          <p>Единственный в квартале, кто умеет хранить новости.</p>
+          <div class="bb-poster__foot"><span>© Alterna 2026</span><span>Ders 2 / 2</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="bb-sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="bb-sb__track"><span class="bb-sb__fill"></span><span class="bb-sb__sq"></span></div>
+  <span class="bb-sb__page" data-page aria-hidden="true">p. 01</span>
+</nav>
+
+
+<template data-achievement data-title="Слух дошёл верно" data-text="Теперь ты пересказываешь с duydum и biliyorum и не путаешь beni и seni.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <rect x="10" y="10" width="100" height="100" fill="#55ee55"/>
+    <rect class="bb-a-bar" x="20" y="22" width="80" height="4" fill="#0b0b0b"/>
+    <text class="bb-a-t" x="20" y="54" font-family="Inter Tight, sans-serif" font-weight="900" font-size="24" letter-spacing="-1.6" fill="#0b0b0b">DUY</text>
+    <text class="bb-a-t" x="20" y="78" font-family="Inter Tight, sans-serif" font-weight="900" font-size="24" letter-spacing="-1.6" fill="#0b0b0b">DUM.</text>
+    <circle class="bb-a-dot" cx="90" cy="92" r="8" fill="#ff2a1a"/>
+    <path class="bb-a-wave" d="M78 50c6 6 6 14 0 20M86 44c10 10 10 22 0 32" stroke="#0b0b0b" stroke-width="4" fill="none" stroke-linecap="round"/>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !reduce;
+  const ST = window.ScrollTrigger || null;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { if (window.AlternaKit) AlternaKit.speak(t); };
+  const sec = (k) => $(`[data-section="${k}"]`);
+  document.documentElement.classList.add('bb-js');
+  if (G) {
+    [window.ScrollTrigger, window.MotionPathPlugin, window.SplitText].filter(Boolean).forEach((p) => gsap.registerPlugin(p));
+    if (ST) ST.config({ ignoreMobileResize: true });
+  }
+  const whenVisible = (el, on, off) => {
+    if (!el) return;
+    if (!('IntersectionObserver' in window)) { on(); return; }
+    new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? on() : off && off()))).observe(el);
+  };
+  const arc = (el, dx, dy, opts = {}) => {
+    if (!A) return;
+    const mid = { x: dx / 2, y: Math.min(dy, 0) / 2 - (opts.lift || 60) };
+    if (window.MotionPathPlugin) gsap.fromTo(el, { x: dx, y: dy }, { motionPath: { path: [{ x: dx, y: dy }, mid, { x: 0, y: 0 }], curviness: 1.4 }, duration: opts.d || .7, ease: 'power2.inOut' });
+    else gsap.fromTo(el, { x: dx, y: dy }, { x: 0, y: 0, duration: opts.d || .7, ease: 'back.out(1.6)' });
+  };
+  const flyFrom = (el, fromRect, opts) => { if (!A || !el || !fromRect) return; const r = el.getBoundingClientRect(); arc(el, fromRect.left - r.left, fromRect.top - r.top, opts); };
+  const CONF = ['#ff4a0a', '#f481ff', '#ffef2e', '#4ff0f0', '#55ee55', '#0b0b0b'];
+  const burst = (x, y, n = 18) => {
+    if (!A) return;
+    const box = document.createElement('div');
+    box.className = 'bb-confetti';
+    document.body.append(box);
+    for (let i = 0; i < n; i++) {
+      const c = document.createElement('i');
+      c.style.left = x + 'px'; c.style.top = y + 'px'; c.style.background = CONF[i % CONF.length];
+      box.append(c);
+      const ang = Math.random() * Math.PI * 2, dist = 60 + Math.random() * 120;
+      gsap.fromTo(c, { x: 0, y: 0, rotation: 0 }, { x: Math.cos(ang) * dist, y: Math.sin(ang) * dist - 50, rotation: gsap.utils.random(-400, 400), duration: .9, ease: 'power3.out' });
+      gsap.to(c, { y: '+=140', opacity: 0, duration: .7, delay: .75, ease: 'power1.in' });
+    }
+    setTimeout(() => box.remove(), 1800);
+  };
+  const burstAt = (el, n) => { if (!el) return; const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, n); };
+  /* морфема → разметка */
+  const M = (parts) => parts.map(([t, r]) => `<span class="bb-m" data-r="${r}">${t}</span>`).join('');
+
+  /* --- турецкие формы: -DIk / -(y)AcAk + принадлежность + винительный --- */
+  const HARD = 'fstkçşhp', VOW = 'aeıioöuü', BACK = 'aıou';
+  const lastV = (s) => [...s].reverse().find((c) => VOW.includes(c)) || 'e';
+  const I4 = (v) => ('aı'.includes(v) ? 'ı' : 'ei'.includes(v) ? 'i' : 'ou'.includes(v) ? 'u' : 'ü');
+  const A2 = (v) => (BACK.includes(v) ? 'a' : 'e');
+  const SOFT = { git: 'gid', et: 'ed' };
+  /* возвращает морфемы: [[корень,'root'],[отриц.,'tense'],[время,'tense'],[лицо,'person'],[падеж,'case']] */
+  function report(root, tense, person, neg) {
+    const parts = [];
+    let base = root;
+    if (neg) { parts.push([root, 'root']); const n = 'm' + A2(lastV(root)); parts.push([n, 'tense']); base = root + n; }
+    let t;
+    if (tense === 'acak') {
+      const v = A2(lastV(base));
+      const y = VOW.includes(base.slice(-1)) ? 'y' : '';
+      const r0 = neg ? null : (SOFT[root] || root);
+      if (!neg) parts.push([r0, 'root']);
+      t = y + v + 'c' + v + 'k';
+    } else {
+      if (!neg) parts.push([root, 'root']);
+      const d = HARD.includes(base.slice(-1)) ? 't' : 'd';
+      t = d + I4(lastV(base)) + 'k';
+    }
+    const tv = lastV(t);
+    let pers, cas;
+    if (person === 'onlar') { pers = 'l' + A2(tv) + 'r' + I4(A2(tv)); cas = 'n' + I4(A2(tv)); parts.push([t, 'tense']); }
+    else {
+      const ts = t.slice(0, -1) + 'ğ';
+      parts.push([ts, 'tense']);
+      const i = I4(tv);
+      pers = { ben: i + 'm', sen: i + 'n', o: i, biz: i + 'm' + i + 'z', siz: i + 'n' + i + 'z' }[person];
+      cas = person === 'o' ? 'n' + i : i;
+    }
+    parts.push([pers, 'person'], [cas, 'case']);
+    return parts;
+  }
+  const word = (parts) => parts.map((p) => p[0]).join('');
+
+  /* --- заголовки: слова выпрыгивают; карточки появляются --- */
+  if (A && window.SplitText) {
+    $$('h2').forEach((h) => {
+      const split = new SplitText(h, { type: 'words', wordsClass: 'wd' });
+      gsap.from(split.words, { yPercent: 70, rotation: 4, duration: .7, ease: 'back.out(1.8)', stagger: .06, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+  }
+  if (A && ST) ScrollTrigger.batch('.bb-poster, .bb-flip, .bb-card', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 40, duration: .6, ease: 'power3.out', stagger: .08 }) });
+  /* гигантские слова едут при прокрутке */
+  if (A && ST) $$('[data-drift]').forEach((el) => gsap.fromTo(el, { xPercent: +el.dataset.drift || 8 }, { xPercent: -(+el.dataset.drift || 8), ease: 'none', scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: .5 } }));
+  /* бегущая строка */
+  $$('[data-marquee]').forEach((m) => {
+    const t = $('.bb-marquee__t', m);
+    m.append(t.cloneNode(true));
+    if (!A) return;
+    const tw = gsap.to($$('.bb-marquee__t', m), { xPercent: -100, ease: 'none', duration: 18, repeat: -1, paused: true });
+    whenVisible(m, () => tw.play(), () => tw.pause());
+  });
+
+  /* --- ловушки: перевёртыши --- */
+  $$('[data-flip]').forEach((b) => {
+    if (!A) b.classList.add('bb-flip--noflip');
+    b.addEventListener('click', () => {
+      const on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', String(on));
+      if (A) gsap.to($('.bb-flip__in', b), { rotationY: on ? 180 : 0, duration: .7, ease: 'back.out(1.4)' });
+      const t = $(on ? '.bb-flip__b big' : '.bb-flip__f big', b);
+      if (t) say(t.textContent);
+    });
+  });
+
+  /* --- свой скроллбар --- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.bb-sb__track', bar);
+  const secs = $$('[data-section]');
+  const pageEl = $('[data-page]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'bb-sb__mark'; b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${($('h1, h2', s)?.textContent || s.dataset.section).trim()}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => {
+    const p = Math.min(1, scrollY / maxScroll());
+    bar.style.setProperty('--p', p.toFixed(4));
+    let n = 0; secs.forEach((s, i) => { if (s.offsetTop - innerHeight * .4 <= scrollY) n = i; });
+    pageEl.textContent = `p. ${String(n + 1).padStart(2, '0')}`;
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.bb-sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (A) gsap.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .6, ease: 'elastic.out(1,.4)' });
+  });
+  layout(); progress();
+
+
+  /* =============== КРЮЧОК =============== */
+  const bubs = $$('[data-chat] .l2-bub');
+  let shown = 1;
+  const showBub = (i) => {
+    bubs[i].classList.add('is-on');
+    if (A) gsap.fromTo(bubs[i], { y: 30, x: i % 2 ? 30 : -30 }, { y: 0, x: 0, duration: .5, ease: 'back.out(2)' });
+    if (i === bubs.length - 1) { $('[data-chatnext]').hidden = true; burstAt($('.l2-cat'), 16); if (A) gsap.fromTo('.l2-eye', { scaleY: 1 }, { scaleY: .1, transformOrigin: '50% 50%', duration: .15, yoyo: true, repeat: 3 }); }
+  };
+  $('[data-chatnext]').addEventListener('click', () => { if (shown < bubs.length) showBub(shown++); });
+  $('[data-chatall]').addEventListener('click', () => { while (shown < bubs.length) showBub(shown++); });
+  if (A) {
+    const blink = gsap.to('.l2-eye', { scaleY: .1, transformOrigin: '50% 50%', duration: .12, yoyo: true, repeat: 1, repeatDelay: 3, paused: true });
+    const loop = gsap.timeline({ repeat: -1, repeatDelay: 2.5, paused: true }).add(blink.play());
+    whenVisible($('.l2-cat'), () => loop.play(), () => loop.pause());
+    gsap.from('.l2-strip svg', { yPercent: 100, duration: .6, ease: 'power3.out', stagger: .05, delay: .4 });
+  }
+
+  /* =============== ТРИ ГЛАГОЛА =============== */
+  const VERBS = [
+    { tr: 'Ayşe yarın geleceğini söyledi.', ru: 'Айше сказала, что завтра придёт.', note: 'Источник — сам человек. Он это сказал.' },
+    { tr: 'Sınavı geçtiğini duydum.', ru: 'Я слышал, что ты сдал экзамен.', note: 'Источник — слухи. Тебе передали.' },
+    { tr: "Murat'ın Antalya'da yaşadığını biliyorum.", ru: 'Я знаю, что Мурат живёт в Анталье.', note: 'Источник — ты сам. Это факт для тебя.' },
+  ];
+  const renderV = (i, anim) => {
+    $$('[data-v]').forEach((b) => b.classList.toggle('is-on', +b.dataset.v === i));
+    $('[data-vtr]').textContent = VERBS[i].tr; $('[data-vru]').textContent = VERBS[i].ru; $('[data-vnote]').textContent = VERBS[i].note;
+    $('[data-vtr]').dataset.say = VERBS[i].tr;
+    if (A && anim) { gsap.from('[data-vtr]', { yPercent: 60, duration: .5, ease: 'power3.out' }); gsap.fromTo(`[data-v="${i}"]`, { x: -20 }, { x: 0, duration: .5, ease: 'back.out(2.5)' }); }
+    if (anim) say(VERBS[i].tr);
+  };
+  $$('[data-v]').forEach((b) => b.addEventListener('click', () => renderV(+b.dataset.v, true)));
+  $('[data-vsay]').addEventListener('click', () => say($('[data-vtr]').dataset.say));
+  renderV(0, false);
+  if (A && ST) ScrollTrigger.create({ trigger: '.l2-list', start: 'top 80%', once: true, onEnter: () => gsap.from('.l2-item', { xPercent: -30, duration: .7, ease: 'power4.out', stagger: .1 }) });
+
+  /* =============== КТО СДЕЛАЛ =============== */
+  const WH = {
+    self: { p: [['Ali', 'word'], ['gel', 'root'], ['diğ', 'tense'], ['i', 'person'], ['ni', 'case'], ['söyledi.', 'verb']], ru: 'Али сказал, что пришёл. Говорит и пришёл — один и тот же.', f1: 'Говорит Али', f2: 'Пришёл Али' },
+    other: { p: [["Ali'nin", 'gen'], ['gel', 'root'], ['diğ', 'tense'], ['i', 'person'], ['ni', 'case'], ['duydum.', 'verb']], ru: 'Я слышал, что Али пришёл. Слышал я, пришёл Али — у него -nin.', f1: 'Слышал я', f2: 'Пришёл Али' },
+  };
+  const renderW = (m, anim) => {
+    const w = WH[m];
+    $('[data-wline]').innerHTML = M(w.p);
+    $('[data-wru]').textContent = w.ru; $('[data-wfig1]').textContent = w.f1; $('[data-wfig2]').textContent = w.f2;
+    $$('[data-wmode]').forEach((b) => b.classList.toggle('is-on', b.dataset.wmode === m));
+    if (anim) say(m === 'self' ? 'Ali geldiğini söyledi.' : "Ali'nin geldiğini duydum.");
+    if (!A || !anim) return;
+    gsap.fromTo('[data-warrow]', { strokeDashoffset: 120 }, { strokeDashoffset: 0, duration: .8, ease: 'power2.out' });
+    if (m === 'other') gsap.from('[data-wline] [data-r="gen"]', { scale: 2.2, rotation: -10, duration: .7, ease: 'elastic.out(1,.4)' });
+    gsap.fromTo('.l2-fig svg', { y: 0 }, { y: -10, duration: .2, yoyo: true, repeat: 1, stagger: .1 });
+  };
+  $$('[data-wmode]').forEach((b) => b.addEventListener('click', () => renderW(b.dataset.wmode, true)));
+  renderW('self', false);
+  if (A && ST) ScrollTrigger.create({ trigger: '.l2-scene', start: 'top 75%', once: true, onEnter: () => gsap.from('.l2-fig', { y: 60, duration: .6, ease: 'back.out(1.8)', stagger: .15 }) });
+
+  /* =============== ЗЕРКАЛО =============== */
+  const MIR = [
+    { a: 'seni', ar: 'тебя', b: 'beni', br: 'меня', line: 'Elif beni sevdiğini söyledi.' },
+    { a: 'sana', ar: 'тебе', b: 'bana', br: 'мне', line: 'Ali bana yardım edeceğini söyledi.' },
+    { a: 'beni', ar: 'меня', b: 'seni', br: 'тебя', line: 'Elif seni özlediğini söyledi.' },
+  ];
+  let mi2 = 0;
+  const renderMir = (anim) => {
+    const m = MIR[mi2];
+    $('[data-ma]').textContent = m.a; $('[data-mar]').textContent = m.ar; $('[data-mb]').textContent = m.b; $('[data-mbr]').textContent = m.br;
+    $('[data-mline]').textContent = m.line;
+    $$('[data-mi]').forEach((b) => b.classList.toggle('is-on', +b.dataset.mi === mi2));
+    if (!A || !anim) return;
+    const a = $('[data-ma]'), b = $('[data-mb]');
+    const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+    gsap.fromTo(b, { x: ra.left - rb.left, scaleX: -1 }, { x: 0, scaleX: 1, duration: .8, ease: 'power3.inOut' });
+    gsap.fromTo('.l2-mirror__bar', { scaleY: .2 }, { scaleY: 1, duration: .6, ease: 'elastic.out(1,.4)' });
+    say(m.line);
+  };
+  $$('[data-mi]').forEach((b) => b.addEventListener('click', () => { mi2 = +b.dataset.mi; renderMir(true); }));
+  $('[data-mflip]').addEventListener('click', () => renderMir(true));
+  renderMir(false);
+
+  /* =============== ПРИКАЗ ИЛИ НОВОСТЬ =============== */
+  const CQ = [
+    { kind: 'cmd', cmd: 'Ali gelmemi söyledi.', news: '—', ru: 'велел мне прийти' },
+    { kind: 'news', cmd: '—', news: 'Ali geleceğini söyledi.', ru: 'сообщил, что придёт' },
+    { kind: 'cmd', cmd: 'Ali gelmememi söyledi.', news: '—', ru: 'велел мне не приходить' },
+    { kind: 'news', cmd: '—', news: 'Ali gelmeyeceğini söyledi.', ru: 'сообщил, что не придёт' },
+  ];
+  const renderCQ = (i, anim) => {
+    const c = CQ[i];
+    $$('[data-cq]').forEach((b) => b.classList.toggle('is-on', +b.dataset.cq === i));
+    $('[data-la="cmd"]').textContent = c.cmd; $('[data-la="news"]').textContent = c.news;
+    if (!A || !anim) return;
+    const on = $(`[data-lane="${c.kind}"]`), off = $(`[data-lane="${c.kind === 'cmd' ? 'news' : 'cmd'}"]`);
+    gsap.to(on, { scale: 1.02, opacity: 1, duration: .3, ease: 'back.out(3)' });
+    gsap.to(off, { scale: .97, opacity: .45, duration: .3 });
+    gsap.from($('.l2-lane__a', on), { xPercent: -20, duration: .5, ease: 'power3.out' });
+    say(c.kind === 'cmd' ? c.cmd : c.news);
+  };
+  $$('[data-cq]').forEach((b) => b.addEventListener('click', () => renderCQ(+b.dataset.cq, true)));
+  renderCQ(0, false);
+  if (A && ST) ScrollTrigger.create({ trigger: '.l2-lanes', start: 'top 80%', once: true, onEnter: () => gsap.from('.l2-lane', { xPercent: (i) => (i ? 40 : -40), duration: .7, ease: 'power3.out' }) });
+
+  /* =============== СТУДИЯ СЛУХОВ =============== */
+  const CH = [
+    { q: 'Yarın geleceğim.', v: 'gel', t: 'acak', n: false, pre: 'yarın' },
+    { q: 'Dün sinemaya gittim.', v: 'git', t: 'dik', n: false, pre: 'dün sinemaya' },
+    { q: 'Bir daha gelmeyeceğim.', v: 'gel', t: 'acak', n: true, pre: 'bir daha' },
+  ];
+  let ci = 0;
+  const HEADS = ['#ffef2e', '#f481ff', '#55ee55'];
+  const headSVG = (c) => `<svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="${c}"/><circle cx="32" cy="26" r="12" fill="#0b0b0b"/><path d="M10 64c2-16 10-24 22-24s20 8 22 24z" fill="#0b0b0b"/></svg>`;
+  const renderChain = (anim) => {
+    const c = CH[ci];
+    $('[data-cq2]').innerHTML = CH.map((x, i) => `<button type="button" class="bb-btn${i === ci ? ' is-on' : ''}" data-ci="${i}" lang="tr">“${x.q}”</button>`).join('');
+    $$('[data-ci]').forEach((b) => b.addEventListener('click', () => { ci = +b.dataset.ci; renderChain(true); }));
+    const f = report(c.v, c.t, 'o', c.n);
+    const links = [
+      ['Айше', [['“' + c.q + '”', 'word']]],
+      ['Айше → Мурату · Мурат → тебе', [['Ayşe', 'word'], [c.pre, 'word'], ...f, ['söyledi.', 'verb']]],
+      ['Ты → Элиф', [["Ayşe'nin", 'gen'], [c.pre, 'word'], ...f, ['duydum.', 'verb']]],
+    ];
+    $('[data-chain]').innerHTML = links.map(([who, p], i) => `<div class="l2-link" data-link="${i}">${headSVG(HEADS[i])}<div><span class="bb-small" data-ui>${who}</span><div class="bb-line-tr" lang="tr">${M(p)}</div></div></div>`).join('');
+    if (A && anim) gsap.from('[data-link]', { x: -40, duration: .5, ease: 'power3.out', stagger: .25 });
+  };
+  $('[data-chainplay]').addEventListener('click', () => {
+    renderChain(true);
+    const c = CH[ci], f = word(report(c.v, c.t, 'o', c.n));
+    say(`Ayşe ${c.pre} ${f} söyledi. Ayşe'nin ${c.pre} ${f} duydum.`);
+    setTimeout(() => burstAt($('[data-link="2"]'), 18), reduce ? 0 : 900);
+  });
+  renderChain(false);
+
+  const AMB = {
+    '': ['geldiğini söyledi', 'Он сказал, что пришёл… он сам? Или ты? Непонятно.'],
+    onun: ['onun geldiğini söyledi', 'Сказал, что пришёл он (кто-то третий).'],
+    senin: ['senin geldiğini söyledi', 'Сказал, что пришёл ты.'],
+    "Ali'nin": ["Ali'nin geldiğini söyledi", 'Сказал, что пришёл Али.'],
+  };
+  $$('[data-amb]').forEach((b) => b.addEventListener('click', () => {
+    const [tr, ru] = AMB[b.dataset.amb];
+    $('[data-ambout]').textContent = tr; $('[data-ambru]').textContent = ru;
+    $$('[data-amb]').forEach((x) => x.classList.toggle('is-on', x === b));
+    say(tr);
+    if (A) gsap.from('[data-ambout]', { scale: .8, duration: .5, ease: 'back.out(3)' });
+  }));
+  $('[data-ambout]').textContent = AMB[''][0]; $('[data-ambru]').textContent = AMB[''][1];
+
+  const SP = [['Annem eve erken gelmemi söyledi.', 'cmd'], ['Ali sınavı geçtiğini söyledi.', 'news'], ['Doktor çok su içmemi söyledi.', 'cmd'], ['Elif yarın arayacağını söyledi.', 'news'], ['Öğretmen kitabı okumamızı söyledi.', 'cmd'], ['Murat geç kalmayacağını söyledi.', 'news']];
+  let spi = 0, spok = 0;
+  const showSp = () => {
+    if (spi >= SP.length) { $('[data-spq]').textContent = `${spok} из ${SP.length}`; $('[data-spout]').textContent = 'Режим заново — нажми вкладку ещё раз.'; if (spok >= 5) burstAt($('[data-spq]'), 26); return; }
+    $('[data-spq]').textContent = SP[spi][0]; say(SP[spi][0]);
+    if (A) gsap.fromTo('[data-spq]', { rotationX: 90 }, { rotationX: 0, duration: .45, ease: 'back.out(2)' });
+  };
+  $$('[data-sp]').forEach((b) => b.addEventListener('click', () => {
+    if (spi >= SP.length) return;
+    const ok = b.dataset.sp === SP[spi][1];
+    if (ok) spok++;
+    $('[data-spout]').textContent = ok ? 'Верно.' : SP[spi][1] === 'cmd' ? 'Это приказ: -mAyI.' : 'Это новость: -DIğI / -AcAğI.';
+    if (A) gsap.fromTo(b, { scale: ok ? 1.08 : .92 }, { scale: 1, duration: .45, ease: 'elastic.out(1,.4)' });
+    spi++; setTimeout(showSp, reduce ? 200 : 900);
+  }));
+  const setLm = (m) => {
+    $$('[data-lm]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.lm === m)));
+    $$('[data-lp]').forEach((p) => { p.hidden = p.dataset.lp !== m; });
+    if (m === 'speed') { spi = 0; spok = 0; $('[data-spout]').textContent = ''; showSp(); }
+    if (A) gsap.from(`[data-lp="${m}"]`, { y: 20, duration: .4, ease: 'power3.out' });
+  };
+  $$('[data-lm]').forEach((b) => b.addEventListener('click', () => setLm(b.dataset.lm)));
+  if (A && ST) ScrollTrigger.create({ trigger: '.l2-lab', start: 'top 75%', once: true, onEnter: () => gsap.from('.l2-lab', { clipPath: 'inset(0 100% 0 0)', duration: .9, ease: 'power3.inOut' }) });
+
+  const sw = $('[data-scrubword]');
+  if (A && ST && window.SplitText) { const sp = new SplitText(sw, { type: 'chars' }); gsap.fromTo(sp.chars, { yPercent: 110, rotation: 12 }, { yPercent: 0, rotation: 0, stagger: .06, ease: 'none', scrollTrigger: { trigger: sw, start: 'top 95%', end: 'top 35%', scrub: .6 } }); }
+  if (A && ST) ScrollTrigger.create({ trigger: '[data-mirror]', start: 'top 75%', once: true, onEnter: () => renderMir(true) });
+  if (A && ST) ScrollTrigger.create({ trigger: '.l2-chain', start: 'top 80%', once: true, onEnter: () => gsap.from('[data-link]', { x: -40, duration: .5, ease: 'power3.out', stagger: .2 }) });
+
+  /* =============== ЛОВУШКИ =============== */
+  if (A && ST) ScrollTrigger.create({ trigger: '.bb-traps', start: 'top 70%', once: true, onEnter: () => gsap.fromTo('.bb-flip__in', { rotationY: 0 }, { rotationY: 22, duration: .3, yoyo: true, repeat: 1, stagger: .12 }) });
+
+  /* =============== ШПАРГАЛКА =============== */
+  const playCheat = () => {
+    if (!A) return;
+    gsap.fromTo('[data-cheatf] .bb-m', { y: -60, rotation: (i) => (i % 2 ? 14 : -14) }, { y: 0, rotation: 0, duration: .7, ease: 'bounce.out', stagger: .1 });
+    setTimeout(() => burstAt($('[data-cheatf]'), 24), 700);
+  };
+  $('[data-cheatplay]').addEventListener('click', () => { playCheat(); say("Ali'nin geldiğini duydum"); });
+  if (A && ST) ScrollTrigger.create({ trigger: '[data-cheat]', start: 'top 75%', once: true, onEnter: playCheat });
+
+  /* =============== АЧИВКА =============== */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelectorAll('.bb-a-t'), { y: 30 }, { y: 0, duration: .5, ease: 'back.out(2.2)', stagger: .12 }, .9)
+      .fromTo(b.querySelector('.bb-a-wave'), { scale: .3, transformOrigin: '0% 50%' }, { scale: 1, duration: .6, ease: 'elastic.out(1,.4)' }, 1.15)
+      .fromTo(b.querySelector('.bb-a-dot'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, ease: 'back.out(3)' }, 1.4);
+  });
+
+  /* =============== НЕСТАНДАРТНОЕ: СЛОМАННЫЙ ТЕЛЕФОН =============== */
+  (async () => {
+    const EX = 'b1.reported-statement.ex8';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const chat = $('[data-x8chat]', root), opts = $('[data-x8opts]', root), status = $('[data-x8status]', root), count = $('[data-x8count]', root);
+    const { items } = await AlternaKit.exercise(EX);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      const it = items[i];
+      locked = false; t0 = performance.now();
+      count.textContent = `${i + 1} / ${items.length}`;
+      status.textContent = '';
+      chat.innerHTML = `<div class="l2-bub"><small>${it.who}</small><p lang="tr">${it.said}</p><p class="bb-small">${it.ru}</p></div><div class="l2-bub l2-bub--me"><small>${it.to}</small><p>${it.task}</p></div>`;
+      opts.innerHTML = it.options.map((o, k) => `<button type="button" class="bb-pick" data-o="${k}">${o}</button>`).join('');
+      $$('[data-o]', opts).forEach((b) => b.addEventListener('click', () => pick(+b.dataset.o)));
+      if (A) gsap.from($$('.l2-bub', chat), { y: 24, duration: .45, ease: 'back.out(2)', stagger: .15 });
+    }
+    function pick(k) {
+      if (locked) return;
+      locked = true;
+      const it = items[i];
+      const ok = k === it.answer;
+      if (ok) correct++;
+      $$('[data-o]', opts).forEach((b) => b.classList.toggle('is-good', +b.dataset.o === it.answer));
+      if (!ok) $(`[data-o="${k}"]`, opts).classList.add('is-bad');
+      status.textContent = ok ? 'Передал без искажений.' : it.explanation;
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.options[k], timeMs: Math.round(performance.now() - t0) });
+      say(it.options[it.answer]);
+      if (ok) burstAt($(`[data-o="${k}"]`, opts), 14);
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else { AlternaTracker.complete({ exerciseId: EX, correct, total: items.length }); count.textContent = 'готово'; chat.innerHTML = `<div class="l2-bub l2-bub--me is-on"><p>${correct} из ${items.length}. Слух дошёл до конца квартала.</p></div>`; opts.innerHTML = ''; }
+      }, reduce ? 300 : 1700);
+    }
+    AlternaKit.registerSolver(EX, async () => {
+      while (i < items.length) { pick(items[i].answer); await new Promise((r) => setTimeout(r, reduce ? 340 : 1750)); }
+    });
+    show();
+  })();
+
+
+  if (ST) {
+    addEventListener('load', () => ScrollTrigger.refresh());
+    document.fonts?.ready.then(() => { ScrollTrigger.refresh(); layout(); });
+    addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+  }
+
+});
+</script>
+</body>
+</html>
