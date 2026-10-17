@@ -385,6 +385,25 @@ p { margin: 0 0 12px; max-width: 64ch; }
   .cp-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
 }
 
+
+/* ---------- доработка: ленты, голосовое, пластинка, звёзды ---------- */
+.cp-marquee { position: relative; width: 100%; max-width: 1180px; margin: 0 auto; overflow: hidden; border-radius: 999px; background: var(--navy); color: var(--sun); padding: 10px 0; transform: rotate(-1.2deg); }
+.cp-marquee--pink { background: var(--pink); color: var(--navy); transform: rotate(1deg); }
+.cp-marquee--sun { background: var(--sun); color: var(--deep); transform: rotate(-.8deg); }
+.cp-marquee__track { display: flex; width: max-content; font: 400 clamp(22px, 5vw, 34px)/1 'Anton', sans-serif; letter-spacing: .03em; white-space: nowrap; }
+.cp-marquee__track span { padding-right: .4em; }
+.cp-voice { justify-self: start; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 6px 12px 6px 6px; border: 0; border-radius: 22px; background: var(--steel); color: #fff; cursor: pointer; }
+.cp-voice__play { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #fff; color: var(--steel); }
+.cp-voice__play .ic { width: 14px; height: 14px; }
+.cp-voice__wave { width: 120px; height: 26px; }
+.cp-voice small { font-size: 12px; opacity: .8; }
+.cp-vinyl { position: absolute; z-index: 0; right: -56px; bottom: -56px; width: 150px; height: 150px; opacity: .5; pointer-events: none; }
+.cp-lab__stage > :not(.cp-vinyl) { position: relative; z-index: 1; }
+.cp-stars { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cp-night > .cp-in { position: relative; }
+.cp-note-fx { position: absolute; width: 22px; height: 22px; pointer-events: none; }
+.cp-trail { position: absolute; font: 700 16px/1 var(--ak-font); color: var(--orange); pointer-events: none; }
+
 /* свечение за курсором — только мышь и большой экран */
 .cp-glow { display: none; }
 @media (hover: hover) and (min-width: 1024px) {
@@ -503,6 +522,8 @@ p { margin: 0 0 12px; max-width: 64ch; }
   </div>
 </section>
 
+<div class="cp-marquee" aria-hidden="true" data-marquee><div class="cp-marquee__track" lang="tr"><span>YORGUNSAN · HASTAYSAN · EVDEYSEN · VARSA · YOKSA · DEĞİLSE · MÜSAİTSEN · AÇSAN · </span><span>YORGUNSAN · HASTAYSAN · EVDEYSEN · VARSA · YOKSA · DEĞİLSE · MÜSAİTSEN · AÇSAN · </span></div></div>
+
 <!-- ============ КРЮЧОК ============ -->
 <section class="cp-s" data-section="story" data-words="58">
   <div class="cp-wide cp-story">
@@ -534,6 +555,7 @@ p { margin: 0 0 12px; max-width: 64ch; }
           <div class="cp-msg cp-msg--me cp-msg--del" data-chat><span lang="tr">Eğer ben yorgun olursam…</span><span class="cp-strike" data-strike></span><small data-ui>стёрто</small></div>
           <div class="cp-typing" data-chat data-typing aria-hidden="true"><i></i><i></i><i></i></div>
           <div class="cp-msg cp-msg--hit" data-chat><a-say>Yorgunsan gelme</a-say><small data-ui>Если устал — не приходи</small></div>
+          <button type="button" class="cp-voice" data-say="Yorgunsan gelme" data-voice data-ui><span class="cp-voice__play"><svg class="ic ic--fill" aria-hidden="true"><use href="#i-play"/></svg></span><svg class="cp-voice__wave" viewBox="0 0 140 30" aria-hidden="true" data-wave></svg><small>0:02</small></button>
         </div>
       </div>
       <div class="cp-mq cp-choice" data-mq>
@@ -801,6 +823,8 @@ p { margin: 0 0 12px; max-width: 64ch; }
   </div>
 </section>
 
+<div class="cp-marquee cp-marquee--pink" aria-hidden="true" data-marquee><div class="cp-marquee__track" lang="tr"><span>ZAMANIN VARSA · PARAN YOKSA · YORGUN DEĞİLSEN · ÖĞRENCİYSENİZ · HAZIRSAN · DOLUYSA · </span><span>ZAMANIN VARSA · PARAN YOKSA · YORGUN DEĞİLSEN · ÖĞRENCİYSENİZ · HAZIRSAN · DOLUYSA · </span></div></div>
+
 <!-- ============ РУССКИЙ ↔ ТУРЕЦКИЙ ============ -->
 <section class="cp-s" data-section="compare" data-words="29">
   <div class="cp-in">
@@ -824,6 +848,7 @@ p { margin: 0 0 12px; max-width: 64ch; }
 
 <!-- ============ АЛГОРИТМ ============ -->
 <section class="cp-s cp-night" data-section="tree" data-words="40">
+  <svg class="cp-stars" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true" data-stars></svg>
   <div class="cp-in">
     <p class="cp-eye" data-ui><b>Алгоритм</b> · ночная смена</p>
     <h2 class="cp-h2"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg><span class="cp-h2__t">Четыре вопроса по порядку</span></h2>
@@ -1006,6 +1031,7 @@ p { margin: 0 0 12px; max-width: 64ch; }
           </div>
         </div>
         <div class="cp-lab__stage" data-ui>
+          <svg class="cp-vinyl" viewBox="0 0 120 120" aria-hidden="true" data-vinyl><circle cx="60" cy="60" r="58" fill="#111827"/><g fill="none" stroke="#2b3550" stroke-width="1.5"><circle cx="60" cy="60" r="50"/><circle cx="60" cy="60" r="42"/><circle cx="60" cy="60" r="34"/></g><circle cx="60" cy="60" r="20" fill="#ec651b"/><circle cx="60" cy="60" r="3" fill="#111827"/><path d="M30 24a44 44 0 0 1 30-10" stroke="#fff" stroke-width="2" opacity=".25" fill="none"/></svg>
           <svg viewBox="0 0 300 40" width="100%" height="26" aria-hidden="true"><g stroke="#f6c445" stroke-width="2" opacity=".6"><path data-eq d="M10 20h20"/><path data-eq d="M40 20h20"/><path data-eq d="M70 20h20"/><path data-eq d="M100 20h20"/><path data-eq d="M130 20h20"/><path data-eq d="M160 20h20"/><path data-eq d="M190 20h20"/><path data-eq d="M220 20h20"/><path data-eq d="M250 20h20"/></g></svg>
           <div class="cp-lab__tiles" lang="tr" data-lab-tiles></div>
           <div class="cp-lab__full" lang="tr" data-lab-full role="button" tabindex="0" aria-label="Послушать форму"></div>
@@ -1116,6 +1142,8 @@ p { margin: 0 0 12px; max-width: 64ch; }
     <a-quiz ref="b1.conditional-nominal.check1"></a-quiz>
   </div>
 </section>
+
+<div class="cp-marquee cp-marquee--sun" aria-hidden="true" data-marquee><div class="cp-marquee__track" lang="tr"><span>-SAM · -SAN · -SA · -SAK · -SANIZ · -SE · -YSE · -YSA · </span><span>-SAM · -SAN · -SA · -SAK · -SANIZ · -SE · -YSE · -YSA · </span></div></div>
 
 <!-- ============ ШПАРГАЛКА И ФИНАЛ ============ -->
 <section class="cp-s cp-poster" data-section="cheat" data-words="41">
@@ -2008,6 +2036,132 @@ addEventListener('DOMContentLoaded', () => {
       .fromTo(b.querySelector('.bar'), { x: -70 }, { x: 0, duration: .5, ease: 'bounce.out' }, 1.2)
       .fromTo(b.querySelector('.txt'), { y: 14, scale: .5 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(3)' }, 1.5);
   });
+});
+</script>
+
+<script>
+/* ---------- доработка: больше визуала и движения ---------- */
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const fx = $('.cp-fx');
+
+  /* бегущие ленты: скорость и наклон зависят от прокрутки */
+  $$('[data-marquee]').forEach((m, i) => {
+    const track = $('.cp-marquee__track', m);
+    if (!A) return;
+    G.fromTo(track, { xPercent: i % 2 ? -50 : 0 }, { xPercent: i % 2 ? 0 : -50, duration: 22, repeat: -1, ease: 'none' });
+    ScrollTrigger.create({ trigger: m, start: 'top bottom', end: 'bottom top', onUpdate: (self) => {
+      const v = G.utils.clamp(-12, 12, self.getVelocity() / 120);
+      G.to(track, { skewX: -v, duration: .4, overwrite: 'auto' });
+    } });
+    G.from(m, { scaleX: .6, rotation: i % 2 ? 6 : -6, duration: .9, ease: 'back.out(1.6)', scrollTrigger: { trigger: m, start: 'top 92%', once: true } });
+    m.addEventListener('pointerdown', () => G.fromTo(m, { scale: .96 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)' }));
+  });
+
+  /* листы въезжают в 3D при прокрутке */
+  if (A) ScrollTrigger.batch('.cp-s:not(.cp-hero)', { start: 'top 96%', once: true, onEnter: (els) => G.from(els, { rotationX: 7, transformPerspective: 1400, transformOrigin: '50% 0%', y: 40, duration: .9, stagger: .1, ease: 'power3.out' }) });
+
+  /* ноты вылетают из гитары */
+  const hero = $('[data-section="hero"]');
+  let noteTimer = null;
+  function emitNote() {
+    if (!A) return;
+    const g = $('.cp-guitar').getBoundingClientRect(), h = hero.getBoundingClientRect();
+    const n = document.createElementNS(NS, 'svg');
+    n.setAttribute('viewBox', '0 0 24 24');
+    n.setAttribute('class', 'cp-note-fx');
+    n.innerHTML = '<path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="17" cy="16" r="3" fill="currentColor"/>';
+    n.style.color = ['#ec651b', '#f6c445', '#e7a3c5', '#fff'][Math.floor(Math.random() * 4)];
+    n.style.left = (g.left - h.left + g.width * .7) + 'px';
+    n.style.top = (g.top - h.top + g.height * .55) + 'px';
+    hero.append(n);
+    G.fromTo(n, { scale: .4, rotation: -20 }, { x: G.utils.random(-140, 40), y: G.utils.random(-260, -160), scale: G.utils.random(.8, 1.4), rotation: G.utils.random(-30, 30), opacity: 0, duration: 2.6, ease: 'power1.out', onComplete: () => n.remove() });
+  }
+  if (A && 'IntersectionObserver' in window) {
+    new IntersectionObserver((es) => es.forEach((e) => {
+      clearInterval(noteTimer);
+      if (e.isIntersecting) noteTimer = setInterval(emitNote, 700);
+    })).observe(hero);
+  }
+
+  /* голосовое: волна из 26 столбиков */
+  const wave = $('[data-wave]');
+  for (let i = 0; i < 26; i++) {
+    const r = document.createElementNS(NS, 'rect');
+    const h = 6 + Math.abs(Math.sin(i * 1.7)) * 20;
+    r.setAttribute('x', i * 5.3);
+    r.setAttribute('y', 15 - h / 2);
+    r.setAttribute('width', 3);
+    r.setAttribute('height', h);
+    r.setAttribute('rx', 1.5);
+    r.setAttribute('fill', '#fff');
+    wave.append(r);
+  }
+  $('[data-voice]').addEventListener('click', () => {
+    if (!A) return;
+    G.fromTo($$('rect', wave), { scaleY: .3, transformOrigin: '50% 50%' }, { scaleY: 1, duration: .25, stagger: { each: .04, repeat: 3, yoyo: true }, ease: 'sine.inOut' });
+    G.fromTo('.cp-voice__play', { scale: .7 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  if (A) G.from($$('rect', wave), { scaleY: .2, transformOrigin: '50% 50%', duration: .6, stagger: .03, ease: 'back.out(3)', scrollTrigger: { trigger: '[data-voice]', start: 'top 85%', once: true } });
+
+  /* пластинка крутится, пока ты в лаборатории */
+  if (A) {
+    const vinyl = G.to('[data-vinyl]', { rotation: 360, svgOrigin: '60 60', duration: 4, repeat: -1, ease: 'none', paused: true });
+    ScrollTrigger.create({ trigger: '.cp-lab', start: 'top 80%', end: 'bottom 20%', onToggle: (self) => (self.isActive ? vinyl.play() : vinyl.pause()) });
+    $$('[data-lab] button').forEach((b) => b.addEventListener('click', () => G.fromTo(vinyl, { timeScale: 6 }, { timeScale: 1, duration: 1.2, ease: 'power2.out' })));
+  }
+
+  /* звёзды над ночной гаванью */
+  const stars = $('[data-stars]');
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', Math.round(Math.random() * 1000));
+    c.setAttribute('cy', Math.round(Math.random() * 600));
+    c.setAttribute('r', (Math.random() * 1.8 + .6).toFixed(1));
+    c.setAttribute('fill', i % 7 ? '#ffffff' : '#f6c445');
+    c.setAttribute('opacity', (Math.random() * .6 + .2).toFixed(2));
+    stars.append(c);
+  }
+  if (A) {
+    G.to($$('circle', stars), { opacity: () => G.utils.random(.1, 1), duration: () => G.utils.random(.8, 2.2), repeat: -1, yoyo: true, stagger: { each: .05, from: 'random' }, ease: 'sine.inOut' });
+    G.to(stars, { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '[data-section="tree"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+
+  /* закат над Калеичи: небо краснеет по мере прокрутки */
+  if (A) {
+    G.to('#g-sky stop:first-child', { attr: { 'stop-color': '#ff8a5c' }, ease: 'none', scrollTrigger: { trigger: '[data-map]', start: 'top 80%', end: 'bottom 30%', scrub: true } });
+    G.to('#g-sky stop:nth-child(2)', { attr: { 'stop-color': '#ffc58a' }, ease: 'none', scrollTrigger: { trigger: '[data-map]', start: 'top 80%', end: 'bottom 30%', scrub: true } });
+  }
+
+  /* постер: буквы падают по одной */
+  if (A && window.SplitText) {
+    const big = $('.cp-poster__big');
+    const sp = new SplitText(big, { type: 'chars' });
+    G.from(sp.chars, { yPercent: -120, rotation: () => G.utils.random(-30, 30), duration: 1, stagger: .08, ease: 'bounce.out', scrollTrigger: { trigger: big, start: 'top 85%', once: true } });
+    big.addEventListener('click', () => G.fromTo(sp.chars, { y: -30 }, { y: 0, duration: .8, stagger: .05, ease: 'bounce.out' }));
+  }
+
+  /* след из нот за курсором на компьютере */
+  if (A && matchMedia('(hover: hover) and (min-width: 1024px)').matches) {
+    let last = 0;
+    addEventListener('pointermove', (e) => {
+      const now = performance.now();
+      if (now - last < 140) return;
+      last = now;
+      const t = document.createElement('span');
+      t.className = 'cp-trail';
+      t.textContent = Math.random() > .5 ? '♪' : '♫';
+      t.style.left = e.clientX + 'px';
+      t.style.top = e.clientY + 'px';
+      fx.append(t);
+      G.fromTo(t, { scale: .6 }, { y: -40, x: G.utils.random(-14, 14), opacity: 0, scale: 1.2, duration: 1.1, ease: 'power2.out', onComplete: () => t.remove() });
+    }, { passive: true });
+  }
 });
 </script>
 </body>
