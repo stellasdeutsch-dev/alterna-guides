@@ -299,6 +299,18 @@ p{margin:0 0 10px}
 .poster__ball{position:absolute;right:-18px;top:-10px;width:clamp(110px,24vw,190px);opacity:.95;pointer-events:none}
 .final{margin-top:26px}
 
+/* ---------- новый визуальный слой ---------- */
+.minib{position:absolute;width:var(--s,30px);pointer-events:none;z-index:1}
+.skyband{position:relative;height:clamp(110px,18vw,180px);margin-top:clamp(40px,8vw,80px);overflow:hidden;pointer-events:none}
+.skyband svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.vring{display:block;width:min(260px,70vw);margin:14px auto 0}
+.vring g[data-v]{cursor:pointer}
+.vring text{font:700 20px var(--ak-font);pointer-events:none}
+.typing{display:inline-flex;gap:5px;align-items:center;padding:12px 14px!important}
+.typing i{display:block;width:8px;height:8px;border-radius:50%;background:#9cc8f4}
+.h2deco{display:inline-block;width:.7em;height:.9em;margin-left:.2em;vertical-align:-.05em}
+.doorsvg{width:70px;height:96px;flex:none;align-self:center}
+.poster__mini{position:absolute;width:26px;pointer-events:none;opacity:.55}
 /* ---------- свой скроллбар: шар поднимается по верёвке ---------- */
 .sb{position:fixed;z-index:60;top:calc(6px + env(safe-area-inset-top));left:12px;right:12px;height:30px;pointer-events:none}
 .sb__track{position:absolute;left:0;right:0;top:13px;height:4px;border-radius:4px;background:rgba(63,132,229,.18);pointer-events:auto;touch-action:none;cursor:pointer}
@@ -371,6 +383,11 @@ p{margin:0 0 10px}
       <div class="cloud drift" style="right:-60px;top:46%;--w:300px;animation-duration:19s"></div>
       <div class="cloud s drift" style="left:12%;top:60%;animation-duration:25s"></div>
     </div>
+    <svg class="minib" style="left:8%;top:78%;--s:26px" viewBox="0 0 60 80" data-minib><use href="#i-ball"/></svg>
+    <svg class="minib" style="left:36%;top:88%;--s:20px" viewBox="0 0 60 80" data-minib><use href="#i-ball"/></svg>
+    <svg class="minib" style="left:70%;top:70%;--s:34px" viewBox="0 0 60 80" data-minib><use href="#i-ball"/></svg>
+    <svg class="minib" style="left:88%;top:90%;--s:22px" viewBox="0 0 60 80" data-minib><use href="#i-ball"/></svg>
+    <svg class="minib" style="left:50%;top:96%;--s:28px" viewBox="0 0 60 80" data-minib><use href="#i-ball"/></svg>
     <svg class="gull" style="left:58%;top:14%" viewBox="0 0 64 64"><use href="#i-gull"/></svg>
     <svg class="gull" style="left:62%;top:34%;width:28px" viewBox="0 0 64 64"><use href="#i-gull"/></svg>
     <svg class="gull" style="left:52%;top:52%;width:24px" viewBox="0 0 64 64"><use href="#i-gull"/></svg>
@@ -453,6 +470,7 @@ p{margin:0 0 10px}
           <div class="msg msg--me"><b data-ui>Ты</b><span lang="tr" class="tk">Ve ben!</span><span class="tr" data-ui>«И я!» — думаешь ты</span></div>
           <div class="msg"><b data-ui>Официант</b><a-say>Sen?</a-say><span class="tr" data-ui>Ты?..</span></div>
           <div class="msg msg--sys" data-ui>Ты киваешь. Он кивает. Чай приносят один.</div>
+          <div class="msg typing" aria-hidden="true" data-typing><i></i><i></i><i></i></div>
         </div>
         <div class="pick">
           <p class="fb" style="margin:0">Что надо было сказать?</p>
@@ -468,6 +486,13 @@ p{margin:0 0 10px}
   </div>
 </section>
 
+<div class="skyband" aria-hidden="true" data-band>
+  <svg viewBox="0 0 1200 160" preserveAspectRatio="none"><defs><linearGradient id="bandG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6fbff"/><stop offset="1" stop-color="#d9ecfd"/></linearGradient></defs><rect width="1200" height="160" fill="url(#bandG1)"/>
+  <g data-bwave><path d="M-200 110c80-14 160 14 240 0s160-14 240 0 160 14 240 0 160-14 240 0 160 14 240 0 160-14 240 0v60h-1440z" fill="#9cc8f4"/><path d="M-200 126c80-10 160 10 240 0s160-10 240 0 160 10 240 0 160-10 240 0 160 10 240 0 160-10 240 0v40h-1440z" fill="#5f9de9"/></g>
+  <use href="#i-ferry" x="100" y="58" width="76" height="76" data-bferry/>
+  <use href="#i-gull" x="700" y="20" width="44" height="44" data-bgull/>
+  <use href="#i-ball" x="960" y="10" width="30" height="40" data-bballoon/></svg>
+</div>
 <!-- ============ 3. УГАДАЙ ============ -->
 <section class="sec" data-section="guess" data-words="13">
   <div class="in">
@@ -526,6 +551,11 @@ p{margin:0 0 10px}
       <h2 class="h2">Цвет шарика</h2>
       <p>Шарик красится в последнюю гласную слова. Не в первую. Не в любимую. В последнюю.</p>
       <p>Согласные в конце не голосуют. Даже громкие.</p>
+      <svg class="vring" viewBox="0 0 240 240" data-vring role="group" aria-label="Гласные: нажми и послушай">
+        <circle cx="120" cy="120" r="104" fill="none" stroke="#9cc8f4" stroke-width="2" stroke-dasharray="4 6" data-vdash/>
+        <g data-vrot></g>
+        <g data-vcenter><circle cx="120" cy="120" r="44" fill="#fff" stroke="#d9e6f6" stroke-width="2"/><text x="120" y="128" text-anchor="middle" fill="#25314a" data-vtext lang="tr">e→de</text></g>
+      </svg>
       <div class="legend">
         <div class="f"><strong lang="tr">e i ö ü</strong><span>мягкие</span> → <span lang="tr">de</span></div>
         <div class="b"><strong lang="tr">a ı o u</strong><span>твёрдые</span> → <span lang="tr">da</span></div>
@@ -598,6 +628,7 @@ p{margin:0 0 10px}
     <p class="txt">Падежные окончания после глухих согласных меняют d на t. Наш шарик — нет. Принципиальный. Буква t стучится. Дверь закрыта. Слова кончаются глухо — шарику всё равно.</p>
     <div class="card">
       <div class="door" data-door>
+        <svg class="doorsvg" viewBox="0 0 70 96" aria-hidden="true" data-doorsvg><rect x="4" y="4" width="62" height="88" rx="6" fill="#c98a3c"/><rect x="12" y="12" width="46" height="34" rx="4" fill="#d9a35a"/><rect x="12" y="52" width="46" height="32" rx="4" fill="#d9a35a"/><circle cx="54" cy="50" r="4" fill="#f2c94c"/><text x="35" y="36" text-anchor="middle" font-family="Onest,sans-serif" font-size="16" font-weight="800" fill="#fff">d</text></svg>
         <span class="door__w" data-say="Mehmet de"><span lang="tr">Mehmet</span><span class="door__d">de</span></span>
         <span class="door__w" data-say="kebap da"><span lang="tr">kebap</span><span class="door__d a">da</span></span>
         <span class="door__w" data-say="süt de"><span lang="tr">süt</span><span class="door__d">de</span></span>
@@ -716,7 +747,8 @@ p{margin:0 0 10px}
         <g class="zone" data-zone="Beşiktaş" data-ru="Бешикташ" role="button" tabindex="0" aria-label="Beşiktaş"><circle class="pin" cx="160" cy="28" r="9"/><text x="104" y="18" lang="tr">Beşiktaş</text></g>
         <g class="zone" data-zone="Üsküdar" data-ru="Ускюдар" role="button" tabindex="0" aria-label="Üsküdar"><circle class="pin" cx="226" cy="104" r="9"/><text x="240" y="108" lang="tr">Üsküdar</text></g>
         <g class="zone" data-zone="Kadıköy" data-ru="Кадыкёй" role="button" tabindex="0" aria-label="Kadıköy"><circle class="pin" cx="214" cy="190" r="9"/><text x="230" y="194" lang="tr">Kadıköy</text></g>
-        <use href="#i-ferry" x="150" y="150" width="40" height="40" data-mapferry/>
+        <path id="bosPath" d="M186 18 C 178 60, 196 96, 184 136 C 174 168, 178 206, 160 246" fill="none"/>
+        <use href="#i-ferry" x="-20" y="-20" width="40" height="40" data-mapferry/>
       </svg>
       <div class="card map__card">
         <p class="mut">Нажимай на районы. Каждый новый — тоже красивый.</p>
@@ -728,6 +760,13 @@ p{margin:0 0 10px}
   </div>
 </section>
 
+<div class="skyband" aria-hidden="true" data-band>
+  <svg viewBox="0 0 1200 160" preserveAspectRatio="none"><defs><linearGradient id="bandG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6fbff"/><stop offset="1" stop-color="#d9ecfd"/></linearGradient></defs><rect width="1200" height="160" fill="url(#bandG2)"/>
+  <g data-bwave><path d="M-200 110c80-14 160 14 240 0s160-14 240 0 160 14 240 0 160-14 240 0 160 14 240 0 160-14 240 0v60h-1440z" fill="#9cc8f4"/><path d="M-200 126c80-10 160 10 240 0s160-10 240 0 160 10 240 0 160-10 240 0 160 10 240 0 160-10 240 0v40h-1440z" fill="#5f9de9"/></g>
+  <use href="#i-ferry" x="100" y="58" width="76" height="76" data-bferry/>
+  <use href="#i-gull" x="700" y="20" width="44" height="44" data-bgull/>
+  <use href="#i-ball" x="960" y="10" width="30" height="40" data-bballoon/></svg>
+</div>
 <!-- ============ 11. АЛГОРИТМ ============ -->
 <section class="sec" data-section="tree" data-words="24">
   <div class="in grid2">
@@ -897,6 +936,13 @@ p{margin:0 0 10px}
   </div>
 </section>
 
+<div class="skyband" aria-hidden="true" data-band>
+  <svg viewBox="0 0 1200 160" preserveAspectRatio="none"><defs><linearGradient id="bandG3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6fbff"/><stop offset="1" stop-color="#d9ecfd"/></linearGradient></defs><rect width="1200" height="160" fill="url(#bandG3)"/>
+  <g data-bwave><path d="M-200 110c80-14 160 14 240 0s160-14 240 0 160 14 240 0 160-14 240 0 160 14 240 0 160-14 240 0v60h-1440z" fill="#9cc8f4"/><path d="M-200 126c80-10 160 10 240 0s160-10 240 0 160 10 240 0 160-10 240 0 160 10 240 0 160-10 240 0v40h-1440z" fill="#5f9de9"/></g>
+  <use href="#i-ferry" x="100" y="58" width="76" height="76" data-bferry/>
+  <use href="#i-gull" x="700" y="20" width="44" height="44" data-bgull/>
+  <use href="#i-ball" x="960" y="10" width="30" height="40" data-bballoon/></svg>
+</div>
 <!-- ============ 17. ВИДЕО ============ -->
 <section class="sec" data-section="video" data-words="11">
   <div class="in">
@@ -948,6 +994,9 @@ p{margin:0 0 10px}
   <div class="in">
     <div class="poster" data-poster>
       <svg class="poster__ball" viewBox="0 0 60 80" aria-hidden="true"><use href="#i-ball"/></svg>
+      <svg class="poster__mini" style="left:46%;top:70%" viewBox="0 0 60 80" aria-hidden="true" data-pmini><use href="#i-ball"/></svg>
+      <svg class="poster__mini" style="left:64%;top:84%;width:18px" viewBox="0 0 60 80" aria-hidden="true" data-pmini><use href="#i-ball"/></svg>
+      <svg class="poster__mini" style="left:30%;top:90%;width:22px" viewBox="0 0 60 80" aria-hidden="true" data-pmini><use href="#i-ball"/></svg>
       <span class="kick" style="color:#ffe9a0" data-ui>Сохрани скриншотом</span>
       <h2 class="poster__t">Тоже = <span class="scr" lang="tr">de · da</span></h2>
       <div class="poster__g">
@@ -1374,7 +1423,7 @@ addEventListener('DOMContentLoaded', () => {
   $('[data-map-say]').addEventListener('click', () => say(mapS.textContent));
   if (A) {
     ST.batch('[data-map] .zone', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: -30, scale: .4, transformOrigin: '50% 100%', duration: .6, ease: 'back.out(3)', stagger: .08 }) });
-    G.to('[data-mapferry]', { x: 40, y: 30, ease: 'none', scrollTrigger: { trigger: '[data-map]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-mapferry]', { ease: 'none', motionPath: { path: '#bosPath', align: '#bosPath', alignOrigin: [.5, .5] }, scrollTrigger: { trigger: '[data-map]', start: 'top bottom', end: 'bottom top', scrub: 1 } });
   }
 
   /* ---------- 11. АЛГОРИТМ: точка бежит по схеме ---------- */
@@ -1703,6 +1752,73 @@ addEventListener('DOMContentLoaded', () => {
   $$('.bx__b').forEach((b) => b.addEventListener('pointerenter', () => { if (A) G.fromTo(b, { y: 0 }, { y: -8, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }); }));
   /* клей дрожит, когда слово приклеилось */
   gapR.addEventListener('change', () => { if (A && +gapR.value < 12) G.fromTo(glue, { scale: 1.3, transformOrigin: '50% 50%' }, { scale: 1, duration: .6, ease: 'elastic.out(1,.35)' }); });
+
+  /* ---------- новый визуальный слой: шарики, небо, кольцо гласных ---------- */
+  if (A) {
+    /* шарики поднимаются в небе hero, на паузе вне экрана */
+    $$('[data-minib]').forEach((b, i) => G.to(b, { y: () => -innerHeight * (.7 + i * .08), x: (i % 2 ? 30 : -30), rotation: i % 2 ? 8 : -8, duration: 9 + i * 2, repeat: -1, ease: 'none', delay: i * 1.3, scrollTrigger: { trigger: '.hero', toggleActions: 'play pause resume pause' } }));
+    G.to('.hero .gull', { scaleY: .6, transformOrigin: '50% 50%', duration: .35, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: .12, scrollTrigger: { trigger: '.hero', toggleActions: 'play pause resume pause' } });
+    /* полосы неба между секциями: паром плывёт, волны бегут, чайка летит */
+    $$('[data-band]').forEach((band) => {
+      const st = { trigger: band, start: 'top bottom', end: 'bottom top', scrub: true };
+      G.fromTo(band.querySelector('[data-bferry]'), { x: -140 }, { x: 900, ease: 'none', scrollTrigger: st });
+      G.fromTo(band.querySelector('[data-bwave]'), { x: 0 }, { x: 240, ease: 'none', scrollTrigger: { ...st } });
+      G.fromTo(band.querySelector('[data-bgull]'), { x: 300, y: 30 }, { x: -500, y: -10, ease: 'none', scrollTrigger: { ...st, scrub: 1.5 } });
+      G.fromTo(band.querySelector('[data-bballoon]'), { y: 90 }, { y: -40, ease: 'none', scrollTrigger: { ...st, scrub: 2 } });
+    });
+    /* набор текста в чате */
+    G.to('[data-typing] i', { y: -6, duration: .3, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: .12, scrollTrigger: { trigger: '[data-chat]', toggleActions: 'play pause resume pause' } });
+    /* шарики на постере всплывают при прокрутке */
+    G.fromTo('[data-pmini]', { y: 60 }, { y: (i) => -160 - i * 40, ease: 'none', stagger: .1, scrollTrigger: { trigger: '[data-poster]', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    /* дверь трясётся, когда стучится t */
+    $('[data-knock]').addEventListener('click', () => G.fromTo('[data-doorsvg]', { rotation: -4 }, { rotation: 0, duration: .8, ease: 'elastic.out(1,.25)', transformOrigin: '50% 100%' }));
+    ST.create({ trigger: '[data-door]', start: 'top 70%', once: true, onEnter: () => G.fromTo('[data-doorsvg]', { rotation: -6 }, { rotation: 0, duration: 1, ease: 'elastic.out(1,.25)', transformOrigin: '50% 100%', delay: .6 }) });
+  }
+  /* кольцо гласных: мягкие → de, твёрдые → da */
+  const VR = [['e', 'Ayşe de'], ['i', 'Ali de'], ['ö', 'Kadıköy de'], ['ü', 'Eminönü de'], ['a', 'çay da'], ['ı', 'martı da'], ['o', 'metro da'], ['u', 'Umut da']];
+  const vrot = $('[data-vrot]'), vtext = $('[data-vtext]');
+  VR.forEach(([v, ex], i) => {
+    const a = (i / VR.length) * Math.PI * 2 - Math.PI / 2, x = 120 + Math.cos(a) * 88, y = 120 + Math.sin(a) * 88;
+    const front = 'eiöü'.includes(v);
+    const g = document.createElementNS(NS, 'g');
+    g.setAttribute('data-v', v); g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', ex);
+    g.innerHTML = `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="22" fill="${front ? '#e2eeff' : '#fdf2cf'}" stroke="${front ? '#2f78e0' : '#c99312'}" stroke-width="2"/><text x="${x.toFixed(1)}" y="${(y + 7).toFixed(1)}" text-anchor="middle" fill="${front ? '#2f78e0' : '#9a6f05'}">${v}</text>`;
+    const pick = () => {
+      vtext.textContent = `${v}→${front ? 'de' : 'da'}`;
+      vtext.setAttribute('fill', front ? '#2f78e0' : '#9a6f05');
+      say(ex);
+      if (A) { G.fromTo($('circle', g), { scale: 1.5, transformOrigin: '50% 50%' }, { scale: 1, duration: .6, ease: 'elastic.out(1,.4)' }); G.fromTo('[data-vcenter]', { scale: .8, svgOrigin: '120 120' }, { scale: 1, svgOrigin: '120 120', duration: .5, ease: 'back.out(3)' }); }
+    };
+    g.addEventListener('click', pick);
+    g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    vrot.append(g);
+  });
+  if (A) {
+    G.fromTo('[data-vdash]', { rotation: -180, svgOrigin: '120 120' }, { rotation: 0, svgOrigin: '120 120', ease: 'none', scrollTrigger: { trigger: '[data-vring]', start: 'top bottom', end: 'center 45%', scrub: true } });
+    $$('[data-vrot] g').forEach((g, i) => { const c = $('circle', g); const dx = 120 - +c.getAttribute('cx'), dy = 120 - +c.getAttribute('cy'); G.fromTo(g, { x: dx, y: dy }, { x: 0, y: 0, ease: 'none', scrollTrigger: { trigger: '[data-vring]', start: 'top bottom', end: 'center 50%', scrub: .5 + i * .05 } }); });
+  }
+  /* маленький шарик у каждого заголовка — прилетает при прокрутке */
+  $$('.sec .h2').forEach((h) => {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 60 80'); s.setAttribute('class', 'h2deco'); s.setAttribute('aria-hidden', 'true');
+    s.innerHTML = '<use href="#i-ball"/>';
+    h.append(s);
+  });
+  if (A) ST.batch('.h2deco', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { x: 80, y: 60, rotation: 30, scale: .4, duration: 1, ease: 'back.out(1.8)', stagger: .1 }) });
+  /* карточки галереи и постер наклоняются за курсором */
+  if (A && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.flip', gal).forEach((c) => {
+      const rx = G.quickTo(c, 'rotationX', { duration: .4, ease: 'power2' }), ry = G.quickTo(c, 'rotationY', { duration: .4, ease: 'power2' });
+      G.set(c, { transformPerspective: 700 });
+      c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 14); rx(-((e.clientY - r.top) / r.height - .5) * 14); });
+      c.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    });
+    const poster = $('[data-poster]');
+    G.set(poster, { transformPerspective: 1200 });
+    const prx = G.quickTo(poster, 'rotationX', { duration: .6, ease: 'power2' }), pry = G.quickTo(poster, 'rotationY', { duration: .6, ease: 'power2' });
+    poster.addEventListener('pointermove', (e) => { const r = poster.getBoundingClientRect(); pry(((e.clientX - r.left) / r.width - .5) * 6); prx(-((e.clientY - r.top) / r.height - .5) * 6); });
+    poster.addEventListener('pointerleave', () => { prx(0); pry(0); });
+  }
 
   /* ---------- свой скроллбар: шар поднимается по верёвке ---------- */
   const bar = $('[data-scrollbar]'), track = $('.sb__track', bar);
