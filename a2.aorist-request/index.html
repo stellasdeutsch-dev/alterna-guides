@@ -120,6 +120,17 @@ p { margin: 0 0 10px; max-width: 62ch; }
 
 .hero__grid > *, .cafe-call > *, .scene > *, .map > *, .tree > *, .mn > *, .grid2 > *, .cmp__row > *, .player > *, .lab__panel > * { min-width: 0; }
 .tries button span { min-width: 0; overflow-wrap: anywhere; text-align: left; }
+.chip__ic { width: 14px; height: 14px; }
+.marq { overflow: hidden; margin: clamp(48px, 9vw, 90px) -16px 0; padding: 10px 0; background: var(--night); color: #f3efe9; rotate: -2deg; }
+.marq--sand { background: var(--grad); rotate: 1.5deg; margin-top: 18px; }
+.marq__in { display: flex; gap: 34px; white-space: nowrap; font-size: clamp(30px, 8vw, 80px); font-weight: 300; letter-spacing: -.05em; line-height: 1.05; will-change: transform; }
+.marq__in span:nth-child(odd) { font-style: italic; color: var(--sand); }
+.marq--sand .marq__in span:nth-child(odd) { color: #fff; }
+.marq--sand .marq__in span:nth-child(even) { color: var(--night); }
+.float--m { bottom: 30%; right: 6%; width: auto; animation: bob 6.5s ease-in-out -3s infinite; }
+.float--n { top: 40%; left: 40%; width: 7%; animation: bob 5.5s ease-in-out -1.5s infinite; }
+.cursor-dot { position: fixed; left: 0; top: 0; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: var(--sand-3); pointer-events: none; z-index: 70; display: none; }
+@media (hover: hover) and (pointer: fine) { .cursor-dot { display: block; } }
 /* ---------- мини-вопрос после блока ---------- */
 .mq { margin-top: 18px; padding: 16px; border-radius: var(--r-lg); background: #f8f7f5; border: 1px dashed #dcd5cd; position: relative; }
 .mq__q { font-weight: 400; margin-bottom: 10px; }
@@ -459,6 +470,7 @@ main { position: relative; z-index: 1; }
 </head>
 <body>
 <div class="glow" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
@@ -509,6 +521,8 @@ main { position: relative; z-index: 1; }
         </div>
         <div class="float float--p" data-depth="0.8" aria-hidden="true"><span class="pill3d" lang="tr">lütfen</span></div>
         <div class="float float--s ball3d" data-depth="2" aria-hidden="true"></div>
+        <div class="float float--m" data-depth="1.1" aria-hidden="true"><span class="pill3d" lang="tr">mısınız?</span></div>
+        <div class="float float--n ball3d" data-depth="2.4" aria-hidden="true"></div>
         <div class="demo__say" data-demo-say aria-live="polite"><span data-ui>Нажми кнопку — посмотри на дверь.</span></div>
         <div class="stage__sea" aria-hidden="true"></div>
         <div class="stage__bus" aria-hidden="true">
@@ -539,7 +553,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="story" data-words="54" id="s-story">
     <span class="s__no" data-ui>02</span>
     <div class="s__head">
-      <span class="chip">Крючок</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-bus"/></svg>Крючок</span>
       <h2 class="h-split">Конак. <em>Середина салона</em></h2>
     </div>
     <div class="comic">
@@ -581,7 +595,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="guess" data-words="19" id="s-guess">
     <span class="s__no" data-ui>03</span>
     <div class="s__head">
-      <span class="chip">Сначала угадай</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-q"/></svg>Сначала угадай</span>
       <h2 class="h-split">Три вопроса <span class="hpill"><svg><use href="#i-q"/></svg></span> <em>про дверь</em></h2>
       <p>Все три — вопросы. Только один из них просьба. Выбирай наугад. Ошибка здесь бесплатная.</p>
     </div>
@@ -597,7 +611,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="formula" data-words="43" id="s-formula">
     <span class="s__no" data-ui>04</span>
     <div class="s__head">
-      <span class="chip">Правило</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-star"/></svg>Правило</span>
       <h2 class="h-split">Четыре кубика. <em>Одна просьба</em></h2>
       <p>Сначала примеры. Смотри на хвосты.</p>
     </div>
@@ -637,7 +651,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="persons" data-words="40" id="s-persons">
     <span class="s__no" data-ui>05</span>
     <div class="s__head">
-      <span class="chip">Ты или вы</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-talk"/></svg>Ты или вы</span>
       <h2 class="h-split"><em lang="tr">sen</em> или <em lang="tr">siz</em>: кому как</h2>
       <p>Другу и брату — sen. Водителю, продавцу, врачу — siz. Ошибиться в сторону siz не страшно.</p>
       <p>В сторону sen — неловко. Как обнять кассира.</p>
@@ -663,7 +677,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="tree" data-words="46" id="s-tree">
     <span class="s__no" data-ui>06</span>
     <div class="s__head">
-      <span class="chip">Алгоритм</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-pin"/></svg>Алгоритм</span>
       <h2 class="h-split">Какой хвост <em>у глагола</em></h2>
       <p>Широкое время ты уже знаешь. Здесь оно просто работает. Задавай вопросы по порядку. Первое да — это ответ.</p>
     </div>
@@ -715,7 +729,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="compare" data-words="42" id="s-compare">
     <span class="s__no" data-ui>07</span>
     <div class="s__head">
-      <span class="chip">Русский и турецкий</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-talk"/></svg>Русский и турецкий</span>
       <h2 class="h-split">Русский просит <em>будущим</em></h2>
       <p>Мы говорим: откроешь окно? Это будущее время. Турок говорит широким: açar mısın?</p>
       <p>Будущее açacak mısın спрашивает про планы. Как анкета. Откроешь ли ты окно в ближайшие годы?</p>
@@ -742,7 +756,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="ladder" data-words="32" id="s-ladder">
     <span class="s__no" data-ui>08</span>
     <div class="s__head">
-      <span class="chip">Пять ступенек</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-star"/></svg>Пять ступенек</span>
       <h2 class="h-split">Лестница <em>вежливости</em></h2>
       <p>Вежливость растёт ступеньками. Приказ. Приказ с lütfen. Вопрос. Вопрос на вы. Вопрос на вы с lütfen. Выше — уже поклон.</p>
       <p>Тяни ползунок. Слушай, как меняется тон.</p>
@@ -791,7 +805,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="bakar" data-words="30" id="s-bakar">
     <span class="s__no" data-ui>10</span>
     <div class="s__head">
-      <span class="chip">Волшебная фраза</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-cup"/></svg>Волшебная фраза</span>
       <h2 class="h-split"><em lang="tr">Bakar mısınız?</em> <span class="hpill"><svg><use href="#i-cup"/></svg></span> позвать официанта</h2>
       <p>Официант не смотрит. Ты машешь. Он не смотрит. Ты кашляешь. Он не смотрит. Говоришь, Bakar mısınız? Он уже рядом. С меню.</p>
       <p>Дословно — посмотрите? Так зовут официанта, продавца, прохожего.</p>
@@ -815,11 +829,14 @@ main { position: relative; z-index: 1; }
     </div>
   </section>
 
+  <div class="marq" aria-hidden="true"><div class="marq__in" data-marq><span lang="tr">açar mısın</span><span lang="tr">verir misiniz</span><span lang="tr">bakar mısınız</span><span lang="tr">durur musunuz</span><span lang="tr">götürür müsünüz</span><span lang="tr">açar mısın</span><span lang="tr">verir misiniz</span></div></div>
+  <div class="marq marq--sand" aria-hidden="true"><div class="marq__in" data-marq2><span lang="tr">lütfen</span><span lang="tr">rica</span><span lang="tr">tabii</span><span lang="tr">olur</span><span lang="tr">hemen</span><span lang="tr">lütfen</span><span lang="tr">rica</span><span lang="tr">tabii</span></div></div>
+
   <!-- 11 MAP -->
   <section class="s" data-section="map" data-words="25" id="s-map">
     <span class="s__no" data-ui>11</span>
     <div class="s__head">
-      <span class="chip">Город уровня</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-pin"/></svg>Город уровня</span>
       <h2 class="h-split">Измир <span class="hpill"><svg><use href="#i-star"/></svg></span> <em>просьбами</em></h2>
       <p>Шесть районов. В каждом своя просьба. Нажимай на метки.</p>
       <p>Метка — район. Карточка — то, что там говорят каждый день. Слушай и повторяй.</p>
@@ -851,7 +868,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="scene" data-words="33" id="s-scene">
     <span class="s__no" data-ui>12</span>
     <div class="s__head">
-      <span class="chip">Сцена</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-cup"/></svg>Сцена</span>
       <h2 class="h-split">Кафе <span class="hpill"><svg><use href="#i-cup"/></svg></span> <em>на Кордоне</em></h2>
       <p>Вечер. Кордон. Залив розовый, как реклама зубной пасты. Ты садишься за столик. Нажимай на предметы. Проси.</p>
       <p>Официант отвечает коротко. Это не грубость. Это Измир вечером: жарко, все хотят домой.</p>
@@ -887,7 +904,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="answers" data-words="33" id="s-answers">
     <span class="s__no" data-ui>13</span>
     <div class="s__head">
-      <span class="chip">Что ответят</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-talk"/></svg>Что ответят</span>
       <h2 class="h-split">Ответ <em>короче просьбы</em></h2>
       <p>Просьба — половина дела. Вторая половина — понять ответ. Обычно он короткий. Турки не тратят слов на да.</p>
       <p>Olur — главное слово. Им соглашаются на всё: на чай, на скидку, на свадьбу.</p>
@@ -905,7 +922,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="gallery" data-words="21" id="s-gallery">
     <span class="s__no" data-ui>14</span>
     <div class="s__head">
-      <span class="chip" data-ui>31 просьба</span>
+      <span class="chip" data-ui><svg class="ic chip__ic" aria-hidden="true"><use href="#i-book"/></svg>31 просьба</span>
       <h2 class="h-split">Просьбы <em>на каждый день</em></h2>
       <p>Переворачивай. Слушай. Повторяй вслух. Соседи привыкнут.</p>
       <p>Тридцать одна фраза. Хватит на месяц в Измире. Может, на два.</p>
@@ -925,7 +942,7 @@ main { position: relative; z-index: 1; }
     <span class="s__no" data-ui>15</span>
     <div class="lab">
       <div class="s__head">
-        <span class="chip chip--sand">Лаборатория</span>
+        <span class="chip chip--sand"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-star"/></svg>Лаборатория</span>
         <h2 class="h-split">Собери <span class="hpill" style="color:#fff"><svg><use href="#i-star"/></svg></span> <em>свою просьбу</em></h2>
         <p style="color:#cfc9c1">Здесь ломать можно. Выбирай глагол и человека. Смотри, как растёт просьба. Нажми «почему» — получишь объяснение.</p>
         <p style="color:#cfc9c1">Четыре режима. Начни с первого. Остальные — когда станет скучно.</p>
@@ -975,7 +992,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="traps" data-words="52" id="s-traps">
     <span class="s__no" data-ui>16</span>
     <div class="s__head">
-      <span class="chip">Ловушки</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-bus"/></svg>Ловушки</span>
       <h2 class="h-split">Пять ям <span class="hpill"><svg><use href="#i-bus"/></svg></span> <em>на маршруте</em></h2>
       <p>На этих пяти спотыкаются все. Это не стыдно. Стыдно — два километра пешком от Конака.</p>
     </div>
@@ -997,7 +1014,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="video" data-words="19" id="s-video">
     <span class="s__no" data-ui>17</span>
     <div class="s__head">
-      <span class="chip">Видео</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-play"/></svg>Видео</span>
       <h2 class="h-split">Послушай <em>учителя</em></h2>
       <p>Обрати внимание: одна и та же форма звучит и как предложение, и как просьба. Решает интонация.</p>
     </div>
@@ -1040,7 +1057,7 @@ main { position: relative; z-index: 1; }
   <section class="s" data-section="cheat" data-words="50" id="s-cheat">
     <span class="s__no" data-ui>20</span>
     <div class="s__head">
-      <span class="chip">Сохрани скриншотом</span>
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-bill"/></svg>Сохрани скриншотом</span>
       <h2 class="h-split">Вся тема <em>на одном экране</em></h2>
     </div>
     <div class="poster" data-poster>
@@ -1113,6 +1130,9 @@ addEventListener('DOMContentLoaded', () => {
     addEventListener('load', () => ScrollTrigger.refresh());
     document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
     addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
+    /* высота страницы меняется (фильтр галереи, диалоги, вкладки) — пересчитываем сцены */
+    let rh = 0, rt = null;
+    new ResizeObserver(([en]) => { const h = Math.round(en.contentRect.height); if (Math.abs(h - rh) < 2) return; rh = h; clearTimeout(rt); rt = setTimeout(() => ScrollTrigger.refresh(), 200); }).observe(document.querySelector('main'));
   }
 
   /* ---------- грамматика: широкое время + вопрос ---------- */
@@ -1809,6 +1829,82 @@ addEventListener('DOMContentLoaded', () => {
     G.from('.hpill', { rotation: -90, scale: .4, duration: .8, ease: 'elastic.out(1, .45)', stagger: .1, scrollTrigger: { trigger: '#s-guess', start: 'top 80%', once: true } });
   }
 
+  /* ---------- второй слой движения ---------- */
+  /* точка-курсор и магнитные кнопки — только мышь */
+  if (A && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const cd = $('.cursor-dot');
+    const cx = G.quickTo(cd, 'x', { duration: .15, ease: 'power3' }), cy = G.quickTo(cd, 'y', { duration: .15, ease: 'power3' });
+    addEventListener('pointermove', (e) => { cx(e.clientX); cy(e.clientY); }, { passive: true });
+    addEventListener('pointerdown', () => G.fromTo(cd, { scale: 2.6 }, { scale: 1, duration: .4, ease: 'back.out(3)' }));
+    $$('.btn').forEach((o) => {
+      o.addEventListener('pointermove', (e) => { const r = o.getBoundingClientRect(); G.to(o, { x: (e.clientX - r.left - r.width / 2) * .2, y: (e.clientY - r.top - r.height / 2) * .3, duration: .4, ease: 'power3.out' }); });
+      o.addEventListener('pointerleave', () => G.to(o, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1, .4)' }));
+    });
+    /* карточки галереи и bento наклоняются за мышью */
+    cardsBox.addEventListener('pointermove', (e) => {
+      const fc = e.target.closest('.fc'); if (!fc) return;
+      const r = fc.getBoundingClientRect();
+      G.to(fc, { rotationX: -((e.clientY - r.top) / r.height - .5) * 10, rotationY: ((e.clientX - r.left) / r.width - .5) * 12, transformPerspective: 900, duration: .4, ease: 'power3.out' });
+    });
+    cardsBox.addEventListener('pointerleave', () => G.to('.fc', { rotationX: 0, rotationY: 0, duration: .6, ease: 'power3.out' }));
+    bento.addEventListener('pointermove', (e) => {
+      const c = e.target.closest('.cell'); if (!c) return;
+      const r = c.getBoundingClientRect();
+      G.to(c, { rotationX: -((e.clientY - r.top) / r.height - .5) * 10, rotationY: ((e.clientX - r.left) / r.width - .5) * 12, transformPerspective: 800, duration: .4, ease: 'power3.out' });
+    });
+    bento.addEventListener('pointerleave', () => G.to('.cell', { rotationX: 0, rotationY: 0, duration: .6, ease: 'power3.out' }));
+  }
+  /* бегущие строки: тянутся за скроллом, по нажатию — рывок */
+  $$('.marq').forEach((m) => m.addEventListener('click', () => { if (A) G.fromTo(m.querySelector('.marq__in'), { x: 0 }, { x: -80, duration: .8, yoyo: true, repeat: 1, ease: 'power3.inOut' }); }));
+  /* мини-плашки в герое: по нажатию падают заново */
+  $('.mini-tiles').addEventListener('click', () => { if (A) G.fromTo('.mini-tiles .t', { y: -50, rotation: -10 }, { y: 0, rotation: 0, duration: .8, ease: 'bounce.out', stagger: .12 }); });
+  /* карта: нажатие на залив — паром-точка плывёт */
+  $('[data-map] svg').addEventListener('click', (e) => { if (A) G.fromTo('[data-land]', { scale: 1.03, transformOrigin: '50% 50%' }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' }); });
+  if (A) {
+    G.fromTo('[data-marq]', { xPercent: 0 }, { xPercent: -35, ease: 'none', scrollTrigger: { trigger: '.marq', start: 'top bottom', end: 'bottom top', scrub: .5 } });
+    G.fromTo('[data-marq2]', { xPercent: -35 }, { xPercent: 0, ease: 'none', scrollTrigger: { trigger: '.marq--sand', start: 'top bottom', end: 'bottom top', scrub: .5 } });
+    G.from('.hero__tag .chip', { y: -20, duration: .6, ease: 'back.out(2.4)', stagger: .1, delay: .2 });
+    G.from('.hero__lead', { y: 24, duration: .8, ease: 'power3.out', delay: .4 });
+    G.from('.cnt', { y: 40, rotation: (k) => (k - 1) * 4, duration: .8, ease: 'back.out(2)', stagger: .12, delay: .7 });
+    G.from('.demo button', { scale: .5, duration: .7, ease: 'back.out(2.6)', stagger: .12, delay: 1 });
+    G.to('.stage__bus', { y: -3, duration: .35, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    G.to('.stage__bus circle', { rotation: 360, transformOrigin: '50% 50%', duration: 2, repeat: -1, ease: 'none' });
+    G.from('.voice', { scale: .9, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.voice', start: 'top 90%', once: true } });
+    G.from('.pick .btns button', { y: 30, duration: .6, ease: 'back.out(2.2)', stagger: .12, scrollTrigger: { trigger: '.pick', start: 'top 90%', once: true } });
+    G.fromTo('.examples', { scale: .94 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.examples', start: 'top bottom', end: 'top 60%', scrub: true } });
+    G.fromTo('[data-lane]', { scale: .9 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-lane]', start: 'top bottom', end: 'top 55%', scrub: true } });
+    G.from('.step', { y: 20, duration: .5, ease: 'back.out(2.4)', stagger: .07, scrollTrigger: { trigger: '.steps', start: 'top 92%', once: true } });
+    G.from('.switch', { scale: .7, duration: .6, ease: 'back.out(2.6)', scrollTrigger: { trigger: '[data-who-switch]', start: 'top 92%', once: true } });
+    G.from('.who__col', { y: 40, duration: .7, ease: 'power3.out', stagger: .15, scrollTrigger: { trigger: '.who', start: 'top 90%', once: true } });
+    G.to(dot, { attr: { r: 11 }, duration: .7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    G.from('.tnode, .tleaf', { scale: .6, transformOrigin: '50% 50%', duration: .6, ease: 'back.out(2.4)', stagger: .07, scrollTrigger: { trigger: tree, start: 'top 85%', once: true } });
+    G.from('.tres', { y: 30, duration: .6, ease: 'power3.out', scrollTrigger: { trigger: '.tres', start: 'top 92%', once: true } });
+    G.from('.cmp__row', { x: (k) => (k % 2 ? 40 : -40), duration: .7, ease: 'power3.out', stagger: .12, scrollTrigger: { trigger: cmp, start: 'top 85%', once: true } });
+    G.fromTo('.therm i', { scaleX: .2, transformOrigin: '0 50%' }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.therm', start: 'top bottom', end: 'top 60%', scrub: true } });
+    G.from('.meter', { y: 20, duration: .6, ease: 'power3.out', scrollTrigger: { trigger: '.meter', start: 'top 92%', once: true } });
+    G.from('.mn__phrase', { yPercent: 20, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: '.mn__phrase', start: 'top 88%', once: true } });
+    G.to('[data-mn-dot]', { y: -6, duration: .9, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    G.from('.tries button', { x: 40, duration: .6, ease: 'back.out(2)', stagger: .1, scrollTrigger: { trigger: '.tries', start: 'top 90%', once: true } });
+    G.to('[data-waiter-head]', { rotation: -6, transformOrigin: '300px 100px', duration: 1.8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    G.to('.pin__disc', { scale: 1.06, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: .2 });
+    G.from('.mapcard', { rotation: 3, y: 30, duration: .8, ease: 'back.out(2)', scrollTrigger: { trigger: '.mapcard', start: 'top 92%', once: true } });
+    G.from('.dialog', { y: 40, duration: .7, ease: 'power3.out', scrollTrigger: { trigger: '.dialog', start: 'top 92%', once: true } });
+    G.from('.hot', { scale: .5, transformOrigin: '50% 50%', duration: .6, ease: 'back.out(2.6)', stagger: .08, scrollTrigger: { trigger: '[data-scene-svg]', start: 'top 80%', once: true } });
+    G.fromTo(cardsBox, { scale: .97, transformOrigin: '50% 0' }, { scale: 1, ease: 'none', scrollTrigger: { trigger: cardsBox, start: 'top bottom', end: 'top 55%', scrub: true } });
+    G.from('[data-lab-tabs] button', { y: 24, duration: .5, ease: 'back.out(2.4)', stagger: .06, scrollTrigger: { trigger: '[data-lab-tabs]', start: 'top 92%', once: true } });
+    G.from('[data-lab-verbs] button', { scale: .7, duration: .45, ease: 'back.out(3)', stagger: .025, scrollTrigger: { trigger: '[data-lab-verbs]', start: 'top 92%', once: true } });
+    G.fromTo('[data-build]', { scale: .92 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-build]', start: 'top bottom', end: 'top 60%', scrub: true } });
+    G.from('.trap__why', { y: 16, duration: .5, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '[data-traps]', start: 'top 85%', once: true } });
+    G.from('.route', { scale: .9, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.route', start: 'top 92%', once: true } });
+    G.from('.pc table tr', { x: -30, duration: .5, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '.pc table', start: 'top 90%', once: true } });
+    G.from('.final .btns button', { scale: .6, duration: .6, ease: 'back.out(2.6)', stagger: .12, scrollTrigger: { trigger: '.final .btns', start: 'top 92%', once: true } });
+    G.fromTo('.final__punch', { letterSpacing: '.02em' }, { letterSpacing: '-.045em', ease: 'none', scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'center center', scrub: true } });
+    G.from('.sb', { y: -30, duration: .8, ease: 'power3.out', delay: 1 });
+    ScrollTrigger.batch('.chip__ic', { start: 'top 94%', once: true, onEnter: (els) => G.from(els, { rotation: -120, scale: .4, duration: .7, ease: 'back.out(2.6)', stagger: .06 }) });
+    ScrollTrigger.batch('.s__head > p', { start: 'top 94%', once: true, onEnter: (els) => G.from(els, { y: 20, duration: .6, ease: 'power3.out', stagger: .08 }) });
+    ScrollTrigger.batch('.bub', { start: 'top 95%', once: true, onEnter: (els) => G.from(els, { scale: .85, duration: .5, ease: 'back.out(2.4)', stagger: .06 }) });
+  }
+
   /* ---------- скроллбар: автобус по маршруту ---------- */
   const bar = $('[data-scrollbar]');
   const track = $('[data-sb-track]');
@@ -1842,6 +1938,7 @@ addEventListener('DOMContentLoaded', () => {
     if (A) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .6, ease: 'back.out(3)' });
   });
   layout(); progress();
+  if (A) ScrollTrigger.addEventListener('refresh', () => { layout(); progress(); });
   if (A) G.to('.sb__bus', { y: -2, duration: .25, yoyo: true, repeat: -1, ease: 'sine.inOut' });
 
   /* ---------- ачивка: двери значка разъезжаются ---------- */
