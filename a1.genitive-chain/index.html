@@ -1,0 +1,1609 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.genitive-chain">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Цепочка изафетов</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Amatic SC';font-style:normal;font-weight:700;font-display:swap;src:url(media/amatic-sc-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Amatic SC';font-style:normal;font-weight:700;font-display:swap;src:url(media/amatic-sc-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Amatic SC';font-style:normal;font-weight:700;font-display:swap;src:url(media/amatic-sc-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400 600;font-display:swap;src:url(media/eb-garamond-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400 600;font-display:swap;src:url(media/eb-garamond-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'EB Garamond';font-style:normal;font-weight:400 600;font-display:swap;src:url(media/eb-garamond-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --ink:#1c2b9e;--ink-2:#3346c8;--ink-soft:#eceffc;--ink-faint:#f5f6fd;
+  --text:#191b24;--muted:#5b5f6e;--paper:#fff;--side:#f4f4f1;--grid:#e3e7f0;
+  --gen:#c8282e;--gen-soft:#fde9e9;--pos:#9a6a06;--pos-soft:#fbf1da;
+  --clip-red:#d6383c;--clip-yel:#e3ad35;
+  --amber:#c98d3e;--night:#1a3f4c;--sepia:#a07c5a;--rose:#c77a64;
+  --hand:'Amatic SC','EB Garamond',Georgia,serif;
+  --serif:'EB Garamond',Georgia,'Times New Roman',serif;
+  --ak-bg:#fff;--ak-surface:#f6f6f3;--ak-ink:#191b24;--ak-muted:#5b5f6e;--ak-line:#dfe1ea;
+  --ak-accent:#1c2b9e;--ak-accent-ink:#fff;--ak-accent-soft:#eceffc;
+  --ak-good:#23784a;--ak-good-soft:#e5f4ea;--ak-bad:#c8282e;--ak-bad-soft:#fde9e9;
+  --ak-radius:6px;--ak-radius-sm:4px;--ak-font:var(--serif);--ak-font-display:var(--hand);
+  --ak-text:clamp(18px,1.05rem + .3vw,21px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;background:#fff}
+body{margin:0;background:var(--paper);color:var(--text);font:400 var(--ak-text)/1.55 var(--serif);overflow-x:clip}
+main{padding:0 16px calc(56px + env(safe-area-inset-bottom));padding-top:env(safe-area-inset-top)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--ink-2);outline-offset:3px}
+[lang="tr"],.tr{font-family:var(--serif);font-weight:600}
+section{position:relative;max-width:1120px;margin:0 auto;padding:clamp(56px,10vw,110px) 0 0}
+.zc-in{max-width:720px;margin:0 auto}
+h1,h2,h3{font-family:var(--hand);font-weight:700;color:var(--ink);letter-spacing:.05em;margin:0 0 14px;line-height:1}
+h1{font-size:clamp(26px,8.6vw,108px)}
+h2{font-size:clamp(26px,8.6vw,64px)}
+h3{font-size:clamp(22px,6.4vw,34px)}
+p{margin:0 0 12px;max-width:62ch}
+.zc-kick{display:inline-block;font:700 clamp(18px,4.6vw,24px)/1 var(--hand);letter-spacing:.12em;color:var(--ink);margin-bottom:10px}
+.zc-ul{display:block;width:min(260px,70%);height:14px;margin:-6px 0 16px;overflow:visible}
+.zc-ul path{fill:none;stroke:var(--ink);stroke-width:2.4;stroke-linecap:round}
+.zc-ico{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.15em}
+.zc-doodle{position:absolute;width:clamp(34px,7vw,62px);height:clamp(34px,7vw,62px);color:var(--ink);pointer-events:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
+.g{color:var(--gen)}.p{color:var(--pos)}
+.zc-w{display:inline-flex;align-items:baseline;font:600 1em/1.2 var(--serif);white-space:nowrap}
+.zc-w .g,.zc-w .p{position:relative;display:inline-block}
+.zc-w .g::after{content:'';position:absolute;left:0;right:0;bottom:-.12em;height:.12em;border-radius:3px;background:var(--gen);opacity:.55}
+.zc-w .p::after{content:'';position:absolute;left:0;right:0;bottom:-.12em;height:.12em;border-radius:3px;background:var(--clip-yel)}
+.zc-tr{display:block;color:var(--muted);font-size:.86em;font-style:normal;font-weight:400;font-family:var(--serif)}
+.zc-btn{display:inline-flex;align-items:center;gap:.4em;min-height:44px;padding:8px 18px;border:2px solid var(--ink);border-radius:999px 820px 999px 760px;background:#fff;color:var(--ink);font:700 22px/1 var(--hand);letter-spacing:.08em;cursor:pointer}
+.zc-btn--fill{background:var(--ink);color:#fff}
+.zc-btn[aria-pressed="true"]{background:var(--ink);color:#fff}
+@media (hover:hover){.zc-btn:hover{translate:0 -2px}.zc-chip:hover{translate:0 -2px}}
+.zc-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.zc-note{font:700 clamp(18px,4.8vw,24px)/1.15 var(--hand);letter-spacing:.06em;color:var(--ink)}
+.zc-paper{background:var(--side);border-radius:4px;padding:clamp(16px,4vw,32px)}
+.zc-grid{background-color:#fff;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px}
+
+/* полароид */
+.zc-pol{position:relative;display:inline-flex;flex-direction:column;align-items:center;background:#fff;padding:7px 7px 10px;box-shadow:0 1px 0 #0001,0 10px 22px -12px #0006;border-radius:2px;rotate:var(--r,0deg)}
+.zc-pol__ph{display:grid;place-items:center;width:var(--s,84px);aspect-ratio:1;background:var(--bg,linear-gradient(160deg,#cfc3ad,#8b7a62));color:#fff;overflow:hidden;filter:saturate(.85)}
+.zc-pol__ph svg{width:62%;height:62%;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.zc-pol__cap{margin-top:6px;font:600 clamp(16px,4.2vw,20px)/1.1 var(--serif);color:var(--text);white-space:nowrap}
+.zc-clip{position:absolute;width:20px;height:44px;top:-22px;left:50%;stroke:var(--clip-red);fill:none;stroke-width:3;stroke-linecap:round}
+.zc-clip--y{stroke:var(--clip-yel)}
+.ph-amber{--bg:linear-gradient(155deg,#e2b36b,#9a5f25)}
+.ph-night{--bg:linear-gradient(160deg,#2a6273,#0f2730)}
+.ph-bw{--bg:linear-gradient(160deg,#c9c9c4,#6d6d69)}
+.ph-rose{--bg:linear-gradient(160deg,#e3a58f,#8d4a3c)}
+.ph-sea{--bg:linear-gradient(170deg,#d8dfd6,#8ea39b)}
+.ph-lamp{--bg:radial-gradient(circle at 70% 30%,#ffd88a,#b9652a 55%,#4b2512)}
+
+/* hero */
+.zc-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;padding:14px 0 0;font:400 15px/1 var(--serif)}
+.zc-nav button{min-height:44px;padding:0 6px;border:0;background:none;cursor:pointer;color:var(--text)}
+.zc-nav button span{border-bottom:1.5px solid var(--ink)}
+.zc-nav .is-circ{position:relative}
+.zc-nav .is-circ svg{position:absolute;inset:4px -10px;width:calc(100% + 20px);height:calc(100% - 8px);stroke:var(--ink);fill:none;stroke-width:1.6}
+.zc-hero{padding-top:12px}
+.zc-sheet{position:relative;margin:16px auto 0;padding:clamp(36px,8vw,80px) clamp(16px,4vw,48px) clamp(28px,6vw,56px);text-align:center;box-shadow:0 18px 40px -30px #0007;overflow:hidden}
+.zc-sheet::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;background:linear-gradient(90deg,#0000,#00000014,#0000)}
+.zc-sheet h1{position:relative;animation:zcRise .9s cubic-bezier(.2,1.4,.4,1) both}
+.zc-sub{font:600 clamp(18px,4.4vw,26px)/1.2 var(--serif);color:var(--ink);letter-spacing:.02em;margin:0 0 6px}
+.zc-lead{margin:14px auto 0;max-width:46ch;animation:zcRise .9s .15s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes zcRise{from{transform:translateY(26px) rotate(2deg)}to{transform:none}}
+@keyframes zcSway{from{rotate:-6deg}to{rotate:6deg}}
+@keyframes zcFloat{from{translate:0 -7px}to{translate:0 7px}}
+.zc-demo{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,3vw,26px) clamp(8px,2vw,20px);margin:clamp(26px,5vw,44px) auto 8px;max-width:760px}
+.zc-demo .zc-pol{--s:clamp(66px,17vw,112px)}
+.zc-demo .zc-pol:nth-child(1){--r:-4deg}.zc-demo .zc-pol:nth-child(2){--r:3deg}.zc-demo .zc-pol:nth-child(3){--r:-2deg}.zc-demo .zc-pol:nth-child(4){--r:5deg}
+.zc-demo .zc-pol{animation:zcDrop .9s cubic-bezier(.3,1.5,.5,1) both}.zc-demo .zc-pol:nth-child(2){animation-delay:.12s}.zc-demo .zc-pol:nth-child(3){animation-delay:.24s}.zc-demo .zc-pol:nth-child(4){animation-delay:.36s}
+@keyframes zcDrop{from{translate:0 -90px}to{translate:0 0}}
+.zc-demo .zc-clip{scale:0}
+.zc-demo.is-on .zc-clip{scale:1}
+.zc-demo .zc-pol__cap b{font-weight:600}
+.zc-demo-out{min-height:3.4em;margin:6px auto 0;font-size:clamp(18px,4.6vw,26px)}
+.zc-count{display:flex;justify-content:center;gap:clamp(18px,6vw,56px);margin:26px 0 0;font:700 clamp(34px,9vw,64px)/1 var(--hand);color:var(--ink)}
+.zc-count small{display:block;font:400 15px/1.2 var(--serif);color:var(--muted);letter-spacing:0}
+.zc-hero .zc-doodle{animation:zcSway 3.2s ease-in-out infinite alternate}
+.zc-collage{position:relative;height:clamp(150px,36vw,300px);margin:26px auto 0;max-width:900px}
+.zc-collage .zc-pol{position:absolute;animation:zcFloat 3.6s ease-in-out infinite alternate}
+.zc-collage .zc-pol:nth-child(2n){animation-duration:4.4s}
+.zc-collage .zc-pol__ph{width:clamp(70px,20vw,170px);aspect-ratio:4/3}
+
+/* story */
+.zc-story{display:grid;gap:22px;align-items:start}
+@media (min-width:900px){.zc-story{grid-template-columns:330px 1fr}}
+.zc-phone{position:relative;width:min(320px,100%);margin:0 auto;padding:18px 14px 22px;border:2.5px solid var(--ink);border-radius:34px;background:#fff}
+.zc-phone__top{width:90px;height:20px;margin:0 auto 12px;border-radius:12px;background:var(--ink)}
+.zc-chat{display:grid;gap:9px;min-height:280px}
+.zc-msg{max-width:88%;padding:9px 13px;border-radius:16px 16px 16px 4px;background:var(--ink-faint);border:1.5px solid #d5daf4;font-size:.95em;line-height:1.35}
+.zc-msg--me{justify-self:end;border-radius:16px 16px 4px 16px;background:#fff;border-color:var(--ink)}
+.zc-msg--sys{justify-self:center;background:none;border:0;padding:2px 0;font:700 19px/1.2 var(--hand);letter-spacing:.06em;color:var(--muted);text-align:center}
+.zc-voice{display:flex;align-items:center;gap:8px}
+.zc-voice i{display:block;width:3px;border-radius:2px;background:var(--ink)}
+.zc-cord{display:block;width:100%;max-width:520px;height:90px;margin:-4px auto 0;overflow:visible}
+.zc-cord path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.zc-lines p{font-size:1.02em}
+.zc-pick{display:grid;gap:10px;margin-top:14px}
+.zc-opt{display:block;width:100%;min-height:48px;padding:10px 14px;border:2px solid var(--ink);border-radius:10px 14px 9px 16px;background:#fff;text-align:left;cursor:pointer;font:600 clamp(16px,4.4vw,20px)/1.25 var(--serif)}
+.zc-opt.is-ok{background:var(--ak-good-soft);border-color:var(--ak-good)}
+.zc-opt.is-no{background:var(--ak-bad-soft);border-color:var(--ak-bad)}
+.zc-fb{min-height:1.6em;margin:10px 0 0;font:700 clamp(19px,5vw,24px)/1.2 var(--hand);letter-spacing:.05em;color:var(--ink)}
+
+/* мини-вопрос */
+.zc-q{position:relative;margin:28px auto 0;max-width:720px;padding:18px clamp(14px,4vw,24px) 14px;border:2px dashed var(--ink);border-radius:12px 18px 10px 20px;background:#fff}
+.zc-q__t{display:flex;gap:8px;align-items:center;margin:0 0 10px;font:700 22px/1.1 var(--hand);letter-spacing:.06em;color:var(--ink)}
+.zc-q__o{display:flex;flex-wrap:wrap;gap:8px}
+.zc-q__o button{min-height:44px;padding:6px 14px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;cursor:pointer;font:600 18px/1.2 var(--serif)}
+.zc-q__o button.is-ok{background:var(--ak-good-soft);border-color:var(--ak-good)}
+.zc-q__o button.is-no{background:var(--ak-bad-soft);border-color:var(--ak-bad)}
+.zc-q__fb{min-height:1.4em;margin:10px 0 0;color:var(--muted);font-size:.95em}
+.zc-spark{position:fixed;z-index:80;width:18px;height:18px;margin:-9px 0 0 -9px;pointer-events:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;fill:none}
+.zc-spark.r{stroke:var(--clip-red)}.zc-spark.y{stroke:var(--clip-yel)}
+
+/* скрепка */
+.zc-link{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:clamp(30px,10vw,90px);padding:40px 0 10px}
+.zc-link .zc-pol{--s:clamp(92px,26vw,150px)}
+.zc-bigclip{position:absolute;left:50%;top:6px;width:clamp(90px,22vw,150px);height:60px;translate:-50% 0;overflow:visible}
+.zc-bigclip path{fill:none;stroke:var(--clip-red);stroke-width:4;stroke-linecap:round}
+.zc-endtag{position:absolute;top:-16px;font:700 22px/1 var(--hand);letter-spacing:.05em;padding:3px 9px;border-radius:999px;background:#fff;border:1.5px solid currentColor;white-space:nowrap}
+.zc-endtag.g{left:-10px}.zc-endtag.p{right:-10px}
+.zc-link.is-off .zc-endtag{scale:0}
+.zc-ex{display:grid;gap:10px;margin:18px 0 0}
+.zc-ex>div{padding:10px 14px;border-left:3px solid var(--ink);background:var(--ink-faint)}
+
+/* плеер шагов */
+.zc-steps{padding:clamp(18px,4vw,32px);border:2px solid var(--ink);border-radius:18px 26px 16px 30px;background:#fff}
+.zc-steps__row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;min-height:2.6em;font-size:clamp(24px,7vw,44px)}
+.zc-steps__row .zc-w{padding:4px 10px;border-radius:8px;background:var(--side)}
+.zc-steps__cap{min-height:2.8em;margin:14px auto 8px;text-align:center;font:700 clamp(20px,5.2vw,28px)/1.15 var(--hand);letter-spacing:.05em;color:var(--ink)}
+.zc-steps__cap span{display:none}.zc-steps__cap span.is-on{display:block}
+.zc-pad{display:flex;justify-content:center;gap:10px;margin:6px 0 14px}
+.zc-pad span{padding:4px 12px;border-radius:999px;border:1.5px dashed currentColor;font:600 20px/1.2 var(--serif)}
+.zc-dots{display:flex;justify-content:center;gap:6px}
+.zc-dots button{width:44px;height:44px;border:0;background:none;cursor:pointer;font:700 22px/1 var(--hand);color:var(--muted)}
+.zc-dots button.is-on{color:var(--ink);text-decoration:underline wavy;text-underline-offset:6px}
+.zc-fly{position:fixed;z-index:70;pointer-events:none;font:600 clamp(24px,7vw,44px)/1.2 var(--serif);color:var(--gen)}
+
+/* bento */
+.zc-bento{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (min-width:760px){.zc-bento{grid-template-columns:repeat(4,1fr)}.zc-bento .is-big{grid-column:span 2}}
+.zc-tile{position:relative;min-height:122px;padding:14px;border:1.5px solid var(--ink);border-radius:6px;background:#fff;text-align:left;cursor:pointer;perspective:600px}
+.zc-tile b{display:block;font:600 40px/1 var(--serif);color:var(--ink)}
+.zc-tile .zc-w{font-size:clamp(18px,4.8vw,24px)}
+.zc-tile small{display:block;margin-top:6px;color:var(--muted);font-size:15px}
+.zc-tile.is-flip{background:var(--ink-faint)}
+.zc-tile .zc-tile__back{display:none}.zc-tile.is-flip .zc-tile__back{display:block}.zc-tile.is-flip .zc-tile__front{display:none}
+.zc-tile:nth-child(odd){rotate:-.6deg}.zc-tile:nth-child(even){rotate:.7deg}
+
+/* порядок */
+.zc-order{position:relative;padding:20px clamp(12px,4vw,30px) 26px;border-radius:6px;background:var(--side)}
+.zc-order__line{position:relative;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;min-height:1.6em;font-size:clamp(22px,6.4vw,38px)}
+.zc-order__line span{display:inline-block;padding:4px 10px;border-radius:6px;background:#fff;box-shadow:0 6px 14px -10px #0007}
+.zc-order__line .k{outline:2px solid var(--ink);outline-offset:2px}
+.zc-order .zc-row{justify-content:center;margin-top:14px}
+.zc-film{display:flex;gap:0;width:max-content;margin:18px 0 0;border:2px solid var(--ink);border-left:0;border-right:0;padding:12px 0;background:repeating-linear-gradient(90deg,transparent 0 12px,var(--ink) 12px 20px,transparent 20px 28px) top/100% 7px no-repeat,repeating-linear-gradient(90deg,transparent 0 12px,var(--ink) 12px 20px,transparent 20px 28px) bottom/100% 7px no-repeat}
+.zc-film div{display:grid;place-items:center;width:130px;height:96px;margin:0 6px;border:2px solid var(--ink);background:#fff;color:var(--ink)}
+.zc-film div svg{width:52px;height:52px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.zc-film div em{font:600 15px/1 var(--serif);font-style:normal}
+.zc-filmwrap{overflow:hidden;margin:0 -16px;padding:0 16px}
+
+/* дерево */
+.zc-tree{display:grid;gap:14px}
+@media (min-width:900px){.zc-tree{grid-template-columns:1fr 1fr;align-items:center}}
+.zc-tree svg{width:100%;height:auto;overflow:visible}
+.zc-tree .edge{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+.zc-tree .node rect{fill:#fff;stroke:var(--ink);stroke-width:2}
+.zc-tree .node text{font:600 17px var(--serif);fill:var(--text);text-anchor:middle}
+.zc-tree .leaf rect{fill:var(--ink-faint)}
+.zc-tree .leaf.is-hit rect{fill:var(--ink);}
+.zc-tree .leaf.is-hit text{fill:#fff}
+.zc-tree .yn{font:700 19px var(--hand);fill:var(--ink);letter-spacing:.05em}
+.zc-tree [role="button"]{cursor:pointer}
+.zc-tree__out{min-height:2.4em;font-size:1.05em}
+
+/* мой / твой */
+.zc-mine{display:grid;gap:12px;padding:clamp(16px,4vw,28px);border:2px solid var(--ink);border-radius:20px 14px 24px 12px}
+.zc-mine__out{font-size:clamp(22px,6.6vw,40px);text-align:center;min-height:1.4em}
+.zc-mine__ru{text-align:center;color:var(--muted)}
+.zc-mine .zc-row{justify-content:center}
+
+/* блок */
+.zc-block{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:16px 20px;padding:36px 0 8px}
+.zc-block .zc-pol{--s:clamp(76px,21vw,118px)}
+.zc-tape{position:absolute;top:-10px;left:50%;width:70px;height:22px;translate:-50% 0;background:#f2e6b8cc;rotate:-4deg}
+.zc-pair{position:relative;display:flex;gap:4px;padding:6px;border:2px dashed var(--ink);border-radius:8px}
+.zc-strike{position:relative;color:var(--muted)}
+.zc-strike svg{position:absolute;left:-4px;right:-4px;top:30%;width:calc(100% + 8px);height:40%;stroke:var(--ink);stroke-width:3;fill:none;overflow:visible}
+
+/* бутерброд */
+.zc-sand{display:grid;justify-items:center;gap:4px;padding:16px 0}
+.zc-sand span{display:block;min-width:200px;padding:8px 18px;border:2px solid currentColor;border-radius:999px 980px 999px 940px;text-align:center;font:600 clamp(22px,6vw,32px)/1.1 var(--serif);background:#fff}
+.zc-sand .b{color:var(--text)}
+.zc-sand .g{background:var(--gen-soft)}.zc-sand .p{background:var(--pos-soft)}
+.zc-mnemo{display:grid;gap:18px;align-items:center}
+@media (min-width:860px){.zc-mnemo{grid-template-columns:1fr 1fr}}
+
+/* сцена */
+.zc-scenewrap{overflow-x:auto;overscroll-behavior-x:contain;margin:0 -16px;padding:0 16px 6px}
+@media (min-width:720px){.zc-scenewrap{overflow:visible;margin:0;padding:0}}
+.zc-scene{position:relative;width:100%;min-width:640px;aspect-ratio:800/440;border:2px solid var(--ink);border-radius:4px;background:linear-gradient(#fff 0 66%,#eef2fa 66%);overflow:hidden}
+.zc-scene svg{position:absolute;inset:0;width:100%;height:100%}
+.zc-scene svg *{vector-effect:non-scaling-stroke}
+.zc-scene .ln{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.zc-hot{position:absolute;display:grid;place-items:center;width:44px;height:44px;margin:-22px 0 0 -22px;border:2px solid var(--ink);border-radius:50%;background:#fff;color:var(--ink);cursor:pointer;font:700 22px/1 var(--hand)}
+.zc-hot.is-on{background:var(--ink);color:#fff}
+.zc-hot::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:1.5px dashed var(--ink);animation:zcSpin 9s linear infinite}
+@keyframes zcSpin{to{rotate:360deg}}
+.zc-bubble{min-height:5.2em;margin-top:12px;padding:12px 16px;border:2px solid var(--ink);border-radius:16px 16px 16px 4px;background:#fff}
+.zc-bubble .zc-w{font-size:clamp(20px,5.6vw,28px);white-space:normal}
+
+/* галерея */
+.zc-gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(160px,44vw),1fr));gap:18px 12px}
+.zc-card{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:206px;padding:10px 8px 12px;border:0;background:#fff;box-shadow:0 1px 0 #0001,0 14px 26px -18px #0008;cursor:pointer;text-align:center;rotate:var(--r,0deg)}
+.zc-card .zc-pol__ph{--s:100%;width:100%;aspect-ratio:4/3}
+.zc-card .zc-pol__ph svg{width:46%;height:60%}
+.zc-card__tr{font:600 16px/1.25 var(--serif)}
+.zc-card__back{display:none;width:100%;font-size:15px;line-height:1.35}
+.zc-card.is-flip .zc-card__back{display:block}.zc-card.is-flip .zc-card__front{display:none}
+.zc-card__back .zc-w{white-space:normal;flex-wrap:wrap;justify-content:center;font-size:16px}
+
+/* лаборатория */
+.zc-lab{padding:clamp(14px,4vw,28px);border:2px solid var(--ink);border-radius:8px;background:#fff}
+.zc-tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:14px}
+@media (min-width:700px){.zc-tabs{grid-template-columns:repeat(4,1fr)}}
+.zc-tab{min-height:48px;border:1.5px solid var(--ink);border-radius:6px;background:#fff;cursor:pointer;font:700 21px/1 var(--hand);letter-spacing:.06em;color:var(--ink)}
+.zc-tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.zc-pane{display:none}.zc-pane.is-on{display:block}
+.zc-slot{margin:0 0 10px}
+.zc-slot>em{display:block;margin-bottom:4px;font:700 18px/1 var(--hand);letter-spacing:.08em;color:var(--muted);font-style:normal}
+.zc-chips{display:flex;flex-wrap:wrap;gap:6px}
+.zc-chip{min-height:44px;padding:4px 12px;border:1.5px solid #c9cde0;border-radius:999px;background:#fff;cursor:pointer;font:600 17px/1.2 var(--serif)}
+.zc-chip[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:#fff}
+.zc-out{margin:14px 0 0;padding:16px;border-radius:6px;background:var(--side);text-align:center}
+.zc-out__tr{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;font-size:clamp(20px,5.8vw,32px)}
+.zc-out__ru{margin:8px 0 6px;color:var(--muted)}
+.zc-why{margin:10px 0 0;padding:0;list-style:none;font-size:16px;text-align:left}
+.zc-why li{padding:3px 0;border-bottom:1px dotted #c9cde0}
+.zc-listen{min-height:44px;padding:6px 16px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;color:var(--ink);cursor:pointer;font:700 20px/1 var(--hand);letter-spacing:.06em}
+
+/* ловушки */
+.zc-traps{display:grid;gap:14px}
+@media (min-width:760px){.zc-traps{grid-template-columns:1fr 1fr}}
+.zc-trap{position:relative;display:block;width:100%;padding:16px 16px 14px;border:1.5px solid var(--ink);border-radius:4px;background:#fff;text-align:left;cursor:pointer}
+.zc-trap__bad{position:relative;display:inline-block;font:600 clamp(18px,4.8vw,22px)/1.3 var(--serif);color:var(--muted)}
+.zc-trap__bad svg{position:absolute;left:-4px;top:15%;width:calc(100% + 8px);height:70%;stroke:var(--ink);stroke-width:2.6;fill:none;overflow:visible}
+.zc-trap__bad svg path{stroke-dasharray:600;stroke-dashoffset:600}
+.zc-trap.is-fix .zc-trap__bad svg path{stroke-dashoffset:0}
+.zc-trap__good{display:block;margin-top:6px;font:600 clamp(18px,4.8vw,22px)/1.3 var(--serif);color:var(--ink);scale:0;transform-origin:left center;height:0}
+.zc-trap.is-fix .zc-trap__good{scale:1;height:auto}
+.zc-trap small{display:block;margin-top:6px;color:var(--muted);font-size:15px}
+.zc-trap__hint{position:absolute;right:12px;top:10px;font:700 18px/1 var(--hand);letter-spacing:.06em;color:var(--ink)}
+
+/* шпаргалка */
+.zc-poster{position:relative;padding:clamp(26px,6vw,60px) clamp(14px,4vw,48px);min-height:min(92dvh,820px);display:grid;align-content:center;gap:16px;text-align:center;box-shadow:0 18px 40px -30px #0007}
+.zc-formula{display:flex;flex-wrap:wrap;justify-content:center;align-items:baseline;gap:8px 14px;font-size:clamp(24px,7vw,48px)}
+.zc-formula .zc-w{padding:4px 10px;background:#fff;border-radius:6px}
+.zc-rules{display:grid;gap:8px;max-width:640px;margin:0 auto;padding:0;list-style:none;text-align:left}
+.zc-rules li{display:flex;gap:10px;align-items:baseline;padding:8px 12px;background:#fffffff2;border:1.5px solid var(--ink);border-radius:4px}
+.zc-rules li b{min-width:5.6em;font:700 22px/1 var(--hand);letter-spacing:.05em;color:var(--ink)}
+.zc-fall{display:flex;justify-content:center;gap:2px;font:700 clamp(40px,12vw,110px)/1 var(--hand);color:var(--ink);letter-spacing:.06em}
+.zc-fall span{display:inline-block}
+.zc-final p{font-size:1.05em}
+.zc-cap{margin:10px auto 0;max-width:46ch;text-align:center;color:var(--muted);font-size:.92em}
+.zc-final .zc-dry{font:700 clamp(22px,6vw,30px)/1.2 var(--hand);letter-spacing:.05em;color:var(--ink)}
+
+/* разделитель */
+.zc-sep{display:block;width:min(560px,90%);height:30px;margin:clamp(40px,8vw,80px) auto 0;overflow:visible}
+.zc-sep path{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+
+/* курсорное свечение */
+.zc-glow{position:fixed;left:0;top:0;z-index:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,#1c2b9e14,#1c2b9e00 62%);display:none}
+@media (hover:hover) and (pointer:fine){.zc-glow{display:block}}
+
+/* нестандартное упражнение */
+.zc-parcel{display:grid;gap:12px}
+.zc-label{position:relative;padding:14px 16px;border:2px solid var(--ink);border-radius:4px;background:repeating-linear-gradient(0deg,#fff 0 30px,#eef0fb 30px 31px)}
+.zc-label__ru{font:700 22px/1.1 var(--hand);letter-spacing:.06em;color:var(--ink)}
+.zc-label__slots{display:flex;flex-wrap:wrap;gap:8px;min-height:48px;margin-top:8px;font-size:clamp(19px,5.2vw,24px)}
+.zc-label__slots span{display:inline-flex;align-items:center;min-width:70px;min-height:40px;padding:2px 10px;border-bottom:2px dashed var(--ink)}
+.zc-photos{display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
+.zc-photo{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:96px;min-height:96px;padding:8px 8px 6px;border:0;background:#fff;box-shadow:0 10px 20px -14px #0009;cursor:pointer;font:600 19px/1.1 var(--serif)}
+.zc-photo i{display:block;width:70px;height:46px;background:var(--bg,#ccc)}
+.zc-photo[disabled]{opacity:.35;cursor:default}
+.zc-ends{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.zc-ends button{min-height:44px;padding:6px 14px;border:1.5px solid var(--ink);border-radius:999px;background:#fff;cursor:pointer;font:600 18px/1.2 var(--serif)}
+.zc-ends[hidden]{display:none}
+.zc-pstat{min-height:2.6em;color:var(--muted);font-size:16px}
+
+/* скроллбар — плёнка */
+.zc-sb{position:fixed;z-index:60;top:env(safe-area-inset-top);left:0;right:0;height:30px;pointer-events:none}
+.zc-sb__track{position:absolute;left:8px;right:8px;top:9px;height:12px;border-radius:2px;background:#fff;border:1.5px solid var(--ink);pointer-events:auto;touch-action:none;background-image:repeating-linear-gradient(90deg,transparent 0 6px,#1c2b9e33 6px 9px)}
+.zc-sb__fill{position:absolute;left:0;top:0;bottom:0;width:calc(var(--p,0)*100%);background:var(--ink);background-image:repeating-linear-gradient(90deg,transparent 0 6px,#fff6 6px 9px)}
+.zc-sb__cam{position:absolute;top:-8px;left:clamp(0px,calc(var(--p,0)*100% - 13px),calc(100% - 26px));width:26px;height:26px;padding:2px;border-radius:50%;background:#fff;stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.zc-sb__mark{position:absolute;left:calc(var(--at,0)*100%);top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;padding:0;border:0;background:none;cursor:pointer}
+.zc-sb__mark::after{content:'';position:absolute;inset:9px;background:#fff;border:1.5px solid var(--ink)}
+.zc-sb__mark.is-read::after{background:var(--clip-red);border-color:var(--clip-red)}
+@media (min-width:768px){
+  .zc-sb{left:auto;right:12px;top:50%;width:26px;height:min(62dvh,540px);translate:0 -50%}
+  .zc-sb__track{left:7px;right:auto;top:0;bottom:0;width:12px;height:auto;background-image:repeating-linear-gradient(0deg,transparent 0 6px,#1c2b9e33 6px 9px)}
+  .zc-sb__fill{right:0;bottom:auto;width:auto;height:calc(var(--p,0)*100%);background-image:repeating-linear-gradient(0deg,transparent 0 6px,#fff6 6px 9px)}
+  .zc-sb__cam{top:clamp(0px,calc(var(--p,0)*100% - 13px),calc(100% - 26px));left:-8px}
+  .zc-sb__mark{left:50%;top:calc(var(--at,0)*100%)}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.is-paused,.is-paused *{animation-play-state:paused!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-clip" viewBox="0 0 20 44"><path d="M6 6v26a4 4 0 0 0 8 0V8a3 3 0 0 0-6 0v20"/></symbol>
+    <symbol id="i-star" viewBox="0 0 48 48"><path d="M24 6l2 36M8 18l32 12M10 34l30-20M18 8l12 32"/></symbol>
+    <symbol id="i-ball" viewBox="0 0 48 48"><path d="M14 26c2-10 18-14 22-4s-10 16-18 10 0-18 12-14 8 12-2 14-14-2-6-10 14-6 10 4"/></symbol>
+    <symbol id="i-cherry" viewBox="0 0 48 48"><path d="M16 36a6 6 0 1 0 .1 0M32 34a6 6 0 1 0 .1 0M16 30C18 20 24 12 30 8M32 28c-1-8-2-14-2-20M30 8c4-2 9-1 12 2-4 2-8 2-12-2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 48 48"><path d="M4 30c10-6 22-8 36-6M31 15l10 9-11 7"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 48 48"><path d="M6 26c8-10 28-10 36 0-8 10-28 10-36 0zM24 22a4 4 0 1 0 .1 0M10 15l3 4M18 11l1 5M29 11l-1 5M38 14l-3 4"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 48 48"><path d="M24 44V24M24 24c-6-4-8-12-2-14s6 8 2 14c4-6 12-6 12 0s-8 4-12 0c2 6-2 12-6 10s0-8 6-10M24 34c-4-2-8-2-10 1"/></symbol>
+    <symbol id="i-cam" viewBox="0 0 48 48"><path d="M7 16h9l3-5h10l3 5h9v23H7zM24 31a7 7 0 1 0 .1 0M24 27a3 3 0 1 0 .1 0M35 20h3M10 13h4"/></symbol>
+    <symbol id="i-key" viewBox="0 0 48 48"><path d="M14 24a7 7 0 1 0 .1 0M21 24h21M36 24v7M41 24v5"/></symbol>
+    <symbol id="i-car" viewBox="0 0 48 48"><path d="M5 31l5-11h23l9 11v6H5zM14 37a3 3 0 1 0 .1 0M34 37a3 3 0 1 0 .1 0M12 22l2 8M23 20v10"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 48 48"><path d="M15 5h18v38H15zM21 38h6M20 10h8"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 48 48"><path d="M10 18h28l-3 23H13zM18 18v-4a6 6 0 0 1 12 0v4"/></symbol>
+    <symbol id="i-cat" viewBox="0 0 48 48"><path d="M12 41V21l4-11 6 7h4l6-7 4 11v20zM19 27h.1M29 27h.1M22 32l2 2 2-2M7 31h9M32 31h9"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 48 48"><path d="M20 8h8v12h12v8H28v12h-8V28H8v-8h12z"/></symbol>
+    <symbol id="i-gate" viewBox="0 0 48 48"><path d="M8 42V14l16-8 16 8v28M8 42h32M16 42V22h16v20M24 22v20"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 48 48"><path d="M13 22h22v19H13zM18 22v-6a6 6 0 0 1 12 0v6M24 30v5"/></symbol>
+    <symbol id="i-office" viewBox="0 0 48 48"><path d="M12 42V7h24v35M8 42h32M17 13h4M27 13h4M17 20h4M27 20h4M17 27h4M27 27h4M21 42v-7h6v7"/></symbol>
+    <symbol id="i-ferry" viewBox="0 0 48 48"><path d="M4 31h40l-6 8H10zM10 31v-8h26v8M16 23v-6h12v6M22 17v-6M2 44c6-3 10 3 16 0s10 3 16 0 8 2 12 0"/></symbol>
+    <symbol id="i-school" viewBox="0 0 48 48"><path d="M6 42V20l18-12 18 12v22zM20 42V30h8v12M24 8V2l7 2-7 2M13 24h5M30 24h5"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 48 48"><path d="M8 10h18l14 14-16 16L8 26zM15 17a2 2 0 1 0 .1 0"/></symbol>
+    <symbol id="i-door" viewBox="0 0 48 48"><path d="M14 42V7h20v35M10 42h28M29 25h.1"/></symbol>
+    <symbol id="i-face" viewBox="0 0 48 48"><path d="M24 9c-8 0-12 6-12 13s5 16 12 16 12-8 12-16-4-13-12-13zM19 22h.1M29 22h.1M20 30c2 2 6 2 8 0M13 17c4-5 18-5 22 0"/></symbol>
+    <symbol id="i-mom" viewBox="0 0 48 48"><path d="M24 14c-7 0-11 5-11 12s5 13 11 13 11-6 11-13-4-12-11-12zM24 14a5 5 0 1 0 0-10 5 5 0 0 0 0 10M19 25h.1M29 25h.1M21 32h6"/></symbol>
+    <symbol id="i-man" viewBox="0 0 48 48"><path d="M24 7a7 7 0 1 0 .1 0M12 42c0-10 6-17 12-17s12 7 12 17"/></symbol>
+    <symbol id="i-jacket" viewBox="0 0 48 48"><path d="M16 8l8 6 8-6 9 6-4 9-5-3v22H16V20l-5 3-4-9zM24 14v28M20 24h1M20 31h1"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 48 48"><path d="M16 13h16l-3 23H19zM13 40h22M19 20h10"/></symbol>
+    <symbol id="i-bus" viewBox="0 0 48 48"><path d="M9 9h30v27H9zM9 23h30M14 36v5M34 36v5M14 30h.1M34 30h.1"/></symbol>
+    <symbol id="i-house" viewBox="0 0 48 48"><path d="M7 22L24 8l17 14M11 20v21h26V20M20 41V29h8v12"/></symbol>
+    <symbol id="i-film" viewBox="0 0 48 48"><path d="M5 12h38v24H5zM5 16h38M5 32h38M10 12v4M16 12v4M22 12v4M28 12v4M34 12v4M10 32v4M16 32v4M22 32v4M28 32v4M34 32v4"/></symbol>
+    <symbol id="i-scr" viewBox="0 0 120 30"><path d="M4 18c10-8 18 8 28 0s16-10 26 0 18 6 28-2 18 4 30-2"/></symbol>
+  </defs>
+</svg>
+<div class="zc-glow" aria-hidden="true"></div>
+<main>
+
+<section data-section="hero" data-words="28" class="zc-hero">
+  <nav class="zc-nav" aria-label="Разделы урока" data-ui>
+    <button type="button" data-goto="middle"><span>правило</span></button>
+    <button type="button" data-goto="lab"><span>лаборатория</span></button>
+    <button type="button" data-goto="cheat"><span>шпаргалка</span></button>
+    <button type="button" data-goto="practice" class="is-circ"><svg viewBox="0 0 120 40" preserveAspectRatio="none" aria-hidden="true"><path d="M8 22C6 8 60 2 100 8s16 26-34 28S10 34 14 16"/></svg><span>практика</span></button>
+  </nav>
+  <div class="zc-sheet zc-grid">
+    <svg class="zc-doodle" style="left:6%;top:8%" aria-hidden="true"><use href="#i-star"/></svg>
+    <svg class="zc-doodle" style="right:7%;top:6%" aria-hidden="true"><use href="#i-eye"/></svg>
+    <svg class="zc-doodle" style="left:4%;bottom:16%" aria-hidden="true"><use href="#i-flower"/></svg>
+    <svg class="zc-doodle" style="right:5%;bottom:12%" aria-hidden="true"><use href="#i-ball"/></svg>
+    <span class="zc-kick" data-ui>A1 · Стамбул · A1-34</span>
+    <h1 class="zc-split">Цепочка изафетов</h1>
+    <p class="zc-sub" lang="tr">zincirleme ad tamlaması</p>
+    <svg class="zc-ul" style="margin:0 auto" viewBox="0 0 260 14" aria-hidden="true"><path d="M3 9C60 3 120 13 180 6s60 2 76 1"/></svg>
+    <p class="zc-lead">Вещь принадлежит человеку. Человек принадлежит другому человеку. Турецкий склеивает их скрепками. Одна фраза — и курьер у нужной двери.</p>
+    <div class="zc-demo" data-demo>
+      <div class="zc-pol"><svg class="zc-clip" aria-hidden="true"><use href="#i-clip"/></svg><div class="zc-pol__ph ph-amber"><svg aria-hidden="true"><use href="#i-face"/></svg></div><span class="zc-pol__cap" lang="tr">Ayşe<b class="g" data-end="'nin"></b></span></div>
+      <div class="zc-pol"><svg class="zc-clip zc-clip--y" aria-hidden="true"><use href="#i-clip"/></svg><div class="zc-pol__ph ph-rose"><svg aria-hidden="true"><use href="#i-mom"/></svg></div><span class="zc-pol__cap" lang="tr">anne<b class="p" data-end="si"></b><b class="g" data-end="nin"></b></span></div>
+      <div class="zc-pol"><svg class="zc-clip" aria-hidden="true"><use href="#i-clip"/></svg><div class="zc-pol__ph ph-night"><svg aria-hidden="true"><use href="#i-office"/></svg></div><span class="zc-pol__cap" lang="tr">ofis<b class="p" data-end="i"></b><b class="g" data-end="nin"></b></span></div>
+      <div class="zc-pol"><div class="zc-pol__ph ph-bw"><svg aria-hidden="true"><use href="#i-door"/></svg></div><span class="zc-pol__cap" lang="tr">kapı<b class="p" data-end="sı"></b></span></div>
+    </div>
+    <div class="zc-row" style="justify-content:center" data-ui>
+      <button type="button" class="zc-btn zc-btn--fill" data-demo-go>Склеить</button>
+      <button type="button" class="zc-btn" data-demo-reset>Расклеить</button>
+    </div>
+    <p class="zc-cap">Нажми «Склеить». Красные хвосты — хозяева. Жёлтые — чьё это.</p>
+    <p class="zc-demo-out" data-demo-out><a-say>Ayşe'nin annesinin ofisinin kapısı</a-say><span class="zc-tr" data-ui>дверь офиса мамы Айше</span></p>
+    <div class="zc-count" data-ui>
+      <div><span data-count="4">4</span><small>слова</small></div>
+      <div><span data-count="3">3</span><small>скрепки</small></div>
+      <div><span data-count="1">1</span><small>фраза</small></div>
+    </div>
+  </div>
+  <div class="zc-collage" aria-hidden="true">
+    <div class="zc-pol" data-par="-60" style="left:2%;top:10%;--r:-7deg"><div class="zc-pol__ph ph-sea"><svg><use href="#i-ferry"/></svg></div></div>
+    <div class="zc-pol" data-par="40" style="left:28%;top:34%;--r:4deg"><div class="zc-pol__ph ph-lamp"><svg><use href="#i-cup"/></svg></div></div>
+    <div class="zc-pol" data-par="-30" style="left:54%;top:4%;--r:-3deg"><div class="zc-pol__ph ph-night"><svg><use href="#i-bus"/></svg></div></div>
+    <div class="zc-pol" data-par="70" style="left:76%;top:30%;--r:6deg"><div class="zc-pol__ph ph-amber"><svg><use href="#i-cat"/></svg></div></div>
+  </div>
+</section>
+
+<svg class="zc-sep" viewBox="0 0 560 30" aria-hidden="true"><path d="M4 18C80 4 140 28 220 14s140-6 200 4 100-8 132-6"/></svg>
+
+<section data-section="story" data-words="68">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>сцена 1</span>
+    <h2 class="zc-split">Курьер на линии</h2>
+    <svg class="zc-ul" viewBox="0 0 260 14" aria-hidden="true"><path d="M3 8C70 2 130 12 256 6"/></svg>
+  </div>
+  <div class="zc-story">
+    <div>
+      <div class="zc-phone">
+        <div class="zc-phone__top"></div>
+        <div class="zc-chat" data-chat>
+          <div class="zc-msg zc-msg--sys">входящий звонок</div>
+          <div class="zc-msg"><b lang="tr" data-say="Merhaba, kargo var!">Merhaba, kargo var!</b><span class="zc-tr" data-ui>Здравствуйте, у меня посылка!</span></div>
+          <div class="zc-msg"><b lang="tr" data-say="Kimin kargosu?">Kimin kargosu?</b><span class="zc-tr" data-ui>Чья посылка?</span></div>
+          <div class="zc-msg zc-msg--me"><span class="zc-voice" aria-hidden="true"><svg class="zc-ico"><use href="#i-phone"/></svg><i style="height:8px"></i><i style="height:16px"></i><i style="height:11px"></i><i style="height:20px"></i><i style="height:9px"></i><i style="height:14px"></i></span><b lang="tr" data-say="Ayşe. Anne. Ofis. Kapı.">Ayşe. Anne. Ofis. Kapı.</b></div>
+          <div class="zc-msg"><b lang="tr" data-say="Pardon?">Pardon?</b></div>
+        </div>
+      </div>
+      <p class="zc-cap">Это не диалог. Это лотерея.</p>
+      <svg class="zc-cord" viewBox="0 0 520 90" aria-hidden="true"><path d="M260 2c-20 30 30 40 10 60s-40-20-60 0 10 30-20 26-40-30-70-10-20 20-60 10S20 70 6 60"/></svg>
+    </div>
+    <div class="zc-lines zc-in">
+      <p>Ты на Кадыкёе. Ждёшь посылку для Айше. Звонит курьер.</p>
+      <p>Говоришь, Айше. Мама. Офис. Дверь. Курьер молчит. Говорит, <span lang="tr">pardon</span>?</p>
+      <p>Говоришь то же самое. Громче. Как будто громкость лечит грамматику.</p>
+      <p>Курьер вздыхает. Так вздыхают люди, которые видели всё. Даже Босфор в пробке.</p>
+      <p>Айше ждёт. Посылка ждёт. Курьер тоже ждёт, но уже без энтузиазма.</p>
+      <p>Четыре слова есть. Скрепок нет.</p>
+      <p class="zc-note">Что скажешь курьеру?</p>
+      <div class="zc-pick" data-pick>
+        <button type="button" class="zc-opt" lang="tr" data-v="0">Ayşe anne ofis kapı.</button>
+        <button type="button" class="zc-opt" lang="tr" data-v="1">Ayşe'nin annesinin ofisinin kapısı.</button>
+        <button type="button" class="zc-opt" lang="tr" data-v="2">Kapısı ofisinin annesinin Ayşe'nin.</button>
+      </div>
+      <p class="zc-fb" data-pick-fb data-ui></p>
+    </div>
+  </div>
+</section>
+
+<section data-section="guess" data-words="28">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>сначала угадай</span>
+    <h2 class="zc-split">Один хвост или два?</h2>
+    <p>Мама Али — <a-say>Ali'nin annesi</a-say>. Это ты уже умеешь. Теперь у мамы куртка. Что прилипнет к <span lang="tr">anne</span>?</p>
+    <div class="zc-pol" style="--r:-3deg;margin:10px 0 18px"><div class="zc-pol__ph ph-rose" style="--s:110px"><svg aria-hidden="true"><use href="#i-jacket"/></svg></div><span class="zc-pol__cap" lang="tr">Ali'nin anne___ ceketi</span></div>
+    <div class="zc-q__o" data-guess>
+      <button type="button" lang="tr" data-v="si">-si</button>
+      <button type="button" lang="tr" data-v="nin">-nin</button>
+      <button type="button" lang="tr" data-v="sinin">-sinin</button>
+    </div>
+    <p class="zc-fb" data-guess-fb data-ui></p>
+    <p class="zc-cap" style="text-align:left;margin-left:0">Ошибиться тут не страшно. Это разминка для мозга, а не экзамен.</p>
+  </div>
+</section>
+
+<section data-section="link" data-words="39">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>шаг 1</span>
+    <h2 class="zc-split">Одна скрепка, два конца</h2>
+    <svg class="zc-ul" viewBox="0 0 260 14" aria-hidden="true"><path d="M3 9C60 3 120 13 180 6s60 2 76 1"/></svg>
+    <p>Вспомни обычный изафет. Хозяин получает <b class="g">-nin</b>. Вещь получает <b class="p">-sı</b>.</p>
+    <p>Это скрепка. Один конец цепляет хозяина, другой — вещь. По отдельности концы не работают.</p>
+  </div>
+  <div class="zc-link is-off" data-link>
+    <svg class="zc-bigclip" viewBox="0 0 150 60" aria-hidden="true"><path d="M10 50V18a14 14 0 0 1 28 0v26M38 44c0-20 74-20 74 0M112 44V16a12 12 0 0 1 24 0v34"/></svg>
+    <div class="zc-pol" style="--r:-4deg"><span class="zc-endtag g" lang="tr">-nin</span><div class="zc-pol__ph ph-amber"><svg aria-hidden="true"><use href="#i-face"/></svg></div><span class="zc-pol__cap" lang="tr">Ayşe'<span class="g">nin</span></span></div>
+    <div class="zc-pol" style="--r:4deg"><span class="zc-endtag p" lang="tr">-si</span><div class="zc-pol__ph ph-rose"><svg aria-hidden="true"><use href="#i-mom"/></svg></div><span class="zc-pol__cap" lang="tr">anne<span class="p">si</span></span></div>
+  </div>
+  <div class="zc-in">
+    <p class="zc-cap">Красный конец держит хозяина. Жёлтый держит вещь. Без <span lang="tr">-nin</span> хозяин теряется. Без <span lang="tr">-sı</span> вещь ничья.</p>
+    <div class="zc-row" style="justify-content:center" data-ui>
+      <button type="button" class="zc-btn zc-btn--fill" data-link-go>Скрепить</button>
+      <button type="button" class="zc-btn" data-link-who>Кто хозяин?</button>
+    </div>
+    <div class="zc-ex">
+      <div><a-say>Ayşe'nin annesi</a-say><span class="zc-tr" data-ui>мама Айше</span></div>
+      <div><a-say>Murat'ın arabası</a-say><span class="zc-tr" data-ui>машина Мурата</span></div>
+    </div>
+    <div class="zc-q" data-q>
+      <p class="zc-q__t"><svg class="zc-ico" aria-hidden="true"><use href="#i-arrow"/></svg>Где хозяин?</p>
+      <p lang="tr" class="tr" style="margin:0 0 8px">Murat'ın arabası</p>
+      <div class="zc-q__o"><button type="button" lang="tr" data-ok>Murat'ın</button><button type="button" lang="tr">arabası</button></div>
+      <p class="zc-q__fb" data-ui data-ok-t="Да. У хозяина всегда -ın. Мурат владеет машиной." data-no-t="Наоборот. arabası — вещь, у неё -sı. Хозяин — с -ın."></p>
+    </div>
+  </div>
+</section>
+
+<section data-section="middle" data-words="55">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>шаг 2 · главное</span>
+    <h2 class="zc-split">Середина держит две скрепки</h2>
+    <p>Добавь третье слово: <a-say>Ali'nin annesinin ceketi</a-say><span class="zc-tr" data-ui>куртка мамы Али</span></p>
+    <p>Мама — вещь Али. И одновременно хозяйка куртки. Поэтому у неё два хвоста: сначала <b class="p">-si</b>, потом <b class="g">-nin</b>.</p>
+  </div>
+  <div class="zc-steps" data-steps>
+    <div class="zc-steps__row" data-steps-row lang="tr"></div>
+    <div class="zc-pad" aria-hidden="true"><span class="p" data-pad="si">-si</span><span class="g" data-pad="nin">-nin</span><span class="p" data-pad="i">-i</span></div>
+    <p class="zc-cap">Хвосты лежат на подставке. Смотри, какой куда полетит. Порядок железный: сначала <span lang="tr">-si</span>, потом <span lang="tr">-nin</span>.</p>
+    <p class="zc-steps__cap" data-steps-cap>
+      <span class="is-on">Али и мама. Обычный изафет.</span>
+      <span>Пришла куртка. Мама стала хозяйкой.</span>
+      <span>К маме прилипает второй хвост.</span>
+      <span>Куртка получает свой хвост. Готово.</span>
+    </p>
+    <div class="zc-dots" data-dots data-ui>
+      <button type="button" class="is-on" aria-label="Шаг 1">1</button><button type="button" aria-label="Шаг 2">2</button><button type="button" aria-label="Шаг 3">3</button><button type="button" aria-label="Шаг 4">4</button>
+    </div>
+    <div class="zc-row" style="justify-content:center;margin-top:8px" data-ui>
+      <button type="button" class="zc-btn" data-step-prev aria-label="Назад">←</button>
+      <button type="button" class="zc-btn zc-btn--fill" data-step-next>дальше →</button>
+      <button type="button" class="zc-btn" data-step-auto>▶ сам</button>
+      <button type="button" class="zc-btn" data-step-again>↻ ещё раз</button>
+    </div>
+  </div>
+  <div class="zc-q" data-q>
+    <p class="zc-q__t"><svg class="zc-ico" aria-hidden="true"><use href="#i-arrow"/></svg>Склей середину</p>
+    <p lang="tr" class="tr" style="margin:0 0 8px">annesi + nin = ?</p>
+    <div class="zc-q__o"><button type="button" lang="tr">annenin</button><button type="button" lang="tr" data-ok>annesinin</button><button type="button" lang="tr">annesin</button></div>
+    <p class="zc-q__fb" data-ui data-ok-t="Точно. Сначала -si, сверху -nin. Ничего не выпало." data-no-t="Мимо. В середине живут оба хвоста: anne + si + nin."></p>
+  </div>
+</section>
+
+<section data-section="forms" data-words="37">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>шаг 3</span>
+    <h2 class="zc-split">Хвост середины: восемь костюмов</h2>
+    <p>Гармония работает как обычно. Командует последняя гласная. После гласной первым идёт <b class="p">s</b>, а <b class="g">n</b> стоит всегда.</p>
+    <p class="zc-note">Нажми на плитку — услышишь и увидишь разбор.</p>
+  </div>
+  <div class="zc-bento" data-bento></div>
+  <p class="zc-cap">Восемь плиток — вся таблица. Больше вариантов турецкий не придумал.</p>
+  <div class="zc-q" data-q>
+    <p class="zc-q__t"><svg class="zc-ico" aria-hidden="true"><use href="#i-arrow"/></svg>Телефон в середине</p>
+    <p lang="tr" class="tr" style="margin:0 0 8px">Ali'nin telefon___ ekranı</p>
+    <div class="zc-q__o"><button type="button" lang="tr" data-ok>-unun</button><button type="button" lang="tr">-ının</button><button type="button" lang="tr">-usunun</button></div>
+    <p class="zc-q__fb" data-ui data-ok-t="Верно: telefonunun. Гласная o зовёт u, после согласной s не нужен." data-no-t="Смотри на o в telefon: значит u. После согласной s не ставим: telefonunun."></p>
+  </div>
+</section>
+
+<section data-section="order" data-words="37">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>русский ↔ турецкий</span>
+    <h2 class="zc-split">Русский читает с конца</h2>
+    <p>Ключ машины Мурата. Русский начинает с ключа. Турецкий начинает с Мурата.</p>
+    <p>Как английский: <span lang="tr">Murat's car's key</span>. Хозяин впереди, вещь в самом конце.</p>
+  </div>
+  <div class="zc-order">
+    <div class="zc-order__line" data-order lang="tr"></div>
+    <div class="zc-row" data-ui>
+      <button type="button" class="zc-btn" data-order-set="ru" aria-pressed="true">по-русски</button>
+      <button type="button" class="zc-btn" data-order-set="tr" aria-pressed="false">по-турецки</button>
+      <button type="button" class="zc-listen" data-say="Murat'ın arabasının anahtarı">▶ слушать</button>
+    </div>
+    <div class="zc-filmwrap" aria-hidden="true">
+      <div class="zc-film" data-film>
+        <div><svg><use href="#i-man"/></svg><em lang="tr">Murat'ın</em></div>
+        <div><svg><use href="#i-car"/></svg><em lang="tr">arabasının</em></div>
+        <div><svg><use href="#i-key"/></svg><em lang="tr">anahtarı</em></div>
+        <div><svg><use href="#i-face"/></svg><em lang="tr">Ayşe'nin</em></div>
+        <div><svg><use href="#i-mom"/></svg><em lang="tr">annesinin</em></div>
+        <div><svg><use href="#i-office"/></svg><em lang="tr">ofisi</em></div>
+      </div>
+    </div>
+    <p class="zc-cap">Плёнка крутится слева направо. Как турецкая фраза: от человека к ключу.</p>
+  </div>
+  <div class="zc-q" data-q>
+    <p class="zc-q__t"><svg class="zc-ico" aria-hidden="true"><use href="#i-arrow"/></svg>С чего начнёшь?</p>
+    <p style="margin:0 0 8px" data-ui>дом друга Элиф</p>
+    <div class="zc-q__o"><button type="button" lang="tr">evi</button><button type="button" lang="tr" data-ok>Elif'in</button><button type="button" lang="tr">arkadaşının</button></div>
+    <p class="zc-q__fb" data-ui data-ok-t="Да. Сначала хозяйка: Elif'in arkadaşının evi." data-no-t="Начинай с хозяйки. Elif'in arkadaşının evi."></p>
+  </div>
+</section>
+
+<section data-section="algo" data-words="39">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>алгоритм</span>
+    <h2 class="zc-split">Два вопроса к каждому слову</h2>
+    <p>Бери слово из цепочки. Задай вопросы по порядку. Первое «да» — это ответ.</p>
+  </div>
+  <div class="zc-tree">
+    <svg viewBox="0 0 420 380" role="img" aria-label="Дерево: первое слово, последнее слово, середина" data-tree>
+      <path class="edge" d="M210 46V82"/>
+      <path class="edge" d="M210 118C160 140 100 150 90 172"/>
+      <path class="edge" d="M210 118C250 140 290 150 300 172"/>
+      <path class="edge" d="M300 208C280 240 220 260 200 288"/>
+      <path class="edge" d="M300 208C320 240 340 260 350 288"/>
+      <path id="zc-ra" d="M210 30V100C160 140 100 150 90 190" fill="none" stroke="none"/>
+      <path id="zc-rb" d="M210 30V100C250 140 290 150 300 190C280 240 220 260 200 306" fill="none" stroke="none"/>
+      <path id="zc-rc" d="M210 30V100C250 140 290 150 300 190C320 240 340 260 350 306" fill="none" stroke="none"/>
+      <text class="yn" x="122" y="146">да</text><text class="yn" x="268" y="146">нет</text>
+      <text class="yn" x="214" y="262">да</text><text class="yn" x="332" y="262">нет</text>
+      <g class="node"><rect x="150" y="12" width="120" height="34" rx="17"/><text x="210" y="35" data-ui>слово</text></g>
+      <g class="node"><rect x="130" y="82" width="160" height="36" rx="6"/><text x="210" y="106">Оно первое?</text></g>
+      <g class="node leaf" data-leaf="a" role="button" tabindex="0" aria-label="Первое слово: только -nin"><rect x="20" y="172" width="140" height="36" rx="6"/><text x="90" y="196">только -nin</text></g>
+      <g class="node"><rect x="210" y="172" width="180" height="36" rx="6"/><text x="300" y="196">Оно последнее?</text></g>
+      <g class="node leaf" data-leaf="b" role="button" tabindex="0" aria-label="Последнее слово: только -sı"><rect x="130" y="288" width="140" height="36" rx="6"/><text x="200" y="312">только -sı</text></g>
+      <g class="node leaf" data-leaf="c" role="button" tabindex="0" aria-label="Середина: -sı и -nin"><rect x="284" y="288" width="132" height="36" rx="6"/><text x="350" y="312">-sı + -nin</text></g>
+      <circle r="9" fill="#c8282e" cx="210" cy="30" data-dot/>
+    </svg>
+    <div>
+      <p class="zc-note">Выбери слово из <span lang="tr" class="tr">Ayşe'nin annesinin ofisinin kapısı</span></p>
+      <div class="zc-chips" data-tree-chips>
+        <button type="button" class="zc-chip" lang="tr" data-route="a" data-w="Ayşe'nin">Ayşe</button>
+        <button type="button" class="zc-chip" lang="tr" data-route="c" data-w="annesinin">anne</button>
+        <button type="button" class="zc-chip" lang="tr" data-route="c" data-w="ofisinin">ofis</button>
+        <button type="button" class="zc-chip" lang="tr" data-route="b" data-w="kapısı">kapı</button>
+      </div>
+      <p class="zc-tree__out" data-tree-out data-ui></p>
+      <p class="zc-cap" style="text-align:left;margin-left:0">Вопросов всего два. Третьего не бывает. Середина — всё, что не край.</p>
+    </div>
+  </div>
+</section>
+
+<section data-section="mine" data-words="37">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>местоимения</span>
+    <h2 class="zc-split">Моя мама, твоя мама</h2>
+    <p>Хозяином бывает местоимение. Тогда второе слово берёт свой хвост: <b class="p">-m</b>, <b class="p">-n</b> или <b class="p">-sı</b>. А <b class="g">-nin</b> встаёт после него.</p>
+    <p><span lang="tr">benim → annem → annemin</span>. Мама — моя. И она хозяйка.</p>
+  </div>
+  <div class="zc-mine zc-in">
+    <div class="zc-row" data-mine data-ui>
+      <button type="button" class="zc-btn" lang="tr" data-p="benim" aria-pressed="true">benim</button>
+      <button type="button" class="zc-btn" lang="tr" data-p="senin" aria-pressed="false">senin</button>
+      <button type="button" class="zc-btn" lang="tr" data-p="onun" aria-pressed="false">onun</button>
+    </div>
+    <div class="zc-mine__out" data-mine-out lang="tr"></div>
+    <div class="zc-mine__ru" data-mine-ru data-ui></div>
+    <div class="zc-row" style="justify-content:center" data-ui><button type="button" class="zc-listen" data-mine-say>▶ слушать</button></div>
+    <p class="zc-cap">Местоимение хвоста не получает. Оно и так готовое. Нажимай кнопки и смотри на маму.</p>
+  </div>
+  <div class="zc-in zc-ex">
+    <div><a-say>benim arkadaşımın evi</a-say><span class="zc-tr" data-ui>дом моего друга</span></div>
+    <div><a-say>senin babanın ofisi</a-say><span class="zc-tr" data-ui>офис твоего папы</span></div>
+  </div>
+</section>
+
+<section data-section="block" data-words="42">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>неопределённый изафет внутри</span>
+    <h2 class="zc-split">Блок из двух слов</h2>
+    <p><a-say>telefon numarası</a-say><span class="zc-tr" data-ui>номер телефона</span> Это неопределённый изафет. В цепочке он ведёт себя как одно слово.</p>
+    <p>Хвост <b class="p">-sı</b> у блока уже есть. Второй не нужен. В середине блок просто получает <b class="g">-nın</b>.</p>
+  </div>
+  <div class="zc-block" data-block>
+    <div class="zc-pol" style="--r:-5deg"><div class="zc-pol__ph ph-amber"><svg aria-hidden="true"><use href="#i-face"/></svg></div><span class="zc-pol__cap" lang="tr">Elif'<span class="g">in</span></span></div>
+    <div class="zc-pair"><span class="zc-tape"></span>
+      <div class="zc-pol" style="--r:2deg"><div class="zc-pol__ph ph-night"><svg aria-hidden="true"><use href="#i-phone"/></svg></div><span class="zc-pol__cap" lang="tr">telefon</span></div>
+      <div class="zc-pol" style="--r:-2deg"><div class="zc-pol__ph ph-bw"><svg aria-hidden="true"><use href="#i-tag"/></svg></div><span class="zc-pol__cap" lang="tr">numara<span class="p">sı</span><span class="zc-strike" data-extra hidden>sı<svg viewBox="0 0 40 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 8C10 2 20 12 40 3"/></svg></span></span></div>
+    </div>
+  </div>
+  <div class="zc-in">
+    <p class="zc-cap">Скотч на фото — это и есть блок. Два слова, один хвост.</p>
+    <div class="zc-row" style="justify-content:center" data-ui>
+      <button type="button" class="zc-btn" data-block-extra>А если второй -sı?</button>
+      <button type="button" class="zc-btn zc-btn--fill" data-block-shake>Склеить блок</button>
+    </div>
+    <div class="zc-ex">
+      <div><a-say>Elif'in telefon numarası</a-say><span class="zc-tr" data-ui>номер телефона Элиф</span></div>
+      <div><a-say>otobüs durağının adı</a-say><span class="zc-tr" data-ui>название автобусной остановки</span></div>
+      <div><a-say>çay bahçesinin kapısı</a-say><span class="zc-tr" data-ui>вход в чайный сад</span></div>
+    </div>
+    <div class="zc-q" data-q>
+      <p class="zc-q__t"><svg class="zc-ico" aria-hidden="true"><use href="#i-arrow"/></svg>Учебник турецкого Али</p>
+      <div class="zc-q__o"><button type="button" lang="tr" data-ok>Ali'nin Türkçe kitabı</button><button type="button" lang="tr">Ali'nin Türkçe kitabısı</button></div>
+      <p class="zc-q__fb" data-ui data-ok-t="Да. У блока хвост уже есть. Второй — лишний." data-no-t="Двойной хвост не бывает. Türkçe kitabı уже с -ı."></p>
+    </div>
+  </div>
+</section>
+
+<section data-section="mnemo" data-words="28">
+  <div class="zc-mnemo">
+    <div class="zc-in">
+      <span class="zc-kick" data-ui>запоминалка</span>
+      <h2 class="zc-split">Бутерброд в середине</h2>
+      <p>Края худые: по одному хвосту. Середина — бутерброд. Внизу слово, сверху <b class="p">-sı</b>, ещё выше <b class="g">-nın</b>.</p>
+      <p>Сколько бы звеньев ни было, середина всегда толще краёв. Края худые. Середина сытая.</p>
+      <button type="button" class="zc-btn zc-btn--fill" data-sand-go data-ui>Собрать бутерброд</button>
+    </div>
+    <div class="zc-sand" data-sand lang="tr">
+      <span class="g" data-say="arabasının">nın</span>
+      <span class="p">sı</span>
+      <span class="b">araba</span>
+      <svg class="zc-ico" style="width:60px;height:60px;color:var(--ink)" aria-hidden="true"><use href="#i-cherry"/></svg>
+    </div>
+  </div>
+</section>
+
+<section data-section="scene" data-words="24">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>сцена 2 · Кадыкёй</span>
+    <h2 class="zc-split">Вечер у пристани</h2>
+    <p>Паром, аптека, остановка. Нажми на место — услышишь цепочку. Город говорит изафетами. Даже паром.</p>
+  </div>
+  <div class="zc-scenewrap"><div class="zc-scene" data-scene>
+    <svg viewBox="0 0 800 440" aria-hidden="true">
+      <path class="ln" d="M0 292h800"/>
+      <path class="ln" d="M20 292V120h90v172M36 140h16M70 140h16M36 170h16M70 170h16M36 200h16M70 200h16M55 292v-40h22v40"/>
+      <path class="ln" d="M130 292V170h100v122M150 210h60M170 190h20v-12h-20zM180 170v-14M168 230h8v-8h8v8h8v8h-8v8h-8v-8h-8z"/>
+      <path class="ln" d="M250 292V150l55-36 55 36v142M290 292v-40h30v40M305 114V84l18 6-18 6M270 180h20M320 180h20"/>
+      <path class="ln" d="M390 292c0-30 10-60 40-60s40 30 40 60M430 232v-40M405 210c-10-30 20-50 25-20M455 212c10-30-15-48-25-22M400 292v-24h14l-2 24M450 292v-24h14l-2 24"/>
+      <path class="ln" d="M500 292V196M500 196h60v30h-60M512 208h36"/>
+      <path class="ln" data-ferry d="M590 330h170l-22 24H612zM610 330v-24h118v24M640 306v-18h50v18M662 288v-16"/>
+      <path class="ln" d="M0 360c40-8 60 8 100 0s60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0M0 400c40-8 60 8 100 0s60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0 60 8 100 0"/>
+      <path class="ln" data-cloud d="M560 70c0-20 30-24 36-8 6-18 40-12 36 8 18 0 18 22 0 22h-66c-16 0-18-22-6-22z"/>
+      <path class="ln" data-cloud d="M150 60c0-14 22-18 26-6 6-12 30-8 26 6 12 0 12 16 0 16h-46c-12 0-12-16-6-16z"/>
+    </svg>
+  </div></div>
+  <p class="zc-cap">Шесть точек — шесть цепочек. Слушай и повторяй вслух.</p>
+  <div class="zc-bubble" data-bubble aria-live="polite"><span class="zc-note" data-ui>Выбери точку на картинке</span></div>
+</section>
+
+<section data-section="gallery" data-words="15">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>фотоархив</span>
+    <h2 class="zc-split">Двенадцать кадров</h2>
+    <p>Нажми на кадр. Услышишь фразу, на обороте — разбор.</p>
+  </div>
+  <div class="zc-gal" data-gal></div>
+  <p class="zc-cap">Красное — хозяин. Жёлтое — чья вещь.</p>
+</section>
+
+<section data-section="lab" data-words="29">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>лаборатория</span>
+    <h2 class="zc-split">Собери сам</h2>
+    <p>Четыре режима. Меняй слова и смотри, какие хвосты прилипают. Каждую фразу можно послушать.</p>
+    <p class="zc-cap" style="text-align:left;margin-left:0">Сборка — с нуля. Удлинитель — добавляй звенья. Моя, твоя — местоимения. Блок — два слова как одно.</p>
+  </div>
+  <div class="zc-lab">
+    <div class="zc-tabs" role="tablist" data-ui>
+      <button type="button" class="zc-tab" role="tab" aria-selected="true" data-tab="a">Сборка</button>
+      <button type="button" class="zc-tab" role="tab" aria-selected="false" data-tab="b">Удлинитель</button>
+      <button type="button" class="zc-tab" role="tab" aria-selected="false" data-tab="c">Моя, твоя</button>
+      <button type="button" class="zc-tab" role="tab" aria-selected="false" data-tab="d">Блок</button>
+    </div>
+    <div class="zc-pane is-on" data-pane="a" data-ui><div data-lab-a></div></div>
+    <div class="zc-pane" data-pane="b" data-ui>
+      <div class="zc-row" style="margin-bottom:10px">
+        <button type="button" class="zc-chip" aria-pressed="true" data-chain="0" lang="tr">Ayşe…</button>
+        <button type="button" class="zc-chip" aria-pressed="false" data-chain="1" lang="tr">Oya…</button>
+        <button type="button" class="zc-btn zc-btn--fill" data-grow>+ звено</button>
+        <button type="button" class="zc-btn" data-shrink>− звено</button>
+      </div>
+    </div>
+    <div class="zc-pane" data-pane="c" data-ui><div data-lab-c></div></div>
+    <div class="zc-pane" data-pane="d" data-ui><div data-lab-d></div></div>
+    <div class="zc-out" data-ui>
+      <div class="zc-out__tr" data-lab-out lang="tr"></div>
+      <p class="zc-out__ru" data-lab-ru></p>
+      <button type="button" class="zc-listen" data-lab-say>▶ слушать</button>
+      <ul class="zc-why" data-lab-why></ul>
+    </div>
+  </div>
+</section>
+
+<section data-section="traps" data-words="39">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>ловушки</span>
+    <h2 class="zc-split">Где спотыкаются все</h2>
+    <p>Эти ошибки делает каждый. Это нормально. Нажми на карточку — ручка исправит.</p>
+  </div>
+  <div class="zc-traps" data-traps></div>
+  <p class="zc-in" style="margin-top:14px" data-trap-notes>Середина без <b class="g">-nin</b> — скрепка болтается. Конец без <b class="p">-sı</b> — вещь ничья. Русский порядок — курьер едет в Ускюдар. Двойной хвост у блока — перебор. Середина без <b class="p">-sı</b> — папа отвязался от сына.</p>
+</section>
+
+<section data-section="video" data-words="8">
+  <div class="zc-in">
+    <span class="zc-kick" data-ui>видео</span>
+    <h2>Учитель у доски</h2>
+    <p>Обрати внимание, как растёт цепочка: <span lang="tr">Ali'nin annesi → Ali'nin annesinin ceketi</span>.</p>
+    <a-video yt="-nIpEHjAfNg" start="44" end="211" title="Zincirleme İsim Tamlaması · Ders 30" channel="Ziya Hoca ile Türkçe"></a-video>
+  </div>
+</section>
+
+<section data-section="practice" data-words="1">
+  <div class="zc-in">
+    <h2>Практика</h2>
+    <a-exercise ref="a1.genitive-chain.ex1"></a-exercise>
+    <a-exercise ref="a1.genitive-chain.ex2"></a-exercise>
+    <a-exercise ref="a1.genitive-chain.ex3"></a-exercise>
+    <a-exercise ref="a1.genitive-chain.ex4"></a-exercise>
+    <a-exercise ref="a1.genitive-chain.ex5" class="ak-ex">
+      <div class="ak-ex__head" data-ui><span class="ak-ex__title">Курьерская этикетка: собери адрес</span><span class="ak-ex__count" data-pc-count>1 / 4</span></div>
+      <div class="zc-parcel">
+        <div class="zc-label"><div class="zc-label__ru" data-pc-ru data-ui></div><div class="zc-label__slots" data-pc-slots lang="tr"></div></div>
+        <div class="zc-photos" data-pc-photos></div>
+        <div class="zc-ends" data-pc-ends hidden></div>
+        <p class="zc-pstat" data-pc-stat aria-live="polite" data-ui></p>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<section data-section="check" data-words="1">
+  <div class="zc-in">
+    <h2>Мини-проверка</h2>
+    <a-quiz ref="a1.genitive-chain.check1"></a-quiz>
+  </div>
+</section>
+
+<section data-section="cheat" data-words="59">
+  <div class="zc-poster zc-grid">
+    <svg class="zc-doodle" style="left:4%;top:4%" aria-hidden="true"><use href="#i-cherry"/></svg>
+    <svg class="zc-doodle" style="right:5%;top:5%" aria-hidden="true"><use href="#i-cam"/></svg>
+    <svg class="zc-doodle" style="left:6%;bottom:5%" aria-hidden="true"><use href="#i-star"/></svg>
+    <span class="zc-kick" data-ui>сохрани скриншотом</span>
+    <h2 class="zc-split">Шпаргалка</h2>
+    <div class="zc-fall" aria-hidden="true" data-fall><span>Z</span><span>İ</span><span>N</span><span>C</span><span>İ</span><span>R</span></div>
+    <div class="zc-formula" lang="tr" data-say="Ayşe'nin annesinin arabası">
+      <span class="zc-w">X<span class="g">'nin</span></span><span class="zc-w">Y<span class="p">sı</span><span class="g">nın</span></span><span class="zc-w">Z<span class="p">sı</span></span>
+    </div>
+    <ul class="zc-rules">
+      <li><b>первое</b><span>только <span class="g">-nin</span>: <span lang="tr">Ayşe'nin</span></span></li>
+      <li><b>середина</b><span><span class="p">-sı</span> + <span class="g">-nın</span>: <span lang="tr">annesinin, evinin</span></span></li>
+      <li><b>последнее</b><span>только <span class="p">-sı</span>: <span lang="tr">arabası</span></span></li>
+      <li><b>блок</b><span>один хвост на двоих: <span lang="tr">telefon numarası</span></span></li>
+      <li><b>порядок</b><span>от хозяина к вещи, как в английском</span></li>
+    </ul>
+    <p class="zc-cap">Сомневаешься — спроси три вещи: кто хозяин, кто вещь, кто посередине.</p>
+  </div>
+  <div class="zc-in zc-final">
+    <p data-line>Курьер перезванивает. Говоришь: <a-say>Ayşe'nin annesinin ofisinin kapısı</a-say>.</p>
+    <p data-line>Курьер молчит секунду. Говорит, <span lang="tr">tamam</span>. Через десять минут посылка у двери. У той самой.</p>
+    <p data-line>Теперь ты склеиваешь три слова и больше. Хоть пять. Курьеры Стамбула могут спать спокойно.</p>
+    <p data-line class="zc-dry">Курьер, кажется, тебя зауважал.</p>
+  </div>
+</section>
+
+</main>
+
+<nav class="zc-sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="zc-sb__track"><span class="zc-sb__fill"></span><svg class="zc-sb__cam" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-cam"/></svg></div>
+</nav>
+
+<template data-achievement data-title="Цепочка держит" data-text="Теперь ты склеиваешь три слова и больше в одну фразу.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <rect width="120" height="120" rx="14" fill="#fff"/>
+    <g class="pa" transform="rotate(-8 30 66)"><rect x="10" y="44" width="38" height="44" fill="#fff" stroke="#1c2b9e" stroke-width="2.5"/><rect x="15" y="49" width="28" height="24" fill="#e2b36b"/></g>
+    <g class="pb" transform="rotate(4 60 60)"><rect x="41" y="36" width="38" height="44" fill="#fff" stroke="#1c2b9e" stroke-width="2.5"/><rect x="46" y="41" width="28" height="24" fill="#2a6273"/></g>
+    <g class="pc" transform="rotate(9 92 66)"><rect x="72" y="44" width="38" height="44" fill="#fff" stroke="#1c2b9e" stroke-width="2.5"/><rect x="77" y="49" width="28" height="24" fill="#c9c9c4"/></g>
+    <path class="ca" d="M36 50V30a6 6 0 0 1 12 0v22" fill="none" stroke="#d6383c" stroke-width="3.5" stroke-linecap="round"/>
+    <path class="cb" d="M70 46V26a6 6 0 0 1 12 0v22" fill="none" stroke="#e3ad35" stroke-width="3.5" stroke-linecap="round"/>
+    <text x="60" y="108" text-anchor="middle" font-size="15" font-weight="700" fill="#1c2b9e" font-family="Georgia,serif">zincir</text>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = !reduce && window.gsap ? window.gsap : null;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const speak = (t) => window.AlternaKit && window.AlternaKit.speak(t);
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  if (G) {
+    if (window.ScrollTrigger) G.registerPlugin(ScrollTrigger);
+    if (window.MotionPathPlugin) G.registerPlugin(MotionPathPlugin);
+    if (window.SplitText) G.registerPlugin(SplitText);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    const refresh = () => ScrollTrigger.refresh();
+    addEventListener('load', refresh);
+    addEventListener('orientationchange', refresh);
+    if (document.fonts) document.fonts.ready.then(refresh);
+  }
+
+  /* разбор слова «anne|si|nin» → разметка с цветными хвостами */
+  const isGen = (a) => a[0] !== '+' && /^n?[ıiuü]n$/.test(a);
+  const wordHTML = (spec) => {
+    const [b, ...aff] = spec.split('|');
+    return `<span class="zc-w">${b}${aff.map((a) => `<span class="${isGen(a) ? 'g' : 'p'}">${a.replace('+', '')}</span>`).join('')}</span>`;
+  };
+  const phraseHTML = (spec) => spec.split(' ').map(wordHTML).join(' ');
+  const plain = (spec) => spec.replace(/[|+]/g, '');
+
+  /* искры на верный ответ */
+  function sparks(el, n = 12) {
+    if (!G || !el) return;
+    const r = el.getBoundingClientRect();
+    for (let i = 0; i < n; i++) {
+      const s = document.createElementNS(NS, 'svg');
+      s.setAttribute('viewBox', '0 0 20 20');
+      s.setAttribute('class', 'zc-spark ' + ['', 'r', 'y'][i % 3]);
+      const p = document.createElementNS(NS, 'path');
+      p.setAttribute('d', 'M10 2v16M2 10h16M4.5 4.5l11 11M15.5 4.5l-11 11');
+      s.append(p);
+      s.style.left = r.left + r.width / 2 + 'px';
+      s.style.top = r.top + r.height / 2 + 'px';
+      document.body.append(s);
+      const a = (Math.PI * 2 * i) / n + Math.random() * 0.4;
+      const d = 50 + Math.random() * 60;
+      G.fromTo(s, { scale: 0.4, rotation: 0 }, { x: Math.cos(a) * d, y: Math.sin(a) * d, scale: 0, rotation: 180, duration: 0.9, ease: 'power2.out', onComplete: () => s.remove() });
+    }
+  }
+
+  /* полёт хвоста по дуге */
+  function fly(from, to, text) {
+    if (!G || !from || !to) return Promise.resolve();
+    const a = from.getBoundingClientRect(), b = to.getBoundingClientRect();
+    const t = document.createElement('span');
+    t.className = 'zc-fly';
+    t.textContent = text;
+    t.style.left = a.left + 'px';
+    t.style.top = a.top + 'px';
+    document.body.append(t);
+    const dx = b.left - a.left, dy = b.top - a.top;
+    return new Promise((res) => G.to(t, { motionPath: { path: [{ x: 0, y: 0 }, { x: dx / 2, y: Math.min(0, dy) - 90 }, { x: dx, y: dy }], curviness: 1.4 }, duration: 0.85, ease: 'power2.inOut', onComplete: () => { t.remove(); res(); } }));
+  }
+
+  /* ---------- заголовки, подчёркивания, общие сцены по скроллу ---------- */
+  if (G) {
+    $$('.zc-split').forEach((h) => {
+      if (h.closest('.zc-hero')) return;
+      const st = window.SplitText ? new SplitText(h, { type: 'words' }) : null;
+      G.from(st ? st.words : h, { yPercent: 55, rotation: 5, duration: 0.8, ease: 'back.out(2)', stagger: 0.07, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    ScrollTrigger.batch('.zc-ul path', { start: 'top 90%', once: true, onEnter: (els) => G.fromTo(els, { strokeDasharray: 300, strokeDashoffset: 300 }, { strokeDashoffset: 0, duration: 1, ease: 'power2.out', stagger: 0.1 }) });
+    $$('.zc-sep path').forEach((p) => {
+      G.fromTo(p, { strokeDasharray: 700, strokeDashoffset: 700 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p, start: 'top 95%', end: 'top 45%', scrub: 0.6 } });
+    });
+    ScrollTrigger.batch('.zc-ex > div', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { x: -40, rotation: -2, duration: 0.6, ease: 'back.out(2)', stagger: 0.12 }) });
+    ScrollTrigger.batch('.zc-q', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: 40, rotation: 1.5, duration: 0.7, ease: 'back.out(2.5)' }) });
+    ScrollTrigger.batch('.zc-kick', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { x: -24, rotation: -4, duration: 0.5, ease: 'back.out(3)' }) });
+    $$('section .zc-doodle').forEach((d, i) => {
+      G.to(d, { rotation: i % 2 ? 14 : -14, y: i % 2 ? -18 : 18, ease: 'none', scrollTrigger: { trigger: d.closest('section'), start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    });
+  }
+
+  if (G) {
+    ScrollTrigger.batch('.zc-cap', { start: 'top 94%', once: true, onEnter: (els) => G.from(els, { y: 18, rotation: -1, duration: 0.5, ease: 'back.out(2)', stagger: 0.1 }) });
+    G.to('.zc-msg--sys', { x: 4, duration: 0.07, yoyo: true, repeat: 9, ease: 'none', scrollTrigger: { trigger: '[data-chat]', start: 'top 80%', once: true } });
+    G.to('[data-dot]', { scale: 1.35, transformOrigin: '50% 50%', duration: 0.6, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: { trigger: '[data-tree]', start: 'top bottom', end: 'bottom top', toggleActions: 'play pause resume pause' } });
+    G.to('.zc-hot', { y: -5, duration: 0.9, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: 0.15, scrollTrigger: { trigger: '[data-scene]', start: 'top bottom', end: 'bottom top', toggleActions: 'play pause resume pause' } });
+    G.from('[data-mine] button', { scale: 0.4, rotation: (i) => (i - 1) * 20, duration: 0.5, ease: 'back.out(3)', stagger: 0.08, scrollTrigger: { trigger: '[data-mine]', start: 'top 88%', once: true } });
+    G.from('.zc-tab', { y: 30, rotation: (i) => (i % 2 ? 4 : -4), duration: 0.5, ease: 'back.out(2.5)', stagger: 0.07, scrollTrigger: { trigger: '.zc-tabs', start: 'top 90%', once: true } });
+    G.to('[data-sand] > span', { y: (i) => (i - 1) * -10, ease: 'none', scrollTrigger: { trigger: '[data-sand]', start: 'top 85%', end: 'bottom 30%', scrub: 0.8 } });
+    G.from('.zc-dry', { rotation: -6, scale: 0.6, duration: 0.8, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: '.zc-dry', start: 'top 92%', once: true } });
+    G.fromTo('.zc-tape', { skewX: -20 }, { skewX: 0, duration: 0.6, ease: 'back.out(3)', scrollTrigger: { trigger: '[data-block]', start: 'top 75%', once: true } });
+    G.to('.zc-order__line', { rotation: 0.6, y: -6, duration: 1.6, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: { trigger: '.zc-order', start: 'top bottom', end: 'bottom top', toggleActions: 'play pause resume pause' } });
+  }
+
+  /* курсорное свечение — только мышь */
+  if (G && fine) {
+    const glow = $('.zc-glow');
+    G.set(glow, { x: -999, y: -999 });
+    const qx = G.quickTo(glow, 'x', { duration: 0.6, ease: 'power3' });
+    const qy = G.quickTo(glow, 'y', { duration: 0.6, ease: 'power3' });
+    addEventListener('pointermove', (e) => { qx(e.clientX); qy(e.clientY); }, { passive: true });
+  }
+
+  /* бесконечные CSS-анимации на паузе вне экрана */
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-paused', !e.isIntersecting)), { rootMargin: '80px' });
+  $$('section').forEach((s) => io.observe(s));
+
+  /* навигация */
+  $$('[data-goto]').forEach((b) => b.addEventListener('click', () => $(`[data-section="${b.dataset.goto}"]`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })));
+
+  /* ---------- HERO ---------- */
+  const demo = $('[data-demo]');
+  const ends = $$('[data-end]', demo);
+  function demoGlue() {
+    demo.classList.add('is-on');
+    ends.forEach((e) => { e.textContent = e.dataset.end; });
+    if (G) {
+      G.fromTo(ends, { y: -40, rotation: -20, scale: 0.4 }, { y: 0, rotation: 0, scale: 1, duration: 0.6, ease: 'bounce.out', stagger: 0.12 });
+      G.fromTo($$('.zc-clip', demo), { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(3)', stagger: 0.15 });
+      G.to($$('.zc-pol', demo), { rotation: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08 });
+      G.fromTo('[data-demo-out]', { scale: 0.8 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1, .45)', delay: 0.6 });
+    }
+    sparks($('[data-demo-out]'), 10);
+  }
+  function demoReset() {
+    demo.classList.remove('is-on');
+    if (G) G.to(ends, { y: 30, scale: 0.4, duration: 0.3, ease: 'power2.in', onComplete: () => ends.forEach((e) => { e.textContent = ''; }) });
+    else ends.forEach((e) => { e.textContent = ''; });
+    if (G) G.to($$('.zc-pol', demo), { rotation: (i) => [-6, 5, -4, 7][i], duration: 0.4 });
+  }
+  $('[data-demo-go]').addEventListener('click', demoGlue);
+  $('[data-demo-reset]').addEventListener('click', demoReset);
+  if (G) {
+    G.delayedCall(1.8, demoGlue);
+    $$('[data-count]').forEach((c) => {
+      const o = { v: 0 };
+      G.to(o, { v: +c.dataset.count, duration: 1.4, ease: 'power2.out', delay: 0.6, onUpdate: () => { c.textContent = Math.round(o.v); } });
+    });
+    $$('[data-par]').forEach((p) => {
+      G.to(p, { y: +p.dataset.par, rotation: '+=6', ease: 'none', scrollTrigger: { trigger: '.zc-collage', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    });
+    G.to('.zc-sheet', { y: 40, ease: 'none', scrollTrigger: { trigger: '.zc-hero', start: 'top top', end: 'bottom top', scrub: 0.8 } });
+  } else demoGlue();
+
+  /* ---------- STORY ---------- */
+  if (G) {
+    const tl = G.timeline({ scrollTrigger: { trigger: '[data-chat]', start: 'top 75%', once: true } });
+    $$('[data-chat] .zc-msg').forEach((m, i) => tl.from(m, { x: m.classList.contains('zc-msg--me') ? 60 : -60, scale: 0.6, duration: 0.45, ease: 'back.out(2.5)' }, i * 0.55));
+    tl.fromTo('.zc-voice i', { scaleY: 0.3 }, { scaleY: 1.4, duration: 0.25, yoyo: true, repeat: 7, stagger: 0.05, ease: 'sine.inOut' }, 1.6);
+    G.fromTo('.zc-cord path', { strokeDasharray: 900, strokeDashoffset: 900 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '.zc-cord', start: 'top 95%', end: 'top 40%', scrub: 0.6 } });
+    ScrollTrigger.batch('.zc-lines p', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { y: 26, rotation: 1, duration: 0.5, ease: 'back.out(2)', stagger: 0.12 }) });
+    G.to('.zc-phone', { rotation: -2, y: -20, ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+  }
+  const pickFb = $('[data-pick-fb]');
+  const PICK = ['Курьер молчит. Четыре слова, ноль связей.', 'Курьер говорит, tamam. Магия? Нет. Скрепки.', 'Курьер уезжает в Ускюдар. На всякий случай.'];
+  $$('[data-pick] .zc-opt').forEach((b) => b.addEventListener('click', () => {
+    const v = +b.dataset.v;
+    $$('[data-pick] .zc-opt').forEach((o) => o.classList.remove('is-ok', 'is-no'));
+    b.classList.add(v === 1 ? 'is-ok' : 'is-no');
+    pickFb.textContent = PICK[v];
+    speak(b.textContent);
+    if (v === 1) sparks(b);
+    if (G) G.fromTo(b, { x: v === 1 ? 0 : -8 }, { x: 0, duration: 0.5, ease: v === 1 ? 'back.out(3)' : 'elastic.out(1, .3)' });
+    if (G) G.fromTo(pickFb, { y: 12, rotation: -2 }, { y: 0, rotation: 0, duration: 0.4, ease: 'back.out(3)' });
+  }));
+
+  /* ---------- GUESS ---------- */
+  const guessFb = $('[data-guess-fb]');
+  $$('[data-guess] button').forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.v === 'sinin';
+    $$('[data-guess] button').forEach((o) => o.classList.remove('is-ok', 'is-no'));
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    guessFb.textContent = ok ? 'Да. Мама теперь и чья-то, и сама хозяйка. Два хвоста.' : 'Смелая версия. Листай дальше — скрепки всё покажут.';
+    if (ok) { sparks(b); speak("Ali'nin annesinin ceketi"); }
+    if (G) G.fromTo(b, { scale: 0.85 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' });
+  }));
+  if (G) G.from('[data-section="guess"] .zc-pol', { rotation: -25, y: -60, duration: 0.9, ease: 'bounce.out', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top 70%', once: true } });
+
+  /* ---------- LINK ---------- */
+  const link = $('[data-link]');
+  function linkGo(user) {
+    link.classList.remove('is-off');
+    if (G) {
+      G.fromTo('.zc-bigclip path', { strokeDasharray: 400, strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 0.9, ease: 'power2.out' });
+      G.fromTo($$('.zc-endtag', link), { scale: 0, y: -20 }, { scale: 1, y: 0, duration: 0.5, ease: 'back.out(3)', stagger: 0.2, delay: 0.4 });
+    }
+    if (user === true) speak("Ayşe'nin annesi");
+  }
+  $('[data-link-go]').addEventListener('click', () => linkGo(true));
+  $('[data-link-who]').addEventListener('click', () => {
+    const owner = $$('.zc-pol', link)[0];
+    if (G) G.fromTo(owner, { y: 0 }, { y: -24, duration: 0.3, yoyo: true, repeat: 3, ease: 'power1.inOut' });
+    sparks(owner, 8);
+  });
+  if (G) {
+    const pols = $$('.zc-pol', link);
+    G.fromTo(pols[0], { x: -70, rotation: -14 }, { x: 0, rotation: -4, ease: 'none', scrollTrigger: { trigger: link, start: 'top 90%', end: 'top 45%', scrub: 0.7 } });
+    G.fromTo(pols[1], { x: 70, rotation: 14 }, { x: 0, rotation: 4, ease: 'none', scrollTrigger: { trigger: link, start: 'top 90%', end: 'top 45%', scrub: 0.7 } });
+    ScrollTrigger.create({ trigger: link, start: 'top 50%', once: true, onEnter: linkGo });
+  } else link.classList.remove('is-off');
+
+  /* ---------- мини-вопросы ---------- */
+  $$('[data-q]').forEach((q) => {
+    const fb = $('.zc-q__fb', q);
+    const opts = $$('.zc-q__o button', q);
+    opts.forEach((b) => b.addEventListener('click', () => {
+      const ok = b.hasAttribute('data-ok');
+      opts.forEach((o) => o.classList.remove('is-ok', 'is-no'));
+      b.classList.add(ok ? 'is-ok' : 'is-no');
+      fb.textContent = ok ? fb.dataset.okT : fb.dataset.noT;
+      if (ok) sparks(b, 14);
+      if (G) G.fromTo(fb, { x: ok ? 0 : -10 }, { x: 0, duration: 0.6, ease: ok ? 'power2.out' : 'elastic.out(1, .3)' });
+    }));
+  });
+
+  /* ---------- MIDDLE: пошаговый плеер ---------- */
+  const row = $('[data-steps-row]');
+  const caps = $$('[data-steps-cap] span');
+  const dots = $$('[data-dots] button');
+  let step = 0, auto = null;
+  function stepWords(n) {
+    const w = [`Ali'|nin`, n >= 2 ? 'anne|si|nin' : 'anne|si'];
+    if (n >= 1) w.push(n >= 3 ? 'ceket|i' : 'ceket');
+    return w;
+  }
+  function renderStep(n, from) {
+    const prev = row.innerHTML;
+    row.innerHTML = stepWords(n).map(wordHTML).join('');
+    caps.forEach((c, i) => c.classList.toggle('is-on', i === n));
+    dots.forEach((d, i) => d.classList.toggle('is-on', i === n));
+    if (!G || prev === row.innerHTML) return;
+    const ws = $$('.zc-w', row);
+    if (n === 0) G.from(ws, { y: -50, rotation: -8, duration: 0.6, ease: 'bounce.out', stagger: 0.15 });
+    if (n === 1 && from < 1) G.from(ws[2], { y: -120, rotation: 25, duration: 0.9, ease: 'bounce.out' });
+    if (n === 2 && from < 2) {
+      const tgt = $$('.g', ws[1])[0];
+      tgt.style.visibility = 'hidden';
+      fly($('[data-pad="nin"]'), tgt, 'nin').then(() => { tgt.style.visibility = ''; G.from(tgt, { scale: 1.8, duration: 0.5, ease: 'elastic.out(1, .45)' }); });
+      G.to(ws[1], { backgroundColor: '#fde9e9', duration: 0.3, yoyo: true, repeat: 1 });
+    }
+    if (n === 3 && from < 3) {
+      const tgt = $('.p', ws[2]);
+      tgt.style.visibility = 'hidden';
+      fly($('[data-pad="i"]'), tgt, 'i').then(() => { tgt.style.visibility = ''; G.from(tgt, { scale: 2, duration: 0.5, ease: 'elastic.out(1, .45)' }); sparks(row, 12); });
+    }
+    G.fromTo(caps[n], { y: 14, rotation: -1.5 }, { y: 0, rotation: 0, duration: 0.45, ease: 'back.out(2.5)' });
+  }
+  function go(n, user) { const from = step; step = Math.max(0, Math.min(3, n)); renderStep(step, from); if (user && step === 3) speak("Ali'nin annesinin ceketi"); }
+  function stopAuto() { clearTimeout(auto); auto = null; }
+  async function playAuto() {
+    stopAuto();
+    go(0);
+    for (let i = 1; i < 4; i++) { await new Promise((r) => { auto = setTimeout(r, reduce ? 300 : 1700); }); if (auto === null) return; go(i); }
+    auto = null;
+  }
+  $('[data-step-next]').addEventListener('click', () => { stopAuto(); go(step + 1, true); });
+  $('[data-step-prev]').addEventListener('click', () => { stopAuto(); go(step - 1); });
+  $('[data-step-auto]').addEventListener('click', playAuto);
+  $('[data-step-again]').addEventListener('click', () => { stopAuto(); row.innerHTML = ''; go(0); });
+  dots.forEach((d, i) => d.addEventListener('click', () => { stopAuto(); go(i, true); }));
+  $('[data-steps]').addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') go(step + 1, true); if (e.key === 'ArrowLeft') go(step - 1, true); });
+  renderStep(G ? 0 : 3, -1);
+  step = G ? 0 : 3;
+  if (G) ScrollTrigger.create({ trigger: '[data-steps]', start: 'top 70%', once: true, onEnter: playAuto });
+  if (G) G.from('.zc-pad span', { y: 30, rotation: (i) => (i - 1) * 12, duration: 0.6, ease: 'back.out(3)', stagger: 0.1, scrollTrigger: { trigger: '.zc-pad', start: 'top 90%', once: true } });
+
+  /* ---------- FORMS: bento ---------- */
+  const BENTO = [
+    ['a', 'araba|sı|nın', 'машина', 1], ['ı', 'kız|ı|nın', 'дочь', 0], ['e', 'anne|si|nin', 'мама', 0], ['i', 'kedi|si|nin', 'кошка', 0],
+    ['o', 'telefon|u|nun', 'телефон', 0], ['u', 'okul|u|nun', 'школа', 0], ['ö', 'şoför|ü|nün', 'водитель', 0], ['ü', 'menü|sü|nün', 'меню', 1],
+  ];
+  const bento = $('[data-bento]');
+  bento.innerHTML = BENTO.map(([v, w, ru, big]) => `<button type="button" class="zc-tile${big ? ' is-big' : ''}" data-say="${plain(w)}"><span class="zc-tile__front"><b lang="tr">${v}</b><span lang="tr">${wordHTML(w)}</span></span><span class="zc-tile__back"><span lang="tr">${w.split('|').join(' + ')}</span><small data-ui>${ru} · ${w.includes('|s') ? 'после гласной: s + n' : 'после согласной: только n'}</small></span></button>`).join('');
+  $$('.zc-tile', bento).forEach((t) => t.addEventListener('click', () => {
+    t.classList.toggle('is-flip');
+    if (G) G.fromTo(t, { rotationY: -90 }, { rotationY: 0, duration: 0.5, ease: 'back.out(2)' });
+  }));
+  if (G) {
+    G.from($$('.zc-tile', bento), { y: 60, rotation: (i) => (i % 2 ? 6 : -6), scale: 0.7, duration: 0.6, ease: 'back.out(2)', stagger: 0.07, scrollTrigger: { trigger: bento, start: 'top 85%', once: true } });
+    G.to($$('.zc-tile b', bento), { y: -6, duration: 0.8, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: 0.12, scrollTrigger: { trigger: bento, start: 'top bottom', end: 'bottom top', toggleActions: 'play pause resume pause' } });
+  }
+
+  /* ---------- ORDER ---------- */
+  const ORDER = { ru: ['ключ', 'машины', 'Мурата'], tr: [`Murat'|ın`, 'araba|sı|nın', 'anahtar|ı'] };
+  const orderEl = $('[data-order]');
+  let orderMode = '';
+  function setOrder(m, user) {
+    if (m === orderMode) return;
+    const first = orderMode === '';
+    orderMode = m;
+    const html = m === 'ru' ? ORDER.ru.map((w, i) => `<span class="${i === 0 ? 'k' : ''}">${w}</span>`).join('') : ORDER.tr.map((w, i) => `<span class="${i === 2 ? 'k' : ''}">${wordHTML(w)}</span>`).join('');
+    orderEl.lang = m === 'ru' ? 'ru' : 'tr';
+    orderEl.toggleAttribute('data-ui', m === 'ru');
+    $$('[data-order-set]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.orderSet === m)));
+    if (!G || first) { orderEl.innerHTML = html; return; }
+    G.to(orderEl.children, { y: -40, rotation: (i) => (i - 1) * 15, scale: 0.6, duration: 0.3, ease: 'power2.in', stagger: 0.05, onComplete: () => {
+      orderEl.innerHTML = html;
+      G.from(orderEl.children, { x: (i) => (m === 'tr' ? (1 - i) * 120 : (i - 1) * 120), y: -60, rotation: (i) => (i - 1) * -20, duration: 0.7, ease: 'back.out(1.8)', stagger: 0.12 });
+    } });
+    if (user && m === 'tr') speak("Murat'ın arabasının anahtarı");
+  }
+  $$('[data-order-set]').forEach((b) => b.addEventListener('click', () => setOrder(b.dataset.orderSet, true)));
+  setOrder('ru');
+  if (G) {
+    ScrollTrigger.create({ trigger: orderEl, start: 'top 60%', once: true, onEnter: () => setTimeout(() => setOrder('tr'), 900) });
+    const film = $('[data-film]');
+    G.fromTo(film, { x: 0 }, { x: () => -Math.max(0, film.scrollWidth - film.parentElement.clientWidth), ease: 'none', scrollTrigger: { trigger: film, start: 'top 95%', end: 'top 20%', scrub: 0.8, invalidateOnRefresh: true } });
+    G.from($$('div', film), { rotation: (i) => (i % 2 ? 8 : -8), y: 30, duration: 0.6, ease: 'back.out(2)', stagger: 0.08, scrollTrigger: { trigger: film, start: 'top 90%', once: true } });
+  }
+
+  /* ---------- ALGO: дерево с бегущей точкой ---------- */
+  const dot = $('[data-dot]');
+  const treeOut = $('[data-tree-out]');
+  const LEAF = { a: 'первое слово — только -nin', b: 'последнее — только -sı', c: 'середина — -sı + -nin' };
+  function runTree(route, word, user) {
+    $$('[data-leaf]').forEach((l) => l.classList.remove('is-hit'));
+    const done = () => { $(`[data-leaf="${route}"]`).classList.add('is-hit'); treeOut.innerHTML = `<b lang="tr">${word}</b> → ${LEAF[route]}`; if (user) speak(word); };
+    if (!G) { done(); return; }
+    G.set(dot, { x: 0, y: 0 });
+    G.to(dot, { motionPath: { path: `#zc-r${route}`, align: `#zc-r${route}`, alignOrigin: [0.5, 0.5] }, duration: 1.3, ease: 'power1.inOut', onComplete: () => { done(); sparks(dot, 8); G.fromTo(`[data-leaf="${route}"] rect`, { scale: 0.8, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.5, ease: 'elastic.out(1, .45)' }); } });
+  }
+  $$('[data-tree-chips] button').forEach((b) => b.addEventListener('click', () => {
+    $$('[data-tree-chips] button').forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+    runTree(b.dataset.route, b.dataset.w, true);
+  }));
+  $$('[data-leaf]').forEach((l) => {
+    const pickLeaf = () => { const b = $(`[data-tree-chips] [data-route="${l.dataset.leaf}"]`); b.click(); };
+    l.addEventListener('click', pickLeaf);
+    l.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pickLeaf(); } });
+  });
+  if (G) {
+    G.fromTo('.zc-tree .edge', { strokeDasharray: 200, strokeDashoffset: 200 }, { strokeDashoffset: 0, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: '[data-tree]', start: 'top 85%', end: 'top 35%', scrub: 0.6 } });
+    G.from('.zc-tree .node', { scale: 0.5, transformOrigin: '50% 50%', duration: 0.5, ease: 'back.out(3)', stagger: 0.08, scrollTrigger: { trigger: '[data-tree]', start: 'top 75%', once: true } });
+    ScrollTrigger.create({ trigger: '[data-tree]', start: 'top 55%', once: true, onEnter: () => runTree('c', 'annesinin') });
+  }
+
+  /* ---------- MINE ---------- */
+  const MINE = { benim: ['benim', 'anne|m|in', 'araba|sı', 'машина моей мамы'], senin: ['senin', 'anne|n|in', 'araba|sı', 'машина твоей мамы'], onun: ['onun', 'anne|si|nin', 'araba|sı', 'машина его или её мамы'] };
+  const mineOut = $('[data-mine-out]'), mineRu = $('[data-mine-ru]');
+  let mineCur = 'benim';
+  function setMine(p) {
+    mineCur = p;
+    const [a, b, c, ru] = MINE[p];
+    mineOut.innerHTML = `<span class="zc-w">${a}</span> ${wordHTML(b)} ${wordHTML(c)}`;
+    mineRu.textContent = ru;
+    $$('[data-mine] button').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.p === p)));
+    if (G) {
+      const mid = $$('.zc-w', mineOut)[1];
+      G.from($$('span', mid), { y: -50, rotation: () => G.utils.random(-40, 40), duration: 0.7, ease: 'bounce.out', stagger: 0.08 });
+      G.fromTo(mineRu, { y: 10 }, { y: 0, duration: 0.4, ease: 'back.out(3)' });
+    }
+  }
+  $$('[data-mine] button').forEach((b) => b.addEventListener('click', () => { setMine(b.dataset.p); speak(mineOut.textContent.replace(/\s+/g, ' ').trim()); }));
+  $('[data-mine-say]').addEventListener('click', () => speak(mineOut.textContent.replace(/\s+/g, ' ').trim()));
+  setMine('benim');
+  if (G) G.from('.zc-mine', { rotation: -3, y: 50, duration: 0.8, ease: 'back.out(2)', scrollTrigger: { trigger: '.zc-mine', start: 'top 85%', once: true } });
+
+  /* ---------- BLOCK ---------- */
+  const extra = $('[data-extra]');
+  $('[data-block-extra]').addEventListener('click', () => {
+    extra.hidden = false;
+    if (G) {
+      G.fromTo(extra, { y: -30, scale: 0.5 }, { y: 0, scale: 1, duration: 0.4, ease: 'back.out(3)' });
+      G.fromTo($('path', extra), { strokeDasharray: 60, strokeDashoffset: 60 }, { strokeDashoffset: 0, duration: 0.5, delay: 0.5, ease: 'power2.out' });
+      G.to(extra, { y: 40, rotation: 40, duration: 0.6, delay: 1.4, ease: 'power2.in', onComplete: () => { extra.hidden = true; G.set(extra, { clearProps: 'all' }); } });
+    } else setTimeout(() => { extra.hidden = true; }, 1500);
+  });
+  $('[data-block-shake]').addEventListener('click', () => {
+    const pair = $('.zc-pair');
+    if (G) {
+      G.fromTo(pair, { rotation: -3 }, { rotation: 3, duration: 0.12, yoyo: true, repeat: 5, ease: 'sine.inOut', onComplete: () => G.set(pair, { rotation: 0 }) });
+      G.fromTo('.zc-tape', { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'back.out(3)' });
+    }
+    speak("Elif'in telefon numarası");
+    sparks(pair, 10);
+  });
+  if (G) {
+    G.fromTo('.zc-pair .zc-pol', { x: (i) => (i ? 60 : -60), rotation: (i) => (i ? 12 : -12) }, { x: 0, rotation: (i) => (i ? -2 : 2), ease: 'none', scrollTrigger: { trigger: '[data-block]', start: 'top 90%', end: 'top 45%', scrub: 0.7 } });
+    G.from('[data-block] > .zc-pol', { y: -80, rotation: -30, duration: 0.9, ease: 'bounce.out', scrollTrigger: { trigger: '[data-block]', start: 'top 60%', once: true } });
+  }
+
+  /* ---------- MNEMO ---------- */
+  function sandGo(user) {
+    const layers = $$('[data-sand] > span').reverse();
+    if (G) G.fromTo(layers, { y: -160, rotation: () => G.utils.random(-25, 25) }, { y: 0, rotation: 0, duration: 0.8, ease: 'bounce.out', stagger: 0.25 });
+    if (user === true) setTimeout(() => speak('arabasının'), reduce ? 0 : 900);
+  }
+  $('[data-sand-go]').addEventListener('click', () => sandGo(true));
+  if (G) {
+    ScrollTrigger.create({ trigger: '[data-sand]', start: 'top 70%', once: true, onEnter: sandGo });
+    G.to('[data-sand] svg', { rotation: 12, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-sand]', start: 'top bottom', end: 'bottom top', toggleActions: 'play pause resume pause' } });
+  }
+
+  /* ---------- SCENE: Кадыкёй ---------- */
+  const SCENE = [
+    [12, 40, "Ayşe'|nin anne|si|nin ofis|i", 'офис мамы Айше'],
+    [23, 52, 'eczane|nin telefon numara|sı', 'номер телефона аптеки'],
+    [38, 36, "Oya'|nın kız|ı|nın öğretmen|i", 'учительница дочери Ойи'],
+    [54, 55, 'çay bahçe|si|nin kapı|sı', 'вход в чайный сад'],
+    [66, 48, 'otobüs durağ|ı|nın ad|ı', 'название автобусной остановки'],
+    [84, 72, 'Kadıköy vapur|u|nun kaptan|ı', 'капитан кадыкёйского парома'],
+  ];
+  const scene = $('[data-scene]'), bubble = $('[data-bubble]');
+  SCENE.forEach(([x, y, w, ru], i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'zc-hot';
+    b.textContent = i + 1;
+    b.style.left = x + '%';
+    b.style.top = y + '%';
+    b.setAttribute('aria-label', `Место ${i + 1}: ${ru}`);
+    b.addEventListener('click', () => {
+      $$('.zc-hot', scene).forEach((h) => h.classList.toggle('is-on', h === b));
+      bubble.innerHTML = `<span lang="tr">${phraseHTML(w)}</span><span class="zc-tr" data-ui>${ru}</span>`;
+      speak(plain(w));
+      if (G) G.fromTo(bubble, { y: 16, rotation: -1.5, scale: 0.96 }, { y: 0, rotation: 0, scale: 1, duration: 0.5, ease: 'back.out(2.5)' });
+      sparks(b, 8);
+    });
+    scene.append(b);
+  });
+  if (G) {
+    G.fromTo('[data-ferry]', { x: 60 }, { x: -90, ease: 'none', scrollTrigger: { trigger: scene, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    G.to('[data-cloud]', { x: (i) => (i ? 60 : -60), ease: 'none', scrollTrigger: { trigger: scene, start: 'top bottom', end: 'bottom top', scrub: 1.5 } });
+    G.fromTo('.zc-scene .ln', { strokeDasharray: 1600, strokeDashoffset: 1600 }, { strokeDashoffset: 0, duration: 2.2, ease: 'power2.inOut', stagger: 0.08, scrollTrigger: { trigger: scene, start: 'top 80%', once: true } });
+    G.from('.zc-hot', { scale: 0.3, rotation: -90, duration: 0.5, ease: 'back.out(3)', stagger: 0.1, delay: 1, scrollTrigger: { trigger: scene, start: 'top 80%', once: true } });
+  }
+
+  /* ---------- GALLERY ---------- */
+  const GAL = [
+    ['i-car', 'ph-amber', "Ayşe'|nin anne|si|nin araba|sı", 'машина мамы Айше'],
+    ['i-key', 'ph-night', "Murat'|ın araba|sı|nın anahtar|ı", 'ключ от машины Мурата'],
+    ['i-phone', 'ph-bw', "Kerem'|in kardeş|i|nin telefon|u", 'телефон брата Керема'],
+    ['i-tag', 'ph-rose', "Elif'|in arkadaş|ı|nın ad|ı", 'имя подруги Элиф'],
+    ['i-bag', 'ph-sea', "Zeynep'|in öğretmen|i|nin çanta|sı", 'сумка учителя Зейнеп'],
+    ['i-cross', 'ph-lamp', "Can'|ın baba|sı|nın eczane|si", 'аптека отца Джана'],
+    ['i-cat', 'ph-amber', "Deniz'|in komşu|su|nun kedi|si", 'кошка соседа Дениз'],
+    ['i-gate', 'ph-bw', 'okul|un bahçe|si|nin kapı|sı', 'ворота школьного двора'],
+    ['i-lock', 'ph-night', 'apartman|ın kapı|sı|nın şifre|si', 'код от двери подъезда'],
+    ['i-office', 'ph-rose', "Burak'|ın müdür|ü|nün ofis|i", 'офис начальника Бурака'],
+    ['i-ferry', 'ph-sea', 'vapur|un kaptan|ı|nın ad|ı', 'имя капитана парома'],
+    ['i-school', 'ph-lamp', "Oya'|nın kız|ı|nın okul|u", 'школа дочери Ойи'],
+  ];
+  const gal = $('[data-gal]');
+  gal.innerHTML = GAL.map(([ic, ph, w, ru], i) => `<button type="button" class="zc-card" style="--r:${[-2, 1.5, -1, 2.5][i % 4]}deg" data-say="${plain(w)}"><span class="zc-pol__ph ${ph}"><svg aria-hidden="true"><use href="#${ic}"/></svg></span><span class="zc-card__front"><span class="zc-card__tr" lang="tr">${plain(w)}</span></span><span class="zc-card__back"><span lang="tr">${phraseHTML(w)}</span><span class="zc-tr" data-ui>${ru}</span></span></button>`).join('');
+  $$('.zc-card', gal).forEach((c) => c.addEventListener('click', () => {
+    c.classList.toggle('is-flip');
+    if (G) G.fromTo(c, { rotationY: 80, scale: 0.94 }, { rotationY: 0, scale: 1, duration: 0.55, ease: 'back.out(2)' });
+  }));
+  if (G && fine) $$('.zc-card', gal).forEach((c) => {
+    c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); G.to(c, { rotationY: ((e.clientX - r.left) / r.width - 0.5) * 18, rotationX: ((e.clientY - r.top) / r.height - 0.5) * -18, transformPerspective: 600, duration: 0.4, ease: 'power2.out' }); });
+    c.addEventListener('pointerleave', () => G.to(c, { rotationY: 0, rotationX: 0, duration: 0.6, ease: 'elastic.out(1, .45)' }));
+  });
+  if (G) ScrollTrigger.batch('.zc-card', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { y: 70, rotation: () => G.utils.random(-14, 14), scale: 0.8, duration: 0.7, ease: 'back.out(1.8)', stagger: 0.08 }) });
+
+  /* ---------- LAB ---------- */
+  const labOut = $('[data-lab-out]'), labRu = $('[data-lab-ru]'), labWhy = $('[data-lab-why]'), labSay = $('[data-lab-say]');
+  function showLab(words, ru) {
+    labOut.innerHTML = words.map(wordHTML).join('');
+    labRu.textContent = ru;
+    labSay.dataset.say = words.map(plain).join(' ');
+    labWhy.innerHTML = words.map((w, i) => {
+      const parts = w.split('|');
+      const role = parts.length === 1 ? 'местоимение-хозяин' : i === 0 ? 'первое: только -nin' : i === words.length - 1 ? 'последнее: только -sı' : (parts.length > 2 ? 'середина: -sı + -nin' : 'середина: хвост блока + -nin');
+      return `<li><b lang="tr">${plain(w)}</b> — ${role}</li>`;
+    }).join('');
+    if (G) {
+      G.from($$('.zc-w', labOut), { y: -40, rotation: (i) => (i % 2 ? 10 : -10), scale: 0.7, duration: 0.55, ease: 'back.out(2.5)', stagger: 0.08 });
+      G.from($$('.g, .p', labOut), { scale: 2.2, duration: 0.5, ease: 'elastic.out(1, .45)', stagger: 0.05, delay: 0.25 });
+      G.fromTo(labWhy.children, { x: 20 }, { x: 0, duration: 0.4, ease: 'power2.out', stagger: 0.05 });
+    }
+  }
+  /* режим A: сборка */
+  const A = {
+    owner: [['ayse', "Ayşe'|nin", 'Айше'], ['murat', "Murat'|ın", 'Мурата'], ['elif', "Elif'|in", 'Элиф'], ['kerem', "Kerem'|in", 'Керема']],
+    person: [['-', '—', '', ''], ['anne', 'anne|si', 'anne|si|nin', 'мамы'], ['baba', 'baba|sı', 'baba|sı|nın', 'папы'], ['arkadas', 'arkadaş|ı', 'arkadaş|ı|nın', 'друга'], ['ogretmen', 'öğretmen|i', 'öğretmen|i|nin', 'учителя'], ['patron', 'patron|u', 'patron|u|nun', 'начальника']],
+    thing: [['araba', 'araba|sı', 'araba|sı|nın', 'машина', 'машины', ['kapi', 'anahtar']], ['ev', 'ev|i', 'ev|i|nin', 'дом', 'дома', ['kapi', 'anahtar', 'pencere']], ['ofis', 'ofis|i', 'ofis|i|nin', 'офис', 'офиса', ['kapi', 'pencere', 'sifre']], ['telefon', 'telefon|u', 'telefon|u|nun', 'телефон', 'телефона', ['ekran', 'sifre']]],
+    part: { '-': ['—', ''], kapi: ['kapı|sı', 'дверь'], anahtar: ['anahtar|ı', 'ключ'], pencere: ['pencere|si', 'окно'], sifre: ['şifre|si', 'пароль'], ekran: ['ekran|ı', 'экран'] },
+  };
+  const aState = { owner: 'ayse', person: 'anne', thing: 'araba', part: 'kapi' };
+  const labA = $('[data-lab-a]');
+  function chipRow(k, label, items) {
+    return `<div class="zc-slot"><em>${label}</em><div class="zc-chips">${items.map(([id, t]) => `<button type="button" class="zc-chip" data-k="${k}" data-v="${id}" aria-pressed="${aState[k] === id}" lang="tr">${plain(t)}</button>`).join('')}</div></div>`;
+  }
+  function renderA(anim) {
+    const thing = A.thing.find((t) => t[0] === aState.thing);
+    if (aState.part !== '-' && !thing[5].includes(aState.part)) aState.part = thing[5][0];
+    labA.innerHTML = chipRow('owner', 'хозяин', A.owner.map((o) => [o[0], o[1]]))
+      + chipRow('person', 'человек', A.person.map((p) => [p[0], p[0] === '-' ? '—' : p[1].split('|')[0]]))
+      + chipRow('thing', 'вещь', A.thing.map((t) => [t[0], t[0]]))
+      + chipRow('part', 'деталь', [['-', '—'], ...thing[5].map((p) => [p, A.part[p][0].split('|')[0]])]);
+    $$('.zc-chip', labA).forEach((c) => c.addEventListener('click', () => { aState[c.dataset.k] = c.dataset.v; renderA(true); }));
+    const owner = A.owner.find((o) => o[0] === aState.owner);
+    const person = A.person.find((p) => p[0] === aState.person);
+    const nouns = [];
+    if (person[0] !== '-') nouns.push([person[1], person[2]]);
+    nouns.push([thing[1], thing[2]]);
+    if (aState.part !== '-') nouns.push([A.part[aState.part][0], A.part[aState.part][0]]);
+    const words = [owner[1], ...nouns.map((n, i) => (i === nouns.length - 1 ? n[0] : n[1]))];
+    const ruOwner = (person[0] !== '-' ? person[3] + ' ' : '') + owner[2];
+    const ru = aState.part !== '-' ? `${A.part[aState.part][1]} ${thing[4]} ${ruOwner}` : `${thing[3]} ${ruOwner}`;
+    if (anim !== false) showLab(words, ru);
+  }
+  /* режим B: удлинитель */
+  const CHAINS = [
+    { owner: "Ayşe'|nin", links: [['anne|si', 'anne|si|nin'], ['ofis|i', 'ofis|i|nin'], ['kapı|sı', 'kapı|sı|nın'], ['şifre|si', 'şifre|si']], ru: ['мама Айше', 'офис мамы Айше', 'дверь офиса мамы Айше', 'код двери офиса мамы Айше'] },
+    { owner: "Oya'|nın", links: [['kız|ı', 'kız|ı|nın'], ['öğretmen|i', 'öğretmen|i|nin'], ['araba|sı', 'araba|sı|nın'], ['anahtar|ı', 'anahtar|ı']], ru: ['дочь Ойи', 'учитель дочери Ойи', 'машина учителя дочери Ойи', 'ключ от машины учителя дочери Ойи'] },
+  ];
+  let bChain = 0, bLen = 1;
+  function renderB() {
+    const c = CHAINS[bChain];
+    const words = [c.owner, ...c.links.slice(0, bLen).map((l, i) => (i === bLen - 1 ? l[0] : l[1]))];
+    showLab(words, c.ru[bLen - 1]);
+  }
+  $('[data-grow]').addEventListener('click', () => { if (bLen < 4) { bLen++; renderB(); sparks(labOut, 8); } else if (G) G.fromTo(labOut, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, .3)' }); });
+  $('[data-shrink]').addEventListener('click', () => { if (bLen > 1) { bLen--; renderB(); } });
+  $$('[data-chain]').forEach((b) => b.addEventListener('click', () => {
+    bChain = +b.dataset.chain; bLen = 1;
+    $$('[data-chain]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    renderB();
+  }));
+  /* режим C: моя, твоя */
+  const C = {
+    pron: [['benim', 'моего', 'моей'], ['senin', 'твоего', 'твоей'], ['onun', 'его', 'его']],
+    who: [['anne', { benim: 'anne|m|in', senin: 'anne|n|in', onun: 'anne|si|nin' }, 'мамы', 'f'], ['baba', { benim: 'baba|m|ın', senin: 'baba|n|ın', onun: 'baba|sı|nın' }, 'папы', 'm'], ['arkadaş', { benim: 'arkadaş|ım|ın', senin: 'arkadaş|+ın|ın', onun: 'arkadaş|ı|nın' }, 'друга', 'm'], ['kardeş', { benim: 'kardeş|im|in', senin: 'kardeş|+in|in', onun: 'kardeş|i|nin' }, 'брата', 'm']],
+    what: [['araba|sı', 'машина'], ['ev|i', 'дом'], ['telefon|u', 'телефон']],
+  };
+  const cState = { pron: 'benim', who: 'anne', what: 'araba|sı' };
+  const labC = $('[data-lab-c]');
+  function renderC() {
+    const row = (k, items) => `<div class="zc-chips" style="margin-bottom:8px">${items.map(([id, t]) => `<button type="button" class="zc-chip" data-k="${k}" data-v="${id}" aria-pressed="${cState[k] === id}" lang="tr">${t}</button>`).join('')}</div>`;
+    labC.innerHTML = row('pron', C.pron.map((p) => [p[0], p[0]])) + row('who', C.who.map((w) => [w[0], w[0]])) + row('what', C.what.map((w) => [w[0], plain(w[0]).replace(/(sı|i|u)$/, '')]));
+    $$('.zc-chip', labC).forEach((c) => c.addEventListener('click', () => { cState[c.dataset.k] = c.dataset.v; renderC(); }));
+    const p = C.pron.find((x) => x[0] === cState.pron), w = C.who.find((x) => x[0] === cState.who), t = C.what.find((x) => x[0] === cState.what);
+    const pr = cState.pron === 'onun' ? 'его или её' : w[3] === 'f' ? p[2] : p[1];
+    showLab([cState.pron, w[1][cState.pron], t[0]], `${t[1]} ${pr} ${w[2]}`);
+  }
+  /* режим D: блок */
+  const D = [
+    ['tel', 'telefon numarası', ["Elif'|in", 'telefon numara|sı'], 'номер телефона Элиф', ['telefon numara|sı|nın', 'sahib|i'], 'владелец номера телефона'],
+    ['durak', 'otobüs durağı', ['okul|un', 'otobüs durağ|ı'], 'автобусная остановка у школы', ['otobüs durağ|ı|nın', 'ad|ı'], 'название автобусной остановки'],
+    ['cay', 'çay bahçesi', ['otel|in', 'çay bahçe|si'], 'чайный сад отеля', ['çay bahçe|si|nin', 'kapı|sı'], 'вход в чайный сад'],
+    ['kitap', 'Türkçe kitabı', ["Ali'|nin", 'Türkçe kitab|ı'], 'учебник турецкого Али', ['Türkçe kitab|ı|nın', 'fiyat|ı'], 'цена учебника турецкого'],
+  ];
+  const dState = { block: 'tel', pos: 'end' };
+  const labD = $('[data-lab-d]');
+  function renderD() {
+    labD.innerHTML = `<div class="zc-chips" style="margin-bottom:8px">${D.map((d) => `<button type="button" class="zc-chip" data-k="block" data-v="${d[0]}" aria-pressed="${dState.block === d[0]}" lang="tr">${d[1]}</button>`).join('')}</div><div class="zc-chips" style="margin-bottom:8px"><button type="button" class="zc-chip" data-k="pos" data-v="end" aria-pressed="${dState.pos === 'end'}">блок в конце</button><button type="button" class="zc-chip" data-k="pos" data-v="mid" aria-pressed="${dState.pos === 'mid'}">блок в середине</button></div>`;
+    $$('.zc-chip', labD).forEach((c) => c.addEventListener('click', () => { dState[c.dataset.k] = c.dataset.v; renderD(); }));
+    const d = D.find((x) => x[0] === dState.block);
+    const [words, ru] = dState.pos === 'end' ? [d[2], d[3]] : [d[4], d[5]];
+    showLab(words.flatMap((w) => (w.includes(' ') ? [w] : [w])), ru);
+  }
+  const RENDER = { a: () => renderA(true), b: renderB, c: renderC, d: renderD };
+  $$('[data-tab]').forEach((t) => t.addEventListener('click', () => {
+    $$('[data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('[data-pane]').forEach((p) => p.classList.toggle('is-on', p.dataset.pane === t.dataset.tab));
+    RENDER[t.dataset.tab]();
+    if (G) G.from(`[data-pane="${t.dataset.tab}"]`, { y: 20, rotation: -0.5, duration: 0.4, ease: 'back.out(2)' });
+  }));
+  $('.zc-tabs').addEventListener('keydown', (e) => {
+    const tabs = $$('[data-tab]'); const i = tabs.findIndex((x) => x.getAttribute('aria-selected') === 'true');
+    if (e.key === 'ArrowRight') tabs[(i + 1) % 4].click();
+    if (e.key === 'ArrowLeft') tabs[(i + 3) % 4].click();
+  });
+  renderA(true);
+  if (G) G.from('.zc-lab', { y: 60, rotation: 1.5, duration: 0.8, ease: 'back.out(2)', scrollTrigger: { trigger: '.zc-lab', start: 'top 88%', once: true } });
+
+  /* ---------- TRAPS ---------- */
+  const TRAPS = [
+    ["Kerem'in kardeşi telefonu", "Kerem'in kardeşinin telefonu", 'середина без -nin'],
+    ["Elif'in arkadaşının ad", "Elif'in arkadaşının adı", 'конец без -ı'],
+    ["anahtarı arabasının Murat'ın", "Murat'ın arabasının anahtarı", 'русский порядок'],
+    ["Ali'nin Türkçe kitabısı", "Ali'nin Türkçe kitabı", 'двойной хвост у блока'],
+    ["Can'ın babanın eczanesi", "Can'ın babasının eczanesi", 'середина без -sı'],
+  ];
+  const traps = $('[data-traps]');
+  traps.innerHTML = TRAPS.map(([bad, good, why]) => `<button type="button" class="zc-trap" data-say="${good}"><span class="zc-trap__hint" data-ui>исправить ✎</span><span class="zc-trap__bad" lang="tr">${bad}<svg viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12C10 4 20 18 32 8s20 10 34 0 22 10 34 2"/></svg></span><span class="zc-trap__good" lang="tr">${good}</span><small data-ui>${why}</small></button>`).join('');
+  $$('.zc-trap', traps).forEach((t) => t.addEventListener('click', () => {
+    if (t.classList.contains('is-fix')) return;
+    t.classList.add('is-fix');
+    if (G) {
+      G.fromTo($('.zc-trap__bad path', t), { strokeDashoffset: 600 }, { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' });
+      G.fromTo($('.zc-trap__good', t), { scale: 0, rotation: -4 }, { scale: 1, rotation: 0, duration: 0.6, delay: 0.4, ease: 'elastic.out(1, .45)' });
+      G.to($('.zc-trap__hint', t), { rotation: 20, y: -6, duration: 0.3, ease: 'back.out(3)' });
+    }
+    sparks(t, 10);
+  }));
+  if (G) ScrollTrigger.batch('.zc-trap', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { x: (i) => (i % 2 ? 60 : -60), rotation: (i) => (i % 2 ? 4 : -4), duration: 0.6, ease: 'back.out(2)', stagger: 0.1 }) });
+
+  /* ---------- CHEAT ---------- */
+  if (G) {
+    G.from('[data-fall] span', { y: -300, rotation: () => G.utils.random(-60, 60), duration: 1.1, ease: 'bounce.out', stagger: 0.09, scrollTrigger: { trigger: '[data-fall]', start: 'top 85%', once: true } });
+    G.from('.zc-rules li', { x: (i) => (i % 2 ? 80 : -80), rotation: (i) => (i % 2 ? 3 : -3), duration: 0.6, ease: 'back.out(2)', stagger: 0.1, scrollTrigger: { trigger: '.zc-rules', start: 'top 85%', once: true } });
+    G.fromTo('.zc-poster', { scale: 0.94, rotation: -1 }, { scale: 1, rotation: 0, ease: 'none', scrollTrigger: { trigger: '.zc-poster', start: 'top bottom', end: 'top 30%', scrub: 0.8 } });
+    G.from('.zc-formula .zc-w', { y: 60, scale: 0.5, duration: 0.7, ease: 'back.out(2.5)', stagger: 0.15, scrollTrigger: { trigger: '.zc-formula', start: 'top 85%', once: true } });
+    ScrollTrigger.batch('[data-line]', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: 30, rotation: 1, duration: 0.6, ease: 'back.out(2)', stagger: 0.35 }) });
+  }
+  $('.zc-formula').addEventListener('click', (e) => sparks(e.currentTarget, 12));
+
+  /* ---------- нестандартное упражнение: курьерская этикетка ---------- */
+  (async () => {
+    const EX = 'a1.genitive-chain.ex5';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const ruEl = $('[data-pc-ru]', root), slots = $('[data-pc-slots]', root), photos = $('[data-pc-photos]', root);
+    const endsEl = $('[data-pc-ends]', root), stat = $('[data-pc-stat]', root), count = $('[data-pc-count]', root);
+    const data = await AlternaKit.exercise(EX);
+    const items = data.items;
+    const TONES = ['ph-amber', 'ph-night', 'ph-rose'];
+    let i = 0, correct = 0, picked = [], t0 = performance.now(), busy = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      const it = items[i];
+      picked = [];
+      busy = false;
+      ruEl.textContent = it.ru;
+      count.textContent = `${i + 1} / ${items.length}`;
+      slots.innerHTML = '<span></span><span></span><span></span>';
+      photos.innerHTML = it.cards.map((c, k) => `<button type="button" class="zc-photo" data-c="${c}"><i class="${TONES[k]}" style="background:var(--bg)"></i><span lang="tr">${c}</span><small data-ui>${k + 1}</small></button>`).join('');
+      $$('.zc-photo', photos).forEach((b) => b.addEventListener('click', () => place(b)));
+      endsEl.hidden = true;
+      stat.textContent = 'Нажимай фото по порядку: сначала хозяин.';
+      t0 = performance.now();
+      if (G) G.from($$('.zc-photo', photos), { y: -60, rotation: () => G.utils.random(-20, 20), duration: 0.6, ease: 'bounce.out', stagger: 0.08 });
+    }
+    function place(b) {
+      if (busy || b.disabled || picked.length >= 3) return;
+      b.disabled = true;
+      picked.push(b.dataset.c);
+      const slot = slots.children[picked.length - 1];
+      slot.textContent = b.dataset.c;
+      if (G) G.from(slot, { y: -30, scale: 0.6, duration: 0.4, ease: 'back.out(3)' });
+      if (picked.length === 3) {
+        const it = items[i];
+        endsEl.innerHTML = it.options.map((o, k) => `<button type="button" data-o="${o}">${o} <small>(${k + 1})</small></button>`).join('');
+        $$('button', endsEl).forEach((x) => x.addEventListener('click', () => finish(x.dataset.o)));
+        endsEl.hidden = false;
+        stat.textContent = 'Теперь хвост для середины.';
+        if (G) G.from($$('button', endsEl), { scale: 0.5, duration: 0.4, ease: 'back.out(3)', stagger: 0.06 });
+      }
+    }
+    function finish(mid) {
+      if (busy) return;
+      busy = true;
+      const it = items[i];
+      const orderOk = picked.join(' ') === it.answer.order.join(' ');
+      const ok = orderOk && mid === it.answer.middle;
+      if (ok) correct++;
+      slots.innerHTML = it.answer.full.split(' ').map((w) => `<span>${w}</span>`).join('');
+      stat.textContent = ok ? `Верно: ${it.answer.full}. Курьер уже едет.` : `Правильно так: ${it.answer.full}. ${it.explanation}`;
+      speak(it.answer.full);
+      if (ok) sparks(slots, 12);
+      else if (G) G.fromTo(slots, { x: -10 }, { x: 0, duration: 0.6, ease: 'elastic.out(1, .3)' });
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: `${picked.join(' ')} | ${mid}`, timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          count.textContent = 'готово';
+          endsEl.hidden = true;
+          photos.innerHTML = '';
+          stat.textContent = `${correct} из ${items.length}. Все посылки доставлены.`;
+        }
+      }, reduce ? 300 : 1400);
+    }
+    root.addEventListener('keydown', (e) => {
+      const k = +e.key;
+      if (!(k >= 1 && k <= 3)) return;
+      if (!endsEl.hidden) { const b = $$('button', endsEl)[k - 1]; if (b) b.click(); }
+      else { const b = $$('.zc-photo', photos)[k - 1]; if (b) b.click(); }
+    });
+    AlternaKit.registerSolver(EX, async () => {
+      while (i < items.length) {
+        const it = items[i];
+        for (const c of it.answer.order) $(`.zc-photo[data-c="${c}"]`, photos).click();
+        finish(it.answer.middle);
+        await wait(reduce ? 330 : 1430);
+      }
+    });
+    show();
+  })();
+
+  /* ---------- скроллбар-плёнка ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.zc-sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'zc-sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `К разделу «${($('h1, h2', s) || {}).textContent || s.dataset.section}»`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, k) => b.style.setProperty('--at', Math.min(1, secs[k].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.zc-sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (G) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' });
+  });
+  layout();
+  progress();
+  if (G) G.to('.zc-sb__cam', { rotation: 360, ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.5 } });
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .from(b.querySelectorAll('.pa, .pb, .pc'), { y: -60, rotation: (k) => (k - 1) * 30, duration: 0.6, ease: 'bounce.out', stagger: 0.12 }, 0.9)
+      .fromTo(b.querySelectorAll('.ca, .cb'), { strokeDasharray: 60, strokeDashoffset: 60 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out', stagger: 0.15 }, 1.4)
+      .from(b.querySelector('text'), { scale: 0.3, transformOrigin: '50% 50%', duration: 0.4, ease: 'back.out(3)' }, 1.7);
+  });
+});
+</script>
+</body>
+</html>
