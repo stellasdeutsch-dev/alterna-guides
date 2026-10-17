@@ -2119,5 +2119,281 @@ addEventListener('DOMContentLoaded', () => {
   } else addEventListener('load', layout);
 });
 </script>
+<style>
+/* ================= v1.1: больше визуала ================= */
+.mk-road { position: relative; height: clamp(90px, 14vw, 150px); background: var(--navy); overflow: clip; }
+.mk-road svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.mk-road--light { background: var(--mist); }
+.mk-ticker + .mk-curve-top { margin-top: 0; }
+.mk-ticker { position: relative; z-index: 4; overflow: clip; background: var(--yellow); padding: 12px 0; border-top: 3px solid var(--navy); border-bottom: 3px solid var(--navy); }
+.mk-ticker__row { display: flex; gap: 12px; width: max-content; }
+.mk-ticker__row + .mk-ticker__row { margin-top: 10px; }
+.mk-tk { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 16px; border: 0; border-radius: 999px; background: var(--navy); color: #fff; font-weight: 700; font-size: 16px; white-space: nowrap; cursor: pointer; }
+.mk-tk b { color: var(--yellow); }
+.mk-tk--y { background: #fff; color: var(--navy); }
+.mk-tk--y b { color: #a68400; }
+.mk-realtors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; max-width: 620px; margin: 6px auto 18px; }
+.mk-realtor { position: relative; display: grid; justify-items: center; gap: 6px; padding: 10px; border: 0; border-radius: 22px; background: rgba(255,255,255,.06); color: #fff; cursor: pointer; }
+.mk-realtor svg { width: min(100%, 170px); height: auto; overflow: visible; }
+.mk-realtor b { font-family: var(--f-head); text-transform: uppercase; letter-spacing: .06em; color: var(--yellow); }
+.mk-realtor small { color: #b6c2d6; font-size: 13px; }
+.mk-wheel { width: 150px; height: 150px; margin: 0 auto; display: block; }
+.mk-cube { position: absolute; z-index: 1; right: clamp(10px, 8vw, 140px); top: 0; width: 110px; height: 110px; perspective: 700px; cursor: grab; touch-action: none; }
+.mk-cube__in { position: absolute; inset: 0; transform-style: preserve-3d; }
+.mk-cube__f { position: absolute; inset: 0; display: grid; place-items: center; border-radius: 16px; border: 2px solid rgba(255,255,255,.25); font-family: var(--f-body); font-weight: 800; font-size: 19px; color: var(--navy); background: var(--yellow); backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: inset 0 0 30px rgba(0,0,0,.08); }
+.mk-cube__f:nth-child(2n) { background: #fff; }
+.mk-cube__f:nth-child(3) { background: var(--navy-3); color: var(--yellow); }
+@media (max-width: 899px) { .mk-cube { display: none; } }
+.mk-bus .mk-tlight { position: absolute; left: auto; right: 8px; bottom: 6px; width: 26px; height: 64px; }
+.mk-keyfx { position: absolute; z-index: 1; bottom: -40px; width: 26px; height: 26px; color: var(--yellow); opacity: .7; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .mk-ticker__row { flex-wrap: wrap; width: auto; padding: 0 16px; } }
+</style>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  'use strict';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = reduce ? null : (window.gsap || null);
+  const ST = G ? window.ScrollTrigger : null;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const speak = (t) => { if (window.AlternaKit) window.AlternaKit.speak(t); };
+  const svgEl = (tag, attrs = {}) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+  const live = (target, tw) => { if (!tw || !target) return; tw.pause(); new IntersectionObserver(([e]) => (e.isIntersecting ? tw.resume() : tw.pause())).observe(target); };
+
+  /* ---------- 1. бегущая лента примеров под hero ---------- */
+  const TICK = [
+    ['Beklemek', ' yerine yürüdüm.'], ['Beklemek', 'tense yürüyelim.'], ['Kahve içmek', ' yerine çay içtim.'], ['Evde oturmak', 'tansa yürüyüşe çıkalım.'],
+    ['Taksiye binmek', ' yerine metroya bindim.'], ['Kira ödemek', 'tense ev alalım.'], ['Mesaj yazmak', ' yerine aradım.'], ['Yalan söylemek', 'tense susarım.'],
+  ];
+  const ticker = document.createElement('div');
+  ticker.className = 'mk-ticker';
+  ticker.setAttribute('aria-label', 'Лента примеров');
+  const rows = [0, 1].map((r) => {
+    const row = document.createElement('div');
+    row.className = 'mk-ticker__row';
+    const list = r ? [...TICK].reverse() : TICK;
+    [...list, ...list].forEach(([a, b], n) => {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'mk-tk' + ((n + r) % 2 ? ' mk-tk--y' : '');
+      chip.lang = 'tr';
+      const strong = document.createElement('b');
+      strong.textContent = a;
+      chip.append(strong, b);
+      chip.dataset.full = a + b;
+      if (n >= list.length) chip.tabIndex = -1;
+      row.append(chip);
+    });
+    ticker.append(row);
+    return row;
+  });
+  $('#s-hero').after(ticker);
+  ticker.addEventListener('click', (e) => {
+    const c = e.target.closest('.mk-tk');
+    if (!c) return;
+    speak(c.dataset.full);
+    if (G) G.fromTo(c, { scale: 1.15, rotation: -3 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .4)' });
+  });
+  if (G) rows.forEach((row, r) => {
+    const half = () => row.scrollWidth / 2;
+    live(ticker, G.fromTo(row, { x: r ? -half() : 0 }, { x: r ? 0 : -half(), duration: 38, ease: 'none', repeat: -1 }));
+  });
+  ticker.addEventListener('pointerenter', () => G && G.globalTimeline && rows.forEach((row) => G.getTweensOf(row).forEach((t) => t.timeScale(.25))));
+  ticker.addEventListener('pointerleave', () => G && rows.forEach((row) => G.getTweensOf(row).forEach((t) => t.timeScale(1))));
+
+  /* ---------- 2. дорожные разделители: машинка едет по скроллу ---------- */
+  const ROADS = [['#s-story', false], ['#s-tansa', true], ['#s-compare', false], ['#s-scene', true], ['#s-traps', false]];
+  ROADS.forEach(([sel, light], n) => {
+    const sec = $(sel);
+    if (!sec) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'mk-road' + (light ? ' mk-road--light' : '');
+    wrap.setAttribute('aria-hidden', 'true');
+    const svg = svgEl('svg', { viewBox: '0 0 1200 140', preserveAspectRatio: 'none' });
+    const d = n % 2 ? 'M-20 60 C 300 130, 520 10, 760 70 S 1100 120, 1220 50' : 'M-20 90 C 260 20, 520 130, 800 60 S 1080 20, 1220 90';
+    const road = svgEl('path', { d, fill: 'none', stroke: light ? '#b9c2d3' : '#16407a', 'stroke-width': 40, 'stroke-linecap': 'round' });
+    const mid = svgEl('path', { d, fill: 'none', stroke: '#f0ca01', 'stroke-width': 3, 'stroke-dasharray': '16 16' });
+    const lamps = svgEl('g');
+    for (let i = 0; i < 7; i++) lamps.append(svgEl('circle', { cx: 80 + i * 170, cy: n % 2 ? 22 : 128, r: 6, fill: '#f0ca01', opacity: .25 }));
+    const car = svgEl('g');
+    car.append(svgEl('rect', { x: -22, y: -11, width: 44, height: 22, rx: 7, fill: n % 2 ? '#f0ca01' : '#ffffff' }),
+      svgEl('rect', { x: 0, y: -8, width: 14, height: 16, rx: 3, fill: '#9fc1ee' }),
+      svgEl('circle', { cx: 24, cy: -6, r: 3, fill: '#fff6c4' }), svgEl('circle', { cx: 24, cy: 6, r: 3, fill: '#fff6c4' }));
+    svg.append(road, mid, lamps, car);
+    wrap.append(svg);
+    sec.after(wrap);
+    if (!G || !ST || !window.MotionPathPlugin) { car.setAttribute('transform', 'translate(600 70)'); return; }
+    G.to(car, { motionPath: { path: road, align: road, alignOrigin: [.5, .5], autoRotate: true }, ease: 'none', scrollTrigger: { trigger: wrap, start: 'top bottom', end: 'bottom top', scrub: .4 } });
+    G.to(lamps.children, { opacity: 1, scale: 1.4, transformOrigin: '50% 50%', stagger: .12, ease: 'none', scrollTrigger: { trigger: wrap, start: 'top 90%', end: 'bottom 30%', scrub: true } });
+    G.to(mid, { strokeDashoffset: -320, ease: 'none', scrollTrigger: { trigger: wrap, start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  /* ---------- 3. hero: звёзды падают, птицы летят, машина едет ---------- */
+  const art = $('[data-hero-art]');
+  if (art) {
+    const meteor = svgEl('line', { x1: 0, y1: 0, x2: 70, y2: 26, stroke: '#fff', 'stroke-width': 2, 'stroke-linecap': 'round', opacity: 0 });
+    const birds = svgEl('g', { fill: 'none', stroke: '#c9d4e6', 'stroke-width': 3 });
+    [[0, 0], [30, 12], [56, -6]].forEach(([x, y]) => birds.append(svgEl('path', { d: `M${x} ${y}q8-8 16 0q8-8 16 0` })));
+    const heroCar = svgEl('g');
+    heroCar.append(svgEl('rect', { x: -30, y: -12, width: 60, height: 24, rx: 8, fill: '#16407a' }), svgEl('path', { d: 'M30 -6 L130 -30 L130 30 L30 6Z', fill: '#f0ca01', opacity: .25 }), svgEl('circle', { cx: 30, cy: 0, r: 4, fill: '#fff6c4' }));
+    const beacon = svgEl('circle', { cx: 1080, cy: 214, r: 7, fill: '#f2787a' });
+    art.append(meteor, birds, heroCar, beacon);
+    if (G) {
+      live(art, G.timeline({ repeat: -1, repeatDelay: 2.5 }).fromTo(meteor, { x: 200, y: 40, opacity: 0 }, { x: 760, y: 250, opacity: 1, duration: .9, ease: 'power2.in' }).to(meteor, { opacity: 0, duration: .2 }));
+      live(art, G.fromTo(birds, { x: -120, y: 260 }, { x: 1500, y: 160, duration: 22, repeat: -1, ease: 'none' }));
+      live(art, G.to(birds.children, { scaleY: .4, transformOrigin: '50% 50%', duration: .35, yoyo: true, repeat: -1, stagger: .12 }));
+      live(art, G.fromTo(heroCar, { x: 700, y: 770 }, { x: 1480, y: 735, duration: 7, repeat: -1, ease: 'none' }));
+      live(art, G.to(beacon, { scale: 2.2, opacity: .2, transformOrigin: '50% 50%', duration: .9, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+    }
+  }
+
+  /* ---------- 4. светофор у остановки ---------- */
+  const busRoad = $('.mk-bus');
+  if (busRoad) {
+    const tl = svgEl('svg', { viewBox: '0 0 26 64', class: 'mk-tlight', 'aria-hidden': 'true' });
+    tl.append(svgEl('rect', { width: 26, height: 64, rx: 8, fill: '#02162e' }));
+    const lights = ['#d9474d', '#f0ca01', '#1d9e57'].map((c, i) => { const l = svgEl('circle', { cx: 13, cy: 12 + i * 20, r: 7, fill: c, opacity: .2 }); tl.append(l); return l; });
+    busRoad.append(tl);
+    if (G) live(busRoad, G.timeline({ repeat: -1 }).to(lights[0], { opacity: 1, duration: .2 }).to(lights[0], { opacity: .2, duration: .2 }, '+=2').to(lights[1], { opacity: 1, duration: .2 }).to(lights[1], { opacity: .2, duration: .2 }, '+=.8').to(lights[2], { opacity: 1, duration: .2 }).to(lights[2], { opacity: .2, duration: .2 }, '+=2'));
+  }
+
+  /* ---------- 5. два риелтора в «отчёт или совет» ---------- */
+  const scale = $('[data-scale]');
+  if (scale) {
+    const box = document.createElement('div');
+    box.className = 'mk-realtors';
+    const PEOPLE = [
+      { k: 'rep', name: 'фактолог', note: 'рассказывает, что было', say: 'Araba almak yerine bisiklet aldı.', coat: '#e7ebf2', prop: 'clip', tag: 'yerine' },
+      { k: 'adv', name: 'советчик', note: 'говорит, как лучше', say: 'Beklemektense yürüyelim.', coat: '#f0ca01', prop: 'bubble', tag: '-maktansa' },
+    ];
+    PEOPLE.forEach((p) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'mk-realtor';
+      b.setAttribute('aria-label', `${p.name}: послушать пример`);
+      const s = svgEl('svg', { viewBox: '0 0 160 170', 'aria-hidden': 'true' });
+      const body = svgEl('g');
+      body.append(svgEl('path', { d: 'M40 170 C40 120 60 104 80 104 S120 120 120 170Z', fill: p.coat }), svgEl('path', { d: 'M74 106h12l-2 10 4 26-8 8-8-8 4-26z', fill: '#02162e' }), svgEl('circle', { cx: 80, cy: 78, r: 26, fill: '#e8b98c' }), svgEl('path', { d: 'M54 72c0-20 52-24 52 0-8-10-44-10-52 0z', fill: '#3a2a1e' }), svgEl('circle', { cx: 71, cy: 80, r: 3, fill: '#02162e' }), svgEl('circle', { cx: 89, cy: 80, r: 3, fill: '#02162e' }), svgEl('path', { d: 'M72 90q8 6 16 0', stroke: '#02162e', 'stroke-width': 2.5, fill: 'none', 'stroke-linecap': 'round' }));
+      const prop = svgEl('g');
+      if (p.prop === 'clip') prop.append(svgEl('rect', { x: 104, y: 112, width: 34, height: 44, rx: 4, fill: '#fff', stroke: '#02162e', 'stroke-width': 2 }), svgEl('path', { d: 'M110 126h22M110 134h22M110 142h14', stroke: '#16407a', 'stroke-width': 2.5 }));
+      else prop.append(svgEl('path', { d: 'M100 20h56v34h-30l-10 12v-12h-16z', fill: '#fff' }), svgEl('text', { x: 128, y: 42, 'text-anchor': 'middle', 'font-size': 13, 'font-weight': 800, fill: '#02162e' }));
+      if (p.prop !== 'clip') prop.lastChild.textContent = '-tansa';
+      const tagG = svgEl('g');
+      tagG.append(svgEl('rect', { x: 30, y: 6, width: 100, height: 26, rx: 13, fill: '#02162e' }), svgEl('text', { x: 80, y: 24, 'text-anchor': 'middle', 'font-size': 14, 'font-weight': 700, fill: '#f0ca01' }));
+      tagG.lastChild.textContent = p.tag;
+      if (p.prop === 'clip') s.append(tagG);
+      s.append(body, prop);
+      const nm = document.createElement('b'); nm.textContent = p.name; nm.setAttribute('data-ui', '');
+      const nt = document.createElement('small'); nt.textContent = p.note; nt.setAttribute('data-ui', '');
+      b.append(s, nm, nt);
+      b.addEventListener('click', () => {
+        speak(p.say);
+        if (G) { G.fromTo(body, { y: 0 }, { y: -14, duration: .2, yoyo: true, repeat: 1, ease: 'power2.out' }); G.fromTo(prop, { scale: .4, rotation: -20, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: .6, ease: 'back.out(3)' }); }
+      });
+      box.append(b);
+      if (G) live(box, G.to(body, { y: -4, duration: 1.2 + (p.k === 'adv' ? .3 : 0), yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+    });
+    scale.after(box);
+    if (G && ST) G.from(box.children, { y: 60, rotation: (n) => (n ? 6 : -6), stagger: .15, duration: .8, ease: 'back.out(2)', scrollTrigger: { trigger: box, start: 'top 85%', once: true } });
+  }
+
+  /* ---------- 6. колесо гласных в машине хвостов ---------- */
+  const hopper = $('[data-hopper]');
+  if (hopper) {
+    const wheel = svgEl('svg', { viewBox: '-80 -80 160 160', class: 'mk-wheel', 'aria-hidden': 'true' });
+    const rot = svgEl('g');
+    const V = ['a', 'ı', 'o', 'u', 'e', 'i', 'ö', 'ü'];
+    rot.append(svgEl('path', { d: 'M0 0 L0 -70 A70 70 0 0 1 0 70 Z', fill: '#16407a' }), svgEl('path', { d: 'M0 0 L0 70 A70 70 0 0 1 0 -70 Z', fill: '#2a2f6b' }));
+    const letters = V.map((v, i) => {
+      const a = (i * 45 - 67.5) * Math.PI / 180;
+      const t = svgEl('text', { x: (Math.cos(a) * 50).toFixed(1), y: (Math.sin(a) * 50 + 6).toFixed(1), 'text-anchor': 'middle', 'font-size': 18, 'font-weight': 800, fill: i < 4 ? '#9fc1ee' : '#c8b8ff' });
+      t.textContent = v;
+      rot.append(t);
+      return t;
+    });
+    wheel.append(rot, svgEl('circle', { r: 20, fill: '#f0ca01' }), svgEl('path', { d: 'M0 -78 L-8 -64 L8 -64Z', fill: '#f0ca01' }));
+    hopper.prepend(wheel);
+    let angle = 0;
+    $$('[data-verbs] .mk-chip').forEach((c) => c.addEventListener('click', () => {
+      const v = c.textContent.replace(/m[ae]k$/, '');
+      const last = [...v].reverse().find((ch) => V.includes(ch));
+      const i = V.indexOf(last);
+      if (i < 0 || !G) return;
+      const target = -(i * 45 - 67.5) - 90;
+      angle = target + Math.round((angle - target) / 360) * 360;
+      G.to(rot, { rotation: angle, svgOrigin: '0 0', duration: 1, ease: 'elastic.out(1, .5)' });
+      G.fromTo(letters[i], { scale: 2, transformOrigin: '50% 50%' }, { scale: 1, duration: .7, ease: 'back.out(3)' });
+    }));
+    if (G) live(wheel, G.to(rot, { rotation: '+=360', svgOrigin: '0 0', duration: 40, repeat: -1, ease: 'none' }));
+  }
+
+  /* ---------- 7. 3D-кубик в лаборатории ---------- */
+  const lab = $('#s-lab .mk-in');
+  if (lab) {
+    const cube = document.createElement('div');
+    cube.className = 'mk-cube';
+    cube.setAttribute('role', 'button');
+    cube.setAttribute('tabindex', '0');
+    cube.setAttribute('aria-label', 'Кубик форм: покрутить');
+    const inner = document.createElement('div');
+    inner.className = 'mk-cube__in';
+    const FACES = ['yerine', '-tansa', '-tense', 'beklemek', 'yürümek', 'kahve → çay'];
+    const TR = ['translateZ(55px)', 'rotateY(90deg) translateZ(55px)', 'rotateY(180deg) translateZ(55px)', 'rotateY(-90deg) translateZ(55px)', 'rotateX(90deg) translateZ(55px)', 'rotateX(-90deg) translateZ(55px)'];
+    FACES.forEach((f, i) => { const s = document.createElement('span'); s.className = 'mk-cube__f'; s.lang = 'tr'; s.textContent = f; s.style.transform = TR[i]; inner.append(s); });
+    cube.append(inner);
+    lab.append(cube);
+    let rx = -18, ry = 30, drag = null;
+    const apply = () => { inner.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; };
+    apply();
+    const spin = () => { if (!G) { ry += 90; apply(); return; } const o = { rx, ry }; G.to(o, { ry: ry + 90, rx: rx + 30, duration: .9, ease: 'back.out(1.6)', onUpdate: () => { rx = o.rx; ry = o.ry; apply(); } }); speak(FACES[Math.floor(Math.random() * 3)] === 'yerine' ? 'Beklemek yerine yürüdüm.' : 'Beklemektense yürüyelim.'); };
+    cube.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, rx, ry, moved: false }; cube.setPointerCapture(e.pointerId); });
+    cube.addEventListener('pointermove', (e) => { if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) + Math.abs(dy) > 4) drag.moved = true; ry = drag.ry + dx * .6; rx = drag.rx - dy * .6; apply(); });
+    cube.addEventListener('pointerup', () => { if (drag && !drag.moved) spin(); drag = null; });
+    cube.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); spin(); } });
+    if (G) {
+      const idle = { v: 0 };
+      live(cube, G.to(idle, { v: 1, duration: 8, repeat: -1, ease: 'none', onUpdate: () => { if (!drag) { ry += .25; apply(); } } }));
+      live(cube, G.to(cube, { y: -14, duration: 2, yoyo: true, repeat: -1, ease: 'sine.inOut' }));
+    }
+  }
+
+  /* ---------- 8. галерея: 3D-наклон за курсором ---------- */
+  if (G && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.mk-fc').forEach((c) => {
+      const qx = G.quickTo(c, 'rotationY', { duration: .4 }), qy = G.quickTo(c, 'rotationX', { duration: .4 });
+      G.set(c, { transformPerspective: 700 });
+      c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); qx(((e.clientX - r.left) / r.width - .5) * 16); qy(-((e.clientY - r.top) / r.height - .5) * 16); });
+      c.addEventListener('pointerleave', () => { qx(0); qy(0); });
+    });
+  }
+
+  /* ---------- 9. карта: долмуши бегут по маршруту ---------- */
+  const route = $('#m-route');
+  if (route && G && window.MotionPathPlugin) {
+    const svg = route.ownerSVGElement;
+    [0, .33, .66].forEach((p, n) => {
+      const dot = svgEl('circle', { r: 7, fill: n === 1 ? '#ffffff' : '#7b5cd6', stroke: '#02162e', 'stroke-width': 2 });
+      svg.insertBefore(dot, $('[data-car]', svg));
+      live(svg, G.to(dot, { motionPath: { path: route, align: route, alignOrigin: [.5, .5], start: p, end: p + 1 }, duration: 14, repeat: -1, ease: 'none' }));
+    });
+  }
+
+  /* ---------- 10. шпаргалка: ключи всплывают ---------- */
+  const cheat = $('#s-cheat');
+  if (cheat) {
+    for (let i = 0; i < 9; i++) {
+      const k = svgEl('svg', { viewBox: '0 0 24 24', class: 'mk-keyfx mk-ic', 'aria-hidden': 'true' });
+      k.append(svgEl('use', { href: '#i-key' }));
+      k.style.left = (6 + i * 11) + '%';
+      cheat.prepend(k);
+      if (G) live(cheat, G.fromTo(k, { y: 0, rotation: 0 }, { y: () => -(cheat.offsetHeight + 80), rotation: 360, duration: 9 + i, delay: i * .8, repeat: -1, ease: 'none' }));
+    }
+  }
+
+  if (ST) addEventListener('load', () => ST.refresh());
+});
+</script>
+
 </body>
 </html>
