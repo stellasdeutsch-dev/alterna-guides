@@ -301,7 +301,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
 @media (max-width: 899px) { .mini3d { display: none; } }
 .sec h2, .sec .hd { position: relative; z-index: 1; }
 .mini3d .cube { position: relative; }
-.hero__art.is-off .cube, .mini3d.is-off .cube { animation-play-state: paused; }
+.hero__art.is-off .cube, .mini3d.is-off .cube, .fx-calm .cube { animation-play-state: paused; }
 .tb { width: 100%; max-width: 180px; height: auto; display: block; margin: 8px 0 4px; overflow: visible; }
 .tb path { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
 .tb rect { stroke: var(--ink); stroke-width: 2; }
@@ -316,6 +316,39 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
 .carr path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
 .tree .flow { fill: none; stroke: var(--yel); stroke-width: 3; stroke-dasharray: 3 12; stroke-linecap: round; pointer-events: none; }
 .trail { position: absolute; width: 12px; height: 12px; }
+/* диаграммы: таблица столкновений, анатомия, потоки */
+.mx { display: grid; grid-template-columns: minmax(58px, .9fr) repeat(4, minmax(0, 1fr)); gap: 6px; }
+.mx__h { display: grid; place-items: center; text-align: center; font: 800 13px/1.15 var(--ak-font); color: var(--muted); padding: 4px 2px; }
+.mx__h b { display: block; color: var(--ink); font-size: 14px; }
+.mx__w { display: flex; align-items: center; font: 900 clamp(14px, 3.6vw, 20px)/1 var(--ak-font); padding-left: 4px; overflow-wrap: anywhere; }
+.mx__w .v { margin-left: 0; }
+.mx__c { min-height: 52px; border-radius: 14px; border: 2px solid var(--ink); display: grid; place-items: center; font: 900 clamp(18px, 4.6vw, 24px)/1 var(--ak-font); cursor: pointer; color: var(--ink); padding: 0; }
+.mx__c small { display: none; font: 700 12px/1.1 var(--ak-font); margin-top: 2px; }
+@media (min-width: 900px) { .mx__c { min-height: 64px; } .mx__c small { display: block; } }
+.c--y { background: var(--yel); } .c--s { background: var(--pink); } .c--n { background: var(--vio); color: #fff; } .c--none { background: #ece9f5; color: var(--muted); }
+.c--sn { background: linear-gradient(135deg, var(--pink) 50%, var(--vio) 50%); color: #fff; }
+.mx__c.is-on { outline: 4px solid var(--cyan); outline-offset: 2px; }
+.mx-out { display: grid; gap: 4px; justify-items: start; margin-top: 16px; min-height: 90px; }
+.mx-out__w { font: 900 clamp(26px, 7vw, 40px)/1.1 var(--ak-font); }
+.mx-leg { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 10px; font-weight: 700; font-size: 14px; color: var(--muted); }
+.mx-dash { font-style: normal; font-weight: 900; color: var(--muted); padding: 0 .3em; }
+.ana { width: 100%; height: auto; display: block; overflow: visible; }
+.ana .ap rect { fill: #fff; stroke: var(--ink); stroke-width: 3; }
+.ana .ap.is-s rect { fill: var(--pink); } .ana .ap.is-n rect { fill: var(--vio); } .ana .ap.is-n text { fill: #fff; } .ana .ap.is-suf rect { fill: var(--cyan-soft); }
+.ana .ap text { font: 900 52px var(--ak-font); fill: var(--ink); }
+.ana .ap { cursor: pointer; }
+.ana__lb text { font: 800 18px var(--ak-font); fill: var(--ink); }
+.ana line { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 4 5; }
+.ana circle.ad { fill: var(--yel); stroke: var(--ink); stroke-width: 2; }
+.flw { width: 100%; height: auto; display: block; overflow: visible; }
+.flw .fn rect { fill: #fff; stroke: var(--ink); stroke-width: 2.5; }
+.flw .fn.is-on rect { fill: var(--ink); } .flw .fn.is-on text { fill: #fff; }
+.flw .fn text { font: 900 20px var(--ak-font); fill: var(--ink); }
+.flw .fn text.sub { font: 700 13px var(--ak-font); fill: var(--muted); }
+.flw .fn { cursor: pointer; }
+.flw path.band { fill: none; stroke-linecap: butt; opacity: .55; }
+.flw .brt { font: 900 22px var(--ak-font); fill: var(--ink); }
+.flw-out { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; min-height: 52px; }
 /* свечение за курсором */
 .glow { position: fixed; left: 0; top: 0; width: 420px; height: 420px; margin: -210px 0 0 -210px; border-radius: 50%; pointer-events: none; z-index: -1; background: radial-gradient(closest-side, rgba(90, 60, 244, .16), rgba(247, 163, 220, .1) 55%, transparent 70%); display: none; }
 @media (hover: hover) and (pointer: fine) and (min-width: 1024px) { .glow { display: block; } }
@@ -522,11 +555,26 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     </div>
   </section>
 
+  <!-- ===================== matrix · таблица столкновений ===================== -->
+  <section class="sec" data-section="matrix" data-words="11">
+    <div class="wrap">
+      <svg class="spk spk--y" style="right:6%;top:40px" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>
+      <div class="hd"><div class="bb"><b class="num">04</b></div><span class="pill pill--c" data-ui>таблица</span></div>
+      <h2>Таблица столкновений</h2>
+      <p>Строка — последняя буква слова. Столбец — хвост. Нажми на клетку.</p>
+      <div class="card">
+        <div class="mx" data-mx role="grid" aria-label="Таблица мостов"></div>
+        <div class="mx-out" data-mxout aria-live="polite"><span class="pill pill--sm pill--c" data-ui>форма</span><span class="mx-out__w" lang="tr" data-mxw>arabaya</span><span class="tr-ru" data-ui data-mxr>araba + y + a · куда?</span></div>
+        <div class="mx-leg" data-ui><span><i class="b b--y">y</i> мост y</span><span><i class="b b--s">s</i> мост s</span><span><i class="b b--n">n</i> мост n</span><span><i class="mx-dash">—</i> без моста</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== 04 · мост y ===================== -->
   <section class="sec" data-section="ybridge" data-words="42">
     <div class="wrap">
       <svg class="dfl dfl--y" style="right:2%;top:40px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-simit"/></svg>
-      <div class="hd"><div class="bb"><b class="num">04</b></div><span class="pill pill--y" data-ui>мост y</span></div>
+      <div class="hd"><div class="bb"><b class="num">05</b></div><span class="pill pill--y" data-ui>мост y</span></div>
       <h2>Мост y — для всех</h2>
       <p>Y — рабочая лошадка. Пашет почти везде. Без него вышло бы <b lang="tr">araba-a</b>. Звучит как икота. У него три клиента.</p>
       <svg class="fly" viewBox="0 0 600 120" aria-hidden="true"><path id="flyPath" d="M20 100C120 0 260 0 300 60S500 120 580 20"/><g data-fly><rect x="-18" y="-18" width="36" height="36" rx="8" fill="#ffc21a" stroke="#0c0b14" stroke-width="2.5"/><text y="9" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="24">y</text></g></svg>
@@ -582,7 +630,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     <div class="wrap">
       <svg class="dfl dfl--p" style="right:3%;top:10px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-tulip"/></svg><div class="mini3d" style="right:14%;top:60px" aria-hidden="true"><div class="cube cube--s"><span>s</span><span>s</span><span>s</span><span>s</span><span>s</span><span>s</span></div></div>
       <svg class="pen" style="left:2%;top:40px;width:min(40vw,320px);height:130px" viewBox="0 0 320 130" aria-hidden="true"><path class="cv" d="M10 20C80 20 160 120 310 110" style="stroke:#f7a3dc"/><rect x="2" y="12" width="16" height="16" style="stroke:#f7a3dc"/><rect x="302" y="102" width="16" height="16" style="stroke:#f7a3dc"/></svg>
-      <div class="hd"><div class="bb"><b class="num">05</b></div><span class="pill pill--p" data-ui>мост s</span></div>
+      <div class="hd"><div class="bb"><b class="num">06</b></div><span class="pill pill--p" data-ui>мост s</span></div>
       <h2>Мост s — только для своих</h2>
       <p>S — мост частный. Пускает только «его» и «её». Без него вышло бы <b lang="tr">kapıı</b>. Две ı подряд — как два таксиста в одной полосе.</p>
       <p>Хвост <b lang="tr">-(s)I</b> значит «его, её». После гласной встаёт s: <b class="t" lang="tr" data-say="arabası">arabası</b>. После согласной моста нет: <b class="t" lang="tr" data-say="evi">evi</b>.</p>
@@ -611,7 +659,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <section class="sec" data-section="nbridge" data-words="39">
     <div class="wrap">
       <svg class="dfl dfl--v" style="right:4%;top:30px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-tea"/></svg><div class="mini3d" style="right:16%;top:70px" aria-hidden="true"><div class="cube cube--n" style="animation-duration:12s"><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span></div></div>
-      <div class="hd"><div class="bb"><b class="num">06</b></div><span class="pill pill--v" data-ui>мост n</span></div>
+      <div class="hd"><div class="bb"><b class="num">07</b></div><span class="pill pill--v" data-ui>мост n</span></div>
       <h2>Мост n — второй этаж</h2>
       <p>N строится на s. Слово уже «его»: <b class="t" lang="tr" data-say="arabası">arabası</b>. Теперь его надо куда-то везти. Запомни картинку: s — первый этаж, n — второй.</p>
       <p>Добавляешь <b lang="tr">-a</b>. Опять две гласные. Но y сюда не пускают. Встаёт n: <b class="t" lang="tr" data-say="arabasına">arabasına</b>.</p>
@@ -636,11 +684,35 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     </div>
   </section>
 
+  <!-- ===================== anatomy · анатомия слова ===================== -->
+  <section class="sec" data-section="anatomy" data-words="11">
+    <div class="wrap">
+      <svg class="spk spk--p" style="right:5%;top:30px" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>
+      <div class="hd"><div class="bb"><b class="num">08</b></div><span class="pill pill--v" data-ui>анатомия</span></div>
+      <h2>Анатомия слова</h2>
+      <p>Прокрути — <b class="t" lang="tr" data-say="arabasına">arabasına</b> разлетится на детали.</p>
+      <div class="card">
+        <svg class="ana" viewBox="0 0 900 360" data-ana role="img" aria-label="Схема слова по частям">
+          <g data-ana-lines></g>
+          <g data-ana-pieces></g>
+          <g class="ana__lb" data-ana-labels>
+            <text data-al="0">основа</text>
+            <text data-al="1">мост s</text>
+            <text data-al="2">его</text>
+            <text data-al="3">мост n</text>
+            <text data-al="4" data-al4>куда?</text>
+          </g>
+        </svg>
+        <div class="row" style="justify-content:center" data-ui data-anabtns></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== 07 · forms bento ===================== -->
   <section class="sec" data-section="forms" data-words="30">
     <div class="wrap">
       <svg class="dfl" style="right:4%;top:24px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-cat"/></svg>
-      <div class="hd"><div class="bb"><b class="num">07</b></div><span class="pill pill--c" data-ui>вся доска</span></div>
+      <div class="hd"><div class="bb"><b class="num">09</b></div><span class="pill pill--c" data-ui>вся доска</span></div>
       <h2>Вся тема на одной доске</h2>
       <p>Нажми на плитку — подсветится её столбик. Диаграмма считает наши тридцать три карточки.</p>
       <div class="fb-grid" data-forms>
@@ -660,10 +732,26 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     </div>
   </section>
 
+  <!-- ===================== flows · кто по какому мосту ===================== -->
+  <section class="sec" data-section="flows" data-words="13">
+    <div class="wrap">
+      <svg class="spk spk--v" style="right:4%;top:36px" viewBox="0 0 24 24" aria-hidden="true"><use href="#spark"/></svg>
+      <div class="hd"><div class="bb"><b class="num">10</b></div><span class="pill pill--y" data-ui>потоки</span></div>
+      <h2>Кто по какому мосту едет</h2>
+      <p>Слева хвосты, справа мосты. Толщина потока — сколько примеров.</p>
+      <div class="card">
+        <svg class="flw" viewBox="0 0 700 460" data-flw role="img" aria-label="Диаграмма потоков: хвосты и мосты">
+          <g data-flw-bands></g><g data-flw-nodes></g><g data-flw-br></g>
+        </svg>
+        <div class="flw-out" data-flwout aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== 08 · карта ===================== -->
   <section class="sec" data-section="map" data-words="32">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">08</b></div><span class="pill pill--p" data-ui>карта</span></div>
+      <div class="hd"><div class="bb"><b class="num">11</b></div><span class="pill pill--p" data-ui>карта</span></div>
       <h2>Стамбул подписан мостами</h2>
       <svg class="skyline" viewBox="0 0 1200 230" role="img" aria-label="Панорама Стамбула" data-skyline>
         <path d="M0 196H1200"/><path class="ac3" d="M30 214c30 8 60 8 90 0s60-8 90 0M520 214c30 8 60 8 90 0s60-8 90 0M900 214c30 8 60 8 90 0"/>
@@ -704,7 +792,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     <div class="wrap">
       <svg class="dfl dfl--v" style="left:46%;top:16px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-gull"/></svg>
       <svg class="pen" style="right:3%;top:50px;width:min(44vw,360px);height:140px" viewBox="0 0 360 140" aria-hidden="true"><path class="cv" d="M10 120C150 130 210 10 350 20" style="stroke:#5a3cf4"/><rect x="2" y="112" width="16" height="16" style="stroke:#5a3cf4"/><rect x="342" y="12" width="16" height="16" style="stroke:#5a3cf4"/></svg>
-      <div class="hd"><div class="bb"><b class="num">09</b></div><span class="pill pill--v" data-ui>сравни</span></div>
+      <div class="hd"><div class="bb"><b class="num">12</b></div><span class="pill pill--v" data-ui>сравни</span></div>
       <h2>Русский, турецкий, казахский</h2>
       <p>В русском «его» — отдельное слово. Гласным негде столкнуться.</p>
       <p>В турецком всё в одном слове. Хвосты стоят плотно, как пассажиры на пароме в час пик.</p>
@@ -726,7 +814,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 10 · дерево ===================== -->
   <section class="sec" data-section="tree" data-words="37">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">10</b></div><span class="pill pill--y" data-ui>алгоритм</span></div>
+      <div class="hd"><div class="bb"><b class="num">13</b></div><span class="pill pill--y" data-ui>алгоритм</span></div>
       <h2>Алгоритм: четыре вопроса</h2>
       <p>Задавай вопросы сверху вниз. Где ветка кончилась — там ответ. Выбери пример, и точка пробежит сама.</p>
       <div class="tree-wrap">
@@ -768,7 +856,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <section class="sec" data-section="mnemo" data-words="25">
     <div class="wrap">
       <svg class="dfl dfl--y" style="right:4%;top:30px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-tulip"/></svg>
-      <div class="hd"><div class="bb"><b class="num">11</b></div><span class="pill pill--p" data-ui>запомни</span></div>
+      <div class="hd"><div class="bb"><b class="num">14</b></div><span class="pill pill--p" data-ui>запомни</span></div>
       <h2>Запомни тремя словами</h2>
       <p class="motto" data-motto>Y — для всех. S — «своё». N — «несу своё».</p>
       <div class="mn" data-mn>
@@ -784,7 +872,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 12 · сцена ===================== -->
   <section class="sec" data-section="scene" data-words="26">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">12</b></div><span class="pill pill--c" data-ui>Кадыкёй</span></div>
+      <div class="hd"><div class="bb"><b class="num">15</b></div><span class="pill pill--c" data-ui>Кадыкёй</span></div>
       <h2>Кадыкёй. Пристань. Вечер.</h2>
       <p>Чайки орут так, будто им недодали симит. Паром гудит. Нажимай на всё, что видишь. Каждая вещь скажет фразу. Где моста нет, тоже подпишем.</p>
       <svg class="scene" viewBox="0 0 800 440" data-scene aria-label="Пристань Кадыкёй">
@@ -812,7 +900,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 13 · галерея ===================== -->
   <section class="sec" data-section="gallery" data-words="19">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">13</b></div><span class="pill pill--y" data-ui>галерея</span></div>
+      <div class="hd"><div class="bb"><b class="num">16</b></div><span class="pill pill--y" data-ui>галерея</span></div>
       <h2>Тридцать три карточки</h2>
       <p>Сначала угадай форму. Потом переверни. Фильтр оставит один мост. Каждая карточка звучит. Ошибся — никто не видел.</p>
       <div class="tabs" role="tablist" data-ui data-gf>
@@ -833,7 +921,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     <div class="wrap">
       <svg class="dfl dfl--p" style="right:4%;top:28px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-simit"/></svg><div class="mini3d" style="right:18%;top:64px" aria-hidden="true"><div class="cube cube--y" style="animation-duration:10s"><span>y</span><span>y</span><span>y</span><span>y</span><span>y</span><span>y</span></div></div>
       <svg class="pen" style="left:3%;top:40px;width:min(40vw,320px);height:120px" viewBox="0 0 320 120" aria-hidden="true"><path class="cv" d="M10 100C90 110 150 10 310 20"/><rect x="2" y="92" width="16" height="16"/><rect x="302" y="12" width="16" height="16"/></svg>
-      <div class="hd"><div class="bb"><b class="num">14</b></div><span class="pill pill--v" data-ui>лаборатория</span></div>
+      <div class="hd"><div class="bb"><b class="num">17</b></div><span class="pill pill--v" data-ui>лаборатория</span></div>
       <h2>Лаборатория мостов</h2>
       <p>Выбери режим, потом слово. Смотри, придёт ли мост и почему. Сломать тут ничего нельзя. Можно только проверить.</p>
       <div class="card" data-lab>
@@ -858,7 +946,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <section class="sec" data-section="traps" data-words="47">
     <div class="wrap">
       <svg class="dfl" style="right:4%;top:24px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-ferry"/></svg>
-      <div class="hd"><div class="bb"><b class="num">15</b></div><span class="pill pill--p" data-ui>ловушки</span></div>
+      <div class="hd"><div class="bb"><b class="num">18</b></div><span class="pill pill--p" data-ui>ловушки</span></div>
       <h2>Пять ловушек</h2>
       <p>На этом спотыкаются все. Это не стыдно. Это статистика. Нажми на карточку — ошибка исправится.</p>
       <div class="traps" data-traps>
@@ -874,7 +962,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== видео ===================== -->
   <section class="sec" data-section="video" data-words="13">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">16</b></div><span class="pill pill--c" data-ui>видео</span></div>
+      <div class="hd"><div class="bb"><b class="num">19</b></div><span class="pill pill--c" data-ui>видео</span></div>
       <h2>Послушай учителя</h2>
       <p>Учитель называет это <b lang="tr">kaynaştırma</b>. Лови y, s и n. Про ş не думай — это другая тема.</p>
       <div class="grid g2">
@@ -887,7 +975,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== практика ===================== -->
   <section class="sec" data-section="practice" data-words="8">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">17</b></div><span class="pill pill--y" data-ui>практика</span></div>
+      <div class="hd"><div class="bb"><b class="num">20</b></div><span class="pill pill--y" data-ui>практика</span></div>
       <h2>Практика</h2>
       <p>Пять заданий. От узнавания к своей фразе.</p>
       <a-exercise ref="a1.buffer-consonants.ex1"></a-exercise>
@@ -917,7 +1005,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== мини-проверка ===================== -->
   <section class="sec" data-section="check" data-words="10">
     <div class="wrap">
-      <div class="hd"><div class="bb"><b class="num">18</b></div><span class="pill pill--v" data-ui>проверка</span></div>
+      <div class="hd"><div class="bb"><b class="num">21</b></div><span class="pill pill--v" data-ui>проверка</span></div>
       <h2>Мини-проверка</h2>
       <p>Пять вопросов. Без шпаргалки. Восемьдесят процентов — и тема твоя.</p>
       <a-quiz ref="a1.buffer-consonants.check1"></a-quiz>
@@ -1006,7 +1094,15 @@ addEventListener('DOMContentLoaded', () => {
   if (A) ScrollTrigger.config({ ignoreMobileResize: true });
   if (!A) document.documentElement.classList.add('no3d');
   /* бесконечные циклы играют, только пока их блок на экране */
-  const loop = (tw, trig) => { if (!A || !tw) return tw; tw.pause(); ScrollTrigger.create({ trigger: trig, start: 'top bottom', end: 'bottom top', onToggle: (st) => (st.isActive ? tw.resume() : tw.pause()) }); return tw; };
+  const LOOPS = [];
+  const loop = (tw, trig) => { if (!A || !tw) return tw; tw.pause(); const st = ScrollTrigger.create({ trigger: trig, start: 'top bottom', end: 'bottom top', onToggle: (x) => { if (document.documentElement.classList.contains('fx-calm')) return; x.isActive ? tw.resume() : tw.pause(); } }); LOOPS.push({ tw, st }); return tw; };
+  /* пока открыта ачивка, декор замирает: размытый фон не перерисовывается каждый кадр */
+  const calm = (on) => { document.documentElement.classList.toggle('fx-calm', on); LOOPS.forEach(({ tw, st }) => (on || !st.isActive ? tw.pause() : tw.resume())); };
+  addEventListener('alterna:achievement', () => {
+    calm(true);
+    const mo = new MutationObserver(() => { if (!document.querySelector('.ak-achv')) { mo.disconnect(); calm(false); } });
+    mo.observe(document.body, { childList: true, subtree: true });
+  });
   /* CSS-кубики тоже засыпают вне экрана */
   const cubeIO = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-off', !e.isIntersecting)));
   document.querySelectorAll('.hero__art, .mini3d').forEach((el) => cubeIO.observe(el));
@@ -1922,6 +2018,206 @@ addEventListener('DOMContentLoaded', () => {
     gsap.fromTo('.gate', { letterSpacing: '.4em' }, { letterSpacing: '0em', ease: 'none', scrollTrigger: { trigger: '.gate', start: 'top 95%', end: 'top 55%', scrub: .5 } });
     gsap.fromTo('.poster', { borderRadius: 80 }, { borderRadius: 32, ease: 'none', scrollTrigger: { trigger: '.poster', start: 'top bottom', end: 'top 40%', scrub: .5 } });
   }
+
+  /* ---------- таблица столкновений: конец слова × хвост ---------- */
+  const MXW = [['araba', 'машина'], ['anne', 'мама'], ['kapı', 'дверь'], ['kedi', 'кошка'], ['metro', 'метро'], ['kuzu', 'ягнёнок'], ['köprü', 'мост'], ['ev', 'дом']];
+  const MXC = [['dat', 'куда?', '-(y)A'], ['acc', 'что?', '-(y)I'], ['pos', 'его', '-(s)I'], ['posdat', 'в его', '-sI + A']];
+  const mxForm = (w, m) => {
+    const v = endsV(w);
+    if (m === 'dat') return { parts: [w, v ? 'y' : '', A2(w)], br: v ? 'y' : 'none' };
+    if (m === 'acc') return { parts: [w, v ? 'y' : '', I4(w)], br: v ? 'y' : 'none' };
+    if (m === 'pos') return { parts: [w, v ? 's' : '', I4(w)], br: v ? 's' : 'none' };
+    const pw = w + (v ? 's' : '') + I4(w);
+    return { parts: [w, v ? 's' : '', I4(w), 'n', A2(pw)], br: v ? 'sn' : 'n' };
+  };
+  const mxHtml = (f) => f.parts.map((x, i) => (!x ? '' : (x === 'y' || x === 's' || x === 'n') && i > 0 ? `<i class="b b--${x}">${x}</i>` : x)).join('');
+  const mx = $('[data-mx]'), mxw = $('[data-mxw]'), mxr = $('[data-mxr]');
+  mx.insertAdjacentHTML('beforeend', '<span class="mx__h" data-ui>слово</span>' + MXC.map(([, ru, af]) => `<span class="mx__h" data-ui><b lang="tr">${af}</b>${ru}</span>`).join(''));
+  const mxCells = [];
+  MXW.forEach(([w, ru]) => {
+    const last = w.at(-1);
+    mx.insertAdjacentHTML('beforeend', `<span class="mx__w" lang="tr" data-say="${w}">${endsV(w) ? `${w.slice(0, -1)}<span class="v">${last}</span>` : w}</span>`);
+    MXC.forEach(([key, cru]) => {
+      const f = mxForm(w, key), word = f.parts.join('');
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = `mx__c c--${f.br}`; b.setAttribute('role', 'gridcell');
+      b.setAttribute('aria-label', `${w}, ${cru}: ${word}`);
+      b.innerHTML = `${f.br === 'none' ? '—' : f.br === 'sn' ? 's+n' : f.br}<small lang="tr">${word}</small>`;
+      b.addEventListener('click', () => {
+        mxCells.forEach((c) => c.classList.toggle('is-on', c === b));
+        mxw.innerHTML = mxHtml(f); mxw.dataset.say = word;
+        mxr.textContent = `${ru} · ${cru} · ${f.br === 'none' ? 'без моста: слово на согласную' : f.br === 'sn' ? 'два моста: s, потом n' : `мост ${f.br}`}`;
+        if (A) { pop(mxw); gsap.from(mxw.querySelectorAll('.b'), { y: -40, rotation: 20, duration: .7, ease: 'bounce.out', stagger: .1 }); sparks(b, 8); }
+        speak(word);
+      });
+      mx.append(b); mxCells.push(b);
+    });
+  });
+  mx.addEventListener('keydown', (e) => {
+    const i = mxCells.indexOf(document.activeElement); if (i < 0) return;
+    const d = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: 4, ArrowUp: -4 }[e.key]; if (!d) return;
+    e.preventDefault(); mxCells[Math.max(0, Math.min(mxCells.length - 1, i + d))].focus();
+  });
+  if (A) {
+    gsap.from(mxCells, { scale: .3, rotationX: 80, transformPerspective: 600, duration: .55, ease: 'back.out(2.2)', stagger: { each: .035, grid: [8, 4], from: 'start' }, scrollTrigger: { trigger: mx, start: 'top 80%', once: true } });
+    gsap.from('.mx__w', { x: -40, duration: .5, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: mx, start: 'top 80%', once: true } });
+    ScrollTrigger.create({ trigger: mx, start: 'top 50%', once: true, onEnter: () => mxCells[3].click() });
+    loop(gsap.to('.mx__c.c--sn', { rotation: 4, duration: .9, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .15, delay: 1.5 }), mx);
+  }
+
+  /* ---------- анатомия слова: arabasına на детали ---------- */
+  const ana = $('[data-ana]'), anaP = $('[data-ana-pieces]', ana), anaL = $('[data-ana-lines]', ana), anaLabels = $$('[data-al]', ana);
+  const ANA = [
+    { parts: ['araba', 's', 'ı', 'n', 'a'], q: 'куда?' }, { parts: ['kapı', 's', 'ı', 'n', 'ı'], q: 'что?' }, { parts: ['anne', 's', 'i', 'n', 'e'], q: 'куда?' },
+  ];
+  const ANACLS = ['', 'is-s', 'is-suf', 'is-n', 'is-suf'];
+  let anaCur = 0, anaTl = null;
+  function anaBuild() {
+    const ex = ANA[anaCur], word = ex.parts.join('');
+    const mob = ana.clientWidth < 600;
+    anaP.replaceChildren(); anaL.replaceChildren();
+    anaLabels[4].textContent = ex.q;
+    const fs = mob ? 46 : 54, h = mob ? 64 : 78;
+    const pcs = ex.parts.map((t, i) => {
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', `ap ${ANACLS[i]}`); g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', t);
+      const r = document.createElementNS(NS, 'rect'); r.setAttribute('rx', 12); r.setAttribute('height', h);
+      const tx = document.createElementNS(NS, 'text'); tx.setAttribute('lang', 'tr'); tx.textContent = t; tx.style.fontSize = `${fs}px`;
+      g.append(r, tx); anaP.append(g);
+      return { g, r, tx, w: Math.max(58, tx.getComputedTextLength() + 30) };
+    });
+    if (mob) {
+      ana.setAttribute('viewBox', '0 0 360 600');
+      pcs.forEach((pc, i) => {
+        const y = 10 + i * 116;
+        pc.r.setAttribute('x', 20); pc.r.setAttribute('y', y); pc.r.setAttribute('width', pc.w);
+        pc.tx.setAttribute('x', 35); pc.tx.setAttribute('y', y + h - 15);
+        const lb = anaLabels[i]; lb.setAttribute('x', 20); lb.setAttribute('y', y + h + 26); lb.setAttribute('text-anchor', 'start');
+        pc.cx = 20 + pc.w / 2; pc.cy = y + h / 2;
+      });
+    } else {
+      ana.setAttribute('viewBox', '0 0 900 360');
+      const total = pcs.reduce((a, pc) => a + pc.w, 0) + 16 * 4;
+      let x = (900 - total) / 2;
+      pcs.forEach((pc, i) => {
+        pc.r.setAttribute('x', x); pc.r.setAttribute('y', 141); pc.r.setAttribute('width', pc.w);
+        pc.tx.setAttribute('x', x + 15); pc.tx.setAttribute('y', 141 + h - 20);
+        pc.cx = x + pc.w / 2; pc.cy = 180;
+        const top = i % 2 === 0, lb = anaLabels[i], lx = Math.max(70, Math.min(830, pc.cx));
+        lb.setAttribute('x', lx); lb.setAttribute('y', top ? 62 : 314); lb.setAttribute('text-anchor', 'middle');
+        const ln = document.createElementNS(NS, 'line');
+        ln.setAttribute('x1', pc.cx); ln.setAttribute('y1', top ? 141 : 219); ln.setAttribute('x2', lx); ln.setAttribute('y2', top ? 74 : 292);
+        const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('class', 'ad'); dot.setAttribute('r', 6); dot.setAttribute('cx', pc.cx); dot.setAttribute('cy', top ? 141 : 219);
+        anaL.append(ln, dot);
+        x += pc.w + 16;
+      });
+    }
+    pcs.forEach((pc, i) => {
+      const hit = () => {
+        anaLabels.forEach((l, j) => l.setAttribute('fill', j === i ? '#5a3cf4' : '#0c0b14'));
+        if (A) { gsap.fromTo(pc.g, { y: -16 }, { y: 0, duration: .7, ease: 'bounce.out' }); gsap.fromTo(anaLabels[i], { scale: 1.25, transformOrigin: '50% 50%' }, { scale: 1, duration: .5, ease: 'back.out(3)' }); }
+        speak(word);
+      };
+      pc.g.addEventListener('click', hit);
+      pc.g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); hit(); } });
+    });
+    if (!A) return;
+    anaTl?.scrollTrigger?.kill(); anaTl?.kill();
+    const mx0 = pcs.reduce((a, pc) => a + pc.cx, 0) / pcs.length, my0 = pcs.reduce((a, pc) => a + pc.cy, 0) / pcs.length;
+    anaTl = gsap.timeline({ scrollTrigger: { trigger: ana, start: 'top 90%', end: 'top 50%', scrub: .6 } });
+    anaTl.fromTo(pcs.map((pc) => pc.g), { x: (i) => (mx0 - pcs[i].cx) * .6, y: (i) => (my0 - pcs[i].cy) * .6 + (i % 2 ? 18 : -18), rotation: (i) => (i % 2 ? 9 : -9) }, { x: 0, y: 0, rotation: 0, ease: 'none' }, 0)
+      .fromTo(anaLabels, { scale: .5, transformOrigin: '50% 50%', opacity: .15 }, { scale: 1, opacity: 1, ease: 'none', stagger: .05 }, .3)
+      .fromTo($$('line', anaL), { strokeDashoffset: 120 }, { strokeDashoffset: 0, ease: 'none' }, .3);
+  }
+  ANA.forEach((ex, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = `chip${i ? '' : ' is-on'}`; b.lang = 'tr'; b.textContent = ex.parts.join('');
+    b.addEventListener('click', () => {
+      anaCur = i; $$('.chip', $('[data-anabtns]')).forEach((x) => x.classList.toggle('is-on', x === b)); anaBuild();
+      if (A) gsap.from($$('.ap', anaP), { y: -50, rotation: -12, duration: .7, ease: 'bounce.out', stagger: .08 });
+      speak(b.textContent);
+    });
+    $('[data-anabtns]').append(b);
+  });
+  anaBuild();
+  document.fonts?.ready.then(anaBuild);
+  let anaW = ana.clientWidth;
+  addEventListener('resize', () => { if (Math.abs(ana.clientWidth - anaW) > 40) { anaW = ana.clientWidth; anaBuild(); } });
+
+  /* ---------- потоки: хвост → мост, толщина = число примеров ---------- */
+  const FLC = [['dat', '-(y)A', 'куда?', 'y'], ['acc', '-(y)I', 'что?', 'y'], ['cop', '-(y)Im', 'я — …', 'y'], ['pos', '-(s)I', 'его', 's'], ['posc', '-sI + A/I', 'его + хвост', 'n'], ['pron', 'o, bu, şu', 'местоимения', 'n']];
+  const flCat = ([stem, plus, , br]) => {
+    if (br === 'y') return ['a', 'e'].includes(plus) ? 'dat' : ['im', 'ım'].includes(plus) ? 'cop' : 'acc';
+    if (br === 's') return 'pos';
+    if (br === 'n') return ['o', 'bu'].includes(stem) ? 'pron' : 'posc';
+    return null;
+  };
+  const flEx = {}; EX.forEach((e) => { const c = flCat(e); if (c) (flEx[c] ||= []).push(e); });
+  const FLCOL = { y: '#ffc21a', s: '#f7a3dc', n: '#5a3cf4' };
+  const flw = $('[data-flw]'), flBands = $('[data-flw-bands]', flw), flNodes = $('[data-flw-nodes]', flw), flBr = $('[data-flw-br]', flw), flOut = $('[data-flwout]');
+  let flTl = null, flCur = null;
+  function flShow(k) {
+    flCur = k;
+    $$('.fn', flNodes).forEach((n) => n.classList.toggle('is-on', n.dataset.k === k));
+    $$('.band', flBands).forEach((b) => b.style.opacity = b.dataset.k === k ? .95 : .15);
+    flOut.replaceChildren(...(flEx[k] || []).map(([stem, plus, res, br, ru]) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'chip'; b.lang = 'tr'; b.dataset.say = res;
+      b.innerHTML = `${splitForm(stem, res, br)} <small data-ui style="font-weight:600;color:var(--muted)">${ru}</small>`;
+      return b;
+    }));
+    if (A) gsap.from(flOut.children, { y: 24, scale: .8, duration: .45, ease: 'back.out(2.4)', stagger: .05 });
+  }
+  function flBuild() {
+    const mob = flw.clientWidth < 600;
+    const W = mob ? 360 : 700, H = mob ? 600 : 460, k = mob ? 3 : 5;
+    flw.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    flBands.replaceChildren(); flNodes.replaceChildren(); flBr.replaceChildren();
+    const nx = mob ? 8 : 20, nw = mob ? 150 : 190, nh = mob ? 62 : 56, gap = (H - 20 - FLC.length * nh) / (FLC.length - 1);
+    const bx = mob ? 236 : 520, bw = mob ? 116 : 160;
+    const BRY = mob ? { y: 120, s: 330, n: 500 } : { y: 90, s: 230, n: 370 };
+    const tot = {}; FLC.forEach(([c, , , t]) => { tot[t] = (tot[t] || 0) + (flEx[c]?.length || 0) * k; });
+    const used = {};
+    FLC.forEach(([c, af, ru, t], i) => {
+      const n = flEx[c]?.length || 0, sw = Math.max(4, n * k);
+      const y0 = 10 + i * (nh + gap) + nh / 2;
+      const off = -tot[t] / 2 + (used[t] || 0) + sw / 2; used[t] = (used[t] || 0) + sw;
+      const y1 = BRY[t] + off, xa = nx + nw, xb = bx;
+      const band = document.createElementNS(NS, 'path');
+      band.setAttribute('class', 'band'); band.dataset.k = c;
+      band.setAttribute('d', `M${xa} ${y0}C${(xa + xb) / 2} ${y0} ${(xa + xb) / 2} ${y1} ${xb} ${y1}`);
+      band.setAttribute('stroke', FLCOL[t]); band.setAttribute('stroke-width', sw);
+      flBands.append(band);
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('class', 'fn'); g.dataset.k = c; g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', `${af}: ${n}`);
+      const r = document.createElementNS(NS, 'rect'); r.setAttribute('x', nx); r.setAttribute('y', y0 - nh / 2); r.setAttribute('width', nw); r.setAttribute('height', nh); r.setAttribute('rx', 14);
+      const t1 = document.createElementNS(NS, 'text'); t1.setAttribute('x', nx + 14); t1.setAttribute('y', y0 - 2); t1.setAttribute('lang', 'tr'); t1.textContent = af;
+      const t2 = document.createElementNS(NS, 'text'); t2.setAttribute('class', 'sub'); t2.setAttribute('x', nx + 14); t2.setAttribute('y', y0 + 18); t2.setAttribute('data-ui', ''); t2.textContent = `${ru} · ${n}`;
+      g.append(r, t1, t2); flNodes.append(g);
+      g.addEventListener('click', () => { flShow(c); if (A) gsap.fromTo(band, { strokeWidth: sw * 1.6 }, { strokeWidth: sw, duration: .7, ease: 'elastic.out(1, .4)' }); speak((flEx[c] || []).map((e) => e[2]).slice(0, 3).join(', ')); });
+      g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); g.dispatchEvent(new Event('click')); } });
+    });
+    Object.entries(BRY).forEach(([t, y]) => {
+      const u = document.createElementNS(NS, 'use'); u.setAttribute('href', '#i-bridge'); u.setAttribute('x', bx); u.setAttribute('y', y - bw / 2 + 6); u.setAttribute('width', bw); u.setAttribute('height', bw * .8); u.setAttribute('color', FLCOL[t]); u.setAttribute('class', 'brI');
+      const lt = document.createElementNS(NS, 'text'); lt.setAttribute('class', 'brt'); lt.setAttribute('x', bx + bw / 2); lt.setAttribute('y', y + bw * .42); lt.setAttribute('text-anchor', 'middle'); lt.setAttribute('data-ui', ''); lt.textContent = `мост ${t}`;
+      flBr.append(u, lt);
+    });
+    if (flCur) flShow(flCur);
+    if (!A) return;
+    flTl?.scrollTrigger?.kill(); flTl?.kill();
+    const bands = $$('.band', flBands);
+    bands.forEach((b) => { const l = b.getTotalLength(); b.style.strokeDasharray = l; b.style.strokeDashoffset = l; });
+    flTl = gsap.timeline({ scrollTrigger: { trigger: flw, start: 'top 85%', end: 'top 30%', scrub: .6 } });
+    flTl.to(bands, { strokeDashoffset: 0, ease: 'none', stagger: .08 }, 0)
+      .from($$('.fn', flNodes), { x: -40, ease: 'none', stagger: .05 }, 0)
+      .from($$('.brI', flBr), { y: 40, scale: .6, transformOrigin: '50% 50%', ease: 'none', stagger: .1 }, .2);
+  }
+  flBuild();
+  document.fonts?.ready.then(flBuild);
+  let flWd = flw.clientWidth;
+  addEventListener('resize', () => { if (Math.abs(flw.clientWidth - flWd) > 40) { flWd = flw.clientWidth; flBuild(); } });
+  if (A) ScrollTrigger.create({ trigger: flw, start: 'top 45%', once: true, onEnter: () => { if (!flCur) flShow('pos'); } });
+  else flShow('pos');
 
   /* ---------- обновления ScrollTrigger ---------- */
   if (A) {
