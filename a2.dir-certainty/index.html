@@ -483,6 +483,35 @@ p { margin: 0 0 12px; }
   .dr-pc--title { grid-column: span 2; grid-row: span 2; }
   .dr-pc--pink, .dr-pc--forest { grid-column: span 2; }
 }
+
+/* ---------- доработка: больше движения ---------- */
+.dr-hero__m { position: relative; width: clamp(70px, 18vw, 130px); height: auto; margin: -10px 0 0 clamp(150px, 46vw, 330px); display: block; overflow: visible; filter: drop-shadow(0 12px 14px rgba(75,12,18,.25)); cursor: pointer; }
+.dr-float--4 { left: 4%; top: 46%; width: clamp(44px, 9vw, 80px); animation-delay: -3s; }
+.dr-float--5 { right: 30%; bottom: 4%; width: clamp(80px, 16vw, 150px); animation-delay: -1s; }
+.dr-dots { position: absolute; inset: 0; pointer-events: none; }
+.dr-dots i { position: absolute; width: 10px; height: 10px; border-radius: 3px; opacity: .8; }
+.dr-tour { margin: 22px 0; }
+.dr-tour__in { position: relative; display: grid; justify-items: center; gap: 10px; min-height: min(78dvh, 560px); align-content: center; padding: 22px 16px; border-radius: var(--r-xl); background: var(--ink); color: var(--cream); overflow: hidden; }
+.dr-gauge--tour { width: min(86%, 380px); }
+.dr-tour__steps { position: relative; width: 100%; min-height: 96px; }
+.dr-tour__s { position: absolute; inset: 0; display: grid; justify-items: center; align-content: center; gap: 2px; margin: 0; text-align: center; cursor: pointer; }
+.dr-tour__s b { font-size: clamp(28px, 7.4vw, 54px); font-weight: 900; letter-spacing: -.03em; color: var(--yellow); }
+.dr-tour__s small { font-size: 15px; color: #f3d9c9; }
+.dr-tour__s + .dr-tour__s { visibility: hidden; }
+.dr-tour.is-static .dr-tour__s { position: static; visibility: visible; }
+.dr-tour__m { position: absolute; right: 6%; bottom: 6%; width: clamp(56px, 12vw, 96px); height: auto; }
+.dr-ribbons { display: grid; gap: 10px; margin: 22px -16px; overflow: hidden; pointer-events: none; }
+.dr-ribbon { display: flex; gap: 10px; width: max-content; }
+.dr-ribbon span { padding: 10px 20px; border-radius: 999px; border: 3px solid var(--ink); background: #fff; font-weight: 900; font-size: clamp(20px, 5vw, 36px); white-space: nowrap; box-shadow: 3px 4px 0 var(--ink); }
+.dr-ribbon .r-o { background: var(--orange); color: #fff; } .dr-ribbon .r-g { background: var(--green); } .dr-ribbon .r-p { background: var(--purple); color: #fff; }
+.dr-ribbon .r-y { background: var(--yellow); } .dr-ribbon .r-b { background: var(--blue); } .dr-ribbon .r-c { background: var(--coral); }
+.dr-peek { display: none; }
+@media (min-width: 1360px) {
+  .dr-peek { display: block; position: fixed; z-index: 40; right: 46px; bottom: 26px; width: 74px; pointer-events: none; }
+  .dr-peek svg { width: 74px; height: 74px; display: block; filter: drop-shadow(0 8px 10px rgba(75,12,18,.25)); }
+  .dr-peek__b { position: absolute; right: 0; bottom: 84px; padding: 6px 12px; border-radius: 14px 14px 4px 14px; background: #fff; border: 2px solid var(--ink); font-size: 13px; font-weight: 800; white-space: nowrap; box-shadow: 3px 3px 0 var(--ink); }
+}
+@media (hover: hover) and (pointer: fine) { .dr-bc, .dr-sign, .dr-pc { transform-style: preserve-3d; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -544,6 +573,9 @@ p { margin: 0 0 12px; }
     <svg class="dr-float dr-float--1" viewBox="0 0 120 120"><rect x="8" y="8" width="104" height="104" rx="28" fill="#ff7b03" stroke="#fff" stroke-width="8"/><use href="#m-flower" x="18" y="18" width="84" height="84" class="dr-use-yellow"/></svg>
     <svg class="dr-float dr-float--2" viewBox="0 0 120 120"><use href="#m-star" width="120" height="120" class="dr-use-purple"/></svg>
     <svg class="dr-float dr-float--3" viewBox="0 0 120 120"><rect x="10" y="10" width="100" height="100" rx="26" fill="#d6ee5e" stroke="#fff" stroke-width="8" transform="rotate(12 60 60)"/><text x="60" y="74" text-anchor="middle" font-size="40" font-weight="900" fill="#4b0c12" transform="rotate(12 60 60)">dır</text></svg>
+    <svg class="dr-float dr-float--4" viewBox="0 0 120 120"><use href="#m-star" width="120" height="120" class="dr-use-blue"/></svg>
+    <svg class="dr-float dr-float--5" viewBox="0 0 160 120"><use href="#m-cloud" width="160" height="120"/></svg>
+    <span class="dr-dots" data-dots></span>
   </div>
   <div class="dr-wrap dr-hero__grid">
     <div class="dr-hero__copy">
@@ -551,6 +583,7 @@ p { margin: 0 0 12px; }
       <h1 class="dr-h1" data-split>Наверное. <span class="dr-h1__alt">Или точно.</span></h1>
       <p class="dr-lead">Один хвост — и факт становится догадкой. На табличке тот же хвост ставит печать.</p>
       <div class="dr-mark" lang="tr" aria-hidden="true"><span class="dr-mark__a">-d</span><span class="dr-mark__b">ır</span></div>
+      <svg class="dr-hero__m" viewBox="0 0 120 120" aria-hidden="true" data-hero-m><use href="#m-flower" class="dr-use-orange"/></svg>
     </div>
     <div class="dr-demo dr-card dr-card--lav">
       <div class="dr-demo__top">
@@ -736,6 +769,10 @@ p { margin: 0 0 12px; }
       <article class="dr-bc dr-bc--coral"><b class="dr-bc__f" lang="tr">-tür</b><span class="dr-tr" lang="tr" data-say="Saat üçtür.">Saat üç<b>tür</b>.</span><small data-ui>Сейчас, наверное, три часа.</small></article>
     </div>
 
+    <div class="dr-ribbons" aria-hidden="true" lang="tr">
+      <div class="dr-ribbon" data-ribbon="1"><span class="r-o">-dır</span><span>evdedir</span><span class="r-g">-dur</span><span>yorgundur</span><span class="r-p">-tır</span><span>açtır</span><span class="r-y">-tür</span><span>üçtür</span><span class="r-o">-dir</span></div>
+      <div class="dr-ribbon" data-ribbon="2"><span>gelmiştir</span><span class="r-b">-tir</span><span>soğuktur</span><span class="r-c">-tur</span><span>hastadır</span><span class="r-g">-dür</span><span>üzgündür</span><span class="r-p">-dır</span></div>
+    </div>
     <div class="dr-q dr-card dr-card--lav" data-q>
       <p class="dr-q__t"><span lang="tr">soğuk + ?</span> Какой хвост?</p>
       <div class="dr-q__opts">
@@ -819,6 +856,19 @@ p { margin: 0 0 12px; }
       <button type="button" class="dr-lad" data-lad="30" data-say="Belki evdedir."><span lang="tr">Belki evdedir.</span><small data-ui>Может, и дома.</small></button>
       <button type="button" class="dr-lad" data-lad="70" data-say="Herhalde evdedir."><span lang="tr">Herhalde evdedir.</span><small data-ui>Наверное, дома.</small></button>
       <button type="button" class="dr-lad" data-lad="90" data-say="Kesin evdedir."><span lang="tr">Kesin evdedir.</span><small data-ui>Наверняка дома.</small></button>
+    </div>
+    <div class="dr-tour" data-tour aria-label="Шкала уверенности по шагам">
+      <div class="dr-tour__in">
+        <svg class="dr-gauge dr-gauge--tour" viewBox="0 0 200 112" aria-hidden="true"><use href="#g-arc"/><g class="dr-needle" data-needle="tour"><path d="M100 26C107 64 114 88 100 106 86 88 93 64 100 26Z" fill="#6b3a1f"/><circle cx="100" cy="96" r="6" fill="#fff"/></g></svg>
+        <div class="dr-tour__steps" data-tour-steps>
+          <p class="dr-tour__s" data-say="Bilmiyorum."><b lang="tr">Bilmiyorum.</b><small data-ui>не знаю</small></p>
+          <p class="dr-tour__s" data-say="Belki evdedir."><b lang="tr">Belki evdedir.</b><small data-ui>может, и дома</small></p>
+          <p class="dr-tour__s" data-say="Herhalde evdedir."><b lang="tr">Herhalde evdedir.</b><small data-ui>наверное, дома</small></p>
+          <p class="dr-tour__s" data-say="Kesin evdedir."><b lang="tr">Kesin evdedir.</b><small data-ui>наверняка дома</small></p>
+          <p class="dr-tour__s" data-say="Evde. Görüyorum."><b lang="tr">Evde. Görüyorum.</b><small data-ui>дома, я вижу</small></p>
+        </div>
+        <svg class="dr-tour__m" viewBox="0 0 120 120" aria-hidden="true" data-tour-m><use href="#m-flower" class="dr-use-orange"/></svg>
+      </div>
     </div>
     <p class="dr-note">Знаешь казахский? <span lang="kk">келгендір</span> — это <span lang="tr" data-say="gelmiştir">gelmiştir</span>. Родня.</p>
   </div>
@@ -933,6 +983,8 @@ p { margin: 0 0 12px; }
           <path d="M0 98C80 74 150 128 240 124 300 122 336 136 356 152 330 170 280 166 236 176 160 192 80 166 0 190Z" fill="#7db8f2"/>
           <path d="M0 120C70 104 140 150 230 146" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="6 10" opacity=".7"/>
           <path d="M20 40h70M140 30h90M260 50h100M30 250h120M200 270h150M290 220h80" stroke="#f6c7a0" stroke-width="10" stroke-linecap="round"/>
+          <path id="dr-ferry-route" d="M230 96C214 130 214 170 200 198" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="8 8" stroke-linecap="round"/>
+          <g class="dr-mferry" data-mferry><path d="M-14 -2h28l-5 8h-18z" fill="#fff8ee" stroke="#4b0c12" stroke-width="2.5"/><rect x="-7" y="-9" width="14" height="7" rx="2" fill="#f47b6a" stroke="#4b0c12" stroke-width="2"/></g>
           <g class="dr-zone" role="button" tabindex="0" aria-label="Каршияка" data-zone="0"><circle cx="230" cy="80" r="16" fill="#69e094" stroke="#4b0c12" stroke-width="4"/><text x="230" y="58" text-anchor="middle" font-size="15" font-weight="800" fill="#4b0c12">Karşıyaka</text></g>
           <g class="dr-zone" role="button" tabindex="0" aria-label="Залив" data-zone="1"><circle cx="130" cy="140" r="16" fill="#fff" stroke="#4b0c12" stroke-width="4"/><text x="130" y="118" text-anchor="middle" font-size="15" font-weight="800" fill="#4b0c12">Körfez</text></g>
           <g class="dr-zone" role="button" tabindex="0" aria-label="Кордон" data-zone="2"><circle cx="300" cy="182" r="16" fill="#b177ed" stroke="#4b0c12" stroke-width="4"/><text x="300" y="214" text-anchor="middle" font-size="15" font-weight="800" fill="#4b0c12">Kordon</text></g>
@@ -968,6 +1020,7 @@ p { margin: 0 0 12px; }
         <g class="dr-ferry" role="button" tabindex="0" aria-label="Паром" data-hot="4"><path d="M330 214h150l-18 26H348z" fill="#fff8ee" stroke="#4b0c12" stroke-width="4"/><rect x="360" y="190" width="80" height="24" rx="6" fill="#f47b6a" stroke="#4b0c12" stroke-width="4"/><rect x="392" y="172" width="14" height="18" fill="#4b0c12"/></g>
         <rect y="270" width="640" height="110" fill="#f6c7a0"/>
         <path d="M0 270h640" stroke="#4b0c12" stroke-width="4"/>
+        <g class="dr-birds" aria-hidden="true" fill="none" stroke="#4b0c12" stroke-width="3" stroke-linecap="round"><path d="M240 70q8-8 16 0 8-8 16 0"/><path d="M290 50q6-6 12 0 6-6 12 0"/><path d="M200 46q5-5 10 0 5-5 10 0"/></g>
         <g class="dr-kiosk" role="button" tabindex="0" aria-label="Закрытый киоск" data-hot="0"><rect x="22" y="196" width="96" height="92" rx="10" fill="#69e094" stroke="#4b0c12" stroke-width="4"/><path d="M14 196h112l-10-22H24z" fill="#ffe36e" stroke="#4b0c12" stroke-width="4"/><rect x="38" y="214" width="64" height="36" fill="#2a0a0d"/><text x="70" y="237" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">KAPALI</text></g>
         <g class="dr-runner" role="button" tabindex="0" aria-label="Бегущий человек" data-hot="1"><circle cx="190" cy="238" r="13" fill="#4b0c12"/><path d="M190 252l-6 34M184 286l-14 22M186 286l16 20M188 262l-18 12M190 262l20 6" stroke="#4b0c12" stroke-width="7" stroke-linecap="round"/><rect x="204" y="262" width="20" height="16" rx="4" fill="#ff7b03"/></g>
         <g class="dr-couple" role="button" tabindex="0" aria-label="Пара за столиком" data-hot="2"><rect x="268" y="300" width="110" height="10" rx="5" fill="#4b0c12"/><path d="M286 310v40M360 310v40" stroke="#4b0c12" stroke-width="6"/><circle cx="270" cy="262" r="15" fill="#b177ed" stroke="#4b0c12" stroke-width="4"/><circle cx="376" cy="262" r="15" fill="#f6a6e6" stroke="#4b0c12" stroke-width="4"/><path d="M300 296c8-10 22-10 28 0h-28z" fill="#7db8f2"/><path d="M314 290l10-4" stroke="#4b0c12" stroke-width="3"/></g>
@@ -1086,6 +1139,9 @@ p { margin: 0 0 12px; }
   <div class="dr-wrap">
     <svg class="dr-div" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 20C50 0 100 40 150 20S250 0 300 20 400 40 450 20 550 0 600 20" fill="none" stroke="#ff7b03" stroke-width="8" stroke-linecap="round"/></svg>
     <p class="dr-kicker">Шпаргалка · сохрани скриншотом</p>
+    <div class="dr-ribbons dr-ribbons--cheat" aria-hidden="true" lang="tr">
+      <div class="dr-ribbon" data-ribbon="3"><span class="r-p">Ali evdedir.</span><span>Toplantı bitmiştir.</span><span class="r-o">Müze kapalıdır.</span><span>Kedi açtır.</span><span class="r-g">Vapur kalkmıştır.</span><span>Saat üçtür.</span></div>
+    </div>
     <div class="dr-poster" data-poster>
       <div class="dr-pc dr-pc--title"><span class="dr-pc__big" lang="tr">-DIr</span><span>два лица одного хвоста</span></div>
       <div class="dr-pc dr-pc--purple"><svg class="dr-ic " viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a5 5 0 1 1 1-9.9A6 6 0 0 1 19 10a4 4 0 0 1-1 8z"/><circle cx="6" cy="21" r="1"/></svg><b>Догадка</b><span lang="tr" data-say="Ali evdedir.">Ali evdedir.</span><small>в речи: «наверное»</small></div>
@@ -1109,6 +1165,8 @@ p { margin: 0 0 12px; }
 </section>
 
 </main>
+
+<div class="dr-peek" aria-hidden="true"><svg viewBox="0 0 120 120"><use href="#m-flower" class="dr-use-orange"/></svg><span class="dr-peek__b" data-peek-b data-ui>Merhaba!</span></div>
 
 <!-- свой скроллбар: стрелка уверенности ползёт от belki к kesin -->
 <nav class="dr-sb" data-scrollbar aria-label="Прогресс урока">
@@ -1918,6 +1976,115 @@ addEventListener('DOMContentLoaded', () => {
     G.from('.dr-gcard__ic', { scale: 0, rotation: 90, duration: .7, ease: 'back.out(3)', stagger: .2, scrollTrigger: { trigger: '.dr-guess__pair', start: 'top 80%' } });
   }
   $('[data-totop]').addEventListener('click', () => scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }));
+
+  /* ================= доработка: больше движения ================= */
+  /* маскот в шапке: моргает, подпрыгивает, по нажатию говорит */
+  const heroM = $('[data-hero-m]');
+  heroM.addEventListener('click', () => {
+    say('Ali evdedir.');
+    if (A) G.fromTo(heroM, { y: 0, rotation: 0 }, { y: -50, rotation: 360, duration: .9, ease: 'back.out(1.6)' });
+  });
+  if (A) {
+    G.from(heroM, { y: -200, rotation: -180, scale: .3, duration: 1.4, delay: .6, ease: 'bounce.out' });
+    G.to(heroM, { y: -10, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut', delay: 2 });
+    setInterval(() => { if (!document.hidden) G.fromTo(heroM, { scaleY: 1 }, { scaleY: .88, duration: .1, yoyo: true, repeat: 1, transformOrigin: '50% 100%' }); }, 2900);
+    G.to('.dr-float--4', { rotationY: 360, duration: 10, repeat: -1, ease: 'none', transformPerspective: 600 });
+    G.to('.dr-float--5', { x: 40, duration: 7, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    /* разноцветные точки-конфетти дрейфуют в шапке */
+    const dots = $('[data-dots]');
+    dots.innerHTML = Array.from({ length: 14 }, (_, i) => `<i style="left:${(i * 37) % 100}%;top:${(i * 53) % 90}%;background:${COLORS[i % COLORS.length]};rotate:${i * 25}deg"></i>`).join('');
+    G.to($$('i', dots), { y: () => G.utils.random(-40, 40), x: () => G.utils.random(-30, 30), rotation: () => G.utils.random(-180, 180), duration: () => G.utils.random(3, 6), yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    /* волнистые разделители прорисовываются по скроллу */
+    $$('.dr-div path').forEach((p) => {
+      const len = p.getTotalLength();
+      p.style.strokeDasharray = len;
+      G.fromTo(p, { strokeDashoffset: len }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p.closest('svg'), start: 'top 95%', end: 'top 55%', scrub: true } });
+    });
+  }
+
+  /* переписка: на компьютере телефон закрепляется, сообщения появляются по скроллу */
+  if (ST && matchMedia('(min-width: 900px)').matches) {
+    const tl = G.timeline({ scrollTrigger: { trigger: '.dr-phone', start: 'top 12%', end: '+=600', pin: true, scrub: 1, onEnter: () => chatTl?.progress(1) } });
+    tl.fromTo('.dr-phone', { rotationY: -18, transformPerspective: 900 }, { rotationY: 12, ease: 'none' })
+      .fromTo('.dr-pstar--1', { x: 0 }, { x: -40, rotation: -30, ease: 'none' }, 0)
+      .fromTo('.dr-pstar--2', { x: 0 }, { x: 40, rotation: 30, ease: 'none' }, 0);
+  }
+
+  /* уверометр-тур: секция закрепляется, стрелка ползёт, фразы сменяются */
+  const tour = $('[data-tour]');
+  const tSteps = $$('.dr-tour__s', tour);
+  const TOUR_PCT = [6, 35, 70, 88, 98];
+  let tourAt = -1;
+  function tourShow(k) {
+    if (k === tourAt) return;
+    tourAt = k;
+    tSteps.forEach((s, i) => { s.style.visibility = i === k ? 'visible' : 'hidden'; });
+    needle('tour', TOUR_PCT[k], .7);
+    if (A) {
+      G.fromTo(tSteps[k], { y: 40, scale: .8, rotation: -3 }, { y: 0, scale: 1, rotation: 0, duration: .55, ease: 'back.out(2.4)' });
+      G.fromTo('[data-tour-m]', { rotation: -20, y: 10 }, { rotation: 0, y: 0, duration: .6, ease: 'elastic.out(1, .45)' });
+    }
+  }
+  tSteps.forEach((s, i) => s.addEventListener('click', () => tourShow(i)));
+  if (ST) {
+    tourShow(0);
+    ScrollTrigger.create({ trigger: '.dr-tour__in', start: 'top 8%', end: '+=900', pin: true, onUpdate: (self) => tourShow(Math.min(4, Math.floor(self.progress * 5))) });
+  } else { tour.classList.add('is-static'); needle('tour', 70, 0); }
+
+  /* ленты хвостов едут навстречу друг другу */
+  if (A) {
+    $$('[data-ribbon]').forEach((r, i) => {
+      const dir = i % 2 ? 1 : -1;
+      G.fromTo(r, { x: dir > 0 ? -320 : 0 }, { x: dir > 0 ? 0 : -320, ease: 'none', scrollTrigger: { trigger: r, start: 'top bottom', end: 'bottom top', scrub: true } });
+    });
+    G.from('.dr-ribbon span', { scale: .4, rotation: () => G.utils.random(-20, 20), duration: .7, ease: 'back.out(2.5)', stagger: .03, scrollTrigger: { trigger: '.dr-ribbons', start: 'top 90%' } });
+  }
+
+  /* карта: паромчик плывёт по маршруту Каршияка → Конак */
+  if (MP) {
+    G.to('[data-mferry]', { motionPath: { path: '#dr-ferry-route', align: '#dr-ferry-route', alignOrigin: [.5, .5], autoRotate: false }, duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  } else $('[data-mferry]').setAttribute('transform', 'translate(214 150)');
+
+  /* сцена: птицы летят над Кордоном */
+  if (A) {
+    const birds = G.to('.dr-birds', { x: 260, y: -20, duration: 9, repeat: -1, ease: 'none' });
+    birds.pause();
+    ScrollTrigger.create({ trigger: '.dr-scene__svg', start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? birds.play() : birds.pause()) });
+    G.to('.dr-birds path', { scaleY: .4, transformOrigin: '50% 50%', duration: .3, yoyo: true, repeat: -1, stagger: .1 });
+  }
+
+  /* стена с дырой: кирпичи вздрагивают перед тем, как дыру заткнут */
+  if (A) G.from('.dr-wall rect', { y: -60, rotation: () => G.utils.random(-12, 12), duration: .8, ease: 'bounce.out', stagger: .04, scrollTrigger: { trigger: '[data-wall]', start: 'top 85%' } });
+
+  /* 3D-наклон карточек за курсором (только мышь) */
+  if (A && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.dr-bc, .dr-sign, .dr-pc').forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - .5, py = (e.clientY - r.top) / r.height - .5;
+        G.to(card, { rotationY: px * 14, rotationX: -py * 14, transformPerspective: 700, duration: .4, ease: 'power2.out' });
+      });
+      card.addEventListener('pointerleave', () => G.to(card, { rotationY: 0, rotationX: 0, duration: .6, ease: 'elastic.out(1, .5)' }));
+    });
+  }
+
+  /* финал: конфетти из шпаргалки */
+  if (ST) ScrollTrigger.create({ trigger: '[data-poster]', start: 'top 50%', once: true, onEnter: () => { sparks($('.dr-pc--title'), 24); sparks($('.dr-final__m'), 14); } });
+
+  /* цветок-компаньон на широком экране */
+  const PEEK = { hero: 'Merhaba!', story: 'Кемаль где?', guess: 'Угадаешь?', meaning: 'Хвост сомневается', forms: '8 костюмов', tenses: 'Сначала время', compare: 'Крути ползунок', official: 'Печать!', tree: 'Да или нет?', mnemo: 'Где дыра?', map: 'Нажми район', scene: 'Нажми героя', gallery: 'Переворачивай', lab: 'Собирай!', traps: 'Осторожно', video: 'Смотри', practice: 'Твой ход', check: 'Без подсказок', cheat: 'Сохрани!' };
+  const peekB = $('[data-peek-b]');
+  if (ST && matchMedia('(min-width: 1360px)').matches) {
+    $$('[data-section]').forEach((sec) => ScrollTrigger.create({
+      trigger: sec, start: 'top 55%', end: 'bottom 55%',
+      onToggle: (self) => {
+        if (!self.isActive) return;
+        peekB.textContent = PEEK[sec.dataset.section] || '';
+        G.fromTo('.dr-peek svg', { y: 30, rotation: -20 }, { y: 0, rotation: 0, duration: .7, ease: 'back.out(2.6)' });
+        G.fromTo(peekB, { scale: .6 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+      },
+    }));
+  }
 
   /* ================= свой скроллбар ================= */
   const bar = $('[data-scrollbar]');
