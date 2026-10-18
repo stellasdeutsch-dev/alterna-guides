@@ -415,6 +415,40 @@ p { margin: 0 0 12px; max-width: 60ch; color: #c9d1de; }
 @media (max-width: 979px) { .hero .iso { width: 46%; right: 0; top: auto; bottom: 34%; } }
 .iso-city { display: block; width: min(100%, 420px); margin: 18px auto 0; height: auto; }
 
+/* ---------- FLOW: сегодня → завтра ---------- */
+.flow { position: relative; padding: clamp(10px, 2vw, 22px); border-radius: 28px; background: var(--bg2); border: 1px solid var(--line); overflow-x: auto; overscroll-behavior-x: contain; }
+.flow__in { min-width: 620px; }
+@media (min-width: 700px) { .flow__in { min-width: 0; } }
+.flow svg { width: 100%; height: auto; display: block; }
+.fband { fill: none; stroke: url(#g-flow); stroke-width: 16; stroke-linecap: round; opacity: .28; cursor: pointer; }
+.fband.is-on { opacity: .95; stroke-dasharray: 14 10; }
+.fnode { cursor: pointer; }
+.fnode rect { fill: #1a2333; stroke: #33405a; stroke-width: 1.5; }
+.fnode.is-on rect { stroke: var(--green); fill: #133325; }
+.fnode text { font: 700 15px var(--ak-font); fill: #e9eef6; }
+
+/* ---------- FORMMAP: круг форм ---------- */
+.fm { position: relative; width: min(100%, 460px); margin-inline: auto; }
+.fm__svg { width: 100%; height: auto; display: block; overflow: visible; }
+.fseg { cursor: pointer; stroke: var(--bg); stroke-width: 3; }
+.fseg.is-on { stroke: #fff; stroke-width: 3; }
+.flab { font: 700 13px var(--ak-font); fill: #fff; pointer-events: none; }
+
+/* ---------- DONUT k / ğ ---------- */
+.donut { display: flex; align-items: center; gap: 16px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+.donut svg { width: 120px; height: 120px; }
+.donut .wk__legend { width: auto; }
+
+/* ---------- LIFE: линия жизни ---------- */
+.life { margin-top: 16px; padding: 12px; border-radius: 26px; background: var(--card); border: 1px solid var(--line); overflow-x: auto; overscroll-behavior-x: contain; }
+.life__in { min-width: 620px; }
+@media (min-width: 700px) { .life__in { min-width: 0; } }
+.life svg { width: 100%; height: auto; display: block; }
+.life__stop { cursor: pointer; }
+.life__c { fill: #1a2333; stroke: #33405a; stroke-width: 2; }
+.life__stop.is-on .life__c { stroke: var(--green); fill: #133325; }
+.life__stop.is-lit .life__c { stroke: #4fe39a; }
+
 </style>
 </head>
 <body>
@@ -603,6 +637,19 @@ p { margin: 0 0 12px; max-width: 60ch; color: #c9d1de; }
         <button type="button" class="chip" data-se="lar">+ lar</button>
       </div>
       <p class="small muted" style="text-align:center;margin:6px auto 0" data-soft-why data-ui>Гласная после k → k становится ğ.</p>
+      <div class="donut" data-donut>
+        <svg viewBox="0 0 120 120" aria-label="Диаграмма: в двух лицах из шести k становится ğ">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#253044" stroke-width="16"/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#ea6cd5" stroke-width="16" stroke-dasharray="96.3 289" transform="rotate(-90 60 60)" data-donut-g/>
+          <circle cx="60" cy="60" r="46" fill="none" stroke="#8b66f3" stroke-width="16" stroke-dasharray="192.7 289" stroke-dashoffset="-96.3" transform="rotate(-90 60 60)" data-donut-k/>
+          <text x="60" y="58" text-anchor="middle" font-size="22" font-weight="800" fill="#e9eef6" lang="tr">ğ 2</text>
+          <text x="60" y="76" text-anchor="middle" font-size="12" fill="#8e98aa" lang="tr">k 4</text>
+        </svg>
+        <ul class="wk__legend" data-ui>
+          <li><i class="dot-l" style="background:#ea6cd5"></i>ğ: <span lang="tr">ben, biz</span></li>
+          <li><i class="dot-l" style="background:#8b66f3"></i>k: <span lang="tr">sen, o, siz, onlar</span></li>
+        </ul>
+      </div>
     </div>
   </div>
   <div class="wrap"><div class="mq" data-mq="soft" data-ui></div></div>
@@ -666,6 +713,37 @@ p { margin: 0 0 12px; max-width: 60ch; color: #c9d1de; }
   <div class="wrap"><div class="mq" data-mq="varyok" data-ui></div></div>
 </section>
 
+
+<!-- ============ FLOW: сегодня → завтра ============ -->
+<section data-section="flow" data-words="18">
+  <i class="flare" style="left:-160px;top:30%" data-speed="30" aria-hidden="true"></i>
+  <div class="wrap">
+    <p class="eyebrow">Диаграмма потока</p>
+    <h2>Сегодня → завтра</h2>
+    <p>Шесть фраз про сегодня. Через переходник они уходят в завтра. Нажми на любую линию.</p>
+    <div class="flow" data-flow><div class="flow__in">
+      <svg viewBox="0 0 760 440" aria-label="Диаграмма: шесть фраз переходят из сегодня в завтра через ol">
+        <defs>
+          <linearGradient id="g-flow" x1="0" x2="1"><stop offset="0" stop-color="#8b66f3"/><stop offset=".5" stop-color="#4fe39a"/><stop offset="1" stop-color="#ea6cd5"/></linearGradient>
+        </defs>
+        <text x="20" y="28" font-size="13" font-weight="700" fill="#8e98aa" letter-spacing="2" data-ui>СЕГОДНЯ</text>
+        <text x="740" y="28" font-size="13" font-weight="700" fill="#8e98aa" letter-spacing="2" text-anchor="end" data-ui>ЗАВТРА</text>
+        <g data-flow-bands></g>
+        <rect x="356" y="44" width="48" height="380" rx="24" fill="#133325" stroke="#4fe39a" stroke-width="2"/>
+        <text x="380" y="242" text-anchor="middle" font-size="22" font-weight="800" fill="#4fe39a" transform="rotate(-90 380 236)" lang="tr">ol · acak</text>
+        <g data-flow-left></g>
+        <g data-flow-right></g>
+      </svg>
+    </div></div>
+    <p class="small muted pool__hint" style="text-align:center;margin:6px auto 0" data-ui>← листай схему →</p>
+    <div class="pool__out" aria-live="polite">
+      <div class="small muted" data-flow-lbl data-ui>Нажми на линию или фразу</div>
+      <div class="pool__tr" lang="tr" data-flow-tr>…</div>
+      <div class="ru" data-flow-ru data-ui></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ NEG + Q ============ -->
 <section data-section="negq" data-words="28">
   <svg class="floater" style="top:14px;right:6%" data-speed="40" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-cal"/></svg>
@@ -689,6 +767,39 @@ p { margin: 0 0 12px; max-width: 60ch; color: #c9d1de; }
       </div>
     </div>
     <div class="mq" data-mq="negq" data-ui></div>
+  </div>
+</section>
+
+
+<!-- ============ FORMMAP: круг форм ============ -->
+<section data-section="formmap" data-words="15">
+  <svg class="floater" style="top:14px;right:6%" data-speed="-30" viewBox="0 0 32 32" aria-hidden="true"><use href="#i-chart"/></svg>
+  <div class="wrap grid2">
+    <div>
+      <p class="eyebrow eyebrow--pink">Карта форм</p>
+      <h2>Все формы на&nbsp;одном круге</h2>
+      <p>Центр — переходник. Первое кольцо — знак. Второе — лицо. Нажимай.</p>
+      <div class="card" aria-live="polite" style="margin-top:14px">
+        <span class="metric__lbl" data-fm-lbl data-ui>Выбери сектор</span>
+        <div class="metric__val" lang="tr" data-fm-tr style="font-size:clamp(22px,5.4vw,34px)">…</div>
+        <div class="ru" data-fm-ru data-ui></div>
+      </div>
+      <ul class="wk__legend" style="margin-top:12px" data-ui>
+        <li><i class="dot-l" style="background:#4fe39a"></i>буду · olacak</li>
+        <li><i class="dot-l" style="background:#ff6b3d"></i>не буду · olmayacak</li>
+        <li><i class="dot-l" style="background:#4f72f7"></i>буду? · olacak mı</li>
+      </ul>
+    </div>
+    <div class="fm">
+      <svg viewBox="-210 -210 420 420" class="fm__svg" aria-label="Круговая диаграмма форм olacak">
+        <g data-fm-ring2></g>
+        <g data-fm-ring1></g>
+        <circle r="62" fill="#1a2333" stroke="#4fe39a" stroke-width="3"/>
+        <circle r="62" fill="none" stroke="#4fe39a" stroke-width="6" stroke-dasharray="30 360" data-fm-spin/>
+        <use href="#i-plug" x="-16" y="-38" width="32" height="32"/>
+        <text y="18" text-anchor="middle" font-size="26" font-weight="800" fill="#e9eef6" lang="tr">ol</text>
+      </svg>
+    </div>
   </div>
 </section>
 
@@ -742,6 +853,16 @@ p { margin: 0 0 12px; max-width: 60ch; color: #c9d1de; }
         <p class="small muted" style="margin:6px 0 0" data-bb-meaning data-ui>Здесь «быть»: состояние, место.</p>
       </div>
     </div>
+    <div class="life" data-life><div class="life__in">
+      <svg viewBox="0 0 760 180" aria-label="Линия времени: от вечера до пяти лет">
+        <path d="M40 90 H 720" stroke="#253044" stroke-width="6" stroke-linecap="round"/>
+        <defs><linearGradient id="g-life" gradientUnits="userSpaceOnUse" x1="40" y1="0" x2="720" y2="0"><stop offset="0" stop-color="#4fe39a"/><stop offset=".5" stop-color="#4f72f7"/><stop offset="1" stop-color="#ea6cd5"/></linearGradient></defs><path d="M40 90 H 720" stroke="url(#g-life)" stroke-width="6" stroke-linecap="round" data-life-fill/><circle r="9" cx="40" cy="90" fill="#4fe39a" data-life-dot/>
+        <text x="40" y="30" font-size="12" fill="#8e98aa" letter-spacing="2" data-ui>БЫТЬ</text>
+        <text x="720" y="30" font-size="12" fill="#8e98aa" letter-spacing="2" text-anchor="end" data-ui>СТАТЬ</text>
+        <g class="life__stop" role="button" tabindex="0" data-life-i="0" aria-label="Akşam"><circle cx="70" cy="90" r="34" class="life__c"/><use href="#i-heart" x="52" y="72" width="36" height="36"/><text x="70" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#e9eef6" lang="tr">Akşam</text></g><g class="life__stop" role="button" tabindex="0" data-life-i="1" aria-label="Yarın"><circle cx="220" cy="90" r="34" class="life__c"/><use href="#i-home" x="202" y="72" width="36" height="36"/><text x="220" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#e9eef6" lang="tr">Yarın</text></g><g class="life__stop" role="button" tabindex="0" data-life-i="2" aria-label="İki ay sonra"><circle cx="380" cy="90" r="34" class="life__c"/><use href="#i-baby" x="362" y="72" width="36" height="36"/><text x="380" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#e9eef6" lang="tr">İki ay sonra</text></g><g class="life__stop" role="button" tabindex="0" data-life-i="3" aria-label="Gelecek yıl"><circle cx="540" cy="90" r="34" class="life__c"/><use href="#i-cap" x="522" y="72" width="36" height="36"/><text x="540" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#e9eef6" lang="tr">Gelecek yıl</text></g><g class="life__stop" role="button" tabindex="0" data-life-i="4" aria-label="Beş yıl sonra"><circle cx="690" cy="90" r="34" class="life__c"/><use href="#i-work" x="672" y="72" width="36" height="36"/><text x="690" y="152" text-anchor="middle" font-size="15" font-weight="700" fill="#e9eef6" lang="tr">Beş yıl sonra</text></g>
+      </svg>
+    </div></div>
+    <div class="bubble" aria-live="polite" data-life-bubble><div class="bubble__who" data-life-who data-ui>Нажми на точку на линии</div><div class="bubble__tr" lang="tr" data-life-tr>…</div><div class="ru" data-life-ru data-ui></div></div>
   </div>
 </section>
 
@@ -1978,6 +2099,163 @@ addEventListener('DOMContentLoaded', () => {
     const pulse = gsap.to('.wk__day svg', { scale: 1.12, duration: .8, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true });
     whenVisible($('[data-wk]'), () => pulse.play(), () => pulse.pause());
   }
+});
+
+addEventListener('DOMContentLoaded', () => {
+  const { $, $$, say, esc, spark, loop, whenVisible, A } = window.__ak;
+  const { WHO, RUP, BE, POS, NEG, Q } = window.__ol;
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; };
+  const hl = (s) => esc(s).replace(/(olmayacak\w*|olacak\w*)/, '<span class="t-ol">$1</span>');
+
+  /* ---------- FLOW: ленты «сегодня → завтра» ---------- */
+  const FLOW = [
+    ['Öğretmenim.', 'Öğretmen olacağım.', 'Я учитель → я буду учителем.', 'существительное'],
+    ['Evdeyim.', 'Evde olacağım.', 'Я дома → я буду дома.', 'место'],
+    ['Yorgunum.', 'Yorgun olacağım.', 'Я устал → я буду усталым.', 'признак'],
+    ['Toplantı var.', 'Toplantı olacak.', 'Есть собрание → будет собрание.', 'var'],
+    ['Su yok.', 'Su olmayacak.', 'Нет воды → не будет воды.', 'yok'],
+    ['Hasta değilim.', 'Hasta olmayacağım.', 'Я не болен → я не буду больным.', 'değil'],
+  ];
+  const bands = $('[data-flow-bands]'), left = $('[data-flow-left]'), right = $('[data-flow-right]');
+  const bandEls = [], lEls = [], rEls = [];
+  FLOW.forEach(([now, fut], i) => {
+    const y = 70 + i * 62;
+    const mid = 120 + i * 40;
+    const p = mk('path', { class: 'fband', d: `M200 ${y} C 300 ${y}, 300 ${mid}, 380 ${mid} S 460 ${y}, 560 ${y}` }, bands);
+    bandEls.push(p);
+    const gl = mk('g', { class: 'fnode', role: 'button', tabindex: '0', 'data-fi': i, 'aria-label': now }, left);
+    mk('rect', { x: 14, y: y - 20, width: 186, height: 40, rx: 12 }, gl);
+    const tl = mk('text', { x: 28, y: y + 5, lang: 'tr' }, gl); tl.textContent = now;
+    lEls.push(gl);
+    const gr = mk('g', { class: 'fnode', role: 'button', tabindex: '0', 'data-fi': i, 'aria-label': fut }, right);
+    mk('rect', { x: 560, y: y - 20, width: 190, height: 40, rx: 12 }, gr);
+    const tr = mk('text', { x: 574, y: y + 5, lang: 'tr' }, gr); tr.textContent = fut;
+    rEls.push(gr);
+    [p, gl, gr].forEach((el) => {
+      el.addEventListener('click', () => flowGo(i, true));
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flowGo(i, true); } });
+    });
+  });
+  let flowTween = null;
+  function flowGo(i, speak) {
+    const [now, fut, ru, kind] = FLOW[i];
+    bandEls.forEach((b, k) => b.classList.toggle('is-on', k === i));
+    lEls.forEach((b, k) => b.classList.toggle('is-on', k === i));
+    rEls.forEach((b, k) => b.classList.toggle('is-on', k === i));
+    $('[data-flow-lbl]').textContent = `Источник: ${kind}`;
+    $('[data-flow-tr]').innerHTML = `<span>${esc(now)}</span><span class="arrow">→</span><span data-say="${fut}">${hl(fut)}</span>`;
+    $('[data-flow-ru]').textContent = ru;
+    if (A) {
+      if (flowTween) flowTween.kill();
+      flowTween = gsap.fromTo(bandEls[i], { strokeDashoffset: 0 }, { strokeDashoffset: -48, duration: .8, repeat: -1, ease: 'none' });
+      gsap.fromTo(rEls[i], { x: 30 }, { x: 0, duration: .6, ease: 'back.out(2.5)' });
+      gsap.fromTo('[data-flow-tr] > *', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: .45, stagger: .1, ease: 'back.out(2)' });
+    }
+    if (speak) say(fut);
+  }
+  if (A) {
+    gsap.from(bandEls, { strokeDasharray: '0 900', stagger: .08, ease: 'none', scrollTrigger: { trigger: '[data-flow]', start: 'top 90%', end: 'top 35%', scrub: true } });
+    ScrollTrigger.batch('[data-flow-left] .fnode', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { x: -60, duration: .6, stagger: .07, ease: 'back.out(2)' }) });
+    ScrollTrigger.batch('[data-flow-right] .fnode', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { x: 60, duration: .6, stagger: .07, ease: 'back.out(2)' }) });
+    ScrollTrigger.create({ trigger: '[data-flow]', start: 'top 60%', once: true, onEnter: () => flowGo(0) });
+  } else flowGo(0);
+
+  /* ---------- FORMMAP: круговая карта форм ---------- */
+  const r1 = $('[data-fm-ring1]'), r2 = $('[data-fm-ring2]');
+  const SIGN = [['+', '#4fe39a', POS, ''], ['−', '#ff6b3d', NEG, 'не '], ['?', '#4f72f7', Q, '']];
+  const arc = (a0, a1, rIn, rOut) => {
+    const p = (a, r) => [Math.cos(a) * r, Math.sin(a) * r];
+    const [x0, y0] = p(a0, rOut), [x1, y1] = p(a1, rOut), [x2, y2] = p(a1, rIn), [x3, y3] = p(a0, rIn);
+    const big = a1 - a0 > Math.PI ? 1 : 0;
+    return `M${x0} ${y0} A${rOut} ${rOut} 0 ${big} 1 ${x1} ${y1} L${x2} ${y2} A${rIn} ${rIn} 0 ${big} 0 ${x3} ${y3}Z`;
+  };
+  const segs = [];
+  SIGN.forEach(([sym, col, set, ne], s) => {
+    const a0 = -Math.PI / 2 + (s * 2 * Math.PI) / 3, a1 = a0 + (2 * Math.PI) / 3;
+    const g1 = mk('path', { class: 'fseg', d: arc(a0 + .01, a1 - .01, 70, 118), fill: col, opacity: .9 }, r1);
+    const am = (a0 + a1) / 2;
+    const t1 = mk('text', { class: 'flab', x: Math.cos(am) * 94, y: Math.sin(am) * 94 + 7, 'text-anchor': 'middle', style: 'font-size:26px', fill: '#07170f' }, r1);
+    t1.textContent = sym;
+    g1.addEventListener('click', () => fmGo(s, 2, true));
+    WHO.forEach((w, p) => {
+      const b0 = a0 + (p * (a1 - a0)) / 6, b1 = b0 + (a1 - a0) / 6;
+      const seg = mk('path', { class: 'fseg', d: arc(b0 + .008, b1 - .008, 122, 200), fill: col, opacity: .35 + p * .08, role: 'button', tabindex: '0', 'aria-label': `${w} ${set[p]}` }, r2);
+      const bm = (b0 + b1) / 2;
+      const t = mk('text', { class: 'flab', x: Math.cos(bm) * 162, y: Math.sin(bm) * 162 + 5, 'text-anchor': 'middle', lang: 'tr' }, r2);
+      t.textContent = w;
+      seg.addEventListener('click', () => fmGo(s, p, true));
+      seg.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fmGo(s, p, true); } });
+      segs.push([seg, s, p]);
+    });
+  });
+  function fmGo(s, p, speak) {
+    const [sym, , set, ne] = SIGN[s];
+    const form = `doktor ${set[p]}${sym === '?' ? '?' : '.'}`;
+    segs.forEach(([el, ss, pp]) => el.classList.toggle('is-on', ss === s && pp === p));
+    $('[data-fm-lbl]').textContent = `${WHO[p]} · ${RUP[p]} · ${sym === '+' ? 'буду' : sym === '−' ? 'не буду' : 'вопрос'}`;
+    $('[data-fm-tr]').innerHTML = hl(form);
+    $('[data-fm-ru]').textContent = `${RUP[p][0].toUpperCase() + RUP[p].slice(1)} ${ne}${BE[p]} врачом${sym === '?' ? '?' : '.'}`;
+    if (A) {
+      const seg = segs.find(([, ss, pp]) => ss === s && pp === p)[0];
+      gsap.fromTo(seg, { scale: 1.08, transformOrigin: '0px 0px' }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' });
+      gsap.fromTo('[data-fm-tr]', { y: 14, opacity: .3 }, { y: 0, opacity: 1, duration: .4, ease: 'back.out(2)' });
+    }
+    if (speak) say(form);
+  }
+  if (A) {
+    loop(gsap.to('[data-fm-spin]', { rotation: 360, transformOrigin: '0px 0px', duration: 5, repeat: -1, ease: 'none' }), $('.fm'));
+    gsap.from(segs.map((x) => x[0]), { scale: 0, transformOrigin: '0px 0px', stagger: .03, duration: .5, ease: 'back.out(2)', scrollTrigger: { trigger: '.fm', start: 'top 85%', once: true } });
+    gsap.from('[data-fm-ring1] path', { rotation: -120, transformOrigin: '0px 0px', stagger: .1, duration: .9, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.fm', start: 'top 85%', once: true } });
+    gsap.from('.fm__svg', { rotation: -30, ease: 'none', scrollTrigger: { trigger: '.fm', start: 'top bottom', end: 'center 50%', scrub: true } });
+    ScrollTrigger.create({ trigger: '.fm', start: 'top 60%', once: true, onEnter: () => fmGo(0, 0) });
+  } else fmGo(0, 0);
+
+  /* ---------- DONUT: k или ğ ---------- */
+  if (A) {
+    gsap.from('[data-donut-g]', { strokeDasharray: '0 289', duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '[data-donut]', start: 'top 90%', once: true } });
+    gsap.from('[data-donut-k]', { strokeDasharray: '0 289', duration: 1.2, delay: .4, ease: 'power3.out', scrollTrigger: { trigger: '[data-donut]', start: 'top 90%', once: true } });
+  }
+  $$('[data-se]').forEach((b) => b.addEventListener('click', () => {
+    const soft = b.dataset.se === 'ım' || b.dataset.se === 'ız';
+    if (A) gsap.fromTo(soft ? '[data-donut-g]' : '[data-donut-k]', { strokeWidth: 16 }, { strokeWidth: 24, duration: .25, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+  }));
+
+  /* ---------- LIFE: линия жизни ---------- */
+  const LIFE = [
+    ['Вечером · быть', 'Akşam yorgun olacağım.', 'Вечером я буду усталым.'],
+    ['Завтра · быть', 'Yarın evde olacağım.', 'Завтра я буду дома.'],
+    ['Через два месяца · стать', 'İki ay sonra anne olacağım.', 'Через два месяца я стану мамой.'],
+    ['В следующем году · стать', 'Gelecek yıl öğretmen olacağım.', 'В следующем году я стану учителем.'],
+    ['Через пять лет · стать', 'Beş yıl sonra müdür olacağım.', 'Через пять лет я стану директором.'],
+  ];
+  const XS = [70, 220, 380, 540, 690];
+  const stops = $$('.life__stop');
+  function lifeGo(i, speak) {
+    const [who, tr, ru] = LIFE[i];
+    stops.forEach((s, k) => { s.classList.toggle('is-on', k === i); s.classList.toggle('is-lit', k <= i); });
+    $('[data-life-who]').textContent = who;
+    $('[data-life-tr]').innerHTML = hl(tr);
+    $('[data-life-tr]').setAttribute('data-say', tr);
+    $('[data-life-ru]').textContent = ru;
+    const box = $('[data-life]');
+    if (box.scrollWidth > box.clientWidth + 4) box.scrollTo({ left: (XS[i] / 760) * box.scrollWidth - box.clientWidth / 2, behavior: A ? 'smooth' : 'auto' });
+    if (A) {
+      gsap.to('[data-life-dot]', { attr: { cx: XS[i] }, duration: .7, ease: 'back.out(1.6)' });
+      gsap.fromTo($('use', stops[i]), { y: -12, scale: 1.2 }, { y: 0, scale: 1, duration: .6, ease: 'bounce.out' });
+      gsap.fromTo('[data-life-bubble]', { y: 12 }, { y: 0, duration: .4, ease: 'back.out(2)' });
+    } else $('[data-life-dot]').setAttribute('cx', XS[i]);
+    if (speak) say(tr);
+  }
+  stops.forEach((s, i) => {
+    s.addEventListener('click', () => lifeGo(i, true));
+    s.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); lifeGo(i, true); } });
+  });
+  if (A) {
+    gsap.from('[data-life-fill]', { strokeDasharray: '0 700', ease: 'none', scrollTrigger: { trigger: '[data-life]', start: 'top 90%', end: 'bottom 40%', scrub: true } });
+    ScrollTrigger.create({ trigger: '[data-life]', start: 'top 80%', end: 'bottom 30%', onUpdate: (st) => { const i = Math.min(4, Math.floor(st.progress * 5)); if (!stops[i].classList.contains('is-on')) lifeGo(i); } });
+    ScrollTrigger.batch('.life__stop', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { y: 30, scale: .5, transformOrigin: '50% 50%', duration: .6, stagger: .08, ease: 'back.out(2.5)' }) });
+  } else lifeGo(0);
 });
 
 </script>
