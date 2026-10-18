@@ -316,6 +316,24 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
 .tb__p.is-miss { background: var(--pink); }
 .tb__fb { min-height: 1.5em; margin-top: 10px; }
 
+/* комикс в крючке */
+.comic { display: grid; gap: 12px; margin-top: 26px; }
+@media (min-width: 768px) { .comic { grid-template-columns: repeat(3, 1fr); } }
+.comic__f { position: relative; border: 0; padding: 0; border-radius: 26px; overflow: hidden; background: var(--night); cursor: pointer; text-align: left; font-family: var(--ak-font); box-shadow: 0 18px 40px -26px rgba(43, 38, 51, .6); }
+.comic__f svg { display: block; width: 100%; height: auto; }
+.comic__cap { display: block; padding: 12px 16px 16px; background: #fff; color: var(--ink); font-size: 15px; line-height: 1.35; }
+.comic__cap b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--blue-d); }
+/* сцена «штатив едет в будущее» */
+.cam__box { position: relative; margin-top: 16px; border-radius: 30px; overflow: hidden; background: var(--night); }
+.cam__box svg { display: block; width: 100%; height: auto; }
+.cam__tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 16px 0 8px; font-size: clamp(22px, 6vw, 44px); }
+.cam__tiles .t { border: 0; font-family: var(--ak-font); font-size: inherit; cursor: pointer; }
+.cam__tiles .t:not(.is-on) { opacity: .28; }
+.cam__out { display: grid; gap: 2px; justify-items: center; text-align: center; }
+.cam__out button { min-height: 44px; border: 0; background: none; font: 850 clamp(19px, 5vw, 28px)/1.2 var(--ak-font); color: var(--ink); cursor: pointer; }
+@media (min-width: 900px) and (min-height: 700px) { .cam { min-height: 100dvh; } }
+.hero__art { perspective: 1100px; }
+
 /* скроллбар: на телефоне — тонкая полоса сверху, от 768 px — рваная синяя линия справа */
 .sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 8px; pointer-events: none; }
 .sb__track { position: absolute; inset: 0; background: rgba(91, 141, 239, .2); pointer-events: auto; touch-action: none; }
@@ -431,7 +449,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
   </section>
 
   <!-- ================= STORY ================= -->
-  <section class="s story" data-section="story" data-words="102">
+  <section class="s story" data-section="story" data-words="118">
     <div class="w grid2">
       <svg class="deco fl fl-story" viewBox="0 0 100 100" aria-hidden="true" style="right:-8px;top:-34px;width:74px;height:auto;color:var(--lime)"><use href="#i-burst"/></svg>
       <div class="tx">
@@ -465,6 +483,11 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
           <button class="chat__opt" type="button" data-k="b" lang="tr" data-say="Dokuzda Samsun'a varmış olacağız.">Dokuzda Samsun'a varmış olacağız.</button>
         </div>
       </div>
+    </div>
+    <div class="w comic">
+      <button class="comic__f" type="button" data-say="Yarın dokuzda kahvaltı?"><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#2b2633"/><g fill="#fff"><circle cx="40" cy="30" r="2"/><circle cx="120" cy="20" r="3"/><circle cx="260" cy="36" r="2"/></g><circle cx="270" cy="50" r="22" fill="#fff0a8"/><rect x="0" y="160" width="320" height="40" fill="#3d3646"/><g class="cx-bus"><rect x="70" y="100" width="170" height="62" rx="16" fill="#5b8def"/><rect x="84" y="112" width="30" height="22" rx="5" fill="#fff0a8"/><rect x="122" y="112" width="30" height="22" rx="5" fill="#fff0a8"/><rect x="160" y="112" width="30" height="22" rx="5" fill="#2b2633"/><rect x="198" y="112" width="30" height="22" rx="5" fill="#fff0a8"/><circle cx="104" cy="164" r="12" fill="#1b0d0e"/><circle cx="206" cy="164" r="12" fill="#1b0d0e"/></g><g class="cx-zz" fill="#fff" font-weight="900"><text x="166" y="96" font-size="16">z</text><text x="180" y="82" font-size="20">z</text><text x="198" y="66" font-size="26">Z</text></g></svg><span class="comic__cap"><b data-ui>02:14</b>Автобус. Сосед дирижирует храпом.</span></button>
+      <button class="comic__f" type="button" data-say="Dokuzda Samsun'a varacağız."><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#86bdf5"/><g class="cx-phone"><rect x="100" y="18" width="120" height="170" rx="20" fill="#2b2633"/><rect x="108" y="30" width="104" height="150" rx="14" fill="#fff"/><rect x="118" y="46" width="70" height="22" rx="10" fill="#fff6dc"/><rect class="cx-msg" x="134" y="78" width="70" height="34" rx="10" fill="#5b8def"/><text x="140" y="99" font-size="11" font-weight="800" fill="#fff">varacağız</text><path class="cx-tick" d="m186 120 5 5 10-10" fill="none" stroke="#55a94a" stroke-width="3" stroke-linecap="round"/></g><use href="#i-spark" x="40" y="40" width="30" height="30" style="color:#fff0a8"/><use href="#i-spark" x="250" y="120" width="24" height="24" style="color:#fff"/></svg><span class="comic__cap"><b data-ui>02:15</b>Одна форма. Отправлено. Ты засыпаешь гордый.</span></button>
+      <button class="comic__f" type="button" data-say="Tamam, o zaman onda görüşürüz."><svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#fff0a8"/><rect x="0" y="130" width="320" height="70" fill="#5b8def"/><path class="cx-sea" d="M0 146q20-8 40 0t40 0 40 0 40 0 40 0 40 0 40 0 40 0 40 0" fill="none" stroke="#fff" stroke-width="3"/><rect x="40" y="118" width="240" height="14" rx="7" fill="#f2e3bd"/><use href="#i-flower" x="120" y="44" width="70" height="78" style="color:#ff8b1f"/><rect x="196" y="86" width="36" height="34" rx="6" fill="#9466ea"/><g class="cx-gull" fill="none" stroke="#2b2633" stroke-width="3" stroke-linecap="round"><path d="M40 40q10-10 20 0q10-10 20 0"/><path d="M230 30q8-8 16 0q8-8 16 0"/></g><g class="cx-clock"><circle cx="270" cy="70" r="22" fill="#fff" stroke="#2b2633" stroke-width="3"/><path class="cx-hand" d="M270 70V54" stroke="#f37563" stroke-width="3" stroke-linecap="round"/></g></svg><span class="comic__cap"><b data-ui>07:00 → 10:00</b>Три часа на набережной. Чайки сочувствуют.</span></button>
     </div>
   </section>
 
@@ -582,6 +605,43 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
     </div>
   </section>
 
+  <!-- ================= CAMERA: штатив едет в будущее ================= -->
+  <section class="s cam" data-section="camera" data-words="34">
+    <div class="w">
+      <span class="tag"><svg width="16" height="16" aria-hidden="true"><use href="#i-spark"/></svg> Сцена по скроллу</span>
+      <svg class="deco fl fl-cam" viewBox="0 0 100 100" aria-hidden="true" style="right:-6px;top:-30px;width:64px;height:auto;color:var(--lime)"><use href="#i-burst"/></svg>
+      <h2>Штатив едет в будущее</h2>
+      <p class="tx">Крути страницу. Ночь сменяется утром. Автобус приезжает в семь и ставит галочку. Штатив <b lang="tr" class="o">ol-</b> катится к девяти и делает снимок.</p>
+      <p class="tx">В кадре — уже готовое прибытие. Это и есть <b lang="tr">varmış olacağız</b>.</p>
+      <div class="cam__box">
+        <svg viewBox="0 0 800 280" aria-hidden="true">
+          <defs><linearGradient id="cm-day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#86bdf5"/><stop offset="1" stop-color="#fff0a8"/></linearGradient></defs>
+          <rect width="800" height="280" fill="url(#cm-day)"/>
+          <rect class="cm-night" width="800" height="280" fill="#2b2633"/>
+          <g class="cm-stars" fill="#fff"><circle cx="90" cy="40" r="2"/><circle cx="210" cy="26" r="3"/><circle cx="380" cy="50" r="2"/><circle cx="560" cy="30" r="2.5"/><circle cx="700" cy="60" r="2"/></g>
+          <circle class="cm-sun" cx="620" cy="110" r="34" fill="#fff0a8"/>
+          <path d="M60 220H740" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity=".7"/>
+          <g font-size="16" font-weight="900" fill="#fff" text-anchor="middle"><text x="60" y="256">02:14</text><text x="500" y="256">07:00</text><text x="680" y="256">09:00</text></g>
+          <path d="M680 120v100" stroke="#f37563" stroke-width="4" stroke-dasharray="6 6"/>
+          <g class="cm-bus"><rect x="440" y="182" width="90" height="34" rx="10" fill="#5b8def"/><rect x="450" y="190" width="20" height="12" rx="3" fill="#fff"/><rect x="476" y="190" width="20" height="12" rx="3" fill="#fff"/><rect x="502" y="190" width="20" height="12" rx="3" fill="#fff"/><circle cx="458" cy="218" r="8" fill="#1b0d0e"/><circle cx="512" cy="218" r="8" fill="#1b0d0e"/></g>
+          <g class="cm-ok"><circle cx="500" cy="164" r="16" fill="#55a94a"/><path d="m492 164 5 5 10-10" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></g>
+          <g class="cm-tri"><use href="#i-cloud" x="640" y="120" width="80" height="64"/><path d="M680 182l-22 36M680 182v38M680 182l22 36" stroke="#1b0d0e" stroke-width="5" stroke-linecap="round"/></g>
+          <g class="cm-clock"><circle cx="740" cy="50" r="26" fill="#fff" stroke="#1b0d0e" stroke-width="3"/><path class="cm-hand" d="M740 50V30" stroke="#f37563" stroke-width="4" stroke-linecap="round"/></g>
+          <rect class="cm-flash" width="800" height="280" fill="#fff" opacity="0"/>
+          <g class="cm-pol"><rect x="300" y="40" width="200" height="150" rx="8" fill="#fff" stroke="#1b0d0e" stroke-width="3"/><rect x="314" y="54" width="172" height="96" rx="4" fill="#fff0a8"/><use href="#i-star" x="368" y="58" width="64" height="70" style="color:#55a94a"/><text x="400" y="176" text-anchor="middle" font-size="15" font-weight="900" fill="#4a0d12">varmış olacağız</text></g>
+        </svg>
+      </div>
+      <div class="cam__tiles" lang="tr">
+        <button class="t t--stem is-on" type="button" data-say="var">var</button>
+        <button class="t t--mis is-on" type="button" data-say="varmış">mış</button>
+        <button class="t t--ol is-on" type="button" data-say="varmış ol">ol</button>
+        <button class="t t--acak is-on" type="button" data-say="varmış olacağız">acağız</button>
+      </div>
+      <div class="cam__out"><button type="button" data-cam-tr lang="tr" data-say="Dokuzda varmış olacağız.">Dokuzda varmış olacağız.</button><span class="ru" data-ui>К девяти мы уже будем на месте.</span></div>
+      <div class="row" style="justify-content:center;margin-top:10px" data-ui><button class="btn" type="button" data-cam-play>📸 Снять кадр</button></div>
+    </div>
+  </section>
+
   <!-- ================= COMPARE ================= -->
   <section class="s cm" data-section="compare" data-words="46" data-lang="ru">
     <div class="w">
@@ -594,12 +654,12 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
       <button class="cm__sw" type="button" role="switch" aria-checked="false" data-ui><span>Русский</span><span class="cm__knob"></span><span>Türkçe</span></button>
       <div class="cm__cards">
         <div class="cm__card" data-ui>
-          <small>Момент прибытия</small>
+          <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" style="color:var(--coral);float:right"><use href="#g-clock"/></svg><small>Момент прибытия</small>
           <div class="cm__l" data-v="ru">В девять мы приедем.</div>
           <div class="cm__l" data-v="tr" lang="tr" data-say="Dokuzda varacağız.">Dokuzda var<mark>acağız</mark>.</div>
         </div>
         <div class="cm__card" data-ui>
-          <small>Уже на месте</small>
+          <svg width="30" height="30" viewBox="0 0 48 48" aria-hidden="true" style="color:var(--green);float:right"><use href="#i-check"/></svg><small>Уже на месте</small>
           <div class="cm__l" data-v="ru"><mark>К</mark> девяти мы <mark>уже</mark> приедем.</div>
           <div class="cm__l" data-v="tr" lang="tr" data-say="Dokuzda varmış olacağız.">Dokuzda var<mark>mış ol</mark>acağız.</div>
         </div>
@@ -973,10 +1033,10 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
         <span class="tag">Шпаргалка</span>
         <h2>Сохрани скриншотом</h2>
         <div class="poster">
-          <button type="button" data-say="Varmış olacağız." style="background:#e3f3dd"><span data-ui>Уже к моменту</span><b lang="tr"><span class="m">-mış</span> <span class="o">ol</span><span class="a">acak</span></b><span lang="tr">varmış olacağız</span></button>
-          <button type="button" data-say="Uyuyor olacağım." style="background:#ffe5c7"><span data-ui>В процессе в момент</span><b lang="tr"><span class="y">-iyor</span> <span class="o">ol</span><span class="a">acak</span></b><span lang="tr">uyuyor olacağım</span></button>
-          <button type="button" data-say="Çıkmış olmalı." style="background:var(--pink)"><span data-ui>Догадка по уликам</span><b lang="tr"><span class="m">-mış</span> <span class="o">ol</span><span class="ml">malı</span></b><span lang="tr">çıkmış olmalı</span></button>
-          <button type="button" data-say="Bitirmemiş olacağım." style="background:var(--lilac)"><span data-ui>Ещё не к моменту</span><b lang="tr"><span class="m">-mamış</span> <span class="o">ol</span><span class="a">acak</span></b><span lang="tr">bitirmemiş olacağım</span></button>
+          <button type="button" data-say="Varmış olacağız." style="background:#e3f3dd"><svg width="38" height="40" viewBox="0 0 120 132" aria-hidden="true" style="color:var(--green)"><use href="#i-star"/></svg><span data-ui>Уже к моменту</span><b lang="tr"><span class="m">-mış</span> <span class="o">ol</span><span class="a">acak</span></b><span lang="tr">varmış olacağız</span></button>
+          <button type="button" data-say="Uyuyor olacağım." style="background:#ffe5c7"><svg width="38" height="40" viewBox="0 0 120 132" aria-hidden="true" style="color:var(--orange)"><use href="#i-flower"/></svg><span data-ui>В процессе в момент</span><b lang="tr"><span class="y">-iyor</span> <span class="o">ol</span><span class="a">acak</span></b><span lang="tr">uyuyor olacağım</span></button>
+          <button type="button" data-say="Çıkmış olmalı." style="background:var(--pink)"><svg width="38" height="40" viewBox="0 0 120 132" aria-hidden="true" style="color:var(--purple)"><use href="#i-blob"/></svg><span data-ui>Догадка по уликам</span><b lang="tr"><span class="m">-mış</span> <span class="o">ol</span><span class="ml">malı</span></b><span lang="tr">çıkmış olmalı</span></button>
+          <button type="button" data-say="Bitirmemiş olacağım." style="background:var(--lilac)"><svg width="38" height="40" viewBox="0 0 100 100" aria-hidden="true" style="color:var(--indigo)"><use href="#i-burst"/></svg><span data-ui>Ещё не к моменту</span><b lang="tr"><span class="m">-mamış</span> <span class="o">ol</span><span class="a">acak</span></b><span lang="tr">bitirmemiş olacağım</span></button>
         </div>
         <p class="tx" style="margin-top:14px">Лицо — только на <b lang="tr" class="o">ol-</b>. <b lang="tr" class="m">-mış</b> и <b lang="tr" class="y">-iyor</b> меняют гласные. <b lang="tr" class="o">ol-</b> не меняет ничего. <b lang="tr">Gelmeli</b> — обязанность, <b lang="tr">gelmiş olmalı</b> — догадка.</p>
         <p class="tx">Четыре кадра. Один штатив. Всё остальное — практика. Вернись сюда через день. Потом через три. Мозг любит повторы с перерывом.</p>
@@ -1607,6 +1667,73 @@ addEventListener('DOMContentLoaded', () => {
     G.fromTo('.fl-gallery, .fl-forms', { scale: 0.5 }, { scale: 1.2, ease: 'none', scrollTrigger: { trigger: sec('gallery'), start: 'top bottom', end: 'bottom top', scrub: true } });
     ScrollTrigger.create({ trigger: sec('cheat'), start: 'top 70%', once: true, onEnter: () => G.fromTo('.fl-cheat, .fl-lab', { scale: 0.3, rotation: -120 }, { scale: 1, rotation: 0, duration: 1, ease: 'back.out(2.5)' }) });
   }
+
+
+  /* ---------- новый слой: комикс, сцена «штатив едет в будущее», 3D-наклон, закреплённая шпаргалка ---------- */
+  const PIN = matchMedia('(min-width: 900px) and (min-height: 700px)').matches;
+  if (A) {
+    G.from('.comic__f', { y: 60, rotation: (i) => [-4, 2, 5][i], duration: 0.8, stagger: 0.18, ease: 'back.out(1.8)', scrollTrigger: { trigger: '.comic', start: 'top 85%', once: true } });
+    G.fromTo('.cx-bus', { x: -40 }, { x: 40, ease: 'none', scrollTrigger: { trigger: '.comic', start: 'top bottom', end: 'bottom top', scrub: true } });
+    idle(G.to('.cx-zz text', { y: -8, duration: 1, repeat: -1, yoyo: true, stagger: 0.25, ease: 'sine.inOut' }), $('.comic'));
+    idle(G.fromTo('.cx-msg', { scale: 0.85, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.8, repeat: -1, yoyo: true, ease: 'sine.inOut' }), $('.comic'));
+    idle(G.to('.cx-gull', { y: -6, duration: 0.6, repeat: -1, yoyo: true, ease: 'sine.inOut' }), $('.comic'));
+    idle(G.to('.cx-hand', { rotation: 360, svgOrigin: '270 70', duration: 3, repeat: -1, ease: 'none' }), $('.comic'));
+    idle(G.to('.cx-sea', { x: -40, duration: 3, repeat: -1, ease: 'none' }), $('.comic'));
+    const camSec = sec('camera'), camTiles = $$('.cam__tiles .t', camSec);
+    const camState = (p) => camTiles.forEach((t, i) => t.classList.toggle('is-on', p >= [0, 0.3, 0.55, 0.8][i]));
+    G.timeline({ scrollTrigger: { trigger: camSec, start: PIN ? 'top top' : 'top 75%', end: PIN ? '+=900' : 'bottom 35%', pin: PIN, scrub: 0.5, onUpdate: (self) => camState(self.progress) } })
+      .fromTo('.cm-night', { opacity: 1 }, { opacity: 0, duration: 3, ease: 'none' }, 0)
+      .fromTo('.cm-stars', { opacity: 1 }, { opacity: 0, duration: 1.5 }, 0)
+      .fromTo('.cm-sun', { y: 150 }, { y: 0, duration: 3, ease: 'power1.out' }, 0)
+      .fromTo('.cm-hand', { rotation: 0 }, { rotation: 720, svgOrigin: '740 50', duration: 4, ease: 'none' }, 0)
+      .fromTo('.cm-bus', { x: -380 }, { x: 0, duration: 1.6, ease: 'power2.out' }, 0.2)
+      .fromTo('.cm-ok', { scale: 0.3, svgOrigin: '500 164' }, { scale: 1, duration: 0.4, ease: 'back.out(3)' }, 1.8)
+      .fromTo('.cm-tri', { x: -600 }, { x: 0, duration: 2.2, ease: 'power1.inOut' }, 0.6)
+      .fromTo('.cm-flash', { opacity: 0 }, { opacity: 0.9, duration: 0.15 }, 2.9)
+      .to('.cm-flash', { opacity: 0, duration: 0.3 }, 3.05)
+      .fromTo('.cm-pol', { scale: 0.3, rotation: -25, svgOrigin: '400 115' }, { scale: 1, rotation: -4, duration: 0.6, ease: 'back.out(2)' }, 3.05)
+      .fromTo('.cam__out', { scale: 0.85 }, { scale: 1, duration: 0.5 }, 3.2);
+    const heroArt = $('.hero__art');
+    if (matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      heroArt.addEventListener('pointermove', (e) => {
+        const r = heroArt.getBoundingClientRect(), dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+        G.to('.hero__art .panel', { rotationY: dx * 10, rotationX: -dy * 8, duration: 0.6, ease: 'power3.out' });
+        G.to('.hero__phone', { rotationY: dx * 16, rotationX: -dy * 12, z: 40, duration: 0.6, ease: 'power3.out' });
+      });
+      heroArt.addEventListener('pointerleave', () => G.to('.hero__art .panel, .hero__phone', { rotationY: 0, rotationX: 0, z: 0, duration: 0.8, ease: 'elastic.out(1, .5)' }));
+    }
+    G.timeline({ scrollTrigger: { trigger: '.poster', start: PIN ? 'top 20%' : 'top 90%', end: PIN ? '+=380' : 'top 35%', pin: PIN ? sec('cheat').querySelector('.panel') : false, scrub: true } })
+      .from('.poster button:nth-child(1)', { x: -140, y: -50, rotation: -14 })
+      .from('.poster button:nth-child(2)', { x: 140, y: -50, rotation: 14 }, '<0.1')
+      .from('.poster button:nth-child(3)', { x: -140, y: 50, rotation: 10 }, '<0.1')
+      .from('.poster button:nth-child(4)', { x: 140, y: 50, rotation: -10 }, '<0.1');
+    G.timeline({ scrollTrigger: { trigger: '.bento', start: 'top 85%', end: 'center 45%', scrub: true } })
+      .from('.bt:nth-child(1)', { rotationY: -40, x: -30 })
+      .from('.bt:nth-child(2)', { rotationY: 40, x: 30 }, '<0.1')
+      .from('.bt:nth-child(3)', { rotationY: -40, x: -30 }, '<0.1')
+      .from('.bt:nth-child(4)', { rotationY: 40, x: 30 }, '<0.1');
+    G.fromTo('.dt__lens', { rotation: -20 }, { rotation: 20, ease: 'none', scrollTrigger: { trigger: '.dt__scene', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.fromTo('.fc:nth-child(odd)', { rotation: -2 }, { rotation: 0, ease: 'none', scrollTrigger: { trigger: '.gl__grid', start: 'top bottom', end: 'center center', scrub: true } });
+    G.fromTo('.fc:nth-child(even)', { rotation: 2, y: 20 }, { rotation: 0, y: 0, ease: 'none', scrollTrigger: { trigger: '.gl__grid', start: 'top bottom', end: 'center center', scrub: true } });
+    G.fromTo('.tp:nth-child(odd)', { x: -20 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.tp__grid', start: 'top bottom', end: 'center center', scrub: true } });
+    G.fromTo('.tp:nth-child(even)', { x: 20 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.tp__grid', start: 'top bottom', end: 'center center', scrub: true } });
+    G.fromTo('.tr__n', { scale: 0.9 }, { scale: 1, ease: 'none', stagger: 0.05, scrollTrigger: { trigger: '.tr__wrap', start: 'top bottom', end: 'center center', scrub: true } });
+    G.fromTo('.mn__tripod', { rotation: -4 }, { rotation: 4, ease: 'none', scrollTrigger: { trigger: '.mn__art', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+  function camShot() {
+    $$('.cam__tiles .t').forEach((t) => t.classList.add('is-on'));
+    if (!A) return;
+    G.timeline()
+      .fromTo('.cm-flash', { opacity: 0 }, { opacity: 0.95, duration: 0.12 })
+      .to('.cm-flash', { opacity: 0, duration: 0.35 })
+      .fromTo('.cm-pol', { scale: 0.4, rotation: -30, svgOrigin: '400 115' }, { scale: 1, rotation: -4, duration: 0.7, ease: 'back.out(2.2)' }, 0.1)
+      .fromTo('.cam__tiles .t', { y: -40, scale: 0.6 }, { y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: 'bounce.out' }, 0.2);
+    sparks($('[data-cam-tr]'), 14);
+  }
+  $('[data-cam-play]').addEventListener('click', camShot);
+  $('.cam__tiles').addEventListener('click', (e) => { const t = e.target.closest('.t'); if (t && A) G.fromTo(t, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1, .4)' }); });
+  $('.cam__box').addEventListener('click', camShot);
+  $$('.comic__f').forEach((f, i) => f.addEventListener('click', () => { if (A) G.fromTo(f, { rotation: [-4, 3, -3][i], scale: 0.96 }, { rotation: 0, scale: 1, duration: 0.7, ease: 'elastic.out(1, .4)' }); }));
 
   /* ---------- свой скроллбар: облако с камерой едет по рваной линии ---------- */
   const bar = $('[data-scrollbar]'), track = $('.sb__track', bar);
