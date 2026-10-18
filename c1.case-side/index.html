@@ -609,6 +609,49 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
   .gal::-webkit-scrollbar { display: none; }
   .flip { flex: 0 0 76%; scroll-snap-align: center; }
 }
+
+/* круговая схема */
+.sun { display: grid; gap: 20px; align-items: center; margin-top: 34px; }
+@media (min-width: 900px) { .sun { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.sun__chart svg { width: 100%; max-width: 440px; display: block; margin: 0 auto; overflow: visible; }
+.sun__seg { cursor: pointer; }
+.sun__seg:focus-visible { outline: none; }
+.sun__seg:focus-visible path { stroke: #3a0d5c; stroke-width: 4; }
+.sun__card { padding: 20px; border-radius: 26px; background: var(--mist); }
+.sun__k { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.sun__fn { font-size: clamp(22px, 6vw, 32px); font-weight: 800; color: var(--plum); margin: 6px 0; letter-spacing: -.02em; }
+.sun__tr { font-size: clamp(20px, 5.4vw, 26px); font-weight: 750; color: var(--violet); cursor: pointer; margin: 0 0 4px; }
+/* калькулятор */
+.calc { display: grid; gap: 18px; align-items: center; margin-top: 30px; padding: clamp(18px, 4vw, 30px); border-radius: 28px; background: #fff; box-shadow: inset 0 0 0 2px var(--lilac); }
+@media (min-width: 860px) { .calc { grid-template-columns: minmax(0, 1fr) minmax(0, 340px); } }
+.calc__svg { width: 100%; max-width: 340px; display: block; margin: 0 auto; }
+.calc__lbl { display: block; font-weight: 700; color: var(--plum); margin-top: 6px; }
+.calc__range { width: 100%; height: 44px; accent-color: var(--violet); }
+.calc__tr { font-size: clamp(19px, 5vw, 24px); font-weight: 750; color: var(--plum); margin: 6px 0; cursor: pointer; }
+/* часы */
+.clock { display: grid; gap: 22px; align-items: center; margin-top: 20px; }
+@media (min-width: 900px) { .clock { grid-template-columns: minmax(0, 360px) minmax(0, 1fr); } }
+.clock__svg { width: 100%; max-width: 320px; display: block; margin: 0 auto; }
+.clock__btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.clock__btns .chip:not([aria-pressed="true"]) { background: var(--mist); }
+.clock__tr { font-size: clamp(22px, 6vw, 32px); font-weight: 800; color: var(--plum); margin: 14px 0 4px; cursor: pointer; }
+/* карта */
+.map { margin-top: 20px; border-radius: 30px; overflow: hidden; background: #fbf6e9; box-shadow: inset 0 0 0 2px var(--lilac); }
+.map__svg { display: block; width: 100%; height: auto; }
+.pin { cursor: pointer; }
+.pin:focus-visible { outline: none; }
+.pin:focus-visible circle { stroke: #3a0d5c; stroke-width: 5; }
+.map__card { padding: 16px 20px 20px; background: #fff; }
+.map__place { font-weight: 800; color: var(--plum); margin: 0 0 4px; }
+.map__tr { font-size: clamp(19px, 5vw, 25px); font-weight: 750; color: var(--plum); margin: 0 0 4px; cursor: pointer; }
+/* телефон: экономим высоту */
+@media (max-width: 767px) {
+  .divider { display: none; }
+  .sec { padding-top: 48px; }
+  .guess { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 6px 16px 14px; scrollbar-width: none; }
+  .guess::-webkit-scrollbar { display: none; }
+  .gcard { flex: 0 0 82%; scroll-snap-align: center; }
+}
 </style>
 </head>
 <body>
@@ -721,7 +764,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 </section>
 
 <!-- ============ 3. КОШЕЛЁК: ОБЗОР ============ -->
-<section data-section="wallet" data-words="60" class="sec">
+<section data-section="wallet" data-words="82" class="sec">
   <div class="wrap">
     <h2>Три карты <span class="hl">в кошельке</span></h2>
     <p class="lead col">Каждый падеж — банковская карта. Основной счёт ты знаешь с A1. Переверни карту — там подработки.</p>
@@ -770,6 +813,18 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
       </button>
     </div>
     <p class="note" data-ui>Цвет запомни: стрелка — фиолетовая, ячейка — жёлтая, источник — коралловый. Так во всём уроке.</p>
+    <div class="sun">
+      <div class="sun__chart">
+        <svg viewBox="-180 -180 360 360" data-sun role="img" aria-label="Круговая схема: 17 подработок трёх падежей"></svg>
+      </div>
+      <div class="sun__card" aria-live="polite">
+        <p class="sun__k" data-ui>карта подработок</p>
+        <p class="sun__fn" data-sun-fn data-ui>Нажми на сектор</p>
+        <p class="sun__tr" lang="tr" data-sun-tr data-say="Yüz liraya aldım.">Yüz liraya aldım.</p>
+        <p class="ru" data-sun-ru data-ui>Я купил за сто лир.</p>
+        <p class="note">Внутреннее кольцо — карта. Внешнее — её смены. Чем шире сектор у карты, тем больше у неё работы.</p>
+      </div>
+    </div>
     <div class="pattern" data-ui>
       <svg viewBox="0 0 480 300" data-pattern role="img" aria-label="Узор из фигур"></svg>
       <p class="pattern__cap">17 подработок — одна система. Крути страницу: узор собирается сам.</p>
@@ -781,7 +836,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 
 <!-- ============ 4. ЦЕНА: -(y)A ============ -->
 <div class="divider" data-divider aria-hidden="true"><i class="divider__a"></i><i class="divider__b"></i><i class="divider__c"></i></div>
-<section data-section="price" data-words="75" class="sec">
+<section data-section="price" data-words="95" class="sec">
   <div class="wrap">
     <span class="pill" data-ui><span class="tag tag--a">-(y)A</span> подработка №1</span>
     <h2>Цена — это <span class="hl">направление</span></h2>
@@ -858,6 +913,29 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="calc">
+      <div>
+        <h3>Калькулятор: <span class="suf-dan">-dan</span> или <span class="suf-a">-a</span></h3>
+        <p>Цена за штуку не меняется. Сумма растёт. Двигай ползунок и смотри, какой столбик живёт.</p>
+        <label class="calc__lbl" data-ui>бубликов: <b data-calc-n>3</b></label>
+        <input type="range" min="1" max="6" value="3" step="1" class="calc__range" aria-label="Сколько бубликов" data-calc>
+        <p class="calc__tr" lang="tr" data-calc-each data-say="Simitler tanesi on liradan.">Simitler tanesi on lira<span class="suf-dan">dan</span>.</p>
+        <p class="calc__tr" lang="tr" data-calc-all data-say="Üç simit otuz liraya.">Üç simit otuz lira<span class="suf-a">ya</span>.</p>
+        <p class="ru" data-calc-ru data-ui>Бублики по десять лир. Три бублика за тридцать лир.</p>
+      </div>
+      <svg viewBox="0 0 320 260" class="calc__svg" data-calc-svg aria-hidden="true">
+        <path d="M40 220h260" stroke="#3a0d5c" stroke-width="3"/>
+        <g data-calc-gridl></g>
+        <rect x="70" y="200" width="70" height="20" rx="8" fill="#dd6f66" data-bar-each/>
+        <rect x="190" y="160" width="70" height="60" rx="8" fill="#6b5cf5" data-bar-all/>
+        <text x="105" y="244" text-anchor="middle" font-family="Onest,sans-serif" font-size="13" font-weight="700" fill="#3a0d5c">за штуку</text>
+        <text x="225" y="244" text-anchor="middle" font-family="Onest,sans-serif" font-size="13" font-weight="700" fill="#3a0d5c">за всё</text>
+        <text x="105" y="192" text-anchor="middle" font-family="Onest,sans-serif" font-size="16" font-weight="800" fill="#3a0d5c" data-lbl-each>10 ₺</text>
+        <text x="225" y="152" text-anchor="middle" font-family="Onest,sans-serif" font-size="16" font-weight="800" fill="#3a0d5c" data-lbl-all>30 ₺</text>
+        <g data-calc-simits></g>
+      </svg>
     </div>
 
     <div class="mq" data-mq>
@@ -1098,6 +1176,41 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
   </div>
 </section>
 
+<!-- ============ 9б. ОДИН ЧАС — ТРИ ПАДЕЖА ============ -->
+<section data-section="clock" data-words="32" class="sec">
+  <div class="wrap">
+    <span class="pill pill--sun" data-ui>схема времени</span>
+    <h2>Один час — <span class="hl">три падежа</span></h2>
+    <p class="lead col">Время тоже раздают трём картам. К пяти — стрелка. В пять — ячейка. После пяти — источник: отсчёт идёт от него.</p>
+    <div class="clock">
+      <svg viewBox="0 0 300 300" class="clock__svg" data-clock aria-hidden="true">
+        <circle cx="150" cy="150" r="132" fill="#fff" stroke="#3a0d5c" stroke-width="8"/>
+        <g data-clock-ticks></g>
+        <path d="M150 150L18 150A132 132 0 0 1 150 18z" fill="#6b5cf5" opacity="0" data-arc-a/>
+        <path d="M150 150L150 18A132 132 0 0 1 282 150z" fill="#dd6f66" opacity="0" data-arc-dan/>
+        <circle cx="216" cy="264" r="22" fill="#f4e13a" opacity="0" data-arc-da/>
+        <g data-hour><path d="M150 150V78" stroke="#3a0d5c" stroke-width="9" stroke-linecap="round"/></g>
+        <g data-min><path d="M150 150V40" stroke="#6b5cf5" stroke-width="5" stroke-linecap="round"/></g>
+        <circle cx="150" cy="150" r="9" fill="#3a0d5c"/>
+      </svg>
+      <div>
+        <div class="clock__btns" role="group" aria-label="Время">
+          <button type="button" class="chip chip--a" data-clk="0" aria-pressed="true" lang="tr">beşe</button>
+          <button type="button" class="chip chip--da" data-clk="1" aria-pressed="false" lang="tr">beşte</button>
+          <button type="button" class="chip chip--dan" data-clk="2" aria-pressed="false" lang="tr">beşten sonra</button>
+        </div>
+        <p class="clock__tr" lang="tr" data-clk-tr data-say="Saat beşe çeyrek var.">Saat beş<span class="suf-a">e</span> çeyrek var.</p>
+        <p class="ru" data-clk-ru data-ui>Без четверти пять: стрелка ещё бежит к пяти.</p>
+        <ul class="say-list">
+          <li><a-say>Film saat beşte başlıyor.</a-say><small data-ui>Фильм начинается в пять.</small></li>
+          <li><a-say>Beşten sonra ararım.</a-say><small data-ui>Позвоню после пяти.</small></li>
+        </ul>
+        <p class="scenelet">Говоришь другу, <b lang="tr" data-say="Beşte mi?">beşte mi?</b> Говорит, <b lang="tr" data-say="Beşten sonra.">beşten sonra</b>. Значит, раньше шести не жди. Источник растяжимый.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 10. РУССКИЙ ↔ ТУРЕЦКИЙ ============ -->
 <section data-section="compare" data-words="30" class="sec">
   <div class="wrap">
@@ -1161,6 +1274,40 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
     <span class="pill pill--plum" data-ui>Самсун · суббота</span>
     <h2>Рынок <span class="hl">у моря</span></h2>
     <p class="lead col">Ты на рынке у набережной. Чайки орут на трёх языках. Нажимай на прилавки и слушай. Продавцы говорят быстро. Ты отвечаешь медленно, но падежами.</p>
+    <div class="map">
+      <svg viewBox="0 0 800 420" class="map__svg" data-map role="img" aria-label="Карта Самсуна">
+        <rect width="800" height="420" fill="#fbf6e9"/>
+        <path d="M0 0h800v120C700 150 640 110 560 130S420 190 330 170 160 120 80 150 0 140 0 140z" fill="#8187f8"/>
+        <path d="M0 120C80 132 160 104 330 150S520 112 560 112 700 128 800 100" fill="none" stroke="#fff" stroke-width="3" opacity=".6" data-map-wave/>
+        <text x="40" y="50" font-family="Onest,sans-serif" font-size="20" font-weight="800" fill="#fff" lang="tr">KARADENİZ</text>
+<g opacity=".9" data-city>
+          <path d="M0 260h800M0 330h800M220 150v270M420 160v260M560 140v280" stroke="#e8dfc9" stroke-width="10"/>
+          <rect x="250" y="270" width="40" height="44" rx="4" fill="#d7d7fc"/><rect x="296" y="282" width="30" height="32" rx="4" fill="#8187f8"/><rect x="250" y="340" width="56" height="40" rx="4" fill="#f4e13a" opacity=".7"/>
+          <rect x="440" y="280" width="50" height="36" rx="4" fill="#d7d7fc"/><rect x="496" y="268" width="34" height="48" rx="4" fill="#dd6f66" opacity=".8"/><rect x="440" y="344" width="90" height="34" rx="4" fill="#8187f8" opacity=".6"/>
+          <rect x="120" y="340" width="70" height="40" rx="4" fill="#d7d7fc"/><rect x="600" y="340" width="60" height="44" rx="4" fill="#d7d7fc"/><rect x="680" y="350" width="80" height="34" rx="4" fill="#f4e13a" opacity=".6"/>
+          <circle cx="40" cy="300" r="12" fill="#9ccf86"/><circle cx="62" cy="310" r="10" fill="#8cc276"/><circle cx="380" cy="300" r="11" fill="#9ccf86"/><circle cx="740" cy="300" r="12" fill="#9ccf86"/><circle cx="760" cy="316" r="9" fill="#8cc276"/>
+          <path d="M60 190c20-4 40 4 60 0" stroke="#f4e13a" stroke-width="10" stroke-linecap="round"/><path d="M40 205c30-6 60 6 90 0" stroke="#f4e13a" stroke-width="8" stroke-linecap="round" opacity=".6"/>
+        </g>
+        <path d="M120 300c80-40 160-20 240-60s180-30 260-10" fill="none" stroke="#3a0d5c" stroke-width="4" stroke-dasharray="10 10" data-route/>
+        <path d="M560 330l60-110" stroke="#3a0d5c" stroke-width="2"/>
+        <g data-cable><rect x="582" y="276" width="18" height="14" rx="3" fill="#dd6f66"/></g>
+        <g data-ship><path d="M150 112h70l-10 18h-50z" fill="#3a0d5c"/><rect x="168" y="94" width="30" height="18" fill="#fff"/><path d="M183 94V78" stroke="#3a0d5c" stroke-width="3"/></g>
+        <path d="M600 230c20-40 60-60 110-40l40 60z" fill="#c7e0a8"/>
+<g font-family="Onest,sans-serif" font-size="14" font-weight="800" fill="#3a0d5c" lang="tr">
+          <text x="214" y="196">Bandırma Vapuru</text><text x="600" y="250">Amisos Tepesi</text><text x="388" y="292">Kapalı Çarşı</text><text x="40" y="276">Atakum</text><text x="528" y="214">Sahil</text>
+        </g>
+        <g class="pin" data-pin="0" tabindex="0" role="button" aria-label="Пароход «Бандырма»"><circle cx="185" cy="160" r="22" fill="#6b5cf5"/><text x="185" y="166" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">1</text></g>
+        <g class="pin" data-pin="1" tabindex="0" role="button" aria-label="Холм Амисос"><circle cx="660" cy="210" r="22" fill="#f4e13a"/><text x="660" y="216" text-anchor="middle" font-size="18" font-weight="800" fill="#3a0d5c">2</text></g>
+        <g class="pin" data-pin="2" tabindex="0" role="button" aria-label="Крытый рынок"><circle cx="360" cy="250" r="22" fill="#6b5cf5"/><text x="360" y="256" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">3</text></g>
+        <g class="pin" data-pin="3" tabindex="0" role="button" aria-label="Пляж Атакум"><circle cx="80" cy="230" r="22" fill="#dd6f66"/><text x="80" y="236" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">4</text></g>
+        <g class="pin" data-pin="4" tabindex="0" role="button" aria-label="Набережная"><circle cx="500" cy="170" r="22" fill="#f4e13a"/><text x="500" y="176" text-anchor="middle" font-size="18" font-weight="800" fill="#3a0d5c">5</text></g>
+      </svg>
+      <div class="map__card" aria-live="polite">
+        <p class="map__place" data-map-place data-ui>1 · Пароход «Бандырма»</p>
+        <p class="map__tr" lang="tr" data-map-tr data-say="Gemiye iskeleden bindik.">Gemiye iskele<span class="suf-dan">den</span> bindik.</p>
+        <p class="ru" data-map-ru data-ui>Мы поднялись на корабль с пристани. Путь — источник.</p>
+      </div>
+    </div>
     <div class="market">
       <svg class="market__art" viewBox="0 0 800 380" data-market role="img" aria-label="Рынок у моря">
         <rect width="800" height="380" fill="#d7d7fc"/>
@@ -2553,6 +2700,201 @@ addEventListener('DOMContentLoaded', () => {
     });
   }
 
+
+  /* ===================== КАРТИНКИ И ДИАГРАММЫ ===================== */
+  /* A. круговая схема подработок */
+  {
+    const SUN = [
+      ['a', '#6b5cf5', '-(y)A', [['цена', 'Yüz liraya aldım.', 'Я купил за сто лир.'], ['цель', 'Balığa gidiyoruz.', 'Мы идём на рыбалку.'], ['срок', 'Akşama görüşürüz.', 'Увидимся вечером.'], ['чувство', 'Habere sevindim.', 'Я обрадовался новости.'], ['каждому', 'Kişi başına yüz lira.', 'По сто лир с человека.']]],
+      ['da', '#f4e13a', '-DA', [['процент', 'Yüzde elli indirim.', 'Скидка пятьдесят процентов.'], ['частота', 'Haftada iki kez.', 'Два раза в неделю.'], ['за срок', 'İki günde bitirdim.', 'Я закончил за два дня.'], ['статус', 'Toplantıdayım.', 'Я на совещании.'], ['признак', 'Otuz yaşında.', 'Тридцать лет.'], ['у кого', 'Anahtar bende.', 'Ключ у меня.']]],
+      ['dan', '#dd6f66', '-DAn', [['причина', 'Sevinçten ağladı.', 'Он заплакал от радости.'], ['материал', 'Tahtadan bir masa.', 'Деревянный стол.'], ['путь', 'Köprüden geçtik.', 'Мы проехали по мосту.'], ['по штуке', 'Tanesi on liradan.', 'По десять лир за штуку.'], ['часть', 'Pastadan bir dilim.', 'Кусок торта.'], ['держат', 'Elinden tuttu.', 'Взял за руку.']]],
+    ];
+    const svg = $('[data-sun]');
+    const total = SUN.reduce((n, s) => n + s[3].length, 0);
+    const pt = (r, a) => [r * Math.sin(a), -r * Math.cos(a)];
+    const arc = (r0, r1, a0, a1) => { const [x0, y0] = pt(r1, a0); const [x1, y1] = pt(r1, a1); const [x2, y2] = pt(r0, a1); const [x3, y3] = pt(r0, a0); const big = a1 - a0 > Math.PI ? 1 : 0; return `M${x0} ${y0}A${r1} ${r1} 0 ${big} 1 ${x1} ${y1}L${x2} ${y2}A${r0} ${r0} 0 ${big} 0 ${x3} ${y3}z`; };
+    const segs = [];
+    let k = 0;
+    const inner = [];
+    SUN.forEach(([key, col, aff, items]) => {
+      const a0 = (k / total) * Math.PI * 2;
+      const a1 = ((k + items.length) / total) * Math.PI * 2;
+      const g = svgEl('g', {});
+      g.append(svgEl('path', { d: arc(40, 92, a0 + 0.01, a1 - 0.01), fill: col }));
+      const [tx, ty] = pt(66, (a0 + a1) / 2);
+      const t = svgEl('text', { x: tx, y: ty + 6, 'text-anchor': 'middle', 'font-size': 17, 'font-weight': 800, fill: key === 'da' ? '#3a0d5c' : '#fff', 'font-family': 'Onest,sans-serif' });
+      t.textContent = aff;
+      g.append(t);
+      svg.append(g);
+      inner.push(g);
+      items.forEach(([fn, tr, ru]) => {
+        const b0 = (k / total) * Math.PI * 2;
+        const b1 = ((k + 1) / total) * Math.PI * 2;
+        const mid = (b0 + b1) / 2;
+        const seg = svgEl('g', { class: 'sun__seg', tabindex: 0, role: 'button', 'aria-label': `${aff}: ${fn}` });
+        seg.append(svgEl('path', { d: arc(96, 172, b0 + 0.008, b1 - 0.008), fill: col, 'fill-opacity': 0.55 }));
+        const [lx, ly] = pt(134, mid);
+        const deg = (mid * 180) / Math.PI;
+        const rot = deg > 180 ? deg + 90 : deg - 90;
+        const lab = svgEl('text', { x: lx, y: ly + 4, 'text-anchor': 'middle', 'font-size': 11.5, 'font-weight': 700, fill: '#2a1046', 'font-family': 'Onest,sans-serif', transform: `rotate(${rot} ${lx} ${ly})` });
+        lab.textContent = fn;
+        seg.append(lab);
+        const pick = () => {
+          segs.forEach((s) => s.firstChild.setAttribute('fill-opacity', 0.55));
+          seg.firstChild.setAttribute('fill-opacity', 1);
+          $('[data-sun-fn]').textContent = `${aff} · ${fn}`;
+          const out = $('[data-sun-tr]');
+          out.textContent = tr;
+          out.dataset.say = tr;
+          $('[data-sun-ru]').textContent = ru;
+          if (A) {
+            const [dx, dy] = pt(10, mid);
+            segs.forEach((s) => gsap.to(s, { x: 0, y: 0, duration: 0.3 }));
+            gsap.to(seg, { x: dx, y: dy, duration: 0.5, ease: 'back.out(3)' });
+            gsap.fromTo(out, { y: 14, rotation: 2 }, { y: 0, rotation: 0, duration: 0.45, ease: 'back.out(2)' });
+          }
+        };
+        seg.addEventListener('click', pick);
+        seg.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+        svg.append(seg);
+        segs.push(seg);
+        k++;
+      });
+    });
+    const core = svgEl('circle', { r: 36, fill: '#3a0d5c' });
+    const ct = svgEl('text', { y: 6, 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 800, fill: '#fff', 'font-family': 'Onest,sans-serif' });
+    ct.textContent = '17';
+    svg.append(core, ct);
+    if (A) {
+      gsap.fromTo(inner, { scale: 0, rotation: -90, svgOrigin: '0 0' }, { scale: 1, rotation: 0, svgOrigin: '0 0', duration: 0.9, ease: 'back.out(1.6)', stagger: 0.12, scrollTrigger: { trigger: svg, start: 'top 85%', once: true } });
+      gsap.fromTo(segs, { scale: 0.4, svgOrigin: '0 0' }, { scale: 1, svgOrigin: '0 0', duration: 0.6, ease: 'back.out(2.5)', stagger: 0.04, delay: 0.4, scrollTrigger: { trigger: svg, start: 'top 85%', once: true } });
+      gsap.to(svg, { rotation: 8, svgOrigin: '0 0', ease: 'none', scrollTrigger: { trigger: svg, start: 'top bottom', end: 'bottom top', scrub: true } });
+      gsap.fromTo([core, ct], { scale: 0, svgOrigin: '0 0' }, { scale: 1, svgOrigin: '0 0', duration: 0.7, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: svg, start: 'top 80%', once: true } });
+    }
+  }
+
+  /* B. калькулятор liraya / liradan */
+  {
+    const NUMW = ['', 'bir', 'iki', 'üç', 'dört', 'beş', 'altı'];
+    const SUMW = ['', 'on', 'yirmi', 'otuz', 'kırk', 'elli', 'altmış'];
+    const RUN = ['', 'один бублик', 'два бублика', 'три бублика', 'четыре бублика', 'пять бубликов', 'шесть бубликов'];
+    const RUS = ['', 'десять', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят'];
+    const range = $('[data-calc]');
+    const gl = $('[data-calc-gridl]');
+    for (let i = 1; i <= 6; i++) gl.append(svgEl('path', { d: `M40 ${220 - i * 30}h260`, stroke: '#d7d7fc', 'stroke-dasharray': '4 6' }));
+    const simBox = $('[data-calc-simits]');
+    function calc(anim) {
+      const n = Number(range.value);
+      $('[data-calc-n]').textContent = n;
+      const all = $('[data-calc-all]');
+      const cap = NUMW[n][0].toLocaleUpperCase('tr') + NUMW[n].slice(1);
+      all.textContent = '';
+      all.append(`${cap} simit ${SUMW[n]} lira`, span('suf-a', 'ya'), '.');
+      all.dataset.say = `${cap} simit ${SUMW[n]} liraya.`;
+      $('[data-calc-ru]').textContent = `Бублики по десять лир. ${RUN[n][0].toUpperCase() + RUN[n].slice(1)} за ${RUS[n]} лир.`;
+      const h = n * 30;
+      $('[data-lbl-all]').textContent = `${n * 10} ₺`;
+      simBox.textContent = '';
+      for (let i = 0; i < n; i++) {
+        const c = svgEl('circle', { cx: 300 - 14, cy: 206 - i * 30, r: 9, fill: '#e4a64b', stroke: '#b97a26', 'stroke-width': 3 });
+        simBox.append(c);
+      }
+      if (A) {
+        gsap.to('[data-bar-all]', { attr: { y: 220 - h, height: h }, duration: anim ? 0.6 : 0, ease: 'back.out(1.6)' });
+        gsap.to('[data-lbl-all]', { attr: { y: 212 - h }, duration: anim ? 0.6 : 0, ease: 'back.out(1.6)' });
+        if (anim) {
+          gsap.fromTo(simBox.lastChild, { y: -60, scale: 0.3, transformOrigin: '50% 50%' }, { y: 0, scale: 1, duration: 0.6, ease: 'bounce.out' });
+          gsap.fromTo('[data-bar-each]', { scaleY: 1.3, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.4, ease: 'elastic.out(1, .4)' });
+        }
+      } else { $('[data-bar-all]').setAttribute('y', 220 - h); $('[data-bar-all]').setAttribute('height', h); $('[data-lbl-all]').setAttribute('y', 212 - h); }
+    }
+    range.addEventListener('input', () => calc(true));
+    range.addEventListener('change', () => speak($('[data-calc-all]').dataset.say));
+    calc(false);
+    if (A) gsap.from('.calc__svg rect', { scaleY: 0, transformOrigin: '50% 100%', duration: 0.8, ease: 'back.out(1.6)', stagger: 0.15, scrollTrigger: { trigger: '.calc', start: 'top 80%', once: true } });
+  }
+
+  /* C. часы: один час — три падежа */
+  {
+    const ticks = $('[data-clock-ticks]');
+    for (let i = 0; i < 12; i++) {
+      const a = (i / 12) * Math.PI * 2;
+      ticks.append(svgEl('path', { d: `M${150 + 112 * Math.sin(a)} ${150 - 112 * Math.cos(a)}L${150 + 124 * Math.sin(a)} ${150 - 124 * Math.cos(a)}`, stroke: '#3a0d5c', 'stroke-width': i % 3 ? 3 : 6, 'stroke-linecap': 'round' }));
+      const t = svgEl('text', { x: 150 + 96 * Math.sin(a), y: 156 - 96 * Math.cos(a), 'text-anchor': 'middle', 'font-size': 15, 'font-weight': 700, fill: '#3a0d5c', 'font-family': 'Onest,sans-serif' });
+      t.textContent = i || 12;
+      ticks.append(t);
+    }
+    const CLK = [
+      { hour: 142.5, min: 270, arc: '[data-arc-a]', tr: ['Saat beş', 'e', ' çeyrek var.'], cls: 'suf-a', say: 'Saat beşe çeyrek var.', ru: 'Без четверти пять: стрелка ещё бежит к пяти.' },
+      { hour: 150, min: 360, arc: '[data-arc-da]', tr: ['Saat beş', 'te', ' başlıyor.'], cls: 'suf-da', say: 'Saat beşte başlıyor.', ru: 'Начинается в пять: момент сидит в ячейке.' },
+      { hour: 157.5, min: 450, arc: '[data-arc-dan]', tr: ['Beş', 'ten', ' sonra ararım.'], cls: 'suf-dan', say: 'Beşten sonra ararım.', ru: 'Позвоню после пяти: отсчёт идёт от пяти.' },
+    ];
+    const out = $('[data-clk-tr]');
+    function clk(i) {
+      const c = CLK[i];
+      $$('[data-clk]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.clk) === i)));
+      out.textContent = '';
+      out.append(c.tr[0], span(c.cls, c.tr[1]), c.tr[2]);
+      out.dataset.say = c.say;
+      $('[data-clk-ru]').textContent = c.ru;
+      ['[data-arc-a]', '[data-arc-da]', '[data-arc-dan]'].forEach((s) => $(s).setAttribute('opacity', s === c.arc ? '0.85' : '0'));
+      if (A) {
+        gsap.to('[data-hour]', { rotation: c.hour, svgOrigin: '150 150', duration: 1, ease: 'back.out(1.4)' });
+        gsap.to('[data-min]', { rotation: c.min, svgOrigin: '150 150', duration: 1, ease: 'back.out(1.4)' });
+        gsap.fromTo(c.arc, { scale: 0.3, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.7, ease: 'back.out(2)' });
+        gsap.fromTo(out, { y: 16 }, { y: 0, duration: 0.45, ease: 'back.out(2)' });
+      } else {
+        $('[data-hour]').setAttribute('transform', `rotate(${c.hour} 150 150)`);
+        $('[data-min]').setAttribute('transform', `rotate(${c.min % 360} 150 150)`);
+      }
+    }
+    $$('[data-clk]').forEach((b) => b.addEventListener('click', () => clk(Number(b.dataset.clk))));
+    $('[data-clock]').addEventListener('click', () => clk((CLK.findIndex((_, i) => $(`[data-clk="${i}"]`).getAttribute('aria-pressed') === 'true') + 1) % 3));
+    clk(0);
+    if (A) {
+      gsap.from('[data-clock]', { rotation: -30, scale: 0.7, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: '[data-clock]', start: 'top 85%', once: true } });
+      gsap.from('[data-clock-ticks] *', { scale: 0, svgOrigin: '150 150', duration: 0.5, stagger: 0.02, scrollTrigger: { trigger: '[data-clock]', start: 'top 80%', once: true } });
+    }
+  }
+
+  /* D. карта Самсуна */
+  {
+    const PINS = [
+      ['1 · Пароход «Бандырма»', ['Gemiye iskele', 'den', ' bindik.'], 'suf-dan', 'Gemiye iskeleden bindik.', 'Мы поднялись на корабль с пристани. Путь — источник.'],
+      ['2 · Холм Амисос', ['Teleferik on dakika', 'da', ' çıkıyor.'], 'suf-da', 'Teleferik on dakikada çıkıyor.', 'Канатка поднимается за десять минут. Срок — ячейка.'],
+      ['3 · Крытый рынок', ['Bu şalı iki yüz lira', 'ya', ' aldım.'], 'suf-a', 'Bu şalı iki yüz liraya aldım.', 'Я купил этот платок за двести лир. Цена — стрелка.'],
+      ['4 · Пляж Атакум', ['Rüzgâr', 'dan', ' üşüdük.'], 'suf-dan', 'Rüzgârdan üşüdük.', 'Мы замёрзли от ветра. Причина — источник.'],
+      ['5 · Набережная', ['Hafta', 'da', ' iki kez sahilde koşuyorum.'], 'suf-da', 'Haftada iki kez sahilde koşuyorum.', 'Бегаю по набережной два раза в неделю. Частота — ячейка.'],
+    ];
+    const tr = $('[data-map-tr]');
+    function pin(i) {
+      const p = PINS[i];
+      $('[data-map-place]').textContent = p[0];
+      tr.textContent = '';
+      tr.append(p[1][0], span(p[2], p[1][1]), p[1][2]);
+      tr.dataset.say = p[3];
+      $('[data-map-ru]').textContent = p[4];
+      if (A) {
+        gsap.fromTo(`[data-pin="${i}"]`, { y: -26 }, { y: 0, duration: 0.8, ease: 'bounce.out' });
+        gsap.fromTo('.map__card', { y: 10 }, { y: 0, duration: 0.4, ease: 'back.out(2)' });
+      }
+    }
+    $$('[data-pin]').forEach((g) => {
+      g.addEventListener('click', () => pin(Number(g.dataset.pin)));
+      g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pin(Number(g.dataset.pin)); } });
+    });
+    if (A) {
+      const route = $('[data-route]');
+      gsap.fromTo(route, { strokeDashoffset: 600 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-map]', start: 'top 85%', end: 'center 45%', scrub: true } });
+      gsap.from('[data-pin]', { y: -80, scale: 0.4, transformOrigin: '50% 100%', duration: 0.8, ease: 'bounce.out', stagger: 0.12, scrollTrigger: { trigger: '[data-map]', start: 'top 75%', once: true } });
+      const life = gsap.timeline({ repeat: -1, yoyo: true, paused: true })
+        .to('[data-ship]', { x: 30, y: -4, rotation: 2, duration: 3, ease: 'sine.inOut' }, 0)
+        .to('[data-map-wave]', { x: -30, duration: 3, ease: 'sine.inOut' }, 0)
+        .fromTo('[data-cable]', { x: 0, y: 0 }, { x: 44, y: -80, duration: 3, ease: 'sine.inOut' }, 0);
+      whileVisible($('[data-map]'), () => life.play(), () => life.pause());
+    }
+  }
+
   /* ===================== СКРОЛЛБАР: КАРТА ЕДЕТ ПО СЧЁТУ ===================== */
   const bar = $('[data-scrollbar]');
   const track = $('.sb__track', bar);
@@ -2561,7 +2903,7 @@ addEventListener('DOMContentLoaded', () => {
   const SB = {
     story: ['старт', '#8187f8'], guess: ['угадай', '#8187f8'], wallet: ['3 карты', '#8187f8'],
     price: ['-(y)A', '#6b5cf5'], arrow: ['-(y)A', '#6b5cf5'], rate: ['-DA', '#f4e13a'], state: ['-DA', '#f4e13a'],
-    cause: ['-DAn', '#dd6f66'], source: ['-DAn', '#dd6f66'], compare: ['ru ↔ tr', '#8187f8'], tree: ['алгоритм', '#8187f8'],
+    cause: ['-DAn', '#dd6f66'], source: ['-DAn', '#dd6f66'], clock: ['часы', '#f4e13a'], compare: ['ru ↔ tr', '#8187f8'], tree: ['алгоритм', '#8187f8'],
     mnemo: ['образ', '#8187f8'], scene: ['Самсун', '#f4e13a'], gallery: ['галерея', '#8187f8'], lab: ['лаба', '#6b5cf5'],
     traps: ['ловушки', '#dd6f66'], video: ['видео', '#8187f8'], practice: ['практика', '#6b5cf5'], check: ['проверка', '#f4e13a'], cheat: ['итог', '#dd6f66'],
   };

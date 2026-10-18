@@ -433,6 +433,56 @@ b.tr{color:var(--lime);white-space:nowrap}
 .hscroll{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;border-radius:28px}
 .hint{display:none;font:700 11px var(--mono);color:#8a8a8a;margin:8px 0 0}
 @media(max-width:699px){.hint{display:block}.citymap{min-width:720px}.gantt{min-width:640px}}
+
+/* ===== визуал: диаграммы, иллюстрации, инфографика ===== */
+.viz{margin-top:22px;border-radius:30px;padding:clamp(16px,3.5vw,28px);position:relative;overflow:hidden}
+.viz--dark{background:#101010;border:1px solid var(--line)}
+.viz--light{background:#fff;border:1px solid #e0e0e0;color:#111}
+.viz__head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.viz__t{font-weight:600;font-size:clamp(17px,3.6vw,21px);letter-spacing:-.02em}
+.viz__k{font:700 11px var(--mono);color:#8a8a8a;text-transform:uppercase;letter-spacing:.06em}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.sankey .band{fill:none;stroke-linecap:butt;opacity:.22;transition:none}
+.sankey .band.on{opacity:1}
+.sankey .vnode rect{fill:#191919;stroke:#3a3a3a;stroke-width:1.5}
+.sankey .vnode.on rect{fill:var(--lime);stroke:var(--lime)}
+.sankey .vnode text{font:600 22px var(--tr);fill:#fff}
+.sankey .vnode.on text{fill:var(--lime-ink)}
+.sankey .pnode rect{fill:var(--lime)}
+.sankey .pnode text{font:700 26px var(--tr);fill:var(--lime-ink)}
+.sankey .pnode.dim rect{fill:#2a2a2a}.sankey .pnode.dim text{fill:#8a8a8a}
+.sankey .lbl2{font:700 11px var(--mono);fill:#8a8a8a}
+.sankey-ex{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;min-height:84px;padding-top:24px;position:relative}
+.sankey-ex .word{font-size:clamp(28px,7vw,44px)}
+.sankey-ex small{color:#9a9a9a;font-size:14px}
+.anat text.big{font:600 46px var(--tr)}
+.anat .box{rx:10;stroke-width:2}
+.anat .call{fill:none;stroke:#111;stroke-width:1.5}
+.anat .cl{font:600 15px var(--sans);fill:#111}
+.anat .cn{font:700 12px var(--mono);fill:var(--lime-ink)}
+.anat .dim{font:700 11px var(--mono);fill:#e3200f}
+.pano{position:relative;border-radius:30px;overflow:hidden;border:1px solid var(--line);margin-bottom:18px;background:#0b0b0b}
+.pano svg{display:block;width:100%;height:clamp(240px,34vw,400px)}
+@media(max-width:699px){.pano__cap .tagpill{font-size:12px;padding:4px 10px}}
+.pano__cap{position:absolute;left:16px;bottom:14px;display:flex;gap:8px;flex-wrap:wrap}
+.donut-wrap{display:grid;gap:16px;align-items:center}
+@media(min-width:760px){.donut-wrap{grid-template-columns:220px 1fr}}
+.donut{width:min(220px,60vw);margin:0 auto}
+.donut text{font:700 40px var(--mono);fill:#111}
+.donut .sub{font:700 11px var(--mono);fill:#6b6b6b}
+.dleg{display:grid;gap:8px}
+.dleg button{display:flex;align-items:center;gap:10px;justify-content:space-between;min-height:44px;padding:8px 14px;border-radius:16px;border:1.5px solid #e0e0e0;background:#fafafa;cursor:pointer;color:#111;font-weight:600;text-align:left}
+.dleg i{width:14px;height:14px;border-radius:4px;flex:none}
+.dleg b{font:700 13px var(--mono)}
+.bars{display:grid;gap:12px}
+.bar{display:grid;grid-template-columns:96px 1fr 56px;gap:10px;align-items:center}
+.bar__lbl{font-weight:600;font-size:15px}
+.bar__track{height:30px;border-radius:999px;background:#1c1c1c;overflow:hidden;position:relative}
+.bar__fill{position:absolute;inset:0 auto 0 0;border-radius:999px;transform-origin:left center}
+.bar__val{font:700 14px var(--mono);text-align:right}
+.passport{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:10px;padding-top:10px;border-top:1px dashed #2a2a2a}
+.passport .stat b{color:var(--lime)}
+@media(max-width:699px){.anat-scroll{overflow-x:auto}.anat-scroll svg{min-width:600px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
 </style>
 </head>
@@ -629,7 +679,7 @@ b.tr{color:var(--lime);white-space:nowrap}
 <div class="marquee" aria-hidden="true" lang="tr" data-marquee="1"><div class="marquee__row"></div></div>
 
 <!-- ================= FORM ================= -->
-<section class="lt" data-section="form" data-words="51" id="s-form">
+<section class="lt" data-section="form" data-words="53" id="s-form">
   <svg class="topo" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
   <div class="wrap">
     <div class="lbl" data-ui><span class="num">05</span>Форма</div>
@@ -661,6 +711,11 @@ b.tr{color:var(--lime);white-space:nowrap}
         <div class="legend" data-ui><span><i style="background:#191919"></i>корень</span><span><i style="background:#d9ff42"></i>пин</span><span><i style="background:#fff;outline:1px dashed #888"></i>мостик</span><span><i style="background:#e3200f"></i>смягчение</span></div>
       </div>
     </div>
+    <div class="viz viz--dark sankey" id="sankey-card">
+      <div class="viz__head" data-ui><span class="viz__t" style="color:#fff">Карта гармонии: 8 гласных → 4 пина</span><span class="viz__k">нажми на гласную</span></div>
+      <svg viewBox="0 0 640 380" id="sankey" role="group" aria-label="Диаграмма: последняя гласная слова и её пин"></svg>
+      <div class="sankey-ex" id="sankey-ex" data-ui></div>
+    </div>
     <div class="mq" data-mq="1"></div>
   </div>
 </section>
@@ -684,7 +739,7 @@ b.tr{color:var(--lime);white-space:nowrap}
 </section>
 
 <!-- ================= SOFTEN ================= -->
-<section class="lt" data-section="soften" data-words="45" id="s-soften">
+<section class="lt" data-section="soften" data-words="53" id="s-soften">
   <svg class="topo" aria-hidden="true" preserveAspectRatio="xMidYMid slice"></svg>
   <div class="wrap">
     <div class="lbl" data-ui><span class="num">07</span>Смягчение</div>
@@ -695,6 +750,22 @@ b.tr{color:var(--lime);white-space:nowrap}
       <p>Исключения есть: <b lang="tr" class="tr" data-say="ceketi">ceket → ceketi</b>. Их запоминают поштучно, как камни на любимой тропе.</p>
     </div>
     <div class="stones" id="stones" style="margin-top:16px"></div>
+    <div class="viz viz--light">
+      <div class="viz__head" data-ui><span class="viz__t">Анатомия фразы</span><span class="viz__k">разбор по деталям</span></div>
+      <div class="anat-scroll"><svg viewBox="0 0 640 260" class="anat" id="anat" aria-hidden="true">
+        <g class="seg" data-i="0"><rect class="box" x="20" y="90" width="80" height="70" fill="#111"/><text class="big" x="60" y="140" text-anchor="middle" fill="#fff">Bu</text></g>
+        <g class="seg" data-i="1"><rect class="box" x="116" y="90" width="120" height="70" fill="#191919"/><text class="big" x="176" y="140" text-anchor="middle" fill="#fff">kita</text></g>
+        <g class="seg" data-i="2"><rect class="box" x="240" y="90" width="52" height="70" fill="#e3200f"/><text class="big" x="266" y="140" text-anchor="middle" fill="#fff">b</text></g>
+        <g class="seg" data-i="3"><rect class="box" x="296" y="90" width="44" height="70" fill="#d9ff42"/><text class="big" x="318" y="140" text-anchor="middle" fill="#141a00">ı</text></g>
+        <g class="seg" data-i="4"><rect class="box" x="360" y="90" width="260" height="70" fill="#ececec" stroke="#cfcfcf"/><text class="big" x="490" y="140" text-anchor="middle" fill="#111">okuyorum</text></g>
+        <path class="call" d="M60 90 V40 H40"/><circle cx="60" cy="40" r="11" fill="#d9ff42"/><text class="cn" x="60" y="44" text-anchor="middle">1</text><text class="cl" x="80" y="44">сигнал «эта»</text>
+        <path class="call" d="M176 160 V210"/><circle cx="176" cy="216" r="11" fill="#d9ff42"/><text class="cn" x="176" y="220" text-anchor="middle">2</text><text class="cl" x="196" y="220">корень kitap</text>
+        <path class="call" d="M266 90 V58 H300"/><circle cx="312" cy="58" r="11" fill="#d9ff42"/><text class="cn" x="312" y="62" text-anchor="middle">3</text><text class="cl" x="330" y="62">камень p → b</text>
+        <path class="call" d="M318 160 V196 H380"/><circle cx="392" cy="196" r="11" fill="#d9ff42"/><text class="cn" x="392" y="200" text-anchor="middle">4</text><text class="cl" x="410" y="200">пин по гласной a</text>
+        <path class="call" d="M490 90 V40"/><circle cx="490" cy="34" r="11" fill="#d9ff42"/><text class="cn" x="490" y="38" text-anchor="middle">5</text><text class="cl" x="508" y="38">глагол</text>
+        <path d="M240 172 H340" stroke="#e3200f" stroke-width="1.5"/><path d="M240 168v8M340 168v8" stroke="#e3200f" stroke-width="1.5"/><text class="dim" x="290" y="188" text-anchor="middle">-(y)I</text>
+      </svg></div>
+    </div>
     <div class="mq" data-mq="2"></div>
   </div>
 </section>
@@ -754,6 +825,10 @@ b.tr{color:var(--lime);white-space:nowrap}
     </div>
     <button class="switch" type="button" role="switch" aria-checked="false" id="cmp-switch" data-ui><span>Русский</span><span class="switch__track"><span class="switch__dot"></span></span><span>Турецкий</span></button>
     <div class="cmp" id="cmp" data-ui></div>
+    <div class="viz viz--dark" data-ui>
+      <div class="viz__head"><span class="viz__t" style="color:#fff">Кому достаётся окончание</span><span class="viz__k">5 фраз выше</span></div>
+      <div class="bars" id="bars"></div>
+    </div>
   </div>
 </section>
 
@@ -792,6 +867,19 @@ b.tr{color:var(--lime);white-space:nowrap}
       <p>Нажми на пин — услышишь, что там говорят. В каждой фразе объект конкретный, поэтому пин стоит везде.</p>
       <p>Гуляй по порядку, от леса до магазина. Турист на карте идёт за тобой. Каждый пин звучит, каждая фраза — с переводом.</p>
     </div>
+    <div class="pano" id="pano"><svg viewBox="0 0 1200 380" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <defs><linearGradient id="g-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b0b0b"/><stop offset="1" stop-color="#1d2410"/></linearGradient></defs>
+      <rect width="1200" height="380" fill="url(#g-sky)"/>
+      <g class="pano-stars" fill="#fff"></g>
+      <g class="pano-bridge" opacity=".5"><path d="M820 230 H1180" stroke="#6b6b6b" stroke-width="3"/><path d="M900 230 V120 M1100 230 V120" stroke="#6b6b6b" stroke-width="5"/><path d="M820 230 Q900 120 1000 170 Q1100 120 1180 230 M900 120 Q1000 200 1100 120" fill="none" stroke="#6b6b6b" stroke-width="1.5"/></g>
+      <path class="pano-m1" d="M0 300 L120 170 L210 230 L330 120 L460 240 L560 160 L700 250 L820 150 L960 250 L1080 180 L1200 250 V380 H0Z" fill="#2a2a2a"/>
+      <path class="pano-m1l" d="M0 300 L120 170 L210 230 L330 120 L460 240 L560 160 L700 250 L820 150 L960 250 L1080 180 L1200 250" fill="none" stroke="#d9ff42" stroke-width="2" stroke-dasharray="2600" stroke-dashoffset="0"/>
+      <path class="pano-m2" d="M0 340 L160 250 L280 300 L420 230 L560 310 L720 240 L880 320 L1040 260 L1200 320 V380 H0Z" fill="#1a1a1a"/>
+      <g class="pano-trees" fill="#0f0f0f"></g>
+      <path id="pano-trail" d="M40 370 C200 330 300 350 420 320 S640 300 760 330 S1000 300 1160 340" fill="none" stroke="#d9ff42" stroke-width="3" stroke-dasharray="10 10"/>
+      <g class="pano-pins"></g>
+      <g id="pano-hiker"><circle r="9" fill="#fff" stroke="#0b0b0b" stroke-width="3"/><path d="M0 -9 V-26 M-8 -18 H8" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g>
+    </svg><div class="pano__cap" lang="tr" data-ui><span class="tagpill">Belgrad Ormanı</span><span class="tagpill dark" style="background:#1c1c1c;color:#e8e8e8">6 pin</span><span class="tagpill dark" style="background:#1c1c1c;color:#e8e8e8">1,845 m</span></div></div>
     <div class="hscroll"><div class="citymap" id="citymap">
       <svg viewBox="0 0 800 460" aria-hidden="true">
         <rect width="800" height="460" fill="#101010"/>
@@ -833,6 +921,10 @@ b.tr{color:var(--lime);white-space:nowrap}
       <button class="chip" type="button" data-f="none" aria-pressed="false">Без пина</button>
       <button class="btn btn--ghost" type="button" id="flip-all"><svg class="ico"><use href="#i-replay"/></svg>Перевернуть все</button>
     </div>
+    <div class="viz viz--light donut-wrap" data-ui>
+      <svg class="donut" viewBox="0 0 220 220" id="donut" aria-hidden="true"><circle cx="110" cy="110" r="80" fill="none" stroke="#ececec" stroke-width="34"/><g id="donut-segs" transform="rotate(-90 110 110)"></g><text x="110" y="116" text-anchor="middle" id="donut-n">20</text><text class="sub" x="110" y="138" text-anchor="middle">КАРТОЧЕК</text></svg>
+      <div><div class="viz__head"><span class="viz__t">Сколько пинов в галерее</span><span class="viz__k">нажми — фильтр</span></div><div class="dleg" id="dleg"></div></div>
+    </div>
     <div class="cards" id="cards"></div>
   </div>
 </section>
@@ -862,6 +954,7 @@ b.tr{color:var(--lime);white-space:nowrap}
         <div class="overview__img"><svg viewBox="0 0 300 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path d="M0 150 L0 100 L60 50 L100 80 L150 20 L200 70 L240 45 L300 90 L300 150Z" fill="url(#g-mount)"/><path d="M0 100 L60 50 L100 80 L150 20 L200 70 L240 45 L300 90" fill="none" stroke="#d9ff42" stroke-width="3" id="lab-ridge"/><use href="#pin" x="136" y="4" width="28" height="38" id="lab-pin"/></svg></div>
         <div class="overview__price" data-ui><span>ФРАЗА</span><b id="lab-tag">PİN ✓</b></div>
         <div class="lab__out" id="lab-out"><div class="word" id="lab-word" lang="tr"></div></div>
+        <div class="passport" id="passport" data-ui></div>
         <div class="lab__ru" id="lab-ru" data-ui aria-live="polite"></div>
         <ul class="why" id="lab-why" data-ui></ul>
       </div>
@@ -1928,6 +2021,127 @@ addEventListener('DOMContentLoaded', () => {
     });
   }
   if (ST) requestAnimationFrame(() => ST.refresh());
+});
+</script>
+
+<script>
+/* ===== визуал: диаграммы и иллюстрации ===== */
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = (q, r = document) => r.querySelector(q);
+  const $$ = (q, r = document) => [...r.querySelectorAll(q)];
+  const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.append(n); return n; };
+  const speak = (t) => { try { window.AlternaKit && AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const mk = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
+
+  /* A. Sankey: последняя гласная → пин */
+  const sk = $('#sankey');
+  const V = [['a', 'ı', 'masa', 'masa|y|ı'], ['ı', 'ı', 'kız', 'kız||ı'], ['e', 'i', 'ev', 'ev||i'], ['i', 'i', 'deniz', 'deniz||i'], ['o', 'u', 'telefon', 'telefon||u'], ['u', 'u', 'okul', 'okul||u'], ['ö', 'ü', 'göz', 'göz||ü'], ['ü', 'ü', 'köprü', 'köprü|y|ü']];
+  const P = ['ı', 'i', 'u', 'ü'];
+  const vy = (i) => 30 + i * 42; const py = (j) => 52 + j * 84;
+  const bands = V.map(([v, p], i) => el('path', { class: 'band', d: `M96 ${vy(i) + 17} C330 ${vy(i) + 17} 330 ${py(P.indexOf(p)) + 30} 520 ${py(P.indexOf(p)) + 30}`, stroke: '#d9ff42', 'stroke-width': 22 }, sk));
+  const vnodes = V.map(([v], i) => { const g = el('g', { class: 'vnode', role: 'button', tabindex: '0', 'aria-label': `Последняя гласная ${v}` }, sk); el('rect', { x: 30, y: vy(i), width: 66, height: 34, rx: 10 }, g); const t = el('text', { x: 63, y: vy(i) + 25, 'text-anchor': 'middle' }, g); t.textContent = v; return g; });
+  const pnodes = P.map((p, j) => { const g = el('g', { class: 'pnode' }, sk); el('rect', { x: 520, y: py(j), width: 90, height: 60, rx: 14 }, g); const t = el('text', { x: 565, y: py(j) + 40, 'text-anchor': 'middle' }, g); t.textContent = '-' + p; return g; });
+  el('text', { class: 'lbl2', x: 30, y: 18 }, sk).textContent = 'ПОСЛЕДНЯЯ ГЛАСНАЯ';
+  el('text', { class: 'lbl2', x: 520, y: 40 }, sk).textContent = 'ПИН';
+  const ex = $('#sankey-ex');
+  function pick(i) {
+    const [v, p, w, f] = V[i];
+    bands.forEach((b, k) => b.classList.toggle('on', k === i));
+    vnodes.forEach((n, k) => n.classList.toggle('on', k === i));
+    pnodes.forEach((n, k) => n.classList.toggle('dim', P[k] !== p));
+    const [st, y, pin] = f.split('|');
+    const word = mk('span', 'word'); word.lang = 'tr';
+    [[st, 'stem'], [y, 'y'], [pin, 'pin']].filter((x) => x[0]).forEach(([t, k]) => word.append(mk('span', `tile t-${k}`, t)));
+    word.dataset.say = st + y + pin;
+    ex.replaceChildren(word, mk('small', '', `${w} → ${st + y + pin}`));
+    if (anim) {
+      gsap.fromTo(bands[i], { strokeDasharray: 600, strokeDashoffset: 600 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.out' });
+      gsap.fromTo($$('.tile', word), { y: -50, scale: 0.5 }, { y: 0, scale: 1, duration: 0.7, ease: 'bounce.out', stagger: 0.1 });
+      gsap.fromTo(pnodes[P.indexOf(p)], { scale: 1.15, transformOrigin: '565px 0px' }, { scale: 1, duration: 0.5, ease: 'back.out(3)' });
+    }
+    speak(st + y + pin);
+  }
+  vnodes.forEach((n, i) => { n.addEventListener('click', () => pick(i)); n.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i); } }); });
+  if (anim) {
+    gsap.fromTo(bands, { strokeDasharray: 600, strokeDashoffset: 600 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.out', stagger: 0.08, scrollTrigger: { trigger: '#sankey', start: 'top 80%' } });
+    gsap.from(vnodes, { x: -60, duration: 0.6, ease: 'back.out(2)', stagger: 0.05, scrollTrigger: { trigger: '#sankey', start: 'top 80%' } });
+    gsap.from(pnodes, { x: 60, duration: 0.6, ease: 'back.out(2)', stagger: 0.08, scrollTrigger: { trigger: '#sankey', start: 'top 80%' } });
+    ScrollTrigger.create({ trigger: '#sankey', start: 'top 55%', once: true, onEnter: () => pick(0) });
+  } else pick(0);
+
+  /* B. Анатомия фразы: детали разъезжаются и съезжаются */
+  if (anim) {
+    const segs = $$('#anat .seg');
+    const tl = gsap.timeline({ scrollTrigger: { trigger: '#anat', start: 'top 85%', end: 'center 45%', scrub: 1 } });
+    tl.from(segs, { y: (i) => (i % 2 ? 60 : -60), rotation: (i) => (i % 2 ? 8 : -8), ease: 'power2.out', stagger: 0.1 })
+      .from('#anat .call', { strokeDasharray: 200, strokeDashoffset: 200, ease: 'none', stagger: 0.05 }, '<0.3')
+      .from('#anat circle', { scale: 0, transformOrigin: '50% 50%', ease: 'back.out(3)', stagger: 0.05 }, '<');
+    $('#anat').addEventListener('click', () => { gsap.fromTo(segs, { y: -20 }, { y: 0, duration: 0.6, ease: 'bounce.out', stagger: 0.08 }); speak('Bu kitabı okuyorum.'); });
+  }
+
+  /* C. Столбцы: кому достаётся окончание */
+  const BARS = [['Русский', 5, '#ffffff'], ['Турецкий', 3, '#d9ff42']];
+  const bars = $('#bars');
+  BARS.forEach(([l, n, c]) => {
+    const row = mk('div', 'bar'); const lb = mk('span', 'bar__lbl', l); lb.style.color = '#fff';
+    const tr = mk('span', 'bar__track'); const f = mk('span', 'bar__fill'); f.style.background = c; f.style.width = (n / 5) * 100 + '%'; tr.append(f);
+    const v = mk('span', 'bar__val', `${n} / 5`); v.style.color = c;
+    row.append(lb, tr, v); bars.append(row);
+    if (anim) gsap.from(f, { scaleX: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '#bars', start: 'top 85%' } });
+  });
+
+  /* D. Панорама Белградского леса: звёзды, ели, пины, турист по тропе */
+  const stars = $('.pano-stars');
+  for (let i = 0; i < 40; i++) el('circle', { cx: (i * 137) % 1200, cy: (i * 53) % 150, r: (i % 3) * 0.6 + 0.6, opacity: 0.3 + (i % 4) * 0.15 }, stars);
+  const trees = $('.pano-trees');
+  for (let i = 0; i < 34; i++) { const x = i * 36 + (i % 3) * 7; const h = 40 + (i * 29) % 46; const y = 330 + (i % 4) * 8; el('path', { d: `M${x} ${y} L${x + 13} ${y - h} L${x + 26} ${y} Z` }, trees); }
+  const pins = $('.pano-pins');
+  [[200, 344], [420, 318], [600, 318], [760, 328], [960, 318], [1150, 336]].forEach(([x, y]) => el('use', { href: '#pin', x: x - 12, y: y - 34, width: 24, height: 32 }, pins));
+  if (anim) {
+    if (window.MotionPathPlugin) gsap.to('#pano-hiker', { motionPath: { path: '#pano-trail', align: '#pano-trail', alignOrigin: [0.5, 1] }, ease: 'none', scrollTrigger: { trigger: '#pano', start: 'top 85%', end: 'bottom 20%', scrub: 1 } });
+    gsap.to('.pano-m1', { y: -18, ease: 'none', scrollTrigger: { trigger: '#pano', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.to('.pano-bridge', { y: -30, ease: 'none', scrollTrigger: { trigger: '#pano', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.fromTo('.pano-m1l', { strokeDashoffset: 2600 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '#pano', start: 'top 90%', end: 'center 50%', scrub: true } });
+    gsap.from('.pano-pins use', { y: -80, duration: 0.8, ease: 'bounce.out', stagger: 0.12, scrollTrigger: { trigger: '#pano', start: 'top 70%' } });
+    gsap.to('.pano-stars circle', { opacity: 0.1, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: { each: 0.08, from: 'random' } });
+    gsap.from('.pano-trees path', { scaleY: 0, transformOrigin: '50% 100%', duration: 0.6, ease: 'back.out(2)', stagger: 0.02, scrollTrigger: { trigger: '#pano', start: 'top 80%' } });
+  }
+
+  /* E. Кольцевая диаграмма по карточкам галереи */
+  const cardsAll = $$('#cards .fcard');
+  const kinds = [['pin', 'С пином', '#d9ff42'], ['none', 'Без пина', '#111111']];
+  const segs = $('#donut-segs'); const C = 2 * Math.PI * 80; let off = 0;
+  const leg = $('#dleg');
+  kinds.forEach(([k, l, c]) => {
+    const n = cardsAll.filter((x) => x.dataset.kind === k).length;
+    const len = (n / cardsAll.length) * C;
+    const seg = el('circle', { cx: 110, cy: 110, r: 80, fill: 'none', stroke: c, 'stroke-width': 34, 'stroke-dasharray': `${len} ${C - len}`, 'stroke-dashoffset': -off }, segs);
+    off += len;
+    const b = mk('button'); b.type = 'button'; const i = mk('i'); i.style.background = c; const t = mk('span', '', l); const v = mk('b', '', `${n} · ${Math.round((n / cardsAll.length) * 100)}%`);
+    b.append(i, t, v); leg.append(b);
+    b.addEventListener('click', () => { const f = $(`#gal-filter [data-f="${k}"]`); if (f) f.click(); if (anim) gsap.fromTo(seg, { attr: { 'stroke-width': 46 } }, { attr: { 'stroke-width': 34 }, duration: 0.6, ease: 'elastic.out(1, .4)' }); });
+    if (anim) gsap.from(seg, { attr: { 'stroke-dasharray': `0 ${C}` }, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '#donut', start: 'top 85%' } });
+  });
+  $('#donut-n').textContent = cardsAll.length;
+  if (anim) gsap.from('#donut', { rotation: -90, scale: 0.6, duration: 1, ease: 'back.out(1.8)', scrollTrigger: { trigger: '#donut', start: 'top 85%' } });
+
+  /* F. Паспорт формы в терминале: части, камни, мостики */
+  const pass = $('#passport');
+  const ICON = { parts: 'i-layers', soft: 'i-alert', y: 'i-bridge', pin: 'i-pin' };
+  function passport() {
+    const w = $('#lab-word');
+    const c = (k) => w.querySelectorAll(`.t-${k}`).length;
+    const data = [['parts', 'частей', w.querySelectorAll('.tile:not(.t-verb)').length], ['soft', 'камней', c('soft')], ['y', 'мостиков', c('y')], ['pin', 'пинов', c('pin')]];
+    pass.replaceChildren(...data.map(([k, l, n]) => { const s = mk('span', 'stat'); const sv = el('svg', {}); el('use', { href: '#' + ICON[k] }, sv); const b = mk('b', '', String(n)); s.append(sv, b, document.createTextNode(' ' + l)); return s; }));
+    if (anim) gsap.fromTo($$('.stat', pass), { y: 14 }, { y: 0, duration: 0.4, ease: 'back.out(2.5)', stagger: 0.05 });
+  }
+  new MutationObserver(passport).observe($('#lab-word'), { childList: true });
+  passport();
+  if (window.ScrollTrigger) requestAnimationFrame(() => ScrollTrigger.refresh());
 });
 </script>
 </body>

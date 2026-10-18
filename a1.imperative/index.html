@@ -403,6 +403,46 @@ section>.wrap{z-index:1}
 @media(hover:hover) and (pointer:fine){.tilt{transform-style:preserve-3d;will-change:transform}}
 @media(max-width:699px){.ticker{transform:rotate(-2deg)}.ticker--alt{transform:rotate(2deg)}.tk{font-size:13px}.tk b{font-size:15px}}
 
+
+/* ===== визуал: диаграммы, иллюстрации, инфографика ===== */
+.viz{margin-top:22px;border-radius:28px;padding:clamp(16px,3.5vw,28px);position:relative;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#1f1830 0%,#131316 60%);border:1px solid var(--line)}
+.viz__head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.viz__t{font-weight:700;font-size:clamp(17px,3.6vw,21px);letter-spacing:-.02em}
+.viz__k{font:600 11px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.viz svg{display:block;width:100%;height:auto;overflow:visible}
+.flow .fl{fill:none;opacity:.28}
+.flow .fl.on{opacity:1}
+.flow .nd rect{fill:#16161b;stroke:#3a3a44;stroke-width:1.5}
+.flow .nd text{font:700 16px var(--ak-font);fill:#f4f2f8}
+.flow .nd.on rect{fill:#2a2047;stroke:var(--violet)}
+.flow .nd.leaf{cursor:pointer}
+.flow .cap2{font:600 11px var(--mono);fill:var(--muted)}
+.anat2 .call{fill:none;stroke:#c9b5ff;stroke-width:1.5}
+.anat2 .cl{font:600 15px var(--ak-font);fill:#f4f2f8}
+.anat2 .cn{font:800 12px var(--ak-font);fill:#150d2c}
+.anat2 text.big{font:800 44px var(--ak-font)}
+.depth{display:grid;gap:10px}
+.dp{display:grid;grid-template-columns:minmax(90px,.8fr) 2fr auto;gap:12px;align-items:center;cursor:pointer}
+.dp__w{font-weight:800;font-size:clamp(20px,4.6vw,26px)}
+.dp__track{height:34px;border-radius:10px;background:#0c0c10;position:relative;overflow:hidden;border:1px solid var(--line)}
+.dp__fill{position:absolute;inset:0 auto 0 0;border-radius:10px;transform-origin:left center}
+.dp__who{font:600 12px var(--mono);color:var(--muted);white-space:nowrap}
+.pano2{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);margin-bottom:18px;background:#0d0b16}
+.pano2 svg{display:block;width:100%;height:clamp(230px,32vw,380px)}
+.donut-wrap{display:grid;gap:16px;align-items:center}
+@media(min-width:760px){.donut-wrap{grid-template-columns:220px 1fr}}
+.donut{width:min(220px,60vw);margin:0 auto}
+.donut text{font:800 40px var(--ak-font);fill:#f4f2f8}
+.donut .sub{font:600 11px var(--mono);fill:var(--muted)}
+.dleg{display:grid;gap:8px}
+.dleg button{display:flex;align-items:center;gap:10px;justify-content:space-between;min-height:44px;padding:8px 14px;border-radius:14px;border:1.5px solid var(--line2);background:var(--panel2);cursor:pointer;color:var(--ink);font-weight:650;text-align:left}
+.dleg i{width:14px;height:14px;border-radius:4px;flex:none}
+.dleg b{font:600 13px var(--mono);color:var(--muted)}
+.passport{display:flex;flex-wrap:wrap;gap:8px 14px;justify-content:center;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line2)}
+.pstat{display:inline-flex;align-items:center;gap:6px;font:600 13px var(--mono);color:var(--muted)}
+.pstat b{color:var(--violet);font-size:15px}
+.pstat i{width:10px;height:10px;border-radius:3px;display:inline-block}
+@media(max-width:699px){.anat2-scroll{overflow-x:auto}.anat2-scroll svg{min-width:620px}.flow-scroll{overflow-x:auto}.flow-scroll svg{min-width:600px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
 </style>
 </head>
@@ -641,6 +681,10 @@ section>.wrap{z-index:1}
         </div>
       </div>
     </div>
+    <div class="viz" data-ui>
+      <div class="viz__head"><span class="viz__t">Стакан вежливости</span><span class="viz__k">чем длиннее хвост — тем вежливее</span></div>
+      <div class="depth" id="depth"></div>
+    </div>
     <div class="mq" data-mq="0"></div>
   </div>
 </section>
@@ -662,7 +706,7 @@ section>.wrap{z-index:1}
 </section>
 
 <!-- ================= THIRD ================= -->
-<section data-section="third" data-words="54" id="s-third">
+<section data-section="third" data-words="56" id="s-third">
   <div class="wrap">
     <div class="kicker" data-ui><svg class="ico"><use href="#i-relay"/></svg>06 · Он и они</div>
     <h2>Пусть он: <em>ордер через брокера</em></h2>
@@ -679,12 +723,16 @@ section>.wrap{z-index:1}
     <p class="prose" style="margin-top:12px">Вся таблица на одном экране. Нажми на ячейку — она прозвучит.</p>
     <div class="bento" id="bento"></div>
     <div class="legend" data-ui><span><i style="background:var(--violet)"></i>-in · вы</span><span><i style="background:var(--blue)"></i>-sin · пусть</span><span><i style="background:var(--sky)"></i>-ler · они</span><span><i style="background:var(--rose)"></i>-me · запрет</span><span><i style="background:var(--peach)"></i>мостик y</span></div>
+    <div class="viz flow" id="flow-card">
+      <div class="viz__head" data-ui><span class="viz__t">Поток ордера: один корень — восемь форм</span><span class="viz__k">нажми на форму</span></div>
+      <div class="flow-scroll"><svg viewBox="0 0 700 420" id="flow" role="group" aria-label="Диаграмма: корень, адресат, форма"></svg></div>
+    </div>
     <div class="mq" data-mq="1"></div>
   </div>
 </section>
 
 <!-- ================= NEGATIVE ================= -->
-<section data-section="negative" data-words="44" id="s-negative">
+<section data-section="negative" data-words="51" id="s-negative">
   <div class="wrap">
     <div class="kicker" data-ui><svg class="ico"><use href="#i-lock"/></svg>07 · Запрет</div>
     <h2>Запрет: <em>замок -me</em></h2>
@@ -701,6 +749,21 @@ section>.wrap{z-index:1}
         <button class="switch" type="button" role="switch" aria-checked="false" id="neg-switch" data-ui><span>Открыт</span><span class="switch__track"><span class="switch__dot"></span></span><span>Заперт</span></button>
         <div class="neglist" id="neglist" style="margin-top:12px"></div>
       </div>
+    </div>
+    <div class="viz">
+      <div class="viz__head" data-ui><span class="viz__t">Анатомия самого длинного ордера</span><span class="viz__k">gel · me · y · in · iz</span></div>
+      <div class="anat2-scroll"><svg viewBox="0 0 680 250" class="anat2" id="anat2" aria-hidden="true" data-say="Gelmeyiniz">
+        <g class="seg"><rect x="40" y="90" width="110" height="70" rx="12" fill="#1f1f26" stroke="#3a3a46" stroke-width="2"/><text class="big" x="95" y="140" text-anchor="middle" fill="#f4f2f8">gel</text></g>
+        <g class="seg"><rect x="160" y="90" width="110" height="70" rx="12" fill="#ff7d95"/><text class="big" x="215" y="140" text-anchor="middle" fill="#2b0610">me</text></g>
+        <g class="seg"><rect x="280" y="90" width="64" height="70" rx="12" fill="#f7a99d"/><text class="big" x="312" y="140" text-anchor="middle" fill="#2a0f0a">y</text></g>
+        <g class="seg"><rect x="354" y="90" width="100" height="70" rx="12" fill="#c9b5ff"/><text class="big" x="404" y="140" text-anchor="middle" fill="#150d2c">in</text></g>
+        <g class="seg"><rect x="464" y="90" width="100" height="70" rx="12" fill="#d7dcea"/><text class="big" x="514" y="140" text-anchor="middle" fill="#13151d">iz</text></g>
+        <path class="call" d="M95 90 V44"/><circle cx="95" cy="36" r="11" fill="#c9b5ff"/><text class="cn" x="95" y="40" text-anchor="middle">1</text><text class="cl" x="114" y="41">корень «приходить»</text>
+        <path class="call" d="M215 160 V206"/><circle cx="215" cy="214" r="11" fill="#c9b5ff"/><text class="cn" x="215" y="218" text-anchor="middle">2</text><text class="cl" x="234" y="219">замок: нельзя</text>
+        <path class="call" d="M312 90 V64 H360"/><circle cx="372" cy="64" r="11" fill="#c9b5ff"/><text class="cn" x="372" y="68" text-anchor="middle">3</text><text class="cl" x="390" y="69">мостик y</text>
+        <path class="call" d="M404 160 V196 H440"/><circle cx="452" cy="196" r="11" fill="#c9b5ff"/><text class="cn" x="452" y="200" text-anchor="middle">4</text><text class="cl" x="470" y="201">«вы»</text>
+        <path class="call" d="M514 90 V40 H560"/><circle cx="572" cy="40" r="11" fill="#c9b5ff"/><text class="cn" x="572" y="44" text-anchor="middle">5</text><text class="cl" x="590" y="45">официально</text>
+      </svg></div>
     </div>
     <div class="mq" data-mq="2"></div>
   </div>
@@ -772,6 +835,22 @@ section>.wrap{z-index:1}
     <h2>Кадыкёй <em>отдаёт приказы</em></h2>
     <p class="prose">Пройди по набережной. Нажми на точку — услышишь, какие ордера там звучат. Город говорит повелительным весь день.</p>
     <p class="prose">У парома кричат на «вы» и бегут. В аптеке советуют. В метро вещают максимально официально, с хвостом <b lang="tr" class="tr">-iz</b>.</p>
+    <div class="pano2" id="pano2"><svg viewBox="0 0 1200 380" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><linearGradient id="g-dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d0b16"/><stop offset=".7" stop-color="#2a1650"/><stop offset="1" stop-color="#5b2bff"/></linearGradient><linearGradient id="g-water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1650"/><stop offset="1" stop-color="#0d0b16"/></linearGradient></defs>
+      <rect width="1200" height="260" fill="url(#g-dusk)"/>
+      <g class="p2-stars" fill="#efe6ff"></g>
+      <circle class="p2-moon" cx="980" cy="80" r="42" fill="url(#g-peach)"/><circle cx="980" cy="80" r="42" fill="url(#g-shine)"/>
+      <g class="p2-far" fill="#1a1230"><path d="M0 260 V200 H80 V170 H140 V210 H220 V180 H300 V260Z"/><path d="M820 260 V190 H900 V160 H960 V200 H1050 V175 H1200 V260Z"/></g>
+      <g class="p2-sky" fill="#120c22">
+        <path d="M330 260 V190 Q400 120 470 190 V260Z"/><path d="M360 190 V140 H368 V190Z M432 190 V140 H440 V190Z"/><path d="M396 130 l4 -18 l4 18Z"/>
+        <path d="M520 260 V200 Q580 150 640 200 V260Z"/><path d="M500 200 V120 H508 V200Z M652 200 V120 H660 V200Z"/><path d="M576 152 V138 H584 V152Z"/>
+        <path d="M720 260 V150 H736 V120 L746 100 L756 120 V150 H772 V260Z"/><circle cx="746" cy="96" r="5"/>
+      </g>
+      <rect y="258" width="1200" height="122" fill="url(#g-water)"/>
+      <g class="p2-refl" stroke="#c9b5ff" stroke-opacity=".35" stroke-width="3"><path d="M330 280 H470"/><path d="M360 300 H440"/><path d="M520 290 H640"/><path d="M720 284 H772"/><path d="M960 280 H1000"/><path d="M950 300 H1010"/></g>
+      <g id="p2-ferry"><path d="M-160 330 h150 l-16 22 h-118z" fill="#f4f2f8"/><rect x="-140" y="308" width="104" height="22" rx="5" fill="#e9e6f1"/><rect x="-112" y="296" width="44" height="14" rx="3" fill="#c9b5ff"/><g fill="#4b55ff"><rect x="-132" y="314" width="12" height="9" rx="2"/><rect x="-114" y="314" width="12" height="9" rx="2"/><rect x="-96" y="314" width="12" height="9" rx="2"/><rect x="-78" y="314" width="12" height="9" rx="2"/></g></g>
+      <text x="40" y="360" font-family="Onest,sans-serif" font-weight="800" font-size="22" fill="#c9b5ff" opacity=".8">İstanbul · Kadıköy · Boğaz</text>
+    </svg></div>
     <div class="hscroll" id="citybox"><div class="city" id="city">
       <svg viewBox="0 0 800 420" aria-hidden="true">
         <rect width="800" height="420" fill="#0d0b16"/>
@@ -823,6 +902,10 @@ section>.wrap{z-index:1}
       <button class="chip" type="button" data-f="o" aria-pressed="false">Пусть</button>
       <button class="chip" type="button" data-f="neg" aria-pressed="false">Нельзя</button>
     </div>
+    <div class="viz donut-wrap" data-ui>
+      <svg class="donut" viewBox="0 0 220 220" id="donut" aria-hidden="true"><circle cx="110" cy="110" r="80" fill="none" stroke="#1e1e24" stroke-width="34"/><g id="donut-segs" transform="rotate(-90 110 110)"></g><text x="110" y="116" text-anchor="middle" id="donut-n">20</text><text class="sub" x="110" y="138" text-anchor="middle">ОРДЕРОВ</text></svg>
+      <div><div class="viz__head"><span class="viz__t">Портфель галереи</span><span class="viz__k">нажми — фильтр</span></div><div class="dleg" id="dleg"></div></div>
+    </div>
     <div class="cards" id="cards"></div>
   </div>
 </section>
@@ -854,6 +937,7 @@ section>.wrap{z-index:1}
       <div>
         <div class="lab__out" id="lab-out"><div class="word" id="lab-word" lang="tr"></div></div>
         <svg class="spark-line" viewBox="0 0 300 56" preserveAspectRatio="none" aria-hidden="true"><polyline id="lab-spark" points="0,40 30,36 60,38 90,30 120,32 150,24 180,28 210,18 240,22 270,12 300,14" fill="none" stroke="#c9b5ff" stroke-width="2.5" stroke-linejoin="round"/><circle id="lab-spark-dot" cx="300" cy="14" r="4" fill="#3ddc84"/></svg>
+        <div class="passport" id="passport" data-ui></div>
         <div class="lab__ru" id="lab-ru" data-ui aria-live="polite"></div>
         <ul class="why" id="lab-why" data-ui></ul>
       </div>
@@ -2025,6 +2109,115 @@ addEventListener('DOMContentLoaded', () => {
     gsap.to('.bg-noise', { filter: 'hue-rotate(40deg)', ease: 'none', scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: true } });
     ScrollTrigger.batch('.ticker', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { scaleX: 0.6, duration: 0.8, ease: 'back.out(1.6)' }) });
   }
+  if (window.ScrollTrigger) requestAnimationFrame(() => ScrollTrigger.refresh());
+});
+</script>
+
+<script>
+/* ===== визуал: диаграммы и иллюстрации ===== */
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = (q, r = document) => r.querySelector(q);
+  const $$ = (q, r = document) => [...r.querySelectorAll(q)];
+  const el = (tag, attrs = {}, parent) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); if (parent) parent.append(n); return n; };
+  const mk = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
+  const speak = (t) => { try { window.AlternaKit && AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+
+  /* C. Стакан вежливости */
+  const DEPTH = [['Gel!', 'другу', 0.34, '#3a3a46'], ['Gelin!', 'продавцу', 0.66, '#c9b5ff'], ['Geliniz!', 'табличка в метро', 1, '#d7dcea']];
+  const depth = $('#depth');
+  DEPTH.forEach(([w, who, v, c]) => {
+    const row = mk('div', 'dp'); row.dataset.say = w; row.setAttribute('role', 'button'); row.tabIndex = 0;
+    const ww = mk('span', 'dp__w', w); ww.lang = 'tr';
+    const tr = mk('span', 'dp__track'); const f = mk('span', 'dp__fill'); f.style.width = v * 100 + '%'; f.style.background = `linear-gradient(90deg, ${c}, ${c}cc)`; tr.append(f);
+    row.append(ww, tr, mk('span', 'dp__who', who)); depth.append(row);
+    if (anim) gsap.from(f, { scaleX: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: '#depth', start: 'top 85%' } });
+    row.addEventListener('click', () => { if (anim) gsap.fromTo(f, { scaleX: 0.4 }, { scaleX: 1, duration: 0.8, ease: 'elastic.out(1, .5)' }); });
+  });
+
+  /* A. Поток: корень → адресат → форма */
+  const fsvg = $('#flow');
+  const MID = [['ты', 'sen'], ['вы', 'siz'], ['он', 'o'], ['они', 'onlar']];
+  const LEAF = [['Gel', 0], ['Gelme', 0], ['Gelin', 1], ['Gelmeyin', 1], ['Gelsin', 2], ['Gelmesin', 2], ['Gelsinler', 3], ['Gelmesinler', 3]];
+  const my = (i) => 40 + i * 96; const ly = (j) => 14 + j * 50;
+  const flows1 = MID.map((m, i) => el('path', { class: 'fl', d: `M130 210 C210 210 210 ${my(i) + 22} 280 ${my(i) + 22}`, stroke: 'url(#g-ribbon)', 'stroke-width': 16 }, fsvg));
+  const flows2 = LEAF.map(([w, i], j) => el('path', { class: 'fl', d: `M380 ${my(i) + 22} C450 ${my(i) + 22} 450 ${ly(j) + 18} 520 ${ly(j) + 18}`, stroke: j % 2 ? '#ff7d95' : '#c9b5ff', 'stroke-width': 8 }, fsvg));
+  const root = el('g', { class: 'nd on' }, fsvg); el('rect', { x: 20, y: 186, width: 110, height: 48, rx: 12 }, root); el('text', { x: 75, y: 216, 'text-anchor': 'middle' }, root).textContent = 'gel';
+  const mids = MID.map(([ru], i) => { const g = el('g', { class: 'nd' }, fsvg); el('rect', { x: 280, y: my(i), width: 100, height: 44, rx: 12 }, g); el('text', { x: 330, y: my(i) + 28, 'text-anchor': 'middle' }, g).textContent = ru; return g; });
+  const leaves = LEAF.map(([w], j) => { const g = el('g', { class: 'nd leaf', role: 'button', tabindex: '0', 'aria-label': w }, fsvg); el('rect', { x: 520, y: ly(j), width: 160, height: 36, rx: 10 }, g); el('text', { x: 600, y: ly(j) + 24, 'text-anchor': 'middle' }, g).textContent = w; return g; });
+  el('text', { class: 'cap2', x: 20, y: 176 }, fsvg).textContent = 'КОРЕНЬ';
+  el('text', { class: 'cap2', x: 280, y: 28 }, fsvg).textContent = 'АДРЕСАТ';
+  function flowPick(j) {
+    const i = LEAF[j][1];
+    flows1.forEach((f, k) => f.classList.toggle('on', k === i));
+    flows2.forEach((f, k) => f.classList.toggle('on', k === j));
+    mids.forEach((m, k) => m.classList.toggle('on', k === i));
+    leaves.forEach((l, k) => l.classList.toggle('on', k === j));
+    if (anim) {
+      gsap.fromTo([flows1[i], flows2[j]], { strokeDasharray: 400, strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out', stagger: 0.2 });
+      gsap.fromTo(leaves[j], { x: 20 }, { x: 0, duration: 0.5, ease: 'back.out(3)' });
+    }
+    speak(LEAF[j][0]);
+  }
+  leaves.forEach((l, j) => { l.addEventListener('click', () => flowPick(j)); l.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flowPick(j); } }); });
+  if (anim) {
+    gsap.fromTo([...flows1, ...flows2], { strokeDasharray: 400, strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1.2, ease: 'power2.out', stagger: 0.05, scrollTrigger: { trigger: '#flow', start: 'top 80%' } });
+    gsap.from(leaves, { x: 60, duration: 0.6, ease: 'back.out(2)', stagger: 0.05, scrollTrigger: { trigger: '#flow', start: 'top 80%' } });
+    ScrollTrigger.create({ trigger: '#flow', start: 'top 55%', once: true, onEnter: () => flowPick(3) });
+  } else flowPick(3);
+
+  /* B. Анатомия gelmeyiniz: детали собираются по скроллу */
+  if (anim) {
+    const segs = $$('#anat2 .seg');
+    const tl = gsap.timeline({ scrollTrigger: { trigger: '#anat2', start: 'top 85%', end: 'center 45%', scrub: 1 } });
+    tl.from(segs, { x: (i) => (i - 2) * 60, y: (i) => (i % 2 ? 50 : -50), rotation: (i) => (i % 2 ? 10 : -10), ease: 'power2.out', stagger: 0.1 })
+      .from('#anat2 .call', { strokeDasharray: 200, strokeDashoffset: 200, ease: 'none', stagger: 0.05 }, '<0.3')
+      .from('#anat2 circle', { scale: 0, transformOrigin: '50% 50%', ease: 'back.out(3)', stagger: 0.05 }, '<');
+    $('#anat2').addEventListener('click', () => gsap.fromTo(segs, { y: -20 }, { y: 0, duration: 0.6, ease: 'bounce.out', stagger: 0.08 }));
+  }
+
+  /* D. Панорама Стамбула: звёзды, паром по скроллу, блики на воде */
+  const st = $('.p2-stars');
+  for (let i = 0; i < 46; i++) el('circle', { cx: (i * 131) % 1200, cy: (i * 47) % 170, r: (i % 3) * 0.6 + 0.6, opacity: 0.3 + (i % 4) * 0.15 }, st);
+  if (anim) {
+    gsap.to('#p2-ferry', { x: 1400, ease: 'none', scrollTrigger: { trigger: '#pano2', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+    gsap.to('.p2-sky', { y: -14, ease: 'none', scrollTrigger: { trigger: '#pano2', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.to('.p2-moon', { y: 30, ease: 'none', scrollTrigger: { trigger: '#pano2', start: 'top bottom', end: 'bottom top', scrub: true } });
+    gsap.to('.p2-refl path', { x: 18, duration: 1.6, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: 0.2 });
+    gsap.to('.p2-stars circle', { opacity: 0.1, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', stagger: { each: 0.08, from: 'random' } });
+  }
+
+  /* E. Портфель галереи */
+  const cardsAll = $$('#cards .fcard');
+  const KINDS = [['sen', 'Ты', '#3a3a46'], ['siz', 'Вы', '#c9b5ff'], ['o', 'Пусть', '#4b55ff'], ['neg', 'Нельзя', '#ff7d95']];
+  const segs = $('#donut-segs'); const C = 2 * Math.PI * 80; let off = 0;
+  const leg = $('#dleg');
+  KINDS.forEach(([k, l, c]) => {
+    const n = cardsAll.filter((x) => x.dataset.kind === k).length;
+    const len = (n / cardsAll.length) * C;
+    const seg = el('circle', { cx: 110, cy: 110, r: 80, fill: 'none', stroke: c, 'stroke-width': 34, 'stroke-dasharray': `${len} ${C - len}`, 'stroke-dashoffset': -off }, segs);
+    off += len;
+    const b = mk('button'); b.type = 'button'; const i = mk('i'); i.style.background = c;
+    b.append(i, mk('span', '', l), mk('b', '', `${n} · ${Math.round((n / cardsAll.length) * 100)}%`)); leg.append(b);
+    b.addEventListener('click', () => { const f = $(`#gal-filter [data-f="${k}"]`); if (f) f.click(); if (anim) gsap.fromTo(seg, { attr: { 'stroke-width': 46 } }, { attr: { 'stroke-width': 34 }, duration: 0.6, ease: 'elastic.out(1, .4)' }); });
+    if (anim) gsap.from(seg, { attr: { 'stroke-dasharray': `0 ${C}` }, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '#donut', start: 'top 85%' } });
+  });
+  $('#donut-n').textContent = cardsAll.length;
+  if (anim) gsap.from('#donut', { rotation: -90, scale: 0.6, duration: 1, ease: 'back.out(1.8)', scrollTrigger: { trigger: '#donut', start: 'top 85%' } });
+
+  /* F. Паспорт формы */
+  const pass = $('#passport');
+  const ROLES = [['stem', 'корень', '#3a3a46'], ['me', 'замок', '#ff7d95'], ['y', 'мостик', '#f7a99d'], ['in', 'вы', '#c9b5ff'], ['sin', 'пусть', '#4b55ff'], ['iz', 'офиц.', '#d7dcea']];
+  function passport() {
+    const w = $('#lab-word');
+    pass.replaceChildren(...ROLES.map(([k, l, c]) => { const n = w.querySelectorAll(`.t-${k}`).length; const sp = mk('span', 'pstat'); const i = mk('i'); i.style.background = c; sp.append(i, mk('b', '', String(n)), document.createTextNode(l)); sp.style.opacity = n ? 1 : 0.45; return sp; }));
+    if (anim) gsap.fromTo($$('.pstat', pass), { y: 12 }, { y: 0, duration: 0.4, ease: 'back.out(2.5)', stagger: 0.04 });
+  }
+  new MutationObserver(passport).observe($('#lab-word'), { childList: true });
+  passport();
   if (window.ScrollTrigger) requestAnimationFrame(() => ScrollTrigger.refresh());
 });
 </script>

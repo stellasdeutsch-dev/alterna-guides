@@ -397,6 +397,28 @@ h3 { font-size: clamp(19px, 5vw, 24px); line-height: 1.15; font-weight: 600; mar
 .z-h2bar { display: block; height: 6px; width: 120px; border-radius: 6px; margin: -6px 0 18px; background: linear-gradient(90deg, var(--z), var(--a), var(--c)); transform-origin: left; }
 @media (max-width: 699px) { .z-deco { opacity: .45; } .z-cap3d { scale: .7; } }
 .z-sec { overflow-x: clip; }
+/* карта тона */
+.z-rmap { position: relative; border-radius: 28px; background: #fff; border: 1.5px solid var(--line); padding: 10px; margin-top: 8px; }
+.z-rdot { position: absolute; translate: -50% -50%; min-height: 40px; padding: 6px 12px; border-radius: 999px; border: 2px solid var(--ink); font-weight: 700; font-size: clamp(11px, 2.6vw, 15px); cursor: pointer; white-space: nowrap; box-shadow: 0 3px 0 var(--ink); }
+.z-rdot[data-k="z"] { background: var(--z); } .z-rdot[data-k="a"] { background: var(--a); } .z-rdot[data-k="c"] { background: var(--c); color: #fff; }
+.z-rdot.is-on { outline: 4px solid var(--ink); outline-offset: 2px; }
+.z-rout { display: grid; gap: 8px; margin-top: 8px; }
+.z-rout > div { border-radius: 18px; padding: 12px 14px; background: var(--fog); }
+.z-rmap__in { position: relative; }
+.z-rmap__in > svg { display: block; width: 100%; height: auto; }
+.z-rmap__in > [data-rdots] { position: absolute; inset: 0; }
+@media (max-width: 699px) { .z-rmap { overflow-x: auto; overscroll-behavior-x: contain; } .z-rmap__in { min-width: 640px; } }
+/* упаковки */
+.z-packs { display: grid; gap: 16px; margin-top: 10px; }
+@media (min-width: 900px) { .z-packs { grid-template-columns: repeat(3, 1fr); align-items: start; } }
+.z-pack { border-radius: 28px; background: var(--fog); padding: 16px; text-align: center; position: relative; overflow: hidden; }
+.z-pack[data-pk="z"] { background: var(--zs); } .z-pack[data-pk="a"] { background: var(--as); } .z-pack[data-pk="c"] { background: var(--cs); }
+.z-box { width: min(100%, 220px); height: auto; display: block; margin: 0 auto; overflow: visible; }
+.z-insert { text-align: left; margin-top: 12px; background: #fff; border-radius: 16px; border: 1.5px dashed var(--ink); padding: 14px; transform-origin: 50% 0; }
+.z-insert[hidden] { display: none; }
+.z-insert dl { margin: 0; display: grid; gap: 8px; }
+.z-insert dt { font: 700 12px/1 var(--cond); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.z-insert dd { margin: 2px 0 0; font-size: 15px; }
 </style>
 </head>
 <body>
@@ -533,14 +555,14 @@ h3 { font-size: clamp(19px, 5vw, 24px); line-height: 1.15; font-weight: 600; mar
 </div>
 </section>
 <!-- ================= ZIRA ================= -->
-<section class="z-sec" data-section="zira" data-words="47">
+<section class="z-sec" data-section="zira" data-words="43">
 <div class="z-in">
 <span class="z-label" data-ui><i style="color:var(--z)"></i>Препарат 1 · зелёный</span>
 <h2 data-split><span lang="tr">zira</span> — это «ибо»</h2>
 <div class="z-grid2">
 <div>
 <p class="z-lead">Сначала результат. Потом <span class="z-k z-k--z" lang="tr">zira</span>. Потом причина.</p>
-<p>Как в летописи: «И сгорел град, ибо был деревянным». Порядок железный. Причина всегда идёт второй. Ибо звучит торжественно. Zira тоже.</p>
+<p>Как в летописи: «И сгорел град, ибо был деревянным». Порядок железный. Причина всегда идёт второй.</p>
 <p>Zira — книжный брат <span lang="tr">çünkü</span>. Живёт в новостях, письмах и докладах. В чате с другом звучит как торжественная речь у подъезда.</p>
 </div>
 <div class="z-stage" data-player="zira">
@@ -671,6 +693,36 @@ h3 { font-size: clamp(19px, 5vw, 24px); line-height: 1.15; font-weight: 600; mar
 <div class="zq" data-q="compare"></div>
 </div>
 </section>
+<!-- ================= REGMAP ================= -->
+<section class="z-sec" data-section="regmap" data-words="28">
+<div class="z-in">
+<span class="z-label" data-ui><i style="color:var(--blue)"></i>Диаграмма</span>
+<h2 data-split>Карта тона</h2>
+<p class="z-lead">Слева — разговор на кухне. Справа — доклад на конференции. Сверху вниз — работа слова.</p>
+<p>Двигай ползунок. В каждой строке загорится нужное слово.</p>
+<div class="z-rmap" data-rmap>
+<div class="z-rmap__in">
+<svg viewBox="0 0 680 380" aria-hidden="true">
+<defs><linearGradient id="zrg" x1="0" x2="1"><stop offset="0" stop-color="#dcf59c"/><stop offset="1" stop-color="#c6aaf8"/></linearGradient></defs>
+<rect class="z-rband" x="110" y="20" width="560" height="100" rx="18" fill="#d9f4ea"/>
+<rect class="z-rband" x="110" y="130" width="560" height="100" rx="18" fill="#fde0da"/>
+<rect class="z-rband" x="110" y="240" width="560" height="100" rx="18" fill="#e8ecff"/>
+<text x="96" y="76" text-anchor="end" font-size="15" font-weight="700" fill="#0d5c49">причина</text>
+<text x="96" y="186" text-anchor="end" font-size="15" font-weight="700" fill="#c24f40">последствие</text>
+<text x="96" y="296" text-anchor="end" font-size="15" font-weight="700" fill="#3a52d4">мнение</text>
+<rect x="110" y="352" width="560" height="10" rx="5" fill="url(#zrg)"/>
+<text x="110" y="378" font-size="13" fill="#676772">в чате</text><text x="670" y="378" text-anchor="end" font-size="13" fill="#676772">в докладе</text>
+<line class="z-rscan" x1="390" y1="14" x2="390" y2="346" stroke="#0c0c0e" stroke-width="3" stroke-dasharray="6 6"/>
+</svg>
+<div data-rdots></div>
+</div>
+</div>
+<p class="z-cityhint" data-ui>Карту можно листать вбок →</p>
+<input class="z-range" type="range" min="0" max="100" step="1" value="50" data-rtone aria-label="Тон: от чата до доклада">
+<div class="z-rout" data-rout aria-live="polite"></div>
+<div class="zq" data-q="regmap"></div>
+</div>
+</section>
 <!-- ================= MAP / BENTO ================= -->
 <section class="z-sec" data-section="map" data-words="43">
 <div class="z-in">
@@ -701,6 +753,34 @@ h3 { font-size: clamp(19px, 5vw, 24px); line-height: 1.15; font-weight: 600; mar
 </div>
 <div class="z-bc z-b6"><span class="z-tagline" data-ui>После aksi hâlde</span><h3>Будущее или широкое</h3><p lang="tr" data-say="geç kalırız">… geç kalırız / geç kalacağız</p><svg class="z-bico"><use href="#i-cal"/></svg></div>
 <div class="z-bc z-b7"><span class="z-tagline" data-ui>Синонимы</span><h3>Запасные ключи</h3><p lang="tr"><span data-say="çünkü">çünkü</span> · <span data-say="yoksa">yoksa</span> · <span data-say="doğrusu">doğrusu</span></p><svg class="z-bico"><use href="#i-key"/></svg></div>
+</div>
+</div>
+</section>
+<!-- ================= PACK ================= -->
+<section class="z-sec" data-section="pack" data-words="15">
+<div class="z-in">
+<span class="z-label" data-ui><i style="color:var(--a)"></i>Инструкция по применению</span>
+<h2 data-split>Три упаковки, три вкладыша</h2>
+<p class="z-lead">Каждая связка — препарат со своими показаниями. Открой коробку.</p>
+<div class="z-packs">
+<article class="z-pack" data-pk="z">
+<svg class="z-box" viewBox="0 0 220 200" aria-hidden="true"><g class="z-boxbody"><path d="M30 70l80-30 80 30v100l-80 30-80-30Z" fill="#fff" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><path d="M110 100v100M30 70l80 30 80-30" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><path d="M30 70l80 30v100l-80-30Z" fill="#22c79b" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><text x="70" y="148" text-anchor="middle" font-size="18" font-weight="800" transform="rotate(20 70 148)">zira</text><path d="M140 130h22M151 119v22" stroke="#22c79b" stroke-width="7" stroke-linecap="round"/></g><g class="z-lid"><path d="M30 70l80-30 80 30-80 30Z" fill="#0d5c49" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/></g><g class="z-pops"><rect x="92" y="40" width="36" height="16" rx="8" fill="#22c79b" stroke="#0c0c0e" stroke-width="2"/><rect x="70" y="30" width="30" height="14" rx="7" fill="#fff" stroke="#0c0c0e" stroke-width="2"/><rect x="120" y="26" width="30" height="14" rx="7" fill="#22c79b" stroke="#0c0c0e" stroke-width="2"/></g></svg>
+<h3><span lang="tr">zira</span> · 500 мг</h3>
+<button type="button" class="z-btn z-btn--dark" data-open data-ui>Открыть коробку</button>
+<div class="z-insert" data-leaf data-ui hidden></div>
+</article>
+<article class="z-pack" data-pk="a">
+<svg class="z-box" viewBox="0 0 220 200" aria-hidden="true"><g class="z-boxbody"><path d="M30 70l80-30 80 30v100l-80 30-80-30Z" fill="#fff" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><path d="M110 100v100M30 70l80 30 80-30" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><path d="M30 70l80 30v100l-80-30Z" fill="#ef8a7f" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><text x="70" y="146" text-anchor="middle" font-size="15" font-weight="800" transform="rotate(20 70 146)">aksi hâlde</text><path d="M140 130h22M151 119v22" stroke="#ef8a7f" stroke-width="7" stroke-linecap="round"/></g><g class="z-lid"><path d="M30 70l80-30 80 30-80 30Z" fill="#c24f40" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/></g><g class="z-pops"><rect x="92" y="40" width="36" height="16" rx="8" fill="#ef8a7f" stroke="#0c0c0e" stroke-width="2"/><rect x="70" y="30" width="30" height="14" rx="7" fill="#fff" stroke="#0c0c0e" stroke-width="2"/><rect x="120" y="26" width="30" height="14" rx="7" fill="#ef8a7f" stroke="#0c0c0e" stroke-width="2"/></g></svg>
+<h3><span lang="tr">aksi hâlde</span> · 250 мг</h3>
+<button type="button" class="z-btn z-btn--dark" data-open data-ui>Открыть коробку</button>
+<div class="z-insert" data-leaf data-ui hidden></div>
+</article>
+<article class="z-pack" data-pk="c">
+<svg class="z-box" viewBox="0 0 220 200" aria-hidden="true"><g class="z-boxbody"><path d="M30 70l80-30 80 30v100l-80 30-80-30Z" fill="#fff" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><path d="M110 100v100M30 70l80 30 80-30" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><path d="M30 70l80 30v100l-80-30Z" fill="#7189f6" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/><text x="70" y="146" text-anchor="middle" font-size="16" font-weight="800" fill="#fff" transform="rotate(20 70 146)">açıkçası</text><path d="M140 130h22M151 119v22" stroke="#7189f6" stroke-width="7" stroke-linecap="round"/></g><g class="z-lid"><path d="M30 70l80-30 80 30-80 30Z" fill="#3a52d4" stroke="#0c0c0e" stroke-width="3" stroke-linejoin="round"/></g><g class="z-pops"><rect x="92" y="40" width="36" height="16" rx="8" fill="#7189f6" stroke="#0c0c0e" stroke-width="2"/><rect x="70" y="30" width="30" height="14" rx="7" fill="#fff" stroke="#0c0c0e" stroke-width="2"/><rect x="120" y="26" width="30" height="14" rx="7" fill="#7189f6" stroke="#0c0c0e" stroke-width="2"/></g></svg>
+<h3><span lang="tr">açıkçası</span> · 100 мг</h3>
+<button type="button" class="z-btn z-btn--dark" data-open data-ui>Открыть коробку</button>
+<div class="z-insert" data-leaf data-ui hidden></div>
+</article>
 </div>
 </div>
 </section>
@@ -1161,6 +1241,7 @@ acik: { q: 'Как сказать «Честно говоря, я устал»?'
 compare: { q: '«Я вижу это иначе» — какое слово нужно?', o: ['farklı', 'aksi hâlde'], ok: 0, y: 'Да. «Иначе» = «по-другому» = farklı.', n: 'Нет. Aksi hâlde грозит последствием, а тут просто «по-другому».' },
 tree: { q: 'Официальное письмо. Объясняешь причину. Что берёшь?', o: ['zira', 'yoksa', 'açıkçası'], ok: 0, y: 'Да. Причина плюс книжный тон — zira.', n: 'Нет. Первый вопрос дерева: причина? Да — значит zira.' },
 scene: { q: '«Kartınıza para yükleyin, aksi hâlde turnikeden geçemezsiniz.» Что будет без денег на карте?', o: ['Не пройдёшь турникет', 'Проедешь бесплатно'], ok: 0, y: 'Да. Турникет не пропустит.', n: 'Нет. Aksi hâlde обещает беду, а не подарок.' },
+regmap: { q: 'Официальное письмо: «Оплатите, в противном случае…». Что берёшь?', o: ['aksi takdirde', 'yoksa'], ok: 0, y: 'Да. Правый край карты — самый официальный.', n: 'Нет. Yoksa живёт слева, в чате.' },
 traps: { q: 'Hasta değilim, ___ çok iyiyim.', o: ['aksine', 'aksi hâlde'], ok: 0, y: 'Да. «Наоборот» — aksine.', n: 'Нет. Тут «наоборот», это aksine.' },
 };
 $$('.zq').forEach((box) => {
@@ -1535,6 +1616,77 @@ G.to('.z-sun', { rotation: 90, transformOrigin: '720px 70px', ease: 'none', scro
 G.to('.z-shipg', { y: -6, rotation: 1.5, transformOrigin: '50% 100%', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-city]', start: 'top bottom', toggleActions: 'play pause resume pause' } });
 G.to('.z-sea', { x: -40, duration: 3, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-city]', start: 'top bottom', toggleActions: 'play pause resume pause' } });
 G.to('.z-sea2', { x: 40, duration: 3.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-city]', start: 'top bottom', toggleActions: 'play pause resume pause' } });
+});
+/* ---------- карта тона ---------- */
+run('regmap', () => {
+const W = [
+{ k: 'z', w: 'çünkü', x: .28, r: 0, s: 'Gelemedim, çünkü hastaydım.', ru: 'Не смог прийти, потому что болел.' },
+{ k: 'z', w: 'zira', x: .86, r: 0, s: 'Toplantıya katılamadım, zira uçağım rötar yaptı.', ru: 'Не смог присутствовать на встрече, ибо рейс задержали.' },
+{ k: 'a', w: 'yoksa', x: .14, r: 1, s: 'Çabuk ol, yoksa geç kalacağız.', ru: 'Быстрее, а то опоздаем.' },
+{ k: 'a', w: 'aksi hâlde', x: .54, r: 1, s: 'Erken çıkmalıyız, aksi hâlde trafiğe kalırız.', ru: 'Надо выйти пораньше, иначе застрянем в пробке.' },
+{ k: 'a', w: 'aksi takdirde', x: .9, r: 1, s: 'Ücret ödenmelidir, aksi takdirde kayıt iptal edilir.', ru: 'Плату нужно внести, в противном случае регистрация аннулируется.' },
+{ k: 'c', w: 'açıkçası', x: .3, r: 2, s: 'Açıkçası, çok yoruldum.', ru: 'Честно говоря, я очень устал.' },
+{ k: 'c', w: 'doğrusu', x: .58, r: 2, s: 'Doğrusu, bu filmi hiç beğenmedim.', ru: 'По правде говоря, мне совсем не понравился этот фильм.' },
+{ k: 'c', w: 'açık konuşmak gerekirse', x: .84, r: 2, s: 'Açık konuşmak gerekirse, film beklentilerimi karşılamadı.', ru: 'Если говорить откровенно, фильм не оправдал ожиданий.' },
+];
+const box = $('[data-rdots]'), out = $('[data-rout]'), tone = $('[data-rtone]'), scan = $('.z-rscan');
+out.dataset.ui = '';
+box.innerHTML = W.map((d, i) => `<button type="button" class="z-rdot" data-k="${d.k}" data-ri="${i}" lang="tr" style="left:${((110 + d.x * 560) / 680) * 100}%;top:${((70 + d.r * 110) / 380) * 100}%">${d.w}</button>`).join('');
+const dots = $$('.z-rdot', box);
+let lastKey = '', manual = false;
+const show = (t, quiet) => {
+const near = [0, 1, 2].map((r) => W.map((d, i) => [d, i]).filter(([d]) => d.r === r).sort((a, b) => Math.abs(a[0].x - t) - Math.abs(b[0].x - t))[0]);
+scan.setAttribute('x1', 110 + t * 560); scan.setAttribute('x2', 110 + t * 560);
+const key = near.map(([, i]) => i).join();
+if (key === lastKey) return;
+lastKey = key;
+dots.forEach((d) => d.classList.toggle('is-on', near.some(([, i]) => i === Number(d.dataset.ri))));
+out.innerHTML = near.map(([d]) => `<div>${say(d.s)}<span class="z-ru">${d.ru}</span></div>`).join('');
+if (G && !quiet) G.fromTo($$('.z-rdot.is-on', box), { scale: 1.3 }, { scale: 1, duration: .45, ease: 'back.out(3)' });
+};
+tone.addEventListener('input', () => { manual = true; show(Number(tone.value) / 100); });
+dots.forEach((d) => d.addEventListener('click', () => { manual = true; const w = W[Number(d.dataset.ri)]; tone.value = Math.round(w.x * 100); show(w.x); speak(w.s); }));
+show(.5, true);
+if (!G) return;
+G.from(dots, { scale: 0, rotation: () => G.utils.random(-40, 40), duration: .7, stagger: .08, ease: 'back.out(3)', scrollTrigger: { trigger: '[data-rmap]', start: 'top 75%', once: true } });
+G.from('.z-rband', { scaleX: 0, transformOrigin: '0% 50%', duration: .9, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '[data-rmap]', start: 'top 85%', once: true } });
+const o = { t: .1 };
+G.to(o, { t: .9, ease: 'none', onUpdate: () => { if (manual) return; tone.value = Math.round(o.t * 100); show(o.t, true); }, scrollTrigger: { trigger: '[data-rmap]', start: 'top 70%', end: 'bottom 40%', scrub: true } });
+});
+/* ---------- упаковки-препараты ---------- */
+run('pack', () => {
+const LEAF = {
+z: [['Показания', 'Объяснить причину в серьёзном тексте: письмо, доклад, новости.'], ['Как принимать', 'результат, zira причина. Причина всегда второй.'], ['Побочные эффекты', 'В чате звучит как летопись. Там бери çünkü.'], ['Аналоги', 'çünkü — разговорный, «ибо» — русский двойник.'], ['Пример', 'Sahile gitmedik, zira rüzgâr çok sertti.']],
+a: [['Показания', 'Предупредить: не сделаешь — будет плохо.'], ['Как принимать', 'совет или -malı, aksi hâlde последствие в будущем или широком времени.'], ['Побочные эффекты', 'Не путать с «по-другому» (farklı) и «наоборот» (aksine).'], ['Аналоги', 'aksi takdirde — строже, yoksa — проще.'], ['Пример', 'Erken çıkmalıyız, aksi hâlde trafiğe kalırız.']],
+c: [['Показания', 'Честное мнение, признание, неудобная правда.'], ['Как принимать', 'В начале с запятой. Можно в середине или в конце.'], ['Побочные эффекты', 'Без -sı (açıkça) значит «ясно, открыто».'], ['Аналоги', 'doğrusu, açık konuşmak gerekirse.'], ['Пример', 'Açıkçası, bu film hiç hoşuma gitmedi.']],
+};
+$$('.z-pack').forEach((pk) => {
+const k = pk.dataset.pk, leaf = $('[data-leaf]', pk), btn = $('[data-open]', pk);
+const rows = LEAF[k];
+leaf.innerHTML = `<dl>${rows.slice(0, 4).map(([t, d]) => `<div><dt>${t}</dt><dd>${d}</dd></div>`).join('')}<div><dt>${rows[4][0]}</dt><dd>${say(rows[4][1])}</dd></div></dl>`;
+let open = false;
+btn.addEventListener('click', () => {
+open = !open;
+leaf.hidden = !open;
+btn.textContent = open ? 'Закрыть коробку' : 'Открыть коробку';
+if (open) speak(rows[4][1]);
+if (!G) return;
+if (open) {
+G.to($('.z-lid', pk), { y: -46, rotation: -24, transformOrigin: '30px 70px', duration: .5, ease: 'back.out(2)' });
+G.fromTo($$('.z-pops rect', pk), { y: 30, scale: .4 }, { y: (i) => -50 - i * 14, x: (i) => (i - 1) * 30, rotation: (i) => (i - 1) * 40, scale: 1, duration: .7, stagger: .08, ease: 'back.out(2.5)' });
+G.fromTo(leaf, { scaleY: .05, rotationX: -60 }, { scaleY: 1, rotationX: 0, duration: .7, ease: 'back.out(1.6)' });
+sparks(btn, COL[k]);
+} else {
+G.to($('.z-lid', pk), { y: 0, rotation: 0, duration: .5, ease: 'bounce.out' });
+G.to($$('.z-pops rect', pk), { y: 0, x: 0, rotation: 0, scale: 1, duration: .5 });
+}
+});
+$('.z-box', pk).addEventListener('click', () => btn.click());
+});
+if (!G) return;
+G.from('.z-pack', { y: 90, rotation: (i) => (i - 1) * 6, duration: .8, stagger: .12, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.z-packs', start: 'top 85%', once: true } });
+G.to('.z-boxbody', { y: -8, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .3, scrollTrigger: { trigger: '.z-packs', start: 'top bottom', toggleActions: 'play pause resume pause' } });
+G.fromTo('.z-box', { rotation: -6 }, { rotation: 6, ease: 'none', scrollTrigger: { trigger: '.z-packs', start: 'top bottom', end: 'bottom top', scrub: true } });
 });
 /* ---------- галерея ---------- */
 run('gallery', () => {
