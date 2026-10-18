@@ -1090,9 +1090,12 @@ addEventListener('DOMContentLoaded', () => {
       gsap.fromTo($$('.tile', hs), { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: .5, stagger: .06, ease: 'back.out(2)' });
       const x = $('[data-hx]', hs);
       if (x) gsap.fromTo(x, { scale: 2, rotation: -20 }, { scale: 1, rotation: 0, duration: .7, delay: .2, ease: 'elastic.out(1, .45)' });
-      const near = innerWidth < 700 ? 0 : 18;
-      gsap.to('[data-hcl]', { x: two ? `${near}vw` : `${near + 10}vw`, duration: 1.2, ease: 'power3.out' });
-      gsap.to('[data-hcr]', { x: two ? `-${near}vw` : 0, opacity: two ? 1 : .35, duration: 1.2, ease: 'power3.out' });
+      /* машины останавливаются нос к носу: зазор считаем по реальным размерам */
+      const road = $('.hero__road').getBoundingClientRect();
+      const cw = $('[data-hcl]').offsetWidth;
+      const free = Math.max(0, road.width * .96 - cw * 2 - 16);
+      gsap.to('[data-hcl]', { x: two ? free / 2 : free, duration: 1.2, ease: 'power3.out' });
+      gsap.to('[data-hcr]', { x: two ? -free / 2 : 0, opacity: two ? 1 : .35, duration: 1.2, ease: 'power3.out' });
     }
     if (speak) say(two ? 'Ali ile Ayşe bakıştı.' : "Ali Ayşe'ye baktı.");
   }
