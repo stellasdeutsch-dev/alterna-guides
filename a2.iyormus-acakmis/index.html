@@ -460,6 +460,28 @@ mark.st { padding: 0; border-radius: 6px; }
 .hero { padding-top: clamp(52px, 8vw, 72px) !important; }
 .tree__out { margin-inline: auto; max-width: 40ch; }
 
+/* сжатие: русская фраза превращается в одно слово */
+.sq { position: relative; padding: clamp(20px, 4vw, 40px); border-radius: 32px; background: #fff; border: 2px solid var(--ink); overflow: hidden; }
+.sq__press { position: absolute; right: 18px; top: 10px; width: 90px; height: auto; }
+.sq__row { position: relative; min-height: 120px; display: grid; place-items: center; }
+.sq__row + .sq__row { border-top: 2px dashed var(--line); }
+.sq__ru { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; font-size: clamp(18px, 4.6vw, 30px); font-weight: 600; }
+.sq__ru span { display: inline-block; padding: 4px 10px; border-radius: 12px; background: var(--soft); }
+.sq__ru span:first-child { background: var(--pink); }
+.sq__tr { position: absolute; font-size: clamp(30px, 8vw, 64px); font-weight: 700; letter-spacing: -.03em; cursor: pointer; }
+.sq__meter { display: flex; align-items: center; gap: 10px; justify-content: center; margin-top: 10px; font-size: 14px; color: var(--muted); }
+.sq__meter svg { width: min(50vw, 200px); height: 16px; }
+
+/* испорченный телефон */
+.chain { position: relative; padding: 18px 0 8px; }
+.chain__line, .chain__dot { position: absolute; left: 0; right: 0; top: 18px; width: 100%; height: 150px; pointer-events: none; }
+.chain__people { position: relative; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; align-items: center; min-height: 150px; }
+.face { display: grid; justify-items: center; gap: 4px; border: 0; background: none; cursor: pointer; padding: 4px; min-height: 44px; font-size: 12px; font-weight: 700; }
+.face:nth-child(even) { margin-top: 50px; }
+.face svg { width: clamp(52px, 13vw, 96px); height: auto; }
+.face.is-done svg circle:first-child { stroke-width: 5; }
+.face.is-on { scale: 1.08; }
+
 </style>
 </head>
 <body>
@@ -864,6 +886,29 @@ mark.st { padding: 0; border-radius: 6px; }
   </div>
 </section>
 
+
+<!-- ============ SQUEEZE ============ -->
+<section data-section="squeeze" data-words="13">
+  <svg class="floater" style="top:12px;right:5%" data-speed="-30" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ear"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">Сжатие <i class="dot" aria-hidden="true" style="background:var(--salmon)"></i></p>
+    <h2>Пять слов → одно</h2>
+    <p>Крути вниз. Русская фраза сжимается в одно турецкое слово.</p>
+    <div class="sq" data-sq>
+      <svg class="sq__press" viewBox="0 0 120 60" aria-hidden="true"><rect x="10" y="4" width="100" height="22" rx="8" fill="#0c0c0e"/><rect x="52" y="26" width="16" height="22" fill="#0c0c0e"/><rect x="20" y="46" width="80" height="10" rx="5" fill="#f28b7b" stroke="#0c0c0e" stroke-width="3"/></svg>
+      <div class="sq__row" data-sq-row="0">
+        <span class="sq__ru" data-ui><span>Говорят,</span> <span>что</span> <span>он</span> <span>сейчас</span> <span>идёт</span></span>
+        <span class="sq__tr" lang="tr" data-say="geliyormuş">geliyor<span class="t-stamp">muş</span></span>
+      </div>
+      <div class="sq__row" data-sq-row="1">
+        <span class="sq__ru" data-ui><span>Говорят,</span> <span>что</span> <span>он</span> <span>завтра</span> <span>придёт</span></span>
+        <span class="sq__tr" lang="tr" data-say="gelecekmiş">gelecek<span class="t-stamp">miş</span></span>
+      </div>
+      <div class="sq__meter" data-ui><span>5 слов</span><svg viewBox="0 0 200 16" aria-hidden="true"><rect x="0" y="3" width="200" height="10" rx="5" fill="#f3f3ef"/><rect x="0" y="3" width="200" height="10" rx="5" fill="#f28b7b" data-sq-bar/></svg><span>1 слово</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ TREE ============ -->
 <section data-section="tree" data-words="41">
   <svg class="floater" style="top:10px;right:5%" data-speed="-30" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-eye"/></svg>
@@ -979,6 +1024,33 @@ mark.st { padding: 0; border-radius: 6px; }
       <div class="city__score small muted" data-city-score data-ui>Услышано: 0 из 6</div>
     </div>
     <div class="mq" data-mq="city" data-ui></div>
+  </div>
+</section>
+
+
+<!-- ============ CHAIN ============ -->
+<section data-section="chain" data-words="23" style="background:var(--soft)">
+  <svg class="floater" style="top:12px;right:5%" data-speed="30" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-car"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">Испорченный телефон <i class="dot" aria-hidden="true" style="background:var(--pink-2)"></i></p>
+    <h2>Мурат покупает машину</h2>
+    <p>Первая соседка видела сама — без штампа. Дальше каждый ставит штамп и чуть-чуть добавляет. Нажимай на соседей по порядку.</p>
+    <div class="chain" data-chain>
+      <svg class="chain__line" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true"><path id="chain-path" d="M60 110 C 180 10, 260 210, 380 110 S 580 10, 620 110 S 820 210, 940 110" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-dasharray="8 8" data-chain-path/></svg>
+      <div class="chain__people">
+        <button type="button" class="face" data-face-i="0" aria-label="Селин"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" fill="#c4e6f0" stroke="#0c0c0e" stroke-width="3"/><circle cx="30" cy="36" r="4"/><circle cx="50" cy="36" r="4"/><path d="M28 52c6 6 18 6 24 0" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-linecap="round"/><use href="#i-eye" x="50" y="0" width="28" height="28"/></svg><span>Selin</span></button>
+        <button type="button" class="face" data-face-i="1" aria-label="Айше"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" fill="#f8cbe6" stroke="#0c0c0e" stroke-width="3"/><circle cx="30" cy="36" r="4"/><circle cx="50" cy="36" r="4"/><path d="M30 52h20" stroke="#0c0c0e" stroke-width="3" stroke-linecap="round"/><use href="#i-ear" x="50" y="0" width="28" height="28"/></svg><span>Ayşe</span></button>
+        <button type="button" class="face" data-face-i="2" aria-label="Кемаль"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" fill="#dbf5a4" stroke="#0c0c0e" stroke-width="3"/><circle cx="30" cy="36" r="4"/><circle cx="50" cy="36" r="4"/><path d="M28 50c8 8 16-6 24 2" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-linecap="round"/><path d="M24 24c8-6 24-6 32 0" fill="none" stroke="#0c0c0e" stroke-width="3"/></svg><span>Kemal</span></button>
+        <button type="button" class="face" data-face-i="3" aria-label="Тётя Фатма"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" fill="#f28b7b" stroke="#0c0c0e" stroke-width="3"/><circle cx="30" cy="36" r="5"/><circle cx="50" cy="36" r="5"/><ellipse cx="40" cy="54" rx="8" ry="6" fill="#0c0c0e"/><path d="M14 30c4-14 48-14 52 0" fill="none" stroke="#0c0c0e" stroke-width="4"/></svg><span lang="tr">Fatma Teyze</span></button>
+        <button type="button" class="face" data-face-i="4" aria-label="Мурат"><svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="34" fill="#fff" stroke="#0c0c0e" stroke-width="3"/><circle cx="30" cy="36" r="4"/><circle cx="50" cy="36" r="4"/><path d="M30 54c4-4 16-4 20 0" fill="none" stroke="#0c0c0e" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="62" r="9" fill="none" stroke="#0c0c0e" stroke-width="3"/><circle cx="20" cy="62" r="9" fill="none" stroke="#0c0c0e" stroke-width="3"/></svg><span>Murat</span></button>
+      </div>
+      <svg class="chain__dot" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true"><g data-chain-dot><circle r="14" fill="#f28b7b" stroke="#0c0c0e" stroke-width="3"/></g></svg>
+    </div>
+    <div class="bubble" aria-live="polite" data-chain-bubble>
+      <div class="bubble__who" data-ui>Начни с Селин</div>
+      <div class="bubble__tr" lang="tr" data-chain-tr>…</div>
+      <div class="ru" data-chain-ru data-ui></div>
+    </div>
   </div>
 </section>
 
@@ -2116,6 +2188,80 @@ addEventListener('DOMContentLoaded', () => {
     addEventListener('load', refresh);
     addEventListener('orientationchange', refresh);
     if (document.fonts) document.fonts.ready.then(refresh);
+  }
+
+  /* ---------- SQUEEZE: фраза сжимается по скроллу ---------- */
+  if (A) {
+    $$('.sq__row').forEach((row, k) => {
+      const words = $$('.sq__ru span', row), tr = $('.sq__tr', row);
+      const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 85%', end: 'center 40%', scrub: .6 } });
+      tl.fromTo(tr, { scale: .2, opacity: 0, y: 30 }, { scale: .2, opacity: 0, y: 30, duration: .1 })
+        .to(words, { x: (i) => (2 - i) * 40, scale: .3, opacity: 0, rotation: (i) => (i - 2) * 20, stagger: .05, duration: .6, ease: 'power2.in' }, .1)
+        .to(tr, { scale: 1, opacity: 1, y: 0, duration: .4, ease: 'back.out(2)' }, .55)
+        .fromTo($('.t-stamp', tr), { y: -80, rotation: -30 }, { y: 0, rotation: 0, duration: .3, ease: 'bounce.out' }, .8);
+    });
+    gsap.fromTo('[data-sq-bar]', { attr: { width: 200 } }, { attr: { width: 40 }, ease: 'none', scrollTrigger: { trigger: '[data-sq]', start: 'top 80%', end: 'bottom 50%', scrub: true } });
+    gsap.fromTo('.sq__press', { y: -20 }, { y: 6, duration: .5, yoyo: true, repeat: -1, ease: 'power2.in', scrollTrigger: { trigger: '[data-sq]', start: 'top bottom', toggleActions: 'play pause resume pause' } });
+  }
+
+  /* ---------- CHAIN: испорченный телефон ---------- */
+  const CHAIN = [
+    ['Selin · видела сама', 'Murat yeni bir araba alıyor.', 'Мурат покупает новую машину. Я сама видела.'],
+    ['Ayşe · слышала от Селин', 'Murat yeni bir araba alıyormuş.', 'Говорят, Мурат покупает новую машину.'],
+    ['Kemal · слышал от Айше', 'Murat iki araba alacakmış.', 'Говорят, Мурат купит две машины.'],
+    ['Fatma Teyze · слышала от Кемаля', 'Murat bir galeri açacakmış!', 'Говорят, Мурат откроет автосалон!'],
+    ['Murat · сам', 'Ben mi? Ben bisiklet aldım.', 'Я? Я купил велосипед.'],
+  ];
+  const cdot = $('[data-chain-dot]');
+  const cpath = $('#chain-path');
+  const chainPos = { t: 0 };
+  /* точка-штамп едет по пунктиру: оба SVG в одной системе координат */
+  function placeDot() {
+    const L = cpath.getTotalLength();
+    const pt = cpath.getPointAtLength(L * chainPos.t);
+    cdot.setAttribute('transform', `translate(${pt.x} ${pt.y})`);
+  }
+  function chainGo(i) {
+    const [who, tr, ru] = CHAIN[i];
+    $$('.face').forEach((f, k) => { f.classList.toggle('is-on', k === i); if (k <= i) f.classList.add('is-done'); });
+    $('[data-chain-bubble] .bubble__who').textContent = who;
+    $('[data-chain-tr]').innerHTML = esc(tr).replace(/(muş|miş|mış)([.!])/, '<mark class="st">$1</mark>$2');
+    $('[data-chain-tr]').setAttribute('data-say', tr);
+    $('[data-chain-ru]').textContent = ru;
+    say(tr);
+    if (A) {
+      gsap.to(chainPos, { t: i / 4, duration: .9, ease: 'power1.inOut', onUpdate: placeDot });
+      gsap.fromTo($$('.face svg')[i], { rotation: -12, scale: .8 }, { rotation: 0, scale: 1, duration: .8, ease: 'elastic.out(1, .4)' });
+      gsap.fromTo('[data-chain-bubble]', { y: 14, scale: .96 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)' });
+    }
+    if (i === 4) spark($('[data-chain-bubble]'), 22);
+    if (!A) { chainPos.t = i / 4; placeDot(); }
+  }
+  $$('.face').forEach((f) => f.addEventListener('click', () => chainGo(Number(f.dataset.faceI))));
+  placeDot();
+  if (A) {
+    gsap.from('[data-chain-path]', { strokeDasharray: '0 1400', ease: 'none', scrollTrigger: { trigger: '[data-chain]', start: 'top 90%', end: 'top 40%', scrub: true } });
+    ScrollTrigger.batch('.face', { start: 'top 92%', once: true, onEnter: (els) => gsap.from(els, { y: 60, scale: .4, duration: .7, stagger: .1, ease: 'back.out(2.5)' }) });
+  }
+
+  /* ---------- ещё сцены по скроллу ---------- */
+  if (A) {
+    gsap.from('.hero__art .mascot', { rotation: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.from('.demo', { y: 30, ease: 'none', scrollTrigger: { trigger: '.demo', start: 'top 100%', end: 'top 60%', scrub: true } });
+    gsap.from('.guess', { y: 40, ease: 'none', scrollTrigger: { trigger: '[data-guess]', start: 'top 98%', end: 'top 60%', scrub: true } });
+    gsap.from('.forge__stage', { scale: .9, ease: 'none', scrollTrigger: { trigger: '[data-forge]', start: 'top 95%', end: 'top 55%', scrub: true } });
+    gsap.from('.rails', { x: -30, ease: 'none', scrollTrigger: { trigger: '[data-rails]', start: 'top 95%', end: 'top 55%', scrub: true } });
+    gsap.from('[data-cham]', { x: 80, rotation: 6, ease: 'none', scrollTrigger: { trigger: '[data-cham]', start: 'top 98%', end: 'top 50%', scrub: true } });
+    gsap.from('.tl__svg', { scaleX: .7, transformOrigin: '0% 50%', ease: 'none', scrollTrigger: { trigger: '[data-tl]', start: 'top 95%', end: 'top 50%', scrub: true } });
+    gsap.from('.faces', { y: 50, rotation: -1.5, ease: 'none', scrollTrigger: { trigger: '[data-faces]', start: 'top 98%', end: 'top 55%', scrub: true } });
+    gsap.from('.bento', { y: 50, ease: 'none', scrollTrigger: { trigger: '[data-bento]', start: 'top 98%', end: 'top 60%', scrub: true } });
+    gsap.from('.mx__panel', { rotationY: (i) => (i ? 16 : -16), transformPerspective: 900, ease: 'none', scrollTrigger: { trigger: '.mx', start: 'top 95%', end: 'top 50%', scrub: true } });
+    gsap.from('.tree svg', { scale: .92, ease: 'none', scrollTrigger: { trigger: '[data-tree]', start: 'top 95%', end: 'top 45%', scrub: true } });
+    gsap.from('.city__svg', { scale: 1.12, transformOrigin: '50% 60%', ease: 'none', scrollTrigger: { trigger: '[data-city]', start: 'top 95%', end: 'center 50%', scrub: true } });
+    gsap.from('.gal', { x: 50, ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top 90%', end: 'top 35%', scrub: true } });
+    gsap.from('.traps', { y: 40, ease: 'none', scrollTrigger: { trigger: '[data-traps]', start: 'top 98%', end: 'top 55%', scrub: true } });
+    gsap.from('[data-poster]', { rotationX: 12, transformPerspective: 1000, y: 40, ease: 'none', scrollTrigger: { trigger: '[data-section="cheat"]', start: 'top 95%', end: 'top 35%', scrub: true } });
+    gsap.from('.notice__row', { x: (i) => (i % 2 ? 40 : -40), ease: 'none', scrollTrigger: { trigger: '[data-notice]', start: 'top 98%', end: 'top 60%', scrub: true } });
   }
 
   /* ---------- свой скроллбар: мышь бежит по проводу ---------- */
