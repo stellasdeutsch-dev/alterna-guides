@@ -482,6 +482,36 @@ mark.st { padding: 0; border-radius: 6px; }
 .face.is-done svg circle:first-child { stroke-width: 5; }
 .face.is-on { scale: 1.08; }
 
+/* диаграмма 2×2 */
+.mtx { position: relative; display: grid; grid-template-columns: auto 1fr; grid-template-rows: 1fr auto; gap: 8px; }
+.mtx__y { display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.mtx__y span { flex: 1; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+.mtx__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mtx__x { grid-column: 2; display: grid; grid-template-columns: 1fr 1fr; text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.mtx__arrows { position: absolute; inset: 0 0 18px 22px; width: calc(100% - 22px); height: calc(100% - 18px); pointer-events: none; }
+.mtx__c { display: grid; gap: 6px; justify-items: start; align-content: end; min-height: clamp(130px, 22vw, 190px); padding: 14px; border-radius: 22px; border: 2px solid var(--ink); text-align: left; cursor: pointer; position: relative; overflow: hidden; }
+.mtx__c svg { width: 40px; height: 40px; position: absolute; right: 10px; top: 10px; }
+.mtx__c b { font-size: clamp(19px, 4.8vw, 32px); letter-spacing: -.02em; }
+.mtx__c .ru { font-size: 13px; }
+.mtx__c--a { background: var(--pink); } .mtx__c--b { background: var(--lav); } .mtx__c--c { background: #fff; } .mtx__c--d { background: var(--lime); }
+.mtx__c.is-on { box-shadow: 6px 6px 0 var(--ink); translate: -3px -3px; }
+
+/* поток пересказа */
+.rf { border-radius: 28px; background: #fff; border: 2px solid var(--ink); padding: clamp(8px, 2vw, 18px); overflow-x: auto; overscroll-behavior-x: contain; }
+.rf__in { min-width: 620px; }
+@media (min-width: 700px) { .rf__in { min-width: 0; } }
+.rf svg { width: 100%; height: auto; display: block; }
+.rband { fill: none; stroke-width: 16; stroke-linecap: round; opacity: .35; cursor: pointer; }
+.rband.is-on { opacity: 1; stroke-dasharray: 14 10; }
+.rnode { cursor: pointer; }
+.rnode rect { fill: #fff; stroke: #0c0c0e; stroke-width: 2; }
+.rnode.is-on rect { fill: #dbf5a4; }
+.rnode text { font: 700 16px var(--ak-font); fill: #0c0c0e; }
+
+/* Ухо и Глаз */
+.duo { margin-top: 16px; padding: 14px; border-radius: 28px; background: #fff; border: 2px solid var(--ink); }
+.duo__svg { display: block; width: min(100%, 560px); height: auto; margin: 0 auto; overflow: visible; }
+
 </style>
 </head>
 <body>
@@ -770,6 +800,29 @@ mark.st { padding: 0; border-radius: 6px; }
 </section>
 
 
+
+<!-- ============ MATRIX: 2×2 ============ -->
+<section data-section="matrix" data-words="13" style="background:var(--soft)">
+  <svg class="floater" style="top:12px;right:5%" data-speed="-30" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-clock"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">Диаграмма <i class="dot" aria-hidden="true" style="background:var(--blue)"></i></p>
+    <h2>Четыре клетки</h2>
+    <p>Два вопроса: когда и откуда знаешь. На пересечении — нужная форма.</p>
+    <div class="mtx" data-mtx>
+      <div class="mtx__y" data-ui><span>мне сказали</span><span>знаю сам</span></div>
+      <div class="mtx__grid">
+        <button type="button" class="mtx__c mtx__c--a" data-q="2"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ear"/></svg><b lang="tr">geli<span class="t-now">yor</span><span class="t-stamp">muş</span></b><span class="ru" data-ui>говорят, идёт</span></button>
+        <button type="button" class="mtx__c mtx__c--b" data-q="3"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ear"/></svg><b lang="tr">gel<span class="t-fut">ecek</span><span class="t-stamp">miş</span></b><span class="ru" data-ui>говорят, придёт</span></button>
+        <button type="button" class="mtx__c mtx__c--c" data-q="0"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-eye"/></svg><b lang="tr">geli<span class="t-now">yor</span></b><span class="ru" data-ui>идёт, вижу сам</span></button>
+        <button type="button" class="mtx__c mtx__c--d" data-q="1"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-eye"/></svg><b lang="tr">gel<span class="t-fut">ecek</span></b><span class="ru" data-ui>придёт, знаю точно</span></button>
+      </div>
+      <div class="mtx__x" data-ui><span>сейчас</span><span>потом</span></div>
+      <svg class="mtx__arrows" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M2 98 H 98" stroke="#0c0c0e" stroke-width=".6"/><path d="M2 98 V 2" stroke="#0c0c0e" stroke-width=".6"/></svg>
+    </div>
+    <div class="bubble" aria-live="polite" data-mtx-out><div class="bubble__who" data-mtx-who data-ui>Нажми на клетку</div><div class="bubble__tr" lang="tr" data-mtx-tr>…</div><div class="ru" data-mtx-ru data-ui></div></div>
+  </div>
+</section>
+
 <!-- ============ MEANING ============ -->
 <section data-section="meaning" data-words="40">
   <svg class="floater" style="top:12px;right:5%" data-speed="-30" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-eye"/></svg>
@@ -791,6 +844,28 @@ mark.st { padding: 0; border-radius: 6px; }
         </div>
       </div>
       <div class="chips" data-ui><button type="button" class="chip" data-face-more>Ещё пример →</button></div>
+    </div>
+    <div class="duo" aria-hidden="true">
+      <svg viewBox="0 0 520 220" class="duo__svg">
+        <rect x="0" y="190" width="520" height="8" rx="4" fill="#0c0c0e"/>
+        <g data-duo-ear>
+          <circle cx="130" cy="110" r="70" fill="#f8cbe6"/>
+          <path d="M95 160c-20-22-26-58-10-88 18-32 62-46 96-28 32 18 40 58 22 88-10 16-26 20-28 38-2 22-16 32-36 30-22-2-30-18-24-34" fill="#fff" stroke="#0c0c0e" stroke-width="5" stroke-linecap="round"/>
+          <path d="M120 96c10-18 40-18 48 0 6 14-4 30-18 32" fill="none" stroke="#0c0c0e" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="118" cy="122" r="7" fill="#0c0c0e"/><circle cx="150" cy="128" r="7" fill="#0c0c0e"/>
+          <path d="M60 60c-14 6-22 18-22 32M44 44c-22 10-34 30-34 52" fill="none" stroke="#5b8cf6" stroke-width="5" stroke-linecap="round" data-duo-waves/>
+          <text x="130" y="216" text-anchor="middle" font-size="24" font-weight="800" fill="#d4533f" lang="tr">-mış</text>
+        </g>
+        <g data-duo-eye>
+          <circle cx="390" cy="110" r="70" fill="#dbf5a4"/>
+          <path d="M320 110c20-34 46-52 70-52s50 18 70 52c-20 34-46 52-70 52s-50-18-70-52z" fill="#fff" stroke="#0c0c0e" stroke-width="5" stroke-linejoin="round"/>
+          <circle cx="390" cy="110" r="24" fill="#0c0c0e" data-duo-pupil/><circle cx="398" cy="102" r="7" fill="#fff"/>
+          <path d="M330 72l-16-14M390 52V32M450 72l16-14" stroke="#0c0c0e" stroke-width="5" stroke-linecap="round" data-duo-lash/>
+          <text x="390" y="216" text-anchor="middle" font-size="24" font-weight="800" fill="#0c0c0e" lang="tr">-yor</text>
+        </g>
+        <path d="M230 110c20-16 40-16 60 0" fill="none" stroke="#0c0c0e" stroke-width="4" stroke-dasharray="6 6"/>
+        <text x="260" y="92" text-anchor="middle" font-size="26" font-weight="800" fill="#0c0c0e">vs</text>
+      </svg>
     </div>
     <p style="margin-top:14px">Форма одна. Значение подскажет ситуация. Удивление обычно видно по «Aaa» и восклицательному знаку.</p>
   </div>
@@ -852,6 +927,30 @@ mark.st { padding: 0; border-radius: 6px; }
     </div>
     <p style="margin-top:16px">Порядок как в очереди: корень, «не», время, штамп, лицо. Никто не лезет вперёд.</p>
     <div class="mq" data-mq="minus" data-ui></div>
+  </div>
+</section>
+
+
+<!-- ============ RFLOW: чужие слова → пересказ ============ -->
+<section data-section="rflow" data-words="16">
+  <svg class="floater" style="top:12px;right:5%" data-speed="30" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-ear"/></svg>
+  <div class="wrap">
+    <p class="eyebrow">Поток <i class="dot" aria-hidden="true" style="background:var(--mint)"></i></p>
+    <h2>Чужие слова → пересказ</h2>
+    <p>Слева то, что сказал Али. Справа — как ты передаёшь. Нажимай на ленты.</p>
+    <div class="rf" data-rf><div class="rf__in">
+      <svg viewBox="0 0 760 400" aria-label="Диаграмма: прямая речь превращается в пересказ через штамп">
+        <text x="20" y="26" font-size="13" font-weight="700" fill="#64646c" letter-spacing="2" data-ui>АЛИ ГОВОРИТ</text>
+        <text x="740" y="26" font-size="13" font-weight="700" fill="#64646c" letter-spacing="2" text-anchor="end" data-ui>ТЫ ПЕРЕДАЁШЬ</text>
+        <g data-rf-bands></g>
+        <rect x="350" y="40" width="60" height="350" rx="30" fill="#f28b7b" stroke="#0c0c0e" stroke-width="3" stroke-dasharray="10 7"/>
+        <text x="380" y="222" text-anchor="middle" font-size="26" font-weight="800" fill="#2b0d07" transform="rotate(-90 380 215)" lang="tr">-mış</text>
+        <g data-rf-left></g>
+        <g data-rf-right></g>
+      </svg>
+    </div></div>
+    <p class="small muted city__hint" data-ui>← листай схему →</p>
+    <div class="bubble" aria-live="polite"><div class="bubble__who" data-rf-who data-ui>Нажми на ленту</div><div class="bubble__tr" lang="tr" data-rf-tr>…</div><div class="ru" data-rf-ru data-ui></div></div>
   </div>
 </section>
 
@@ -2386,6 +2485,111 @@ addEventListener('DOMContentLoaded', () => {
     });
     show();
   })();
+});
+
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const A = !!G && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { if (window.AlternaKit) window.AlternaKit.speak(t); };
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const NS = 'http://www.w3.org/2000/svg';
+  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.append(e); return e; };
+  const stamp = (s) => esc(s).replace(/(muş|miş|mış)(lar)?([.!?])?$/, '<mark class="st">$1</mark>$2$3');
+  const vis = (el, on, off) => { if (!el || !('IntersectionObserver' in window)) { on(); return; } new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? on() : off()))).observe(el); };
+
+  /* ---------- MATRIX: когда × откуда знаешь ---------- */
+  const MTX = [
+    ['Сейчас · знаю сам', 'Bak, Ali geliyor.', 'Смотри, Али идёт. Я его вижу.'],
+    ['Потом · знаю сам', 'Ali yarın gelecek.', 'Али завтра придёт. Это точно: билеты куплены.'],
+    ['Сейчас · мне сказали', 'Ali geliyormuş.', 'Говорят, Али идёт.'],
+    ['Потом · мне сказали', 'Ali yarın gelecekmiş.', 'Говорят, Али завтра придёт.'],
+  ];
+  const cells = $$('.mtx__c');
+  function mtxGo(q, speak) {
+    const [who, tr, ru] = MTX[q];
+    cells.forEach((c) => c.classList.toggle('is-on', Number(c.dataset.q) === q));
+    $('[data-mtx-who]').textContent = who;
+    $('[data-mtx-tr]').innerHTML = stamp(tr);
+    $('[data-mtx-tr]').setAttribute('data-say', tr);
+    $('[data-mtx-ru]').textContent = ru;
+    if (A) {
+      const c = cells.find((x) => Number(x.dataset.q) === q);
+      gsap.fromTo($('svg', c), { rotation: -30, scale: .5 }, { rotation: 0, scale: 1, duration: .8, ease: 'elastic.out(1, .4)' });
+      gsap.fromTo('[data-mtx-out]', { y: 12, scale: .97 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2)' });
+    }
+    if (speak) say(tr);
+  }
+  cells.forEach((c) => c.addEventListener('click', () => mtxGo(Number(c.dataset.q), true)));
+  if (A) {
+    gsap.from(cells, { x: (i) => (i % 2 ? 120 : -120), y: (i) => (i < 2 ? -60 : 60), rotation: (i) => (i % 2 ? 8 : -8), ease: 'none', scrollTrigger: { trigger: '[data-mtx]', start: 'top 95%', end: 'top 45%', scrub: true } });
+    gsap.from('.mtx__arrows path', { strokeDasharray: '0 200', ease: 'none', scrollTrigger: { trigger: '[data-mtx]', start: 'top 90%', end: 'top 50%', scrub: true } });
+    ScrollTrigger.create({ trigger: '[data-mtx]', start: 'top 55%', once: true, onEnter: () => { let k = 0; const t = setInterval(() => { mtxGo([0, 1, 2, 3][k++]); if (k > 3) clearInterval(t); }, 900); } });
+  } else mtxGo(2);
+
+  /* ---------- RFLOW: прямая речь → пересказ ---------- */
+  const RF = [
+    ['«Geliyorum.»', 'Ali geliyormuş.', 'Али: «Я иду». Ты: говорят, Али идёт.', '#5b8cf6'],
+    ['«Geleceğim.»', 'Ali gelecekmiş.', 'Али: «Я приду». Ты: говорят, Али придёт.', '#22cfa2'],
+    ['«Gelmiyorum.»', 'Ali gelmiyormuş.', 'Али: «Я не иду». Ты: говорят, не идёт.', '#8a3aa8'],
+    ['«Gelmeyeceğim.»', 'Ali gelmeyecekmiş.', 'Али: «Я не приду». Ты: говорят, не придёт.', '#f39fd0'],
+    ['«Geliyoruz.»', 'Geliyorlarmış.', 'Али и Элиф: «Мы идём». Ты: говорят, они идут.', '#f28b7b'],
+  ];
+  const bands = [], ln = [], rn = [];
+  RF.forEach(([src, out, , col], i) => {
+    const y = 70 + i * 66, mid = 110 + i * 48;
+    const p = mk('path', { class: 'rband', d: `M210 ${y} C 300 ${y}, 290 ${mid}, 380 ${mid} S 460 ${y}, 550 ${y}`, stroke: col }, $('[data-rf-bands]'));
+    const gl = mk('g', { class: 'rnode', role: 'button', tabindex: '0', 'aria-label': src }, $('[data-rf-left]'));
+    mk('rect', { x: 14, y: y - 21, width: 196, height: 42, rx: 14 }, gl);
+    mk('text', { x: 28, y: y + 6, lang: 'tr' }, gl).textContent = src;
+    const gr = mk('g', { class: 'rnode', role: 'button', tabindex: '0', 'aria-label': out }, $('[data-rf-right]'));
+    mk('rect', { x: 550, y: y - 21, width: 196, height: 42, rx: 14 }, gr);
+    mk('text', { x: 564, y: y + 6, lang: 'tr' }, gr).textContent = out;
+    bands.push(p); ln.push(gl); rn.push(gr);
+    [p, gl, gr].forEach((el) => {
+      el.addEventListener('click', () => rfGo(i, true));
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); rfGo(i, true); } });
+    });
+  });
+  let rfT = null;
+  function rfGo(i, speak) {
+    const [src, out, ru] = RF[i];
+    [bands, ln, rn].forEach((arr) => arr.forEach((el, k) => el.classList.toggle('is-on', k === i)));
+    $('[data-rf-who]').textContent = `Али говорит ${src}`;
+    $('[data-rf-tr]').innerHTML = stamp(out);
+    $('[data-rf-tr]').setAttribute('data-say', out);
+    $('[data-rf-ru]').textContent = ru;
+    if (A) {
+      if (rfT) rfT.kill();
+      rfT = gsap.fromTo(bands[i], { strokeDashoffset: 0 }, { strokeDashoffset: -48, duration: .8, repeat: -1, ease: 'none' });
+      gsap.fromTo(rn[i], { x: 24 }, { x: 0, duration: .6, ease: 'back.out(2.5)' });
+    }
+    if (speak) say(out);
+  }
+  if (A) {
+    gsap.from(bands, { strokeDasharray: '0 900', stagger: .08, ease: 'none', scrollTrigger: { trigger: '[data-rf]', start: 'top 90%', end: 'top 35%', scrub: true } });
+    ScrollTrigger.batch('[data-rf-left] .rnode', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { x: -60, duration: .6, stagger: .07, ease: 'back.out(2)' }) });
+    ScrollTrigger.batch('[data-rf-right] .rnode', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { x: 60, duration: .6, stagger: .07, ease: 'back.out(2)' }) });
+    ScrollTrigger.create({ trigger: '[data-rf]', start: 'top 60%', once: true, onEnter: () => rfGo(0) });
+  } else rfGo(0);
+
+  /* ---------- Ухо и Глаз ---------- */
+  if (A) {
+    const loops = [
+      gsap.to('[data-duo-waves]', { scale: 1.15, opacity: .3, transformOrigin: '100% 50%', duration: .8, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
+      gsap.to('[data-duo-pupil]', { x: 10, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
+      gsap.to('[data-duo-ear]', { rotation: -4, transformOrigin: '130px 190px', duration: 1.6, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
+      gsap.to('[data-duo-eye]', { y: -6, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
+    ];
+    vis($('.duo'), () => loops.forEach((l) => l.play()), () => loops.forEach((l) => l.pause()));
+    gsap.from('[data-duo-ear]', { x: -120, ease: 'none', scrollTrigger: { trigger: '.duo', start: 'top 95%', end: 'top 55%', scrub: true } });
+    gsap.from('[data-duo-eye]', { x: 120, ease: 'none', scrollTrigger: { trigger: '.duo', start: 'top 95%', end: 'top 55%', scrub: true } });
+    $$('[data-face]').forEach((b) => b.addEventListener('click', () => {
+      const hear = b.dataset.face === 'hear';
+      gsap.fromTo(hear ? '[data-duo-ear]' : '[data-duo-eye]', { scale: 1.12, transformOrigin: hear ? '130px 110px' : '390px 110px' }, { scale: 1, duration: .7, ease: 'elastic.out(1, .4)' });
+    }));
+  }
 });
 
 </script>
