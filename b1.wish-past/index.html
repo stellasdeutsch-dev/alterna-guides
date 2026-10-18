@@ -483,6 +483,47 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 /* декоративная антиква — только для турецкого; русские акценты — курсивом Rubik */
 .it:not([lang="tr"]) { font-family: var(--ak-font); font-style: italic; font-weight: 850; letter-spacing: -.035em; }
 .sb__track { background: rgba(240, 87, 63, .28); }
+
+/* торт в разрезе */
+.explode { margin-top: 36px; padding: clamp(18px, 4vw, 30px); border-radius: 28px; background: #fffaf0; box-shadow: var(--shadow); }
+.explode__svg { width: 100%; max-width: 640px; display: block; margin: 0 auto 12px; }
+/* картинки-сожаления */
+.pics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+@media (min-width: 900px) { .pics { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.pic { display: grid; gap: 4px; padding: 0 0 12px; border: 0; border-radius: 20px; overflow: hidden; background: var(--cream); color: var(--wine); text-align: left; cursor: pointer; }
+.pic svg { width: 100%; display: block; aspect-ratio: 4 / 3; }
+.pic__tr { padding: 0 12px; font-family: var(--serif); font-style: italic; font-weight: 800; font-size: 16px; line-height: 1.2; }
+.pic__ru { padding: 0 12px; font-size: 13px; color: var(--muted); }
+/* матрица */
+.matrix { margin-top: 30px; }
+.mx { position: relative; padding: 34px 10px; }
+.mx__svg { position: absolute; inset: 24px 0; width: 100%; height: calc(100% - 48px); pointer-events: none; }
+.mx__grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+.mx__c { display: grid; gap: 6px; min-height: 110px; padding: 14px; border: 0; border-radius: 18px; text-align: left; cursor: pointer; font-family: var(--serif); font-style: italic; font-weight: 800; font-size: clamp(17px, 4.4vw, 22px); color: var(--wine); align-content: center; }
+.mx__c small { font-family: var(--ak-font); font-style: normal; font-weight: 500; font-size: 13px; color: var(--muted); }
+.mx__c--a { background: var(--lime-2); } .mx__c--b { background: #f3e1c2; } .mx__c--c { background: var(--sky-2); } .mx__c--d { background: var(--tomato-2); }
+.mx__c[aria-pressed="true"] { box-shadow: inset 0 0 0 3px var(--wine); }
+.mx__ax { position: absolute; font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.mx__ax--top { top: 6px; left: 50%; translate: -50% 0; } .mx__ax--bot { bottom: 6px; left: 50%; translate: -50% 0; }
+.mx__ax--l { left: 0; top: 10px; } .mx__ax--r { right: 0; top: 10px; }
+/* схема потоков */
+.flow { margin-top: 30px; padding: clamp(16px, 4vw, 28px); border-radius: 28px; background: #fffaf0; box-shadow: var(--shadow); }
+.flow__svg { width: 100%; height: auto; display: block; }
+.flow__src { cursor: pointer; }
+.flow__src:focus-visible { outline: none; }
+.flow__src:focus-visible rect { stroke: var(--tomato); stroke-width: 4; }
+.flow__out { font-family: var(--serif); font-style: italic; font-weight: 850; font-size: clamp(22px, 6vw, 32px); margin: 10px 0 2px; cursor: pointer; }
+/* карта Антальи */
+.amap { margin-top: 20px; border-radius: 28px; overflow: hidden; box-shadow: var(--shadow); background: #fffaf0; }
+.amap__svg { display: block; width: 100%; height: auto; }
+.apin { cursor: pointer; }
+.apin:focus-visible { outline: none; }
+.apin:focus-visible circle { stroke: var(--tomato); stroke-width: 5; }
+.amap__card { padding: 14px 20px 18px; }
+.amap__place { font-weight: 800; margin: 0 0 4px; }
+.amap__tr { font-family: var(--serif); font-style: italic; font-weight: 850; font-size: clamp(19px, 5vw, 26px); margin: 0 0 4px; cursor: pointer; }
+.mside--ru { color: var(--cream); }
+.mside--ru .big { color: var(--cream); }
 </style>
 </head>
 <body>
@@ -589,7 +630,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 </section>
 
 <!-- ============ 3. РЕЦЕПТ: ТОРТ ИЗ ЧЕТЫРЁХ СЛОЁВ ============ -->
-<section data-section="recipe" data-words="59" class="sec">
+<section data-section="recipe" data-words="70" class="sec">
   <div class="wrap">
     <span class="label" data-ui><svg class="lbl-ch" viewBox="0 0 20 26" aria-hidden="true"><path d="M10 2c2 4 1 8-3 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="18" r="7" fill="#f0573f"/></svg>рецепт</span>
     <h2>Форма — это <span class="it">торт</span> в четыре слоя</h2>
@@ -630,6 +671,24 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
         <p class="scenelet">Ты строишь форму как кондитер. Слой за слоем. Ничего не плавится, ничего не меняется местами.</p>
       </div>
     </div>
+    <div class="explode">
+      <h3>Торт в разрезе</h3>
+      <svg viewBox="0 0 640 420" class="explode__svg" data-explode role="img" aria-label="Схема формы gelseydim в разрезе">
+        <ellipse cx="250" cy="396" rx="190" ry="16" fill="#e8cfa8"/>
+        <g data-ex="0"><path d="M90 330h320v54H90z" fill="#7a3a1d"/><path d="M90 330c40 10 80 10 120 0s80 10 120 0 60 10 80 0" stroke="#fdefd6" stroke-width="6" fill="none"/><text x="250" y="366" text-anchor="middle" font-family="Rubik,sans-serif" font-size="26" font-weight="900" fill="#fdefd6">gel</text></g>
+        <g data-ex="1"><path d="M100 270h300v54H100z" fill="#dbe86a"/><text x="250" y="306" text-anchor="middle" font-family="Rubik,sans-serif" font-size="26" font-weight="900" fill="#5c0f1a">se</text></g>
+        <g data-ex="2"><path d="M110 210h280v54H110z" fill="#aac6ec"/><text x="250" y="246" text-anchor="middle" font-family="Rubik,sans-serif" font-size="26" font-weight="900" fill="#5c0f1a">ydi</text></g>
+        <g data-ex="3"><path d="M250 160c4-26 20-44 42-52" fill="none" stroke="#3f0911" stroke-width="5" stroke-linecap="round"/><circle cx="250" cy="176" r="28" fill="#f0573f"/><text x="250" y="186" text-anchor="middle" font-family="Rubik,sans-serif" font-size="26" font-weight="900" fill="#fff">m</text></g>
+        <g data-exl stroke="#5c0f1a" stroke-width="2" fill="none" stroke-dasharray="4 5"><path d="M410 357h70"/><path d="M400 297h80"/><path d="M390 237h90"/><path d="M278 176h202"/></g>
+        <g font-family="Rubik,sans-serif" fill="#5c0f1a" data-exlab>
+          <text x="490" y="352" font-size="17" font-weight="800">корень</text><text x="490" y="372" font-size="13">глагол без -mak</text>
+          <text x="490" y="292" font-size="17" font-weight="800">-sa / -se</text><text x="490" y="312" font-size="13">желание</text>
+          <text x="490" y="232" font-size="17" font-weight="800">-ydı / -ydi</text><text x="490" y="252" font-size="13">вагон в прошлое</text>
+          <text x="490" y="171" font-size="17" font-weight="800">лицо</text><text x="490" y="191" font-size="13">кто жалеет</text>
+        </g>
+      </svg>
+      <button type="button" class="btn btn--sm" data-explode-btn>⇕ <span data-ui>разобрать и собрать</span></button>
+    </div>
   </div>
 </section>
 
@@ -651,7 +710,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 <div class="scallop" aria-hidden="true"></div>
 
 <!-- ============ 5. ЧЕК СОЖАЛЕНИЙ ============ -->
-<section data-section="regret" data-words="59" class="sec sec--wine">
+<section data-section="regret" data-words="62" class="sec sec--wine">
   <div class="wrap">
     <span class="label" data-ui><svg class="lbl-ch" viewBox="0 0 20 26" aria-hidden="true"><path d="M10 2c2 4 1 8-3 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="18" r="7" fill="#f0573f"/></svg>значение №1</span>
     <h2>Чек <span class="it">сожалений</span></h2>
@@ -687,6 +746,25 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
         </div>
       </div>
     </div>
+    <h3 style="margin-top:40px">Четыре маленьких сожаления</h3>
+    <div class="pics">
+      <button type="button" class="pic" data-say="Keşke şemsiye alsaydım.">
+        <svg viewBox="0 0 240 180" aria-hidden="true"><rect width="240" height="180" fill="#aac6ec"/><path d="M0 150h240v30H0z" fill="#5c0f1a"/><g data-rain><path d="M20 10l-6 16M60 0l-6 16M100 14l-6 16M140 4l-6 16M180 12l-6 16M220 2l-6 16M40 40l-6 16M120 44l-6 16M200 40l-6 16" stroke="#fff" stroke-width="3" stroke-linecap="round"/></g><circle cx="120" cy="88" r="18" fill="#fdefd6"/><path d="M96 150v-34a24 24 0 0 1 48 0v34z" fill="#f0573f"/><path d="M110 88h4M126 88h4" stroke="#5c0f1a" stroke-width="3"/><path d="M114 98c4-3 8-3 12 0" stroke="#5c0f1a" stroke-width="2.5" fill="none"/></svg>
+        <span class="pic__tr" lang="tr">Keşke şemsiye alsaydım.</span><span class="pic__ru" data-ui>Жаль, что не взял зонт.</span>
+      </button>
+      <button type="button" class="pic" data-say="Keşke erken çıksaydım.">
+        <svg viewBox="0 0 240 180" aria-hidden="true"><rect width="240" height="180" fill="#dbe86a"/><path d="M0 140h240v40H0z" fill="#5c0f1a"/><g data-bus><rect x="120" y="86" width="110" height="54" rx="10" fill="#f0573f"/><rect x="132" y="96" width="24" height="18" rx="3" fill="#dce8f8"/><rect x="162" y="96" width="24" height="18" rx="3" fill="#dce8f8"/><rect x="192" y="96" width="24" height="18" rx="3" fill="#dce8f8"/><circle cx="144" cy="142" r="9" fill="#3f0911"/><circle cx="206" cy="142" r="9" fill="#3f0911"/></g><circle cx="50" cy="96" r="14" fill="#fdefd6"/><path d="M32 140v-26a18 18 0 0 1 36 0v26z" fill="#5c0f1a"/><path d="M66 112l20-12" stroke="#5c0f1a" stroke-width="5" stroke-linecap="round"/></svg>
+        <span class="pic__tr" lang="tr">Keşke erken çıksaydım.</span><span class="pic__ru" data-ui>Жаль, что не вышел раньше.</span>
+      </button>
+      <button type="button" class="pic" data-say="Keşke o mesajı göndermeseydim.">
+        <svg viewBox="0 0 240 180" aria-hidden="true"><rect width="240" height="180" fill="#fcd9d1"/><rect x="80" y="20" width="80" height="146" rx="14" fill="#5c0f1a"/><rect x="88" y="34" width="64" height="118" rx="6" fill="#fdefd6"/><g data-msg><rect x="96" y="96" width="50" height="22" rx="10" fill="#f0573f"/><path d="M104 107h34" stroke="#fff" stroke-width="3"/></g><path d="M170 60l20-10M172 80h22M170 100l20 10" stroke="#5c0f1a" stroke-width="4" stroke-linecap="round" data-shock/></svg>
+        <span class="pic__tr" lang="tr">Keşke o mesajı göndermeseydim.</span><span class="pic__ru" data-ui>Жаль, что отправил то сообщение.</span>
+      </button>
+      <button type="button" class="pic" data-say="Keşke fotoğraf çekseydim.">
+        <svg viewBox="0 0 240 180" aria-hidden="true"><rect width="240" height="180" fill="#5c0f1a"/><circle cx="120" cy="120" r="40" fill="#f0573f" data-sunset/><path d="M0 120h240v60H0z" fill="#761a26"/><path d="M0 130c30-6 60 6 90 0s60-6 90 0 40 6 60 0" stroke="#aac6ec" stroke-width="4" fill="none"/><g data-cam><rect x="150" y="30" width="60" height="40" rx="8" fill="#fdefd6"/><circle cx="180" cy="50" r="12" fill="#5c0f1a"/><path d="M150 30l60 40M210 30l-60 40" stroke="#f0573f" stroke-width="4"/></g></svg>
+        <span class="pic__tr" lang="tr">Keşke fotoğraf çekseydim.</span><span class="pic__ru" data-ui>Жаль, что не сфотографировал.</span>
+      </button>
+    </div>
   </div>
 </section>
 <div class="scallop scallop--up" aria-hidden="true"></div>
@@ -716,7 +794,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 </section>
 
 <!-- ============ 7. -sA ИЛИ -sAydI: ЛИНИЯ ВРЕМЕНИ ============ -->
-<section data-section="timeline" data-words="37" class="sec">
+<section data-section="timeline" data-words="48" class="sec">
   <div class="wrap">
     <h2><span lang="tr">-sA</span> или <span class="it" lang="tr">-sAydI?</span></h2>
     <p class="lead col">Всё решает время — главный ингредиент. Пока ещё можно — хватает -sA. Когда поезд ушёл — нужен -ydı. Сейчас — живут оба, но с -ydı безнадёжнее.</p>
@@ -746,6 +824,23 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
       <li><a-say>Keşke yarın gelse.</a-say><small data-ui>Хоть бы он завтра пришёл.</small></li>
       <li><a-say>Keşke şimdi burada olsaydın.</a-say><small data-ui>Жаль, что тебя сейчас нет рядом.</small></li>
     </ul>
+    <div class="matrix">
+      <h3>Матрица: время и отрицание</h3>
+      <p>Две оси — четыре формы. Нажимай на клетки.</p>
+      <div class="mx">
+        <span class="mx__ax mx__ax--top" data-ui>ещё может быть</span>
+        <span class="mx__ax mx__ax--bot" data-ui>уже прошло</span>
+        <span class="mx__ax mx__ax--l" data-ui>хочу «да»</span>
+        <span class="mx__ax mx__ax--r" data-ui>хочу «нет»</span>
+        <svg viewBox="0 0 400 300" class="mx__svg" data-mx aria-hidden="true"><path d="M200 10v280M10 150h380" stroke="#5c0f1a" stroke-width="4"/><path d="M200 10l-8 14h16zM390 150l-14-8v16z" fill="#5c0f1a"/><circle cx="105" cy="80" r="14" fill="#f0573f" data-mx-dot/></svg>
+        <div class="mx__grid">
+          <button type="button" class="mx__c mx__c--a" data-mx="0" lang="tr" data-say="Keşke gelsem.">keşke gel<span class="p-sa">se</span>m<small data-ui>хоть бы пришёл</small></button>
+          <button type="button" class="mx__c mx__c--b" data-mx="1" lang="tr" data-say="Keşke gelmesem.">keşke gel<span class="p-me">me</span><span class="p-sa">se</span>m<small data-ui>хоть бы не пришлось идти</small></button>
+          <button type="button" class="mx__c mx__c--c" data-mx="2" lang="tr" data-say="Keşke gelseydim.">keşke gel<span class="p-sa">se</span><span class="p-di">ydi</span>m<small data-ui>жаль, что не пришёл</small></button>
+          <button type="button" class="mx__c mx__c--d" data-mx="3" lang="tr" data-say="Keşke gelmeseydim.">keşke gel<span class="p-me">me</span><span class="p-sa">se</span><span class="p-di">ydi</span>m<small data-ui>жаль, что пришёл</small></button>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -796,12 +891,39 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 </section>
 
 <!-- ============ 10. РУССКИЙ ↔ ТУРЕЦКИЙ ============ -->
-<section data-section="compare" data-words="41" class="sec">
+<section data-section="compare" data-words="59" class="sec">
   <div class="wrap">
     <h2>Русский <span class="it">↔</span> турецкий</h2>
     <p class="lead col">Переключи. Где совпадаем — лайм. Где привычка ломается — томат. Томат — твоя зона роста. Совпадений больше, чем кажется. Подвох один, но жирный.</p>
     <button type="button" class="switch" role="switch" aria-checked="false" data-cmp-switch><span data-ui>русский</span><span class="switch__k"><i></i></span><span data-ui>турецкий</span></button>
     <div class="cmp" data-cmp></div>
+    <div class="flow">
+      <h3>Схема: русская фраза → турецкая форма</h3>
+      <svg viewBox="0 0 640 360" class="flow__svg" data-flow role="img" aria-label="Схема соответствий русских фраз и турецких форм">
+        <g font-family="Rubik,sans-serif" font-size="16" font-weight="700" fill="#5c0f1a">
+          <g class="flow__src" data-fsrc="0" tabindex="0" role="button"><rect x="10" y="20" width="200" height="44" rx="22" fill="#fff7e8" stroke="#ecd3ad" stroke-width="2"/><text x="110" y="48" text-anchor="middle">хоть бы…</text></g>
+          <g class="flow__src" data-fsrc="1" tabindex="0" role="button"><rect x="10" y="90" width="200" height="44" rx="22" fill="#fff7e8" stroke="#ecd3ad" stroke-width="2"/><text x="110" y="118" text-anchor="middle">жаль, что не…</text></g>
+          <g class="flow__src" data-fsrc="2" tabindex="0" role="button"><rect x="10" y="160" width="200" height="44" rx="22" fill="#fff7e8" stroke="#ecd3ad" stroke-width="2"/><text x="110" y="188" text-anchor="middle">жаль, что…</text></g>
+          <g class="flow__src" data-fsrc="3" tabindex="0" role="button"><rect x="10" y="230" width="200" height="44" rx="22" fill="#fff7e8" stroke="#ecd3ad" stroke-width="2"/><text x="110" y="258" text-anchor="middle">если бы… бы</text></g>
+          <g class="flow__src" data-fsrc="4" tabindex="0" role="button"><rect x="10" y="300" width="200" height="44" rx="22" fill="#fff7e8" stroke="#ecd3ad" stroke-width="2"/><text x="110" y="328" text-anchor="middle">сделал бы ты!</text></g>
+        </g>
+        <g fill="none" stroke-width="10" stroke-linecap="round" opacity=".35" data-flinks>
+          <path d="M210 42C320 42 330 60 430 60" stroke="#dbe86a"/>
+          <path d="M210 112C320 112 330 160 430 160" stroke="#aac6ec"/>
+          <path d="M210 182C320 182 330 260 430 260" stroke="#f0573f"/>
+          <path d="M210 252C320 252 330 170 430 170" stroke="#aac6ec"/>
+          <path d="M210 322C320 322 330 180 430 180" stroke="#aac6ec"/>
+        </g>
+        <g font-family="Rubik,sans-serif" font-size="20" font-weight="900">
+          <rect x="430" y="36" width="190" height="48" rx="12" fill="#dbe86a"/><text x="525" y="68" text-anchor="middle" fill="#5c0f1a">-sA</text>
+          <rect x="430" y="136" width="190" height="60" rx="12" fill="#aac6ec"/><text x="525" y="174" text-anchor="middle" fill="#5c0f1a">-sAydI</text>
+          <rect x="430" y="236" width="190" height="48" rx="12" fill="#f0573f"/><text x="525" y="268" text-anchor="middle" fill="#fff">-mAsAydI</text>
+        </g>
+        <g data-fdots></g>
+      </svg>
+      <p class="flow__out" lang="tr" data-flow-out data-say="Keşke gelse.">Keşke gelse.</p>
+      <p class="ru" data-flow-ru data-ui>Хоть бы он пришёл.</p>
+    </div>
   </div>
 </section>
 <div class="scallop" aria-hidden="true"></div>
@@ -863,6 +985,32 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
     <span class="label" data-ui><svg class="lbl-ch" viewBox="0 0 20 26" aria-hidden="true"><path d="M10 2c2 4 1 8-3 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="18" r="7" fill="#f0573f"/></svg>Анталья · Калеичи</span>
     <h2>Кафе <span class="it">у старой гавани</span></h2>
     <p class="lead col">Суббота. Яхты скрипят, кошки спят, туристы спорят с картами. Официант помнит всех. Нажимай на места и слушай, как здесь жалеют. Кошки тоже жалеют. Но молча.</p>
+    <div class="amap">
+      <svg viewBox="0 0 800 400" class="amap__svg" data-amap role="img" aria-label="Карта Антальи">
+        <rect width="800" height="400" fill="#fdefd6"/>
+        <path d="M0 300C120 280 200 320 320 300S520 250 600 280 760 330 800 310V400H0z" fill="#aac6ec"/>
+        <path d="M0 316C120 296 200 336 320 316S520 266 600 296 760 346 800 326" fill="none" stroke="#fff" stroke-width="3" opacity=".7" data-awave/>
+        <text x="60" y="372" font-family="Rubik,sans-serif" font-size="18" font-weight="800" fill="#5c0f1a" lang="tr">AKDENİZ</text>
+        <path d="M0 80c80-30 160-10 240-40s200 0 300-20 180 10 260-10V0H0z" fill="#e8cfa8"/>
+        <path d="M640 40l30-30 30 30 30-20 40 30v-50H640z" fill="#c9a46a"/>
+        <g stroke="#ecd3ad" stroke-width="12" stroke-linecap="round"><path d="M80 220h640"/><path d="M380 100v180"/><path d="M560 110l60 150"/></g>
+        <path d="M120 250c120-60 220-40 300-60s180-60 260-20" fill="none" stroke="#5c0f1a" stroke-width="4" stroke-dasharray="10 10" data-aroute/>
+        <g data-plane><path d="M690 70l40-6-6 6 22 2-4 6-20-2-10 10h-8l6-10-20-2z" fill="#5c0f1a"/></g>
+        <g data-fall><path d="M560 120v40" stroke="#aac6ec" stroke-width="10" stroke-linecap="round"/></g>
+        <g data-boat><path d="M300 296h40l-8 10h-24z" fill="#f0573f"/><path d="M318 296v-22l14 18z" fill="#fff"/></g>
+        <g font-family="Rubik,sans-serif" font-size="14" font-weight="800" fill="#5c0f1a" lang="tr"><text x="440" y="262">Kaleiçi</text><text x="110" y="290">Konyaaltı</text><text x="580" y="110">Düden Şelalesi</text><text x="410" y="170">Hadrian Kapısı</text><text x="650" y="110">Havalimanı</text></g>
+        <g class="apin" data-apin="0" tabindex="0" role="button" aria-label="Калеичи"><circle cx="420" cy="250" r="20" fill="#5c0f1a"/><text x="420" y="256" text-anchor="middle" font-size="16" font-weight="900" fill="#dbe86a">1</text></g>
+        <g class="apin" data-apin="1" tabindex="0" role="button" aria-label="Коньяалты"><circle cx="90" cy="270" r="20" fill="#f0573f"/><text x="90" y="276" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">2</text></g>
+        <g class="apin" data-apin="2" tabindex="0" role="button" aria-label="Водопад Дюден"><circle cx="560" cy="170" r="20" fill="#aac6ec" stroke="#5c0f1a" stroke-width="3"/><text x="560" y="176" text-anchor="middle" font-size="16" font-weight="900" fill="#5c0f1a">3</text></g>
+        <g class="apin" data-apin="3" tabindex="0" role="button" aria-label="Ворота Адриана"><circle cx="390" cy="160" r="20" fill="#dbe86a" stroke="#5c0f1a" stroke-width="3"/><text x="390" y="166" text-anchor="middle" font-size="16" font-weight="900" fill="#5c0f1a">4</text></g>
+        <g class="apin" data-apin="4" tabindex="0" role="button" aria-label="Аэропорт"><circle cx="700" cy="120" r="20" fill="#5c0f1a"/><text x="700" y="126" text-anchor="middle" font-size="16" font-weight="900" fill="#fdefd6">5</text></g>
+      </svg>
+      <div class="amap__card" aria-live="polite">
+        <p class="amap__place" data-amap-place data-ui>1 · Калеичи</p>
+        <p class="amap__tr" lang="tr" data-amap-tr data-say="Keşke Kaleiçi'nde daha çok kalsaydık.">Keşke Kaleiçi'nde daha çok kal<span class="p-sa">sa</span><span class="p-di">ydı</span><span class="p-p">k</span>.</p>
+        <p class="ru" data-amap-ru data-ui>Жаль, что мы не остались в Калеичи подольше.</p>
+      </div>
+    </div>
     <div class="cafe">
       <svg class="cafe__art" viewBox="0 0 800 380" data-cafe role="img" aria-label="Кафе в Калеичи">
         <rect width="800" height="380" fill="#aac6ec"/>
@@ -2034,6 +2182,129 @@ addEventListener('DOMContentLoaded', () => {
     gsap.from('.scenelet', { x: -30, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: '.scenelet', start: 'top 90%', once: true } });
     ScrollTrigger.batch('.scenelet', { start: 'top 92%', once: true, onEnter: (els) => gsap.fromTo(els, { borderLeftWidth: 0 }, { borderLeftWidth: 4, duration: 0.6, ease: 'power2.out' }) });
     ScrollTrigger.batch('.lead', { start: 'top 94%', once: true, onEnter: (els) => gsap.from(els, { y: 24, duration: 0.6, ease: 'power3.out', stagger: 0.06 }) });
+  }
+
+
+  /* ===================== КАРТИНКИ И ДИАГРАММЫ ===================== */
+  /* E. торт в разрезе: слои разъезжаются по скроллу */
+  {
+    const L = $$('[data-ex]');
+    let open = false;
+    function explode(on) {
+      open = on;
+      if (!A) return;
+      L.forEach((l, i) => gsap.to(l, { y: on ? -i * 22 : 0, x: on ? i * 6 : 0, duration: 0.8, ease: 'back.out(1.6)' }));
+      gsap.to('[data-exl]', { attr: { 'stroke-dashoffset': on ? 0 : 40 }, duration: 0.8 });
+    }
+    $('[data-explode-btn]').addEventListener('click', () => explode(!open));
+    $('[data-explode]').addEventListener('click', () => explode(!open));
+    if (A) {
+      gsap.timeline({ scrollTrigger: { trigger: '[data-explode]', start: 'top 85%', end: 'center 40%', scrub: 0.6 } })
+        .fromTo(L, { y: (i) => -i * 60, rotation: (i) => (i % 2 ? 4 : -4), svgOrigin: '250 300' }, { y: 0, rotation: 0, svgOrigin: '250 300', ease: 'none', stagger: 0.05 }, 0)
+        .fromTo('[data-exl] path', { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, ease: 'none', stagger: 0.05 }, 0.2)
+        .fromTo('[data-exlab] text', { x: 30 }, { x: 0, ease: 'none', stagger: 0.03 }, 0.3);
+    }
+  }
+
+  /* F. картинки-сожаления: каждая сцена живёт своей жизнью */
+  if (A) {
+    gsap.fromTo('[data-rain]', { y: -20 }, { y: 30, duration: 0.6, ease: 'none', repeat: -1 });
+    gsap.fromTo('[data-bus]', { x: 0 }, { x: 140, duration: 2.4, ease: 'power1.in', repeat: -1, repeatDelay: 0.6 });
+    gsap.fromTo('[data-msg]', { x: 0, scale: 1, transformOrigin: '50% 50%' }, { x: 0, y: -50, scale: 0.4, duration: 1.2, ease: 'power2.in', repeat: -1, repeatDelay: 1 });
+    gsap.to('[data-shock]', { x: 6, duration: 0.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    gsap.fromTo('[data-sunset]', { y: -30 }, { y: 40, duration: 4, ease: 'sine.inOut', repeat: -1, yoyo: true });
+    gsap.to('[data-cam]', { rotation: -8, svgOrigin: '180 50', duration: 0.8, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    gsap.from('.pic', { y: 80, rotation: (i) => [-6, 4, -3, 5][i], duration: 0.9, ease: 'back.out(1.6)', stagger: 0.12, scrollTrigger: { trigger: '.pics', start: 'top 88%', once: true } });
+  }
+  $$('.pic').forEach((p) => p.addEventListener('click', () => { pop(p); sparks(p, 12); }));
+
+  /* G. матрица 2×2 */
+  {
+    const POS = [[105, 80], [295, 80], [105, 220], [295, 220]];
+    const cellsM = $$('[data-mx]');
+    function mx(i) {
+      cellsM.forEach((c, k) => c.setAttribute('aria-pressed', String(k === i)));
+      if (A) {
+        gsap.to('[data-mx-dot]', { attr: { cx: POS[i][0], cy: POS[i][1] }, duration: 0.6, ease: 'back.out(2)' });
+        gsap.fromTo(cellsM[i], { scale: 0.92 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1, .4)' });
+      }
+    }
+    cellsM.forEach((c, i) => c.addEventListener('click', () => mx(i)));
+    mx(2);
+    if (A) gsap.from(cellsM, { scale: 0.5, rotation: (i) => [-6, 6, 6, -6][i], duration: 0.7, ease: 'back.out(2)', stagger: 0.1, scrollTrigger: { trigger: '.mx', start: 'top 85%', once: true } });
+  }
+
+  /* H. схема потоков: точки бегут по связям */
+  {
+    const FL = [
+      ['Keşke gelse.', 'Хоть бы он пришёл.'],
+      ['Keşke gelseydi.', 'Жаль, что он не пришёл.'],
+      ['Keşke gelmeseydi.', 'Жаль, что он пришёл.'],
+      ['Gelseydi, görürdü.', 'Если бы он пришёл, он бы увидел.'],
+      ['Gelseydin!', 'Пришёл бы ты!'],
+    ];
+    const links = $$('[data-flinks] path');
+    const dotsG = $('[data-fdots]');
+    const dots = links.map((p, i) => { const c = svgEl('circle', { r: 7, fill: ['#5c0f1a', '#5c0f1a', '#fff', '#5c0f1a', '#5c0f1a'][i], stroke: '#5c0f1a', 'stroke-width': 2 }); dotsG.append(c); return c; });
+    const tws = [];
+    if (A) links.forEach((p, i) => tws.push(gsap.to(dots[i], { motionPath: { path: p, align: p, alignOrigin: [0.5, 0.5] }, duration: 2.2, ease: 'none', repeat: -1, delay: i * 0.35, paused: true })));
+    else dots.forEach((d) => d.setAttribute('visibility', 'hidden'));
+    whileVisible($('[data-flow]'), () => tws.forEach((t) => t.play()), () => tws.forEach((t) => t.pause()));
+    function fl(i) {
+      links.forEach((p, k) => p.setAttribute('opacity', k === i ? '1' : '.4'));
+      const out = $('[data-flow-out]');
+      out.textContent = FL[i][0];
+      out.dataset.say = FL[i][0];
+      $('[data-flow-ru]').textContent = FL[i][1];
+      if (A) {
+        gsap.fromTo(links[i], { strokeWidth: 18 }, { strokeWidth: 10, duration: 0.6, ease: 'power2.out' });
+        gsap.fromTo(out, { y: 16, rotation: 2 }, { y: 0, rotation: 0, duration: 0.45, ease: 'back.out(2)' });
+        gsap.fromTo(`[data-fsrc="${i}"] rect`, { scaleX: 0.9, transformOrigin: '50% 50%' }, { scaleX: 1, duration: 0.5, ease: 'elastic.out(1, .4)' });
+      }
+    }
+    $$('[data-fsrc]').forEach((g) => {
+      g.addEventListener('click', () => fl(Number(g.dataset.fsrc)));
+      g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fl(Number(g.dataset.fsrc)); } });
+    });
+    fl(0);
+    if (A) gsap.fromTo(links, { strokeDasharray: 400, strokeDashoffset: 400 }, { strokeDashoffset: 0, ease: 'none', stagger: 0.1, scrollTrigger: { trigger: '[data-flow]', start: 'top 85%', end: 'center 50%', scrub: true } });
+  }
+
+  /* I. карта Антальи */
+  {
+    const AP = [
+      ['1 · Калеичи', [['Keşke Kaleiçi\'nde daha çok kal'], ['sa', 'p-sa'], ['ydı', 'p-di'], ['k', 'p-p'], ['.']], 'Keşke Kaleiçi\'nde daha çok kalsaydık.', 'Жаль, что мы не остались в Калеичи подольше.'],
+      ['2 · Пляж Коньяалты', [['Keşke Konyaaltı\'nda yüz'], ['se', 'p-sa'], ['ydi', 'p-di'], ['m', 'p-p'], ['.']], 'Keşke Konyaaltı\'nda yüzseydim.', 'Жаль, что я не поплавал на Коньяалты.'],
+      ['3 · Водопад Дюден', [['Keşke Düden Şelalesi\'ni gör'], ['se', 'p-sa'], ['ydi', 'p-di'], ['k', 'p-p'], ['.']], 'Keşke Düden Şelalesi\'ni görseydik.', 'Жаль, что мы не увидели водопад Дюден.'],
+      ['4 · Ворота Адриана', [['Keşke orada fotoğraf çek'], ['se', 'p-sa'], ['ydi', 'p-di'], ['m', 'p-p'], ['.']], 'Keşke orada fotoğraf çekseydim.', 'Жаль, что я там не сфотографировал.'],
+      ['5 · Аэропорт', [['Erken çık'], ['sa', 'p-sa'], ['ydı', 'p-di'], ['k', 'p-p'], [', uçağa yetişirdik.']], 'Erken çıksaydık, uçağa yetişirdik.', 'Если бы мы вышли раньше, мы бы успели на самолёт.'],
+    ];
+    const tr = $('[data-amap-tr]');
+    function ap(i) {
+      const p = AP[i];
+      $('[data-amap-place]').textContent = p[0];
+      markup(tr, p[1]);
+      tr.dataset.say = p[2];
+      $('[data-amap-ru]').textContent = p[3];
+      if (A) {
+        gsap.fromTo(`[data-apin="${i}"]`, { y: -24 }, { y: 0, duration: 0.8, ease: 'bounce.out' });
+        gsap.fromTo(tr, { y: 14 }, { y: 0, duration: 0.45, ease: 'back.out(2)' });
+      }
+    }
+    $$('[data-apin]').forEach((g) => {
+      g.addEventListener('click', () => ap(Number(g.dataset.apin)));
+      g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ap(Number(g.dataset.apin)); } });
+    });
+    if (A) {
+      gsap.fromTo('[data-aroute]', { strokeDashoffset: 700 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-amap]', start: 'top 85%', end: 'center 45%', scrub: true } });
+      gsap.from('[data-apin]', { y: -70, scale: 0.4, transformOrigin: '50% 100%', duration: 0.8, ease: 'bounce.out', stagger: 0.12, scrollTrigger: { trigger: '[data-amap]', start: 'top 75%', once: true } });
+      const life = gsap.timeline({ repeat: -1, paused: true })
+        .fromTo('[data-plane]', { x: -60, y: 20 }, { x: 80, y: -30, duration: 4, ease: 'none' }, 0)
+        .to('[data-boat]', { x: 60, duration: 2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 0)
+        .to('[data-awave]', { x: -30, duration: 2, ease: 'sine.inOut', yoyo: true, repeat: 1 }, 0)
+        .fromTo('[data-fall] path', { strokeDasharray: '6 10', strokeDashoffset: 0 }, { strokeDashoffset: -64, duration: 4, ease: 'none' }, 0);
+      whileVisible($('[data-amap]'), () => life.play(), () => life.pause());
+    }
   }
 
   /* ===================== СКРОЛЛБАР: ВИШНЯ НА ЛЕНТЕ ===================== */
