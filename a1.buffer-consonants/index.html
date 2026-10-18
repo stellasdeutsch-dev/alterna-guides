@@ -291,6 +291,31 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
 .poster__row span.ex { font-weight: 800; font-size: clamp(16px, 4vw, 20px); overflow-wrap: anywhere; }
 .final { text-align: left; }
 .final .dry { font-weight: 800; margin-top: 18px; }
+/* доработка: панорама, дудлы, кубики, сломанные мосты, счётчик */
+.skyline { width: 100%; height: auto; display: block; margin: 8px 0 26px; overflow: visible; }
+.skyline path { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.skyline .ac1 { stroke: var(--vio); } .skyline .ac2 { stroke: var(--yel); stroke-width: 6; } .skyline .ac3 { stroke: var(--cyan); } .skyline .ac4 { stroke: var(--pink-deep); }
+.dfl { position: absolute; width: clamp(44px, 7vw, 76px); height: auto; color: var(--ink); opacity: .75; pointer-events: none; z-index: 0; }
+.dfl--y { color: #c78a00; } .dfl--p { color: var(--pink-deep); } .dfl--v { color: var(--vio); }
+.mini3d { position: absolute; z-index: 0; pointer-events: none; transform: scale(.7); }
+@media (max-width: 899px) { .mini3d { display: none; } }
+.sec h2, .sec .hd { position: relative; z-index: 1; }
+.mini3d .cube { position: relative; }
+.hero__art.is-off .cube, .mini3d.is-off .cube { animation-play-state: paused; }
+.tb { width: 100%; max-width: 180px; height: auto; display: block; margin: 8px 0 4px; overflow: visible; }
+.tb path { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linecap: round; }
+.tb rect { stroke: var(--ink); stroke-width: 2; }
+.meter { width: 100%; max-width: 420px; height: auto; display: block; margin: 14px auto 0; }
+.meter text { font: 800 15px var(--ak-font); fill: var(--ink); }
+.pen-hero { position: absolute; inset: -18px -24px -40px -18px; width: calc(100% + 42px); height: calc(100% + 58px); pointer-events: none; overflow: visible; z-index: 2; }
+.pen-hero path { fill: none; stroke: var(--yel); stroke-width: 4; stroke-linecap: round; }
+.fly { width: 100%; height: auto; display: block; margin: 6px 0 0; overflow: visible; }
+.fly path { fill: none; stroke: var(--line); stroke-width: 3; stroke-dasharray: 6 9; }
+.cmp__row { grid-template-columns: minmax(0, 1fr) 26px minmax(0, 1.4fr); }
+.carr { width: 26px; height: 26px; color: var(--vio); }
+.carr path { fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; }
+.tree .flow { fill: none; stroke: var(--yel); stroke-width: 3; stroke-dasharray: 3 12; stroke-linecap: round; pointer-events: none; }
+.trail { position: absolute; width: 12px; height: 12px; }
 /* свечение за курсором */
 .glow { position: fixed; left: 0; top: 0; width: 420px; height: 420px; margin: -210px 0 0 -210px; border-radius: 50%; pointer-events: none; z-index: -1; background: radial-gradient(closest-side, rgba(90, 60, 244, .16), rgba(247, 163, 220, .1) 55%, transparent 70%); display: none; }
 @media (hover: hover) and (pointer: fine) and (min-width: 1024px) { .glow { display: block; } }
@@ -345,6 +370,9 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     <symbol id="i-person" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="15" r="7"/><path d="M10 42c0-9 6-14 14-14s14 5 14 14"/></symbol>
     <symbol id="i-point" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 24h22"/><path d="M24 17l7 7-7 7"/><circle cx="38" cy="24" r="4"/></symbol>
     <symbol id="i-school" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21L24 10l19 11"/><path d="M10 20v20h28V20"/><path d="M20 40v-9h8v9"/><path d="M24 4v6"/></symbol>
+    <symbol id="i-gull" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26c6-8 13-8 20 0 7-8 14-8 20 0"/><path d="M22 26l2 4 2-4"/></symbol>
+    <symbol id="i-simit" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><circle cx="24" cy="24" r="7"/><path d="M14 14l2 2M32 14l-2 2M14 34l2-2M33 33l-2-2M24 8v3M24 37v3"/></symbol>
+    <symbol id="i-tulip" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 44V24"/><path d="M14 10l5 6 5-8 5 8 5-6v8a10 10 0 0 1-20 0z"/><path d="M24 34c-6 0-9-4-10-8M24 38c6 0 9-4 10-8"/></symbol>
     <symbol id="i-stack" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 31v-5l4-7h17l6 7h1v5z"/><path d="M17 40v-5l4-7h17l6 7h1v5z"/></symbol>
   </defs>
 </svg>
@@ -358,6 +386,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
         <div>
           <div class="hero__title">
             <h1>Две гласные<br>не встречаются</h1>
+            <svg class="pen-hero" viewBox="0 0 600 300" preserveAspectRatio="none" aria-hidden="true"><path data-penpath d="M20 280C150 300 420 300 560 250C610 200 600 60 520 20"/><use data-nib href="#nib" width="26" height="34" x="-13" y="-30"/></svg>
             <span class="pill pill--y" data-ui>для этого есть мосты</span>
           </div>
           <p class="lead hero__sub">В турецком две гласные подряд почти не стоят. Между ними встаёт мост — одна буква. Мостов три: <b>y</b>, <b>s</b>, <b>n</b>. Восемь минут — и ты строишь их сам.</p>
@@ -435,6 +464,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 02 · guess ===================== -->
   <section class="sec" data-section="guess" data-words="23">
     <div class="wrap">
+      <svg class="dfl dfl--p" style="right:4%;top:20px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-gull"/></svg>
       <div class="hd"><div class="bb"><b class="num">02</b></div><span class="pill pill--p" data-ui>сначала угадай</span></div>
       <h2>Сначала угадай</h2>
       <p>Три вопроса. Ошибаться можно: так мозг запоминает крепче. Не знаешь — жми наугад.</p>
@@ -495,9 +525,11 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 04 · мост y ===================== -->
   <section class="sec" data-section="ybridge" data-words="42">
     <div class="wrap">
+      <svg class="dfl dfl--y" style="right:2%;top:40px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-simit"/></svg>
       <div class="hd"><div class="bb"><b class="num">04</b></div><span class="pill pill--y" data-ui>мост y</span></div>
       <h2>Мост y — для всех</h2>
       <p>Y — рабочая лошадка. Пашет почти везде. Без него вышло бы <b lang="tr">araba-a</b>. Звучит как икота. У него три клиента.</p>
+      <svg class="fly" viewBox="0 0 600 120" aria-hidden="true"><path id="flyPath" d="M20 100C120 0 260 0 300 60S500 120 580 20"/><g data-fly><rect x="-18" y="-18" width="36" height="36" rx="8" fill="#ffc21a" stroke="#0c0b14" stroke-width="2.5"/><text y="9" text-anchor="middle" font-family="Montserrat" font-weight="900" font-size="24">y</text></g></svg>
       <div class="bento">
         <div class="bt bt--y" data-bt>
           <span class="pill pill--sm pill--y" lang="tr">-(y)A</span>
@@ -548,6 +580,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 05 · мост s ===================== -->
   <section class="sec" data-section="sbridge" data-words="44">
     <div class="wrap">
+      <svg class="dfl dfl--p" style="right:3%;top:10px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-tulip"/></svg><div class="mini3d" style="right:14%;top:60px" aria-hidden="true"><div class="cube cube--s"><span>s</span><span>s</span><span>s</span><span>s</span><span>s</span><span>s</span></div></div>
       <svg class="pen" style="left:2%;top:40px;width:min(40vw,320px);height:130px" viewBox="0 0 320 130" aria-hidden="true"><path class="cv" d="M10 20C80 20 160 120 310 110" style="stroke:#f7a3dc"/><rect x="2" y="12" width="16" height="16" style="stroke:#f7a3dc"/><rect x="302" y="102" width="16" height="16" style="stroke:#f7a3dc"/></svg>
       <div class="hd"><div class="bb"><b class="num">05</b></div><span class="pill pill--p" data-ui>мост s</span></div>
       <h2>Мост s — только для своих</h2>
@@ -577,6 +610,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 06 · мост n ===================== -->
   <section class="sec" data-section="nbridge" data-words="39">
     <div class="wrap">
+      <svg class="dfl dfl--v" style="right:4%;top:30px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-tea"/></svg><div class="mini3d" style="right:16%;top:70px" aria-hidden="true"><div class="cube cube--n" style="animation-duration:12s"><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span><span>n</span></div></div>
       <div class="hd"><div class="bb"><b class="num">06</b></div><span class="pill pill--v" data-ui>мост n</span></div>
       <h2>Мост n — второй этаж</h2>
       <p>N строится на s. Слово уже «его»: <b class="t" lang="tr" data-say="arabası">arabası</b>. Теперь его надо куда-то везти. Запомни картинку: s — первый этаж, n — второй.</p>
@@ -605,6 +639,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 07 · forms bento ===================== -->
   <section class="sec" data-section="forms" data-words="30">
     <div class="wrap">
+      <svg class="dfl" style="right:4%;top:24px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-cat"/></svg>
       <div class="hd"><div class="bb"><b class="num">07</b></div><span class="pill pill--c" data-ui>вся доска</span></div>
       <h2>Вся тема на одной доске</h2>
       <p>Нажми на плитку — подсветится её столбик. Диаграмма считает наши тридцать три карточки.</p>
@@ -630,6 +665,15 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
     <div class="wrap">
       <div class="hd"><div class="bb"><b class="num">08</b></div><span class="pill pill--p" data-ui>карта</span></div>
       <h2>Стамбул подписан мостами</h2>
+      <svg class="skyline" viewBox="0 0 1200 230" role="img" aria-label="Панорама Стамбула" data-skyline>
+        <path d="M0 196H1200"/><path class="ac3" d="M30 214c30 8 60 8 90 0s60-8 90 0M520 214c30 8 60 8 90 0s60-8 90 0M900 214c30 8 60 8 90 0"/>
+        <path d="M160 196V92H200V196M152 92H208L180 38ZM172 122H188M172 152H188M180 38V22"/>
+        <path d="M330 196V62M326 62L330 40L334 62M510 196V62M506 62L510 40L514 62M342 196V142H498V196"/><path class="ac2" d="M352 142Q420 58 488 142"/><path d="M398 112Q420 90 442 112M420 90V74"/>
+        <path d="M650 196V80M850 196V80M590 162H910"/><path class="ac1" d="M590 152C620 152 640 92 650 84C700 152 800 152 850 84C860 92 880 152 910 152"/>
+        <path d="M985 196H1060M1002 196V132H1042V196M996 132H1048L1022 100ZM1022 100V84"/><path class="ac4" d="M1022 84h14l-4 6 4 6h-14"/>
+        <path d="M528 190h86l-10 12h-66zM542 190v-14h56v14"/>
+        <path d="M80 70c6-6 12-6 18 0 6-6 12-6 18 0M720 40c6-6 12-6 18 0 6-6 12-6 18 0M1100 60c6-6 12-6 18 0 6-6 12-6 18 0"/>
+      </svg>
       <p>Башня, мост, пристань, проспект. В названиях Стамбула s живёт на каждом шагу. Нажимай на точки. Так турки подписывают всё, что чьё-то: башня Галаты, пристань Кадыкёя.</p>
       <p>Где-то s нет: <b class="t" lang="tr" data-say="Taksim Meydanı">Taksim Meydanı</b>. Почему — скажет карточка.</p>
       <div class="grid g2" style="align-items:start">
@@ -658,6 +702,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 09 · сравнение ===================== -->
   <section class="sec" data-section="compare" data-words="45">
     <div class="wrap">
+      <svg class="dfl dfl--v" style="left:46%;top:16px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-gull"/></svg>
       <svg class="pen" style="right:3%;top:50px;width:min(44vw,360px);height:140px" viewBox="0 0 360 140" aria-hidden="true"><path class="cv" d="M10 120C150 130 210 10 350 20" style="stroke:#5a3cf4"/><rect x="2" y="112" width="16" height="16" style="stroke:#5a3cf4"/><rect x="342" y="12" width="16" height="16" style="stroke:#5a3cf4"/></svg>
       <div class="hd"><div class="bb"><b class="num">09</b></div><span class="pill pill--v" data-ui>сравни</span></div>
       <h2>Русский, турецкий, казахский</h2>
@@ -669,9 +714,9 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
         <button type="button" class="btn" role="tab" aria-selected="false" data-lang="kk">казахский</button>
       </div>
       <div class="cmp" data-cmp>
-        <div class="cmp__row"><span class="cmp__ru">в машину</span><span class="cmp__w" data-cw="0"></span></div>
-        <div class="cmp__row"><span class="cmp__ru">его машина</span><span class="cmp__w" data-cw="1"></span></div>
-        <div class="cmp__row"><span class="cmp__ru">в его машину</span><span class="cmp__w" data-cw="2"></span></div>
+        <div class="cmp__row"><span class="cmp__ru">в машину</span><svg class="carr" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h22M18 8l8 8-8 8"/></svg><span class="cmp__w" data-cw="0"></span></div>
+        <div class="cmp__row"><span class="cmp__ru">его машина</span><svg class="carr" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h22M18 8l8 8-8 8"/></svg><span class="cmp__w" data-cw="1"></span></div>
+        <div class="cmp__row"><span class="cmp__ru">в его машину</span><svg class="carr" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 16h22M18 8l8 8-8 8"/></svg><span class="cmp__w" data-cw="2"></span></div>
       </div>
       <p class="cmp__note" data-cnote data-ui></p>
       <p>Знаешь казахский? Там те же s и n: <span lang="kk" data-ui>арбасы, арбасына</span>. Даже машина почти та же.</p>
@@ -722,6 +767,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 11 · мнемоника ===================== -->
   <section class="sec" data-section="mnemo" data-words="25">
     <div class="wrap">
+      <svg class="dfl dfl--y" style="right:4%;top:30px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-tulip"/></svg>
       <div class="hd"><div class="bb"><b class="num">11</b></div><span class="pill pill--p" data-ui>запомни</span></div>
       <h2>Запомни тремя словами</h2>
       <p class="motto" data-motto>Y — для всех. S — «своё». N — «несу своё».</p>
@@ -785,6 +831,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 14 · лаборатория ===================== -->
   <section class="sec" data-section="lab" data-words="19">
     <div class="wrap">
+      <svg class="dfl dfl--p" style="right:4%;top:28px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-simit"/></svg><div class="mini3d" style="right:18%;top:64px" aria-hidden="true"><div class="cube cube--y" style="animation-duration:10s"><span>y</span><span>y</span><span>y</span><span>y</span><span>y</span><span>y</span></div></div>
       <svg class="pen" style="left:3%;top:40px;width:min(40vw,320px);height:120px" viewBox="0 0 320 120" aria-hidden="true"><path class="cv" d="M10 100C90 110 150 10 310 20"/><rect x="2" y="92" width="16" height="16"/><rect x="302" y="12" width="16" height="16"/></svg>
       <div class="hd"><div class="bb"><b class="num">14</b></div><span class="pill pill--v" data-ui>лаборатория</span></div>
       <h2>Лаборатория мостов</h2>
@@ -802,6 +849,7 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
         <div class="lab__words" data-lbwords></div>
         <div class="row" style="justify-content:center;margin-top:12px" data-ui><button type="button" class="btn btn--y" data-lbrand>случайное слово</button><button type="button" class="btn" data-lbsay>послушать</button></div>
         <div class="hist" data-lbhist lang="tr"></div>
+        <svg class="meter" viewBox="0 0 420 120" data-meter role="img" aria-label="Сколько мостов ты построил"></svg>
       </div>
     </div>
   </section>
@@ -809,15 +857,16 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
   <!-- ===================== 15 · ловушки ===================== -->
   <section class="sec" data-section="traps" data-words="47">
     <div class="wrap">
+      <svg class="dfl" style="right:4%;top:24px" viewBox="0 0 48 48" aria-hidden="true" data-dfl><use href="#i-ferry"/></svg>
       <div class="hd"><div class="bb"><b class="num">15</b></div><span class="pill pill--p" data-ui>ловушки</span></div>
       <h2>Пять ловушек</h2>
       <p>На этом спотыкаются все. Это не стыдно. Это статистика. Нажми на карточку — ошибка исправится.</p>
       <div class="traps" data-traps>
-        <button type="button" class="trap" data-bad="evye" data-good="eve"><span class="pill pill--sm pill--y">1</span><span class="trap__w" lang="tr"><span class="trap__bad">evye</span><span class="trap__good" data-g></span></span><b>Согласная на конце</b><span class="tr-ru">ev кончается на v. Мосту некуда встать.</span></button>
-        <button type="button" class="trap" data-bad="buya" data-good="buna"><span class="pill pill--sm pill--v">2</span><span class="trap__w" lang="tr"><span class="trap__bad">buya</span><span class="trap__good" data-g></span></span><b lang="tr">bu, şu, o</b><span class="tr-ru">У них свой мост — n.</span></button>
-        <button type="button" class="trap" data-bad="arabasıya" data-good="arabasına"><span class="pill pill--sm pill--v">3</span><span class="trap__w" lang="tr"><span class="trap__bad">arabasıya</span><span class="trap__good" data-g></span></span><b>После «его»</b><span class="tr-ru">За -sI пускают только n.</span></button>
-        <button type="button" class="trap" data-bad="susu" data-good="suyu"><span class="pill pill--sm pill--p">4</span><span class="trap__w" lang="tr"><span class="trap__bad">susu</span><span class="trap__good" data-g></span></span><b>Вода — бунтарь</b><span class="tr-ru">Даже «его вода» — это suyu.</span></button>
-        <button type="button" class="trap" data-bad="çayyı" data-good="çayı"><span class="pill pill--sm pill--y">5</span><span class="trap__w" lang="tr"><span class="trap__bad">çayyı</span><span class="trap__good" data-g></span></span><b>Буква y в самом слове</b><span class="tr-ru">У çay буква y своя. Это не мост.</span></button>
+        <button type="button" class="trap" data-bad="evye" data-good="eve"><span class="pill pill--sm pill--y">1</span><svg class="tb" viewBox="0 0 180 50" aria-hidden="true"><path d="M4 40h36M140 40h36M40 40v8M140 40v8"/><g class="pk"><rect x="42" y="33" width="30" height="7" rx="2" fill="#ffc21a" transform="translate(4 12) rotate(28 57 36)"/><rect x="75" y="33" width="30" height="7" rx="2" fill="#f7a3dc" transform="translate(0 18) rotate(-20 90 36)"/><rect x="108" y="33" width="30" height="7" rx="2" fill="#5a3cf4" transform="translate(-2 10) rotate(35 123 36)"/></g></svg><span class="trap__w" lang="tr"><span class="trap__bad">evye</span><span class="trap__good" data-g></span></span><b>Согласная на конце</b><span class="tr-ru">ev кончается на v. Мосту некуда встать.</span></button>
+        <button type="button" class="trap" data-bad="buya" data-good="buna"><span class="pill pill--sm pill--v">2</span><svg class="tb" viewBox="0 0 180 50" aria-hidden="true"><path d="M4 40h36M140 40h36M40 40v8M140 40v8"/><g class="pk"><rect x="42" y="33" width="30" height="7" rx="2" fill="#ffc21a" transform="translate(4 12) rotate(28 57 36)"/><rect x="75" y="33" width="30" height="7" rx="2" fill="#f7a3dc" transform="translate(0 18) rotate(-20 90 36)"/><rect x="108" y="33" width="30" height="7" rx="2" fill="#5a3cf4" transform="translate(-2 10) rotate(35 123 36)"/></g></svg><span class="trap__w" lang="tr"><span class="trap__bad">buya</span><span class="trap__good" data-g></span></span><b lang="tr">bu, şu, o</b><span class="tr-ru">У них свой мост — n.</span></button>
+        <button type="button" class="trap" data-bad="arabasıya" data-good="arabasına"><span class="pill pill--sm pill--v">3</span><svg class="tb" viewBox="0 0 180 50" aria-hidden="true"><path d="M4 40h36M140 40h36M40 40v8M140 40v8"/><g class="pk"><rect x="42" y="33" width="30" height="7" rx="2" fill="#ffc21a" transform="translate(4 12) rotate(28 57 36)"/><rect x="75" y="33" width="30" height="7" rx="2" fill="#f7a3dc" transform="translate(0 18) rotate(-20 90 36)"/><rect x="108" y="33" width="30" height="7" rx="2" fill="#5a3cf4" transform="translate(-2 10) rotate(35 123 36)"/></g></svg><span class="trap__w" lang="tr"><span class="trap__bad">arabasıya</span><span class="trap__good" data-g></span></span><b>После «его»</b><span class="tr-ru">За -sI пускают только n.</span></button>
+        <button type="button" class="trap" data-bad="susu" data-good="suyu"><span class="pill pill--sm pill--p">4</span><svg class="tb" viewBox="0 0 180 50" aria-hidden="true"><path d="M4 40h36M140 40h36M40 40v8M140 40v8"/><g class="pk"><rect x="42" y="33" width="30" height="7" rx="2" fill="#ffc21a" transform="translate(4 12) rotate(28 57 36)"/><rect x="75" y="33" width="30" height="7" rx="2" fill="#f7a3dc" transform="translate(0 18) rotate(-20 90 36)"/><rect x="108" y="33" width="30" height="7" rx="2" fill="#5a3cf4" transform="translate(-2 10) rotate(35 123 36)"/></g></svg><span class="trap__w" lang="tr"><span class="trap__bad">susu</span><span class="trap__good" data-g></span></span><b>Вода — бунтарь</b><span class="tr-ru">Даже «его вода» — это suyu.</span></button>
+        <button type="button" class="trap" data-bad="çayyı" data-good="çayı"><span class="pill pill--sm pill--y">5</span><svg class="tb" viewBox="0 0 180 50" aria-hidden="true"><path d="M4 40h36M140 40h36M40 40v8M140 40v8"/><g class="pk"><rect x="42" y="33" width="30" height="7" rx="2" fill="#ffc21a" transform="translate(4 12) rotate(28 57 36)"/><rect x="75" y="33" width="30" height="7" rx="2" fill="#f7a3dc" transform="translate(0 18) rotate(-20 90 36)"/><rect x="108" y="33" width="30" height="7" rx="2" fill="#5a3cf4" transform="translate(-2 10) rotate(35 123 36)"/></g></svg><span class="trap__w" lang="tr"><span class="trap__bad">çayyı</span><span class="trap__good" data-g></span></span><b>Буква y в самом слове</b><span class="tr-ru">У çay буква y своя. Это не мост.</span></button>
       </div>
     </div>
   </section>
@@ -892,6 +941,15 @@ button:focus-visible, [role="button"]:focus-visible, [tabindex]:focus-visible { 
         <div class="poster__row" data-pr><span class="tile">ev</span><div><b>Согласная на конце — моста нет</b><span class="ex" lang="tr" data-say="eve, okula, çayı">eve · okula · çayı</span></div></div>
       </div>
       <div class="final" style="margin-top:56px">
+        <svg class="skyline" viewBox="0 0 1200 230" role="img" aria-label="Панорама Стамбула" data-skyline2>
+        <path d="M0 196H1200"/><path class="ac3" d="M30 214c30 8 60 8 90 0s60-8 90 0M520 214c30 8 60 8 90 0s60-8 90 0M900 214c30 8 60 8 90 0"/>
+        <path d="M160 196V92H200V196M152 92H208L180 38ZM172 122H188M172 152H188M180 38V22"/>
+        <path d="M330 196V62M326 62L330 40L334 62M510 196V62M506 62L510 40L514 62M342 196V142H498V196"/><path class="ac2" d="M352 142Q420 58 488 142"/><path d="M398 112Q420 90 442 112M420 90V74"/>
+        <path d="M650 196V80M850 196V80M590 162H910"/><path class="ac1" d="M590 152C620 152 640 92 650 84C700 152 800 152 850 84C860 92 880 152 910 152"/>
+        <path d="M985 196H1060M1002 196V132H1042V196M996 132H1048L1022 100ZM1022 100V84"/><path class="ac4" d="M1022 84h14l-4 6 4 6h-14"/>
+        <path d="M528 190h86l-10 12h-66zM542 190v-14h56v14"/>
+        <path d="M80 70c6-6 12-6 18 0 6-6 12-6 18 0M720 40c6-6 12-6 18 0 6-6 12-6 18 0M1100 60c6-6 12-6 18 0 6-6 12-6 18 0"/>
+      </svg>
         <h2>Снова такси</h2>
         <div class="taxi-road" aria-hidden="true" style="max-width:640px"><svg viewBox="0 0 48 48" data-taxi2><use href="#i-taxi" color="#0c0b14"/></svg></div>
         <p class="lead" style="margin-top:16px">Говоришь, <b class="t" lang="tr" data-say="Kadıköy iskelesine, lütfen.">Kadıköy iskelesine, lütfen</b>. Таксист кивает. Едет.</p>
@@ -947,6 +1005,11 @@ addEventListener('DOMContentLoaded', () => {
   const mark = (stem, br, suf) => `${stem}${br && br !== 'none' ? `<i class="b ${BR[br]}">${br}</i>` : ''}${suf}`;
   if (A) ScrollTrigger.config({ ignoreMobileResize: true });
   if (!A) document.documentElement.classList.add('no3d');
+  /* бесконечные циклы играют, только пока их блок на экране */
+  const loop = (tw, trig) => { if (!A || !tw) return tw; tw.pause(); ScrollTrigger.create({ trigger: trig, start: 'top bottom', end: 'bottom top', onToggle: (st) => (st.isActive ? tw.resume() : tw.pause()) }); return tw; };
+  /* CSS-кубики тоже засыпают вне экрана */
+  const cubeIO = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-off', !e.isIntersecting)));
+  document.querySelectorAll('.hero__art, .mini3d').forEach((el) => cubeIO.observe(el));
 
   /* ---------- маркеры рамок, как в векторном редакторе ---------- */
   $$('.bb').forEach((b) => ['tl', 'tm', 'tr', 'ml', 'mr', 'bl', 'bm', 'br'].forEach((p) => { const i = document.createElement('i'); i.className = `hdl hdl--${p}`; b.append(i); }));
@@ -995,13 +1058,13 @@ addEventListener('DOMContentLoaded', () => {
       const len = path.getTotalLength();
       gsap.fromTo(path, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: p.parentElement, start: 'top 80%', end: 'top 20%', scrub: .6 } });
     });
-    $$('.spk').forEach((s, i) => gsap.to(s, { y: -10, rotation: 90, scale: 1.15, duration: 1.6 + (i % 3) * .4, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    $$('.spk').forEach((s, i) => loop(gsap.to(s, { y: -10, rotation: 90, scale: 1.15, duration: 1.6 + (i % 3) * .4, ease: 'sine.inOut', yoyo: true, repeat: -1 }), s.closest('section') || s));
   }
 
   /* ---------- hero: параллакс, счётчики, мини-демо ---------- */
   if (A) {
     $$('[data-par]').forEach((l) => gsap.to(l, { y: Number(l.dataset.par), ease: 'none', scrollTrigger: { trigger: '.hero__art', start: 'top top', end: 'bottom top', scrub: true } }));
-    gsap.to('.hero__art .cube', { y: -16, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .5 });
+    loop(gsap.to('.hero__art .cube', { y: -16, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .5 }), '.hero__art');
     ScrollTrigger.create({ trigger: '.counters', start: 'top 95%', once: true, onEnter: () => $$('[data-count]').forEach((b) => { const o = { v: 0 }; gsap.to(o, { v: Number(b.dataset.count), duration: 1.4, ease: 'power2.out', onUpdate: () => { b.textContent = Math.round(o.v); } }); }) });
   } else $$('[data-count]').forEach((b) => { b.textContent = b.dataset.count; });
 
@@ -1043,8 +1106,8 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- крючок: кадры комикса и выбор ---------- */
   if (A) {
     ScrollTrigger.batch('.bubble', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { scale: .4, rotation: -10, duration: .6, ease: 'back.out(3)', stagger: .25 }) });
-    gsap.to('.taxi1', { x: 40, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.to('.frame .eye', { y: 3, duration: .3, yoyo: true, repeat: -1, repeatDelay: 1.6 });
+    loop(gsap.to('.taxi1', { x: 40, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1 }), '.comic');
+    loop(gsap.to('.frame .eye', { y: 3, duration: .3, yoyo: true, repeat: -1, repeatDelay: 1.6 }), '.comic');
   }
   const HOOK = [
     { ok: false, t: 'Он пожимает плечами. Пристань без хозяина — просто доски в воде.' },
@@ -1523,9 +1586,9 @@ addEventListener('DOMContentLoaded', () => {
   });
   if (A) {
     ScrollTrigger.create({ trigger: scene, start: 'top 55%', once: true, onEnter: () => $('[data-hot="kedi"]', scene).dispatchEvent(new Event('click')) });
-    gsap.to($$('.hot .ring', scene), { attr: { r: 24 }, opacity: .2, duration: 1.2, ease: 'sine.out', repeat: -1, stagger: .2 });
-    gsap.to('.scene .ferry', { y: 4, rotation: .6, transformOrigin: '50% 100%', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-    gsap.to('.scene .gulls path', { x: 20, y: -6, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .3 });
+    loop(gsap.to($$('.hot .ring', scene), { attr: { r: 24 }, opacity: .2, duration: 1.2, ease: 'sine.out', repeat: -1, stagger: .2 }), scene);
+    loop(gsap.to('.scene .ferry', { y: 4, rotation: .6, transformOrigin: '50% 100%', duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }), scene);
+    loop(gsap.to('.scene .gulls path', { x: 20, y: -6, duration: 2.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .3 }), scene);
     gsap.from(scene, { y: 60, rotation: 1, duration: .9, ease: 'back.out(1.4)', scrollTrigger: { trigger: scene, start: 'top 90%', once: true } });
   }
 
@@ -1569,8 +1632,36 @@ addEventListener('DOMContentLoaded', () => {
       gsap.fromTo(lbr, { scale: .7, y: 20 }, { scale: 1, y: 0, duration: .6, delay: .6, ease: 'back.out(2.4)' });
       gsap.from(chip, { x: -30, scale: .5, duration: .4, ease: 'back.out(2)' });
     }
+    if (animate) { meterCount[f.br]++; meterDraw(f.br); }
     if (animate) speak(res);
   }
+  const meter = $('[data-meter]', lab);
+  const meterCount = { y: 0, s: 0, n: 0, none: 0 };
+  const MCOL = { y: '#ffc21a', s: '#f7a3dc', n: '#5a3cf4', none: '#e2def3' };
+  const mBars = {};
+  ['y', 's', 'n', 'none'].forEach((k, i) => {
+    const r = document.createElementNS(NS, 'rect');
+    r.setAttribute('x', 20 + i * 100); r.setAttribute('y', 86); r.setAttribute('width', 80); r.setAttribute('height', 4); r.setAttribute('rx', 8);
+    r.setAttribute('fill', MCOL[k]); r.setAttribute('stroke', '#0c0b14'); r.setAttribute('stroke-width', 2);
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', 60 + i * 100); t.setAttribute('y', 112); t.setAttribute('text-anchor', 'middle'); t.setAttribute('data-ui', ''); t.textContent = k === 'none' ? '—' : k;
+    const c = document.createElementNS(NS, 'text');
+    c.setAttribute('x', 60 + i * 100); c.setAttribute('y', 78); c.setAttribute('text-anchor', 'middle'); c.textContent = '0';
+    meter.append(r, t, c);
+    mBars[k] = { r, c };
+  });
+  function meterDraw(k) {
+    const max = Math.max(1, ...Object.values(meterCount));
+    Object.entries(mBars).forEach(([key, { r, c }]) => {
+      const h = 4 + (meterCount[key] / max) * 60;
+      c.textContent = meterCount[key];
+      if (A) gsap.to(r, { attr: { y: 90 - h, height: h }, duration: .6, ease: 'back.out(2)' });
+      else { r.setAttribute('y', 90 - h); r.setAttribute('height', h); }
+      if (A) gsap.to(c, { attr: { y: 82 - h }, duration: .6, ease: 'back.out(2)' }); else c.setAttribute('y', 82 - h);
+    });
+    if (A && k) gsap.fromTo(mBars[k].r, { scaleX: 1.3, transformOrigin: '50% 100%' }, { scaleX: 1, duration: .5, ease: 'elastic.out(1, .4)' });
+  }
+  meter.addEventListener('click', () => { Object.keys(meterCount).forEach((k) => { meterCount[k] = 0; }); meterDraw(); });
   const lbwords = $('[data-lbwords]', lab);
   LABW.forEach((w) => {
     const b = document.createElement('button');
@@ -1600,6 +1691,10 @@ addEventListener('DOMContentLoaded', () => {
     if (t.classList.contains('is-fixed')) { speak(t.dataset.good); return; }
     t.classList.add('is-fixed');
     g.textContent = `→ ${t.dataset.good}`;
+    const planks = $$('.pk rect', t);
+    if (A) gsap.killTweensOf(planks);
+    if (A) gsap.to(planks, { x: 0, y: 0, rotation: 0, duration: .8, ease: 'back.out(2)', stagger: .12, delay: .3 });
+    else planks.forEach((pk) => pk.removeAttribute('transform'));
     if (A) {
       gsap.to(bad, { y: 30, rotation: 14, opacity: .45, duration: .7, ease: 'bounce.out' });
       const r = t.getBoundingClientRect(), b = g.getBoundingClientRect();
@@ -1741,6 +1836,91 @@ addEventListener('DOMContentLoaded', () => {
     gsap.from('[data-traps] .trap__bad', { scale: 1.6, rotation: -8, duration: .6, ease: 'back.out(2.4)', stagger: .1, scrollTrigger: { trigger: '[data-traps]', start: 'top 80%', once: true } });
     gsap.from('[data-section="video"] a-video', { y: 50, scale: .92, rotation: -1.5, duration: .8, ease: 'back.out(1.6)', stagger: .15, scrollTrigger: { trigger: '[data-section="video"]', start: 'top 80%', once: true } });
     gsap.fromTo('[data-guess] .gs__q', { rotation: -3 }, { rotation: 3, ease: 'none', scrollTrigger: { trigger: '[data-guess]', start: 'top bottom', end: 'bottom top', scrub: true } });
+  }
+
+  /* ---------- доработка: больше движения и визуала ---------- */
+  /* перо обводит заголовок первого экрана */
+  const penPath = $('[data-penpath]'), nib = $('[data-nib]');
+  if (A && penPath) {
+    const len = penPath.getTotalLength();
+    gsap.fromTo(penPath, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 2.2, delay: 1, ease: 'power2.inOut' });
+    gsap.to(nib, { duration: 2.2, delay: 1, ease: 'power2.inOut', motionPath: { path: penPath, align: penPath, alignOrigin: [.5, 1] } });
+    gsap.to(nib, { y: -6, duration: .5, yoyo: true, repeat: 5, delay: 3.2, ease: 'sine.inOut' });
+  }
+  /* панорама Стамбула прорисовывается по скроллу */
+  if (A) $$('[data-skyline], [data-skyline2]').forEach((sk) => {
+    const paths = $$('path', sk);
+    paths.forEach((pa) => { const l = pa.getTotalLength(); pa.style.strokeDasharray = l; pa.style.strokeDashoffset = l; });
+    gsap.to(paths, { strokeDashoffset: 0, ease: 'none', stagger: .05, scrollTrigger: { trigger: sk, start: 'top 90%', end: 'top 30%', scrub: .6 } });
+  });
+  /* линейные дудлы плывут на полях */
+  if (A) $$('[data-dfl]').forEach((d, i) => {
+    gsap.fromTo(d, { y: 40, rotation: -10 }, { y: -40, rotation: 10, ease: 'none', scrollTrigger: { trigger: d.parentElement, start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    loop(gsap.to(d, { x: i % 2 ? -12 : 12, duration: 2 + (i % 3) * .5, ease: 'sine.inOut', yoyo: true, repeat: -1 }), d.parentElement);
+  });
+  /* кубики в секциях: параллакс */
+  if (A) $$('.mini3d').forEach((m) => gsap.fromTo(m, { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: m.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+  /* буква y летит по кривой вместе со скроллом */
+  const flyG = $('[data-fly]');
+  if (A && flyG) gsap.to(flyG, { ease: 'none', motionPath: { path: '#flyPath', align: '#flyPath', alignOrigin: [.5, .5], autoRotate: false }, scrollTrigger: { trigger: '.fly', start: 'top 90%', end: 'top 25%', scrub: .6 } });
+  else if (flyG) flyG.setAttribute('transform', 'translate(580 20)');
+  /* стрелки сравнения */
+  if (A) gsap.from('.carr', { x: -20, scale: .4, duration: .5, ease: 'back.out(3)', stagger: .1, scrollTrigger: { trigger: '[data-cmp]', start: 'top 80%', once: true } });
+  $$('.cmp__row').forEach((row) => row.addEventListener('click', () => { const w = row.querySelector('.cmp__w'); if (A) gsap.fromTo(w, { scale: 1.12 }, { scale: 1, duration: .5, ease: 'back.out(3)' }); if (w.lang === 'tr') speak(w.textContent); }));
+  /* «течение» по веткам алгоритма */
+  const treeSvg = $('[data-tree]');
+  if (treeSvg) {
+    const flows = $$('.edge', treeSvg).map((e) => { const f = document.createElementNS(NS, 'path'); f.setAttribute('d', e.getAttribute('d')); f.setAttribute('class', 'flow'); e.after(f); return f; });
+    loop(gsap.to(flows, { strokeDashoffset: -30, duration: 1.2, ease: 'none', repeat: -1 }), treeSvg);
+  }
+  /* сломанные мосты в ловушках чуть качаются, пока не починены */
+  if (A) loop(gsap.to('.pk rect', { y: '+=3', duration: 1.1, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .15 }), '[data-traps]');
+  /* закат над Кадыкёем по скроллу */
+  if (A) gsap.fromTo('[data-scene] rect:first-of-type', { attr: { fill: '#ffffff' } }, { attr: { fill: '#fff0f8' }, ease: 'none', scrollTrigger: { trigger: '[data-scene]', start: 'top bottom', end: 'bottom top', scrub: true } });
+  /* наклон карточек галереи за мышью */
+  if (A && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const gg = $('[data-ggrid]');
+    gg.addEventListener('pointermove', (e) => {
+      const c = e.target.closest('.gcard'); if (!c) return;
+      const r = c.getBoundingClientRect();
+      gsap.to(c, { rotationY: ((e.clientX - r.left) / r.width - .5) * 16, rotationX: -((e.clientY - r.top) / r.height - .5) * 12, transformPerspective: 700, duration: .3 });
+    });
+    gg.addEventListener('pointerout', (e) => { const c = e.target.closest('.gcard'); if (c && !c.contains(e.relatedTarget)) gsap.to(c, { rotationY: 0, rotationX: 0, duration: .5, ease: 'power3.out' }); });
+    /* искры за курсором */
+    let last = 0;
+    addEventListener('pointermove', (e) => {
+      const now = performance.now(); if (now - last < 70) return; last = now;
+      const st = document.createElementNS(NS, 'svg'); st.setAttribute('viewBox', '0 0 24 24'); st.setAttribute('class', 'trail');
+      const u = document.createElementNS(NS, 'use'); u.setAttribute('href', '#spark'); st.append(u);
+      st.style.color = ['#ffc21a', '#f7a3dc', '#5a3cf4', '#19d1ef'][Math.floor(now / 70) % 4];
+      st.style.left = `${e.clientX - 6}px`; st.style.top = `${e.clientY - 6}px`;
+      fx.append(st);
+      gsap.fromTo(st, { scale: 1, rotation: 0 }, { scale: 0, rotation: 120, y: 16, duration: .7, ease: 'power2.out', onComplete: () => st.remove() });
+    }, { passive: true });
+  }
+  /* рамки с маркерами «оживают» при входе секции */
+  if (A) $$('.hd .bb').forEach((bb) => gsap.from(bb.querySelectorAll('.hdl'), { scale: 0, duration: .4, ease: 'back.out(3)', stagger: .04, scrollTrigger: { trigger: bb, start: 'top 85%', once: true } }));
+  /* счётчик лаборатории появляется */
+  if (A) gsap.from('[data-meter]', { y: 40, scale: .9, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '[data-meter]', start: 'top 92%', once: true } });
+  /* клик по кубику — он делает сальто */
+  $$('.hero__art .cube').forEach((c) => c.parentElement && c.addEventListener('click', () => { if (A) gsap.fromTo(c, { scale: 1 }, { scale: 1.4, duration: .3, yoyo: true, repeat: 1, ease: 'power2.out' }); }));
+  /* панорама: клик по башне — звучит название */
+  $$('[data-skyline], [data-skyline2]').forEach((sk) => sk.addEventListener('click', () => { if (A) gsap.fromTo(sk, { y: -6 }, { y: 0, duration: .6, ease: 'bounce.out' }); speak('Galata Kulesi, Galata Köprüsü, Kız Kulesi'); }));
+
+  /* ---------- ещё смысловые движения ---------- */
+  if (A) {
+    gsap.from('.comic .frame:nth-child(odd)', { x: -90, rotation: -5, duration: .8, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.comic', start: 'top 80%', once: true } });
+    gsap.from('.comic .frame:nth-child(even)', { x: 90, rotation: 5, duration: .8, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.comic', start: 'top 80%', once: true } });
+    gsap.from('.counters .counter', { y: 30, rotation: (i) => (i - 1) * 6, duration: .7, ease: 'back.out(2.2)', stagger: .1, scrollTrigger: { trigger: '.counters', start: 'top 95%', once: true } });
+    gsap.from('[data-law] .steps button', { scale: 0, duration: .4, ease: 'back.out(3)', stagger: .08, scrollTrigger: { trigger: '[data-law]', start: 'top 75%', once: true } });
+    loop(gsap.to($$('.pin circle.dot', $('[data-pins]')), { attr: { r: 18 }, duration: .9, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: .2, from: 'random' } }), '[data-map]');
+    loop(gsap.to('[data-mnb]', { y: -8, duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .25 }), '[data-mn]');
+    gsap.from('[data-gf] .btn', { y: -20, scale: .8, duration: .5, ease: 'back.out(2.4)', stagger: .06, scrollTrigger: { trigger: '[data-gf]', start: 'top 90%', once: true } });
+    gsap.from('[data-lbwords] .chip', { scale: .4, rotation: (i) => (i % 2 ? 10 : -10), duration: .5, ease: 'back.out(2.6)', stagger: .04, scrollTrigger: { trigger: '[data-lbwords]', start: 'top 90%', once: true } });
+    gsap.from('[data-pron] button', { rotationX: 80, transformPerspective: 600, duration: .6, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: '[data-pron]', start: 'top 92%', once: true } });
+    gsap.from('.glue button', { scaleX: .5, duration: .6, ease: 'elastic.out(1, .5)', stagger: .1, scrollTrigger: { trigger: '.glue', start: 'top 88%', once: true } });
+    gsap.fromTo('.gate', { letterSpacing: '.4em' }, { letterSpacing: '0em', ease: 'none', scrollTrigger: { trigger: '.gate', start: 'top 95%', end: 'top 55%', scrub: .5 } });
+    gsap.fromTo('.poster', { borderRadius: 80 }, { borderRadius: 32, ease: 'none', scrollTrigger: { trigger: '.poster', start: 'top bottom', end: 'top 40%', scrub: .5 } });
   }
 
   /* ---------- обновления ScrollTrigger ---------- */
