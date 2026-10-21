@@ -2314,6 +2314,8 @@ tl.fromTo('[data-pc]', { y: 260, scale: .4, rotationX: 60, transformPerspective:
 if (ST) {
 const refresh = () => { ScrollTrigger.sort(); ScrollTrigger.refresh(); layout(); placeHots(); };
 ScrollTrigger.sort(); ScrollTrigger.refresh();
+/* kit дорисовывает упражнения после загрузки — страница растёт, позиции сцен пересчитываем */
+if (ST && window.ResizeObserver) { const mn = document.querySelector('main'); let lastH = mn.offsetHeight, rt = null; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { if (Math.abs(mn.offsetHeight - lastH) > 4) { ScrollTrigger.refresh(); lastH = mn.offsetHeight; layout(); } }, 250); }).observe(mn); }
 addEventListener('load', refresh);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
 addEventListener('orientationchange', () => setTimeout(refresh, 300));

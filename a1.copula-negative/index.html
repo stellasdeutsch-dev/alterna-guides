@@ -1937,6 +1937,8 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- пересчёт после шрифтов, загрузки и поворота ---------- */
   if (A) {
     addEventListener('load', () => ScrollTrigger.refresh());
+    /* kit дорисовывает упражнения позже — пересчитываем позиции сцен, когда меняется высота страницы */
+    if (window.ResizeObserver) { const mainEl = document.querySelector('main'); let lastH = mainEl.offsetHeight, rt = 0; new ResizeObserver(() => { const h = mainEl.offsetHeight; if (Math.abs(h - lastH) < 4) return; clearTimeout(rt); rt = setTimeout(() => { ScrollTrigger.refresh(); lastH = mainEl.offsetHeight; }, 250); }).observe(mainEl); }
     document.fonts && document.fonts.ready.then(() => ScrollTrigger.refresh());
     addEventListener('orientationchange', () => setTimeout(() => ScrollTrigger.refresh(), 300));
   }
