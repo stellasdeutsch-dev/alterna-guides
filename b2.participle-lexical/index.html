@@ -270,7 +270,7 @@ button{font:inherit;color:inherit}
 .finale{max-width:640px;margin:46px auto 0;text-align:center}
 .finale p{margin:0 auto 6px;font-size:clamp(17px,2.1vw,20px)}
 .finale .dry{margin-top:22px;font-weight:800}
-.endcard{margin:40px auto 0;max-width:760px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.endcard{margin:40px auto 0;max-width:760px;width:min(760px,100%);display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
 .endcard i{height:64px;border-radius:14px;background:var(--c)}
 .pnl__dev{position:absolute;right:1%;top:4px;width:min(34%,270px);height:auto;z-index:1;filter:drop-shadow(0 18px 24px rgba(0,0,0,.6))}
 @media (max-width:640px){.pnl__dev{width:34%;right:0;top:6px}}
@@ -281,6 +281,26 @@ button{font:inherit;color:inherit}
 .spec .sp-a{stroke:#8a4dff;stroke-width:3}.spec .sp-b{stroke:#e8f4ff;stroke-width:3}
 .spec circle{fill:#fff}
 .spec text{font:700 12px var(--ak-font);fill:#7f859a;letter-spacing:.06em}
+
+/* --- кинорежим --- */
+html.cine .tunnel i{animation:none;opacity:0}
+.tunnel i::after{content:attr(data-l);position:absolute;right:3%;bottom:3%;font:800 clamp(22px,4vw,52px)/1 var(--ak-font);color:var(--c,#fff);text-shadow:0 0 40px currentColor;opacity:.9}
+html:not(.cine) .tunnel i::after{display:none}
+.hall{padding-bottom:30px;display:flex;flex-direction:column;justify-content:center}
+html.cine .hall{height:100svh;min-height:560px}
+.hall__head{padding:0 16px;max-width:1140px;margin:0 auto;width:100%}
+.hall__track{display:flex;gap:18px;padding:16px;overflow-x:auto;scrollbar-width:none;align-self:flex-start}
+html.cine .hall__track{overflow:visible;width:max-content}
+.hall__track::-webkit-scrollbar{display:none}
+.hcard{flex:none;width:min(78vw,520px);min-height:min(56svh,420px);border-radius:var(--r-xl);background:var(--c);color:#fff;padding:clamp(18px,3vw,32px);display:grid;align-content:space-between;gap:12px;position:relative;overflow:hidden}
+.hcard__s{font:800 clamp(48px,9vw,110px)/.9 var(--ak-font);letter-spacing:-.04em}
+.hcard__m{font-size:clamp(17px,2.4vw,22px);font-weight:700}
+.hcard__ex{font-size:clamp(20px,3vw,30px);font-weight:800}
+.hcard__ex small{display:block;font-size:14px;font-weight:600;opacity:.85}
+.hcard .pnl__dev{position:absolute;right:12px;top:12px;width:38%}
+.hcard--mis{color:#1b1400}
+.fin-sc{display:grid;align-content:center}
+html.cine .fin-sc{min-height:100svh}
 /* скроллбар-часы */
 .sb{position:fixed;z-index:60;right:14px;top:14vh;bottom:14vh;width:44px}
 .sb__track{position:absolute;inset:0;touch-action:none;cursor:pointer}
@@ -467,6 +487,12 @@ button{font:inherit;color:inherit}
 </div>
 </div>
 <div class="wrap"><div class="mq" data-mq data-ok="okunası kitap"><p class="mq__q"><span>Вопрос</span>Где признак без лица?</p><div class="mq__o" lang="tr"><button type="button">okuduğum kitap</button><button type="button">okunası kitap</button><button type="button">okuyacağım kitap</button></div><p class="mq__f" data-ui aria-live="polite"></p></div></div>
+</section>
+
+<!-- ============ HALL: проход по залу ============ -->
+<section class="sx hall" data-section="hall" data-words="19" id="s-hall">
+<div class="hall__head"><p class="kick"><b>★</b>Проход по залу</p><h2>Пять стендов подряд</h2><p>Листай вниз — зал едет вбок. Каждый экран — один суффикс и один пример. Подробности ждут дальше.</p></div>
+<div class="hall__track" data-hall></div>
 </section>
 
 <!-- ============ AR ============ -->
@@ -848,6 +874,7 @@ button{font:inherit;color:inherit}
 <div class="crow2"><h3><i>5</i><span lang="tr" class="c-mis">-mIş</span></h3><p>Уже случилось, результат остался. <span class="ex" lang="tr">kurumuş yaprak, dolmuş</span></p></div>
 </div>
 <p style="margin-top:22px;font-weight:700">Один вопрос решает всё: есть ли у признака лицо? Нет лица — смотри на время: всегда, никогда, стоит, не было, уже.</p>
+<div class="fin-sc" data-finsc>
 <div class="endcard" aria-hidden="true"><i style="--c:var(--ar)"></i><i style="--c:var(--maz)"></i><i style="--c:var(--asi)"></i><i style="--c:var(--dik)"></i><i style="--c:var(--mis)"></i></div>
 <div class="finale" data-finale>
 <p>Ты снова в Хамамёню. Турист спрашивает дорогу.</p>
@@ -855,6 +882,7 @@ button{font:inherit;color:inherit}
 <p>Он кивает. Говорит, <b class="tr" lang="tr" data-say="Sağ ol!">sağ ol</b>. Ты чувствуешь себя местным.</p>
 <p class="dry">Кофе там, кстати, так себе.</p>
 <div class="stage-ctl" data-ui style="justify-content:center;margin-top:18px"><button type="button" class="btn" data-goto="hero">Наверх</button></div>
+</div>
 </div>
 </div>
 </section>
@@ -894,6 +922,15 @@ const isDesk = () => matchMedia('(min-width: 1024px)').matches;
 if (G) { ['ScrollTrigger', 'MotionPathPlugin', 'SplitText'].forEach((n) => { if (window[n]) gsap.registerPlugin(window[n]); }); if (window.ScrollTrigger) ScrollTrigger.config({ ignoreMobileResize: true }); }
 const ST = A && window.ScrollTrigger ? window.ScrollTrigger : null;
 const MP = A && !!window.MotionPathPlugin;
+/* кинорежим: крупные сцены закрепляются и проигрываются прокруткой */
+if (ST) document.documentElement.classList.add('cine');
+const mob = () => innerWidth < 768;
+function scene(el, len, build, start) {
+  if (!ST || !el) return null;
+  const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: start || 'top top', end: () => '+=' + (typeof len === 'function' ? len() : len), scrub: .8, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
+  build(tl);
+  return tl;
+}
 const NS = 'http://www.w3.org/2000/svg';
 const COL = { ar: '#2f7bff', maz: '#6f63f4', asi: '#ff7a45', dik: '#14b8c7', mis: '#f4b740' };
 /* разметка примеров: {страдательный} и [суффикс] — «kır{ıl}[maz] cam» */
@@ -947,8 +984,6 @@ if (ST && window.SplitText) $$('main h2').forEach((h) => { const sp = new SplitT
 if (ST) {
   ScrollTrigger.batch('.kick', { start: 'top 92%', once: true, onEnter: (els) => gsap.from(els, { x: -30, duration: .6, ease: 'power3.out' }) });
   ScrollTrigger.batch('.rule, .mq', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 50, scale: .95, duration: .8, ease: 'back.out(1.6)', stagger: .1 }) });
-  gsap.to('.tunnel', { scale: 1.7, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-  gsap.to('.hero__t', { yPercent: -18, scale: .94, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   $$('[data-pnl]').forEach((p) => {
     gsap.from(p, { y: 90, scale: .96, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'top 55%', scrub: .6 } });
     gsap.fromTo($('.pnl__title', p), { xPercent: 0 }, { xPercent: 8, ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'bottom top', scrub: true } });
@@ -990,9 +1025,7 @@ if (A) {
     $$('[data-count]').forEach((el, i) => { const o = { v: 0 }; gsap.to(o, { v: Number(el.dataset.count), duration: 1.5, delay: .2 + i * .15, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(o.v); } }); });
     gsap.from('.shelf__bar .dev', { y: 40, duration: .7, ease: 'back.out(2)', stagger: .08 });
   }, 150));
-  let ht = null; const KS = ['ar', 'maz', 'asi', 'dik', 'mis'];
-  watch($('.hero'), () => { if (!ht) ht = setInterval(() => shelf(KS[(KS.indexOf(heroK) + 1) % 5]), 4200); }, () => { clearInterval(ht); ht = null; });
-  watch($('.hero'), () => $$('.tunnel i').forEach((t) => { t.style.animationPlayState = 'running'; }), () => $$('.tunnel i').forEach((t) => { t.style.animationPlayState = 'paused'; }));
+  if (!ST) watch($('.hero'), () => $$('.tunnel i').forEach((t) => { t.style.animationPlayState = 'running'; }), () => $$('.tunnel i').forEach((t) => { t.style.animationPlayState = 'paused'; }));
 }
 
 /* ---------- STORY: карта и тупик ---------- */
@@ -1020,10 +1053,6 @@ function walk() {
 }
 $('[data-smap-go]').addEventListener('click', walk);
 if (ST) {
-  const rl = route.getTotalLength();
-  gsap.fromTo(route, { strokeDasharray: rl, strokeDashoffset: rl }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-smap]', start: 'top 85%', end: 'center 50%', scrub: .6 } });
-  ScrollTrigger.create({ trigger: '[data-smap]', start: 'center 55%', once: true, onEnter: walk });
-  ScrollTrigger.batch('[data-lines] p', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { x: -40, rotation: -1, duration: .6, ease: 'back.out(1.8)', stagger: .12 }) });
   gsap.from('[data-smap]', { rotationY: -18, transformPerspective: 1000, x: 60, ease: 'none', scrollTrigger: { trigger: '[data-smap]', start: 'top bottom', end: 'top 50%', scrub: .6 } });
 }
 
@@ -1059,7 +1088,7 @@ const PS = [
   { w: 'oku<span class="ps">n</span><span class="sf asi">ası</span> kitap', b: 'лица нет', c: 'Лицо ушло. Осталась оценка: книгу стоит прочитать.', f: true },
   { w: 'okunası', b: 'в словаре', c: 'Слово легло в словарь. Как «невиданный» в русском.', f: true },
 ];
-let pi = 0, pAuto = true, pT = null, pVis = false;
+let pi = 0, pAuto = !ST, pT = null, pVis = false;
 const liquid = $('[data-liquid] path');
 function pShow(i) {
   pi = (i + PS.length) % PS.length; const s = PS[pi];
@@ -1219,16 +1248,6 @@ const sts = LS.map((s) => {
   lsvg.append(g); return g;
 });
 const train = document.createElementNS(NS, 'circle'); train.setAttribute('r', 9); train.setAttribute('fill', '#fff'); lsvg.append(train);
-if (A && MP) {
-  const lp = $('[data-line-p]');
-  const tt = gsap.to(train, { duration: 7, repeat: -1, yoyo: true, ease: 'sine.inOut', paused: true, motionPath: { path: lp, align: lp, alignOrigin: [.5, .5] } });
-  watch($('[data-line]'), () => tt.play(), () => tt.pause());
-}
-if (ST) {
-  const lp = $('[data-line-p]'); const ll = lp.getTotalLength();
-  gsap.fromTo(lp, { strokeDasharray: ll, strokeDashoffset: ll }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-line]', start: 'top 85%', end: 'center 50%', scrub: .6 } });
-  gsap.from(sts, { scale: 0, transformOrigin: 'center', duration: .6, ease: 'back.out(2.5)', stagger: .12, scrollTrigger: { trigger: '[data-line]', start: 'top 65%', once: true } });
-}
 
 /* ---------- TREE ---------- */
 const CS = [
@@ -1306,7 +1325,6 @@ $('[data-bub-say]').addEventListener('click', () => say(cur.tr));
 if (A) {
   gsap.set('[data-dolmus]', { y: 398 });
   const L = [
-    gsap.fromTo('[data-dolmus]', { x: -150 }, { x: 820, duration: 9, repeat: -1, ease: 'none', paused: true }),
     gsap.to('[data-glow-top]', { opacity: .4, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
     gsap.to('[data-water]', { scaleY: 1.12, transformOrigin: '95px 400px', duration: .8, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
     gsap.to('[data-crowd]', { y: -3, duration: .5, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }),
@@ -1316,7 +1334,6 @@ if (A) {
 }
 if (ST) {
   gsap.to('[data-par-city]', { x: -30, ease: 'none', scrollTrigger: { trigger: city, start: 'top bottom', end: 'bottom top', scrub: true } });
-  gsap.from(hots, { scale: 0, duration: .6, ease: 'back.out(2.5)', stagger: .08, scrollTrigger: { trigger: city, start: 'top 70%', once: true } });
   gsap.from(city, { clipPath: 'inset(14% 10% 14% 10% round 46px)', ease: 'none', scrollTrigger: { trigger: city, start: 'top bottom', end: 'top 40%', scrub: .6 } });
 }
 /* ---------- LAB: конструктор ---------- */
@@ -1471,8 +1488,6 @@ if (ST) ScrollTrigger.batch('.trap', { start: 'top 90%', once: true, onEnter: (e
 /* ---------- CHEAT ---------- */
 if (ST) {
   ScrollTrigger.batch('.crow2', { start: 'top 92%', once: true, onEnter: (els) => gsap.from(els, { x: -60, duration: .7, ease: 'back.out(1.6)', stagger: .1 }) });
-  gsap.from('.endcard i', { scaleY: 0, transformOrigin: '50% 100%', duration: .7, ease: 'back.out(2)', stagger: .1, scrollTrigger: { trigger: '.endcard', start: 'top 90%', once: true } });
-  ScrollTrigger.batch('.finale p', { start: 'top 92%', once: true, onEnter: (els) => gsap.from(els, { y: 30, duration: .6, ease: 'back.out(1.8)', stagger: .18 }) });
   gsap.from('.cont', { scaleX: 0, transformOrigin: '0 50%', ease: 'none', scrollTrigger: { trigger: '.cont', start: 'top 90%', end: 'top 60%', scrub: .5 } });
 }
 $$('.crow2').forEach((r) => r.addEventListener('click', () => { const ex = $('.ex', r); if (ex) say(ex.textContent); pop($('h3 i', r)); }));
@@ -1487,12 +1502,8 @@ $$('[data-dev-svg]').forEach((d) => {
   fp.forEach((p) => { const l = p.getTotalLength(); gsap.set(p, { strokeDasharray: l, strokeDashoffset: l }); });
   gsap.to(fp, { strokeDashoffset: 0, duration: 1, ease: 'power2.out', stagger: .05, scrollTrigger: { trigger: d, start: 'top 80%', once: true } });
   gsap.from(d, { y: -60, rotation: -8, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: d, start: 'top 85%', once: true } });
-  const fl = gsap.to(d, { y: -8, duration: 2.2, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true });
-  const gl = gsap.fromTo(scr, { opacity: 1 }, { opacity: .7, duration: 1.4, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true });
-  watch(d, () => { fl.play(); gl.play(); }, () => { fl.pause(); gl.pause(); });
 });
 if (ST) {
-  ScrollTrigger.batch('.kn', { start: 'top 95%', once: true, onEnter: (els) => gsap.from(els, { rotation: -180, scale: 0, duration: .8, ease: 'back.out(2)', stagger: .05 }) });
   $$('[data-spec]').forEach((sp) => {
     gsap.fromTo($('.sp-a', sp), { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sp, start: 'top 90%', end: 'top 55%', scrub: .5 } });
     gsap.fromTo($('.sp-b', sp), { scaleX: 0, transformOrigin: '100% 50%' }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sp, start: 'top 85%', end: 'top 50%', scrub: .5 } });
@@ -1500,9 +1511,88 @@ if (ST) {
   });
 }
 if (ST) gsap.fromTo('[data-watch-svg]', { rotation: -120 }, { rotation: -90, ease: 'none', scrollTrigger: { trigger: '[data-watch]', start: 'top bottom', end: 'bottom top', scrub: true } });
-$$('.crow2').forEach((r) => r.addEventListener('pointerenter', () => { if (A && isDesk()) gsap.fromTo(r, { x: 0 }, { x: 10, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }); }));
-if (A) { const pulse = gsap.to('.floor-glow', { opacity: .55, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }); watch($('.hero'), () => pulse.play(), () => pulse.pause()); }
-$$('.dcard').forEach((c) => c.addEventListener('pointerenter', () => { if (A && isDesk()) gsap.fromTo(c, { y: 0 }, { y: -8, duration: .25, yoyo: true, repeat: 1, ease: 'power2.out' }); }));
+
+/* ---------- СЦЕНА 1: полёт сквозь неоновый коридор ---------- */
+const frames = $$('.tunnel i'), FK = ['ar', 'maz', 'asi', 'dik', 'mis'], FL = ['-ar', '-maz', '-ası', '-dık', '-mış'];
+frames.forEach((f, i) => { f.dataset.l = FL[i]; f.style.setProperty('--c', COL[FK[i]]); if (ST) f.style.borderColor = COL[FK[i]]; });
+scene($('.hero'), () => (mob() ? 1300 : 1900), (tl) => {
+  frames.forEach((f, i) => {
+    tl.fromTo(f, { z: -2600, opacity: 0 }, { z: 600, opacity: 1, duration: .55, ease: 'power1.in' }, i * .14)
+      .to(f, { opacity: 0, duration: .06 }, i * .14 + .5);
+  });
+  tl.to('.hero__t', { scale: 1.15, y: -40, duration: .35 }, 0)
+    .to('.hero__kick, .hero__tag', { opacity: .25, duration: .2 }, .1)
+    .fromTo('.floor-glow', { opacity: .4 }, { opacity: 1, duration: .6 }, 0)
+    .to('.hero__in', { y: -120, opacity: 0, duration: .25 }, .95)
+    .to({}, { duration: .1 });
+});
+
+/* ---------- СЦЕНА 2: маршрут в тупик ---------- */
+(() => {
+  const wide = !mob(), lines = $$('[data-lines] p');
+  scene(wide ? $('[data-section="story"]') : $('[data-smap]'), () => (wide ? 1700 : 1100), (tl) => {
+    const rl = route.getTotalLength();
+    gsap.set(route, { strokeDasharray: rl, strokeDashoffset: rl });
+    if (wide) { gsap.set(lines.slice(1), { opacity: .2 }); lines.slice(1).forEach((p, i) => tl.to(p, { opacity: 1, duration: .08 }, .05 + i * .1)); }
+    tl.to(route, { strokeDashoffset: 0, duration: .6 }, .05);
+    if (MP) tl.fromTo(me, { x: 0, y: 0 }, { duration: .6, motionPath: { path: route, align: route, alignOrigin: [.5, .5] } }, .05);
+    tl.to('[data-wall]', { x: 6, duration: .02, yoyo: true, repeat: 5 }, .7)
+      .fromTo('[data-wall] rect', { scale: 1 }, { scale: 1.3, transformOrigin: '50% 50%', duration: .06, yoyo: true, repeat: 1 }, .7)
+      .fromTo('[data-cafe]', { scale: .2, svgOrigin: '430 150' }, { scale: 1, duration: .15, ease: 'back.out(2)' }, .82)
+      .to({}, { duration: .1 });
+  }, wide ? 'top top' : 'center center');
+})();
+
+/* ---------- СЦЕНА 3: глагол застывает ---------- */
+scene($('[data-player]'), () => (mob() ? 1100 : 1500), (tl) => {
+  tl.to({}, { duration: 1, onUpdate: () => { const i = Math.min(3, Math.floor(tl.progress() * 4)); if (i !== pi) pShow(i); } })
+    .fromTo('[data-p-w]', { scale: 1 }, { scale: 1.25, duration: .5 }, 0)
+    .to('[data-p-w]', { scale: 1, duration: .5 }, .5);
+}, 'center center');
+
+/* ---------- СЦЕНА 4: проход по залу ---------- */
+const hall = $('[data-hall]');
+const devs = $$('[data-dev-svg]');
+Object.keys(COL).forEach((k, i) => {
+  const c = document.createElement('article'); c.className = 'hcard' + (k === 'mis' ? ' hcard--mis' : ''); c.style.setProperty('--c', COL[k]);
+  const [w, ru] = EX[k][0];
+  c.innerHTML = `<span class="hcard__s" lang="tr">${['-(A/I)r', '-mAz', '-AsI', '-DIk', '-mIş'][i]}</span><span class="hcard__m" data-ui>${['делает всегда', 'не делает никогда', 'стоит того', 'такого не было', 'уже случилось'][i]}</span><span class="hcard__ex" lang="tr" data-say="${plain(w)}">${plain(w)}<small data-ui>${ru}</small></span>`;
+  if (devs[i]) c.append(devs[i].cloneNode(true));
+  hall.append(c);
+});
+scene($('[data-section="hall"]'), () => Math.max(500, hall.scrollWidth - innerWidth + 80), (tl) => {
+  tl.to(hall, { x: () => -(hall.scrollWidth - innerWidth + 32), duration: 1 })
+    .fromTo('.hcard__s', { yPercent: 40 }, { yPercent: 0, stagger: .15, duration: .3 }, 0);
+});
+
+/* ---------- СЦЕНА 5: поезд по линии времени ---------- */
+scene($('[data-line]'), () => (mob() ? 1100 : 1400), (tl) => {
+  const lp = $('[data-line-p]'), ll = lp.getTotalLength();
+  gsap.set(lp, { strokeDasharray: ll, strokeDashoffset: ll });
+  let last = -1;
+  tl.to(lp, { strokeDashoffset: 0, duration: .3 }, 0)
+    .fromTo(sts, { scale: 0, transformOrigin: 'center' }, { scale: 1, stagger: .05, duration: .1 }, .1);
+  if (MP) tl.fromTo(train, { x: 0, y: 0 }, { duration: .7, motionPath: { path: lp, align: lp, alignOrigin: [.5, .5] }, onUpdate: function () { const i = Math.min(4, Math.floor(this.progress() * 5)); if (i !== last) { last = i; sts.forEach((x, j) => x.querySelector('circle').setAttribute('r', j === i ? 30 : 22)); $('[data-line-w]').textContent = LS[i].t; $('[data-line-r]').textContent = LS[i].r; } } }, .3);
+}, 'center center');
+
+/* ---------- СЦЕНА 6: ночной Кызылай ---------- */
+scene(city, () => (mob() ? 1000 : 1300), (tl) => {
+  gsap.set('[data-dolmus]', { y: 398 });
+  tl.fromTo('[data-dolmus]', { x: -150 }, { x: 820, duration: 1 }, 0)
+    .fromTo('[data-par-city]', { x: 30 }, { x: -50, duration: 1 }, 0)
+    .fromTo('[data-atakule]', { y: 40 }, { y: 0, duration: .6 }, 0)
+    .fromTo(hots, { scale: 0 }, { scale: 1, stagger: .08, duration: .1, ease: 'back.out(3)' }, .1);
+}, 'center center');
+
+/* ---------- СЦЕНА 7: финал — пять цветов сливаются ---------- */
+scene($('[data-finsc]'), () => (mob() ? 900 : 1100), (tl) => {
+  tl.fromTo('.endcard i', { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, stagger: .08, duration: .2 })
+    .to('.endcard', { gap: 0, duration: .15 })
+    .to('.endcard i', { borderRadius: 0, duration: .1 }, '<')
+    .fromTo('.finale p', { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: .12, duration: .15 })
+    .fromTo('.finale .dry', { scale: .7 }, { scale: 1, duration: .15, ease: 'back.out(3)' })
+    .to({}, { duration: .2 });
+}, 'center center');
 
 /* ---------- скроллбар: часы с кольцом ---------- */
 const bar = $('[data-scrollbar]'), track = $('[data-sb-track]'), ringC = $('[data-sb-ring]'), num = $('[data-sb-n]');
@@ -1541,7 +1631,10 @@ addEventListener('alterna:achievement', ({ detail }) => {
 });
 
 /* ---------- пересчёт ---------- */
-const refresh = () => { if (ST) ScrollTrigger.refresh(); layout(); place(); };
+const refresh = () => { if (ST) { ScrollTrigger.sort(); ScrollTrigger.refresh(); } layout(); place(); };
+if (ST) { ScrollTrigger.sort(); ScrollTrigger.refresh(); }
+/* kit дорисовывает упражнения после загрузки — страница растёт, позиции сцен пересчитываем */
+if (ST && window.ResizeObserver) { const mn = $('main'); let lastH = mn.offsetHeight, rt = null; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { const h = mn.offsetHeight; if (Math.abs(h - lastH) > 4) { ScrollTrigger.refresh(); lastH = mn.offsetHeight; layout(); } }, 250); }).observe(mn); }
 addEventListener('load', refresh);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
 addEventListener('orientationchange', () => setTimeout(refresh, 300));
