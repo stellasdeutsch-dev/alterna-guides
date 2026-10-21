@@ -413,10 +413,7 @@ to{transform:rotateX(-18deg) rotateY(360deg)}
 .glow{position:fixed;left:0;top:0;width:460px;height:460px;margin:-230px 0 0 -230px;border-radius:50%;pointer-events:none;z-index:0;background:radial-gradient(circle,rgba(255,196,120,.22),rgba(255,196,120,0) 65%);display:none}
 @media (hover:hover) and (min-width:1024px){.glow{display:block}
 }
-.bokeh{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.bokeh i{position:absolute;border-radius:50%;background:#fff;box-shadow:0 0 12px rgba(255,255,255,.9);opacity:.75}
-@media (max-width:767px){.bokeh{display:none}
-}
+
 .disp{display:grid;gap:14px}
 .disp__map{position:relative;border-radius:22px;overflow:hidden;background:#dbe6f0;aspect-ratio:16/8;min-height:170px}
 .disp__map svg{position:absolute;inset:0;width:100%;height:100%}
@@ -433,13 +430,6 @@ to{transform:rotateX(-18deg) rotateY(360deg)}
 .disp__st{margin:0;min-height:2.8em;font-size:15px;color:var(--muted);text-align:center}
 .mw{float:right;width:clamp(74px,13vw,118px);height:auto;margin:-34px 0 6px 12px;filter:drop-shadow(0 18px 14px rgba(20,30,60,.22))}
 .mw .mw-ham{transform-origin:94px 124px}
-.rain{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
-.rain .drop-l{position:absolute;top:0;font-weight:900;font-size:clamp(22px,3vw,34px);padding:.05em .3em;border-radius:10px;background:#fff;color:#9aa4b2;box-shadow:0 10px 20px -14px rgba(0,0,0,.4)}
-.rain .drop-l.m-y{background:var(--y);color:#fff}
-.rain .drop-l.m-s{background:var(--s);color:#fff}
-.rain .drop-l.m-n{background:var(--n);color:#fff}
-@media (max-width:700px){.rain{display:none}
-}
 .bld{position:relative;max-width:1000px;margin:24px auto 0;height:min(78vh,640px);min-height:460px;border-radius:var(--r-xl);overflow:hidden;background:linear-gradient(180deg,#dbeaf8 0%,#f3f6fa 70%,#e7ebf0 100%);box-shadow:var(--shadow)}
 .bld__crane{position:absolute;left:0;top:0;height:72%;width:auto;max-width:60%}
 .bld__tower{position:absolute;left:50%;bottom:0;translate:-34% 0;display:flex;flex-direction:column;align-items:center;gap:6px;padding-bottom:30px;width:min(560px,86%)}
@@ -475,9 +465,6 @@ to{transform:rotateX(-18deg) rotateY(360deg)}
 @media (max-width:640px){.flows{overflow-x:auto}
 .flows svg{min-width:560px}
 }
-.seam{display:block;width:min(1120px,calc(100% - 32px));height:26px;margin:clamp(40px,7vw,80px) auto 0;overflow:visible}
-.seam path{fill:none;stroke:#c5ccd6;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:6 7}
-.seam circle{fill:var(--or2)}
 .desk-decor{position:relative;height:0}
 .dc-pencil{position:absolute;right:4%;top:-40px;width:18px;height:150px;rotate:28deg;z-index:3;filter:drop-shadow(0 14px 10px rgba(0,0,0,.25))}
 .dc-pen{position:absolute;right:12%;top:-60px;width:18px;height:170px;rotate:-24deg;z-index:3;filter:drop-shadow(0 14px 10px rgba(0,0,0,.2))}
@@ -496,7 +483,6 @@ to{transform:rotateX(-18deg) rotateY(360deg)}
 </head>
 <body>
 <div class="glow" aria-hidden="true"></div>
-<div class="bokeh" aria-hidden="true"></div>
 <!-- спрайт иконок -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
 <defs>
@@ -538,7 +524,6 @@ to{transform:rotateX(-18deg) rotateY(360deg)}
 <svg class="l2" viewBox="0 0 60 200" data-par="70"><path d="M30 0v80" stroke="#2b2f36" stroke-width="2"/><path d="M14 120 26 80h8l12 40z" fill="#2c3036"/><path d="M14 120h32" stroke="#575d66" stroke-width="3"/><ellipse cx="30" cy="123" rx="9" ry="4" fill="#fff6d6"/></svg>
 </div>
 <svg class="dc-plant" viewBox="0 0 120 260" aria-hidden="true" data-plant><path d="M60 170C40 120 36 60 52 4c10 50 12 110 8 166z" fill="#4f7d4a"/><path d="M60 170C70 110 86 60 104 30c-4 60-20 110-44 140z" fill="#6b9a5c"/><path d="M60 170C46 130 20 100 6 70c26 30 46 64 54 100z" fill="#3f6b3d"/><path d="M56 170c-2-40 0-80 12-120 2 40-2 80-12 120z" fill="#8bb26e"/><path d="M30 170h60l-6 70a8 8 0 0 1-8 8H44a8 8 0 0 1-8-8z" fill="#d8b96a"/><path d="M28 168h64v8H28z" fill="#c8a24f"/><path d="M40 248l-6 12M80 248l6 12" stroke="#c8a24f" stroke-width="3"/></svg>
-<div class="rain" aria-hidden="true" data-rain></div>
 <div class="cubes" aria-hidden="true">
 <div class="cube cube--y"><i>y</i><i>y</i><i>y</i><i>y</i><i>y</i><i>y</i></div>
 <div class="cube cube--s"><i>s</i><i>s</i><i>s</i><i>s</i><i>s</i><i>s</i></div>
@@ -1249,6 +1234,15 @@ if (window.ScrollTrigger) ScrollTrigger.config({ ignoreMobileResize: true });
 }
 const ST = A && window.ScrollTrigger ? window.ScrollTrigger : null;
 const MP = A && !!window.MotionPathPlugin;
+/* кинорежим: крупные сцены закрепляются и проигрываются прокруткой */
+if (ST) document.documentElement.classList.add('cine');
+const mob = () => innerWidth < 768;
+function scene(el, len, build, start) {
+if (!ST || !el) return null;
+const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: start || 'top top', end: () => '+=' + (typeof len === 'function' ? len() : len), scrub: .8, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
+build(tl);
+return tl;
+}
 const KCLS = { stem: 'tl', tail: 'tl tl--tail', y: 'tl tl--y', s: 'tl tl--s', n: 'tl tl--n', gap: 'tl tl--gap', ap: 'tl' };
 function tile(t, k) { const e = document.createElement('span'); e.className = KCLS[k] || 'tl'; e.textContent = t; e.dataset.k = k; if (k === 'ap') e.style.cssText = 'background:none;box-shadow:none;padding:0;min-width:0'; return e; }
 function tiles(stage, parts) { stage.textContent = ''; return parts.map(([t, k]) => { const e = tile(t, k); stage.append(e); return e; }); }
@@ -1360,15 +1354,10 @@ gsap.to(o, { v: to, duration: 1.6, delay: .3 + i * .15, ease: 'power2.out', onUp
 });
 }, 120));
 let demoTimer = null;
-watch($('.hero'), () => { if (!demoTimer) demoTimer = setInterval(() => runDemo({ y: 's', s: 'n', n: 'y' }[demoM]), 5200); }, () => { clearInterval(demoTimer); demoTimer = null; });
+if (!ST) watch($('.hero'), () => { if (!demoTimer) demoTimer = setInterval(() => runDemo({ y: 's', s: 'n', n: 'y' }[demoM]), 5200); }, () => { clearInterval(demoTimer); demoTimer = null; });
 watch($('.hero'), () => $$('.cube, .ticker__row').forEach((c) => { c.style.animationPlayState = 'running'; }), () => $$('.cube, .ticker__row').forEach((c) => { c.style.animationPlayState = 'paused'; }));
 }
 if (ST) {
-gsap.to('.hero__lamps .l1', { y: 60, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-gsap.to('.hero__lamps .l2', { y: 110, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-gsap.to('.hero__worker', { y: -50, rotation: -2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-gsap.to('.hero__title', { scale: .92, yPercent: -12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-gsap.to('.cubes', { yPercent: 18, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 const skew = gsap.quickTo('.ticker__row', 'skewX', { duration: .4, ease: 'power3' });
 ScrollTrigger.create({ trigger: '.ticker', start: 'top bottom', end: 'bottom top', onUpdate: (self) => skew(Math.max(-12, Math.min(12, self.getVelocity() / -260))) });
 }
@@ -1380,15 +1369,6 @@ if (!isDesk()) return;
 gx(e.clientX); gy(e.clientY);
 gsap.to('.cubes', { x: (e.clientX / innerWidth - .5) * 30, duration: .8, ease: 'power2.out', overwrite: 'auto' });
 }, { passive: true });
-}
-if (A && isDesk()) {
-const bk = $('.bokeh');
-for (let i = 0; i < 16; i++) {
-const d = document.createElement('i'); const s = 3 + Math.random() * 6;
-d.style.cssText = `left:${Math.random() * 100}%;top:${Math.random() * 100}%;width:${s}px;height:${s}px`;
-bk.append(d);
-gsap.to(d, { y: -40 - Math.random() * 60, x: (Math.random() - .5) * 40, duration: 6 + Math.random() * 6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
-}
 }
 $$('[data-goto]').forEach((b) => b.addEventListener('click', () => $(`[data-section="${b.dataset.goto}"]`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })));
 const chat = $('[data-chat]'), pick = $('[data-chat-pick]');
@@ -1521,11 +1501,6 @@ $('[data-gap-break]').addEventListener('click', (e) => { broken = !broken; e.cur
 gapShow(false);
 if (ST) {
 const tapeRect = $('[data-gap-tape] rect');
-gsap.fromTo(tapeRect, { attr: { x: 0, width: 360 } }, { attr: { x: 300, width: 60 }, ease: 'none', scrollTrigger: { trigger: '[data-gap]', start: 'top 85%', end: 'center 50%', scrub: .5 } });
-gsap.fromTo(ticks, { x: 0 }, { x: 300, ease: 'none', scrollTrigger: { trigger: '[data-gap]', start: 'top 85%', end: 'center 50%', scrub: .5 } });
-ScrollTrigger.create({ trigger: '[data-gap]', start: 'center 60%', once: true, onEnter: () => gapShow() });
-ScrollTrigger.batch('.chain p', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 26, rotation: (i) => (i % 2 ? 1.5 : -1.5), duration: .55, ease: 'back.out(2)', stagger: .15 }) });
-gsap.from('[data-gap]', { rotation: 3, y: 60, ease: 'none', scrollTrigger: { trigger: '[data-gap]', start: 'top bottom', end: 'top 50%', scrub: .6 } });
 }
 const STEPS = [
 { stem: 'araba', tail: 'a', tr: 'Arabaya bin.', ru: 'Садись в машину. Куда? — y.' },
@@ -1623,8 +1598,6 @@ gsap.fromTo('.anat__lbl', { scaleY: 0 }, { scaleY: 1, duration: .4, delay: .9, s
 }
 $('[data-anat-again]').addEventListener('click', anatAssemble);
 if (ST) {
-gsap.fromTo(aps, { x: (i) => (i - 2) * 60, y: (i) => [-110, 80, -70, 100, -90][i], rotation: (i) => [-25, 30, -20, 35, -30][i] },
-{ x: 0, y: 0, rotation: 0, ease: 'none', stagger: .05, scrollTrigger: { trigger: '[data-anat]', start: 'top 90%', end: 'center 55%', scrub: .7 } });
 }
 const wfStage = $('[data-wf-stage]');
 let wfFixed = false;
@@ -2120,8 +2093,6 @@ for (const it of items.slice(i)) { pick(it.answer); await new Promise((r) => set
 show();
 })();
 if (ST) {
-gsap.from('[data-pc]', { y: 80, rotation: (i) => (i - 1) * 5, scale: .9, duration: .9, ease: 'back.out(1.6)', stagger: .12, scrollTrigger: { trigger: '[data-poster]', start: 'top 75%', once: true } });
-gsap.from('.pc__L', { scale: 0, rotation: -40, duration: .8, ease: 'elastic.out(1, .45)', stagger: .12, delay: .4, scrollTrigger: { trigger: '[data-poster]', start: 'top 75%', once: true } });
 gsap.from('[data-plaque]', { rotation: -14, y: -120, transformOrigin: '50% -40%', duration: 1.4, ease: 'elastic.out(1, .4)', scrollTrigger: { trigger: '[data-plaque]', start: 'top 85%', once: true } });
 gsap.from('.screw', { rotation: 360, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: '[data-plaque]', start: 'top 85%', once: true } });
 ScrollTrigger.batch('.finale p', { start: 'top 92%', once: true, onEnter: (els) => gsap.from(els, { y: 30, rotation: -1, duration: .6, ease: 'back.out(1.8)', stagger: .2 }) });
@@ -2207,24 +2178,6 @@ gsap.to(w, { y: -18, ease: 'none', scrollTrigger: { trigger: w.closest('section'
 }
 if (A) { let t = null; watch(w, () => { if (!t) t = setInterval(knock, 4200); }, () => { clearInterval(t); t = null; }); }
 });
-const rain = $('[data-rain]');
-if (A && rain && isDesk()) {
-const PAIRS = [['a', 'a', 'y'], ['ı', 'ı', 's'], ['i', 'e', 'n'], ['e', 'e', 'y'], ['u', 'u', 'n'], ['ü', 'ü', 's']];
-let pi = 0, rainT = null;
-const drop = () => {
-const [l, r, m] = PAIRS[pi++ % PAIRS.length];
-const x = 6 + Math.random() * 80, h = rain.clientHeight;
-const mk = (t, cls) => { const e = document.createElement('span'); e.className = 'drop-l ' + cls; e.textContent = t; e.style.left = x + '%'; rain.append(e); return e; };
-const a = mk(l, ''), b = mk(r, ''), c = mk(m, 'm-' + m);
-const tl = gsap.timeline({ onComplete: () => [a, b, c].forEach((e) => e.remove()) });
-tl.fromTo(a, { x: -60, y: -60, rotation: -30 }, { x: -18, y: h * .55, rotation: 0, duration: 1.6, ease: 'power2.in' })
-.fromTo(b, { x: 60, y: -60, rotation: 30 }, { x: 18, y: h * .55, rotation: 0, duration: 1.6, ease: 'power2.in' }, '<')
-.to([a, b], { x: (k) => (k ? 40 : -40), duration: .25, ease: 'power2.out' })
-.fromTo(c, { y: -60, scale: .4 }, { y: h * .55, scale: 1, duration: .7, ease: 'bounce.out' }, '<')
-.to([a, b, c], { y: h + 60, rotation: (k) => (k - 1) * 20, duration: 1.2, ease: 'power2.in', delay: .8 });
-};
-watch($('.hero'), () => { if (!rainT) rainT = setInterval(drop, 1700); }, () => { clearInterval(rainT); rainT = null; });
-}
 const bld = $('[data-bld]');
 if (bld) {
 const floors = [0, 1, 2, 3].map((k) => $(`[data-floor="${k}"]`, bld));
@@ -2283,19 +2236,84 @@ gsap.from(nodes, { x: -60, duration: .6, ease: 'back.out(2)', stagger: .07, scro
 gsap.from('.fl-r-n', { x: 60, scale: .6, transformOrigin: '50% 50%', duration: .7, ease: 'back.out(2)', stagger: .1, scrollTrigger: { trigger: flows, start: 'top 70%', once: true } });
 }
 }
-$$('[data-section]').slice(1).forEach((sec) => {
-const NS = 'http://www.w3.org/2000/svg';
-const sv = document.createElementNS(NS, 'svg');
-sv.setAttribute('class', 'seam'); sv.setAttribute('viewBox', '0 0 1000 26'); sv.setAttribute('preserveAspectRatio', 'none'); sv.setAttribute('aria-hidden', 'true');
-sv.innerHTML = '<path d="M0 13 Q125 0 250 13 T500 13 T750 13 T1000 13"/><circle cx="500" cy="13" r="5"/>';
-sec.parentNode.insertBefore(sv, sec);
-if (ST) {
-gsap.fromTo(sv.querySelector('path'), { scaleX: 0, transformOrigin: '50% 50%' }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: sv, start: 'top 95%', end: 'top 60%', scrub: .5 } });
-gsap.fromTo(sv.querySelector('circle'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .5, ease: 'back.out(3)', scrollTrigger: { trigger: sv, start: 'top 75%', once: true } });
-}
+/* ---------- СЦЕНА 1: первый экран — щель и мастер ---------- */
+scene($('.hero'), () => (mob() ? 900 : 1300), (tl) => {
+const [st, mm, tt] = tiles(demoStage, [['araba', 'stem'], ['y', 'y'], ['a', 'tail']]);
+const dc = () => { const r = $('.demo').getBoundingClientRect(), h = $('.hero').getBoundingClientRect(); return { x: innerWidth / 2 - (r.left + r.width / 2), y: innerHeight * .58 - (r.top - h.top + r.height / 2) }; };
+tl.to('.hero__title', { scale: .72, yPercent: -26, duration: .5 }, 0)
+.to('.hero__kick, .hero__list, .hero__lead, .hero__stats, .hero .btn-or', { opacity: 0, y: -40, duration: .3 }, 0)
+.to('.hero__ysn button', { scale: .6, y: -90, opacity: 0, stagger: .05, duration: .35 }, 0)
+.to('.hero__worker', { x: () => (mob() ? 0 : innerWidth * .06), y: () => (mob() ? -120 : 0), rotation: -4, opacity: () => (mob() ? .25 : 1), duration: .5 }, 0)
+.to('.demo', { x: () => dc().x, y: () => dc().y, scale: () => (mob() ? 1.1 : 1.75), duration: .5 }, .1)
+.to(mm, { y: -300, rotation: 40, scale: .5, duration: .3 }, .4)
+.to(st, { x: -150, rotation: -8, duration: .3 }, .4)
+.to(tt, { x: 150, rotation: 8, duration: .3 }, .4)
+.to(st, { x: 0, rotation: 0, duration: .25 }, .72)
+.to(tt, { x: () => -(mm.offsetWidth + 6), rotation: 0, duration: .25 }, .72)
+.to(tt, { backgroundColor: '#e5484d', color: '#ffffff', duration: .04 }, .97)
+.to([st, tt], { x: (i) => (i ? -(mm.offsetWidth + 6) + 5 : -5), duration: .03, yoyo: true, repeat: 3 }, .97)
+.to(tt, { x: 0, backgroundColor: '#eef1f5', color: '#1c2128', duration: .15 }, 1.1)
+.to(mm, { y: 0, rotation: 0, scale: 1, duration: .3, ease: 'bounce.out' }, 1.1)
+.fromTo('.demo__say', { scale: 1 }, { scale: 1.2, duration: .15, yoyo: true, repeat: 1 }, 1.4)
+.to({}, { duration: .3 });
 });
+
+/* ---------- СЦЕНА 2: закон стыка по кадрам ---------- */
+(() => {
+const box = $('[data-gap]'), chainPs = $$('.chain p');
+const wide = !mob();
+scene(wide ? $('[data-section="gap"]') : box, () => (wide ? 1500 : 1100), (tl) => {
+const [st, mm, tt] = $$('.tl', gStage);
+const tape = $('[data-gap-tape] rect');
+if (wide) { gsap.set(chainPs.slice(1), { opacity: .18 }); chainPs.slice(1).forEach((p, i) => tl.to(p, { opacity: 1, x: 0, duration: .2 }, .1 + i * .18).fromTo(p, { x: 24 }, { x: 0, duration: .2, immediateRender: false }, '<')); }
+tl.to(mm, { y: -260, rotation: -30, scale: .5, duration: .25 }, .05)
+.to(st, { x: -120, duration: .25 }, .05).to(tt, { x: 120, duration: .25 }, .05)
+.fromTo(tape, { attr: { x: 0, width: 360 } }, { attr: { x: 300, width: 60 }, duration: .6 }, .25)
+.fromTo(ticks, { x: 0 }, { x: 300, duration: .6 }, .25)
+.to(st, { x: 0, duration: .4 }, .3).to(tt, { x: () => -(mm.offsetWidth + 4), duration: .4 }, .3)
+.set(gCrack, { visibility: 'visible' }, .7)
+.fromTo(gCrack, { scaleY: 0 }, { scaleY: 1.2, duration: .12 }, .7)
+.to(tt, { backgroundColor: '#e5484d', color: '#ffffff', duration: .05 }, .7)
+.add(() => { gMm.textContent = 'щель!'; }, .72)
+.to(gCrack, { scaleY: 0, duration: .1 }, .95)
+.to(tt, { x: 0, backgroundColor: '#eef1f5', color: '#1c2128', duration: .15 }, .95)
+.to(mm, { y: 0, rotation: 0, scale: 1, duration: .25, ease: 'bounce.out' }, .95)
+.add(() => { gMm.textContent = '1 буква'; }, 1.1)
+.to({}, { duration: .3 });
+}, wide ? 'top top' : 'center center');
+})();
+
+/* ---------- СЦЕНА 3: анатомия Kule·s·i·n·e ---------- */
+scene($('[data-anat]'), () => (mob() ? 900 : 1100), (tl) => {
+tl.fromTo(aps, { x: (i) => (i - 2) * 70, y: (i) => [-140, 110, -90, 130, -120][i], rotation: (i) => [-25, 30, -20, 35, -30][i], scale: .6 }, { x: 0, y: 0, rotation: 0, scale: 1, duration: .5, stagger: .12 })
+.fromTo('.anat__lbl', { scaleY: 0 }, { scaleY: 1, duration: .2, stagger: .08 }, '>')
+.fromTo(aps[1], { boxShadow: '0 0 0 0 rgba(13,152,165,0)' }, { boxShadow: '0 0 0 10px rgba(13,152,165,.35)', duration: .15, yoyo: true, repeat: 1 })
+.fromTo(aps[3], { boxShadow: '0 0 0 0 rgba(138,92,232,0)' }, { boxShadow: '0 0 0 10px rgba(138,92,232,.35)', duration: .15, yoyo: true, repeat: 1 })
+.to({}, { duration: .3 });
+}, 'center center');
+
+/* ---------- СЦЕНА 4: пристань, утро ---------- */
+scene(city, () => (mob() ? 1000 : 1300), (tl) => {
+tl.fromTo('[data-ferry]', { x: -420 }, { x: 160, duration: 1 }, 0)
+.fromTo('.city circle:first-of-type', { attr: { cy: 180 } }, { attr: { cy: 80 }, duration: 1 }, 0)
+.fromTo('[data-par-city]', { x: 40 }, { x: -40, duration: 1 }, 0)
+.fromTo(hots, { scale: 0 }, { scale: 1, duration: .15, stagger: .08, ease: 'back.out(3)' }, .1)
+.fromTo('[data-tower]', { y: 30 }, { y: 0, duration: .6 }, 0);
+if (MP) tl.fromTo('[data-gull]', { x: 0, y: 0 }, { duration: 1, motionPath: { path: [{ x: 0, y: 0 }, { x: 220, y: -40 }, { x: 460, y: 30 }], curviness: 1.4 } }, 0);
+}, 'center center');
+
+/* ---------- СЦЕНА 5: шпаргалка собирается из глубины ---------- */
+if (mob() && ST) ScrollTrigger.batch('[data-pc], .poster__zero', { start: 'top 88%', once: true, onEnter: (els) => gsap.from(els, { y: 80, scale: .85, rotationX: 40, transformPerspective: 900, duration: .8, stagger: .12, ease: 'power3.out' }) });
+if (!mob()) scene($('[data-poster]'), 1000, (tl) => {
+tl.fromTo('[data-pc]', { y: 260, scale: .4, rotationX: 60, transformPerspective: 900, opacity: 0 }, { y: 0, scale: 1, rotationX: 0, opacity: 1, duration: .5, stagger: .2 })
+.fromTo('.pc__L', { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: .3, stagger: .15 }, '<.3')
+.fromTo('.poster__zero', { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: .3, stagger: .15 })
+.to({}, { duration: .3 });
+}, 'center center');
+
 if (ST) {
-const refresh = () => { ScrollTrigger.refresh(); layout(); placeHots(); };
+const refresh = () => { ScrollTrigger.sort(); ScrollTrigger.refresh(); layout(); placeHots(); };
+ScrollTrigger.sort(); ScrollTrigger.refresh();
 addEventListener('load', refresh);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
 addEventListener('orientationchange', () => setTimeout(refresh, 300));
