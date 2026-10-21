@@ -1178,6 +1178,17 @@ addEventListener('DOMContentLoaded', () => {
     addEventListener('load', () => ST.refresh());
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
     addEventListener('orientationchange', () => setTimeout(() => ST.refresh(), 300));
+    /* упражнения kit дорисовываются после загрузки — пересчитываем позиции сцен */
+    if ('ResizeObserver' in window) {
+      let lastH = 0, t = null;
+      new ResizeObserver(() => {
+        const h = document.querySelector('main').offsetHeight;
+        if (Math.abs(h - lastH) < 40) return;
+        lastH = h;
+        clearTimeout(t);
+        t = setTimeout(() => ST.refresh(), 250);
+      }).observe(document.querySelector('main'));
+    }
   }
 });
 </script>
