@@ -467,6 +467,25 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 .mq .chip.is-wrong{border-color:var(--gold-2);background:var(--cream);color:var(--ink)}
 .vbox{margin-top:12px}
 .video-note{display:flex;gap:10px;align-items:flex-start;margin:0 0 16px}
+
+/* ---------- v2: панорама, ленты, волны, орешки ---------- */
+.skyline{position:absolute;left:0;right:0;bottom:0;width:100%;height:46%;z-index:-1;pointer-events:none}
+.ribbon{position:relative;overflow:hidden;border-radius:999px;margin:0 0 22px;padding:10px 0;background:linear-gradient(90deg,rgba(42,95,232,.08),rgba(232,185,104,.14));mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pn--dark .ribbon,.pn--blue .ribbon{background:rgba(255,255,255,.06)}
+.ribbon__in{display:inline-flex;gap:26px;white-space:nowrap;font:400 clamp(22px,4.4vw,34px)/1 'Forum',serif;will-change:transform}
+.ribbon__in > span{display:inline-flex;align-items:center;gap:0}
+.ribbon__in > span::after{content:"";margin-left:26px;width:9px;height:9px;border-radius:2px;background:var(--gold-2);transform:rotate(45deg)}
+.nut{position:fixed;z-index:61;left:0;top:0;width:18px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#f8dca6,#e8b968 60%,#c98a2b);pointer-events:none}
+.lab-cube{position:absolute;right:14px;top:14px}
+.lab-cube .cube{--s:54px}
+@media (max-width:640px){.lab-cube{position:static;display:flex;justify-content:flex-end;margin:0 6px -18px 0}.lab-cube .cube{--s:44px}}
+.bench{position:relative}
+.r-cube{display:flex;justify-content:flex-end;margin-top:-10px}
+.r-cube .cube{--s:58px}
+.typing{align-self:flex-start;display:inline-flex;gap:5px;padding:12px 14px;border-radius:18px;background:#fff}
+.typing i{width:7px;height:7px;border-radius:50%;background:#9aa3b5;display:block}
+.poster{transform-style:preserve-3d}
+.fc__sheen{position:absolute;inset:0;border-radius:20px;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.75) 48%,transparent 62%);transform:translateX(-120%)}
 @media (prefers-reduced-motion: reduce){
   .hero__in,.deco .cube{animation:none !important}
   .fc__in,.sw__knob::after{transition:none}
@@ -529,6 +548,21 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
     <div class="deco" style="top:6%;right:4%" data-speed="-60"><div class="cube" style="--s:70px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <div class="deco deco--desk" style="bottom:8%;left:46%" data-speed="40"><div class="cube" style="--s:46px;animation-duration:24s"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <svg class="deco" style="left:-40px;top:30%;width:220px;height:220px" viewBox="0 0 200 200" aria-hidden="true"><path d="M100 20 180 170H20z" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1.5"/><path d="M100 70 140 145H60z" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="1.5"/></svg>
+    <svg class="skyline" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" data-skyline>
+      <g data-sky-far fill="rgba(255,255,255,.045)">
+        <path d="M120 300V210h40v-20h20v20h30v90z"/><rect x="250" y="150" width="8" height="150"/><path d="M246 150l8-46 8 46z"/>
+        <path d="M290 300v-60q60-80 120 0v60z"/><path d="M330 240q20-26 40 0z"/><rect x="430" y="140" width="8" height="160"/><path d="M426 140l8-50 8 50z"/>
+        <path d="M470 300v-40q40-50 80 0v40z"/><rect x="980" y="200" width="70" height="100"/><rect x="1060" y="230" width="90" height="70"/>
+      </g>
+      <g data-sky-near fill="rgba(255,255,255,.08)">
+        <path d="M760 300V170h10l14-60 14 60h10v130z"/><rect x="740" y="250" width="110" height="50"/>
+        <path d="M560 300v-50h70v50z"/><path d="M640 300v-80h50v80z"/><path d="M880 300v-60h60v60z"/>
+      </g>
+      <path d="M0 282q150-12 300 0t300 0 300 0 300 0v18H0z" fill="rgba(80,130,255,.18)" data-sky-water/>
+      <g data-sky-ferry><path d="M-30 -4h60l-10 12h-40z" fill="rgba(255,255,255,.35)"/><rect x="-16" y="-14" width="32" height="10" rx="2" fill="rgba(253,233,198,.5)"/></g>
+      <g data-gull fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round"><path d="M-14 0q7-8 14 0q7-8 14 0"/></g>
+      <g data-gull fill="none" stroke="rgba(255,255,255,.4)" stroke-width="2.5" stroke-linecap="round"><path d="M-10 0q5-6 10 0q5-6 10 0"/></g>
+    </svg>
     <div class="hero__grid">
       <div>
         <span class="kick hero__in"><span class="tri"></span><span data-ui>A1 · Стамбул · 6 минут</span></span>
@@ -586,6 +620,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
             <div class="msg msg--in" lang="tr">Kabataş'ta?</div>
             <div class="msg msg--out" lang="tr">Evet, Kabataş'<span class="bad">d</span>a.</div>
             <div class="msg msg--in" lang="tr">Kabataş'TA 🙂</div>
+            <div class="typing" aria-hidden="true" data-typing><i></i><i></i><i></i></div>
             <div class="msg msg--sys" data-ui>⛴ паром отходит от причала</div>
           </div>
           <div class="chat__pick" data-chat-pick role="group" aria-label="Как надо было ответить">
@@ -611,7 +646,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 3. GUESS ================= -->
 <section data-section="guess" data-words="13" id="guess">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
+    <div class="deco" style="right:4%;top:4%" data-speed="30"><div class="cube" style="--s:40px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Сначала угадай</span></span>
     <h2 class="h2" data-split>Жми по ощущению</h2>
     <p class="note">Правила ещё нет. Три слова, три ставки. Ошибаться здесь можно.</p>
@@ -720,7 +756,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 6. RULE ================= -->
 <section data-section="rule" data-words="34" id="rule">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
+    <div class="ribbon" aria-hidden="true"><div class="ribbon__in" lang="tr" data-ribbon="a"></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Правило</span></span>
     <h2 class="h2" data-split>Четыре шага</h2>
     <div class="row" role="group" aria-label="Слово для правила" style="margin-bottom:14px">
@@ -749,6 +786,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
         </div>
       </div>
       <div class="progress" aria-hidden="true"><i data-rprog></i></div>
+      <div class="r-cube cube-wrap"><div class="cube" data-rcube><div class="cube__f f1">d</div><div class="cube__f cube__f--t f2">t</div><div class="cube__f f3">d</div><div class="cube__f cube__f--t f4">t</div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     </div>
     <div class="rule-line" data-rule-line>Последняя буква глухая — аффикс тоже глухой: <b lang="tr">d → t</b>. Больше ничего не меняется.</div>
     <div class="mq" data-mq data-ok="1" data-why-ok="Да: p в клубе, d становится t. kitapta." data-why-no="Последняя буква p. Она в клубе глухих, поэтому d → t.">
@@ -761,7 +799,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 7. FORMS ================= -->
 <section data-section="forms" data-words="36" id="forms">
-  <div class="pn pn--cream">
+  <div class="pn pn--cream" data-pause>
+    <div class="deco" style="right:4%;top:3%" data-speed="-50"><div class="cube" style="--s:54px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Четыре формы</span></span>
     <h2 class="h2" data-split>Две кнопки</h2>
     <p class="note" style="color:#5a4a30">Согласную выбирает последняя буква. Гласную — последняя гласная. Кнопки не мешают друг другу. Гласную ты уже умеешь: это гармония.</p>
@@ -795,6 +834,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 <!-- ================= 8. COMPARE ================= -->
 <section data-section="compare" data-words="37" id="compare">
   <div class="pn pn--dark" data-pause>
+    <div class="deco" style="right:5%;top:4%" data-speed="-40"><div class="cube" style="--s:50px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Сравни</span></span>
     <h2 class="h2" data-split>Русский, турецкий, казахский</h2>
     <div class="tabs" role="tablist" aria-label="Язык">
@@ -819,7 +859,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 9. TREE ================= -->
 <section data-section="tree" data-words="29" id="tree">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
+    <div class="deco" style="right:5%;top:4%" data-speed="40"><div class="cube" style="--s:48px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Алгоритм</span></span>
     <h2 class="h2" data-split>Два вопроса</h2>
     <div class="tree">
@@ -856,6 +897,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 <!-- ================= 10. CITY ================= -->
 <section data-section="city" data-words="27" id="city">
   <div class="pn pn--blue" data-pause>
+    <div class="deco" style="right:3%;top:2%" data-speed="-60"><div class="cube" style="--s:58px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Сцена в городе</span></span>
     <h2 class="h2" data-split>Стамбул на пароме</h2>
     <p class="note">Нажми на район. Паром довезёт, кубик выберет аффикс. Золотая точка — район кончается на глухую.</p>
@@ -875,6 +917,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
         <g class="dist" data-place="Bebek" role="button" tabindex="0"><circle cx="350" cy="70" r="9"/><text x="334" y="74" text-anchor="end" lang="tr">Bebek</text></g>
         <g class="dist" data-place="Üsküdar" role="button" tabindex="0"><circle cx="440" cy="230" r="9"/><text x="456" y="234" lang="tr">Üsküdar</text></g>
         <g class="dist" data-place="Kadıköy" role="button" tabindex="0"><circle cx="370" cy="380" r="9"/><text x="388" y="384" lang="tr">Kadıköy</text></g>
+        <g data-mgull fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M-12 0q6-7 12 0q6-7 12 0"/></g>
+        <g data-mgull fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".6"><path d="M-9 0q4.5-5 9 0q4.5-5 9 0"/></g>
         <g data-ferry><path d="M-18 -2h36l-6 10h-24z" fill="#fff"/><rect x="-10" y="-12" width="20" height="10" rx="2" fill="#fde9c6"/><path d="M-2 -12v-8" stroke="#fff" stroke-width="2"/></g>
       </svg>
       <div class="row dchips" data-dchips role="group" aria-label="Районы"></div>
@@ -913,7 +957,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 11. GALLERY ================= -->
 <section data-section="gallery" data-words="11" id="gallery">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
+    <div class="ribbon" aria-hidden="true"><div class="ribbon__in" lang="tr" data-ribbon="b" data-rev></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Галерея</span></span>
     <h2 class="h2" data-split>Двадцать восемь мест</h2>
     <p class="note">Переверни карточку и послушай. Синее — звонкое, золото — глухое.</p>
@@ -950,6 +995,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
         <div class="labin"><label><input type="checkbox" data-lprop><span data-ui>имя собственное (с апострофом)</span></label></div>
       </div>
       <div class="bench">
+        <div class="lab-cube cube-wrap"><div class="cube" data-lcube><div class="cube__f f1">d</div><div class="cube__f cube__f--t f2">t</div><div class="cube__f f3">d</div><div class="cube__f cube__f--t f4">t</div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
         <div class="tiles" data-ltiles></div>
         <div class="lab__res">
           <span class="lab__form" lang="tr" data-lform>sokakta</span>
@@ -968,7 +1014,8 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 13. TRAPS ================= -->
 <section data-section="traps" data-words="38" id="traps">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
+    <div class="deco" style="right:4%;top:3%" data-speed="50"><div class="cube" style="--s:44px"><div class="cube__f f1"></div><div class="cube__f f2"></div><div class="cube__f f3"></div><div class="cube__f f4"></div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Ловушки</span></span>
     <h2 class="h2" data-split>Пять ловушек</h2>
     <div class="traps" data-traps>
@@ -1004,7 +1051,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 14. VIDEO ================= -->
 <section data-section="video" data-words="11" id="video">
-  <div class="pn pn--dark">
+  <div class="pn pn--dark" data-pause>
     <span class="kick"><span class="tri"></span><span data-ui>Видео · 2 минуты</span></span>
     <h2 class="h2">Видео</h2>
     <p class="video-note"><span class="tri"></span><span>Смотри, как из имени <b lang="tr">Fıstıkçı Şahap</b> выпадают гласные и остаётся клуб глухих.</span></p>
@@ -1014,7 +1061,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 15. PRACTICE ================= -->
 <section data-section="practice" data-words="13" id="practice">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
     <span class="kick"><span class="tri"></span><span data-ui>Практика</span></span>
     <h2 class="h2">Практика</h2>
     <p class="note">Сначала узнать, потом поставить, потом поймать ошибку. В конце — турникет на Кабаташе.</p>
@@ -1046,7 +1093,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 
 <!-- ================= 16. CHECK ================= -->
 <section data-section="check" data-words="7" id="check">
-  <div class="pn pn--white">
+  <div class="pn pn--white" data-pause>
     <span class="kick"><span class="tri"></span><span data-ui>Мини-проверка</span></span>
     <h2 class="h2">Без шпаргалки</h2>
     <p class="note">Пять вопросов. Порог восемьдесят процентов.</p>
@@ -1057,6 +1104,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 <!-- ================= 17. CHEAT ================= -->
 <section data-section="cheat" data-words="44" id="cheat">
   <div class="pn pn--dark" data-pause>
+    <div class="ribbon" aria-hidden="true"><div class="ribbon__in" lang="tr" data-ribbon="c"></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Сохрани скриншотом</span></span>
     <h2 class="h2" data-split>Шпаргалка</h2>
     <div class="poster" data-poster>
@@ -1137,6 +1185,8 @@ addEventListener('DOMContentLoaded', () => {
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const A = !!G && !RM;
   const ST = window.ScrollTrigger || null;
+  const MP = window.MotionPathPlugin || null;
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
   if (A) {
     const plugins = [ST, window.MotionPathPlugin, window.SplitText].filter(Boolean);
     G.registerPlugin(...plugins);
@@ -1983,6 +2033,121 @@ addEventListener('DOMContentLoaded', () => {
     G.fromTo('.pc--club', { rotationX: 25, transformPerspective: 900, transformOrigin: '50% 100%' }, { rotationX: 0, ease: 'none', scrollTrigger: { trigger: '[data-poster]', start: 'top bottom', end: 'top 45%', scrub: true } });
     ST.batch('.stack > a-exercise', { start: 'top 90%', onEnter: (els) => G.from(els, { y: 40, duration: .6, stagger: .1, ease: 'power3.out', overwrite: true }) });
   }
+
+  /* =============== v2: живой Стамбул, ленты, орешки, волны =============== */
+  const keep = (el, tw) => { if (!el || !tw) return; const w = el.closest('[data-pause]') || el; onVis(w, (v) => (v ? tw.resume() : tw.pause())); };
+  /* бегущие ленты: форма целиком, оглушённая буква — золотом */
+  const RIB = { a: ['sokak', 'kitap', 'ev', 'okul', 'dolmuş', 'otobüs', 'deniz', 'iş', 'park', 'tren'], b: ['Beşiktaş', 'Kadıköy', 'Sultanahmet', 'Üsküdar', 'Bebek', 'Taksim', 'Balat', 'Karaköy'], c: ['Türk', 'Arap', 'Alman', 'Rus', 'İngiliz', 'Kazak'] };
+  $$('[data-ribbon]').forEach((rb) => {
+    const k = rb.dataset.ribbon;
+    const items = RIB[k].map((w) => (k === 'c' ? build(w, 'ca') : build(w, 'da', k === 'b')));
+    for (let rep = 0; rep < 2; rep++) items.forEach((r) => {
+      const sp = el('span'); const head = el('span', '', r.form.slice(0, r.form.length - r.aff.length)); head.style.gap = '0';
+      const c = el('b', r.vl ? 't' : 'd', r.c); const rest = el('span', '', r.aff.slice(1)); rest.style.gap = '0';
+      head.style.display = rest.style.display = 'inline';
+      sp.append(head, c, rest); rb.appendChild(sp);
+    });
+    if (A && ST) G.fromTo(rb, { xPercent: rb.hasAttribute('data-rev') ? -50 : 0 }, { xPercent: rb.hasAttribute('data-rev') ? 0 : -50, ease: 'none', scrollTrigger: { trigger: rb, start: 'top bottom', end: 'bottom top', scrub: .6 } });
+  });
+  if (A) {
+    /* панорама: параллакс слоёв, паром и чайки */
+    if (ST) G.to('[data-sky-far]', { y: 40, ease: 'none', scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: true } });
+    if (ST) G.to('[data-sky-near]', { y: 80, ease: 'none', scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: true } });
+    keep($('[data-sky-ferry]'), G.fromTo('[data-sky-ferry]', { x: -60, y: 280 }, { x: 1260, duration: 26, repeat: -1, ease: 'none' }));
+    keep($('[data-sky-water]'), G.to('[data-sky-water]', { x: -60, duration: 3, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+    const gulls = $$('[data-gull]');
+    if (MP) gulls.forEach((g, i) => keep(g, G.to(g, { duration: 14 + i * 5, repeat: -1, ease: 'none', delay: i * 3, motionPath: { path: [{ x: -40, y: 120 + i * 30 }, { x: 300, y: 60 + i * 20 }, { x: 650, y: 130 }, { x: 950, y: 50 + i * 40 }, { x: 1260, y: 110 }], curviness: 1.5 } })));
+    gulls.forEach((g, i) => keep(g, G.to($('path', g), { scaleY: .4, transformOrigin: '50% 50%', duration: .35 + i * .1, repeat: -1, yoyo: true, ease: 'sine.inOut' })));
+    /* переписка: «печатает…» */
+    keep($('[data-typing]'), G.to('[data-typing] i', { y: -5, duration: .35, repeat: -1, yoyo: true, stagger: .12, ease: 'sine.inOut' }));
+    /* чайки над Босфором на карте */
+    if (MP) $$('[data-mgull]').forEach((g, i) => keep(g, G.to(g, { duration: 10 + i * 4, repeat: -1, ease: 'none', motionPath: { path: [{ x: 420, y: 60 + i * 30 }, { x: 330, y: 140 }, { x: 380, y: 260 + i * 20 }, { x: 470, y: 160 }, { x: 420, y: 60 + i * 30 }], curviness: 1.6 } })));
+    $$('[data-mgull] path').forEach((pth, i) => keep(pth, G.to(pth, { scaleY: .4, transformOrigin: '50% 50%', duration: .3 + i * .1, repeat: -1, yoyo: true })));
+    keep($('.transport'), G.to('.trn svg', { y: -4, duration: .6, stagger: { each: .12, repeat: -1, yoyo: true }, ease: 'sine.inOut' }));
+    /* стеклянные блики на карточках галереи */
+    $$('.fc__f').forEach((f) => f.appendChild(el('span', 'fc__sheen')));
+    if (ST) ST.batch('.fc__sheen', { start: 'top 85%', onEnter: (els) => G.fromTo(els, { xPercent: -120 }, { xPercent: 120, duration: 1.1, stagger: .05, ease: 'power2.inOut' }) });
+    /* постер наклоняется за курсором */
+    const poster = $('[data-poster]');
+    if (fine && poster) {
+      const rx = G.quickTo(poster, 'rotationX', { duration: .5, ease: 'power3' }), ry = G.quickTo(poster, 'rotationY', { duration: .5, ease: 'power3' });
+      G.set(poster, { transformPerspective: 1200 });
+      poster.addEventListener('pointermove', (e) => { const r = poster.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 8); rx(-((e.clientY - r.top) / r.height - .5) * 8); });
+      poster.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    }
+    /* плитки «форм» наклоняются под пальцем */
+    $$('.bt:not(.bt--big)').forEach((t) => t.addEventListener('pointerdown', () => G.fromTo(t, { rotation: -2, scale: .96 }, { rotation: 0, scale: 1, duration: .6, ease: 'elastic.out(1,.4)' })));
+    if (ST) {
+      G.fromTo('.trap', { rotation: (i) => (i % 2 ? 2 : -2) }, { rotation: 0, ease: 'none', scrollTrigger: { trigger: '[data-traps]', start: 'top bottom', end: 'center center', scrub: true } });
+      G.fromTo('.letters', { rotationX: 30, transformPerspective: 900 }, { rotationX: 0, ease: 'none', scrollTrigger: { trigger: '.letters', start: 'top bottom', end: 'top 55%', scrub: true } });
+      G.fromTo('.map', { scale: .9, rotation: -2 }, { scale: 1, rotation: 0, ease: 'none', scrollTrigger: { trigger: '.map', start: 'top bottom', end: 'top 45%', scrub: true } });
+      G.fromTo('.cityout', { x: 60 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.cityout', start: 'top bottom', end: 'top 50%', scrub: true } });
+      G.fromTo('.slots', { letterSpacing: '1em', scale: .9 }, { letterSpacing: '0em', scale: 1, ease: 'none', scrollTrigger: { trigger: '.slots', start: 'top bottom', end: 'top 60%', scrub: true } });
+      G.from('.stat', { y: 40, rotation: (i) => (i - 1) * 5, duration: .8, delay: .6, stagger: .1, ease: 'back.out(2)' });
+      G.fromTo('[data-tree] .node rect', { scale: .9, transformOrigin: '50% 50%' }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-tree]', start: 'top bottom', end: 'top 50%', scrub: true } });
+    }
+  }
+  if (A) {
+    keep($('[data-demo-cube]'), G.to('.demo .cube-wrap', { y: -8, duration: 1.6, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+    keep($('[data-cart]'), G.to('[data-cart] path:first-of-type', { rotation: 3, svgOrigin: '210 110', duration: 1.8, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+    keep($('[data-throat]'), G.to('[data-cords]', { opacity: .7, duration: 1.2, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+    keep($('[data-dot]'), G.to('[data-dot]', { attr: { r: 12 }, duration: .7, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+    keep($('.pc__letters'), G.to('.pc__letters button', { scale: 1.05, duration: .9, repeat: -1, yoyo: true, stagger: { each: .15, repeat: -1, yoyo: true }, ease: 'sine.inOut' }));
+    keep($('[data-arrow-dot]'), G.to('[data-arrow-dot]', { attr: { r: 8 }, duration: .6, repeat: -1, yoyo: true }));
+    if (ST) {
+      G.fromTo('.gcard', { rotationY: -25, transformPerspective: 900 }, { rotationY: 0, ease: 'none', stagger: .1, scrollTrigger: { trigger: '[data-guess]', start: 'top bottom', end: 'top 50%', scrub: true } });
+      G.fromTo('.switches .sw', { x: (i) => (i ? 60 : -60) }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.switches', start: 'top bottom', end: 'top 60%', scrub: true } });
+      G.fromTo('.fx__stage', { scale: .92 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.fx__stage', start: 'top bottom', end: 'top 55%', scrub: true } });
+      G.fromTo('.final .phone', { rotation: -8, y: 50 }, { rotation: 0, y: 0, ease: 'none', scrollTrigger: { trigger: '.final', start: 'top bottom', end: 'center center', scrub: true } });
+      G.fromTo('.tabs', { scale: .85 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.tabs', start: 'top bottom', end: 'top 65%', scrub: true } });
+    }
+  }
+  /* кубик плеера правила поворачивается вместе с шагами */
+  (() => {
+    const rc = $('[data-rcube]'); if (!rc) return;
+    if (A) G.set(rc, { rotationX: -20, rotationY: -32 });
+    $$('[data-step], [data-next], [data-prev], [data-play], [data-replay], [data-rw]').forEach((b) => b.addEventListener('click', () => setTimeout(() => {
+      const aff = $('[data-rtiles] .tile--aff'); turnCube(rc, !!aff && aff.classList.contains('is-vl'));
+      if (A) G.fromTo(rc, { y: -16 }, { y: 0, duration: .6, ease: 'bounce.out' });
+    }, 60)));
+  })();
+  /* кубик лаборатории показывает грань нового аффикса */
+  (() => {
+    const lc = $('[data-lcube]'), form = $('[data-lform]'); if (!lc || !form) return;
+    if (A) G.set(lc, { rotationX: -20, rotationY: -32 });
+    const sync = () => { const t = $('[data-ltiles] .tile--aff'); if (!t) return; const vl = t.classList.contains('is-vl'); const r = $$('.cube__f', lc); const isC = /[cç]/.test(t.textContent); r[0].textContent = r[2].textContent = isC ? 'c' : 'd'; r[1].textContent = r[3].textContent = isC ? 'ç' : 't'; turnCube(lc, vl); if (A) G.fromTo(lc, { scale: .7 }, { scale: 1, duration: .6, ease: 'back.out(3)' }); };
+    new MutationObserver(() => setTimeout(sync, 40)).observe(form, { childList: true, characterData: true, subtree: true });
+    setTimeout(sync, 300);
+  })();
+  /* фисташки летят в восемь ячеек клуба */
+  (() => {
+    const btn = $('[data-drop]'), cart = $('[data-cart]'); if (!btn || !cart) return;
+    const fly = () => {
+      if (!A || !MP) return;
+      const c = cart.getBoundingClientRect();
+      $$('.slot').forEach((sl, i) => {
+        const r = sl.getBoundingClientRect(), n = el('i', 'nut'); document.body.appendChild(n);
+        const x0 = c.left + c.width * .5, y0 = c.top + c.height * .5, x1 = r.left + r.width / 2, y1 = r.top + r.height / 2;
+        G.to(n, { duration: .9, delay: .5 + i * .07, ease: 'power2.in', motionPath: { path: [{ x: x0, y: y0 }, { x: (x0 + x1) / 2, y: Math.min(y0, y1) - 120 }, { x: x1, y: y1 }], curviness: 1.4 }, rotation: 540, onComplete: () => { n.remove(); G.fromTo(sl, { scale: 1.25 }, { scale: 1, duration: .4, ease: 'back.out(3)' }); } });
+      });
+    };
+    btn.addEventListener('click', fly);
+    $('[data-drop-again]').addEventListener('click', () => setTimeout(fly, RM ? 0 : 700));
+  })();
+  /* звуковые волны над буквой, которая звучит иначе */
+  (() => {
+    const strip = $('[data-strip]'); if (!strip) return;
+    const waves = () => {
+      const t = $('.tile.sound', strip); if (!t || !A) return;
+      const sv = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      sv.setAttribute('viewBox', '0 0 60 40'); sv.setAttribute('aria-hidden', 'true');
+      sv.style.cssText = 'position:absolute;left:50%;top:-44px;width:60px;height:40px;margin-left:-30px;overflow:visible;pointer-events:none';
+      sv.innerHTML = '<path d="M18 30q12-14 24 0" fill="none" stroke="#f4d29b" stroke-width="3" stroke-linecap="round"/><path d="M10 26q20-24 40 0" fill="none" stroke="#f4d29b" stroke-width="3" stroke-linecap="round"/><path d="M2 22q28-34 56 0" fill="none" stroke="#f4d29b" stroke-width="3" stroke-linecap="round"/>';
+      t.appendChild(sv);
+      G.fromTo($$('path', sv), { scale: .3, opacity: 1, transformOrigin: '50% 100%' }, { scale: 1.2, opacity: 0, duration: 1.1, stagger: .18, repeat: 2, ease: 'power2.out', onComplete: () => sv.remove() });
+    };
+    new MutationObserver(() => setTimeout(waves, 50)).observe(strip, { subtree: true, attributes: true, attributeFilter: ['class'] });
+  })();
 
   /* ---------- пересчёт ScrollTrigger ---------- */
   if (A && ST) {
