@@ -382,6 +382,20 @@ main, .sec { z-index: 1; }
 .coin small { font-size: 13px; font-weight: 700; opacity: .85; }
 .tk__mid .tk__sc { position: absolute; left: -10px; top: -14px; width: 40px; height: 26px; z-index: 2; }
 .sc-wake { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 18 14; opacity: .8; }
+/* ===== кино-сцены: закреплённые экраны ===== */
+.cine { position: relative; min-height: 100vh; min-height: 100svh; display: grid; align-content: center; padding: 70px 0 40px; }
+.has-cine #cutStage { min-height: 100vh; min-height: 100svh; border-radius: 0; align-content: center; gap: 10px; }
+.has-cine #cutStage .ch { font-size: clamp(34px, 10vw, 120px); min-height: 1.3em; padding-inline: .4em; }
+.has-cine #cutStage::before { content: 'DEĞİL'; position: absolute; left: 50%; top: 50%; translate: -50% -60%; font: 700 clamp(120px, 30vw, 420px)/1 var(--f-head); color: transparent; -webkit-text-stroke: 2px #f3d5da; pointer-events: none; }
+.has-cine .keyhole { max-width: 460px; }
+.has-cine #askCine .lab__out { padding: 26px 16px; }
+.has-cine #askCine .lab__sent { font-size: clamp(22px, 5vw, 40px); }
+.has-cine #cutStage .scis { width: clamp(92px, 16vw, 180px); height: auto; }
+#cutStage .cap { position: relative; z-index: 2; margin: 18px auto 0; font-size: clamp(17px, 2.4vw, 24px); }
+.cine-cap { position: absolute; left: 0; right: 0; top: 18px; text-align: center; z-index: 3; }
+.cine-cap b { font: 700 clamp(26px, 6vw, 54px)/1 var(--f-head); text-transform: uppercase; color: var(--pink); }
+#ferryCine .scene { max-width: 1000px; margin: 0 auto; width: 100%; }
+.plaster { position: absolute; z-index: 5; width: 90px; height: 40px; left: -120px; top: 40%; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -544,16 +558,16 @@ main, .sec { z-index: 1; }
       <div class="stage" id="cutStage">
         <svg class="scis" viewBox="0 0 140 90" id="cutScis" aria-hidden="true"><g class="bl-a"><circle cx="22" cy="22" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 31 64 44l74-12-72 20Z"/></g><g class="bl-b"><circle cx="22" cy="68" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 59 64 46l74 12-72-20Z"/></g><circle cx="64" cy="45" r="5" fill="#b57631"/></svg>
         <div class="chips" id="cutChips" data-ui></div>
+        <ol class="cap" id="cutCap">
+          <li>Шаг первый: есть фраза «я устал».</li>
+          <li>Шаг второй: ножницы отрезают хвост.</li>
+          <li>Шаг третий: <span lang="tr">değil</span> встаёт после слова.</li>
+          <li>Шаг четвёртый: хвост прыгает на <span lang="tr">değil</span>.</li>
+        </ol>
       </div>
       <div class="steps" data-ui>
         <button type="button" data-step="0" aria-label="Шаг 1">1</button><button type="button" data-step="1" aria-label="Шаг 2">2</button><button type="button" data-step="2" aria-label="Шаг 3">3</button><button type="button" data-step="3" aria-label="Шаг 4">4</button>
       </div>
-      <ol class="cap" id="cutCap">
-        <li>Шаг первый: есть фраза «я устал».</li>
-        <li>Шаг второй: ножницы отрезают хвост.</li>
-        <li>Шаг третий: <span lang="tr">değil</span> встаёт после слова.</li>
-        <li>Шаг четвёртый: хвост прыгает на <span lang="tr">değil</span>.</li>
-      </ol>
       <div class="row" style="justify-content:center" data-ui>
         <button class="btn btn--ghost" type="button" id="cutPrev">← назад</button>
         <button class="btn" type="button" id="cutPlay">▶ авто</button>
@@ -677,7 +691,7 @@ main, .sec { z-index: 1; }
         <p>Новое одно. Хвост переезжает на ключ. <b lang="tr" data-say="Öğretmensin.">Öğretmensin</b> → <b class="tq" lang="tr" data-say="Öğretmen misin?">Öğretmen misin?</b></p>
         <p>Порядок в голове такой: слово, ключ, хвост. Встретились две гласные — между ними встаёт y: <b class="tq" lang="tr" data-say="Hazır mıyım?">Hazır mıyım?</b></p>
       </div>
-      <div class="lockbox">
+      <div class="cine" id="askCine"><div class="cine-cap" data-ui><b lang="tr">mı · mi · mu · mü</b></div><div class="lockbox">
         <div class="keyhole">
           <svg viewBox="0 0 340 300" id="khSvg" aria-hidden="true">
             <rect x="20" y="40" width="300" height="220" rx="40" fill="url(#gPink)"/>
@@ -699,7 +713,7 @@ main, .sec { z-index: 1; }
           <div class="lab__grp" id="askP"><button type="button" data-p="0" aria-pressed="false">ben</button><button type="button" data-p="1" aria-pressed="true">sen</button><button type="button" data-p="2" aria-pressed="false">o</button><button type="button" data-p="3" aria-pressed="false">biz</button><button type="button" data-p="4" aria-pressed="false">siz</button><button type="button" data-p="5" aria-pressed="false">onlar</button></div>
           <div class="lab__out" style="margin-top:12px"><div class="chips" id="askChips"></div><p class="lab__sent" id="askSent" lang="tr"></p><p class="lab__ru" id="askRu"></p></div>
         </div>
-      </div>
+      </div></div>
       <ul class="exl" data-ui>
         <li><a-say>Aç mısın?</a-say><small>Ты голоден?</small></li>
         <li><a-say>Öğretmen misin?</a-say><small>Ты учитель?</small></li>
@@ -835,7 +849,7 @@ main, .sec { z-index: 1; }
       <span class="script">сцена</span>
       <h2 data-split>Паром <span class="pk">Кадыкёй — Эминёню</span></h2>
       <div class="txt"><p>Паром. Чай. Чайки. Вокруг сплошные вопросы. Паром идёт двадцать минут — успеешь всё. Нажимай на людей и предметы.</p><p>Заметь: у кота хвоста нет. Грамматического. Он — третье лицо.</p></div>
-      <div class="scene" id="scene">
+      <div class="cine" id="ferryCine"><div class="scene" id="scene">
         <svg viewBox="0 0 800 440" aria-hidden="true">
           <rect width="800" height="440" fill="url(#gSky)"/>
           <circle cx="640" cy="80" r="40" fill="#ffd2b0" opacity=".8"/>
@@ -874,7 +888,7 @@ main, .sec { z-index: 1; }
         <button class="hot" type="button" style="left:35%;top:70%" data-s="4" aria-label="Кот"><svg viewBox="0 0 24 24"><use href="#ic-cat"/></svg></button>
         <button class="hot" type="button" style="left:44%;top:42%" data-s="5" aria-label="Капитан"><svg viewBox="0 0 24 24"><use href="#ic-wheel"/></svg></button>
       </div>
-      <div class="scene__bub" id="sceneBub" data-ui aria-live="polite"><div class="qa__q"><small>Нажми на любую точку на пароме.</small></div></div>
+      <div class="scene__bub" id="sceneBub" data-ui aria-live="polite"><div class="qa__q"><small>Нажми на любую точку на пароме.</small></div></div></div>
     </div>
   </section>
 
@@ -1013,7 +1027,7 @@ main, .sec { z-index: 1; }
           <button class="btn" type="button" id="finPlay" data-ui>▶ сыграть финал</button>
         </div>
         <div class="phone" data-ui>
-          <div class="phone__scr" id="finScr">
+          <div class="phone__scr" id="finScr"><svg class="plaster" id="plaster" viewBox="0 0 90 40" aria-hidden="true"><rect x="2" y="6" width="86" height="28" rx="14" fill="#f8d3ab" stroke="#e6b588" stroke-width="2"/><rect x="30" y="10" width="30" height="20" rx="4" fill="#fde9d4"/><g fill="#e6b588"><circle cx="14" cy="16" r="1.6"/><circle cx="20" cy="24" r="1.6"/><circle cx="72" cy="16" r="1.6"/><circle cx="78" cy="24" r="1.6"/></g></svg>
             <span class="phone__isl"></span>
             <div class="phone__top"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="url(#gPink)"/><use href="#p-b" width="100" height="100"/></svg><div><b lang="tr">Eczane · Kadıköy</b></div></div>
             <div class="bub"><a-say>Hasta mısınız?</a-say><small>Вы больны?</small></div>
@@ -1050,6 +1064,7 @@ addEventListener('DOMContentLoaded', () => {
   const G = window.gsap || null;
   const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const A = !!G && !RM;
+  if (A) document.documentElement.classList.add('has-cine');
   const ST = window.ScrollTrigger;
   if (A) { gsap.registerPlugin(ScrollTrigger, MotionPathPlugin, SplitText); ScrollTrigger.config({ ignoreMobileResize: true }); }
   const $ = (s, r = document) => r.querySelector(s);
@@ -1141,8 +1156,8 @@ addEventListener('DOMContentLoaded', () => {
       gsap.from(sp.words, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .07, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
     });
     $$('.script').forEach((s) => gsap.from(s, { x: -40, rotation: -14, duration: .9, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: s, start: 'top 90%', once: true } }));
-    gsap.set('.txt p, .exl li, .lock, .cmp__row, .mq', { y: 30 });
-    ScrollTrigger.batch('.txt p, .exl li, .lock, .cmp__row, .mq', { start: 'top 92%', onEnter: (b) => gsap.to(b, { y: 0, duration: .6, ease: 'back.out(1.6)', stagger: .06, overwrite: true }) });
+    gsap.set('.sec:not(.story) .txt p, .exl li, .lock, .cmp__row, .mq', { y: 30 });
+    ScrollTrigger.batch('.sec:not(.story) .txt p, .exl li, .lock, .cmp__row, .mq', { start: 'top 92%', onEnter: (b) => gsap.to(b, { y: 0, duration: .6, ease: 'back.out(1.6)', stagger: .06, overwrite: true }) });
   });
 
   /* ---------- мини-вопросы после блоков ---------- */
@@ -1182,6 +1197,23 @@ addEventListener('DOMContentLoaded', () => {
       gsap.to('#heroArt .ha-scin', { x: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
       ScrollTrigger.create({ trigger: '.hero', start: 'top bottom', end: 'bottom top', onToggle: (st) => gsap.getTweensOf(['.ha-key', '.ha-sc', '.ha-pearl']).forEach((t) => (st.isActive ? t.resume() : t.pause())) });
     } else $$('[data-count]').forEach((el) => { el.textContent = el.dataset.count; });
+  });
+
+  /* =========================== кино: выход из hero и рассказ в аптеке =========================== */
+  safe(() => {
+    if (!A) return;
+    gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } })
+      .to('.hero__art', { scale: 1.25, y: 120, rotation: 4, ease: 'none' }, 0)
+      .to('.hero__copy', { y: -120, ease: 'none' }, 0);
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 1024px)', () => {
+      const lines = $$('#s-story .txt p');
+      gsap.set(lines, { autoAlpha: .15 });
+      const tl = gsap.timeline({ scrollTrigger: { trigger: '#s-story .story__grid', start: 'center center', end: '+=' + Math.round(innerHeight * 1.6), pin: true, scrub: 1, anticipatePin: 1 } });
+      lines.forEach((l, i) => tl.to(l, { autoAlpha: 1, x: 0, duration: .4 }, i * .5).to(l, { color: '#2a2a2e', duration: .2 }, i * .5));
+      tl.to('#phone', { rotation: 0, scale: 1.05, duration: 1 }, 0).to('#phone', { rotation: -6, scale: 1, duration: 1 }, 2);
+      return () => gsap.set(lines, { clearProps: 'all' });
+    });
   });
 
   /* =========================== STORY: телефон =========================== */
@@ -1291,10 +1323,9 @@ addEventListener('DOMContentLoaded', () => {
     $('#cutPlay').addEventListener('click', auto);
     go(0);
     if (A) {
-      const mmCut = gsap.matchMedia();
-      /* на компьютере плеер закрепляется, и шаги 1→4 крутит скролл */
-      mmCut.add('(min-width: 1024px)', () => { ScrollTrigger.create({ trigger: '#cutStage', start: 'center center', end: '+=900', pin: true, onUpdate: (st) => { const k = Math.min(3, Math.floor(st.progress * 4)); if (k !== cur) { stop(); go(k); } } }); });
-      mmCut.add('(max-width: 1023px)', () => { ScrollTrigger.create({ trigger: '#cutStage', start: 'top 70%', once: true, onEnter: auto }); });
+      /* кино-сцена: плеер на весь экран закрепляется, шаги 1→4 крутит скролл */
+      ScrollTrigger.create({ trigger: '#cutStage', start: 'top top', end: () => '+=' + Math.round(innerHeight * (innerWidth < 768 ? 1.1 : 1.6)), pin: true, anticipatePin: 1, onUpdate: (st) => { const k = Math.min(3, Math.floor(st.progress * 4)); if (k !== cur) { stop(); go(k); } } });
+      gsap.fromTo('#cutStage', { backgroundColor: '#faf8f8' }, { backgroundColor: '#fff1f3', ease: 'none', scrollTrigger: { trigger: '#cutStage', start: 'top top', end: () => '+=' + Math.round(innerHeight * (innerWidth < 768 ? 1.1 : 1.6)), scrub: true } });
     }
     if (A) ScrollTrigger.create({ trigger: '#cutStage', start: 'top bottom', end: 'bottom top', onLeave: stop, onLeaveBack: stop });
   });
@@ -1421,7 +1452,14 @@ addEventListener('DOMContentLoaded', () => {
     $$('#askP button').forEach((b) => b.addEventListener('click', () => { p = +b.dataset.p; $$('#askP button').forEach((x) => x.setAttribute('aria-pressed', x === b)); upd(true); }));
     sent.addEventListener('click', () => say(sent.textContent));
     upd(false);
-    if (A) ScrollTrigger.create({ trigger: '#khSvg', start: 'top 75%', once: true, onEnter: () => upd(false) });
+    if (A) {
+      /* кино-сцена: замок закреплён, скролл вставляет ключ в разные слова */
+      const SEQ = [['aç', 1], ['öğretmen', 1], ['yorgun', 1], ['Türk', 1], ['öğretmen', 3]];
+      let li = -1;
+      const setAsk = (k) => { w = SEQ[k][0]; p = SEQ[k][1]; $$('#askW button').forEach((x) => x.setAttribute('aria-pressed', x.dataset.w === w)); $$('#askP button').forEach((x) => x.setAttribute('aria-pressed', +x.dataset.p === p)); upd(false); };
+      ScrollTrigger.create({ trigger: '#askCine', start: 'top top', end: () => '+=' + Math.round(innerHeight * (innerWidth < 768 ? 1.2 : 1.8)), pin: true, anticipatePin: 1, onUpdate: (st) => { const k = Math.min(SEQ.length - 1, Math.floor(st.progress * SEQ.length)); if (k !== li) { li = k; setAsk(k); } } });
+      gsap.fromTo('#askCine .cine-cap b', { letterSpacing: '0.4em', scale: .8 }, { letterSpacing: '0em', scale: 1, ease: 'none', scrollTrigger: { trigger: '#askCine', start: 'top top', end: () => '+=' + Math.round(innerHeight * (innerWidth < 768 ? 1.2 : 1.8)), scrub: true } });
+    }
     if (A) gsap.fromTo('#khSvg', { rotation: -6, scale: .9 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '#khSvg', start: 'top bottom', end: 'center center', scrub: true } });
   });
 
@@ -1571,7 +1609,14 @@ addEventListener('DOMContentLoaded', () => {
       gsap.to('.sc-gull', { x: -120, y: -20, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
       gsap.to('.smoke circle', { y: -18, scale: 1.3, transformOrigin: '50% 50%', duration: 2, ease: 'sine.out', stagger: .3, yoyo: true, repeat: -1 });
       gsap.fromTo('.sc-far', { y: 20 }, { y: -10, ease: 'none', scrollTrigger: { trigger: '#scene', start: 'top bottom', end: 'bottom top', scrub: true } });
-      gsap.fromTo('.sc-ferry', { x: -60 }, { x: 40, ease: 'none', scrollTrigger: { trigger: '#scene', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      /* кино-сцена: паром пересекает Босфор, на каждой точке пути — новый диалог */
+      let lf = -1;
+      const quiet = (i) => { const s = S[i]; bub.innerHTML = `<div class="qa__q"><a-say>${s[0]}</a-say><small>${s[1]}</small></div><div class="qa__a"><a-say>${s[2]}</a-say><small>${s[3]}</small></div>`; $$('#scene .hot').forEach((x) => x.classList.toggle('is-on', +x.dataset.s === i)); gsap.fromTo(bub.children, { y: 30, scale: .8 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(2.5)', stagger: .15 }); gsap.fromTo(`#scene .hot[data-s="${i}"]`, { scale: 1.8 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' }); };
+      const fLen = () => '+=' + Math.round(innerHeight * (innerWidth < 768 ? 1.3 : 2));
+      gsap.timeline({ scrollTrigger: { trigger: '#ferryCine', start: 'top top', end: fLen, pin: true, scrub: 1, anticipatePin: 1, onUpdate: (st) => { const k = Math.min(S.length - 1, Math.floor(st.progress * S.length)); if (k !== lf) { lf = k; quiet(k); } } } })
+        .fromTo('.sc-ferry', { x: -240 }, { x: 240, ease: 'none', duration: 1 }, 0)
+        .fromTo('.sc-far', { x: 60 }, { x: -60, ease: 'none', duration: 1 }, 0)
+        .fromTo('#scene > svg', { scale: 1.15 }, { scale: 1, ease: 'none', duration: .4 }, 0);
       gsap.from('#scene .hot', { scale: .2, duration: .6, ease: 'back.out(3)', stagger: .1, scrollTrigger: { trigger: '#scene', start: 'top 70%', once: true } });
       ScrollTrigger.create({ trigger: '#scene', start: 'top bottom', end: 'bottom top', onToggle: (st) => gsap.getTweensOf(['.sc-ferry', '.wave', '.sc-gull', '.smoke circle']).forEach((t) => (st.isActive ? t.resume() : t.pause())) });
     }
@@ -1686,7 +1731,15 @@ addEventListener('DOMContentLoaded', () => {
       gsap.from('#poster .ends button', { scale: .4, duration: .5, ease: 'back.out(3)', stagger: .05, scrollTrigger: { trigger: '#poster .ends', start: 'top 90%', once: true } });
       gsap.from('.motto', { scale: .6, rotation: -6, duration: 1, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: '.motto', start: 'top 92%', once: true } });
       gsap.fromTo('#poster', { scale: .94 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '#poster', start: 'top bottom', end: 'top 40%', scrub: true } });
-      gsap.fromTo('.fin .phone', { rotation: 8, y: 60 }, { rotation: -6, y: 0, ease: 'none', scrollTrigger: { trigger: '.fin', start: 'top bottom', end: 'center center', scrub: 1 } });
+      /* кино-сцена: финал в аптеке — реплики по скроллу, пластырь летит в руки, таблетки уходят */
+      const fb = $$('#finScr .bub');
+      gsap.set(fb, { y: 40, scale: .6, autoAlpha: 0 });
+      gsap.timeline({ scrollTrigger: { trigger: '.fin .phone', start: 'center center', end: () => '+=' + Math.round(innerHeight * (innerWidth < 768 ? 1 : 1.4)), pin: true, scrub: 1, anticipatePin: 1 } })
+        .fromTo('.fin .phone', { rotation: 8 }, { rotation: -6, duration: 1 }, 0)
+        .to(fb[0], { y: 0, scale: 1, autoAlpha: 1, duration: .3, ease: 'back.out(2)' }, .1)
+        .to(fb[1], { y: 0, scale: 1, autoAlpha: 1, duration: .3, ease: 'back.out(2)' }, .4)
+        .to(fb[2], { y: 0, scale: 1, autoAlpha: 1, duration: .3, ease: 'back.out(2)' }, .7)
+        .fromTo('#plaster', { x: 0, rotation: -30 }, { x: 260, rotation: 10, duration: .3, ease: 'back.out(1.5)' }, .85);
     }
   });
 
