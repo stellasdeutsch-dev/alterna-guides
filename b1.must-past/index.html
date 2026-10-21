@@ -105,6 +105,7 @@ p{margin:0 0 12px}
 .tile.bk{height:clamp(70px,13vw,150px);font-size:clamp(32px,8.4vw,96px);padding:0 clamp(14px,2.6vw,36px);border-radius:clamp(18px,2.4vw,32px)}
 .tile.bk small{bottom:-30px;font-size:12px;color:#fff}
 .bk__row2 .tile{height:52px;font-size:24px}
+@media (max-width:767px){.bk__row{gap:6px}.tile.bk{height:64px;font-size:30px;padding:0 12px;border-radius:16px}.bk__row2 .tile{height:44px;font-size:19px}}
 .sc-split{display:grid;place-items:center}
 .sp__l,.sp__r{position:absolute;top:0;bottom:0;width:50%;display:none}
 .cine .sp__l,.cine .sp__r{display:block}
@@ -1862,7 +1863,7 @@ addEventListener('DOMContentLoaded', () => {
         .from('#bk1', { y: () => -innerHeight * 0.7, rotation: 30, duration: 0.5, ease: 'power2.out' }, 0.25)
         .from('#bk2', { x: () => innerWidth * 0.7, rotation: 40, duration: 0.5, ease: 'power2.out' }, 0.5)
         .from('#bk3', { y: () => innerHeight * 0.7, rotation: -30, duration: 0.5, ease: 'power2.out' }, 0.75)
-        .fromTo('#bkStage', { scale: 0.82 }, { scale: 1.08, duration: 1.1 }, 0.3)
+        .fromTo('#bkStage', { scale: 0.82 }, { scale: () => (innerWidth < 768 ? 1 : 1.08), duration: 1.1 }, 0.3)
         .from('#bkRow2', { y: 120, scale: 0, duration: 0.35, ease: 'back.out(2)' }, 1.25);
     });
     pinScene('scSplit', 1.6, (tl) => {
@@ -1873,13 +1874,13 @@ addEventListener('DOMContentLoaded', () => {
         .fromTo('#srcEye svg', { scaleY: 0.1 }, { scaleY: 1, duration: 0.2 }, 0.6)
         .fromTo('#srcEar svg', { rotation: -30 }, { rotation: 0, duration: 0.3 }, 1.1)
         .to(['#srcEye', '#srcEar'], { y: -12, duration: 0.15, yoyo: true, repeat: 1 }, 1.4);
-    });
+    }, { mobileFree: true });
     const rp = { v: 100 };
     pinScene('scRew', 1.8, (tl) => {
       tl.to(rp, { v: 0, duration: 1.5, onUpdate: () => { tlRange.value = rp.v; tlSet(rp.v); } }, 0.15)
         .fromTo('.vhs', { backgroundPositionY: '0px' }, { backgroundPositionY: '900px', duration: 1.8 }, 0)
         .fromTo('#tlF', { scale: 0.9 }, { scale: 1.25, duration: 1.5 }, 0.15);
-    });
+    }, { mobileFree: true });
   }
 
   /* ============ живые детали ============ */

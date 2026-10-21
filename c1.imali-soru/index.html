@@ -12,6 +12,7 @@
 <link rel="preload" href="media/oswald-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="media/montserrat-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../kit/v1/kit.css">
+<script>if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('cine');</script>
 <style>
 @font-face{font-family:'Oswald';font-weight:200 700;font-display:swap;src:url(media/oswald-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
 @font-face{font-family:'Oswald';font-weight:200 700;font-display:swap;src:url(media/oswald-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
@@ -388,6 +389,42 @@ p{margin:0 0 12px}
 .final .ak-say{font-size:20px;color:#fff}
 .final__punch{font:700 clamp(22px,6vw,34px)/1.1 var(--fd);text-transform:uppercase;color:var(--gold2);margin-top:18px}
 
+
+/* ---------- кинематографичные сцены ---------- */
+.scene{position:relative}
+.cine .scene{height:100vh;height:100svh;overflow:hidden}
+.cine .scene.is-free{height:auto;overflow:visible}
+.scene.is-free .scene__ctl{display:none}
+.scene__ctl{position:absolute;right:16px;bottom:18px;z-index:9}
+.scene__ctl .btn-gold{min-height:48px;padding:0 22px;font-size:11px}
+.cine .sc__in{height:100%;display:flex;flex-direction:column;justify-content:center;padding:40px 0 70px}
+.cine .sc-flip .stage{min-height:min(36vh,300px)}
+.bigq{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;z-index:0}
+.bigq span{display:block;font:700 min(70vh,60vw)/1 var(--fd);color:rgba(60,240,143,.06);-webkit-text-stroke:3px rgba(60,240,143,.55);text-shadow:0 0 60px rgba(60,240,143,.25)}
+.cine .sc-hero .w{height:100%;display:flex;align-items:center}
+.cine .sc-hero .hero{min-height:0;width:100%}
+.cine .sc-chat{display:flex;align-items:center}
+.cine .sc-chat .story{margin-top:0;width:100%}
+.story__txt p{transition:color .3s}
+.cine .sc-chat .story__txt p.dim{color:rgba(219,228,222,.28)}
+@media (max-width:767px){
+  .scene__ctl{bottom:14px;right:10px}
+  .scene__ctl .btn-gold{min-height:44px;padding:0 14px;letter-spacing:.12em}
+  .cine .sc__in{padding:84px 0 24px;justify-content:flex-start}
+  .cine .sc-comic .comic{display:block;position:relative;height:56vh}
+  .cine .sc-comic .frame{position:absolute;inset:0}
+  .cine .sc-comic .frame svg{height:40vh}
+  .cine .sc-mirror .mirror{min-height:260px}
+}
+@media (max-width:879px){
+  .polls,.traps,.strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-left:-16px;margin-right:-16px;padding:4px 16px 18px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  .polls>*,.traps>*,.strip>*{flex:0 0 min(82%,340px);scroll-snap-align:center}
+  .gal{grid-template-columns:1fr 1fr;gap:8px}
+  .fc,.fc__in{min-height:190px}
+  .fc__f,.fc__b{padding:12px;gap:6px}
+  .fc .ak-say{font-size:13.5px}
+  .fc__turn{padding:0 10px;font-size:10px;letter-spacing:.08em}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -439,7 +476,9 @@ p{margin:0 0 12px}
 
 <!-- ================= 1. КРЮЧОК ================= -->
 <section data-section="story" data-words="61" class="s s-hero" id="s-story">
+  <div class="scene sc-hero" id="scHero">
   <div class="hero__grid" aria-hidden="true"></div>
+  <div class="bigq" id="bigQ" aria-hidden="true"><span id="bigQs">?</span></div>
   <div class="w">
     <div class="hero">
       <div class="hero__txt">
@@ -482,8 +521,11 @@ p{margin:0 0 12px}
       </div>
     </div>
   </div>
+  <div class="scene__ctl"><button class="btn-gold" type="button" data-play="scHero"><span data-ui>Смотреть сцену</span></button></div>
+  </div>
   <div class="belt-wrap" aria-hidden="true"><div class="belt" lang="tr"><span>söylemedim mi? <i></i> yalan söyler miyim? <i></i> güzel mi güzel! <i></i> bir çay içmez misin? <i></i> yağmur başlamaz mı! <i></i></span><span>söylemedim mi? <i></i> yalan söyler miyim? <i></i> güzel mi güzel! <i></i> bir çay içmez misin? <i></i> yağmur başlamaz mı! <i></i></span></div></div>
 
+  <div class="scene sc-chat" id="scChat">
   <div class="w story">
     <div class="story__txt">
       <h2 class="h">Сорок минут в Атакуме</h2>
@@ -507,6 +549,8 @@ p{margin:0 0 12px}
         </div>
       </div>
     </div>
+  </div>
+  <div class="scene__ctl"><button class="btn-gold" type="button" data-play="scChat"><span data-ui>Смотреть сцену</span></button></div>
   </div>
 </section>
 
@@ -538,6 +582,7 @@ p{margin:0 0 12px}
 <!-- ================= 3. ПРАВИЛО 1 ================= -->
 <section data-section="flip" data-words="56" class="s" id="s-flip">
   <div class="w">
+    <div class="scene sc-flip" id="scFlip"><div class="sc__in">
     <div class="sh"><p class="kick" data-ui>Модуль 02 · Упрёк</p><h2 class="h">Минус на вопрос — <em>плюс</em></h2><p class="lead">Смотри, как собирается фраза. По шагам.</p></div>
     <div class="stage" id="flipStage">
       <span class="tile" data-k="root" lang="tr">söyle<small data-ui>корень</small></span>
@@ -557,6 +602,7 @@ p{margin:0 0 12px}
       <button class="btn-ghost" type="button" id="flipPlay"><svg class="ic"><use href="#i-redo"/></svg><span data-ui>Ещё раз</span></button>
     </div>
     <p class="capt" id="flipCapt" data-ui>Корень: сказать.</p>
+    </div><div class="scene__ctl"><button class="btn-gold" type="button" data-play="scFlip"><span data-ui>Смотреть сцену</span></button></div></div>
     <p class="lead" style="text-align:center;margin-top:8px">Четыре шага. Корень. Потом «не» и прошлое. Потом вопрос. А в конце щелчок: минус и вопрос гасят друг друга.</p>
     <div class="rule"><span class="neg">отрицание</span><i>+</i><span class="mi">mi</span><i>=</i><span class="plus">«ещё как да!»</span></div>
     <div class="strip">
@@ -600,6 +646,7 @@ p{margin:0 0 12px}
 <!-- ================= 5. ПРАВИЛО 2 ================= -->
 <section data-section="never" data-words="39" class="s" id="s-never">
   <div class="w">
+    <div class="scene sc-mirror" id="scMirror"><div class="sc__in">
     <div class="sh"><p class="kick" data-ui>Модуль 04 · Отказ</p><h2 class="h">Плюс на вопрос — <em>минус</em></h2><p class="lead">Убери отрицание. Смысл переворачивается, как в зеркале.</p></div>
     <div class="mirror" id="mirror">
       <div class="mirror__side"><span class="mirror__sign">есть «не»</span><span class="mirror__f" lang="tr">söyle<span class="neg">me</span>dim <span class="mi">mi?</span></span><span class="mirror__m plus">сказал!</span></div>
@@ -607,6 +654,7 @@ p{margin:0 0 12px}
       <i class="mirror__line" id="mirrorLine"></i>
     </div>
     <input class="range" id="mirrorRange" type="range" min="0" max="100" value="50" aria-label="Двигай зеркало">
+    </div><div class="scene__ctl"><button class="btn-gold" type="button" data-play="scMirror"><span data-ui>Смотреть сцену</span></button></div></div>
     <div class="strip" style="margin-top:22px">
       <div class="ex"><svg class="ic ex__ic"><use href="#i-x"/></svg><a-say>Ben yalan söyler miyim?</a-say><span class="ru" data-ui>Я? Врать? Никогда.</span></div>
       <div class="ex"><svg class="ic ex__ic"><use href="#i-heart"/></svg><a-say>Ben seni unutur muyum?</a-say><span class="ru" data-ui>Как я могу тебя забыть!</span></div>
@@ -681,6 +729,7 @@ p{margin:0 0 12px}
 <!-- ================= 8. СЮРПРИЗ ================= -->
 <section data-section="surprise" data-words="40" class="s" id="s-surprise">
   <div class="w">
+    <div class="scene sc-comic" id="scComic"><div class="sc__in">
     <div class="sh"><p class="kick" data-ui>Модуль 07 · Сюрприз</p><h2 class="h">И тут — <em>бац</em></h2><p class="lead">Ты рассказываешь историю. Всё спокойно. А потом удар: <b lang="tr" class="mi">-mAz mı!</b></p></div>
     <div class="comic" id="comic">
       <div class="frame"><svg viewBox="0 0 240 150" aria-hidden="true"><rect y="118" width="240" height="32" fill="#9fb8a8"/><rect x="20" y="40" width="70" height="78" fill="#e9dfcf" stroke="#0b0f0c" stroke-width="3"/><rect x="44" y="80" width="22" height="38" fill="#0f5132"/><g class="walker"><circle cx="130" cy="78" r="9" fill="#0b0f0c"/><path d="M130 88v18M130 106l-8 14M130 106l8 14M130 94l-10 8M130 94l10 6" stroke="#0b0f0c" stroke-width="4" stroke-linecap="round"/></g><circle cx="200" cy="30" r="14" fill="#ffd36b"/></svg><p class="frame__t"><span lang="tr">Evden çıktım,</span><span class="ru" data-ui>Выхожу из дома…</span></p></div>
@@ -689,6 +738,7 @@ p{margin:0 0 12px}
     </div>
     <div class="row center" style="margin-top:18px"><button class="btn-gold" type="button" id="comicBtn"><svg class="ic"><use href="#i-play"/></svg><span data-ui>Следующий кадр</span></button>
       <button class="btn-ghost" type="button" data-say="Evden çıktım, yağmur başlamaz mı!"><svg class="ic"><use href="#i-ear"/></svg><span data-ui>Вся фраза</span></button></div>
+    </div><div class="scene__ctl"><button class="btn-gold" type="button" data-play="scComic"><span data-ui>Смотреть сцену</span></button></div></div>
     <p class="lead" style="margin-top:22px;text-align:center">Буквально: «разве не начнётся дождь?» По смыслу: «и тут как ливанёт». Начало истории в прошлом. Удар — в <b lang="tr">-mAz mı</b>. В конце хочется поставить восклицательный знак, и его ставят.</p>
     <div class="strip" style="margin-top:18px">
       <div class="ex"><svg class="ic ex__ic"><use href="#i-key"/></svg><a-say>Kapıyı açtım, karşımda patronum durmaz mı!</a-say><span class="ru" data-ui>Открываю дверь — а там стоит мой начальник!</span></div>
@@ -1025,6 +1075,31 @@ addEventListener('DOMContentLoaded', () => {
     $$('.kick').forEach((k) => G.from(k, { letterSpacing: '0.7em', duration: 1, ease: 'power3.out', scrollTrigger: { trigger: k, start: 'top 92%' } }));
   }
 
+  /* =================================================================
+     ДВИЖОК СЦЕН: закреплённый кадр + таймлайн по прокрутке + «смотреть»
+     ================================================================= */
+  const scenes = {};
+  const sceneK = () => (innerWidth < 768 ? 0.32 : innerWidth < 1100 ? 0.45 : 0.6);
+  function pinScene(id, len, build, opt = {}) {
+    const el = $('#' + id);
+    const free = opt.mobileFree && innerWidth < 768;
+    if (free) el.classList.add('is-free');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: free ? { trigger: el, start: 'top 80%', end: 'bottom 30%', scrub: 0.8 } : { trigger: el, start: 'top top', end: () => '+=' + Math.round(Math.min(innerHeight, 820) * len * sceneK()), pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    build(tl, el);
+    scenes[id] = { tl, len };
+    return tl;
+  }
+  let autoplay = null;
+  const stopAuto = () => { if (autoplay) { autoplay.kill(); autoplay = null; } };
+  ['wheel', 'touchstart', 'keydown'].forEach((t) => addEventListener(t, stopAuto, { passive: true }));
+  $$('[data-play]').forEach((b) => b.addEventListener('click', () => {
+    const sc = scenes[b.dataset.play], el = $('#' + b.dataset.play);
+    if (!sc || !G) { el.scrollIntoView({ behavior: 'smooth' }); return; }
+    stopAuto();
+    const st = sc.tl.scrollTrigger, o = { y: scrollY < st.start - 2 || scrollY >= st.end - 2 ? st.start : scrollY };
+    autoplay = G.to(o, { y: st.end + 2, duration: sc.len * 2.4, ease: 'power1.inOut', onUpdate: () => scrollTo(0, o.y) });
+  }));
+
   /* ============ 1. HERO + КРЮЧОК ============ */
   const demo = $('#demo'), demoMark = $('.demo__mark'), demoAns = $('#demoAns');
   let demoOff = false;
@@ -1050,12 +1125,8 @@ addEventListener('DOMContentLoaded', () => {
   if (G) {
     loopIn(heroArt, G.to('.fl', { y: -16, rotation: 6, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: 0.4, from: 'random' } }));
     loopIn(heroArt, G.to('.hero__arc', { rotation: 360, duration: 34, ease: 'none', repeat: -1 }));
-    loopIn(heroArt, G.to('.badge150', { rotation: -4, y: -8, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
     G.from(heroPhone, { rotationY: -35, rotationX: 12, y: 60, duration: 1.4, ease: 'power3.out', delay: 0.2 });
     G.from('.badge150', { scale: 0.3, rotation: -40, duration: 1, ease: 'elastic.out(1, .45)', delay: 0.8 });
-    G.to(heroPhone, { yPercent: -14, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    G.to('.hero__txt', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    G.to('.hero__ring', { scale: 1.5, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
     G.fromTo('.belt-wrap', { rotation: -4 }, { rotation: 2, ease: 'none', scrollTrigger: { trigger: '.belt-wrap', start: 'top bottom', end: 'bottom top', scrub: true } });
     if (fine) heroArt.addEventListener('pointermove', (e) => {
       const r = heroArt.getBoundingClientRect();
@@ -1063,6 +1134,30 @@ addEventListener('DOMContentLoaded', () => {
       G.to(heroPhone, { rotationY: x * 24, rotationX: -y * 18, duration: 0.6, ease: 'power2.out' });
       G.to('.fl', { x: (i) => x * (20 + i * 10), duration: 0.8, ease: 'power2.out' });
     });
+  }
+
+
+  /* ---------- СЦЕНА: знак вопроса становится восклицательным ---------- */
+  if (G) {
+    let bigState = '?';
+    const heroTl = pinScene('scHero', 2, (tl) => {
+      tl.fromTo('#bigQs', { scale: 0.7 }, { scale: 1.25, rotation: 14, duration: 1.4 }, 0)
+        .to('#bigQs', { webkitTextStrokeColor: 'rgba(243,189,133,.55)', duration: 0.6 }, 0.7)
+        .to('.fl', { x: (i) => (i % 2 ? 1 : -1) * innerWidth * 0.4, y: (i) => (i < 2 ? -1 : 1) * innerHeight * 0.3, rotation: (i) => (i % 2 ? 180 : -180), scale: 1.6, duration: 1.2 }, 0.1)
+        .to(heroPhone, { rotationY: -28, rotationX: 10, z: 120, scale: 1.08, duration: 1.2 }, 0.2)
+        .to('.badge150', { x: 120, y: -80, rotation: 30, scale: 1.3, duration: 1 }, 0.2)
+        .to('.hero__arc', { rotation: 220, scale: 1.4, duration: 2 }, 0)
+        .to('.hero__ring', { scale: 2.2, duration: 2 }, 0)
+        .to('.hero__h', { scale: 1.05, transformOrigin: '0 50%', duration: 1 }, 0.4)
+        .to('#bigQs', { scale: 1.6, rotation: 0, webkitTextStrokeColor: 'rgba(60,240,143,.8)', duration: 0.6 }, 1.4);
+    }, { mobileFree: true });
+    heroTl.eventCallback('onUpdate', () => {
+      const st = heroTl.progress() > 0.5 ? '!' : '?';
+      if (st === bigState) return;
+      bigState = st; $('#bigQs').textContent = st;
+      if ((st === '!') !== demoOff) $('#demoBtn').click();
+    });
+    G.from('#bigQ', { scale: 0, rotation: -90, duration: 1.6, ease: 'expo.out', delay: 0.2 });
   }
 
   /* чат-крючок */
@@ -1076,7 +1171,6 @@ addEventListener('DOMContentLoaded', () => {
     if (G) G.from(b, { y: 24, scale: 0.7, transformOrigin: cls.includes('me') ? '100% 100%' : '0 100%', duration: 0.5, ease: 'back.out(2.2)' });
     return b;
   };
-  if (ST) ST.create({ trigger: '#chatPhone', start: 'top 75%', once: true, onEnter: () => G.from($$('.bub', chatScr), { y: 30, scale: 0.6, stagger: 0.35, duration: 0.5, ease: 'back.out(2)' }) });
   choices.addEventListener('click', (e) => {
     const btn = e.target.closest('button');
     if (!btn || btn.disabled) return;
@@ -1094,6 +1188,31 @@ addEventListener('DOMContentLoaded', () => {
       reveal.style.borderColor = lit ? 'var(--red)' : 'var(--neon)';
     }, 900);
   });
+
+
+  /* ---------- СЦЕНА: история по кадрам ---------- */
+  if (G) {
+    const ps = $$('.story__txt p');
+    const bubs = $$('.bub', chatScr);
+    ps.forEach((x) => x.classList.add('dim'));
+    let shown = -1;
+    const chatTl = pinScene('scChat', 1.8, (tl) => {
+      tl.from('#chatPhone', { y: 160, rotationX: 30, rotationY: -20, duration: 0.6 }, 0)
+        .from(bubs[0], { scale: 0, y: 30, transformOrigin: '100% 100%', duration: 0.25 }, 0.5)
+        .from(bubs[1], { scale: 0, y: 30, transformOrigin: '0 100%', duration: 0.25 }, 1.1)
+        .from('#chatChoices button', { scale: 0, y: 30, stagger: 0.1, duration: 0.25 }, 1.6)
+        .to('#chatPhone', { rotationY: -10, scale: 1.04, duration: 0.6 }, 1.4)
+        .fromTo('.big-say', { scale: 1 }, { scale: 1.12, transformOrigin: '0 50%', duration: 0.3 }, 1.15)
+        .to({}, { duration: 0.2 });
+    }, { mobileFree: true });
+    chatTl.eventCallback('onUpdate', () => {
+      const n = Math.min(ps.length - 1, Math.floor(chatTl.progress() * (ps.length + 0.2)));
+      if (n === shown) return;
+      shown = n;
+      ps.forEach((x, i) => x.classList.toggle('dim', i > n));
+      G.fromTo(ps[n], { x: -24 }, { x: 0, duration: 0.4, ease: 'back.out(2)' });
+    });
+  }
 
   /* ============ 2. УГАДАЙ ============ */
   const POLL_WHY = [
@@ -1173,15 +1292,26 @@ addEventListener('DOMContentLoaded', () => {
     if (!G) return;
     fAuto = G.timeline().call(() => flipGo(1), null, 1.2).call(() => flipGo(2), null, 2.8).call(() => flipGo(3), null, 4.4);
   }
-  const stopAuto = () => { if (fAuto) { fAuto.kill(); fAuto = null; } };
-  $$('#flipSteps [data-step]').forEach((b) => b.addEventListener('click', () => { stopAuto(); flipGo(Number(b.dataset.step) - 1); }));
-  $('#flipPrev').addEventListener('click', () => { stopAuto(); flipGo(fStep - 1); });
-  $('#flipNext').addEventListener('click', () => { stopAuto(); flipGo(fStep + 1); });
+  const stopAuto2 = () => { if (fAuto) { fAuto.kill(); fAuto = null; } };
+  $$('#flipSteps [data-step]').forEach((b) => b.addEventListener('click', () => { stopAuto2(); flipGo(Number(b.dataset.step) - 1); }));
+  $('#flipPrev').addEventListener('click', () => { stopAuto2(); flipGo(fStep - 1); });
+  $('#flipNext').addEventListener('click', () => { stopAuto2(); flipGo(fStep + 1); });
   $('#flipPlay').addEventListener('click', flipPlay);
   fStage.addEventListener('click', () => speak(fStage.dataset.say));
-  if (G) { flipGo(0); ST.create({ trigger: fStage, start: 'top 70%', once: true, onEnter: flipPlay }); }
-  else flipGo(3);
-  if (G) G.fromTo('#s-flip .rule', { scale: 0.7, rotation: -3 }, { scale: 1, rotation: 0, ease: 'none', scrollTrigger: { trigger: '#s-flip .rule', start: 'top bottom', end: 'top 60%', scrub: true } });
+  if (G) {
+    flipGo(0);
+    let fLast = 0;
+    const flipTl = pinScene('scFlip', 2.2, (tl) => {
+      tl.from('#scFlip .sh', { y: 60, scale: 0.9, duration: 0.3 }, 0)
+        .fromTo(fStage, { scale: 0.86, rotationX: 18 }, { scale: 1.06, rotationX: 0, duration: 1 }, 0)
+        .to(fStage, { boxShadow: '0 0 90px rgba(60,240,143,.35)', duration: 0.4 }, 0.75)
+        .to({}, { duration: 0.1 });
+    });
+    flipTl.eventCallback('onUpdate', () => {
+      const n = Math.min(3, Math.floor(flipTl.progress() * 4.3));
+      if (n !== fLast) { fLast = n; stopAuto2(); flipGo(n); }
+    });
+  } else flipGo(3);
 
   /* ============ 4. СРАВНЕНИЕ ============ */
   const CMP = {
@@ -1227,9 +1357,16 @@ addEventListener('DOMContentLoaded', () => {
   sides[0].addEventListener('click', () => { speak('Ben sana söylemedim mi?'); pop(sides[0]); });
   sides[1].addEventListener('click', () => { speak('Ben yalan söyler miyim?'); pop(sides[1]); });
   if (G) {
-    G.fromTo(mirror, { rotationX: 25, y: 40 }, { rotationX: 0, y: 0, ease: 'none', scrollTrigger: { trigger: mirror, start: 'top bottom', end: 'top 55%', scrub: true } });
-    G.fromTo($$('.mirror__m', mirror), { scale: 0.5, rotation: -8 }, { scale: 1, rotation: 0, duration: 0.8, ease: 'elastic.out(1, .45)', stagger: 0.3, scrollTrigger: { trigger: mirror, start: 'top 70%' } });
-    loopIn(mirror, G.to(mLine, { boxShadow: '0 0 34px #fff', duration: 1.2, yoyo: true, repeat: -1 }));
+    pinScene('scMirror', 2, (tl) => {
+      tl.from('#scMirror .sh', { y: 60, duration: 0.3 }, 0)
+        .fromTo(mirror, { rotationX: 30, scale: 0.85 }, { rotationX: 0, scale: 1, duration: 0.5 }, 0)
+        .fromTo(mLine, { left: '0%' }, { left: '100%', duration: 1.2 }, 0.3)
+        .fromTo(sides[0], { scale: 1.12 }, { scale: 0.86, duration: 1.2 }, 0.3)
+        .fromTo(sides[1], { scale: 0.86 }, { scale: 1.12, duration: 1.2 }, 0.3)
+        .fromTo($$('.mirror__m', mirror)[0], { scale: 1.4, rotation: -8 }, { scale: 0.8, rotation: 0, duration: 0.6 }, 0.3)
+        .fromTo($$('.mirror__m', mirror)[1], { scale: 0.6, rotation: 8 }, { scale: 1.4, rotation: 0, duration: 0.6 }, 0.9)
+        .to(mLine, { left: '50%', duration: 0.4 }, 1.5);
+    });
   }
 
   /* ============ 6. ЛУПА ============ */
@@ -1299,8 +1436,25 @@ addEventListener('DOMContentLoaded', () => {
     $('span', e.currentTarget).textContent = cIdx === 2 ? 'Сначала' : 'Следующий кадр';
   });
   frames.forEach((f, i) => f.addEventListener('click', () => { cIdx = i; comicShow(i); }));
-  if (ST) ST.create({ trigger: '#comic', start: 'top 65%', once: true, onEnter: () => { setTimeout(() => comicShow(1), 700); setTimeout(() => { comicShow(2); cIdx = 2; }, 1700); } });
-  else frames.forEach((f) => f.classList.remove('is-dim'));
+  if (G) {
+    let cLast = -1;
+    const mob = innerWidth < 768;
+    const comicTl = pinScene('scComic', 2.2, (tl) => {
+      tl.from('#scComic .sh', { y: 60, duration: 0.3 }, 0);
+      if (mob) {
+        tl.fromTo(frames[1], { xPercent: 110 }, { xPercent: 0, duration: 0.4 }, 0.6)
+          .fromTo(frames[2], { xPercent: 110 }, { xPercent: 0, duration: 0.4 }, 1.3);
+      } else {
+        tl.fromTo('#comic', { scale: 1.18, x: () => innerWidth * 0.14, transformOrigin: '50% 0%' }, { scale: 1, x: 0, duration: 0.7 }, 0.1)
+          .to('#comic', { scale: 1.08, x: () => -innerWidth * 0.06, transformOrigin: '50% 0%', duration: 0.6 }, 1.2);
+      }
+      tl.to({}, { duration: 0.4 }, 1.8);
+    });
+    comicTl.eventCallback('onUpdate', () => {
+      const n = comicTl.progress() < 0.28 ? 0 : comicTl.progress() < 0.58 ? 1 : 2;
+      if (n !== cLast) { cLast = n; cIdx = n; comicShow(n); }
+    });
+  } else frames.forEach((f) => f.classList.remove('is-dim'));
   void rain;
 
   /* ============ 9. ДВЕ МЕЛОДИИ ============ */
@@ -1781,16 +1935,13 @@ addEventListener('DOMContentLoaded', () => {
   /* ============ дополнительные сцены по скроллу ============ */
   if (G) {
     const scrub = (trigger, start = 'top bottom', end = 'center center') => ({ trigger, start, end, scrub: true });
-    G.fromTo('#chatPhone', { rotationY: 18, rotationX: 8 }, { rotationY: 0, rotationX: 0, ease: 'none', scrollTrigger: scrub('#chatPhone') });
     G.fromTo('#polls .poll', { rotation: (i) => (innerWidth < 860 ? 0 : (i - 1) * 8), y: (i) => (innerWidth < 860 ? 0 : Math.abs(i - 1) * 40), scale: () => (innerWidth < 860 ? 0.94 : 1) }, { rotation: 0, y: 0, scale: 1, ease: 'none', scrollTrigger: scrub('#polls', 'top bottom', 'top 55%') });
     G.fromTo('#cmp', { gap: '42px' }, { gap: '8px', ease: 'none', scrollTrigger: scrub('#cmp', 'top bottom', 'top 45%') });
     G.fromTo('#tea>svg', { scale: 0.75, rotation: -10 }, { scale: 1, rotation: 0, ease: 'none', scrollTrigger: scrub('#tea') });
-    G.fromTo('#comic .frame', { y: (i) => 30 + i * 40 }, { y: 0, ease: 'none', scrollTrigger: scrub('#comic', 'top bottom', 'top 40%') });
     G.fromTo('#pitch', { rotationY: -25, scale: 0.9 }, { rotationY: 0, scale: 1, ease: 'none', scrollTrigger: scrub('#pitch') });
     G.fromTo('#traps .trap', { rotation: (i) => (i % 2 ? 3 : -3) }, { rotation: 0, ease: 'none', scrollTrigger: scrub('#traps', 'top bottom', 'top 30%') });
     G.fromTo('#flt', { scale: 0.8, letterSpacing: '0.2em' }, { scale: 1, letterSpacing: '0em', ease: 'none', scrollTrigger: scrub('#flt', 'top bottom', 'top 60%') });
     G.fromTo('#labStage', { boxShadow: '0 0 0 rgba(60,240,143,0)' }, { boxShadow: '0 0 60px rgba(60,240,143,.25)', ease: 'none', scrollTrigger: scrub('#labStage') });
-    $$('.strip').forEach((st) => G.fromTo(st.children, { y: (i) => 16 + i * 14, rotation: (i) => (i % 2 ? 1.5 : -1.5) }, { y: 0, rotation: 0, ease: 'none', scrollTrigger: scrub(st, 'top bottom', 'top 70%') }));
   }
 
   /* ============ обновления ScrollTrigger ============ */
