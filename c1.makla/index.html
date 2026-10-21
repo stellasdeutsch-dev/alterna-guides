@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="alterna:topic" content="c1.makla">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>-mAklA: bilmekle beraber, söylemekle kalmadı</title>
+<link rel="preload" href="media/unbounded-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="media/onest-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Unbounded';font-weight:200 700;font-display:swap;src:url(media/unbounded-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-weight:200 700;font-display:swap;src:url(media/unbounded-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-weight:200 700;font-display:swap;src:url(media/unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-weight:300 700;font-display:swap;src:url(media/onest-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-weight:300 700;font-display:swap;src:url(media/onest-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-weight:300 700;font-display:swap;src:url(media/onest-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+--ak-bg:#1a1b1d;--ak-surface:#222326;--ak-ink:#f6f6f6;--ak-muted:#9a9ea4;--ak-line:#34373a;--ak-accent:#e59136;--ak-accent-ink:#131415;--ak-accent-soft:#3a2a17;
+--ak-good:#8fb27a;--ak-good-soft:#24301d;--ak-bad:#e5675a;--ak-bad-soft:#3a1d19;--ak-radius:20px;--ak-radius-sm:12px;
+--ak-font:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;--ak-font-display:'Unbounded','Onest',sans-serif;
+--bg:#131415;--bg2:#1a1b1d;--gr:#34373a;--snow:#f6f6f6;--amber:#e59136;--mist:#9fb0bf;--moss:#8fb27a;--muted:#8d9198;--line:#2b2d30;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:clip;background:var(--bg);color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--snow);font:400 var(--ak-text)/1.6 var(--ak-font);overflow-x:clip}
+main{position:relative;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+h1,h2,h3{font-family:var(--ak-font-display);font-weight:300;margin:0;letter-spacing:-.04em;text-transform:uppercase}
+h2{font-size:clamp(22px,5.4vw,56px);line-height:1;margin-bottom:18px}
+h3{font-size:clamp(16px,3.4vw,22px);line-height:1.15;font-weight:400}
+p{margin:0 0 12px;max-width:60ch}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+.sx{position:relative;padding:clamp(80px,12vw,150px) 16px 0}
+.wrap{position:relative;max-width:1160px;margin:0 auto}
+.micro{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500;line-height:1.5}
+.lbl{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.lbl::before{content:"[";color:#5d6166}.lbl::after{content:"]";color:#5d6166}
+.dot{display:inline-block;width:.62em;height:.62em;border-radius:50%;background:radial-gradient(circle at 40% 40%,#ffd7a0,var(--amber) 55%,#b8601a);box-shadow:0 0 18px 4px rgba(229,145,54,.65);vertical-align:.08em;margin:0 .18em}
+.brk{position:relative;padding:0 clamp(18px,4vw,60px)}
+.brk::before,.brk::after{content:"";position:absolute;top:0;bottom:0;width:10px;border:1.5px solid #6a6e73}
+.brk::before{left:0;border-right:0}.brk::after{right:0;border-left:0}
+.tail{font-family:var(--ak-font);text-transform:none;letter-spacing:-.01em;font-size:.36em;line-height:1.05;display:inline-block;vertical-align:middle;font-weight:400}
+.tr{font-weight:600;color:#fff}
+.ru{color:var(--muted)}
+.ma{color:var(--amber)}.cb{color:var(--mist)}.cg{color:var(--moss)}
+.lead{font-size:clamp(16px,2vw,19px);color:#c9ccd0}
+.rule{display:flex;gap:14px;align-items:flex-start;max-width:660px;padding:16px 18px;border-radius:18px;background:#1b1c1e;border:1px solid var(--line)}
+.rule i{flex:none;width:12px;height:12px;margin-top:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 14px 3px rgba(229,145,54,.6)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:46px;padding:0 22px;border-radius:24px;border:0;background:var(--snow);color:#131415;font-weight:600;cursor:pointer;font-size:14px}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #45484c;background:transparent;cursor:pointer;font-size:14px;color:#e9eaeb;transition:border-color .2s,background-color .2s}
+.btn-g:hover{border-color:var(--amber)}
+.btn-g[aria-pressed="true"],.btn-g.is-on{background:var(--snow);color:#131415;border-color:var(--snow)}
+.circ{display:inline-grid;place-items:center;width:96px;height:96px;border-radius:50%;background:#0d0e0f;color:#fff;border:0;cursor:pointer;font-size:11px;line-height:1.2;text-align:center;box-shadow:0 0 0 1px #3a3d41}
+.btn-g svg,.btn svg{width:14px;height:14px}
+.mq{margin-top:26px;max-width:600px;display:grid;gap:10px;padding:16px 18px;border-radius:20px;background:#1a1b1d;border:1px solid var(--line)}
+.mq__q{margin:0;font-weight:500}
+.mq__q span{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-right:8px}
+.mq__o{display:flex;flex-wrap:wrap;gap:8px}
+.mq__o button{min-height:46px;padding:0 16px;border-radius:23px;border:1px solid #45484c;background:#202124;font-size:15px;cursor:pointer;text-align:left}
+.mq__o button.ok{background:var(--moss);border-color:var(--moss);color:#131415}
+.mq__o button.no{border-color:var(--ak-bad);color:#ffb2a8}
+.mq__f{margin:0;min-height:1.4em;color:var(--muted);font-size:15px}
+/* курсор */
+.cur{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;border:1px solid rgba(229,145,54,.7);pointer-events:none;z-index:90;display:none;place-items:center;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#131415}
+.cur i{position:absolute;inset:13px;border-radius:50%;background:var(--amber);box-shadow:0 0 16px 4px rgba(229,145,54,.6)}
+@media (hover:hover) and (min-width:1024px){.cur{display:grid}}
+/* ---------- кинематографичные сцены ---------- */
+.scene{position:relative;overflow:hidden}
+html.cine .scene{height:100svh;min-height:520px}
+/* HERO */
+.hero{padding:0;height:100svh;min-height:560px;overflow:hidden;background:#1d1f21}
+.hero svg.land{position:absolute;inset:0;width:100%;height:100%}
+.nav{position:absolute;z-index:5;left:0;right:0;top:0;display:flex;align-items:center;gap:18px;padding:18px clamp(16px,4vw,48px)}
+.logo{font-family:var(--ak-font-display);font-weight:300;font-size:22px;letter-spacing:-.04em}
+.nav__l{display:flex;gap:18px;margin-left:auto;flex-wrap:wrap}
+.nav__l button{background:none;border:0;cursor:pointer;color:#d8dadc;font-size:11px;letter-spacing:.14em;text-transform:uppercase;min-height:44px}
+@media (max-width:760px){.nav__l button:not(.nav__cta){display:none}}
+.nav__cta{text-decoration:underline;text-underline-offset:5px}
+.hero__t{position:absolute;z-index:4;left:clamp(16px,4vw,48px);top:clamp(70px,13vh,130px);right:16px}
+.hero__t h1{text-transform:none;font-size:clamp(54px,17vw,250px);line-height:.82;letter-spacing:-.06em;font-weight:200;color:#f3f3f3}
+.hero__t h1 span{display:inline-block;animation:rise 1.2s cubic-bezier(.2,1,.3,1) both}
+@keyframes rise{from{transform:translateY(60%)}to{transform:none}}
+.hero__sub{font-family:var(--ak-font-display);font-weight:200;font-size:clamp(15px,3vw,34px);letter-spacing:-.03em;margin-top:10px;color:#e6e7e8}
+.hero__lead{position:absolute;z-index:4;left:clamp(16px,4vw,48px);bottom:clamp(90px,14vh,140px);max-width:min(440px,calc(100% - 32px));font-size:clamp(14px,1.6vw,16px);color:#e6e7e8}
+.hero__lead p{max-width:none}
+.phase{position:absolute;z-index:4;right:clamp(16px,4vw,48px);bottom:clamp(90px,14vh,140px);display:grid;gap:8px;width:220px}
+.phase div{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#d8dadc}
+.phase div::after{content:"";grid-column:1/-1;height:2px;background:linear-gradient(90deg,#f6f6f6 var(--w,60%),rgba(255,255,255,.25) 0)}
+@media (max-width:760px){.phase{display:none}}
+@media (max-width:760px){.hero__lead{left:0;right:0;bottom:0;max-width:none;padding:70px 16px 64px;background:linear-gradient(rgba(19,20,21,0),rgba(19,20,21,.9) 40%)}}
+.scroll-hint{position:absolute;z-index:4;left:50%;bottom:22px;translate:-50% 0;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#d8dadc;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+.wipe{position:absolute;inset:0;z-index:6;background:var(--bg);clip-path:circle(0% at 72% 62%);pointer-events:none}
+/* STORY */
+.story{display:grid;align-content:center;gap:24px;padding:clamp(70px,10vh,110px) 16px 30px}
+.story__in{max-width:1160px;width:100%;margin:0 auto;display:grid;gap:clamp(20px,4vw,60px);align-items:center}
+@media (min-width:900px){.story__in{grid-template-columns:1fr 1fr}}
+.lines p{font-size:clamp(17px,2.2vw,22px);line-height:1.45;margin-bottom:10px}
+html.cine .lines{position:relative;min-height:9.5em}
+html.cine .lines p{position:absolute;left:0;right:0;top:0;margin:0}
+.plan{position:relative;border:1px solid var(--line);border-radius:24px;padding:16px;background:#161718}
+.plan svg{display:block;width:100%;height:auto;max-height:46svh}
+.plan svg .wall{fill:none;stroke:#e8e8e8;stroke-width:3}
+.plan svg .thin{fill:none;stroke:#8d9198;stroke-width:1.2}
+.plan__m{position:absolute;right:18px;top:14px;text-align:right}
+.plan__m b{display:block;font-family:var(--ak-font-display);font-weight:200;font-size:clamp(34px,6vw,64px);line-height:1;letter-spacing:-.05em}
+.lift{display:inline-block;color:var(--amber);font-weight:700}
+/* GUESS */
+.filt{display:grid;gap:14px;padding:clamp(16px,3vw,28px);border-radius:26px;background:#1a1b1d;border:1px solid var(--line)}
+.filt__s{font-size:clamp(20px,3.6vw,30px);font-family:var(--ak-font-display);font-weight:300;letter-spacing:-.03em}
+.filt__o{display:flex;flex-wrap:wrap;gap:8px}
+.filt__o button{min-height:44px;padding:0 16px;border-radius:22px;border:1px solid #45484c;background:#222326;cursor:pointer;font-size:15px}
+.filt__o button.ok{background:var(--moss);color:#131415;border-color:var(--moss)}
+.filt__o button.no{border-color:var(--ak-bad);color:#ffb2a8}
+.range{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;font-size:12px;color:var(--muted)}
+.range i{height:2px;background:#45484c;position:relative}
+.range i b{position:absolute;left:0;top:-4px;width:10px;height:10px;border-radius:50%;background:#fff;transform:translateX(var(--x,0))}
+/* FORMULA: сетка */
+.grid{display:grid;align-content:center;padding:clamp(70px,10vh,110px) 16px 24px}
+.grid__in{max-width:1160px;width:100%;margin:0 auto}
+.gs{position:relative;display:grid;grid-template-columns:1.2fr .9fr .7fr 1.6fr;border:1px solid #3a3d41;border-radius:6px;min-height:clamp(190px,32vh,300px);margin-top:14px}
+.gs>div{position:relative;border-right:1px dashed #3a3d41;display:grid;align-items:center;justify-items:center;padding:30px 4px 10px}
+.gs>div:last-child{border-right:0}
+.gs__h{position:absolute;top:8px;left:0;right:0;text-align:center;font-size:10.5px;letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.gs__p{font-family:var(--ak-font-display);font-weight:200;font-size:clamp(24px,6.4vw,88px);letter-spacing:-.06em;line-height:1;white-space:nowrap}
+.gs__p.ma{color:var(--amber);font-weight:300}
+.gs__m{margin-top:16px;font-size:clamp(17px,2.4vw,24px);min-height:1.5em}
+.gs__ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+/* BERABER: весы */
+.scale-sc{display:grid;align-content:center;padding:clamp(70px,10vh,110px) 16px 24px}
+.scale-sc svg{display:block;width:100%;max-width:880px;height:auto;max-height:52svh;margin:0 auto}
+.scale-sc .ptext{font:500 22px var(--ak-font);fill:#fff}
+.sent{font-size:clamp(18px,2.8vw,30px);text-align:center;margin-top:10px;font-family:var(--ak-font-display);font-weight:200;letter-spacing:-.03em}
+.ex-list{display:grid;border-top:1px solid #3a3d41;margin-top:26px}
+.ex-row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 4px;border-bottom:1px solid #3a3d41;cursor:pointer;background:none;border-left:0;border-right:0;border-top:0;text-align:left;width:100%}
+.ex-row .n{font-size:10.5px;color:var(--muted);letter-spacing:.12em}
+.ex-row .w{font-size:clamp(16px,2.4vw,22px)}
+.ex-row .w small{display:block;color:var(--muted);font-size:13px}
+.ex-row .ar{width:28px;height:28px;border-radius:50%;background:#2a2c2f;display:grid;place-items:center}
+.sw{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.sw__out{margin-top:10px;min-height:3em}
+/* KALMA: этажи */
+.tower{display:grid;align-content:center;padding:clamp(70px,10vh,110px) 16px 24px}
+.tower svg{display:block;width:100%;max-width:760px;height:auto;max-height:56svh;margin:0 auto}
+.tower .ft{font:500 26px var(--ak-font);fill:#131415}
+.tower .lb{font:600 18px var(--ak-font);fill:var(--moss)}
+/* PARTNERS: горизонтальный проезд */
+.hz{padding:clamp(70px,10vh,110px) 0 24px;display:flex;flex-direction:column;justify-content:center}
+.hz__track{align-self:flex-start;max-width:none}
+.hz__head{padding:0 16px;max-width:1160px;margin:0 auto;width:100%}
+.hz__track{display:flex;gap:clamp(14px,2vw,24px);padding:16px;overflow-x:auto;scrollbar-width:none}
+html.cine .hz__track{overflow:visible;width:max-content}
+.hz__track::-webkit-scrollbar{display:none}
+.apt{flex:none;width:min(82vw,420px);border-radius:24px;background:#1a1b1d;border:1px solid var(--line);padding:16px;display:grid;gap:10px;align-content:start}
+.apt svg{width:100%;height:auto;background:#121314;border-radius:14px}
+.apt svg .wall{fill:none;stroke:#e8e8e8;stroke-width:2.4}
+.apt svg .thin{fill:none;stroke:#6f7378;stroke-width:1}
+.apt__n{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+.apt__t{font-family:var(--ak-font-display);font-weight:300;font-size:clamp(20px,3vw,26px);letter-spacing:-.03em}
+.apt__ex{font-weight:600}
+.apt button{justify-self:start}
+/* сравнение, регистр, дерево */
+.tabs{display:inline-flex;gap:4px;padding:4px;border-radius:24px;border:1px solid #3a3d41}
+.tabs button{min-height:42px;padding:0 16px;border:0;border-radius:20px;background:none;cursor:pointer;color:#d0d2d5}
+.tabs button[aria-selected="true"]{background:var(--snow);color:#131415}
+.crows{display:grid;margin-top:14px;border-top:1px solid #3a3d41}
+.crow{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:14px 4px;border-bottom:1px solid #3a3d41;font-size:clamp(15px,2.2vw,19px)}
+.crow b{font-weight:500}
+.bars{display:grid;gap:10px;margin-top:16px}
+.bar{display:grid;grid-template-columns:minmax(120px,1fr) 2fr;gap:12px;align-items:center;cursor:pointer;background:none;border:0;padding:6px 0;text-align:left}
+.bar span{font-weight:600}
+.bar i{height:42px;border-radius:21px;background:linear-gradient(90deg,#3a3d41,#4a4d52);position:relative;overflow:hidden}
+.bar i::after{content:"";position:absolute;inset:0;width:var(--w);border-radius:21px;background:var(--c,#f6f6f6)}
+.bar.is-on i::after{box-shadow:0 0 22px rgba(229,145,54,.6)}
+.reg-out{margin-top:14px;min-height:3.2em;font-size:17px}
+.tree__sc{overflow-x:auto}
+.tree svg{display:block;width:100%;min-width:640px;height:auto}
+.tree .q rect{fill:#1a1b1d;stroke:#45484c;stroke-width:1.5}
+.tree .q text{font:400 17px var(--ak-font);fill:#e9eaeb}
+.tree .q.is-on rect{stroke:var(--amber)}
+.tree .lf text{font:500 18px var(--ak-font);fill:#131415}
+.tree .ed{fill:none;stroke:#45484c;stroke-width:2}
+.tree .ed.is-on{stroke:var(--amber)}
+.tree .yn{font:400 13px var(--ak-font);fill:var(--muted)}
+.cases{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tree__out{min-height:1.6em;margin-top:10px;font-size:17px}
+/* маклер */
+.card{position:relative;max-width:520px;aspect-ratio:1.75;border-radius:20px;background:linear-gradient(140deg,#f6f6f6,#dcdcdc);color:#131415;padding:clamp(18px,3vw,30px);display:grid;align-content:space-between;box-shadow:0 40px 60px -30px rgba(0,0,0,.8);cursor:pointer;border:0;text-align:left;width:100%}
+.card__w{font-family:var(--ak-font-display);font-weight:200;font-size:clamp(34px,7vw,64px);letter-spacing:-.06em;line-height:1}
+.card__w b{font-weight:300;color:var(--amber)}
+/* закат */
+.sunset{padding:0}
+.sunset svg{position:absolute;inset:0;width:100%;height:100%}
+.sunset__t{position:absolute;z-index:3;left:16px;right:16px;top:clamp(60px,9vh,90px);max-width:1160px;margin:0 auto}
+.hot{position:absolute;z-index:4;translate:-50% -50%;width:44px;height:44px;border-radius:50%;border:1px solid #fff;background:rgba(19,20,21,.55);cursor:pointer;display:grid;place-items:center;color:#fff}
+.hot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--amber);box-shadow:0 0 12px 3px rgba(229,145,54,.8)}
+.hot.is-on{background:var(--snow)}
+.bub{position:absolute;z-index:5;left:16px;right:16px;bottom:18px;max-width:560px;margin:0 auto;padding:14px 16px;border-radius:18px;background:rgba(19,20,21,.86);border:1px solid #3a3d41;display:grid;gap:4px}
+@media (min-width:900px){.bub{left:auto;right:40px;margin:0}}
+.bub .tr{font-size:clamp(17px,2.4vw,21px)}
+/* лаборатория */
+.lab{border-radius:28px;background:#f6f6f6;color:#131415;padding:clamp(16px,3vw,32px)}
+.lab .micro{color:#6b6f75}
+.ltabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.ltabs button{min-height:42px;padding:0 14px;border-radius:21px;border:1px solid #c9cbcf;background:#fff;cursor:pointer;color:#131415;font-size:14px}
+.ltabs button[aria-selected="true"]{background:#131415;color:#fff;border-color:#131415}
+.lpane[hidden]{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.chips button{min-height:42px;padding:0 14px;border-radius:21px;border:1px solid #c9cbcf;background:#fff;cursor:pointer;color:#131415;font-size:15px}
+.chips button[aria-pressed="true"]{background:#131415;color:#fff;border-color:#131415}
+.chips button:disabled{opacity:.3;cursor:not-allowed}
+.lout{margin-top:10px;border-radius:20px;background:#131415;color:#f6f6f6;padding:18px;display:grid;gap:8px;min-height:150px;align-content:center;text-align:center;justify-items:center}
+.lout .big{font-family:var(--ak-font-display);font-weight:200;font-size:clamp(22px,4.4vw,40px);letter-spacing:-.04em}
+.lwhy{margin:0;color:#b9bcc0;font-size:15px}
+.slots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;min-height:48px}
+.slots span{padding:8px 12px;border-radius:14px;background:#2a2c2f}
+/* ловушки — документы */
+.docs{display:grid;gap:14px}
+@media (min-width:760px){.docs{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.docs{grid-template-columns:repeat(3,1fr)}}
+.doc{position:relative;padding:18px;border-radius:20px;background:#1a1b1d;border:1px solid var(--line);display:grid;gap:10px;overflow:hidden}
+.doc__w{font-size:clamp(17px,2.4vw,21px);min-height:2.6em}
+.doc__w .bad{color:#ff9d90;text-decoration:line-through}
+.doc__w .good{color:#c9e8b8}
+.doc p{margin:0;font-size:14.5px;color:#b9bcc0}
+.stamp{position:absolute;right:14px;top:12px;padding:4px 10px;border:2px solid currentColor;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;rotate:-8deg}
+.stamp.no{color:#e5675a}.stamp.yes{color:var(--moss)}
+/* шпаргалка: лист шрифта */
+.spec{border-top:1px solid #3a3d41}
+.spec__r{display:grid;gap:10px;padding:22px 0;border-bottom:1px solid #3a3d41;cursor:pointer}
+@media (min-width:900px){.spec__r{grid-template-columns:200px 1.4fr 1fr 1fr;align-items:center}}
+.spec__r h3{font-size:13px;letter-spacing:.14em;font-weight:400}
+.spec__big{font-family:var(--ak-font-display);font-weight:200;font-size:clamp(26px,5vw,58px);letter-spacing:-.05em;line-height:1}
+.spec__i{width:80px;height:50px}
+@media (min-width:900px){.spec__r{grid-template-columns:90px 200px 1.4fr 1fr 1fr}}
+.spec__k{font-size:12px;color:var(--muted)}.spec__k b{display:block;color:#fff;font-weight:500;font-size:15px}
+.sw4{display:grid;gap:10px;margin-top:26px}
+@media (min-width:760px){.sw4{grid-template-columns:repeat(4,1fr)}}
+.sw4 div{border-radius:14px;padding:16px;min-height:120px;display:grid;align-content:space-between;font-size:13px}
+/* финальная сцена */
+.fin{display:grid;align-content:center;justify-items:center;text-align:center;padding:60px 16px}
+.fin__t{font-family:var(--ak-font-display);font-weight:200;font-size:clamp(30px,8vw,120px);line-height:.95;letter-spacing:-.06em}
+.fin__t span{display:inline-block}
+.finale{max-width:620px;margin:40px auto 0;text-align:center}
+.finale p{margin:0 auto 6px;font-size:clamp(16px,2vw,19px)}
+.finale .dry{margin-top:20px;font-weight:600}
+/* бегущая строка */
+.mar{overflow:hidden;padding:40px 0;border-top:1px solid #2b2d30;border-bottom:1px solid #2b2d30;margin-top:clamp(60px,9vw,120px)}
+.mar__r{display:flex;width:max-content;font-family:var(--ak-font-display);font-weight:200;font-size:clamp(44px,9vw,130px);letter-spacing:-.05em;white-space:nowrap;color:transparent;-webkit-text-stroke:1px #6a6e73;animation:mar 40s linear infinite}
+.mar__r span{padding-right:.5em}
+@keyframes mar{to{transform:translateX(-50%)}}
+/* скроллбар: шкала строительства */
+.sb{position:fixed;z-index:60;right:16px;top:16vh;bottom:16vh;width:40px}
+.sb__t{position:absolute;inset:0;touch-action:none;cursor:pointer}
+.sb__rail{position:absolute;left:19px;top:0;bottom:0;width:2px;background:#34373a}
+.sb__fill{position:absolute;left:19px;top:0;width:2px;height:100%;background:var(--snow);transform-origin:50% 0;transform:scaleY(var(--p,0))}
+.sb__dot{position:absolute;left:8px;width:24px;height:24px;top:calc(var(--p,0) * (100% - 24px));border-radius:50%;background:radial-gradient(circle at 40% 40%,#ffd7a0,var(--amber) 55%,#b8601a);box-shadow:0 0 18px 5px rgba(229,145,54,.6)}
+.sb__pct{position:absolute;right:30px;top:calc(var(--p,0) * (100% - 24px));font-size:10px;letter-spacing:.1em;color:#d8dadc;white-space:nowrap;line-height:24px}
+.sb__m{position:absolute;left:12px;width:16px;height:16px;top:calc(var(--at,0) * (100% - 16px));border:0;padding:0;background:none;cursor:pointer}
+.sb__m::after{content:"";display:block;width:8px;height:2px;margin:7px auto;background:#5d6166}
+.sb__m.is-read::after{background:var(--snow);width:12px}
+@media (max-width:767px){
+.sb{left:0;right:0;top:0;bottom:auto;width:auto;height:30px;background:linear-gradient(var(--bg),rgba(19,20,21,0))}
+.sb__t{inset:0 12px}
+.sb__rail,.sb__fill{left:0;right:0;top:13px;bottom:auto;width:auto;height:2px}
+.sb__fill{transform-origin:0 50%;transform:scaleX(var(--p,0))}
+.sb__dot{top:4px;left:calc(var(--p,0) * (100% - 20px));width:20px;height:20px}
+.sb__pct{display:none}
+.sb__m{top:2px;left:calc(var(--at,0) * (100% - 16px));height:26px}
+.sb__m::after{width:2px;height:8px;margin:9px auto}
+}
+/* упражнение «Договор» */
+.deal{display:grid;gap:12px}
+.deal__doc{padding:18px;border-radius:18px;background:#f6f6f6;color:#131415;display:grid;gap:6px}
+.deal__s{font-size:clamp(17px,3.4vw,21px);font-weight:500}
+.deal__s u{text-decoration:none;display:inline-block;min-width:4.5em;border-bottom:2px solid #131415;text-align:center;color:#b8601a}
+.deal__st{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.deal__st button{min-height:56px;border-radius:14px;border:2px solid var(--c);background:transparent;color:var(--c);font-weight:700;cursor:pointer;letter-spacing:.04em;text-transform:uppercase;font-size:clamp(11px,2.6vw,14px);rotate:-3deg}
+.deal__st button small{display:block;font-size:10px;opacity:.7}
+.deal__m{margin:0;min-height:2.6em;color:var(--muted);text-align:center;font-size:15px}
+.kitbox{display:grid;gap:22px;max-width:840px;margin:0 auto}
+.kitbox a-exercise,.kitbox a-quiz{display:block}
+[data-pair="0"]{background:#2a2418;border-color:#e59136}[data-pair="1"]{background:#1f2a1b;border-color:#8fb27a}[data-pair="2"]{background:#1d252c;border-color:#9fb0bf}
+[data-pair="3"]{background:#2a1f2a;border-color:#c49ad6}[data-pair="4"]{background:#2e1c1a;border-color:#e5675a}[data-pair="5"]{background:#1c2a2a;border-color:#7cc4c0}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="cur" aria-hidden="true"><i></i></div>
+<main>
+
+<!-- ============ HERO: полёт над Самсуном ============ -->
+<section class="sx scene hero" data-section="hero" data-words="30" id="s-hero">
+<svg class="land" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2d30"/><stop offset=".55" stop-color="#6d7174"/><stop offset=".75" stop-color="#b9a48a"/><stop offset="1" stop-color="#d9c3a2"/></linearGradient>
+<radialGradient id="sun"><stop offset="0" stop-color="#ffe2b8"/><stop offset=".35" stop-color="#e59136"/><stop offset="1" stop-color="#e59136" stop-opacity="0"/></radialGradient>
+<linearGradient id="fog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e8e8e6" stop-opacity="0"/><stop offset=".5" stop-color="#e8e8e6" stop-opacity=".55"/><stop offset="1" stop-color="#e8e8e6" stop-opacity="0"/></linearGradient>
+<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d8487"/><stop offset="1" stop-color="#25292b"/></linearGradient>
+<linearGradient id="near" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3f5a33"/><stop offset="1" stop-color="#16200f"/></linearGradient>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<g data-l="sun"><circle cx="1180" cy="560" r="260" fill="url(#sun)" opacity=".75"/><circle cx="1180" cy="560" r="46" fill="#ffd9a6"/></g>
+<rect data-l="sea" y="600" width="1600" height="300" fill="url(#sea)"/>
+<g data-l="far" fill="#5e6467"><path d="M0 620 L180 470 L320 560 L520 400 L700 540 L860 430 L1040 560 L1200 470 L1380 560 L1600 450 V700 H0Z"/></g>
+<rect data-l="fog1" x="-200" y="500" width="2000" height="160" fill="url(#fog)"/>
+<g data-l="mid" fill="#3c4339"><path d="M0 700 L140 580 L300 650 L470 520 L650 640 L820 560 L980 650 L1100 600 L1600 520 V900 H0Z"/></g>
+<rect data-l="fog2" x="-200" y="610" width="2000" height="140" fill="url(#fog)"/>
+<g data-l="near"><path d="M820 900 L900 690 L1010 640 L1180 610 L1350 650 L1480 600 L1600 620 V900Z" fill="url(#near)"/><path d="M0 900 L0 760 L160 720 L320 780 L460 900Z" fill="#1b2414"/></g>
+<g data-l="villa">
+<defs><radialGradient id="wg"><stop offset="0" stop-color="#ffc27a" stop-opacity=".9"/><stop offset="1" stop-color="#ffc27a" stop-opacity="0"/></radialGradient></defs>
+<ellipse class="vglow" cx="1180" cy="580" rx="260" ry="110" fill="url(#wg)" opacity="0"/>
+<rect x="1056" y="614" width="258" height="8" fill="#0d1110" opacity=".55"/><rect x="1106" y="558" width="238" height="7" fill="#0d1110" opacity=".55"/>
+<rect x="1060" y="560" width="250" height="56" fill="#ececea"/><rect x="1074" y="570" width="222" height="36" fill="#22272a"/>
+<rect x="1110" y="508" width="230" height="52" fill="#f2f2f0"/><rect x="1124" y="518" width="202" height="32" fill="#22272a"/>
+<rect x="1030" y="616" width="210" height="44" fill="#e4e4e2"/><rect x="1044" y="624" width="182" height="28" fill="#22272a"/>
+<path d="M1074 570l40 36M1124 518l36 32M1044 624l30 28" stroke="#ffffff" stroke-opacity=".12" stroke-width="8"/>
+<path d="M1060 616h250M1110 560h230" stroke="#bfc2c3" stroke-width="2"/>
+<g class="win" fill="#22272a"><rect x="1080" y="573" width="30" height="30"/><rect x="1118" y="573" width="30" height="30"/><rect x="1156" y="573" width="30" height="30"/><rect x="1194" y="573" width="30" height="30"/><rect x="1232" y="573" width="30" height="30"/><rect x="1130" y="521" width="28" height="26"/><rect x="1166" y="521" width="28" height="26"/><rect x="1202" y="521" width="28" height="26"/><rect x="1238" y="521" width="28" height="26"/><rect x="1274" y="521" width="28" height="26"/><rect x="1050" y="627" width="26" height="22"/><rect x="1084" y="627" width="26" height="22"/><rect x="1118" y="627" width="26" height="22"/><rect x="1152" y="627" width="26" height="22"/><rect x="1186" y="627" width="26" height="22"/></g>
+</g>
+<rect data-l="fog3" x="-200" y="700" width="2000" height="200" fill="url(#fog)" opacity=".7"/>
+</svg>
+<div class="nav" data-ui>
+<span class="logo" lang="tr">m<span class="dot"></span>kla</span>
+<nav class="nav__l" aria-label="Разделы">
+<button type="button" data-goto="formula">Формула</button><button type="button" data-goto="beraber">Хотя</button><button type="button" data-goto="kalma">Не только</button><button type="button" data-goto="partners">Квартиры</button><button type="button" class="nav__cta" data-goto="lab">Конструктор ↗</button>
+</nav>
+</div>
+<div class="hero__t">
+<h1 lang="tr"><span>-mAklA</span></h1>
+<div class="hero__sub" lang="tr">bilmekle beraber<span class="dot"></span>söylemekle kalmadı</div>
+</div>
+<div class="hero__lead"><p>Самсун, Атакум. Новый комплекс над Чёрным морем. Здесь продают квартиры и одну турецкую конструкцию. Она умеет две вещи: признать — и добавить. «Хотя» и «не только». Листай медленно: экскурсия идёт сценами.</p></div>
+<div class="phase" data-ui><span class="micro">Текущая фаза</span><div style="--w:100%">Формулы<span>2</span></div><div style="--w:60%">Партнёры<span>6</span></div><div style="--w:85%">Примеры<span>30+</span></div></div>
+<div class="scroll-hint" data-ui>листай ↓</div>
+<div class="wipe" aria-hidden="true"></div>
+</section>
+
+<!-- ============ STORY: просмотр квартиры ============ -->
+<section class="sx scene story" data-section="story" data-words="57" id="s-story">
+<div class="story__in">
+<div>
+<p class="lbl">01 · Просмотр</p>
+<h2>Тридцать восемь метров</h2>
+<div class="lines" data-lines>
+<p>Ты в Самсуне. Смотришь квартиру в Атакуме.</p>
+<p>Риелтор говорит, <b class="tr" lang="tr" data-say="Daire deniz manzaralı olmakla beraber biraz küçük.">daire deniz manzaralı <span class="lift" data-lift>olmakla beraber</span> biraz küçük</b>.</p>
+<p>Ты слышишь «deniz manzaralı». Середина фразы шумит, как прибой.</p>
+<p>Говоришь, беру. Он говорит, <b class="tr" lang="tr" data-say="Sadece söylemekle kalmayın, imzalayın da.">sadece söylemekle kalmayın, imzalayın da</b>.</p>
+<p>Подписываешь. Въезжаешь. Тридцать восемь метров. Море видно. Если встать на табурет.</p>
+<p>Ту середину ты пропустил. <b class="ma" lang="tr">Olmakla beraber</b> — «хотя». Самое дорогое слово в договоре.</p>
+<p>Риелтор, кстати, не соврал. Он сказал всё. Просто важное спрятал в середину.</p>
+</div>
+</div>
+<div class="plan" data-plan>
+<div class="plan__m" data-ui><span class="micro">Площадь</span><b data-m2>38</b><span class="micro">м²</span></div>
+<svg viewBox="0 0 420 300" aria-hidden="true">
+<path class="wall" data-wall d="M20 40H400V280H20Z"/>
+<path class="wall" data-wall d="M220 40V150M220 190V280M20 160H120M160 160H220"/>
+<path class="thin" data-wall d="M60 200h70v60H60zM250 60h120v40H250zM260 220h40v40h-40z"/>
+<path class="thin" data-wall d="M120 160a40 40 0 0 0 40 0M220 150a40 40 0 0 1 0 40"/>
+<rect data-sea x="300" y="34" width="80" height="12" fill="#7fa6c7"/>
+<g data-stool><rect x="330" y="120" width="34" height="8" rx="2" fill="#e59136"/><path d="M334 128v26M360 128v26" stroke="#e59136" stroke-width="4"/></g>
+<text x="230" y="130" font-size="11" fill="#8d9198" font-family="Onest,sans-serif" data-ui>salon</text>
+</svg>
+</div>
+</div>
+</section>
+
+<!-- ============ GUESS ============ -->
+<section class="sx" data-section="guess" data-words="24" id="s-guess">
+<div class="wrap">
+<p class="lbl">02 · Разведка</p>
+<h2 class="brk">Сначала угадай</h2>
+<p class="lead">Правил ещё не было. Подбери смысл, как фильтр квартиры. Ошибка ничего не стоит. Смотри на слово после -mAklA: оно и решает смысл.</p>
+<div class="filt" data-guess>
+<span class="micro" data-ui data-g-n>Вопрос 1 из 2</span>
+<div class="filt__s" lang="tr" data-g-s></div>
+<div class="filt__o" data-g-o data-ui></div>
+<p class="mq__f" data-g-f data-ui aria-live="polite"></p>
+<div class="range" data-ui><span>хотя</span><i><b data-g-x></b></i><span>не только</span></div>
+<div><button type="button" class="btn-g" data-g-next data-ui>Следующий вопрос →</button></div>
+</div>
+</div>
+</section>
+
+<!-- ============ FORMULA: сборка ============ -->
+<section class="sx scene grid" data-section="formula" data-words="35" id="s-formula">
+<div class="grid__in">
+<p class="lbl">03 · Сетка конструкции</p>
+<h2>Конструкция в разрезе</h2>
+<p>Берём глагол. Делаем из него имя на -mAk. Цепляем -lA — «с, посредством». Получаем «с тем, что знать». Дальше решает рамка. Лица и времени у -mAklA нет: они живут в главном глаголе.</p>
+<div class="gs" data-gs>
+<div><span class="gs__h">корень</span><span class="gs__p" lang="tr" data-gp="0">bil</span></div>
+<div><span class="gs__h" lang="tr">-mAk</span><span class="gs__p ma" lang="tr" data-gp="1">mek</span></div>
+<div><span class="gs__h" lang="tr">-lA</span><span class="gs__p ma" lang="tr" data-gp="2">le</span></div>
+<div><span class="gs__h">рамка</span><span class="gs__p cb" lang="tr" data-gp="3">beraber</span></div>
+</div>
+<div class="gs__m" data-gm data-ui>хотя знал</div>
+<div class="gs__ctl" data-ui><span class="micro" style="align-self:center">Глагол:</span><span data-gv></span><span class="micro" style="align-self:center">Рамка:</span><span data-gf></span></div>
+</div>
+</section>
+
+<!-- ============ BERABER: весы ============ -->
+<section class="sx scene scale-sc" data-section="beraber" data-words="20" id="s-beraber">
+<div class="wrap" style="width:100%">
+<p class="lbl">04 · Хотя</p>
+<h2>Признаю<span class="dot"></span>но…</h2>
+<p><b lang="tr">Beraber</b> и <b lang="tr">birlikte</b> здесь не значат «вместе». Они превращают первую часть в уступку. Да, это правда. Но смотри, что дальше.</p>
+<svg viewBox="0 0 880 330" aria-hidden="true" data-scale>
+<path d="M440 60V300M380 300h120" stroke="#6a6e73" stroke-width="4"/>
+<circle cx="440" cy="60" r="10" fill="#e59136"/>
+<g data-beam><path d="M120 60H760" stroke="#f6f6f6" stroke-width="5" stroke-linecap="round"/>
+<g data-panl><path d="M120 60l-70 120M120 60l70 120" stroke="#6a6e73" stroke-width="2"/><path d="M40 180h160a80 30 0 0 1-160 0z" fill="#9fb0bf"/><text class="ptext" x="120" y="236" text-anchor="middle" lang="tr">haklı olmakla</text><text class="ptext" x="120" y="264" text-anchor="middle" lang="tr" style="fill:#9fb0bf">beraber</text></g>
+<g data-panr><path d="M760 60l-70 120M760 60l70 120" stroke="#6a6e73" stroke-width="2"/><path d="M680 180h160a80 30 0 0 1-160 0z" fill="#e59136"/><text class="ptext" x="760" y="236" text-anchor="middle" lang="tr">kibar</text><text class="ptext" x="760" y="264" text-anchor="middle" lang="tr">davranmadı</text></g>
+</g>
+</svg>
+<div class="sent" lang="tr" data-ui><span data-s1>Haklı olmakla beraber</span> <span data-s2>kibar davranmadı.</span></div>
+<p class="ru" style="text-align:center;margin:6px auto 0" data-ui data-s3>Был прав — и всё равно нагрубил.</p>
+</div>
+</section>
+<section class="sx" data-section="beraber2" data-words="68" id="s-beraber2">
+<div class="wrap">
+<p>Стиль книжный, деловой. В разговоре скорее скажут <b lang="tr">ama</b>. Подлежащее ставят отдельно: <b lang="tr">-mAklA</b> лиц не знает.</p>
+<p>Ещё деталь. Отрицание стоит в главной части, а не в -mAklA. <b lang="tr">Bilmekle beraber söylemedi</b> — знал, но не сказал. Сама уступка всегда звучит утвердительно. Beraber и birlikte здесь взаимозаменяемы: birlikte чуть строже, beraber чуть живее.</p>
+<p>Ловушка для глаза. С существительным <b lang="tr">ile beraber</b> — «вместе с». С глаголом на -mAk — «хотя». Переключи и сравни.</p>
+<div class="sw" data-ui><button type="button" class="btn-g is-on" data-sw="0" lang="tr">annemle beraber</button><button type="button" class="btn-g" data-sw="1" lang="tr">gelmekle beraber</button></div>
+<p class="sw__out" data-sw-out data-ui aria-live="polite"></p>
+<div class="ex-list" data-exl="b" data-ui></div>
+<div class="mq" data-mq data-ok="хотя устал, пошёл на работу"><p class="mq__q"><span>вопрос</span><span lang="tr" style="letter-spacing:0;text-transform:none;color:#fff;font-size:15px">Yorgun olmakla birlikte işe gitti.</span></p><div class="mq__o"><button type="button">вместе с усталым пошёл на работу</button><button type="button">хотя устал, пошёл на работу</button><button type="button">не только устал, но и пошёл</button></div><p class="mq__f" data-ui aria-live="polite"></p></div>
+</div>
+</section>
+
+<!-- ============ KALMA: второй этаж ============ -->
+<section class="sx scene tower" data-section="kalma" data-words="22" id="s-kalma">
+<div class="wrap" style="width:100%">
+<p class="lbl">05 · Не только</p>
+<h2>Не только<span class="dot"></span>но и</h2>
+<p><b lang="tr">Kalmamak</b> — «не остановиться на этом». Первый этаж построен — сверху ставят второй. Во второй части почти всегда стоит <b lang="tr">da/de</b> или <b lang="tr">bile</b>.</p>
+<svg viewBox="0 0 760 360" aria-hidden="true" data-tw>
+<path d="M60 340H700" stroke="#6a6e73" stroke-width="3"/>
+<g data-f1><rect x="190" y="250" width="380" height="88" rx="6" fill="#f6f6f6"/><text class="ft" x="380" y="304" text-anchor="middle" lang="tr">sadece söylemekle</text></g>
+<g data-band><rect x="250" y="222" width="260" height="26" rx="13" fill="#8fb27a"/><text x="380" y="241" text-anchor="middle" font-size="16" font-weight="600" fill="#131415" font-family="Onest,sans-serif" lang="tr">kalmadı</text></g>
+<g data-f2><rect x="210" y="130" width="340" height="90" rx="6" fill="#e59136"/><text class="ft" x="380" y="184" text-anchor="middle" lang="tr">yaptı da</text></g>
+<g data-ghost opacity="0"><rect x="210" y="130" width="340" height="90" rx="6" fill="none" stroke="#6a6e73" stroke-width="2" stroke-dasharray="8 8"/><text class="lb" x="380" y="184" text-anchor="middle" lang="tr">plan yapmakla kaldık</text></g>
+<g data-hook><path d="M380 0V110" stroke="#9a9ea4" stroke-width="2"/><path d="M372 110h16l-8 10v6a5 5 0 1 1-5 5" fill="none" stroke="#9a9ea4" stroke-width="3"/></g>
+</svg>
+<div class="sent" lang="tr" data-ui data-tw-s>Sadece söylemekle kalmadı, yaptı da.</div>
+<p class="ru" style="text-align:center;margin:6px auto 0" data-ui data-tw-r>Не только сказал — ещё и сделал.</p>
+</div>
+</section>
+<section class="sx" data-section="kalma2" data-words="63" id="s-kalma2">
+<div class="wrap">
+<p>Без отрицания смысл обратный. <b lang="tr">Plan yapmakla kaldık</b> — дальше плана не пошли. Второй этаж так и остался пунктиром.</p>
+<p>На C1 встретишь и <b lang="tr">-DIğIylA kalmak</b> — «остаться только с тем, что…». <b lang="tr" data-say="Sadece verdiği sözle kaldık.">Sadece verdiği sözle kaldık</b>: у нас осталось только его обещание.</p>
+<p>Kalmamak спрягается как обычный глагол: <b lang="tr">kalmadım, kalmayacağız, kalmaz</b>. Время любое. А <b lang="tr">bile</b> вместо da усиливает: не только… но даже. Без sadece тоже можно, но с ним мысль звучит острее.</p>
+<div class="ex-list" data-exl="k" data-ui></div>
+<div class="mq" data-mq data-ok="мало того что опоздал, ещё и не извинился"><p class="mq__q"><span>вопрос</span><span lang="tr" style="letter-spacing:0;text-transform:none;color:#fff;font-size:15px">Geç kalmakla kalmadı, özür de dilemedi.</span></p><div class="mq__o"><button type="button">хотя опоздал, извинился</button><button type="button">мало того что опоздал, ещё и не извинился</button><button type="button">опоздал только на минуту</button></div><p class="mq__f" data-ui aria-live="polite"></p></div>
+</div>
+</section>
+
+<div class="mar" aria-hidden="true" data-ui><div class="mar__r" lang="tr"><span>bilmekle beraber</span><span>söylemekle kalmadı</span><span>gülümsemekle yetindi</span><span>bilmekle beraber</span><span>söylemekle kalmadı</span><span>gülümsemekle yetindi</span></div></div>
+
+<!-- ============ PARTNERS: горизонтальный проезд ============ -->
+<section class="sx scene hz" data-section="partners" data-words="30" id="s-partners">
+<div class="hz__head">
+<p class="lbl">06 · Другие квартиры комплекса</p>
+<h2>Глаголы-соседи</h2>
+<p>Некоторые слова требуют «чем?» — и охотно берут -mAklA. Чем доволен, чем занят, в чём обвиняют. Каждая квартира — отдельный глагол со своим планом. Листай вниз: квартиры едут вбок.</p>
+</div>
+<div class="hz__track" data-hz></div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section class="sx" data-section="compare" data-words="48" id="s-compare">
+<div class="wrap">
+<p class="lbl">07 · Сравни</p>
+<h2 class="brk">Как это по-русски</h2>
+<p>Русский прячет уступку в книжные слова: «при том что», «несмотря на то что». А «мало того что… ещё и» — близнец <b lang="tr">kalmadı</b>.</p>
+<p>Английский держит то же различие: уступка отдельно, добавление отдельно. Переключи язык и сравни. Русскому уху «при том что» кажется канцеляритом. Турецкому уху -mAklA beraber — тоже немного.</p>
+<div class="tabs" role="tablist" data-ui><button type="button" role="tab" aria-selected="true" data-tab="ru">Русский</button><button type="button" role="tab" aria-selected="false" data-tab="en">English</button></div>
+<div class="crows" data-crows data-ui></div>
+</div>
+</section>
+
+<!-- ============ REGISTER ============ -->
+<section class="sx" data-section="register" data-words="38" id="s-register">
+<div class="wrap">
+<p class="lbl">08 · Документы</p>
+<h2>Одна мысль — три костюма</h2>
+<p>«Хотя» по-турецки бывает разговорным, нейтральным и книжным. Нажми на полосу — увидишь костюм.</p>
+<p>На письме и в новостях встретишь книжный вариант. В разговоре с другом — ama. Не перепутай костюм: книжное в чате звучит как протокол.</p>
+<div class="bars" data-bars data-ui></div>
+<p class="reg-out" data-reg data-ui aria-live="polite"></p>
+</div>
+</section>
+
+<!-- ============ TREE ============ -->
+<section class="sx" data-section="tree" data-words="38" id="s-tree">
+<div class="wrap">
+<p class="lbl">09 · Алгоритм</p>
+<h2>Какую рамку взять</h2>
+<p>Спрашивай по порядку. Первое «да» — ответ. Если ни одно «да» не сработало, посмотри на глагол справа. Он сам попросит -mAklA.</p>
+<div class="tree" data-tree><div class="tree__sc">
+<svg viewBox="0 0 860 470" aria-hidden="true">
+<path class="ed" data-e="1" d="M300 70H660V100"/><path class="ed" data-e="2" d="M300 100V160"/><path class="ed" data-e="3" d="M300 190H660V210"/><path class="ed" data-e="4" d="M300 220V270"/><path class="ed" data-e="5" d="M300 300H660V320"/><path class="ed" data-e="6" d="M300 330V390"/>
+<g class="q" data-q="1"><rect x="10" y="40" width="580" height="60" rx="30"/><text x="34" y="77">Признаёшь факт, а дальше контраст?</text></g>
+<g class="lf" data-l="b"><rect x="610" y="100" width="230" height="52" rx="26" fill="#9fb0bf"/><text x="725" y="132" text-anchor="middle" lang="tr">-mAklA beraber</text></g>
+<g class="q" data-q="2"><rect x="10" y="160" width="580" height="60" rx="30"/><text x="34" y="197">Сверху ещё одно действие?</text></g>
+<g class="lf" data-l="k"><rect x="610" y="210" width="230" height="52" rx="26" fill="#8fb27a"/><text x="725" y="242" text-anchor="middle" lang="tr">-mAklA kalmadı, … da</text></g>
+<g class="q" data-q="3"><rect x="10" y="270" width="580" height="60" rx="30"/><text x="34" y="307">Только этим и ограничился?</text></g>
+<g class="lf" data-l="y"><rect x="610" y="320" width="230" height="52" rx="26" fill="#f6f6f6"/><text x="725" y="352" text-anchor="middle" lang="tr">kaldı / yetindi</text></g>
+<g class="lf" data-l="p"><rect x="150" y="390" width="300" height="52" rx="26" fill="#e59136"/><text x="300" y="422" text-anchor="middle">глагол-сосед: «чем?»</text></g>
+<text class="yn" x="606" y="62" data-ui>да</text><text class="yn" x="310" y="134" data-ui>нет</text><text class="yn" x="606" y="182" data-ui>да</text><text class="yn" x="310" y="252" data-ui>нет</text><text class="yn" x="606" y="292" data-ui>да</text><text class="yn" x="310" y="366" data-ui>нет</text>
+<circle data-dot cx="300" cy="18" r="9" fill="#e59136"/>
+<path id="tp-b" d="M300 18V70H660V120" fill="none"/><path id="tp-k" d="M300 18V190H660V232" fill="none"/><path id="tp-y" d="M300 18V300H660V342" fill="none"/><path id="tp-p" d="M300 18V412" fill="none"/>
+</svg></div>
+<p class="ru" data-ui style="text-align:center;margin:8px 0 0" data-hint>Схему можно листать в сторону →</p>
+<div class="cases" data-cases data-ui></div>
+<p class="tree__out" data-tree-out data-ui aria-live="polite"></p>
+</div>
+</div>
+</section>
+
+<!-- ============ MNEMO ============ -->
+<section class="sx" data-section="mnemo" data-words="37" id="s-mnemo">
+<div class="wrap" style="display:grid;gap:30px;align-items:center;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))">
+<div>
+<p class="lbl">10 · Как запомнить</p>
+<h2>Маклер всегда говорит «хотя»</h2>
+<p>Звучит как «маклер». Маклер — это риелтор. Он всегда начинает с уступки: <b lang="tr">manzaralı olmakla beraber…</b></p>
+<p>А потом не останавливается: <b lang="tr">göstermekle kalmaz, satar da</b>. Покажет — и продаст.</p>
+<p>Маклер — настоящее слово из торговли. Пусть он и подсказывает тебе на экзамене.</p>
+</div>
+<button type="button" class="card" data-card><span class="micro" style="color:#6b6f75" data-ui>визитка · Атакум</span><span class="card__w" data-card-w>МАКЛЕР</span><span class="micro" style="color:#6b6f75" data-ui>нажми, чтобы перевернуть</span></button>
+</div>
+</section>
+
+<!-- ============ SUNSET: Атакум ============ -->
+<section class="sx scene sunset" data-section="city" data-words="22" id="s-city">
+<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+<defs><linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b4a63" data-dk1/><stop offset=".7" stop-color="#e3a46a" data-dk2/><stop offset="1" stop-color="#f0c08a"/></linearGradient><linearGradient id="sea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a6a78"/><stop offset="1" stop-color="#1c2228"/></linearGradient></defs>
+<rect width="1600" height="900" fill="url(#dusk)"/>
+<rect data-night width="1600" height="900" fill="#0d1018" opacity="0"/>
+<circle data-sun2 cx="900" cy="420" r="60" fill="#ffd29a"/>
+<rect y="560" width="1600" height="340" fill="url(#sea2)"/>
+<path d="M0 560 C300 540 500 470 700 480 S1100 520 1600 470 V560 H0Z" fill="#2c3330"/>
+<path data-cable d="M180 520 L620 300" stroke="#c9cbcf" stroke-width="2"/>
+<g data-cab><rect x="-14" y="0" width="28" height="22" rx="4" fill="#e59136"/><path d="M0 0v-12" stroke="#c9cbcf" stroke-width="2"/></g>
+<g fill="#1a1d1f"><rect x="1050" y="430" width="70" height="130"/><rect x="1130" y="400" width="60" height="160"/><rect x="1200" y="450" width="90" height="110"/><rect x="1300" y="420" width="60" height="140"/><rect x="1370" y="460" width="110" height="100"/></g>
+<g class="lights" fill="#ffd29a" opacity=".9"><rect x="1060" y="450" width="10" height="10"/><rect x="1090" y="480" width="10" height="10"/><rect x="1140" y="420" width="10" height="10"/><rect x="1160" y="470" width="10" height="10"/><rect x="1215" y="470" width="10" height="10"/><rect x="1250" y="500" width="10" height="10"/><rect x="1315" y="440" width="10" height="10"/><rect x="1390" y="480" width="10" height="10"/><rect x="1440" y="500" width="10" height="10"/></g>
+<g data-ship><path d="M300 660h220l-24 30H330z" fill="#e8e8e6"/><rect x="350" y="630" width="110" height="30" fill="#d9d9d7"/><rect x="398" y="600" width="12" height="30" fill="#b8601a"/></g>
+<g fill="#1a1d1f"><path d="M760 560v-90h16v90z"/><path d="M740 470h56l-28-40z"/></g>
+<g data-fish><rect x="560" y="520" width="120" height="40" fill="#3a3d41"/><rect x="570" y="510" width="100" height="12" fill="#e59136"/></g>
+<rect y="840" width="1600" height="60" fill="#121416"/>
+</svg>
+<div class="sunset__t"><p class="lbl" style="color:#e6e7e8">11 · Сцена</p><h2>Атакум. Закат</h2><p style="color:#e6e7e8">Крути — солнце садится, город включает огни. Потом нажимай на всё подряд. Каждая точка — фраза: кто что признаёт и кто что добавляет.</p></div>
+<div data-hots></div>
+<div class="bub" aria-live="polite"><span class="tr" lang="tr" data-bub-tr>Amisos Tepesi'ne çıkmakla kalmadık, gün batımını da izledik.</span><span class="ru" data-ui data-bub-ru>Мы не только поднялись на холм Амисос, но и посмотрели закат.</span></div>
+</section>
+
+<!-- ============ LAB ============ -->
+<section class="sx" data-section="lab" data-words="38" id="s-lab">
+<div class="wrap">
+<p class="lbl">12 · Конструктор</p>
+<h2 class="brk">Собери сделку<span class="dot"></span><span class="tail">и проверь договор</span></h2>
+<p>Выбирай глагол и рамку. Загорятся только живые пары. Остальные погаснут: так по-турецки не говорят. Результат можно послушать.</p>
+<div class="lab" data-lab>
+<div class="ltabs" role="tablist" data-ui><button type="button" role="tab" aria-selected="true" data-lt="build">Собрать</button><button type="button" role="tab" aria-selected="false" data-lt="rew">Переписать</button><button type="button" role="tab" aria-selected="false" data-lt="blitz">Блиц</button></div>
+<div class="lpane" data-lp="build">
+<span class="micro" data-ui>Глагол</span><div class="chips" lang="tr" data-lb-v></div>
+<span class="micro" data-ui>Рамка</span><div class="chips" lang="tr" data-lb-f></div>
+<div class="lout"><div class="big" lang="tr" data-lb-w></div><p class="lwhy" data-lb-why data-ui></p><button type="button" class="btn-g" data-lb-say data-ui style="color:#fff">Слушать</button></div>
+</div>
+<div class="lpane" data-lp="rew" hidden>
+<p class="lwhy" style="color:#4a4e53">Перепиши разговорное «ama» книжно. Нажимай куски по порядку.</p>
+<div class="lout"><span class="ru" lang="tr" data-rw-src></span><div class="slots" lang="tr" data-rw-slots></div><div class="chips" lang="tr" data-rw-ch style="justify-content:center"></div><p class="lwhy" data-rw-st data-ui aria-live="polite"></p><button type="button" class="btn-g" data-rw-next data-ui style="color:#fff">Следующая фраза</button></div>
+</div>
+<div class="lpane" data-lp="blitz" hidden>
+<p class="lwhy" style="color:#4a4e53">Восемь секунд на ответ. Выбери турецкую фразу по смыслу.</p>
+<div class="lout"><div class="big" style="font-size:clamp(18px,3vw,26px)" data-bz-q></div><div class="chips" lang="tr" data-bz-o style="justify-content:center"></div><p class="lwhy" data-bz-st data-ui aria-live="polite"></p><button type="button" class="btn" data-bz-go data-ui>Старт</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ============ TRAPS ============ -->
+<section class="sx" data-section="traps" data-words="60" id="s-traps">
+<div class="wrap">
+<p class="lbl">13 · Документы на проверке</p>
+<h2>Пять отказов в договоре</h2>
+<p>На этом спотыкаются все. Даже на C1. Каждый отказ — настоящая ошибка с экзаменов. Нажми «Исправить» — договор одобрят.</p>
+<div class="docs">
+<article class="doc" data-trap="0"><span class="stamp no" data-ui>отказ</span><div class="doc__w" lang="tr" data-tw></div><p>Нужно имя на -mAk: söyle-mek-le. Форма на -mA сюда не подходит.</p><button type="button" class="btn-g" data-tfix data-ui>Исправить</button></article>
+<article class="doc" data-trap="1"><span class="stamp no" data-ui>отказ</span><div class="doc__w" lang="tr" data-tw></div><p>-mAklA beraber — «хотя», а не «вместе». «Вместе» — просто birlikte.</p><button type="button" class="btn-g" data-tfix data-ui>Исправить</button></article>
+<article class="doc" data-trap="2"><span class="stamp no" data-ui>отказ</span><div class="doc__w" lang="tr" data-tw></div><p>Без da вторая часть звучит обрубленно. Второй этаж держится на da.</p><button type="button" class="btn-g" data-tfix data-ui>Исправить</button></article>
+<article class="doc" data-trap="3"><span class="stamp no" data-ui>отказ</span><div class="doc__w" lang="tr" data-tw></div><p>-mAklA не берёт личных окончаний. Лицо видно из подлежащего.</p><button type="button" class="btn-g" data-tfix data-ui>Исправить</button></article>
+<article class="doc" data-trap="4"><span class="stamp no" data-ui>отказ</span><div class="doc__w" lang="tr" data-tw></div><p>Yetinmek спрашивает «чем?», а не «куда?». Нужно -lA.</p><button type="button" class="btn-g" data-tfix data-ui>Исправить</button></article>
+</div>
+</div>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section class="sx" data-section="video" data-words="13" id="s-video">
+<div class="wrap" style="max-width:860px">
+<p class="lbl">14 · Видео</p>
+<h2>Учитель объясняет</h2>
+<p>Обрати внимание на <b lang="tr">-mAklA kalmamak</b>: учитель всё время добавляет вторую часть с <b lang="tr">da</b>.</p>
+<a-video yt="0cpJ2jJFcQM" start="40" end="220" title="131. Ders (C1) Ulaçlar" channel="ALTIN KÖPRÜ - TÜRKÇE"></a-video>
+</div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section class="sx" data-section="practice" data-words="2" id="s-practice">
+<div class="wrap kitbox">
+<p class="lbl">15 · Руками</p>
+<h2>Практика</h2>
+<a-exercise ref="c1.makla.ex1"></a-exercise>
+<a-exercise ref="c1.makla.ex2"></a-exercise>
+<a-exercise ref="c1.makla.ex3"></a-exercise>
+<a-exercise ref="c1.makla.ex4"></a-exercise>
+<a-exercise ref="c1.makla.ex5" class="ak-ex" data-deal>
+<div class="ak-ex__head"><span class="ak-ex__title">Договор с риелтором: поставь печать в пропуск</span><span class="ak-ex__count" data-d-count>1 / 8</span></div>
+<div class="deal">
+<div class="deal__doc"><span class="micro" style="color:#6b6f75">Пункт договора</span><div class="deal__s" lang="tr" data-d-s></div><span class="ru" style="color:#5d6166;font-size:14px" data-d-r></span></div>
+<div class="deal__st">
+<button type="button" data-st="beraber" style="--c:#9fb0bf" lang="tr">beraber<small>1</small></button>
+<button type="button" data-st="kalma" style="--c:#8fb27a" lang="tr">kalma-<small>2</small></button>
+<button type="button" data-st="yetin" style="--c:#f6f6f6" lang="tr">yetin-<small>3</small></button>
+<button type="button" data-st="sucla" style="--c:#e59136" lang="tr">suçla-<small>4</small></button>
+</div>
+<p class="deal__m" data-d-m aria-live="polite"></p>
+</div>
+</a-exercise>
+</div>
+</section>
+
+<!-- ============ CHECK ============ -->
+<section class="sx" data-section="check" data-words="3" id="s-check">
+<div class="wrap kitbox">
+<p class="lbl">16 · Без подсказок</p>
+<h2>Мини-проверка</h2>
+<a-quiz ref="c1.makla.check1"></a-quiz>
+</div>
+</section>
+
+<!-- ============ CHEAT ============ -->
+<section class="sx" data-section="cheat" data-words="42" id="s-cheat">
+<div class="wrap">
+<p class="lbl">17 · Шпаргалка</p>
+<h2>Лист конструкции</h2>
+<p>Три формулы на одном листе. Сохрани скриншотом. Слева номер, справа смысл и регистр. Ниже — соседи, которые просят «чем?».</p>
+<div class="spec">
+<div class="spec__r" data-spec="Haklı olmakla beraber kibar davranmadı." role="button" tabindex="0"><svg class="spec__i" viewBox="0 0 80 50" aria-hidden="true"><path d="M40 6V46M8 14H72" stroke="#f6f6f6" stroke-width="2" transform="rotate(8 40 14)"/><circle cx="12" cy="30" r="8" fill="#9fb0bf"/><circle cx="68" cy="38" r="10" fill="#e59136"/></svg><h3>Формула 001<br><span class="ru">уступка</span></h3><span class="spec__big" lang="tr">-mAklA beraber</span><span class="spec__k">Значение<b>хотя</b></span><span class="spec__k">Регистр<b>книжный</b></span></div>
+<div class="spec__r" data-spec="Sadece söylemekle kalmadı, yaptı da." role="button" tabindex="0"><svg class="spec__i" viewBox="0 0 80 50" aria-hidden="true"><rect x="14" y="28" width="52" height="18" fill="#f6f6f6"/><rect x="18" y="6" width="44" height="18" fill="#e59136"/><rect x="24" y="23" width="32" height="6" rx="3" fill="#8fb27a"/></svg><h3>Формула 002<br><span class="ru">добавление</span></h3><span class="spec__big" lang="tr">-mAklA kalmadı, … da</span><span class="spec__k">Значение<b>не только… но и</b></span><span class="spec__k">Регистр<b>любой</b></span></div>
+<div class="spec__r" data-spec="Plan yapmakla kaldık." role="button" tabindex="0"><svg class="spec__i" viewBox="0 0 80 50" aria-hidden="true"><rect x="14" y="28" width="52" height="18" fill="#f6f6f6"/><rect x="18" y="6" width="44" height="18" fill="none" stroke="#6a6e73" stroke-dasharray="4 4"/></svg><h3>Формула 003<br><span class="ru">ограничение</span></h3><span class="spec__big" lang="tr">-mAklA kaldı / yetindi</span><span class="spec__k">Значение<b>только и всего</b></span><span class="spec__k">Регистр<b>любой</b></span></div>
+</div>
+<div class="sw4">
+<div style="background:#f6f6f6;color:#131415"><span class="micro" style="color:#6b6f75">001</span><b lang="tr">meşgul olmak</b><span>быть занятым</span></div>
+<div style="background:#e59136;color:#131415"><span class="micro" style="color:#5b3510">002</span><b lang="tr">suçlamak</b><span>обвинять в чём-то</span></div>
+<div style="background:#1a1b1d;border:1px solid #3a3d41"><span class="micro">003</span><b lang="tr">görevli olmak</b><span>отвечать за что-то</span></div>
+<div style="background:#34373a"><span class="micro">004</span><b lang="tr">iyi etmek</b><span>правильно сделать</span></div>
+</div>
+</div>
+</section>
+<section class="sx scene fin" data-section="final" data-words="32" id="s-final">
+<div class="fin__t" lang="tr" data-fin>Sadece okumakla kalmadın<span class="dot"></span>anladın da.</div>
+<p class="ru" style="margin-top:18px" data-fin-r>Ты не только дочитал. Ты понял.</p>
+<div class="finale" data-finale>
+<p>Ты снова у риелтора. Он говорит, <b lang="tr">manzaralı olmakla beraber…</b></p>
+<p>Ты поднимаешь руку. Говоришь, <b lang="tr">beraber</b> что? Он вздыхает. Говорит, <b lang="tr">küçük</b>.</p>
+<p>Говоришь, <b lang="tr" data-say="Sadece söylemekle kalmayın, indirim de yapın.">sadece söylemekle kalmayın, indirim de yapın</b>.</p>
+<p>Середину фразы ты больше не пропускаешь.</p>
+<p class="dry">Скидку дали. Табурет, кстати, тоже.</p>
+<div style="margin-top:18px" data-ui><button type="button" class="btn" data-goto="hero">Наверх</button></div>
+</div>
+</section>
+
+</main>
+
+<nav class="sb" data-scrollbar aria-label="Прогресс урока"><div class="sb__t" data-sb-t><span class="sb__rail"></span><span class="sb__fill"></span><span class="sb__dot" aria-hidden="true"></span><span class="sb__pct" data-sb-pct aria-hidden="true">0%</span></div></nav>
+
+<template data-achievement data-title="Сделка закрыта" data-text="Теперь ты признаёшь с -mAklA beraber и добавляешь с -mAklA kalmadı, … da — как риелтор с C1.">
+<svg viewBox="0 0 140 140" aria-hidden="true">
+<rect width="140" height="140" rx="30" fill="#131415"/>
+<path class="ac-m" d="M14 104 L44 64 L64 86 L88 52 L126 104Z" fill="#3c4339"/>
+<circle class="ac-s" cx="96" cy="58" r="14" fill="#e59136"/>
+<g class="ac-v"><rect x="40" y="82" width="60" height="14" fill="#f6f6f6"/><rect x="50" y="70" width="56" height="12" fill="#ececea"/><rect class="ac-w" x="46" y="86" width="10" height="6" fill="#e59136"/><rect class="ac-w" x="62" y="86" width="10" height="6" fill="#e59136"/><rect class="ac-w" x="78" y="86" width="10" height="6" fill="#e59136"/></g>
+<text x="70" y="126" text-anchor="middle" font-size="13" font-family="Unbounded,sans-serif" font-weight="300" fill="#f6f6f6">-mAklA</text>
+</svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+const G = window.gsap || null;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const A = !!G && !reduce;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const say = (t) => { try { window.AlternaKit && AlternaKit.speak(t); } catch (e) { /* тихо */ } };
+const mob = () => innerWidth < 768;
+if (G) { ['ScrollTrigger', 'MotionPathPlugin', 'SplitText'].forEach((n) => { if (window[n]) gsap.registerPlugin(window[n]); }); if (window.ScrollTrigger) ScrollTrigger.config({ ignoreMobileResize: true }); }
+const ST = A && window.ScrollTrigger ? window.ScrollTrigger : null;
+const MP = A && !!window.MotionPathPlugin;
+/* кинорежим: секции-сцены закрепляются и проигрываются прокруткой */
+if (ST) document.documentElement.classList.add('cine');
+function scene(el, len, build) {
+  if (!ST || !el) return null;
+  const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: el, start: 'top top', end: () => '+=' + (typeof len === 'function' ? len() : len), scrub: .8, pin: true, anticipatePin: 1, invalidateOnRefresh: true } });
+  build(tl);
+  return tl;
+}
+const AMB = ['#e59136', '#ffd29a', '#f6f6f6', '#8fb27a', '#9fb0bf'];
+function spark(el) {
+  if (!A || !el) return;
+  const r = el.getBoundingClientRect();
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement('span');
+    s.style.cssText = `position:fixed;z-index:95;left:${r.left + r.width / 2}px;top:${r.top + r.height / 2}px;width:7px;height:7px;border-radius:50%;pointer-events:none;background:${AMB[i % 5]}`;
+    document.body.append(s);
+    const a = (i / 14) * Math.PI * 2, d = 50 + Math.random() * 50;
+    gsap.fromTo(s, { x: 0, y: 0, scale: 1.2 }, { x: Math.cos(a) * d, y: Math.sin(a) * d, scale: 0, duration: .8, ease: 'power2.out', onComplete: () => s.remove() });
+  }
+}
+const shake = (el) => { if (A) gsap.fromTo(el, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' }); };
+/* «дешифровка» текста: буквы перебираются и встают на место */
+const CH = 'abcçdefgğhıijklmnoöprsştuüvyz';
+function scramble(el, text, dur = .7) {
+  if (!A) { el.textContent = text; return; }
+  const o = { p: 0 };
+  gsap.to(o, { p: 1, duration: dur, ease: 'power2.out', onUpdate: () => { const n = Math.floor(text.length * o.p); el.textContent = text.slice(0, n) + [...text.slice(n)].map((c) => (c === ' ' ? ' ' : CH[(Math.random() * CH.length) | 0])).join(''); }, onComplete: () => { el.textContent = text; } });
+}
+function watch(el, on, off) { if (el) new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? on() : off())), { threshold: .05 }).observe(el); }
+$$('[data-goto]').forEach((b) => b.addEventListener('click', () => $(`[data-section="${b.dataset.goto}"]`).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })));
+
+/* ---------- курсор-солнце и магнитные кнопки ---------- */
+const cur = $('.cur');
+if (A && matchMedia('(hover: hover)').matches) {
+  const cx = gsap.quickTo(cur, 'x', { duration: .35, ease: 'power3' }), cy = gsap.quickTo(cur, 'y', { duration: .35, ease: 'power3' });
+  addEventListener('pointermove', (e) => { cx(e.clientX); cy(e.clientY); }, { passive: true });
+  document.addEventListener('pointerover', (e) => { const t = e.target.closest('button, [data-say], a'); gsap.to(cur, { scale: t ? 2.2 : 1, duration: .3 }); });
+  $$('.btn, .circ, .nav__cta').forEach((b) => {
+    b.addEventListener('pointermove', (e) => { const r = b.getBoundingClientRect(); gsap.to(b, { x: (e.clientX - r.left - r.width / 2) * .3, y: (e.clientY - r.top - r.height / 2) * .3, duration: .3 }); });
+    b.addEventListener('pointerleave', () => gsap.to(b, { x: 0, y: 0, duration: .6, ease: 'elastic.out(1, .4)' }));
+  });
+}
+
+/* ---------- СЦЕНА 1: полёт над Самсуном ---------- */
+const hero = $('.hero');
+/* на телефоне камера смотрит на виллу: свой кадр viewBox и точка «входа в окно» */
+const land = $('.land');
+const camX = () => (mob() ? '40%' : '72%');
+if (mob()) land.setAttribute('viewBox', '900 0 700 900');
+$('.wipe').style.clipPath = `circle(0% at ${camX()} 62%)`;
+let heroChars = null;
+if (ST && window.SplitText) heroChars = new SplitText('.hero__t h1 span', { type: 'chars' }).chars;
+scene(hero, () => (mob() ? 1100 : 1700), (tl) => {
+  tl.to('[data-l="far"]', { y: -40, scale: 1.04, svgOrigin: '800 500' }, 0)
+    .to('[data-l="mid"]', { y: -100 }, 0)
+    .to('[data-l="near"]', { y: -190, scale: 1.08, svgOrigin: '1200 700' }, 0)
+    .to('[data-l="sun"]', { y: -170 }, 0)
+    .to('[data-l="sea"]', { y: -40 }, 0)
+    .to('[data-l="fog1"]', { x: 320 }, 0).to('[data-l="fog2"]', { x: -280 }, 0).to('[data-l="fog3"]', { x: 220, y: -80 }, 0)
+    .to(heroChars || '.hero__t h1', { y: (i) => -140 - i * 30, rotation: (i) => (i - 3) * 8, opacity: 0, stagger: .03, duration: .5 }, .05)
+    .to('.hero__sub', { y: -60, opacity: 0, duration: .4 }, .1)
+    .to('.hero__lead, .phase, .scroll-hint, .nav', { y: -60, opacity: 0, duration: .3 }, .15)
+    .to('.win rect', { fill: '#ffc27a', stagger: .02, duration: .2 }, .3)
+    .to('.vglow', { opacity: 1, duration: .3 }, .35)
+    .to('[data-l="villa"]', { scale: 3.4, svgOrigin: '1180 580', y: 40, duration: .7 }, .4)
+    .to('.land', { scale: 1.5, transformOrigin: `${camX()} 62%`, duration: .7 }, .4)
+    .to('.wipe', { clipPath: `circle(150% at ${camX()} 62%)`, duration: .35 }, .8);
+});
+if (A) {
+  const fogs = [gsap.to('[data-l="fog1"]', { xPercent: 6, duration: 9, yoyo: true, repeat: -1, ease: 'sine.inOut' }), gsap.to('[data-l="fog2"]', { xPercent: -7, duration: 11, yoyo: true, repeat: -1, ease: 'sine.inOut' })];
+  watch(hero, () => fogs.forEach((f) => f.play()), () => fogs.forEach((f) => f.pause()));
+}
+
+/* ---------- СЦЕНА 2: просмотр квартиры ---------- */
+const lines = $$('[data-lines] p'), walls = $$('[data-wall]'), m2 = $('[data-m2]');
+scene($('[data-section="story"]'), () => (mob() ? 1800 : 2400), (tl) => {
+  walls.forEach((w) => { const l = w.getTotalLength(); gsap.set(w, { strokeDasharray: l, strokeDashoffset: l }); });
+  gsap.set(lines.slice(1), { opacity: 0, y: 40 });
+  gsap.set('[data-stool], [data-sea]', { scale: 0, svgOrigin: '347 137' });
+  const o = { v: 0 };
+  lines.forEach((p, i) => {
+    if (i) tl.to(lines[i - 1], { opacity: 0, y: -40, duration: .4 }).to(p, { opacity: 1, y: 0, duration: .4 }, '<.1');
+    if (walls[i]) tl.to(walls[i], { strokeDashoffset: 0, duration: .8 }, '<');
+    if (i === 1) tl.fromTo('[data-lift]', { color: '#ffffff' }, { color: '#e59136', duration: .3 });
+    if (i === 4) tl.to(o, { v: 38, duration: .8, onUpdate: () => { m2.textContent = Math.round(o.v); } }, '<').to('[data-sea]', { scale: 1, duration: .3 }).to('[data-stool]', { scale: 1, rotation: 360, duration: .5 });
+    if (i === 5) tl.fromTo(p.querySelector('.ma'), { scale: 1 }, { scale: 1.25, transformOrigin: '0 50%', duration: .5 });
+    tl.to({}, { duration: .4 });
+  });
+});
+
+/* ---------- угадайка-фильтр ---------- */
+const GQ = [
+  { s: 'Zengin olmakla beraber mutlu değil.', o: ['хотя богат, несчастлив', 'вместе с богатым он несчастлив', 'не только богат, но и несчастлив'], ok: 0, x: 0, why: ['Да. Beraber после -mAklA — уступка: «хотя».', '«Вместе с» было бы с существительным: zenginle beraber.', '«Не только» — это kalmadı, а здесь beraber.'] },
+  { s: 'Sadece izlemekle kalmadı, yardım da etti.', o: ['только смотрел и не помог', 'не только смотрел, но и помог', 'хотя смотрел, помог'], ok: 1, x: 1, why: ['Kalmadı — «не остановился на этом». Он пошёл дальше.', 'Да. Kalmadı + da — второй этаж: ещё и помог.', '«Хотя» — это beraber. Здесь kalmadı.'] },
+];
+let gi = 0;
+function gShow() {
+  const q = GQ[gi], box = $('[data-g-o]');
+  $('[data-g-n]').textContent = `Вопрос ${gi + 1} из ${GQ.length}`; $('[data-g-f]').textContent = '';
+  scramble($('[data-g-s]'), q.s, .9);
+  box.textContent = '';
+  q.o.forEach((t, i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = t;
+    b.addEventListener('click', () => { $$('button', box).forEach((x) => x.classList.remove('ok', 'no')); b.classList.add(i === q.ok ? 'ok' : 'no'); $('[data-g-f]').textContent = q.why[i]; if (i === q.ok) { spark(b); say(q.s); if (A) gsap.to('[data-g-x]', { x: q.x ? $('.range i').clientWidth - 10 : 0, duration: .8, ease: 'power3.inOut' }); } else shake(b); });
+    box.append(b);
+  });
+}
+$('[data-g-next]').addEventListener('click', () => { gi = (gi + 1) % GQ.length; gShow(); });
+gShow();
+
+/* ---------- СЦЕНА 3: сборка конструкции ---------- */
+const GP = $$('[data-gp]'), GM = $('[data-gm]');
+const back = (w) => /[aıou][^aeıioöuü]*$/.test(w);
+const VERBS = [['bil', 'знал'], ['haklı ol', 'был прав'], ['söyle', 'сказал'], ['gel', 'пришёл']];
+const FR = [['beraber', 'хотя', 'cb'], ['birlikte', 'хотя', 'cb'], ['kalmadı', 'не только… но и', 'cg'], ['yetindi', 'только и всего', '']];
+let gv = 0, gf = 0;
+function gSet(v, f, anim) {
+  gv = v; gf = f;
+  const [w, ru] = VERBS[v], [fw, fru, fc] = FR[f], b = back(w);
+  const parts = [w, b ? 'mak' : 'mek', b ? 'la' : 'le', fw];
+  GP.forEach((p, i) => { if (p.textContent !== parts[i]) { if (anim) scramble(p, parts[i], .5); else p.textContent = parts[i]; } });
+  GP[3].className = 'gs__p ' + fc;
+  GM.textContent = f === 2 ? `не только ${ru}, но и…` : f === 3 ? `только ${ru} — и всё` : `${fru} ${ru}`;
+  $$('[data-gvb]').forEach((x) => x.classList.toggle('is-on', Number(x.dataset.gvb) === v));
+  $$('[data-gfb]').forEach((x) => x.classList.toggle('is-on', Number(x.dataset.gfb) === f));
+}
+VERBS.forEach(([w], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn-g'; b.dataset.gvb = i; b.lang = 'tr'; b.textContent = w; b.addEventListener('click', () => { gSet(i, gf, true); say(GP.map((p) => p.textContent).slice(0, 3).join('') + ' ' + FR[gf][0]); }); $('[data-gv]').append(b); });
+FR.forEach(([w], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn-g'; b.dataset.gfb = i; b.lang = 'tr'; b.textContent = w; b.addEventListener('click', () => { gSet(gv, i, true); say(GP.map((p) => p.textContent).slice(0, 3).join('') + ' ' + w); }); $('[data-gf]').append(b); });
+gSet(0, 0, false);
+scene($('[data-section="formula"]'), () => (mob() ? 1500 : 2000), (tl) => {
+  tl.from('.gs', { scaleX: 0, transformOrigin: '0 50%', duration: .5 })
+    .from('.gs__h', { y: -20, opacity: 0, stagger: .1, duration: .3 })
+    .from(GP[0], { y: -260, rotation: -20, duration: .5, ease: 'bounce.out' })
+    .from(GP[1], { x: 320, duration: .5, ease: 'power3.out' })
+    .from(GP[2], { y: 260, rotation: 30, duration: .5, ease: 'back.out(2)' })
+    .from(GP[3], { scale: 3, opacity: 0, duration: .5 })
+    .from(GM, { y: 30, opacity: 0, duration: .3 })
+    .to({}, { duration: 1.6 });
+});
+if (ST) ScrollTrigger.create({ trigger: '[data-section="formula"]', start: 'top top', end: () => '+=' + (mob() ? 1500 : 2000), onUpdate: (s) => { const st = s.progress < .62 ? 0 : s.progress < .8 ? 1 : 2; const want = [[0, 0], [0, 2], [1, 0]][st]; if (want[0] !== gv || want[1] !== gf) gSet(want[0], want[1], true); } });
+
+/* ---------- СЦЕНА 4: весы уступки ---------- */
+scene($('[data-section="beraber"]'), () => (mob() ? 1100 : 1500), (tl) => {
+  tl.from('[data-panl]', { y: -300, duration: .5, ease: 'bounce.out' })
+    .from('[data-s1]', { y: 20, opacity: 0, duration: .3 }, '<.2')
+    .from('[data-panr]', { y: -300, duration: .5, ease: 'bounce.out' })
+    .to('[data-beam]', { rotation: 9, svgOrigin: '440 60', duration: .6, ease: 'power2.inOut' })
+    .to('[data-panl]', { rotation: -9, svgOrigin: '120 60', duration: .6, ease: 'power2.inOut' }, '<')
+    .to('[data-panr]', { rotation: -9, svgOrigin: '760 60', duration: .6, ease: 'power2.inOut' }, '<')
+    .from('[data-s2]', { y: 20, opacity: 0, duration: .3 })
+    .from('[data-s3]', { y: 20, opacity: 0, duration: .3 })
+    .to({}, { duration: .6 });
+});
+const SW = [['Annemle beraber geldim.', 'Я пришла вместе с мамой. Существительное + ile beraber = «вместе с».'], ['Gelmekle beraber hiç konuşmadı.', 'Хотя пришёл, не сказал ни слова. Глагол на -mAk + -lA beraber = «хотя».']];
+function swShow(i) { $$('[data-sw]').forEach((b) => b.classList.toggle('is-on', Number(b.dataset.sw) === i)); const o = $('[data-sw-out]'); o.innerHTML = `<b lang="tr">${SW[i][0]}</b><br><span class="ru">${SW[i][1]}</span>`; say(SW[i][0]); if (A) gsap.from(o, { y: 14, opacity: 0, duration: .4 }); }
+$$('[data-sw]').forEach((b) => b.addEventListener('click', () => swShow(Number(b.dataset.sw))));
+$('[data-sw-out]').innerHTML = `<b lang="tr">${SW[0][0]}</b><br><span class="ru">${SW[0][1]}</span>`;
+const EXL = {
+  b: [['Haklı olmakla beraber kibar davranmadı.', 'Был прав, но повёл себя грубо.'], ['Zengin olmakla birlikte mutlu değil.', 'Хотя богат, несчастлив.'], ['Bilmekle beraber söylemedi.', 'Знал, но не сказал.'], ['Okumakla beraber anlamadı.', 'Хотя прочитал, не понял.'], ['Fiyatı yüksek olmakla beraber herkes almak istiyor.', 'Хотя цена высокая, купить хотят все.']],
+  k: [['Sadece söylemekle kalmadı, yaptı da.', 'Не только сказал, но и сделал.'], ['Sadece izlemekle kalmadık, yardım da ettik.', 'Мы не только смотрели, но и помогли.'], ['Türkçe öğrenmekle kalmadı, öğretmeye de başladı.', 'Не только выучил турецкий, но и начал преподавать.'], ['Plan yapmakla kaldık.', 'Дальше плана не пошли.'], ['Bakmakla yetindik, almadık.', 'Только посмотрели, не купили.']],
+};
+Object.entries(EXL).forEach(([k, list]) => {
+  const box = $(`[data-exl="${k}"]`);
+  list.forEach(([tr, ru], i) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'ex-row';
+    b.innerHTML = `<span class="n">/ 0${i + 1}</span><span class="w"><span lang="tr">${tr}</span><small>${ru}</small></span><span class="ar">↗</span>`;
+    b.addEventListener('click', () => { say(tr); if (A) gsap.fromTo(b.querySelector('.ar'), { rotation: 0 }, { rotation: 45, duration: .3, yoyo: true, repeat: 1 }); });
+    box.append(b);
+  });
+  if (ST) gsap.from($$('.ex-row', box), { x: -40, opacity: 0, duration: .5, stagger: .08, scrollTrigger: { trigger: box, start: 'top 85%', once: true } });
+});
+
+/* ---------- СЦЕНА 5: второй этаж ---------- */
+const twS = $('[data-tw-s]'), twR = $('[data-tw-r]');
+scene($('[data-section="kalma"]'), () => (mob() ? 1300 : 1800), (tl) => {
+  tl.from('[data-f1]', { y: 160, duration: .5, ease: 'power3.out' })
+    .from('[data-band]', { scaleX: 0, svgOrigin: '380 235', duration: .4 })
+    .from('[data-hook]', { y: -140, duration: .3 })
+    .from('[data-f2]', { y: -240, duration: .6, ease: 'bounce.out' })
+    .from(twS, { y: 20, opacity: 0, duration: .3 }).from(twR, { y: 20, opacity: 0, duration: .3 }, '<.1')
+    .to({}, { duration: .5 })
+    .to('[data-f2], [data-hook]', { y: -300, duration: .6, ease: 'power2.in' })
+    .to('[data-ghost]', { opacity: 1, duration: .3 })
+    .to('[data-band] rect', { fill: '#9a9ea4', duration: .2 }, '<')
+    .to({}, { duration: .6 });
+});
+if (ST) ScrollTrigger.create({ trigger: '[data-section="kalma"]', start: 'top top', end: () => '+=' + (mob() ? 1300 : 1800), onUpdate: (s) => { const late = s.progress > .7; const t = late ? 'Plan yapmakla kaldık.' : 'Sadece söylemekle kalmadı, yaptı da.'; if (twS.textContent !== t) { twS.textContent = t; twR.textContent = late ? 'Дальше плана не пошли.' : 'Не только сказал — ещё и сделал.'; } } });
+
+/* ---------- СЦЕНА 6: горизонтальный проезд по квартирам ---------- */
+const APTS = [
+  ['01', 'Studio', '-mAklA yetinmek', 'довольствоваться тем, что…', 'Gülümsemekle yetindi.', 'Он лишь улыбнулся.'],
+  ['02', 'Loft', '-mAklA meşgul olmak', 'быть занятым тем, что…', 'Ev aramakla meşgulüm.', 'Я занят поиском квартиры.'],
+  ['03', 'Penthouse', '-mAklA suçlamak', 'обвинять в том, что…', 'Onu yalan söylemekle suçladılar.', 'Его обвинили во лжи.'],
+  ['04', 'Family', '-mAklA görevli olmak', 'отвечать за то, чтобы…', 'Güvenliği sağlamakla görevli.', 'Он отвечает за безопасность.'],
+  ['05', 'Garden', '-mAklA iyi / hata etmek', 'хорошо (зря), что…', 'Gelmekle iyi ettin.', 'Хорошо, что ты пришёл.'],
+  ['06', 'Skyline', '-mAklA tanınmak', 'быть известным тем, что…', 'Dürüst olmakla tanınır.', 'Он известен честностью.'],
+];
+const NS = 'http://www.w3.org/2000/svg', track = $('[data-hz]');
+function planSvg(seed) {
+  const s = document.createElementNS(NS, 'svg'); s.setAttribute('viewBox', '0 0 320 180'); s.setAttribute('aria-hidden', 'true');
+  const r = (n) => { seed = (seed * 9301 + 49297) % 233280; return Math.floor((seed / 233280) * n); };
+  const x1 = 100 + r(60), y1 = 70 + r(40);
+  const d = [`M14 14H306V166H14Z`, `M${x1} 14V${y1 - 20}M${x1} ${y1 + 20}V166`, `M14 ${y1}H${x1 - 30}`, `M${x1} ${y1}H${200 + r(60)}`];
+  d.forEach((dd, i) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', dd); p.setAttribute('class', i ? 'thin' : 'wall'); s.append(p); });
+  const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', x1 + 40); c.setAttribute('cy', 40 + r(90)); c.setAttribute('r', 5); c.setAttribute('fill', '#e59136'); s.append(c);
+  return s;
+}
+const apts = APTS.map(([n, nm, t, ru, ex, exr], i) => {
+  const a = document.createElement('article'); a.className = 'apt';
+  a.innerHTML = `<div class="apt__n" data-ui><span>${nm}</span><span>/ ${n}</span></div><div class="apt__t" lang="tr">${t}</div><div class="ru" data-ui>${ru}</div><div class="apt__ex" lang="tr">${ex}</div><div class="ru" data-ui>${exr}</div>`;
+  a.insertBefore(planSvg(i * 7 + 3), a.children[1]);
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'btn-g'; b.dataset.ui = ''; b.textContent = 'Слушать пример ↗';
+  b.addEventListener('click', () => { say(ex); spark(b); });
+  a.append(b); track.append(a); return a;
+});
+let hzTween = null;
+scene($('[data-section="partners"]'), () => Math.max(400, track.scrollWidth - innerWidth + 60), (tl) => {
+  hzTween = tl.to(track, { x: () => -(track.scrollWidth - innerWidth + 32), duration: 1 });
+});
+if (ST && hzTween) apts.forEach((a) => {
+  $$('path', a).forEach((p) => { const l = p.getTotalLength(); gsap.set(p, { strokeDasharray: l, strokeDashoffset: l }); });
+  gsap.to($$('path', a), { strokeDashoffset: 0, duration: 1, stagger: .1, scrollTrigger: { trigger: a, containerAnimation: hzTween, start: 'left 85%', toggleActions: 'play none none reverse' } });
+  gsap.from(a, { y: 60, scale: .94, duration: .8, scrollTrigger: { trigger: a, containerAnimation: hzTween, start: 'left 95%', toggleActions: 'play none none reverse' } });
+});
+
+/* ---------- сравнение и регистр ---------- */
+const CR = {
+  ru: [['Haklı olmakla beraber…', 'Хотя он был прав… / при том что он был прав…'], ['Söylemekle kalmadı, yaptı da.', 'Мало того что сказал — ещё и сделал.'], ['Gülümsemekle yetindi.', 'Ограничился улыбкой.'], ['Yalan söylemekle suçlandı.', 'Его обвинили во лжи.'], ['Gelmekle iyi ettin.', 'Хорошо, что ты пришёл.']],
+  en: [['Haklı olmakla beraber…', 'Although he was right…'], ['Söylemekle kalmadı, yaptı da.', 'He not only said it but also did it.'], ['Gülümsemekle yetindi.', 'He contented himself with a smile.'], ['Yalan söylemekle suçlandı.', 'He was accused of lying.'], ['Gelmekle iyi ettin.', 'You did well to come.']],
+};
+function cShow(k) {
+  $$('[data-tab]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === k)));
+  const box = $('[data-crows]'); box.textContent = '';
+  CR[k].forEach(([tr, x]) => { const r = document.createElement('div'); r.className = 'crow'; r.innerHTML = `<b lang="tr" data-say="${tr}">${tr}</b><span lang="${k}">${x}</span>`; box.append(r); });
+  if (A) gsap.from($$('.crow', box), { y: 20, opacity: 0, duration: .4, stagger: .06 });
+}
+$$('[data-tab]').forEach((b) => b.addEventListener('click', () => cShow(b.dataset.tab)));
+cShow('ru');
+const REG = [['ama', '30%', '#9a9ea4', 'Haklıydı ama kibar davranmadı.', 'разговорный: был прав, но…'], ['-sA da', '50%', '#c9cbcf', 'Haklı olsa da kibar davranmadı.', 'нейтральный: хоть и был прав…'], ['-mAsInA rağmen', '70%', '#9fb0bf', 'Haklı olmasına rağmen kibar davranmadı.', 'нейтрально-книжный: несмотря на то что…'], ['-mAklA beraber', '95%', '#e59136', 'Haklı olmakla beraber kibar davranmadı.', 'книжный, деловой: при том что…']];
+const bars = REG.map(([t, w, c, ex, r]) => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'bar'; b.style.setProperty('--w', w); b.style.setProperty('--c', c);
+  b.innerHTML = `<span lang="tr">${t}</span><i></i>`;
+  b.addEventListener('click', () => { bars.forEach((x) => x.classList.toggle('is-on', x === b)); $('[data-reg]').innerHTML = `<b lang="tr">${ex}</b><br><span class="ru">${r}</span>`; say(ex); });
+  $('[data-bars]').append(b); return b;
+});
+if (ST) gsap.from($$('.bar i'), { scaleX: 0, transformOrigin: '0 50%', duration: 1, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '[data-bars]', start: 'top 80%', once: true } });
+
+/* ---------- дерево ---------- */
+const CS = [['хотя был прав — нагрубил', 'b', 'Haklı olmakla beraber kibar davranmadı.'], ['не только сказал — сделал', 'k', 'Sadece söylemekle kalmadı, yaptı da.'], ['только посмотрели', 'y', 'Bakmakla yetindik.'], ['занят поиском квартиры', 'p', 'Ev aramakla meşgulüm.']];
+const PATH = { b: [[1], [1]], k: [[2, 3], [1, 2]], y: [[2, 4, 5], [1, 2, 3]], p: [[2, 4, 6], [1, 2, 3]] };
+const dot = $('[data-dot]');
+function tRun([t, k, w], btn) {
+  $$('[data-cases] button').forEach((b) => b.classList.toggle('is-on', b === btn));
+  $$('.tree .ed').forEach((e) => e.classList.remove('is-on')); $$('.tree .q').forEach((e) => e.classList.remove('is-on'));
+  $('[data-tree-out]').innerHTML = `${t} → <b lang="tr">${w}</b>`; say(w);
+  const light = () => { PATH[k][0].forEach((n) => $(`.ed[data-e="${n}"]`).classList.add('is-on')); PATH[k][1].forEach((n) => $(`.q[data-q="${n}"]`).classList.add('is-on')); };
+  if (MP) { gsap.set(dot, { x: 0, y: 0 }); gsap.to(dot, { duration: 1.4, ease: 'power1.inOut', motionPath: { path: `#tp-${k}`, align: `#tp-${k}`, alignOrigin: [.5, .5] }, onComplete: light }); } else light();
+}
+CS.forEach((c) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn-g'; b.textContent = c[0]; b.addEventListener('click', () => tRun(c, b)); $('[data-cases]').append(b); });
+if (ST) {
+  $$('.tree .ed').forEach((e) => { const l = e.getTotalLength(); gsap.set(e, { strokeDasharray: l, strokeDashoffset: l }); });
+  gsap.to('.tree .ed', { strokeDashoffset: 0, stagger: .1, ease: 'none', scrollTrigger: { trigger: '[data-tree]', start: 'top 80%', end: 'center 50%', scrub: .6 } });
+}
+
+/* ---------- маклер ---------- */
+const CW = ['МАКЛЕР', 'makla beraber', 'makla kalmaz', 'МАКЛЕР'];
+let ci = 0;
+$('[data-card]').addEventListener('click', (e) => {
+  ci = (ci + 1) % CW.length; const w = $('[data-card-w]');
+  if (A) gsap.fromTo(e.currentTarget, { rotationY: 0 }, { rotationY: 360, transformPerspective: 900, duration: .9, ease: 'power3.inOut' });
+  setTimeout(() => scramble(w, CW[ci], .6), A ? 300 : 0);
+  if (ci === 1 || ci === 2) say(CW[ci]);
+});
+if (ST) gsap.from('[data-card]', { rotationX: 50, y: 100, transformPerspective: 900, ease: 'none', scrollTrigger: { trigger: '[data-card]', start: 'top bottom', end: 'top 50%', scrub: .6 } });
+
+/* ---------- СЦЕНА 7: закат над Атакумом ---------- */
+const city = $('[data-section="city"]');
+const HOTS = [
+  [420, 410, 'Amisos Tepesi\'ne çıkmakla kalmadık, gün batımını da izledik.', 'Мы не только поднялись на холм Амисос, но и посмотрели закат.'],
+  [410, 640, 'Bandırma Vapuru müzesi küçük olmakla beraber çok etkileyici.', 'Музей «Бандырма» маленький, но очень впечатляет.'],
+  [620, 515, 'Balıkçı fiyatı söylemekle yetindi, pazarlık yapmadı.', 'Рыбак только назвал цену и не торговался.'],
+  [900, 720, 'Deniz soğuk olmakla birlikte herkes yüzüyor.', 'Хотя море холодное, все купаются.'],
+  [768, 455, 'Rehber anıtı anlatmakla görevli.', 'Гид отвечает за рассказ о памятнике.'],
+  [1240, 470, 'Emlakçı daire göstermekle meşgul.', 'Риелтор занят показом квартир.'],
+  [1420, 510, 'Buraya gelmekle iyi ettik.', 'Хорошо, что мы сюда пришли.'],
+];
+const hb = $('[data-hots]'), csvg = $('svg', city);
+const hots = HOTS.map(([x, y, tr, ru]) => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'hot'; b.setAttribute('aria-label', tr);
+  b.addEventListener('click', () => { hots.forEach((h) => h.classList.toggle('is-on', h === b)); $('[data-bub-tr]').textContent = tr; $('[data-bub-ru]').textContent = ru; say(tr); if (A) gsap.from('.bub', { y: 16, opacity: .4, duration: .4 }); });
+  hb.append(b); return b;
+});
+/* панорама: SVG во всю ширину сцены едет внутри секции, точки едут вместе с ним */
+let panP = ST ? 0 : .5;
+function placeHots() {
+  const w = city.clientWidth, h = city.clientHeight, k = Math.max(w / 1600, h / 900), sw = 1600 * k, sh = 900 * k, oy = (h - sh) / 2, shift = (sw - w) * panP;
+  csvg.style.cssText = `width:${sw}px;height:${sh}px;left:0;top:${oy}px;right:auto;bottom:auto;transform:translateX(${-shift}px)`;
+  hots.forEach((b, i) => { b.style.left = (HOTS[i][0] * k - shift) + 'px'; b.style.top = (HOTS[i][1] * k + oy) + 'px'; });
+}
+placeHots(); addEventListener('resize', placeHots);
+scene(city, () => (mob() ? 1600 : 1400), (tl) => {
+  const o = { p: 0 };
+  tl.to('[data-sun2]', { attr: { cy: 610 }, duration: 1 }, 0)
+    .to('[data-night]', { opacity: .62, duration: 1 }, 0)
+    .fromTo('.lights rect', { opacity: 0 }, { opacity: 1, stagger: .05, duration: .2 }, .3)
+    .to('[data-ship]', { x: 260, duration: 1 }, 0)
+    .to(o, { p: 1, duration: 1, onUpdate: () => { panP = o.p; placeHots(); } }, 0);
+  if (MP) tl.fromTo('[data-cab]', { x: 180, y: 520 }, { x: 620, y: 300, duration: 1 }, 0);
+});
+
+/* ---------- лаборатория ---------- */
+const LV = [['bil', 'знать', ['beraber', 'kalmadı']], ['haklı ol', 'быть правым', ['beraber']], ['söyle', 'сказать', ['beraber', 'kalmadı', 'yetindi', 'iyi etti']], ['izle', 'смотреть', ['kalmadı', 'yetindi']], ['gülümse', 'улыбнуться', ['yetindi']], ['ev ara', 'искать квартиру', ['meşgul']], ['güvenliği sağla', 'обеспечивать безопасность', ['görevli']], ['gel', 'прийти', ['beraber', 'iyi etti']], ['yalan söyle', 'лгать', ['suçlandı']], ['oku', 'читать', ['beraber', 'kalmadı', 'meşgul']]];
+const LF = [['beraber', 'хотя'], ['kalmadı', 'не только… но и'], ['yetindi', 'ограничился тем, что…'], ['meşgul', 'занят тем, что…'], ['suçlandı', 'обвинён в том, что…'], ['görevli', 'отвечает за то, чтобы…'], ['iyi etti', 'хорошо, что…']];
+let lv = 0, lf = 0, lw = '';
+const inf = (v) => v + (back(v) ? 'makla' : 'mekle');
+function lbRun() {
+  const [v, vr, ok] = LV[lv]; if (!ok.includes(LF[lf][0])) lf = LF.findIndex((f) => f[0] === ok[0]);
+  $$('[data-lb-v] button').forEach((b, i) => b.setAttribute('aria-pressed', String(i === lv)));
+  $$('[data-lb-f] button').forEach((b, i) => { b.disabled = !ok.includes(LF[i][0]); b.setAttribute('aria-pressed', String(i === lf)); });
+  lw = `${inf(v)} ${LF[lf][0]}${LF[lf][0] === 'kalmadı' ? ', … da' : ''}`;
+  scramble($('[data-lb-w]'), lw, .6);
+  $('[data-lb-why]').textContent = `${LF[lf][1]} ${vr}`.replace('… ', '… ');
+  say(lw.replace(', … da', ''));
+}
+LV.forEach(([v], i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = v; b.addEventListener('click', () => { lv = i; lbRun(); }); $('[data-lb-v]').append(b); });
+LF.forEach(([f], i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = f; b.addEventListener('click', () => { lf = i; lbRun(); }); $('[data-lb-f]').append(b); });
+lbRun();
+$('[data-lb-say]').addEventListener('click', () => say(lw.replace(', … da', '')));
+$$('[data-lt]').forEach((b) => b.addEventListener('click', () => { $$('[data-lt]').forEach((x) => x.setAttribute('aria-selected', String(x === b))); $$('[data-lp]').forEach((p) => { p.hidden = p.dataset.lp !== b.dataset.lt; }); if (A) gsap.from(`[data-lp="${b.dataset.lt}"]`, { y: 20, opacity: 0, duration: .4 }); }));
+const RW = [['Haklıydı ama kibar davranmadı.', ['Haklı', 'olmakla', 'beraber', 'kibar davranmadı.'], ['olmasıyla', 'kalmadı']], ['Yorgundu ama işe gitti.', ['Yorgun', 'olmakla', 'birlikte', 'işe gitti.'], ['olmaya', 'yetindi']], ['Hem söyledi hem yaptı.', ['Sadece', 'söylemekle', 'kalmadı,', 'yaptı da.'], ['söylemeyle', 'beraber']], ['Sadece baktık, almadık.', ['Bakmakla', 'yetindik,', 'almadık.'], ['Bakmaya', 'kalmadık']]];
+let ri = 0, rk = 0;
+function rwShow() {
+  const [src, tgt, dis] = RW[ri]; rk = 0;
+  $('[data-rw-src]').textContent = src; $('[data-rw-slots]').textContent = ''; $('[data-rw-st]').textContent = '';
+  const ch = $('[data-rw-ch]'); ch.textContent = '';
+  [...tgt, ...dis].sort(() => Math.random() - .5).forEach((w) => {
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = w;
+    b.addEventListener('click', () => {
+      if (w === tgt[rk]) { rk++; const s = document.createElement('span'); s.textContent = w; $('[data-rw-slots]').append(s); b.disabled = true; if (A) gsap.from(s, { y: -30, scale: .6, duration: .4, ease: 'back.out(2)' }); if (rk === tgt.length) { $('[data-rw-st]').textContent = 'Книжно и точно. Договор подписан.'; say(tgt.join(' ')); spark($('[data-rw-slots]')); } }
+      else { shake(b); $('[data-rw-st]').textContent = dis.includes(w) ? 'Этот кусок здесь чужой.' : 'Не по порядку. Что идёт следующим?'; }
+    });
+    ch.append(b);
+  });
+}
+$('[data-rw-next]').addEventListener('click', () => { ri = (ri + 1) % RW.length; rwShow(); });
+rwShow();
+const BZ = [['хотя знал, не сказал', ['Bilmekle beraber söylemedi.', 'Bilmekle kalmadı, söyledi de.', 'Bilmekle yetindi.'], 0], ['не только пришёл, но и помог', ['Gelmekle beraber yardım etmedi.', 'Gelmekle kalmadı, yardım da etti.', 'Gelmekle iyi etti.'], 1], ['только улыбнулся', ['Gülümsemekle yetindi.', 'Gülümsemekle kalmadı.', 'Gülümsemekle beraber.'], 0], ['хорошо, что ты пришёл', ['Gelmekle hata ettin.', 'Gelmekle iyi ettin.', 'Gelmekle meşgulsün.'], 1], ['его обвинили во лжи', ['Yalan söylemekle görevli.', 'Yalan söylemekle yetindi.', 'Yalan söylemekle suçlandı.'], 2], ['я занят поиском квартиры', ['Ev aramakla meşgulüm.', 'Ev aramakla kaldım.', 'Ev aramakla beraber.'], 0]];
+let bi = 0, bs = 0, bt = null;
+function bzQ() {
+  const o = $('[data-bz-o]'); o.textContent = '';
+  if (bi >= BZ.length) { $('[data-bz-q]').textContent = `${bs} из ${BZ.length}`; $('[data-bz-st]').textContent = bs === BZ.length ? 'Чисто. Можно работать маклером.' : 'Ещё круг — и будет чисто.'; $('[data-bz-go]').hidden = false; return; }
+  const [q, opts, ok] = BZ[bi]; $('[data-bz-q]').textContent = q;
+  const next = (good, m) => { clearTimeout(bt); if (good) bs++; $('[data-bz-st]').textContent = m; bi++; setTimeout(bzQ, 1000); };
+  opts.forEach((t, i) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.addEventListener('click', () => { if (b.disabled) return; $$('button', o).forEach((x) => { x.disabled = true; }); if (i === ok) spark(b); else shake(b); next(i === ok, i === ok ? 'Да!' : `Нужно: ${opts[ok]}`); }); o.append(b); });
+  bt = setTimeout(() => { $$('button', o).forEach((x) => { x.disabled = true; }); next(false, `Время! Нужно: ${opts[ok]}`); }, 8000);
+}
+$('[data-bz-go]').addEventListener('click', (e) => { e.currentTarget.hidden = true; bi = 0; bs = 0; bzQ(); });
+
+/* ---------- ловушки: печати ---------- */
+const TR = [['Söylemeyle kalmadı, yaptı da.', 'Söylemekle kalmadı, yaptı da.'], ['Gelmekle beraber geldik.', 'Birlikte geldik.'], ['Sadece söylemekle kalmadı, yaptı.', 'Sadece söylemekle kalmadı, yaptı da.'], ['Ben haklı olmaklamla beraber…', 'Ben haklı olmakla beraber…'], ['Bakmaya yetindik.', 'Bakmakla yetindik.']];
+$$('[data-trap]').forEach((d) => {
+  const [bad, good] = TR[Number(d.dataset.trap)], w = $('[data-tw]', d), st = $('.stamp', d), btn = $('[data-tfix]', d);
+  let fixed = false;
+  const show = () => { w.innerHTML = fixed ? `<span class="good">${good}</span>` : `<span class="bad">${bad}</span>`; st.textContent = fixed ? 'одобрено' : 'отказ'; st.className = 'stamp ' + (fixed ? 'yes' : 'no'); btn.textContent = fixed ? 'Показать ошибку' : 'Исправить'; };
+  show();
+  btn.addEventListener('click', () => { fixed = !fixed; show(); if (fixed) { say(good); spark(st); if (A) gsap.fromTo(st, { scale: 3, rotation: -30, opacity: 0 }, { scale: 1, rotation: -8, opacity: 1, duration: .5, ease: 'back.out(2)' }); } });
+});
+if (ST) ScrollTrigger.batch('.doc', { start: 'top 90%', once: true, onEnter: (els) => gsap.from(els, { y: 60, rotation: 2, duration: .7, stagger: .1, ease: 'power3.out' }) });
+
+/* ---------- нестандартное упражнение: договор (c1.makla.ex5) ---------- */
+(async () => {
+  const EXID = 'c1.makla.ex5', root = $(`a-exercise[ref="${EXID}"]`);
+  if (!root || !window.AlternaKit) return;
+  const data = await AlternaKit.exercise(EXID).catch(() => null); if (!data) return;
+  const items = data.items, btns = $$('.deal__st button', root);
+  let i = 0, correct = 0, t0 = performance.now(), lock = false;
+  if (window.AlternaTracker) AlternaTracker.start(EXID, 'practice');
+  const fill = (it, word) => it.s.replace('___', `<u>${word}</u>`);
+  function show() { const it = items[i]; lock = false; $('[data-d-count]', root).textContent = `${i + 1} / ${items.length}`; $('[data-d-s]', root).innerHTML = fill(it, '&nbsp;'); $('[data-d-r]', root).textContent = it.ru; $('[data-d-m]', root).textContent = 'Какая печать подходит? Клавиши 1–4 тоже работают.'; if (A) gsap.from('.deal__doc', { y: 16, opacity: .3, duration: .4 }); t0 = performance.now(); }
+  function pick(st) {
+    if (lock || i >= items.length) return; lock = true;
+    const it = items[i], ok = st === it.answer; if (ok) correct++;
+    $('[data-d-s]', root).innerHTML = fill(it, it.result);
+    $('[data-d-m]', root).textContent = ok ? 'Печать на месте. Пункт одобрен.' : `Не та печать. ${it.explanation}`;
+    const b = btns.find((x) => x.dataset.st === st);
+    if (ok) spark(b); else shake(b);
+    if (A) gsap.fromTo($('u', root), { scale: 2.4, rotation: -14 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(2)' });
+    if (window.AlternaTracker) AlternaTracker.answer({ exerciseId: EXID, itemId: it.id, correct: ok, answer: st, timeMs: Math.round(performance.now() - t0) });
+    setTimeout(() => {
+      i++;
+      if (i < items.length) show();
+      else { if (window.AlternaTracker) AlternaTracker.complete({ exerciseId: EXID, correct, total: items.length }); $('[data-d-count]', root).textContent = 'готово'; $('[data-d-s]', root).textContent = `${correct} из ${items.length} пунктов одобрено`; $('[data-d-r]', root).textContent = ''; $('[data-d-m]', root).textContent = correct === items.length ? 'Договор чистый. Риелтор нервно улыбается.' : 'Пара пунктов с ошибкой. Загляни в дерево.'; }
+    }, A ? 1300 : 300);
+  }
+  btns.forEach((b) => b.addEventListener('click', () => pick(b.dataset.st)));
+  root.addEventListener('keydown', (e) => { const s = { 1: 'beraber', 2: 'kalma', 3: 'yetin', 4: 'sucla' }[e.key]; if (s) pick(s); });
+  AlternaKit.registerSolver(EXID, async () => { for (const it of items.slice(i)) { pick(it.answer); await new Promise((r) => setTimeout(r, A ? 1340 : 340)); } });
+  show();
+})();
+
+/* ---------- шпаргалка ---------- */
+$$('[data-spec]').forEach((r) => r.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); r.click(); } }));
+$$('[data-spec]').forEach((r) => r.addEventListener('click', () => { say(r.dataset.spec); if (A) gsap.fromTo($('.spec__big', r), { x: -20 }, { x: 0, duration: .6, ease: 'elastic.out(1, .4)' }); }));
+if (ST) {
+  gsap.from('.spec__r', { y: 50, opacity: 0, duration: .7, stagger: .15, ease: 'power3.out', scrollTrigger: { trigger: '.spec', start: 'top 80%', once: true } });
+  gsap.from('.sw4 div', { y: 80, rotation: (i) => (i - 1.5) * 4, duration: .8, stagger: .1, ease: 'back.out(1.6)', scrollTrigger: { trigger: '.sw4', start: 'top 85%', once: true } });
+}
+
+/* ---------- СЦЕНА 8: финальная фраза ---------- */
+let finWords = null;
+if (ST && window.SplitText) finWords = new SplitText('[data-fin]', { type: 'words' }).words;
+scene($('[data-section="final"]'), () => (mob() ? 1100 : 1400), (tl) => {
+  tl.from(finWords || '[data-fin]', { scale: 3.2, y: (i) => (i % 2 ? 120 : -120), opacity: 0, stagger: .12, duration: .6, ease: 'power3.out' })
+    .from('[data-fin] .dot', { scale: 0, duration: .3 })
+    .from('[data-fin-r]', { y: 30, opacity: 0, duration: .3 })
+    .from('.finale p', { y: 30, opacity: 0, stagger: .15, duration: .3 })
+    .to({}, { duration: .5 });
+});
+
+/* ---------- мини-вопросы ---------- */
+$$('[data-mq]').forEach((m) => {
+  const ok = m.dataset.ok, f = $('.mq__f', m), bs = $$('.mq__o button', m);
+  bs.forEach((b) => b.addEventListener('click', () => {
+    const good = b.textContent.trim() === ok; b.classList.add(good ? 'ok' : 'no');
+    f.textContent = good ? 'Да. Именно так.' : 'Не совсем. Посмотри на рамку после -mAklA.';
+    if (good) { bs.forEach((x) => { x.disabled = true; }); spark(b); say(m.querySelector('[lang="tr"]').textContent); } else shake(b);
+  }));
+});
+if (ST) ScrollTrigger.batch('.brk, .lbl', { start: 'top 92%', once: true, onEnter: (els) => gsap.from(els, { y: 30, opacity: 0, duration: .7, ease: 'power3.out', stagger: .08 }) });
+
+/* ---------- скроллбар: шкала с солнцем ---------- */
+const bar = $('[data-scrollbar]'), trk = $('[data-sb-t]'), pct = $('[data-sb-pct]'), secs = $$('[data-section]');
+const maxS = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+const vert = () => matchMedia('(min-width: 768px)').matches;
+const marks = secs.map((s) => {
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'sb__m'; b.dataset.key = s.dataset.section;
+  b.setAttribute('aria-label', `К разделу «${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}»`);
+  b.addEventListener('click', (e) => { e.stopPropagation(); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+  trk.append(b); return b;
+});
+const layout = () => marks.forEach((b, i) => { const top = secs[i].getBoundingClientRect().top + scrollY; b.style.setProperty('--at', Math.min(1, top / maxS()).toFixed(4)); });
+const prog = () => { const p = Math.min(1, scrollY / maxS()); bar.style.setProperty('--p', p.toFixed(4)); pct.textContent = Math.round(p * 100) + '%'; };
+const seek = (e) => { const r = trk.getBoundingClientRect(); const p = vert() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width; scrollTo(0, Math.max(0, Math.min(1, p)) * maxS()); };
+trk.addEventListener('pointerdown', (e) => { if (e.target.closest('.sb__m')) return; trk.setPointerCapture(e.pointerId); seek(e); });
+trk.addEventListener('pointermove', (e) => { if (trk.hasPointerCapture(e.pointerId)) seek(e); });
+trk.addEventListener('pointerup', (e) => { if (trk.hasPointerCapture(e.pointerId)) trk.releasePointerCapture(e.pointerId); });
+addEventListener('scroll', prog, { passive: true });
+addEventListener('resize', () => { layout(); prog(); });
+addEventListener('alterna:read', (e) => { const m = marks.find((b) => b.dataset.key === e.detail.key); if (m) m.classList.add('is-read'); });
+layout(); prog();
+
+/* ---------- ачивка: вилла над горами зажигает окна ---------- */
+addEventListener('alterna:achievement', ({ detail }) => {
+  const b = detail.badge, tl = detail.timeline; if (!b || !tl) return;
+  tl.fromTo(b.querySelector('.ac-m'), { y: 30 }, { y: 0, duration: .5, ease: 'power3.out' }, .9)
+    .fromTo(b.querySelector('.ac-s'), { y: 30, scale: .3, transformOrigin: '50% 50%' }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, 1)
+    .fromTo(b.querySelector('.ac-v'), { y: -40 }, { y: 0, duration: .6, ease: 'bounce.out' }, 1.1)
+    .fromTo(b.querySelectorAll('.ac-w'), { fill: '#22272a' }, { fill: '#e59136', duration: .2, stagger: .12 }, 1.7);
+});
+
+/* ---------- пересчёт ---------- */
+const refresh = () => { if (ST) ScrollTrigger.refresh(); layout(); placeHots(); };
+addEventListener('load', refresh);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+addEventListener('orientationchange', () => setTimeout(refresh, 300));
+});
+</script>
+</body>
+</html>
