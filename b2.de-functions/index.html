@@ -1,0 +1,1351 @@
+<!doctype html>
+<html lang="ru" class="x-still">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="b2.de-functions">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>de / da: дополнительные значения</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Onest';font-style:normal;font-weight:300 700;font-display:swap;src:url(media/onest-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:300 700;font-display:swap;src:url(media/onest-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:300 700;font-display:swap;src:url(media/onest-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 500;font-display:swap;src:url(media/unbounded-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 500;font-display:swap;src:url(media/unbounded-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:200 500;font-display:swap;src:url(media/unbounded-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Poiret One';font-style:normal;font-weight:400;font-display:swap;src:url(media/poiretone-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Poiret One';font-style:normal;font-weight:400;font-display:swap;src:url(media/poiretone-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+:root{
+  --x-night:#0c0910; --x-wall:#150d15; --x-light:#f4eef3; --x-dim:#b9adbd;
+  --x-also:#ff3d5e;   /* «тоже» */
+  --x-link:#b066ff;   /* звено: «и тогда», «чтобы» */
+  --x-push:#ff6fb0;   /* нажим: «ну же» */
+  --x-pt:#f7f1ea;     /* сам союз — металл цепи */
+  --x-cta:#dcaa7c; --x-cta-2:#a8683f; /* действие */
+  --x-paper:#f7f2f3; --x-ink:#1d1422;
+  --x-display:'Unbounded','Onest',system-ui,sans-serif;
+  --x-tr:'Poiret One','Onest',system-ui,sans-serif;
+  --ak-bg:#f7f2f3; --ak-surface:#ffffff; --ak-ink:#1d1422; --ak-muted:#66586c; --ak-line:#e7dce5;
+  --ak-accent:#8a4f2a; --ak-accent-ink:#ffffff; --ak-accent-soft:#f6e7dc;
+  --ak-good:#1b8f61; --ak-good-soft:#e1f4ea; --ak-bad:#c22545; --ak-bad-soft:#fbe5ea;
+  --ak-font:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif; --ak-font-display:var(--x-display);
+  --x-brick:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40'%3E%3Crect width='80' height='40' fill='%23160e16'/%3E%3Cpath d='M0 19.5h80M0 39.5h80M40 0v20M1 20v20M79 20v20' stroke='%23070508' stroke-width='2.5'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--x-night);overflow-x:clip}
+body{margin:0;background:var(--x-night);color:var(--x-light);font-family:var(--ak-font);font-size:var(--ak-text);line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased}
+main{display:block}
+.x-sprite{position:absolute;width:0;height:0;overflow:hidden}
+.x-tr,.x-trs{font-family:var(--x-tr)}
+[hidden]{display:none!important}
+
+/* ---------- сцены ---------- */
+.x-scene{position:relative;background:var(--x-wall) var(--x-brick);color:var(--x-light)}
+.x-pin{position:relative;width:100%;overflow:hidden;
+  background:radial-gradient(120% 70% at 0% 40%,rgba(224,48,78,.30),transparent 60%),radial-gradient(120% 70% at 100% 30%,rgba(150,60,230,.30),transparent 60%),var(--x-brick),var(--x-wall)}
+.x-stage{position:relative;display:flex;flex-direction:column;gap:clamp(8px,1.4vh,14px);max-width:1180px;margin:0 auto;
+  padding:clamp(18px,4vh,40px) clamp(16px,4vw,56px) clamp(18px,3.5vh,34px);padding-right:clamp(16px,6vw,80px)}
+.x-chap{margin:0;font-family:var(--x-display);font-weight:300;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--x-dim)}
+.x-chap b{color:var(--x-cta);font-weight:400}
+.x-h{margin:0;font-family:var(--x-display);font-weight:200;text-transform:uppercase;letter-spacing:.06em;line-height:1.08;font-size:clamp(22px,6.4vw,50px)}
+.x-h em{font-style:normal;color:var(--x-cta)}
+.x-frame{position:relative;border-radius:16px;overflow:hidden;min-height:260px;height:min(56vh,520px);
+  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.07);background:#0d0810}
+.x-svg{display:block;width:100%;height:100%}
+.x-subs{position:relative}
+.x-sub{margin:0;max-width:52ch;font-size:clamp(16px,.95rem + .45vw,21px);line-height:1.45;text-shadow:0 2px 14px #000}
+.x-sub + .x-sub{margin-top:.45em}
+.x-rule{display:inline-block;margin:0;padding:.45em .9em;border-radius:10px;border:1px solid rgba(220,170,124,.55);background:rgba(220,170,124,.10);font-weight:600}
+.x-act{position:relative;padding-top:10px;border-top:1px solid rgba(255,255,255,.12)}
+.x-q{margin:0 0 8px;font-weight:600}
+.x-opts{display:flex;flex-wrap:wrap;gap:8px}
+.x-opt{min-height:44px;padding:.5em 1em;border-radius:10px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.06);color:inherit;font:inherit;font-size:16px;cursor:pointer;text-align:left;transition:border-color .2s,background-color .2s}
+.x-opt:hover{border-color:var(--x-cta)}
+.x-opt:focus-visible,.x-btn:focus-visible,.x-tab:focus-visible,.x-chip:focus-visible,.x-pol:focus-visible,.x-bar__mark:focus-visible{outline:3px solid var(--x-cta);outline-offset:2px}
+.x-opt.is-ok{border-color:#3fd39a;background:rgba(27,143,97,.28)}
+.x-opt.is-no{border-color:var(--x-also);background:rgba(224,48,78,.18)}
+.x-opt.is-pick{border-color:var(--x-cta);background:rgba(220,170,124,.18)}
+.x-fb{min-height:1.4em;margin:8px 0 0;font-size:15px;color:var(--x-dim)}
+.x-btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:46px;padding:0 1.6em;border:0;border-radius:10px;cursor:pointer;
+  background:linear-gradient(180deg,var(--x-cta),var(--x-cta-2));color:#1d0f06;font:700 13px/1 var(--ak-font);letter-spacing:.2em;text-transform:uppercase;box-shadow:0 10px 30px rgba(220,170,124,.28),inset 0 1px 0 rgba(255,255,255,.4)}
+.x-btn svg{width:18px;height:18px}
+.x-curtain{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(180deg,#07050a 0%,#0c0910 88%,var(--x-cta-2) 99%,#f0c39a 100%)}
+.x-pt{display:inline-block;padding:0 .32em;border:1.5px solid currentColor;border-radius:999px;line-height:1.25;font-weight:700}
+.c-also{color:var(--x-also)} .c-link{color:var(--x-link)} .c-push{color:var(--x-push)}
+.f-also{fill:var(--x-also)} .f-link{fill:var(--x-link)} .f-push{fill:var(--x-push)} .f-pt{fill:var(--x-pt)}
+.x-title{display:flex;flex-direction:column;gap:6px}
+.x-big{font-family:var(--x-tr);font-size:clamp(44px,13vw,120px);line-height:.9;letter-spacing:.04em;margin:0}
+.x-spaced{letter-spacing:.6em;text-transform:uppercase;font-size:12px;color:var(--x-dim);margin:0}
+
+/* фильм: сцена закреплена */
+.x-film .x-pin{height:100vh;height:100svh}
+.x-film .x-stage{height:100%}
+.x-film .x-pin--lab .x-stage,.x-film .x-pin--traps .x-stage{justify-content:center}
+.x-film .x-frame{flex:1 1 auto;height:auto;min-height:0}
+.x-film .x-subs .x-sub{position:absolute;left:0;right:0;bottom:0;margin:0}
+.x-still .x-curtain,.x-still .s1-street{display:none}
+.x-still .s3-v2,.x-still .s3-v3,.x-still .s4-t2,.x-still .s4-t3,.x-still .s4-t4{display:none}
+
+/* ---------- лаборатория ---------- */
+.x-lab{max-width:1180px;margin:0 auto;padding:0 clamp(16px,6vw,80px) clamp(28px,6vh,60px) clamp(16px,4vw,56px)}
+.x-labbox{border-radius:18px;background:linear-gradient(160deg,rgba(40,18,52,.92),rgba(18,10,20,.95));box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.08);padding:clamp(14px,3vw,28px)}
+.x-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.x-tab{display:inline-flex;align-items:center;gap:.5em;min-height:46px;padding:0 1em;border-radius:10px;border:1px solid rgba(255,255,255,.18);background:transparent;color:var(--x-dim);font:600 15px var(--ak-font);cursor:pointer}
+.x-tab svg{width:26px;height:20px}
+.x-tab[aria-selected="true"]{color:var(--x-light);border-color:var(--x-cta);background:rgba(220,170,124,.12)}
+.x-hint{margin:0 0 10px;color:var(--x-dim);font-size:15px}
+.x-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.x-chip{min-height:44px;padding:0 .95em;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.05);color:var(--x-light);font:500 17px var(--ak-font);cursor:pointer}
+.x-chip[aria-pressed="true"]{border-color:var(--x-link);background:rgba(176,102,255,.22)}
+.x-chips--res .x-chip[aria-pressed="true"]{border-color:var(--x-cta);background:rgba(220,170,124,.18)}
+.x-screen{position:relative;border-radius:14px;padding:16px;margin-top:6px;background:#07050a;box-shadow:inset 0 0 0 1px rgba(176,102,255,.35),0 0 40px rgba(176,102,255,.14)}
+.x-out{margin:0;font-size:clamp(22px,5.4vw,34px);line-height:1.3}
+.x-out span{display:inline-block}
+.x-ru{margin:4px 0 0;color:var(--x-light)}
+.x-why{margin:8px 0 0;color:var(--x-dim);font-size:15px}
+.x-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.x-word{font-family:var(--x-tr);font-size:clamp(40px,10vw,72px);line-height:1;margin:0 0 12px}
+.x-ghost{min-height:44px;padding:0 1.1em;border-radius:10px;border:1px dashed rgba(255,255,255,.3);background:transparent;color:var(--x-light);font:600 15px var(--ak-font);cursor:pointer}
+
+/* ---------- дубли ---------- */
+.x-belt-wrap{position:relative;overflow:hidden;margin:0 calc(-1 * clamp(16px,4vw,56px));padding:18px clamp(16px,4vw,56px) 28px}
+.x-belt{display:flex;gap:clamp(18px,3vw,40px);width:max-content}
+.x-pol{position:relative;flex:0 0 auto;width:clamp(230px,24vw,280px);min-height:44px;padding:0;border:0;background:none;cursor:pointer;perspective:900px;color:var(--x-ink);font:inherit;text-align:left}
+.x-pol__in{position:relative;display:block;transform-style:preserve-3d;height:330px}
+.x-pol__face{position:absolute;inset:0;display:flex;flex-direction:column;gap:8px;padding:12px 12px 14px;background:#f3eee8;box-shadow:0 18px 40px rgba(0,0,0,.55);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.x-pol__face--back{transform:rotateY(180deg)}
+.x-pol__ph{position:relative;display:block;height:170px;background:#121014;overflow:hidden}
+.x-pol__ph svg{width:100%;height:100%;display:block}
+.x-pol__ph b{position:absolute;left:10px;right:10px;bottom:10px;font:400 22px/1.15 var(--x-tr);color:#fff}
+.x-pol__bad b{color:#ff8fa2;text-decoration:line-through;text-decoration-color:var(--x-also)}
+.x-pol__cap{font-size:14px;line-height:1.35}
+.x-pol__cap strong{display:block;font-family:var(--x-display);font-weight:400;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:#7a6a7e;margin-bottom:2px}
+.x-tape{position:absolute;z-index:2;top:-10px;left:50%;width:84px;height:24px;margin-left:-42px;background:rgba(235,230,220,.65);transform:rotate(-4deg);box-shadow:0 2px 6px rgba(0,0,0,.25)}
+.x-still .x-belt{flex-wrap:wrap;width:auto}
+
+/* ---------- бумага: практика и проверка ---------- */
+.x-paper{background:var(--x-paper);color:var(--x-ink);border-top:4px solid transparent;border-image:linear-gradient(90deg,var(--x-also),var(--x-link)) 1}
+.x-paper__in{max-width:860px;margin:0 auto;padding:clamp(32px,7vh,72px) clamp(16px,6vw,80px) clamp(32px,7vh,72px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:18px}
+.x-paper .x-chap{color:#7a6a7e}
+.x-paper .x-h{color:var(--x-ink)}
+.x-paper p{margin:0}
+.x-game{display:flex;flex-direction:column;gap:12px}
+.x-game__head{display:flex;align-items:center;gap:12px}
+.x-game__head svg{width:42px;height:56px;flex:0 0 auto}
+.x-game__title{margin:0;font-family:var(--x-display);font-weight:400;font-size:18px}
+.x-game__step{margin:0;color:var(--ak-muted);font-size:14px}
+.x-dials{display:grid;grid-template-columns:1fr auto 1fr;gap:10px}
+.x-dial{display:flex;flex-direction:column;gap:6px}
+.x-dial button{min-height:44px;padding:0 .8em;border-radius:10px;border:1px solid var(--ak-line);background:#fff;color:var(--x-ink);font:500 16px var(--ak-font);cursor:pointer}
+.x-dial button[aria-pressed="true"]{border-color:var(--ak-accent);background:var(--ak-accent-soft)}
+.x-game__line{margin:0;font-family:var(--x-tr);font-size:clamp(22px,5vw,30px);min-height:1.4em}
+.x-game__fb{margin:0;min-height:1.4em;font-size:15px}
+.x-game .x-btn{align-self:flex-start}
+
+/* ---------- афиша ---------- */
+.x-poster{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,36px);align-items:center}
+.x-poster__art{border-radius:16px;overflow:hidden;aspect-ratio:6/5;box-shadow:0 30px 80px rgba(0,0,0,.55)}
+.x-checks{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.x-checks li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start;font-size:16px;line-height:1.45}
+.x-checks li svg{width:28px;height:28px}
+.x-stage--flow{padding-top:clamp(28px,6vh,60px);padding-bottom:clamp(28px,6vh,60px)}
+
+/* ---------- скроллбар: цепь и замок ---------- */
+.x-bar{position:fixed;z-index:40;right:10px;top:50%;width:40px;height:min(72vh,560px);transform:translateY(-50%);touch-action:none;cursor:grab}
+.x-bar__track{position:absolute;left:50%;top:0;bottom:0;width:4px;margin-left:-2px;border-radius:4px;
+  background:repeating-linear-gradient(180deg,#5d5163 0 7px,transparent 7px 11px)}
+.x-bar__fill{position:absolute;inset:0;border-radius:4px;background:linear-gradient(180deg,var(--x-also),var(--x-link));transform-origin:50% 0;transform:scaleY(0)}
+.x-bar__lock{position:absolute;left:50%;top:0;width:30px;height:40px;margin:-20px 0 0 -15px;pointer-events:none;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.x-bar__lock svg{width:100%;height:100%}
+.x-bar__mark{position:absolute;left:50%;top:0;width:22px;height:22px;margin:-11px 0 0 -11px;padding:0;border-radius:50%;border:2px solid #6c5e72;background:#0c0910;cursor:pointer}
+.x-bar__mark.is-read{border-color:var(--x-cta);background:var(--x-cta)}
+.x-bar__mark.is-here{box-shadow:0 0 0 5px rgba(255,111,176,.35)}
+
+/* ---------- телефон ---------- */
+@media (max-width:767px){
+  .x-stage{padding-top:56px;padding-right:16px}
+  .x-lab{padding-right:16px}
+  .x-paper__in{padding-right:16px;padding-top:64px}
+  .x-poster{grid-template-columns:1fr}
+  .x-frame{height:min(46vh,420px)}
+  .x-m-hide{display:none}
+  .x-bar{top:8px;left:12px;right:12px;width:auto;height:34px;transform:none}
+  .x-bar__track{left:0;right:0;top:50%;bottom:auto;width:auto;height:4px;margin:-2px 0 0;background:repeating-linear-gradient(90deg,#5d5163 0 7px,transparent 7px 11px)}
+  .x-bar__fill{transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--x-also),var(--x-link))}
+  .x-bar__lock{left:0;top:50%;width:24px;height:32px;margin:-16px 0 0 -12px}
+  .x-bar__mark{top:50%;left:0;width:20px;height:20px;margin:-10px 0 0 -10px}
+  .x-dials{grid-template-columns:1fr}
+  .x-dial{flex-direction:row;flex-wrap:wrap}
+  .x-pol__in{height:310px}
+}
+@media (prefers-reduced-motion:reduce){ .x-opt,.x-chip{transition:none} }
+</style>
+</head>
+<body>
+<svg class="x-sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="xg-hood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b3242"/><stop offset=".55" stop-color="#17111b"/><stop offset="1" stop-color="#09060b"/></linearGradient>
+    <linearGradient id="xg-metal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3eef4"/><stop offset=".5" stop-color="#7d7381"/><stop offset="1" stop-color="#d6cfd9"/></linearGradient>
+    <linearGradient id="xg-copper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0c39a"/><stop offset="1" stop-color="#9c5f35"/></linearGradient>
+    <linearGradient id="xg-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe08a"/><stop offset="1" stop-color="#b8862b"/></linearGradient>
+    <radialGradient id="xg-red" cx=".08" cy=".5" r=".85"><stop offset="0" stop-color="#e0304e" stop-opacity=".7"/><stop offset="1" stop-color="#e0304e" stop-opacity="0"/></radialGradient>
+    <radialGradient id="xg-vio" cx=".92" cy=".35" r=".85"><stop offset="0" stop-color="#9443e6" stop-opacity=".65"/><stop offset="1" stop-color="#9443e6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="xg-red-u" gradientUnits="userSpaceOnUse" cx="40" cy="260" r="520"><stop offset="0" stop-color="#e0304e" stop-opacity=".7"/><stop offset="1" stop-color="#e0304e" stop-opacity="0"/></radialGradient>
+    <radialGradient id="xg-vio-u" gradientUnits="userSpaceOnUse" cx="570" cy="170" r="520"><stop offset="0" stop-color="#9443e6" stop-opacity=".65"/><stop offset="1" stop-color="#9443e6" stop-opacity="0"/></radialGradient>
+    <radialGradient id="xg-spot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <pattern id="xp-brick" width="80" height="40" patternUnits="userSpaceOnUse"><rect width="80" height="40" fill="#170f17"/><path d="M0 19.5h80M0 39.5h80M40 0v20M1 20v20M79 20v20" stroke="#060407" stroke-width="2.5"/></pattern>
+    <pattern id="xp-chess" width="120" height="120" patternUnits="userSpaceOnUse"><rect width="120" height="120" fill="#5b1440"/><rect width="60" height="60" fill="#8e2a6a"/><rect x="60" y="60" width="60" height="60" fill="#7a2a9a"/></pattern>
+    <filter id="xf-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="xf-smoke" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter>
+    <clipPath id="xc-mask"><path d="M148 150C148 112 172 96 200 96C228 96 252 112 252 150C252 204 236 246 200 262C164 246 148 204 148 150Z"/></clipPath>
+    <symbol id="x-host" viewBox="0 0 400 500">
+      <path d="M30 500C42 392 112 338 200 330C288 338 358 392 370 500Z" fill="#130e17"/>
+      <path d="M150 336 200 440 250 336 236 330 200 400 164 330Z" fill="#221a28"/>
+      <path d="M176 334 200 398 224 334Z" fill="#ece5ea"/>
+      <path d="M194 338H206L212 400 200 428 188 400Z" fill="#b3162f"/>
+      <path d="M104 344C82 236 112 90 200 64C288 90 318 236 296 344C262 312 138 312 104 344Z" fill="url(#xg-hood)"/>
+      <ellipse cx="200" cy="196" rx="72" ry="104" fill="#050307"/>
+      <g clip-path="url(#xc-mask)">
+        <path d="M148 150C148 112 172 96 200 96C228 96 252 112 252 150C252 204 236 246 200 262C164 246 148 204 148 150Z" fill="#efe9ec"/>
+        <path d="M244 92 266 112 166 274 146 254Z" fill="#0d090f"/>
+        <path d="M150 120C170 104 196 100 218 104" stroke="#fff" stroke-width="6" opacity=".5" fill="none"/>
+      </g>
+      <path d="M164 168c9-9 22-9 30 0-8 7-22 7-30 0zM206 168c8-9 21-9 30 0-8 7-22 7-30 0z" fill="#050307"/>
+      <path d="M214 112l-8 18 10 10-6 16 12 12M182 200l-10 14 6 10-8 12M228 196l12 10-4 14M176 120l8 14-6 10" fill="none" stroke="#2b2230" stroke-width="1.7" stroke-linecap="round"/>
+      <path d="M186 232q14 6 28 0" stroke="#9c939a" stroke-width="2" fill="none"/>
+    </symbol>
+    <symbol id="x-man" viewBox="0 0 120 300"><g fill="currentColor"><circle cx="60" cy="44" r="26"/><path d="M48 66h24v34H48z"/><path d="M12 300C10 196 22 116 60 102c38 14 50 94 48 198z"/></g></symbol>
+    <symbol id="x-emre" viewBox="0 0 120 300"><g fill="currentColor"><circle cx="60" cy="46" r="25"/><path d="M33 38c4-24 52-28 58-2l16 5c2 5-2 7-7 7H35z"/><path d="M48 66h24v34H48z"/><path d="M12 300C10 196 22 116 60 102c38 14 50 94 48 198z"/></g></symbol>
+    <symbol id="x-link" viewBox="0 0 40 70"><rect x="6" y="6" width="28" height="58" rx="14" fill="none" stroke="url(#xg-metal)" stroke-width="7"/></symbol>
+    <symbol id="x-lock" viewBox="0 0 60 80"><path d="M15 36V24a15 15 0 0 1 30 0v12" fill="none" stroke="url(#xg-metal)" stroke-width="7"/><rect x="6" y="34" width="48" height="42" rx="8" fill="url(#xg-copper)"/><circle cx="30" cy="52" r="5" fill="#2a160a"/><path d="M30 55v10" stroke="#2a160a" stroke-width="4" stroke-linecap="round"/></symbol>
+    <symbol id="x-env" viewBox="0 0 60 44"><rect x="2" y="8" width="56" height="34" rx="3" fill="currentColor"/><path d="M2 10 30 30 58 10" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/><path d="M8 2h44l-22 16z" fill="#fff" fill-opacity=".85"/></symbol>
+    <symbol id="x-check" viewBox="0 0 28 28"><circle cx="14" cy="14" r="13" fill="#c22545"/><path d="m8 14.5 4 4 8-9" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<nav data-scrollbar class="x-bar" aria-label="Прогресс урока">
+  <div class="x-bar__track"><span class="x-bar__fill"></span></div>
+  <div class="x-bar__marks"></div>
+  <div class="x-bar__lock"><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#x-lock"/></svg></div>
+</nav>
+
+<main>
+<!-- ============ 1. ЗАВЯЗКА ============ -->
+<section data-section="story" data-words="81" class="x-scene" id="story">
+  <div class="x-pin">
+    <div class="x-stage">
+      <div class="x-title">
+        <p class="x-chap">B2 · Анкара · <b>сцена 1</b> · завязка</p>
+        <h1 class="x-h">Союз <em class="x-tr">de</em>: не только «тоже»</h1>
+      </div>
+      <div class="x-frame">
+        <svg class="x-svg s1" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Квест «Маска»: улица, комната, захлопнутая дверь">
+          <g class="s1-room"><g class="s1-shake">
+            <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-brick)"/>
+            <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-red-u)"/>
+            <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-vio-u)"/>
+            <g class="s1-chains x-m-hide">
+              <use href="#x-link" x="40" y="-6" width="20" height="36"/><use href="#x-link" x="40" y="26" width="20" height="36"/><use href="#x-link" x="40" y="58" width="20" height="36"/><use href="#x-link" x="40" y="90" width="20" height="36"/>
+              <use href="#x-link" x="560" y="-6" width="20" height="36"/><use href="#x-link" x="560" y="26" width="20" height="36"/><use href="#x-link" x="560" y="58" width="20" height="36"/>
+            </g>
+            <rect x="300" y="48" width="270" height="232" rx="6" fill="#1a1022" fill-opacity=".72" stroke="#5c4a68" stroke-width="3"/>
+            <use class="s1-host" href="#x-host" x="345" y="56" width="180" height="225"/>
+            <path d="M312 58h44l-60 216h-0z" fill="#fff" opacity=".05"/>
+            <rect x="420" y="392" width="160" height="72" rx="6" fill="#2a1a12" stroke="#5a3a24" stroke-width="2"/>
+            <use href="#x-lock" x="480" y="360" width="40" height="54"/>
+            <use class="s1-emre" href="#x-emre" x="330" y="262" width="88" height="220" style="color:#3c2c46"/>
+            <use class="s1-hero" href="#x-man" x="192" y="262" width="88" height="220" style="color:#6e4c82"/>
+            <g class="s1-bubble">
+              <rect x="246" y="190" width="316" height="58" rx="12" fill="#f4eef3"/>
+              <path d="M360 248l10 16 14-16z" fill="#f4eef3"/>
+              <text x="404" y="227" text-anchor="middle" class="x-trs" font-size="24" fill="#1d1422">Bekle <tspan class="f-link" font-weight="700">de</tspan> birlikte…</text>
+            </g>
+            <g class="s1-mis"><text x="236" y="246" text-anchor="middle" font-size="19" class="f-also" font-family="Onest" font-weight="700">«тоже подожди»?</text></g>
+            <g class="s1-slam">
+              <rect x="138" y="20" width="104" height="462" fill="#0b080d" stroke="#e0304e" stroke-width="2"/>
+              <path d="M150 40h80M150 460h80" stroke="#2a2030" stroke-width="3"/>
+              <use href="#x-lock" x="168" y="226" width="44" height="58"/>
+            </g>
+            <text class="s1-click" x="190" y="150" text-anchor="middle" font-size="30" fill="#dcaa7c" font-family="Unbounded" font-weight="300">ЩЁЛК</text>
+            <g class="x-smoke s1-smoke" filter="url(#xf-smoke)" opacity=".35"><ellipse cx="160" cy="470" rx="160" ry="40" fill="#b9aebf"/><ellipse cx="470" cy="480" rx="150" ry="36" fill="#9c86ad"/></g>
+          </g></g>
+          <g class="s1-street">
+            <rect x="-600" y="-500" width="1800" height="1500" fill="#110918"/>
+            <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-vio-u)"/>
+            <g class="s1-stars" fill="#fff"><circle cx="40" cy="40" r="1.4"/><circle cx="120" cy="80" r="1"/><circle cx="210" cy="30" r="1.6"/><circle cx="330" cy="60" r="1"/><circle cx="420" cy="26" r="1.3"/><circle cx="520" cy="70" r="1.6"/><circle cx="570" cy="20" r="1"/><circle cx="470" cy="130" r="1"/><circle cx="80" cy="150" r="1.2"/></g>
+            <g class="s1-city" fill="#1e1428">
+              <rect x="96" y="150" width="12" height="270"/><ellipse cx="102" cy="160" rx="27" ry="22"/><rect x="100" y="102" width="4" height="44"/>
+              <path d="M0 420V330h34v-28h30v48h20v-60h44v130zM450 420V300h46v-24h36v40h30v-50h38v154z"/>
+            </g>
+            <g class="s1-house">
+              <rect x="190" y="206" width="220" height="276" fill="#0e0911"/>
+              <rect x="190" y="206" width="220" height="7" fill="#2b1d31"/>
+              <g class="s1-neon" filter="url(#xf-glow)">
+                <text x="300" y="262" text-anchor="middle" class="x-trs" font-size="48" fill="none" stroke="#ff6fb0" stroke-width="1.8">MASKE</text>
+                <text x="300" y="292" text-anchor="middle" font-size="11" letter-spacing="7" fill="#dcaa7c" font-family="Onest">KAÇIŞ ODASI</text>
+              </g>
+              <rect x="272" y="342" width="56" height="128" fill="#050307" stroke="#e0304e" stroke-width="2"/>
+              <circle cx="318" cy="408" r="3" fill="#dcaa7c"/>
+            </g>
+            <rect x="-600" y="470" width="1800" height="600" fill="#09060b"/>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Анкара, Кызылай. Пятница, девять вечера.</p>
+        <p class="x-sub">Мы с Эмре в квесте «Маска». Час времени, цепи, кирпич. За стеклом ведущий в маске.</p>
+        <p class="x-sub">Эмре ковыряет замок и кричит мне: <a-say><span class="c-link">Biraz bekle</span> <span class="x-pt c-link">de</span> birlikte çıkalım!</a-say></p>
+        <p class="x-sub">Я знаю: de — это «тоже». Слышу: «тоже подожди». Думаю, а кто ещё ждёт?</p>
+        <p class="x-sub">Нахожу дверь. Выхожу один. Щёлк. Эмре внутри, я в коридоре.</p>
+        <p class="x-sub">Ведущий в маске медленно хлопает. Ждать, кстати, просили меня.</p>
+      </div>
+      <div class="x-act" data-act="story">
+        <p class="x-q">Что на самом деле крикнул Эмре?</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-ok="0">«Ты тоже подожди»</button>
+          <button type="button" class="x-opt" data-ok="1">«Подожди немного — и выйдем вместе»</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. СТАРЫЙ КЛЮЧ ============ -->
+<section data-section="oldkey" data-words="35" class="x-scene" id="oldkey">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>сцена 2</b> · старый ключ</p>
+      <div class="x-frame">
+        <svg class="x-svg s2" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Связка ключей с бирками: Ben de, Kapı da, Sen de, Maske de">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-brick)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-vio-u)"/>
+          <ellipse cx="300" cy="150" rx="260" ry="120" fill="url(#xg-spot)" opacity=".08"/>
+          <g class="s2-cam">
+            <g class="s2-ring"><path d="M300 0v66" stroke="#9a8fa0" stroke-width="4"/><circle cx="300" cy="110" r="42" fill="none" stroke="url(#xg-metal)" stroke-width="7"/></g>
+            <g class="s2-tag"><path d="M300 152 120 268" stroke="#8a7f8e" stroke-width="2"/><rect x="60" y="266" width="124" height="62" rx="8" fill="#f2ece6"/><circle cx="122" cy="276" r="4" fill="#170f17"/><text x="122" y="312" text-anchor="middle" class="x-trs" font-size="24" fill="#1d1422">Ben <tspan class="f-also" font-weight="700">de</tspan></text></g>
+            <g class="s2-tag"><path d="M300 152 252 318" stroke="#8a7f8e" stroke-width="2"/><rect x="186" y="316" width="134" height="62" rx="8" fill="#f2ece6"/><circle cx="252" cy="326" r="4" fill="#170f17"/><text x="252" y="362" text-anchor="middle" class="x-trs" font-size="24" fill="#1d1422">Kapı <tspan class="f-also" font-weight="700">da</tspan></text>
+              <circle class="s2-vowel" cx="245" cy="354" r="11" fill="none" stroke="#dcaa7c" stroke-width="2.5"/>
+              <path class="s2-arc" d="M247 366q14 22 32 -2" fill="none" stroke="#dcaa7c" stroke-width="2.5" stroke-dasharray="80" stroke-dashoffset="0"/></g>
+            <g class="s2-tag"><path d="M300 152 370 300" stroke="#8a7f8e" stroke-width="2"/><rect x="310" y="298" width="122" height="62" rx="8" fill="#f2ece6"/><circle cx="371" cy="308" r="4" fill="#170f17"/><text x="371" y="344" text-anchor="middle" class="x-trs" font-size="24" fill="#1d1422">Sen <tspan class="f-also" font-weight="700">de</tspan></text></g>
+            <g class="s2-tag"><path d="M300 152 492 262" stroke="#8a7f8e" stroke-width="2"/><rect x="428" y="260" width="140" height="62" rx="8" fill="#f2ece6"/><circle cx="498" cy="270" r="4" fill="#170f17"/><text x="498" y="306" text-anchor="middle" class="x-trs" font-size="24" fill="#1d1422">Maske <tspan class="f-also" font-weight="700">de</tspan></text></g>
+            <g class="s2-stamp"><circle cx="300" cy="216" r="50" fill="#170f17" fill-opacity=".85" stroke="#ff3d5e" stroke-width="3"/><text x="300" y="226" text-anchor="middle" font-family="Unbounded" font-size="24" fill="#ff3d5e">te ta</text><path d="M262 244 338 188" stroke="#ff3d5e" stroke-width="4"/></g>
+            <g class="s2-key"><circle cx="210" cy="448" r="22" fill="none" stroke="url(#xg-copper)" stroke-width="9"/><path d="M232 448h150v18h-12v-10h-12v14h-12v-14h-12" fill="none" stroke="url(#xg-copper)" stroke-width="8" stroke-linejoin="round"/></g>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Старый ключ у тебя уже есть. de после слова — «тоже».</p>
+        <p class="x-sub"><a-say>Ben <span class="x-pt c-also">de</span>.</a-say> Я тоже. <a-say>Kapı <span class="x-pt c-also">da</span> kilitli.</a-say> Дверь тоже заперта.</p>
+        <p class="x-sub">Пишется отдельно. Гласную берёт у последнего слога: e, i, ö, ü — de; a, ı, o, u — da.</p>
+        <p class="x-sub">И никогда te или ta. Это союз, он не оглушается.</p>
+      </div>
+      <div class="x-act" data-act="oldkey">
+        <p class="x-q">Повесь бирку: <span class="x-tr" lang="tr" data-k-word>Maske</span> … de или da?</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-k="de" lang="tr">de</button>
+          <button type="button" class="x-opt" data-k="da" lang="tr">da</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. ЗВЕНО ============ -->
+<section data-section="link" data-words="42" class="x-scene" id="link">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>сцена 3</b> · звено</p>
+      <div class="x-frame">
+        <svg class="x-svg s3" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Цепь: приказ, звено de, следующий шаг">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-brick)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-red-u)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-vio-u)"/>
+          <g class="s3-cam">
+            <g class="s3-chain"><use href="#x-link" x="288" y="-150" width="24" height="42"/><use href="#x-link" x="288" y="-114" width="24" height="42"/><use href="#x-link" x="288" y="-78" width="24" height="42"/><use href="#x-link" x="288" y="-42" width="24" height="42"/><use href="#x-link" x="288" y="-6" width="24" height="42"/><use href="#x-link" x="288" y="30" width="24" height="42"/><use href="#x-link" x="288" y="66" width="24" height="42"/><use href="#x-link" x="288" y="102" width="24" height="42"/><use href="#x-link" x="288" y="138" width="24" height="42"/></g>
+            <g class="s3-L"><path d="M110 0v198" stroke="#9a8fa0" stroke-width="3"/><rect x="18" y="196" width="184" height="92" rx="10" fill="#2a1240" stroke="#b066ff" stroke-width="2"/>
+              <text class="s3-v1 x-trs f-link" x="110" y="254" text-anchor="middle" font-size="34">Bekle</text>
+              <text class="s3-v2 x-trs f-link" x="110" y="254" text-anchor="middle" font-size="34">Otur</text>
+              <text class="s3-v3 x-trs f-link" x="110" y="252" text-anchor="middle" font-size="27">Ders çalış</text></g>
+            <g class="s3-R"><path d="M490 0v198" stroke="#9a8fa0" stroke-width="3"/><rect x="376" y="196" width="214" height="92" rx="10" fill="#1d1030" stroke="#b066ff" stroke-width="1.5" stroke-dasharray="6 5"/>
+              <text class="s3-v1 x-trs" x="483" y="252" text-anchor="middle" font-size="25" fill="#f4eef3">birlikte çıkalım</text>
+              <text class="s3-v2 x-trs" x="483" y="252" text-anchor="middle" font-size="27" fill="#f4eef3">konuşalım</text>
+              <text class="s3-v3 x-trs" x="483" y="252" text-anchor="middle" font-size="27" fill="#f4eef3">sınavı geç</text></g>
+            <g class="s3-M"><use href="#x-link" x="262" y="186" width="76" height="120"/>
+              <text class="s3-v1 f-pt" x="300" y="256" text-anchor="middle" font-family="Onest" font-weight="700" font-size="26">de</text>
+              <text class="s3-v2 f-pt" x="300" y="256" text-anchor="middle" font-family="Onest" font-weight="700" font-size="26">da</text>
+              <text class="s3-v3 f-pt" x="300" y="256" text-anchor="middle" font-family="Onest" font-weight="700" font-size="26">da</text></g>
+            <path class="s3-wire" d="M202 242H266M334 242H376" stroke="#b066ff" stroke-width="3" stroke-dasharray="110" stroke-dashoffset="0" fill="none"/>
+            <g font-family="Onest" font-size="15" fill="#b9adbd" text-anchor="middle"><text x="110" y="314">приказ</text><text x="300" y="330">звено</text><text x="483" y="314">следующий шаг</text></g>
+            <g class="s3-seal"><circle cx="300" cy="412" r="46" fill="url(#xg-copper)"/><circle cx="300" cy="412" r="35" fill="none" stroke="#7a4524" stroke-width="2"/><path d="M276 412h40m-12-12 12 12-12 12" fill="none" stroke="#4a260f" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Сначала угадай: что общего у этих трёх фраз?</p>
+        <p class="x-sub"><a-say><span class="c-link">Bekle</span> <span class="x-pt c-link">de</span> birlikte çıkalım.</a-say> Подожди — и выйдем вместе.</p>
+        <p class="x-sub"><a-say><span class="c-link">Otur</span> <span class="x-pt c-link">da</span> konuşalım.</a-say> Сядь, и поговорим.</p>
+        <p class="x-sub"><a-say><span class="c-link">Ders çalış</span> <span class="x-pt c-link">da</span> sınavı geç.</a-say> Позанимайся, чтобы сдать экзамен.</p>
+        <p class="x-sub">Ответ: de стоит не после имени, а после приказа. <span class="x-rule">Приказ + de + следующий шаг = «и тогда», «чтобы».</span></p>
+      </div>
+      <div class="x-act" data-act="link">
+        <p class="x-q">Собери цепь: <span data-l-ru>«Сядь, и поговорим»</span></p>
+        <div class="x-opts" data-l-side="L">
+          <button type="button" class="x-opt" data-l="Bekle" lang="tr">Bekle</button>
+          <button type="button" class="x-opt" data-l="Otur" lang="tr">Otur</button>
+          <button type="button" class="x-opt" data-l="Ver" lang="tr">Ver</button>
+        </div>
+        <div class="x-opts" data-l-side="R" style="margin-top:8px">
+          <button type="button" class="x-opt" data-r="birlikte çıkalım" lang="tr">birlikte çıkalım</button>
+          <button type="button" class="x-opt" data-r="konuşalım" lang="tr">konuşalım</button>
+          <button type="button" class="x-opt" data-r="bakayım" lang="tr">bakayım</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. НАЖИМ ============ -->
+<section data-section="push" data-words="57" class="x-scene" id="push">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>сцена 4</b> · нажим</p>
+      <div class="x-frame">
+        <svg class="x-svg s4" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Экран с ведущим в маске и бегущая строка">
+          <defs>
+            <clipPath id="s4-scr"><rect x="132" y="56" width="336" height="236" rx="6"/></clipPath>
+            <clipPath id="s4-tk"><rect x="44" y="340" width="512" height="56" rx="8"/></clipPath>
+          </defs>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-brick)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-red-u)"/>
+          <g class="s4-cam">
+            <rect x="120" y="44" width="360" height="260" rx="14" fill="#0b070d" stroke="#3a2c44" stroke-width="6"/>
+            <g clip-path="url(#s4-scr)">
+              <rect x="132" y="56" width="336" height="236" fill="#1a0b14"/>
+              <use class="s4-face" href="#x-host" x="150" y="36" width="300" height="375"/>
+              <rect class="s4-red" x="132" y="56" width="336" height="236" fill="#e0304e" opacity=".22"/>
+              <rect class="s4-pink" x="132" y="56" width="336" height="236" fill="#ff6fb0" opacity="0"/>
+              <path d="M132 70h336M132 110h336M132 150h336M132 190h336M132 230h336M132 270h336" stroke="#000" stroke-opacity=".18" stroke-width="2"/>
+            </g>
+            <g class="s4-spk"><rect x="510" y="96" width="44" height="60" rx="8" fill="#241a2a"/><circle cx="532" cy="126" r="14" fill="#0c0910" stroke="#5c4a68" stroke-width="2"/>
+              <g class="s4-waves" fill="none" stroke="#ff6fb0" stroke-width="2.5" stroke-linecap="round"><path d="M566 106a30 30 0 0 1 0 40"/><path d="M578 94a48 48 0 0 1 0 64"/></g></g>
+            <rect x="44" y="340" width="512" height="56" rx="8" fill="#060407" stroke="#e0304e" stroke-width="2"/>
+            <g clip-path="url(#s4-tk)" font-family="Onest" font-size="22" text-anchor="middle" fill="#ffe3ee">
+              <text class="s4-t1" x="300" y="376">Şifreyi söyle <tspan class="f-push" font-weight="700">de</tspan> kapıyı açayım</text>
+              <text class="s4-t2" x="300" y="376">Söyle <tspan class="f-push" font-weight="700">de</tspan> bilelim!</text>
+              <text class="s4-t3" x="300" y="376">Anlat <tspan class="f-push" font-weight="700">da</tspan> dinleyelim!</text>
+              <text class="s4-t4" x="300" y="376">Ver <tspan class="f-push" font-weight="700">de</tspan> bakayım!</text>
+            </g>
+            <use class="s4-hero" href="#x-man" x="14" y="300" width="70" height="176" style="color:#6e4c82"/>
+            <g class="x-smoke s4-smoke" filter="url(#xf-smoke)" opacity=".3"><ellipse cx="420" cy="480" rx="200" ry="40" fill="#c7a0b8"/></g>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Сижу в коридоре. Из динамика голос ведущего: <a-say><span class="c-push">Şifreyi söyle</span> <span class="x-pt c-push">de</span> kapıyı açayım.</a-say></p>
+        <p class="x-sub">Скажи шифр — открою. Та же цепь: приказ, de, следующий шаг.</p>
+        <p class="x-sub">Но в голосе нажим. Так турки подгоняют: ну давай уже.</p>
+        <p class="x-sub"><a-say><span class="c-push">Söyle</span> <span class="x-pt c-push">de</span> bilelim.</a-say> Ну скажи, мы ждём. <a-say><span class="c-push">Anlat</span> <span class="x-pt c-push">da</span> dinleyelim.</a-say> Рассказывай давай.</p>
+        <p class="x-sub">Примета: дальше «узнаем», «послушаем», «посмотрю». По-русски — «ну», «давай», «-ка»: <a-say>Ver <span class="x-pt c-push">de</span> bakayım.</a-say> Дай-ка гляну.</p>
+      </div>
+      <div class="x-act" data-act="push">
+        <p class="x-q">Как перевести <span class="x-tr" lang="tr">Söyle de bilelim</span>?</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-ok="0">«Ты тоже скажи, мы узнаем»</button>
+          <button type="button" class="x-opt" data-ok="1">«Ну скажи уже, мы ждём»</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ТОЖЕ ИЛИ ЗВЕНО ============ -->
+<section data-section="split" data-words="45" class="x-scene" id="split">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>сцена 5</b> · тоже или звено</p>
+      <div class="x-frame">
+        <svg class="x-svg s5" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Две половины кадра: Sen de bekle и Bekle de çıkalım">
+          <rect x="-600" y="-500" width="900" height="1500" fill="#2a0a14"/><rect x="300" y="-500" width="900" height="1500" fill="#1c0a30"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-red-u)"/><rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-vio-u)"/>
+          <use class="s5-host" href="#x-host" x="150" y="150" width="300" height="375"/>
+          <line class="s5-div" x1="300" y1="0" x2="300" y2="500" stroke="#f7f1ea" stroke-width="2" opacity=".55"/>
+          <g class="x-trs" font-size="34">
+            <text class="s5-l1" x="34" y="110" fill="#f4eef3">Sen</text>
+            <text class="s5-l2 f-also" x="104" y="110" font-family="Onest" font-weight="700" font-size="28">de</text>
+            <text class="s5-l3" x="148" y="110" fill="#f4eef3">bekle</text>
+            <text class="s5-r1 f-link" x="318" y="110">Bekle</text>
+            <text class="s5-r2 f-link" x="412" y="110" font-family="Onest" font-weight="700" font-size="28">de</text>
+            <text class="s5-r3" x="456" y="110" fill="#f4eef3">çıkalım</text>
+          </g>
+          <g font-family="Unbounded" font-weight="300" font-size="16" letter-spacing="3" text-anchor="middle">
+            <text class="s5-lab1 f-also" x="150" y="156">ТОЖЕ</text>
+            <text class="s5-lab2 f-link" x="450" y="156">ЗВЕНО</text>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Шифр я, конечно, не знаю. Зато понял фокус.</p>
+        <p class="x-sub">Смотри, что стоит перед de. Имя или «я, ты, он» — значит «тоже». <a-say><span class="c-also">Sen</span> <span class="x-pt c-also">de</span> bekle.</a-say> Ты тоже подожди.</p>
+        <p class="x-sub">Голый приказ — значит звено. <a-say><span class="c-link">Bekle</span> <span class="x-pt c-link">de</span> çıkalım.</a-say> Подожди, и выйдем.</p>
+        <p class="x-sub">Слова те же. Порядок другой. Смысл другой.</p>
+      </div>
+      <div class="x-act" data-act="split">
+        <p class="x-q">Разложи: <span class="x-tr" lang="tr" data-s-card>Sen de otur.</span></p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-s="also"><span class="c-also">●</span> тоже</button>
+          <button type="button" class="x-opt" data-s="link"><span class="c-link">●</span> звено</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. МОНТАЖНАЯ ============ -->
+<section data-section="lab" data-words="46" class="x-scene" id="lab">
+  <div class="x-pin x-pin--lab">
+    <div class="x-stage">
+      <p class="x-chap"><b>сцена 6</b> · монтажная</p>
+      <h2 class="x-h">Режиссёр теперь <em>ты</em></h2>
+      <svg class="x-svg s6" viewBox="0 0 600 200" style="height:auto;max-height:40vh" role="img" aria-label="Монтажный стол: плёнка и три конверта">
+        <g class="s6-strip">
+          <rect x="-300" y="14" width="1200" height="84" fill="#07050a"/>
+          <path d="M-300 24h1200M-300 88h1200" stroke="#3a2c44" stroke-width="8" stroke-dasharray="8 10"/>
+          <g fill="#1d1226" stroke="#5c4a68"><rect x="-260" y="34" width="90" height="44"/><rect x="-150" y="34" width="90" height="44"/><rect x="-40" y="34" width="90" height="44"/><rect x="70" y="34" width="90" height="44"/><rect x="180" y="34" width="90" height="44"/><rect x="290" y="34" width="90" height="44"/><rect x="400" y="34" width="90" height="44"/><rect x="510" y="34" width="90" height="44"/><rect x="620" y="34" width="90" height="44"/><rect x="730" y="34" width="90" height="44"/></g>
+          <g class="x-trs" font-size="16" fill="#f4eef3" text-anchor="middle"><text x="-105" y="62">Bekle de</text><text x="5" y="62">Otur da</text><text x="115" y="62">Söyle de</text><text x="225" y="62">Gel de</text><text x="335" y="62">Anlat da</text><text x="445" y="62">Ver de</text><text x="555" y="62">Dinle de</text><text x="665" y="62">Bak da</text></g>
+        </g>
+        <use class="s6-env" href="#x-env" x="110" y="120" width="88" height="64" style="color:#24182a"/>
+        <use class="s6-env" href="#x-env" x="256" y="116" width="88" height="64" style="color:#c98652"/>
+        <use class="s6-env" href="#x-env" x="402" y="120" width="88" height="64" style="color:#d7a93a"/>
+      </svg>
+      <p class="x-sub" style="position:static">Три конверта — три задачи. Собери фразу, выбери союз, угадай смысл.</p>
+      <div class="x-curtain"></div>
+    </div>
+  </div>
+  <div class="x-lab">
+    <div class="x-labbox">
+      <div class="x-tabs" role="tablist" aria-label="Режимы монтажной">
+        <button type="button" class="x-tab" role="tab" aria-selected="true" data-mode="build"><svg viewBox="0 0 60 44" aria-hidden="true"><use href="#x-env" style="color:#24182a"/></svg><span data-ui>Собери</span></button>
+        <button type="button" class="x-tab" role="tab" aria-selected="false" data-mode="harm"><svg viewBox="0 0 60 44" aria-hidden="true"><use href="#x-env" style="color:#c98652"/></svg><span data-ui>de или da</span></button>
+        <button type="button" class="x-tab" role="tab" aria-selected="false" data-mode="mean"><svg viewBox="0 0 60 44" aria-hidden="true"><use href="#x-env" style="color:#d7a93a"/></svg><span data-ui>Что значит</span></button>
+      </div>
+
+      <div class="x-pane" data-pane="build" role="tabpanel">
+        <p class="x-hint">Выбери приказ и следующий шаг. Союз встанет сам.</p>
+        <div class="x-chips" data-row="cmd" lang="tr">
+          <button type="button" class="x-chip" aria-pressed="true">Bekle</button><button type="button" class="x-chip" aria-pressed="false">Otur</button><button type="button" class="x-chip" aria-pressed="false">Dinle</button><button type="button" class="x-chip" aria-pressed="false">Söyle</button><button type="button" class="x-chip" aria-pressed="false">Kapıyı aç</button><button type="button" class="x-chip" aria-pressed="false">Gel</button>
+        </div>
+        <div class="x-chips x-chips--res" data-row="res" lang="tr">
+          <button type="button" class="x-chip" aria-pressed="true">birlikte çıkalım</button><button type="button" class="x-chip" aria-pressed="false">konuşalım</button><button type="button" class="x-chip" aria-pressed="false">bilelim</button><button type="button" class="x-chip" aria-pressed="false">gör</button><button type="button" class="x-chip" aria-pressed="false">bakayım</button>
+        </div>
+        <div class="x-screen">
+          <p class="x-out" lang="tr"><span class="x-out-cmd c-link">Bekle</span> <span class="x-out-pt x-pt c-link">de</span> <span class="x-out-res">birlikte çıkalım</span></p>
+          <p class="x-ru x-out-ru">Подожди, и выйдем вместе.</p>
+          <p class="x-why x-out-why">Звено. В «bekle» последняя гласная e, поэтому de.</p>
+          <div class="x-row"><button type="button" class="x-ghost x-out-say"><span data-ui>▶ Послушать</span></button></div>
+        </div>
+      </div>
+
+      <div class="x-pane" data-pane="harm" role="tabpanel" hidden>
+        <p class="x-hint">Какой союз встанет после этого приказа?</p>
+        <p class="x-word" lang="tr"><span class="x-h-word">Otur</span> <span class="x-h-pt x-pt c-link">…</span></p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-h="de" lang="tr">de</button>
+          <button type="button" class="x-opt" data-h="da" lang="tr">da</button>
+          <button type="button" class="x-ghost x-h-next"><span data-ui>Дальше →</span></button>
+        </div>
+        <p class="x-why x-h-why" aria-live="polite"></p>
+      </div>
+
+      <div class="x-pane" data-pane="mean" role="tabpanel" hidden>
+        <p class="x-hint">Что здесь делает de?</p>
+        <p class="x-word x-m-tr" lang="tr" style="font-size:clamp(28px,7vw,48px)">Sen de otur.</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-m="also"><span class="c-also">●</span> тоже</button>
+          <button type="button" class="x-opt" data-m="link"><span class="c-link">●</span> и тогда</button>
+          <button type="button" class="x-opt" data-m="push"><span class="c-push">●</span> ну же</button>
+          <button type="button" class="x-ghost x-m-next"><span data-ui>Дальше →</span></button>
+        </div>
+        <p class="x-why x-m-why" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. НЕУДАЧНЫЕ ДУБЛИ ============ -->
+<section data-section="traps" data-words="59" class="x-scene" id="traps">
+  <div class="x-pin x-pin--traps">
+    <div class="x-stage">
+      <p class="x-chap"><b>сцена 7</b> · неудачные дубли</p>
+      <p class="x-sub" style="position:static">На этом спотыкаются все. Нажми на кадр — увидишь чистый дубль.</p>
+      <div class="x-belt-wrap">
+        <div class="x-belt">
+          <button type="button" class="x-pol" aria-pressed="false"><span class="x-tape"></span><span class="x-pol__in">
+            <span class="x-pol__face x-pol__bad"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#1a0a12"/><rect width="240" height="170" fill="url(#xg-red)"/><use href="#x-host" x="90" y="10" width="120" height="150" opacity=".7"/></svg><b lang="tr">Bekle te çıkalım.</b></span><span class="x-pol__cap"><strong>Дубль 1</strong>Звук не тот.</span></span>
+            <span class="x-pol__face x-pol__face--back"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#170c26"/><rect width="240" height="170" fill="url(#xg-vio)"/><use href="#x-lock" x="96" y="40" width="48" height="64"/></svg><b lang="tr">Bekle de çıkalım.</b></span><span class="x-pol__cap"><strong>Чистый дубль</strong>Союз не оглушается: только de или da.</span></span>
+          </span></button>
+          <button type="button" class="x-pol" aria-pressed="false"><span class="x-tape"></span><span class="x-pol__in">
+            <span class="x-pol__face x-pol__bad"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#1a0a12"/><rect width="240" height="170" fill="url(#xg-red)"/><use href="#x-man" x="40" y="30" width="60" height="150" style="color:#6e4c82"/><use href="#x-emre" x="130" y="30" width="60" height="150" style="color:#3c2c46"/></svg><b lang="tr">Beklede çıkalım.</b></span><span class="x-pol__cap"><strong>Дубль 2</strong>Склеили лишнее.</span></span>
+            <span class="x-pol__face x-pol__face--back"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#170c26"/><rect width="240" height="170" fill="url(#xg-vio)"/><use href="#x-link" x="104" y="40" width="32" height="56"/></svg><b lang="tr">Bekle de çıkalım.</b></span><span class="x-pol__cap"><strong>Чистый дубль</strong>Слитно пишутся окончания. Союз всегда отдельно.</span></span>
+          </span></button>
+          <button type="button" class="x-pol" aria-pressed="false"><span class="x-tape"></span><span class="x-pol__in">
+            <span class="x-pol__face x-pol__bad"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#1a0a12"/><rect width="240" height="170" fill="url(#xg-red)"/><rect x="60" y="40" width="120" height="80" rx="6" fill="#2a1a12" stroke="#5a3a24" stroke-width="2"/><use href="#x-lock" x="100" y="22" width="40" height="54"/></svg><b lang="tr">Çalış de sınavı geç.</b></span><span class="x-pol__cap"><strong>Дубль 3</strong>Гласная из другой сцены.</span></span>
+            <span class="x-pol__face x-pol__face--back"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#170c26"/><rect width="240" height="170" fill="url(#xg-vio)"/><text x="120" y="96" text-anchor="middle" font-family="Poiret One" font-size="44" fill="#f4eef3">ı → da</text></svg><b lang="tr">Çalış da sınavı geç.</b></span><span class="x-pol__cap"><strong>Чистый дубль</strong>Гласная от последнего слога: çalış, ı, значит da.</span></span>
+          </span></button>
+          <button type="button" class="x-pol" aria-pressed="false"><span class="x-tape"></span><span class="x-pol__in">
+            <span class="x-pol__face x-pol__bad"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#1a0a12"/><rect width="240" height="170" fill="url(#xg-red)"/><use href="#x-host" x="60" y="10" width="120" height="150"/></svg><b lang="tr">Söyle de bilelim.</b></span><span class="x-pol__cap"><strong>Дубль 4</strong>Перевели как «ты тоже скажи».</span></span>
+            <span class="x-pol__face x-pol__face--back"><span class="x-pol__ph"><svg viewBox="0 0 240 170" aria-hidden="true"><rect width="240" height="170" fill="#2a0c22"/><rect width="240" height="170" fill="url(#xg-vio)"/><g fill="none" stroke="#ff6fb0" stroke-width="4" stroke-linecap="round"><path d="M150 60a40 40 0 0 1 0 50"/><path d="M168 46a62 62 0 0 1 0 78"/></g><circle cx="110" cy="85" r="26" fill="#ff6fb0"/></svg><b lang="tr">Söyle de bilelim!</b></span><span class="x-pol__cap"><strong>Чистый дубль</strong>«Ну скажи уже!» После приказа de не «тоже».</span></span>
+          </span></button>
+        </div>
+      </div>
+      <div class="x-curtain"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВИДЕО ============ -->
+<section data-section="video" data-words="13" class="x-scene" id="video">
+  <div class="x-stage x-stage--flow">
+    <p class="x-chap"><b>хроника</b> · видео</p>
+    <p class="x-sub">Смотри, какое слово стоит перед da или de. От этого и меняется смысл.</p>
+    <a-video yt="3r0OOfIKsEk" start="0" end="102" title="Уровень В2. Союз da/de" channel="Московская академия наук"></a-video>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКА ============ -->
+<section data-section="practice" data-words="10" class="x-paper" id="practice">
+  <div class="x-paper__in">
+    <p class="x-chap">практика</p>
+    <h2 class="x-h">Замки открываешь ты</h2>
+    <p>Сначала узнай, потом поставь, потом собери.</p>
+    <a-exercise ref="b2.de-functions.ex1"></a-exercise>
+    <a-exercise ref="b2.de-functions.ex2"></a-exercise>
+    <a-exercise ref="b2.de-functions.ex3"></a-exercise>
+    <a-exercise ref="b2.de-functions.ex4"></a-exercise>
+    <a-exercise ref="b2.de-functions.ex5">
+      <div class="x-game" data-game>
+        <div class="x-game__head">
+          <svg viewBox="0 0 60 80" aria-hidden="true"><use href="#x-lock"/></svg>
+          <div><p class="x-game__title">Замок «Маски»</p><p class="x-game__step" data-ui>Замок <b data-g-n>1</b> из 5 · открыто <b data-g-ok>0</b></p></div>
+        </div>
+        <p data-ui>Собери: <b data-g-ru>Подожди немного, и выйдем вместе.</b></p>
+        <div class="x-dials">
+          <div class="x-dial" data-d="0" role="group" aria-label="Приказ"></div>
+          <div class="x-dial" data-d="1" role="group" aria-label="Союз"></div>
+          <div class="x-dial" data-d="2" role="group" aria-label="Следующий шаг"></div>
+        </div>
+        <p class="x-game__line" lang="tr" data-g-line>… … …</p>
+        <button type="button" class="x-btn" data-g-go><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#x-lock"/></svg><span data-ui>Повернуть ключ</span></button>
+        <p class="x-game__fb" aria-live="polite" data-g-fb></p>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<!-- ============ МИНИ-ПРОВЕРКА ============ -->
+<section data-section="check" data-words="5" class="x-paper" id="check">
+  <div class="x-paper__in">
+    <p class="x-chap">мини-проверка</p>
+    <h2 class="x-h">Пять вопросов без подсказок</h2>
+    <a-quiz ref="b2.de-functions.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ============ АФИША И ФИНАЛ ============ -->
+<section data-section="cheat" data-words="64" class="x-scene" id="cheat">
+  <div class="x-stage x-stage--flow x-poster-wrap">
+    <p class="x-chap"><b>афиша</b> · шпаргалка</p>
+    <div class="x-poster">
+      <div class="x-poster__art">
+        <svg class="x-svg s8" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Афиша: MASKE, de / da">
+          <rect width="600" height="500" fill="url(#xp-chess)"/>
+          <rect width="600" height="500" fill="#0c0910" opacity=".35"/>
+          <rect width="600" height="500" fill="url(#xg-vio)"/>
+          <text class="s8-ma x-trs" x="120" y="300" font-size="150" fill="#f4eef3" text-anchor="middle">MA</text>
+          <text class="s8-ke x-trs" x="486" y="300" font-size="150" fill="#f4eef3" text-anchor="middle">KE</text>
+          <use class="s8-host" href="#x-host" x="160" y="110" width="280" height="350"/>
+          <text class="s8-s" x="300" y="80" text-anchor="middle" font-family="Unbounded" font-weight="300" font-size="22" letter-spacing="14" fill="#f4eef3">de / da</text>
+          <text x="300" y="486" text-anchor="middle" font-family="Onest" font-size="12" letter-spacing="9" fill="#dcaa7c">ANKARA · KAÇIŞ ODASI</text>
+        </svg>
+      </div>
+      <div>
+        <h2 class="x-h">Шпаргалка</h2>
+        <ul class="x-checks">
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><use href="#x-check"/></svg><span>Имя + de = <b class="c-also">«тоже»</b>. <a-say>Sen <span class="x-pt c-also">de</span> bekle.</a-say></span></li>
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><use href="#x-check"/></svg><span>Приказ + de + шаг = <b class="c-link">«и тогда», «чтобы»</b>. <a-say>Bekle <span class="x-pt c-link">de</span> çıkalım.</a-say></span></li>
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><use href="#x-check"/></svg><span>Приказ + de + «узнаем, послушаем» = <b class="c-push">«ну же»</b>. <a-say>Söyle <span class="x-pt c-push">de</span> bilelim.</a-say></span></li>
+          <li><svg viewBox="0 0 28 28" aria-hidden="true"><use href="#x-check"/></svg><span>e, i, ö, ü → de; a, ı, o, u → da. Отдельно. Никогда te и ta.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="x-pin x-pin--final">
+    <div class="x-stage">
+      <p class="x-chap"><b>финал</b> · второй заход</p>
+      <div class="x-frame">
+        <svg class="x-svg s9" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Дверь квеста открывается, двое выходят">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-brick)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-red-u)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-vio-u)"/>
+          <rect x="226" y="120" width="148" height="300" fill="#f7e3c8"/>
+          <rect class="s9-glow" x="186" y="90" width="228" height="360" fill="url(#xg-spot)" opacity=".35"/>
+          <use class="s9-emre" href="#x-emre" x="250" y="212" width="80" height="210" style="color:#1b1220"/>
+          <use class="s9-hero" href="#x-man" x="300" y="212" width="80" height="210" style="color:#1b1220"/>
+          <g class="s9-door"><rect x="226" y="120" width="148" height="300" fill="#0b080d" stroke="#e0304e" stroke-width="2"/><use href="#x-lock" x="278" y="236" width="44" height="58"/></g>
+          <use class="s9-host" href="#x-host" x="420" y="210" width="190" height="238"/>
+          <g class="s9-bubble"><rect x="20" y="40" width="330" height="56" rx="12" fill="#f4eef3"/><path d="M250 96l10 16 14-16z" fill="#f4eef3"/><text x="185" y="76" text-anchor="middle" class="x-trs" font-size="22" fill="#1d1422">Emre, bekle <tspan class="f-link" font-weight="700">de</tspan> birlikte…</text></g>
+          <g class="s9-thumb"><circle cx="520" cy="190" r="26" fill="#dcaa7c"/><path d="M510 196v-12l8-12 4 2-2 10h10l-2 14h-18z" fill="#1d0f06"/></g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Через неделю мы снова в «Маске». Эмре опять несётся к двери.</p>
+        <p class="x-sub">Кричу ему: <a-say>Emre, <span class="c-link">bekle</span> <span class="x-pt c-link">de</span> birlikte çıkalım!</a-say></p>
+        <p class="x-sub">Эмре останавливается. Выходим вдвоём, за пятьдесят две минуты.</p>
+        <p class="x-sub">Ведущий показывает большой палец. Маску, кстати, так и не снял.</p>
+        <p class="x-sub">Теперь ты отличаешь «тоже» от «и тогда» и умеешь подогнать собеседника по-турецки.</p>
+      </div>
+      <div class="x-act" data-act="final">
+        <button type="button" class="x-btn" data-final><svg viewBox="0 0 60 80" aria-hidden="true"><use href="#x-lock"/></svg><span data-ui>Открыть дверь</span></button>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<template data-achievement data-title="Ключ от «Маски»" data-text="Отличаешь «тоже» от «и тогда» и подгоняешь собеседника по-турецки">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#170f17"/>
+    <circle cx="60" cy="60" r="50" fill="none" stroke="#dcaa7c" stroke-width="3"/>
+    <g class="xb-mask"><path d="M40 48c0-12 9-18 20-18s20 6 20 18c0 18-7 30-20 36-13-6-20-18-20-36z" fill="#efe9ec"/><path d="M73 32l5 5-28 44-5-5z" fill="#0d090f"/><path d="M47 50c3-3 8-3 11 0-3 3-8 3-11 0zM62 50c3-3 8-3 11 0-3 3-8 3-11 0z" fill="#050307"/></g>
+    <g class="xb-key"><circle cx="34" cy="96" r="7" fill="none" stroke="#dcaa7c" stroke-width="4"/><path d="M41 96h40v6h-5v-4h-5v5h-5v-5" fill="none" stroke="#dcaa7c" stroke-width="4" stroke-linejoin="round"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  const root = document.documentElement;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const VOW = 'aıoueiöüAIOUEİÖÜ';
+  const BACK = 'aıouAIOU';
+  const lastVowel = (w) => { for (let i = w.length - 1; i >= 0; i--) if (VOW.includes(w[i])) return w[i]; return 'e'; };
+  const part = (w) => (BACK.includes(lastVowel(w)) ? 'da' : 'de');
+  const pop = (el) => { if (G && el) G.fromTo(el, { scale: 0.92 }, { scale: 1, duration: 0.45, ease: 'back.out(3)' }); };
+  const shake = (el) => { if (G && el) G.fromTo(el, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1,0.3)' }); };
+  root.classList.add('x-still');
+  if (G && ST) G.registerPlugin(ST);
+
+  /* ---------- субтитры: строки по очереди ---------- */
+  const subs = (tl, sec, times) => {
+    const lines = $$('.x-subs .x-sub', sec);
+    lines.forEach((l, i) => {
+      if (times[i] > 0) tl.fromTo(l, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.35 }, times[i]);
+      if (i < lines.length - 1) tl.to(l, { opacity: 0, y: -16, duration: 0.3 }, times[i + 1] - 0.32);
+    });
+  };
+  const fitSubs = () => {
+    $$('.x-subs').forEach((box) => {
+      if (!root.classList.contains('x-film')) { box.style.height = ''; return; }
+      let h = 0;
+      $$('.x-sub', box).forEach((p) => { h = Math.max(h, p.offsetHeight); });
+      box.style.height = h + 'px';
+    });
+  };
+
+  /* ---------- сцены ---------- */
+  function sceneStory(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.addLabel('street', 0)
+      .fromTo('.s1-stars', { y: 30 }, { y: -30, duration: 2 }, 0)
+      .fromTo('.s1-city', { y: 14 }, { y: -10, duration: 2 }, 0)
+      .fromTo('.s1-neon', { opacity: 0.2 }, { opacity: 1, duration: 0.5, ease: 'steps(5)' }, 0.25)
+      .addLabel('dive', 1.6)
+      .to('.s1-street', { scale: 5, svgOrigin: '300 405', duration: 1.2, ease: 'power2.in' }, 'dive')
+      .to('.s1-street', { opacity: 0, duration: 0.35 }, 'dive+=0.95')
+      .fromTo('.s1-room', { scale: 1.3, svgOrigin: '300 250' }, { scale: 1, duration: 1.1, ease: 'power2.out' }, 'dive+=0.9')
+      .fromTo('.s1-host', { scale: 0.85, opacity: 0, svgOrigin: '435 170' }, { scale: 1, opacity: 1, duration: 0.6 }, 'dive+=1.4')
+      .addLabel('shout', 3.7)
+      .fromTo('.s1-emre', { x: 40 }, { x: 0, duration: 0.5 }, 'shout')
+      .fromTo('.s1-bubble', { scale: 0, svgOrigin: '372 262' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 'shout+=0.2')
+      .addLabel('mis', 5)
+      .fromTo('.s1-mis', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4 }, 'mis')
+      .addLabel('slam', 6.2)
+      .to('.s1-mis', { opacity: 0, duration: 0.3 }, 'slam')
+      .to('.s1-bubble', { opacity: 0, duration: 0.3 }, 'slam')
+      .to('.s1-hero', { x: -150, duration: 0.8, ease: 'power1.inOut' }, 'slam')
+      .fromTo('.s1-slam', { y: -520 }, { y: 0, duration: 0.35, ease: 'power3.in' }, 'slam+=0.7')
+      .fromTo('.s1-click', { scale: 0, opacity: 0, svgOrigin: '190 140' }, { scale: 1, opacity: 1, duration: 0.3 }, 'slam+=1.05')
+      .fromTo('.s1-shake', { x: -10 }, { x: 0, duration: 0.5, ease: 'elastic.out(1,0.3)' }, 'slam+=1.05')
+      .addLabel('clap', 7.8)
+      .fromTo('.s1-host', { scale: 1, svgOrigin: '435 170' }, { scale: 1.07, duration: 0.2, yoyo: true, repeat: 3 }, 'clap')
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 'clap+=1')
+      .fromTo($('.x-curtain', sec), { yPercent: -101 }, { yPercent: 0, duration: 0.6, immediateRender: false }, 'clap+=2.6');
+    subs(tl, sec, [0, 2.6, 3.8, 5, 6.3, 7.8]);
+    return tl;
+  }
+
+  function sceneOldkey(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.6 }, 0)
+      .fromTo('.s2-ring', { y: -200 }, { y: 0, duration: 0.8, ease: 'bounce.out' }, 0.2)
+      .fromTo('.s2-tag', { rotation: (i) => [-55, -30, 30, 55][i], opacity: 0, svgOrigin: '300 152' }, { rotation: 0, opacity: 1, duration: 1, stagger: 0.15, ease: 'elastic.out(1,0.5)' }, 0.6)
+      .fromTo('.s2-key', { rotation: -12, svgOrigin: '210 448' }, { rotation: 12, duration: 6 }, 0)
+      .addLabel('zoom', 2.6)
+      .to('.s2-cam', { scale: 1.9, svgOrigin: '253 347', duration: 1, ease: 'power2.inOut' }, 'zoom')
+      .fromTo('.s2-vowel', { scale: 0, svgOrigin: '245 354' }, { scale: 1, duration: 0.3, ease: 'back.out(3)' }, 'zoom+=0.9')
+      .fromTo('.s2-arc', { strokeDashoffset: 80 }, { strokeDashoffset: 0, duration: 0.6 }, 'zoom+=1.1')
+      .to('.s2-cam', { scale: 1, svgOrigin: '253 347', duration: 0.9, ease: 'power2.inOut' }, 'zoom+=2.1')
+      .addLabel('stamp', 5.1)
+      .fromTo('.s2-stamp', { scale: 2.6, opacity: 0, rotation: -24, svgOrigin: '300 216' }, { scale: 1, opacity: 1, rotation: -8, duration: 0.4, ease: 'power4.in' }, 'stamp')
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 'stamp+=0.8')
+      .fromTo($('.x-curtain', sec), { yPercent: -101 }, { yPercent: 0, duration: 0.6, immediateRender: false }, 'stamp+=2.4');
+    subs(tl, sec, [0, 1.6, 3.2, 5.1]);
+    return tl;
+  }
+
+  function sceneLink(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.6 }, 0)
+      .fromTo('.s3-chain', { y: -160 }, { y: 0, duration: 1.4, ease: 'power2.out' }, 0)
+      .fromTo('.s3-L', { rotation: -28, opacity: 0, svgOrigin: '110 0' }, { rotation: 0, opacity: 1, duration: 0.9, ease: 'elastic.out(1,0.5)' }, 0.4)
+      .fromTo('.s3-R', { rotation: 28, opacity: 0, svgOrigin: '490 0' }, { rotation: 0, opacity: 1, duration: 0.9, ease: 'elastic.out(1,0.5)' }, 0.6)
+      .fromTo('.s3-M', { y: -300 }, { y: 0, duration: 0.7, ease: 'bounce.out' }, 1.5)
+      .fromTo('.s3-wire', { strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: 0.6 }, 2.1)
+      .addLabel('v2', 3.3)
+      .to('.s3-v1', { opacity: 0, y: -14, duration: 0.3 }, 'v2')
+      .fromTo('.s3-v2', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3 }, 'v2+=0.2')
+      .addLabel('v3', 4.6)
+      .to('.s3-v2', { opacity: 0, y: -14, duration: 0.3 }, 'v3')
+      .fromTo('.s3-v3', { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3 }, 'v3+=0.2')
+      .addLabel('rule', 5.9)
+      .to('.s3-cam', { scale: 0.92, svgOrigin: '300 250', duration: 0.8 }, 'rule')
+      .fromTo('.s3-seal', { scale: 3, opacity: 0, svgOrigin: '300 412' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'power4.in' }, 'rule+=0.3')
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 'rule+=1.2')
+      .fromTo($('.x-curtain', sec), { yPercent: -101 }, { yPercent: 0, duration: 0.6, immediateRender: false }, 'rule+=2.8');
+    subs(tl, sec, [0, 2, 3.4, 4.7, 5.9]);
+    return tl;
+  }
+
+  function scenePush(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.6 }, 0)
+      .fromTo('.s4-cam', { scale: 1.25, svgOrigin: '300 200' }, { scale: 1, duration: 1.2, ease: 'power2.out' }, 0)
+      .fromTo('.s4-t1', { x: 160, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8 }, 0.4)
+      .fromTo('.s4-waves', { scale: 0.6, opacity: 0, svgOrigin: '532 126' }, { scale: 1.2, opacity: 1, duration: 0.4, repeat: 5, yoyo: true }, 0.4)
+      .addLabel('push', 2.8)
+      .to('.s4-cam', { scale: 1.4, svgOrigin: '300 200', duration: 1, ease: 'power2.inOut' }, 'push')
+      .to('.s4-pink', { opacity: 0.35, duration: 0.6 }, 'push')
+      .to('.s4-red', { opacity: 0, duration: 0.6 }, 'push')
+      .fromTo('.s4-face', { scale: 1, svgOrigin: '300 220' }, { scale: 1.08, duration: 1 }, 'push')
+      .to('.s4-t1', { y: -34, opacity: 0, duration: 0.3 }, 'push+=1.2')
+      .fromTo('.s4-t2', { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 'push+=1.35')
+      .to('.s4-t2', { y: -34, opacity: 0, duration: 0.3 }, 'push+=2.2')
+      .fromTo('.s4-t3', { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 'push+=2.35')
+      .to('.s4-t3', { y: -34, opacity: 0, duration: 0.3 }, 'push+=3.2')
+      .fromTo('.s4-t4', { y: 34, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 'push+=3.35')
+      .to('.s4-cam', { scale: 1, svgOrigin: '300 200', duration: 0.8 }, 'push+=3.6')
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 'push+=4.2')
+      .fromTo($('.x-curtain', sec), { yPercent: -101 }, { yPercent: 0, duration: 0.6, immediateRender: false }, 'push+=5.8');
+    subs(tl, sec, [0, 1.6, 2.8, 4.1, 6.1]);
+    return tl;
+  }
+
+  function sceneSplit(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.6 }, 0)
+      .fromTo('.s5-host', { opacity: 0.2, y: 40 }, { opacity: 0.95, y: 0, duration: 1.2 }, 0)
+      .fromTo('.s5-div', { scaleY: 0, svgOrigin: '300 250' }, { scaleY: 1, duration: 0.8 }, 0.6)
+      .fromTo(['.s5-l1', '.s5-l2', '.s5-l3'], { x: 150, opacity: 0 }, { x: 150, opacity: 1, duration: 0.4, stagger: 0.1 }, 0.4)
+      .addLabel('part', 1.6)
+      .to(['.s5-l1', '.s5-l2', '.s5-l3'], { x: 0, duration: 0.8, ease: 'power2.inOut' }, 'part')
+      .fromTo('.s5-lab1', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3 }, 'part+=0.8')
+      .addLabel('swap', 3)
+      .fromTo('.s5-r1', { x: -170, y: 0, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power2.inOut' }, 'swap')
+      .fromTo('.s5-r2', { rotation: -180, opacity: 0, svgOrigin: '426 100' }, { rotation: 0, opacity: 1, duration: 0.6 }, 'swap+=0.4')
+      .fromTo('.s5-r3', { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 'swap+=0.7')
+      .fromTo('.s5-lab2', { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3 }, 'swap+=1')
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 'swap+=2')
+      .fromTo($('.x-curtain', sec), { yPercent: -101 }, { yPercent: 0, duration: 0.6, immediateRender: false }, 'swap+=3.6');
+    subs(tl, sec, [0, 1.6, 3, 4.4]);
+    return tl;
+  }
+
+  function sceneLab(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.5 }, 0)
+      .fromTo('.s6-strip', { x: 0 }, { x: -330, duration: 2 }, 0)
+      .fromTo('.s6-env', { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.2, ease: 'bounce.out' }, 0.5)
+      .fromTo($('.x-h', sec), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 0.3);
+    return tl;
+  }
+
+  function sceneTraps(sec, len, desk) {
+    const belt = $('.x-belt', sec);
+    const wrap = $('.x-belt-wrap', sec);
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.5 }, 0)
+      .fromTo($$('.x-pol', sec), { y: -260, rotation: (i) => [-9, 6, -5, 8][i] }, { y: 0, rotation: (i) => [-3, 2, -2, 3][i], duration: 0.8, stagger: 0.25, ease: 'back.out(1.4)' }, 0.2)
+      .to(belt, { x: () => Math.min(0, wrap.clientWidth - belt.scrollWidth - (desk ? 40 : 24)), duration: 3 }, 1.4);
+    return tl;
+  }
+
+  function sceneFinal(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin--final', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo($('.x-curtain', $('.x-pin--final', sec)), { yPercent: 0 }, { yPercent: 101, duration: 0.6 }, 0)
+      .fromTo('.s9-emre', { x: -200 }, { x: 0, duration: 0.9, ease: 'power2.out' }, 0.4)
+      .fromTo('.s9-bubble', { scale: 0, svgOrigin: '260 110' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1.6)
+      .fromTo('.s9-door', { scaleX: 1, svgOrigin: '226 270' }, { scaleX: 0.08, duration: 1, ease: 'power2.inOut' }, 2.9)
+      .fromTo('.s9-glow', { opacity: 0 }, { opacity: 0.6, duration: 0.8 }, 3.1)
+      .fromTo(['.s9-emre', '.s9-hero'], { y: 0 }, { y: -6, duration: 0.25, yoyo: true, repeat: 3 }, 3.5)
+      .fromTo('.s9-thumb', { scale: 0, svgOrigin: '520 190' }, { scale: 1, duration: 0.4, ease: 'back.out(3)' }, 4.3)
+      .fromTo($('.x-act', $('.x-pin--final', sec)), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 5.5);
+    subs(tl, $('.x-pin--final', sec), [0, 1.6, 2.9, 4.3, 5.6]);
+    return tl;
+  }
+
+  if (G && ST) {
+    const mm = G.matchMedia();
+    mm.add({
+      desk: '(min-width: 768px) and (min-height: 520px) and (prefers-reduced-motion: no-preference)',
+      mob: '(max-width: 767px) and (min-height: 520px) and (prefers-reduced-motion: no-preference)',
+    }, (ctx) => {
+      const { desk } = ctx.conditions;
+      root.classList.add('x-film');
+      root.classList.remove('x-still');
+      fitSubs();
+      G.set('.x-curtain', { yPercent: -101 });
+      const L = (d, m) => '+=' + (desk ? d : m) + '%';
+      sceneStory($('#story'), L(250, 150));
+      sceneOldkey($('#oldkey'), L(190, 130));
+      sceneLink($('#link'), L(220, 140));
+      scenePush($('#push'), L(220, 140));
+      sceneSplit($('#split'), L(180, 120));
+      sceneLab($('#lab'), L(90, 70));
+      sceneTraps($('#traps'), L(180, 130), desk);
+      sceneFinal($('#cheat'), L(170, 120));
+      /* афиша: проявляется по скроллу, без закрепления */
+      G.timeline({ scrollTrigger: { trigger: '.x-poster', start: 'top 85%', end: 'center 55%', scrub: 0.6 } })
+        .fromTo('.s8-ma', { x: -120, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, 0)
+        .fromTo('.s8-ke', { x: 120, opacity: 0 }, { x: 0, opacity: 1, duration: 1 }, 0)
+        .fromTo('.s8-host', { scale: 0.86, svgOrigin: '300 460' }, { scale: 1, duration: 1 }, 0);
+      return () => { root.classList.remove('x-film'); root.classList.add('x-still'); fitSubs(); };
+    });
+
+    /* бумажные секции и списки: появление пачкой */
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) ScrollTrigger.batch('.x-checks li, .x-paper .x-h', {
+      start: 'top 92%',
+      once: true,
+      onEnter: (els) => G.fromTo(els, { y: 26, opacity: 0.001 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out', overwrite: true }),
+    });
+
+    /* циклы: работают, только пока сцена на экране */
+    const loop = (sec, tw) => {
+      tw.pause();
+      ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top', onToggle: (s) => (s.isActive ? tw.play() : tw.pause()) });
+    };
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      loop($('#story'), G.to('.s1-smoke', { x: 40, duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+      loop($('#push'), G.to('.s4-smoke', { x: -50, duration: 7, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+      loop($('#link'), G.to('.s3-seal', { rotation: 10, svgOrigin: '300 412', duration: 2.4, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+      loop($('#cheat'), G.fromTo('.s8-s', { opacity: 0.45 }, { opacity: 1, duration: 0.9, repeat: -1, yoyo: true, ease: 'steps(3)' }));
+    }
+  }
+
+  /* ---------- действие в конце сцены 1 ---------- */
+  const storyAct = $('[data-act="story"]');
+  $$('.x-opt', storyAct).forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.ok === '1';
+    $$('.x-opt', storyAct).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-fb', storyAct).textContent = ok ? 'Вот. А я уже в коридоре.' : 'Так подумал и я. Поэтому сижу в коридоре.';
+    if (ok) { say('Biraz bekle de birlikte çıkalım!'); pop(b); } else shake(b);
+    if (G) G.fromTo('.s1-slam use', { rotation: -14, svgOrigin: '190 230' }, { rotation: 0, duration: 0.7, ease: 'elastic.out(1,0.3)' });
+  }));
+
+  /* ---------- сцена 2: бирки ---------- */
+  const keyAct = $('[data-act="oldkey"]');
+  const KEYS = [['Maske', 'de'], ['Oda', 'da'], ['Zincir', 'de'], ['Kutu', 'da']];
+  let ki = 0;
+  $$('[data-k]', keyAct).forEach((b) => b.addEventListener('click', () => {
+    if (ki >= KEYS.length) { ki = 0; $('[data-k-word]', keyAct).textContent = KEYS[0][0]; $('.x-fb', keyAct).textContent = 'Ещё круг.'; return; }
+    const [w, p] = KEYS[ki];
+    const ok = b.dataset.k === p;
+    const fb = $('.x-fb', keyAct);
+    if (!ok) { fb.textContent = `Мимо. В «${w}» последняя гласная ${lastVowel(w)}.`; shake(b); return; }
+    fb.textContent = `${w} ${p} — гласная ${lastVowel(w)}, значит ${p}.`;
+    pop(b);
+    if (G) G.fromTo($$('.s2-tag')[ki % 4], { rotation: -10, svgOrigin: '300 152' }, { rotation: 0, duration: 0.8, ease: 'elastic.out(1,0.4)' });
+    ki++;
+    if (ki < KEYS.length) $('[data-k-word]', keyAct).textContent = KEYS[ki][0];
+    else fb.textContent += ' Все четыре бирки на месте.';
+  }));
+
+  /* ---------- сцена 3: собери цепь ---------- */
+  const linkAct = $('[data-act="link"]');
+  const ROUNDS = [
+    { ru: '«Сядь, и поговорим»', L: 'Otur', R: 'konuşalım' },
+    { ru: '«Подожди — и выйдем вместе»', L: 'Bekle', R: 'birlikte çıkalım' },
+    { ru: '«Дай-ка гляну»', L: 'Ver', R: 'bakayım' },
+  ];
+  let lr = 0; let pickL = null; let pickR = null;
+  const linkCheck = () => {
+    if (!pickL || !pickR) return;
+    const r = ROUNDS[lr % ROUNDS.length];
+    const fb = $('.x-fb', linkAct);
+    const line = `${pickL} ${part(pickL)} ${pickR}`;
+    if (pickL === r.L && pickR === r.R) {
+      fb.textContent = `${line}. Звено держит. ${part(pickL)} — по гласной в «${pickL}».`;
+      say(line);
+      if (G) G.fromTo('.s3-M', { y: -30 }, { y: 0, duration: 0.6, ease: 'bounce.out' });
+      lr++;
+      setTimeout(() => {
+        $$('.x-opt', linkAct).forEach((x) => x.classList.remove('is-pick', 'is-ok', 'is-no'));
+        pickL = pickR = null;
+        $('[data-l-ru]', linkAct).textContent = ROUNDS[lr % ROUNDS.length].ru;
+      }, 1400);
+    } else {
+      fb.textContent = `${line}. Фраза турецкая, но смысл не тот. Ещё раз.`;
+      shake($('[data-l-side="R"]', linkAct));
+    }
+  };
+  $$('[data-l]', linkAct).forEach((b) => b.addEventListener('click', () => {
+    $$('[data-l]', linkAct).forEach((x) => x.classList.remove('is-pick'));
+    b.classList.add('is-pick'); pickL = b.dataset.l; pop(b); linkCheck();
+  }));
+  $$('[data-r]', linkAct).forEach((b) => b.addEventListener('click', () => {
+    $$('[data-r]', linkAct).forEach((x) => x.classList.remove('is-pick'));
+    b.classList.add('is-pick'); pickR = b.dataset.r; pop(b); linkCheck();
+  }));
+
+  /* ---------- сцена 4: нажим ---------- */
+  const pushAct = $('[data-act="push"]');
+  $$('.x-opt', pushAct).forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.ok === '1';
+    $$('.x-opt', pushAct).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-fb', pushAct).textContent = ok ? 'Да. Ведущий не просит «тоже», он торопит.' : 'Перед de нет имени. Значит, не «тоже», а нажим.';
+    if (ok) { say('Söyle de bilelim!'); pop(b); } else shake(b);
+    if (G) G.fromTo('.s4-waves', { scale: 0.7, opacity: 0, svgOrigin: '532 126' }, { scale: 1.25, opacity: 1, duration: 0.5, repeat: 1, yoyo: true });
+  }));
+
+  /* ---------- сцена 5: разложи ---------- */
+  const splitAct = $('[data-act="split"]');
+  const CARDS = [['Sen de otur.', 'also'], ['Otur da konuşalım.', 'link'], ['Kapı da kilitli.', 'also'], ['Anlat da dinleyelim.', 'link']];
+  let ci = 0;
+  $$('[data-s]', splitAct).forEach((b) => b.addEventListener('click', () => {
+    const card = $('[data-s-card]', splitAct);
+    const fb = $('.x-fb', splitAct);
+    if (ci >= CARDS.length) { ci = 0; card.textContent = CARDS[0][0]; fb.textContent = 'Ещё круг.'; return; }
+    const [tr, a] = CARDS[ci];
+    if (b.dataset.s !== a) { fb.textContent = a === 'also' ? 'Перед de имя или местоимение — это «тоже».' : 'Перед de голый приказ — это звено.'; shake(b); return; }
+    fb.textContent = a === 'also' ? `${tr} Тоже.` : `${tr} Звено.`;
+    say(tr);
+    const next = () => { ci++; card.textContent = ci < CARDS.length ? CARDS[ci][0] : 'Всё разложено.'; };
+    if (G) G.to(card, { x: a === 'also' ? -60 : 60, opacity: 0, duration: 0.3, onComplete: () => { next(); G.fromTo(card, { x: 0, opacity: 0, y: 10 }, { y: 0, opacity: 1, duration: 0.3 }); } });
+    else next();
+  }));
+
+  /* ---------- монтажная ---------- */
+  const lab = $('.x-labbox');
+  $$('.x-tab', lab).forEach((t) => t.addEventListener('click', () => {
+    $$('.x-tab', lab).forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('.x-pane', lab).forEach((p) => { p.hidden = p.dataset.pane !== t.dataset.mode; });
+    const pane = $(`[data-pane="${t.dataset.mode}"]`, lab);
+    if (G) G.fromTo(pane, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+  }));
+
+  const CMD_RU = { Bekle: 'Подожди', Otur: 'Сядь', Dinle: 'Послушай', 'Söyle': 'Скажи', 'Kapıyı aç': 'Открой дверь', Gel: 'Иди сюда' };
+  const RES_RU = { 'birlikte çıkalım': 'выйдем вместе', 'konuşalım': 'поговорим', bilelim: 'мы будем знать', 'gör': 'сам увидишь', 'bakayım': 'я посмотрю' };
+  const PUSHY = ['bilelim', 'gör', 'bakayım'];
+  let bCmd = 'Bekle'; let bRes = 'birlikte çıkalım';
+  const build = () => {
+    const p = part(bCmd);
+    const word = bCmd.split(' ').pop();
+    const pushy = PUSHY.includes(bRes);
+    const cls = pushy ? 'c-push' : 'c-link';
+    const ptEl = $('.x-out-pt', lab);
+    $('.x-out-cmd', lab).textContent = bCmd;
+    $('.x-out-cmd', lab).className = 'x-out-cmd ' + cls;
+    ptEl.textContent = p;
+    ptEl.className = 'x-out-pt x-pt ' + cls;
+    $('.x-out-res', lab).textContent = bRes;
+    $('.x-out-ru', lab).textContent = `${CMD_RU[bCmd]} — и ${RES_RU[bRes]}.`;
+    $('.x-out-why', lab).textContent = `${pushy ? 'Звено с нажимом: «ну-ка».' : 'Звено: «и тогда».'} В «${word.toLowerCase()}» последняя гласная ${lastVowel(word)}, поэтому ${p}.`;
+    if (G) G.fromTo(ptEl, { y: -46, rotation: -90, opacity: 0 }, { y: 0, rotation: 0, opacity: 1, duration: 0.55, ease: 'back.out(2)' });
+  };
+  $$('[data-row="cmd"] .x-chip', lab).forEach((c) => c.addEventListener('click', () => {
+    $$('[data-row="cmd"] .x-chip', lab).forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+    bCmd = c.textContent.trim(); build();
+  }));
+  $$('[data-row="res"] .x-chip', lab).forEach((c) => c.addEventListener('click', () => {
+    $$('[data-row="res"] .x-chip', lab).forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+    bRes = c.textContent.trim(); build();
+  }));
+  $('.x-out-say', lab).addEventListener('click', () => say(`${bCmd} ${part(bCmd)} ${bRes}`));
+
+  const HARM = ['Otur', 'Bekle', 'Çalış', 'Söyle', 'Anlat', 'Gel', 'Bak', 'Dinle', 'Kapıyı aç', 'Gör', 'Koş', 'Ver', 'Sus', 'Düşün'];
+  let hi = 0; let hDone = false;
+  const harmShow = () => {
+    hDone = false;
+    $('.x-h-word', lab).textContent = HARM[hi % HARM.length];
+    $('.x-h-pt', lab).textContent = '…';
+    $('.x-h-why', lab).textContent = '';
+    $$('[data-h]', lab).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+  };
+  $$('[data-h]', lab).forEach((b) => b.addEventListener('click', () => {
+    if (hDone) return;
+    const w = HARM[hi % HARM.length];
+    const word = w.split(' ').pop();
+    const p = part(word);
+    const ok = b.dataset.h === p;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-h-why', lab).textContent = `${ok ? 'Верно.' : 'Мимо.'} В «${word.toLowerCase()}» последняя гласная ${lastVowel(word)}, значит ${p}.`;
+    if (ok) {
+      hDone = true;
+      const pt = $('.x-h-pt', lab);
+      pt.textContent = p;
+      if (G) G.fromTo(pt, { x: 60, opacity: 0, scale: 1.6 }, { x: 0, opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(2)' });
+      say(`${w} ${p}`);
+    } else shake(b);
+  }));
+  $('.x-h-next', lab).addEventListener('click', () => { hi++; harmShow(); });
+  harmShow();
+
+  const MEAN = [
+    ['Sen de otur.', 'also', 'Перед de местоимение sen. «Ты тоже садись».'],
+    ['Otur da konuşalım.', 'link', 'Приказ, da, шаг. «Сядь, и поговорим».'],
+    ['Söyle de bilelim!', 'push', 'Дальше «узнаем». Это нажим: «Ну скажи уже!»'],
+    ['Kapı da kilitli.', 'also', 'Перед da существительное kapı. «Дверь тоже заперта».'],
+    ['Ders çalış da sınavı geç.', 'link', 'Приказ, da, цель. «Позанимайся, чтобы сдать экзамен».'],
+    ['Anlat da dinleyelim.', 'push', 'Дальше «послушаем». «Рассказывай давай».'],
+    ['Ben de.', 'also', '«Я тоже». Классика.'],
+    ['Ver de bakayım.', 'push', 'Дальше «посмотрю». «Дай-ка гляну».'],
+    ['Bekle de birlikte çıkalım.', 'link', 'Тот самый крик Эмре. «Подожди, и выйдем вместе».'],
+  ];
+  let mi = 0; let mDone = false;
+  const meanShow = () => {
+    mDone = false;
+    const el = $('.x-m-tr', lab);
+    el.textContent = MEAN[mi % MEAN.length][0];
+    $('.x-m-why', lab).textContent = '';
+    $$('[data-m]', lab).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    if (G) G.fromTo(el, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 });
+  };
+  $$('[data-m]', lab).forEach((b) => b.addEventListener('click', () => {
+    if (mDone) return;
+    const [tr, a, why] = MEAN[mi % MEAN.length];
+    const ok = b.dataset.m === a;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-m-why', lab).textContent = (ok ? 'Да. ' : 'Не совсем. ') + why;
+    if (ok) { mDone = true; say(tr); pop(b); } else shake(b);
+  }));
+  $('.x-m-next', lab).addEventListener('click', () => { mi++; meanShow(); });
+
+  /* ---------- дубли: перевернуть кадр ---------- */
+  $$('.x-pol').forEach((p) => p.addEventListener('click', () => {
+    const on = p.getAttribute('aria-pressed') !== 'true';
+    p.setAttribute('aria-pressed', String(on));
+    const inner = $('.x-pol__in', p);
+    if (G) G.to(inner, { rotationY: on ? 180 : 0, duration: 0.7, ease: 'power3.inOut' });
+    else inner.style.transform = on ? 'rotateY(180deg)' : '';
+    if (on) say($('.x-pol__face--back b', p).textContent);
+  }));
+
+  /* ---------- финал ---------- */
+  const fin = $('[data-final]');
+  fin.addEventListener('click', () => {
+    say('Emre, bekle de birlikte çıkalım!');
+    $('.x-fb', fin.parentElement).textContent = 'Дверь открыта. Вышли вдвоём.';
+    if (G) {
+      G.timeline()
+        .fromTo('.s9-door', { scaleX: 1, svgOrigin: '226 270' }, { scaleX: 0.08, duration: 0.8, ease: 'power2.inOut' })
+        .fromTo('.s9-glow', { opacity: 0.2 }, { opacity: 0.7, duration: 0.5 }, 0.2)
+        .fromTo(['.s9-emre', '.s9-hero'], { x: 0 }, { x: -60, duration: 1, stagger: 0.15, ease: 'power1.inOut' }, 0.5)
+        .fromTo('.s9-thumb', { rotation: -30, svgOrigin: '520 190' }, { rotation: 0, duration: 0.6, ease: 'elastic.out(1,0.4)' }, 0.9);
+    }
+  });
+
+  /* ---------- нестандартное упражнение: замок «Маски» ---------- */
+  const EX = 'b2.de-functions.ex5';
+  const GAME = [
+    { ru: 'Подожди немного, и выйдем вместе.', a: ['Biraz bekle', 'de', 'birlikte çıkalım'], c: ['Biraz bekle', 'Sen de', 'Otur'], r: ['bakayım', 'birlikte çıkalım', 'konuşalım'] },
+    { ru: 'Сядь, и поговорим.', a: ['Otur', 'da', 'konuşalım'], c: ['Gel', 'Otur', 'Ben de'], r: ['konuşalım', 'gör', 'bilelim'] },
+    { ru: 'Ну скажи, мы ждём!', a: ['Söyle', 'de', 'bilelim'], c: ['Sen de', 'Söyle', 'Bekle'], r: ['çıkalım', 'bilelim', 'konuşalım'] },
+    { ru: 'Дай-ка гляну.', a: ['Ver', 'de', 'bakayım'], c: ['Ver', 'Kapı da', 'Dinle'], r: ['bakayım', 'birlikte çıkalım', 'bilelim'] },
+    { ru: 'Открой дверь, и выйдем.', a: ['Kapıyı aç', 'da', 'çıkalım'], c: ['Kapıyı aç', 'Anlat', 'Sen de'], r: ['dinleyelim', 'bakayım', 'çıkalım'] },
+  ];
+  const game = $('[data-game]');
+  let gi = 0; let gOk = 0; let gPick = [null, null, null]; let gT0 = performance.now(); let gBusy = false; let gDone = false;
+  const gLine = () => { $('[data-g-line]', game).textContent = gPick.map((x) => x || '…').join(' '); };
+  const gRound = () => {
+    const R = GAME[gi];
+    gPick = [null, null, null];
+    gT0 = performance.now();
+    $('[data-g-n]', game).textContent = String(gi + 1);
+    $('[data-g-ru]', game).textContent = R.ru;
+    $('[data-g-fb]', game).textContent = '';
+    [R.c, ['de', 'da'], R.r].forEach((opts, d) => {
+      const box = $(`[data-d="${d}"]`, game);
+      box.replaceChildren();
+      opts.forEach((o) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.lang = 'tr'; b.textContent = o; b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', () => {
+          if (gBusy || gDone) return;
+          $$('button', box).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          gPick[d] = o; gLine();
+          if (G) G.fromTo(b, { rotation: -6 }, { rotation: 0, duration: 0.4, ease: 'back.out(3)' });
+        });
+        box.append(b);
+      });
+    });
+    gLine();
+  };
+  const gGo = () => {
+    if (gBusy || gDone) return;
+    const fb = $('[data-g-fb]', game);
+    if (gPick.some((x) => !x)) { fb.textContent = 'Нужны все три диска.'; shake($('.x-dials', game)); return; }
+    const R = GAME[gi];
+    const correct = gPick.every((x, i) => x === R.a[i]);
+    window.AlternaTracker?.answer({ exerciseId: EX, itemId: String(gi + 1), correct, answer: gPick.join(' '), timeMs: Math.round(performance.now() - gT0) });
+    if (correct) gOk++;
+    $('[data-g-ok]', game).textContent = String(gOk);
+    fb.textContent = correct ? `Щёлк! ${R.a.join(' ')}.` : `Замок молчит. Верно: ${R.a.join(' ')}.`;
+    if (correct) say(R.a.join(' '));
+    if (G) G.fromTo($('.x-game__head svg', game), { rotation: correct ? -20 : 0, x: correct ? 0 : -8 }, { rotation: 0, x: 0, duration: 0.6, ease: 'elastic.out(1,0.3)' });
+    gBusy = true;
+    setTimeout(() => {
+      gBusy = false;
+      gi++;
+      if (gi < GAME.length) { gRound(); return; }
+      gDone = true;
+      window.AlternaTracker?.complete({ exerciseId: EX, correct: gOk, total: GAME.length });
+      fb.textContent = `Открыто замков: ${gOk} из ${GAME.length}. Ведущий кивает.`;
+    }, 700);
+  };
+  $('[data-g-go]', game).addEventListener('click', gGo);
+  gRound();
+  window.AlternaKit?.registerSolver(EX, async () => {
+    while (!gDone) {
+      if (gBusy) { await new Promise((r) => setTimeout(r, 750)); continue; }
+      gPick = GAME[gi].a.slice();
+      gGo();
+      await new Promise((r) => setTimeout(r, 750));
+    }
+  });
+
+  /* ---------- свой скроллбар: цепь, замок, главы ---------- */
+  const bar = $('[data-scrollbar]');
+  const marksBox = $('.x-bar__marks', bar);
+  const fill = $('.x-bar__fill', bar);
+  const lock = $('.x-bar__lock', bar);
+  const secs = $$('[data-section]');
+  const isMob = () => matchMedia('(max-width: 767px)').matches;
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'x-bar__mark';
+    const title = s.querySelector('.x-chap')?.textContent.trim() || s.dataset.section;
+    b.setAttribute('aria-label', title); b.title = title;
+    b.addEventListener('click', (e) => { e.stopPropagation(); window.scrollTo({ top: s.getBoundingClientRect().top + scrollY + 2, behavior: 'smooth' }); });
+    marksBox.append(b);
+    return b;
+  });
+  /* главы стоят равномерно, замок едет внутри главы пропорционально её длине */
+  let starts = [];
+  const N = secs.length;
+  const placeMarks = () => {
+    starts = secs.map((s) => Math.max(0, s.getBoundingClientRect().top + scrollY));
+    marks.forEach((m, i) => {
+      const p = i / N;
+      m.style.transform = isMob() ? `translateX(${p * bar.clientWidth}px)` : `translateY(${p * bar.clientHeight}px)`;
+    });
+  };
+  const toPos = (y) => {
+    if (!starts.length) placeMarks();
+    let i = 0;
+    for (let k = 0; k < N; k++) if (starts[k] <= y + 1) i = k;
+    const end = i < N - 1 ? starts[i + 1] : maxScroll();
+    const f = end > starts[i] ? Math.min(1, Math.max(0, (y - starts[i]) / (end - starts[i]))) : 1;
+    return { p: Math.min(1, (i + f) / N), i };
+  };
+  const fromPos = (r) => {
+    if (!starts.length) placeMarks();
+    const x = Math.max(0, Math.min(0.9999, r)) * N;
+    const i = Math.floor(x);
+    const end = i < N - 1 ? starts[i + 1] : maxScroll();
+    return starts[i] + (x - i) * (end - starts[i]);
+  };
+  const setBar = () => {
+    const mob = isMob();
+    const { p, i: cur } = toPos(scrollY);
+    fill.style.transform = mob ? `scaleX(${p})` : `scaleY(${p})`;
+    lock.style.transform = mob ? `translateX(${p * bar.clientWidth}px)` : `translateY(${p * bar.clientHeight}px)`;
+    marks.forEach((m, i) => m.classList.toggle('is-here', i === cur));
+  };
+  const onScroll = () => setBar();
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: () => setBar(), onRefresh: placeMarks });
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('alterna:read', (e) => {
+    const i = secs.findIndex((s) => s.dataset.section === e.detail?.key);
+    if (i >= 0) marks[i].classList.add('is-read');
+  });
+  let drag = false;
+  const dragTo = (e) => {
+    const r = bar.getBoundingClientRect();
+    const p = isMob() ? (e.clientX - r.left) / r.width : (e.clientY - r.top) / r.height;
+    window.scrollTo(0, fromPos(p));
+  };
+  bar.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.x-bar__mark')) return;
+    drag = true; bar.setPointerCapture(e.pointerId); bar.style.cursor = 'grabbing'; dragTo(e);
+  });
+  bar.addEventListener('pointermove', (e) => { if (drag) dragTo(e); });
+  bar.addEventListener('pointerup', () => { drag = false; bar.style.cursor = ''; });
+  bar.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { window.scrollBy(0, innerHeight * 0.8); e.preventDefault(); }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { window.scrollBy(0, -innerHeight * 0.8); e.preventDefault(); }
+  });
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    const m = b && b.querySelector('.xb-mask');
+    const k = b && b.querySelector('.xb-key');
+    if (!m || !k) return;
+    detail.timeline
+      .fromTo(m, { scale: 0.2, rotation: -30, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: 0.9, ease: 'back.out(1.7)' }, 0.2)
+      .fromTo(k, { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.8);
+  });
+
+  /* ---------- пересчёт после загрузки, шрифтов и поворота ---------- */
+  const refresh = () => { fitSubs(); placeMarks(); if (ST) ScrollTrigger.refresh(); onScroll(); };
+  if (ST) ScrollTrigger.addEventListener('refreshInit', fitSubs);
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  placeMarks(); onScroll();
+});
+</script>
+</body>
+</html>
