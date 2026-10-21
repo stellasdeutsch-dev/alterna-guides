@@ -1,0 +1,1385 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.var-yok">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Есть / нет: var, yok</title>
+<link rel="preload" href="media/inter-tight-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Inter Tight';font-weight:400 800;font-display:swap;src:url(media/inter-tight-cyrillic-ext.woff2) format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}
+@font-face{font-family:'Inter Tight';font-weight:400 800;font-display:swap;src:url(media/inter-tight-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter Tight';font-weight:400 800;font-display:swap;src:url(media/inter-tight-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter Tight';font-weight:400 800;font-display:swap;src:url(media/inter-tight-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Amatic SC';font-weight:700;font-display:swap;src:url(media/amatic-sc-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Amatic SC';font-weight:700;font-display:swap;src:url(media/amatic-sc-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Amatic SC';font-weight:700;font-display:swap;src:url(media/amatic-sc-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(media/jetbrains-mono-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(media/jetbrains-mono-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'JetBrains Mono';font-weight:500;font-display:swap;src:url(media/jetbrains-mono-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --paper:#ece4d4; --paper-2:#e3d8c3; --paper-3:#d6c8ad; --sheet:#f4eee2;
+  --blue:#2148c8; --blue-2:#1a3aa6; --blue-3:#132b7e; --blue-l:#5b7fe6; --navy:#16285f;
+  --or:#e4572e; --or-l:#f6c9b6; --ink:#262523; --ink-2:#4a4844; --muted:#77716a; --line:#2a2a28;
+  --grid:rgba(33,72,200,.10);
+  --var:var(--blue); --yok:var(--or);
+  --ak-bg:#fbf8f2; --ak-surface:#f1eadc; --ak-ink:var(--ink); --ak-muted:var(--muted); --ak-line:#ddd2bd;
+  --ak-accent:var(--blue); --ak-accent-ink:#fff; --ak-accent-soft:#e3e9fb;
+  --ak-good:#2e8b57; --ak-good-soft:#e2f2e8; --ak-bad:var(--or); --ak-bad-soft:#fbe6dd;
+  --ak-radius:6px; --ak-radius-sm:4px;
+  --ak-font:'Inter Tight',system-ui,sans-serif; --ak-font-display:'Inter Tight',system-ui,sans-serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none !important}
+html{overflow-x:clip;background:var(--paper)}
+body{margin:0;color:var(--ink);font:450 var(--ak-text)/1.55 var(--ak-font);overflow-x:clip;-webkit-font-smoothing:antialiased;
+  background:
+    linear-gradient(var(--grid) 1px,transparent 1px) 0 0/32px 32px,
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/32px 32px,
+    var(--paper)}
+button{font:inherit;color:inherit}
+p{margin:0 0 .7em}
+.tr{font-weight:700}
+.ru{color:var(--muted);font-size:.86em}
+.mono{font:500 12px/1.3 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+.hand{font-family:'Amatic SC',cursive;font-weight:700;letter-spacing:.03em;color:var(--or)}
+.v{color:var(--var)} .y{color:var(--yok)}
+.place{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px;text-decoration-color:var(--ink-2)}
+
+/* ---------- листы ---------- */
+main{padding:clamp(30px,5vw,40px) 0 40px}
+section[data-section]{padding:clamp(8px,1.4vw,14px) clamp(8px,2vw,24px);scroll-margin-top:40px}
+.pn{position:relative;max-width:1260px;margin:0 auto;padding:clamp(22px,5vw,66px) clamp(16px,4.6vw,66px);overflow:hidden;isolation:isolate;border-radius:4px}
+.pn--sheet{background:var(--sheet);box-shadow:0 1px 0 rgba(0,0,0,.05),0 30px 50px -40px rgba(30,30,60,.4)}
+.pn--sheet::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(var(--grid) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/24px 24px;opacity:.6}
+.pn--blue{color:#f3ede1;background:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px) 0 0/28px 28px,radial-gradient(70% 60% at 50% 40%,#2753d6,#1a3aa6 70%)}
+.pn--ink{color:#f3ede1;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px) 0 0/28px 28px,#1d1c1a}
+.pn--blue .ru,.pn--ink .ru{color:rgba(243,237,225,.72)}
+.pn--blue .v{color:#fff;text-decoration:underline;text-decoration-color:rgba(255,255,255,.5);text-underline-offset:4px}
+.pn--blue .y,.pn--ink .y{color:#ff8a62}
+.pn--ink .v{color:#8fa9ff}
+.corner{position:absolute;width:18px;height:18px;border:2px solid currentColor;opacity:.35}
+.corner--tl{left:12px;top:12px;border-right:0;border-bottom:0}.corner--tr{right:12px;top:12px;border-left:0;border-bottom:0}
+.corner--bl{left:12px;bottom:12px;border-right:0;border-top:0}.corner--br{right:12px;bottom:12px;border-left:0;border-top:0}
+.tag{display:inline-flex;align-items:center;gap:10px;margin-bottom:16px}
+.tag svg{width:26px;height:26px;flex:none}
+.h1,.h2{font-family:'Inter Tight',sans-serif;font-weight:600;letter-spacing:-.04em;line-height:.95;margin:0 0 .35em}
+.h2{font-size:clamp(30px,8.4vw,84px)}
+@media (min-width:768px){.h2{font-size:clamp(44px,6.2vw,92px)}}
+.h2 .hand{font-size:.5em;letter-spacing:.02em;display:inline-block;transform:rotate(-5deg);margin-left:.2em;vertical-align:.4em}
+.lead{font-size:clamp(17px,1.1rem + .35vw,22px);max-width:44ch}
+.note{font-size:15px;color:var(--muted);max-width:62ch}
+.pn--blue .note,.pn--ink .note{color:rgba(243,237,225,.75)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.grid2{display:grid;gap:clamp(20px,3vw,48px);align-items:center}
+@media (min-width:920px){.grid2{grid-template-columns:1fr 1fr}}
+.giant{position:absolute;z-index:-1;font:700 clamp(160px,34vw,460px)/.8 'Inter Tight',sans-serif;letter-spacing:-.06em;white-space:nowrap;pointer-events:none;color:transparent;-webkit-text-stroke:1.5px rgba(33,72,200,.14)}
+.pn--blue .giant,.pn--ink .giant{-webkit-text-stroke:1.5px rgba(255,255,255,.12)}
+
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border:0;border-radius:3px;cursor:pointer;font:500 13px/1 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;touch-action:manipulation;scale:1;transition:scale .15s ease}
+.btn:active{scale:.96}
+.btn--blue{background:var(--blue);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+.btn--or{background:var(--or);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+.btn--line{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn--sm{min-height:44px;padding:0 14px;font-size:12px}
+.btn svg{width:16px;height:16px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border:1.5px solid var(--ink);border-radius:999px;background:transparent;cursor:pointer;font-weight:600;touch-action:manipulation}
+.chip.is-on{background:var(--ink);color:var(--sheet)}
+.chip.is-var{background:var(--blue);border-color:var(--blue);color:#fff}
+.chip.is-yok{background:transparent;border-style:dashed;border-color:var(--or);color:var(--or)}
+.pn--blue .chip,.pn--ink .chip{border-color:rgba(243,237,225,.6)}
+.pn--blue .chip.is-on,.pn--ink .chip.is-on{background:#f3ede1;color:var(--ink)}
+:is(.btn,.chip,[role=button],.tab,.mode):focus-visible{outline:3px solid var(--or);outline-offset:3px}
+
+/* ---------- изометрия ---------- */
+.iso{width:100%;height:auto;display:block;overflow:visible}
+.iso .rf{fill:#efe6d4}.iso .rl{fill:#e3d7c0}.iso .rr{fill:#d9cbb0}
+.iso .room path{stroke:var(--line);stroke-width:1.4;stroke-linejoin:round}
+.iso .it path,.iso .it ellipse{stroke:var(--line);stroke-width:1.3;stroke-linejoin:round}
+.iso .ft{fill:#4a72ea}.iso .fl{fill:#2148c8}.iso .fr{fill:#17349a}
+.iso .it.is-paper .ft{fill:#f6f0e4}.iso .it.is-paper .fl{fill:#e6dbc6}.iso .it.is-paper .fr{fill:#d4c5a8}
+.iso .it.is-yok path,.iso .it.is-yok ellipse{fill:rgba(228,87,46,.06);stroke:var(--or);stroke-dasharray:5 4;stroke-width:1.6}
+.iso .lbl{font:500 13px 'JetBrains Mono',monospace;fill:var(--ink-2);letter-spacing:.06em}
+.iso .win{fill:#cfe0ff;stroke:var(--line);stroke-width:1.2}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+.drawn path{stroke-dasharray:1;stroke-dashoffset:0;animation:draw 1.8s cubic-bezier(.6,.1,.3,1) both}
+.drawn .it path{animation-delay:.9s}
+
+/* ---------- 1. hero ---------- */
+.hero{min-height:min(94vh,940px);display:grid;align-content:center}
+.hero__grid{display:grid;gap:24px;align-items:center}
+@media (min-width:960px){.hero__grid{grid-template-columns:1.05fr .95fr}}
+.hero__words{position:relative;width:100%;max-width:620px;height:auto;display:block;overflow:visible}
+.hero__words text{font:700 200px 'Inter Tight',sans-serif;letter-spacing:-12px}
+.hero__var{fill:var(--blue)}
+.hero__yok{fill:none;stroke:var(--or);stroke-width:3;stroke-dasharray:14 9}
+.hero__note{position:absolute;font-size:clamp(22px,3vw,30px);white-space:nowrap}
+.hero__sub{font-size:clamp(17px,1.1rem + .35vw,22px);max-width:40ch;margin-top:14px}
+.hero__in{animation:rise .9s cubic-bezier(.2,.9,.25,1) both}
+.hero__in:nth-child(2){animation-delay:.1s}.hero__in:nth-child(3){animation-delay:.2s}.hero__in:nth-child(4){animation-delay:.3s}.hero__in:nth-child(5){animation-delay:.4s}
+@keyframes rise{from{transform:translateY(30px)}to{transform:none}}
+.hero__stage{position:relative}
+.hero__stage .iso{max-width:640px;margin:0 auto}
+.hero__sentence{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;min-height:56px;margin-top:-6px;font-size:clamp(20px,4.8vw,28px);font-weight:700}
+.hero__sentence button{border:0;background:transparent;cursor:pointer;font:inherit;padding:4px 8px;border-radius:3px}
+.items{justify-content:center;margin-top:8px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:24px;max-width:520px;border-top:1.5px solid var(--ink)}
+.stat{padding:12px 10px 0 0}
+.stat b{display:block;font:600 clamp(34px,7vw,52px)/1 'Inter Tight',sans-serif;letter-spacing:-.04em}
+.stat span{font:500 11px/1.3 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+
+/* ---------- 2. история (закреплённая сцена) ---------- */
+.story{padding-top:clamp(22px,4vw,48px);padding-bottom:clamp(22px,4vw,48px)}
+.story__pin{display:grid;gap:22px;align-items:center}
+@media (min-width:920px){.story__pin{grid-template-columns:1.1fr .9fr;min-height:min(86vh,760px)}}
+.plan{width:100%;height:auto;display:block;max-height:58vh}
+.plan .wall{fill:none;stroke:var(--line);stroke-width:4;stroke-linecap:square}
+.plan .thin{fill:none;stroke:var(--line);stroke-width:1.5}
+.plan .rmname{font:500 13px 'JetBrains Mono',monospace;fill:var(--ink-2);letter-spacing:.08em}
+.plan .obj-var{fill:var(--blue);stroke:var(--line);stroke-width:1.5}
+.plan .obj-yok{fill:rgba(228,87,46,.08);stroke:var(--or);stroke-width:2;stroke-dasharray:6 5}
+.plan .wave{fill:none;stroke:var(--blue);stroke-width:3;stroke-linecap:round}
+.steps{position:relative;list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.st{padding:16px 18px;border-left:3px solid var(--ink);background:rgba(255,255,255,.55)}
+.st p{margin:0;font-size:clamp(16px,1rem + .3vw,19px)}
+.bub{display:inline-block;padding:8px 12px;margin:0 6px 8px 0;font-weight:700;border-radius:3px}
+.bub.q{background:var(--ink);color:var(--sheet)}
+.bub.a{background:var(--blue);color:#fff}
+.bub.a.no{background:var(--or)}
+.st .punch{font-weight:700;margin-top:8px}
+.is-pinned .steps{display:block;min-height:250px}
+.is-pinned .st{position:absolute;left:0;right:0;top:0}
+.story__hint{margin-top:12px}
+
+/* ---------- 3. угадай ---------- */
+.guess{display:grid;gap:14px}
+@media (min-width:860px){.guess{grid-template-columns:repeat(3,1fr)}}
+.gc{border:1.5px solid var(--ink);padding:16px;background:rgba(255,255,255,.6)}
+.gc svg.iso{max-width:220px;margin:0 auto}
+.gc__tr{font-size:22px;font-weight:700;text-align:center;margin:8px 0}
+.gc .row{justify-content:center}
+.gc__fb{min-height:44px;margin:10px 0 0;font-size:14px;color:var(--muted);text-align:center}
+.gc.is-right{background:#e8eefc}.gc.is-wrong{background:#fbe9e1}
+
+/* ---------- 4. правило: блоки ---------- */
+.blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,1.6vw,16px);max-width:760px;margin:10px 0 18px;perspective:900px}
+.blk{position:relative;aspect-ratio:1;border:0;padding:clamp(8px,2vw,16px);display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:left;cursor:pointer;color:#fff;transform-style:preserve-3d}
+.blk svg{width:clamp(34px,8vw,64px);height:auto}
+.blk b{font:600 clamp(20px,5vw,40px)/1 'Inter Tight',sans-serif;letter-spacing:-.03em}
+.blk small{font:500 11px/1.2 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em;opacity:.85}
+.blk--place{background:var(--ink)}.blk--thing{background:var(--blue)}.blk--var{background:var(--blue-3)}
+.blk--var.is-yok{background:var(--or)}
+.rstage{padding:6px 0}
+.sentence{font-size:clamp(24px,6.4vw,46px);font-weight:700;letter-spacing:-.02em;min-height:1.4em}
+.sentence .w{display:inline-block;margin-right:.25em}
+.formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0}
+.formula span{padding:6px 12px;font-weight:700;border:1.5px solid var(--ink)}
+
+/* ---------- 5. сравнение ---------- */
+.tabs{display:inline-flex;border:1.5px solid currentColor;margin-bottom:18px;flex-wrap:nowrap}
+.tab{min-height:44px;padding:0 16px;border:0;background:transparent;cursor:pointer;font:500 13px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase}
+.tab[aria-selected="true"]{background:currentColor}
+.tab[aria-selected="true"] span{color:var(--blue-2)}
+@media (max-width:480px){.tab{padding:0 10px;font-size:11px}}
+.cmp{display:grid;gap:18px}
+@media (min-width:860px){.cmp{grid-template-columns:1fr 1fr}}
+.lane{padding:18px;border:1.5px solid rgba(243,237,225,.5);min-height:180px}
+.lane h3{margin:0 0 10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.lane__line{font-size:clamp(22px,5.4vw,36px);font-weight:700;line-height:1.3}
+.lane__line .chg{display:inline-block;color:#ff8a62;border-bottom:3px solid #ff8a62}
+.lane__line .same{display:inline-block;border-bottom:3px solid #fff}
+.sw{display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:6px 16px;border:1.5px solid currentColor;background:transparent;cursor:pointer;font:500 13px 'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.06em}
+.sw__k{position:relative;width:54px;height:28px;border:1.5px solid currentColor;border-radius:999px}
+.sw__k::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:currentColor;translate:0 0;transition:translate .25s ease}
+.sw[aria-checked="true"] .sw__k::after{translate:26px 0;background:#ff8a62}
+
+/* ---------- 6. вопрос ---------- */
+.qa{display:grid;gap:16px}
+@media (min-width:900px){.qa{grid-template-columns:1.1fr .9fr}}
+.qline{font-size:clamp(26px,6.6vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.15}
+.qline .mi{display:inline-block;padding:0 .18em;background:var(--ink);color:var(--sheet);transform-origin:50% 100%}
+.qline .q{color:var(--or)}
+.ans{display:grid;gap:10px;margin-top:14px}
+.ans button{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:56px;padding:8px 16px;border:1.5px solid var(--ink);background:rgba(255,255,255,.6);cursor:pointer;text-align:left;font-size:19px;font-weight:700}
+.ans button.is-on{background:var(--ink);color:var(--sheet)}
+.harm{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.harm div{padding:16px;border:1.5px dashed var(--ink);text-align:center}
+.harm b{display:block;font-size:clamp(28px,6vw,44px)}
+
+/* ---------- 7. камера ---------- */
+.cams{display:grid;gap:16px}
+@media (min-width:900px){.cams{grid-template-columns:1fr 1fr}}
+.cam{position:relative;border:1.5px solid var(--ink);background:#f7f2e8;overflow:hidden}
+.cam svg.iso{transform-origin:50% 50%}
+.cam__vf{position:absolute;inset:14px;pointer-events:none}
+.cam__vf i{position:absolute;width:22px;height:22px;border:3px solid var(--or)}
+.cam__vf i:nth-child(1){left:0;top:0;border-right:0;border-bottom:0}.cam__vf i:nth-child(2){right:0;top:0;border-left:0;border-bottom:0}.cam__vf i:nth-child(3){left:0;bottom:0;border-right:0;border-top:0}.cam__vf i:nth-child(4){right:0;bottom:0;border-left:0;border-top:0}
+.cam__rec{position:absolute;left:14px;top:12px;display:flex;align-items:center;gap:6px;color:var(--or)}
+.cam__rec::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--or)}
+.cam__cap{padding:14px 16px;border-top:1.5px solid var(--ink);background:var(--sheet)}
+.cam__cap b{font-size:clamp(20px,4.6vw,26px)}
+
+/* ---------- 8. три «нет» ---------- */
+.doors{display:grid;gap:14px;perspective:1100px}
+@media (min-width:860px){.doors{grid-template-columns:repeat(3,1fr)}}
+.door{position:relative;min-height:250px;border:1.5px solid rgba(243,237,225,.6)}
+.door__in{padding:18px;display:flex;flex-direction:column;gap:8px;height:100%}
+.door__in b{font-size:clamp(28px,6vw,44px);letter-spacing:-.03em}
+.door__leaf{position:absolute;inset:0;transform-origin:0 50%;background:var(--blue-2);border:1.5px solid rgba(243,237,225,.6);display:flex;flex-direction:column;justify-content:space-between;padding:18px;cursor:pointer;width:100%;color:#f3ede1;text-align:left;backface-visibility:hidden}
+.door__leaf b{font-size:clamp(34px,7vw,56px);letter-spacing:-.04em}
+.door__leaf .knob{width:12px;height:12px;border-radius:50%;background:#f6c9b6;align-self:flex-end}
+
+/* ---------- 9. улица (горизонтальная панорама) ---------- */
+.street{position:relative}
+.street__wrap{position:relative;overflow:hidden;border-top:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);background:#f7f2e8}
+.street__track{display:block;height:clamp(300px,58vh,560px);width:auto;max-width:none}
+.street__track .shop{cursor:pointer}
+.street__track .sign text{font:700 26px 'Inter Tight',sans-serif;fill:#fff;letter-spacing:.04em}
+.street__track .card text{font:700 22px 'Inter Tight',sans-serif}
+.street__panel{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;padding:14px 4px 0;min-height:86px}
+.street__q{font-size:clamp(19px,4.6vw,26px);font-weight:700}
+.street__a{font-size:clamp(19px,4.6vw,26px);font-weight:700}
+.shopbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+
+/* ---------- 10. лаборатория ---------- */
+.lab{display:grid;gap:18px}
+@media (min-width:980px){.lab{grid-template-columns:.95fr 1.05fr;align-items:start}}
+.lab h3{margin:16px 0 8px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1.5px solid var(--ink)}
+.mode{min-height:56px;border:0;border-right:1.5px solid var(--ink);background:transparent;cursor:pointer;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase;padding:6px}
+.mode:last-child{border-right:0}
+.mode[aria-selected="true"]{background:var(--ink);color:var(--sheet)}
+.board{border:1.5px solid var(--ink);background:#f7f2e8;padding:12px}
+.out{margin-top:12px;display:grid;gap:8px}
+.out__main{font-size:clamp(22px,5.4vw,32px);font-weight:700;letter-spacing:-.02em}
+.out__list{display:flex;flex-wrap:wrap;gap:6px}
+.out__list button{border:1px solid var(--ink-2);background:transparent;padding:6px 10px;cursor:pointer;font-weight:600;min-height:40px}
+.why{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}
+.why li{display:flex;gap:10px;font-size:15px}
+.why li::before{content:"";flex:none;width:10px;height:10px;margin-top:6px;background:var(--or)}
+.stepper{display:inline-flex;align-items:center;border:1.5px solid var(--ink)}
+.stepper button{width:48px;height:48px;border:0;background:transparent;cursor:pointer;font-size:22px;font-weight:700}
+.stepper span{min-width:70px;text-align:center;font-weight:700}
+
+/* ---------- 11. ловушки ---------- */
+.traps{display:grid;gap:12px}
+@media (min-width:760px){.traps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.traps{grid-template-columns:repeat(3,1fr)}}
+.trap{border:1.5px solid var(--ink);padding:16px;background:rgba(255,255,255,.6);display:flex;flex-direction:column;gap:10px}
+.trap__w{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:21px;font-weight:700;min-height:40px}
+.trap__w .x{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--or);text-decoration-thickness:3px}
+.trap__w svg{width:20px;height:20px}
+.trap__why{margin:0;font-size:15px;color:var(--ink-2)}
+.trap .btn{align-self:flex-start}
+.trap.is-fixed{background:#e8eefc;border-color:var(--blue)}
+.trap--intro{background:var(--ink);color:var(--sheet);justify-content:center}
+
+/* ---------- практика: приёмка квартиры ---------- */
+.ins{display:block;border:1.5px solid var(--ink);background:#f7f2e8;padding:clamp(14px,3vw,22px);outline:none}
+.ins:focus-visible{box-shadow:0 0 0 3px var(--or)}
+.ins__top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.ins__room{max-width:420px;margin:0 auto}
+.ins__q{font-size:clamp(22px,5.4vw,30px);font-weight:700;text-align:center;margin:6px 0}
+.ins__gap{display:inline-block;min-width:2.6em;border-bottom:3px dashed var(--or);color:var(--or);text-align:center}
+.ins__opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.ins__opts button{min-height:56px;border:1.5px solid var(--ink);background:#fff;cursor:pointer;font-size:19px;font-weight:700}
+.ins__opts button.is-right{background:var(--blue);color:#fff;border-color:var(--blue)}
+.ins__opts button.is-wrong{background:var(--or);color:#fff;border-color:var(--or)}
+.ins__st{min-height:46px;margin:10px 0 0;font-size:15px}
+.stack{display:grid;gap:18px}
+.stack a-exercise,.stack a-quiz{display:block}
+[data-pair="0"]{background:#e3e9fb;border-color:var(--blue)}
+[data-pair="1"]{background:#fbe6dd;border-color:var(--or)}
+[data-pair="2"]{background:#efe6d4;border-color:#a8956f}
+[data-pair="3"]{background:#e2f2e8;border-color:#2e8b57}
+[data-pair="4"]{background:#ece8f7;border-color:#6e5bb0}
+[data-pair="5"]{background:#f4efe2;border-color:#262523}
+
+/* ---------- шпаргалка: синька ---------- */
+.poster{display:grid;gap:12px}
+@media (min-width:900px){.poster{grid-template-columns:repeat(3,1fr)}}
+.pc{border:1.5px solid rgba(243,237,225,.55);padding:18px}
+.pc h3{margin:0 0 10px;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.pc__big{font-size:clamp(24px,5.4vw,34px);font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.pc--wide{grid-column:1/-1}
+.final{margin-top:24px;display:grid;gap:18px;align-items:center}
+@media (min-width:900px){.final{grid-template-columns:1fr 1fr}}
+.final__chat{display:grid;gap:8px}
+
+/* ---------- скроллбар: линейка архитектора ---------- */
+.sb{position:fixed;z-index:40;top:0;left:0;right:0;height:30px;pointer-events:none}
+.sb__track{position:absolute;left:8px;right:8px;top:8px;height:12px;pointer-events:auto;cursor:pointer;background:#f6f0e4;border:1.5px solid var(--ink);
+  background-image:repeating-linear-gradient(90deg,var(--ink) 0 1px,transparent 1px 12px)}
+.sb__fill{position:absolute;inset:0;background:var(--blue);transform-origin:0 50%;transform:scaleX(0);mix-blend-mode:normal;opacity:.85}
+.sb__pen{position:absolute;left:0;top:-10px;width:30px;height:30px;margin-left:-6px;pointer-events:none}
+.sb__marks{list-style:none;margin:0;padding:0;position:absolute;left:8px;right:8px;top:0;height:30px}
+.sb__marks li{position:absolute;top:0;translate:-50% 0}
+.sb__mark{width:28px;height:30px;border:0;padding:0;background:transparent;cursor:pointer;pointer-events:auto;display:grid;place-items:center}
+.sb__mark i{width:2px;height:16px;background:var(--ink)}
+.sb__mark.is-read i{background:var(--or);width:4px}
+.sb__mark.is-here i{height:24px;background:var(--blue);width:4px}
+.sb__marks li.minor{display:none}
+.sb__tip{display:none}
+@media (min-width:768px){
+  .sb{left:auto;right:10px;top:50%;width:48px;height:min(74vh,640px);translate:0 -50%}
+  .sb__track{left:18px;right:auto;top:0;bottom:0;width:14px;height:auto;background-image:repeating-linear-gradient(180deg,var(--ink) 0 1px,transparent 1px 12px)}
+  .sb__fill{transform-origin:50% 0;transform:scaleY(0)}
+  .sb__pen{left:-12px;top:0;margin:-15px 0 0}
+  .sb__marks{left:0;right:0;top:0;bottom:0;height:auto}
+  .sb__marks li{left:10px !important;translate:0 -50%}
+  .sb__marks li.minor{display:block}
+  .sb__mark{height:22px}
+  .sb__mark i{width:16px;height:2px}
+  .sb__mark.is-read i{height:4px;width:16px}
+  .sb__mark.is-here i{width:24px;height:4px}
+  .sb__tip{display:block;position:absolute;right:38px;top:50%;translate:0 -50%;white-space:nowrap;font:500 11px 'JetBrains Mono',monospace;text-transform:uppercase;padding:5px 8px;background:var(--ink);color:var(--sheet);opacity:0;pointer-events:none;transition:opacity .15s}
+  .sb__mark:hover + .sb__tip,.sb__mark:focus-visible + .sb__tip{opacity:1}
+}
+
+/* ---------- карандаш за курсором, искры, мини-вопросы ---------- */
+.pencil-trail{position:fixed;inset:0;z-index:30;pointer-events:none;display:none}
+.pencil{position:fixed;left:0;top:0;z-index:31;width:34px;height:34px;pointer-events:none;display:none}
+@media (pointer:fine) and (min-width:1024px){.pencil-trail,.pencil{display:block}}
+.spark{position:fixed;z-index:60;left:0;top:0;width:10px;height:10px;pointer-events:none}
+.mq{margin-top:22px;padding:16px 18px;border:1.5px dashed currentColor;display:grid;gap:10px}
+.mq__q{font-weight:700;display:flex;gap:10px;align-items:center}
+.mq__q svg{width:24px;height:24px;flex:none}
+.mq__fb{min-height:22px;font-size:14px;margin:0}
+.mq .chip.is-right{background:var(--blue);border-color:var(--blue);color:#fff}
+.mq .chip.is-wrong{background:var(--or);border-color:var(--or);color:#fff}
+.sayb{display:inline-grid;place-items:center;width:44px;height:44px;border:1.5px solid currentColor;border-radius:50%;background:transparent;cursor:pointer;flex:none}
+.sayb svg{width:18px;height:18px}
+@media (prefers-reduced-motion: reduce){.hero__in,.drawn path{animation:none !important}.sw__k::after{transition:none}}
+</style>
+</head>
+<body>
+<svg class="pencil-trail" aria-hidden="true"><polyline data-trail fill="none" stroke="#2148c8" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity=".55" points=""/></svg>
+<svg class="pencil" viewBox="0 0 34 34" aria-hidden="true" data-pencil><g transform="rotate(-45 17 17)"><rect x="13" y="2" width="8" height="22" fill="#2148c8" stroke="#262523" stroke-width="1.2"/><rect x="13" y="2" width="8" height="4" fill="#e4572e" stroke="#262523" stroke-width="1.2"/><path d="M13 24h8l-4 8z" fill="#f2dfbf" stroke="#262523" stroke-width="1.2"/><path d="M16 30l1 2 1-2z" fill="#262523"/></g></svg>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="b-lines" viewBox="0 0 64 64"><rect width="64" height="64" fill="#2148c8"/><g fill="#efe6d4"><rect x="10" y="12" width="44" height="9"/><rect x="10" y="27" width="44" height="9"/><rect x="10" y="42" width="44" height="9"/></g></symbol>
+    <symbol id="b-house" viewBox="0 0 64 64"><rect width="64" height="64" fill="#2148c8"/><path d="M10 54V30L32 10l22 20v24H44V36L32 25 20 36v18z" fill="#efe6d4"/></symbol>
+    <symbol id="b-ring" viewBox="0 0 64 64"><rect width="64" height="64" fill="#2148c8"/><circle cx="32" cy="32" r="22" fill="#efe6d4"/><circle cx="32" cy="32" r="10" fill="#2148c8"/></symbol>
+    <symbol id="b-quarter" viewBox="0 0 64 64"><rect width="64" height="64" fill="#e4572e"/><path d="M10 10h44A44 44 0 0 1 10 54z" fill="#efe6d4"/></symbol>
+    <symbol id="b-q" viewBox="0 0 64 64"><rect width="64" height="64" fill="#262523"/><text x="32" y="46" text-anchor="middle" font-family="Inter Tight,sans-serif" font-weight="700" font-size="40" fill="#efe6d4">?</text></symbol>
+    <symbol id="i-say" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9zM16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16M14 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+    <symbol id="i-again" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+  </defs>
+</svg>
+
+<nav class="sb" data-scrollbar aria-label="Прогресс урока">
+  <div class="sb__track" data-sb-track><div class="sb__fill"></div>
+    <svg class="sb__pen" viewBox="0 0 34 34" aria-hidden="true"><g transform="rotate(-135 17 17)"><rect x="13" y="2" width="8" height="22" fill="#2148c8" stroke="#262523" stroke-width="1.2"/><rect x="13" y="2" width="8" height="4" fill="#e4572e" stroke="#262523" stroke-width="1.2"/><path d="M13 24h8l-4 8z" fill="#f2dfbf" stroke="#262523" stroke-width="1.2"/></g></svg>
+  </div>
+  <ol class="sb__marks" data-sb-marks></ol>
+</nav>
+
+<main>
+
+<!-- ================= 1. HERO ================= -->
+<section data-section="intro" data-words="36" id="intro">
+  <div class="pn pn--sheet hero" data-pause>
+    <i class="corner corner--tl"></i><i class="corner corner--tr"></i><i class="corner corner--bl"></i><i class="corner corner--br"></i>
+    <div class="hero__grid">
+      <div>
+        <div class="tag hero__in"><svg><use href="#b-house"/></svg><span class="mono" data-ui>A1-16 · Стамбул · 8 минут · лист 01</span></div>
+        <div class="hero__in" style="position:relative">
+          <svg class="hero__words" viewBox="0 0 640 400" data-hwords role="img" aria-label="var и yok">
+            <text class="hero__var" x="0" y="170" lang="tr" data-hvar>var</text>
+            <text class="hero__yok" x="40" y="370" lang="tr" data-hyok>yok</text>
+          </svg>
+          <span class="hand hero__note" style="right:2%;top:16%;transform:rotate(-6deg)">есть — значит нарисовано</span>
+          <span class="hand hero__note" style="right:6%;bottom:6%;transform:rotate(4deg)">нет — только пунктир</span>
+        </div>
+        <p class="hero__sub hero__in">Два слова на весь турецкий быт. Есть — <b lang="tr" class="v">var</b>. Нет — <b lang="tr" class="y">yok</b>. Сама вещь при этом не меняется ни на букву.</p>
+        <div class="row hero__in" style="margin-top:14px">
+          <button class="btn btn--blue" type="button" data-go="story" data-ui>Смотреть квартиру</button>
+          <button class="btn btn--line" type="button" data-go="cheat" data-ui>Шпаргалка</button>
+        </div>
+        <div class="stats hero__in">
+          <div class="stat"><b data-count="2">2</b><span>слова</span></div>
+          <div class="stat"><b data-count="0">0</b><span>падежей у вещи</span></div>
+          <div class="stat"><b data-count="1">1</b><span>порядок слов</span></div>
+        </div>
+      </div>
+      <div class="hero__stage" data-hstage>
+        <svg class="iso drawn" viewBox="0 0 600 470" data-hroom role="img" aria-label="Комната: вещи есть и нет"></svg>
+        <div class="hero__sentence" aria-live="polite"><button type="button" lang="tr" data-hsent data-say="Odada kedi var.">Odada kedi var.</button></div>
+        <p class="note" style="text-align:center;margin:4px auto 0">Нажми на вещь — она появится или исчезнет.</p>
+        <div class="row items" role="group" aria-label="Вещи в комнате" data-hitems></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. STORY (закреплённая сцена) ================= -->
+<section data-section="story" data-words="65" id="story">
+  <div class="pn pn--sheet story" data-pause>
+    <div class="story__pin" data-spin>
+      <div>
+        <div class="tag"><svg><use href="#b-lines"/></svg><span class="mono" data-ui>Крючок · план квартиры · Кадыкёй</span></div>
+        <svg class="plan" viewBox="0 0 600 420" data-plan role="img" aria-label="План квартиры">
+          <g data-walls>
+            <path class="wall" d="M30 30H420V300H30Z"/>
+            <path class="wall" d="M250 30V180M250 220V300"/>
+            <path class="wall" d="M30 190H120M160 190H250"/>
+            <path class="wall" d="M420 120H570V300H420"/>
+            <path class="thin" d="M420 300H570M440 300V400H570V300" stroke-dasharray="4 4"/>
+          </g>
+          <text class="rmname" x="50" y="60" lang="tr">SALON</text>
+          <text class="rmname" x="270" y="60" lang="tr">MUTFAK</text>
+          <text class="rmname" x="50" y="220" lang="tr">BANYO</text>
+          <text class="rmname" x="440" y="150" lang="tr">KORİDOR</text>
+          <text class="rmname" x="455" y="330" lang="tr">BALKON</text>
+          <g data-p-router><rect class="obj-var" x="150" y="110" width="44" height="26" rx="3"/><path class="wave" d="M156 100q16-14 32 0M150 90q22-20 44 0M144 80q28-26 56 0"/></g>
+          <g data-p-klima><rect class="obj-yok" x="60" y="34" width="110" height="22"/><path class="obj-yok" d="M60 34l110 22M170 34L60 56"/></g>
+          <g data-p-lift><rect class="obj-yok" x="480" y="160" width="70" height="70"/><path class="obj-yok" d="M480 160l70 70M550 160l-70 70"/><text class="rmname" x="470" y="252" lang="tr">ASANSÖR</text></g>
+          <g data-p-cat transform="translate(505 360)"><ellipse class="obj-var" cx="0" cy="0" rx="22" ry="15"/><circle class="obj-var" cx="20" cy="-12" r="11"/><path class="obj-var" d="M14 -22l3-10 6 8zM24 -22l5-9 3 10z"/><path d="M-22 4q-16 6-10 18" fill="none" stroke="#262523" stroke-width="3" stroke-linecap="round"/></g>
+          <g data-p-door><path class="thin" d="M120 190a40 40 0 0 1 40 0"/></g>
+        </svg>
+      </div>
+      <div>
+        <h2 class="h2" data-split>Квартира <span class="hand">с котом</span></h2>
+        <ol class="steps" data-steps>
+          <li class="st" data-st="0"><p>Ты смотришь квартиру в Кадыкёе. Хозяин открывает дверь так, будто это дворец Топкапы. Пятый этаж, вид на соседнюю стену.</p></li>
+          <li class="st" data-st="1"><span class="bub q" lang="tr">Evde internet var mı?</span><span class="bub a" lang="tr">Var.</span><p>Говоришь, интернет есть? Говорит, var. Роутер мигает гордо.</p></li>
+          <li class="st" data-st="2"><span class="bub q" lang="tr">Klima var mı?</span><span class="bub a no" lang="tr">Yok.</span><p>Говоришь, а кондиционер? Говорит, yok. Говорит с достоинством. Летом в Стамбуле это звучит как приговор.</p></li>
+          <li class="st" data-st="3"><span class="bub q" lang="tr">Asansör var mı?</span><span class="bub a no" lang="tr">Yok.</span><p>Говоришь, а лифт? Говорит, yok. Пятый этаж.</p></li>
+          <li class="st" data-st="4"><span class="bub q" lang="tr">Balkon var mı?</span><span class="bub a" lang="tr">Var! Balkonda kedi var.</span><p>Говоришь, а балкон? Говорит, var. Там живёт кот.</p><p class="punch">Кот в договор не входит. Но и не уходит.</p></li>
+        </ol>
+        <p class="note story__hint" data-ui>Листай — квартира чертится сама.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 3. GUESS ================= -->
+<section data-section="guess" data-words="19" id="guess">
+  <div class="pn pn--sheet">
+    <div class="tag"><svg><use href="#b-q"/></svg><span class="mono" data-ui>Сначала угадай · лист 02</span></div>
+    <h2 class="h2" data-split>Что на чертеже?</h2>
+    <p class="note">Правила ещё нет. Синее нарисовано — значит есть. Пунктир — значит нет. Жми по ощущению. Чертёж не врёт.</p>
+    <div class="guess" data-guess></div>
+  </div>
+</section>
+
+<!-- ================= 4. RULE: блоки ================= -->
+<section data-section="rule" data-words="50" id="rule">
+  <div class="pn pn--sheet" data-pause>
+    <span class="giant" style="left:-4%;bottom:-8%" lang="tr" aria-hidden="true" data-giant>var</span>
+    <div class="tag"><svg><use href="#b-ring"/></svg><span class="mono" data-ui>Правило · лист 03</span></div>
+    <h2 class="h2" data-split>Место, вещь, <span lang="tr" class="v">var</span></h2>
+    <p class="lead">Турок строит фразу как архитектор: сначала участок, потом дом, потом табличка «есть» или «нет». Блоки стоят всегда в одном порядке. Переставишь — дом рухнет.</p>
+    <div class="rstage" data-rstage>
+    <p class="mono" style="margin:0 0 8px" data-rcap data-ui>1 · участок</p>
+    <div class="blocks" data-blocks>
+      <button class="blk blk--place" type="button" data-blk="place"><svg><use href="#b-lines"/></svg><span><small data-ui>1 · где</small><br><b lang="tr" data-bplace>Odada</b></span></button>
+      <button class="blk blk--thing" type="button" data-blk="thing"><svg><use href="#b-house"/></svg><span><small data-ui>2 · что</small><br><b lang="tr" data-bthing>masa</b></span></button>
+      <button class="blk blk--var" type="button" data-blk="var"><svg data-bicon><use href="#b-ring"/></svg><span><small data-ui>3 · есть / нет</small><br><b lang="tr" data-bvar>var</b></span></button>
+    </div>
+    <div class="sentence" lang="tr" data-sentence aria-live="polite"></div>
+    </div>
+    <p class="note">Жми на блоки: меняй место, вещь и табличку. Место — с <b lang="tr">-da</b> из прошлой темы. Вещь — как в словаре. В конце — <b lang="tr" class="v">var</b> или <b lang="tr" class="y">yok</b>.</p>
+    <div class="mq" data-mq data-ok="0" data-why-ok="Да. Сначала место, потом вещь, в конце var." data-why-no="Место всегда в начале, var или yok — в самом конце.">
+      <div class="mq__q"><svg><use href="#b-q"/></svg><span>«На кухне есть стол» — как?</span></div>
+      <div class="row"><button class="chip" type="button" lang="tr" data-a="0">Mutfakta masa var.</button><button class="chip" type="button" lang="tr" data-a="1">Var masa mutfakta.</button></div>
+      <p class="mq__fb" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 5. COMPARE ================= -->
+<section data-section="compare" data-words="54" id="compare">
+  <div class="pn pn--blue" data-pause>
+    <i class="corner corner--tl"></i><i class="corner corner--br"></i>
+    <div class="tag"><svg><use href="#b-quarter"/></svg><span class="mono" data-ui>Сравни · лист 04</span></div>
+    <h2 class="h2" data-split>Стол не болеет</h2>
+    <p class="lead">В русском «нет» ломает слово: стол — нет стола. В турецком <b lang="tr">masa</b> остаётся <b lang="tr">masa</b>. И с <span lang="tr">var</span>, и с <span lang="tr">yok</span>.</p>
+    <button class="sw" type="button" role="switch" aria-checked="false" data-csw><span class="sw__k" aria-hidden="true"></span><span data-ui>есть → нет</span></button>
+    <div class="cmp" style="margin-top:18px">
+      <div class="lane"><h3 data-ui>Русский</h3><div class="lane__line" data-cru>В комнате есть <span class="same">стол</span>.</div></div>
+      <div class="lane"><h3 data-ui>Турецкий</h3><div class="lane__line" lang="tr" data-ctr>Odada <span class="same">masa</span> var.</div></div>
+      <div class="lane"><h3 data-ui>Казахский</h3><div class="lane__line" data-ckz>Бөлмеде <span class="same">үстел</span> бар.</div></div>
+      <div class="lane"><h3 data-ui>Вывод</h3><p style="margin:0">Казахский делает то же самое: бар и жоқ стоят в конце, вещь не меняется. Знаешь казахский — тема уже наполовину твоя. А русскому стулу от «нет» плохо: стул — стула.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 6. QUESTION ================= -->
+<section data-section="question" data-words="47" id="question">
+  <div class="pn pn--sheet" data-pause>
+    <span class="giant" style="right:-6%;top:-6%" lang="tr" aria-hidden="true" data-giant>mı?</span>
+    <div class="tag"><svg><use href="#b-q"/></svg><span class="mono" data-ui>Вопрос · лист 05</span></div>
+    <h2 class="h2" data-split><span lang="tr">Var mı?</span> <span class="hand">— Var.</span></h2>
+    <div class="qa" data-qstage>
+      <div>
+        <div class="qline" lang="tr" data-qline><span data-qa>Odada kedi </span><span class="v" data-qv>var</span> <span class="mi" data-qmi>mı</span><span class="q" data-qq>?</span></div>
+        <p class="lead" style="margin-top:12px">Вопрос — та же фраза плюс частица. После <b lang="tr">var</b> пишем <b lang="tr">mı</b>, после <b lang="tr">yok</b> — <b lang="tr">mu</b>. Это гармония, ты её знаешь. Вопросительный знак — в конце, как обычно.</p>
+        <div class="harm"><div><b lang="tr">var mı?</b><span class="ru" data-ui>a → ı</span></div><div><b lang="tr">yok mu?</b><span class="ru" data-ui>o → u</span></div></div>
+        <p class="note" style="margin-top:12px">Если в вопросе уже есть <b lang="tr">ne</b> — «что», частица не нужна: <span lang="tr">Odada ne var?</span></p>
+      </div>
+      <div>
+        <p class="mono" data-ui>Отвечают коротко</p>
+        <div class="ans" role="group" aria-label="Ответы">
+          <button type="button" data-ans="var" data-say="Evet, var."><span lang="tr">Evet, var.</span><span class="ru" data-ui>Да, есть.</span></button>
+          <button type="button" data-ans="yok" data-say="Hayır, yok."><span lang="tr">Hayır, yok.</span><span class="ru" data-ui>Нет, нету.</span></button>
+          <button type="button" data-ans="ne" data-say="Odada ne var? Odada kedi var."><span lang="tr">Odada ne var?</span><span class="ru" data-ui>Что в комнате?</span></button>
+        </div>
+        <p class="note" style="margin-top:10px">Можно и одним словом: <b lang="tr">Var.</b> или <b lang="tr">Yok.</b> Турки так и делают. Хозяин отвечает «var» быстро, а «yok» — после паузы и со вздохом.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7. FOCUS: камера ================= -->
+<section data-section="focus" data-words="60" id="focus">
+  <div class="pn pn--sheet" data-pause>
+    <div class="tag"><svg><use href="#b-lines"/></svg><span class="mono" data-ui>Тонкость · лист 06</span></div>
+    <h2 class="h2" data-split>Камера <span class="hand">и прицел</span></h2>
+    <p class="lead">Две похожие фразы снимают разное кино. Одна ищет вещь, другая осматривает место.</p>
+    <p class="note">Камера слева держит в прицеле книгу. Камера справа водит объективом по столу и перечисляет всё подряд.</p>
+    <div class="cams" data-cstage>
+      <div class="cam" data-cam="where">
+        <span class="cam__rec mono" data-ui>где?</span>
+        <svg class="iso" viewBox="0 0 600 470" data-cam1 aria-hidden="true"></svg>
+        <div class="cam__vf"><i></i><i></i><i></i><i></i></div>
+        <div class="cam__cap"><b lang="tr" data-say="Kitap nerede? Kitap masada.">Kitap masada.</b><p style="margin:6px 0 0">Книга на столе. Мы знаем, о какой книге речь, и ищем её.</p></div>
+      </div>
+      <div class="cam" data-cam="what">
+        <span class="cam__rec mono" data-ui>что там?</span>
+        <svg class="iso" viewBox="0 0 600 470" data-cam2 aria-hidden="true"></svg>
+        <div class="cam__vf"><i></i><i></i><i></i><i></i></div>
+        <div class="cam__cap"><b lang="tr" data-say="Masada ne var? Masada kitap var.">Masada kitap var.</b><p style="margin:6px 0 0">На столе есть книга. Смотрим на стол и перечисляем, что там лежит.</p></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:14px"><button class="btn btn--blue btn--sm" type="button" data-shoot data-ui>Снять ещё раз</button></div>
+    <div class="mq" data-mq data-ok="1" data-why-ok="Да. Вопрос «где кот?» — значит, кот известен: Kedi balkonda." data-why-no="Ищем конкретного кота — вещь в начале: Kedi balkonda.">
+      <div class="mq__q"><svg><use href="#b-q"/></svg><span>«Где кот? — Кот на балконе»</span></div>
+      <div class="row"><button class="chip" type="button" lang="tr" data-a="0">Balkonda kedi var.</button><button class="chip" type="button" lang="tr" data-a="1">Kedi balkonda.</button></div>
+      <p class="mq__fb" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. THREE NO ================= -->
+<section data-section="three" data-words="47" id="three">
+  <div class="pn pn--ink" data-pause>
+    <div class="tag"><svg><use href="#b-quarter"/></svg><span class="mono" data-ui>Ловушка смысла · лист 07</span></div>
+    <h2 class="h2" data-split>Три разных «нет»</h2>
+    <p class="lead">Русское «нет» работает за троих. В турецком у каждого своя дверь. Открой все три. Перепутаешь двери — турок вежливо переспросит. Дважды.</p>
+    <p class="note">Hayır — отвечаешь на вопрос. Değil — споришь с названием. Yok — показываешь пустую полку.</p>
+    <div class="doors" data-doors data-dstage>
+      <div class="door"><div class="door__in"><b lang="tr">Hayır</b><span>ответ «нет» на вопрос</span><a-say>Hayır, yok.</a-say><span class="ru" data-ui>Нет, нету.</span></div><button class="door__leaf" type="button" data-door><b lang="tr">1</b><span data-ui>ответ</span><i class="knob"></i></button></div>
+      <div class="door"><div class="door__in"><b lang="tr">Değil</b><span>«не является»: это не кофе</span><a-say>Bu kahve değil, çay.</a-say><span class="ru" data-ui>Это не кофе, а чай.</span></div><button class="door__leaf" type="button" data-door><b lang="tr">2</b><span data-ui>не то</span><i class="knob"></i></button></div>
+      <div class="door"><div class="door__in"><b lang="tr" class="y">Yok</b><span>«отсутствует»: кофе нет</span><a-say>Evde kahve yok.</a-say><span class="ru" data-ui>Дома нет кофе.</span></div><button class="door__leaf" type="button" data-door><b lang="tr">3</b><span data-ui>пусто</span><i class="knob"></i></button></div>
+    </div>
+    <div class="mq" data-mq data-ok="1" data-why-ok="Да. Кофе отсутствует — это yok." data-why-no="Değil — «не является». А кофе просто нет — это yok.">
+      <div class="mq__q"><svg><use href="#b-q"/></svg><span>«Дома нет кофе»</span></div>
+      <div class="row"><button class="chip" type="button" lang="tr" data-a="0">Evde kahve değil.</button><button class="chip" type="button" lang="tr" data-a="1">Evde kahve yok.</button></div>
+      <p class="mq__fb" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. STREET (горизонтальная панорама) ================= -->
+<section data-section="city" data-words="30" id="city">
+  <div class="pn pn--sheet street" data-pause>
+    <div class="tag"><svg><use href="#b-house"/></svg><span class="mono" data-ui>Сцена в городе · Кадыкёй · лист 08</span></div>
+    <h2 class="h2" data-split>Улица <span class="hand">в Кадыкёе</span></h2>
+    <p class="note">Листай — улица поедет вбок. Лавка в центре сама расскажет, что у неё есть. На вывески можно нажимать. Бакалея, аптека, банкомат, кафе, остановка, парк: шесть лавок, шесть вопросов.</p>
+    <div class="street__wrap" data-swrap>
+      <svg class="street__track" viewBox="0 0 2400 600" data-street role="group" aria-label="Улица в Кадыкёе"></svg>
+    </div>
+    <div class="street__panel" aria-live="polite">
+      <div><div class="street__q" lang="tr" data-sq>Bakkalda ekmek var mı?</div><div class="ru" data-ui data-sqru>В бакалее есть хлеб?</div></div>
+      <div style="display:flex;align-items:center;gap:10px"><div class="street__a" lang="tr" data-sa>Evet, var.</div><button class="sayb" type="button" data-ssay data-say="Bakkalda ekmek var mı? Evet, var." aria-label="Послушать"><svg><use href="#i-say"/></svg></button></div>
+    </div>
+    <div class="shopbar" data-shopbar role="group" aria-label="Лавки"></div>
+  </div>
+</section>
+
+<!-- ================= 10. LAB ================= -->
+<section data-section="lab" data-words="38" id="lab">
+  <div class="pn pn--sheet" data-pause>
+    <div class="tag"><svg><use href="#b-ring"/></svg><span class="mono" data-ui>Лаборатория · лист 09</span></div>
+    <h2 class="h2" data-split>Собери квартиру</h2>
+    <p class="note">Три режима. Ставь вещи в комнаты, спрашивай хозяина, считай стулья. Режим «Спросить» отвечает за хозяина честно, без скидок. Чертёж справа перерисовывается сразу. После числа <b lang="tr">-lar</b> не нужен: <span lang="tr">üç sandalye var</span>.</p>
+    <div class="lab">
+      <div>
+        <div class="modes" role="tablist" aria-label="Режим">
+          <button class="mode" type="button" role="tab" aria-selected="true" data-mode="say" data-ui>Описать</button>
+          <button class="mode" type="button" role="tab" aria-selected="false" data-mode="ask" data-ui>Спросить</button>
+          <button class="mode" type="button" role="tab" aria-selected="false" data-mode="count" data-ui>Посчитать</button>
+        </div>
+        <h3 data-ui>Комната</h3>
+        <div class="row" data-lrooms role="group" aria-label="Комната"></div>
+        <h3 data-ui>Вещи — нажми, чтобы поставить или убрать</h3>
+        <div class="row" data-litems role="group" aria-label="Вещи"></div>
+        <div data-lcount hidden style="margin-top:14px"><h3 data-ui>Сколько</h3><div class="stepper"><button type="button" data-cminus aria-label="Меньше">−</button><span data-cval lang="tr">bir</span><button type="button" data-cplus aria-label="Больше">+</button></div></div>
+      </div>
+      <div>
+        <div class="board"><svg class="iso" viewBox="0 0 600 470" data-lroom role="img" aria-label="Комната конструктора"></svg></div>
+        <div class="out" aria-live="polite">
+          <div style="display:flex;align-items:center;gap:10px;justify-content:space-between"><div class="out__main" lang="tr" data-lmain>Odada masa var.</div><button class="sayb" type="button" data-lsay data-say="Odada masa var." aria-label="Послушать"><svg><use href="#i-say"/></svg></button></div>
+          <div class="ru" data-ui data-lru>В комнате есть стол.</div>
+          <ul class="why" data-lwhy></ul>
+          <div class="out__list" data-llist></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 11. TRAPS ================= -->
+<section data-section="traps" data-words="42" id="traps">
+  <div class="pn pn--sheet" data-pause>
+    <div class="tag"><svg><use href="#b-quarter"/></svg><span class="mono" data-ui>Ловушки · лист 10</span></div>
+    <h2 class="h2" data-split>Пять ловушек</h2>
+    <div class="traps" data-traps>
+      <div class="trap trap--intro"><p class="trap__why" style="color:inherit;font-size:17px">На этом спотыкаются все. Даже архитекторы. Нажми «исправить» — чертёж поправится.</p></div>
+      <div class="trap" data-trap><div class="trap__w"><span class="x" lang="tr">Masa odada var.</span><svg><use href="#i-arrow"/></svg><span class="ok v" lang="tr" hidden data-say="Odada masa var.">Odada masa var.</span></div><p class="trap__why">Сначала участок, потом дом. Место — в начале.</p><button class="btn btn--blue btn--sm" type="button" data-fix data-ui>Исправить</button></div>
+      <div class="trap" data-trap><div class="trap__w"><span class="x" lang="tr">Evde kahve değil.</span><svg><use href="#i-arrow"/></svg><span class="ok v" lang="tr" hidden data-say="Evde kahve yok.">Evde kahve yok.</span></div><p class="trap__why">Кофе не «не является». Его просто нет.</p><button class="btn btn--blue btn--sm" type="button" data-fix data-ui>Исправить</button></div>
+      <div class="trap" data-trap><div class="trap__w"><span class="x" lang="tr">Var mi?</span><svg><use href="#i-arrow"/></svg><span class="ok v" lang="tr" hidden data-say="Var mı?">Var mı?</span></div><p class="trap__why">В <b lang="tr">var</b> гласная <b lang="tr">a</b>. Значит, <b lang="tr">mı</b> без точки.</p><button class="btn btn--blue btn--sm" type="button" data-fix data-ui>Исправить</button></div>
+      <div class="trap" data-trap><div class="trap__w"><span class="x" lang="tr">Odada üç sandalyeler var.</span><svg><use href="#i-arrow"/></svg><span class="ok v" lang="tr" hidden data-say="Odada üç sandalye var.">Odada üç sandalye var.</span></div><p class="trap__why">После числа <b lang="tr">-lar</b> лишний. Число уже всё сказало.</p><button class="btn btn--blue btn--sm" type="button" data-fix data-ui>Исправить</button></div>
+      <div class="trap" data-trap><div class="trap__w"><span class="x" lang="tr">— Kedi var mı? — Hayır, değil.</span><svg><use href="#i-arrow"/></svg><span class="ok v" lang="tr" hidden data-say="Hayır, yok.">Hayır, yok.</span></div><p class="trap__why">Спросили про <b lang="tr">var</b> — отвечай через <b lang="tr">yok</b>.</p><button class="btn btn--blue btn--sm" type="button" data-fix data-ui>Исправить</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 12. VIDEO ================= -->
+<section data-section="video" data-words="19" id="video">
+  <div class="pn pn--ink">
+    <div class="tag"><svg><use href="#b-ring"/></svg><span class="mono" data-ui>Видео · 3 минуты</span></div>
+    <h2 class="h2">Видео</h2>
+    <p class="note">Учитель объясняет по-русски. Обрати внимание, как он разводит <b lang="tr">hayır</b> и <b lang="tr">yok</b>: отрицание и отсутствие. И как отвечает на вопрос с <b lang="tr">var</b>.</p>
+    <a-video yt="RJNB9fjV0iA" start="8" end="180" title="Турецкий язык. Урок 9. Есть — нет: VAR, YOK" channel="Pratikturkce"></a-video>
+  </div>
+</section>
+
+<!-- ================= 13. PRACTICE ================= -->
+<section data-section="practice" data-words="13" id="practice">
+  <div class="pn pn--sheet">
+    <div class="tag"><svg><use href="#b-lines"/></svg><span class="mono" data-ui>Практика · лист 11</span></div>
+    <h2 class="h2">Практика</h2>
+    <p class="note">Сначала узнать, потом сопоставить, вставить, собрать. В конце — приёмка квартиры по чертежу.</p>
+    <div class="stack">
+      <a-exercise ref="a1.var-yok.ex1"></a-exercise>
+      <a-exercise ref="a1.var-yok.ex2"></a-exercise>
+      <a-exercise ref="a1.var-yok.ex3"></a-exercise>
+      <a-exercise ref="a1.var-yok.ex4"></a-exercise>
+      <a-exercise ref="a1.var-yok.ex5" class="ak-ex ins" tabindex="0">
+        <div class="ins__top"><b class="mono">Приёмка квартиры</b><span class="mono" data-icount>1 / 10</span></div>
+        <p style="margin:0 0 6px;font-size:15px">Смотри на чертёж: синее — есть, пунктир — нет. Клавиши 1 и 2 тоже работают.</p>
+        <div class="ins__room"><svg class="iso" viewBox="0 0 600 470" data-iroom role="img" aria-label="Чертёж комнаты"></svg></div>
+        <div class="ins__q" lang="tr" data-iq>…</div>
+        <div class="ins__opts" data-iopts role="group" aria-label="Варианты"></div>
+        <p class="ins__st" aria-live="polite" data-ist>Синее — var, пунктир — yok.</p>
+        <button class="btn btn--or btn--sm" type="button" data-iagain hidden>Ещё раз</button>
+      </a-exercise>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 14. CHECK ================= -->
+<section data-section="check" data-words="8" id="check">
+  <div class="pn pn--sheet">
+    <div class="tag"><svg><use href="#b-q"/></svg><span class="mono" data-ui>Мини-проверка</span></div>
+    <h2 class="h2">Без шпаргалки</h2>
+    <p class="note">Пять вопросов вперемешку. Порог восемьдесят процентов.</p>
+    <a-quiz ref="a1.var-yok.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ================= 15. CHEAT ================= -->
+<section data-section="cheat" data-words="71" id="cheat">
+  <div class="pn pn--blue" data-pause>
+    <i class="corner corner--tl"></i><i class="corner corner--tr"></i><i class="corner corner--bl"></i><i class="corner corner--br"></i>
+    <span class="giant" style="left:-4%;bottom:-10%" lang="tr" aria-hidden="true" data-giant>yok</span>
+    <div class="tag"><svg><use href="#b-house"/></svg><span class="mono" data-ui>Синька · сохрани скриншотом · лист 12</span></div>
+    <h2 class="h2" data-split>Шпаргалка</h2>
+    <div class="poster" data-poster>
+      <div class="pc pc--wide"><h3>Формула</h3><div class="pc__big" lang="tr"><span class="place">Odada</span> + masa + <span class="v">var</span> / <span class="y">yok</span></div><p class="ru" style="margin:8px 0 0">место с -da · вещь как в словаре · есть или нет</p></div>
+      <div class="pc"><h3>Вопрос</h3><div class="pc__big" lang="tr" data-say="Var mı? Yok mu?">var mı? · yok mu?</div><p class="ru" style="margin:8px 0 0">с ne частица не нужна: Odada ne var?</p></div>
+      <div class="pc"><h3>Ответ</h3><div class="pc__big" lang="tr" data-say="Evet, var. Hayır, yok.">Evet, var. · Hayır, yok.</div></div>
+      <div class="pc"><h3>Три «нет»</h3><p style="margin:0">hayır — ответ · değil — не является · yok — отсутствует</p></div>
+      <div class="pc"><h3>Где или что</h3><p style="margin:0"><b lang="tr">Kitap masada.</b> — где книга. <b lang="tr">Masada kitap var.</b> — что на столе.</p></div>
+      <div class="pc"><h3>Число</h3><p style="margin:0"><b lang="tr">Odada üç sandalye var.</b> После числа без -lar.</p></div>
+      <div class="pc"><h3>Вещь не меняется</h3><p style="margin:0"><b lang="tr">masa var · masa yok</b> — никаких «стола».</p></div>
+    </div>
+    <div class="final">
+      <div class="final__chat" data-fchat>
+        <div><span class="bub q" lang="tr">Binada asansör var!</span></div>
+        <div><span class="bub a no" lang="tr">Asansör yok. Merdiven var.</span></div>
+        <div><span class="bub a" lang="tr">Balkonda kedi var. 🐈</span></div>
+      </div>
+      <div>
+        <p class="lead">Через неделю хозяин пишет: в доме есть лифт! Ты спускаешься к двери. Лифта нет. Есть лестница. И тот же кот.</p>
+        <p class="lead" style="font-weight:700">Теперь ты знаешь, что есть и чего нет. И тебе не продадут воздух.</p>
+        <button class="btn btn--or" type="button" data-freplay data-ui>Прочитать ещё раз</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<template data-achievement data-title="Чертёж принят" data-text="Ты говоришь, что есть и чего нет: Odada masa var, Evde kahve yok — и спрашиваешь var mı?">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <rect width="120" height="120" fill="#efe6d4"/>
+    <g class="a-b1"><rect x="14" y="14" width="44" height="44" fill="#2148c8"/><g fill="#efe6d4"><rect x="21" y="22" width="30" height="6"/><rect x="21" y="33" width="30" height="6"/><rect x="21" y="44" width="30" height="6"/></g></g>
+    <g class="a-b2"><rect x="62" y="14" width="44" height="44" fill="#2148c8"/><path d="M69 52V36l15-14 15 14v16h-7V40l-8-7-8 7v12z" fill="#efe6d4"/></g>
+    <g class="a-b3"><rect x="14" y="62" width="44" height="44" fill="#2148c8"/><circle cx="36" cy="84" r="15" fill="#efe6d4"/><circle cx="36" cy="84" r="7" fill="#2148c8"/></g>
+    <g class="a-b4"><rect x="62" y="62" width="44" height="44" fill="#e4572e"/><path d="M69 69h30A30 30 0 0 1 69 99z" fill="#efe6d4"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  'use strict';
+  const G = window.gsap || null;
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !RM;
+  const ST = window.ScrollTrigger || null;
+  const MP = window.MotionPathPlugin || null;
+  if (A) { G.registerPlugin(...[ST, MP, window.SplitText].filter(Boolean)); if (ST) ST.config({ ignoreMobileResize: true }); }
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const sv = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+  const el = (tag, cls, txt, attrs) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; if (attrs) for (const k in attrs) e.setAttribute(k, attrs[k]); return e; };
+  const speak = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const fine = matchMedia('(pointer:fine)').matches && innerWidth >= 1024;
+
+  /* ================= изометрия: комната и вещи ================= */
+  const C = Math.cos(Math.PI / 6), S = Math.sin(Math.PI / 6);
+  const O = { ox: 300, oy: 196, u: 25 };
+  const P = (x, y, z) => [O.ox + (x - y) * C * O.u, O.oy + (x + y) * S * O.u - z * O.u];
+  const poly = (pts) => 'M' + pts.map((p) => p.map((n) => n.toFixed(1)).join(' ')).join('L') + 'Z';
+  function box(g, x, y, z, w, d, h) {
+    sv('path', { class: 'fr', d: poly([P(x + w, y, z), P(x + w, y + d, z), P(x + w, y + d, z + h), P(x + w, y, z + h)]) }, g);
+    sv('path', { class: 'fl', d: poly([P(x, y + d, z), P(x + w, y + d, z), P(x + w, y + d, z + h), P(x, y + d, z + h)]) }, g);
+    sv('path', { class: 'ft', d: poly([P(x, y, z + h), P(x + w, y, z + h), P(x + w, y + d, z + h), P(x, y + d, z + h)]) }, g);
+  }
+  const blob = (g, x, y, z, r) => { const [cx, cy] = P(x, y, z); sv('ellipse', { class: 'ft', cx, cy, rx: r * O.u, ry: r * O.u * .8 }, g); };
+  const ITEMS = {
+    masa: { tr: 'masa', ru: 'стол', gen: 'стола', build: (g) => { [[3.1, 4.1], [6.6, 4.1], [3.1, 6.6], [6.6, 6.6]].forEach(([x, y]) => box(g, x, y, 0, .3, .3, 3)); box(g, 3, 4, 3, 4, 3, .4); } },
+    sandalye: { tr: 'sandalye', ru: 'стул', gen: 'стула', cnt: ['один стул', 'два стула', 'три стула', 'четыре стула', 'пять стульев'], build: (g, k = 0) => { const dx = k * 0, dy = k * 1.9; [[7.7, 2.2], [9, 2.2], [7.7, 3.5], [9, 3.5]].forEach(([x, y]) => box(g, x + dx, y + dy - 1.2, 0, .22, .22, 1.8)); box(g, 7.6 + dx, 1 + dy, 1.8, 1.7, 1.7, .25); box(g, 9.1 + dx, 1 + dy, 2, .2, 1.7, 2.2); } },
+    lamba: { tr: 'lamba', ru: 'лампа', gen: 'лампы', cnt: ['одна лампа', 'две лампы', 'три лампы', 'четыре лампы', 'пять ламп'], build: (g, k = 0) => { const d = k * 1.3; box(g, 1.3 + d, 1.3, 0, 1, 1, .2); box(g, 1.68 + d, 1.68, .2, .24, .24, 4.6); box(g, 1.1 + d, 1.1, 4.8, 1.4, 1.4, 1.1); } },
+    kedi: { tr: 'kedi', ru: 'кошка', gen: 'кошки', cnt: ['одна кошка', 'две кошки', 'три кошки', 'четыре кошки', 'пять кошек'], build: (g, k = 0) => { const d = k * 1.5; box(g, 4.2 - d * .3, 8 - d * .2 + (k ? -1 : 0) * 0, 0, 2.2, 1, 1); box(g, 6.1 - d * .3, 7.8 - d * .2, .7, 1.1, 1.1, 1); box(g, 6.15 - d * .3, 7.85 - d * .2, 1.7, .35, .35, .45); box(g, 6.8 - d * .3, 7.85 - d * .2, 1.7, .35, .35, .45); } },
+    klima: { tr: 'klima', ru: 'кондиционер', gen: 'кондиционера', build: (g) => { box(g, 5.2, .05, 5.4, 3.2, .9, 1.1); } },
+    bitki: { tr: 'bitki', ru: 'растение', gen: 'растения', cnt: ['одно растение', 'два растения', 'три растения', 'четыре растения', 'пять растений'], build: (g, k = 0) => { const d = k * 1.6; box(g, 8.3, 7.4 - d, 0, 1.2, 1.2, 1.2); blob(g, 8.9, 8 - d, 2.4, .9); blob(g, 8.5, 7.7 - d, 3.1, .7); blob(g, 9.2, 8.2 - d, 3.3, .6); } },
+    buzdolabı: { tr: 'buzdolabı', ru: 'холодильник', gen: 'холодильника', paper: true, build: (g) => { box(g, .3, 6.2, 0, 1.9, 1.9, 5.6); } },
+    ayna: { tr: 'ayna', ru: 'зеркало', gen: 'зеркала', paper: true, build: (g) => { box(g, .05, 2.6, 2.4, .2, 2.4, 3.2); } },
+  };
+  const DEPTH = { klima: 0, ayna: 0, lamba: 2.6, buzdolabı: 6.5, masa: 7, sandalye: 8.6, kedi: 12, bitki: 15.7 };
+  const byDepth = (keys) => [...keys].sort((a, b) => DEPTH[a] - DEPTH[b]);
+  function drawRoom(svg, name) {
+    svg.innerHTML = '';
+    const room = sv('g', { class: 'room' }, svg);
+    sv('path', { class: 'rf', d: poly([P(0, 0, 0), P(10, 0, 0), P(10, 10, 0), P(0, 10, 0)]) }, room);
+    sv('path', { class: 'rl', d: poly([P(0, 0, 0), P(0, 10, 0), P(0, 10, 7), P(0, 0, 7)]) }, room);
+    sv('path', { class: 'rr', d: poly([P(0, 0, 0), P(10, 0, 0), P(10, 0, 7), P(0, 0, 7)]) }, room);
+    sv('path', { class: 'win', d: poly([P(1.6, 0, 2.6), P(4.4, 0, 2.6), P(4.4, 0, 5.4), P(1.6, 0, 5.4)]) }, room);
+    sv('path', { class: 'rl', d: poly([P(0, 7.2, 0), P(0, 9.2, 0), P(0, 9.2, 4.6), P(0, 7.2, 4.6)]), style: 'fill:#d2c3a5' }, room);
+    if (name) { const [lx, ly] = P(8.6, 9.6, 0); sv('text', { class: 'lbl', x: lx - 60, y: ly + 30, lang: 'tr' }, svg).textContent = name.toUpperCase(); }
+    return room;
+  }
+  function addItem(svg, key, state = 'var', k = 0) {
+    const it = ITEMS[key];
+    const g = sv('g', { class: 'it' + (it.paper ? ' is-paper' : '') + (state === 'yok' ? ' is-yok' : ''), 'data-it': key }, svg);
+    it.build(g, k);
+    return g;
+  }
+  function setState(g, state, anim) {
+    const yok = state === 'yok';
+    if (!anim || !A) { g.classList.toggle('is-yok', yok); return; }
+    const parts = $$('path, ellipse', g);
+    if (yok) {
+      G.to(g, { scale: .92, svgOrigin: originOf(g), duration: .2, onComplete: () => { g.classList.add('is-yok'); G.to(g, { scale: 1, svgOrigin: originOf(g), duration: .6, ease: 'elastic.out(1,.45)' }); } });
+    } else {
+      g.classList.remove('is-yok');
+      parts.forEach((p) => { const L = p.getTotalLength ? p.getTotalLength() : 100; p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+      G.to(parts, { strokeDashoffset: 0, duration: .7, stagger: .02, ease: 'power2.inOut', onComplete: () => parts.forEach((p) => { p.style.strokeDasharray = ''; p.style.strokeDashoffset = ''; }) });
+      G.fromTo(g, { scale: .2, svgOrigin: originOf(g) }, { scale: 1, svgOrigin: originOf(g), duration: .8, ease: 'back.out(2)' });
+    }
+  }
+  const originOf = (g) => { try { const b = g.getBBox(); return `${b.x + b.width / 2} ${b.y + b.height}`; } catch (e) { return '300 300'; } };
+  const LOC = { oda: 'Odada', mutfak: 'Mutfakta', banyo: 'Banyoda', balkon: 'Balkonda' };
+  const LOCRU = { oda: 'В комнате', mutfak: 'На кухне', banyo: 'В ванной', balkon: 'На балконе' };
+  const NUM = ['bir', 'iki', 'üç', 'dört', 'beş'];
+  const ruLine = (room, key, state) => `${LOCRU[room]} ${state === 'var' ? 'есть ' + ITEMS[key].ru : 'нет ' + ITEMS[key].gen}.`;
+
+  /* ================= искры ================= */
+  function sparks(x, y, n = 14) {
+    if (!A) return;
+    const cols = ['#2148c8', '#e4572e', '#262523', '#efe6d4'];
+    for (let i = 0; i < n; i++) {
+      const s = el('i', 'spark'); s.style.background = cols[i % 4]; document.body.appendChild(s);
+      const a = (Math.PI * 2 * i) / n, r = 50 + Math.random() * 60;
+      G.fromTo(s, { x, y, rotation: 0 }, { x: x + Math.cos(a) * r, y: y + Math.sin(a) * r + 24, rotation: 180, scale: .3, opacity: 0, duration: .8, ease: 'power2.out', onComplete: () => s.remove() });
+    }
+  }
+  const sparkAt = (e) => { const r = e.getBoundingClientRect(); sparks(r.left + r.width / 2, r.top + r.height / 2); };
+
+  /* ================= пауза вне экрана ================= */
+  const io = new IntersectionObserver((es) => es.forEach((e) => { (e.target._vis || []).forEach((f) => f(e.isIntersecting)); }), { rootMargin: '80px' });
+  $$('[data-pause]').forEach((x) => io.observe(x));
+  const onVis = (x, f) => { (x._vis = x._vis || []).push(f); };
+  const keep = (sel, tw) => { const n = typeof sel === 'string' ? $(sel) : sel; if (!n || !tw) return; onVis(n.closest('[data-pause]') || n, (v) => (v ? tw.resume() : tw.pause())); };
+
+  /* ================= карандаш за курсором ================= */
+  if (fine && A) {
+    const pen = $('[data-pencil]'), trail = $('[data-trail]'), pts = [];
+    const px = G.quickTo(pen, 'x', { duration: .25, ease: 'power3' }), py = G.quickTo(pen, 'y', { duration: .25, ease: 'power3' });
+    addEventListener('pointermove', (e) => {
+      px(e.clientX + 2); py(e.clientY - 30);
+      pts.push([e.clientX + 2, e.clientY + 2]); if (pts.length > 26) pts.shift();
+      trail.setAttribute('points', pts.map((p) => p.join(',')).join(' '));
+    }, { passive: true });
+    G.ticker.add(() => { if (pts.length) { pts.shift(); trail.setAttribute('points', pts.map((p) => p.join(',')).join(' ')); } });
+  }
+
+  /* ================= общее ================= */
+  const goTo = (k) => { const s = document.querySelector(`[data-section="${k}"]`); if (s) s.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' }); };
+  $$('[data-go]').forEach((b) => b.addEventListener('click', () => goTo(b.dataset.go)));
+  if (A && ST) {
+    $$('[data-split]').forEach((h) => {
+      const parts = window.SplitText ? new SplitText(h, { type: 'chars,words' }).chars : [h];
+      G.from(parts, { yPercent: 110, rotationX: -80, transformOrigin: '50% 100%', duration: .9, ease: 'power4.out', stagger: .025, scrollTrigger: { trigger: h, start: 'top 88%' } });
+    });
+    $$('[data-giant]').forEach((g, i) => G.fromTo(g, { xPercent: i % 2 ? 20 : -20 }, { xPercent: i % 2 ? -20 : 20, ease: 'none', scrollTrigger: { trigger: g.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
+    $$('.pn--blue, .pn--ink').forEach((p) => G.fromTo(p, { clipPath: 'inset(6% 5% 6% 5%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: p, start: 'top bottom', end: 'top 35%', scrub: true } }));
+    ST.batch('.note, .mq, .tag', { start: 'top 92%', onEnter: (els) => G.from(els, { y: 30, duration: .6, ease: 'power3.out', stagger: .06, overwrite: true }) });
+  }
+  $$('[data-mq]').forEach((box2) => {
+    const fb = $('.mq__fb', box2);
+    $$('[data-a]', box2).forEach((b) => b.addEventListener('click', () => {
+      const ok = b.dataset.a === box2.dataset.ok;
+      $$('[data-a]', box2).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      fb.textContent = ok ? box2.dataset.whyOk : box2.dataset.whyNo;
+      speak($$('[data-a]', box2).find((x) => x.dataset.a === box2.dataset.ok).textContent);
+      if (ok) sparkAt(b);
+      if (A) G.fromTo(b, { scale: .88 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+      if (A && !ok) G.fromTo(b, { x: -8 }, { x: 0, duration: .6, ease: 'elastic.out(1,.3)' });
+    }));
+  });
+
+  /* =============== 1. HERO: комната, огромные var / yok =============== */
+  (() => {
+    const svg = $('[data-hroom]'), sent = $('[data-hsent]'), bar = $('[data-hitems]');
+    drawRoom(svg);
+    const STATE = { masa: 'var', lamba: 'var', klima: 'yok', bitki: 'var', kedi: 'var' };
+    const groups = {};
+    byDepth(Object.keys(STATE)).forEach((k) => { groups[k] = addItem(svg, k, STATE[k]); });
+    $$('path, ellipse', svg).forEach((p) => p.setAttribute('pathLength', '1'));
+    setTimeout(() => { svg.classList.remove('drawn'); $$('path, ellipse', svg).forEach((p) => p.removeAttribute('pathLength')); }, RM ? 0 : 3200);
+    function show(k, user) {
+      const s = STATE[k];
+      const t = `Odada ${ITEMS[k].tr} ${s}.`;
+      sent.textContent = t; sent.dataset.say = t;
+      sent.className = s === 'var' ? 'v' : 'y';
+      if (user) speak(t);
+      if (A) G.fromTo(sent, { y: 14, scale: .9 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(3)' });
+    }
+    Object.keys(STATE).forEach((k) => {
+      const b = el('button', 'chip ' + (STATE[k] === 'var' ? 'is-var' : 'is-yok'), ITEMS[k].tr, { type: 'button' }); b.lang = 'tr';
+      b.addEventListener('click', () => {
+        STATE[k] = STATE[k] === 'var' ? 'yok' : 'var';
+        b.className = 'chip ' + (STATE[k] === 'var' ? 'is-var' : 'is-yok');
+        setState(groups[k], STATE[k], true); show(k, true);
+        if (A) G.to('[data-hvar]', { attr: { y: STATE[k] === 'var' ? 160 : 176 }, duration: .4, yoyo: true, repeat: 1 });
+      });
+      bar.appendChild(b);
+    });
+    show('kedi', false);
+    if (A) {
+      $$('[data-count]').forEach((b) => { const n = Number(b.dataset.count), o = { v: n ? 0 : 9 }; G.to(o, { v: n, duration: 1.4, delay: .6, ease: 'power2.out', onUpdate: () => { b.textContent = Math.round(o.v); } }); });
+      G.fromTo('[data-hyok]', { strokeDashoffset: 0 }, { strokeDashoffset: -46, duration: 1.6, repeat: -1, ease: 'none' });
+      G.fromTo('[data-hvar]', { attr: { x: -30 } }, { attr: { x: 0 }, duration: 1, ease: 'power4.out', delay: .2 });
+      keep('[data-hroom]', G.to(groups.kedi, { y: -4, duration: .9, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+      if (fine) {
+        const stage = $('[data-hstage]');
+        const rx = G.quickTo(svg, 'rotationY', { duration: .6, ease: 'power3' }), ry = G.quickTo(svg, 'rotationX', { duration: .6, ease: 'power3' });
+        G.set(svg, { transformPerspective: 1100 });
+        stage.addEventListener('pointermove', (e) => { const r = stage.getBoundingClientRect(); rx(((e.clientX - r.left) / r.width - .5) * 10); ry(-((e.clientY - r.top) / r.height - .5) * 8); });
+        stage.addEventListener('pointerleave', () => { rx(0); ry(0); });
+      }
+      if (ST) {
+        G.to('[data-hwords]', { yPercent: 25, scale: .9, ease: 'none', scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: true } });
+        G.to('[data-hroom]', { yPercent: -10, rotation: -2, ease: 'none', scrollTrigger: { trigger: '#intro', start: 'top top', end: 'bottom top', scrub: true } });
+      }
+    }
+  })();
+
+  /* =============== 2. STORY: закреплённый план квартиры =============== */
+  (() => {
+    const pin = $('[data-spin]'), steps = $$('[data-st]');
+    const walls = $$('[data-walls] path');
+    const rt = $('[data-p-router]'), kl = $('[data-p-klima]'), lf = $('[data-p-lift]'), cat = $('[data-p-cat]'), waves = $$('[data-p-router] .wave');
+    if (!A || !ST) return;
+    const big = innerWidth >= 920;
+    pin.classList.add('is-pinned');
+    G.set(steps.slice(1), { autoAlpha: 0, y: 40 });
+    walls.forEach((p) => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
+    G.set([rt, kl, lf, cat], { scale: 0, transformOrigin: '50% 50%' });
+    const tl = G.timeline({ defaults: { ease: 'power2.inOut' }, scrollTrigger: { trigger: pin, start: big ? 'center center' : 'top top+=30', end: '+=' + (big ? 2200 : 2600), pin: true, scrub: .8, anticipatePin: 1 } });
+    tl.to(walls, { strokeDashoffset: 0, duration: 2, stagger: .25 });
+    const step = (i, objTl) => {
+      tl.to(steps[i - 1], { autoAlpha: 0, y: -40, duration: .6 }, '+=.4');
+      tl.to(steps[i], { autoAlpha: 1, y: 0, duration: .6 }, '<.2');
+      objTl();
+    };
+    step(1, () => { tl.to(rt, { scale: 1, duration: .6, ease: 'back.out(2)' }); tl.fromTo(waves, { scale: .3, transformOrigin: '50% 100%' }, { scale: 1, stagger: .15, duration: .6 }, '<'); });
+    step(2, () => { tl.to(kl, { scale: 1, duration: .6, ease: 'back.out(2)' }); tl.fromTo(kl, { rotation: -4 }, { rotation: 0, duration: .4 }); });
+    step(3, () => { tl.to(lf, { scale: 1, duration: .6, ease: 'back.out(2)' }); tl.fromTo(lf, { y: -20 }, { y: 0, duration: .4, ease: 'bounce.out' }); });
+    step(4, () => { tl.to(cat, { scale: 1, duration: .8, ease: 'elastic.out(1,.45)' }); });
+    tl.to({}, { duration: .8 });
+    keep(pin, G.to(waves, { opacity: .25, duration: .5, stagger: .15, repeat: -1, yoyo: true }));
+  })();
+
+  /* =============== 3. GUESS: мини-чертежи =============== */
+  (() => {
+    const box2 = $('[data-guess]');
+    const Q = [
+      { room: 'mutfak', key: 'buzdolabı', st: 'var', t: 'Mutfakta buzdolabı …', ru: 'на кухне — холодильник?' },
+      { room: 'oda', key: 'klima', st: 'yok', t: 'Odada klima …', ru: 'в комнате — кондиционер?' },
+      { room: 'balkon', key: 'kedi', st: 'var', t: 'Balkonda kedi …', ru: 'на балконе — кошка?' },
+    ];
+    Q.forEach((q) => {
+      const c = el('div', 'gc');
+      const s = sv('svg', { class: 'iso', viewBox: '0 0 600 470', 'aria-hidden': 'true' }, c);
+      drawRoom(s, q.room); const g = addItem(s, q.key, q.st);
+      c.append(el('div', 'gc__tr', q.t, { lang: 'tr' }), el('div', 'ru', q.ru, { 'data-ui': '', style: 'text-align:center' }));
+      const row = el('div', 'row'); const fb = el('p', 'gc__fb', '', { 'aria-live': 'polite' });
+      ['var', 'yok'].forEach((v) => {
+        const b = el('button', 'chip', v, { type: 'button', lang: 'tr' });
+        b.addEventListener('click', () => {
+          const ok = v === q.st, full = q.t.replace('…', q.st + '.');
+          c.classList.remove('is-right', 'is-wrong'); c.classList.add(ok ? 'is-right' : 'is-wrong');
+          fb.textContent = ok ? `Верно: ${full}` : `На этом спотыкаются все. Здесь: ${full}`;
+          speak(full); if (ok) sparkAt(b);
+          if (A) { G.fromTo(g, { scale: 1.15, svgOrigin: originOf(g) }, { scale: 1, svgOrigin: originOf(g), duration: .6, ease: 'elastic.out(1,.4)' }); G.fromTo(c, { rotation: ok ? 0 : -1 }, { rotation: 0, duration: .5 }); }
+        });
+        row.appendChild(b);
+      });
+      c.append(row, fb); box2.appendChild(c);
+    });
+    if (A && ST) G.from('.gc', { y: 90, rotation: (i) => (i - 1) * 4, duration: .9, stagger: .12, ease: 'power4.out', scrollTrigger: { trigger: box2, start: 'top 85%' } });
+  })();
+
+  /* =============== 4. RULE: блоки-участки =============== */
+  (() => {
+    const places = ['oda', 'mutfak', 'banyo', 'balkon'], things = ['masa', 'lamba', 'kedi', 'bitki', 'ayna'];
+    let pi = 0, ti = 0, v = 'var';
+    const out = $('[data-sentence]'), bVar = $('[data-blk="var"]');
+    function render(pop) {
+      const t = `${LOC[places[pi]]} ${ITEMS[things[ti]].tr} ${v}.`;
+      $('[data-bplace]').textContent = LOC[places[pi]]; $('[data-bthing]').textContent = ITEMS[things[ti]].tr; $('[data-bvar]').textContent = v;
+      $('[data-bicon] use').setAttribute('href', v === 'var' ? '#b-ring' : '#b-quarter');
+      bVar.classList.toggle('is-yok', v === 'yok');
+      out.innerHTML = '';
+      const w1 = el('span', 'w place', LOC[places[pi]]), w2 = el('span', 'w', ITEMS[things[ti]].tr), w3 = el('span', 'w ' + (v === 'var' ? 'v' : 'y'), v + '.');
+      out.append(w1, w2, w3); out.dataset.say = t; out.style.cursor = 'pointer';
+      const ru = el('div', 'ru', ruLine(places[pi], things[ti], v), { 'data-ui': '' }); out.appendChild(ru);
+      if (A && pop) G.from([w1, w2, w3], { y: 40, rotationX: -70, duration: .6, stagger: .08, ease: 'power4.out' });
+      return t;
+    }
+    const flip = (b) => { if (A) G.fromTo(b, { rotationY: -180 }, { rotationY: 0, duration: .7, ease: 'power3.out' }); };
+    $$('[data-blk]').forEach((b) => b.addEventListener('click', () => {
+      const k = b.dataset.blk;
+      if (k === 'place') pi = (pi + 1) % places.length;
+      if (k === 'thing') ti = (ti + 1) % things.length;
+      if (k === 'var') v = v === 'var' ? 'yok' : 'var';
+      flip(b); speak(render(true));
+    }));
+    render(false);
+    if (A && ST) {
+      /* закреплённая сцена: участок, дом, табличка — фраза собирается по мере прокрутки */
+      const blks = $$('.blk'), cap = $('[data-rcap]');
+      const CAPS = ['1 · участок: где', '2 · дом: что', '3 · табличка: есть', '4 · табличка переворачивается: нет'];
+      let auto = -1;
+      const stage = (n) => { if (n === auto) return; auto = n; cap.textContent = CAPS[n]; const want = n >= 3 ? 'yok' : 'var'; if (v !== want) { v = want; render(true); } blks.forEach((b, i) => b.style.outline = i === Math.min(n, 2) ? '3px solid var(--or)' : ''); };
+      const tl = G.timeline({ scrollTrigger: { trigger: '[data-rstage]', start: innerWidth >= 920 ? 'center center' : 'top top+=40', end: '+=1500', pin: true, scrub: .7, anticipatePin: 1, onUpdate: (st) => stage(Math.min(3, Math.floor(st.progress * 4.2))), onLeave: () => blks.forEach((b) => (b.style.outline = '')) } });
+      tl.fromTo(blks[0], { x: -320, y: -140, rotation: -30 }, { x: 0, y: 0, rotation: 0, duration: 1, ease: 'power3.out' });
+      tl.fromTo(blks[1], { y: -360, rotation: 20 }, { y: 0, rotation: 0, duration: 1, ease: 'bounce.out' });
+      tl.fromTo(blks[2], { x: 320, y: -140, rotation: 30 }, { x: 0, y: 0, rotation: 0, duration: 1, ease: 'power3.out' });
+      tl.fromTo('[data-sentence]', { scale: .8, y: 24 }, { scale: 1, y: 0, duration: .8, ease: 'back.out(2)' });
+      tl.to(blks[2], { rotationY: 360, duration: 1.2, ease: 'power2.inOut' });
+      tl.to({}, { duration: .4 });
+    }
+  })();
+
+  /* =============== 5. COMPARE: стол не болеет =============== */
+  (() => {
+    const sw = $('[data-csw]'), ru = $('[data-cru]'), tr = $('[data-ctr]'), kz = $('[data-ckz]');
+    function render(neg, pop) {
+      ru.innerHTML = neg ? 'В комнате нет <span class="chg">стола</span>.' : 'В комнате есть <span class="same">стол</span>.';
+      tr.innerHTML = neg ? 'Odada <span class="same">masa</span> <span class="y">yok</span>.' : 'Odada <span class="same">masa</span> <span class="v">var</span>.';
+      kz.innerHTML = neg ? 'Бөлмеде <span class="same">үстел</span> жоқ.' : 'Бөлмеде <span class="same">үстел</span> бар.';
+      tr.dataset.say = neg ? 'Odada masa yok.' : 'Odada masa var.';
+      if (!A || !pop) return;
+      G.fromTo($('.chg, .same', ru), { rotationX: -90, y: -10 }, { rotationX: 0, y: 0, duration: .6, ease: 'back.out(2)' });
+      G.fromTo($('.same', tr), { scale: 1.25 }, { scale: 1, duration: .6, ease: 'elastic.out(1,.4)' });
+      G.fromTo($('.same', kz), { scale: 1.25 }, { scale: 1, duration: .6, ease: 'elastic.out(1,.4)', delay: .1 });
+      G.fromTo('.lane', { y: 10 }, { y: 0, duration: .4, stagger: .06 });
+    }
+    sw.addEventListener('click', () => { const on = sw.getAttribute('aria-checked') !== 'true'; sw.setAttribute('aria-checked', String(on)); render(on, true); speak(on ? 'Odada masa yok.' : 'Odada masa var.'); });
+    render(false, false);
+    if (A && ST) {
+      G.from('.lane', { y: 60, duration: .8, stagger: .1, ease: 'power4.out', scrollTrigger: { trigger: '.cmp', start: 'top 85%' } });
+      ST.create({ trigger: '.cmp', start: 'top 55%', once: true, onEnter: () => setTimeout(() => { if (sw.getAttribute('aria-checked') !== 'true') sw.click(); }, 900) });
+    }
+  })();
+
+  /* =============== 6. QUESTION =============== */
+  (() => {
+    const line = $('[data-qline]'), mi = $('[data-qmi]');
+    const SET = { var: ['Odada kedi ', 'var', 'mı', 'Evet, var.'], yok: ['Odada kedi ', 'yok', 'mu', 'Hayır, yok.'] };
+    const qa = $('[data-qa]'), qv = $('[data-qv]');
+    const fill = (k) => {
+      if (k === 'ne') { qa.textContent = 'Odada ne '; qv.textContent = 'var'; qv.className = 'v'; mi.hidden = true; return; }
+      const [a, v, m] = SET[k]; qa.textContent = a; qv.textContent = v; qv.className = k === 'var' ? 'v' : 'y'; mi.textContent = m; mi.hidden = false;
+    };
+    $$('[data-ans]').forEach((b) => b.addEventListener('click', () => {
+      $$('[data-ans]').forEach((x) => x.classList.toggle('is-on', x === b));
+      fill(b.dataset.ans);
+      if (A) { G.from($$('span', line), { y: 30, rotationX: -60, duration: .5, stagger: .06, ease: 'back.out(2)' }); G.fromTo(b, { x: 8 }, { x: 0, duration: .5, ease: 'back.out(3)' }); }
+    }));
+    if (A && ST) {
+      /* закреплённая сцена: частица mı влетает из огромной фоновой надписи и прилипает к фразе */
+      let mode = '';
+      const setLine = (k) => { if (k === mode) return; mode = k; fill(k); };
+      setLine('var');
+      const tl = G.timeline({ scrollTrigger: { trigger: '[data-qstage]', start: innerWidth >= 900 ? 'center center' : 'top top+=40', end: '+=1400', pin: true, scrub: .7, anticipatePin: 1,
+        onUpdate: (st) => setLine(st.progress > .62 ? 'yok' : 'var') } });
+      tl.fromTo(line, { scale: .85 }, { scale: 1, duration: .5 });
+      tl.fromTo(mi, { x: 380, y: -220, scale: 5, rotation: 40 }, { x: 0, y: 0, scale: 1, rotation: 0, duration: 1.2, ease: 'power3.in' });
+      tl.fromTo('[data-qq]', { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(3)' });
+      tl.fromTo('.harm div', { y: 24, rotationX: -60 }, { y: 0, rotationX: 0, duration: .7, stagger: .2 });
+      tl.to(line, { rotationX: 360, duration: 1, ease: 'power2.inOut' });
+      tl.fromTo('.ans button', { x: 120 }, { x: 0, duration: .7, stagger: .15, ease: 'power3.out' });
+      tl.to({}, { duration: .3 });
+      $('[data-giant]', $('#question')) && tl.to($('[data-giant]', $('#question')), { scale: 1.3, duration: 4.5, ease: 'none' }, 0);
+    }
+  })();
+
+  /* =============== 7. FOCUS: две камеры =============== */
+  (() => {
+    const s1 = $('[data-cam1]'), s2 = $('[data-cam2]');
+    drawRoom(s1); drawRoom(s2);
+    byDepth(['masa', 'lamba', 'bitki', 'kedi']).forEach((k) => { addItem(s1, k); addItem(s2, k); });
+    const book = (svg) => { const g = sv('g', { class: 'it' }, svg); box(g, 4.4, 5, 3.4, 1.4, 1, .35); box(g, 4.5, 5.05, 3.75, 1.2, .9, .3); return g; };
+    const b1 = book(s1); book(s2);
+    function shoot() {
+      if (!A) return;
+      const o = originOf(b1).split(' ').map(Number);
+      G.fromTo(s1, { scale: 1, x: 0, y: 0 }, { scale: 2.4, x: (300 - o[0]) * 1.2, y: (235 - o[1]) * 1.2, transformOrigin: '50% 50%', duration: 1.4, ease: 'power3.inOut' });
+      G.fromTo(s2, { scale: 1.6, x: 140 }, { scale: 1, x: 0, duration: 1.8, ease: 'power2.inOut' });
+      G.fromTo('.cam__vf i', { scale: 1.6 }, { scale: 1, duration: .5, stagger: .05, ease: 'back.out(3)' });
+    }
+    $('[data-shoot]').addEventListener('click', shoot);
+    $$('.cam').forEach((c) => c.addEventListener('click', () => { if (A) G.fromTo($$('.cam__vf i', c), { scale: 1.4 }, { scale: 1, duration: .4, stagger: .04 }); }));
+    if (A) keep('.cam__rec', G.to('.cam__rec', { opacity: .3, duration: .6, repeat: -1, yoyo: true }));
+    if (A && ST) {
+      /* закреплённая сцена: прокрутка ведёт зум — левая камера наезжает на книгу, правая отъезжает */
+      const o = originOf(b1).split(' ').map(Number);
+      const tl = G.timeline({ scrollTrigger: { trigger: '[data-cstage]', start: innerWidth >= 900 ? 'center center' : 'top top+=40', end: '+=1200', pin: true, scrub: .8, anticipatePin: 1 } });
+      tl.fromTo(s1, { scale: 1, x: 0, y: 0 }, { scale: 2.6, x: (300 - o[0]) * 1.3, y: (235 - o[1]) * 1.3, transformOrigin: '50% 50%', duration: 2, ease: 'power2.inOut' }, 0);
+      tl.fromTo(s2, { scale: 2.2, x: 160, y: 40 }, { scale: 1, x: 0, y: 0, duration: 2, ease: 'power2.inOut' }, 0);
+      tl.fromTo('.cam__vf i', { scale: 2 }, { scale: 1, duration: .6, stagger: .05 }, 0);
+      tl.fromTo('.cam__cap', { y: 40 }, { y: 0, duration: .6, stagger: .3 }, 1.2);
+    }
+  })();
+
+  /* =============== 8. THREE NO: двери =============== */
+  (() => {
+    $$('[data-door]').forEach((leaf, i) => leaf.addEventListener('click', () => {
+      const open = !leaf.classList.contains('is-open');
+      leaf.classList.toggle('is-open', open);
+      if (A) G.to(leaf, { rotationY: open ? -100 : 0, duration: .9, ease: open ? 'power3.out' : 'bounce.out' });
+      else leaf.style.transform = open ? 'rotateY(-100deg)' : '';
+      if (open) { const s = $('a-say', leaf.parentElement); if (s) speak(s.textContent.trim()); }
+    }));
+    if (A && ST) {
+      /* закреплённая сцена: двери открываются одна за другой, пока листаешь */
+      const leaves = $$('[data-door]');
+      const tl = G.timeline({ scrollTrigger: { trigger: '[data-dstage]', start: innerWidth >= 860 ? 'center center' : 'top top+=40', end: '+=' + (innerWidth >= 860 ? 1300 : 1700), pin: true, scrub: .7, anticipatePin: 1,
+        onUpdate: (st) => leaves.forEach((d, i) => d.classList.toggle('is-open', st.progress > .2 + i * .27)) } });
+      tl.from('.door', { y: 120, rotationX: 35, duration: .8, stagger: .15, ease: 'power3.out' });
+      leaves.forEach((d, i) => { tl.to(d, { rotationY: -100, duration: 1, ease: 'power2.inOut' }); tl.fromTo($('.door__in', d.parentElement), { x: -30 }, { x: 0, duration: .6 }, '<.3'); });
+      tl.to({}, { duration: .3 });
+    }
+  })();
+
+  /* =============== 9. STREET: горизонтальная панорама =============== */
+  (() => {
+    const svg = $('[data-street]'), wrap = $('[data-swrap]'), bar = $('[data-shopbar]');
+    const qEl = $('[data-sq]'), qru = $('[data-sqru]'), aEl = $('[data-sa]'), sayB = $('[data-ssay]');
+    const SHOPS = [
+      { id: 'bakkal', name: 'BAKKAL', x: 120, w: 300, col: '#2148c8', q: 'Bakkalda ekmek var mı?', qru: 'В бакалее есть хлеб?', a: 'Evet, var.', st: 'var', card: 'EKMEK VAR' },
+      { id: 'eczane', name: 'ECZANE', x: 500, w: 280, col: '#2e8b57', q: 'Eczanede maske var mı?', qru: 'В аптеке есть маски?', a: 'Hayır, yok.', st: 'yok', card: 'MASKE YOK' },
+      { id: 'atm', name: 'ATM', x: 860, w: 200, col: '#262523', q: 'ATM\'de para var mı?', qru: 'В банкомате есть деньги?', a: 'Yok!', st: 'yok', card: 'PARA YOK' },
+      { id: 'kafe', name: 'KAFE', x: 1140, w: 320, col: '#e4572e', q: 'Kafede çay var mı?', qru: 'В кафе есть чай?', a: 'Evet, var. Simit de var.', st: 'var', card: 'ÇAY VAR' },
+      { id: 'durak', name: 'DURAK', x: 1540, w: 260, col: '#16285f', q: 'Durakta otobüs var mı?', qru: 'На остановке есть автобус?', a: 'Hayır, yok.', st: 'yok', card: 'OTOBÜS YOK' },
+      { id: 'park', name: 'PARK', x: 1880, w: 400, col: '#2148c8', q: 'Parkta kedi var mı?', qru: 'В парке есть кошки?', a: 'Çok kedi var!', st: 'var', card: 'ÇOK KEDİ VAR' },
+    ];
+    sv('rect', { x: 0, y: 0, width: 2400, height: 600, fill: '#f7f2e8' }, svg);
+    for (let i = 0; i < 24; i++) sv('rect', { x: i * 100 + 20, y: 60 + (i % 5) * 18, width: 80, height: 470 - (i % 5) * 18, fill: i % 2 ? '#ece4d4' : '#e6dcc8', stroke: '#262523', 'stroke-width': 1 }, svg);
+    sv('rect', { x: 0, y: 530, width: 2400, height: 70, fill: '#d6c8ad' }, svg);
+    sv('path', { d: 'M0 560H2400', stroke: '#262523', 'stroke-width': 2, 'stroke-dasharray': '30 20' }, svg);
+    const groups = SHOPS.map((s) => {
+      const g = sv('g', { class: 'shop', role: 'button', tabindex: '0', 'aria-label': s.q, 'data-shop': s.id }, svg);
+      sv('rect', { x: s.x, y: 150, width: s.w, height: 380, fill: '#f4eee2', stroke: '#262523', 'stroke-width': 2 }, g);
+      for (let r = 0; r < 2; r++) for (let c = 0; c < Math.floor(s.w / 70); c++) sv('rect', { x: s.x + 20 + c * 70, y: 180 + r * 70, width: 46, height: 46, fill: '#cfe0ff', stroke: '#262523', 'stroke-width': 1.5 }, g);
+      const aw = sv('g', {}, g);
+      for (let k = 0; k < s.w / 30; k++) sv('path', { d: `M${s.x + k * 30} 330h30l-6 40h-18z`, fill: k % 2 ? '#f4eee2' : s.col, stroke: '#262523', 'stroke-width': 1.2 }, aw);
+      const sign = sv('g', { class: 'sign' }, g);
+      sv('rect', { x: s.x + 20, y: 300, width: s.w - 40, height: 34, fill: s.col }, sign);
+      sv('text', { x: s.x + s.w / 2, y: 326, 'text-anchor': 'middle', lang: 'tr' }, sign).textContent = s.name;
+      sv('rect', { x: s.x + s.w / 2 - 50, y: 390, width: 100, height: 140, fill: '#262523' }, g);
+      const card = sv('g', { class: 'card', 'data-card': s.id }, g);
+      sv('path', { d: `M${s.x + s.w / 2 - 20} 120V150M${s.x + s.w / 2 + 20} 120V150`, stroke: '#262523', 'stroke-width': 2 }, card);
+      sv('rect', { x: s.x + s.w / 2 - 105, y: 70, width: 210, height: 50, fill: s.st === 'var' ? '#2148c8' : '#f4eee2', stroke: s.st === 'var' ? '#262523' : '#e4572e', 'stroke-width': 2.5, 'stroke-dasharray': s.st === 'var' ? '' : '8 6' }, card);
+      sv('text', { x: s.x + s.w / 2, y: 104, 'text-anchor': 'middle', fill: s.st === 'var' ? '#fff' : '#e4572e', lang: 'tr' }, card).textContent = s.card;
+      return g;
+    });
+    const ped = sv('g', { 'data-ped': '' }, svg);
+    sv('circle', { cx: 0, cy: 470, r: 14, fill: '#2148c8', stroke: '#262523', 'stroke-width': 2 }, ped);
+    sv('path', { d: 'M0 484v34M0 518l-12 12M0 518l12 12M0 494l-14 12M0 494l14 12', stroke: '#262523', 'stroke-width': 3, 'stroke-linecap': 'round' }, ped);
+    let cur = -1;
+    function pick(i, user) {
+      if (i === cur && !user) return; cur = i;
+      const s = SHOPS[i];
+      qEl.textContent = s.q; qru.textContent = s.qru; aEl.textContent = s.a; aEl.className = 'street__a ' + (s.st === 'var' ? 'v' : 'y');
+      sayB.dataset.say = `${s.q} ${s.a}`;
+      $$('.chip', bar).forEach((c, k) => c.classList.toggle('is-on', k === i));
+      if (user) speak(`${s.q} ${s.a}`);
+      if (A) { G.fromTo([qEl, aEl], { y: 16 }, { y: 0, duration: .45, stagger: .08, ease: 'back.out(2.5)' }); G.fromTo(`[data-card="${s.id}"]`, { rotation: -8, svgOrigin: `${s.x + s.w / 2} 120` }, { rotation: 0, svgOrigin: `${s.x + s.w / 2} 120`, duration: 1, ease: 'elastic.out(1,.3)' }); }
+    }
+    groups.forEach((g, i) => { g.addEventListener('click', () => pick(i, true)); g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i, true); } }); });
+    SHOPS.forEach((s, i) => { const b = el('button', 'chip', s.name.toLowerCase(), { type: 'button', lang: 'tr' }); b.addEventListener('click', () => pick(i, true)); bar.appendChild(b); });
+    pick(0, false);
+    if (A) G.set(ped, { x: 60 });
+    if (A && ST) {
+      const dist = () => Math.max(0, svg.getBoundingClientRect().width - wrap.clientWidth);
+      G.to(svg, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: wrap, start: 'center center', end: () => '+=' + Math.max(600, dist() * 1.2), pin: '#city .street', scrub: .6, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: (st) => { const i = Math.min(SHOPS.length - 1, Math.floor(st.progress * SHOPS.length)); pick(i, false); G.set(ped, { x: 60 + st.progress * 2240 }); } } });
+      keep(ped, G.to('[data-ped] path', { rotation: 8, svgOrigin: '0 518', duration: .3, repeat: -1, yoyo: true }));
+    }
+  })();
+
+  /* =============== 10. LAB: собери квартиру =============== */
+  (() => {
+    const svg = $('[data-lroom]'), rbox = $('[data-lrooms]'), ibox = $('[data-litems]'), main = $('[data-lmain]'), ru = $('[data-lru]'), why = $('[data-lwhy]'), list = $('[data-llist]'), sayB = $('[data-lsay]'), cbox = $('[data-lcount]'), cval = $('[data-cval]');
+    const ROOMS = ['oda', 'mutfak', 'banyo', 'balkon'];
+    const KEYS = Object.keys(ITEMS);
+    const COUNTABLE = ['sandalye', 'lamba', 'kedi', 'bitki'];
+    const S = { mode: 'say', room: 'oda', last: 'masa', n: 1, have: { oda: { masa: 1, lamba: 1, sandalye: 1 }, mutfak: { buzdolabı: 1, masa: 1 }, banyo: { ayna: 1 }, balkon: { kedi: 1, bitki: 1 } } };
+    function draw(anim) {
+      drawRoom(svg, S.room);
+      byDepth(KEYS).forEach((k) => {
+        const n = S.have[S.room][k] || 0;
+        if (!n) return;
+        const copies = S.mode === 'count' && k === S.last && COUNTABLE.includes(k) ? S.n : 1;
+        for (let c = 0; c < copies; c++) { const g = addItem(svg, k, 'var', c); if (anim && k === S.last) setState(g, 'var', true); }
+      });
+    }
+    const li = (t) => el('li', '', t);
+    function out(user) {
+      const k = S.last, room = S.room, has = !!S.have[room][k];
+      const st = has ? 'var' : 'yok';
+      let t, r;
+      why.innerHTML = '';
+      if (S.mode === 'ask') {
+        t = `${LOC[room]} ${ITEMS[k].tr} var mı? — ${has ? 'Evet, var.' : 'Hayır, yok.'}`;
+        r = `${LOCRU[room]} есть ${ITEMS[k].ru}? — ${has ? 'Да, есть.' : 'Нет.'}`;
+        why.append(li('Вопрос: та же фраза плюс mı. После var — mı.'), li(has ? 'Вещь на чертеже, отвечаем var.' : 'Вещи нет, отвечаем yok.'));
+      } else if (S.mode === 'count' && COUNTABLE.includes(k) && has) {
+        t = `${LOC[room]} ${NUM[S.n - 1]} ${ITEMS[k].tr} var.`;
+        r = `${LOCRU[room]} ${ITEMS[k].cnt[S.n - 1]}.`;
+        why.append(li(`Число ${NUM[S.n - 1]} уже говорит «сколько».`), li(`Поэтому ${ITEMS[k].tr} без -lar.`));
+      } else {
+        t = `${LOC[room]} ${ITEMS[k].tr} ${st}.`;
+        r = ruLine(room, k, st);
+        why.append(li(`Место первым: ${LOC[room]}.`), li(`Вещь как в словаре: ${ITEMS[k].tr}.`), li(has ? 'Вещь нарисована — в конце var.' : 'Вещи нет — в конце yok.'));
+        if (S.mode === 'count' && !COUNTABLE.includes(k)) why.append(li('Эту вещь не считаем. Выбери стул, лампу, кошку или растение.'));
+      }
+      main.textContent = t; main.className = 'out__main ' + (st === 'var' ? 'v' : 'y'); sayB.dataset.say = t; ru.textContent = r;
+      list.innerHTML = '';
+      KEYS.filter((x) => S.have[room][x]).forEach((x) => { const s = `${LOC[room]} ${ITEMS[x].tr} var.`; const b = el('button', '', s, { type: 'button', lang: 'tr' }); b.dataset.say = s; list.appendChild(b); });
+      if (A) { G.fromTo(main, { y: 18, rotationX: -50 }, { y: 0, rotationX: 0, duration: .55, ease: 'back.out(2)' }); G.from($$('li', why), { x: 20, duration: .35, stagger: .06 }); }
+      if (user) speak(t);
+    }
+    function chips() {
+      ibox.innerHTML = '';
+      KEYS.forEach((k) => {
+        const has = !!S.have[S.room][k];
+        const b = el('button', 'chip ' + (has ? 'is-var' : 'is-yok'), ITEMS[k].tr, { type: 'button', lang: 'tr' });
+        b.addEventListener('click', () => {
+          if (S.mode === 'count') { S.have[S.room][k] = 1; } else if (S.mode === 'say') { if (S.have[S.room][k]) delete S.have[S.room][k]; else S.have[S.room][k] = 1; }
+          S.last = k; chips(); draw(true); out(true);
+        });
+        ibox.appendChild(b);
+      });
+    }
+    ROOMS.forEach((r) => { const b = el('button', 'chip' + (r === 'oda' ? ' is-on' : ''), LOC[r], { type: 'button', lang: 'tr' }); b.dataset.r = r; b.addEventListener('click', () => { S.room = r; $$('.chip', rbox).forEach((x) => x.classList.toggle('is-on', x === b)); chips(); draw(false); if (A) G.from(svg, { rotationY: -30, transformPerspective: 900, duration: .7, ease: 'power3.out' }); out(true); }); rbox.appendChild(b); });
+    $$('[data-mode]').forEach((b) => b.addEventListener('click', () => { S.mode = b.dataset.mode; $$('[data-mode]').forEach((x) => x.setAttribute('aria-selected', String(x === b))); cbox.hidden = S.mode !== 'count'; if (S.mode === 'count' && !COUNTABLE.includes(S.last)) { S.last = 'sandalye'; S.have[S.room].sandalye = 1; } chips(); draw(true); out(true); }));
+    const setN = (d) => { S.n = Math.min(5, Math.max(1, S.n + d)); cval.textContent = NUM[S.n - 1]; draw(true); out(true); if (A) G.fromTo(cval, { scale: 1.4 }, { scale: 1, duration: .4, ease: 'back.out(3)' }); };
+    $('[data-cminus]').addEventListener('click', () => setN(-1));
+    $('[data-cplus]').addEventListener('click', () => setN(1));
+    sayB.addEventListener('click', () => { if (A) G.fromTo(main, { x: -6 }, { x: 0, duration: .5, ease: 'elastic.out(1,.3)' }); });
+    chips(); draw(false); out(false);
+    if (A && ST) G.fromTo('.board', { rotationX: 25, transformPerspective: 900, y: 50 }, { rotationX: 0, y: 0, ease: 'none', scrollTrigger: { trigger: '.board', start: 'top bottom', end: 'top 55%', scrub: true } });
+    if (A && ST) G.from('.mode', { y: -30, duration: .5, stagger: .08, ease: 'back.out(2)', scrollTrigger: { trigger: '.modes', start: 'top 90%' } });
+  })();
+
+  /* =============== 11. TRAPS =============== */
+  (() => {
+    $$('[data-trap]').forEach((card) => {
+      const x = $('.x', card), ok = $('.ok', card), b = $('[data-fix]', card);
+      b.addEventListener('click', () => {
+        if (card.classList.contains('is-fixed')) { card.classList.remove('is-fixed'); ok.hidden = true; b.textContent = 'Исправить'; return; }
+        card.classList.add('is-fixed'); ok.hidden = false; b.textContent = 'Вернуть ошибку'; speak(ok.dataset.say);
+        if (A) { G.fromTo(x, { scaleX: 1 }, { scaleX: .96, duration: .3 }); G.fromTo(ok, { y: -40, rotationX: -90 }, { y: 0, rotationX: 0, duration: .7, ease: 'back.out(2)' }); sparkAt(ok); }
+      });
+    });
+    if (A && ST) G.from('.trap', { y: 80, rotation: () => (Math.random() - .5) * 6, duration: .8, stagger: .08, ease: 'power4.out', scrollTrigger: { trigger: '[data-traps]', start: 'top 85%' } });
+  })();
+
+  /* =============== 13. PRACTICE: приёмка квартиры (custom) =============== */
+  (async () => {
+    const EX = 'a1.var-yok.ex5';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    if (!root || !window.AlternaKit) return;
+    const svg = $('[data-iroom]', root), q = $('[data-iq]', root), opts = $('[data-iopts]', root), st = $('[data-ist]', root), cnt = $('[data-icount]', root), again = $('[data-iagain]', root);
+    let items = [];
+    try { items = (await window.AlternaKit.exercise(EX)).items; } catch (e) { st.textContent = 'Упражнение не загрузилось.'; return; }
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    const tr = () => window.AlternaTracker;
+    function show() {
+      const it = items[i];
+      drawRoom(svg, it.room);
+      byDepth(Object.keys(it.show)).map((k) => [k, it.show[k]]).forEach(([k, s]) => { const g = addItem(svg, k, s); if (A && k === it.item) G.fromTo(g, { scale: .3, svgOrigin: originOf(g) }, { scale: 1, svgOrigin: originOf(g), duration: .7, ease: 'back.out(2)' }); });
+      q.innerHTML = ''; const [a, b] = it.text.split('___');
+      q.append(document.createTextNode(a), el('span', 'ins__gap', '…'), document.createTextNode(b || ''));
+      opts.innerHTML = '';
+      it.options.forEach((o, k) => { const bt = el('button', '', `${k + 1}. ${o}`, { type: 'button', lang: 'tr' }); bt.addEventListener('click', () => pick(k)); opts.appendChild(bt); });
+      cnt.textContent = `${i + 1} / ${items.length}`; st.textContent = 'Синее — var, пунктир — yok.';
+      t0 = performance.now(); locked = false;
+      if (A) G.fromTo(svg, { rotationY: -25, transformPerspective: 900 }, { rotationY: 0, duration: .6, ease: 'power3.out' });
+    }
+    function pick(k) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i], ok = k === it.answer, bs = $$('button', opts);
+      if (ok) correct++;
+      bs[it.answer].classList.add('is-right'); if (!ok) bs[k].classList.add('is-wrong');
+      $('.ins__gap', q).textContent = it.options[it.answer];
+      st.textContent = ok ? `Верно: ${it.text.replace('___', it.options[it.answer])}` : `Не совсем. ${it.explanation}`;
+      tr() && tr().answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.options[k], timeMs: Math.round(performance.now() - t0) });
+      if (ok) sparkAt(bs[k]);
+      if (A && !ok) G.fromTo(root, { x: -8 }, { x: 0, duration: .6, ease: 'elastic.out(1,.3)' });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else { tr() && tr().complete({ exerciseId: EX, correct, total: items.length }); cnt.textContent = 'готово'; st.textContent = `${correct} из ${items.length}. Квартира принята. Кот тоже.`; again.hidden = false; opts.innerHTML = ''; }
+      }, RM ? 250 : 1200);
+    }
+    root.addEventListener('keydown', (e) => { const n = Number(e.key); if (n >= 1 && items[i] && n <= items[i].options.length) { e.preventDefault(); pick(n - 1); } });
+    again.addEventListener('click', () => { i = 0; correct = 0; again.hidden = true; if (tr() && tr().start) tr().start(EX, 'practice'); show(); });
+    if (tr() && tr().start) tr().start(EX, 'practice');
+    show();
+    window.AlternaKit.registerSolver(EX, async () => {
+      if (i >= items.length) { i = 0; correct = 0; show(); }
+      for (const it of items.slice(i)) { locked = false; pick(it.answer); await new Promise((r) => setTimeout(r, RM ? 300 : 1250)); }
+    });
+  })();
+
+  /* =============== 15. CHEAT =============== */
+  (() => {
+    const msgs = $$('[data-fchat] .bub');
+    const play = () => { if (A) G.fromTo(msgs, { y: 30, rotationX: -60 }, { y: 0, rotationX: 0, duration: .6, stagger: .6, ease: 'back.out(2)' }); };
+    $('[data-freplay]').addEventListener('click', (e) => { play(); speak('Binada asansör var! Asansör yok. Merdiven var.'); sparkAt(e.currentTarget); });
+    const poster = $('[data-poster]');
+    if (A && fine) {
+      const rx = G.quickTo(poster, 'rotationX', { duration: .5 }), ry = G.quickTo(poster, 'rotationY', { duration: .5 });
+      G.set(poster, { transformPerspective: 1200 });
+      poster.addEventListener('pointermove', (e) => { const r = poster.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - .5) * 6); rx(-((e.clientY - r.top) / r.height - .5) * 6); });
+      poster.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    }
+    if (A && ST) {
+      G.from('.pc', { y: 80, rotationX: -30, transformPerspective: 900, duration: .9, stagger: .08, ease: 'power4.out', scrollTrigger: { trigger: poster, start: 'top 85%' } });
+      ST.create({ trigger: '[data-fchat]', start: 'top 80%', once: true, onEnter: play });
+    }
+  })();
+
+  /* =============== скроллбар: линейка архитектора =============== */
+  (() => {
+    const sb = $('[data-scrollbar]'), track = $('[data-sb-track]'), fill = $('.sb__fill', sb), pen = $('.sb__pen', sb), list = $('[data-sb-marks]');
+    const secs = $$('[data-section]');
+    const MAJOR = ['story', 'rule', 'question', 'city', 'lab', 'practice', 'cheat'];
+    const NAMES = { intro: 'Старт', story: 'Квартира', guess: 'Угадай', rule: 'Правило', compare: 'Сравни', question: 'Вопрос', focus: 'Камера', three: 'Три «нет»', city: 'Улица', lab: 'Конструктор', traps: 'Ловушки', video: 'Видео', practice: 'Практика', check: 'Проверка', cheat: 'Шпаргалка' };
+    const vert = () => innerWidth >= 768;
+    const marks = secs.map((s) => {
+      const k = s.dataset.section, li = el('li', MAJOR.includes(k) ? '' : 'minor');
+      const b = el('button', 'sb__mark', null, { type: 'button', 'aria-label': NAMES[k] || k }); b.dataset.goto = k; b.innerHTML = '<i></i>';
+      b.addEventListener('click', () => goTo(k));
+      li.append(b, el('span', 'sb__tip', NAMES[k] || k, { 'data-ui': '' })); list.appendChild(li);
+      return { k, s, li, b };
+    });
+    const top = (n) => n.getBoundingClientRect().top + scrollY;
+    function layout() { const max = document.documentElement.scrollHeight - innerHeight || 1; marks.forEach((m) => { const p = Math.min(1, Math.max(0, (top(m.s) - 40) / max)); if (vert()) { m.li.style.left = ''; m.li.style.top = p * 100 + '%'; } else { m.li.style.top = ''; m.li.style.left = p * 100 + '%'; } }); }
+    function update() {
+      const max = document.documentElement.scrollHeight - innerHeight || 1, p = Math.min(1, Math.max(0, scrollY / max));
+      if (vert()) { fill.style.transform = `scaleY(${p})`; pen.style.transform = `translateY(${p * track.clientHeight}px)`; }
+      else { fill.style.transform = `scaleX(${p})`; pen.style.transform = `translateX(${p * track.clientWidth}px)`; }
+      let here = marks[0]; marks.forEach((m) => { if (top(m.s) - innerHeight * .5 <= scrollY) here = m; });
+      marks.forEach((m) => m.b.classList.toggle('is-here', m === here));
+    }
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', () => { layout(); update(); });
+    addEventListener('alterna:read', (e) => { const m = marks.find((x) => x.k === (e.detail && e.detail.key)); if (m) { m.b.classList.add('is-read'); if (A) G.fromTo(m.b, { scale: 2 }, { scale: 1, duration: .5, ease: 'back.out(3)' }); } });
+    let drag = false;
+    const seek = (e) => { const r = track.getBoundingClientRect(); const p = vert() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width; window.scrollTo(0, Math.min(1, Math.max(0, p)) * (document.documentElement.scrollHeight - innerHeight)); };
+    track.addEventListener('pointerdown', (e) => { drag = true; try { track.setPointerCapture(e.pointerId); } catch (x) { /* */ } seek(e); });
+    track.addEventListener('pointermove', (e) => { if (drag) seek(e); });
+    track.addEventListener('pointerup', () => { drag = false; });
+    track.addEventListener('pointercancel', () => { drag = false; });
+    layout(); update();
+    addEventListener('load', () => { layout(); update(); });
+    setTimeout(() => { layout(); update(); }, 1500);
+    if (ST) ST.addEventListener('refresh', () => { layout(); update(); });
+  })();
+
+  /* =============== ачивка: четыре блока складываются в знак =============== */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    if (!detail || !detail.timeline || !detail.badge || !G) return;
+    const b = detail.badge, tl = detail.timeline;
+    const parts = ['.a-b1', '.a-b2', '.a-b3', '.a-b4'].map((s) => b.querySelector(s)).filter(Boolean);
+    const from = [[-60, -60], [60, -60], [-60, 60], [60, 60]];
+    parts.forEach((p, i) => tl.fromTo(p, { x: from[i][0], y: from[i][1], rotation: (i % 2 ? 90 : -90), transformOrigin: '50% 50%' }, { x: 0, y: 0, rotation: 0, duration: .55, ease: 'back.out(1.8)' }, .9 + i * .12));
+    if (parts[3]) tl.fromTo(parts[3], { scale: 1 }, { scale: 1.12, duration: .2, yoyo: true, repeat: 1, transformOrigin: '50% 50%' }, 1.9);
+  });
+
+  if (A && ST) {
+    addEventListener('load', () => ST.refresh());
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => ST.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ST.refresh(), 300));
+  }
+});
+</script>
+</body>
+</html>
