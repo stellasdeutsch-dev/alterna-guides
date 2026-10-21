@@ -486,6 +486,22 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 .typing i{width:7px;height:7px;border-radius:50%;background:#9aa3b5;display:block}
 .poster{transform-style:preserve-3d}
 .fc__sheen{position:absolute;inset:0;border-radius:20px;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.75) 48%,transparent 62%);transform:translateX(-120%)}
+
+/* ---------- v3: кинематографичные сцены ---------- */
+.conv{margin:6px 0 26px;padding:clamp(16px,3vw,30px);border-radius:24px;background:linear-gradient(170deg,#121520,#1d2232);color:#fff;overflow:hidden}
+.conv__stage{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(8px,3vw,44px);min-height:clamp(150px,30vw,270px)}
+.conv__in{text-align:right}
+.conv__word{display:inline-block;font:700 clamp(26px,6.6vw,64px)/1 'Onest',sans-serif;letter-spacing:.01em}
+.conv__last{display:inline-block;color:var(--gold)}
+.conv__last.vd{color:#9fbcff}
+.conv .cube{--s:clamp(66px,15vw,150px)}
+.conv__out{display:inline-block;font:700 clamp(24px,6vw,58px)/1 'Onest',sans-serif}
+.conv__out .t{color:var(--gold)}
+.conv__out .d{color:#9fbcff}
+.conv__cap{text-align:center;color:rgba(255,255,255,.82);min-height:2.8em;margin:12px auto 10px;max-width:46ch}
+.conv__list{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.conv__list li{padding:7px 13px;border-radius:999px;background:rgba(255,255,255,.08);font-weight:700}
+.conv__list li.is-done{background:#fff;color:#14161b}
 @media (prefers-reduced-motion: reduce){
   .hero__in,.deco .cube{animation:none !important}
   .fc__in,.sw__knob::after{transition:none}
@@ -755,11 +771,20 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
 </section>
 
 <!-- ================= 6. RULE ================= -->
-<section data-section="rule" data-words="34" id="rule">
+<section data-section="rule" data-words="41" id="rule">
   <div class="pn pn--white" data-pause>
     <div class="ribbon" aria-hidden="true"><div class="ribbon__in" lang="tr" data-ribbon="a"></div></div>
     <span class="kick"><span class="tri"></span><span data-ui>Правило</span></span>
     <h2 class="h2" data-split>Четыре шага</h2>
+    <div class="conv" data-conv>
+      <div class="conv__stage">
+        <div class="conv__in"><span class="conv__word" lang="tr" data-cw><span data-cwh>soka</span><span class="conv__last" data-cwl>k</span></span></div>
+        <div class="cube-wrap"><div class="cube" data-convcube><div class="cube__f f1">d</div><div class="cube__f cube__f--t f2">t</div><div class="cube__f f3">d</div><div class="cube__f cube__f--t f4">t</div><div class="cube__f f5"></div><div class="cube__f f6"></div></div></div>
+        <div><span class="conv__out" lang="tr" data-cout>sokak<span class="t">ta</span></span></div>
+      </div>
+      <p class="conv__cap" data-ccap>Последняя k — в клубе глухих. Кубик поворачивается гранью t.</p>
+      <ol class="conv__list" data-clist lang="tr"></ol>
+    </div>
     <div class="row" role="group" aria-label="Слово для правила" style="margin-bottom:14px">
       <button class="chip is-on" type="button" lang="tr" data-rw="sokak">sokak</button>
       <button class="chip" type="button" lang="tr" data-rw="okul">okul</button>
@@ -1334,8 +1359,20 @@ addEventListener('DOMContentLoaded', () => {
       G.fromTo(msgs, { y: 24, scale: .85 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .55 });
       G.fromTo('[data-chat] .bad', { backgroundColor: 'rgba(255,214,140,0)' }, { backgroundColor: 'rgba(255,214,140,.6)', duration: .4, delay: 1.2, repeat: 3, yoyo: true });
     }
-    if (A && ST) ST.create({ trigger: '[data-phone]', start: 'top 75%', once: true, onEnter: play });
-    if (A && ST) G.fromTo('.story__text p', { x: 30 }, { x: 0, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.story__text', start: 'top 85%', end: 'top 40%', scrub: 1 } });
+    if (A && ST) {
+      if (innerWidth >= 900) {
+        /* сцена: переписка идёт за прокруткой, рассказ проявляется строка за строкой */
+        const paras = $$('.story__text p');
+        const tl = G.timeline({ scrollTrigger: { trigger: '#story .story__grid', start: 'center center', end: '+=1500', pin: true, scrub: .7, anticipatePin: 1 } });
+        msgs.forEach((m, i) => { tl.fromTo(m, { y: 34, scale: .7, opacity: .15 }, { y: 0, scale: 1, opacity: 1, duration: .5, ease: 'back.out(2)' }); if (paras[i]) tl.fromTo(paras[i], { x: 50, opacity: .2 }, { x: 0, opacity: 1, duration: .5 }, '<'); });
+        tl.fromTo('[data-chat] .bad', { backgroundColor: 'rgba(255,214,140,0)' }, { backgroundColor: 'rgba(255,214,140,.75)', duration: .3, yoyo: true, repeat: 3 });
+        tl.fromTo('[data-phone]', { rotation: 0 }, { rotation: -3, y: 10, duration: .5 }, '<');
+        tl.fromTo('.story__q', { y: 40, scale: .9 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(2)' });
+      } else {
+        ST.create({ trigger: '[data-phone]', start: 'top 75%', once: true, onEnter: play });
+        G.fromTo('.story__text p', { x: 30 }, { x: 0, stagger: .12, ease: 'power3.out', scrollTrigger: { trigger: '.story__text', start: 'top 85%', end: 'top 40%', scrub: 1 } });
+      }
+    }
     pick.forEach((b) => b.addEventListener('click', () => {
       const chat = $('[data-chat]');
       pick.forEach((x) => x.classList.remove('is-right', 'is-wrong'));
@@ -1473,11 +1510,48 @@ addEventListener('DOMContentLoaded', () => {
     $('[data-drop]').addEventListener('click', drop);
     $('[data-drop-again]').addEventListener('click', () => { reset(); setTimeout(drop, RM ? 0 : 700); });
     if (A && ST) {
-      G.from(spans, { y: -120, rotation: () => (Math.random() - .5) * 40, duration: .9, ease: 'bounce.out', stagger: .05, scrollTrigger: { trigger: name, start: 'top 85%' } });
-      G.to('[data-wheel]', { rotation: 360, transformOrigin: '50% 50%', ease: 'none', scrollTrigger: { trigger: '[data-cart]', start: 'top bottom', end: 'bottom top', scrub: true } });
-      G.fromTo('[data-cart]', { x: -60 }, { x: 20, ease: 'none', scrollTrigger: { trigger: '[data-cart]', start: 'top bottom', end: 'bottom top', scrub: true } });
-      ST.create({ trigger: slots, start: 'top 75%', once: true, onEnter: () => setTimeout(drop, 600) });
+      /* сцена: имя падает буквами, тележка въезжает, гласные осыпаются, восемь глухих занимают ячейки */
+      const desk = innerWidth >= 900;
+      const cons = spans.filter((x) => x.classList.contains('cons'));
+      const tl = G.timeline({ scrollTrigger: { trigger: desk ? '#club .club' : name, start: desk ? 'center center' : 'top 75%', end: desk ? '+=1500' : '+=700', pin: desk, scrub: .7, anticipatePin: 1 } });
+      tl.from(spans, { y: -170, rotation: () => (Math.random() - .5) * 50, duration: .7, stagger: .03, ease: 'bounce.out' });
+      tl.fromTo('[data-cart]', { x: -340, rotation: -4 }, { x: 0, rotation: 0, duration: 1.1, ease: 'power2.out' }, 0);
+      tl.to('[data-wheel]', { rotation: 720, transformOrigin: '50% 50%', duration: 1.1, ease: 'power2.out' }, 0);
+      tl.to(vws, { y: 170, rotation: (i) => (i % 2 ? 80 : -80), scale: .4, opacity: 0, duration: .7, stagger: .1, ease: 'power2.in' });
+      tl.to(vws, { width: 0, duration: .35 });
+      tl.to(cons, { scale: 1.18, duration: .3, stagger: .04, yoyo: true, repeat: 1 });
+      tl.fromTo(slotBtns, { y: -90, rotation: -25, scale: .3 }, { y: 0, rotation: 0, scale: 1, duration: .7, stagger: .07, ease: 'back.out(2)' });
+      tl.to('[data-nuts] ellipse', { y: -50, duration: .3, stagger: .05, yoyo: true, repeat: 1 }, '<');
     }
+  })();
+
+  /* =============== СЦЕНА: конвейер кубика =============== */
+  (() => {
+    const W = [['sokak', false], ['okul', false], ['kitap', false], ['ev', false], ['dolmuş', false], ['Beşiktaş', true], ['Kadıköy', true]];
+    const cube = $('[data-convcube]'), cw = $('[data-cw]'), head = $('[data-cwh]'), last = $('[data-cwl]'), out = $('[data-cout]'), cap = $('[data-ccap]'), list = $('[data-clist]');
+    const R = W.map(([w, p]) => build(w, 'da', p));
+    const lis = R.map((r) => { const li = el('li', '', r.form); li.dataset.say = r.form; li.style.cursor = 'pointer'; list.appendChild(li); return li; });
+    function set(i) {
+      const r = R[i], w = W[i][0];
+      head.textContent = w.slice(0, -1); last.textContent = w.slice(-1); last.classList.toggle('vd', !r.vl);
+      out.innerHTML = ''; out.append(document.createTextNode(r.form.slice(0, r.form.length - r.aff.length)), el('span', r.vl ? 't' : 'd', r.aff));
+      cap.textContent = r.vl ? `Последняя ${r.last} — в клубе глухих. Кубик поворачивается гранью t.` : `Последняя ${r.last} — звонкая. Кубик остаётся гранью d.`;
+      lis.forEach((li, k) => li.classList.toggle('is-done', k <= i));
+    }
+    set(0);
+    if (!A || !ST) { lis.forEach((li) => li.classList.add('is-done')); return; }
+    G.set(cube, { rotationX: -20, rotationY: -32 });
+    let cur = 0;
+    const tl = G.timeline({ scrollTrigger: { trigger: '[data-conv]', start: innerWidth >= 900 ? 'center center' : 'top top+=40', end: '+=' + W.length * 380, pin: true, scrub: .6, anticipatePin: 1,
+      onUpdate: (st) => { const i = Math.min(W.length - 1, Math.floor(st.progress * W.length)); if (i !== cur) { cur = i; set(i); } } } });
+    R.forEach((r, i) => {
+      tl.fromTo(cw, { x: -320, rotation: -14, scale: .7 }, { x: 0, rotation: 0, scale: 1, duration: .35, ease: 'power3.out' });
+      tl.fromTo(last, { scale: 1, y: 0 }, { scale: 1.7, y: -10, duration: .12, yoyo: true, repeat: 1 });
+      tl.to(cube, { rotationY: (r.vl ? -122 : -32) - (i + 1) * 360, duration: .3, ease: 'power2.inOut' });
+      tl.fromTo(out, { scale: .3, x: -70 }, { scale: 1, x: 0, duration: .22, ease: 'back.out(2.5)' });
+      tl.to([cw, out], { y: -24, duration: .1 }, '+=.08');
+      tl.set([cw, out], { y: 0 });
+    });
   })();
 
   /* =============== 6. RULE: плеер =============== */
@@ -1722,6 +1796,14 @@ addEventListener('DOMContentLoaded', () => {
       dchips.appendChild(c);
     });
     go($('[data-place="Kabataş"]'), false);
+    if (A && ST) {
+      /* сцена: паром идёт по маршруту, на каждой пристани кубик выбирает аффикс */
+      const ROUTE = ['Kabataş', 'Beşiktaş', 'Bebek', 'Üsküdar', 'Kadıköy', 'Karaköy', 'Sultanahmet', 'Balat'].map((n) => $(`[data-place="${n}"]`));
+      const desk = innerWidth >= 1000;
+      let stop = -1;
+      ST.create({ trigger: desk ? '#city .city' : '[data-map]', start: desk ? 'center center' : 'top 30%', end: desk ? '+=1900' : 'bottom top', pin: desk, scrub: true, anticipatePin: 1,
+        onUpdate: (st) => { const i = Math.min(ROUTE.length - 1, Math.floor(st.progress * ROUTE.length)); if (i !== stop) { stop = i; go(ROUTE[i], false); } } });
+    }
     /* транспорт */
     const bubble = $('[data-tbubble]');
     $$('[data-tw2]').forEach((b) => b.addEventListener('click', () => {
