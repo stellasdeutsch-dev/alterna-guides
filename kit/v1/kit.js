@@ -91,7 +91,11 @@ function deviceVoice() {
   return same.length ? { voice: bestVoice(same), pitch: 1 } : { voice: bestVoice(trVoices), pitch: male ? 0.72 : 1.15 };
 }
 
+/* под автоматизацией (Playwright, Puppeteer, guide:check) и с ?mute kit молчит: --mute-audio не глушит системный синтез речи macOS */
+const SILENT = navigator.webdriver === true || new URLSearchParams(location.search).has('mute');
+
 function speakTTS(text) {
+  if (SILENT) return true;
   if (!window.speechSynthesis) return false;
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
@@ -107,7 +111,7 @@ function speakTTS(text) {
 let playing = null;
 function speak(text, audio, { silent = false } = {}) {
   if (!silent) track('event', 'audio_play', { text, voice: settings.voice, rate: settings.rate });
-  if (!audio) return speakTTS(text);
+  if (!audio || SILENT) return speakTTS(text);
   const src = /\.(mp3|m4a|ogg|wav)(\?|$)/i.test(audio) ? audio : `${audio}.${settings.voice}.mp3`;
   playing?.pause();
   playing = new Audio(src);
@@ -649,6 +653,7 @@ let achvShown = false;
 
 /* три ноты; AudioContext создаём сразу в обработчике нажатия — так iPhone разрешает звук */
 function chime(delay) {
+  if (SILENT) return;
   try {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
