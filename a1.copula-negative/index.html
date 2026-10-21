@@ -363,6 +363,25 @@ main, .sec { z-index: 1; }
   .sb__thumb { top: calc(var(--p, 0) * 100%); left: 50%; rotate: 90deg; }
   .sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
 }
+/* ===== слой v2: бегущая лента, номера секций, монета, след, печатает… ===== */
+.ticker { overflow: hidden; margin: clamp(40px, 7vw, 80px) -16px 0; padding: 14px 0; rotate: -2deg; background: linear-gradient(90deg, #ff8197, #ef4f6c 50%, #e23d62); color: #fff; box-shadow: 0 16px 30px -18px rgba(233, 60, 96, .9); }
+.ticker__in { display: flex; gap: 30px; width: max-content; font: 700 clamp(22px, 5vw, 36px)/1 var(--f-head); text-transform: uppercase; white-space: nowrap; }
+.ticker__in span { display: inline-flex; align-items: center; gap: 30px; }
+.ticker__in svg { width: 46px; height: 30px; }
+.num { position: absolute; right: 16px; top: clamp(20px, 5vw, 50px); font: 700 clamp(90px, 20vw, 220px)/1 var(--f-head); color: transparent; -webkit-text-stroke: 2px #ecdfe1; pointer-events: none; user-select: none; z-index: -1; }
+.dec { position: absolute; pointer-events: none; z-index: -1; filter: drop-shadow(0 10px 12px rgba(120, 70, 20, .25)); }
+.trail { position: fixed; z-index: 2; left: 0; top: 0; width: 26px; height: 10px; pointer-events: none; }
+.typing { display: inline-flex; gap: 5px; padding: 12px 16px; border-radius: 18px; background: #fff; box-shadow: 0 6px 14px -8px rgba(0,0,0,.3); align-self: flex-start; }
+.typing i { width: 7px; height: 7px; border-radius: 50%; background: #c9b6b9; display: block; }
+.coin { position: relative; width: 210px; height: 210px; margin: 22px auto 0; perspective: 900px; cursor: pointer; }
+.coin__in { position: absolute; inset: 0; transform-style: preserve-3d; }
+.coin__f, .coin__b { position: absolute; inset: 0; border-radius: 50%; display: grid; place-content: center; text-align: center; gap: 2px; backface-visibility: hidden; -webkit-backface-visibility: hidden; box-shadow: inset 0 0 0 10px rgba(255,255,255,.35), 0 20px 30px -16px rgba(120, 60, 20, .7); }
+.coin__f { color: #fff; background: radial-gradient(circle at 35% 30%, #ff9fb0, #ef4f6c 55%, #c42c4f); }
+.coin__b { color: #5a3712; background: radial-gradient(circle at 35% 30%, #fff3d4, #f1c879 55%, #c88a3e); transform: rotateY(180deg); }
+.coin b { font: 700 40px/1 var(--f-head); text-transform: uppercase; }
+.coin small { font-size: 13px; font-weight: 700; opacity: .85; }
+.tk__mid .tk__sc { position: absolute; left: -10px; top: -14px; width: 40px; height: 26px; z-index: 2; }
+.sc-wake { fill: none; stroke: #fff; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 18 14; opacity: .8; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 </head>
@@ -449,7 +468,7 @@ main, .sec { z-index: 1; }
             <rect x="225" y="80" width="70" height="18" rx="9" fill="#1f1f22"/>
             <rect x="172" y="120" width="176" height="150" rx="20" fill="url(#gPink)"/>
             <text x="260" y="168" text-anchor="middle" font-family="Marck Script, cursive" font-size="30" fill="#ffe6c8" lang="tr">Öğretmen</text>
-            <text x="260" y="222" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="44" fill="#fff" lang="tr">DEĞİLİM</text>
+            <text x="260" y="222" text-anchor="middle" font-family="Oswald, sans-serif" font-weight="700" font-size="44" fill="#fff" lang="tr" id="haWord">DEĞİLİM</text>
             <rect x="200" y="238" width="120" height="20" rx="10" fill="#fff" opacity=".9"/>
             <text x="260" y="253" text-anchor="middle" font-family="Manrope, sans-serif" font-weight="800" font-size="11" letter-spacing="3" fill="#e23d62" lang="tr">✂ DEĞİL</text>
             <rect x="172" y="286" width="176" height="56" rx="16" fill="#f7f3f3"/>
@@ -459,15 +478,16 @@ main, .sec { z-index: 1; }
             <rect x="196" y="424" width="128" height="34" rx="17" fill="url(#gPink)"/>
           </g>
           <g class="ha-key"><use href="#i-key" x="270" y="20" width="230" height="80" transform="rotate(28 385 60)"/></g>
-          <g class="ha-sc"><use href="#i-scissors" x="10" y="330" width="220" height="140" transform="rotate(-24 120 400)"/></g>
+          <g class="ha-sc" transform="rotate(-24 120 400)"><g class="ha-scin" transform="translate(10 330) scale(1.57)"><g class="hb-a"><circle cx="22" cy="22" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 31 64 44l74-12-72 20Z"/></g><g class="hb-b"><circle cx="22" cy="68" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 59 64 46l74 12-72-20Z"/></g><circle cx="64" cy="45" r="5" fill="#b57631"/></g></g>
           <circle class="ha-pearl" cx="140" cy="300" r="10" fill="url(#gPearl)"/>
         </svg>
       </div>
     </div>
+    <div class="ticker" data-ui aria-hidden="true"><div class="ticker__in" id="ticker" lang="tr"></div></div>
   </section>
 
   <!-- ===================== STORY ===================== -->
-  <section class="sec story" data-section="story" data-words="50" id="s-story">
+  <section class="sec story" data-section="story" data-words="50" id="s-story"><span class="num" data-ui aria-hidden="true">01</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:6%;top:71px;rotate:-3deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap story__grid">
       <div class="txt">
         <span class="script">история</span>
@@ -484,7 +504,7 @@ main, .sec { z-index: 1; }
         <div class="phone__scr" data-ui>
           <span class="phone__isl"></span>
           <div class="phone__top"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="url(#gPink)"/><use href="#p-b" width="100" height="100"/></svg><div><b lang="tr">Eczane · Kadıköy</b><br><small>аптекарь</small></div></div>
-          <div class="bub" id="phQ"><a-say>Hasta mısınız?</a-say><small>Вы больны?</small></div>
+          <div class="typing" id="phTyping" aria-hidden="true"><i></i><i></i><i></i></div><div class="bub" id="phQ"><a-say>Hasta mısınız?</a-say><small>Вы больны?</small></div>
           <div id="phLog" style="display:grid;gap:10px"></div>
           <div class="phone__opts" id="phOpts">
             <button type="button" data-ph="bad" lang="tr">Hayır, hastayım.</button>
@@ -497,7 +517,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== GUESS ===================== -->
-  <section class="sec" data-section="guess" data-words="18" id="s-guess">
+  <section class="sec" data-section="guess" data-words="18" id="s-guess"><span class="num" data-ui aria-hidden="true">02</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:5%;top:112px;rotate:14deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap">
       <span class="script">не подглядывай</span>
       <h2 data-split>Сначала <span class="pk">угадай</span></h2>
@@ -512,7 +532,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== CUT ===================== -->
-  <section class="sec" data-section="cut" data-words="56" id="s-cut">
+  <section class="sec" data-section="cut" data-words="56" id="s-cut"><span class="num" data-ui aria-hidden="true">03</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:4%;top:33px;rotate:-9deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">правило первое</span>
       <h2 data-split><span class="pk">Ножницы</span>: <span lang="tr">değil</span></h2>
@@ -555,7 +575,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== PERSONS ===================== -->
-  <section class="sec" data-section="persons" data-words="29" id="s-persons">
+  <section class="sec" data-section="persons" data-words="29" id="s-persons"><span class="num" data-ui aria-hidden="true">04</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:3%;top:74px;rotate:8deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap">
       <span class="script">шесть лиц</span>
       <h2 data-split><span lang="tr">Değil</span> <span class="pk">по лицам</span></h2>
@@ -585,7 +605,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== BODY MAP ===================== -->
-  <section class="sec" data-section="body" data-words="31" id="s-body">
+  <section class="sec" data-section="body" data-words="31" id="s-body"><span class="num" data-ui aria-hidden="true">05</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:2%;top:115px;rotate:-15deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap">
       <span class="script">карта</span>
       <h2 data-split>Как ты <span class="pk">себя чувствуешь?</span></h2>
@@ -621,7 +641,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== COMPARE ===================== -->
-  <section class="sec" data-section="compare" data-words="40" id="s-compare">
+  <section class="sec" data-section="compare" data-words="40" id="s-compare"><span class="num" data-ui aria-hidden="true">06</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:1%;top:36px;rotate:2deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">сравни</span>
       <h2 data-split>Русский <span class="pk">↔</span> турецкий</h2>
@@ -648,7 +668,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== ASK ===================== -->
-  <section class="sec" data-section="ask" data-words="36" id="s-ask">
+  <section class="sec" data-section="ask" data-words="36" id="s-ask"><span class="num" data-ui aria-hidden="true">07</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:6%;top:77px;rotate:19deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap">
       <span class="script">правило второе</span>
       <h2 data-split><span class="gd">Ключ</span>: вопрос</h2>
@@ -695,7 +715,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== NEGASK ===================== -->
-  <section class="sec" data-section="negask" data-words="37" id="s-negask">
+  <section class="sec" data-section="negask" data-words="37" id="s-negask"><span class="num" data-ui aria-hidden="true">08</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:5%;top:118px;rotate:-4deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">правило третье</span>
       <h2 data-split>Ножницы <span class="pk">+</span> ключ</h2>
@@ -725,7 +745,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== ANSWERS ===================== -->
-  <section class="sec" data-section="answers" data-words="35" id="s-answers">
+  <section class="sec" data-section="answers" data-words="35" id="s-answers"><span class="num" data-ui aria-hidden="true">09</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:4%;top:39px;rotate:13deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap">
       <span class="script">ответ</span>
       <h2 data-split><span class="pk" lang="tr">Hayır</span> — не <span lang="tr">değil</span></h2>
@@ -751,7 +771,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== TREE ===================== -->
-  <section class="sec" data-section="tree" data-words="22" id="s-tree">
+  <section class="sec" data-section="tree" data-words="22" id="s-tree"><span class="num" data-ui aria-hidden="true">10</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:3%;top:80px;rotate:-10deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">алгоритм</span>
       <h2 data-split>Три вопроса <span class="pk">по порядку</span></h2>
@@ -792,7 +812,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== MNEMO ===================== -->
-  <section class="sec" data-section="mnemo" data-words="24" id="s-mnemo">
+  <section class="sec" data-section="mnemo" data-words="24" id="s-mnemo"><span class="num" data-ui aria-hidden="true">11</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:2%;top:121px;rotate:7deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap">
       <span class="script">запомни</span>
       <h2 data-split>Хвост — <span class="pk">в последний вагон</span></h2>
@@ -805,11 +825,12 @@ main, .sec { z-index: 1; }
         <button class="lnk" type="button" id="mnReset">↺ сброс</button>
       </div>
       <p class="cap" id="mnSent" data-ui></p>
+      <div class="coin" id="coin" data-ui role="button" tabindex="0" aria-label="Перевернуть монету"><div class="coin__in" id="coinIn"><div class="coin__f"><span>✂</span><b lang="tr">değil</b><small>ножницы: «не»</small></div><div class="coin__b"><span>🔑</span><b lang="tr">mı</b><small>ключ: вопрос</small></div></div></div>
     </div>
   </section>
 
   <!-- ===================== SCENE ===================== -->
-  <section class="sec" data-section="scene" data-words="30" id="s-scene">
+  <section class="sec" data-section="scene" data-words="30" id="s-scene"><span class="num" data-ui aria-hidden="true">12</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:1%;top:42px;rotate:-16deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap">
       <span class="script">сцена</span>
       <h2 data-split>Паром <span class="pk">Кадыкёй — Эминёню</span></h2>
@@ -844,7 +865,7 @@ main, .sec { z-index: 1; }
             <g transform="translate(250 280)"><path d="M0 20q10-26 30-10 14 0 22-14l4 18q-4 18-26 18H0Z" fill="#8d8d94"/><circle cx="48" cy="6" r="2" fill="#2a2a2e"/></g>
             <g transform="translate(330 196)"><circle cx="16" cy="16" r="14" fill="#efd2bf"/><rect x="0" y="0" width="32" height="10" rx="3" fill="#fff"/><rect x="-2" y="8" width="36" height="4" fill="#2a2a2e"/></g>
           </g>
-          <g class="sc-gull"><path d="M0 10q14-14 28 0 14-14 28 0" fill="none" stroke="#2a2a2e" stroke-width="4" stroke-linecap="round" transform="translate(600 120)"/></g>
+          <g class="sc-gull"><path d="M0 10q14-14 28 0 14-14 28 0" fill="none" stroke="#2a2a2e" stroke-width="4" stroke-linecap="round" transform="translate(600 120)"/></g><g class="sc-gull2"><path d="M0 8q10-10 20 0 10-10 20 0" fill="none" stroke="#2a2a2e" stroke-width="3" stroke-linecap="round" transform="translate(520 90)"/><path d="M0 8q10-10 20 0 10-10 20 0" fill="none" stroke="#2a2a2e" stroke-width="3" stroke-linecap="round" transform="translate(680 70)"/></g><path class="sc-wake" d="M90 360C60 370 30 372 0 380M100 372C70 386 40 392 10 404"/>
         </svg>
         <button class="hot" type="button" style="left:23%;top:52%" data-s="0" aria-label="Продавец симитов"><svg viewBox="0 0 24 24"><use href="#ic-simit"/></svg></button>
         <button class="hot" type="button" style="left:73%;top:50%" data-s="1" aria-label="Турист"><svg viewBox="0 0 24 24"><use href="#ic-flag"/></svg></button>
@@ -858,7 +879,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== GALLERY ===================== -->
-  <section class="sec" data-section="gallery" data-words="22" id="s-gallery">
+  <section class="sec" data-section="gallery" data-words="22" id="s-gallery"><span class="num" data-ui aria-hidden="true">13</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:6%;top:83px;rotate:1deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap">
       <span class="script">галерея</span>
       <h2 data-split>Шестнадцать <span class="pk">фраз</span></h2>
@@ -874,7 +895,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== LAB ===================== -->
-  <section class="sec" data-section="lab" data-words="28" id="s-lab">
+  <section class="sec" data-section="lab" data-words="28" id="s-lab"><span class="num" data-ui aria-hidden="true">14</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:5%;top:124px;rotate:18deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">лаборатория</span>
       <h2 data-split>Собери <span class="pk">сам</span></h2>
@@ -904,17 +925,17 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== TRAPS ===================== -->
-  <section class="sec" data-section="traps" data-words="51" id="s-traps">
+  <section class="sec" data-section="traps" data-words="51" id="s-traps"><span class="num" data-ui aria-hidden="true">15</span><svg class="dec flt" viewBox="0 0 140 48" style="width:110px;height:38px;left:4%;top:45px;rotate:-5deg" aria-hidden="true"><use href="#i-key"/></svg>
     <div class="wrap">
       <span class="script">ловушки</span>
       <h2 data-split>На этом <span class="pk">спотыкаются все</span></h2>
       <div class="txt"><p>Пять ошибок русскоязычных. Не стыдно. Нажми на билет — ножницы починят.</p></div>
       <div class="tks" id="tks">
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Ben değil öğretmen.</span></div><div class="tk__mid"></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Ben öğretmen değilim.">Ben öğretmen değilim.</div><p>Değil стоит после слова, а не перед ним.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmenim değil.</span></div><div class="tk__mid"></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değilim.">Öğretmen değilim.</div><p>Хвост не остаётся на слове. Он переезжает на değil.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Hayır, açım.</span> <small data-ui>(хотел: «нет, не голоден»)</small></div><div class="tk__mid"></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Hayır, aç değilim.">Hayır, aç değilim.</div><p>Одно hayır ничего не отрицает. Нужен ещё değil.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmen değil musun?</span></div><div class="tk__mid"></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değil misin?">Öğretmen değil misin?</div><p>После değil ключ всегда mi. Там гласная i.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Sen öğretmensin mi?</span></div><div class="tk__mid"></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Sen öğretmen misin?">Sen öğretmen misin?</div><p>В вопросе хвост едет на ключ, а не на слово.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Ben değil öğretmen.</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Ben öğretmen değilim.">Ben öğretmen değilim.</div><p>Değil стоит после слова, а не перед ним.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmenim değil.</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değilim.">Öğretmen değilim.</div><p>Хвост не остаётся на слове. Он переезжает на değil.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Hayır, açım.</span> <small data-ui>(хотел: «нет, не голоден»)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Hayır, aç değilim.">Hayır, aç değilim.</div><p>Одно hayır ничего не отрицает. Нужен ещё değil.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmen değil musun?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değil misin?">Öğretmen değil misin?</div><p>После değil ключ всегда mi. Там гласная i.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Sen öğretmensin mi?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>нажми, чтобы починить</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Sen öğretmen misin?">Sen öğretmen misin?</div><p>В вопросе хвост едет на ключ, а не на слово.</p></div></div></button>
       </div>
     </div>
   </section>
@@ -959,7 +980,7 @@ main, .sec { z-index: 1; }
   </section>
 
   <!-- ===================== CHEAT ===================== -->
-  <section class="sec" data-section="cheat" data-words="37" id="s-cheat">
+  <section class="sec" data-section="cheat" data-words="37" id="s-cheat"><span class="num" data-ui aria-hidden="true">16</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:3%;top:86px;rotate:12deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap">
       <span class="script">шпаргалка</span>
       <h2 data-split>Сохрани <span class="pk">скриншотом</span></h2>
@@ -1158,7 +1179,7 @@ addEventListener('DOMContentLoaded', () => {
       gsap.to('.hero__bg', { yPercent: 30, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       gsap.to('.ha-phone', { y: -60, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
       gsap.to('#heroArt .ha-key use', { x: 40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
-      gsap.to('#heroArt .ha-sc use', { x: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
+      gsap.to('#heroArt .ha-scin', { x: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 } });
       ScrollTrigger.create({ trigger: '.hero', start: 'top bottom', end: 'bottom top', onToggle: (st) => gsap.getTweensOf(['.ha-key', '.ha-sc', '.ha-pearl']).forEach((t) => (st.isActive ? t.resume() : t.pause())) });
     } else $$('[data-count]').forEach((el) => { el.textContent = el.dataset.count; });
   });
@@ -1269,7 +1290,12 @@ addEventListener('DOMContentLoaded', () => {
     function auto() { stop(); go(0); timer = setInterval(() => { if (cur >= 3) { stop(); say('Yorgun değilim.'); return; } go(cur + 1); }, 1700); }
     $('#cutPlay').addEventListener('click', auto);
     go(0);
-    if (A) ScrollTrigger.create({ trigger: '#cutStage', start: 'top 70%', once: true, onEnter: auto });
+    if (A) {
+      const mmCut = gsap.matchMedia();
+      /* на компьютере плеер закрепляется, и шаги 1→4 крутит скролл */
+      mmCut.add('(min-width: 1024px)', () => { ScrollTrigger.create({ trigger: '#cutStage', start: 'center center', end: '+=900', pin: true, onUpdate: (st) => { const k = Math.min(3, Math.floor(st.progress * 4)); if (k !== cur) { stop(); go(k); } } }); });
+      mmCut.add('(max-width: 1023px)', () => { ScrollTrigger.create({ trigger: '#cutStage', start: 'top 70%', once: true, onEnter: auto }); });
+    }
     if (A) ScrollTrigger.create({ trigger: '#cutStage', start: 'top bottom', end: 'bottom top', onLeave: stop, onLeaveBack: stop });
   });
 
@@ -1662,6 +1688,86 @@ addEventListener('DOMContentLoaded', () => {
       gsap.fromTo('#poster', { scale: .94 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '#poster', start: 'top bottom', end: 'top 40%', scrub: true } });
       gsap.fromTo('.fin .phone', { rotation: 8, y: 60 }, { rotation: -6, y: 0, ease: 'none', scrollTrigger: { trigger: '.fin', start: 'top bottom', end: 'center center', scrub: 1 } });
     }
+  });
+
+  /* =========================== слой v2: больше движения =========================== */
+  safe(() => {
+    const NS = 'http://www.w3.org/2000/svg';
+    /* бегущая лента */
+    const W = ['değilim', 'değilsin', 'değil', 'değiliz', 'miyim?', 'misin?', 'değil mi?', 'Hasta değilim'];
+    const one = W.map((w) => `<span>${w}<svg viewBox="0 0 140 90"><use href="#i-scissors"/></svg></span>`).join('');
+    $('#ticker').innerHTML = one + one;
+    /* монета: ножницы ↔ ключ */
+    let flip = 0;
+    const coin = $('#coin');
+    const turn = () => { flip += 180; say(flip % 360 ? 'mı' : 'değil'); if (A) gsap.to('#coinIn', { rotationY: flip, duration: .9, ease: 'back.out(1.8)' }); else $('#coinIn').style.transform = `rotateY(${flip}deg)`; };
+    coin.addEventListener('click', turn);
+    coin.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); turn(); } });
+    if (!A) return;
+    const tick = gsap.to('#ticker', { xPercent: -50, duration: 24, ease: 'none', repeat: -1 });
+    $('.ticker').addEventListener('pointerenter', () => gsap.to(tick, { timeScale: .2, duration: .5 }));
+    $('.ticker').addEventListener('pointerleave', () => gsap.to(tick, { timeScale: 1, duration: .5 }));
+    gsap.to('#ticker svg', { rotation: 20, duration: .3, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    /* hero: ножницы щёлкают, экран телефона меняет форму */
+    gsap.to('.hb-a', { rotation: -10, svgOrigin: '64 45', duration: .22, ease: 'power1.inOut', yoyo: true, repeat: -1, repeatDelay: .9 });
+    gsap.to('.hb-b', { rotation: 10, svgOrigin: '64 45', duration: .22, ease: 'power1.inOut', yoyo: true, repeat: -1, repeatDelay: .9 });
+    const words = ['DEĞİLİM', 'DEĞİLSİN', 'DEĞİLİZ', 'MİYİM?', 'DEĞİL Mİ?'];
+    let wi = 0;
+    gsap.to({}, { duration: 2.2, repeat: -1, onRepeat: () => { wi = (wi + 1) % words.length; $('#haWord').textContent = words[wi]; gsap.fromTo('#haWord', { scale: .6, transformOrigin: '50% 50%' }, { scale: 1, duration: .5, ease: 'back.out(3)' }); } });
+    /* номера секций и декор */
+    $$('.num').forEach((n) => gsap.fromTo(n, { x: 90, rotation: 5 }, { x: -20, rotation: 0, ease: 'none', scrollTrigger: { trigger: n.parentNode, start: 'top bottom', end: 'bottom top', scrub: 1 } }));
+    $$('.dec').forEach((d, i) => gsap.fromTo(d, { y: 80 }, { y: -80, ease: 'none', scrollTrigger: { trigger: d.parentNode, start: 'top bottom', end: 'bottom top', scrub: 1 + (i % 3) * .3 } }));
+    /* «печатает…» в аптеке */
+    gsap.to('#phTyping i', { y: -6, duration: .35, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: .12 });
+    ScrollTrigger.create({ trigger: '#phone', start: 'top 70%', once: true, onEnter: () => gsap.to('#phTyping', { scale: 0, duration: .3, delay: 1.2, ease: 'back.in(2)', onComplete: () => { $('#phTyping').style.display = 'none'; } }) });
+    /* монета крутится от скролла */
+    gsap.fromTo('#coinIn', { rotationY: -40 }, { rotationY: 40, ease: 'none', scrollTrigger: { trigger: '#coin', start: 'top bottom', end: 'bottom top', scrub: 1, onLeave: () => gsap.set('#coinIn', { rotationY: flip }) } });
+    gsap.from('#coin', { scale: .3, rotation: -90, duration: 1, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: '#coin', start: 'top 88%', once: true } });
+    /* ловушки: ножницы бегут по линии отреза */
+    $$('#tks .tk').forEach((t) => t.addEventListener('click', () => { const sc = $('.tk__sc', t); gsap.fromTo(sc, { x: 0, rotation: 0 }, { x: () => t.clientWidth - 30, duration: .8, ease: 'power2.inOut' }); gsap.fromTo(sc.querySelector('use'), { scaleY: 1 }, { scaleY: .6, transformOrigin: '50% 50%', duration: .1, yoyo: true, repeat: 7 }); }));
+    /* паром: чайки и след */
+    gsap.to('.sc-gull2', { x: -160, y: 20, duration: 7, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.sc-wake', { strokeDashoffset: -64, duration: 1.4, ease: 'none', repeat: -1 });
+    /* живые мелочи */
+    gsap.to('.pcard .ava', { y: -5, duration: 1.2, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: .2, from: 'random' } });
+    gsap.to('.fc__i', { rotation: 8, duration: 1, ease: 'sine.inOut', yoyo: true, repeat: -1, stagger: { each: .12, from: 'random' } });
+    gsap.to('.lab__out', { boxShadow: 'inset 0 0 0 2px #ef4f6c', duration: 1.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.motto', { scale: 1.04, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('#khKey', { y: -4, duration: 1, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('#treeDot', { attr: { r: 14 }, duration: .6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.to('.sb__thumb', { rotation: 12, duration: .5, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+    gsap.from('.ticker', { xPercent: -30, rotation: 4, ease: 'none', scrollTrigger: { trigger: '.ticker', start: 'top bottom', end: 'bottom 60%', scrub: true } });
+    gsap.from('.qa', { x: 60, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.qa', start: 'top 85%', once: true } });
+    gsap.from('.scene__bub', { y: 40, duration: .6, ease: 'back.out(2)', scrollTrigger: { trigger: '.scene__bub', start: 'top 92%', once: true } });
+    gsap.from('.forms6', { scale: .9, rotation: -2, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.forms6', start: 'top 88%', once: true } });
+    gsap.from('.ans .qcard', { rotationX: 80, transformPerspective: 800, duration: .8, ease: 'back.out(2)', scrollTrigger: { trigger: '.ans', start: 'top 85%', once: true } });
+    /* компьютер: 3D-наклон карточек и золотой след за курсором */
+    if (fine) {
+      $$('.pn, .lock, .pcard, .tk, .fc, .pt, .cmp__row, .qa__q, .qa__a').filter((c) => !c.querySelector('#cutStage')).forEach((c) => {
+        c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); gsap.to(c, { rotationY: ((e.clientX - r.left) / r.width - .5) * 8, rotationX: -((e.clientY - r.top) / r.height - .5) * 8, transformPerspective: 1000, duration: .4, ease: 'power2.out' }); });
+        c.addEventListener('pointerleave', () => gsap.to(c, { rotationY: 0, rotationX: 0, duration: .7, ease: 'elastic.out(1, .5)' }));
+      });
+      let last = 0;
+      addEventListener('pointermove', (e) => {
+        const now = performance.now();
+        if (now - last < 160) return;
+        last = now;
+        const t = document.createElementNS(NS, 'svg');
+        t.setAttribute('viewBox', '0 0 140 48'); t.setAttribute('class', 'trail'); t.innerHTML = '<use href="#i-key"/>';
+        document.body.append(t);
+        gsap.fromTo(t, { x: e.clientX + 8, y: e.clientY + 10, scale: 1, rotation: Math.random() * 60 - 30 }, { scale: .2, y: '+=22', rotation: '+=90', duration: 1.1, ease: 'power1.in', onComplete: () => t.remove() });
+      }, { passive: true });
+    }
+    /* все бесконечные циклы спят, пока их секция вне экрана */
+    setTimeout(() => {
+      gsap.globalTimeline.getChildren(false, true, false).filter((t) => t.repeat && t.repeat() === -1).forEach((t) => {
+        const el = (t.targets && t.targets()[0]) || null;
+        const sec = el && el.closest ? el.closest('.sec') : null;
+        if (!sec) return;
+        ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top', onToggle: (st) => (st.isActive ? t.resume() : t.pause()) });
+        if (!ScrollTrigger.isInViewport(sec)) t.pause();
+      });
+    }, 0);
   });
 
   /* =========================== свой скроллбар =========================== */
