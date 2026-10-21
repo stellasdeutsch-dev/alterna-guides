@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a2.gibi-kadar">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Как, такой же как: gibi, kadar</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:100 900;font-display:swap;src:url(media/intertight-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:100 900;font-display:swap;src:url(media/intertight-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter Tight';font-style:normal;font-weight:100 900;font-display:swap;src:url(media/intertight-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --paper:#ececea; --paper-2:#f6f6f5; --card:#fbfbfb; --line:#d8d8d6;
+  --ink:#161616; --char:#202020; --char-2:#2b2b2b; --steel:#8b8b8b; --muted:#7a7a7a;
+  --red:#e3262d; --red-d:#b5161c; --red-glow:rgba(227,38,45,.42);
+  --ply:#7a3a27; --ply-l:#a2593b; --concrete:#cfcfcb; --concrete-d:#b4b4af; --sea:#cdd6da;
+  --gibi:var(--red); --kadar:#1d1d1d; --gen:var(--ply-l);
+  --pad:clamp(16px,4vw,56px);
+  --ak-bg:#fbfbfb; --ak-surface:#f1f1ef; --ak-ink:var(--ink); --ak-muted:var(--muted); --ak-line:var(--line);
+  --ak-accent:var(--red); --ak-accent-ink:#fff; --ak-accent-soft:#fde5e5;
+  --ak-radius:8px; --ak-radius-sm:6px;
+  --ak-font:'Inter Tight',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif; --ak-font-display:var(--ak-font);
+}
+*{box-sizing:border-box}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 var(--ak-text)/1.45 var(--ak-font);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+main{position:relative;z-index:1}
+b,strong{font-weight:700}
+button{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- типографика из референса ---------- */
+.tag{margin:0;font-size:13px;letter-spacing:.02em;color:var(--muted)}
+.tag em{font-style:normal;color:var(--red)}
+.ttl{margin:4px 0 0;font-weight:300;text-transform:uppercase;letter-spacing:-.045em;line-height:.95;font-size:clamp(30px,5.4vw,72px)}
+.ttl b{font-weight:800}
+.lead{margin:0;max-width:30ch;font-size:clamp(15px,1.3vw,19px);line-height:1.3;color:#5c5c5c}
+.dark .lead{color:#bdbdbd}
+.g{color:var(--gibi);font-weight:700}
+.k{color:var(--kadar);font-weight:700;border-bottom:2px dashed currentColor}
+.dark .k{color:#fff}
+.gen{color:var(--gen);font-weight:700}
+.tr{font-weight:600}
+
+/* ---------- кнопки ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 20px;border:0;border-radius:4px;background:var(--red);color:#fff;
+  font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.01em;cursor:pointer;box-shadow:0 16px 26px -12px var(--red-glow);transition:transform .15s}
+.btn:active{transform:translateY(1px)}
+.btn svg{width:14px;height:14px}
+.btn-o{min-height:46px;padding:8px 16px;border:1px solid var(--line);border-radius:4px;background:var(--card);cursor:pointer;font-size:15px;text-align:left;transition:border-color .2s,background .2s}
+.btn-o:hover{border-color:var(--red)}
+.btn-o[data-state=ok]{border-color:var(--ak-good);background:var(--ak-good-soft)}
+.btn-o[data-state=no]{border-color:var(--ak-bad);background:var(--ak-bad-soft)}
+.dark .btn-o{background:#2c2c2c;border-color:#444;color:#f2f2f2}
+.dark .btn-o[data-state=ok]{background:#1d3a2a;border-color:#2fb26a}
+.dark .btn-o[data-state=no]{background:#3d2022;border-color:#e0575c}
+.chip{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;border:1px solid var(--line);border-radius:4px;background:#fff;font-size:15px;cursor:pointer}
+.dark .chip{background:#2a2a2a;border-color:#474747;color:#eee}
+.chip[aria-pressed=true]{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset}
+
+/* ---------- сцена-кадр ---------- */
+.scene{position:relative}
+.scene.dark{background:radial-gradient(120% 90% at 50% 30%,#3a3a3a 0,#232323 45%,#1a1a1a 100%);color:#f1f1f1}
+.scene.dark .tag{color:#9a9a9a}
+.stage{position:relative;display:flex;flex-direction:column;gap:12px;padding:32px var(--pad) 28px;overflow:hidden}
+.stage__head{position:relative;z-index:6;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;flex-wrap:wrap}
+.view{position:relative;z-index:2}
+.cam{position:relative;height:clamp(240px,46vw,460px);transform-origin:50% 70%}
+.layer{position:absolute;inset:0;width:100%;height:100%;display:block}
+.grp{position:relative;margin:14px 0}
+.band{position:relative;z-index:6;display:grid;gap:12px}
+.subs{display:grid;gap:8px;margin:0;padding:0}
+.sub{margin:0;max-width:44ch;padding:10px 14px;border-radius:4px;background:rgba(255,255,255,.9);box-shadow:0 10px 30px -18px rgba(0,0,0,.35);font-size:clamp(15px,1.25vw,18px);line-height:1.35}
+.dark .sub{background:rgba(20,20,20,.86);color:#f2f2f2;box-shadow:none;border:1px solid #333}
+.sub .who{display:inline-block;margin-right:6px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--red);font-weight:700}
+.sub .ru{display:block;color:var(--muted);font-size:.9em}
+.dark .sub .ru{color:#a9a9a9}
+.act{display:grid;gap:10px;max-width:560px;padding:14px;border-radius:6px;background:var(--card);border:1px solid var(--line);box-shadow:0 20px 40px -26px rgba(0,0,0,.4)}
+.dark .act{background:#262626;border-color:#3a3a3a}
+.act__q{margin:0;font-weight:600}
+.act__row{display:flex;flex-wrap:wrap;gap:8px}
+.act__fb{margin:0;min-height:1.4em;color:var(--muted)}
+.dark .act__fb{color:#bcbcbc}
+.act__fb b{color:var(--ink)}
+.dark .act__fb b{color:#fff}
+.light{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#0f1420 0,#1d2333 60%,#2a2a2a 100%);opacity:0;z-index:3}
+.shut{position:absolute;inset:0;z-index:5;pointer-events:none;background:var(--char);transform:scaleY(0);transform-origin:50% 0}
+.dark .shut{background:var(--paper)}
+
+/* кино: сцена закреплена, кадры сменяют друг друга */
+.cine .stage{height:100vh;height:100svh;min-height:540px;padding-top:28px;padding-bottom:76px}
+.cine .view{flex:1;min-height:0;margin:0 calc(-1 * var(--pad));overflow:hidden}
+.cam .layer{left:-6%;width:112%;overflow:visible}
+.cine .cam{position:absolute;inset:0;height:auto}
+.cine .grp{position:absolute;inset:0;margin:0;display:grid;place-items:center;pointer-events:none}
+.cine .grp>*{pointer-events:auto}
+.cine .subs{position:relative;min-height:6.2em}
+.cine .sub{position:absolute;left:0;bottom:0}
+@media (min-width:1024px){
+  .cine .band{grid-template-columns:minmax(0,1fr) minmax(0,460px);align-items:end}
+  .stage__head .lead{text-align:left}
+}
+@media (max-width:767.98px){
+  .stage{padding-top:64px}
+  .cine .stage{padding-top:58px;min-height:600px;padding-bottom:70px}
+  .act .act__row .btn-o{flex:1 1 40%;font-size:14px;padding:6px 10px}
+  .stage__head .lead{display:none}
+  .cine .subs{min-height:5.6em}
+  .cine .act{position:absolute;left:0;right:0;bottom:calc(100% + 10px)}
+  .sub{font-size:15px;padding:8px 12px}
+  .act{padding:10px;gap:8px}
+}
+
+/* ---------- скроллбар-рулетка ---------- */
+.tape{position:fixed;z-index:40;right:14px;top:50%;width:52px;height:min(74vh,640px);transform:translateY(-50%);touch-action:none;user-select:none}
+.tape__track{position:absolute;left:20px;top:0;bottom:0;width:12px;border-radius:3px;background:#fdfdfd;border:1px solid #cfcfcf;overflow:hidden;cursor:ns-resize;
+  background-image:repeating-linear-gradient(180deg,#9a9a9a 0 1px,transparent 1px 8px)}
+.tape__fill{position:absolute;inset:0;background:var(--red);transform-origin:50% 0;transform:scaleY(0)}
+.tape__case{position:absolute;left:8px;top:-34px;width:36px;height:30px}
+.tape__marks{list-style:none;margin:0;padding:0;position:absolute;inset:0}
+.tape__marks li{position:absolute;left:0;transform:translateY(-50%)}
+.tape__marks button{width:44px;height:30px;display:grid;place-items:center start;padding:0 0 0 2px;border:0;background:none;cursor:pointer}
+.tape__marks i{display:block;width:14px;height:3px;background:#555;border-radius:2px;transition:width .2s,background .2s}
+.tape__marks button[data-read] i{background:var(--red);width:18px}
+.tape__marks button[aria-current=true] i{width:22px;background:var(--ink)}
+.tape__marks button span{position:absolute;right:52px;white-space:nowrap;padding:4px 8px;border-radius:3px;background:var(--char);color:#fff;font-size:12px;opacity:0;transform:translateX(6px);transition:.2s;pointer-events:none}
+.tape__marks button:hover span,.tape__marks button:focus-visible span{opacity:1;transform:none}
+@media (max-width:767.98px){
+  .tape{top:0;left:0;right:0;width:auto;height:44px;transform:none;background:rgba(236,236,234,.94);border-bottom:1px solid #d5d5d3}
+  .tape__track{left:10px;right:10px;top:auto;bottom:6px;width:auto;height:8px;cursor:ew-resize;background-image:repeating-linear-gradient(90deg,#9a9a9a 0 1px,transparent 1px 7px)}
+  .tape__fill{transform-origin:0 50%;transform:scaleX(0)}
+  .tape__case{display:none}
+  .tape__marks{display:flex;left:6px;right:6px;bottom:10px}
+  .tape__marks li{position:static;flex:1;transform:none}
+  .tape__marks button{width:100%;height:34px;place-items:center}
+  .tape__marks i{width:3px;height:12px}
+  .tape__marks button[data-read] i{width:4px;height:14px}
+  .tape__marks button[aria-current=true] i{width:5px;height:18px}
+  .tape__marks button span{display:none}
+}
+
+/* ---------- сцена 1: заказ ---------- */
+.sky{background:linear-gradient(180deg,#f4f4f3 0,#e9e9e7 100%)}
+
+/* ---------- сцена 2: gibi ---------- */
+.guess{display:grid;gap:10px;justify-items:center;text-align:center;max-width:420px}
+.guess>svg{width:min(70vw,300px);height:auto}
+.signs{display:flex;gap:14px;justify-content:center}
+.sign{width:min(30vw,230px);padding:14px;border-radius:4px;background:linear-gradient(160deg,#fff 0,#ececec 100%);color:var(--ink);box-shadow:0 26px 40px -22px #000}
+.sign>svg{width:100%;height:110px;display:block}
+.sign p{margin:8px 0 0;font-size:14px;color:#555}
+.sign .lbl{font-size:12px;color:#999;margin-top:10px}
+.swap{display:grid;gap:40px;justify-items:center}
+.tiles{display:flex;gap:10px}
+.tile{position:relative;display:grid;place-items:center;min-width:120px;height:62px;padding:0 18px;border-radius:4px;background:#fff;color:var(--ink);font-size:24px;font-weight:600;overflow:hidden}
+.tile .t1{opacity:0}
+.tile .t2{position:absolute;inset:0;display:grid;place-items:center}
+.t-a{order:2}
+.cine .t-a{order:0}
+.cine .tile .t1{opacity:1}
+.tile.is-g{background:var(--red);color:#fff;box-shadow:0 16px 26px -12px var(--red-glow)}
+.stamps{display:grid;grid-template-columns:repeat(4,auto);gap:8px 12px;justify-content:center}
+.stamp{display:grid;justify-items:center;gap:4px;font-size:15px;color:#ddd}
+.stamp .g{display:inline-block;padding:2px 8px;border-radius:3px;background:var(--red);color:#fff}
+
+/* ---------- сцена 3: kadar ---------- */
+.dim{font:600 15px var(--ak-font)}
+.clock{width:min(60vw,240px);height:auto}
+
+/* ---------- сцена 4: переписка ---------- */
+.phone{position:relative;width:min(78vw,300px);height:min(92%,520px);min-height:330px;border-radius:38px;border:9px solid #111;background:#f3f3f2;box-shadow:0 40px 60px -30px #000,inset 0 0 0 1px #333;transform:rotate(-6deg);overflow:hidden;color:var(--ink)}
+.phone__top{display:flex;align-items:center;gap:8px;padding:30px 14px 10px;border-bottom:1px solid #ddd;background:#fff;font-size:14px}
+.phone__top svg{width:30px;height:30px}
+.phone__notch{position:absolute;left:50%;top:6px;width:84px;height:20px;margin-left:-42px;border-radius:12px;background:#111}
+.chat{display:grid;gap:10px;padding:14px}
+.msg{max-width:88%;padding:9px 12px;border-radius:12px;font-size:15px;background:#fff;box-shadow:0 4px 10px -6px rgba(0,0,0,.25)}
+.msg--me{justify-self:end;background:var(--char);color:#fff}
+.msg--me a-say .ak-say__btn{background:#444;color:#fff}
+.msg small{display:block;color:var(--muted);font-size:12px}
+.msg--me small{color:#bbb}
+.dress{display:grid;grid-template-columns:repeat(3,auto);gap:12px 16px;justify-content:center}
+.pr{display:flex;align-items:center;gap:2px;font-size:clamp(18px,2.4vw,26px);font-weight:600}
+.pr .root{padding:4px 10px;border-radius:4px;background:#fff;color:var(--ink)}
+.pr .suf{padding:4px 8px;border-radius:4px;background:var(--gen);color:#fff}
+.pr .suf.none{background:none;border:1px dashed #888;color:#aaa}
+.names{display:grid;gap:10px;justify-items:center;font-size:clamp(20px,2.6vw,30px);font-weight:600}
+.names s{color:#888;text-decoration-color:var(--red);text-decoration-thickness:3px}
+
+/* ---------- сцена 5: каталог ---------- */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:min(100%,860px)}
+.pcard{display:grid;gap:8px;padding:16px;border-radius:6px;background:#fff;box-shadow:0 30px 50px -34px rgba(0,0,0,.5)}
+.pcard h3{margin:0;font-weight:500;font-size:clamp(17px,1.6vw,22px)}
+.pcard>svg{width:100%;height:150px;background:repeating-linear-gradient(0deg,transparent 0 23px,#efefef 23px 24px),repeating-linear-gradient(90deg,transparent 0 23px,#efefef 23px 24px);border-radius:4px}
+.spec{display:grid;margin:0}
+.spec div{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid #e5e5e5;font-size:14px}
+.spec dt{color:var(--muted)}
+.spec dd{margin:0;font-weight:600;text-align:right}
+.badge-n{position:absolute;right:14px;top:12px;padding:3px 8px;border-radius:3px;background:var(--char);color:#fff;font-size:12px}
+.pcard{position:relative}
+.switch{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 14px;border:1px solid var(--line);border-radius:30px;background:#fff;cursor:pointer}
+.switch i{position:relative;width:46px;height:26px;border-radius:13px;background:var(--red);transition:background .2s}
+.switch i::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .25s}
+.switch[aria-checked=true] i{background:var(--kadar)}
+.switch[aria-checked=true] i::after{transform:translateX(20px)}
+
+/* ---------- лаборатория ---------- */
+.lab{padding:56px var(--pad) 64px}
+.lab__panel{position:relative;max-width:1080px;margin:0 auto;padding:clamp(18px,3vw,40px);color:#f2f2f2;background:radial-gradient(90% 120% at 50% 0,#383838 0,#1f1f1f 70%);
+  clip-path:polygon(0 28px,28px 0,calc(100% - 28px) 0,100% 28px,100% 100%,0 100%)}
+.film{display:flex;gap:6px;margin:0 0 18px;height:26px}
+.film i{flex:1;border-radius:2px;background:#3d3d3d;box-shadow:inset 0 0 0 1px #4a4a4a}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tabs [role=tab]{min-height:44px;padding:0 16px;border:1px solid #4a4a4a;border-radius:4px;background:#2a2a2a;color:#eee;cursor:pointer}
+.tabs [role=tab][aria-selected=true]{background:var(--red);border-color:var(--red);box-shadow:0 14px 24px -12px var(--red-glow)}
+.desk{display:grid;gap:14px;padding:16px;border-radius:6px;background:#f6f6f5;color:var(--ink)}
+.desk[hidden]{display:none}
+.desk__row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.out{display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-height:64px;padding:10px 14px;border-radius:4px;background:#fff;border:1px dashed #c9c9c9;font-size:clamp(20px,2.4vw,28px);font-weight:600}
+.out .piece{display:inline-block;padding:2px 8px;border-radius:3px}
+.out .p-root{background:#efefef}
+.out .p-gen{background:var(--gen);color:#fff}
+.out .p-g{background:var(--red);color:#fff}
+.out .p-k{background:var(--kadar);color:#fff}
+.why{margin:0;color:#555;font-size:15px}
+.why b{color:var(--ink)}
+.ruler{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:end}
+.ruler>svg{width:min(42vw,220px);height:200px}
+.ruler input{width:100%;accent-color:var(--red);min-height:44px}
+
+/* ---------- ловушки: дубли ---------- */
+.traps{padding:64px var(--pad)}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:16px;max-width:1120px;margin:22px auto 0}
+.take{display:grid;gap:10px;padding:14px;border-radius:6px;background:#262626;border:1px solid #393939}
+.take>svg{width:100%;height:56px}
+.take .bad,.take .good{margin:0;font-size:20px;font-weight:600}
+.take .bad s{text-decoration-color:var(--red);text-decoration-thickness:3px;color:#a5a5a5}
+.take .good{color:#7fe0a5;display:none}
+.take[data-fixed] .good{display:block}
+.take[data-fixed] .bad{display:none}
+.take .why{color:#bdbdbd}
+.take .why b{color:#fff}
+
+/* ---------- видео, практика, проверка ---------- */
+.plain{max-width:980px;margin:0 auto;padding:56px var(--pad)}
+.plain h2{margin:6px 0 16px}
+.note{display:flex;gap:12px;align-items:center;margin:0 0 14px}
+.note>svg{flex:none;width:40px;height:40px}
+.game{display:grid;gap:14px;margin-top:22px;padding:clamp(14px,3vw,28px);border-radius:6px;background:radial-gradient(100% 120% at 50% 0,#353535 0,#1d1d1d 70%);color:#f2f2f2;outline:none}
+.game:focus-visible{box-shadow:0 0 0 3px var(--red)}
+.game__top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.game__wall{width:100%;height:120px}
+.radio{display:grid;gap:10px;padding:14px;border-radius:6px;background:#2a2a2a;border:1px solid #3c3c3c}
+.radio__line{margin:0;font-size:clamp(19px,2.4vw,26px);font-weight:600}
+.radio__line .gap{display:inline-block;min-width:3.6em;border-bottom:3px solid var(--red);text-align:center}
+.radio__ru{margin:0;color:#aaa}
+.game .btn-o{min-width:120px;text-align:center}
+.game kbd{display:inline-block;margin-right:6px;padding:0 6px;border-radius:3px;background:#444;font:600 12px var(--ak-font)}
+
+/* ---------- финал и шпаргалка ---------- */
+.poster{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:min(100%,980px);padding:clamp(14px,2.4vw,26px);border-radius:6px;background:#fff;box-shadow:0 40px 70px -40px rgba(0,0,0,.6)}
+.poster h3{margin:0 0 6px;font-weight:300;text-transform:uppercase;letter-spacing:-.03em;font-size:clamp(20px,2.4vw,32px)}
+.poster h3 b{font-weight:800}
+.poster ul{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:15px}
+.poster li{padding:6px 0;border-bottom:1px solid #eee}
+.poster .col-g h3 b{color:var(--red)}
+.poster .full{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.poster .full p{margin:0}
+@media (max-width:767.98px){
+  .signs{gap:8px}
+  .sign{width:46vw;padding:10px}
+  .sign:nth-child(3){display:none}
+  .cine .sign:nth-child(3){display:block}
+  .cards{grid-template-columns:1fr}
+  .cine .cards{grid-template-columns:1fr 1fr;gap:8px}
+  .cine .pcard{padding:8px}
+  .cine .pcard>svg{height:96px}
+  .cine .spec div{font-size:12px;padding:4px 0}
+  .poster{grid-template-columns:1fr;gap:6px}
+  .cine .poster{font-size:13px;padding:12px}
+  .cine .poster ul{font-size:13px;gap:2px}
+  .cine .poster li{padding:3px 0}
+  .cine .poster h3{font-size:18px;margin:0 0 2px}
+  .cine .poster .full{gap:6px}
+  .cine .poster .btn{min-height:44px}
+  .tile{min-width:96px;height:52px;font-size:20px}
+  .stamps{grid-template-columns:repeat(2,auto)}
+  .dress{grid-template-columns:repeat(2,auto)}
+  .phone{height:min(100%,440px);min-height:300px}
+}
+@media (max-width:767.98px){ .cine .signs{position:relative;width:100%;height:250px} .cine .sign{position:absolute;left:50%;top:0;margin-left:-23vw} .cine .sign:nth-child(2){top:22px;margin-left:-18vw} .cine .sign:nth-child(3){top:44px;margin-left:-28vw} }
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- спрайт: щит опалубки, люди, кошка -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g-con" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#dcdcd8"/><stop offset="1" stop-color="#b9b9b4"/></linearGradient>
+    <linearGradient id="g-ply" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8a4632"/><stop offset="1" stop-color="#5e2c1e"/></linearGradient>
+    <pattern id="p-ties" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="3.2" fill="#9d9d98"/></pattern>
+    <symbol id="s-panel" viewBox="0 0 140 240">
+      <path d="M110 8 136 20v216l-26-10z" fill="#a3141a"/>
+      <rect x="4" y="8" width="106" height="218" fill="#e3262d"/>
+      <rect x="14" y="18" width="86" height="198" fill="url(#g-ply)"/>
+      <g fill="#e3262d"><rect x="14" y="64" width="86" height="7"/><rect x="14" y="114" width="86" height="7"/><rect x="14" y="164" width="86" height="7"/><rect x="54" y="18" width="6" height="198"/></g>
+      <rect x="4" y="8" width="106" height="3" fill="#ff7b7b" opacity=".7"/>
+      <g fill="#fff" opacity=".85"><circle cx="9" cy="40" r="2"/><circle cx="9" cy="120" r="2"/><circle cx="9" cy="200" r="2"/><circle cx="105" cy="40" r="2"/><circle cx="105" cy="120" r="2"/><circle cx="105" cy="200" r="2"/></g>
+    </symbol>
+    <symbol id="p-misha" viewBox="-6 0 104 204">
+      <path d="M12 52Q45 40 78 52q12 6 12 24l-2 54H74l-2 70H52l-7-60-7 60H18l-2-70H2L0 76q0-18 12-24z" fill="#2b2b2b"/>
+      <circle cx="45" cy="24" r="20" fill="#d8cfc6"/>
+      <path d="M25 22q2-20 20-20t20 20q-10-10-20-8-10-2-20 8z" fill="#2b2b2b"/>
+      <circle cx="38" cy="26" r="2" fill="#222"/><circle cx="52" cy="26" r="2" fill="#222"/>
+      <rect x="72" y="66" width="12" height="74" rx="6" fill="#f5f5f5" transform="rotate(-18 78 103)"/>
+    </symbol>
+    <symbol id="p-murat" viewBox="-8 0 108 204">
+      <path d="M10 56q35-12 70 0 16 8 16 28l-4 48H78l-2 68H54l-8-54-8 54H16l-2-68H0l-4-48q0-20 14-28z" fill="#3a3a3a"/>
+      <rect x="2" y="98" width="88" height="8" fill="#c4c4c4"/>
+      <circle cx="45" cy="28" r="20" fill="#d8cfc6"/>
+      <path d="M22 24q0-22 23-22t23 22l7 2H15z" fill="#e3262d"/>
+      <path d="M36 36q9-5 18 0-9 5-18 0z" fill="#3a3a3a"/>
+      <circle cx="38" cy="29" r="2" fill="#222"/><circle cx="52" cy="29" r="2" fill="#222"/>
+    </symbol>
+    <symbol id="p-cat" viewBox="0 0 160 120">
+      <path d="M30 104q-8-40 22-58l-2-26 18 16q12-4 24 0l18-16-2 26q30 18 22 58z" fill="#fff" stroke="#9a9a9a" stroke-width="3"/>
+      <path d="M128 100q24-6 20-34" fill="none" stroke="#9a9a9a" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="66" cy="66" r="4" fill="#222"/><circle cx="94" cy="66" r="4" fill="#222"/><path d="M76 78l4 4 4-4z" fill="#e3262d"/>
+    </symbol>
+    <path id="sil" d="M25 22a20 20 0 1 0 40 0a20 20 0 1 0-40 0zM12 52q33-12 66 0 12 6 12 24l-2 54H74l-2 70H52l-7-60-7 60H18l-2-70H2L0 76q0-18 12-24z"/>
+  </defs>
+</svg>
+
+<nav class="tape" data-scrollbar aria-label="Прогресс урока">
+  <svg class="tape__case" viewBox="0 0 36 30" aria-hidden="true"><rect x="1" y="1" width="34" height="28" rx="6" fill="#e3262d"/><circle cx="18" cy="15" r="8" fill="#b5161c"/><circle cx="18" cy="15" r="3" fill="#fff"/></svg>
+  <div class="tape__track" data-ui><div class="tape__fill"></div></div>
+  <ol class="tape__marks"></ol>
+</nav>
+
+<main>
+
+<!-- =============== СЦЕНА 1: ЗАКАЗ =============== -->
+<section data-section="story" data-words="78" class="scene sky" id="s-story">
+  <div class="stage" data-stage>
+    <div class="stage__head">
+      <div><p class="tag">/ сцена 01 · <em>заказ</em></p><h2 class="ttl">Измир. Стена <b>по заказу</b></h2></div>
+      <p class="lead">Одно русское «как» — два турецких слова. Миша пока об этом не знает.</p>
+    </div>
+    <div class="view">
+      <div class="cam">
+        <svg class="layer l-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <rect width="1600" height="900" fill="#efefed"/>
+          <circle cx="800" cy="700" r="560" fill="#fff" opacity=".55"/>
+          <path d="M0 610 180 520l150 50 190-100 180 90 180-60 180 70 180-90 180 80 180-40v100H0z" fill="#d9d9d7"/>
+          <rect y="636" width="1600" height="90" fill="#cdd6da"/>
+          <g stroke="#e8eef0" stroke-width="3" stroke-linecap="round" class="waves"><path d="M200 660h80M520 680h60M900 664h90M1250 690h70"/></g>
+        </svg>
+        <svg class="layer l-mid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <g fill="#c2c2bf"><rect x="40" y="660" width="120" height="66"/><rect x="170" y="640" width="90" height="86"/><rect x="1380" y="650" width="110" height="76"/><rect x="1500" y="630" width="100" height="96"/></g>
+          <g transform="translate(1240 470)" fill="#b7b7b3">
+            <rect x="0" y="232" width="80" height="24"/><rect x="10" y="150" width="60" height="84"/><rect x="16" y="86" width="48" height="66"/>
+            <circle cx="40" cy="70" r="20" fill="#e9e9e7" stroke="#b7b7b3" stroke-width="6"/><path d="M40 58v12l8 6" stroke="#8b8b8b" stroke-width="3" fill="none"/>
+            <rect x="22" y="40" width="36" height="12"/><path d="M26 40q14-34 28 0z"/><rect x="38" y="0" width="4" height="12"/>
+            <g fill="#e9e9e7"><path d="M22 234v-30q8-12 16 0v30zM42 234v-30q8-12 16 0v30z"/></g>
+          </g>
+          <g stroke="#6b6b6b" stroke-width="7" fill="none" stroke-linecap="round"><path d="M420 726q-6-80 10-140M1150 726q8-70-6-120"/></g>
+          <g fill="#7d7d7d"><path d="M430 586q-60-10-80 20 40-14 80-20zm0 0q50-30 90-6-46-4-90 6zm0 0q-20-40-60-50 46 10 60 50zm0 0q30-40 70-40-40 14-70 40z"/>
+          <path d="M1144 606q-60-10-80 20 40-14 80-20zm0 0q50-30 90-6-46-4-90 6zm0 0q-20-40-60-50 46 10 60 50z"/></g>
+        </svg>
+        <svg class="layer l-near" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <g class="crane" stroke="#e3262d" stroke-width="5" fill="none" stroke-linejoin="round">
+            <path class="draw" data-lattice="v,250,760,170,40,36"/>
+            <path class="draw" data-lattice="h,160,1360,170,30,40"/>
+            <path class="draw" d="M210 170 270 90 330 170M270 90 1360 170M270 90 160 170"/>
+          </g>
+          <rect x="230" y="190" width="70" height="44" fill="#2b2b2b"/>
+          <g class="hook"><path d="M1150 200v150" stroke="#555" stroke-width="3"/><use href="#s-panel" x="1112" y="346" width="76" height="130"/></g>
+          <g fill="#d0d0cc"><rect x="60" y="700" width="16" height="70"/><rect x="1510" y="700" width="16" height="70"/></g>
+        </svg>
+        <svg class="layer l-front" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <rect y="756" width="1600" height="600" fill="#d4d4d0"/>
+          <ellipse cx="760" cy="770" rx="300" ry="16" fill="#000" opacity=".12"/>
+          <defs><mask id="m-hole"><rect x="540" y="380" width="440" height="400" fill="#fff"/><use href="#sil" x="715" y="558" fill="#000"/></mask></defs>
+          <g class="wall1"><rect x="560" y="400" width="400" height="360" fill="url(#g-con)" mask="url(#m-hole)"/><rect x="560" y="400" width="400" height="360" fill="url(#p-ties)" mask="url(#m-hole)" opacity=".8"/></g>
+          <use class="hole-o" href="#sil" x="715" y="558" fill="none" stroke="#e3262d" stroke-width="4" stroke-dasharray="10 8"/>
+          <use class="murat" href="#p-murat" x="430" y="556" width="104" height="204"/>
+          <use class="misha" href="#p-misha" x="1010" y="558" width="100" height="202"/>
+        </svg>
+      </div>
+      <div class="light"></div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Миша снял дом в Измире. Во дворе нужна стена. Высокая, примерно с самого Мишу.</p>
+        <p class="sub">Миша идёт к прорабу. Прораба зовут Мурат-уста. Миша говорит:</p>
+        <p class="sub"><span class="who">Миша</span><a-say>Usta, duvar benim gibi!</a-say><span class="ru">Уста, стена как я!</span></p>
+        <p class="sub"><span class="who">Мурат</span><a-say>Tamam.</a-say><span class="ru">Ладно.</span></p>
+        <p class="sub">Утром стена готова. В стене дырка. В форме Миши.</p>
+        <p class="sub">Миша говорит, это что. Мурат говорит, сам же сказал: как я.</p>
+      </div>
+      <div class="act" data-act="story">
+        <p class="act__q">Чего на самом деле хотел Миша?</p>
+        <div class="act__row"><button type="button" class="btn-o" data-ok="1">Стену высотой с себя</button><button type="button" class="btn-o">Стену в форме себя</button></div>
+        <p class="act__fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== СЦЕНА 2: GİBİ =============== -->
+<section data-section="gibi" data-words="91" class="scene dark" id="s-gibi">
+  <div class="stage" data-stage>
+    <div class="stage__head">
+      <div><p class="tag">/ сцена 02 · <em>опалубка</em></p><h2 class="ttl"><span lang="tr">Gibi</span> — <b>форма</b></h2></div>
+      <p class="lead">Опалубка не меряет. Она повторяет форму того, что в неё залили.</p>
+    </div>
+    <div class="view">
+      <div class="cam">
+        <svg class="layer" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle class="arch" cx="800" cy="520" r="430" fill="#2f2f2f"/>
+          <circle cx="800" cy="520" r="300" fill="#353535"/>
+        </svg>
+      </div>
+      <div class="grp g-mold">
+        <svg viewBox="0 0 300 300" width="300" height="300" style="width:min(64vw,320px);height:auto" aria-hidden="true">
+          <defs><clipPath id="c-sil"><use href="#sil" transform="translate(105 50)"/></clipPath></defs>
+          <g clip-path="url(#c-sil)"><rect class="pour" x="100" y="40" width="100" height="212" fill="url(#g-con)"/></g>
+          <use class="mold" href="#sil" transform="translate(105 50)" fill="none" stroke="#e3262d" stroke-width="7" stroke-dasharray="18 5"/>
+          <g fill="#e3262d" class="bolts"><circle cx="105" cy="128" r="4"/><circle cx="195" cy="128" r="4"/><circle cx="125" cy="180" r="4"/><circle cx="175" cy="180" r="4"/></g>
+        </svg>
+      </div>
+      <div class="grp g-guess">
+        <div class="guess">
+          <svg viewBox="0 0 300 140" width="300" height="140" aria-hidden="true">
+            <rect x="20" y="96" width="260" height="20" rx="4" fill="#4a4a4a"/>
+            <g transform="rotate(-90 150 70) translate(98 -30)"><use href="#p-murat" width="70" height="140"/></g>
+            <g class="zz" fill="#e3262d" font-weight="700" font-size="22"><text x="210" y="50">z</text><text x="226" y="34">z</text><text x="244" y="18">z</text></g>
+          </svg>
+          <p class="sub" style="position:static"><a-say>Murat bebek gibi uyuyor.</a-say></p>
+          <div class="act__row" data-guess><button type="button" class="btn-o" data-ok="1">Крепко, как младенец</button><button type="button" class="btn-o">Рядом с младенцем</button></div>
+        </div>
+      </div>
+      <div class="grp g-signs">
+        <div class="signs belt">
+          <div class="sign"><svg viewBox="0 0 200 110" aria-hidden="true"><circle cx="100" cy="52" r="34" fill="#f2d7c8"/><circle cx="88" cy="50" r="3" fill="#222"/><circle cx="112" cy="50" r="3" fill="#222"/><path d="M92 64q8 6 16 0" stroke="#222" stroke-width="3" fill="none"/><path d="M70 40q30-36 60 0" fill="#e3262d"/></svg><a-say>bebek gibi</a-say><p>как младенец</p><p class="lbl">/ 01</p></div>
+          <div class="sign"><svg viewBox="0 0 200 110" aria-hidden="true"><path d="M70 30l40-16 40 16v50l-40 18-40-18z" fill="#dfe9ee" stroke="#9fb3bd" stroke-width="3"/><path d="M70 30l40 16 40-16M110 46v52" stroke="#9fb3bd" stroke-width="3" fill="none"/></svg><a-say>buz gibi</a-say><p>ледяной, как лёд</p><p class="lbl">/ 02</p></div>
+          <div class="sign"><svg viewBox="0 0 200 110" aria-hidden="true"><circle cx="100" cy="56" r="44" fill="#b5161c"/><circle cx="100" cy="58" r="28" fill="#e9c08f"/><circle cx="90" cy="54" r="3" fill="#222"/><circle cx="110" cy="54" r="3" fill="#222"/><path d="M96 66h8l-4 5z" fill="#222"/></svg><a-say>aslan gibi</a-say><p>как лев</p><p class="lbl">/ 03</p></div>
+        </div>
+      </div>
+      <div class="grp g-swap">
+        <div class="swap">
+          <div class="tiles">
+            <div class="tile t-a is-g"><span class="t1">как</span><span class="t2" lang="tr">gibi</span></div>
+            <div class="tile t-b"><span class="t1">лёд</span><span class="t2" lang="tr">buz</span></div>
+          </div>
+          <div class="stamps">
+            <div class="stamp"><span lang="tr">bebek</span><span class="g" lang="tr">gibi</span></div>
+            <div class="stamp"><span lang="tr">aslan</span><span class="g" lang="tr">gibi</span></div>
+            <div class="stamp"><span lang="tr">kuş</span><span class="g" lang="tr">gibi</span></div>
+            <div class="stamp"><span lang="tr">göz</span><span class="g" lang="tr">gibi</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Камера ныряет в дырку. Любая стена — бетон, залитый в форму. Форма называется опалубка.</p>
+        <p class="sub">Сначала угадай. Как спит Мурат? Жми на ответ прямо в кадре.</p>
+        <p class="sub"><b class="g">gibi</b> значит «как, похожий на». Копирует форму, повадку, вид.</p>
+        <p class="sub">Стоит после слова. По-русски «как лёд», по-турецки «лёд как». В казахском так же: бала сияқты.</p>
+        <p class="sub">И не меняется. Никакой гармонии. Одна опалубка на все слова.</p>
+      </div>
+      <div class="act" data-act="gibi">
+        <p class="act__q">Залей в опалубку — выбери слово:</p>
+        <div class="act__row"><button type="button" class="chip" data-pour="kuş gibi hafif|лёгкий, как птица">kuş</button><button type="button" class="chip" data-pour="bal gibi tatlı|сладкий, как мёд">bal</button><button type="button" class="chip" data-pour="kar gibi beyaz|белый, как снег">kar</button></div>
+        <p class="act__fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== СЦЕНА 3: KADAR =============== -->
+<section data-section="kadar" data-words="83" class="scene" id="s-kadar">
+  <div class="stage" data-stage>
+    <div class="shut"></div>
+    <div class="stage__head">
+      <div><p class="tag">/ сцена 03 · <em>рулетка</em></p><h2 class="ttl"><span lang="tr">Kadar</span> — <b>размер</b></h2></div>
+      <p class="lead">Рулетке всё равно, на что ты похож. Её интересует, сколько в тебе сантиметров.</p>
+    </div>
+    <div class="view">
+      <div class="cam">
+        <svg class="layer" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <circle cx="800" cy="760" r="620" fill="#f7f7f6"/>
+          <rect y="760" width="1600" height="140" fill="#dededb"/>
+          <g class="k-bgpanels" opacity=".35"><use href="#s-panel" x="160" y="420" width="190" height="330"/><use href="#s-panel" x="1260" y="440" width="170" height="310"/></g>
+        </svg>
+      </div>
+      <div class="grp g-tape">
+        <svg viewBox="0 0 520 330" width="520" height="330" style="width:min(92vw,560px);height:auto" aria-hidden="true">
+          <rect x="0" y="300" width="520" height="30" fill="#d4d4d0"/>
+          <use href="#p-murat" x="40" y="96" width="104" height="204"/>
+          <use href="#p-misha" x="330" y="98" width="100" height="202"/>
+          <g class="tp"><rect class="tp-tape" x="262" y="98" width="16" height="202" fill="#f6f6f6" stroke="#9a9a9a"/>
+          <g class="tp-ticks" stroke="#555"><path d="M262 120h8M262 140h5M262 160h8M262 180h5M262 200h8M262 220h5M262 240h8M262 260h5M262 280h8"/></g>
+          <rect x="248" y="282" width="44" height="36" rx="8" fill="#e3262d"/><circle cx="270" cy="300" r="9" fill="#b5161c"/></g>
+          <g class="tp-dim"><path d="M300 98h140" stroke="#1d1d1d" stroke-width="2" stroke-dasharray="6 5"/><text x="300" y="88" class="dim" fill="#1d1d1d">180 см</text></g>
+        </svg>
+      </div>
+      <div class="grp g-pair">
+        <svg viewBox="0 0 420 300" width="420" height="300" style="width:min(80vw,420px);height:auto" aria-hidden="true">
+          <rect y="270" width="420" height="30" fill="#d4d4d0"/>
+          <g class="gulay"><circle cx="120" cy="100" r="22" fill="#d8cfc6"/><path d="M98 96q0-34 22-34t22 34q4 30-2 40H100q-6-10-2-40z" fill="#5a2c20" opacity=".9"/><path d="M90 140q30-14 60 0l8 80-10 50h-56l-10-50z" fill="#e3262d"/></g>
+          <g class="you"><circle cx="300" cy="100" r="22" fill="#d8cfc6"/><path d="M270 140q30-14 60 0l4 70-6 60h-56l-6-60z" fill="#2b2b2b"/></g>
+          <path class="topline" d="M80 76h260" stroke="#1d1d1d" stroke-width="2" stroke-dasharray="6 5"/>
+          <text x="104" y="295" font-size="15" fill="#555">Gülay</text><text x="292" y="295" font-size="15" fill="#555">sen</text>
+        </svg>
+      </div>
+      <div class="grp g-row">
+        <svg viewBox="0 0 560 320" width="560" height="320" style="width:min(94vw,600px);height:auto" aria-hidden="true">
+          <rect y="290" width="560" height="30" fill="#d4d4d0"/>
+          <g class="door"><rect x="40" y="70" width="110" height="220" fill="#2b2b2b"/><rect x="52" y="82" width="86" height="208" fill="#3c3c3c"/><circle cx="128" cy="190" r="5" fill="#e3262d"/></g>
+          <use class="pn1" href="#s-panel" x="210" y="150" width="90" height="146"/>
+          <use class="pn2" href="#s-panel" x="330" y="200" width="70" height="96"/>
+          <use class="pn3" href="#s-panel" x="430" y="240" width="40" height="56"/>
+          <g class="dims" stroke="#1d1d1d" stroke-width="2" stroke-dasharray="5 5"><path d="M30 70h500"/><path d="M200 150h80"/></g>
+          <text x="420" y="62" class="dim" fill="#1d1d1d">дверь · 2,1 м</text><text x="196" y="140" class="dim" fill="#e3262d">щит · 1,2 м</text>
+        </svg>
+      </div>
+      <div class="grp g-clock">
+        <svg class="clock" viewBox="0 0 240 240" width="240" height="240" aria-hidden="true">
+          <circle cx="120" cy="120" r="100" fill="#fff" stroke="#1d1d1d" stroke-width="6"/>
+          <path class="arc" d="M120 32a88 88 0 0 1 76.2 44" fill="none" stroke="#1d1d1d" stroke-width="14" stroke-dasharray="6 5"/>
+          <g class="hand"><path d="M120 120V44" stroke="#e3262d" stroke-width="6" stroke-linecap="round"/></g>
+          <circle cx="120" cy="120" r="8" fill="#1d1d1d"/>
+          <text x="96" y="182" font-size="18" fill="#555">≈ 2 saat</text>
+        </svg>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">У Мурата для «как» два инструмента. Второй — рулетка.</p>
+        <p class="sub"><b class="k">kadar</b> ничего не копирует. Он меряет: такой же величины, как. <a-say>Duvar Mişa kadar yüksek.</a-say><span class="ru">Стена высотой с Мишу.</span></p>
+        <p class="sub"><a-say>Gülay senin kadar uzun.</a-say><span class="ru">Гюлай такая же высокая, как ты.</span></p>
+        <p class="sub">Тоже после слова, тоже без гармонии. Рядом почти всегда мера: высокий, большой, длинный.</p>
+        <p class="sub"><a-say>Panel kapı kadar yüksek değil.</a-say><span class="ru">Щит не такой высокий, как дверь. <span lang="tr">değil</span> — «не такой».</span></p>
+        <p class="sub">С числом <b class="k">kadar</b> значит «примерно». <a-say>iki saat kadar</a-say><span class="ru">около двух часов</span></p>
+      </div>
+      <div class="act" data-act="kadar">
+        <p class="act__q">Подними стену до Миши:</p>
+        <svg viewBox="0 0 300 120" width="300" height="120" style="width:100%;height:96px" aria-hidden="true">
+          <rect y="110" width="300" height="10" fill="#d4d4d0"/>
+          <rect class="kwall" x="40" y="10" width="150" height="100" fill="url(#g-con)" style="transform-origin:0 110px"/>
+          <use href="#p-misha" x="210" y="10" width="50" height="100"/>
+          <path d="M30 10h250" stroke="#1d1d1d" stroke-dasharray="5 5"/>
+        </svg>
+        <input type="range" min="20" max="100" value="40" aria-label="Высота стены" class="kslider">
+        <p class="act__fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== СЦЕНА 4: ПЕРЕПИСКА =============== -->
+<section data-section="pronouns" data-words="54" class="scene dark" id="s-pronouns">
+  <div class="stage" data-stage>
+    <div class="stage__head">
+      <div><p class="tag">/ сцена 04 · <em>переписка</em></p><h2 class="ttl"><span lang="tr">Benim gibi,</span> <b lang="tr">senin kadar</b></h2></div>
+      <p class="lead">Местоимения к опалубке и рулетке приходят нарядными.</p>
+    </div>
+    <div class="view">
+      <div class="cam">
+        <svg class="layer" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle class="dot" cx="800" cy="450" r="40" fill="#fff" opacity=".08"/>
+          <circle cx="800" cy="450" r="380" fill="#2c2c2c"/>
+        </svg>
+      </div>
+      <div class="grp g-phone">
+        <div class="phone">
+          <div class="phone__notch"></div>
+          <div class="phone__top"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="#2b2b2b"/><path d="M5 13q0-11 10-11t10 11z" fill="#e3262d"/></svg><b lang="tr">Murat usta</b></div>
+          <div class="chat">
+            <div class="msg m1"><a-say>Yeni duvar senin kadar yüksek.</a-say><small>Новая стена — высотой с тебя.</small></div>
+            <div class="msg msg--me m2"><a-say>Evet, benim kadar!</a-say><small>Да, с меня!</small></div>
+            <div class="msg m3" hidden><a-say>Süper!</a-say></div>
+          </div>
+        </div>
+      </div>
+      <div class="grp g-dress">
+        <div class="dress">
+          <div class="pr"><span class="root" lang="tr">ben</span><span class="suf" lang="tr">im</span></div>
+          <div class="pr"><span class="root" lang="tr">sen</span><span class="suf" lang="tr">in</span></div>
+          <div class="pr"><span class="root" lang="tr">o</span><span class="suf" lang="tr">nun</span></div>
+          <div class="pr"><span class="root" lang="tr">biz</span><span class="suf" lang="tr">im</span></div>
+          <div class="pr"><span class="root" lang="tr">siz</span><span class="suf" lang="tr">in</span></div>
+          <div class="pr"><span class="root" lang="tr">onlar</span><span class="suf none">—</span></div>
+        </div>
+      </div>
+      <div class="grp g-names">
+        <div class="names">
+          <span><s lang="tr">Murat'ın gibi</s> → <span lang="tr">Murat <b class="g">gibi</b></span></span>
+          <span><s lang="tr">Mişa'nın kadar</s> → <span lang="tr">Mişa <b class="k">kadar</b></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Вечером Мурат пишет Мише.</p>
+        <p class="sub">Заметил? Не <span lang="tr">sen kadar</span>, а <span lang="tr">senin kadar</span>. Не <span lang="tr">ben</span>, а <span lang="tr">benim</span>.</p>
+        <p class="sub">Это <b class="gen">родительный падеж</b> — ответ на «чей?». Местоимение надевает его перед <span lang="tr">gibi</span> и <span lang="tr">kadar</span>.</p>
+        <p class="sub"><span lang="tr">onlar</span> — исключение. Говорят <span lang="tr">onlar gibi</span>, без окончания.</p>
+        <p class="sub">Имена и обычные слова родительный не берут. Голые, как есть.</p>
+      </div>
+      <div class="act" data-act="pronouns">
+        <p class="act__q">Допиши ответ Миши: <span lang="tr">Evet, ___ kadar!</span></p>
+        <div class="act__row"><button type="button" class="chip" lang="tr">ben</button><button type="button" class="chip" lang="tr" data-ok="1">benim</button></div>
+        <p class="act__fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== СЦЕНА 5: КАТАЛОГ =============== -->
+<section data-section="versus" data-words="68" class="scene" id="s-versus">
+  <div class="stage" data-stage>
+    <div class="stage__head">
+      <div><p class="tag">/ сцена 05 · <em>каталог</em></p><h2 class="ttl">Форма <b>или размер</b></h2></div>
+      <p class="lead">Два товара из одного каталога. Похожи, но для разных задач.</p>
+    </div>
+    <div class="view">
+      <div class="cam">
+        <svg class="layer" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <circle cx="800" cy="520" r="520" fill="#f7f7f6"/>
+          <g stroke="#dedede" stroke-width="2" class="grid"><path d="M0 300h1600M0 600h1600M400 0v900M800 0v900M1200 0v900"/></g>
+        </svg>
+      </div>
+      <div class="grp g-cards">
+        <div class="cards">
+          <article class="pcard c-g">
+            <span class="badge-n" lang="tr">gibi</span>
+            <h3>Памук · <b class="g">форма</b></h3>
+            <svg viewBox="0 0 320 150" aria-hidden="true"><g class="mane" transform="translate(160 78)"><circle r="62" fill="#b5161c"/><g fill="#b5161c"><circle cx="-56" cy="-30" r="22"/><circle cx="56" cy="-30" r="22"/><circle cx="0" cy="-64" r="22"/><circle cx="-56" cy="30" r="22"/><circle cx="56" cy="30" r="22"/></g></g><use href="#p-cat" x="100" y="22" width="120" height="100"/></svg>
+            <a-say>Pamuk aslan gibi.</a-say>
+            <dl class="spec"><div><dt>вопрос</dt><dd>на что похожа?</dd></div><div><dt>ответ</dt><dd>на льва</dd></div></dl>
+          </article>
+          <article class="pcard c-k">
+            <span class="badge-n" lang="tr">kadar</span>
+            <h3>Памук · <b class="k">размер</b></h3>
+            <svg viewBox="0 0 320 150" aria-hidden="true"><path class="lion" d="M150 140q-6-60 40-90 40-26 80 0 40 30 34 90z" fill="none" stroke="#1d1d1d" stroke-width="3" stroke-dasharray="7 6"/><use class="kcat" href="#p-cat" x="40" y="84" width="66" height="56"/><path d="M20 140h290" stroke="#bbb" stroke-width="2"/></svg>
+            <a-say>Pamuk aslan kadar büyük değil.</a-say>
+            <dl class="spec"><div><dt>вопрос</dt><dd>насколько большая?</dd></div><div><dt>ответ</dt><dd>не со льва</dd></div></dl>
+          </article>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">На стройке живёт кошка Памук. Мурат её побаивается.</p>
+        <p class="sub">Памук как лев: рычит, охотится, смотрит свысока.</p>
+        <p class="sub">А размером Памук не со льва. Слава богу.</p>
+        <p class="sub">По-русски оба — «как». Спроси: на что похоже? Это <b class="g">gibi</b>. Насколько большое? Это <b class="k">kadar</b>.</p>
+      </div>
+      <div class="act" data-act="versus">
+        <p class="act__q">Переключи и посмотри на кошку:</p>
+        <button type="button" class="switch" role="switch" aria-checked="false"><span>форма</span><i></i><span>размер</span></button>
+        <p class="act__fb" aria-live="polite"><a-say>Pamuk aslan gibi.</a-say></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============== СЦЕНА 6: МОНТАЖНАЯ =============== -->
+<section data-section="lab" data-words="42" class="lab" id="s-lab">
+  <div class="lab__panel">
+    <div class="film" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="tag">/ сцена 06 · <em>монтажная</em></p>
+    <h2 class="ttl">Монтажная</h2>
+    <p class="lead" style="margin-top:10px">Тут режиссёр ты. Три стола, собирай сам.</p>
+    <div class="tabs" role="tablist" aria-label="Режимы лаборатории">
+      <button type="button" role="tab" aria-selected="true" aria-controls="d1" id="t1">Чей?</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="d2" id="t2">Форма или размер</button>
+      <button type="button" role="tab" aria-selected="false" aria-controls="d3" id="t3">Рулетка</button>
+    </div>
+
+    <div class="desk" id="d1" role="tabpanel" aria-labelledby="t1">
+      <div class="desk__row" data-l1="pron"><button type="button" class="chip" data-p="ben" aria-pressed="true" lang="tr">ben</button><button type="button" class="chip" data-p="sen" lang="tr">sen</button><button type="button" class="chip" data-p="o" lang="tr">o</button><button type="button" class="chip" data-p="biz" lang="tr">biz</button><button type="button" class="chip" data-p="siz" lang="tr">siz</button><button type="button" class="chip" data-p="onlar" lang="tr">onlar</button></div>
+      <div class="desk__row" data-l1="suf"><button type="button" class="chip" data-s="im" lang="tr">-im</button><button type="button" class="chip" data-s="in" lang="tr">-in</button><button type="button" class="chip" data-s="nun" lang="tr">-nun</button><button type="button" class="chip" data-s="" data-ui>без окончания</button></div>
+      <div class="desk__row" data-l1="post"><button type="button" class="chip" data-w="gibi" aria-pressed="true" lang="tr">gibi</button><button type="button" class="chip" data-w="kadar" lang="tr">kadar</button></div>
+      <div class="out" data-out="1" data-say="benim gibi"><span class="piece p-root" lang="tr">ben</span><span class="piece p-gen" lang="tr">?</span><span class="piece p-g" lang="tr">gibi</span></div>
+      <p class="why" data-why="1">Выбери местоимение и окончание.</p>
+    </div>
+
+    <div class="desk" id="d2" role="tabpanel" aria-labelledby="t2" hidden>
+      <div class="desk__row" data-l2="cases"></div>
+      <div class="out" data-out="2"><span class="piece p-root">…</span></div>
+      <div class="desk__row"><button type="button" class="chip" data-pick="gibi" lang="tr">gibi</button><button type="button" class="chip" data-pick="kadar" lang="tr">kadar</button></div>
+      <p class="why" data-why="2">Ситуация сверху. Форма или размер?</p>
+    </div>
+
+    <div class="desk" id="d3" role="tabpanel" aria-labelledby="t3" hidden>
+      <div class="ruler">
+        <svg viewBox="0 0 220 200" aria-hidden="true">
+          <rect y="190" width="220" height="10" fill="#d4d4d0"/>
+          <use href="#p-misha" x="20" y="10" width="90" height="180"/>
+          <g class="lmurat" style="transform-origin:155px 190px"><use href="#p-murat" x="110" y="10" width="94" height="180"/></g>
+          <path d="M10 10h210" stroke="#1d1d1d" stroke-dasharray="5 5"/>
+        </svg>
+        <div>
+          <label for="lr" style="font-size:14px;color:#555">Рост Мурата</label>
+          <input id="lr" type="range" min="150" max="180" value="165">
+          <div class="out" data-out="3" style="font-size:20px"></div>
+        </div>
+      </div>
+      <p class="why" data-why="3"></p>
+    </div>
+  </div>
+</section>
+
+<!-- =============== ЛОВУШКИ =============== -->
+<section data-section="traps" data-words="56" class="traps scene dark" id="s-traps">
+  <p class="tag">/ сцена 07 · <em>дубли</em></p>
+  <h2 class="ttl">Неудачные <b>дубли</b></h2>
+  <p class="lead" style="margin-top:10px">На этом спотыкаются все. Снимаем заново.</p>
+  <div class="takes">
+    <article class="take"><svg viewBox="0 0 200 56" aria-hidden="true"><g class="clap"><path d="M10 20 190 4v14L10 34z" fill="#e3262d"/></g><rect x="10" y="30" width="180" height="24" fill="#f2f2f2"/><text x="18" y="48" font-size="14" fill="#222">ДУБЛЬ 1</text></svg>
+      <p class="bad"><s lang="tr">gibi buz</s></p><p class="good" lang="tr">buz gibi</p>
+      <p class="why">Русский порядок «как лёд». В турецком <b>gibi</b> идёт после слова.</p>
+      <button type="button" class="btn">Снять заново</button></article>
+    <article class="take"><svg viewBox="0 0 200 56" aria-hidden="true"><g class="clap"><path d="M10 20 190 4v14L10 34z" fill="#e3262d"/></g><rect x="10" y="30" width="180" height="24" fill="#f2f2f2"/><text x="18" y="48" font-size="14" fill="#222">ДУБЛЬ 2</text></svg>
+      <p class="bad"><s lang="tr">ben gibi</s></p><p class="good" lang="tr">benim gibi</p>
+      <p class="why">Местоимение без родительного звучит голо. Нужно <b>benim</b>.</p>
+      <button type="button" class="btn">Снять заново</button></article>
+    <article class="take"><svg viewBox="0 0 200 56" aria-hidden="true"><g class="clap"><path d="M10 20 190 4v14L10 34z" fill="#e3262d"/></g><rect x="10" y="30" width="180" height="24" fill="#f2f2f2"/><text x="18" y="48" font-size="14" fill="#222">ДУБЛЬ 3</text></svg>
+      <p class="bad"><s lang="tr">Murat'ın kadar</s></p><p class="good" lang="tr">Murat kadar</p>
+      <p class="why">А имени родительный не нужен. Наряжаются только местоимения.</p>
+      <button type="button" class="btn">Снять заново</button></article>
+    <article class="take"><svg viewBox="0 0 200 56" aria-hidden="true"><g class="clap"><path d="M10 20 190 4v14L10 34z" fill="#e3262d"/></g><rect x="10" y="30" width="180" height="24" fill="#f2f2f2"/><text x="18" y="48" font-size="14" fill="#222">ДУБЛЬ 4</text></svg>
+      <p class="bad"><s lang="tr">Deniz kadar yürüyorum.</s></p><p class="good" lang="tr">Denize kadar yürüyorum.</p>
+      <p class="why">Иду до моря — с дательным: <b>denize kadar</b>. Без него выходит «размером с море».</p>
+      <button type="button" class="btn">Снять заново</button></article>
+  </div>
+</section>
+
+<!-- =============== ВИДЕО =============== -->
+<section data-section="video" data-words="9" class="plain" id="s-video">
+  <p class="tag">/ хроника</p>
+  <h2 class="ttl">Видео</h2>
+  <p class="note"><svg viewBox="0 0 40 40" aria-hidden="true"><rect x="2" y="8" width="36" height="26" rx="3" fill="#202020"/><path d="M16 14v14l11-7z" fill="#e3262d"/></svg>Следи, где стоят <span lang="tr">gibi</span> и <span lang="tr">kadar</span>: всегда после слова.</p>
+  <a-video yt="iwXN1r2ShB8" start="0" end="180" title="A2 - Gibi Kadar" channel="Yunus Emre Enstitüsü"></a-video>
+</section>
+
+<!-- =============== ПРАКТИКА =============== -->
+<section data-section="practice" data-words="0" class="plain" id="s-practice">
+  <p class="tag">/ репетиция</p>
+  <h2 class="ttl">Практика</h2>
+  <a-exercise ref="a2.gibi-kadar.ex1"></a-exercise>
+  <a-exercise ref="a2.gibi-kadar.ex2"></a-exercise>
+  <a-exercise ref="a2.gibi-kadar.ex3"></a-exercise>
+  <a-exercise ref="a2.gibi-kadar.ex4"></a-exercise>
+  <a-exercise ref="a2.gibi-kadar.ex5"></a-exercise>
+  <div class="game" tabindex="0" aria-label="Рация прораба">
+    <div class="game__top"><b>Рация прораба</b><span class="g-score">0 / 6</span></div>
+    <svg class="game__wall" viewBox="0 0 600 120" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+      <rect y="112" width="600" height="8" fill="#555"/>
+      <g class="slots"></g>
+    </svg>
+    <div class="radio">
+      <p class="radio__line"></p>
+      <p class="radio__ru"></p>
+      <div class="act__row g-opts"></div>
+      <p class="act__fb g-fb" aria-live="polite"></p>
+    </div>
+    <div class="act__row"><button type="button" class="btn g-restart">Заново</button></div>
+  </div>
+</section>
+
+<!-- =============== ПРОВЕРКА =============== -->
+<section data-section="check" data-words="0" class="plain" id="s-check">
+  <p class="tag">/ приёмка</p>
+  <h2 class="ttl">Мини-проверка</h2>
+  <a-quiz ref="a2.gibi-kadar.check1"></a-quiz>
+</section>
+
+<!-- =============== ФИНАЛ И ШПАРГАЛКА =============== -->
+<section data-section="cheat" data-words="80" class="scene sky" id="s-cheat">
+  <div class="stage" data-stage>
+    <div class="stage__head">
+      <div><p class="tag">/ финал · <em>сдача объекта</em></p><h2 class="ttl"><span lang="tr">Gibi</span> — форма. <b><span lang="tr">Kadar</span> — размер</b></h2></div>
+    </div>
+    <div class="view">
+      <div class="cam">
+        <svg class="layer f-back" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <rect width="1600" height="900" fill="#efefed"/>
+          <circle cx="800" cy="700" r="560" fill="#fff" opacity=".6"/>
+          <rect y="636" width="1600" height="90" fill="#cdd6da"/>
+          <rect y="756" width="1600" height="144" fill="#d4d4d0"/>
+        </svg>
+        <svg class="layer f-front" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <g class="wall2" style="transform-origin:760px 760px"><rect x="560" y="556" width="400" height="204" fill="url(#g-con)"/><rect x="560" y="556" width="400" height="204" fill="url(#p-ties)" opacity=".8"/>
+          <rect class="win" x="700" y="600" width="120" height="80" fill="#9fc3d6" stroke="#e3262d" stroke-width="6"/></g>
+          <path d="M540 556h500" stroke="#1d1d1d" stroke-width="3" stroke-dasharray="10 8"/>
+          <use href="#p-murat" x="430" y="556" width="104" height="204"/>
+          <use class="misha2" href="#p-misha" x="1010" y="558" width="100" height="202"/>
+        </svg>
+      </div>
+      <div class="grp g-poster">
+        <div class="poster">
+          <div class="col-g"><h3><span lang="tr">gibi</span> — <b>форма</b></h3>
+            <ul><li>как, похожий на</li><li><span data-say="bebek gibi" lang="tr">bebek gibi</span> — как младенец</li><li><span data-say="buz gibi" lang="tr">buz gibi</span> — ледяной</li></ul></div>
+          <div><h3><span lang="tr">kadar</span> — <b>размер</b></h3>
+            <ul><li>такой же величины, как</li><li><span data-say="senin kadar uzun" lang="tr">senin kadar uzun</span> — высокий, как ты</li><li><span data-say="iki saat kadar" lang="tr">iki saat kadar</span> — около двух часов</li></ul></div>
+          <div><h3><b>Местоимения</b></h3>
+            <ul><li><span lang="tr">benim, senin, onun, bizim, sizin</span> + <span lang="tr">gibi/kadar</span></li><li>но <span lang="tr">onlar gibi</span></li></ul></div>
+          <div><h3><b>Имена</b> без окончания</h3>
+            <ul><li><span lang="tr">Murat gibi, Mişa kadar</span></li><li><span lang="tr">kadar … değil</span> — не такой, как</li></ul></div>
+          <div class="full"><p>Теперь ты отличаешь форму от размера и ставишь местоимение в родительный.</p><button type="button" class="btn f-say">Скажи за Мишу <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11 11 3M5 3h6v6" stroke="#fff" stroke-width="2" fill="none"/></svg></button></div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Утро. Миша приходит к Мурату ещё раз. В этот раз с рулеткой в голове.</p>
+        <p class="sub"><span class="who">Миша</span><a-say>Usta, duvar benim kadar yüksek. Pencere deniz gibi mavi.</a-say><span class="ru">Стена высотой с меня. Окно синее, как море.</span></p>
+        <p class="sub"><span class="who">Мурат</span><a-say>Tamam! Türk gibi konuşuyorsun.</a-say><span class="ru">Ладно! Говоришь, как турок.</span></p>
+        <p class="sub">Стена выросла ровно до Миши. Дырку заделали. Окно синее.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<template data-achievement data-title="Форма и размер" data-text="Отличаешь gibi от kadar и ставишь benim, senin, onun перед ними">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#202020"/>
+    <g class="a-panel"><use href="#s-panel" x="22" y="18" width="50" height="86"/></g>
+    <g class="a-tape"><rect x="66" y="66" width="36" height="30" rx="7" fill="#e3262d"/><circle cx="84" cy="81" r="7" fill="#b5161c"/><rect class="a-strip" x="70" y="40" width="8" height="28" fill="#f4f4f4"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  if (G && ST) G.registerPlugin(ST);
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const html = document.documentElement;
+  const say = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* kit ещё не готов */ } };
+  const pop = (el) => { if (G) G.fromTo(el, { scale: 0.9 }, { scale: 1, duration: 0.35, ease: 'back.out(2)' }); };
+
+  /* ---------- решётка крана ---------- */
+  $$('[data-lattice]').forEach((p) => {
+    const [dir, a, b, c, w, step] = p.dataset.lattice.split(',');
+    const A = +a, B = +b, C = +c, W = +w, S = +step;
+    let d = '';
+    if (dir === 'v') { /* башня: x=A, от y=B вверх до y=C */
+      d = `M${A} ${B}V${C}M${A + W} ${B}V${C}`;
+      for (let y = B, i = 0; y > C; y -= S, i++) d += `M${A} ${y}L${A + W} ${y - S}M${A} ${y}H${A + W}`;
+    } else { /* стрела: от x=A до x=B на высоте C */
+      d = `M${A} ${C}H${B}M${A} ${C + W}H${B}`;
+      for (let x = A; x < B; x += S) d += `M${x} ${C + W}L${x + S / 2} ${C}L${x + S} ${C + W}`;
+    }
+    p.setAttribute('d', d);
+  });
+
+  /* ---------- скроллбар-рулетка ---------- */
+  const sections = $$('[data-section]');
+  const names = { story: 'Заказ', gibi: 'Опалубка', kadar: 'Рулетка', pronouns: 'Переписка', versus: 'Каталог', lab: 'Монтажная', traps: 'Дубли', video: 'Видео', practice: 'Практика', check: 'Проверка', cheat: 'Финал' };
+  const tape = $('[data-scrollbar]');
+  const marks = $('.tape__marks', tape);
+  const fill = $('.tape__fill', tape);
+  const track = $('.tape__track', tape);
+  sections.forEach((s, i) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.dataset.goto = s.dataset.section;
+    b.innerHTML = `<i></i><span>${String(i + 1).padStart(2, '0')} · ${names[s.dataset.section] || ''}</span>`;
+    b.setAttribute('aria-label', names[s.dataset.section] || s.dataset.section);
+    b.addEventListener('click', () => {
+      const y = s.getBoundingClientRect().top + scrollY - (innerWidth < 768 ? 50 : 0);
+      scrollTo({ top: y, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    });
+    li.appendChild(b);
+    marks.appendChild(li);
+  });
+  const markBtns = $$('button', marks);
+  const placeMarks = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    markBtns.forEach((b, i) => {
+      const top = sections[i].getBoundingClientRect().top + scrollY;
+      if (innerWidth >= 768) b.parentElement.style.top = `${Math.min(100, Math.max(0, (top / Math.max(1, max)) * 100))}%`;
+      else b.parentElement.style.top = '';
+    });
+  };
+  const paintTape = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    fill.style.transform = innerWidth >= 768 ? `scaleY(${p})` : `scaleX(${p})`;
+    let cur = 0;
+    sections.forEach((s, i) => { if (s.getBoundingClientRect().top < innerHeight * 0.5) cur = i; });
+    markBtns.forEach((b, i) => b.setAttribute('aria-current', String(i === cur)));
+  };
+  addEventListener('scroll', paintTape, { passive: true });
+  addEventListener('resize', () => { placeMarks(); paintTape(); });
+  addEventListener('alterna:read', (e) => {
+    const b = markBtns.find((x) => x.dataset.goto === (e.detail && e.detail.key));
+    if (b) { b.dataset.read = '1'; pop(b); }
+  });
+  let dragging = false;
+  const dragTo = (ev) => {
+    const r = track.getBoundingClientRect();
+    const p = innerWidth >= 768 ? (ev.clientY - r.top) / r.height : (ev.clientX - r.left) / r.width;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    scrollTo(0, Math.min(1, Math.max(0, p)) * max);
+  };
+  track.addEventListener('pointerdown', (ev) => { dragging = true; track.setPointerCapture(ev.pointerId); dragTo(ev); });
+  track.addEventListener('pointermove', (ev) => { if (dragging) dragTo(ev); });
+  track.addEventListener('pointerup', () => { dragging = false; });
+  placeMarks(); paintTape();
+
+  /* ---------- действия в конце сцен ---------- */
+  const fb = (root, text) => { const p = $('.act__fb', root); if (p) { p.innerHTML = text; pop(p); } };
+
+  const actStory = $('[data-act="story"]');
+  $$('.btn-o', actStory).forEach((b) => b.addEventListener('click', () => {
+    const ok = !!b.dataset.ok;
+    $$('.btn-o', actStory).forEach((x) => x.removeAttribute('data-state'));
+    b.dataset.state = ok ? 'ok' : 'no';
+    fb(actStory, ok ? 'Вот. А сказал «как я». По-турецки «как» бывает двух видов.' : 'Тогда Мурат молодец. Но Миша хотел высоту, а не фигуру.');
+    if (G) G.fromTo('.hole-o', { scale: 1.25, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.6, ease: 'elastic.out(1,.4)' });
+  }));
+
+  const guess = $('[data-guess]');
+  $$('.btn-o', guess).forEach((b) => b.addEventListener('click', () => {
+    b.dataset.state = b.dataset.ok ? 'ok' : 'no';
+    if (G) G.to('.zz text', { y: -10, duration: 0.3, yoyo: true, repeat: 1, stagger: 0.08 });
+  }));
+
+  const actGibi = $('[data-act="gibi"]');
+  $$('[data-pour]', actGibi).forEach((b) => b.addEventListener('click', () => {
+    const [tr, ru] = b.dataset.pour.split('|');
+    $$('[data-pour]', actGibi).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    fb(actGibi, `<b lang="tr" data-say="${tr}">${tr}</b> — ${ru}`);
+    say(tr);
+    if (G) G.fromTo('.g-mold .pour', { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.9, ease: 'power2.out' });
+  }));
+
+  const actKadar = $('[data-act="kadar"]');
+  const kslider = $('.kslider', actKadar);
+  const kwall = $('.kwall', actKadar);
+  const kPaint = () => {
+    const v = +kslider.value;
+    kwall.style.transform = `scaleY(${v / 100})`;
+    if (v >= 97) fb(actKadar, '<b lang="tr">Duvar Mişa kadar yüksek.</b> Ровно с Мишу.');
+    else fb(actKadar, '<b lang="tr">Duvar Mişa kadar yüksek değil.</b> Пока не с Мишу.');
+  };
+  kslider.addEventListener('input', kPaint);
+  kslider.addEventListener('change', () => { if (+kslider.value >= 97) say('Duvar Mişa kadar yüksek.'); });
+  kPaint();
+
+  const actPr = $('[data-act="pronouns"]');
+  $$('.chip', actPr).forEach((b) => b.addEventListener('click', () => {
+    const ok = !!b.dataset.ok;
+    $$('.chip', actPr).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    fb(actPr, ok ? 'Верно: <b lang="tr">benim kadar</b>. Мурат отвечает: <span lang="tr">Süper!</span>' : 'Голое <b lang="tr">ben</b> не подходит. Нужен родительный: <b lang="tr">benim</b>.');
+    const m3 = $('.m3');
+    if (ok && m3.hidden) { m3.hidden = false; if (G) G.from(m3, { y: 20, scale: 0.8, duration: 0.4, ease: 'back.out(2)' }); }
+  }));
+
+  const sw = $('.switch');
+  const swFb = $('[data-act="versus"] .act__fb');
+  sw.addEventListener('click', () => {
+    const on = sw.getAttribute('aria-checked') !== 'true';
+    sw.setAttribute('aria-checked', String(on));
+    swFb.innerHTML = on ? '<a-say>Pamuk aslan kadar büyük değil.</a-say>' : '<a-say>Pamuk aslan gibi.</a-say>';
+    if (G) {
+      if (on) { G.to('.c-g .mane', { scale: 0.2, opacity: 0.2, duration: 0.4 }); G.fromTo('.c-k .kcat', { scale: 0.6, transformOrigin: '50% 100%' }, { scale: 1, duration: 0.6, ease: 'back.out(2)' }); }
+      else { G.to('.c-g .mane', { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }); }
+    }
+  });
+
+  /* ---------- монтажная ---------- */
+  const tabs = $$('[role=tab]');
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    tabs.forEach((x) => { x.setAttribute('aria-selected', String(x === t)); $('#' + x.getAttribute('aria-controls')).hidden = x !== t; });
+    const d = $('#' + t.getAttribute('aria-controls'));
+    if (G) G.from(d, { y: 24, opacity: 0, duration: 0.4, ease: 'power2.out' });
+  }));
+
+  const GEN = { ben: 'im', sen: 'in', o: 'nun', biz: 'im', siz: 'in', onlar: '' };
+  const l1 = { p: 'ben', s: null, w: 'gibi' };
+  const out1 = $('[data-out="1"]');
+  const why1 = $('[data-why="1"]');
+  const paint1 = () => {
+    const pieces = $$('.piece', out1);
+    pieces[0].textContent = l1.p;
+    pieces[1].textContent = l1.s === null ? '?' : (l1.s || '∅');
+    pieces[2].textContent = l1.w;
+    pieces[2].className = `piece ${l1.w === 'gibi' ? 'p-g' : 'p-k'}`;
+    if (l1.s === null) { why1.textContent = 'Выбери окончание родительного падежа.'; return; }
+    const right = GEN[l1.p];
+    if (l1.s === right) {
+      const phrase = `${l1.p}${right} ${l1.w}`;
+      out1.dataset.say = phrase;
+      why1.innerHTML = right ? `<b>${phrase}</b>: ${l1.p} → ${l1.p}${right}, родительный перед ${l1.w}.` : `<b>${phrase}</b>: onlar — исключение, окончание не нужно.`;
+      if (G) G.fromTo(pieces[1], { x: -30, rotation: -12 }, { x: 0, rotation: 0, duration: 0.5, ease: 'back.out(3)' });
+      say(phrase);
+    } else {
+      why1.innerHTML = right ? `Не то. У <b>${l1.p}</b> родительный — <b>-${right}</b>.` : 'У <b>onlar</b> окончания нет: <b>onlar gibi</b>.';
+      if (G) G.fromTo(out1, { x: -8 }, { x: 0, duration: 0.4, ease: 'elastic.out(1,.3)' });
+    }
+  };
+  $$('[data-p]').forEach((b) => b.addEventListener('click', () => { l1.p = b.dataset.p; l1.s = null; $$('[data-p]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); paint1(); }));
+  $$('[data-s]').forEach((b) => b.addEventListener('click', () => { l1.s = b.dataset.s; paint1(); }));
+  $$('[data-w]').forEach((b) => b.addEventListener('click', () => { l1.w = b.dataset.w; $$('[data-w]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); paint1(); }));
+  paint1();
+
+  const CASES = [
+    { ru: 'ледяная вода', tr: 'buz', ans: 'gibi', tail: '', why: 'Вода похожа на лёд, а не размером с него. Форма — <b>gibi</b>.' },
+    { ru: 'стол длиной с диван', tr: 'Masa kanepe', ans: 'kadar', tail: ' uzun', why: '«Длиной с» — это мера. Рулетка — <b>kadar</b>.' },
+    { ru: 'спит как бревно', tr: 'kütük', ans: 'gibi', tail: ' uyuyor', why: 'Спит так, как спит бревно. Повадка — <b>gibi</b>.' },
+    { ru: 'дом размером с дворец', tr: 'Ev saray', ans: 'kadar', tail: ' büyük', why: '«Размером с» — величина. Значит <b>kadar</b>.' },
+  ];
+  let ci = 0;
+  const row2 = $('[data-l2="cases"]');
+  const out2 = $('[data-out="2"]');
+  const why2 = $('[data-why="2"]');
+  CASES.forEach((c, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = c.ru;
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.addEventListener('click', () => { ci = i; $$('.chip', row2).forEach((x, j) => x.setAttribute('aria-pressed', String(j === i))); out2.innerHTML = `<span class="piece p-root">${c.ru}</span>`; why2.textContent = 'Форма или размер?'; });
+    row2.appendChild(b);
+  });
+  out2.innerHTML = `<span class="piece p-root">${CASES[0].ru}</span>`;
+  $$('[data-pick]').forEach((b) => b.addEventListener('click', () => {
+    const c = CASES[ci];
+    const ok = b.dataset.pick === c.ans;
+    if (ok) {
+      const phrase = `${c.tr} ${c.ans}${c.tail}`;
+      out2.innerHTML = `<span class="piece p-root" lang="tr">${c.tr}</span><span class="piece ${c.ans === 'gibi' ? 'p-g' : 'p-k'}" lang="tr">${c.ans}</span><span class="piece" lang="tr">${c.tail}</span>`;
+      out2.dataset.say = phrase;
+      say(phrase);
+      if (G) G.from($$('.piece', out2), { y: -26, opacity: 0, stagger: 0.12, duration: 0.4, ease: 'back.out(2)' });
+    } else if (G) G.fromTo(out2, { x: -10 }, { x: 0, duration: 0.5, ease: 'elastic.out(1,.3)' });
+    why2.innerHTML = (ok ? 'Да. ' : 'Не то. ') + c.why;
+  }));
+
+  const lr = $('#lr');
+  const out3 = $('[data-out="3"]');
+  const why3 = $('[data-why="3"]');
+  const lmurat = $('.lmurat');
+  const paint3 = () => {
+    const v = +lr.value;
+    lmurat.style.transform = `scaleY(${v / 180})`;
+    const eq = v >= 179;
+    const phrase = eq ? 'Murat Mişa kadar uzun.' : 'Murat Mişa kadar uzun değil.';
+    out3.innerHTML = `<span lang="tr">${phrase}</span>`;
+    out3.dataset.say = phrase;
+    why3.innerHTML = eq ? `${v} см и 180 см. Равны — <b>kadar</b>.` : `${v} см меньше 180. Не дотягивает — <b>kadar … değil</b>.`;
+  };
+  lr.addEventListener('input', paint3);
+  lr.addEventListener('change', () => say(out3.dataset.say));
+  paint3();
+
+  /* ---------- дубли ---------- */
+  $$('.take').forEach((t) => $('.btn', t).addEventListener('click', () => {
+    const fixed = !t.dataset.fixed;
+    if (fixed) t.dataset.fixed = '1'; else delete t.dataset.fixed;
+    $('.btn', t).textContent = fixed ? 'Ещё раз' : 'Снять заново';
+    if (fixed) say($('.good', t).textContent);
+    if (G) {
+      G.fromTo($('.clap', t), { rotation: -18, svgOrigin: '10 27' }, { rotation: 0, duration: 0.35, ease: 'bounce.out' });
+      G.from($(fixed ? '.good' : '.bad', t), { y: 16, opacity: 0, duration: 0.4 });
+    }
+  }));
+
+  /* ---------- игра: рация прораба ---------- */
+  const EX5 = 'a2.gibi-kadar.ex5';
+  const ORDERS = [
+    { id: 'i1', line: 'Bu ayran buz ___.', ru: 'Этот айран ледяной.', opts: ['gibi', 'kadar'], a: 0, why: 'Айран похож на лёд, а не размером с него — gibi.' },
+    { id: 'i2', line: 'Duvar kapı ___ yüksek.', ru: 'Стена высотой с дверь.', opts: ['kadar', 'gibi'], a: 0, why: 'Высота — это мера. Мера — kadar.' },
+    { id: 'i3', line: 'Murat ___ gibi konuşuyor. (ben)', ru: 'Мурат говорит, как я.', opts: ['benim', 'ben'], a: 0, why: 'Местоимение перед gibi — в родительном: benim.' },
+    { id: 'i4', line: 'Pamuk aslan ___ büyük değil.', ru: 'Памук не размером со льва.', opts: ['kadar', 'gibi'], a: 0, why: 'Сравниваем размер — kadar … değil.' },
+    { id: 'i5', line: 'Mişa kütük ___ uyuyor.', ru: 'Миша спит как бревно.', opts: ['gibi', 'kadar'], a: 0, why: 'Спит так, как бревно — повадка, gibi.' },
+    { id: 'i6', line: 'Bu panel ___ kadar ağır. (sen)', ru: 'Этот щит тяжёлый, как ты.', opts: ['sen', 'senin'], a: 1, why: 'sen → senin перед kadar.' },
+  ];
+  const game = $('.game');
+  const gLine = $('.radio__line', game);
+  const gRu = $('.radio__ru', game);
+  const gOpts = $('.g-opts', game);
+  const gFb = $('.g-fb', game);
+  const gScore = $('.g-score', game);
+  const slots = $('.slots', game);
+  let gi = 0, gOk = 0, gT = performance.now(), gLock = false;
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const buildSlots = () => {
+    slots.innerHTML = '';
+    ORDERS.forEach((o, i) => {
+      const u = document.createElementNS(SVGNS, 'use');
+      u.setAttribute('href', '#s-panel');
+      u.setAttribute('x', String(40 + i * 90)); u.setAttribute('y', '12');
+      u.setAttribute('width', '84'); u.setAttribute('height', '100');
+      u.setAttribute('opacity', '0.12');
+      slots.appendChild(u);
+    });
+  };
+  const gRender = () => {
+    gScore.textContent = `${gOk} / ${ORDERS.length}`;
+    if (gi >= ORDERS.length) {
+      gLine.textContent = 'Стена готова.';
+      gRu.textContent = `Верных приказов: ${gOk} из ${ORDERS.length}.`;
+      gOpts.innerHTML = '';
+      return;
+    }
+    const o = ORDERS[gi];
+    gLine.innerHTML = o.line.replace('___', '<span class="gap">___</span>');
+    gLine.setAttribute('lang', 'tr');
+    gRu.textContent = o.ru;
+    gOpts.innerHTML = '';
+    o.opts.forEach((t, k) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn-o'; b.lang = 'tr';
+      b.innerHTML = `<kbd>${k + 1}</kbd>${t}`;
+      b.addEventListener('click', () => gAnswer(k));
+      gOpts.appendChild(b);
+    });
+    gT = performance.now();
+    if (G) G.from(gLine, { x: 30, opacity: 0, duration: 0.35 });
+  };
+  const gAnswer = (k) => {
+    if (gLock || gi >= ORDERS.length) return;
+    gLock = true;
+    const o = ORDERS[gi];
+    const ok = k === o.a;
+    if (ok) gOk++;
+    const tr = window.AlternaTracker;
+    if (tr) tr.answer({ exerciseId: EX5, itemId: o.id, correct: ok, answer: o.opts[k], timeMs: Math.round(performance.now() - gT) });
+    const full = o.line.replace(/ \((ben|sen)\)$/, '').replace('___', o.opts[o.a]);
+    $$('button', gOpts)[k].dataset.state = ok ? 'ok' : 'no';
+    gFb.innerHTML = (ok ? 'Принято. ' : 'Мимо. ') + o.why;
+    const slot = slots.children[gi];
+    if (G) {
+      if (ok) G.fromTo(slot, { y: -120, opacity: 1 }, { y: 0, opacity: 1, duration: 0.5, ease: 'bounce.out' });
+      else { slot.setAttribute('opacity', '0.4'); G.fromTo(slot, { rotation: -8, transformOrigin: '50% 100%' }, { rotation: 0, duration: 0.6, ease: 'elastic.out(1,.3)' }); }
+    } else slot.setAttribute('opacity', ok ? '1' : '0.4');
+    if (ok) say(full);
+    gi++;
+    setTimeout(() => {
+      gLock = false;
+      gRender();
+      if (gi >= ORDERS.length && tr) tr.complete({ exerciseId: EX5, correct: gOk, total: ORDERS.length });
+    }, 650);
+  };
+  const gReset = () => { gi = 0; gOk = 0; gLock = false; gFb.textContent = ''; buildSlots(); gRender(); };
+  $('.g-restart', game).addEventListener('click', gReset);
+  game.addEventListener('keydown', (e) => { if (e.key === '1' || e.key === '2') { e.preventDefault(); gAnswer(+e.key - 1); } });
+  gReset();
+  if (window.AlternaKit) window.AlternaKit.registerSolver(EX5, async () => {
+    gReset();
+    for (const o of ORDERS) { gLock = false; gAnswer(o.a); await new Promise((r) => setTimeout(r, 700)); }
+  });
+
+  /* ---------- финал ---------- */
+  $('.f-say').addEventListener('click', () => {
+    say('Usta, duvar benim kadar yüksek. Pencere deniz gibi mavi.');
+    if (G) { G.fromTo('.wall2', { scaleY: 0.2, svgOrigin: '760 760' }, { scaleY: 1, svgOrigin: '760 760', duration: 0.9, ease: 'power3.out' }); G.fromTo('.win', { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.5, delay: 0.6, ease: 'back.out(2)' }); }
+  });
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    const panel = b.querySelector('.a-panel');
+    const tp = b.querySelector('.a-tape');
+    const strip = b.querySelector('.a-strip');
+    if (panel) detail.timeline.fromTo(panel, { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'bounce.out' }, 0.3);
+    if (tp) detail.timeline.fromTo(tp, { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 0.7);
+    if (strip) detail.timeline.fromTo(strip, { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 0.9, ease: 'power2.out' }, 1.0);
+  });
+
+  if (!G || !ST) return;
+
+  /* ---------- кино: сцены по скроллу ---------- */
+  const subsIn = (tl, stage, times) => {
+    const list = $$('.sub', $('.subs', stage));
+    list.forEach((el, i) => {
+      if (i) tl.fromTo(el, { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, times[i]);
+      if (i < list.length - 1) tl.to(el, { y: -18, opacity: 0, duration: 0.3 }, times[i + 1] - 0.2);
+    });
+  };
+  const pinCfg = (stage, desk) => ({ trigger: stage, start: 'top top', end: `+=${desk ? 220 : 130}%`, pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true });
+
+  const mm = G.matchMedia();
+  mm.add({ desk: '(min-width: 768px) and (prefers-reduced-motion: no-preference)', mob: '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)' }, (ctx) => {
+    const desk = ctx.conditions.desk;
+    html.classList.add('cine');
+    ST.refresh();
+
+    /* сцена 1 — заказ */
+    const s1 = $('#s-story .stage');
+    const t1 = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(s1, desk) });
+    t1.to($('.l-far', s1), { xPercent: -2, duration: 10 }, 0)
+      .to($('.l-mid', s1), { xPercent: desk ? -5 : -3, duration: 10 }, 0)
+      .to($('.l-near', s1), { xPercent: desk ? -10 : -6, duration: 10 }, 0)
+      .fromTo($$('.crane .draw', s1), { strokeDasharray: 9000, strokeDashoffset: 9000 }, { strokeDashoffset: 0, duration: 2.2 }, 0)
+      .from($('.hook', s1), { y: -180, duration: 1.6, ease: 'power2.out' }, 1)
+      .to($('.cam', s1), { scale: desk ? 1.35 : 1.25, duration: 2, ease: 'power1.inOut' }, 2)
+      .from($('.misha', s1), { x: 160, duration: 1.2, ease: 'power2.out' }, 2.2)
+      .to($('.light', s1), { opacity: 0.62, duration: 0.8 }, 5)
+      .to($('.cam', s1), { scale: 1, duration: 1.4, ease: 'power1.inOut' }, 5)
+      .from($('.wall1', s1), { scaleY: 0, transformOrigin: '50% 100%', duration: 1.2, ease: 'power3.out' }, 5.6)
+      .to($('.light', s1), { opacity: 0, duration: 0.8 }, 6.6)
+      .from($('.hole-o', s1), { scale: 1.6, opacity: 0, transformOrigin: '50% 50%', duration: 0.6 }, 7.2)
+      .to($('.misha', s1), { x: -40, duration: 0.8, ease: 'power2.out' }, 7.6)
+      .from($('.act', s1), { y: 40, opacity: 0, duration: 0.6 }, 9)
+      .to($('.cam', s1), { yPercent: desk ? 0 : -24, duration: 0.6 }, 8.9)
+      .to({}, { duration: 1.6 }, 9.6);
+    subsIn(t1, s1, [0.3, 2.2, 3.2, 4.2, 6.8, 8.2]);
+
+    /* сцена 2 — опалубка: камера ныряет в дырку, из неё рождается форма */
+    const s2 = $('#s-gibi .stage');
+    const t2 = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(s2, desk) });
+    t2.fromTo($('.g-mold svg', s2), { scale: 7 }, { scale: 1, duration: 1.4, ease: 'power3.out' }, 0)
+      .from($('.arch', s2), { scale: 0.6, transformOrigin: '50% 50%', duration: 1.4 }, 0)
+      .fromTo($('.g-mold .pour', s2), { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 1.2 }, 1.2)
+      .from($$('.g-mold .bolts circle', s2), { scale: 0, transformOrigin: '50% 50%', stagger: 0.1, duration: 0.3 }, 1.4)
+      .to($('.g-mold', s2), { y: -60, scale: 0.6, opacity: 0, duration: 0.6 }, 2.6)
+      .from($('.g-guess', s2), { y: 80, opacity: 0, duration: 0.6 }, 2.8)
+      .to($('.g-guess', s2), { x: desk ? -200 : -120, opacity: 0, duration: 0.6 }, 4.4)
+      .from($$('.sign', s2), { y: 140, rotation: (i) => (i - 1) * 6, opacity: 0, stagger: 0.25, duration: 0.7, ease: 'power2.out' }, 4.6);
+    t2.to($('.g-signs', s2), { y: -80, opacity: 0, duration: 0.6 }, 6.4)
+      .from($('.tiles', s2), { scale: 0.6, opacity: 0, duration: 0.5 }, 6.6)
+      .to($('.t-a', s2), { x: desk ? 130 : 106, duration: 0.8, ease: 'power2.inOut' }, 7.2)
+      .to($('.t-b', s2), { x: desk ? -130 : -106, duration: 0.8, ease: 'power2.inOut' }, 7.2)
+      .to($$('.tile .t1', s2), { yPercent: -120, opacity: 0, duration: 0.4 }, 7.6)
+      .from($$('.tile .t2', s2), { yPercent: 120, opacity: 0, duration: 0.4 }, 7.7)
+      .from($$('.stamp', s2), { y: 50, opacity: 0, stagger: 0.12, duration: 0.4 }, 8.3)
+      .from($$('.stamp .g', s2), { y: -60, scale: 1.4, stagger: 0.12, duration: 0.45, ease: 'bounce.out' }, 8.6)
+      .from($('.act', s2), { y: 40, opacity: 0, duration: 0.6 }, 9.4)
+      .to($('.g-swap', s2), { y: desk ? 0 : -110, duration: 0.6 }, 9.3)
+      .to({}, { duration: 1.4 }, 10);
+    subsIn(t2, s2, [0.2, 2.9, 4.6, 6.6, 8.3]);
+
+    /* сцена 3 — рулетка: шторка-сантиметр открывает кадр */
+    const s3 = $('#s-kadar .stage');
+    const t3 = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(s3, desk) });
+    t3.fromTo($('.shut', s3), { scaleY: 1 }, { scaleY: 0, transformOrigin: '50% 0', duration: 0.8, ease: 'power2.inOut' }, 0)
+      .from($('.k-bgpanels', s3), { xPercent: 20, duration: 10 }, 0)
+      .from($('.g-tape', s3), { scale: 0.8, opacity: 0, duration: 0.6 }, 0.4)
+      .fromTo($('.tp-tape', s3), { scaleY: 0, transformOrigin: '50% 100%' }, { scaleY: 1, duration: 1.2, ease: 'power2.out' }, 1)
+      .from($('.tp-ticks', s3), { opacity: 0, duration: 0.4 }, 1.8)
+      .from($('.tp-dim', s3), { x: -60, opacity: 0, duration: 0.5 }, 2.2)
+      .to($('.g-tape', s3), { x: desk ? -260 : -140, opacity: 0, duration: 0.6 }, 3.4)
+      .from($('.g-pair', s3), { x: desk ? 260 : 140, opacity: 0, duration: 0.6 }, 3.6)
+      .fromTo($('.g-pair .topline', s3), { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, duration: 0.6 }, 4.2)
+      .to($('.g-pair', s3), { y: -60, opacity: 0, duration: 0.5 }, 5.6)
+      .from($('.g-row', s3), { y: 60, opacity: 0, duration: 0.5 }, 5.8)
+      .from($$('.g-row use', s3), { y: 120, opacity: 0, stagger: 0.15, duration: 0.5, ease: 'power2.out' }, 6)
+      .fromTo($$('.g-row .dims path', s3), { scaleX: 0, transformOrigin: '0 50%' }, { scaleX: 1, stagger: 0.2, duration: 0.5 }, 6.6)
+      .to($('.g-row', s3), { scale: 0.7, opacity: 0, duration: 0.5 }, 7.8)
+      .from($('.g-clock', s3), { scale: 1.6, opacity: 0, duration: 0.5 }, 8)
+      .fromTo($('.g-clock .hand', s3), { rotation: 0, svgOrigin: '120 120' }, { rotation: 60, duration: 1, ease: 'power1.inOut' }, 8.3)
+      .from($('.act', s3), { y: 40, opacity: 0, duration: 0.6 }, 9.4)
+      .to($('.g-clock', s3), { y: desk ? 0 : -120, scale: desk ? 1 : 0.7, duration: 0.6 }, 9.3)
+      .to({}, { duration: 1.4 }, 10);
+    subsIn(t3, s3, [0.4, 1.6, 3.8, 5.0, 6.2, 8.1]);
+
+    /* сцена 4 — переписка: экран телефона загорается из точки */
+    const s4 = $('#s-pronouns .stage');
+    const t4 = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(s4, desk) });
+    t4.fromTo($('.dot', s4), { scale: 0, transformOrigin: '50% 50%' }, { scale: 14, opacity: 0.12, duration: 1 }, 0)
+      .from($('.phone', s4), { y: 300, rotation: 14, duration: 1, ease: 'power3.out' }, 0.2)
+      .from($('.m1', s4), { x: -40, opacity: 0, duration: 0.4 }, 1.2)
+      .from($('.m2', s4), { x: 40, opacity: 0, duration: 0.4 }, 1.8)
+      .to($('.phone', s4), { scale: desk ? 1.35 : 1.2, y: desk ? 60 : 30, duration: 1, ease: 'power1.inOut' }, 2.4)
+      .to($('.phone', s4), { y: -400, opacity: 0, duration: 0.7 }, 4)
+      .from($$('.pr .root', s4), { y: 60, opacity: 0, stagger: 0.08, duration: 0.4 }, 4.3)
+      .from($$('.pr .suf', s4), { x: 80, y: -40, rotation: 20, opacity: 0, stagger: 0.12, duration: 0.5, ease: 'back.out(2)' }, 4.9)
+      .to($('.g-dress', s4), { scale: 0.8, opacity: 0, duration: 0.5 }, 6.8)
+      .from($$('.names > span', s4), { y: 40, opacity: 0, stagger: 0.2, duration: 0.5 }, 7)
+      .from($$('.names s', s4), { opacity: 0, duration: 0.3 }, 7)
+      .from($('.act', s4), { y: 40, opacity: 0, duration: 0.6 }, 8.6)
+      .to($('.g-names', s4), { y: desk ? 0 : -110, duration: 0.6 }, 8.5)
+      .to({}, { duration: 1.4 }, 9.2);
+    subsIn(t4, s4, [0.4, 2.4, 4.4, 6.0, 7.2]);
+
+    /* сцена 5 — каталог: камера с тетради-сетки уходит на карточки */
+    const s5 = $('#s-versus .stage');
+    const t5 = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(s5, desk) });
+    t5.from($('.grid', s5), { scale: 1.6, transformOrigin: '50% 50%', duration: 1.2 }, 0)
+      .from($('.c-g', s5), { x: desk ? -200 : -90, rotation: -4, opacity: 0, duration: 0.8, ease: 'power2.out' }, 0.6)
+      .from($('.c-g .mane', s5), { scale: 0, transformOrigin: '50% 50%', duration: 0.8, ease: 'back.out(1.6)' }, 2.2)
+      .from($('.c-k', s5), { x: desk ? 200 : 90, rotation: 4, opacity: 0, duration: 0.8, ease: 'power2.out' }, 3.4)
+      .from($('.c-k .lion', s5), { opacity: 0, scale: 0.8, transformOrigin: '50% 100%', duration: 1 }, 4)
+      .from($('.c-k .kcat', s5), { scale: 0.3, transformOrigin: '50% 100%', duration: 0.6 }, 4.4)
+      .to($('.c-g', s5), { y: desk ? -20 : -10, duration: 1 }, 6)
+      .to($('.c-k', s5), { y: desk ? 20 : 10, duration: 1 }, 6)
+      .from($('.act', s5), { y: 40, opacity: 0, duration: 0.6 }, 7.4)
+      .to($('.g-cards', s5), { y: desk ? 0 : -90, duration: 0.6 }, 7.3)
+      .to({}, { duration: 1.4 }, 8);
+    subsIn(t5, s5, [0.4, 2.0, 3.6, 5.6]);
+
+    /* сцена 6 — монтажная: плёнка протягивается */
+    G.from($$('#s-lab .film i'), { y: -40, opacity: 0, stagger: 0.06, scrollTrigger: { trigger: '#s-lab', start: 'top 85%', end: 'top 35%', scrub: 0.6 } });
+    G.from('#s-lab .lab__panel', { y: 80, scrollTrigger: { trigger: '#s-lab', start: 'top bottom', end: 'top 40%', scrub: 0.6 } });
+
+    /* финал — стена растёт до Миши, на кадр ложится постер */
+    const s9 = $('#s-cheat .stage');
+    const t9 = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(s9, desk) });
+    t9.from($('.f-back', s9), { scale: 1.2, transformOrigin: '50% 80%', duration: 1.2 }, 0)
+      .from($('.misha2', s9), { x: 200, duration: 1, ease: 'power2.out' }, 0.4)
+      .from($('.wall2', s9), { scaleY: 0, svgOrigin: '760 760', duration: 1.4, ease: 'power3.out' }, 2.4)
+      .from($('.win', s9), { scale: 0, transformOrigin: '50% 50%', duration: 0.5, ease: 'back.out(2)' }, 3.6)
+      .to($('.cam', s9), { scale: desk ? 0.92 : 0.9, y: desk ? -40 : -20, duration: 1 }, 5.4)
+      .from($('.g-poster', s9), { y: 300, rotation: 3, opacity: 0, duration: 1, ease: 'power3.out' }, 5.6)
+      .to($$('.sub', s9).pop(), { y: 20, opacity: 0, duration: 0.4 }, 5.6)
+      .to({}, { duration: 1.6 }, 6.8);
+    subsIn(t9, s9, [0.2, 1.4, 3.0, 4.4]);
+
+    return () => html.classList.remove('cine');
+  });
+
+  /* дубли: карточки въезжают пачкой */
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    ScrollTrigger.batch('.take', { start: 'top 88%', onEnter: (els) => G.from(els, { y: 60, rotation: (i) => (i % 2 ? 2 : -2), stagger: 0.12, duration: 0.6, ease: 'power2.out' }) });
+    G.from('#s-video .note svg', { scale: 0, scrollTrigger: { trigger: '#s-video', start: 'top 80%' }, duration: 0.5, ease: 'back.out(2)' });
+    G.from('.game', { y: 40, scrollTrigger: { trigger: '.game', start: 'top 90%' }, duration: 0.6 });
+  }
+
+  /* циклы: на паузе вне экрана */
+  const loops = [
+    [G.to('#s-story .hook', { rotation: 2, svgOrigin: '1150 200', duration: 1.6, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true }), '#s-story'],
+    [G.to('#s-gibi .zz text', { y: -6, duration: 0.8, yoyo: true, repeat: -1, stagger: 0.2, ease: 'sine.inOut', paused: true }), '#s-gibi'],
+  ];
+  loops.forEach(([tw, sel]) => ScrollTrigger.create({ trigger: sel, start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? tw.play() : tw.pause()) }));
+
+  /* пересчёт после загрузки шрифтов, упражнений и поворота */
+  const refresh = () => { ST.refresh(); placeMarks(); paintTape(); };
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  let rt;
+  if (window.ResizeObserver) new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(refresh, 250); }).observe($('#s-practice'));
+});
+</script>
+</body>
+</html>
