@@ -677,6 +677,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
       <h2 class="h2" data-split>Четыре часа <span class="script">и одно «если»</span></h2>
       <p class="note">Двигай ползунок по времени или жми на карточки. Каждое время отвечает на свой вопрос.</p>
       <p class="lead">Главный вопрос не «когда», а «что ты знаешь». Видел сам? Слышал от других? Это у кого-то в планах? Время внутри «если» — это твоя информация о событии.</p>
+      <div data-mstage>
       <div class="tl">
         <svg class="tl__svg" viewBox="0 0 800 190" data-tl>
           <path d="M30 120H770" stroke="#c4d8cc" stroke-width="10" stroke-linecap="round"/>
@@ -697,6 +698,7 @@ section[data-section]{padding:clamp(8px,1.6vw,16px) clamp(8px,2.2vw,28px);scroll
         <button class="mc mc--plan" type="button" data-mc="plan"><svg class="clay"><use href="#i-plan"/></svg><span class="mc__f" lang="tr">gelecekse</span><p>Если собирается. Есть план или намерение.</p></button>
       </div>
       <div class="mex" aria-live="polite" data-mex></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1182,7 +1184,8 @@ addEventListener('DOMContentLoaded', () => {
       G.from(parts, { yPercent: 60, rotation: 6, scale: .9, duration: .8, ease: 'back.out(2.2)', stagger: .07, scrollTrigger: { trigger: h, start: 'top 88%' } });
     });
     ST.batch('.kick, .note, .mq', { start: 'top 92%', onEnter: (els) => G.from(els, { y: 26, scale: .97, duration: .6, ease: 'back.out(2)', stagger: .06, overwrite: true }) });
-    $$('.win').forEach((w) => G.fromTo(w, { y: 50, scale: .97 }, { y: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: w, start: 'top bottom', end: 'top 70%', scrub: true } }));
+    /* окна раскрываются маской: transform на окне сломал бы закреплённые сцены внутри */
+    $$('.win').forEach((w) => G.fromTo(w, { clipPath: 'inset(4% 3% 4% 3% round 30px)' }, { clipPath: 'inset(0% 0% 0% 0% round 30px)', ease: 'none', scrollTrigger: { trigger: w, start: 'top bottom', end: 'top 60%', scrub: true } }));
     $$('.floaty').forEach((f, i) => G.to(f, { y: i % 2 ? -70 : 70, rotation: i % 2 ? 20 : -20, ease: 'none', scrollTrigger: { trigger: f.closest('.win'), start: 'top bottom', end: 'bottom top', scrub: true } }));
   }
   $$('[data-mq]').forEach((box) => {
@@ -1245,6 +1248,12 @@ addEventListener('DOMContentLoaded', () => {
     onVis($('#intro .win'), (v) => (v ? start() : stop()));
     desk.addEventListener('pointerdown', stop);
     paintForm(res, cond('gel', 'now'), 'now'); folds[0].classList.add('is-on');
+    if (A && ST) {
+      /* сцена: пока листаешь, курсор по очереди тащит четыре папки-времени в приложение -sa */
+      let last = -1;
+      ST.create({ trigger: '#intro .win', start: innerWidth < 980 ? 'bottom bottom' : 'top top', end: '+=1500', pin: true, anticipatePin: 1,
+        onUpdate: (st) => { const i = Math.min(3, Math.floor(st.progress * 4.3)); if (i !== last) { last = i; stop(); busy = false; drop(folds[i], false); } } });
+    }
     if (A) {
       $$('[data-count]').forEach((b) => { const n = Number(b.dataset.count), o = { v: 0 }; G.to(o, { v: n, duration: 1.4, delay: .6, ease: 'power2.out', onUpdate: () => { b.textContent = Math.round(o.v); } }); });
       G.from(folds, { y: -40, rotation: () => (Math.random() - .5) * 30, duration: .9, delay: .4, stagger: .1, ease: 'bounce.out' });
@@ -1258,9 +1267,20 @@ addEventListener('DOMContentLoaded', () => {
   (() => {
     const msgs = $$('[data-chat] .msg'), pick = $$('[data-pick]');
     const play = () => { if (A) { G.fromTo(msgs, { y: 24, scale: .85 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2.2)', stagger: .55 }); G.fromTo('[data-chat] .hl', { scale: 1 }, { scale: 1.15, duration: .3, yoyo: true, repeat: 3, delay: 1.1 }); } };
-    if (A && ST) ST.create({ trigger: '[data-phone]', start: 'top 75%', once: true, onEnter: play });
-    if (A && ST) G.fromTo('.tale p', { x: 40 }, { x: 0, ease: 'power3.out', stagger: .12, scrollTrigger: { trigger: '.tale', start: 'top 85%', end: 'top 40%', scrub: 1 } });
-    if (A && ST) G.fromTo('[data-phone]', { rotation: -6, y: 40 }, { rotation: 0, y: 0, ease: 'none', scrollTrigger: { trigger: '#story', start: 'top bottom', end: 'center center', scrub: true } });
+    if (A && ST) {
+      if (innerWidth >= 920) {
+        /* сцена: переписка с Керемом идёт за прокруткой, рассказ проявляется строка за строкой */
+        const paras = $$('.tale p');
+        const tl = G.timeline({ scrollTrigger: { trigger: '#story .story', start: 'center center', end: '+=1600', pin: true, scrub: .7, anticipatePin: 1 } });
+        msgs.forEach((m, i) => { tl.fromTo(m, { y: 36, scale: .7, opacity: .15 }, { y: 0, scale: 1, opacity: 1, duration: .5, ease: 'back.out(2)' }); if (paras[i]) tl.fromTo(paras[i], { x: 50, opacity: .2 }, { x: 0, opacity: 1, duration: .5 }, '<'); });
+        tl.fromTo('[data-chat] .hl', { scale: 1 }, { scale: 1.2, duration: .25, yoyo: true, repeat: 3 });
+        tl.fromTo('[data-phone]', { rotation: 0 }, { rotation: -4, y: 12, duration: .5 }, '<');
+        tl.fromTo('.tale__q', { y: 40, scale: .9 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(2)' });
+      } else {
+        ST.create({ trigger: '[data-phone]', start: 'top 75%', once: true, onEnter: play });
+        G.fromTo('.tale p', { x: 40 }, { x: 0, ease: 'power3.out', stagger: .12, scrollTrigger: { trigger: '.tale', start: 'top 85%', end: 'top 40%', scrub: 1 } });
+      }
+    }
     pick.forEach((b) => b.addEventListener('click', () => {
       const chat = $('[data-chat]'), ok = b.dataset.pick === '1';
       pick.forEach((x) => x.classList.remove('is-right', 'is-wrong'));
@@ -1310,9 +1330,9 @@ addEventListener('DOMContentLoaded', () => {
       g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(); } });
     });
     let angle = 0;
-    function show(i) {
+    function show(i, quiet) {
       const [t, , ruTxt] = SEG[i]; const c = cond('gel', t);
-      paintForm(out, c, t); oru.textContent = ruTxt; out.dataset.say = c.form; speak(c.form);
+      paintForm(out, c, t); oru.textContent = ruTxt; out.dataset.say = c.form; if (!quiet) speak(c.form);
       if (A) G.fromTo(out, { scale: .7, y: 10 }, { scale: 1, y: 0, duration: .6, ease: 'elastic.out(1,.5)' });
     }
     function land(i, spins = 0) {
@@ -1323,7 +1343,14 @@ addEventListener('DOMContentLoaded', () => {
     }
     $('[data-spin]').addEventListener('click', (e) => { land(Math.floor(Math.random() * n), 3); if (A) G.fromTo(e.currentTarget, { rotation: -8 }, { rotation: 0, duration: .6, ease: 'elastic.out(1,.4)' }); });
     out.style.cursor = 'pointer';
-    if (A && ST) G.fromTo('[data-wheel]', { scale: .8, rotation: -25 }, { scale: 1, rotation: 0, ease: 'none', scrollTrigger: { trigger: '[data-wheel]', start: 'top bottom', end: 'top 40%', scrub: 1 } });
+    if (A && ST) {
+      /* сцена: барабан вращается вместе с прокруткой, середина слова меняется на каждом секторе */
+      const desk = innerWidth >= 920;
+      let cur = 0;
+      ST.create({ trigger: desk ? '.wheelbox' : '[data-wheel]', start: desk ? 'center center' : 'top 20%', end: desk ? '+=1500' : '+=900', pin: desk, scrub: true, anticipatePin: 1,
+        onUpdate: (st) => { const r = -st.progress * (n - 1) * (360 / n); G.set(rot, { rotation: r, svgOrigin: '0 0' }); angle = r; const i = Math.min(n - 1, Math.round(-r / (360 / n))); if (i !== cur) { cur = i; show(i, true); } } });
+      G.fromTo('[data-wheel]', { scale: .8 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-wheel]', start: 'top bottom', end: 'top 50%', scrub: true } });
+    }
     paintForm(out, cond('gel', 'gen'), 'gen');
   })();
 
@@ -1415,7 +1442,12 @@ addEventListener('DOMContentLoaded', () => {
     moveFace();
     if (A && ST) G.from('.mc', { y: 60, rotationX: -50, duration: .7, stagger: .1, ease: 'back.out(1.8)', scrollTrigger: { trigger: '[data-mcards]', start: 'top 88%' } });
     if (A && ST) G.fromTo('[data-tl] .mk', { y: -40 }, { y: 0, ease: 'none', stagger: .1, scrollTrigger: { trigger: '[data-tl]', start: 'top bottom', end: 'top 50%', scrub: true } });
-    if (A && ST) ST.create({ trigger: '[data-tl]', start: 'top 60%', end: 'bottom 30%', onUpdate: (s) => { range.value = Math.round(15 + s.progress * 70); moveFace(); } });
+    if (A && ST) {
+      /* сцена: лицо идёт по оси времени от «вчера» к «завтра», карточки и пример меняются сами */
+      const desk = innerWidth >= 860;
+      ST.create({ trigger: desk ? '[data-mstage]' : '[data-tl]', start: desk ? 'center center' : 'top 60%', end: desk ? '+=1600' : 'bottom 20%', pin: desk, scrub: true, anticipatePin: 1,
+        onUpdate: (s) => { range.value = Math.round(15 + s.progress * 75); moveFace(); } });
+    }
   })();
 
   /* =============== 7. SHADES: шкала уверенности =============== */
@@ -1608,6 +1640,14 @@ addEventListener('DOMContentLoaded', () => {
       if (ST) G.from('.rline', { x: 60, duration: .6, stagger: .12, ease: 'back.out(2)', scrollTrigger: { trigger: '.reception', start: 'top 85%' } });
     }
     show('beach', false);
+    if (A && ST) {
+      /* сцена: прогулка по Анталье — каждая точка по очереди рассказывает своё «если» */
+      const ORDER = ['beach', 'ice', 'tram', 'hotel', 'sun', 'tower', 'boat', 'plane'];
+      const desk = innerWidth >= 1000;
+      let cur = -1;
+      ST.create({ trigger: desk ? '#city .city' : '[data-scene]', start: desk ? 'center center' : 'top 25%', end: desk ? '+=2000' : 'bottom top', pin: desk, scrub: true, anticipatePin: 1,
+        onUpdate: (st) => { const i = Math.min(ORDER.length - 1, Math.floor(st.progress * ORDER.length)); if (i !== cur) { cur = i; show(ORDER[i], false); } } });
+    }
   })();
 
   /* =============== 13. GALLERY: 30 карточек =============== */
