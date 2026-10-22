@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="b2.tarafindan">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Кем: tarafından, -CA</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+/* Дизайн: лендинг мобильного приложения для общих счетов. Светлая страница, тёмные экраны-кадры,
+   розовый акцент F13A5A, серые EFEFEF / 7E7E7E, почти чёрный 050505. Заголовки — Inter Display:
+   жирный рядом с тонким курсивом. Пилюли-метки, номера 01–06 в кружках, арки профилей,
+   каракули «проблема → решение». */
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 900;font-display:swap;src:url(media/inter-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 900;font-display:swap;src:url(media/inter-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 900;font-display:swap;src:url(media/inter-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+20BA,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Inter';font-style:italic;font-weight:300 700;font-display:swap;src:url(media/inter-italic-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-style:italic;font-weight:300 700;font-display:swap;src:url(media/inter-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:italic;font-weight:300 700;font-display:swap;src:url(media/inter-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --white:#ffffff; --mist:#efefef; --soft:#f6f6f6; --gray:#7e7e7e; --ink:#050505; --night:#0c0c0d; --card:#1c1c1e; --card-2:#26262a; --line:#2e2e33;
+  --pink:#f13a5a; --pink-2:#ff7a90; --pink-soft:#fde3e8;
+  /* роли грамматики: один цвет — одна роль */
+  --c-agent:#f13a5a;   /* кто сделал */
+  --c-pass:#3a6cf4;    /* пассив -Il / -In */
+  --c-ca:#f2a93b;      /* -CA */
+  --c-poss:#2fa57a;    /* притяжательный хвост на taraf */
+  /* tarafından — белая пилюля с чёрной обводкой */
+  --f:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --reel-h:0px;
+  --ak-bg:#ffffff; --ak-surface:var(--soft); --ak-ink:var(--ink); --ak-muted:#6b6b6b; --ak-line:#e2e2e2;
+  --ak-accent:var(--pink); --ak-accent-ink:#fff; --ak-accent-soft:var(--pink-soft);
+  --ak-good:#1f8f5f; --ak-good-soft:#ddf3e9; --ak-bad:#b3261e; --ak-bad-soft:#fbe0de;
+  --ak-radius:20px; --ak-radius-sm:14px; --ak-font:var(--f); --ak-font-display:var(--f);
+}
+@media (max-width:899.98px){ :root{ --reel-h:56px; } }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--ink);font:400 var(--ak-text)/1.5 var(--f);overflow-x:clip;letter-spacing:-.005em}
+p{margin:0}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
+.it{font-style:italic;font-weight:300}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:99px;background:var(--white);border:1px solid #e3e3e3;font:500 13px/1 var(--f);color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+
+/* роли в тексте */
+.k{display:inline-block;font-weight:700;border-radius:.3em;padding:0 .12em;line-height:1.18}
+.k-agent{color:var(--c-agent)}
+.k-pass{background:var(--c-pass);color:#fff}
+.k-ca{background:var(--c-ca);color:var(--ink)}
+.k-poss{background:var(--c-poss);color:#fff}
+.k-taraf{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:99px;padding:0 .4em}
+[data-say]{text-decoration:underline dotted rgba(241,58,90,.5);text-underline-offset:.18em}
+.frame [data-say],.poster [data-say],.feed [data-say]{text-decoration:none}
+
+/* ---------- титр ---------- */
+.title{position:relative;padding:calc(var(--reel-h) + 40px) 16px 24px;max-width:1100px;margin:0 auto;display:grid;gap:16px;justify-items:center;text-align:center}
+.title h1{font-size:clamp(42px,7.4vw,92px);font-weight:800}
+.title h1 .it{font-weight:300}
+.title__sub{font-size:clamp(16px,1rem+.4vw,20px);max-width:38ch;color:#3b3b3b}
+.title__phone{position:relative;width:min(300px,78vw);aspect-ratio:9/12;border-radius:44px;background:var(--night);border:8px solid #1e1e20;box-shadow:0 30px 60px rgba(5,5,5,.18), inset 0 0 0 2px #39393d;overflow:hidden;margin-top:6px}
+.title__phone::before{content:"";position:absolute;left:50%;top:10px;translate:-50% 0;width:34%;height:22px;border-radius:99px;background:#000}
+.tnote{position:absolute;left:8%;right:8%;padding:12px 14px;border-radius:18px;background:#fff;color:var(--ink);text-align:left;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:center;font-size:13px;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.tnote b{font-weight:700}
+.tnote small{grid-column:2;color:var(--gray);font-size:11px}
+.blob{width:26px;height:26px;border-radius:50% 46% 54% 44%;background:radial-gradient(circle at 35% 30%,#ff9fb0,var(--pink) 55%,#a3122e);grid-row:span 2}
+.title__cue{font:500 15px/1 var(--f);color:var(--gray);display:inline-flex;gap:8px;align-items:center}
+.title__cue svg{width:18px;height:18px}
+
+/* ---------- сцены ---------- */
+.scene{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:calc(var(--reel-h) + 10px) 16px 12px;background:var(--white)}
+.shot{width:100%;max-width:1240px;display:grid;gap:12px;align-items:center}
+.frame{position:relative;width:min(100%, calc((100svh - 318px) * 4 / 3));min-width:min(100%,280px);aspect-ratio:4/3;margin-inline:auto;overflow:hidden;border-radius:28px;background:var(--night);background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px);background-size:22px 22px;container-type:inline-size;isolation:isolate;box-shadow:0 24px 50px rgba(5,5,5,.16)}
+@media (min-width:900px){
+  .scene{padding:24px 112px 24px 32px}
+  .shot{grid-template-columns:minmax(0,1fr) minmax(290px,380px);gap:32px}
+  .frame{width:min(100%, calc((100svh - 64px) * 4 / 3))}
+}
+.cam{position:absolute;inset:0;transform-origin:0 0}
+.art{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ov{position:absolute;translate:-50% -50%}
+.glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(60% 50% at 50% 110%,rgba(241,58,90,.22),transparent 70%);z-index:0}
+.dot{position:absolute;left:50%;top:50%;width:14%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:var(--pink);transform:scale(0);pointer-events:none;z-index:6}
+.wipe{position:absolute;inset:0;background:var(--white);transform:scaleY(0);transform-origin:50% 100%;z-index:6;pointer-events:none}
+.side{display:grid;gap:10px;max-width:620px;margin-inline:auto;width:100%}
+.tag{display:flex;align-items:center;gap:10px}
+.tag .num{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #e3e3e3;font:600 14px/1 var(--f);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.tag h3{font-size:clamp(22px,1.1rem+1vw,32px);font-weight:700}
+.tag h3 .it{font-weight:300}
+.subs{position:relative;display:grid;gap:8px}
+.film .subs{overflow:hidden;gap:0}
+.film .sub{grid-area:1/1}
+.sub{padding:12px 14px;background:var(--soft);border-radius:18px;font-size:clamp(15px,.88rem+.3vw,18px);line-height:1.42}
+.act{padding:12px 14px;border-radius:20px;background:var(--ink);color:#fff;display:grid;gap:8px}
+.act__q{font-weight:600;font-size:15px;line-height:1.3}
+.act__row{display:flex;flex-wrap:wrap;gap:8px}
+.act__fb{min-height:1.35em;font-size:14.5px;line-height:1.3;color:#dcdcdc}
+.act [data-say]{text-decoration-color:rgba(255,255,255,.5)}
+.btn{min-height:44px;min-width:44px;padding:9px 16px;border:0;border-radius:99px;background:#fff;color:var(--ink);font:600 15px/1.15 var(--f);cursor:pointer;touch-action:manipulation;text-decoration:none;box-shadow:inset 0 0 0 1px #e3e3e3}
+.btn:hover{background:var(--mist)}
+.btn--pink{background:var(--pink);color:#fff;box-shadow:none}
+.btn--pink:hover{background:#d92c4b}
+.btn:focus-visible,.reel__btn:focus-visible,.tile:focus-visible{outline:3px solid var(--c-ca);outline-offset:2px}
+.btn[aria-pressed="true"],.btn.is-sel{background:var(--pink);color:#fff;box-shadow:none}
+.btn.is-right{background:var(--ak-good);color:#fff;box-shadow:none}
+.btn.is-wrong{background:var(--ak-bad);color:#fff;box-shadow:none}
+.btn.is-done{opacity:.4;pointer-events:none}
+
+/* общие элементы кадров */
+.av{display:grid;place-items:center;width:9cqw;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--c,#7e7e7e) 55%,#fff),var(--c,#7e7e7e) 70%);color:#fff;font:700 3.4cqw/1 var(--f);box-shadow:0 0 0 .5cqw var(--night)}
+.av--q{background:none;border:.4cqw dashed #6b6b70;color:#8c8c92}
+.card{background:var(--card);border-radius:3cqw;color:#fff;box-shadow:0 1.6cqw 4cqw rgba(0,0,0,.35)}
+.note{display:flex;align-items:center;gap:2cqw;padding:2cqw 2.6cqw;background:#fff;color:var(--ink);border-radius:3cqw;font:600 3cqw/1.2 var(--f);box-shadow:0 1.6cqw 4cqw rgba(0,0,0,.35)}
+.note small{display:block;font:500 2cqw/1.2 var(--f);color:var(--gray)}
+.note .blob{width:6cqw;height:6cqw}
+.chip{display:inline-block;padding:.35em .7em;border-radius:99px;background:var(--card-2);color:#fff;font:600 2.8cqw/1.1 var(--f);white-space:nowrap}
+
+/* сцена 1 */
+.bill{left:50%;top:53%;width:30%;padding:2.2cqw;text-align:center;display:grid;gap:.8cqw}
+.bill small{font:500 2.1cqw/1 var(--f);color:#a9a9ad}
+.bill b{font:800 5.6cqw/1 var(--f);letter-spacing:-.03em}
+.barcode{height:5cqw;border-radius:.6cqw;background:repeating-linear-gradient(90deg,#fff 0 .35cqw,transparent .35cqw .7cqw,#fff .7cqw .9cqw,transparent .9cqw 1.5cqw)}
+.seat{transform-origin:50% 50%}
+.seat.me .av{box-shadow:0 0 0 .5cqw var(--night),0 0 0 1cqw var(--pink)}
+.banner{left:50%;top:10%;width:70%}
+.morning{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,180,140,.35),transparent 60%);opacity:0;pointer-events:none;z-index:1}
+.emre{left:58%;top:88%;width:64%;padding:1.8cqw 2.4cqw;border-radius:3cqw 3cqw 3cqw .6cqw;background:#fff;color:var(--ink);font:600 2.9cqw/1.25 var(--f)}
+
+/* сцена 2 */
+.ncard{left:50%;width:80%;padding:2.2cqw 2.6cqw;display:flex;align-items:center;gap:2.4cqw;font:600 3.6cqw/1.2 var(--f)}
+.nA{top:34%}.nB{top:62%}
+.ncard .av{flex:none}
+.bits i{position:absolute;left:12.5%;top:34%;width:1.4cqw;aspect-ratio:1;border-radius:50%;background:var(--pink);transform:scale(0)}
+.split{left:50%;top:12%;display:flex;gap:1cqw;font:800 7.2cqw/1 var(--f);letter-spacing:-.03em;color:#fff;white-space:nowrap}
+.split b{display:inline-block;padding:0 .08em;border-radius:.16em}
+.ilrow{left:50%;top:88%;display:flex;gap:1.4cqw;flex-wrap:nowrap}
+.scrib{fill:none;stroke:#8c8c92;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+
+/* сцена 3 */
+.hero-av{left:50%;top:41.7%}
+.hero-av .av{width:13cqw;font-size:5cqw}
+.rebuild{left:50%;top:78%;width:88%;padding:2.4cqw;display:flex;flex-wrap:wrap;justify-content:center;gap:1.4cqw;font:700 4.2cqw/1.2 var(--f)}
+.rebuild b{display:inline-block}
+.book{left:15%;top:24%;width:17%}
+.book svg{width:100%;height:auto;display:block}
+.bookchip{left:30%;top:41%;font-size:2.4cqw}
+
+/* сцена 4 */
+.arch{top:30%;width:28%;height:40%;padding:4.4cqw 1.6cqw 2cqw;border-radius:14cqw 14cqw 2.6cqw 2.6cqw;background:linear-gradient(180deg,#2a2a2f,#18181b);display:grid;align-content:space-between;justify-items:center;text-align:center;color:#fff}
+.arch.r2{top:74%}
+.arch .pr{font:800 6.6cqw/1 var(--f);letter-spacing:-.03em}
+.arch .fm{font:600 2.7cqw/1.2 var(--f)}
+.arch .dt{width:1.6cqw;aspect-ratio:1;border-radius:50%;background:var(--c-poss)}
+
+/* сцена 5 */
+.ticket{left:27%;top:50%;width:40%;padding:2.6cqw;border-radius:3cqw;background:var(--pink);color:#fff;display:grid;gap:1.2cqw}
+.ticket h4{font:800 5.6cqw/1 var(--f);letter-spacing:-.03em}
+.ticket p{font:500 2.4cqw/1.25 var(--f)}
+.ticket .barcode{height:7cqw;background:repeating-linear-gradient(90deg,#fff 0 .35cqw,transparent .35cqw .7cqw,#fff .7cqw .9cqw,transparent .9cqw 1.5cqw)}
+.stamp{left:27%;top:47%;padding:.2em .6em;border:.6cqw solid #fff;border-radius:1.2cqw;color:#fff;background:rgba(5,5,5,.35);font:800 6cqw/1 var(--f);letter-spacing:.06em;rotate:-14deg}
+.letter{left:72%;top:42%;width:46%;padding:2.6cqw;border-radius:2.4cqw;background:#fff;color:var(--ink);display:grid;gap:1.2cqw}
+.letter small{font:600 2cqw/1.2 var(--f);color:var(--gray);letter-spacing:.02em}
+.letter hr{border:0;height:.3cqw;background:var(--mist);margin:0}
+.letter p{font:700 3.3cqw/1.25 var(--f)}
+.think{left:72%;top:80%;padding:1.4cqw 2.4cqw;border-radius:99px;background:var(--card-2);color:#fff;font:600 3cqw/1.1 var(--f);white-space:nowrap;visibility:hidden}
+.forms{left:72%;top:82%;width:48%;display:flex;flex-wrap:wrap;justify-content:center;gap:1cqw}
+
+/* сцена 6 */
+.phone{top:42%;width:36%;aspect-ratio:9/12;border-radius:4.6cqw;background:#000;border:.8cqw solid #232327;padding:5cqw 2cqw 2cqw;display:grid;align-content:start;gap:1.6cqw;color:#fff}
+.phone .hd{font:700 2.6cqw/1 var(--f);color:#a9a9ad;letter-spacing:.04em}
+.phone .hl{font:700 3.3cqw/1.25 var(--f)}
+.phone .bb{padding:1.6cqw;border-radius:2.4cqw 2.4cqw .4cqw 2.4cqw;background:var(--card-2);font:600 3cqw/1.25 var(--f)}
+.eq{left:50%;top:42%;font:300 9cqw/1 var(--f);color:#fff}
+.tiles{left:50%;top:88%;display:flex;gap:1.4cqw}
+.tl{position:relative;padding:1.2cqw 2cqw;border-radius:99px;background:var(--card-2);color:#fff;font:600 2.8cqw/1 var(--f)}
+.tl i{position:absolute;right:-1cqw;top:-1.4cqw;width:3.6cqw;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font:800 2.2cqw/1 var(--f);font-style:normal}
+.tl i.y{background:var(--ak-good);color:#fff}.tl i.n{background:var(--ak-bad);color:#fff}
+
+/* ---------- обычные секции ---------- */
+.page{max-width:1080px;margin:0 auto;padding:64px 16px}
+@media (min-width:900px){.page{padding:84px 112px 84px 32px}}
+.page__head{display:grid;gap:12px;margin-bottom:24px;max-width:64ch;justify-items:start}
+.page__head h2{font-size:clamp(32px,1.4rem+2.6vw,56px);font-weight:800}
+.page__head h2 .it{font-weight:300}
+.page__head p{font-size:clamp(16px,.95rem+.3vw,19px);color:#3b3b3b}
+
+/* монтажная → «конструктор уведомлений» */
+.lab{background:var(--ink);color:#fff;border-radius:28px;padding:clamp(16px,3vw,30px);display:grid;gap:14px}
+.lab__modes{display:flex;flex-wrap:wrap;gap:8px}
+.lab__modes .btn{background:var(--card-2);color:#fff;box-shadow:none}
+.lab__modes .btn[aria-pressed="true"]{background:var(--pink)}
+.lab__hint{font-size:15px;color:#bdbdc2;min-height:2.6em}
+.lab__chips{display:flex;flex-wrap:wrap;gap:6px;max-height:220px;overflow:auto;padding:2px}
+.lab__chips .btn{background:var(--card-2);color:#fff;box-shadow:none;font-size:15px}
+.lab__chips .btn.is-sel{background:#fff;color:var(--ink)}
+.lab__chips .btn.is-right{background:var(--ak-good)}
+.lab__chips .btn.is-wrong{background:var(--ak-bad)}
+.lab__screen{background:#fff;color:var(--ink);border-radius:22px;padding:18px;display:grid;gap:10px;min-height:200px;align-content:start}
+.lab__strip{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:800 clamp(24px,5vw,44px)/1.15 var(--f);letter-spacing:-.025em;min-height:1.2em;cursor:pointer}
+.lab__strip b{display:inline-block;padding:0 .08em;border-radius:.16em}
+.t-agent{color:var(--c-agent)}
+.t-pass{background:var(--c-pass);color:#fff}
+.t-ca{background:var(--c-ca);color:var(--ink)}
+.t-poss{background:var(--c-poss);color:#fff}
+.t-taraf{background:#fff;border:2px solid var(--ink);border-radius:99px!important;padding:0 .35em!important}
+.lab__ru{font-size:17px;font-weight:600}
+.lab__why{margin:0;padding:0;list-style:none;display:grid;gap:5px;font-size:15.5px;color:#3b3b3b}
+.lab__why li::before{content:"→ ";color:var(--pink);font-weight:700}
+.lab__score{font:700 22px/1 var(--f);color:var(--pink)}
+
+/* дубли */
+.takes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.take{perspective:900px;min-height:250px}
+.take__in{position:relative;height:100%;min-height:250px;transform-style:preserve-3d}
+.take__f,.take__b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;padding:18px;display:grid;gap:10px;align-content:start}
+.take__f{background:var(--soft)}
+.take__b{background:var(--ink);color:#fff;transform:rotateY(180deg)}
+.take.is-flipped .take__in{transform:rotateY(180deg)}
+.take .num{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid #e3e3e3;font:600 14px/1 var(--f)}
+.take__b .num{background:var(--pink);border-color:var(--pink);color:#fff}
+.bad{font:700 19px/1.3 var(--f);text-decoration:line-through;text-decoration-color:var(--ak-bad);text-decoration-thickness:3px}
+.good{font:700 20px/1.3 var(--f)}
+.take__b [data-say]{text-decoration-color:rgba(255,255,255,.55)}
+.take__b .btn{justify-self:start}
+
+/* видео, практика */
+.vnote{font-weight:600;margin-bottom:10px}
+.feed{display:grid;gap:12px}
+.feed__was{padding:14px 16px;border-radius:18px;background:var(--soft);font:600 clamp(17px,1rem+.5vw,21px)/1.35 var(--f)}
+.feed__was small{display:block;font:500 13px/1.2 var(--f);color:var(--gray);margin-bottom:4px}
+.feed__ru{font-weight:500;color:#3b3b3b}
+.feed__opts{display:grid;gap:8px}
+.feed__opt{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 14px;border:0;border-radius:18px;background:var(--ink);color:#fff;font:600 16px/1.3 var(--f);text-align:left;cursor:pointer}
+.feed__opt .blob{width:28px;height:28px;flex:none}
+.feed__opt.is-right{background:var(--ak-good)}
+.feed__opt.is-wrong{background:var(--ak-bad)}
+.feed__opt:focus-visible{outline:3px solid var(--c-ca);outline-offset:2px}
+.feed__fb{min-height:1.4em;font-weight:600}
+.feed__dots{display:flex;gap:6px}
+.feed__dots i{width:12px;height:12px;border-radius:50%;background:var(--mist)}
+.feed__dots i.ok{background:var(--ak-good)}
+.feed__dots i.no{background:var(--ak-bad)}
+
+/* постер */
+.poster{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.pc{border-radius:26px;padding:20px;display:grid;gap:8px;align-content:start;background:var(--soft)}
+.pc .num{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#fff;border:1px solid #e3e3e3;font:600 13px/1 var(--f)}
+.pc h3{font-size:26px;font-weight:700}
+.pc h3 .it{font-weight:300}
+.pc p{font-weight:500}
+.pc--dark{background:var(--ink);color:#fff}
+.pc--dark .num{background:var(--pink);border-color:var(--pink);color:#fff}
+.pc--dark [data-say]{text-decoration-color:rgba(255,255,255,.55)}
+.fin{margin-top:28px;border-radius:32px;background:var(--pink);color:#fff;padding:clamp(20px,4vw,44px);display:grid;gap:20px;overflow:hidden}
+@media (min-width:900px){.fin{grid-template-columns:1.1fr .9fr;align-items:center}}
+.fin h3{font-size:clamp(30px,1.4rem+2.4vw,52px);font-weight:800}
+.fin h3 .it{font-weight:300}
+.fin__text{display:grid;gap:12px;font-size:clamp(16px,.95rem+.35vw,19px)}
+.fin [data-say]{text-decoration-color:rgba(255,255,255,.6)}
+.fphone{justify-self:center;width:min(320px,100%);border-radius:40px;background:var(--night);border:8px solid #1e1e20;padding:44px 12px 16px;display:grid;gap:8px;box-shadow:0 30px 60px rgba(5,5,5,.25)}
+.fphone .note{font-size:13.5px;border-radius:16px;padding:10px 12px;gap:10px}
+.fphone .note small{font-size:11px}
+.fphone .note .blob{width:24px;height:24px}
+.fin__replay{justify-self:center;margin-top:6px;background:#fff;color:var(--ink)}
+
+/* ---------- скроллбар: пилюля с номерами ---------- */
+.reel{position:fixed;z-index:50;left:0;right:0;top:0;height:var(--reel-h);display:flex;align-items:center;padding:6px 8px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 #ececec}
+.reel__track{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--mist)}
+.reel__fill{position:absolute;inset:0;background:var(--pink);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+.reel__list{list-style:none;margin:0;padding:0 2px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;width:100%}
+.reel__list::-webkit-scrollbar{display:none}
+.reel__btn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid #e3e3e3;background:#fff;color:var(--ink);font:600 13px/1 var(--f);cursor:pointer;display:grid;place-items:center;position:relative;touch-action:manipulation}
+.reel__btn svg{width:18px;height:18px}
+.reel__btn.is-read{background:var(--ink);color:#fff;border-color:var(--ink)}
+.reel__btn.is-now{background:var(--pink);color:#fff;border-color:var(--pink)}
+.reel__lbl{display:none}
+@media (min-width:900px){
+  .reel{left:auto;right:16px;top:50%;translate:0 -50%;height:auto;max-height:calc(100vh - 24px);width:66px;flex-direction:column;padding:10px 0;border-radius:99px;background:#fff;box-shadow:0 10px 30px rgba(5,5,5,.1),0 0 0 1px #ececec;cursor:grab}
+  .reel.is-drag{cursor:grabbing}
+  .reel__track{left:50%;right:auto;top:14px;bottom:14px;width:3px;height:auto;translate:-50% 0}
+  .reel__fill{transform-origin:50% 0;transform:scaleY(var(--p,0))}
+  .reel__list{flex-direction:column;overflow:auto;padding:0;width:auto;position:relative;z-index:1;gap:4px}
+  .reel__lbl{display:block;position:absolute;right:58px;top:50%;translate:0 -50%;white-space:nowrap;padding:6px 12px;border-radius:99px;background:var(--ink);color:#fff;font:600 13px/1 var(--f);pointer-events:none;transform:scaleX(0);transform-origin:100% 50%;transition:transform .2s}
+  .reel__btn:hover .reel__lbl,.reel__btn:focus-visible .reel__lbl{transform:scaleX(1)}
+}
+</style>
+</head>
+<body>
+
+<nav data-scrollbar class="reel" aria-label="Прогресс урока">
+  <div class="reel__track" aria-hidden="true"><span class="reel__fill"></span></div>
+  <ol class="reel__list">
+    <li><button type="button" class="reel__btn" data-go="story" aria-label="01. Чек без имени">01<span class="reel__lbl">Чек без имени</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="passive" aria-label="02. Пассив прячет">02<span class="reel__lbl">Пассив прячет</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="agent" aria-label="03. tarafından">03<span class="reel__lbl">tarafından</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="persons" aria-label="04. Я, ты, мы">04<span class="reel__lbl">Я, ты, мы</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="ca" aria-label="05. Казённое -CA">05<span class="reel__lbl">Казённое -CA</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="register" aria-label="06. Два регистра">06<span class="reel__lbl">Два регистра</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="lab" aria-label="Конструктор"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path d="M17.5 14v7M14 17.5h7"/></svg><span class="reel__lbl">Конструктор</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="traps" aria-label="Неудачные дубли"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg><span class="reel__lbl">Дубли</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="video" aria-label="Видео"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg><span class="reel__lbl">Видео</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="practice" aria-label="Практика"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg><span class="reel__lbl">Практика</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="check" aria-label="Мини-проверка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span class="reel__lbl">Проверка</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="cheat" aria-label="Шпаргалка"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg><span class="reel__lbl">Шпаргалка</span></button></li>
+  </ol>
+</nav>
+
+<main>
+  <header class="title">
+    <span class="pill">B2 · 02 · Анкара</span>
+    <h1>Кем? <span class="it">Это</span> <span class="k k-taraf">tarafından</span></h1>
+    <p class="title__sub">Короткий фильм про одно уведомление, которое стоило Эмре 2400 лир. Крути вниз: прокрутка — это перемотка.</p>
+    <div class="title__phone" aria-hidden="true">
+      <div class="tnote" style="top:16%"><span class="blob"></span><b>Ortak</b><small>şimdi</small></div>
+      <div class="tnote" style="top:40%"><span class="blob"></span><b>Hesap ödendi.</b><small>Kim tarafından?</small></div>
+      <div class="tnote" style="top:64%"><span class="blob"></span><b>Hesap Emre tarafından ödendi.</b><small>2400 ₺</small></div>
+    </div>
+    <p class="title__cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M5 12l7 7 7-7"/></svg>Листай вниз</p>
+  </header>
+
+  <!-- ===== 01. Чек без имени ===== -->
+  <section data-section="story" data-words="54" id="sec-story">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="glow"></div>
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" role="img" aria-label="Стол в ресторане, шесть друзей и общий счёт">
+              <circle class="table" cx="400" cy="318" r="150" fill="#1c1c1e" stroke="#2e2e33" stroke-width="6"/>
+              <circle cx="400" cy="318" r="118" fill="none" stroke="#2e2e33" stroke-width="2" stroke-dasharray="4 10"/>
+              <g fill="#26262a"><circle cx="400" cy="200" r="22"/><circle cx="502" cy="259" r="22"/><circle cx="502" cy="377" r="22"/><circle cx="400" cy="436" r="22"/><circle cx="298" cy="377" r="22"/><circle cx="298" cy="259" r="22"/></g>
+            </svg>
+            <div class="ov seat" style="left:50%;top:18.8%"><span class="av" style="--c:#3a6cf4">S</span></div>
+            <div class="ov seat me" style="left:72.2%;top:35.9%"><span class="av" style="--c:#f13a5a">E</span></div>
+            <div class="ov seat" style="left:72.2%;top:70.1%"><span class="av" style="--c:#2fa57a">K</span></div>
+            <div class="ov seat" style="left:50%;top:87.2%"><span class="av" style="--c:#f2a93b">M</span></div>
+            <div class="ov seat" style="left:27.8%;top:70.1%"><span class="av" style="--c:#9b6cf4">D</span></div>
+            <div class="ov seat" style="left:27.8%;top:35.9%"><span class="av" style="--c:#7e7e7e">A</span></div>
+            <div class="ov card bill"><small>Hesap · Kızılay</small><b>2400 ₺</b><span class="barcode"></span></div>
+            <div class="ov note banner" data-say="Hesap ödendi."><span class="blob"></span><span>Hesap ödendi.<small>Ortak · şimdi</small></span></div>
+            <p class="ov emre" data-say="Ben ödedim! Kimse para göndermedi.">Ben ödedim! Kimse para göndermedi.</p>
+          </div>
+          <div class="morning"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="side">
+          <div class="tag"><span class="num">01</span><h3>Чек <span class="it">без имени</span></h3></div>
+          <div class="subs">
+            <p class="sub" data-at="table">Анкара, Кызылай. Шесть друзей, длинный ужин и счёт на 2400 лир.</p>
+            <p class="sub" data-at="pay">Дана делает приложение для общих счетов. Эмре платит картой. Приложение пишет: <a-say>Hesap ödendi.</a-say></p>
+            <p class="sub" data-at="leave">«Счёт оплачен». Отлично. Все встают и расходятся по домам.</p>
+            <p class="sub" data-at="morning">Утром Эмре пишет: <b data-say="Ben ödedim! Kimse para göndermedi.">Ben ödedim! Kimse para göndermedi.</b> Я заплатил, а мне никто ничего не скинул.</p>
+          </div>
+          <div class="act" data-yes="Да. Пассив сказал, что случилось, и спрятал, кто это сделал." data-no="Это в уведомлении было. Не было главного героя — Эмре.">
+            <p class="act__q">Чего не хватило в уведомлении?</p>
+            <div class="act__row">
+              <button type="button" class="btn" data-ok>Кто заплатил</button>
+              <button type="button" class="btn">Сколько</button>
+              <button type="button" class="btn">Где ужинали</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 02. Пассив прячет ===== -->
+  <section data-section="passive" data-words="42" id="sec-passive">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="glow"></div>
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <path class="scrib scrib-a" d="M80 520 C140 420 260 600 300 500 S180 380 260 420 S420 560 380 470 S260 380 340 400 S520 520 470 440 S380 360 460 380 S640 500 600 440 S520 380 580 400 S720 470 740 420"/>
+            </svg>
+            <p class="ov split" data-say="ödendi"><b>öde</b><b class="k-pass">n</b><b>di</b></p>
+            <div class="ov card ncard nA" data-say="Emre hesabı ödedi."><span class="av avA" style="--c:#f13a5a">E</span><span><span class="k-agent">Emre</span> hesabı ödedi.</span></div>
+            <div class="ov card ncard nB" data-say="Hesap ödendi."><span class="av av--q">?</span><span>Hesap öde<b class="k k-pass">n</b>di.</span></div>
+            <div class="bits" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <p class="ov ilrow"><span class="chip" data-say="yazıldı">yaz<b class="k k-pass">ıl</b>dı</span><span class="chip" data-say="yapıldı">yap<b class="k k-pass">ıl</b>dı</span><span class="chip" data-say="açıklandı">açıkla<b class="k k-pass">n</b>dı</span><span class="chip" data-say="ödendi">öde<b class="k k-pass">n</b>di</span></p>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="side">
+          <div class="tag"><span class="num">02</span><h3>Пассив <span class="it">прячет</span></h3></div>
+          <div class="subs">
+            <p class="sub" data-at="active">Сравни. <a-say>Emre hesabı ödedi.</a-say> Эмре оплатил счёт. Герой на месте.</p>
+            <p class="sub" data-at="pass">Пассив: <b data-say="ödendi">öde-n-di</b>. <a-say>Hesap ödendi.</a-say> Счёт оплачен. Кем — тишина.</p>
+            <p class="sub" data-at="chaos">Пассив любит новости и уведомления: важно, что случилось. Кто сделал — дело десятое. Пока не начинаются долги.</p>
+            <p class="sub" data-at="il">Напомню, как он собирается: <span class="k k-pass">-Il</span>, а после гласной или <b>l</b> — <span class="k k-pass">-In</span>.</p>
+          </div>
+          <div class="act" data-yes="yapıldı. Сделано. Кем — пока молчим." data-no="Пассив здесь — -ıl: yap-ıl-dı.">
+            <p class="act__q">Как будет <b data-say="yaptı">yaptı</b> в пассиве?</p>
+            <div class="act__row">
+              <button type="button" class="btn" data-ok data-say="yapıldı">yapıldı</button>
+              <button type="button" class="btn" data-say="yapındı">yapındı</button>
+              <button type="button" class="btn" data-say="yaptırdı">yaptırdı</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 03. tarafından ===== -->
+  <section data-section="agent" data-words="41" id="sec-agent">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="glow"></div>
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <path class="scrib scrib-b" d="M80 520 C140 420 260 600 300 500 S180 380 260 420 S420 560 380 470 S260 380 340 400 S520 520 470 440 S380 360 460 380 S640 500 600 440 S520 380 580 400 S720 470 740 420"/>
+              <path class="scrib spiral" style="stroke:#f13a5a" d="M406 250 L407 252 L407 255 L405 259 L402 262 L398 263 L393 263 L389 261 L385 258 L382 253 L381 247 L381 241 L384 234 L389 229 L396 226 L404 224 L412 226 L420 230 L427 236 L431 245 L432 255 L430 265 L425 275 L416 282 L406 287 L394 288 L382 286 L371 279 L362 269 L357 257 L355 243 L359 229 L366 216 L378 206 L392 200 L408 199 L424 203 L438 212 L450 225 L456 241 L457 259 L453 277 L443 293 L428 305 L410 313 L390 314 L370 309 L352 298 L339 281 L331 261 L330 239 L336 217 L348 198 L366 183 L388 175 L412 173 L436 180 L457 193 L472 213 L482 237 L483 263 L476 289 L461 311 L440 328 L414 338 L386 339 L358 332 L334 316 L316 293 L306 265 L304 235 L313 205 L330 180 L354 160 L384 149 L416 148 L447 157 L475 175 L495 201 L507 233 L509 250"/>
+            </svg>
+            <div class="ov hero-av"><span class="av" style="--c:#f13a5a">E</span></div>
+            <div class="ov book"><svg viewBox="0 0 120 160" aria-hidden="true"><rect x="6" y="4" width="108" height="152" rx="8" fill="#efefef"/><rect x="6" y="4" width="14" height="152" rx="4" fill="#d6d6d6"/><text x="66" y="70" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="34" fill="#050505">Kar</text><text x="66" y="96" text-anchor="middle" font-family="Inter, sans-serif" font-style="italic" font-weight="300" font-size="13" fill="#7e7e7e">roman</text><circle cx="66" cy="126" r="9" fill="#f13a5a"/></svg></div>
+            <p class="ov chip bookchip" data-say="Orhan Pamuk tarafından">Orhan Pamuk <span class="k k-taraf">tarafından</span></p>
+            <p class="ov note rebuild" data-say="Hesap Emre tarafından ödendi."><b class="rb">Hesap</b> <b class="rb k-agent">Emre</b> <b class="rb k k-taraf">tarafından</b> <b class="rb">öde<span class="k k-pass">n</span>di.</b></p>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="side">
+          <div class="tag"><span class="num">03</span><h3>Возвращаем <span class="it">героя</span></h3></div>
+          <div class="subs">
+            <p class="sub" data-at="spiral">Чтобы вернуть героя в пассив, есть <span class="k k-taraf">tarafından</span>. Буквально — «со стороны Эмре».</p>
+            <p class="sub" data-at="build">Схема: кто + tarafından + глагол в пассиве. <a-say>Hesap Emre tarafından ödendi.</a-say> Счёт оплачен Эмре.</p>
+            <p class="sub" data-at="book"><a-say>Bu roman Orhan Pamuk tarafından yazıldı.</a-say> Роман написан Орханом Памуком. По-русски это творительный: кем.</p>
+            <p class="sub" data-at="plain">Имя или слово ставим как есть, без <b>-in</b>: <b data-say="Emre tarafından">Emre tarafından</b>, <b data-say="öğretmen tarafından">öğretmen tarafından</b>.</p>
+          </div>
+          <div class="act act--build" data-done="Hesap Emre tarafından ödendi. Эмре снова в кадре.">
+            <p class="act__q">Собери уведомление заново — нажимай по порядку:</p>
+            <div class="act__row">
+              <button type="button" class="btn" data-i="3" data-say="ödendi">ödendi.</button>
+              <button type="button" class="btn" data-i="2" data-say="tarafından">tarafından</button>
+              <button type="button" class="btn" data-i="0" data-say="hesap">Hesap</button>
+              <button type="button" class="btn" data-i="1" data-say="Emre">Emre</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 04. Я, ты, мы ===== -->
+  <section data-section="persons" data-words="27" id="sec-persons">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="glow"></div>
+          <div class="cam">
+            <div class="ov arch" style="left:18%" data-say="benim tarafımdan"><span class="dt"></span><span class="pr">ben</span><span class="fm">benim taraf<b class="k k-poss">ım</b>dan</span></div>
+            <div class="ov arch" style="left:50%" data-say="senin tarafından"><span class="dt"></span><span class="pr">sen</span><span class="fm">senin taraf<b class="k k-poss">ın</b>dan</span></div>
+            <div class="ov arch" style="left:82%" data-say="onun tarafından"><span class="dt"></span><span class="pr">o</span><span class="fm">onun taraf<b class="k k-poss">ı</b>ndan</span></div>
+            <div class="ov arch r2" style="left:18%" data-say="bizim tarafımızdan"><span class="dt"></span><span class="pr">biz</span><span class="fm">bizim taraf<b class="k k-poss">ımız</b>dan</span></div>
+            <div class="ov arch r2" style="left:50%" data-say="sizin tarafınızdan"><span class="dt"></span><span class="pr">siz</span><span class="fm">sizin taraf<b class="k k-poss">ınız</b>dan</span></div>
+            <div class="ov arch r2" style="left:82%" data-say="onlar tarafından"><span class="dt"></span><span class="pr">onlar</span><span class="fm">onlar tarafından</span></div>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="side">
+          <div class="tag"><span class="num">04</span><h3>Я, ты, <span class="it">мы</span></h3></div>
+          <div class="subs">
+            <p class="sub" data-at="ben">С местоимениями хитрее: <b>taraf</b> получает притяжательный хвост. <b data-say="benim tarafımdan">benim tarafımdan</b> — мной.</p>
+            <p class="sub" data-at="sen"><b data-say="senin tarafından">senin tarafından</b> — тобой. <b data-say="onun tarafından">onun tarafından</b> — им или ею.</p>
+            <p class="sub" data-at="biz"><b data-say="bizim tarafımızdan">bizim tarafımızdan</b> — нами. <b data-say="sizin tarafınızdan">sizin tarafınızdan</b> — вами. <b data-say="onlar tarafından">onlar tarafından</b> — ими.</p>
+            <p class="sub" data-at="pay">Дана первой переводит деньги: <a-say>Para benim tarafımdan gönderildi.</a-say> Деньги отправлены мной.</p>
+          </div>
+          <div class="act" data-yes="bizim tarafımızdan. Хвост -ımız — «наш», как в bizim evimiz." data-no="Местоимению нужен хвост на taraf: bizim tarafımızdan.">
+            <p class="act__q">Как сказать «нами»?</p>
+            <div class="act__row">
+              <button type="button" class="btn" data-say="biz tarafından">biz tarafından</button>
+              <button type="button" class="btn" data-ok data-say="bizim tarafımızdan">bizim tarafımızdan</button>
+              <button type="button" class="btn" data-say="bizim tarafından">bizim tarafından</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 05. Казённое -CA ===== -->
+  <section data-section="ca" data-words="46" id="sec-ca">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="glow"></div>
+          <div class="cam">
+            <div class="ov ticket"><h4>Konser</h4><p>Gençlik Parkı · Cuma 20:00</p><span class="barcode"></span></div>
+            <p class="ov stamp" data-say="iptal">İPTAL</p>
+            <div class="ov letter" data-say="Konser belediyece iptal edildi."><small>ANKARA BÜYÜKŞEHİR BELEDİYESİ</small><hr><p>Konser belediye<b class="k k-ca">ce</b> iptal edildi.</p></div>
+            <p class="ov think"><b class="k k-ca">-ce</b> = «по-»?</p>
+            <p class="ov forms"><span class="chip" data-say="bakanlıkça">bakanlık<b class="k k-ca">ça</b></span><span class="chip" data-say="belediyece">belediye<b class="k k-ca">ce</b></span><span class="chip" data-say="hükümetçe">hükümet<b class="k k-ca">çe</b></span><span class="chip" data-say="mahkemece">mahkeme<b class="k k-ca">ce</b></span></p>
+          </div>
+          <div class="wipe"></div>
+        </div>
+        <div class="side">
+          <div class="tag"><span class="num">05</span><h3>Казённое <span class="it">-CA</span></h3></div>
+          <div class="subs">
+            <p class="sub" data-at="ticket">В пятницу концерт в парке Генчлик. У Даны билет. В четверг приходит письмо.</p>
+            <p class="sub" data-at="letter"><a-say>Konser belediyece iptal edildi.</a-say> Дана знает <span class="k k-ca">-CA</span> как «по-»: <b data-say="çocukça">çocukça</b> — по-детски, <b data-say="Türkçe">Türkçe</b> — по-турецки.</p>
+            <p class="sub" data-at="think">Читает: «отменён по-муниципальному». Звучит обидно, но непонятно.</p>
+            <p class="sub" data-at="flip">Рядом с пассивом и учреждением <span class="k k-ca">-CA</span> значит «кем». <b data-say="belediyece">belediyece</b> = <b data-say="belediye tarafından">belediye tarafından</b>. Отменён мэрией.</p>
+            <p class="sub" data-at="forms">Хвост подстраивается: гласная a или e, после глухих — <b>ç</b>. <b data-say="bakanlıkça">bakanlıkça</b>, <b data-say="hükümetçe">hükümetçe</b>.</p>
+          </div>
+          <div class="act" data-yes="hükümetçe: после глухой t — ç, гласная e — значит -çe." data-no="После глухой t звучит ç, а гласная e: hükümetçe.">
+            <p class="act__q">Как «правительством» от <b data-say="hükümet">hükümet</b>?</p>
+            <div class="act__row">
+              <button type="button" class="btn" data-say="hükümetce">hükümetce</button>
+              <button type="button" class="btn" data-say="hükümetça">hükümetça</button>
+              <button type="button" class="btn" data-ok data-say="hükümetçe">hükümetçe</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 06. Два регистра ===== -->
+  <section data-section="register" data-words="46" id="sec-register">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="glow"></div>
+          <div class="cam">
+            <div class="ov phone ph-a" style="left:26%"><span class="hd">HABER</span><p class="hl" data-say="Karar bakanlıkça açıklandı.">Karar bakanlık<b class="k k-ca">ça</b> açıklandı.</p></div>
+            <p class="ov eq">=</p>
+            <div class="ov phone ph-b" style="left:74%"><span class="hd">SOHBET</span><p class="bb" data-say="Karar bakanlık tarafından açıklandı.">Karar bakanlık <b class="k k-taraf">tarafından</b> açıklandı.</p></div>
+            <p class="ov tiles"><span class="tl" data-say="bakanlık">bakanlık<i class="y">✓</i></span><span class="tl" data-say="belediye">belediye<i class="y">✓</i></span><span class="tl" data-say="polis">polis<i class="y">✓</i></span><span class="tl" data-say="Emre">Emre<i class="n">✕</i></span></p>
+          </div>
+          <div class="dot"></div>
+        </div>
+        <div class="side">
+          <div class="tag"><span class="num">06</span><h3>Два <span class="it">регистра</span></h3></div>
+          <div class="subs">
+            <p class="sub" data-at="two">Одна новость, два способа. Слева — новостной тон, справа — разговорный.</p>
+            <p class="sub" data-at="who"><span class="k k-taraf">tarafından</span> подходит всем: людям и учреждениям. <span class="k k-ca">-CA</span> — учреждениям и группам, в новостях и письмах.</p>
+            <p class="sub" data-at="emre"><b>Emrece</b> про счёт никто не скажет. Эмре — человек, а не министерство. Хотя спорит иногда как министерство.</p>
+          </div>
+          <div class="act act--pick" data-done="Верно: -CA берут учреждения. Людям — tarafından.">
+            <p class="act__q">Отметь, к кому можно прицепить -CA, и проверь:</p>
+            <div class="act__row">
+              <button type="button" class="btn" aria-pressed="false" data-ok data-say="belediye">belediye</button>
+              <button type="button" class="btn" aria-pressed="false" data-say="Emre">Emre</button>
+              <button type="button" class="btn" aria-pressed="false" data-ok data-say="bakanlık">bakanlık</button>
+              <button type="button" class="btn" aria-pressed="false" data-say="annem">annem</button>
+              <button type="button" class="btn btn--pink act__check">Проверить</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Конструктор ===== -->
+  <section data-section="lab" data-words="38" id="sec-lab">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Конструктор</span>
+        <h2>Собери <span class="it">уведомление</span> сам</h2>
+        <p>Четыре режима. Выбирай героя, учреждение или фразу — конструктор соберёт форму и скажет, почему так.</p>
+      </div>
+      <div class="lab rv">
+        <div class="lab__modes" role="group" aria-label="Режим конструктора">
+          <button type="button" class="btn" data-mode="who" aria-pressed="true">Кем</button>
+          <button type="button" class="btn" data-mode="ca" aria-pressed="false">-CA</button>
+          <button type="button" class="btn" data-mode="flip" aria-pressed="false">В пассив</button>
+          <button type="button" class="btn" data-mode="quiz" aria-pressed="false">Угадай</button>
+        </div>
+        <p class="lab__hint">Выбери, кто сделал.</p>
+        <div class="lab__chips" role="group" aria-label="Варианты"></div>
+        <div class="lab__screen">
+          <p class="lab__strip" aria-live="polite"></p>
+          <p class="lab__ru"></p>
+          <ul class="lab__why"></ul>
+          <p class="lab__score"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Дубли ===== -->
+  <section data-section="traps" data-words="47" id="sec-traps">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Неудачные дубли</span>
+        <h2>Где <span class="it">спотыкаются</span> все</h2>
+        <p>Четыре частые ошибки. Нажми «Переснять» — увидишь чистый вариант.</p>
+      </div>
+      <div class="takes">
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><span class="num">01</span><p class="bad">Emre tarafından ödedi.</p><p>tarafından живёт только с пассивом.</p><button type="button" class="btn take__go">Переснять</button></div>
+          <div class="take__b"><span class="num">01</span><p class="good" data-say="Hesap Emre tarafından ödendi.">Hesap Emre tarafından ödendi.</p><p>Или просто: <b data-say="Emre ödedi.">Emre ödedi.</b></p><button type="button" class="btn take__back">Назад</button></div>
+        </div></article>
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><span class="num">02</span><p class="bad">Para ben tarafından gönderildi.</p><p>Местоимению нужен хвост на taraf.</p><button type="button" class="btn take__go">Переснять</button></div>
+          <div class="take__b"><span class="num">02</span><p class="good" data-say="Para benim tarafımdan gönderildi.">Para benim tarafımdan gönderildi.</p><p>Деньги отправлены мной.</p><button type="button" class="btn take__back">Назад</button></div>
+        </div></article>
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><span class="num">03</span><p class="bad">Kitap öğretmen tarafında yazıldı.</p><p>tarafında — «на стороне». Нужна -dan.</p><button type="button" class="btn take__go">Переснять</button></div>
+          <div class="take__b"><span class="num">03</span><p class="good" data-say="Kitap öğretmen tarafından yazıldı.">Kitap öğretmen tarafından yazıldı.</p><p>Книга написана учителем.</p><button type="button" class="btn take__back">Назад</button></div>
+        </div></article>
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><span class="num">04</span><p class="bad">Yol belediyeçe kapatıldı.</p><p>После гласной глушить нечего.</p><button type="button" class="btn take__go">Переснять</button></div>
+          <div class="take__b"><span class="num">04</span><p class="good" data-say="Yol belediyece kapatıldı.">Yol belediyece kapatıldı.</p><p>Дорогу перекрыла мэрия.</p><button type="button" class="btn take__back">Назад</button></div>
+        </div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Видео ===== -->
+  <section data-section="video" data-words="12" id="sec-video">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Видео</span>
+        <h2>База: <span class="it">пассив</span></h2>
+      </div>
+      <p class="vnote rv">Обрати внимание на -Il и -In: именно к такому глаголу цепляется tarafından.</p>
+      <a-video yt="58_Mr3oer4Q" start="0" end="180" title="Уровень В2. Edilgen fiil" channel="Московская академия наук"></a-video>
+    </div>
+  </section>
+
+  <!-- ===== Практика ===== -->
+  <section data-section="practice" data-words="9" id="sec-practice">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Практика</span>
+        <h2>Твоя <span class="it">очередь</span></h2>
+        <p>Сначала узнаём, потом ставим, потом собираем.</p>
+      </div>
+      <a-exercise ref="b2.tarafindan.ex1"></a-exercise>
+      <a-exercise ref="b2.tarafindan.ex2"></a-exercise>
+      <a-exercise ref="b2.tarafindan.ex3"></a-exercise>
+      <a-exercise ref="b2.tarafindan.ex4"></a-exercise>
+      <a-exercise ref="b2.tarafindan.ex5" class="game">
+        <div class="feed">
+          <p><b>Лента уведомлений.</b> Приложение получает событие. Выбери, какое уведомление показать. Можно нажимать 1, 2, 3.</p>
+          <div class="feed__dots" aria-hidden="true"></div>
+          <div class="feed__was"><small>Событие</small><span class="feed__src"></span></div>
+          <p class="feed__ru"></p>
+          <div class="feed__opts" role="group" aria-label="Уведомления"></div>
+          <p class="feed__fb" aria-live="polite"></p>
+          <button type="button" class="btn btn--pink feed__again" hidden>Ещё раз</button>
+        </div>
+      </a-exercise>
+    </div>
+  </section>
+
+  <!-- ===== Проверка ===== -->
+  <section data-section="check" data-words="9" id="sec-check">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Мини-проверка</span>
+        <h2>Пять <span class="it">вопросов</span></h2>
+        <p>Новые фразы, те же правила. Нужно 80%.</p>
+      </div>
+      <a-quiz ref="b2.tarafindan.check1"></a-quiz>
+    </div>
+  </section>
+
+  <!-- ===== Шпаргалка и финал ===== -->
+  <section data-section="cheat" data-words="59" id="sec-cheat">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Шпаргалка</span>
+        <h2>Вся тема <span class="it">на одном экране</span></h2>
+      </div>
+      <div class="poster">
+        <div class="pc pc--dark rv"><span class="num">01</span><h3>Кто + <span class="it">tarafından</span></h3><p>+ глагол в пассиве</p><p data-say="Hesap Emre tarafından ödendi.">Hesap Emre tarafından ödendi.</p></div>
+        <div class="pc rv"><span class="num">02</span><h3>Местоимения</h3><p><span data-say="benim tarafımdan">benim tarafımdan</span> · <span data-say="senin tarafından">senin tarafından</span> · <span data-say="onun tarafından">onun tarafından</span> · <span data-say="bizim tarafımızdan">bizim tarafımızdan</span> · <span data-say="sizin tarafınızdan">sizin tarafınızdan</span> · <span data-say="onlar tarafından">onlar tarafından</span></p></div>
+        <div class="pc rv"><span class="num">03</span><h3>-CA <span class="it">= кем</span></h3><p>учреждения, новости: <span data-say="bakanlıkça">bakanlıkça</span>, <span data-say="belediyece">belediyece</span>, <span data-say="hükümetçe">hükümetçe</span></p></div>
+        <div class="pc rv"><span class="num">04</span><h3>Без <span class="it">-in</span></h3><p><span data-say="Emre tarafından">Emre tarafından</span>, а не Emre'nin. tarafında — это «на стороне».</p></div>
+      </div>
+      <div class="fin">
+        <div class="fin__text rv">
+          <h3>Эмре <span class="it">снова</span> в кадре</h3>
+          <p>Дана чинит приложение за вечер. Теперь уведомление звучит так:</p>
+          <p><a-say>Hesap Emre tarafından ödendi.</a-say></p>
+          <p>Через минуту телефон Эмре вибрирует пять раз подряд. Деньги отправлены друзьями. Эмре пишет одно слово: <b data-say="Sağ olun!">Sağ olun!</b></p>
+          <p><b>Теперь ты умеешь</b> возвращать героя в пассив: людям — tarafından, учреждениям — ещё и -CA.</p>
+        </div>
+        <div class="fphone" aria-label="Лента уведомлений">
+          <div class="note fn" data-say="Hesap Emre tarafından ödendi."><span class="blob"></span><span>Hesap Emre tarafından ödendi.<small>2400 ₺</small></span></div>
+          <div class="note fn" data-say="Para Deniz tarafından gönderildi."><span class="blob"></span><span>Para Deniz tarafından gönderildi.<small>400 ₺</small></span></div>
+          <div class="note fn" data-say="Para Kaan tarafından gönderildi."><span class="blob"></span><span>Para Kaan tarafından gönderildi.<small>400 ₺</small></span></div>
+          <div class="note fn" data-say="Para benim tarafımdan gönderildi."><span class="blob"></span><span>Para benim tarafımdan gönderildi.<small>400 ₺ · Dana</small></span></div>
+          <div class="note fn" data-say="Sağ olun!"><span class="blob"></span><span>Emre: Sağ olun!<small>şimdi</small></span></div>
+          <button type="button" class="btn btn--pink fin__replay">Обновить ленту ↻</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<template data-achievement data-title="Герой в кадре" data-text="Говоришь, кем сделано: tarafından и -CA">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <rect class="bd-phone" x="34" y="12" width="52" height="96" rx="12" fill="#050505"/>
+    <rect class="bd-note" x="22" y="40" width="76" height="26" rx="10" fill="#ffffff"/>
+    <circle class="bd-blob" cx="36" cy="53" r="7" fill="#f13a5a"/>
+    <rect class="bd-line" x="48" y="49" width="40" height="8" rx="4" fill="#050505"/>
+    <circle class="bd-star" cx="92" cy="22" r="10" fill="#f13a5a"/>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  if (G && ST) G.registerPlugin(ST);
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduceQ = matchMedia('(prefers-reduced-motion: reduce)');
+  const moves = () => !!G && !reduceQ.matches;
+  const speak = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const pop = (el) => { if (G && el) G.fromTo(el, { scale: 0.6 }, { scale: 1, duration: 0.45, ease: 'back.out(2.4)', overwrite: 'auto' }); };
+  const shake = (el) => { if (G && el) G.fromTo(el, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1, 0.3)', overwrite: 'auto' }); };
+
+  /* ---------- скроллбар ---------- */
+  const reel = $('[data-scrollbar]');
+  const marks = $$('.reel__btn', reel);
+  const reelList = $('.reel__list', reel);
+  const secOf = (b) => $(`[data-section="${b.dataset.go}"]`);
+  const topOf = (el) => el.getBoundingClientRect().top + scrollY;
+  const deskQ = matchMedia('(min-width: 900px)');
+  let dragMoved = false;
+  marks.forEach((b) => b.addEventListener('click', (e) => {
+    if (dragMoved) { e.preventDefault(); return; }
+    const s = secOf(b); if (!s) return;
+    scrollTo({ top: topOf(s), behavior: reduceQ.matches ? 'auto' : 'smooth' });
+  }));
+  let nowIdx = -1;
+  const progress = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    reel.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);
+    let idx = 0;
+    marks.forEach((b, i) => { const s = secOf(b); if (s && topOf(s) <= scrollY + innerHeight * 0.45) idx = i; });
+    if (idx !== nowIdx) {
+      nowIdx = idx;
+      marks.forEach((b, i) => { b.classList.toggle('is-now', i === idx); if (i === idx) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+      if (!deskQ.matches) { const b = marks[idx]; reelList.scrollTo({ left: b.offsetLeft - reelList.clientWidth / 2 + 22, behavior: 'smooth' }); }
+    }
+  };
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: progress, onRefresh: progress });
+  else addEventListener('scroll', progress, { passive: true });
+  progress();
+  addEventListener('alterna:read', (e) => {
+    const key = e.detail && e.detail.key;
+    const b = marks.find((m) => m.dataset.go === key);
+    if (b && !b.classList.contains('is-read')) { b.classList.add('is-read'); pop(b); }
+  });
+  let dragging = false, startY = 0;
+  const dragTo = (clientY) => {
+    const r = reel.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
+    scrollTo({ top: p * (document.documentElement.scrollHeight - innerHeight), behavior: 'auto' });
+  };
+  reel.addEventListener('pointerdown', (e) => {
+    if (!deskQ.matches || e.pointerType === 'touch') return;
+    dragging = true; dragMoved = false; startY = e.clientY;
+  });
+  addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    if (!dragMoved && Math.abs(e.clientY - startY) > 6) { dragMoved = true; reel.classList.add('is-drag'); }
+    if (dragMoved) { e.preventDefault(); dragTo(e.clientY); }
+  });
+  addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false; reel.classList.remove('is-drag');
+    setTimeout(() => { dragMoved = false; }, 0);
+  });
+
+  /* ---------- действия в конце сцен ---------- */
+  $$('.act').forEach((act) => {
+    if (act.matches('.act--build, .act--pick')) return;
+    const fb = $('.act__fb', act);
+    const sec = act.closest('[data-section]');
+    $$('.act__row .btn', act).forEach((btn) => btn.addEventListener('click', () => {
+      const ok = btn.hasAttribute('data-ok');
+      $$('.act__row .btn', act).forEach((b) => b.classList.remove('is-right', 'is-wrong'));
+      btn.classList.add(ok ? 'is-right' : 'is-wrong');
+      fb.textContent = ok ? act.dataset.yes : act.dataset.no;
+      if (ok) { reactOk(sec); pop(btn); } else shake(btn);
+    }));
+  });
+  function reactOk(sec) {
+    if (!G) return;
+    const key = sec.dataset.section;
+    if (key === 'story') G.fromTo($('.seat.me', sec), { scale: 1.6 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+    if (key === 'passive') G.fromTo($('.nB', sec), { rotation: -3 }, { rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+    if (key === 'persons') G.fromTo($$('.arch.r2', sec)[0], { y: -14 }, { y: 0, duration: 0.6, ease: 'bounce.out' });
+    if (key === 'ca') G.fromTo($$('.forms .chip', sec), { y: -10 }, { y: 0, stagger: 0.06, duration: 0.4, ease: 'back.out(2)' });
+  }
+
+  /* собрать уведомление по порядку */
+  const buildAct = $('.act--build');
+  if (buildAct) {
+    const fb = $('.act__fb', buildAct), sec = buildAct.closest('[data-section]');
+    let next = 0;
+    const parts = $$('.rb', sec);
+    $$('.act__row .btn', buildAct).forEach((btn) => btn.addEventListener('click', () => {
+      const i = Number(btn.dataset.i);
+      if (i !== next) { shake(btn); fb.textContent = next === 0 ? 'Начни с того, что оплатили.' : 'Не тот кадр. Схема: что — кто — tarafından — пассив.'; return; }
+      btn.classList.add('is-done');
+      if (G) G.fromTo(parts[i], { y: -16, scale: 1.3 }, { y: 0, scale: 1, duration: 0.4, ease: 'back.out(2.4)' });
+      next++;
+      fb.textContent = next === 4 ? buildAct.dataset.done : `${next} из 4`;
+      if (next === 4) { pop($('.hero-av', sec)); setTimeout(() => { next = 0; $$('.act__row .btn', buildAct).forEach((b) => b.classList.remove('is-done')); }, 2600); }
+    }));
+  }
+
+  /* кому подходит -CA */
+  const pickAct = $('.act--pick');
+  if (pickAct) {
+    const fb = $('.act__fb', pickAct), sec = pickAct.closest('[data-section]');
+    const opts = $$('.act__row .btn:not(.act__check)', pickAct);
+    opts.forEach((b) => b.addEventListener('click', () => {
+      b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+      b.classList.remove('is-right', 'is-wrong');
+    }));
+    $('.act__check', pickAct).addEventListener('click', () => {
+      let ok = true;
+      opts.forEach((b) => {
+        const on = b.getAttribute('aria-pressed') === 'true', need = b.hasAttribute('data-ok');
+        if (on !== need) { ok = false; b.classList.add('is-wrong'); shake(b); } else if (need) b.classList.add('is-right');
+      });
+      fb.textContent = ok ? pickAct.dataset.done : 'Почти. -CA цепляется к учреждениям: belediye, bakanlık. Людям — tarafından.';
+      if (ok && G) G.fromTo($$('.tl', sec), { y: -10 }, { y: 0, stagger: 0.06, duration: 0.4, ease: 'back.out(2)' });
+    });
+  }
+
+  /* дубли */
+  $$('.take').forEach((take) => {
+    const inner = $('.take__in', take);
+    const flip = (on) => {
+      take.classList.toggle('is-flipped', on);
+      if (moves()) G.fromTo(inner, { rotationY: on ? 0 : 180 }, { rotationY: on ? 180 : 0, duration: 0.7, ease: 'power3.inOut', clearProps: 'transform' });
+      const target = on ? $('.take__back', take) : $('.take__go', take);
+      setTimeout(() => target.focus({ preventScroll: true }), 50);
+    };
+    $('.take__go', take).addEventListener('click', () => flip(true));
+    $('.take__back', take).addEventListener('click', () => flip(false));
+  });
+
+  /* ---------- конструктор ---------- */
+  const WHO = [
+    ['Emre', 'Emre', 'Эмре', 'name'], ['öğretmen', 'öğretmen', 'учителем', 'name'], ['şirket', 'şirket', 'компанией', 'name'], ['Orhan Pamuk', 'Orhan Pamuk', 'Орханом Памуком', 'name'],
+    ['ben', 'benim taraf|ım|dan', 'мной', 'pro'], ['sen', 'senin taraf|ın|dan', 'тобой', 'pro'], ['o', 'onun taraf|ı|ndan', 'им / ею', 'pro'],
+    ['biz', 'bizim taraf|ımız|dan', 'нами', 'pro'], ['siz', 'sizin taraf|ınız|dan', 'вами', 'pro'], ['onlar', 'onlar tarafından', 'ими', 'name']
+  ];
+  const THINGS = [['Hesap', 'öde', 'n', 'di', 'Счёт оплачен'], ['Mektup', 'yaz', 'ıl', 'dı', 'Письмо написано'], ['Pasta', 'yap', 'ıl', 'dı', 'Торт сделан'], ['Para', 'gönder', 'il', 'di', 'Деньги отправлены']];
+  const INST = [['bakanlık', 'министерством'], ['belediye', 'мэрией'], ['hükümet', 'правительством'], ['mahkeme', 'судом'], ['valilik', 'губернаторством'], ['üniversite', 'университетом'], ['polis', 'полицией'], ['okul', 'школой'], ['devlet', 'государством'], ['yönetim', 'администрацией']];
+  const FLIP = [
+    ['Emre hesabı ödedi.', [['Hesap ', ''], ['Emre', 'agent'], [' tarafından', 'taraf'], [' öde', ''], ['n', 'pass'], ['di.', '']], 'Hesap Emre tarafından ödendi.', 'Счёт оплачен Эмре.', ['hesabı → hesap: дополнение становится подлежащим', 'Emre + tarafından', 'ödedi → ödendi']],
+    ['Deniz mektubu yazdı.', [['Mektup ', ''], ['Deniz', 'agent'], [' tarafından', 'taraf'], [' yaz', ''], ['ıl', 'pass'], ['dı.', '']], 'Mektup Deniz tarafından yazıldı.', 'Письмо написано Дениз.', ['mektubu → mektup', 'Deniz + tarafından', 'yazdı → yazıldı']],
+    ['Belediye konseri iptal etti.', [['Konser ', ''], ['belediye', 'agent'], ['ce', 'ca'], [' iptal ed', ''], ['il', 'pass'], ['di.', '']], 'Konser belediyece iptal edildi.', 'Концерт отменён мэрией.', ['konseri → konser', 'учреждение → можно -CA: belediyece', 'iptal etti → iptal edildi']],
+    ['Bakanlık kararı açıkladı.', [['Karar ', ''], ['bakanlık', 'agent'], ['ça', 'ca'], [' açıkla', ''], ['n', 'pass'], ['dı.', '']], 'Karar bakanlıkça açıklandı.', 'Решение объявлено министерством.', ['kararı → karar', 'учреждение → bakanlıkça', 'açıkladı → açıklandı']],
+    ['Ben parayı gönderdim.', [['Para ', ''], ['benim taraf', 'agent'], ['ım', 'poss'], ['dan', 'agent'], [' gönder', ''], ['il', 'pass'], ['di.', '']], 'Para benim tarafımdan gönderildi.', 'Деньги отправлены мной.', ['parayı → para', 'ben → benim tarafımdan', 'gönderdim → gönderildi']]
+  ];
+  const VOW = 'aıoueiöü', BACK = 'aıou', HARD = 'fstkçşhp';
+  const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
+  const caOf = (w) => (HARD.includes(w[w.length - 1]) ? 'ç' : 'c') + (BACK.includes(lastV(w)) ? 'a' : 'e');
+
+  const lab = $('.lab');
+  const strip = $('.lab__strip'), labRu = $('.lab__ru'), labWhy = $('.lab__why'), hint = $('.lab__hint'), chipsBox = $('.lab__chips'), score = $('.lab__score');
+  let mode = 'who', thing = 0, qN = 0, qOk = 0, qItem = null;
+  const HINTS = { who: 'Выбери, кто сделал. Предмет меняется кнопкой «другое».', ca: 'Выбери учреждение — соберём форму с -CA.', flip: 'Выбери активную фразу — переведём её в пассив с героем.', quiz: 'Выбери правильную форму. Счёт ведётся.' };
+  const show = (parts, say) => {
+    strip.innerHTML = parts.map(([t, c]) => `<b class="${c ? 't-' + c : ''}">${t}</b>`).join('');
+    strip.dataset.say = say;
+    if (moves()) G.from($$('b', strip), { y: -28, scale: 0.5, stagger: 0.06, duration: 0.38, ease: 'back.out(2)' });
+  };
+  const why = (lines) => {
+    labWhy.innerHTML = lines.map((l) => `<li>${l}</li>`).join('');
+    if (moves()) G.from($$('li', labWhy), { x: -20, stagger: 0.08, duration: 0.35, ease: 'power2.out', delay: 0.2 });
+  };
+  const mkBtn = (text, fn, say) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = text; if (say) b.dataset.say = say; b.addEventListener('click', () => fn(b)); chipsBox.append(b); return b; };
+  const sel = (b) => $$('.btn', chipsBox).forEach((x) => x.classList.toggle('is-sel', x === b));
+  function whoBuild(row) {
+    const [, form, ru, kind] = row, [noun, root, ps, end, nru] = THINGS[thing];
+    const parts = [[noun + ' ', '']];
+    if (kind === 'pro') { const [a, p, z] = form.split('|'); parts.push([a, 'agent'], [p, 'poss'], [z, 'agent']); }
+    else parts.push([form.replace(' tarafından', ''), 'agent'], [' tarafından', 'taraf']);
+    parts.push([' ' + root, ''], [ps, 'pass'], [end + '.', '']);
+    const say = `${noun} ${form.replace(/\|/g, '')}${kind === 'pro' ? '' : (form.includes('tarafından') ? '' : ' tarafından')} ${root}${ps}${end}.`.replace(/\s+/g, ' ');
+    show(parts, say);
+    labRu.textContent = `${nru} ${ru}.`;
+    why(kind === 'pro' ? ['местоимение → притяжательный хвост на taraf', 'глагол — в пассиве'] : ['имя или слово как есть, без -in', 'глагол — в пассиве']);
+  }
+  function render() {
+    chipsBox.innerHTML = ''; score.textContent = '';
+    if (mode === 'who') {
+      WHO.forEach((row) => mkBtn(row[0], (b) => { sel(b); whoBuild(row); }));
+      mkBtn('другое ↻', () => { thing = (thing + 1) % THINGS.length; const cur = $$('.btn', chipsBox).find((x) => x.classList.contains('is-sel')); const row = cur && WHO.find((r) => r[0] === cur.textContent); if (row) whoBuild(row); });
+    } else if (mode === 'ca') {
+      INST.forEach(([w, ru]) => mkBtn(w, (b) => {
+        sel(b);
+        const ca = caOf(w);
+        show([[w, 'agent'], [ca, 'ca']], w + ca);
+        labRu.textContent = `${w}${ca} = ${w} tarafından — ${ru}`;
+        why([`последняя гласная «${lastV(w)}» → ${ca[1]}`, HARD.includes(w[w.length - 1]) ? `в конце глухая «${w[w.length - 1]}» → ç` : 'в конце не глухая → c']);
+      }, w));
+    } else if (mode === 'flip') {
+      FLIP.forEach((row) => mkBtn(row[0], (b) => { sel(b); show(row[1], row[2]); labRu.textContent = row[3]; why(row[4]); }, row[0]));
+    } else quiz();
+  }
+  function quiz() {
+    chipsBox.innerHTML = '';
+    const pool = [];
+    INST.forEach(([w, ru]) => { const c = caOf(w); const wrong = [w + (c[0] === 'ç' ? 'c' : 'ç') + c[1], w + c[0] + (c[1] === 'a' ? 'e' : 'a')]; pool.push({ q: `${ru} (${w})`, ok: w + c, opts: [w + c, ...wrong] }); });
+    WHO.filter((r) => r[3] === 'pro').forEach((r) => { const ok = r[1].replace(/\|/g, ''); pool.push({ q: r[2] + ` (${r[0]})`, ok, opts: [ok, r[0] + ' tarafından', ok.replace(/taraf\S*dan/, 'tarafından') === ok ? r[0] + ' tarafımdan' : ok.replace(/taraf\S*dan/, 'tarafından')] }); });
+    qItem = pool[Math.floor(Math.random() * pool.length)];
+    strip.innerHTML = `<b>${qItem.q}</b>`; strip.dataset.say = '';
+    labRu.textContent = 'Какая форма верная?'; labWhy.innerHTML = '';
+    [...new Set(qItem.opts)].sort(() => Math.random() - 0.5).forEach((o) => mkBtn(o, (b) => {
+      if (qItem.done) return;
+      qItem.done = true; qN++;
+      const ok = o === qItem.ok; if (ok) qOk++;
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      if (!ok) { const r = $$('.btn', chipsBox).find((x) => x.textContent === qItem.ok); if (r) r.classList.add('is-right'); shake(b); }
+      strip.innerHTML = `<b>${qItem.ok}</b>`; strip.dataset.say = qItem.ok;
+      score.textContent = `${qOk} из ${qN}`; pop(score);
+      mkBtn('дальше →', quiz);
+    }, o));
+  }
+  $$('[data-mode]', lab).forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('[data-mode]', lab).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    hint.textContent = HINTS[mode];
+    strip.innerHTML = ''; labRu.textContent = ''; labWhy.innerHTML = '';
+    render();
+    if (moves()) G.from(chipsBox.children, { y: 14, scale: 0.85, stagger: 0.02, duration: 0.3, ease: 'power2.out' });
+  }));
+  strip.addEventListener('click', () => { if (strip.dataset.say) speak(strip.dataset.say); });
+  render();
+  { const first = $('.btn', chipsBox); first.click(); }
+
+  /* ---------- нестандартное упражнение: лента уведомлений ---------- */
+  const EX = 'b2.tarafindan.ex5';
+  const FEED = [
+    { id: 'i1', src: 'Deniz pastayı yaptı.', ru: 'Дениз испекла торт.', opts: ['Pasta Deniz tarafından yapıldı.', 'Pasta Deniz tarafından yaptı.', 'Pasta Deniz tarafında yapıldı.'], ok: 0, why: 'tarafından + пассив: yapıldı. tarafında — «на стороне».' },
+    { id: 'i2', src: 'Belediye yolu kapattı.', ru: 'Мэрия перекрыла дорогу.', opts: ['Yol belediyece kapattı.', 'Yol belediyece kapatıldı.', 'Yol belediyeçe kapatıldı.'], ok: 1, why: 'Учреждение → belediyece. Глагол в пассиве: kapatıldı.' },
+    { id: 'i3', src: 'Ben parayı gönderdim.', ru: 'Я отправила деньги.', opts: ['Para ben tarafından gönderildi.', 'Para benim tarafından gönderildi.', 'Para benim tarafımdan gönderildi.'], ok: 2, why: 'ben → benim tarafımdan: хвост -ım на taraf.' },
+    { id: 'i4', src: 'Emre hesabı ödedi.', ru: 'Эмре оплатил счёт.', opts: ['Hesap Emre tarafından ödendi.', 'Hesap Emrece ödendi.', 'Hesabı Emre tarafından ödendi.'], ok: 0, why: 'Эмре — человек: tarafından. Подлежащее — hesap без -ı.' },
+    { id: 'i5', src: 'Siz bileti aldınız.', ru: 'Вы купили билет.', opts: ['Bilet siz tarafından alındı.', 'Bilet sizin tarafınızdan alındı.', 'Bilet sizin tarafımızdan alındı.'], ok: 1, why: 'siz → sizin tarafınızdan: хвост -ınız.' },
+    { id: 'i6', src: 'Bakanlık kararı açıkladı.', ru: 'Министерство объявило решение.', opts: ['Karar bakanlıkça açıklandı.', 'Karar bakanlıkca açıklandı.', 'Kararı bakanlıkça açıklandı.'], ok: 0, why: 'После глухой k — ç: bakanlıkça. Подлежащее — karar.' }
+  ];
+  const game = $('.game');
+  if (game) {
+    const src = $('.feed__src', game), ru = $('.feed__ru', game), opts = $('.feed__opts', game), fb = $('.feed__fb', game), dots = $('.feed__dots', game), again = $('.feed__again', game);
+    let idx = 0, right = 0, t0 = 0, busy = false;
+    dots.innerHTML = FEED.map(() => '<i></i>').join('');
+    const render = () => {
+      const it = FEED[idx];
+      busy = false;
+      src.textContent = it.src; src.dataset.say = it.src;
+      ru.textContent = it.ru;
+      fb.textContent = `${idx + 1} из ${FEED.length}`;
+      opts.innerHTML = '';
+      it.opts.forEach((o, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'feed__opt';
+        b.innerHTML = `<span class="blob"></span><span>${i + 1}. ${o}</span>`;
+        b.addEventListener('click', () => choose(i));
+        opts.append(b);
+      });
+      t0 = performance.now();
+      if (moves()) G.from(opts.children, { y: -24, scale: 0.94, stagger: 0.08, duration: 0.4, ease: 'back.out(1.8)' });
+    };
+    const choose = (i) => {
+      if (busy) return;
+      busy = true;
+      const it = FEED[idx], ok = i === it.ok, btns = $$('.feed__opt', opts);
+      btns[i].classList.add(ok ? 'is-right' : 'is-wrong');
+      if (!ok) btns[it.ok].classList.add('is-right');
+      btns[it.ok].dataset.say = it.opts[it.ok];
+      fb.textContent = ok ? 'Уведомление ушло. Все видят, кто это сделал.' : `Не то. ${it.why}`;
+      dots.children[idx].classList.add(ok ? 'ok' : 'no');
+      if (ok) right++;
+      try { window.AlternaTracker && window.AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.opts[i], timeMs: Math.round(performance.now() - t0) }); } catch (e) { /* офлайн */ }
+      if (moves()) { if (ok) G.to(btns[i], { x: 12, duration: 0.2, yoyo: true, repeat: 1 }); else shake(btns[i]); }
+      setTimeout(next, ok ? 900 : 2000);
+    };
+    const next = () => {
+      idx++;
+      if (idx < FEED.length) { render(); return; }
+      try { window.AlternaTracker && window.AlternaTracker.complete({ exerciseId: EX, correct: right, total: FEED.length }); } catch (e) { /* офлайн */ }
+      opts.innerHTML = '';
+      src.textContent = `Отправлено ${right} из ${FEED.length}.`; src.dataset.say = '';
+      ru.textContent = right === FEED.length ? 'Ни одного потерянного героя.' : 'Посмотри на красные точки и попробуй ещё раз.';
+      fb.textContent = '';
+      again.hidden = false; again.focus({ preventScroll: true });
+    };
+    again.addEventListener('click', () => { idx = 0; right = 0; again.hidden = true; $$('i', dots).forEach((d) => { d.className = ''; }); render(); });
+    game.addEventListener('keydown', (e) => { const n = Number(e.key); if (n >= 1 && n <= 3 && idx < FEED.length && !busy) { e.preventDefault(); choose(n - 1); } });
+    render();
+    const solve = async () => {
+      idx = 0; right = 0; again.hidden = true; $$('i', dots).forEach((d) => { d.className = ''; }); render();
+      for (let k = 0; k < FEED.length; k++) { choose(FEED[idx].ok); await new Promise((r) => setTimeout(r, 950)); }
+    };
+    const reg = () => { if (window.AlternaKit && window.AlternaKit.registerSolver) { window.AlternaKit.registerSolver(EX, solve); return true; } return false; };
+    if (!reg()) { let n = 0; const t = setInterval(() => { if (reg() || ++n > 50) clearInterval(t); }, 100); }
+  }
+
+  /* финал: ленту можно обновить */
+  const replay = $('.fin__replay');
+  if (replay) replay.addEventListener('click', () => {
+    const fns = $$('.fphone .fn');
+    if (moves()) G.fromTo(fns, { y: -40, scale: 0.85 }, { y: 0, scale: 1, stagger: 0.15, duration: 0.45, ease: 'back.out(1.8)', overwrite: 'auto' });
+    else pop(fns[0]);
+  });
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    if (!detail || !detail.timeline || !detail.badge) return;
+    const b = detail.badge, tl = detail.timeline;
+    tl.fromTo(b.querySelector('.bd-note'), { y: -30, scale: 0.6, transformOrigin: '50% 50%' }, { y: 0, scale: 1, duration: 0.45, ease: 'back.out(2)' }, 0.9);
+    tl.fromTo(b.querySelector('.bd-line'), { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.35 }, 1.25);
+    tl.fromTo(b.querySelector('.bd-star'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.4, ease: 'back.out(3)' }, 1.5);
+  });
+
+  /* ---------- кино ---------- */
+  if (!G || !ST) return;
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  const zoom = (tl, cam, px, py, s, pos, d = 1) => tl.to(cam, { scale: s, xPercent: 50 - px * s, yPercent: 50 - py * s, duration: d }, pos);
+  const unzoom = (tl, cam, pos, d = 0.8) => tl.to(cam, { scale: 1, xPercent: 0, yPercent: 0, duration: d }, pos);
+  const draw = (tl, path, pos, d = 0.6) => {
+    const L = path.getTotalLength();
+    path.style.strokeDasharray = L;
+    tl.fromTo(path, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: 'none' }, pos);
+  };
+
+  const SCENES = {
+    story: { scrollTrigger: { desk: 2.3, mob: 1.45 }, build(tl, S, A, m) {
+      const cam = S('.cam'), seats = A('.seat');
+      tl.addLabel('table', 0);
+      tl.from(S('.table'), { scale: 0.6, transformOrigin: '50% 50%', duration: 0.6 }, 0);
+      tl.from(seats, { scale: 0, stagger: 0.08, duration: 0.4, ease: 'back.out(2)' }, 0.2);
+      tl.from(S('.bill'), { scale: 0, rotation: -8, duration: 0.5, ease: 'back.out(1.8)' }, 0.7);
+      tl.addLabel('pay', 1.6);
+      zoom(tl, cam, 61, 44, m ? 1.6 : 1.45, 'pay', 0.7);
+      tl.fromTo(S('.seat.me'), { scale: 1 }, { scale: 1.3, duration: 0.25, yoyo: true, repeat: 1 }, 'pay+=0.5');
+      tl.from(S('.banner'), { yPercent: -260, duration: 0.5, ease: 'back.out(1.4)' }, 'pay+=0.9');
+      tl.addLabel('leave', 3);
+      unzoom(tl, cam, 'leave', 0.6);
+      seats.filter((s) => !s.classList.contains('me')).forEach((s, i) => {
+        const lx = parseFloat(s.style.left) - 50, ly = parseFloat(s.style.top) - 53;
+        tl.to(s, { x: () => lx * 9, y: () => ly * 9, scale: 0.4, autoAlpha: 0, duration: 0.6 }, `leave+=${0.4 + i * 0.08}`);
+      });
+      tl.to(S('.banner'), { yPercent: -260, duration: 0.4 }, 'leave+=1');
+      tl.addLabel('morning', 4.4);
+      tl.fromTo(S('.morning'), { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'none' }, 'morning');
+      tl.to(S('.bill'), { scale: 0.7, autoAlpha: 0.35, duration: 0.5 }, 'morning');
+      tl.from(S('.emre'), { scale: 0, transformOrigin: '0% 100%', duration: 0.45, ease: 'back.out(2)' }, 'morning+=0.5');
+      tl.fromTo(S('.seat.me'), { x: -6 }, { x: 6, duration: 0.08, repeat: 7, yoyo: true }, 'morning+=0.9');
+    } },
+    passive: { scrollTrigger: { desk: 2.1, mob: 1.35 }, build(tl, S, A, m, F) {
+      tl.addLabel('active', 0);
+      tl.from(S('.nA'), { xPercent: -150, rotation: -6, duration: 0.7 }, 0);
+      tl.from(S('.split'), { y: () => -F.offsetHeight * 0.3, duration: 0.6 }, 0.2);
+      tl.addLabel('pass', 1.2);
+      tl.from(S('.nB'), { xPercent: 150, rotation: 6, duration: 0.7 }, 'pass');
+      tl.fromTo(S('.avA'), { scale: 1 }, { scale: 0, duration: 0.4 }, 'pass+=0.5');
+      A('.bits i').forEach((b, i) => {
+        const a = (i / 8) * Math.PI * 2;
+        tl.fromTo(b, { scale: 0, x: 0, y: 0 }, { scale: 1, x: () => Math.cos(a) * F.offsetWidth * 0.12, y: () => Math.sin(a) * F.offsetWidth * 0.12, duration: 0.5, ease: 'power2.out' }, 'pass+=0.55');
+        tl.to(b, { scale: 0, duration: 0.3 }, 'pass+=1.05');
+      });
+      tl.from(S('.split .k-pass'), { yPercent: -160, rotation: -30, duration: 0.4, ease: 'back.out(2)' }, 'pass+=0.3');
+      tl.addLabel('chaos', 2.7);
+      draw(tl, S('.scrib-a'), 'chaos', 1);
+      if (!m) tl.fromTo(S('.nA'), { y: 0 }, { y: -6, duration: 0.15, repeat: 5, yoyo: true }, 'chaos+=0.3');
+      tl.addLabel('il', 4);
+      tl.from(A('.ilrow .chip'), { y: 40, scale: 0.6, stagger: 0.1, duration: 0.4, ease: 'back.out(2)' }, 'il');
+    } },
+    agent: { scrollTrigger: { desk: 2.3, mob: 1.45 }, build(tl, S, A, m) {
+      const cam = S('.cam');
+      tl.addLabel('spiral', 0);
+      tl.fromTo(S('.scrib-b'), { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.6 }, 0.3);
+      draw(tl, S('.spiral'), 0.4, 1.1);
+      tl.from(S('.hero-av'), { scale: 0, rotation: -90, duration: 0.6, ease: 'back.out(2)' }, 1.2);
+      tl.addLabel('build', 2);
+      tl.from(S('.rebuild'), { scaleX: 0.2, scaleY: 0.4, duration: 0.4 }, 'build');
+      A('.rb').forEach((b, i) => tl.from(b, { y: -60, x: (i - 1.5) * 30, scale: 0.4, rotation: (i % 2 ? 1 : -1) * 20, duration: 0.45, ease: 'back.out(2)' }, `build+=${0.3 + i * 0.2}`));
+      tl.addLabel('book', 3.6);
+      zoom(tl, cam, 22, 32, m ? 1.8 : 1.6, 'book', 0.7);
+      tl.from(S('.book'), { rotation: -20, y: 40, scale: 0.5, duration: 0.5, ease: 'back.out(1.8)' }, 'book+=0.2');
+      tl.from(S('.bookchip'), { scale: 0, duration: 0.4, ease: 'back.out(2)' }, 'book+=0.6');
+      tl.addLabel('plain', 5);
+      unzoom(tl, cam, 'plain', 0.7);
+      tl.fromTo(S('.rebuild .k-agent'), { scale: 1 }, { scale: 1.25, duration: 0.25, yoyo: true, repeat: 1 }, 'plain+=0.6');
+    } },
+    persons: { scrollTrigger: { desk: 2.2, mob: 1.4 }, build(tl, S, A, m) {
+      const cam = S('.cam'), arches = A('.arch');
+      const pts = [[18, 30], [50, 30], [82, 30], [18, 74], [50, 74], [82, 74]];
+      tl.addLabel('ben', 0);
+      tl.from(arches, { yPercent: 60, scale: 0.6, stagger: 0.06, duration: 0.5, ease: 'back.out(1.6)' }, 0);
+      const labels = ['ben', 'sen', null, 'biz', null, null];
+      pts.forEach(([x, y], i) => {
+        const at = 0.6 + i * 0.75;
+        if (labels[i] && i > 0) tl.addLabel(labels[i], at);
+        zoom(tl, cam, x, y, m ? 2.2 : 2, at, 0.55);
+        tl.from($('.fm', arches[i]), { scale: 0, duration: 0.3, ease: 'back.out(2.4)' }, at + 0.4);
+        tl.fromTo($('.dt', arches[i]), { scale: 1 }, { scale: 2.2, duration: 0.2, yoyo: true, repeat: 1 }, at + 0.35);
+      });
+      tl.addLabel('pay', 5.2);
+      unzoom(tl, cam, 'pay', 0.8);
+      tl.fromTo(arches[0], { y: 0 }, { y: -12, duration: 0.25, yoyo: true, repeat: 1 }, 'pay+=0.7');
+    } },
+    ca: { scrollTrigger: { desk: 2.3, mob: 1.45 }, build(tl, S, A, m) {
+      const cam = S('.cam');
+      tl.addLabel('ticket', 0);
+      tl.from(S('.ticket'), { xPercent: -160, rotation: -10, duration: 0.7 }, 0);
+      tl.from(S('.ticket .barcode'), { scaleX: 0, transformOrigin: '0% 50%', duration: 0.4 }, 0.5);
+      tl.addLabel('letter', 1.2);
+      tl.from(S('.letter'), { yPercent: 160, rotation: 8, duration: 0.6 }, 'letter');
+      tl.from(S('.stamp'), { scale: 3, autoAlpha: 0, duration: 0.3, ease: 'power4.in' }, 'letter+=0.8');
+      tl.fromTo(S('.ticket'), { x: 0 }, { x: 6, duration: 0.05, repeat: 3, yoyo: true }, 'letter+=1.1');
+      tl.addLabel('think', 2.6);
+      zoom(tl, cam, 72, 50, m ? 1.7 : 1.55, 'think', 0.6);
+      tl.fromTo(S('.think'), { autoAlpha: 1, scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' }, 'think+=0.4');
+      tl.addLabel('flip', 3.8);
+      tl.fromTo(S('.wipe'), { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: 'power2.in' }, 'flip');
+      tl.to(S('.think'), { autoAlpha: 0, duration: 0.01 }, 'flip+=0.32');
+      unzoom(tl, cam, 'flip+=0.32', 0.01);
+      tl.to(S('.wipe'), { scaleY: 0, transformOrigin: '50% 0%', duration: 0.4, ease: 'power2.out' }, 'flip+=0.35');
+      tl.fromTo(S('.letter .k-ca'), { scale: 1 }, { scale: 1.5, duration: 0.25, yoyo: true, repeat: 1 }, 'flip+=0.8');
+      tl.addLabel('forms', 5);
+      tl.from(A('.forms .chip'), { y: 50, scale: 0.5, stagger: 0.12, duration: 0.4, ease: 'back.out(2)' }, 'forms');
+    } },
+    register: { scrollTrigger: { desk: 2, mob: 1.3 }, build(tl, S, A, m) {
+      const cam = S('.cam');
+      tl.addLabel('two', 0);
+      tl.from(S('.ph-a'), { yPercent: 140, rotation: -8, duration: 0.6 }, 0);
+      tl.from(S('.ph-b'), { yPercent: 140, rotation: 8, duration: 0.6 }, 0.15);
+      tl.from(S('.eq'), { scale: 0, rotation: 90, duration: 0.4, ease: 'back.out(2)' }, 0.8);
+      if (!m) { zoom(tl, cam, 26, 42, 1.5, 1.2, 0.6); zoom(tl, cam, 74, 42, 1.5, 1.9, 0.6); unzoom(tl, cam, 2.6, 0.5); }
+      tl.addLabel('who', 3);
+      tl.from(A('.tl'), { y: 40, scale: 0.6, stagger: 0.1, duration: 0.4, ease: 'back.out(2)' }, 'who');
+      tl.from(A('.tl i'), { scale: 0, stagger: 0.12, duration: 0.3, ease: 'back.out(3)' }, 'who+=0.6');
+      tl.addLabel('emre', 4.4);
+      tl.fromTo(A('.tl')[3], { rotation: 0 }, { rotation: 6, duration: 0.08, repeat: 5, yoyo: true }, 'emre');
+    } }
+  };
+
+  function film(key, m, scene) {
+    const sec = $(`[data-section="${key}"]`);
+    if (!sec) return;
+    const pin = $('.scene', sec), F = $('.frame', sec);
+    const S = (s) => $(s, sec), A = (s) => $$(s, sec);
+    const tl = G.timeline({
+      defaults: { ease: 'power2.inOut', duration: 1 },
+      scrollTrigger: { trigger: pin, start: 'top top', end: () => '+=' + Math.round(innerHeight * (m ? scene.scrollTrigger.mob : scene.scrollTrigger.desk)), pin: true, scrub: m ? 0.5 : 0.8, anticipatePin: 1, invalidateOnRefresh: true }
+    });
+    scene.build(tl, S, A, m, F);
+    const box = S('.subs'), subs = A('.sub');
+    subs.forEach((s, i) => {
+      const at = s.dataset.at, nxt = subs[i + 1] && subs[i + 1].dataset.at;
+      if (i > 0) tl.fromTo(s, { y: () => box.offsetHeight + 12 }, { y: 0, duration: 0.45, ease: 'power3.out' }, at);
+      if (nxt) tl.to(s, { y: () => -(box.offsetHeight + 12), duration: 0.4, ease: 'power2.in' }, `${nxt}-=0.08`);
+    });
+    tl.from(S('.act'), { scale: 0, transformOrigin: '50% 100%', duration: 0.5, ease: 'back.out(1.6)' }, '+=0.2');
+    tl.to({}, { duration: 1.2 });
+  }
+
+  const mm = G.matchMedia();
+  mm.add({ desk: '(min-width: 900px) and (prefers-reduced-motion: no-preference)', mob: '(max-width: 899.98px) and (prefers-reduced-motion: no-preference)' }, (ctx) => {
+    const m = !!ctx.conditions.mob;
+    document.documentElement.classList.add('film');
+    Object.keys(SCENES).forEach((k) => film(k, m, SCENES[k]));
+
+    ScrollTrigger.batch('.rv', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 50, scale: 0.97, stagger: 0.08, duration: 0.6, ease: 'power3.out' }) });
+
+    /* титр: уведомления падают сверху, потом идут по кругу */
+    const notes = $$('.title .tnote');
+    G.from(notes, { y: -60, scale: 0.9, stagger: 0.25, duration: 0.6, ease: 'back.out(1.6)', delay: 0.3 });
+    const pulse = G.to('.title .blob', { scale: 1.15, duration: 0.6, repeat: -1, yoyo: true, ease: 'sine.inOut', stagger: 0.2, paused: true });
+    ScrollTrigger.create({ trigger: '.title', start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? pulse.play() : pulse.pause()) });
+
+    /* финал: лента наполняется по прокрутке */
+    const ft = G.timeline({ scrollTrigger: { trigger: '.fphone', start: 'top 85%', end: 'bottom 55%', scrub: 0.6 } });
+    ft.from('.fphone .fn', { y: -40, scale: 0.85, stagger: 0.3, duration: 0.5, ease: 'back.out(1.6)' });
+
+    return () => document.documentElement.classList.remove('film');
+  });
+
+  const refresh = () => ScrollTrigger.refresh();
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 350));
+  reduceQ.addEventListener('change', () => setTimeout(refresh, 50));
+});
+</script>
+</body>
+</html>
