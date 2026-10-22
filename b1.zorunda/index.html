@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="ru" class="x-still">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="b1.zorunda">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Вынужден: zorunda, mecbur, zorunda kalmak</title>
+<link rel="stylesheet" href="../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 700;font-display:swap;src:url(media/inter-cyrillic.woff2) format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 700;font-display:swap;src:url(media/inter-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:300 700;font-display:swap;src:url(media/inter-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+:root{
+  --x-bg:#eceef3; --x-ink:#0b0b0f; --x-mute:#6f727c; --x-line:#dcdfe7;
+  --x-blue:#2f5bff; --x-blue-2:#1b3fe4; --x-black:#060607; --x-panel:#131316;
+  --x-want:#1fb6ff;   /* хочу: выбор есть */
+  --x-need:#8a7dff;   /* lazım / gerek: надо */
+  --x-must:#2f5bff;   /* zorunda: обязан */
+  --x-forced:#26262c; /* mecbur: вынужден */
+  --x-past:#ff2f8e;   /* zorunda kaldı: пришлось */
+  --ak-bg:#eceef3; --ak-surface:#ffffff; --ak-ink:#0b0b0f; --ak-muted:#6f727c; --ak-line:#dcdfe7;
+  --ak-accent:#0b0b0f; --ak-accent-ink:#ffffff; --ak-accent-soft:#e5e8f0;
+  --ak-good:#12925f; --ak-good-soft:#e0f5ec; --ak-bad:#d1284f; --ak-bad-soft:#fde6ec;
+  --ak-font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif; --ak-font-display:'Inter',system-ui,sans-serif;
+  --ak-radius:22px; --ak-radius-sm:14px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--x-bg);overflow-x:clip}
+body{margin:0;background:var(--x-bg);color:var(--x-ink);font-family:var(--ak-font);font-size:var(--ak-text);line-height:1.5;overflow-x:clip;-webkit-font-smoothing:antialiased;letter-spacing:-.005em}
+.x-sprite{position:absolute;width:0;height:0;overflow:hidden}
+[hidden]{display:none!important}
+
+/* ---------- сцены ---------- */
+.x-scene{position:relative;background:var(--x-bg)}
+.x-pin{position:relative;width:100%;overflow:hidden;background:var(--x-bg)}
+.x-stage{position:relative;display:flex;flex-direction:column;gap:clamp(8px,1.5vh,16px);max-width:1200px;margin:0 auto;
+  padding:clamp(18px,4vh,40px) clamp(16px,6vw,84px) clamp(18px,3.5vh,34px) clamp(16px,4vw,56px)}
+.x-chap{margin:0;display:flex;gap:10px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--x-mute)}
+.x-chap b{display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:24px;padding:0 8px;border-radius:999px;background:var(--x-ink);color:#fff;font-weight:600}
+.x-h{margin:0;font-weight:600;letter-spacing:-.035em;line-height:1.02;font-size:clamp(28px,7.6vw,64px)}
+.x-h em{font-style:normal;color:var(--x-blue)}
+.x-frame{position:relative;border-radius:28px;overflow:hidden;min-height:260px;height:min(56vh,540px);background:var(--x-blue)}
+.x-frame--dark{background:var(--x-black)}
+.x-frame--light{background:#f7f8fb;box-shadow:inset 0 0 0 1px var(--x-line)}
+.x-svg{display:block;width:100%;height:100%}
+.x-subs{position:relative}
+.x-sub{margin:0;max-width:56ch;font-size:clamp(16px,.95rem + .45vw,21px);line-height:1.45}
+.x-sub + .x-sub{margin-top:.45em}
+.x-rule{display:inline-block;padding:.35em .9em;border-radius:999px;background:var(--x-ink);color:#fff;font-weight:600;font-size:.92em}
+.x-act{position:relative;padding-top:12px;border-top:1px solid var(--x-line)}
+.x-q{margin:0 0 8px;font-weight:600}
+.x-opts{display:flex;flex-wrap:wrap;gap:8px}
+.x-opt{min-height:44px;padding:.5em 1.1em;border-radius:999px;border:1px solid #cfd3dd;background:#fff;color:var(--x-ink);font:500 16px var(--ak-font);cursor:pointer;text-align:left;transition:border-color .2s,background-color .2s}
+.x-opt:hover{border-color:var(--x-ink)}
+.x-opt:focus-visible,.x-btn:focus-visible,.x-tab:focus-visible,.x-chip:focus-visible,.x-acc__head:focus-visible,.x-bar__mark:focus-visible{outline:3px solid var(--x-blue);outline-offset:2px}
+.x-opt.is-ok{border-color:var(--ak-good);background:var(--ak-good-soft)}
+.x-opt.is-no{border-color:var(--ak-bad);background:var(--ak-bad-soft)}
+.x-opt.is-pick{border-color:var(--x-blue);background:#e6ecff}
+.x-fb{min-height:1.4em;margin:8px 0 0;font-size:15px;color:var(--x-mute)}
+.x-btn{display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:46px;padding:0 1.5em;border:0;border-radius:999px;cursor:pointer;background:var(--x-ink);color:#fff;font:600 15px/1 var(--ak-font)}
+.x-btn svg{width:18px;height:18px}
+.x-curtain{position:absolute;inset:0;z-index:5;pointer-events:none;border-radius:inherit;background:linear-gradient(160deg,#3a66ff,#1b3fe4)}
+.x-curtain::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.35) 1.2px,transparent 1.6px) 0 0/12px 12px}
+.c-want{color:var(--x-want)} .c-need{color:var(--x-need)} .c-must{color:var(--x-must)} .c-forced{color:var(--x-forced)} .c-past{color:var(--x-past)}
+.x-mk{display:inline-block;padding:0 .35em;border-radius:8px;font-weight:700;color:#fff;line-height:1.35}
+.x-mk.c-must{background:var(--x-must)} .x-mk.c-forced{background:var(--x-forced)} .x-mk.c-past{background:var(--x-past)} .x-mk.c-want{background:var(--x-want)} .x-mk.c-need{background:var(--x-need)}
+.x-tag{display:inline-block;padding:0 .3em;border-bottom:2px solid currentColor;font-weight:700}
+
+/* фильм: сцена закреплена */
+.x-film .x-pin{height:100vh;height:100svh}
+.x-film .x-stage{height:100%}
+.x-film .x-frame{flex:1 1 auto;height:auto;min-height:0}
+.x-film .x-subs{display:grid;align-items:end}
+.x-film .x-subs .x-sub{grid-area:1/1;margin:0}
+.x-film .x-pin--lab .x-stage,.x-film .x-pin--traps .x-stage{justify-content:center}
+.x-still .x-curtain,.x-still .s1-notif,.x-still .s7-shine{display:none}
+.x-still .s2-n100,.x-still .s2-n50,.x-still .s2-n15,.x-still .s3-v2,.x-still .s3-v3,.x-still .s4-to,.x-still .s1-p100{display:none}
+
+/* ---------- лаборатория ---------- */
+.x-lab{max-width:1200px;margin:0 auto;padding:0 clamp(16px,6vw,84px) clamp(28px,6vh,64px) clamp(16px,4vw,56px)}
+.x-labbox{border-radius:28px;background:var(--x-black);color:#fff;padding:clamp(16px,3vw,32px);
+  background-image:radial-gradient(circle,rgba(255,255,255,.12) 1.1px,transparent 1.5px);background-size:12px 12px}
+.x-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:5px;margin-bottom:16px;border-radius:999px;background:#fff;width:max-content;max-width:100%}
+.x-tab{min-height:44px;padding:0 1.1em;border-radius:999px;border:0;background:transparent;color:#55585f;font:600 15px var(--ak-font);cursor:pointer}
+.x-tab[aria-selected="true"]{background:var(--x-ink);color:#fff}
+.x-hint{margin:0 0 10px;color:#a9acb6;font-size:15px}
+.x-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.x-chip{min-height:44px;padding:0 1em;border-radius:999px;border:1px solid #34353b;background:#1b1c20;color:#e9eaee;font:500 16px var(--ak-font);cursor:pointer}
+.x-chip[aria-pressed="true"]{background:#fff;color:var(--x-ink);border-color:#fff}
+.x-screen{border-radius:22px;padding:18px;margin-top:6px;background:linear-gradient(160deg,#3a66ff,#1b3fe4);color:#fff}
+.x-out{margin:0;font-size:clamp(22px,5vw,34px);font-weight:600;letter-spacing:-.02em;line-height:1.25}
+.x-out span{display:inline-block}
+.x-ru{margin:6px 0 0}
+.x-why{margin:8px 0 0;font-size:15px;opacity:.85}
+.x-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.x-ghost{min-height:44px;padding:0 1.1em;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:transparent;color:inherit;font:600 15px var(--ak-font);cursor:pointer}
+.x-word{font-size:clamp(30px,8vw,56px);font-weight:600;letter-spacing:-.03em;line-height:1.05;margin:0 0 12px}
+.x-labbox .x-opt{background:#1b1c20;color:#fff;border-color:#34353b}
+.x-labbox .x-opt.is-ok{background:rgba(18,146,95,.35);border-color:#3fd39a}
+.x-labbox .x-opt.is-no{background:rgba(209,40,79,.3);border-color:#ff6b8f}
+.x-labbox .x-why{color:#c9ccd4}
+
+/* ---------- ловушки: проблема и решение ---------- */
+.x-traps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.x-acc{border-radius:22px;background:#141417;color:#fff;overflow:hidden}
+.x-acc__head{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:16px 20px;border:0;background:none;color:inherit;font:600 clamp(16px,1.6vw,20px)/1.25 var(--ak-font);text-align:left;cursor:pointer}
+.x-acc__head svg{flex:0 0 auto;width:22px;height:22px}
+.x-acc__bad{color:#ff8fb0;text-decoration:line-through;text-decoration-color:var(--x-past)}
+.x-acc__body{padding:0 20px 18px}
+.x-acc__good{margin:0 0 6px;font-size:clamp(18px,1.8vw,22px);font-weight:600;color:#fff}
+.x-acc__good b{color:#8fb0ff}
+.x-acc__why{margin:0;color:#a9acb6;font-size:15px}
+.x-traps-wrap{border-radius:28px;background:var(--x-black);padding:clamp(14px,2.4vw,24px);
+  background-image:radial-gradient(circle,rgba(255,255,255,.13) 1.1px,transparent 1.5px);background-size:12px 12px}
+
+/* ---------- бумага ---------- */
+.x-paper{background:#fff;border-top:1px solid var(--x-line)}
+.x-paper__in{max-width:880px;margin:0 auto;padding:clamp(32px,7vh,72px) clamp(16px,6vw,84px) clamp(32px,7vh,72px) clamp(16px,4vw,40px);display:flex;flex-direction:column;gap:18px}
+.x-paper p{margin:0}
+.x-game{display:flex;flex-direction:column;gap:12px}
+.x-game__head{display:flex;align-items:center;gap:12px}
+.x-game__head svg{width:46px;height:46px;flex:0 0 auto}
+.x-game__title{margin:0;font-weight:700;font-size:18px;letter-spacing:-.02em}
+.x-game__step{margin:0;color:var(--ak-muted);font-size:14px}
+.x-pay{border-radius:22px;padding:16px;background:linear-gradient(160deg,#3a66ff,#1b3fe4);color:#fff}
+.x-pay__ru{margin:0 0 4px;font-size:13px;opacity:.8}
+.x-pay__task{margin:0;font-size:19px;font-weight:600}
+.x-dials{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.x-dial{display:flex;flex-direction:column;gap:6px}
+.x-dial button{min-height:44px;padding:0 1em;border-radius:999px;border:1px solid var(--ak-line);background:#fff;color:var(--x-ink);font:500 16px var(--ak-font);cursor:pointer;text-align:left}
+.x-dial button[aria-pressed="true"]{border-color:var(--x-ink);background:var(--x-ink);color:#fff}
+.x-game__line{margin:0;font-size:clamp(20px,4.6vw,28px);font-weight:600;letter-spacing:-.02em;min-height:1.4em}
+.x-game__fb{margin:0;min-height:1.4em;font-size:15px}
+.x-game .x-btn{align-self:flex-start}
+
+/* ---------- шпаргалка ---------- */
+.x-scope{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.x-scope__card{border-radius:22px;background:#141417;color:#fff;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.x-scope__top{display:flex;gap:12px;align-items:baseline}
+.x-scope__n{font-size:34px;font-weight:300;letter-spacing:-.04em;line-height:1}
+.x-scope__t{font-size:18px;font-weight:600;letter-spacing:-.02em;line-height:1.2}
+.x-scope__pill{display:flex;gap:8px;align-items:center;align-self:flex-start;padding:6px 12px 6px 6px;border-radius:999px;background:#1f2024;color:#c9ccd4;font-size:15px}
+.x-scope__pill svg{width:22px;height:22px;flex:0 0 auto}
+.x-wordmark{display:block;width:100%;height:auto}
+.x-stage--flow{padding-top:clamp(28px,6vh,64px);padding-bottom:clamp(28px,6vh,64px)}
+
+/* ---------- скроллбар: шкала с монетой ---------- */
+.x-bar{position:fixed;z-index:40;right:12px;top:50%;width:40px;height:min(72vh,560px);transform:translateY(-50%);touch-action:none;cursor:grab}
+.x-bar__track{position:absolute;left:50%;top:0;bottom:0;width:6px;margin-left:-3px;border-radius:6px;background:#d6d9e2}
+.x-bar__fill{position:absolute;inset:0;border-radius:6px;background:linear-gradient(180deg,var(--x-want),var(--x-blue) 55%,var(--x-ink));transform-origin:50% 0;transform:scaleY(0)}
+.x-bar__coin{position:absolute;left:50%;top:0;width:32px;height:32px;margin:-16px 0 0 -16px;pointer-events:none;filter:drop-shadow(0 4px 8px rgba(27,63,228,.45))}
+.x-bar__coin svg{width:100%;height:100%}
+.x-bar__mark{position:absolute;left:50%;top:0;width:20px;height:20px;margin:-10px 0 0 -10px;padding:0;border-radius:50%;border:2px solid #b9bdc8;background:#fff;cursor:pointer}
+.x-bar__mark.is-read{border-color:var(--x-ink);background:var(--x-ink)}
+.x-bar__mark.is-here{box-shadow:0 0 0 5px rgba(47,91,255,.25)}
+
+@media (max-width:767px){
+  .x-stage{padding-top:56px;padding-right:16px}
+  .x-lab{padding-right:16px}
+  .x-paper__in{padding-right:16px;padding-top:64px}
+  .x-frame{height:min(48vh,440px);border-radius:22px}
+  .x-traps{grid-template-columns:1fr}
+  .x-scope{grid-template-columns:1fr}
+  .x-dials{grid-template-columns:1fr}
+  .x-bar{top:8px;left:12px;right:12px;width:auto;height:34px;transform:none}
+  .x-bar__track{left:0;right:0;top:50%;bottom:auto;width:auto;height:6px;margin:-3px 0 0}
+  .x-bar__fill{transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--x-want),var(--x-blue) 55%,var(--x-ink))}
+  .x-bar__coin{left:0;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px}
+  .x-bar__mark{top:50%;left:0;width:18px;height:18px;margin:-9px 0 0 -9px}
+  .x-acc__head{min-height:56px;padding:12px 16px}
+}
+@media (min-width:768px) and (max-width:1023px){ .x-scope{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (prefers-reduced-motion:reduce){ .x-opt{transition:none} }
+</style>
+</head>
+<body>
+<svg class="x-sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="xg-blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4a72ff"/><stop offset="1" stop-color="#1b3fe4"/></linearGradient>
+    <linearGradient id="xg-meter" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0b0b0f"/><stop offset=".45" stop-color="#2f5bff"/><stop offset="1" stop-color="#1fb6ff"/></linearGradient>
+    <linearGradient id="xg-chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#cfd2da"/><stop offset="1" stop-color="#6d7180"/></linearGradient>
+    <linearGradient id="xg-steel" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b2c33"/><stop offset=".5" stop-color="#0e0e12"/><stop offset="1" stop-color="#3a3b44"/></linearGradient>
+    <linearGradient id="xg-pastbar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff2f8e"/><stop offset="1" stop-color="#ff2f8e" stop-opacity="0"/></linearGradient>
+    <linearGradient id="xg-mustbar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f5bff"/><stop offset="1" stop-color="#2f5bff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="xg-coin" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#9fb4ff"/><stop offset=".45" stop-color="#3a62ff"/><stop offset="1" stop-color="#1630b8"/></radialGradient>
+    <pattern id="xp-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="1.6" fill="#ffffff"/></pattern>
+    <mask id="xm-map" maskUnits="userSpaceOnUse" x="-600" y="-500" width="1800" height="1500">
+      <rect x="-600" y="-500" width="1800" height="1500" fill="#000"/>
+      <g fill="#fff"><ellipse cx="120" cy="150" rx="110" ry="70"/><ellipse cx="170" cy="300" rx="55" ry="90"/><ellipse cx="320" cy="140" rx="70" ry="60"/><ellipse cx="330" cy="280" rx="60" ry="90"/><ellipse cx="470" cy="170" rx="130" ry="80"/><ellipse cx="520" cy="350" rx="50" ry="40"/><ellipse cx="-80" cy="200" rx="100" ry="80"/><ellipse cx="700" cy="230" rx="110" ry="90"/></g>
+    </mask>
+    <filter id="xf-shadow" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b1a66" flood-opacity=".3"/></filter>
+    <symbol id="x-coin" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="url(#xg-coin)"/><circle cx="50" cy="50" r="38" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="3"/><path d="M50 26 74 70H60L50 50 40 70H26z" fill="#fff"/><path d="M14 40a38 38 0 0 1 30-26" stroke="#fff" stroke-opacity=".6" stroke-width="5" fill="none" stroke-linecap="round"/></symbol>
+    <symbol id="x-phone" viewBox="0 0 260 480"><rect width="260" height="480" rx="42" fill="#0d0d10"/><rect x="2" y="2" width="256" height="476" rx="40" fill="none" stroke="#5c5f6a" stroke-width="2"/><rect x="10" y="10" width="240" height="460" rx="34" fill="#f5f6fa"/><rect x="92" y="18" width="76" height="22" rx="11" fill="#0d0d10"/></symbol>
+    <symbol id="x-arrow" viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="#eef1f8"/><path d="M14 26 26 14M16 14h10v10" fill="none" stroke="#2f5bff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="x-down" viewBox="0 0 24 24"><path d="M12 4v16m-6-6 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="x-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#2a2b31"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#c9ccd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="x-logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="5"/><path d="M50 22 76 72H60L50 52 40 72H24z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<nav data-scrollbar class="x-bar" aria-label="Прогресс урока">
+  <div class="x-bar__track"><span class="x-bar__fill"></span></div>
+  <div class="x-bar__marks"></div>
+  <div class="x-bar__coin"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#x-coin"/></svg></div>
+</nav>
+
+<main>
+<!-- ============ 1. ЗАВЯЗКА ============ -->
+<section data-section="story" data-words="66" class="x-scene" id="story">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>01</b>B1 · Анталья · завязка</p>
+      <h1 class="x-h">Вынужден — <em>не значит</em> хочу</h1>
+      <div class="x-frame">
+        <svg class="x-svg x-scn s1" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Переписка с хозяйкой квартиры в банковском стиле">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-blue)"/>
+          <rect class="s1-map" x="-600" y="-500" width="1800" height="1500" fill="url(#xp-dots)" mask="url(#xm-map)" opacity=".28"/>
+          <g class="s1-coins">
+            <use href="#x-coin" x="40" y="80" width="96" height="96"/>
+            <use href="#x-coin" x="480" y="60" width="70" height="70"/>
+            <use href="#x-coin" x="470" y="400" width="120" height="120"/>
+            <use href="#x-coin" x="20" y="390" width="70" height="70"/>
+          </g>
+          <g class="s1-cam">
+            <use href="#x-phone" x="170" y="10" width="260" height="480"/>
+            <g font-family="Inter" fill="#0b0b0f">
+              <text x="198" y="44" font-size="12" font-weight="600">9:41</text>
+              <circle cx="206" cy="82" r="15" fill="#ffd2a8"/><text x="200" y="87" font-size="13" font-weight="700" fill="#7a4a1f">A</text>
+              <text x="228" y="80" font-size="15" font-weight="600">Ayşe teyze</text>
+              <text x="228" y="96" font-size="10" fill="#7d808a">Antalya · Konyaaltı</text>
+              <path d="M180 112h240" stroke="#e3e5ec"/>
+              <g class="s1-b1"><rect x="190" y="126" width="200" height="44" rx="16" fill="#e7eaf2"/><text x="204" y="153" font-size="14">Yarın akşam yemeğe gel!</text></g>
+              <g class="s1-b2"><rect x="200" y="184" width="212" height="44" rx="16" fill="#2f5bff"/><text x="214" y="211" font-size="14" fill="#fff">Tamam, gelmek <tspan font-weight="700">zorundayım</tspan>.</text></g>
+              <g class="s1-typing" fill="#9a9da8"><circle cx="208" cy="266" r="4"/><circle cx="222" cy="266" r="4"/><circle cx="236" cy="266" r="4"/></g>
+              <g class="s1-b3"><rect x="188" y="246" width="226" height="44" rx="16" fill="#e7eaf2"/><text x="200" y="273" font-size="13">Zorunda mısın? Gelme o zaman!</text></g>
+            </g>
+            <g class="s1-notif"><rect x="186" y="24" width="228" height="58" rx="18" fill="#111216"/><circle cx="210" cy="53" r="12" fill="#ff2f8e"/><path d="M205 53h10" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+              <text x="230" y="50" font-family="Inter" font-size="12.5" font-weight="600" fill="#fff">Ужин отменён</text><text x="230" y="68" font-family="Inter" font-size="10" fill="#9a9da8">Ayşe teyze · 19:02</text></g>
+          </g>
+          <g class="s1-meter" filter="url(#xf-shadow)">
+            <rect x="330" y="322" width="176" height="118" rx="20" fill="#fff"/>
+            <text x="348" y="350" font-family="Inter" font-size="11" fill="#7d808a">баланс выбора</text>
+            <text class="s1-p100" x="348" y="392" font-family="Inter" font-size="34" font-weight="700" fill="#0b0b0f" letter-spacing="-1">100%</text>
+            <text class="s1-p0" x="348" y="392" font-family="Inter" font-size="34" font-weight="700" fill="#2f5bff" letter-spacing="-1">0%</text>
+            <rect x="348" y="410" width="140" height="10" rx="5" fill="#e6e8ef"/>
+            <rect class="s1-bar" x="348" y="410" width="140" height="10" rx="5" fill="url(#xg-meter)"/>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Анталья, Коньяалты. Снимаю квартиру у Айше-тейзе. Тейзе готовит лучший плов в районе.</p>
+        <p class="x-sub">Вечером она пишет: <a-say>Yarın akşam yemeğe gel!</a-say> Завтра приходи на ужин.</p>
+        <p class="x-sub">Хочу ответить: «Конечно, обязательно приду». Пишу: <a-say>Tamam, gelmek <span class="x-mk c-must">zorundayım</span>.</a-say></p>
+        <p class="x-sub">Через минуту ответ: <a-say>Zorunda mısın? Gelme o zaman!</a-say></p>
+        <p class="x-sub">Вынужден? Тогда не приходи. Ужин отменён. Плов пахнет на весь подъезд.</p>
+      </div>
+      <div class="x-act" data-act="story">
+        <p class="x-q">Почему тейзе обиделась?</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-ok="0">Я перепутал падеж</button>
+          <button type="button" class="x-opt" data-ok="1">Я сказал, что приду по обязанности, а не потому что хочу</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. БАЛАНС ВЫБОРА ============ -->
+<section data-section="balance" data-words="51" class="x-scene" id="balance">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>02</b>баланс выбора</p>
+      <div class="x-frame x-frame--light">
+        <svg class="x-svg x-scn s2" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Шкала выбора: istiyorum, lazım, zorundayım, mecburum">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="#f7f8fb"/>
+          <ellipse class="s2-blob" cx="470" cy="120" rx="170" ry="120" fill="#2f5bff" opacity=".12"/>
+          <g class="s2-card" filter="url(#xf-shadow)">
+            <rect x="100" y="60" width="400" height="390" rx="28" fill="#fff"/>
+            <text x="130" y="104" font-family="Inter" font-size="15" font-weight="600" fill="#0b0b0f">Баланс выбора</text>
+            <g font-family="Inter" font-size="62" font-weight="700" letter-spacing="-3">
+              <text class="s2-n100" x="128" y="180" fill="#1fb6ff">100%</text>
+              <text class="s2-n50" x="128" y="180" fill="#8a7dff">50%</text>
+              <text class="s2-n15" x="128" y="180" fill="#2f5bff">10%</text>
+              <text class="s2-n0" x="128" y="180" fill="#0b0b0f">0%</text>
+            </g>
+            <rect x="130" y="214" width="340" height="16" rx="8" fill="#eceef3"/>
+            <rect class="s2-fill" x="130" y="214" width="340" height="16" rx="8" fill="url(#xg-meter)"/>
+            <g stroke="#c6cad6" stroke-width="1.5" stroke-dasharray="3 3"><path class="s2-t1" d="M470 232v48"/><path class="s2-t2" d="M300 232v98"/><path class="s2-t3" d="M164 232v48"/><path class="s2-t4" d="M130 232v148"/></g>
+            <g font-family="Inter" font-size="15" font-weight="600" text-anchor="middle">
+              <g class="s2-c1"><rect x="372" y="282" width="110" height="34" rx="17" fill="#1fb6ff"/><text x="427" y="304" fill="#fff">istiyorum</text></g>
+              <g class="s2-c2"><rect x="230" y="332" width="140" height="34" rx="17" fill="#8a7dff"/><text x="300" y="354" fill="#fff">lazım · gerek</text></g>
+              <g class="s2-c3"><rect x="140" y="282" width="122" height="34" rx="17" fill="#2f5bff"/><text x="201" y="304" fill="#fff">zorundayım</text></g>
+              <g class="s2-c4"><rect x="118" y="382" width="114" height="34" rx="17" fill="#26262c"/><text x="175" y="404" fill="#fff">mecburum</text></g>
+            </g>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Сначала угадай: где в этих фразах больше всего свободы?</p>
+        <p class="x-sub"><a-say>Gelmek <span class="x-mk c-want">istiyorum</span>.</a-say> Хочу прийти. Выбор — сто процентов.</p>
+        <p class="x-sub"><a-say>Gelmem <span class="x-mk c-need">lazım</span>.</a-say> <a-say>Gelmem <span class="x-mk c-need">gerek</span>.</a-say> Мне надо прийти. Надо, но решаю я сам.</p>
+        <p class="x-sub"><a-say>Gelmek <span class="x-mk c-must">zorundayım</span>.</a-say> Я обязан. Решили за меня: работа, закон, хозяйка.</p>
+        <p class="x-sub"><a-say>Gelmeye <span class="x-mk c-forced">mecburum</span>.</a-say> Вынужден. Выбора ноль. <span class="x-rule">Меньше выбора — меньше радости в голосе.</span></p>
+      </div>
+      <div class="x-act" data-act="balance">
+        <p class="x-q">Сколько выбора в <b lang="tr" data-b-word>Gelmek zorundayım</b>?</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-b="want"><span class="c-want">●</span> хочу</button>
+          <button type="button" class="x-opt" data-b="need"><span class="c-need">●</span> надо</button>
+          <button type="button" class="x-opt" data-b="must"><span class="c-must">●</span> обязан</button>
+          <button type="button" class="x-opt" data-b="forced"><span class="c-forced">●</span> нет выбора</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. ZORUNDA ============ -->
+<section data-section="zorunda" data-words="47" class="x-scene" id="zorunda">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>03</b>формула zorunda</p>
+      <div class="x-frame">
+        <svg class="x-svg x-scn s3" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Три карточки: глагол, zorunda, окончание лица">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-blue)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-dots)" mask="url(#xm-map)" opacity=".22"/>
+          <text class="s3-title" x="104" y="104" font-family="Inter" font-size="26" font-weight="600" fill="#fff" letter-spacing="-1">-mAk + zorunda + -(y)Im</text>
+          <g font-family="Inter">
+            <g class="s3-k1"><rect x="104" y="140" width="128" height="190" rx="18" fill="#fff"/><text x="118" y="182" font-size="34" font-weight="300" fill="#2f5bff" letter-spacing="-2">01</text>
+              <text class="s3-v1" x="118" y="300" font-size="19" font-weight="600" fill="#0b0b0f">bitirmek</text><text class="s3-v2" x="118" y="300" font-size="19" font-weight="600" fill="#0b0b0f">ödemek</text><text class="s3-v3" x="118" y="300" font-size="19" font-weight="600" fill="#0b0b0f">çalışmak</text>
+              <text x="118" y="318" font-size="10.5" fill="#7d808a">глагол как в словаре</text></g>
+            <g class="s3-k2"><rect x="242" y="140" width="128" height="190" rx="18" fill="#fff"/><text x="256" y="182" font-size="34" font-weight="300" fill="#2f5bff" letter-spacing="-2">02</text>
+              <text x="256" y="300" font-size="19" font-weight="700" fill="#2f5bff">zorunda</text><text x="256" y="318" font-size="10.5" fill="#7d808a">не меняется</text></g>
+            <g class="s3-k3"><rect x="380" y="140" width="116" height="190" rx="18" fill="#fff"/><text x="394" y="182" font-size="34" font-weight="300" fill="#2f5bff" letter-spacing="-2">03</text>
+              <text class="s3-v1" x="394" y="300" font-size="24" font-weight="700" fill="#0b0b0f">-yım</text><text class="s3-v2" x="394" y="300" font-size="24" font-weight="700" fill="#0b0b0f">-sın</text><text class="s3-v3" x="394" y="300" font-size="24" font-weight="700" fill="#0b0b0f">—</text>
+              <text x="394" y="318" font-size="10.5" fill="#7d808a">кто обязан</text>
+              <use href="#x-arrow" x="452" y="150" width="32" height="32"/></g>
+          </g>
+          <g class="s3-bar"><rect x="104" y="356" width="392" height="56" rx="28" fill="#fff"/>
+            <g font-family="Inter" font-size="18" font-weight="600" fill="#0b0b0f">
+              <text class="s3-v1" x="128" y="391">Bu işi bitirmek <tspan fill="#2f5bff">zorundayım</tspan>.</text>
+              <text class="s3-v2" x="128" y="391">Kirayı ödemek <tspan fill="#2f5bff">zorundasın</tspan>.</text>
+              <text class="s3-v3" x="128" y="391">Ahmet çalışmak <tspan fill="#2f5bff">zorunda</tspan>.</text>
+            </g></g>
+          <g class="s3-persons" font-family="Inter" font-size="12" font-weight="600" fill="#fff" opacity=".85"><text x="104" y="446">ben -yım · sen -sın · o — · biz -yız · siz -sınız · onlar -lar</text></g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Формула простая. Глагол как в словаре, потом zorunda, потом окончание лица.</p>
+        <p class="x-sub"><a-say>Bu işi bitirmek <span class="x-mk c-must">zorundayım</span>.</a-say> Я обязан закончить эту работу.</p>
+        <p class="x-sub"><a-say>Kirayı ödemek <span class="x-mk c-must">zorundasın</span>.</a-say> Ты обязан платить за квартиру. <a-say>Ahmet çalışmak <span class="x-mk c-must">zorunda</span>.</a-say> Ахмет обязан работать.</p>
+        <p class="x-sub">Глагол не меняется: -mek или -mak, никакого падежа. Меняется только хвост у zorunda.</p>
+      </div>
+      <div class="x-act" data-act="zorunda">
+        <p class="x-q">Поставь хвост: <span data-z-ru>«Мы обязаны ждать»</span> — <b lang="tr">beklemek zorunda…</b></p>
+        <div class="x-opts" lang="tr">
+          <button type="button" class="x-opt" data-z="yım">-yım</button>
+          <button type="button" class="x-opt" data-z="yız">-yız</button>
+          <button type="button" class="x-opt" data-z="sınız">-sınız</button>
+          <button type="button" class="x-opt" data-z="lar">-lar</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. MECBUR ============ -->
+<section data-section="mecbur" data-words="35" class="x-scene" id="mecbur">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>04</b>mecbur и дательный падеж</p>
+      <div class="x-frame x-frame--dark">
+        <svg class="x-svg x-scn s4" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Чёрная карта MECBUR: gitmek превращается в gitmeye">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="#060607"/>
+          <rect class="s4-map" x="-600" y="-500" width="1800" height="1500" fill="url(#xp-dots)" mask="url(#xm-map)" opacity=".16"/>
+          <g font-family="Inter" font-weight="600">
+            <g class="s4-from"><rect x="104" y="70" width="140" height="48" rx="24" fill="#fff"/><text x="174" y="101" font-size="19" text-anchor="middle" fill="#0b0b0f">gitmek</text></g>
+            <path class="s4-arrow" d="M250 94H352" stroke="#2f5bff" stroke-width="3" stroke-dasharray="110" stroke-dashoffset="0" fill="none"/>
+            <path class="s4-head" d="M340 84l14 10-14 10" fill="none" stroke="#2f5bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <text class="s4-case" x="300" y="80" font-size="15" text-anchor="middle" fill="#8fb0ff">-(y)A</text>
+            <g class="s4-to"><rect x="360" y="70" width="140" height="48" rx="24" fill="#2f5bff"/><text x="430" y="101" font-size="19" text-anchor="middle" fill="#fff">gitmeye</text></g>
+          </g>
+          <g class="s4-card">
+            <rect x="150" y="190" width="300" height="190" rx="20" fill="url(#xg-steel)"/>
+            <g opacity=".5"><path d="M150 380 290 190h60L230 380z" fill="#4a4c57"/><path d="M330 380 420 190h30v40L370 380z" fill="#2c2d34"/><path d="M150 260 230 190h40L150 300z" fill="#55586a"/></g>
+            <rect x="176" y="226" width="44" height="34" rx="6" fill="#c7c9cf"/><path d="M176 243h44M198 226v34" stroke="#8b8e98"/>
+            <text x="176" y="350" font-family="Inter" font-size="36" font-weight="800" fill="url(#xg-chrome)" letter-spacing="1">MECBUR</text>
+            <text x="176" y="370" font-family="Inter" font-size="10.5" fill="#9a9da8" letter-spacing="2">-UM · -SUN · — · -UZ · -SUNUZ · -LAR</text>
+            <use href="#x-logo" x="400" y="210" width="34" height="34" style="color:#cfd2da"/>
+          </g>
+          <g class="s4-line" font-family="Inter" font-size="18" font-weight="600"><rect x="104" y="410" width="392" height="52" rx="26" fill="#fff"/><text x="128" y="443" fill="#0b0b0f">Gitmeye <tspan fill="#2f5bff">mecburum</tspan>.</text></g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">У mecbur характер жёстче. И он требует дательный падеж.</p>
+        <p class="x-sub">-mak и -mek становятся -maya и -meye: <a-say>gitmek → <span class="x-tag c-must">gitmeye</span></a-say></p>
+        <p class="x-sub"><a-say><span class="x-tag c-must">Gitmeye</span> <span class="x-mk c-forced">mecburum</span>.</a-say> Я вынужден уйти. <a-say>Kirayı <span class="x-tag c-must">ödemeye</span> <span class="x-mk c-forced">mecburuz</span>.</a-say> Мы вынуждены платить.</p>
+        <p class="x-sub">Хвосты по гармонии: -um, -sun, -uz, -sunuz, -lar. А одно <a-say>Mecburum!</a-say> значит: у меня нет выбора.</p>
+      </div>
+      <div class="x-act" data-act="mecbur">
+        <p class="x-q">Как сказать «Я вынужден ждать»?</p>
+        <div class="x-opts" lang="tr">
+          <button type="button" class="x-opt" data-ok="0">Beklemek mecburum.</button>
+          <button type="button" class="x-opt" data-ok="1">Beklemeye mecburum.</button>
+          <button type="button" class="x-opt" data-ok="0">Beklemeye zorundayım.</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ZORUNDA KALDIM ============ -->
+<section data-section="kaldi" data-words="54" class="x-scene" id="kaldi">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>05</b>zorunda kaldım: пришлось</p>
+      <div class="x-frame x-frame--light">
+        <svg class="x-svg x-scn s5" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="История операций в телефоне: пришлось идти пешком, пришлось взять такси">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="#f7f8fb"/>
+          <ellipse cx="300" cy="250" rx="260" ry="200" fill="#2f5bff" opacity=".08"/>
+          <g class="s5-phone">
+            <use href="#x-phone" x="170" y="10" width="260" height="480"/>
+            <g font-family="Inter" fill="#0b0b0f">
+              <text x="198" y="44" font-size="12" font-weight="600">9:41</text>
+              <text x="196" y="84" font-size="22" font-weight="700" letter-spacing="-1">Geçmiş</text>
+              <text x="196" y="102" font-size="10" fill="#7d808a">Antalya · Pazartesi</text>
+              <g class="s5-r1"><rect x="188" y="118" width="224" height="62" rx="16" fill="#fff"/><circle cx="212" cy="149" r="14" fill="#eef1f8"/><path d="M205 144h14v10h-14zM207 156v3M217 156v3" fill="none" stroke="#2f5bff" stroke-width="2"/>
+                <text x="234" y="145" font-size="13" font-weight="600">Otobüs gelmedi</text><text x="234" y="163" font-size="10" fill="#7d808a">08:40</text></g>
+              <g class="s5-r2"><rect x="188" y="190" width="224" height="62" rx="16" fill="#fff"/><circle cx="212" cy="221" r="14" fill="#ffe3f0"/><path d="M212 213v8l5 4" stroke="#ff2f8e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <text x="234" y="217" font-size="12" font-weight="600">yürümek <tspan fill="#ff2f8e">zorunda kaldık</tspan></text><text x="234" y="235" font-size="10" fill="#7d808a">08:41 · −1 выбор</text></g>
+              <g class="s5-r3"><rect x="188" y="262" width="224" height="62" rx="16" fill="#fff"/><circle cx="212" cy="293" r="14" fill="#ffe3f0"/><path d="M205 296h14l-2-7h-10z" fill="#ff2f8e"/>
+                <text x="234" y="289" font-size="11.5" font-weight="600">taksiye binmek <tspan fill="#ff2f8e">zorunda kaldım</tspan></text><text x="234" y="307" font-size="10" fill="#7d808a">23:10 · −1 выбор</text></g>
+            </g>
+          </g>
+          <g class="s5-time" filter="url(#xf-shadow)">
+            <rect x="120" y="344" width="360" height="118" rx="20" fill="#0b0b0f"/>
+            <g font-family="Inter" font-size="13" font-weight="600">
+              <rect class="s5-bar1" x="138" y="362" width="300" height="30" rx="15" fill="url(#xg-mustbar)"/><text x="152" y="382" fill="#fff">zorundaydım</text><text x="300" y="382" fill="#b9bdc8" font-weight="400">был обязан</text>
+              <rect class="s5-bar2" x="138" y="410" width="300" height="30" rx="15" fill="url(#xg-pastbar)"/><text x="152" y="430" fill="#fff">zorunda kaldım</text><text x="300" y="430" fill="#b9bdc8" font-weight="400">пришлось</text>
+            </g>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Теперь прошлое. В понедельник автобус в Коньяалты так и не пришёл.</p>
+        <p class="x-sub"><a-say>Otobüs gelmedi, yürümek <span class="x-mk c-past">zorunda kaldık</span>.</a-say> Автобус не пришёл, пришлось идти пешком.</p>
+        <p class="x-sub">zorunda + kalmak — это «пришлось». Обстоятельства прижали, и ты это сделал.</p>
+        <p class="x-sub"><a-say>Taksiye binmek <span class="x-mk c-past">zorunda kaldım</span>.</a-say> Пришлось взять такси. Прошедшее висит на kal: kaldım, kaldın, kaldık.</p>
+        <p class="x-sub">А <a-say>zorundaydım</a-say> — просто «я был обязан». Сделал или нет, неизвестно.</p>
+      </div>
+      <div class="x-act" data-act="kaldi">
+        <p class="x-q">«Вчера мне пришлось работать до ночи». Как сказать?</p>
+        <div class="x-opts" lang="tr">
+          <button type="button" class="x-opt" data-ok="1">Dün geç saate kadar çalışmak zorunda kaldım.</button>
+          <button type="button" class="x-opt" data-ok="0">Dün geç saate kadar çalışmak zorundayım.</button>
+          <button type="button" class="x-opt" data-ok="0">Dün geç saate kadar çalışmaya zorunda kaldım.</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. НЕ ОБЯЗАН ≠ НЕЛЬЗЯ ============ -->
+<section data-section="degil" data-words="55" class="x-scene" id="degil">
+  <div class="x-pin">
+    <div class="x-stage">
+      <p class="x-chap"><b>06</b>не обязан — не значит нельзя</p>
+      <div class="x-frame x-frame--dark">
+        <svg class="x-svg x-scn s6" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="zorunda değilsin против yasak">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="#060607"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-dots)" mask="url(#xm-map)" opacity=".16"/>
+          <g class="s6-l" font-family="Inter">
+            <rect x="100" y="110" width="190" height="280" rx="24" fill="#fff"/>
+            <text x="122" y="150" font-size="13" fill="#7d808a">обязанность</text>
+            <g class="s6-sw"><rect class="s6-on" x="122" y="166" width="76" height="40" rx="20" fill="#2f5bff"/><rect class="s6-off" x="122" y="166" width="76" height="40" rx="20" fill="#d6d9e2"/><circle class="s6-knob" cx="178" cy="186" r="16" fill="#fff" stroke="#c6cad6"/></g>
+            <text x="122" y="262" font-size="21" font-weight="700" fill="#0b0b0f" letter-spacing="-.5">zorunda</text>
+            <text x="122" y="290" font-size="21" font-weight="700" fill="#2f5bff" letter-spacing="-.5">değilsin</text>
+            <text x="122" y="356" font-size="14" fill="#0b0b0f">можно не идти</text>
+          </g>
+          <text class="s6-ne" x="300" y="268" font-family="Inter" font-size="40" font-weight="300" fill="#fff" text-anchor="middle">≠</text>
+          <g class="s6-r" font-family="Inter">
+            <rect x="310" y="110" width="190" height="280" rx="24" fill="#1b1c20"/>
+            <text x="332" y="150" font-size="13" fill="#9a9da8">запрет</text>
+            <g transform="translate(330 166)"><rect x="0" y="16" width="34" height="26" rx="6" fill="#ff2f8e"/><path d="M7 16V10a10 10 0 0 1 20 0v6" fill="none" stroke="#ff2f8e" stroke-width="4"/></g>
+            <text x="332" y="276" font-size="26" font-weight="700" fill="#fff">yasak</text>
+            <text x="332" y="356" font-size="14" fill="#c9ccd4">нельзя</text>
+          </g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Последняя ловушка — отрицание.</p>
+        <p class="x-sub"><a-say>Gelmek zorunda <span class="x-mk c-must">değilsin</span>.</a-say> Ты не обязан приходить. Можешь прийти, можешь нет.</p>
+        <p class="x-sub">Это не запрет. Русское «ты не должен» в смысле «нельзя» сюда не годится.</p>
+        <p class="x-sub"><a-say>Bugün ödemek zorunda değilsiniz.</a-say> Сегодня вы не обязаны платить. Банк просто разрешил подождать.</p>
+      </div>
+      <div class="x-act" data-act="degil">
+        <p class="x-q">Что значит <b lang="tr">Yarın çalışmak zorunda değilim</b>?</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-ok="0">Мне завтра нельзя работать</button>
+          <button type="button" class="x-opt" data-ok="1">Завтра я не обязан работать</button>
+        </div>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. КОНСТРУКТОР ============ -->
+<section data-section="lab" data-words="43" class="x-scene" id="lab">
+  <div class="x-pin x-pin--lab">
+    <div class="x-stage">
+      <p class="x-chap"><b>07</b>конструктор</p>
+      <svg class="x-wordmark s7" viewBox="0 0 600 130" role="img" aria-label="ZORUNDA">
+        <use class="s7-logo" href="#x-logo" x="0" y="20" width="90" height="90" style="color:#0b0b0f"/>
+        <text class="s7-word" x="104" y="104" font-family="Inter" font-size="96" font-weight="800" letter-spacing="-5" fill="#0b0b0f">ZORUNDA</text>
+        <rect class="s7-shine" x="104" y="16" width="40" height="100" fill="#fff" opacity=".55" transform="skewX(-18)"/>
+      </svg>
+      <h2 class="x-h">Собери <em>обязанность</em> сам</h2>
+      <p class="x-sub" style="position:static">Три режима: собрать форму, выбрать падеж, оценить баланс выбора.</p>
+      <div class="x-curtain"></div>
+    </div>
+  </div>
+  <div class="x-lab">
+    <div class="x-labbox">
+      <div class="x-tabs" role="tablist" aria-label="Режимы конструктора">
+        <button type="button" class="x-tab" role="tab" aria-selected="true" data-mode="build"><span data-ui>Собери</span></button>
+        <button type="button" class="x-tab" role="tab" aria-selected="false" data-mode="case"><span data-ui>Падеж</span></button>
+        <button type="button" class="x-tab" role="tab" aria-selected="false" data-mode="bal"><span data-ui>Баланс</span></button>
+      </div>
+      <div class="x-pane" data-pane="build" role="tabpanel">
+        <p class="x-hint">Выбери глагол, конструкцию и лицо. Форма соберётся сама.</p>
+        <div class="x-chips" data-row="verb" lang="tr">
+          <button type="button" class="x-chip" aria-pressed="true">gitmek</button><button type="button" class="x-chip" aria-pressed="false">gelmek</button><button type="button" class="x-chip" aria-pressed="false">beklemek</button><button type="button" class="x-chip" aria-pressed="false">ödemek</button><button type="button" class="x-chip" aria-pressed="false">çalışmak</button><button type="button" class="x-chip" aria-pressed="false">yürümek</button><button type="button" class="x-chip" aria-pressed="false">taşınmak</button>
+        </div>
+        <div class="x-chips" data-row="kind" lang="tr">
+          <button type="button" class="x-chip" aria-pressed="true" data-k="must">zorunda</button><button type="button" class="x-chip" aria-pressed="false" data-k="forced">mecbur</button><button type="button" class="x-chip" aria-pressed="false" data-k="past">zorunda kal-</button><button type="button" class="x-chip" aria-pressed="false" data-k="not">zorunda değil</button>
+        </div>
+        <div class="x-chips" data-row="who" lang="tr">
+          <button type="button" class="x-chip" aria-pressed="true">ben</button><button type="button" class="x-chip" aria-pressed="false">sen</button><button type="button" class="x-chip" aria-pressed="false">o</button><button type="button" class="x-chip" aria-pressed="false">biz</button><button type="button" class="x-chip" aria-pressed="false">siz</button><button type="button" class="x-chip" aria-pressed="false">onlar</button>
+        </div>
+        <div class="x-screen">
+          <p class="x-out" lang="tr"><span class="x-out-v">gitmek</span> <span class="x-out-h">zorundayım</span></p>
+          <p class="x-ru x-out-ru">Я обязан уйти.</p>
+          <p class="x-why x-out-why">zorunda: глагол без падежа, хвост -yım.</p>
+          <div class="x-row"><button type="button" class="x-ghost x-out-say"><span data-ui>▶ Послушать</span></button></div>
+        </div>
+      </div>
+      <div class="x-pane" data-pane="case" role="tabpanel" hidden>
+        <p class="x-hint">Какую форму глагола возьмёт это слово?</p>
+        <p class="x-word" lang="tr"><span class="x-c-verb">…</span> <span class="x-c-head c-must">zorundayım</span></p>
+        <div class="x-opts" lang="tr">
+          <button type="button" class="x-opt" data-c="0">gitmek</button>
+          <button type="button" class="x-opt" data-c="1">gitmeye</button>
+          <button type="button" class="x-ghost x-c-next"><span data-ui>Дальше →</span></button>
+        </div>
+        <p class="x-why x-c-why" aria-live="polite"></p>
+      </div>
+      <div class="x-pane" data-pane="bal" role="tabpanel" hidden>
+        <p class="x-hint">Сколько здесь выбора?</p>
+        <p class="x-word x-bal-tr" lang="tr" style="font-size:clamp(24px,6vw,42px)">Gelmek istiyorum.</p>
+        <div class="x-opts">
+          <button type="button" class="x-opt" data-v="want"><span class="c-want">●</span> хочу</button>
+          <button type="button" class="x-opt" data-v="need"><span class="c-need">●</span> надо</button>
+          <button type="button" class="x-opt" data-v="must"><span class="c-must">●</span> обязан</button>
+          <button type="button" class="x-opt" data-v="forced"><span class="c-forced" style="color:#c9ccd4">●</span> нет выбора</button>
+          <button type="button" class="x-opt" data-v="past"><span class="c-past">●</span> пришлось</button>
+          <button type="button" class="x-ghost x-bal-next"><span data-ui>Дальше →</span></button>
+        </div>
+        <p class="x-why x-bal-why" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8. ЛОВУШКИ ============ -->
+<section data-section="traps" data-words="36" class="x-scene" id="traps">
+  <div class="x-pin x-pin--traps">
+    <div class="x-stage">
+      <p class="x-chap"><b>08</b>проблемы и решения</p>
+      <p class="x-sub" style="position:static">На этом спотыкаются все. Открой карточку — там решение.</p>
+      <div class="x-traps-wrap">
+        <div class="x-traps">
+          <div class="x-acc"><button type="button" class="x-acc__head" aria-expanded="false"><span><span class="x-acc__bad" lang="tr">Gitmeye zorundayım.</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-down"/></svg></button>
+            <div class="x-acc__body"><p class="x-acc__good" lang="tr">Gitmek <b>zorundayım</b>.</p><p class="x-acc__why">zorunda берёт голый глагол: -mek, -mak. Дательный — это к mecbur.</p></div></div>
+          <div class="x-acc"><button type="button" class="x-acc__head" aria-expanded="false"><span><span class="x-acc__bad" lang="tr">Gitmek mecburum.</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-down"/></svg></button>
+            <div class="x-acc__body"><p class="x-acc__good" lang="tr">Gitmeye <b>mecburum</b>.</p><p class="x-acc__why">mecbur требует дательный: -meye, -maya.</p></div></div>
+          <div class="x-acc"><button type="button" class="x-acc__head" aria-expanded="false"><span><span class="x-acc__bad" lang="tr">Zorundayım gitmek.</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-down"/></svg></button>
+            <div class="x-acc__body"><p class="x-acc__good" lang="tr">Gitmek <b>zorundayım</b>.</p><p class="x-acc__why">Порядок не русский. Сначала действие, в конце — обязан.</p></div></div>
+          <div class="x-acc"><button type="button" class="x-acc__head" aria-expanded="false"><span><span class="x-acc__bad" lang="tr">Dün yürümek zorundaydım.</span></span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-down"/></svg></button>
+            <div class="x-acc__body"><p class="x-acc__good" lang="tr">Dün yürümek <b>zorunda kaldım</b>.</p><p class="x-acc__why">Если пришлось и ты пошёл — это kaldım. zorundaydım только про долг.</p></div></div>
+        </div>
+      </div>
+      <div class="x-curtain"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВИДЕО ============ -->
+<section data-section="video" data-words="9" class="x-scene" id="video">
+  <div class="x-stage x-stage--flow">
+    <p class="x-chap"><b>▶</b>видео</p>
+    <p class="x-sub">Обрати внимание, какую форму глагола берут zorunda и mecbur.</p>
+    <a-video yt="RJVYab_5ILw" start="0" end="180" title="Турецкий язык с нуля. Урок № 63: mek zorunda / mecbur" channel="Anastasia Pektas"></a-video>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКА ============ -->
+<section data-section="practice" data-words="10" class="x-paper" id="practice">
+  <div class="x-paper__in">
+    <p class="x-chap"><b>09</b>практика</p>
+    <h2 class="x-h">Теперь платишь <em>ты</em></h2>
+    <p>Сначала узнай, потом поставь, потом собери.</p>
+    <a-exercise ref="b1.zorunda.ex1"></a-exercise>
+    <a-exercise ref="b1.zorunda.ex2"></a-exercise>
+    <a-exercise ref="b1.zorunda.ex3"></a-exercise>
+    <a-exercise ref="b1.zorunda.ex4"></a-exercise>
+    <a-exercise ref="b1.zorunda.ex5">
+      <div class="x-game" data-game>
+        <div class="x-game__head">
+          <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#x-coin"/></svg>
+          <div><p class="x-game__title">Платёжка обязательств</p><p class="x-game__step" data-ui>Платёж <b data-g-n>1</b> из 5 · проведено <b data-g-ok>0</b></p></div>
+        </div>
+        <div class="x-pay"><p class="x-pay__ru" data-ui>Назначение платежа</p><p class="x-pay__task" data-ui data-g-ru>Я обязан закончить эту работу.</p></div>
+        <div class="x-dials">
+          <div class="x-dial" data-d="0" role="group" aria-label="Форма глагола"></div>
+          <div class="x-dial" data-d="1" role="group" aria-label="Обязанность"></div>
+        </div>
+        <p class="x-game__line" lang="tr" data-g-line>…</p>
+        <button type="button" class="x-btn" data-g-go><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#x-coin"/></svg><span data-ui>Подтвердить платёж</span></button>
+        <p class="x-game__fb" aria-live="polite" data-g-fb></p>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<!-- ============ МИНИ-ПРОВЕРКА ============ -->
+<section data-section="check" data-words="5" class="x-paper" id="check">
+  <div class="x-paper__in">
+    <p class="x-chap"><b>10</b>мини-проверка</p>
+    <h2 class="x-h">Пять вопросов без подсказок</h2>
+    <a-quiz ref="b1.zorunda.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ============ ШПАРГАЛКА И ФИНАЛ ============ -->
+<section data-section="cheat" data-words="57" class="x-scene" id="cheat">
+  <div class="x-stage x-stage--flow">
+    <p class="x-chap"><b>11</b>шпаргалка</p>
+    <h2 class="x-h">Шкала <em>обязательств</em></h2>
+    <div class="x-scope">
+      <div class="x-scope__card"><div class="x-scope__top"><span class="x-scope__n c-want">01</span><span class="x-scope__t">Хочу</span></div><div class="x-scope__pill"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-check"/></svg><a-say>Gelmek istiyorum.</a-say></div></div>
+      <div class="x-scope__card"><div class="x-scope__top"><span class="x-scope__n c-need">02</span><span class="x-scope__t">Надо: -mAm lazım, gerek</span></div><div class="x-scope__pill"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-check"/></svg><a-say>Gelmem lazım.</a-say></div></div>
+      <div class="x-scope__card"><div class="x-scope__top"><span class="x-scope__n c-must">03</span><span class="x-scope__t">Обязан: -mAk zorundayım</span></div><div class="x-scope__pill"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-check"/></svg><a-say>Gelmek zorundayım.</a-say></div></div>
+      <div class="x-scope__card"><div class="x-scope__top"><span class="x-scope__n" style="color:#c9ccd4">04</span><span class="x-scope__t">Вынужден: -mAyA mecburum</span></div><div class="x-scope__pill"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-check"/></svg><a-say>Gelmeye mecburum.</a-say></div></div>
+      <div class="x-scope__card"><div class="x-scope__top"><span class="x-scope__n c-past">05</span><span class="x-scope__t">Пришлось: -mAk zorunda kaldım</span></div><div class="x-scope__pill"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-check"/></svg><a-say>Yürümek zorunda kaldım.</a-say></div></div>
+      <div class="x-scope__card"><div class="x-scope__top"><span class="x-scope__n" style="color:#8fb0ff">06</span><span class="x-scope__t">Не обязан, но не запрет: zorunda değilim</span></div><div class="x-scope__pill"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#x-check"/></svg><a-say>Gelmek zorunda değilim.</a-say></div></div>
+    </div>
+  </div>
+  <div class="x-pin x-pin--final">
+    <div class="x-stage">
+      <p class="x-chap"><b>12</b>финал · второе сообщение</p>
+      <div class="x-frame">
+        <svg class="x-svg x-scn s9" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Новое сообщение хозяйке и её ответ">
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xg-blue)"/>
+          <rect x="-600" y="-500" width="1800" height="1500" fill="url(#xp-dots)" mask="url(#xm-map)" opacity=".28"/>
+          <g class="s9-coins"><use href="#x-coin" x="40" y="70" width="90" height="90"/><use href="#x-coin" x="470" y="380" width="120" height="120"/></g>
+          <use href="#x-phone" x="170" y="10" width="260" height="480"/>
+          <g font-family="Inter" fill="#0b0b0f">
+            <text x="198" y="44" font-size="12" font-weight="600">9:41</text>
+            <circle cx="206" cy="82" r="15" fill="#ffd2a8"/><text x="200" y="87" font-size="13" font-weight="700" fill="#7a4a1f">A</text>
+            <text x="228" y="80" font-size="15" font-weight="600">Ayşe teyze</text><text x="228" y="96" font-size="10" fill="#7d808a">Antalya · Konyaaltı</text>
+            <path d="M180 112h240" stroke="#e3e5ec"/>
+            <g class="s9-b1"><rect x="196" y="126" width="216" height="40" rx="16" fill="#2f5bff"/><text x="210" y="151" font-size="13" fill="#fff">Pardon teyze, yanlış yazdım.</text></g>
+            <g class="s9-b2"><rect x="216" y="174" width="196" height="40" rx="16" fill="#2f5bff"/><text x="230" y="199" font-size="13" fill="#fff">Gelmek zorunda değilim.</text></g>
+            <g class="s9-b3"><rect x="262" y="222" width="150" height="40" rx="16" fill="#2f5bff"/><text x="276" y="247" font-size="13" font-weight="700" fill="#fff">Gelmek istiyorum!</text></g>
+            <g class="s9-b4"><rect x="188" y="280" width="190" height="40" rx="16" fill="#e7eaf2"/><text x="202" y="305" font-size="13">Gel o zaman! Pilav hazır.</text></g>
+          </g>
+          <g class="s9-meter" filter="url(#xf-shadow)">
+            <rect x="330" y="340" width="176" height="110" rx="20" fill="#fff"/>
+            <text x="348" y="368" font-family="Inter" font-size="11" fill="#7d808a">баланс выбора</text>
+            <text x="348" y="408" font-family="Inter" font-size="34" font-weight="700" fill="#1fb6ff" letter-spacing="-1">100%</text>
+            <rect x="348" y="424" width="140" height="10" rx="5" fill="#e6e8ef"/>
+            <rect class="s9-bar" x="348" y="424" width="140" height="10" rx="5" fill="url(#xg-meter)"/>
+          </g>
+          <g class="s9-notif"><rect x="186" y="24" width="228" height="58" rx="18" fill="#111216"/><circle cx="210" cy="53" r="12" fill="#1fb6ff"/><path d="m204 53 4 4 8-8" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="230" y="50" font-family="Inter" font-size="12.5" font-weight="600" fill="#fff">Ужин восстановлен</text><text x="230" y="68" font-family="Inter" font-size="10" fill="#9a9da8">Ayşe teyze · 20:15</text></g>
+        </svg>
+        <div class="x-curtain"></div>
+      </div>
+      <div class="x-subs">
+        <p class="x-sub">Через час я пишу тейзе ещё раз.</p>
+        <p class="x-sub"><a-say>Pardon teyze, yanlış yazdım. Gelmek zorunda değilim. Gelmek istiyorum!</a-say></p>
+        <p class="x-sub">Ответ приходит быстрее, чем остывает плов: <a-say>Gel o zaman! Pilav hazır.</a-say></p>
+        <p class="x-sub">Ужин восстановлен. Добавку, кстати, я ел уже совсем не по обязанности.</p>
+        <p class="x-sub">Теперь ты различаешь «хочу», «надо», «обязан», «вынужден» и «пришлось». И хозяйку не обидишь.</p>
+      </div>
+      <div class="x-act" data-act="final">
+        <button type="button" class="x-btn" data-final><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#x-coin"/></svg><span data-ui>Отправить сообщение</span></button>
+        <p class="x-fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<template data-achievement data-title="Баланс выбора" data-text="Различаешь «хочу», «надо», «обязан», «вынужден» и «пришлось»">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#0b0b0f"/>
+    <g class="xb-coin"><circle cx="60" cy="54" r="34" fill="url(#xg-coin)"/><path d="M60 32 78 66H67L60 52 53 66H42z" fill="#fff"/></g>
+    <g class="xb-bar"><rect x="26" y="96" width="68" height="8" rx="4" fill="#2a2b31"/><rect x="26" y="96" width="68" height="8" rx="4" fill="url(#xg-meter)"/></g>
+  </svg>
+</template>
+
+<script src="../kit/v1/gsap.min.js"></script>
+<script type="module" src="../kit/v1/kit.js"></script>
+<script src="../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  const root = document.documentElement;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const pop = (el) => { if (G && el) G.fromTo(el, { scale: 0.92 }, { scale: 1, duration: 0.45, ease: 'back.out(3)' }); };
+  const shake = (el) => { if (G && el) G.fromTo(el, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1,0.3)' }); };
+  const choose = (box, b, ok, fb, yes, no) => {
+    $$('.x-opt', box).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-fb', box).textContent = ok ? yes : no;
+    if (ok) pop(b); else shake(b);
+  };
+  if (G && ST) G.registerPlugin(ST);
+
+  /* ---------- субтитры ---------- */
+  const subs = (tl, sec, times) => {
+    const lines = $$('.x-subs .x-sub', sec);
+    lines.forEach((l, i) => {
+      if (times[i] > 0) tl.fromTo(l, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.35 }, times[i]);
+      if (i < lines.length - 1) tl.to(l, { opacity: 0, y: -16, duration: 0.3 }, times[i + 1] - 0.32);
+    });
+  };
+  const fitSubs = () => {
+    $$('.x-subs').forEach((box) => {
+      box.style.height = '';
+    });
+  };
+  const open = (tl, sec) => tl.fromTo($('.x-curtain', sec), { yPercent: 0 }, { yPercent: 101, duration: 0.6, ease: 'power2.inOut' }, 0);
+  const close = (tl, sec, at) => tl.fromTo($('.x-curtain', sec), { yPercent: -101 }, { yPercent: 0, duration: 0.6, ease: 'power2.inOut', immediateRender: false }, at);
+
+  /* ---------- сцены ---------- */
+  function sceneStory(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.fromTo('.s1-coins use', { y: (i) => [40, 60, 80, 30][i] }, { y: (i) => [-40, -30, -60, -20][i], duration: 7 }, 0)
+      .fromTo('.s1-map', { x: -20 }, { x: 20, duration: 7 }, 0)
+      .fromTo('.s1-cam', { scale: 0.86, svgOrigin: '300 250' }, { scale: 1.12, duration: 1.4, ease: 'power2.inOut' }, 0.3)
+      .fromTo('.s1-b1', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 1.6)
+      .fromTo('.s1-meter', { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 2.6)
+      .fromTo('.s1-b2', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 3.1)
+      .fromTo('.s1-bar', { scaleX: 1, svgOrigin: '348 415' }, { scaleX: 0.03, duration: 0.8, ease: 'power2.in' }, 3.4)
+      .fromTo('.s1-p100', { opacity: 1 }, { opacity: 0, duration: 0.2 }, 4)
+      .fromTo('.s1-p0', { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 }, 4.1)
+      .fromTo('.s1-typing', { opacity: 0 }, { opacity: 1, duration: 0.2, repeat: 3, yoyo: true }, 4.4)
+      .fromTo('.s1-b3', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 5.2)
+      .fromTo('.s1-notif', { y: -90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 6.4)
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 7.2);
+    close(tl, sec, 8.8);
+    subs(tl, sec, [0, 1.6, 3.1, 5.2, 6.4]);
+    return tl;
+  }
+
+  function sceneBalance(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.s2-card', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out' }, 0.3)
+      .fromTo('.s2-blob', { scale: 0.6, svgOrigin: '470 120' }, { scale: 1.3, duration: 7 }, 0)
+      .fromTo('.s2-fill', { scaleX: 1, svgOrigin: '130 222' }, { scaleX: 1, duration: 0.1 }, 1.4)
+      .fromTo('.s2-c1', { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 1.6)
+      .fromTo('.s2-n100', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 1.6)
+      .to('.s2-fill', { scaleX: 0.5, svgOrigin: '130 222', duration: 0.6 }, 2.9)
+      .to('.s2-n100', { opacity: 0, duration: 0.2 }, 2.9)
+      .fromTo('.s2-n50', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 3)
+      .fromTo('.s2-c2', { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 2.9)
+      .to('.s2-fill', { scaleX: 0.1, svgOrigin: '130 222', duration: 0.6 }, 4.2)
+      .to('.s2-n50', { opacity: 0, duration: 0.2 }, 4.2)
+      .fromTo('.s2-n15', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 4.3)
+      .fromTo('.s2-c3', { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 4.2)
+      .to('.s2-fill', { scaleX: 0.01, svgOrigin: '130 222', duration: 0.6 }, 5.5)
+      .to('.s2-n15', { opacity: 0, duration: 0.2 }, 5.5)
+      .fromTo('.s2-n0', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 5.6)
+      .fromTo('.s2-c4', { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 5.5)
+      .fromTo(['.s2-t1', '.s2-t2', '.s2-t3', '.s2-t4'], { opacity: 0 }, { opacity: 1, duration: 0.3, stagger: 1.3 }, 1.8)
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 6.6);
+    close(tl, sec, 8.2);
+    subs(tl, sec, [0, 1.6, 2.9, 4.2, 5.5]);
+    return tl;
+  }
+
+  function sceneZorunda(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.s3-title', { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 0.3)
+      .fromTo(['.s3-k1', '.s3-k2', '.s3-k3'], { y: 140, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.25, ease: 'power3.out' }, 0.5)
+      .fromTo('.s3-bar', { scaleX: 0.2, opacity: 0, svgOrigin: '300 384' }, { scaleX: 1, opacity: 1, duration: 0.5 }, 1.6)
+      .fromTo('.s3-persons', { y: 20, opacity: 0 }, { y: 0, opacity: 0.85, duration: 0.4 }, 2)
+      .addLabel('v2', 3.2)
+      .to('.s3-v1', { y: -16, opacity: 0, duration: 0.3 }, 'v2')
+      .fromTo('.s3-v2', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 'v2+=0.2')
+      .fromTo('.s3-k3', { y: 0 }, { y: -14, duration: 0.25, yoyo: true, repeat: 1, immediateRender: false }, 'v2+=0.3')
+      .addLabel('v3', 4.5)
+      .to('.s3-v2', { y: -16, opacity: 0, duration: 0.3 }, 'v3')
+      .fromTo('.s3-v3', { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 'v3+=0.2')
+      .fromTo('.s3-k1', { y: 0 }, { y: -14, duration: 0.25, yoyo: true, repeat: 1, immediateRender: false }, 5.8)
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 6.6);
+    close(tl, sec, 8.2);
+    subs(tl, sec, [0, 1.8, 3.2, 5.8]);
+    return tl;
+  }
+
+  function sceneMecbur(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.s4-map', { x: 30 }, { x: -30, duration: 8 }, 0)
+      .fromTo('.s4-card', { y: 160, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, 0.3)
+      .fromTo('.s4-from', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5 }, 1.4)
+      .fromTo('.s4-arrow', { strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: 0.6 }, 2)
+      .fromTo('.s4-head', { opacity: 0 }, { opacity: 1, duration: 0.2 }, 2.5)
+      .fromTo('.s4-case', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3 }, 2.2)
+      .fromTo('.s4-to', { x: -110, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 2.7)
+      .addLabel('land', 3.9)
+      .fromTo('.s4-line', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 'land')
+      .fromTo('.s4-card', { y: 0 }, { y: -12, duration: 0.3, yoyo: true, repeat: 1, immediateRender: false }, 'land+=0.3')
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 6.4);
+    close(tl, sec, 8);
+    subs(tl, sec, [0, 1.6, 3.9, 5.3]);
+    return tl;
+  }
+
+  function sceneKaldi(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.s5-phone', { y: 120, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 0.2)
+      .fromTo('.s5-r1', { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 }, 1.3)
+      .fromTo('.s5-r2', { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 }, 1.9)
+      .fromTo('.s5-r3', { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 }, 4.2)
+      .fromTo('.s5-time', { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 5.4)
+      .fromTo('.s5-bar1', { scaleX: 0, svgOrigin: '138 377' }, { scaleX: 1, duration: 0.6 }, 5.7)
+      .fromTo('.s5-bar2', { scaleX: 0, svgOrigin: '138 425' }, { scaleX: 1, duration: 0.6 }, 6)
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 7.4);
+    close(tl, sec, 9);
+    subs(tl, sec, [0, 1.6, 3, 4.2, 5.6]);
+    return tl;
+  }
+
+  function sceneDegil(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.s6-l', { x: -80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 0.3)
+      .fromTo('.s6-off', { opacity: 0 }, { opacity: 0, duration: 0.1 }, 0.3)
+      .addLabel('off', 1.6)
+      .fromTo('.s6-knob', { x: 0 }, { x: -36, duration: 0.5, ease: 'power2.inOut' }, 'off')
+      .to('.s6-off', { opacity: 1, duration: 0.4 }, 'off')
+      .fromTo('.s6-ne', { scale: 0, svgOrigin: '300 255' }, { scale: 1, duration: 0.4, ease: 'back.out(3)' }, 2.9)
+      .fromTo('.s6-r', { x: 80, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, 3)
+      .fromTo($('.x-act', sec), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 5.6);
+    close(tl, sec, 7.2);
+    subs(tl, sec, [0, 1.6, 2.9, 4.3]);
+    return tl;
+  }
+
+  function sceneLab(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.s7-word', { x: 160, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 0.2)
+      .fromTo('.s7-logo', { rotation: -120, opacity: 0, svgOrigin: '45 65' }, { rotation: 0, opacity: 1, duration: 0.8 }, 0.2)
+      .fromTo('.s7-shine', { x: 0, opacity: 0.55 }, { x: 520, opacity: 0, duration: 1.2 }, 0.9)
+      .fromTo($('.x-h', sec), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 0.8);
+    return tl;
+  }
+
+  function sceneTraps(sec, len) {
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: $('.x-pin', sec), pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, sec);
+    tl.fromTo('.x-traps-wrap', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, 0.2)
+      .fromTo($$('.x-acc', sec), { y: 50, opacity: 0, rotation: (i) => [-2, 2, -1.5, 1.5][i] }, { y: 0, opacity: 1, rotation: 0, duration: 0.6, stagger: 0.3, ease: 'back.out(1.4)' }, 0.6);
+    return tl;
+  }
+
+  function sceneFinal(sec, len) {
+    const pin = $('.x-pin--final', sec);
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: pin, pin: true, start: 'top top', end: len, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+    open(tl, pin);
+    tl.fromTo('.s9-coins use', { y: (i) => [50, 70][i] }, { y: (i) => [-40, -50][i], duration: 7 }, 0)
+      .fromTo('.s9-b1', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 1.4)
+      .fromTo('.s9-b2', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 1.8)
+      .fromTo('.s9-b3', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 2.2)
+      .fromTo('.s9-b4', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 3)
+      .fromTo('.s9-meter', { y: 80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 3.3)
+      .fromTo('.s9-bar', { scaleX: 0.03, svgOrigin: '348 429' }, { scaleX: 1, duration: 0.8, ease: 'power2.out' }, 3.6)
+      .fromTo('.s9-notif', { y: -90, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'back.out(1.6)' }, 4.3)
+      .fromTo($('.x-act', pin), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5 }, 5.6);
+    subs(tl, pin, [0, 1.4, 3, 4.3, 5.6]);
+    return tl;
+  }
+
+  if (G && ST) {
+    const mm = G.matchMedia();
+    mm.add({
+      desk: '(min-width: 768px) and (min-height: 520px) and (prefers-reduced-motion: no-preference)',
+      mob: '(max-width: 767px) and (min-height: 520px) and (prefers-reduced-motion: no-preference)',
+    }, (ctx) => {
+      const { desk } = ctx.conditions;
+      root.classList.add('x-film');
+      root.classList.remove('x-still');
+      /* на телефоне кадр заполняет экран: края обрезаются, главное — в центре */
+      if (!desk) $$('.x-scn').forEach((s) => s.setAttribute('preserveAspectRatio', 'xMidYMid slice'));
+      fitSubs();
+      G.set('.x-curtain', { yPercent: -101 });
+      const L = (d, m) => '+=' + (desk ? d : m) + '%';
+      sceneStory($('#story'), L(240, 150));
+      sceneBalance($('#balance'), L(220, 140));
+      sceneZorunda($('#zorunda'), L(210, 140));
+      sceneMecbur($('#mecbur'), L(200, 130));
+      sceneKaldi($('#kaldi'), L(220, 140));
+      sceneDegil($('#degil'), L(180, 120));
+      sceneLab($('#lab'), L(80, 60));
+      sceneTraps($('#traps'), L(120, 100));
+      sceneFinal($('#cheat'), L(180, 120));
+      G.timeline({ scrollTrigger: { trigger: '.x-scope', start: 'top 85%', end: 'bottom 70%', scrub: 0.6 } })
+        .fromTo('.x-scope__card', { y: 60, opacity: 0.001 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.12 });
+      return () => {
+        root.classList.remove('x-film'); root.classList.add('x-still');
+        $$('.x-scn').forEach((s) => s.setAttribute('preserveAspectRatio', 'xMidYMid meet'));
+        fitSubs();
+      };
+    });
+
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      ScrollTrigger.batch('.x-paper .x-h, .x-paper .x-chap', {
+        start: 'top 92%',
+        once: true,
+        onEnter: (els) => G.fromTo(els, { y: 26, opacity: 0.001 }, { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: 'power2.out', overwrite: true }),
+      });
+      const loop = (sec, tw) => {
+        tw.pause();
+        ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top', onToggle: (s) => (s.isActive ? tw.play() : tw.pause()) });
+      };
+      loop($('#story'), G.fromTo('.s1-typing circle', { opacity: 0.3 }, { opacity: 1, duration: 0.4, stagger: 0.15, repeat: -1, yoyo: true }));
+      loop($('#mecbur'), G.fromTo('.s4-head', { x: -4 }, { x: 4, duration: 0.8, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+      loop($('#balance'), G.fromTo('.s2-blob', { opacity: 0.08 }, { opacity: 0.18, duration: 2.4, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+      loop($('#cheat'), G.fromTo('.x-scope__n', { opacity: 0.6 }, { opacity: 1, duration: 1.2, stagger: 0.2, repeat: -1, yoyo: true, ease: 'sine.inOut' }));
+    }
+  }
+
+  /* ---------- действия в конце сцен ---------- */
+  const storyAct = $('[data-act="story"]');
+  $$('.x-opt', storyAct).forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.ok === '1';
+    choose(storyAct, b, ok, '', 'Вот. Падеж был верный. Не тот был баланс выбора.', 'Падеж тут как раз правильный. Обидело само слово zorunda.');
+    if (ok) say('Gelmek istiyorum!');
+    if (G) G.fromTo('.s1-meter', { y: -12 }, { y: 0, duration: 0.6, ease: 'bounce.out' });
+  }));
+
+  const balAct = $('[data-act="balance"]');
+  const BAL = [['Gelmek zorundayım', 'must'], ['Gelmek istiyorum', 'want'], ['Gelmeye mecburum', 'forced'], ['Gelmem lazım', 'need']];
+  const BAL_RU = { want: 'хочу', need: 'надо', must: 'обязан', forced: 'нет выбора' };
+  let bi = 0;
+  $$('[data-b]', balAct).forEach((b) => b.addEventListener('click', () => {
+    const [tr, a] = BAL[bi % BAL.length];
+    const ok = b.dataset.b === a;
+    choose(balAct, b, ok, '', `${tr}: ${BAL_RU[a]}.`, `Мимо. ${tr} — это «${BAL_RU[a]}».`);
+    if (!ok) return;
+    say(tr);
+    if (G) G.fromTo('.s2-card', { y: -8 }, { y: 0, duration: 0.5, ease: 'bounce.out' });
+    bi++;
+    setTimeout(() => { $('[data-b-word]', balAct).textContent = BAL[bi % BAL.length][0]; $$('.x-opt', balAct).forEach((x) => x.classList.remove('is-ok', 'is-no')); }, 1100);
+  }));
+
+  const zAct = $('[data-act="zorunda"]');
+  const ZR = [['«Мы обязаны ждать»', 'yız', 'beklemek zorundayız'], ['«Вы обязаны показать паспорт»', 'sınız', 'pasaportunuzu göstermek zorundasınız'], ['«Они обязаны платить»', 'lar', 'ödemek zorundalar']];
+  let zi = 0;
+  $$('[data-z]', zAct).forEach((b) => b.addEventListener('click', () => {
+    const [, end, line] = ZR[zi % ZR.length];
+    const ok = b.dataset.z === end;
+    choose(zAct, b, ok, '', `${line}. Хвост -${end}, глагол не трогаем.`, `Не то лицо. Нужно -${end}.`);
+    if (!ok) return;
+    say(line);
+    zi++;
+    setTimeout(() => {
+      const [ru] = ZR[zi % ZR.length];
+      $('[data-z-ru]', zAct).textContent = ru;
+      const verb = ZR[zi % ZR.length][2].split(' zorunda')[0];
+      $('.x-q b', zAct).textContent = `${verb} zorunda…`;
+      $$('.x-opt', zAct).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    }, 1200);
+  }));
+
+  const mAct = $('[data-act="mecbur"]');
+  $$('.x-opt', mAct).forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.ok === '1';
+    choose(mAct, b, ok, '', 'Да: mecbur + дательный, beklemeye.', b.textContent.startsWith('Beklemek') ? 'mecbur не берёт голый глагол. Нужен дательный: beklemeye.' : 'Дательный — только для mecbur. С zorunda было бы beklemek.');
+    if (ok) say('Beklemeye mecburum.');
+    if (G) G.fromTo('.s4-to', { y: -12 }, { y: 0, duration: 0.6, ease: 'bounce.out' });
+  }));
+
+  const kAct = $('[data-act="kaldi"]');
+  $$('.x-opt', kAct).forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.ok === '1';
+    choose(kAct, b, ok, '', 'Да. Пришлось — значит kaldım.', b.textContent.includes('çalışmaya') ? 'zorunda не любит дательный: çalışmak.' : 'zorundayım — это сейчас. Вчера и «пришлось» — kaldım.');
+    if (ok) say('Dün geç saate kadar çalışmak zorunda kaldım.');
+    if (G) G.fromTo('.s5-r3', { x: 14 }, { x: 0, duration: 0.6, ease: 'elastic.out(1,0.3)' });
+  }));
+
+  const dAct = $('[data-act="degil"]');
+  $$('.x-opt', dAct).forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.ok === '1';
+    choose(dAct, b, ok, '', 'Верно. Не обязан — значит можно отдохнуть.', 'Это не запрет. Работать можно, просто не обязательно.');
+    if (ok) say('Yarın çalışmak zorunda değilim.');
+    if (G) G.fromTo('.s6-ne', { scale: 1.4, svgOrigin: '300 255' }, { scale: 1, duration: 0.5, ease: 'back.out(3)' });
+  }));
+
+  /* ---------- конструктор ---------- */
+  const lab = $('.x-labbox');
+  $$('.x-tab', lab).forEach((t) => t.addEventListener('click', () => {
+    $$('.x-tab', lab).forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('.x-pane', lab).forEach((p) => { p.hidden = p.dataset.pane !== t.dataset.mode; });
+    if (G) G.fromTo($(`[data-pane="${t.dataset.mode}"]`, lab), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+  }));
+  const RU_V = { gitmek: 'уйти', gelmek: 'прийти', beklemek: 'ждать', 'ödemek': 'платить', 'çalışmak': 'работать', 'yürümek': 'идти пешком', 'taşınmak': 'переехать' };
+  const WHO = ['ben', 'sen', 'o', 'biz', 'siz', 'onlar'];
+  const END = {
+    must: ['yım', 'sın', '', 'yız', 'sınız', 'lar'],
+    forced: ['um', 'sun', '', 'uz', 'sunuz', 'lar'],
+    past: ['m', 'n', '', 'k', 'nız', 'lar'],
+    not: ['im', 'sin', '', 'iz', 'siniz', 'ler'],
+  };
+  const RU_MUST = ['Я обязан', 'Ты обязан', 'Он обязан', 'Мы обязаны', 'Вы обязаны', 'Они обязаны'];
+  const RU_FORCED = ['Я вынужден', 'Ты вынужден', 'Он вынужден', 'Мы вынуждены', 'Вы вынуждены', 'Они вынуждены'];
+  const RU_PAST = ['Мне пришлось', 'Тебе пришлось', 'Ему пришлось', 'Нам пришлось', 'Вам пришлось', 'Им пришлось'];
+  const RU_NOT = ['Я не обязан', 'Ты не обязан', 'Он не обязан', 'Мы не обязаны', 'Вы не обязаны', 'Они не обязаны'];
+  const dat = (v) => v.slice(0, -1) + (v.endsWith('mak') ? 'ya' : 'ye');
+  const form = (v, k, w) => {
+    const e = END[k][w];
+    if (k === 'forced') return [dat(v), 'mecbur' + e];
+    if (k === 'past') return [v, 'zorunda kaldı' + e];
+    if (k === 'not') return [v, 'zorunda değil' + e];
+    return [v, 'zorunda' + e];
+  };
+  let lv = 'gitmek'; let lk = 'must'; let lw = 0;
+  const build = () => {
+    const [v, h] = form(lv, lk, lw);
+    const ru = { must: RU_MUST, forced: RU_FORCED, past: RU_PAST, not: RU_NOT }[lk][lw];
+    $('.x-out-v', lab).textContent = v;
+    $('.x-out-h', lab).textContent = h;
+    $('.x-out-ru', lab).textContent = `${ru} ${RU_V[lv]}.`;
+    const why = {
+      must: `zorunda: глагол без падежа, ${END.must[lw] ? 'хвост -' + END.must[lw] : 'у третьего лица хвоста нет'}.`,
+      forced: `mecbur: глагол в дательном (${v}), ${END.forced[lw] ? 'хвост -' + END.forced[lw] : 'у третьего лица хвоста нет'}.`,
+      past: 'Пришлось: zorunda не трогаем, прошедшее висит на kal.',
+      not: 'Не обязан: değil + лицо. Это не запрет.',
+    }[lk];
+    $('.x-out-why', lab).textContent = why;
+    if (G) G.fromTo($('.x-out-h', lab), { y: -30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: 'back.out(2)' });
+    if (G && lk === 'forced') G.fromTo($('.x-out-v', lab), { x: -20 }, { x: 0, duration: 0.4, ease: 'power2.out' });
+  };
+  const row = (name, fn) => $$(`[data-row="${name}"] .x-chip`, lab).forEach((c, i) => c.addEventListener('click', () => {
+    $$(`[data-row="${name}"] .x-chip`, lab).forEach((x) => x.setAttribute('aria-pressed', String(x === c)));
+    fn(c, i); build();
+  }));
+  row('verb', (c) => { lv = c.textContent.trim(); });
+  row('kind', (c) => { lk = c.dataset.k; });
+  row('who', (c, i) => { lw = i; });
+  $('.x-out-say', lab).addEventListener('click', () => { const [v, h] = form(lv, lk, lw); say(`${v} ${h}`); });
+
+  const CASE = [['gitmek', 'zorundayım', 0], ['beklemek', 'mecburuz', 1], ['ödemek', 'zorunda kaldım', 0], ['çalışmak', 'mecbursun', 1], ['taşınmak', 'zorundalar', 0], ['yürümek', 'mecbur', 1]];
+  let ci = 0; let cDone = false;
+  const caseShow = () => {
+    cDone = false;
+    const [v, h] = CASE[ci % CASE.length];
+    $('.x-c-verb', lab).textContent = '…';
+    $('.x-c-head', lab).textContent = h;
+    $('.x-c-head', lab).className = 'x-c-head ' + (h.startsWith('mecbur') ? 'c-want' : 'c-must');
+    const bs = $$('[data-c]', lab);
+    bs[0].textContent = v; bs[1].textContent = dat(v);
+    bs.forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    $('.x-c-why', lab).textContent = '';
+  };
+  $$('[data-c]', lab).forEach((b) => b.addEventListener('click', () => {
+    if (cDone) return;
+    const [v, h, need] = CASE[ci % CASE.length];
+    const ok = Number(b.dataset.c) === need;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-c-why', lab).textContent = need ? `${ok ? 'Да.' : 'Мимо.'} ${h} требует дательный: ${dat(v)}.` : `${ok ? 'Да.' : 'Мимо.'} С zorunda глагол голый: ${v}.`;
+    if (!ok) { shake(b); return; }
+    cDone = true;
+    const out = need ? dat(v) : v;
+    $('.x-c-verb', lab).textContent = out;
+    if (G) G.fromTo($('.x-c-verb', lab), { x: -40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+    say(`${out} ${h}`);
+  }));
+  $('.x-c-next', lab).addEventListener('click', () => { ci++; caseShow(); });
+  caseShow();
+
+  const BALS = [
+    ['Gelmek istiyorum.', 'want', '«Хочу прийти». Выбор полный.'],
+    ['Bu işi bitirmem lazım.', 'need', '«Мне надо закончить». Надо, но решаю я.'],
+    ['Pasaportunuzu göstermek zorundasınız.', 'must', '«Вы обязаны показать паспорт». Правило банка.'],
+    ['Kirayı ödemeye mecburuz.', 'forced', '«Мы вынуждены платить». Деваться некуда.'],
+    ['Otobüs gelmedi, yürümek zorunda kaldık.', 'past', '«Пришлось идти пешком». Уже случилось.'],
+    ['Gitmem gerek.', 'need', '«Мне надо идти». gerek как lazım.'],
+    ['Taşınmak zorunda kaldım.', 'past', '«Пришлось переехать». Обстоятельства.'],
+  ];
+  let vi = 0; let vDone = false;
+  const balShow = () => {
+    vDone = false;
+    const el = $('.x-bal-tr', lab);
+    el.textContent = BALS[vi % BALS.length][0];
+    $('.x-bal-why', lab).textContent = '';
+    $$('[data-v]', lab).forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    if (G) G.fromTo(el, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 });
+  };
+  $$('[data-v]', lab).forEach((b) => b.addEventListener('click', () => {
+    if (vDone) return;
+    const [tr, a, why] = BALS[vi % BALS.length];
+    const ok = b.dataset.v === a;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('.x-bal-why', lab).textContent = (ok ? 'Да. ' : 'Не совсем. ') + why;
+    if (ok) { vDone = true; say(tr); pop(b); } else shake(b);
+  }));
+  $('.x-bal-next', lab).addEventListener('click', () => { vi++; balShow(); });
+
+  /* ---------- ловушки: аккордеон, открыта одна ---------- */
+  const accs = $$('.x-acc');
+  accs.forEach((a) => {
+    const body = $('.x-acc__body', a);
+    if (root.classList.contains('x-film') || G) body.hidden = true;
+  });
+  accs.forEach((a) => $('.x-acc__head', a).addEventListener('click', () => {
+    const was = $('.x-acc__head', a).getAttribute('aria-expanded') === 'true';
+    accs.forEach((x) => { $('.x-acc__head', x).setAttribute('aria-expanded', 'false'); $('.x-acc__body', x).hidden = true; if (G) G.to($('.x-acc__head svg', x), { rotation: 0, duration: 0.3 }); });
+    if (was) return;
+    $('.x-acc__head', a).setAttribute('aria-expanded', 'true');
+    const body = $('.x-acc__body', a);
+    body.hidden = false;
+    if (G) {
+      G.fromTo(body, { y: -10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' });
+      G.to($('.x-acc__head svg', a), { rotation: 180, duration: 0.3 });
+    }
+    say($('.x-acc__good', a).textContent);
+  }));
+
+  /* ---------- финал ---------- */
+  const fin = $('[data-final]');
+  fin.addEventListener('click', () => {
+    say('Pardon teyze, yanlış yazdım. Gelmek zorunda değilim. Gelmek istiyorum!');
+    $('.x-fb', fin.parentElement).textContent = 'Отправлено. Тейзе ставит чайник.';
+    if (G) {
+      G.timeline()
+        .fromTo(['.s9-b1', '.s9-b2', '.s9-b3'], { x: 20, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, stagger: 0.15 })
+        .fromTo('.s9-b4', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35 }, 0.7)
+        .fromTo('.s9-bar', { scaleX: 0.03, svgOrigin: '348 429' }, { scaleX: 1, duration: 0.7, ease: 'power2.out' }, 0.9);
+    }
+  });
+
+  /* ---------- нестандартное упражнение: платёжка ---------- */
+  const EX = 'b1.zorunda.ex5';
+  const GAME = [
+    { ru: 'Я обязан закончить эту работу.', pre: 'Bu işi', a: ['bitirmek', 'zorundayım'], v: ['bitirmek', 'bitirmeye'], h: ['zorundayım', 'mecburum', 'zorunda kaldım'] },
+    { ru: 'Мы вынуждены ждать.', pre: '', a: ['beklemeye', 'mecburuz'], v: ['beklemek', 'beklemeye'], h: ['zorundayız', 'mecburuz', 'zorunda kaldık'] },
+    { ru: 'Автобус не пришёл, нам пришлось идти пешком.', pre: 'Otobüs gelmedi,', a: ['yürümek', 'zorunda kaldık'], v: ['yürümek', 'yürümeye'], h: ['zorundayız', 'mecburuz', 'zorunda kaldık'] },
+    { ru: 'Сегодня ты не обязан платить.', pre: 'Bugün', a: ['ödemek', 'zorunda değilsin'], v: ['ödemek', 'ödemeye'], h: ['zorundasın', 'zorunda değilsin', 'mecbursun'] },
+    { ru: 'Мне пришлось переехать.', pre: '', a: ['taşınmak', 'zorunda kaldım'], v: ['taşınmak', 'taşınmaya'], h: ['zorunda kaldım', 'zorundaydım', 'mecburum'] },
+  ];
+  const game = $('[data-game]');
+  let gi = 0; let gOk = 0; let gPick = [null, null]; let gT0 = performance.now(); let gBusy = false; let gDone = false;
+  const gText = () => [GAME[gi].pre, gPick[0] || '…', gPick[1] || '…'].filter(Boolean).join(' ');
+  const gLine = () => { $('[data-g-line]', game).textContent = gText(); };
+  const gRound = () => {
+    const R = GAME[gi];
+    gPick = [null, null];
+    gT0 = performance.now();
+    $('[data-g-n]', game).textContent = String(gi + 1);
+    $('[data-g-ru]', game).textContent = R.ru;
+    $('[data-g-fb]', game).textContent = '';
+    [R.v, R.h].forEach((opts, d) => {
+      const box = $(`[data-d="${d}"]`, game);
+      box.replaceChildren();
+      opts.forEach((o) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.lang = 'tr'; b.textContent = o; b.setAttribute('aria-pressed', 'false');
+        b.addEventListener('click', () => {
+          if (gBusy || gDone) return;
+          $$('button', box).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+          gPick[d] = o; gLine();
+          if (G) G.fromTo(b, { x: -6 }, { x: 0, duration: 0.4, ease: 'back.out(3)' });
+        });
+        box.append(b);
+      });
+    });
+    gLine();
+    if (G) G.fromTo($('.x-pay', game), { y: 14, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.4 });
+  };
+  const gGo = () => {
+    if (gBusy || gDone) return;
+    const fb = $('[data-g-fb]', game);
+    if (gPick.some((x) => !x)) { fb.textContent = 'Выбери обе части платежа.'; shake($('.x-dials', game)); return; }
+    const R = GAME[gi];
+    const correct = gPick[0] === R.a[0] && gPick[1] === R.a[1];
+    window.AlternaTracker?.answer({ exerciseId: EX, itemId: String(gi + 1), correct, answer: gText(), timeMs: Math.round(performance.now() - gT0) });
+    if (correct) gOk++;
+    $('[data-g-ok]', game).textContent = String(gOk);
+    const right = [R.pre, ...R.a].filter(Boolean).join(' ');
+    fb.textContent = correct ? `Платёж проведён: ${right}.` : `Отклонено. Верно: ${right}.`;
+    if (correct) say(right);
+    if (G) G.fromTo($('.x-game__head svg', game), { rotation: correct ? 360 : 0, x: correct ? 0 : -8, transformOrigin: '50% 50%' }, { rotation: 0, x: 0, duration: 0.7, ease: 'power2.out' });
+    gBusy = true;
+    setTimeout(() => {
+      gBusy = false;
+      gi++;
+      if (gi < GAME.length) { gRound(); return; }
+      gDone = true;
+      window.AlternaTracker?.complete({ exerciseId: EX, correct: gOk, total: GAME.length });
+      fb.textContent = `Проведено платежей: ${gOk} из ${GAME.length}.`;
+    }, 700);
+  };
+  $('[data-g-go]', game).addEventListener('click', gGo);
+  gRound();
+  window.AlternaKit?.registerSolver(EX, async () => {
+    while (!gDone) {
+      if (gBusy) { await new Promise((r) => setTimeout(r, 750)); continue; }
+      gPick = GAME[gi].a.slice();
+      gGo();
+      await new Promise((r) => setTimeout(r, 750));
+    }
+  });
+
+  /* ---------- свой скроллбар: шкала с монетой, главы равномерно ---------- */
+  const bar = $('[data-scrollbar]');
+  const marksBox = $('.x-bar__marks', bar);
+  const fill = $('.x-bar__fill', bar);
+  const coin = $('.x-bar__coin', bar);
+  const secs = $$('[data-section]');
+  const N = secs.length;
+  const isMob = () => matchMedia('(max-width: 767px)').matches;
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'x-bar__mark';
+    const title = s.querySelector('.x-chap')?.textContent.trim() || s.dataset.section;
+    b.setAttribute('aria-label', title); b.title = title;
+    b.addEventListener('click', (e) => { e.stopPropagation(); window.scrollTo({ top: s.getBoundingClientRect().top + scrollY + 2, behavior: 'smooth' }); });
+    marksBox.append(b);
+    return b;
+  });
+  let starts = [];
+  const placeMarks = () => {
+    starts = secs.map((s) => Math.max(0, s.getBoundingClientRect().top + scrollY));
+    marks.forEach((m, i) => {
+      const p = i / N;
+      m.style.transform = isMob() ? `translateX(${p * bar.clientWidth}px)` : `translateY(${p * bar.clientHeight}px)`;
+    });
+  };
+  const toPos = (y) => {
+    if (!starts.length) placeMarks();
+    let i = 0;
+    for (let k = 0; k < N; k++) if (starts[k] <= y + 1) i = k;
+    const end = i < N - 1 ? starts[i + 1] : maxScroll();
+    const f = end > starts[i] ? Math.min(1, Math.max(0, (y - starts[i]) / (end - starts[i]))) : 1;
+    return { p: Math.min(1, (i + f) / N), i };
+  };
+  const fromPos = (r) => {
+    if (!starts.length) placeMarks();
+    const x = Math.max(0, Math.min(0.9999, r)) * N;
+    const i = Math.floor(x);
+    const end = i < N - 1 ? starts[i + 1] : maxScroll();
+    return starts[i] + (x - i) * (end - starts[i]);
+  };
+  const setBar = () => {
+    const mob = isMob();
+    const { p, i: cur } = toPos(scrollY);
+    fill.style.transform = mob ? `scaleX(${p})` : `scaleY(${p})`;
+    coin.style.transform = mob ? `translateX(${p * bar.clientWidth}px) rotate(${p * 720}deg)` : `translateY(${p * bar.clientHeight}px) rotate(${p * 720}deg)`;
+    marks.forEach((m, i) => m.classList.toggle('is-here', i === cur));
+  };
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: () => setBar(), onRefresh: placeMarks });
+  addEventListener('scroll', setBar, { passive: true });
+  addEventListener('alterna:read', (e) => {
+    const i = secs.findIndex((s) => s.dataset.section === e.detail?.key);
+    if (i >= 0) marks[i].classList.add('is-read');
+  });
+  let drag = false;
+  const dragTo = (e) => {
+    const r = bar.getBoundingClientRect();
+    const p = isMob() ? (e.clientX - r.left) / r.width : (e.clientY - r.top) / r.height;
+    window.scrollTo(0, fromPos(p));
+  };
+  bar.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.x-bar__mark')) return;
+    drag = true; bar.setPointerCapture(e.pointerId); bar.style.cursor = 'grabbing'; dragTo(e);
+  });
+  bar.addEventListener('pointermove', (e) => { if (drag) dragTo(e); });
+  bar.addEventListener('pointerup', () => { drag = false; bar.style.cursor = ''; });
+  bar.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { window.scrollBy(0, innerHeight * 0.8); e.preventDefault(); }
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { window.scrollBy(0, -innerHeight * 0.8); e.preventDefault(); }
+  });
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    const c = b && b.querySelector('.xb-coin');
+    const m = b && b.querySelector('.xb-bar');
+    if (!c || !m) return;
+    detail.timeline
+      .fromTo(c, { scale: 0.2, rotation: -200, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: 0.9, ease: 'back.out(1.6)' }, 0.2)
+      .fromTo(m, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.6, ease: 'power2.out' }, 0.8);
+  });
+
+  /* ---------- пересчёт после загрузки, шрифтов и поворота ---------- */
+  const refresh = () => { fitSubs(); placeMarks(); if (ST) ScrollTrigger.refresh(); setBar(); };
+  if (ST) ScrollTrigger.addEventListener('refreshInit', fitSubs);
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  placeMarks(); setBar();
+});
+</script>
+</body>
+</html>
