@@ -393,6 +393,8 @@ p { margin: 0 0 10px; max-width: 62ch; }
 .opts3 button.is-no { background: #4d2f2a; border-color: #c7776a; }
 .lab__task { font-size: clamp(18px, 4.4vw, 24px); letter-spacing: -.03em; color: #fff; }
 .lab__score { color: var(--sand); font-size: 14px; }
+.lab__kk { margin: 0; text-align: center; color: #cfc9c1; font-size: 15px; max-width: none; }
+.lab__kk b { color: #fff; font-weight: 400; }
 .lab .ak-say__btn { background: rgba(255,255,255,.12); color: #fff; }
 
 /* ---------- TRAPS ---------- */
@@ -466,6 +468,22 @@ main { position: relative; z-index: 1; }
 [data-pair="3"] { background: #f4ece4; border-color: #b49a82; }
 [data-pair="4"] { background: #e5efe9; border-color: #8fb5a0; }
 [data-pair="5"] { background: #efe9f1; border-color: #a89ab2; }
+
+/* ---------- айна: тіл ↔ түрікше ---------- */
+.same { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
+.same .chip { background: var(--ak-good-soft); color: #2f6047; white-space: normal; }
+.dif { display: grid; gap: 16px; }
+.dif__rows { display: grid; gap: 12px; padding: clamp(14px, 3vw, 24px); border-radius: var(--r-lg); background: #f8f7f5; }
+.dr { display: grid; grid-template-columns: 2.6em minmax(0, 1fr); align-items: center; gap: 8px; }
+.dr__lab { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.dr__tiles { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; min-height: 1.9em; font-size: clamp(18px, 5vw, 36px); }
+.dr__tiles .t { padding: 0 .45em; }
+.dr__tiles .t { min-height: 1.6em; }
+.dr__q { color: var(--muted); }
+.dr__eq { grid-column: 2; font-size: 14px; color: var(--sand-3); }
+.t.is-alt { background: var(--ak-bad-soft); color: var(--ak-bad); box-shadow: inset 0 0 0 1.5px #e4b9b1; text-decoration: line-through; text-decoration-thickness: 2px; }
+.dif__note { font-size: 16px; margin: 0; max-width: 64ch; }
+.dif__note b { font-weight: 500; }
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -641,7 +659,7 @@ main { position: relative; z-index: 1; }
       </div>
     </div>
     <p style="margin-top:14px">Тәртіп әрқашан бір. Етістік, шақ, сұрақ, жақ. Маршрут аялдамалары сияқты: Конак Алсанджактан кейін тұрмайды.</p>
-    <div class="mq" data-mq data-ok="1" data-why-ok="Иә. mı әрқашан бөлек сөз болып тұрады." data-why-no="mı шылауы әрқашан бөлек: açar mısın.">
+    <div class="mq" data-mq data-ok="1" data-why-ok="Иә. Қазақшадағыдай: ашасың ба — бөлек, açar mısın — бөлек." data-why-no="mı шылауы әрқашан бөлек. Қазақша ба да бөлек жазылады ғой: açar mısın.">
       <p class="mq__q"><small data-ui>Шағын сұрақ</small>Шылау қалай жазылады?</p>
       <div class="mq__opts"><button type="button" lang="tr">açarmısın</button><button type="button" lang="tr">açar mısın</button></div>
       <p class="mq__fb" aria-live="polite"></p>
@@ -654,15 +672,15 @@ main { position: relative; z-index: 1; }
     <div class="s__head">
       <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-talk"/></svg>Сен бе, сіз бе</span>
       <h2 class="h-split"><em lang="tr">sen</em> әлде <em lang="tr">siz</em>: кімге қалай</h2>
-      <p>Досқа, бауырға — sen. Жүргізушіге, сатушыға, дәрігерге — siz. siz жағына қателессең — қорқынышты емес.</p>
-      <p>sen жағына — ыңғайсыз. Кассирді құшақтағандай.</p>
+      <p>Мұнда бәрі қазақшадағыдай. Досқа — sen, жүргізушіге, сатушыға, дәрігерге — siz. Сен мен сізді саған үйретпейміз.</p>
+      <p>siz жағына қателессең — қорқынышты емес. sen жағына — ыңғайсыз. Кассирді құшақтағандай.</p>
     </div>
     <div class="switch" role="radiogroup" aria-label="Кімге айтасың" data-who-switch>
       <button type="button" role="switch" aria-checked="true" data-who="sen"><span lang="tr">sen</span> · <span data-ui>сен</span></button>
       <button type="button" role="switch" aria-checked="false" data-who="siz"><span lang="tr">siz</span> · <span data-ui>сіз</span></button>
     </div>
     <div class="bento" data-bento></div>
-    <p style="margin-top:14px">Шылау етістіктің соңғы дауыстысын тыңдайды. Төрт дауысты — төрт шылау. Бірінші қаладағы сол үндестік. Қазақшадағы «ба/бе/па/пе» сияқты.</p>
+    <p style="margin-top:14px">Шылау етістіктің соңғы дауыстысын тыңдайды. Қазақша ба мен бе — жуан не жіңішке, екі-ақ түр. Түрікше ерінге де қарайды: o, u-дан кейін mu, ö, ü-ден кейін mü. Төрт дауысты — төрт шылау. Ал дауыссызы әрқашан m: ма/ба/па сияқты ауыспайды.</p>
     <div class="who">
       <div class="who__col"><h3 lang="tr"><svg class="ic" aria-hidden="true"><use href="#i-hand"/></svg> sen</h3><div class="who__list" data-ui><span class="chip">дос</span><span class="chip">бауыр</span><span class="chip">бала</span><span class="chip">құрдас әріптес</span></div></div>
       <div class="who__col"><h3 lang="tr"><svg class="ic" aria-hidden="true"><use href="#i-talk"/></svg> siz</h3><div class="who__list" data-ui><span class="chip">жүргізуші</span><span class="chip">даяшы</span><span class="chip">дәрігер</span><span class="chip">көрші әйел</span><span class="chip">кез келген бейтаныс</span></div></div>
@@ -732,9 +750,8 @@ main { position: relative; z-index: 1; }
     <div class="s__head">
       <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-talk"/></svg>Қазақша және түрікше</span>
       <h2 class="h-split">Қазақ та <em>ауыспалы шақпен</em> сұрайды</h2>
-      <p>Біз айтамыз: терезені ашасың ба? Бұл — ауыспалы осы-келер шақ. Түрік те дәл солай: açar mısın? Құрылым бір. Ал орысша мұнда келер шақпен сұрайды.</p>
-      <p>Келер шақ açacak mısın жоспар туралы сұрайды. Сауалнама сияқты. Жақын жылдары терезені ашпақсың ба?</p>
-      <p>Орысшадағы «не подскажете» сияқты «не» мұнда артық. Түрікше онсыз да сыпайы.</p>
+      <p>Біз айтамыз: терезені ашасың ба? Ауыспалы осы-келер шақ плюс сұрақ. Түрік те дәл солай: açar mısın. Бұйрық емес, сұрақ. Мұны саған түсіндірудің қажеті жоқ.</p>
+      <p>Қауіп орыс тілінен келеді. Орысша «Откроешь?» — келер шақ. Көшірсең, açacak mısın шығады. Ол жоспар туралы сұрайды: жақын жылдары терезені ашпақсың ба?</p>
     </div>
     <div class="switch" role="radiogroup" aria-label="Нені көрсету" data-cmp-switch>
       <button type="button" role="switch" aria-checked="true" data-m="both"><span data-ui>екеуі</span></button>
@@ -749,6 +766,31 @@ main { position: relative; z-index: 1; }
     <div class="mq" data-mq data-ok="1" data-why-ok="Иә. Өтініш — бұл аорист." data-why-no="Gösterecek misiniz жоспар туралы сұрайды. Өтініш — gösterir misiniz.">
       <p class="mq__q"><small data-ui>Шағын сұрақ</small>Көрсетесіз бе? — қай форма өтінеді?</p>
       <div class="mq__opts"><button type="button" lang="tr">Gösterecek misiniz?</button><button type="button" lang="tr">Gösterir misiniz?</button></div>
+      <p class="mq__fb" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 07½ АЙНА: ҚАЗАҚША ↔ ТҮРІКШЕ -->
+  <section class="s" data-section="kk-diff" data-words="70" id="s-kk-diff">
+    <span class="s__no" data-ui>07½</span>
+    <div class="s__head">
+      <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-scale"/></svg>Қазақша ↔ түрікше</span>
+      <h2 class="h-split">Туыс, бірақ <em>егіз емес</em></h2>
+      <p>Бірдей жерлер қысқа. Сен оларды білесің.</p>
+    </div>
+    <div class="same" data-ui>
+      <span class="chip">= сұрақ — өтініш</span><span class="chip">= сен / сіз</span><span class="chip">= шылау бөлек жазылады</span><span class="chip">= етістік соңында</span>
+    </div>
+    <p>Ал үш жерде қазақша дағды түрікшені бұзады. Батырманы бас. Үстінде қазақша, астында түрікше. Қызыл — қазақша қолдың өзі жазатын қате.</p>
+    <div class="card dif" data-dif>
+      <div class="tabs" role="tablist" aria-label="Айырмалар" data-dif-tabs></div>
+      <div class="dif__rows" data-dif-rows aria-live="polite"></div>
+      <p class="dif__note" data-dif-note></p>
+      <div class="btns"><button type="button" class="btn btn--ghost" data-dif-again><span data-ui>Тағы көрсету</span></button><button type="button" class="btn" data-dif-say><span data-ui>Тыңдау</span><svg class="ic"><use href="#i-sound"/></svg></button></div>
+    </div>
+    <div class="mq" data-mq data-ok="1" data-why-ok="Иә. Қазақша «көрсетер», бірақ göster — көп буын: gösterir." data-why-no="Қазақша әдет ұстап қалды. göster — екі буын, демек -ir. Жақ шылаудан кейін тұрады: gösterir misiniz.">
+      <p class="mq__q"><small data-ui>Шағын сұрақ</small>Жолды көрсетесіз бе? Қазақша құлақ «көрсетер» дейді. Түрікше?</p>
+      <div class="mq__opts"><button type="button" lang="tr">Yolu gösterer misiniz?</button><button type="button" lang="tr">Yolu gösterir misiniz?</button><button type="button" lang="tr">Yolu gösterirsiniz mi?</button></div>
       <p class="mq__fb" aria-live="polite"></p>
     </div>
   </section>
@@ -774,7 +816,7 @@ main { position: relative; z-index: 1; }
         <div class="rung" data-r="1"><span class="rung__n" data-ui>02</span><span class="rung__t" lang="tr" data-say="Aç lütfen.">Aç lütfen.</span><span class="rung__ru" data-ui>Ашшы, өтінемін. Өз адамдарыңа қалыпты.</span></div>
         <div class="rung" data-r="2"><span class="rung__n" data-ui>03</span><span class="rung__t" lang="tr" data-say="Açar mısın?">Açar mısın?</span><span class="rung__ru" data-ui>Ашасың ба? Жұмсақ, сенмен.</span></div>
         <div class="rung" data-r="3"><span class="rung__n" data-ui>04</span><span class="rung__t" lang="tr" data-say="Açar mısınız?">Açar mısınız?</span><span class="rung__ru" data-ui>Ашасыз ба? Жұмсақ, сізбен.</span></div>
-        <div class="rung" data-r="4"><span class="rung__n" data-ui>05</span><span class="rung__t" lang="tr" data-say="Lütfen açar mısınız?">Lütfen açar mısınız?</span><span class="rung__ru" data-ui>Ашып жіберсеңіз екен, өтінемін? Дәрігер мен әжеге.</span></div>
+        <div class="rung" data-r="4"><span class="rung__n" data-ui>05</span><span class="rung__t" lang="tr" data-say="Lütfen açar mısınız?">Lütfen açar mısınız?</span><span class="rung__ru" data-ui>Өтінемін, ашып жібересіз бе? Дәрігер мен әжеге.</span></div>
       </div>
     </div>
     <div class="mq" data-mq data-ok="1" data-why-ok="Иә. Дәрігерге — siz, lütfen де қосуға болады." data-why-no="Дәрігерге — siz: açar mısınız. Дәрігерге бұйрық берсең, ол аузын да ашпайды.">
@@ -809,7 +851,7 @@ main { position: relative; z-index: 1; }
       <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-cup"/></svg>Сиқырлы сөз</span>
       <h2 class="h-split"><em lang="tr">Bakar mısınız?</em> <span class="hpill"><svg><use href="#i-cup"/></svg></span> даяшыны шақыру</h2>
       <p>Даяшы қарамайды. Қол бұлғайсың. Қарамайды. Жөтелесің. Қарамайды. Айтасың: Bakar mısınız? Ол жаныңда. Мәзірмен.</p>
-      <p>Сөзбе-сөз — қарайсыз ба? Даяшыны, сатушыны, өтіп бара жатқан адамды осылай шақырады.</p>
+      <p>Сөзбе-сөз — қарайсыз ба? Қазақ «Кешіріңіз!» дер еді. Түрік сұрайды. Даяшыны, сатушыны, өтіп бара жатқан адамды осылай шақырады.</p>
     </div>
     <div class="cafe-call">
       <svg viewBox="0 0 400 260" aria-hidden="true" data-waiter>
@@ -962,6 +1004,7 @@ main { position: relative; z-index: 1; }
           <button type="button" role="switch" aria-checked="false" data-who="siz"><span lang="tr">siz</span></button>
         </div>
         <div class="build" data-build aria-live="polite"></div>
+        <p class="lab__kk" data-build-kk data-ui></p>
         <div class="btns"><button type="button" class="btn" data-build-say><span data-ui>Тыңдау</span><svg class="ic"><use href="#i-sound"/></svg></button><button type="button" class="btn btn--ghost" data-build-why><span data-ui>Неге солай?</span></button></div>
         <p class="why" data-why data-ui hidden></p>
       </div>
@@ -995,18 +1038,18 @@ main { position: relative; z-index: 1; }
     <div class="s__head">
       <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-bus"/></svg>Тұзақтар</span>
       <h2 class="h-split">Бес шұңқыр <span class="hpill"><svg><use href="#i-bus"/></svg></span> <em>маршрутта</em></h2>
-      <p>Осы беуіне бәрі сүрінеді. Бұл ұят емес. Ұят — Конактан екі шақырым жаяу жүру.</p>
+      <p>Алғашқы үшеуі — қазақша дағдыдан. Қалған екеуі — орысшадан және асығыстан. Бұл ұят емес. Ұят — Конактан екі шақырым жаяу жүру.</p>
     </div>
     <div class="traps" data-traps>
-      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açacak mısın?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Келер шақ жоспар туралы сұрайды. Өтініш — аорист.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
-      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açarmısın?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Шылау әрқашан бөлек сөз.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
-      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açar misin?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Шылаудың дауыстысы соңғы дауыстыны тыңдайды: açar — a, демек mı.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
-      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Alar mısın?</span><span class="trap__good" lang="tr" data-say="Alır mısın?">Alır mısın?</span></div><p class="trap__why">al — ерекшелік. Он үш етістік -Ir алады.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
-      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açıyor musun?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Бұл «қазір ашып жатырсың ба?» деген сұрақ. Адам қолына қарайды.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açarsın mı?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Қазақша жақ етістікте: аш-а-сың ба. Түрікше жақ шылаудан кейін келеді: açar mı-sın.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Alar mısın?</span><span class="trap__good" lang="tr" data-say="Alır mısın?">Alır mısın?</span></div><p class="trap__why">Қазақша алар, келер, берер — бәрі -ар/-ер. Түрікше al, gel, ver — он үш ерекшеліктің ішінде: alır, gelir, verir.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Durur mısınız?</span><span class="trap__good" lang="tr" data-say="Durur musunuz?">Durur musunuz?</span></div><p class="trap__why">Қазақша шылау ерінге қарамайды: тоқтайсыз ба, оқисың ба. Түрікше қарайды: durur — u, демек mu.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açacak mısın?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Бұл — орысша «Откроешь?» келер шағының көшірмесі. Бұл жоспар туралы сұрақ. Өтініш — аорист.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
+      <div class="trap"><div class="trap__row"><span class="trap__bad" lang="tr">Açıyor musun?</span><span class="trap__good" lang="tr" data-say="Açar mısın?">Açar mısın?</span></div><p class="trap__why">Бұл — «ашып жатырсың ба?». Процесс туралы. Адам қолына қарайды.</p><button type="button" class="btn btn--ghost" data-fix><span data-ui>Түзету</span><svg class="ic"><use href="#i-arrow"/></svg></button></div>
     </div>
-    <div class="mq" data-mq data-ok="0" data-why-ok="Иә. bekler: e — демек misin." data-why-no="bekler-ге қара: соңғы дауысты e. Демек misin.">
+    <div class="mq" data-mq data-ok="0" data-why-ok="Иә. bekler: e — демек misin. Жақ шылауда." data-why-no="Жақ шылаудан кейін тұрады, ал өтініш — аористте: bekler misin.">
       <p class="mq__q"><small data-ui>Шағын сұрақ</small>Күтесің бе? Қай жерде қате жоқ?</p>
-      <div class="mq__opts"><button type="button" lang="tr">Bekler misin?</button><button type="button" lang="tr">Beklermisin?</button><button type="button" lang="tr">Bekleyecek misin?</button></div>
+      <div class="mq__opts"><button type="button" lang="tr">Bekler misin?</button><button type="button" lang="tr">Beklersin mi?</button><button type="button" lang="tr">Bekleyecek misin?</button></div>
       <p class="mq__fb" aria-live="polite"></p>
     </div>
   </section>
@@ -1017,7 +1060,7 @@ main { position: relative; z-index: 1; }
     <div class="s__head">
       <span class="chip"><svg class="ic chip__ic" aria-hidden="true"><use href="#i-play"/></svg>Видео</span>
       <h2 class="h-split"><em>Мұғалімді</em> тыңда</h2>
-      <p>Назар аудар: бір форма ұсыныс та, өтініш те болып естіледі. Интонация шешеді.</p>
+      <p>Видео орысша. Назар аудар: бір форма ұсыныс та, өтініш те болып естіледі. Интонация шешеді.</p>
     </div>
     <a-video yt="_VZ5-2qnwxE" start="46" end="150" title="Yap-ar mı-sın? Өтініштердегі geniş zaman" channel="Түрік тілі"></a-video>
   </section>
@@ -1081,7 +1124,7 @@ main { position: relative; z-index: 1; }
       </div>
       <div class="pc">
         <h3>Шатастырма</h3>
-        <p style="margin:0"><span lang="tr">açacak mısın</span> — жоспар. <span lang="tr">açıyor musun</span> — қазір. Өтініш — <span lang="tr">açar mısın</span>.</p>
+        <p style="margin:0"><span lang="tr">açacak mısın</span> — жоспар. <span lang="tr">açıyor musun</span> — қазір. <span lang="tr">açarsın mı</span> — қазақша тәртіп. Өтініш — <span lang="tr">açar mısın</span>.</p>
       </div>
     </div>
     <div class="final card">
@@ -1366,17 +1409,17 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- 05 PERSONS: bento из данных ---------- */
   const BENTO = [
-    { v: 'a · ı', sen: 'mısın', siz: 'mısınız', ex: 'kapat', ru: 'жабасың ба / жабасыз ба' },
-    { v: 'e · i', sen: 'misin', siz: 'misiniz', ex: 'ver', ru: 'бересің бе / бересіз бе' },
-    { v: 'o · u', sen: 'musun', siz: 'musunuz', ex: 'oku', ru: 'оқисың ба / оқисыз ба' },
-    { v: 'ö · ü', sen: 'müsün', siz: 'müsünüz', ex: 'götür', ru: 'апарасың ба / апарасыз ба' },
+    { v: 'a · ı', sen: 'mısın', siz: 'mısınız', ex: 'kapat', kk: { sen: 'Жабасың ба?', siz: 'Жабасыз ба?' } },
+    { v: 'e · i', sen: 'misin', siz: 'misiniz', ex: 'ver', kk: { sen: 'Бересің бе?', siz: 'Бересіз бе?' } },
+    { v: 'o · u', sen: 'musun', siz: 'musunuz', ex: 'oku', kk: { sen: 'Оқисың ба?', siz: 'Оқисыз ба?' } },
+    { v: 'ö · ü', sen: 'müsün', siz: 'müsünüz', ex: 'götür', kk: { sen: 'Апарасың ба?', siz: 'Апарасыз ба?' } },
   ];
   const bento = $('[data-bento]');
   let who = 'sen';
   function renderBento() {
     bento.innerHTML = BENTO.map((c, k) => {
       const r = request(c.ex, who);
-      return `<button type="button" class="cell" data-cell="${k}" data-say="${esc(r.cap)}"><span class="cell__v" data-ui>${c.v}-дан кейін</span><span class="cell__f" lang="tr">${who === 'sen' ? c.sen : c.siz}</span><span class="cell__ex" lang="tr">${esc(r.cap)}</span><span class="cell__v" data-ui>${c.ru}</span></button>`;
+      return `<button type="button" class="cell" data-cell="${k}" data-say="${esc(r.cap)}"><span class="cell__v" data-ui>соңғы дауысты: ${c.v}</span><span class="cell__f" lang="tr">${who === 'sen' ? c.sen : c.siz}</span><span class="cell__ex" lang="tr">${esc(r.cap)}</span><span class="cell__v" data-ui>${c.kk[who]}</span></button>`;
     }).join('');
     if (A) G.fromTo(bento.querySelectorAll('.cell__f'), { y: -24, rotation: -6 }, { y: 0, rotation: 0, duration: .6, ease: 'back.out(2.4)', stagger: .07 });
   }
@@ -1442,6 +1485,84 @@ addEventListener('DOMContentLoaded', () => {
   if (A) G.from('.cmp__arrow', { x: -30, rotation: -45, duration: .8, ease: 'back.out(2)', stagger: .15, scrollTrigger: { trigger: cmp, start: 'top 80%', once: true } });
   if (A) G.fromTo('.cmp__tr', { x: 30 }, { x: 0, ease: 'none', scrollTrigger: { trigger: cmp, start: 'top 90%', end: 'top 40%', scrub: true } });
 
+  /* ---------- 07½ АЙНА: қазақша ↔ түрікше ---------- */
+  /* плитка: [мәтін, рөл, alt] — alt алдымен қызыл болып шығады (қазақша қолдың қатесі), сосын дұрысына аударылады.
+     from — түрікше жолдың бастапқы реті (қазақша тәртіп); сосын плиткалар өз орнына ұшады. */
+  const DIF = [
+    { tab: '1 · Жақ қайда', say: 'Açar mısın?',
+      rows: [
+        { lab: 'қаз', tiles: [['аш', 'root'], ['а', 'ar'], ['сың', 'p'], ['ба', 'mi']] },
+        { lab: 'түр', tr: true, tiles: [['aç', 'root'], ['ar', 'ar'], ['mı', 'mi'], ['sın', 'p']], from: [0, 1, 3, 2] },
+      ],
+      note: 'Қазақша жақ етістікке жалғанады, шылау — ең соңында: <b>ашасың ба</b>. Түрікше керісінше: шылау етістіктен кейін, жақ — шылаудың өзінде: <b lang="tr">açar mı-sın</b>. Сізбен де солай: ашасыз ба — <b lang="tr">açar mısınız</b>.' },
+    { tab: '2 · ба әлде mu', say: 'Okur musun?',
+      rows: [
+        { lab: 'қаз', tiles: [['оқи', 'root'], ['сың', 'p'], ['ба', 'mi']] },
+        { lab: 'түр', tr: true, tiles: [['ok', 'root'], ['ur', 'ar'], ['mu', 'mi', 'mı'], ['sun', 'p', 'sın']] },
+      ],
+      note: 'Қазақша шылау жуан не жіңішке ғана: <b>ба / бе</b> (дауыссызға қарай ма, па да болады). Ерінге қарамайды. Түрікше дауыссыз әрқашан m, ал дауысты төртеу: <b lang="tr">okur musun, götürür müsün</b>. Жақтың дауыстысы да соған ілеседі.' },
+    { tab: '3 · -ар әлде -ır', say: 'Alır mısın?',
+      rows: [
+        { lab: 'қаз', noq: true, tiles: [['ал', 'root'], ['ар', 'ar']] },
+        { lab: 'түр', tr: true, tiles: [['al', 'root'], ['ır', 'ar', 'ar'], ['mı', 'mi'], ['sın', 'p']] },
+      ],
+      note: 'Қазақшада да -ар бар: <b>ашар, алар, келер</b>. Бұл — болжал, өтініш емес. Ал дауыссызға біткен етістікке ол әрқашан -ар/-ер. Түрікше үш жол: <b lang="tr">açar</b>, бірақ <b lang="tr">alır, gelir, verir</b> (ерекшеліктер) және <b lang="tr">kapatır, gösterir</b> (көп буын). Сәйкес келетіні: оқыр — <b lang="tr">okur</b>.' },
+  ];
+  const difTabs = $('[data-dif-tabs]'), difRows = $('[data-dif-rows]'), difNote = $('[data-dif-note]');
+  let difI = 0;
+  const difTile = ([t, role, alt], k) => `<span class="t t--${role}${alt ? ' is-alt' : ''}" data-k="${k}">${esc(alt || t)}</span>`;
+  function renderDif(i, animate) {
+    difI = i;
+    const d = DIF[i];
+    $$('button', difTabs).forEach((b, k) => b.setAttribute('aria-selected', k === i));
+    const play = A && animate;
+    difRows.innerHTML = d.rows.map((r) => {
+      const order = play && r.from ? r.from : r.tiles.map((_, k) => k);
+      const tiles = order.map((k) => (play ? difTile(r.tiles[k], k) : difTile([r.tiles[k][0], r.tiles[k][1]], k))).join('');
+      return `<div class="dr"><span class="dr__lab" data-ui>${r.lab}</span><div class="dr__tiles"${r.tr ? ' lang="tr"' : ''}>${tiles}<span class="dr__q">${r.noq ? '' : '?'}</span></div></div>`;
+    }).join('');
+    difNote.innerHTML = d.note;
+    if (!play) return;
+    const tl = G.timeline();
+    tl.from(difRows.querySelectorAll('.dr'), { y: 24, duration: .45, ease: 'back.out(2)', stagger: .12 })
+      .from(difRows.querySelectorAll('.t'), { y: -30, rotation: -8, duration: .5, ease: 'bounce.out', stagger: .05 }, '<.1');
+    d.rows.forEach((r, ri) => {
+      const box = difRows.children[ri].querySelector('.dr__tiles');
+      if (r.from) {
+        tl.add(() => {
+          const els = [...box.querySelectorAll('.t')];
+          const first = new Map(els.map((e) => [e, e.getBoundingClientRect()]));
+          r.tiles.forEach((_, k) => box.insertBefore(box.querySelector(`.t[data-k="${k}"]`), box.querySelector('.dr__q')));
+          els.forEach((e) => {
+            const a = first.get(e), b2 = e.getBoundingClientRect();
+            const dx = a.left - b2.left, dy = a.top - b2.top;
+            if (!dx && !dy) return;
+            G.set(e, { x: dx, y: dy });
+            G.to(e, { keyframes: [{ x: dx / 2, y: dx > 0 ? -44 : 30, duration: .4, ease: 'power2.out' }, { x: 0, y: 0, duration: .5, ease: 'bounce.out' }] });
+          });
+        }, '+=.6');
+      }
+      r.tiles.forEach(([t, , alt], k) => {
+        if (!alt) return;
+        const el = box.querySelector(`.t[data-k="${k}"]`);
+        tl.to(el, { rotationX: 90, duration: .2, ease: 'power2.in', onComplete: () => { el.textContent = t; el.classList.remove('is-alt'); } }, '+=.5')
+          .to(el, { rotationX: 0, duration: .5, ease: 'back.out(3)' });
+      });
+    });
+    tl.from(difNote, { y: 16, duration: .5, ease: 'power3.out' }, '-=.2');
+  }
+  DIF.forEach((d, k) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-selected', k === 0);
+    b.innerHTML = `<span data-ui>${esc(d.tab)}</span>`;
+    b.addEventListener('click', () => renderDif(k, true));
+    difTabs.append(b);
+  });
+  $('[data-dif-again]').addEventListener('click', () => renderDif(difI, true));
+  $('[data-dif-say]').addEventListener('click', () => speak(DIF[difI].say));
+  renderDif(0, false);
+  if (A) ScrollTrigger.create({ trigger: '[data-dif]', start: 'top 70%', once: true, onEnter: () => renderDif(difI, true) });
+
   /* ---------- 08 LADDER ---------- */
   const range = $('[data-ladder-range]');
   const rungs = $$('[data-r]');
@@ -1488,7 +1609,7 @@ addEventListener('DOMContentLoaded', () => {
     if (A) G.fromTo('[data-you]', { scale: 1 }, { scale: 1.08, transformOrigin: '50% 100%', duration: .12, yoyo: true, repeat: 3 });
   });
   $('[data-try="magic"]').addEventListener('click', (e) => {
-    log.textContent = fails ? `Ұятты ${fails} ${fails === 1 ? 'әрекет' : 'әрекет'} үнемделді. Даяшы жаныңда. Мәзірмен.` : 'Даяшы жаныңда. Мәзірмен. Қол бұлғаудың да қажеті болмады.';
+    log.textContent = fails ? `${fails} ұятты әрекет — бекер. Бір сұрақ жетті. Даяшы жаныңда. Мәзірмен.` : 'Даяшы жаныңда. Мәзірмен. Қол бұлғаудың да қажеті болмады.';
     if (A) {
       G.to('[data-waiter-body]', { x: -150, duration: .9, ease: 'power3.out' });
       G.fromTo('[data-menu]', { rotation: -20 }, { rotation: 0, transformOrigin: '50% 50%', duration: .6, ease: 'back.out(3)', delay: .7 });
@@ -1602,7 +1723,7 @@ addEventListener('DOMContentLoaded', () => {
     ['home', 'pin', 'Buraya gelir misin?', 'Бері келесің бе?'],
     ['home', 'book', 'Bunu okur musun?', 'Мынаны оқып бересің бе?'],
     ['home', 'hand', 'Yanıma oturur musun?', 'Қасыма отырасың ба?'],
-    ['home', 'sound', 'Sessiz olur musunuz?', 'Ақырынырақ, өтінемін?'],
+    ['home', 'sound', 'Sessiz olur musunuz?', 'Тынышырақ боласыз ба?'],
     ['cafe', 'cam', 'Gülümser misiniz?', 'Күлімдейсіз бе? Сурет үшін.'],
   ];
   const cardsBox = $('[data-cards]');
@@ -1634,6 +1755,14 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- 15 LAB ---------- */
   const LAB_VERBS = ['aç', 'kapat', 'ver', 'getir', 'bekle', 'bak', 'dur', 'oku', 'götür', 'al', 'gel', 'yaz', 'çağır', 'söyle'];
   const LAB_RU = { aç: 'ашу', kapat: 'жабу', ver: 'беру', getir: 'әкелу', bekle: 'күту', bak: 'қарау', dur: 'тоқтау', oku: 'оқу', götür: 'апару', al: 'алу', gel: 'келу', yaz: 'жазу', çağır: 'шақыру', söyle: 'айту' };
+  /* қазақша баламасы: әр жаққа дайын форма — құрамаймыз */
+  const LAB_KK = {
+    aç: ['Ашасың ба?', 'Ашасыз ба?'], kapat: ['Жабасың ба?', 'Жабасыз ба?'], ver: ['Бересің бе?', 'Бересіз бе?'],
+    getir: ['Әкелесің бе?', 'Әкелесіз бе?'], bekle: ['Күтесің бе?', 'Күтесіз бе?'], bak: ['Қарайсың ба?', 'Қарайсыз ба?'],
+    dur: ['Тоқтайсың ба?', 'Тоқтайсыз ба?'], oku: ['Оқисың ба?', 'Оқисыз ба?'], götür: ['Апарасың ба?', 'Апарасыз ба?'],
+    al: ['Аласың ба?', 'Аласыз ба?'], gel: ['Келесің бе?', 'Келесіз бе?'], yaz: ['Жазасың ба?', 'Жазасыз ба?'],
+    çağır: ['Шақырасың ба?', 'Шақырасыз ба?'], söyle: ['Айтасың ба?', 'Айтасыз ба?'],
+  };
   let labVerb = 'aç', labWho = 'sen';
   const buildEl = $('[data-build]');
   const whyEl = $('[data-why]');
@@ -1652,7 +1781,9 @@ addEventListener('DOMContentLoaded', () => {
     const r = request(labVerb, labWho);
     const p = r.q.slice(2);
     buildEl.innerHTML = `<span class="t t--root" lang="tr">${r.stem}</span><span class="t t--ar" lang="tr">${r.suf}</span><span class="gap" style="width:.25em"></span><span class="t t--mi" lang="tr">${r.q.slice(0, 2)}</span><span class="t t--p" lang="tr">${p}</span><span lang="tr" style="color:#8a9198">?</span>`;
-    whyEl.textContent = `${labVerb} — ${LAB_RU[labVerb]}. Шақ: ${RULE_RU[r.rule]} → ${r.form}. Соңғы дауысты «${lastV(r.form)}» → ${r.q.slice(0, 2)}. ${labWho === 'siz' ? 'Сізге — ' + r.q : 'Саған — ' + r.q}.`;
+    const kk = LAB_KK[labVerb][labWho === 'siz' ? 1 : 0];
+    $('[data-build-kk]').innerHTML = `қазақша: <b>${esc(kk)}</b>`;
+    whyEl.textContent = `${labVerb} — ${LAB_RU[labVerb]}. Шақ: ${RULE_RU[r.rule]} → ${r.form}. Соңғы дауысты «${lastV(r.form)}» → ${r.q.slice(0, 2)}. ${labWho === 'siz' ? 'Сізге — ' + r.q : 'Саған — ' + r.q}. Қазақша жақ етістікте тұрады (${kk}), түрікше — шылауда: ${r.form} ${r.q}.`;
     if (A && animate) {
       const [root, ar, , mi, pp] = buildEl.children;
       G.fromTo(root, { y: -50 }, { y: 0, duration: .6, ease: 'bounce.out' });
@@ -1675,21 +1806,34 @@ addEventListener('DOMContentLoaded', () => {
 
   /* режим 2: смягчи приказ */
   const ORDERS = [
-    ['Kapıyı kapat!', 'kapat', 'siz', 'Kapıyı'], ['Su ver!', 'ver', 'sen', 'Su'], ['Bekle!', 'bekle', 'siz', ''],
-    ['Menüyü getir!', 'getir', 'siz', 'Menüyü'], ['Bana bak!', 'bak', 'sen', 'Bana'], ['Burada dur!', 'dur', 'siz', 'Burada'],
+    ['Kapıyı kapat!', 'kapat', 'siz', 'Kapıyı', 'Есікті жап!'], ['Su ver!', 'ver', 'sen', 'Su', 'Су бер!'], ['Bekle!', 'bekle', 'siz', '', 'Күт!'],
+    ['Menüyü getir!', 'getir', 'siz', 'Menüyü', 'Мәзірді әкел!'], ['Bana bak!', 'bak', 'sen', 'Bana', 'Маған қара!'], ['Burada dur!', 'dur', 'siz', 'Burada', 'Осы жерде тоқта!'],
   ];
   let oi = 0, oscore = 0;
+  /* төрт нұсқа: дұрыс, келер шақ, қазақша тәртіп (жақ етістікте), ерінге қарамаған шылау */
   function wrongOf(verb, who) {
     const r = request(verb, who);
     const fut = { aç: 'açacak', kapat: 'kapatacak', ver: 'verecek', bekle: 'bekleyecek', getir: 'getirecek', bak: 'bakacak', dur: 'duracak' }[verb];
-    const badI = { ı: 'i', i: 'ı', u: 'ü', ü: 'u' }[r.i];
+    const pe = who === 'siz' ? `s${r.i}n${r.i}z` : `s${r.i}n`;
+    const badI = { ı: 'i', i: 'ı', u: 'ı', ü: 'i' }[r.i];
     const badQ = who === 'siz' ? `m${badI}s${badI}n${badI}z` : `m${badI}s${badI}n`;
-    return [r.full, `${fut} ${particle(fut, who)}`, `${r.form} ${badQ}`];
+    return [
+      { f: r.full, kind: 'ok' },
+      { f: `${fut} ${particle(fut, who)}`, kind: 'fut' },
+      { f: `${r.form}${pe} m${r.i}`, kind: 'order' },
+      { f: `${r.form} ${badQ}`, kind: 'vowel' },
+    ];
   }
+  const SOFT_WHY = {
+    ok: 'Иә. Аорист, үндестікке сай шылау, жақ шылаудан кейін.',
+    fut: 'Бұл келер шақ — жоспар туралы сұрақ. Өтініш аористте тұрады.',
+    order: 'Қазақша тәртіп: ашасың ба. Түрікше жақ шылауға жабысады: mı-sın, mı-sınız.',
+    vowel: 'Шылаудың дауыстысы дұрыс емес. Етістіктің соңғы дауыстысын тыңда: жуан ба, жіңішке ме, еріндік пе.',
+  };
   function renderSoft() {
-    const [cmd, verb, w, obj] = ORDERS[oi];
-    $('[data-soft-task]').innerHTML = `<span lang="tr">${esc(cmd)}</span> <span data-ui style="color:#b8b2aa;font-size:.7em">→ ${w === 'siz' ? 'бейтанысқа, сізбен' : 'досқа, сенмен'}</span>`;
-    const opts = wrongOf(verb, w).map((f, k) => ({ f: (obj ? obj + ' ' : '') + f, ok: k === 0 }));
+    const [cmd, verb, w, obj, kk] = ORDERS[oi];
+    $('[data-soft-task]').innerHTML = `<span lang="tr">${esc(cmd)}</span> <span data-ui style="color:#b8b2aa;font-size:.7em">«${esc(kk)}» → ${w === 'siz' ? 'бейтанысқа, сізбен' : 'досқа, сенмен'}</span>`;
+    const opts = wrongOf(verb, w).map((o) => ({ ...o, f: (obj ? obj + ' ' : '') + o.f, ok: o.kind === 'ok' }));
     opts.sort(() => Math.random() - .5);
     const box = $('[data-soft-opts]');
     box.innerHTML = '';
@@ -1703,7 +1847,7 @@ addEventListener('DOMContentLoaded', () => {
         b.classList.add(o.ok ? 'is-ok' : 'is-no');
         const why = $('[data-soft-why]');
         why.hidden = false;
-        why.textContent = o.ok ? 'Иә. Аорист, үндестікке сай шылау, тыңдаушыға сай жақ.' : (/acak|ecek/.test(o.f) ? 'Бұл келер шақ — жоспар туралы сұрақ. Өтініш аористте тұрады.' : 'Шылаудың дауыстысы дұрыс емес. Етістіктің соңғы дауыстысын тыңда.');
+        why.textContent = SOFT_WHY[o.kind];
         if (o.ok) { oscore++; sparks(b); speak(t); } else { shake(b); const good = $$('button', box).find((x) => opts[$$('button', box).indexOf(x)].ok); good && good.classList.add('is-ok'); }
         $('[data-soft-score]').textContent = `дұрыс: ${oscore}`;
       });
@@ -1760,7 +1904,7 @@ addEventListener('DOMContentLoaded', () => {
     why.hidden = false;
     why.textContent = WHO[wi][0] + ': ' + (ok ? (WHO[wi][1] === 'siz' ? 'Иә. Бөтенге және үлкенге — açar mısınız.' : 'Иә. Өз адамыңа — açar mısın.') : (WHO[wi][1] === 'siz' ? 'siz жақсырақ. Сенмен — кассирді құшақтағандай.' : 'sen болады. Өз адамыңа siz суық естіледі, банктен келген хат сияқты.'));
     if (ok) { wscore++; sparks(b); speak(WHO[wi][1] === 'siz' ? 'Açar mısınız?' : 'Açar mısın?'); } else shake(b);
-    $('[data-who-score]').textContent = `дұрыс: ${WHO.length}-ден ${wscore}`;
+    $('[data-who-score]').textContent = `дұрыс: ${wscore}`;
     wi = (wi + 1) % WHO.length;
     setTimeout(renderWho, 700);
   }));
@@ -1975,7 +2119,7 @@ addEventListener('DOMContentLoaded', () => {
     let i = 0, part = 0, correct = 0, okItem = true, t0 = performance.now(), busy = false;
     const pick = [];
     AlternaTracker.start(EX, 'practice');
-    const VERB_RU = { aç: 'есікті ашу', kapat: 'терезені жабу', ver: 'қайырымды беру', bekle: 'мені күту', götür: 'паромға апару' };
+    const VERB_RU = { aç: 'есікті ашу', kapat: 'терезені жабу', ver: 'қайтарымды беру', bekle: 'мені күту', götür: 'паромға апару' };
     function choicesFor(it) {
       if (part === 0) {
         const v = it.verb, right = it.answer[0], lv = lastV(v);
@@ -2034,7 +2178,7 @@ addEventListener('DOMContentLoaded', () => {
           AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
           $('[data-bx-count]', root).textContent = 'дайын';
           optsEl.innerHTML = '';
-          statusEl.textContent = `Маршрут өтілді: ${items.length}-ден ${correct}. ${correct === items.length ? 'Бірде-бір артық аялдама жоқ.' : 'Бір-екі аялдаманы өтіп кеттің. Болады.'}`;
+          statusEl.textContent = `Маршрут өтілді: ${correct} / ${items.length}. ${correct === items.length ? 'Бірде-бір артық аялдама жоқ.' : 'Бір-екі аялдаманы өтіп кеттің. Болады.'}`;
         }
       }, reduce ? 350 : 1100);
     }

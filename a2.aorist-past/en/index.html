@@ -418,6 +418,24 @@ html:not(.cin) .cs-a,html:not(.cin) .cs-b{min-height:80vh}
 a-exercise[ref="a2.aorist-past.ex5"]{display:none}
 .sp-float{position:absolute;pointer-events:none;z-index:0}
 .sp-sec>.sp-wrap{position:relative;z-index:1}
+/* native language ↔ Turkish */
+.kt-pairs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:flex-start;padding:10px 0 4px}
+.kt-col{display:flex;flex-direction:column;align-items:center;gap:6px}
+.kt-col .tile{min-width:clamp(48px,13vw,72px);min-height:clamp(48px,12vw,64px);font-size:clamp(22px,6.2vw,36px);border-radius:14px}
+.kt-link{display:block;width:3px;height:22px;border-radius:2px;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(124,198,255,.25));transform-origin:50% 0}
+.tile.is-kk{background:rgba(255,255,255,.04);box-shadow:none;border:1.5px dashed currentColor}
+.tile.is-kk.c-root{color:#eef1ff}
+.kt-tag{font:700 11px/1 var(--sp-text);letter-spacing:.18em;text-transform:uppercase;color:var(--sp-muted);text-align:center;margin:0}
+.kt-mean{display:grid;gap:10px;margin-top:14px}
+@media (min-width:768px){.kt-mean{grid-template-columns:1fr 1fr}}
+.kt-box{border:1px solid var(--sp-line);border-radius:14px;padding:12px 14px;background:rgba(255,255,255,.03)}
+.kt-box b{display:block;font:700 18px/1.2 var(--sp-display);margin-bottom:4px}
+.kt-box p{margin:0;font-size:15px;color:#dfe4ff}
+.kt-h{display:grid;grid-template-columns:auto 1fr;gap:10px 12px;align-items:center;margin-top:12px}
+.kt-h .tile{font-size:clamp(18px,4.8vw,26px);min-height:40px;padding:0 9px}
+.kt-h .sp-row{gap:6px}
+.kt-en{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:6px 0}
+.kt-en .tile{font-family:var(--sp-text);font-weight:700;font-size:clamp(17px,4.6vw,24px);min-height:44px}
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -528,6 +546,7 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
       <button class="sp-chip" type="button" data-goto="persons">Persons</button>
       <button class="sp-chip" type="button" data-goto="harmony">Tails</button>
       <button class="sp-chip" type="button" data-goto="compare">Comparison</button>
+      <button class="sp-chip" type="button" data-goto="entr">English ↔ Turkish</button>
       <button class="sp-chip" type="button" data-goto="negative">Negation</button>
       <button class="sp-chip" type="button" data-goto="question">Question</button>
       <button class="sp-chip" type="button" data-goto="scene">Kemeraltı</button>
@@ -651,7 +670,7 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
   <div class="sp-wrap">
     <p class="sp-kick" data-ui><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="9" r="3" fill="#b994ff"/><circle cx="16" cy="9" r="3" fill="#7cc6ff"/><path d="M3 19c1-4 9-4 10 0M11 19c1-4 9-4 10 0" stroke="#cfd6ff" stroke-width="2" fill="none"/></svg>Persons</p>
     <h2 class="sp-h2">Six persons — <em>six stars</em></h2>
-    <p class="sp-p">You already know the person tails from <b lang="tr">hastaydım</b>. Only “they” is sneaky: <b lang="tr" class="c-pers">-lar</b> goes before <b lang="tr" class="c-di">-dı</b>.</p>
+    <p class="sp-p">English says “used to” for everyone. Turkish changes the end for each person. You already know these tails from <b lang="tr">hastaydım</b>. Only “they” is sneaky: <b lang="tr" class="c-pers">-lar</b> goes before <b lang="tr" class="c-di">-dı</b>.</p>
     <div class="sp-row" role="tablist" aria-label="Verb" id="sp-pverbs" lang="tr">
       <button class="sp-chip" type="button" role="tab" aria-selected="true" data-v="gel">gel</button>
       <button class="sp-chip" type="button" role="tab" aria-selected="false" data-v="yap">yap</button>
@@ -743,7 +762,7 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
         <div class="sp-mn__l"><span class="tile t-di" lang="tr">d</span><span class="sp-mn__w c-di" id="mn-d">distant past</span></div>
       </div>
       <p class="sp-p">See <b lang="tr">-rd-</b> in the middle of a verb — read it as “regularly, but in the distant past.” Like starlight: the star shone every night. Just long ago.</p>
-      <p class="sp-p">English knows this too. “He would come over, sit down, tell a story” — regular and long ago. Turkish just hides it in two letters.</p>
+      <p class="sp-p">English knows this too. “He would come over, sit down, tell a story” — regular and long ago. English needs “would” or “used to”. Turkish hides it in two letters.</p>
       <button class="sp-btn" type="button" id="mn-go"><span data-ui>Send the light</span></button>
       <div class="sp-journey" id="sp-journey">
         <svg viewBox="0 0 800 290" aria-hidden="true">
@@ -765,7 +784,7 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
   <div class="sp-wrap">
     <p class="sp-kick" data-ui><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3" stroke="#7cc6ff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>English ↔ Turkish</p>
     <h2 class="sp-h2">One “swam” <em>for everything</em></h2>
-    <p class="sp-p">In English, “swam” works for everything. Swam yesterday. Swam all through childhood. That's not enough for Turkish. It needs to know: once or regularly.</p>
+    <p class="sp-p">In English, “swam” works for everything. Swam yesterday. Swam every summer as a kid. “Used to” is optional. In Turkish it isn't: once is <b lang="tr">yüzdüm</b>, a habit is <b lang="tr">yüzerdim</b>. Every time.</p>
   </div>
   <div class="cin-stage cs-b" id="cs-b">
       <svg id="csb-svg" aria-hidden="true"></svg>
@@ -785,9 +804,9 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
         <line x1="10" y1="210" x2="390" y2="210" stroke="rgba(207,214,255,.4)" stroke-width="2"/>
         <line x1="300" y1="14" x2="300" y2="218" stroke="#ff8a2b" stroke-width="2" stroke-dasharray="4 6"/>
         <text x="300" y="240" text-anchor="middle" data-ui>now</text><text x="10" y="240" data-ui>long ago</text>
-        <g class="row r1"><circle cx="280" cy="46" r="7" fill="#7cc6ff"/><text class="lbl" x="10" y="30" id="tl-l1">swam</text></g>
-        <g class="row r2"><circle cx="40" cy="112" r="7" fill="#ffb460"/><circle cx="70" cy="112" r="7" fill="#ffb460"/><circle cx="100" cy="112" r="7" fill="#ffb460"/><circle cx="130" cy="112" r="7" fill="#ffb460"/><circle cx="160" cy="112" r="7" fill="#ffb460"/><circle cx="190" cy="112" r="7" fill="#ffb460"/><text class="lbl" x="10" y="92" id="tl-l2">swam</text></g>
-        <g class="row r3"><circle cx="270" cy="178" r="7" fill="#b994ff"/><circle cx="300" cy="178" r="7" fill="#b994ff"/><circle cx="330" cy="178" r="7" fill="#b994ff"/><circle cx="360" cy="178" r="7" fill="#b994ff"/><text class="lbl" x="10" y="158" id="tl-l3">swim</text></g>
+        <g class="row r1"><circle cx="280" cy="46" r="7" fill="#7cc6ff"/><text class="lbl" x="10" y="30" id="tl-l1">swam · once</text></g>
+        <g class="row r2"><circle cx="40" cy="112" r="7" fill="#ffb460"/><circle cx="70" cy="112" r="7" fill="#ffb460"/><circle cx="100" cy="112" r="7" fill="#ffb460"/><circle cx="130" cy="112" r="7" fill="#ffb460"/><circle cx="160" cy="112" r="7" fill="#ffb460"/><circle cx="190" cy="112" r="7" fill="#ffb460"/><text class="lbl" x="10" y="92" id="tl-l2">swam / used to swim · back then</text></g>
+        <g class="row r3"><circle cx="270" cy="178" r="7" fill="#b994ff"/><circle cx="300" cy="178" r="7" fill="#b994ff"/><circle cx="330" cy="178" r="7" fill="#b994ff"/><circle cx="360" cy="178" r="7" fill="#b994ff"/><text class="lbl" x="10" y="158" id="tl-l3">swim · usually</text></g>
       </svg>
       <ul class="sp-steps" style="margin:10px 0 0">
         <li class="is-on"><i class="c-di">1</i><span>One dot — once: <b lang="tr">yüzdüm</b>.</span></li>
@@ -803,6 +822,46 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
       <div class="sp-row" lang="tr"><button class="sp-chip" type="button">Çok okudum.</button><button class="sp-chip" type="button">Çocukken çok okurdum.</button><button class="sp-chip" type="button">Çok okurum.</button></div>
       <p class="sp-fb" aria-live="polite"></p>
     </div>
+  </div>
+</section>
+
+<!-- ============ ENGLISH ↔ TURKISH ============ -->
+<section data-section="entr" data-words="80" class="sp-sec" data-title="English ↔ Turkish">
+  <svg class="sp-deco sp-deco--a" viewBox="0 0 100 100" aria-hidden="true"><ellipse cx="50" cy="52" rx="48" ry="12" fill="none" stroke="#36e6bd" stroke-width="3" transform="rotate(-18 50 52)"/><circle cx="50" cy="50" r="28" fill="#8b4dff"/><circle cx="42" cy="40" r="9" fill="#fff" opacity=".35"/></svg>
+  <div class="sp-wrap">
+    <p class="sp-kick" data-ui><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h13l-3-3M20 16H7l3 3" stroke="#36e6bd" stroke-width="2" fill="none" stroke-linecap="round"/></svg>English ↔ Turkish</p>
+    <h2 class="sp-h2">Three words <em>into one</em></h2>
+    <p class="sp-p">English builds this in front of the verb: “I used to come.” Turkish packs it all into the verb, from the back: <b lang="tr">gel-ir-di-m</b>. Same pieces, reverse order. Switch the mode and watch the words fly into place.</p>
+    <div class="pn pn--notch" id="kt-card">
+      <div class="sp-switch" role="tablist" aria-label="Mode" data-ui id="kt-modes">
+        <button class="sp-chip" type="button" role="tab" aria-selected="true" data-km="pos">+ yes</button>
+        <button class="sp-chip" type="button" role="tab" aria-selected="false" data-km="neg">− no</button>
+        <button class="sp-chip" type="button" role="tab" aria-selected="false" data-km="q">? question</button>
+      </div>
+      <p class="kt-tag" style="margin-top:14px" data-ui>English</p>
+      <div class="kt-en" id="kt-en" data-ui></div>
+      <p class="kt-tag" data-ui>Turkish</p>
+      <div class="kt-pairs" id="kt-pairs" lang="tr"></div>
+      <div class="kt-mean">
+        <div class="kt-box"><b id="kt-enw">I used to come</b><p id="kt-enm" data-ui></p></div>
+        <div class="kt-box"><b lang="tr" id="kt-trw" data-say="gelirdim">gelirdim</b><p id="kt-trm" data-ui></p></div>
+      </div>
+    </div>
+    <div class="pn" style="margin-top:16px">
+      <p class="sp-mq__q">Same in both: “would” has two jobs</p>
+      <p class="sp-p" style="margin:0">English “would” is an old habit and a polite wish. Turkish <b lang="tr" class="c-di">-rdı</b> is exactly the same pair. Tap to hear.</p>
+      <div class="sp-forms" style="grid-template-columns:1fr">
+        <button class="sp-form" type="button" data-say="Her yaz köye giderdik."><b lang="tr">Her yaz köye giderdik.</b><small data-ui>Every summer we would go to the village. — habit</small></button>
+        <button class="sp-form" type="button" data-say="Ben de isterdim."><b lang="tr">Ben de isterdim.</b><small data-ui>I would like that too. — polite wish</small></button>
+      </div>
+      <p class="sp-p" style="margin:12px 0 0">One false friend: “I'm <i>used to</i> it” is a different thing — <b lang="tr">alışkınım</b>, not <b lang="tr">-rdı</b>.</p>
+    </div>
+    <div class="sp-mq pn" data-kq data-ok="1" data-yes="Yes. A habit gets -rdı: gider + di + k." data-no="English can use plain past for a habit. Turkish marks it: giderdik.">
+      <p class="sp-mq__q">“As kids, we went to the village every summer.” In Turkish?</p>
+      <div class="sp-row" lang="tr"><button class="sp-chip" type="button">Çocukken her yaz köye gittik.</button><button class="sp-chip" type="button">Çocukken her yaz köye giderdik.</button><button class="sp-chip" type="button">Çocukken her yaz köye gideriz.</button></div>
+      <p class="sp-fb" aria-live="polite"></p>
+    </div>
+    <p class="sp-dry">English stacks words. Turkish stacks tails.</p>
   </div>
 </section>
 
@@ -846,7 +905,7 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
         <div class="sp-stage" lang="tr" id="sp-neg-stage"><span class="tile t-root">yap</span><span class="tile t-aor" id="sp-neg-core">-ar</span><span class="tile t-di" id="sp-neg-di">-dı</span><span class="tile t-pers">-m</span></div>
         <svg class="sp-negstar" viewBox="0 0 120 120" aria-hidden="true"><circle id="ng-glow" cx="60" cy="60" r="58" fill="url(#g-oglow)"/><use id="ng-star" href="#sp-star4" x="25" y="25" width="70" height="70" fill="#fff"/><path id="ng-x" d="M30 30 90 90" stroke="#ff5c93" stroke-width="6" stroke-linecap="round" stroke-dasharray="90" stroke-dashoffset="90"/></svg>
         <div class="sp-res" lang="tr" id="sp-neg-res" data-say="yapardım">yapardım</div>
-        <span class="sp-ru" data-ui style="text-align:center" id="sp-neg-ru">back then I often did it</span>
+        <span class="sp-ru" data-ui style="text-align:center" id="sp-neg-ru">I used to do it</span>
       </div>
       <div>
         <p class="sp-p">Careful with “I.” In the aorist it's <b lang="tr">yapmam</b>. Here the <b lang="tr" class="c-neg">z</b> comes back: <b lang="tr">yapmazdım</b>.</p>
@@ -867,7 +926,7 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
   <div class="sp-wrap">
     <p class="sp-kick" data-ui><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9a4 4 0 1 1 5 3.9c-.6.2-1 .7-1 1.3V15M12 19h.01" stroke="#36e6bd" stroke-width="2" fill="none" stroke-linecap="round"/></svg>Question</p>
     <h2 class="sp-h2"><em lang="tr">mı</em> jumps into the middle</h2>
-    <p class="sp-p">The particle <b lang="tr" class="c-q">mı</b> goes right after the light <b lang="tr" class="c-aor">-r</b>. The past tail moves over to it. Remember <b lang="tr">hasta mıydın</b>? Same thing here.</p>
+    <p class="sp-p">The particle <b lang="tr" class="c-q">mı</b> goes right after the light <b lang="tr" class="c-aor">-r</b>. The past tail moves over to it. Remember <b lang="tr">hasta mıydın</b>? Same thing here. No “Did” at the front: the question lives inside, in the middle.</p>
     <div class="sp-grid2">
       <div class="pn pn--bl">
         <div class="sp-stage" lang="tr" id="sp-q-stage"><span class="tile t-root" id="q-root">gel</span><span class="tile t-aor" id="q-aor">-ir</span><span class="tile t-q" id="q-mi" hidden>mi</span><span class="tile t-di" id="q-di">-di</span><span class="tile t-pers" id="q-p">-n</span></div>
@@ -1011,15 +1070,16 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
   <div class="sp-wrap">
     <p class="sp-kick" data-ui><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20zM12 9v5M12 17h.01" stroke="#ff5c93" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>Traps</p>
     <h2 class="sp-h2"><em>Everyone</em> trips here</h2>
-    <p class="sp-p">No big deal. A mistake is light too, just crooked. Five potholes. Tap “fix” and watch the form snap into place.</p>
-    <div class="sp-row" data-ui><button class="sp-chip" type="button" id="tr-all">Fix all</button></div>
+    <p class="sp-p">No big deal. A mistake is light too, just crooked. Six potholes, four of them dug by English. Tap “fix” and watch the form snap into place.</p>
+    <div class="sp-row" data-ui><button class="sp-chip" type="button" id="tr-all">Fix them all</button></div>
     <div class="sp-traps" id="sp-traps">
+      <div class="sp-trap pn" data-fix="Eskiden her sabah çay içerdim."><span class="sp-w bad" lang="tr">Eskiden her sabah çay içtim.</span><p class="sp-trap__why">English happily says “I drank tea every morning.” Turkish wants the habit form: <b lang="tr">içerdim</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
+      <div class="sp-trap pn" data-fix="Dün sinemaya gittim."><span class="sp-w bad" lang="tr">Dün sinemaya giderdim.</span><p class="sp-trap__why">Like “used to”, <b lang="tr">-rdı</b> is never for one time. One trip yesterday — plain <b lang="tr">gittim</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
+      <div class="sp-trap pn" data-fix="Yapar mıydın?"><span class="sp-w bad" lang="tr">Mı yapardın?</span><p class="sp-trap__why">English starts with “Did”. Turkish never starts with <b lang="tr">mı</b>: it goes after <b lang="tr">-r</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
+      <div class="sp-trap pn" data-fix="okurdu"><span class="sp-w bad" lang="tr">okurdi</span><p class="sp-trap__why">English has no vowel harmony, so the hand writes <b lang="tr">-di</b> everywhere. After <b lang="tr">u</b> it's <b lang="tr">-du</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
       <div class="sp-trap pn" data-fix="yapmazdım"><span class="sp-w bad" lang="tr">yapmamdım</span><p class="sp-trap__why">“I” gets <b lang="tr">-maz</b> too. The <b lang="tr">z</b> stays put.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
       <div class="sp-trap pn" data-fix="gelirdim"><span class="sp-w bad" lang="tr">gelerdim</span><p class="sp-trap__why"><b lang="tr">Gel</b> is one of the thirteen. Its light is <b lang="tr">-ir</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
-      <div class="sp-trap pn" data-fix="giderdim"><span class="sp-w bad" lang="tr">giterdim</span><p class="sp-trap__why"><b lang="tr">T</b> between vowels gets voiced: <b lang="tr">gider</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
-      <div class="sp-trap pn" data-fix="Eskiden her gün yüzerdim."><span class="sp-w bad" lang="tr">Eskiden her gün yüzerim.</span><p class="sp-trap__why">There's “in the past” — you need <b lang="tr">-dı</b>.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
-      <div class="sp-trap pn" data-fix="Dün sinemaya gittim."><span class="sp-w bad" lang="tr">Dün sinemaya giderdim.</span><p class="sp-trap__why">One trip yesterday — plain <b lang="tr">-dı</b>, no light.</p><button class="sp-btn sp-btn--sm" type="button"><span data-ui>Fix</span></button></div>
-      <div class="sp-trap pn pn--bl"><span class="sp-w good" lang="tr" data-say="Ben de isterdim!">Ben de isterdim!</span><span class="sp-ru" data-ui>I'd like that too!</span><p class="sp-trap__why" style="margin-top:8px">Bonus. The same form can be polite: “I would like.”</p></div>
+      <div class="sp-trap pn pn--bl"><span class="sp-w good" lang="tr" data-say="Ben de isterdim!">Ben de isterdim!</span><span class="sp-ru" data-ui>I'd like that too!</span><p class="sp-trap__why" style="margin-top:8px">Bonus. Just like English “would”, the same form can be a polite wish: “I would like.”</p></div>
     </div>
   </div>
 </section>
@@ -1085,8 +1145,9 @@ a-exercise[ref="a2.aorist-past.ex5"]{display:none}
       <div class="pn pc-sm"><h3>Tails</h3><div class="sp-row" lang="tr"><span class="tile t-di">-ardı</span><span class="tile t-di">-erdi</span><span class="tile t-di">-ırdı</span><span class="tile t-di">-irdi</span><span class="tile t-di">-urdu</span><span class="tile t-di">-ürdü</span></div></div>
       <div class="pn pc-mid"><h3>Persons</h3><div class="sp-row" lang="tr" style="gap:6px"><span class="tile t-pers" data-say="gelirdim">gelirdim</span><span class="tile t-pers" data-say="gelirdin">gelirdin</span><span class="tile t-pers" data-say="gelirdi">gelirdi</span><span class="tile t-pers" data-say="gelirdik">gelirdik</span><span class="tile t-pers" data-say="gelirdiniz">gelirdiniz</span><span class="tile t-pers" data-say="gelirlerdi">gelirlerdi</span></div></div>
       <div class="pn pc-mid"><h3>No and question</h3><div class="sp-row" lang="tr" style="gap:6px"><span class="tile t-neg" data-say="yapmazdım">yapmazdım</span><span class="tile t-neg" data-say="gelmezdik">gelmezdik</span><span class="tile t-q" data-say="Yapar mıydın?">yapar mıydın?</span><span class="tile t-q" data-say="Gelir miydiniz?">gelir miydiniz?</span></div></div>
-      <div class="pn pn--bl pc-wide"><h3>Three times</h3><div class="sp-tri" lang="tr"><div><span class="tile t-root" data-say="gittim">gittim</span><small data-ui>once</small></div><div><span class="tile t-aor" data-say="giderim">giderim</span><small data-ui>usually now</small></div><div><span class="tile t-di" data-say="giderdim">giderdim</span><small data-ui>usually back then</small></div></div></div>
+      <div class="pn pn--bl pc-wide"><h3>Three tenses</h3><div class="sp-tri" lang="tr"><div><span class="tile t-root" data-say="gittim">gittim</span><small data-ui>once · I went</small></div><div><span class="tile t-aor" data-say="giderim">giderim</span><small data-ui>usually now · I go</small></div><div><span class="tile t-di" data-say="giderdim">giderdim</span><small data-ui>usually back then · I used to go</small></div></div></div>
       <div class="pn pc-sm"><h3>Lighthouses</h3><div class="sp-row" lang="tr" style="gap:6px"><span class="tile t-root" data-say="eskiden">eskiden</span><span class="tile t-root" data-say="çocukken">çocukken</span><span class="tile t-root" data-say="o zamanlar">o zamanlar</span><span class="tile t-root" data-say="her yaz">her yaz</span><span class="tile t-root" data-say="hep">hep</span></div></div>
+      <div class="pn" style="grid-column:1/-1"><h3>English ↔ Turkish</h3><p class="sp-muted" style="margin:0">“I used to come” = <b lang="tr">gelirdim</b> — one word. “I didn't use to come” = <b lang="tr">gelmezdim</b>. “Did you use to come?” = <b lang="tr">gelir miydin?</b> — the question sits in the middle. “Would” has two jobs in both languages: habit and polite wish.</p></div>
     </div>
     <div class="sp-row" style="margin-top:14px" data-ui><button class="sp-btn sp-btn--sm" type="button" id="ch-replay"><span>Send the light again</span></button><button class="sp-chip" type="button" data-goto="intro">To top</button></div>
     <div class="sp-final pn pn--notch">
@@ -1151,21 +1212,26 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- грамматика: сборка формы ---------- */
   const V = {
-    gel: { s: 'gel', a: 'ir', n: 'gel', m: 'came', p: 'came', why: 'gel is one of the 13 exceptions: light -ir.' },
-    git: { s: 'gid', a: 'er', n: 'git', m: 'went', p: 'went', why: 'git: one syllable — -er, and t gets voiced: gider.' },
-    yap: { s: 'yap', a: 'ar', n: 'yap', m: 'did it', p: 'did it', why: 'yap: one syllable, not an exception — -ar.' },
-    'iç': { s: 'iç', a: 'er', n: 'iç', m: 'drank', p: 'drank', why: 'iç: one syllable — -er by harmony.' },
-    ye: { s: 'ye', a: 'r', n: 'ye', m: 'ate', p: 'ate', why: 'ye ends in a vowel — just -r.' },
+    gel: { s: 'gel', a: 'ir', n: 'gel', m: 'come', p: 'come', why: 'gel is one of the 13 exceptions: light -ir.' },
+    git: { s: 'gid', a: 'er', n: 'git', m: 'go', p: 'go', why: 'git: one syllable — -er, and t gets voiced: gider.' },
+    yap: { s: 'yap', a: 'ar', n: 'yap', m: 'do it', p: 'do it', why: 'yap: one syllable, not an exception — -ar.' },
+    'iç': { s: 'iç', a: 'er', n: 'iç', m: 'drink', p: 'drink', why: 'iç: one syllable — -er by harmony.' },
+    ye: { s: 'ye', a: 'r', n: 'ye', m: 'eat', p: 'eat', why: 'ye ends in a vowel — just -r.' },
     oku: { s: 'oku', a: 'r', n: 'oku', m: 'read', p: 'read', why: 'oku ends in a vowel — just -r.' },
-    otur: { s: 'otur', a: 'ur', n: 'otur', m: 'lived there', p: 'lived there', why: 'otur: two syllables — -ur by harmony.' },
-    'çalış': { s: 'çalış', a: 'ır', n: 'çalış', m: 'worked', p: 'worked', why: 'çalış: two syllables — -ır.' },
-    al: { s: 'al', a: 'ır', n: 'al', m: 'bought it', p: 'bought it', why: 'al is one of the 13 exceptions: -ır.' },
-    'gör': { s: 'gör', a: 'ür', n: 'gör', m: 'saw it', p: 'saw it', why: 'gör is one of the 13 exceptions: -ür.' },
-    dinle: { s: 'dinle', a: 'r', n: 'dinle', m: 'listened', p: 'listened', why: 'dinle ends in a vowel — just -r.' },
-    'yüz': { s: 'yüz', a: 'er', n: 'yüz', m: 'swam', p: 'swam', why: 'yüz: one syllable, not an exception — -er.' },
+    otur: { s: 'otur', a: 'ur', n: 'otur', m: 'live there', p: 'live there', why: 'otur: two syllables — -ur by harmony.' },
+    'çalış': { s: 'çalış', a: 'ır', n: 'çalış', m: 'work', p: 'work', why: 'çalış: two syllables — -ır.' },
+    al: { s: 'al', a: 'ır', n: 'al', m: 'buy it', p: 'buy it', why: 'al is one of the 13 exceptions: -ır.' },
+    'gör': { s: 'gör', a: 'ür', n: 'gör', m: 'see it', p: 'see it', why: 'gör is one of the 13 exceptions: -ür.' },
+    dinle: { s: 'dinle', a: 'r', n: 'dinle', m: 'listen', p: 'listen', why: 'dinle ends in a vowel — just -r.' },
+    'yüz': { s: 'yüz', a: 'er', n: 'yüz', m: 'swim', p: 'swim', why: 'yüz: one syllable, not an exception — -er.' },
   };
   const PRON = ['ben', 'sen', 'o', 'biz', 'siz', 'onlar'];
-  const RU_P = ['I', 'you', 'he', 'we', 'you all', 'they'];
+  const RU_P = ['I', 'you', 'he/she', 'we', 'you all', 'they'];
+  /* English gloss: a full sentence for every person and mode */
+  function enGloss(v, p, pol) {
+    if (pol === 'q') return `Did ${RU_P[p]} use to ${v.m}?`;
+    return `${RU_P[p].charAt(0).toUpperCase() + RU_P[p].slice(1)} ${pol === 'neg' ? "didn't use to" : 'used to'} ${v.m}`;
+  }
   const lastV = (w) => { const m = w.match(/[aeıioöuü](?=[^aeıioöuü]*$)/); return m ? m[0] : 'e'; };
   const h4 = (v) => ({ a: 'ı', 'ı': 'ı', e: 'i', i: 'i', o: 'u', u: 'u', 'ö': 'ü', 'ü': 'ü' })[v];
   const h2 = (v) => ('aıou'.includes(v) ? 'a' : 'e');
@@ -1182,8 +1248,7 @@ addEventListener('DOMContentLoaded', () => {
     } else if (p === 5) { const l = 'l' + h2(lv) + 'r'; parts.push([l, 'pers'], ['d' + h4(lastV(l)), 'di']); }
     else { const dv = h4(lv); parts.push(['d' + dv, 'di']); const e = pend(p, dv); if (e) parts.push([e, 'pers']); }
     const word = parts.map((x) => x[0]).join('') + (pol === 'q' ? '?' : '');
-    const verb = p >= 3 ? v.p : v.m;
-    const ru = `back then ${RU_P[p]} ${pol === 'neg' ? 'never ' : 'often '}${verb}${pol === 'q' ? '?' : ''}`;
+    const ru = enGloss(v, p, pol);
     return { parts, word, ru };
   }
   const tileOf = ([t, role], i) => { const s = mk('span', 'tile t-' + role, (i ? (t.startsWith(' ') ? t.trim() : '-' + t) : t)); return s; };
@@ -1449,7 +1514,7 @@ addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- сравнение ---------- */
-  const TL = { ru: ['swam', 'swam', 'swim'], tr: ['yüzdüm · once', 'yüzerdim · usually back then', 'yüzerim · usually'] };
+  const TL = { ru: ['swam · once', 'swam / used to swim · back then', 'swim · usually'], tr: ['yüzdüm · once', 'yüzerdim · usually back then', 'yüzerim · usually'] };
   const tlL = [$('#tl-l1'), $('#tl-l2'), $('#tl-l3')];
   $('[data-section="compare"] .sp-switch').addEventListener('click', (e) => {
     const b = e.target.closest('[data-lang]'); if (!b) return;
@@ -1465,6 +1530,48 @@ addEventListener('DOMContentLoaded', () => {
     }
   });
   if (G && ST) G.from('#sp-tl .row circle', { scale: 0.3, transformOrigin: '50% 50%', duration: 0.4, ease: 'back.out(3)', stagger: 0.05, scrollTrigger: { trigger: '#sp-tl', start: 'top 80%' } });
+
+  /* ---------- English ↔ Turkish: words fly into the verb ---------- */
+  const KT = {
+    pos: { en: [['I', 'pers'], ['used to', 'aor'], ['come', 'root']], tr: [['gel', 'root', 2], ['ir', 'aor', 1], ['di', 'di', 1], ['m', 'pers', 0]], enw: 'I used to come', trw: 'gelirdim',
+      enm: 'Three words. The verb comes last.', trm: 'One word. Root first, then habit (-ir), past (-di), person (-m).' },
+    neg: { en: [['I', 'pers'], ["didn't use to", 'neg'], ['come', 'root']], tr: [['gel', 'root', 2], ['mez', 'neg', 1], ['di', 'di', 1], ['m', 'pers', 0]], enw: "I didn't use to come", trw: 'gelmezdim',
+      enm: 'English needs “did” + “not”.', trm: 'No extra words: -mez takes the place of -ir.' },
+    q: { en: [['Did', 'q'], ['you', 'pers'], ['use to', 'aor'], ['come?', 'root']], tr: [['gel', 'root', 3], ['ir', 'aor', 2], [' mi', 'q', 0], ['ydi', 'di', 0], ['n', 'pers', 1]], enw: 'Did you use to come?', trw: 'Gelir miydin?',
+      enm: '“Did” jumps to the front.', trm: 'No word at the front. mi sits in the middle, after -r, and takes the past: miydin.' },
+  };
+  const ktEn = $('#kt-en'); const ktPairs = $('#kt-pairs'); const ktEnw = $('#kt-enw'); const ktTrw = $('#kt-trw'); const ktEnm = $('#kt-enm'); const ktTrm = $('#kt-trm');
+  function ktRender(mode, animate) {
+    const d = KT[mode];
+    ktEn.replaceChildren(...d.en.map(([w, role]) => mk('span', 'tile is-kk c-' + role, w)));
+    ktPairs.replaceChildren(...d.tr.map((p, i) => tileOf(p, i)));
+    ktEnw.textContent = d.enw; ktTrw.textContent = d.trw; ktTrw.dataset.say = d.trw; ktEnm.textContent = d.enm; ktTrm.textContent = d.trm;
+    $$('#kt-modes [data-km]').forEach((x) => x.setAttribute('aria-selected', x.dataset.km === mode ? 'true' : 'false'));
+    if (animate && G) {
+      const enT = $$('.tile', ktEn); const trT = $$('.tile', ktPairs);
+      G.fromTo(enT, { y: -30, scale: 0.7 }, { y: 0, scale: 1, duration: 0.45, ease: 'back.out(2.4)', stagger: 0.08 });
+      trT.forEach((t, i) => {
+        const src = enT[d.tr[i][2]]; const a = src.getBoundingClientRect(); const b = t.getBoundingClientRect();
+        G.fromTo(t, { x: a.left + a.width / 2 - (b.left + b.width / 2), y: a.top - b.top, scale: 0.5 }, { x: 0, y: 0, scale: 1, duration: 0.9, ease: 'power3.inOut', delay: 0.45 + i * 0.12 });
+      });
+      G.fromTo('.kt-box', { y: 18 }, { y: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.12, delay: 1.1 });
+    }
+  }
+  ktRender('pos', false);
+  $('#kt-modes').addEventListener('click', (e) => { const b = e.target.closest('[data-km]'); if (!b) return; ktRender(b.dataset.km, true); setTimeout(() => say(KT[b.dataset.km].trw), 900); });
+  ktTrw.addEventListener('click', () => say(ktTrw.dataset.say));
+  if (ST) ST.create({ trigger: '#kt-card', start: 'top 70%', once: true, onEnter: () => ktRender('pos', true) });
+  $$('[data-kq]').forEach((box) => {
+    const fb = $('.sp-fb', box); const opts = $$('.sp-row .sp-chip', box);
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.sp-chip'); if (!b) return;
+      const ok = opts.indexOf(b) === +box.dataset.ok;
+      opts.forEach((o) => o.classList.remove('is-ok', 'is-bad')); b.classList.add(ok ? 'is-ok' : 'is-bad');
+      fb.textContent = ok ? box.dataset.yes : box.dataset.no; fb.className = 'sp-fb ' + (ok ? 'ok' : 'bad');
+      say(b.textContent);
+      if (ok) { sparks(b, 18); pop(b); } else shake(b);
+    });
+  });
 
   /* ---------- маяки ---------- */
   const MK = [
@@ -1677,7 +1784,7 @@ addEventListener('DOMContentLoaded', () => {
     const f = build(LB.v, LB.p, LB.pol);
     lbOut.replaceChildren(...f.parts.map(tileOf)); lbOut.dataset.say = f.word; lbRu.textContent = f.ru + ' · ' + f.word;
     const v = V[LB.v];
-    lbWhy.textContent = LB.pol === 'neg' ? `Negative: swap the light for -m${h2(lastV(v.n))}z. Then -d${h4(h2(lastV(v.n)))} and the person.` : LB.pol === 'q' ? `Question: mi is separate, right after -${v.a}. The tail moved to it: -yd…` : v.why;
+    lbWhy.textContent = LB.pol === 'neg' ? `Negative: -m${h2(lastV(v.n))}z takes the light's place. Then -d${h4(h2(lastV(v.n)))} and the person. No separate “didn't” — it's all inside the verb.` : LB.pol === 'q' ? `Question: m${h4(lastV(v.s + v.a))} is a separate word right after the light. The past tail moves onto it. English puts “Did” first — Turkish puts the question in the middle.` : v.why;
     if (animate && G) {
       G.fromTo($$('.tile', lbOut), { y: -70, rotation: (i) => (i % 2 ? 18 : -18), scale: 0.6 }, { y: 0, rotation: 0, scale: 1, duration: 0.7, ease: 'back.out(2.2)', stagger: 0.07 });
       G.fromTo(lbWhy, { x: 16 }, { x: 0, duration: 0.4, ease: 'power3.out' });
