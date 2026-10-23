@@ -53,7 +53,7 @@ p { margin: 0 0 12px; max-width: 65ch; }
 .kbd { font-weight: 800; padding: 0 6px; border-radius: 6px; background: var(--ak-surface); }
 .mk-tr small, .tr-ru { display: block; color: var(--muted); font-size: .86em; }
 
-/* тёмные секции как «Кто такой Аватар» */
+/* dark sections */
 .dark { background: var(--ink); color: var(--cream); }
 .dark h2, .dark h3 { color: var(--cream); }
 .dark .lead, .dark .tr-ru { color: #CDBF9C; }
@@ -61,7 +61,7 @@ p { margin: 0 0 12px; max-width: 65ch; }
 .dark::before, .dark::after { content: ''; position: absolute; left: 0; right: 0; height: 14px; background: repeating-linear-gradient(90deg, var(--parch) 0 18px, transparent 18px 22px); opacity: .25; }
 .dark::before { top: 10px; } .dark::after { bottom: 10px; }
 
-/* кнопки-ленты как «для заголовков» */
+/* ribbon buttons */
 .rib { --bg: var(--cream); position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 8px 18px; border: 2px solid var(--brown); border-radius: 4px;
   background: var(--bg); color: var(--brown); font: 700 15px/1.2 var(--ak-font); cursor: pointer; text-align: center; }
 .rib::before, .rib::after { content: ''; position: absolute; top: 50%; width: 10px; height: 10px; border: 2px solid var(--brown); background: var(--bg); translate: 0 -50%; rotate: 45deg; }
@@ -293,6 +293,30 @@ p { margin: 0 0 12px; max-width: 65ch; }
 .cut { color: #F0A58F; text-decoration: line-through 3px; }
 .ret { color: var(--gold); }
 
+/* ---------- en-diff: English ↔ Turkish ---------- */
+.kd { display: grid; gap: 10px; }
+.kd-lbl { color: var(--muted); }
+.kd-rows { display: grid; gap: 4px; justify-items: center; margin-top: 8px; padding: 14px 10px; border-radius: 10px; background: var(--paper); border: 2px solid var(--brown); }
+.kd-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.kd-flag { display: inline-grid; place-items: center; min-width: 46px; height: 28px; padding: 0 8px; border-radius: 999px; background: var(--teal2); color: var(--cream); font: 800 12px/1 var(--ak-font); letter-spacing: .12em; text-transform: uppercase; }
+.kd-flag--tr { background: var(--red); }
+.kd-line { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; min-height: 48px; }
+.kd-line .tile { font-size: clamp(16px, 4.4vw, 24px); min-height: 42px; padding: 4px 10px; }
+.kd-end, .kd-neg { font-style: normal; }
+.kd-end { display: inline-block; color: var(--red); text-decoration: underline 3px; text-underline-offset: 5px; }
+.tile--want .kd-end { color: #FFE3A3; }
+.kd-neg { color: var(--ak-bad); }
+.tile--want .kd-neg { color: #FFD0C2; }
+.kd-jump { width: min(100%, 320px); height: 44px; }
+.kd-why { text-align: center; color: var(--muted); font-weight: 600; min-height: 3em; max-width: 56ch; margin: 4px auto 0; }
+.kd-cards { display: grid; gap: 12px; margin-top: 18px; }
+@media (min-width: 720px) { .kd-cards { grid-template-columns: 1fr 1fr; } }
+.kd-card { position: relative; padding: 14px 16px 12px 54px; border: 2px solid var(--brown); border-radius: 10px; background: var(--cream); }
+.kd-card h3 { font-size: 20px; margin: 0 0 4px; }
+.kd-card p { margin: 0; font-size: 15px; }
+.kd-card s { color: var(--ak-bad); text-decoration-thickness: 2px; }
+.kd-card__n { position: absolute; left: 12px; top: 14px; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--red); color: var(--cream); font: 800 16px/1 var(--ak-font); }
+
 /* ---------- traps ---------- */
 .traps { display: grid; gap: 14px; }
 @media (min-width: 860px) { .traps { grid-template-columns: 1fr 1fr; } }
@@ -328,7 +352,7 @@ p { margin: 0 0 12px; max-width: 65ch; }
 .pier__status { min-height: 1.6em; margin-top: 8px; font-weight: 600; }
 .section-note { text-align: center; color: var(--muted); font-weight: 600; margin: 10px auto 18px; }
 
-/* kit: пары matching в палитре гайда */
+/* kit: matching pairs in the guide palette */
 [data-pair="0"] { background: #DCEBEA; border-color: #6FA3A6; }
 [data-pair="1"] { background: #F6DCCF; border-color: #D98B6F; }
 [data-pair="2"] { background: #F3E5BE; border-color: #C99A3C; }
@@ -338,7 +362,7 @@ p { margin: 0 0 12px; max-width: 65ch; }
 a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 .ak-ex { border: 2px solid var(--brown); }
 
-/* ---------- свой скроллбар: свиток и печать ---------- */
+/* ---------- custom scrollbar: scroll and seal ---------- */
 .sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 8px; pointer-events: none; }
 .sb__track { position: absolute; inset: 0; background: rgba(62, 30, 16, .16); pointer-events: auto; touch-action: none; }
 .sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--teal2), var(--red)); }
@@ -357,7 +381,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 }
 @media (min-width: 1024px) { [data-section] { padding-left: 32px; padding-right: 56px; } }
 
-/* ---------- v2: печати разделов, декор на полях, бегущая строка ---------- */
+/* ---------- v2: section stamps, margin decor, ticker ---------- */
 .st-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 0 auto 10px; }
 .st { width: 44px; height: 44px; flex: none; }
 .st-t { font: 800 11px/1.2 var(--ak-font); letter-spacing: .16em; text-transform: uppercase; color: var(--red2); }
@@ -393,7 +417,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 
 <main>
 
-<!-- ============ STORY: hero + крючок ============ -->
+<!-- ============ STORY: hero + hook ============ -->
 <section data-section="story" data-words="74">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="hero">
@@ -566,7 +590,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
     <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 04 · passport</span></div>
     <h2>The verb in its passport: -mak or -mek</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
-    <p class="lead">In the dictionary every Turkish verb ends in -mak or -mek. That’s its passport. And that’s how it stands before <a-say>istiyorum</a-say>. Not in <span lang="tr">-yor</span>. In its passport.</p>
+    <p class="lead">In the dictionary every Turkish verb ends in -mak or -mek. It’s the Turkish “to”: to drink = <span lang="tr">içmek</span>. Only it comes after the verb. That’s its passport. And that’s how it stands before <a-say>istiyorum</a-say>. Not in <span lang="tr">-yor</span>. In its passport.</p>
     <div class="frame">
       <div class="gates">
         <div class="gate gate--mak" data-gate="mak">
@@ -605,7 +629,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
   </div>
 </section>
 
-<!-- ============ BUILD: пошаговый плеер ============ -->
+<!-- ============ BUILD: step player ============ -->
 <section data-section="build" data-words="54">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
@@ -648,12 +672,12 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
   <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
     <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 06 · order</span></div>
-    <h2>English puts “want” up front</h2>
+    <h2>English, in a mirror</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
-    <p class="lead">In English: I want to drink tea. “Want” comes almost first. Turkish does the opposite. Tea first. Then drink. Then want.</p>
+    <p class="lead">In English: I want to drink tea. “Want” comes almost first. Turkish does the opposite. Tea first. Then drink. Then want. The verb waits for the very end.</p>
     <div class="frame cmp">
       <div class="row" role="group" aria-label="Language" data-ui>
-        <button type="button" class="chip" data-lang="ru" aria-pressed="true">English</button>
+        <button type="button" class="chip" data-lang="en" aria-pressed="true">English</button>
         <button type="button" class="chip" data-lang="tr" aria-pressed="false">Turkish</button>
       </div>
       <svg class="cmp__svg" viewBox="0 0 560 70" aria-hidden="true"><path class="cmp-arc" d="M60 60C200 -10 360 -10 500 60" fill="none" stroke="#C99A3C" stroke-width="3"/><circle class="cmp-dot" cx="60" cy="60" r="8" fill="#B8452B"/></svg>
@@ -661,19 +685,49 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
         <span class="tile" data-k="ben" data-ui>I</span> <span class="tile tile--want" data-k="want" data-ui>want</span> <span class="tile tile--mek" data-k="verb" data-ui>to drink</span> <span class="tile tile--obj" data-k="obj" data-ui>tea</span>
       </div>
       <p class="cmp__kk">A Turkish phrase is like a train. The cars with the action go first. The “want” locomotive pushes them from behind.</p>
-      <p class="cmp__kk">Kazakh, by the way, works like Turkish: <span lang="kk" data-ui>шай ішкім келеді</span>. “Want” goes at the tail.</p>
+      <p class="cmp__kk">Now read the English backwards: tea — drink — to — want — I. That’s Turkish, piece by piece: <span lang="tr">çay iç-mek istiyor-um</span>. Even “to” and “I” have a place: <span lang="tr">-mek</span> and <span lang="tr">-um</span>.</p>
     </div>
   </div>
 </section>
 
-<!-- ============ FORMS: да / нет / вопрос ============ -->
+<!-- ============ EN-DIFF: English ↔ Turkish ============ -->
+<section data-section="en-diff" data-words="80">
+  <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
+  <div class="wrap">
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 07 · English ↔ Turkish</span></div>
+    <h2>Who wants? The tail tells</h2>
+    <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
+    <p class="lead">In English the word <b>I</b> tells who wants. In Turkish the tail does it: <span lang="tr">istiyor<b>um</b></span>. That’s why <span lang="tr">Ben</span> is optional. Pick a person and watch the job move.</p>
+    <div class="frame kd">
+      <div class="lab-lbl kd-lbl" data-ui>Who</div>
+      <div class="row" role="group" aria-label="Person" data-kd-persons data-ui></div>
+      <div class="lab-lbl kd-lbl" data-ui>How</div>
+      <div class="row" role="group" aria-label="Mode" data-kd-pols data-ui></div>
+      <div class="kd-rows">
+        <div class="kd-row"><span class="kd-flag" data-ui>eng</span><div class="kd-line" data-kd-kk data-ui></div></div>
+        <svg class="kd-jump" viewBox="0 0 320 44" aria-hidden="true"><path class="kd-arc" d="M60 6C120 44 200 44 260 6" fill="none" stroke="#C99A3C" stroke-width="3" stroke-dasharray="7 7"/><path d="M250 4l12 2-4 11" fill="none" stroke="#C99A3C" stroke-width="3"/></svg>
+        <div class="kd-row"><span class="kd-flag kd-flag--tr" data-ui>tür</span><div class="kd-line" data-kd-tr lang="tr"></div></div>
+      </div>
+      <p class="kd-why" data-kd-why data-ui aria-live="polite"></p>
+    </div>
+    <div class="kd-cards">
+      <div class="kd-card"><b class="kd-card__n" data-ui>1</b><h3>-mak = “to”</h3><p>to drink = <a-say>içmek</a-say>. English puts “to” in front of the verb. Turkish glues it to the end.</p></div>
+      <div class="kd-card"><b class="kd-card__n" data-ui>2</b><h3>He wants → O istiyor</h3><p>English adds -s only for he and she. Turkish is the opposite: every person gets a tail — except <span lang="tr">o</span>. One <span lang="tr">o</span> = he, she and it.</p></div>
+      <div class="kd-card"><b class="kd-card__n" data-ui>3</b><h3>No “do”</h3><p>English needs “do” for “don’t” and “Do you…?” Turkish has no helper. “Not” goes inside: <a-say>istemiyorum</a-say>. A question just adds <span lang="tr">mu</span>: <a-say>istiyor musun?</a-say></p></div>
+      <div class="kd-card"><b class="kd-card__n" data-ui>4</b><h3>Say it</h3><p><span lang="tr">ç</span> = ch in “chair”: <a-say>içmek</a-say>. <span lang="tr">-mak</span> rhymes with “mock.” <a-say>istiyorum</a-say> sounds like “is-tee-yo-room.”</p></div>
+    </div>
+    <div class="mq" data-mq="5"></div>
+  </div>
+</section>
+
+<!-- ============ FORMS: yes / no / question ============ -->
 <section data-section="forms" data-words="41" class="dark">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 07 · yes, no, question</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 08 · yes, no, question</span></div>
     <h2>Yes, no, question</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
-    <p class="lead">The “not” lives in <span lang="tr">istemek</span>. You don’t touch the first verb. It’s in its passport, it has immunity.</p>
+    <p class="lead">No “don’t,” no “do.” The “not” lives in <span lang="tr">istemek</span>. You don’t touch the first verb. It’s in its passport, it has immunity.</p>
     <svg class="negmap" viewBox="0 0 560 120" aria-hidden="true">
       <rect x="20" y="40" width="200" height="54" rx="6" fill="#2D3836" stroke="#8f7b55" stroke-width="2"/>
       <text x="120" y="74" text-anchor="middle" fill="#9BD3D5" font-size="22" font-weight="800" font-family="Manrope">içmek</text>
@@ -691,7 +745,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
       <button type="button" class="chip" data-col="no" aria-pressed="false">Don’t want</button>
       <button type="button" class="chip" data-col="q" aria-pressed="false">Want to?</button>
     </div>
-    <p class="section-note" style="color:#CDBF9C">A question is a separate word, <span lang="tr">mu</span>. It goes after <span lang="tr">istiyor</span> and takes the person for itself. Tap any cell — it’ll say the phrase out loud. Swimming is just an example. Nobody’s making you swim.</p>
+    <p class="section-note" style="color:#CDBF9C">A question is a separate word, <span lang="tr">mu</span>. No flipping like “Do you…?” It goes after <span lang="tr">istiyor</span> and takes the person for itself. Tap any cell — it’ll say the phrase out loud. Swimming is just an example. Nobody’s making you swim.</p>
     <div class="bento" data-bento></div>
     <div class="mq" data-mq="3"></div>
   </div>
@@ -701,7 +755,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="tree" data-words="34">
   <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 08 · forks</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 09 · forks</span></div>
     <h2>Three questions in order</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Ask the questions top to bottom. Answer with the buttons. The dot runs along your path. At the end — a finished phrase. The first “yes” takes you further, the second — further still.</p>
@@ -738,7 +792,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="mnemonic" data-words="24">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap mn">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 09 · seal</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 10 · seal</span></div>
     <h2>Scroll and seal</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">The action is written on the scroll. “Want” is stamped as a seal at the bottom. A scroll without a seal is just paper. A seal without a scroll is just a red circle. Together — a document.</p>
@@ -764,7 +818,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="scene" data-words="35" class="dark">
   <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 10 · pier</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 11 · pier</span></div>
     <h2>Eminönü pier</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Tap the dots. Everyone here wants something. Like everyone in this city. Especially the seagulls.</p>
@@ -813,7 +867,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="gallery" data-words="29">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 11 · gallery</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 12 · gallery</span></div>
     <h2>Wishes by the hour</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">One day in Istanbul. Tap the clock. Then flip the cards — Turkish and sound on the back.</p>
@@ -836,7 +890,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="lab" data-words="27" class="dark">
   <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 12 · lab</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 13 · lab</span></div>
     <h2>The wish lab</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Four modes. Spin, build, listen. Mistakes are fine. The lab will show you why anyway.</p>
@@ -890,26 +944,26 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 </section>
 
 <!-- ============ TRAPS ============ -->
-<section data-section="traps" data-words="51">
+<section data-section="traps" data-words="80">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 13 · traps</span></div>
-    <h2>Five traps</h2>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 14 · traps</span></div>
+    <h2>Six traps</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
-    <p class="lead">Everyone trips over these. No shame in it. The shame is a third tea.</p>
+    <p class="lead">Everyone trips over these. English sets most of them. No shame in it. The shame is a third tea.</p>
     <div class="traps">
       <div class="trap" data-trap>
         <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#B8452B"/><text x="17" y="23" text-anchor="middle" fill="#FFF4DD" font-size="18" font-weight="800" font-family="Manrope">1</text></svg>
         <div class="trap__bad" lang="tr"><s>Çay içiyorum</s> istiyorum.</div>
         <div class="trap__good is-hidden" lang="tr">Çay içmek istiyorum.</div>
-        <p class="trap__why">Two verbs in -yor are two reports. The first verb always goes in its passport.</p>
+        <p class="trap__why"><span lang="tr">-yor</span> is like “-ing.” You don’t say “I want drinking tea.” You say “to drink” — and that’s <span lang="tr">içmek</span>.</p>
         <button type="button" class="rib" data-fix data-ui>Fix</button>
       </div>
       <div class="trap" data-trap>
         <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#B8452B"/><text x="17" y="23" text-anchor="middle" fill="#FFF4DD" font-size="18" font-weight="800" font-family="Manrope">2</text></svg>
         <div class="trap__bad" lang="tr"><s>İstiyorum</s> çay içmek.</div>
         <div class="trap__good is-hidden" lang="tr">Çay içmek istiyorum.</div>
-        <p class="trap__why">English order doesn’t work. “Want” goes to the tail.</p>
+        <p class="trap__why">That’s English word for word. Turkish reads it in a mirror: “want” goes to the tail.</p>
         <button type="button" class="rib" data-fix data-ui>Fix</button>
       </div>
       <div class="trap" data-trap>
@@ -923,7 +977,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
         <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#B8452B"/><text x="17" y="23" text-anchor="middle" fill="#FFF4DD" font-size="18" font-weight="800" font-family="Manrope">4</text></svg>
         <div class="trap__bad" lang="tr">Kahve içmek <s>istiyorum değil</s>.</div>
         <div class="trap__good is-hidden" lang="tr">Kahve içmek istemiyorum.</div>
-        <p class="trap__why"><span lang="tr">değil</span> doesn’t get along with verbs. The “not” hides inside: <span lang="tr">iste-mi-yorum</span>.</p>
+        <p class="trap__why">In English “not” is a separate word. <span lang="tr">değil</span> looks like it, but it doesn’t get along with verbs. The “not” hides inside: <span lang="tr">iste-mi-yorum</span>.</p>
         <button type="button" class="rib" data-fix data-ui>Fix</button>
       </div>
       <div class="trap" data-trap>
@@ -931,6 +985,13 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
         <div class="trap__bad" lang="tr"><s>Beklmek</s> istemiyorum.</div>
         <div class="trap__good is-hidden" lang="tr">Beklemek istemiyorum.</div>
         <p class="trap__why">In <span lang="tr">bekliyorum</span> the <span lang="tr">e</span> went into hiding. In the passport it comes back: <span lang="tr">bekle-mek</span>.</p>
+        <button type="button" class="rib" data-fix data-ui>Fix</button>
+      </div>
+      <div class="trap" data-trap>
+        <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="15" fill="#B8452B"/><text x="17" y="23" text-anchor="middle" fill="#FFF4DD" font-size="18" font-weight="800" font-family="Manrope">6</text></svg>
+        <div class="trap__bad" lang="tr"><s>İstiyor musun</s> çay içmek?</div>
+        <div class="trap__good is-hidden" lang="tr">Çay içmek istiyor musun?</div>
+        <p class="trap__why">English flips a question: “Do you want…?” Turkish doesn’t flip anything. Same order, <span lang="tr">mu</span> at the end.</p>
         <button type="button" class="rib" data-fix data-ui>Fix</button>
       </div>
     </div>
@@ -943,11 +1004,11 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="video" data-words="13">
   <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 14 · video</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 15 · video</span></div>
     <h2>Listen one more time</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
-    <p class="lead">Pay attention: the first verb is in -mak or -mek, the second changes by person.</p>
-    <a-video yt="zm0tUM7yMC8" start="53" end="230" title="MAK / MEK + İSTEMEK: how to say “I want to do”" channel="LEARNING TURKISH"></a-video>
+    <p class="lead">The video is in Turkish and a step ahead of you (A2). Don’t try to catch everything. Listen for the passport forms: <span lang="tr">-mak</span>, <span lang="tr">-mek</span>.</p>
+    <a-video yt="LLdzXSNQ7gQ" start="0" end="180" title="İsim-Fiilleri Hemen Öğren! · A2" channel="Yunus Emre Enstitüsü"></a-video>
   </div>
 </section>
 
@@ -955,7 +1016,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="practice" data-words="11">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 15 · practice</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 16 · practice</span></div>
     <h2>Practice</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Five tasks. From recognizing to your own phrase. The last one is at the pier.</p>
@@ -978,7 +1039,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
 <section data-section="check" data-words="5">
   <svg class="dc dc--l dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--l2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 16 · check</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 17 · check</span></div>
     <h2>Quick check</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead">Five questions. No cheat sheet.</p>
@@ -986,11 +1047,11 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
   </div>
 </section>
 
-<!-- ============ CHEAT + финал ============ -->
+<!-- ============ CHEAT + finale ============ -->
 <section data-section="cheat" data-words="53">
   <svg class="dc dc--r dc-cloud" viewBox="0 0 120 50" aria-hidden="true"><use href="#cloud"/></svg><svg class="dc dc--r2 dc-lotus" viewBox="0 0 120 90" aria-hidden="true"><use href="#lotus"/></svg>
   <div class="wrap">
-    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 17 · finale</span></div>
+    <div class="st-row" data-ui><svg class="st" viewBox="0 0 64 64" aria-hidden="true"><g class="st__ring"><circle cx="32" cy="32" r="29" fill="none" stroke="#B8452B" stroke-width="2" stroke-dasharray="3 4"/></g><circle cx="32" cy="32" r="21" fill="#B8452B"/><path class="st__lotus" d="M32 19c-5 6-5 13 0 19 5-6 5-13 0-19ZM32 38c-6-2-10-7-11-12 5 2 9 6 11 12Zm0 0c6-2 10-7 11-12-5 2-9 6-11 12Z" fill="#FFF4DD"/></svg><span class="st-t">scroll 18 · finale</span></div>
     <h2>Cheat sheet</h2>
     <svg class="orn" viewBox="0 0 160 14" aria-hidden="true"><use href="#orn"/></svg>
     <p class="lead" data-ui>Save it as a screenshot.</p>
@@ -999,7 +1060,7 @@ a-exercise, a-quiz { display: block; max-width: 760px; margin: 0 auto 18px; }
         <div class="pbox">
           <h3>Formula</h3>
           <div class="formula" lang="tr"><span class="tile tile--obj">çay</span><span class="tile tile--mek">içmek</span><span class="tile tile--want">istiyorum</span></div>
-          <p style="text-align:center;margin-top:8px">Action in its passport → <span lang="tr">iste</span> + <span lang="tr">yor</span> + person.</p>
+          <p style="text-align:center;margin-top:8px">Action in its passport → <span lang="tr">iste</span> + <span lang="tr">yor</span> + person. English in a mirror: I want to drink tea.</p>
         </div>
         <div class="pbox">
           <h3>Passport</h3>
@@ -1222,9 +1283,10 @@ addEventListener('DOMContentLoaded', () => {
   const MQ = [
     { q: 'How do you say “I want a simit” — just the thing?', o: ['Simit istiyorum.', 'Simit yemek istiyorum.'], a: 0, why: ['Yes. The thing — and the seal.', 'That’s “I want to eat a simit.” That’s an action now.'] },
     { q: 'The root is yap-. Which door?', o: ['yapmak', 'yapmek'], a: 0, why: ['Yes. The vowel a is a back vowel.', 'The vowel a is a back vowel. The -mak door.'] },
-    { q: 'We want to swim.', o: ['Yüzmek istiyoruz.', 'Yüzmek istiyorum.', 'Yüzüyoruz istiyoruz.'], a: 0, why: ['Yes. We — -uz.', '-um is “I.” We — -uz.', 'The first verb goes in its passport.'] },
+    { q: 'We want to swim.', o: ['Yüzmek istiyoruz.', 'Yüzmek istiyor.', 'Yüzüyoruz istiyoruz.'], a: 0, why: ['Yes. We — -uz.', 'That’s “she wants.” English “want” has no ending, but Turkish needs one. We — -uz.', 'That’s “swimming,” not “to swim.” The first verb goes in its passport.'] },
     { q: 'You don’t want to wait.', o: ['Beklemek istemiyorsun.', 'Beklemiyorsun istiyorsun.'], a: 0, why: ['Yes. The “not” is inside istemek.', 'The “not” lives in istemek, not in the first verb.'] },
     { q: 'Where’s the mistake: “Kahve içmak istiyorum”?', o: ['içmak', 'istiyorum'], a: 0, why: ['Yes. iç has a front i. So it’s içmek.', 'The seal is fine. The mistake is in the door: içmek.'] },
+    { q: 'Do you want to drink tea?', o: ['Çay içmek istiyor musun?', 'İstiyor musun çay içmek?', 'Mu çay içmek istiyorsun?'], a: 0, why: ['Yes. Same order as always, mu at the end.', 'That’s the English flip. Turkish keeps “want” last: çay içmek istiyor musun?', 'mu isn’t “do.” It never goes first. Çay içmek istiyor musun?'] },
   ];
   $$('[data-mq]').forEach((box) => {
     const d = MQ[Number(box.dataset.mq)];
@@ -1325,11 +1387,11 @@ addEventListener('DOMContentLoaded', () => {
 
   const PERS = [
     { p: 'Ben', s: 'um', ru: 'I want to drink tea' },
-    { p: 'Sen', s: 'sun', ru: 'you want' },
-    { p: 'O', s: '', ru: 'he, she wants' },
-    { p: 'Biz', s: 'uz', ru: 'we want' },
-    { p: 'Siz', s: 'sunuz', ru: 'you all want' },
-    { p: 'Onlar', s: 'lar', ru: 'they want' },
+    { p: 'Sen', s: 'sun', ru: 'you want to drink tea' },
+    { p: 'O', s: '', ru: 'he / she wants to drink tea' },
+    { p: 'Biz', s: 'uz', ru: 'we want to drink tea' },
+    { p: 'Siz', s: 'sunuz', ru: 'you all want to drink tea' },
+    { p: 'Onlar', s: 'lar', ru: 'they want to drink tea' },
   ];
   const personsBox = $('[data-persons]');
   personsBox.setAttribute('data-ui', '');
@@ -1349,11 +1411,11 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- COMPARE: порядок слов переставляется ---------- */
   const cmp = $('[data-cmp]');
-  const ORDER = { ru: [['ben', 'I'], ['want', 'want'], ['verb', 'to drink'], ['obj', 'tea']], tr: [['ben', 'Ben'], ['obj', 'çay'], ['verb', 'içmek'], ['want', 'istiyorum']] };
+  const ORDER = { en: [['ben', 'I'], ['want', 'want'], ['verb', 'to drink'], ['obj', 'tea']], tr: [['ben', 'Ben'], ['obj', 'çay'], ['verb', 'içmek'], ['want', 'istiyorum']] };
   function setLang(lang) {
     $$('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     const before = new Map($$('.tile', cmp).map((t) => [t.dataset.k, t.getBoundingClientRect()]));
-    ORDER[lang].forEach(([k, txt]) => { const t = $(`[data-k="${k}"]`, cmp); t.textContent = txt; t.lang = lang === 'tr' ? 'tr' : 'ru'; cmp.append(t); });
+    ORDER[lang].forEach(([k, txt]) => { const t = $(`[data-k="${k}"]`, cmp); t.textContent = txt; t.lang = lang; cmp.append(t); });
     if (lang === 'tr') speak('Ben çay içmek istiyorum.');
     if (!G) return;
     $$('.tile', cmp).forEach((t) => {
@@ -1367,6 +1429,78 @@ addEventListener('DOMContentLoaded', () => {
   $$('[data-lang]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
   if (ST) ST.create({ trigger: cmp, start: 'top 60%', once: true, onEnter: () => setTimeout(() => setLang('tr'), 500) });
   if (G) G.fromTo('.cmp-arc', { strokeDasharray: 600, strokeDashoffset: 600 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: cmp, start: 'top 85%', end: 'top 40%', scrub: true } });
+
+  /* ---------- EN-DIFF: the pronoun’s job moves into the Turkish tail ---------- */
+  /* full English forms for each person — nothing is glued */
+  const KD = [
+    { en: 'I', yes: 'want', no: 'don’t want', aux: 'Do', tr: 'Ben', te: 'um', q: 'muyum' },
+    { en: 'You', yes: 'want', no: 'don’t want', aux: 'Do', tr: 'Sen', te: 'sun', q: 'musun' },
+    { en: 'She', yes: 'wants', no: 'doesn’t want', aux: 'Does', tr: 'O', te: '', q: 'mu' },
+    { en: 'We', yes: 'want', no: 'don’t want', aux: 'Do', tr: 'Biz', te: 'uz', q: 'muyuz' },
+    { en: 'You all', yes: 'want', no: 'don’t want', aux: 'Do', tr: 'Siz', te: 'sunuz', q: 'musunuz' },
+    { en: 'They', yes: 'want', no: 'don’t want', aux: 'Do', tr: 'Onlar', te: 'lar', q: 'mı' },
+  ];
+  const KD_POLS = [['yes', 'Want'], ['no', 'Don’t want'], ['q', 'Question']];
+  const KD_LBL = ['I', 'you', 'he / she', 'we', 'you all', 'they'];
+  const kdState = { p: 0, pol: 'yes' };
+  const kdEn = $('[data-kd-kk]');
+  const kdTr = $('[data-kd-tr]');
+  const esc = (t) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  const tileH = (cls, html) => `<span class="tile ${cls}">${html}</span>`;
+  const endH = (t) => (t ? `<i class="kd-end">${esc(t)}</i>` : '');
+  function kdRender(anim) {
+    const d = KD[kdState.p];
+    const pol = kdState.pol;
+    const who = `<i class="kd-end">${esc(pol === 'q' && d.en !== 'I' ? d.en.toLowerCase() : d.en)}</i>`;
+    let enHtml;
+    if (pol === 'yes') enHtml = tileH('', who) + tileH('tile--want', d.yes === 'wants' ? 'want<i class="kd-end">s</i>' : 'want') + tileH('tile--mek', 'to drink') + tileH('tile--obj', 'tea.');
+    else if (pol === 'no') enHtml = tileH('', who) + tileH('tile--want', `<i class="kd-neg">${esc(d.no.split(' ')[0])}</i> want`) + tileH('tile--mek', 'to drink') + tileH('tile--obj', 'tea.');
+    else enHtml = tileH('tile--want', `<i class="kd-neg">${d.aux}</i>`) + tileH('', who) + tileH('tile--want', 'want') + tileH('tile--mek', 'to drink') + tileH('tile--obj', 'tea?');
+    kdEn.innerHTML = enHtml;
+    let trHtml = tileH('', d.tr) + tileH('tile--obj', 'çay') + tileH('tile--mek', 'içmek');
+    if (pol === 'yes') trHtml += tileH('tile--want', `istiyor${endH(d.te)}.`);
+    if (pol === 'no') trHtml += tileH('tile--want', `iste<i class="kd-neg">mi</i>yor${endH(d.te)}.`);
+    if (pol === 'q') trHtml += kdState.p === 5 ? tileH('tile--want', `istiyor${endH('lar')}`) + tileH('tile--want', 'mı?') : tileH('tile--want', 'istiyor') + tileH('tile--want', `${endH(d.q)}?`);
+    kdTr.innerHTML = trHtml;
+    const trForm = pol === 'q' ? (kdState.p === 5 ? 'istiyorlar mı' : `istiyor ${d.q}`) : pol === 'no' ? `istemiyor${d.te}` : `istiyor${d.te}`;
+    const trEnd = pol === 'q' && kdState.p !== 5 ? d.q : d.te;
+    let why = `English: the word “${d.en}” shows who. Turkish: ${kdState.p === 2 ? (pol === 'q' ? 'o has no tail, so mu stands alone' : 'no tail at all — o is the only person without one') : pol === 'q' && kdState.p !== 5 ? `mu carries the person: ${d.q}` : `the tail -${trEnd} does it`}.`;
+    if (kdState.p === 2 && pol === 'yes') why += ' English adds -s here. Turkish adds nothing.';
+    if (pol === 'no') why += ' English adds a whole word, “' + d.no.split(' ')[0] + '.” Turkish slips -me- inside: iste-mi-yor.';
+    if (pol === 'q') why += kdState.p === 5 ? ' No flipping: -lar stays on istiyor, mı goes last.' : ' English flips the order with “' + d.aux + '.” Turkish never flips — it just adds mu' + (kdState.p === 2 ? '.' : ', and the tail jumps onto it.');
+    $('[data-kd-why]').textContent = why;
+    if (!anim) return;
+    speak(`${d.tr} çay içmek ${trForm}${pol === 'q' ? '?' : '.'}`);
+    if (!G) return;
+    const from = $('.kd-end', kdEn);
+    const to = $('.kd-end', kdTr);
+    G.fromTo($$('.tile', kdEn), { y: -10 }, { y: 0, duration: 0.4, ease: 'back.out(3)', stagger: 0.05 });
+    if (from) G.fromTo(from, { scale: 1.6 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1, .4)' });
+    if (from && to) {
+      const a = from.getBoundingClientRect();
+      const b = to.getBoundingClientRect();
+      G.fromTo(to, { x: a.left - b.left, y: a.top - b.top, scale: 1.5, opacity: 0.4 }, { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.9, delay: 0.35, ease: 'power3.inOut' });
+    }
+    G.fromTo('.kd-arc', { strokeDashoffset: 60 }, { strokeDashoffset: 0, duration: 0.9, delay: 0.3, ease: 'power2.inOut' });
+  }
+  const kdChips = (box, list, key) => list.forEach(([val, label], i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.textContent = label;
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.addEventListener('click', () => {
+      kdState[key] = val;
+      $$('button', box).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      kdRender(true);
+    });
+    box.append(b);
+  });
+  kdChips($('[data-kd-persons]'), KD_LBL.map((l, i) => [i, l]), 'p');
+  kdChips($('[data-kd-pols]'), KD_POLS, 'pol');
+  kdRender(false);
+  if (ST) ST.create({ trigger: '.kd-rows', start: 'top 70%', once: true, onEnter: () => kdRender(true) });
+  if (G) G.from('.kd-card', { y: 40, rotation: (i) => (i % 2 ? 2 : -2), duration: 0.7, ease: 'back.out(1.8)', stagger: 0.1, scrollTrigger: { trigger: '.kd-cards', start: 'top 85%', once: true } });
 
   /* ---------- FORMS: bento да / нет / вопрос ---------- */
   const Q = ['muyum', 'musun', 'mu', 'muyuz', 'musunuz'];
@@ -1617,7 +1751,7 @@ addEventListener('DOMContentLoaded', () => {
     ['taxi', 'I want to call a taxi', 'Taksi çağırmak istiyorum.'],
     ['ice', 'Do you want to eat ice cream?', 'Dondurma yemek istiyor musun?'],
     ['ask', 'I want to ask something', 'Bir şey sormak istiyorum.'],
-    ['fish', 'He wants a balık ekmek', 'Balık ekmek yemek istiyor.'],
+    ['fish', 'He wants to eat a balık ekmek', 'Balık ekmek yemek istiyor.'],
     ['tv', 'I don’t want to watch a movie', 'Film izlemek istemiyorum.'],
     ['clock', 'I don’t want to wait', 'Beklemek istemiyorum.'],
     ['bag', 'I don’t want to work today', 'Bugün çalışmak istemiyorum.'],
@@ -1667,7 +1801,11 @@ addEventListener('DOMContentLoaded', () => {
     { inf: 'yüzmek', obj: '', ru: 'to swim' },
     { inf: 'uyumak', obj: '', ru: 'to sleep' },
   ];
-  const WANT = ['want', 'want', 'wants', 'want', 'want', 'want'];
+  /* full English forms per person and mode — nothing is glued */
+  const EN_PRON = ['I', 'You', 'She', 'We', 'You all', 'They'];
+  const EN_YES = ['want', 'want', 'wants', 'want', 'want', 'want'];
+  const EN_NO = ['don’t want', 'don’t want', 'doesn’t want', 'don’t want', 'don’t want', 'don’t want'];
+  const EN_Q = ['Do I want', 'Do you want', 'Does she want', 'Do we want', 'Do you all want', 'Do they want'];
   const POLS = [['yes', 'Want'], ['no', 'Don’t want'], ['q', 'Question']];
   const lab = { v: 0, p: 0, pol: 'yes' };
   const mkChips = (box, list, key) => list.forEach(([val, label], i) => {
@@ -1695,11 +1833,11 @@ addEventListener('DOMContentLoaded', () => {
     const parts = [[PERS[lab.p].p, 'tile--obj'], ...(v.obj ? [[v.obj, 'tile--obj']] : []), [v.inf, v.inf.endsWith('mak') ? 'tile--mak' : 'tile--mek'], [f, 'tile--want']];
     const tiles = parts.map(([t, c]) => { const s = document.createElement('span'); s.className = 'tile ' + c; s.textContent = t; out.append(s); return s; });
     const sentence = parts.map((x) => x[0]).join(' ') + (lab.pol === 'q' ? '' : '.');
-    const ruWant = (lab.pol === 'no' ? 'never ' : '') + WANT[lab.p];
-    const ru = `${PRU[lab.p]} ${ruWant} ${v.ru}${lab.pol === 'q' ? '?' : '.'}`;
-    $('[data-lab-ru]').textContent = ru.charAt(0).toUpperCase() + ru.slice(1);
-    const whyPol = lab.pol === 'no' ? 'The “not” sits inside: iste-mi-yor.' : lab.pol === 'q' ? 'A question is a separate word mi after istiyor.' : 'A plain “want.”';
-    $('[data-lab-why]').textContent = `${v.inf} doesn’t change. Person — ${PERS[lab.p].p}, tail -${PERS[lab.p].s || '∅'}. ${whyPol}`;
+    const en = lab.pol === 'q' ? `${EN_Q[lab.p]} ${v.ru}?` : `${EN_PRON[lab.p]} ${(lab.pol === 'no' ? EN_NO : EN_YES)[lab.p]} ${v.ru}.`;
+    $('[data-lab-ru]').textContent = en;
+    const tail = lab.p === 2 ? (lab.pol === 'q' ? 'o has no tail, so mu stands alone' : 'o has no tail') : lab.pol === 'q' && lab.p !== 5 ? `mu takes the person: ${Q[lab.p]}` : PERS[lab.p].s ? `the tail on istiyor is -${PERS[lab.p].s}` : 'o has no tail';
+    const whyPol = lab.pol === 'no' ? ' No “don’t”: the “not” sits inside, iste-mi-yor.' : lab.pol === 'q' ? (lab.p === 5 ? ' No “do” and no flipping: istiyorlar mı.' : ' No “do” and no flipping — just mu at the end.') : '';
+    $('[data-lab-why]').textContent = `${v.inf} never changes. Person — ${PERS[lab.p].p}: ${tail}.${whyPol}`;
     if (say) speak(sentence);
     if (G && say) {
       G.fromTo(tiles, { y: -30, rotation: (i) => (i % 2 ? 8 : -8) }, { y: 0, rotation: 0, duration: 0.55, ease: 'back.out(2.5)', stagger: 0.07 });
@@ -1841,7 +1979,7 @@ addEventListener('DOMContentLoaded', () => {
   $('[data-fix-all]').addEventListener('click', async () => { for (const c of $$('[data-trap]')) { fixTrap(c); await wait(reduce ? 50 : 700); } });
   if (G) G.from('[data-trap] svg', { rotation: -180, scale: 0.3, duration: 0.8, ease: 'back.out(2)', stagger: 0.1, scrollTrigger: { trigger: '.traps', start: 'top 80%', once: true } });
 
-  /* ---------- CHEAT + финал ---------- */
+  /* ---------- CHEAT + finale ---------- */
   if (G) {
     G.fromTo('[data-poster]', { rotation: -2, scale: 0.92 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-poster]', start: 'top bottom', end: 'center center', scrub: true } });
     G.from('.poster-seal', { scale: 3, rotation: -60, duration: 0.8, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: '[data-poster]', start: 'center 70%', once: true } });
@@ -1933,6 +2071,11 @@ addEventListener('DOMContentLoaded', () => {
     G.from('[data-section="compare"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="compare"] .st-row', start: 'top 92%', once: true } });
     G.fromTo('[data-section="compare"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="compare"]', start: 'top bottom', end: 'bottom top', scrub: true } });
     G.to('[data-section="compare"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="compare"]', toggleActions: 'play pause resume pause' } });
+    G.fromTo('[data-section="en-diff"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="en-diff"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="en-diff"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="en-diff"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="en-diff"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="en-diff"] .st-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="en-diff"] > .dc-cloud', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: { trigger: '[data-section="en-diff"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('[data-section="en-diff"] > .dc-lotus', { y: -10, rotation: 6, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: { trigger: '[data-section="en-diff"]', toggleActions: 'play pause resume pause' } });
     G.fromTo('[data-section="forms"] .st', { rotation: -160, scale: 0.5 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="forms"]', start: 'top 92%', end: 'top 45%', scrub: true } });
     G.to('[data-section="forms"] .st__ring', { rotation: 270, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="forms"]', start: 'top bottom', end: 'bottom top', scrub: true } });
     G.from('[data-section="forms"] .st-t', { y: 16, letterSpacing: '0.4em', duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="forms"] .st-row', start: 'top 92%', once: true } });

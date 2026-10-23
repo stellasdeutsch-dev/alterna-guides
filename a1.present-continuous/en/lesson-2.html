@@ -183,7 +183,7 @@
   .pc-note { display: flex; gap: 10px; align-items: flex-start; }
   .pc-note svg { width: 28px; height: 28px; flex: none; }
 
-  /* свой скроллбар: киноплёнка, по ней едет камера */
+  /* custom scrollbar: film strip with a camera */
   .pc-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 12px; pointer-events: none; }
   .pc-sb__track { position: absolute; inset: 0; pointer-events: auto; touch-action: none; cursor: pointer;
     background: repeating-linear-gradient(90deg, #2E4557 0 7px, #E4F2FB 7px 10px); background-size: 10px 4px; background-repeat: repeat-x; background-position: 0 0, 0 100%; background-color: #3A5468; }
@@ -201,7 +201,7 @@
   }
   @media (min-width: 1024px) { section { padding-top: 96px; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
-  /* пульт камеры */
+  /* camera remote */
   .pc-remote { max-width: 440px; margin: 0 auto 26px; border-radius: 28px; padding: 20px 18px 18px; background: linear-gradient(170deg, #3A5468, #2E4557); color: #fff; box-shadow: var(--sh); animation: pc-rise .9s .2s cubic-bezier(.2,1.3,.4,1) both; }
   .pc-remote__screen { border-radius: 16px; background: linear-gradient(160deg, #FEF8EE, #FBEBD3); padding: 16px 10px; text-align: center; color: var(--gold-ink); }
   .pc-remote__word { font: 600 clamp(28px, 8vw, 46px)/1.05 var(--disp); color: var(--steel-2); min-height: 1.1em; }
@@ -230,6 +230,11 @@
   .pc-hard small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
   .pc-qgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
   .pc-qgrid .pc-chip { padding: 8px 6px; }
+  .pc-qx { min-height: 76px; margin-bottom: 4px; }
+  .pc-qx .pc-piece { font-size: clamp(26px, 7vw, 44px); }
+  .pc-piece--who { color: var(--muted); }
+  .pc-piece--be { color: #fff; background: #5C93B5; }
+  .pc-piece--ing { color: var(--gold-ink); background: var(--gold); }
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -262,7 +267,7 @@
     </div>
   </section>
 
-  <section data-section="negative" data-words="55">
+  <section data-section="negative" data-words="85">
     <span class="pc-tag pc-tag--gold">Button 1 · stop</span>
     <h2 class="pc-split">A shot <em>with “not”</em></h2>
     <p>Guess first. The root is <b lang="tr" class="tr">gel-</b>. How do you say “I’m not coming”?</p>
@@ -289,6 +294,7 @@
     <p class="pc-formula">root + <b lang="tr">mı / mi / mu / mü</b> + <b lang="tr">yor</b> + person</p>
     <p>Picture it: <b lang="tr">mı</b> is a little barrier before <b lang="tr">yor</b>. It closes the shot with a “not.” The person tails are the same, with <b>u</b>.</p>
     <p>The vowel in <b lang="tr">mı</b> follows the same 4-way harmony. Roots ending in a vowel don’t suffer: <a-say>anla → anlamıyorum</a-say></p>
+    <p>English adds a separate word: I’m <b>not</b> coming. Turkish hides “not” inside the verb. So no <b lang="tr">değil</b> here: <s lang="tr">geliyor değilim</s> is wrong. <b lang="tr">değil</b> is for nouns and adjectives, like <span lang="tr">öğrenci değilim</span>.</p>
     <p>The “not now” shot: <a-say>Çay içmiyorum.</a-say> I’m not drinking tea right now. <a-say>Ali çalışmıyor.</a-say> Ali isn’t working.</p>
   </section>
 
@@ -310,11 +316,27 @@
     <p>Only “they” keeps its tail at home: <a-say>Geliyorlar mı?</a-say> Both buttons at once: <a-say>Gelmiyor musun?</a-say> Aren’t you coming?</p>
   </section>
 
+  <section data-section="en-q" data-words="80">
+    <span class="pc-tag pc-tag--gold">English ↔ Turkish</span>
+    <h2 class="pc-split">Who <em>moves</em> in a question</h2>
+    <p>In English the question moves to the front: you are → <b>are you</b>? In Turkish nothing moves to the front. The verb stays last, <b lang="tr">mu</b> joins at the end, and the tail hops onto it.</p>
+    <p>So never start with <b lang="tr">mu</b>: <s lang="tr">Mu geliyorsun?</s> Pick a person and press the button. Watch both rows.</p>
+    <div class="pc-card pc-card--ice">
+      <div class="pc-lbl">English</div>
+      <div class="pc-stage pc-qx" data-eq-en lang="en" aria-live="polite"></div>
+      <div class="pc-lbl">Turkish</div>
+      <div class="pc-stage pc-qx" data-eq-tr lang="tr" aria-live="polite"></div>
+      <div class="pc-qgrid" data-eq-persons></div>
+      <div class="pc-row" style="justify-content:center;margin-top:12px"><button type="button" class="pc-btn" data-eq-go>Make it a question</button></div>
+      <p class="pc-hint" data-ui data-eq-hint style="text-align:center" aria-live="polite"></p>
+    </div>
+  </section>
+
   <section data-section="hard" data-words="66">
     <span class="pc-tag pc-tag--gold">Tricky cases</span>
     <h2 class="pc-split">Roots <em>with attitude</em></h2>
     <p>Four short verbs change their root. Tap a card and see what happens.</p>
-    <p>Why did <b lang="tr">t</b> become <b lang="tr">d</b>? Between vowels the sound softens, and Turkish honestly writes it down.</p>
+    <p>Why did <b lang="tr">t</b> become <b lang="tr">d</b>? Between vowels the sound softens, and Turkish honestly writes it down. Say it: <a-say>gidiyorum</a-say> ≈ “ghee-dee-YOR-oom,” with g as in “give.”</p>
     <div class="pc-hardgrid">
       <button type="button" class="pc-hard" data-hard="gidiyor" data-from="t" data-to="d"><span class="pc-hard__a" lang="tr">git-</span><span class="pc-hard__b" lang="tr">gi<i>t</i>iyor</span><small>t → d between vowels</small></button>
       <button type="button" class="pc-hard" data-hard="ediyor" data-from="t" data-to="d"><span class="pc-hard__a" lang="tr">et-</span><span class="pc-hard__b" lang="tr">e<i>t</i>iyor</span><small>t → d, like git</small></button>
@@ -324,7 +346,7 @@
     <p style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-3px"><circle cx="12" cy="12" r="10" fill="#E6F6EC"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#2E8A57" stroke-width="2.6" stroke-linecap="round"/></svg> With the “stop” button they stay calm: <a-say>gitmiyor, etmiyor, demiyor, yemiyor</a-say></p>
     <div class="pc-card pc-card--gold" style="margin-top:12px">
       <span class="pc-tag pc-tag--gold">One more shot: a plan</span>
-      <p style="margin-top:8px">The camera also shoots what’s already settled: <a-say>Yarın geliyorum.</a-say> I’m coming tomorrow; the ticket’s in my pocket. Not a dream, a done deal.</p>
+      <p style="margin-top:8px">The camera also shoots what’s already settled: <a-say>Yarın geliyorum.</a-say> I’m coming tomorrow; the ticket’s in my pocket. Not a dream, a done deal. English does exactly the same: “I’m coming tomorrow.”</p>
       <button type="button" class="pc-btn pc-btn--ghost" data-plan>Show on the timeline</button>
       <div class="pc-ribbon" aria-hidden="true" style="margin-top:12px">
         <div class="pc-ribbon__base"></div>
@@ -370,26 +392,26 @@
     <div style="text-align:center;margin-top:12px"><button type="button" class="pc-btn pc-btn--ghost" data-chat-reset><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>Rewind the scene</button></div>
   </section>
 
-  <section data-section="traps" data-words="42">
+  <section data-section="traps" data-words="62">
     <span class="pc-tag pc-tag--gold">Traps</span>
-    <h2 class="pc-split">Where everyone <em>trips</em></h2>
-    <p>Almost everyone trips on these. Tap a card to flip it.</p>
+    <h2 class="pc-split">Where English <em>trips you</em></h2>
+    <p>English habits that break Turkish. Tap a card to flip it.</p>
     <div class="pc-traps">
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">gelmeyorum</s><small>A low vowel before yor</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">gelmiyorum</span><small>Only high vowels before yor: mı, mi, mu, mü.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Mu geliyorsun?</s><small>“Are you…?” puts the question first</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Geliyor musun?</span><small>The verb stays put. mu comes after it.</small></span> </span></button>
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyormusun?</s><small>Written together</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyor musun?</span><small>The question is written as a separate word.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Geliyor değilim.</s><small>“Not” as a separate word</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Gelmiyorum.</span><small>“Not” lives inside the verb: gel + mi + yor.</small></span> </span></button>
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyor misin?</s><small>Vowel taken from the root</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyor musun?</span><small>The question looks at yor, so it’s always u.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyor misin?</s><small>Matching the root’s vowel</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyor musun?</span><small>mu looks at yor, so it’s always u.</small></span> </span></button>
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">gitiyorum</s><small>Root left untouched</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">gidiyorum</span><small>t between vowels sounds like d.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">gitiyorum</s><small>Root left alone</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">gidiyorum</span><small>Between vowels t turns into d.</small></span> </span></button>
     </div>
   </section>
 
   <section data-section="video" data-words="12">
     <h2 class="pc-split">Listen <em>once more</em></h2>
-    <p class="pc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FDF3E2"/><path d="M10 8l6 4-6 4z" fill="#E3A340"/></svg><span>Notice: where <b lang="tr">mı</b> goes and how <b lang="tr">mu</b> splits off from the verb.</span></p>
-    <a-video yt="rZmYUlqGh-s" start="580" end="760" title="Present continuous Şimdiki zaman: rules and examples" channel="online school"></a-video>
+    <p class="pc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FDF3E2"/><path d="M10 8l6 4-6 4z" fill="#E3A340"/></svg><span>The video is in Turkish. Listen for the “not” inside the verb (<b lang="tr">mı/mi/mu/mü</b>) and the separate question word <b lang="tr">mu</b> after it.</span></p>
+    <a-video yt="DE9e7G3c8Kk" start="0" end="240" title="A1 – 10 Şimdiki Zaman 2 · Present Continuous 2" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
 
   <section data-section="practice" data-words="1">
@@ -427,7 +449,7 @@
     <h2 class="pc-split">The whole remote <em>on one screen</em></h2>
     <div class="pc-cheat">
       <div class="pc-chi"><span class="pc-n">01</span><span><b>Stop</b><span>root + <span lang="tr">mı/mi/mu/mü</span> + <span lang="tr">yor: gelmiyorum</span></span></span></div>
-      <div class="pc-chi"><span class="pc-n">02</span><span><b>Question</b><span><span lang="tr">yor</span> + <span lang="tr">mu</span> + person: <span lang="tr">geliyor musun?</span></span></span></div>
+      <div class="pc-chi"><span class="pc-n">02</span><span><b>Question</b><span><span lang="tr">yor</span> + <span lang="tr">mu</span> + person: <span lang="tr">geliyor musun?</span> Never <span lang="tr">“Mu geliyorsun?”</span></span></span></div>
       <div class="pc-chi"><span class="pc-n">03</span><span><b>They</b><span lang="tr">geliyorlar mı? · gelmiyorlar mı?</span></span></div>
       <div class="pc-chi"><span class="pc-n">04</span><span><b>t → d</b><span lang="tr">git → gidiyor · et → ediyor</span></span></div>
       <div class="pc-chi"><span class="pc-n">05</span><span><b>e → i</b><span lang="tr">de → diyor · ye → yiyor</span></span></div>
@@ -481,6 +503,7 @@ addEventListener('DOMContentLoaded', () => {
   const ENDS = ['um', 'sun', '', 'uz', 'sunuz', 'lar'];
   const QM = ['muyum', 'musun', 'mu', 'muyuz', 'musunuz', 'mı'];
   const PERS = [['ben', 'I'], ['sen', 'you'], ['o', 'he'], ['biz', 'we'], ['siz', 'you (pl.)'], ['onlar', 'they']];
+  const cap = (t) => t[0].toUpperCase() + t.slice(1);
   const lastV = (s) => [...s].reverse().find((c) => VOW.includes(c));
   /* части формы: [текст, класс] */
   function posStem(root) {
@@ -515,7 +538,7 @@ addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- пульт в крючке ---------- */
-  const RM = { pos: ['anlıyorum', 'I understand'], neg: ['anlamıyorum', 'I don’t understand'], q: ['anlıyor musun?', 'do you understand?'] };
+  const RM = { pos: ['anlıyorum', 'I understand'], neg: ['anlamıyorum', 'I don’t understand'], q: ['anlıyor musun?', 'Do you understand?'] };
   $$('[data-rk]').forEach((b) => b.addEventListener('click', () => {
     const k = b.dataset.rk;
     $$('[data-rk]').forEach((x) => x.classList.toggle('is-on', x === b));
@@ -574,11 +597,12 @@ addEventListener('DOMContentLoaded', () => {
   const qStage = $('[data-q-stage]');
   const qBox = $('[data-q-persons]');
   PERS.forEach(([p, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip' + (i === 1 ? ' is-on' : ''); b.dataset.i = i; b.innerHTML = `<span lang="tr">${p}</span>`; b.setAttribute('aria-label', ru); qBox.append(b); });
-  const QRU = ['I’m coming', 'you’re coming', 'he’s coming', 'we’re coming', 'you (pl.) are coming', 'they’re coming'];
+  const QRU = ['I’m coming.', 'You’re coming.', 'He’s coming.', 'We’re coming.', 'You all are coming.', 'They’re coming.'];
+  const QRUQ = ['Am I coming?', 'Are you coming?', 'Is he coming?', 'Are we coming?', 'Are you all coming?', 'Are they coming?'];
   function qDraw(animate) {
     const ps = pieces('gel', qp, qOn ? 'q' : 'pos');
     qStage.innerHTML = paint(ps);
-    $('[data-q-ru]').textContent = QRU[qp] + (qOn ? '?' : '.');
+    $('[data-q-ru]').textContent = qOn ? QRUQ[qp] : QRU[qp];
     if (A && animate && qOn) {
       const q = qStage.querySelector('.pc-piece--q');
       G.from(q, { x: -70, y: -30, rotation: -25, duration: .8, ease: 'back.out(1.8)' });
@@ -595,6 +619,51 @@ addEventListener('DOMContentLoaded', () => {
     speak(text(pieces('gel', qp, qOn ? 'q' : 'pos')));
   });
   qDraw(false);
+
+
+  /* ---------- English ↔ Turkish: what moves in a question ---------- */
+  const EQP = [['I', 'am'], ['you', 'are'], ['he', 'is'], ['we', 'are'], ['you all', 'are'], ['they', 'are']];
+  const QE = ['yum', 'sun', '', 'yuz', 'sunuz'];
+  let eqOn = false, eqp = 1;
+  const eqEn = $('[data-eq-en]'), eqTr = $('[data-eq-tr]'), eqBox = $('[data-eq-persons]');
+  EQP.forEach(([w], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip' + (i === 1 ? ' is-on' : ''); b.dataset.i = i; b.innerHTML = `<span lang="tr">${PERS[i][0]}</span> · ${w}`; eqBox.append(b); });
+  const pc = (t, c, id) => `<span class="pc-piece pc-piece--${c}" data-id="${id}">${t}</span>`;
+  const eqTrText = () => (eqOn ? (eqp === 5 ? 'Geliyorlar mı?' : `Geliyor mu${QE[eqp]}?`) : `Geliyor${ENDS[eqp]}.`);
+  function eqDraw(animate) {
+    const before = {};
+    if (animate) $$('[data-id]', eqEn.parentNode).forEach((el) => { before[el.closest('[data-eq-en]') ? 'en' + el.dataset.id : 'tr' + el.dataset.id] = el.getBoundingClientRect(); });
+    const [w, be] = EQP[eqp];
+    const W = cap(w), B = cap(be);
+    eqEn.innerHTML = eqOn
+      ? pc(B, 'be', 'be') + pc(w, 'who', 'who') + pc('com', 'stem', 'root') + pc('ing', 'ing', 'ing') + pc('?', 'stem', 'qm')
+      : pc(W, 'who', 'who') + pc(be, 'be', 'be') + pc('com', 'stem', 'root') + pc('ing', 'ing', 'ing') + pc('.', 'stem', 'qm');
+    let tr = pc('Gel', 'stem', 'root') + pc('iyor', 'yor', 'ing');
+    if (!eqOn) tr += (ENDS[eqp] ? pc(ENDS[eqp], 'end', 'end') : '') + pc('.', 'stem', 'qm');
+    else if (eqp === 5) tr += pc('lar', 'end', 'end') + pc('mı', 'q', 'q') + pc('?', 'stem', 'qm');
+    else tr += pc('mu', 'q', 'q') + (QE[eqp] ? pc(QE[eqp], 'end', 'end') : '') + pc('?', 'stem', 'qm');
+    eqTr.innerHTML = tr;
+    const en = eqOn ? `${B} ${w} coming?` : `${W} ${be} coming.`;
+    $('[data-eq-hint]').textContent = !eqOn ? `${en} = ${eqTrText()} Now press the button.`
+      : eqp === 5 ? `${en} = ${eqTrText()} With “they,” -lar stays on the verb and mı goes last.`
+      : eqp === 2 ? `${en} = ${eqTrText()} “He” has no tail, so mu just joins the end.`
+      : `${en} = ${eqTrText()} English moved “${be}” to the front. Turkish moved the tail onto mu.`;
+    if (!A || !animate) return;
+    $$('[data-id]', eqEn.parentNode).forEach((el) => {
+      const k = (el.closest('[data-eq-en]') ? 'en' : 'tr') + el.dataset.id;
+      const r = el.getBoundingClientRect();
+      if (before[k]) G.from(el, { x: before[k].left - r.left, y: before[k].top - r.top, duration: .75, ease: 'power3.inOut' });
+      else G.from(el, { y: -50, scale: .4, rotation: -15, duration: .7, ease: 'bounce.out' });
+    });
+  }
+  $('[data-eq-go]').addEventListener('click', (e) => { eqOn = !eqOn; eqDraw(true); speak(eqTrText()); e.currentTarget.textContent = eqOn ? 'Back to a statement' : 'Make it a question'; });
+  eqBox.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    eqp = +b.dataset.i;
+    $$('button', eqBox).forEach((x) => x.classList.toggle('is-on', x === b));
+    eqDraw(false); speak(eqTrText());
+    if (A) G.from($$('[data-id]', eqEn.parentNode), { y: -16, duration: .4, ease: 'back.out(2.5)', stagger: .03 });
+  });
+  eqDraw(false);
 
   /* ---------- корни с характером ---------- */
   $$('[data-hard]').forEach((b) => b.addEventListener('click', () => {
@@ -620,12 +689,22 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- лаборатория ---------- */
   const VERBS = [['gel', 'come'], ['git', 'go'], ['iç', 'drink'], ['anla', 'understand'], ['çalış', 'work'], ['ye', 'eat'], ['de', 'say'], ['oku', 'read']];
-  const RU = {
-    gel: ['coming', 'coming', 'coming', 'coming', 'coming', 'coming'], git: ['going', 'going', 'going', 'going', 'going', 'going'],
-    iç: ['drinking', 'drinking', 'drinking', 'drinking', 'drinking', 'drinking'], anla: ['understanding', 'understanding', 'understanding', 'understanding', 'understanding', 'understanding'],
-    çalış: ['working', 'working', 'working', 'working', 'working', 'working'], ye: ['eating', 'eating', 'eating', 'eating', 'eating', 'eating'],
-    de: ['talking', 'talking', 'talking', 'talking', 'talking', 'talking'], oku: ['reading', 'reading', 'reading', 'reading', 'reading', 'reading'],
-  };
+  /* English sentence for every person and mode; understand takes do/does, not -ing */
+  const EN = { gel: 'coming', git: 'going', iç: 'drinking', çalış: 'working', ye: 'eating', de: 'saying it', oku: 'reading' };
+  const EN_ST = { anla: ['understand', 'understands'] };
+  const SUBJ = ['I', 'you', 'he', 'we', 'you all', 'they'];
+  const BE = ['am', 'are', 'is', 'are', 'are', 'are'];
+  const BE_POS = ['I’m', 'You’re', 'He’s', 'We’re', 'You all are', 'They’re'];
+  const BE_NEG = ['I’m not', 'You aren’t', 'He isn’t', 'We aren’t', 'You all aren’t', 'They aren’t'];
+  const BE_NQ = ['Aren’t I', 'Aren’t you', 'Isn’t he', 'Aren’t we', 'Aren’t you all', 'Aren’t they'];
+  function enPhrase(r, p, mode) {
+    if (EN_ST[r]) {
+      const v = EN_ST[r][0], v3 = EN_ST[r][p === 2 ? 1 : 0], does = p === 2 ? 'does' : 'do';
+      return { pos: `${cap(SUBJ[p])} ${v3}.`, neg: `${cap(SUBJ[p])} ${does}n’t ${v}.`, q: `${cap(does)} ${SUBJ[p]} ${v}?`, negq: `${cap(does)}n’t ${SUBJ[p]} ${v}?` }[mode];
+    }
+    const g = EN[r];
+    return { pos: `${BE_POS[p]} ${g}.`, neg: `${BE_NEG[p]} ${g}.`, q: `${cap(BE[p])} ${SUBJ[p]} ${g}?`, negq: `${BE_NQ[p]} ${g}?` }[mode];
+  }
   let lv = 0, lp = 0, lm = 'pos';
   const vBox = $('[data-lab-verbs]');
   const pBox = $('[data-lab-persons]');
@@ -638,7 +717,7 @@ addEventListener('DOMContentLoaded', () => {
     labOut.innerHTML = paint(pieces(r, lp, lm));
     const neg = lm === 'neg' || lm === 'negq';
     const q = lm === 'q' || lm === 'negq';
-    $('[data-lab-ru]').textContent = `${PERS[lp][1]}: ${neg ? 'not ' : ''}${RU[r][lp]}${q ? '?' : '.'}`;
+    $('[data-lab-ru]').textContent = enPhrase(r, lp, lm) + (EN_ST[r] ? ' English uses do/does here, Turkish still uses -iyor.' : '');
     if (A) G.from(labOut.children, { y: -30, rotation: () => G.utils.random(-12, 12), duration: .55, ease: 'back.out(2.5)', stagger: .07 });
   }
   vBox.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lv = +b.dataset.i; $$('button', vBox).forEach((x) => x.classList.toggle('is-on', x === b)); labDraw(); });

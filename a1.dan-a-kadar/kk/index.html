@@ -299,6 +299,30 @@ p{margin:0 0 12px}
 .boy{display:none}
 @media (min-width:860px){.boy{display:block;position:absolute;right:0;bottom:-30px;width:230px;height:auto;z-index:-1}}
 .kick svg{transform-origin:50% 50%}
+[data-section="kk-diff"] .btn{background:#fff}
+/* қазақша ↔ түрікше: айырмалар */
+.kd__map{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 18px}
+.kd__map .cw{font-size:clamp(18px,4.4vw,26px);padding:8px 12px}
+.kd__map .kd__x{position:relative;color:var(--grey)}
+.kd__map .kd__x::after{content:'';position:absolute;left:8px;right:8px;top:50%;height:3px;border-radius:3px;background:var(--ak-bad);transform:scaleX(var(--cut,0));transform-origin:0 50%}
+.kd__arr{font:500 28px/1 var(--cond);color:var(--grey)}
+.kd{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
+.kd__c{position:relative;display:flex;flex-direction:column;gap:10px;border:0;text-align:left;cursor:pointer;padding:16px;border-radius:24px;background:#fff;box-shadow:var(--sh-s);min-height:190px}
+.kd__lab{font-size:14px;font-weight:600;color:var(--ink2)}
+.kd__lang{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
+.kd__w{display:flex;flex-wrap:wrap;gap:4px;min-height:52px;align-items:center}
+.kd__w .tl{min-height:44px;font-size:clamp(20px,5vw,28px);padding:0 10px;border-radius:12px;background:var(--panel2)}
+.kd__w .tl--s{background:var(--or)}
+.kd__w .tl--e{background:var(--li)}
+.kd__w .tl--x{background:var(--ak-bad-soft);color:var(--ak-bad)}
+.kd__w .tl--y{background:var(--ink);color:#fff}
+.kd__note{font-size:14px;line-height:1.45;color:var(--ink2);margin:0}
+.kd__c:not(.is-on) .kd__note{opacity:.55}
+.kd__c.is-on{box-shadow:inset 0 0 0 2px var(--li),var(--sh-s)}
+.kd__tap{margin-top:auto;font-size:13px;font-weight:600;color:var(--or)}
+.cmp__row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;width:100%}
+.cmp__lab{width:100%;text-align:center;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
+.kd__foot{margin:16px 0 0;min-height:1.5em;color:var(--ink2)}
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -533,7 +557,7 @@ p{margin:0 0 12px}
       <ol class="legend">
         <li><b>Старт — қайдан.</b> -DAn құйрығы. <span lang="tr" data-say="sabahtan">sabah<i class="m-s">tan</i></span></li>
         <li><b>Мәре — қайда.</b> -(y)A құйрығы. <span lang="tr" data-say="akşama">akşam<i class="m-e">a</i></span></li>
-        <li><b>kadar сөзі — «дейін».</b> Соңында тұрады. <span lang="tr" data-say="akşama kadar">akşama <i class="m-k">kadar</i></span></li>
+        <li><b>kadar сөзі — «дейін».</b> Қазақшадағыдай, соңында тұрады. <span lang="tr" data-say="akşama kadar">akşama <i class="m-k">kadar</i></span></li>
       </ol>
     </div>
     <div class="mini" data-mini data-ok="1" data-say="Evden okula kadar." data-yes="Иә: старт ev-den, мәре okul-a, сосын kadar." data-no="Тәртібіне қара: старт, мәре, kadar. Және әрқайсысының өз құйрығы бар.">
@@ -549,7 +573,7 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-grid"/></svg>құйрықтар</p>
     <h2>Сегіз <span class="l">құйрық</span></h2>
-    <p class="txt rv">Құйрықтар екі ескі ереже бойынша өзгереді. Дауысты: a немесе e. Үнділік: қатаң дауыссыздан кейін d t-ға айналады. Бас — естисің. Екі ережені де білесің, бұл жай қайталау. Қазақтың -дан/-тан, -ға/-қа-сы сияқты.</p>
+    <p class="txt rv">Старт — қазақтың -дан/-ден/-тан/-тен-і: жуан-жіңішке, ұяң-қатаң. Бұны білесің. Мәре оңайырақ: тек -a не -e, дауыстыдан кейін y. Карточканы бас — естисің.</p>
     <div class="seg" role="tablist" aria-label="Старт немесе мәре" id="fSeg" data-ui>
       <button type="button" role="tab" aria-selected="true" data-f="all">Барлығы</button>
       <button type="button" role="tab" aria-selected="false" data-f="s">Старт -DAn</button>
@@ -581,19 +605,40 @@ p{margin:0 0 12px}
   <div class="wrap grid2">
     <div class="txt">
       <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-chat"/></svg>салыстыр</p>
-      <h2>Бәрі <span class="l">керісінше</span></h2>
-      <p class="rv">Орыс тілінде кішкентай сөздер алдында тұрады: «с» утра, «до» вечера.</p>
-      <p class="rv">Түрікшеде құйрықтар артынан жабысады, ал kadar сөйлемді жабады. Қазақша дәл солай құрылған.</p>
-      <p class="rv">Тілдерді ауыстыр да, кішкентай сөздер қайда кететінін қара.</p>
+      <h2>Бәрі <span class="l">қазақшадағыдай</span></h2>
+      <p class="rv">Мұнда қазаққа жаңалық жоқ. Старт — шығыс септік, мәре — барыс септік, соңында «дейін». Түрікшеде ол <b lang="tr" data-say="kadar">kadar</b>.</p>
+      <p class="rv">Тәртіп те, бөліктер саны да бірдей. Мысалды ауыстыр: екі қатар бір-біріне қатар түседі.</p>
     </div>
     <div class="card cmp" id="cmp">
-      <div class="seg" role="tablist" aria-label="Тіл" data-ui>
-        <button type="button" role="tab" aria-selected="true" id="cRu">Орысша</button>
-        <button type="button" role="tab" aria-selected="false" id="cTr">Түрікше</button>
-        <button type="button" role="tab" aria-selected="false" id="cKz">Қазақша</button>
+      <div class="seg" role="tablist" aria-label="Мысал" data-ui>
+        <button type="button" role="tab" aria-selected="true" id="cRu">Уақыт</button>
+        <button type="button" role="tab" aria-selected="false" id="cTr">Орын</button>
+        <button type="button" role="tab" aria-selected="false" id="cKz">Апта</button>
       </div>
       <div class="cmp__st" id="cmpSt" data-ui></div>
       <p class="cap" id="cmpCap" data-ui></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--panel" data-section="kk-diff" data-words="95">
+  <div class="wrap">
+    <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-chat"/></svg>қазақша ↔ түрікше</p>
+    <h2>Бес <span class="l">айырма</span></h2>
+    <p class="txt rv">Схема ортақ. Бірақ құйрықтың іші басқа, әсіресе мәреде. Қазақшада барыс септігінің төрт түрі бар, түрікшеде — екі дауысты және y.</p>
+    <div class="kd__map" id="kdMap" aria-label="Қазақша -ға, -ге, -қа, -ке орнына түрікше -a, -e">
+      <span class="cw kd__x">-ға</span><span class="cw kd__x">-ге</span><span class="cw kd__x">-қа</span><span class="cw kd__x">-ке</span>
+      <span class="kd__arr" aria-hidden="true">→</span>
+      <span class="cw cw--e" lang="tr">-(y)a</span><span class="cw cw--e" lang="tr">-(y)e</span>
+    </div>
+    <p class="txt rv">Карточканы бас: қазақша сөз түрікшеге аударылады, ал өзгерген бөлігі жарқ етеді.</p>
+    <div class="row" style="margin:6px 0 16px"><button type="button" class="btn" id="kdAll" data-ui><svg aria-hidden="true"><use href="#i-replay"/></svg>Бәрін түрікшеге</button></div>
+    <div class="kd" id="kd"></div>
+    <p class="kd__foot" id="kdFoot" aria-live="polite" data-ui>Түрікшеге аударылды: 0 / 5.</p>
+    <div class="mini" data-mini data-ok="1" data-say="Pazartesiden cumaya kadar." data-yes="Иә: дауыстыдан кейін y — cumaya." data-no="Қазақша -ға түрікшеге көшпейді. cuma дауыстыға бітеді: y + a.">
+      <p class="mini__q">«Дүйсенбіден жұмаға дейін» — түрікше…</p>
+      <div class="mini__o"><button type="button" lang="tr">pazartesiden cumağa kadar</button><button type="button" lang="tr">pazartesiden cumaya kadar</button><button type="button" lang="tr">pazartesinen cumaa kadar</button></div>
+      <p class="mini__f" data-ui></p>
     </div>
   </div>
 </section>
@@ -604,7 +649,7 @@ p{margin:0 0 12px}
       <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-tree"/></svg>алгоритм</p>
       <h2>Стартқа <span class="l">екі сұрақ</span></h2>
       <p class="rv">Біріншісі: соңғы дыбыс қатаң ба? Иә — t-ны ал. Екіншісі: соңғы дауысты жуан ба? Иә — a-ны ал.</p>
-      <p class="rv">Сөзді таңда — нүкте сызба бойынша жүгіреді, ал төменде мәре де пайда болады.</p>
+      <p class="rv">Сұрақтар қазақшадан таныс. Тек -нан тармағы жоқ: akşamdan, ondan. Сөзді таңда — нүкте сызба бойынша жүгіреді, төменде мәре де шығады.</p>
       <div class="chips" id="trChips" data-ui></div>
       <p class="tr__res" id="trRes" data-ui>Сөзді таңда.</p>
     </div>
@@ -649,9 +694,9 @@ p{margin:0 0 12px}
     <div class="txt">
       <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-run"/></svg>есте сақтағыш</p>
       <h2>-DAn — старт! <span class="l">Мәреге дейін жүгір</span></h2>
-      <p class="rv">-DAn құйрығы қазақтың «-дан»-ымен бірдей естіледі. Шығыс септік — «қайдан». Демек, осыдан.</p>
-      <p class="rv">Мәре — -(y)A таспасы және kadar сөзі. Соған дейін жүгіріп жеттің — сөйлем бітті.</p>
-      <p class="mn__big rv">-dan — старт, kadar-ға дейін жүгір.</p>
+      <p class="rv">-DAn құйрығы қазақтың -дан-ымен бірдей естіледі. Шығыс септік, «қайдан». Мылтық атылды — жүгір.</p>
+      <p class="rv">Мәре — -(y)A таспасы және kadar, яғни «дейін». Таспаға жеттің — сөйлем бітті.</p>
+      <p class="mn__big rv">-dan — старт, kadar — мәре.</p>
     </div>
   </div>
 </section>
@@ -661,7 +706,7 @@ p{margin:0 0 12px}
     <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-ferry"/></svg>қала</p>
     <h2>Стамбұл <span class="l">басынан аяғына дейін</span></h2>
     <p class="txt rv">Старт аялдамасын, сосын мәре аялдамасын бас. Бағыт сызылады, ал сөйлем өзі құралады. Апостроф ұмытылмаған.</p>
-    <p class="txt rv">Стамбұл екі жағалауда тұр. Мұнда «осыдан анда» деп күн сайын айтады.</p>
+    <p class="txt rv">Стамбұл екі жағалауда тұр. «Кадыкөйден Бешикташқа дейін» мұнда күн сайын айтылады — түрікше, әрине.</p>
     <div class="tablet">
       <div class="tablet__scr city" id="city">
         <div class="city__in">
@@ -680,7 +725,7 @@ p{margin:0 0 12px}
         </div>
       </div>
     </div>
-    <div class="card bubble" id="bub" aria-live="polite" data-ui><p class="bub__tr" id="bubTr" lang="tr">Kadıköy'den Beşiktaş'a kadar gidiyorum.</p><p class="ru" id="bubRu">Кадыкөйден Бешикташқа дейін барамын.</p></div>
+    <div class="card bubble" id="bub" aria-live="polite" data-ui><p class="bub__tr" id="bubTr" lang="tr">Kadıköy'den Beşiktaş'a kadar gidiyorum.</p><p class="ru" id="bubRu">Кадыкөйден Бешикташқа дейін бара жатырмын.</p></div>
   </div>
 </section>
 
@@ -738,8 +783,8 @@ p{margin:0 0 12px}
 <section class="sec sec--panel" data-section="traps" data-words="35">
   <div class="wrap">
     <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-warn"/></svg>тұзақтар</p>
-    <h2><span class="l">Бәрі</span> қайда сүрінеді</h2>
-    <p class="txt rv">Алты мина. Карточканы бас — ол дұрыс жолды көрсетеді.</p>
+    <h2><span class="l">Қазақ</span> қайда сүрінеді</h2>
+    <p class="txt rv">Төрт мина, бәрі қазақшадан келеді. Карточканы бас — ол дұрыс жолды көрсетеді.</p>
     <div class="row" style="margin-bottom:16px"><button type="button" class="btn" id="trapAll" data-ui><svg aria-hidden="true"><use href="#i-check"/></svg>Бәрін түзету</button></div>
     <div class="traps" id="traps"></div>
   </div>
@@ -749,8 +794,8 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-tv"/></svg>видео</p>
     <h2><span class="l">Тағы бір рет</span> тыңда</h2>
-    <p class="txt">Назар аудар: kadar алдында сөз әрқашан барыс септігінде.</p>
-    <a-video yt="opOSj3cmRbk" start="26" end="88" title="Түрікше нөлден: «дейін» және «кейін»" channel="Түрік тілі"></a-video>
+    <p class="txt">Видео орысша. Назар аудар: «дейін» мағынасында kadar алдындағы сөз барыс септігінде — қазақтың «дейін»-і сияқты.</p>
+    <a-video yt="opOSj3cmRbk" start="26" end="88" title="Турецкий с нуля: «до» и «после»" channel="Турецкий язык"></a-video>
   </div>
 </section>
 
@@ -798,7 +843,7 @@ p{margin:0 0 12px}
         <button type="button" class="poster__c" data-say="akşama kadar"><b>Соңында</b><span lang="tr">kadar</span></button>
         <button type="button" class="poster__c" data-say="Kadıköy'den Beşiktaş'a kadar"><b>Қала</b><span lang="tr">Kadıköy'den · Beşiktaş'a</span></button>
       </div>
-      <p class="cap" style="margin-top:14px;color:#fff">Скриншот жасап сақта. Бүкіл сабақ бір экранда: старт, мәре, kadar.</p>
+      <p class="cap" style="margin-top:14px;color:#fff">Скриншот жасап сақта. Қазақшадан айырма: мәреде ғ/қ жоқ, -нан жоқ, атаудан кейін апостроф.</p>
     </div>
     <div class="final rv">
       <p>Спортзал есіңде ме? <b lang="tr" data-say="Dokuzdan dokuza kadar.">Dokuzdan dokuza kadar.</b> Әкімші старт пен мәрені адал айтты. Тек тәуліктің қай уақыты екенін нақтыламады.</p>
@@ -1255,7 +1300,7 @@ safe('rule', () => {
   const playBtn = $('#plPlay');
   const S = [
     { h: `${tileHtml('sabah')}${tileHtml('tan', 's')}`, c: 'Старт: sabah + tan. h — қатаң, сондықтан t.', s: 'sabahtan' },
-    { h: `${tileHtml('akşam')}${tileHtml('a', 'e')}`, c: 'Мәре: akşam + a. Қайда — барыс септігі.', s: 'akşama' },
+    { h: `${tileHtml('akşam')}${tileHtml('a', 'e')}`, c: 'Мәре: akşam + a. Барыс септігі, бірақ ғ/қ-сыз: кеш-ке емес, akşam-a.', s: 'akşama' },
     { h: `${tileHtml('akşam')}${tileHtml('a', 'e')}${tileHtml('kadar', 'k')}`, c: 'kadar сөзі мәреден кейін тұрады.', s: 'akşama kadar' },
     { h: spanTiles('sabah', 'akşam'), c: 'Бәрі бірге: sabahtan akşama kadar.', s: 'sabahtan akşama kadar' },
   ];
@@ -1306,30 +1351,89 @@ safe('forms', () => {
   loopWhenVisible($('#bento'), bob);
 });
 
-/* сравнение: русский, турецкий, казахский */
+/* сравнение: қазақша және түрікше қатар — бес бөлік бес бөлікке түседі */
 safe('compare', () => {
   const st = $('#cmpSt');
   const capEl = $('#cmpCap');
   const tabs = [$('#cRu'), $('#cTr'), $('#cKz')];
   const L = [
-    { w: [['с', 'p'], ['утра', ''], ['до', 'p'], ['вечера', '']], c: '«с» және «до» деген кішкентай сөздер сөздің алдында тұрады.', say: '' },
-    { w: [['sabah', ''], ['tan', 's'], ['akşam', ''], ['a', 'e'], ['kadar', 'p']], c: 'Құйрықтар артынан жабысады, kadar сөйлемді жабады.', say: 'sabahtan akşama kadar' },
-    { w: [['таңертең', ''], ['нен', 's'], ['кеш', ''], ['ке', 'e'], ['дейін', 'p']], c: 'Қазақша: -нен және -ке, үстіне дейін. Схема түрікшедегідей.', say: '' },
+    { kk: [['таңертең', ''], ['нен', 's'], ['кеш', ''], ['ке', 'e'], ['дейін', 'p']], tr: [['sabah', ''], ['tan', 's'], ['akşam', ''], ['a', 'e'], ['kadar', 'p']], c: 'Таңертеңнен кешке дейін. Бес бөлік — бес бөлік: түбір, старт, түбір, мәре, «дейін».', say: 'sabahtan akşama kadar' },
+    { kk: [['үй', ''], ['ден', 's'], ['мектеп', ''], ['ке', 'e'], ['дейін', 'p']], tr: [['ev', ''], ['den', 's'], ['okul', ''], ['a', 'e'], ['kadar', 'p']], c: 'Үйден мектепке дейін. Старт екі тілде де -den/-ден. Мәреде айырма бар — келесі блокта.', say: 'evden okula kadar' },
+    { kk: [['дүйсенбі', ''], ['ден', 's'], ['жұма', ''], ['ға', 'e'], ['дейін', 'p']], tr: [['pazartesi', ''], ['den', 's'], ['cuma', ''], ['ya', 'e'], ['kadar', 'p']], c: 'Дүйсенбіден жұмаға дейін. Қазақша -ға, түрікше -ya. Бұл туралы — төменде.', say: 'pazartesiden cumaya kadar' },
   ];
+  const row = (list, lang) => `<span class="cmp__row">${list.map(([x, c]) => `<span class="cw${c ? ' cw--' + c : ''}" lang="${lang}">${x}</span>`).join('')}</span>`;
   const set = (k) => {
     tabs.forEach((t, j) => t.setAttribute('aria-selected', String(j === k)));
-    st.innerHTML = L[k].w.map(([x, c]) => `<span class="cw${c ? ' cw--' + c : ''}"${k === 1 ? ' lang="tr"' : k === 2 ? ' lang="kk"' : ''}>${x}</span>`).join('');
+    st.innerHTML = `<span class="cmp__lab" data-ui>қазақша</span>${row(L[k].kk, 'kk')}<span class="cmp__lab" data-ui>түрікше</span>${row(L[k].tr, 'tr')}`;
     st.dataset.say = L[k].say;
     capEl.textContent = L[k].c;
-    const ps = st.querySelectorAll('.cw--p');
-    g.from(st.children, { y: 40, rotation: (n) => (n % 2 ? 10 : -10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07 });
-    if (ps.length) g.fromTo(ps, { x: k ? 80 : -80 }, { x: 0, duration: 0.9, ease: 'power3.out' });
-    if (L[k].say) say(L[k].say);
+    const rows = st.querySelectorAll('.cmp__row');
+    g.from(rows[0].children, { y: -40, rotation: (n) => (n % 2 ? 10 : -10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07 });
+    g.from(rows[1].children, { y: 40, rotation: (n) => (n % 2 ? -10 : 10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07, delay: 0.35 });
+    g.fromTo(st.querySelectorAll('.cw--s, .cw--e, .cw--p'), { scale: 1 }, { scale: 1.12, duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out', delay: 1.1, stagger: 0.05 });
+    say(L[k].say);
   };
   tabs.forEach((t, k) => t.addEventListener('click', () => set(k)));
   set(0);
   g.from('#cmp', { x: 90, rotation: 3, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '#cmp', start: 'top 88%', once: true } });
-  if (ST) ScrollTrigger.create({ trigger: '#cmp', start: 'top 55%', once: true, onEnter: () => set(1) });
+});
+
+/* қазақша ↔ түрікше: бес айырма */
+safe('kk-diff', () => {
+  const D = [
+    { lab: 'Мәреде ғ/қ жоқ', kk: [['кеш', ''], ['ке', 'e']], tr: [['akşam', ''], ['a', 'e']], say: 'akşama', n: 'Қазақша мәре -ға/-ге/-қа/-ке. Түрікше — жалғыз дауысты: -a/-e. Қазақшада жалаң -е тек тәуелдіктен кейін келеді: үйім-е.' },
+    { lab: 'Дауыстыдан кейін — y', kk: [['жұма', ''], ['ға', 'e']], tr: [['cuma', ''], ['y', 'y'], ['a', 'e']], say: 'cumaya', n: 'Екі дауысты қатар тұрмайды, арасына y кіреді: cumaya, geceye. ğ емес — y.' },
+    { lab: '-нан/-нен жоқ', kk: [['маусым', ''], ['нан', 's']], tr: [['haziran', ''], ['dan', 's']], say: 'hazirandan', n: 'Қазақша м, н, ң-нен кейін -нан/-нен. Түрікшеде ондай нұсқа жоқ: akşamdan, ekimden, ondan.' },
+    { lab: 't, k жұмсарады', kk: [['төрт', ''], ['ке', 'e']], tr: [['dör', ''], ['d', 'y'], ['e', 'e']], say: 'dörde', n: 'Қазақша құйрық дауыссыздан басталады — t орнында. Түрікше құйрық дауыстыдан: dört → dörde, aralık → aralığa.' },
+    { lab: 'Атаудан кейін апостроф', kk: [['Алматы', ''], ['дан', 's']], tr: [["Ankara'", ''], ['dan', 's']], say: "Ankara'dan", n: "Қазақша қала атауына құйрықты бірге жазамыз. Түрікше — апостроф арқылы: Ankara'dan, Kadıköy'e." },
+  ];
+  const root = $('#kd');
+  const foot = $('#kdFoot');
+  const tiles = (list, lang) => list.map(([x, c]) => `<span class="tl${c ? ' tl--' + c : ''}" lang="${lang}">${esc(x)}</span>`).join('');
+  root.innerHTML = D.map((d, i) => `<button type="button" class="kd__c" data-i="${i}" aria-pressed="false"><span class="kd__lab">${esc(d.lab)}</span><span class="kd__lang" data-ui>қазақша</span><span class="kd__w">${tiles(d.kk, 'kk')}</span><span class="kd__note">${esc(d.n)}</span><span class="kd__tap" data-ui>бас — түрікшеге</span></button>`).join('');
+  const cards = $$('.kd__c', root);
+  const turn = (c, on, quiet) => {
+    const d = D[+c.dataset.i];
+    if (c.classList.contains('is-on') === on) return;
+    c.classList.toggle('is-on', on);
+    c.setAttribute('aria-pressed', String(on));
+    const w = $('.kd__w', c);
+    $('.kd__lang', c).textContent = on ? 'түрікше' : 'қазақша';
+    $('.kd__tap', c).textContent = on ? 'бас — қазақшаға' : 'бас — түрікшеге';
+    w.innerHTML = on ? tiles(d.tr, 'tr') : tiles(d.kk, 'kk');
+    w.dataset.say = on ? d.say : '';
+    g.from(w.children, { y: on ? -46 : 46, rotationX: 80, transformPerspective: 500, duration: 0.6, stagger: 0.07, ease: 'back.out(2.2)' });
+    const hot = w.querySelector('.tl--y, .tl--e, .tl--s');
+    if (hot) g.fromTo(hot, { scale: 1.5, rotation: -14 }, { scale: 1, rotation: 0, duration: 0.8, ease: 'elastic.out(1, .4)', delay: 0.3 });
+    if (on && !quiet) { say(d.say); sparks(c, 10); }
+    const n = cards.filter((x) => x.classList.contains('is-on')).length;
+    foot.textContent = n === D.length ? 'Бесеуі де түрікшеде. Схема ортақ, құйрықтың іші басқа.' : `Түрікшеге аударылды: ${n} / ${D.length}.`;
+  };
+  cards.forEach((c) => c.addEventListener('click', () => turn(c, !c.classList.contains('is-on'))));
+  let all = false;
+  const allBtn = $('#kdAll');
+  allBtn.addEventListener('click', () => {
+    all = !all;
+    allBtn.lastChild.textContent = all ? 'Бәрін қазақшаға' : 'Бәрін түрікшеге';
+    cards.forEach((c, k) => setTimeout(() => turn(c, all, true), reduce ? 0 : k * 160));
+  });
+  /* жоғарғы карта: қазақтың төрт нұсқасы сызылып, түрікшенің екеуі қалады */
+  const xs = $$('#kdMap .kd__x');
+  if (ON) {
+    const t = G.timeline({ scrollTrigger: { trigger: '#kdMap', start: 'top 80%', once: true } });
+    t.from('#kdMap .cw', { y: 30, scale: 0.6, duration: 0.5, stagger: 0.06, ease: 'back.out(2.4)' })
+      .to(xs, { '--cut': 1, duration: 0.35, stagger: 0.12, ease: 'power2.out' })
+      .to(xs, { opacity: 0.7, duration: 0.3 }, '<.2')
+      .from('#kdMap .kd__arr', { x: -30, opacity: 0, duration: 0.4, ease: 'power2.out' })
+      .from('#kdMap .cw--e', { scale: 0, rotation: -20, duration: 0.6, stagger: 0.1, ease: 'back.out(3)' });
+  } else xs.forEach((x) => x.style.setProperty('--cut', 1));
+  g.from(cards, { y: 80, rotation: (i) => (i % 2 ? 4 : -4), duration: 0.8, ease: 'back.out(1.7)', stagger: 0.08, scrollTrigger: { trigger: root, start: 'top 85%', once: true } });
+  if (ON && matchMedia('(hover: hover)').matches) {
+    cards.forEach((c) => {
+      c.addEventListener('pointermove', (e) => { const r = c.getBoundingClientRect(); G.to(c, { rotationY: ((e.clientX - r.left) / r.width - 0.5) * 10, rotationX: -((e.clientY - r.top) / r.height - 0.5) * 8, transformPerspective: 700, duration: 0.3 }); });
+      c.addEventListener('pointerleave', () => G.to(c, { rotationY: 0, rotationX: 0, duration: 0.6, ease: 'elastic.out(1, .5)' }));
+    });
+  }
 });
 
 /* алгоритм-дерево */
@@ -1402,11 +1506,11 @@ safe('mnemonic', () => {
 /* Стамбул: маршрут от и до */
 safe('scene', () => {
   const STOPS = [
-    { w: 'Taksim', ru: 'Таксим', ruTo: 'Таксим', x: 21, y: 32 },
-    { w: 'Beşiktaş', ru: 'Бешикташ', ruTo: 'Бешикташ', x: 37.5, y: 16 },
-    { w: 'Sirkeci', ru: 'Сиркеджи', ruTo: 'Сиркеджи', x: 25, y: 68 },
-    { w: 'Üsküdar', ru: 'Үскүдар', ruTo: 'Үскүдар', x: 66, y: 38 },
-    { w: 'Kadıköy', ru: 'Кадыкөй', ruTo: 'Кадыкөй', x: 76, y: 76 },
+    { w: 'Taksim', ru: 'Таксимнен', ruTo: 'Таксимге', x: 21, y: 32 },
+    { w: 'Beşiktaş', ru: 'Бешикташтан', ruTo: 'Бешикташқа', x: 37.5, y: 16 },
+    { w: 'Sirkeci', ru: 'Сиркеджиден', ruTo: 'Сиркеджиге', x: 25, y: 68 },
+    { w: 'Üsküdar', ru: 'Үскүдардан', ruTo: 'Үскүдарға', x: 66, y: 38 },
+    { w: 'Kadıköy', ru: 'Кадыкөйден', ruTo: 'Кадыкөйге', x: 76, y: 76 },
   ];
   const wrap = $('#stops');
   wrap.innerHTML = STOPS.map((s, i) => `<button type="button" class="stop" style="left:${s.x}%;top:${s.y}%" data-i="${i}" lang="tr">${s.w}</button>`).join('');
@@ -1424,7 +1528,7 @@ safe('scene', () => {
     const s = `${abl(A.w)} ${dat(B.w)} kadar gidiyorum.`;
     $('#bubTr').textContent = s;
     $('#bubTr').dataset.say = s;
-    $('#bubRu').textContent = `Бара жатырмын: ${A.ru} → ${B.ruTo}.`;
+    $('#bubRu').textContent = `${A.ru} ${B.ruTo} дейін бара жатырмын.`;
     g.fromTo(route, { strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 1, ease: 'power2.out' });
     if (ON && window.MotionPathPlugin) G.fromTo('#cityTram', { opacity: 1 }, { duration: 1.2, ease: 'power1.inOut', motionPath: { path: route, align: route, alignOrigin: [0.5, 0.5] } });
     g.fromTo('#bub', { y: 18, scale: 0.94 }, { y: 0, scale: 1, duration: 0.5, ease: 'back.out(2.5)' });
@@ -1496,16 +1600,19 @@ safe('lab', () => {
   const RUD = [['дүйсенбіден', 'дүйсенбіге'], ['сейсенбіден', 'сейсенбіге'], ['сәрсенбіден', 'сәрсенбіге'], ['бейсенбіден', 'бейсенбіге'], ['жұмадан', 'жұмаға'], ['сенбіден', 'сенбіге'], ['жексенбіден', 'жексенбіге']];
   const MON = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık'];
   const RUM = [['қаңтардан', 'қаңтарға'], ['ақпаннан', 'ақпанға'], ['наурыздан', 'наурызға'], ['сәуірден', 'сәуірге'], ['мамырдан', 'мамырға'], ['маусымнан', 'маусымға'], ['шілдеден', 'шілдеге'], ['тамыздан', 'тамызға'], ['қыркүйектен', 'қыркүйекке'], ['қазаннан', 'қазанға'], ['қарашадан', 'қарашаға'], ['желтоқсаннан', 'желтоқсанға']];
+  /* қазақша сағат: әр санның өз шығыс және барыс формасы (-нан, -қа… түрікшеге ұқсамайды) */
+  const KZN = [['бірден', 'бірге'], ['екіден', 'екіге'], ['үштен', 'үшке'], ['төрттен', 'төртке'], ['бестен', 'беске'], ['алтыдан', 'алтыға'], ['жетіден', 'жетіге'], ['сегізден', 'сегізге'], ['тоғыздан', 'тоғызға'], ['оннан', 'онға'], ['он бірден', 'он бірге'], ['он екіден', 'он екіге']];
   const MODES = [
-    { list: NUM, s: 8, e: 4, tpl: (a, b) => `Saat ${a} ${b} kadar çalışıyorum.`, ru: (i, j) => `Сағат ${i + 1}:00 мен ${j + 1}:00 аралығында жұмыс істеймін.`, cap: 'Сағат. Мәреде dört-та тосынсый бар: dörde.' },
-    { list: DAYS, s: 0, e: 4, tpl: (a, b) => `${cap1(a)} ${b} kadar okula gidiyorum.`, ru: (i, j) => `Мектепке ${RUD[i][0]} ${RUD[j][1]} дейін барамын.`, cap: 'Апта. Апта күндерін кіші әріппен жазамыз.' },
-    { list: MON, s: 0, e: 11, tpl: (a, b) => `${cap1(a)} ${b} kadar Türkçe öğreniyorum.`, ru: (i, j) => `Түрікшені ${RUM[i][0]} ${RUM[j][1]} дейін оқимын.`, cap: 'Айлар. Ocak пен aralık мәреде жұмсарады: ocağa, aralığa.' },
+    { list: NUM, s: 8, e: 4, tpl: (a, b) => `Saat ${a} ${b} kadar çalışıyorum.`, ru: (i, j) => `Сағат ${KZN[i][0]} ${KZN[j][1]} дейін жұмыс істеймін.`, cap: 'Сағат. on: қазақша оннан, түрікше ondan. dört: қазақша төртке, түрікше dörde.' },
+    { list: DAYS, s: 0, e: 4, tpl: (a, b) => `${cap1(a)} ${b} kadar okula gidiyorum.`, ru: (i, j) => `${cap1(RUD[i][0])} ${RUD[j][1]} дейін мектепке барамын.`, cap: 'Апта. Апта күндерін кіші әріппен жазамыз. Дауыстыға біткен күн — мәреде y: cumaya.' },
+    { list: MON, s: 0, e: 11, tpl: (a, b) => `${cap1(a)} ${b} kadar Türkçe öğreniyorum.`, ru: (i, j) => `${cap1(RUM[i][0])} ${RUM[j][1]} дейін түрік тілін үйренемін.`, cap: 'Айлар. Ocak пен aralık мәреде жұмсарады: ocağa, aralığa. Қазақша қаңтарға — жұмсармайды.' },
   ];
   const why = (w, isEnd) => {
     const b = bare(w).split(' ').pop();
-    if (isEnd && SOFT[b]) return `${b}: k немесе t дауысты алдында жұмсарады — ${SOFT[b]}.`;
-    if (isEnd) return endsV(b) ? `${b} дауыстыға бітеді — y керек.` : `${b}: соңғы дауысты ${lastV(b)} — -${A2(b)} құйрығы.`;
-    return VOICELESS.includes(b.slice(-1)) ? `${b} қатаң ${b.slice(-1)}-ға бітеді — старт t-мен.` : `${b}: соңы ұяң — старт d-мен.`;
+    if (isEnd && SOFT[b]) return `${b}: құйрық дауысты, сондықтан ${b.slice(-1)} жұмсарады — ${SOFT[b]}.`;
+    if (isEnd) return endsV(b) ? `${b} дауыстыға бітеді — y керек: ${dat(b)}, ğ емес.` : `${b}: соңғы дауысты ${lastV(b)} — жай -${A2(b)}, ғ/қ-сыз.`;
+    if (/[mn]$/.test(b)) return `${b} ${b.slice(-1)}-ға бітеді, бірақ түрікшеде -нан жоқ — ${abl(b)}.`;
+    return VOICELESS.includes(b.slice(-1)) ? `${b} қатаң ${b.slice(-1)}-ға бітеді — старт t-мен.` : `${b}: соңы ұяң не дауысты — старт d-мен.`;
   };
   const sS = $('#lsS');
   const sE = $('#lsE');
@@ -1555,7 +1662,7 @@ safe('lab', () => {
   }));
   setMode(0);
   /* детектор */
-  const DV = ['ev', 'okul', 'sabah', 'iş', 'akşam', 'üç', 'park', 'gece', "Kadıköy", "Beşiktaş", 'kitap', 'pazar', 'market', 'ofis', 'deniz'];
+  const DV = ['ev', 'okul', 'sabah', 'iş', 'akşam', 'üç', 'park', 'gece', "Kadıköy", "Beşiktaş", 'kitap', 'pazar', 'market', 'ofis', 'deniz', 'haziran', 'ekim', 'on'];
   const dW = $('#ldW');
   const dS = $('#ldS');
   const dWhy = $('#ldWhy');
@@ -1595,12 +1702,10 @@ safe('lab', () => {
 /* ловушки */
 safe('traps', () => {
   buildTraps($('#traps'), [
-    { bad: 'Sabahtan akşamda kadar', good: 'Sabahtan akşama kadar', why: 'kadar алдында барыс септігі керек: akşama.' },
-    { bad: 'sabahdan', good: 'sabahtan', why: 'h — қатаң. Қатаңнан кейін d t-ға айналады.' },
-    { bad: 'Kadıköyden', good: "Kadıköy'den", why: 'Қала атауы — құйрық апостроф арқылы.' },
-    { bad: 'cumaa kadar', good: 'cumaya kadar', why: 'Дауыстыдан кейін y тұрады: cuma-ya.' },
-    { bad: 'kadar akşama', good: 'akşama kadar', why: 'Kadar әрқашан мәреден кейін, алдында емес.' },
-    { bad: 'dörte kadar', good: 'dörde kadar', why: 't дауысты алдында жұмсарады: dörde.' },
+    { bad: 'cumağa kadar', good: 'cumaya kadar', why: 'Қазақша «жұмаға» — ғ-мен. Түрікше мәреде ғ/қ жоқ: дауыстыдан кейін тек y.' },
+    { bad: 'hazirannan', good: 'hazirandan', why: 'Қазақша «маусымнан» — м, н-нен кейін -нан. Түрікшеде -nan жоқ: hazirandan, akşamdan.' },
+    { bad: 'dörte kadar', good: 'dörde kadar', why: 'Қазақша «төртке» — t орнында, өйткені құйрық дауыссыздан басталады. Түрікше құйрық — дауысты, t жұмсарады: dörde.' },
+    { bad: 'Kadıköyden', good: "Kadıköy'den", why: 'Қазақша «Алматыдан» деп бірге жазамыз. Түрікше атаудан кейін апостроф: Kadıköy\'den.' },
   ]);
   $('#trapAll').addEventListener('click', () => {
     $$('#traps .trap:not(.is-on)').forEach((t, k) => setTimeout(() => t.click(), reduce ? 0 : k * 220));

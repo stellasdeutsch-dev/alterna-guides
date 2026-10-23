@@ -299,6 +299,13 @@ p{margin:0 0 12px}
 .boy{display:none}
 @media (min-width:860px){.boy{display:block;position:absolute;right:0;bottom:-30px;width:230px;height:auto;z-index:-1}}
 .kick svg{transform-origin:50% 50%}
+#edEx button[aria-selected="false"]{background:#fff}
+.cmp__row{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;align-items:center;width:100%}
+.cmp__lab{width:100%;text-align:center;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--grey)}
+#edT{min-height:132px}
+#edT .tl{font-size:clamp(20px,5vw,32px)}
+#edS button:first-child{font-size:0}
+#edS button:first-child::after{content:"EN";font-size:13px}
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -420,7 +427,7 @@ p{margin:0 0 12px}
     </div>
     <div class="hero__low">
       <div class="card hero__intro">
-        <p class="lead">Any span of time or space in Turkish is built from three pieces. A start with the -DAn tail. A finish with the -(y)A tail. And the word <b lang="tr" data-say="kadar">kadar</b> — “until.” Six minutes — and any schedule is yours.</p>
+        <p class="lead">Any span of time or space in Turkish is built from three pieces. A start with the -DAn tail. A finish with the -(y)A tail. And the word <b lang="tr" data-say="kadar">kadar</b> — “until.” English puts “from” and “to” in front. Turkish puts them at the back. Six minutes — and any schedule is yours.</p>
         <div class="demo" id="demo">
           <p class="cap">Mini demo: pick a start and a finish.</p>
           <div class="row" data-ui>
@@ -459,7 +466,7 @@ p{margin:0 0 12px}
           <div class="chat__ch" id="chatCh"></div>
         </div>
       </div>
-      <button type="button" class="btn" id="chatRe" data-ui><svg aria-hidden="true"><use href="#i-replay"/></svg>First</button>
+      <button type="button" class="btn" id="chatRe" data-ui><svg aria-hidden="true"><use href="#i-replay"/></svg>Start over</button>
     </div>
   </div>
 </section>
@@ -549,7 +556,7 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-grid"/></svg>tails</p>
     <h2>Eight <span class="l">tails</span></h2>
-    <p class="txt rv">The tails change by two old rules. Vowel: a or e. Voicing: after a voiceless consonant, d becomes t. Tap to hear. You already know both rules, this is just review.</p>
+    <p class="txt rv">The tails change by two rules you already know. Vowel: a or e. Voicing: after a voiceless consonant, d becomes t. Tap to hear. Say it right: ş = sh, so akşam is “ak-SHAHM”; c = j in jam, so cuma is “JOO-mah.”</p>
     <div class="seg" role="tablist" aria-label="Start or finish" id="fSeg" data-ui>
       <button type="button" role="tab" aria-selected="true" data-f="all">All</button>
       <button type="button" role="tab" aria-selected="false" data-f="s">Start -DAn</button>
@@ -581,19 +588,54 @@ p{margin:0 0 12px}
   <div class="wrap grid2">
     <div class="txt">
       <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-chat"/></svg>compare</p>
-      <h2>Everything <span class="l">backwards</span></h2>
-      <p class="rv">In English the little words go in front: “from” morning “till” evening.</p>
-      <p class="rv">In Turkish the tails stick on at the back, and kadar closes the phrase. Kazakh works exactly the same way.</p>
-      <p class="rv">Switch languages and watch where the little words go.</p>
+      <h2>One thing <span class="l">is the same</span></h2>
+      <p class="rv">The order of ideas. Start first, finish second — just like “from nine to five.”</p>
+      <p class="rv">Same color means same job. Pick an example and watch the two rows line up. Where the little words end up — that’s the next block.</p>
     </div>
     <div class="card cmp" id="cmp">
-      <div class="seg" role="tablist" aria-label="Language" data-ui>
-        <button type="button" role="tab" aria-selected="true" id="cRu">English</button>
-        <button type="button" role="tab" aria-selected="false" id="cTr">Turkish</button>
-        <button type="button" role="tab" aria-selected="false" id="cKz">Kazakh</button>
+      <div class="seg" role="tablist" aria-label="Example" data-ui>
+        <button type="button" role="tab" aria-selected="true" id="cRu">Time</button>
+        <button type="button" role="tab" aria-selected="false" id="cTr">Place</button>
+        <button type="button" role="tab" aria-selected="false" id="cKz">Week</button>
       </div>
       <div class="cmp__st" id="cmpSt" data-ui></div>
       <p class="cap" id="cmpCap" data-ui></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--panel" data-section="en-diff" data-words="95">
+  <div class="wrap">
+    <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-chat"/></svg>English ↔ Turkish</p>
+    <h2>Four <span class="l">moves</span></h2>
+    <p class="txt rv">English puts little words in front of the noun. Turkish glues them on at the back. Watch one English phrase turn into Turkish, one move at a time.</p>
+    <div class="seg" role="tablist" aria-label="Example" id="edEx" data-ui style="margin-bottom:14px">
+      <button type="button" role="tab" aria-selected="true">Place</button>
+      <button type="button" role="tab" aria-selected="false">Time</button>
+      <button type="button" role="tab" aria-selected="false">Week</button>
+    </div>
+    <div class="grid2">
+      <div class="player card" id="ed">
+        <div class="stage"><div class="tiles" id="edT"></div></div>
+        <p class="stage__cap" id="edCap" data-ui></p>
+        <div class="steps" id="edS" data-ui><button type="button" class="is-on" aria-label="English">0</button><button type="button">1</button><button type="button">2</button><button type="button">3</button><button type="button">4</button></div>
+        <div class="row" style="justify-content:center">
+          <button type="button" class="btn" id="edPrev" aria-label="Back"><svg aria-hidden="true"><use href="#i-prev"/></svg></button>
+          <button type="button" class="btn" id="edPlay" data-ui><svg aria-hidden="true"><use href="#i-play"/></svg>Auto</button>
+          <button type="button" class="btn" id="edNext" aria-label="Next"><svg aria-hidden="true"><use href="#i-next"/></svg></button>
+        </div>
+      </div>
+      <ol class="legend" id="edMoves">
+        <li><b>No “the,” no “a.”</b> Turkish has no articles.</li>
+        <li><b>“from” goes behind.</b> It becomes the ending -DAn: <span lang="tr" data-say="istasyondan">istasyon<i class="m-s">dan</i></span></li>
+        <li><b>“to / until” splits in two.</b> An ending -(y)A on the word, then kadar last: <span lang="tr" data-say="müzeye kadar">müze<i class="m-e">ye</i> <i class="m-k">kadar</i></span></li>
+        <li><b>Endings change, words don’t.</b> “from” is always “from.” -dan can be -den, -tan, -ten.</li>
+      </ol>
+    </div>
+    <div class="mini" data-mini data-ok="2" data-say="Cumaya kadar." data-yes="Yes: the ending -ya on cuma, then kadar. One English word became two pieces." data-no="In Turkish “until” is two pieces: an ending on the word (-ya) and kadar after it.">
+      <p class="mini__q">“Until Friday” in Turkish is…</p>
+      <div class="mini__o"><button type="button" lang="tr">kadar cuma</button><button type="button" lang="tr">cuma kadar</button><button type="button" lang="tr">cumaya kadar</button></div>
+      <p class="mini__f" data-ui></p>
     </div>
   </div>
 </section>
@@ -604,7 +646,7 @@ p{margin:0 0 12px}
       <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-tree"/></svg>algorithm</p>
       <h2>Two questions <span class="l">for the start</span></h2>
       <p class="rv">First: is the last sound voiceless? Yes — take t. Second: is the last vowel a back vowel? Yes — take a.</p>
-      <p class="rv">Pick a word — the dot runs through the diagram, and the finish shows up below.</p>
+      <p class="rv">English has nothing like this: “from” never changes. In Turkish the start tail listens to the word. Pick one — the dot runs through the diagram, and the finish shows up below.</p>
       <div class="chips" id="trChips" data-ui></div>
       <p class="tr__res" id="trRes" data-ui>Pick a word.</p>
     </div>
@@ -661,7 +703,7 @@ p{margin:0 0 12px}
     <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-ferry"/></svg>city</p>
     <h2>Istanbul <span class="l">end to end</span></h2>
     <p class="txt rv">Tap a start stop, then a finish. The route draws itself and the phrase builds itself. The apostrophe isn’t forgotten.</p>
-    <p class="txt rv">Istanbul sits on two shores. People say “from here to there” every day.</p>
+    <p class="txt rv">Istanbul sits on two shores. Everyone here travels from one side to the other every day.</p>
     <div class="tablet">
       <div class="tablet__scr city" id="city">
         <div class="city__in">
@@ -738,8 +780,8 @@ p{margin:0 0 12px}
 <section class="sec sec--panel" data-section="traps" data-words="35">
   <div class="wrap">
     <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-warn"/></svg>traps</p>
-    <h2>Where <span class="l">everyone</span> trips</h2>
-    <p class="txt rv">Six mines. Tap a card — it’ll show the right way.</p>
+    <h2>Where <span class="l">English</span> trips you</h2>
+    <p class="txt rv">Four mines. Each one comes from English habits. Tap a card — it’ll show the right way.</p>
     <div class="row" style="margin-bottom:16px"><button type="button" class="btn" id="trapAll" data-ui><svg aria-hidden="true"><use href="#i-check"/></svg>Fix them all</button></div>
     <div class="traps" id="traps"></div>
   </div>
@@ -749,8 +791,8 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick kick--l" data-ui><svg aria-hidden="true"><use href="#i-tv"/></svg>video</p>
     <h2>Listen <span class="l">once more</span></h2>
-    <p class="txt">Notice: before kadar the word is always in the dative case.</p>
-    <a-video yt="opOSj3cmRbk" start="26" end="88" title="Turkish from scratch: “before” and “after”" channel="Turkish language"></a-video>
+    <p class="txt">All in Turkish, and one level up: it shows kadar doing more than one job. Today you need just one — a word with -a/-e, then kadar. Catch those.</p>
+    <a-video yt="iwXN1r2ShB8" start="0" end="240" title="A2 - Gibi Kadar" channel="Yunus Emre Enstitüsü"></a-video>
   </div>
 </section>
 
@@ -798,7 +840,7 @@ p{margin:0 0 12px}
         <button type="button" class="poster__c" data-say="akşama kadar"><b>Last</b><span lang="tr">kadar</span></button>
         <button type="button" class="poster__c" data-say="Kadıköy'den Beşiktaş'a kadar"><b>City</b><span lang="tr">Kadıköy'den · Beşiktaş'a</span></button>
       </div>
-      <p class="cap" style="margin-top:14px;color:#fff">Save it as a screenshot. The whole lesson on one screen: start, finish, kadar.</p>
+      <p class="cap" style="margin-top:14px;color:#fff">Save it as a screenshot. English: from + word, to + word. Turkish: word + -dan, word + -a, kadar.</p>
     </div>
     <div class="final rv">
       <p>Remember the gym? <b lang="tr" data-say="Dokuzdan dokuza kadar.">Dokuzdan dokuza kadar.</b> The receptionist gave the start and finish honestly. He just didn’t say what time of day.</p>
@@ -1100,7 +1142,7 @@ safe('hero', () => {
   const T = $('#demoT');
   const res = $('#demoRes');
   const st = { s: 'sabah', e: 'akşam' };
-  const RU = { 'sabah|akşam': 'from morning till evening', 'sabah|okul': 'from morning till school', 'ev|akşam': 'from home till evening — odd, but grammatical', 'ev|okul': 'from home to school' };
+  const RU = { 'sabah|akşam': 'from morning till evening', 'sabah|okul': 'from morning to school — odd, but grammatical', 'ev|akşam': 'from home till evening — odd, but grammatical', 'ev|okul': 'from home to school' };
   const draw = (which) => {
     T.innerHTML = spanTiles(st.s, st.e);
     const w = `${abl(st.s)} ${dat(st.e)} kadar`;
@@ -1255,7 +1297,7 @@ safe('rule', () => {
   const playBtn = $('#plPlay');
   const S = [
     { h: `${tileHtml('sabah')}${tileHtml('tan', 's')}`, c: 'Start: sabah + tan. h is voiceless, so t.', s: 'sabahtan' },
-    { h: `${tileHtml('akşam')}${tileHtml('a', 'e')}`, c: 'Finish: akşam + a. To where — dative case.', s: 'akşama' },
+    { h: `${tileHtml('akşam')}${tileHtml('a', 'e')}`, c: 'Finish: akşam + a. English says “to” in front, Turkish adds -a at the back.', s: 'akşama' },
     { h: `${tileHtml('akşam')}${tileHtml('a', 'e')}${tileHtml('kadar', 'k')}`, c: 'The word kadar goes after the finish.', s: 'akşama kadar' },
     { h: spanTiles('sabah', 'akşam'), c: 'All together: sabahtan akşama kadar.', s: 'sabahtan akşama kadar' },
   ];
@@ -1306,30 +1348,119 @@ safe('forms', () => {
   loopWhenVisible($('#bento'), bob);
 });
 
-/* сравнение: русский, турецкий, казахский */
+/* сравнение: английский и турецкий рядом — порядок идей один */
 safe('compare', () => {
   const st = $('#cmpSt');
   const capEl = $('#cmpCap');
   const tabs = [$('#cRu'), $('#cTr'), $('#cKz')];
   const L = [
-    { w: [['from', 'p'], ['morning', ''], ['till', 'p'], ['evening', '']], c: 'The little words “from” and “till” go before the word.', say: '' },
-    { w: [['sabah', ''], ['tan', 's'], ['akşam', ''], ['a', 'e'], ['kadar', 'p']], c: 'The tails stick on at the back, kadar closes the phrase.', say: 'sabahtan akşama kadar' },
-    { w: [['tañerteñ', ''], ['nen', 's'], ['keş', ''], ['ke', 'e'], ['deiın', 'p']], c: 'Kazakh: -nen and -ke plus deiın. Same pattern as Turkish.', say: '' },
+    { en: [['from', 's'], ['morning', ''], ['until', 'e'], ['evening', '']], tr: [['sabah', ''], ['tan', 's'], ['akşam', ''], ['a', 'e'], ['kadar', 'p']], c: 'Start, then finish. Orange is “from,” purple is “until.”', say: 'sabahtan akşama kadar' },
+    { en: [['from', 's'], ['home', ''], ['to', 'e'], ['school', '']], tr: [['ev', ''], ['den', 's'], ['okul', ''], ['a', 'e'], ['kadar', 'p']], c: 'Start, then finish. “to” and “until” are both kadar here.', say: 'evden okula kadar' },
+    { en: [['from', 's'], ['Monday', ''], ['to', 'e'], ['Friday', '']], tr: [['pazartesi', ''], ['den', 's'], ['cuma', ''], ['ya', 'e'], ['kadar', 'p']], c: 'Start, then finish. And no capital letter on Turkish days.', say: 'pazartesiden cumaya kadar' },
   ];
+  const row = (list, lang) => `<span class="cmp__row">${list.map(([x, c]) => `<span class="cw${c ? ' cw--' + c : ''}" lang="${lang}">${x}</span>`).join('')}</span>`;
   const set = (k) => {
     tabs.forEach((t, j) => t.setAttribute('aria-selected', String(j === k)));
-    st.innerHTML = L[k].w.map(([x, c]) => `<span class="cw${c ? ' cw--' + c : ''}"${k === 1 ? ' lang="tr"' : k === 2 ? ' lang="kk"' : ''}>${x}</span>`).join('');
+    st.innerHTML = `<span class="cmp__lab" data-ui>English</span>${row(L[k].en, 'en')}<span class="cmp__lab" data-ui>Turkish</span>${row(L[k].tr, 'tr')}`;
     st.dataset.say = L[k].say;
     capEl.textContent = L[k].c;
-    const ps = st.querySelectorAll('.cw--p');
-    g.from(st.children, { y: 40, rotation: (n) => (n % 2 ? 10 : -10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07 });
-    if (ps.length) g.fromTo(ps, { x: k ? 80 : -80 }, { x: 0, duration: 0.9, ease: 'power3.out' });
-    if (L[k].say) say(L[k].say);
+    const rows = st.querySelectorAll('.cmp__row');
+    g.from(rows[0].children, { y: -40, rotation: (n) => (n % 2 ? 10 : -10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07 });
+    g.from(rows[1].children, { y: 40, rotation: (n) => (n % 2 ? -10 : 10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07, delay: 0.35 });
+    g.fromTo(st.querySelectorAll('.cw--s, .cw--e'), { scale: 1 }, { scale: 1.12, duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out', delay: 1.1, stagger: 0.05 });
+    say(L[k].say);
   };
   tabs.forEach((t, k) => t.addEventListener('click', () => set(k)));
   set(0);
   g.from('#cmp', { x: 90, rotation: 3, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '#cmp', start: 'top 88%', once: true } });
-  if (ST) ScrollTrigger.create({ trigger: '#cmp', start: 'top 55%', once: true, onEnter: () => set(1) });
+});
+
+/* English → Turkish за четыре хода: плитки переезжают (FLIP) */
+safe('en-diff', () => {
+  const X = [
+    { en: ['the', 'station', 'to', 'the', 'museum'], tr: ['istasyon', 'dan', 'müze', 'ye'], say: 'istasyondan müzeye kadar' },
+    { en: ['', 'morning', 'until', '', 'evening'], tr: ['sabah', 'tan', 'akşam', 'a'], say: 'sabahtan akşama kadar' },
+    { en: ['', 'Monday', 'to', '', 'Friday'], tr: ['pazartesi', 'den', 'cuma', 'ya'], say: 'pazartesiden cumaya kadar' },
+  ];
+  const T = $('#edT');
+  const cap = $('#edCap');
+  const sb = $$('#edS button');
+  const playBtn = $('#edPlay');
+  let ex = 0;
+  let i = 0;
+  let timer = null;
+  /* плитка: [ключ, текст, класс, язык] */
+  const state = (k) => {
+    const e = X[ex];
+    const [t1, A, to, t2, B] = e.en;
+    const L = [];
+    if (k === 0) {
+      L.push(['f', 'from', 's', 'en']);
+      if (t1) L.push(['t1', t1, 'g', 'en']);
+      L.push(['a', A, '', 'en'], ['to', to, 'e', 'en']);
+      if (t2) L.push(['t2', t2, 'g', 'en']);
+      L.push(['b', B, '', 'en']);
+    } else if (k === 1) L.push(['f', 'from', 's', 'en'], ['a', A, '', 'en'], ['to', to, 'e', 'en'], ['b', B, '', 'en']);
+    else if (k === 2) L.push(['a', A, '', 'en'], ['f', `-${e.tr[1]}`, 's', 'tr'], ['to', to, 'e', 'en'], ['b', B, '', 'en']);
+    else if (k === 3) L.push(['a', A, '', 'en'], ['f', `-${e.tr[1]}`, 's', 'tr'], ['b', B, '', 'en'], ['to', `-${e.tr[3]}`, 'e', 'tr'], ['kd', 'kadar', 'k', 'tr']);
+    else L.push(['a', e.tr[0], '', 'tr'], ['f', e.tr[1], 's', 'tr'], ['b', e.tr[2], '', 'tr'], ['to', e.tr[3], 'e', 'tr'], ['kd', 'kadar', 'k', 'tr']);
+    return L;
+  };
+  const caps = (k) => {
+    const e = X[ex];
+    return [
+      `English: the little words go in front of the noun — “from … ${e.en[2]} …”.`,
+      e.en[0] ? 'Move 1. Turkish has no “the” and no “a.” Drop them.' : 'Move 1. Turkish has no “the” and no “a.” Nothing to drop here — easy.',
+      `Move 2. “from” jumps behind the word and becomes an ending: -${e.tr[1]}.`,
+      `Move 3. “${e.en[2]}” splits in two: an ending on the word (-${e.tr[3]}) and kadar at the very end.`,
+      `Move 4. Turkish words in. Done: ${e.say}.`,
+    ][k];
+  };
+  const html = (L) => L.map(([k, x, c, lang]) => `<span class="tl${c ? ' tl--' + c : ''}" data-k="${k}" lang="${lang}">${esc(x)}</span>`).join('');
+  const render = (k, animate) => {
+    const old = {};
+    $$('.tl', T).forEach((el) => { old[el.dataset.k] = el.getBoundingClientRect(); });
+    const L = state(k);
+    const keys = L.map((x) => x[0]);
+    const gone = $$('.tl', T).filter((el) => !keys.includes(el.dataset.k));
+    const paint = () => {
+      T.innerHTML = html(L);
+      T.dataset.say = k === 4 ? X[ex].say : '';
+      cap.textContent = caps(k);
+      sb.forEach((b, j) => b.classList.toggle('is-on', j === k));
+      if (!animate) return;
+      $$('.tl', T).forEach((el) => {
+        const o = old[el.dataset.k] || (el.dataset.k === 'kd' ? old.to : null);
+        const n = el.getBoundingClientRect();
+        if (o) g.from(el, { x: o.left - n.left, y: o.top - n.top, duration: 0.8, ease: 'power3.inOut' });
+        else g.from(el, { scale: 0, rotation: -20, duration: 0.6, ease: 'back.out(3)' });
+      });
+      const hot = $$('.tl--s, .tl--e, .tl--k', T);
+      g.fromTo(hot, { scale: 1 }, { scale: 1.15, duration: 0.2, yoyo: true, repeat: 1, delay: 0.8, stagger: 0.06 });
+      g.fromTo(cap, { y: 14 }, { y: 0, duration: 0.5, ease: 'power2.out' });
+      if (k === 4) { say(X[ex].say); sparks(T, 14); }
+    };
+    if (animate && ON && gone.length) { G.to(gone, { y: -50, opacity: 0, rotation: 12, duration: 0.35, ease: 'power2.in', onComplete: paint }); }
+    else paint();
+  };
+  const show = (k) => { i = (k + 5) % 5; render(i, true); };
+  const stop = () => { clearInterval(timer); timer = null; playBtn.classList.remove('is-on'); };
+  const play = () => { stop(); playBtn.classList.add('is-on'); timer = setInterval(() => show(i + 1), 2600); };
+  sb.forEach((b, j) => b.addEventListener('click', () => { stop(); show(j); }));
+  $('#edPrev').addEventListener('click', () => { stop(); show(i - 1); });
+  $('#edNext').addEventListener('click', () => { stop(); show(i + 1); });
+  playBtn.addEventListener('click', () => (timer ? stop() : play()));
+  const tabs = $$('#edEx button');
+  tabs.forEach((t, k) => t.addEventListener('click', () => {
+    stop(); ex = k; i = 0;
+    tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    T.innerHTML = '';
+    render(0, true);
+  }));
+  render(0, false);
+  whenVisible($('#ed'), () => { if (!timer && !reduce) play(); }, stop);
+  g.from('#ed', { y: 80, rotation: -2, duration: 0.9, ease: 'back.out(1.6)', scrollTrigger: { trigger: '#ed', start: 'top 88%', once: true } });
+  g.from('#edMoves li', { x: 70, rotation: 2, duration: 0.7, ease: 'back.out(1.8)', stagger: 0.12, scrollTrigger: { trigger: '#edMoves', start: 'top 88%', once: true } });
 });
 
 /* алгоритм-дерево */
@@ -1496,16 +1627,17 @@ safe('lab', () => {
   const RUD = [['Monday', 'Monday'], ['Tuesday', 'Tuesday'], ['Wednesday', 'Wednesday'], ['Thursday', 'Thursday'], ['Friday', 'Friday'], ['Saturday', 'Saturday'], ['Sunday', 'Sunday']];
   const MON = ['ocak', 'şubat', 'mart', 'nisan', 'mayıs', 'haziran', 'temmuz', 'ağustos', 'eylül', 'ekim', 'kasım', 'aralık'];
   const RUM = [['January', 'January'], ['February', 'February'], ['March', 'March'], ['April', 'April'], ['May', 'May'], ['June', 'June'], ['July', 'July'], ['August', 'August'], ['September', 'September'], ['October', 'October'], ['November', 'November'], ['December', 'December']];
+  const EN = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve'];
   const MODES = [
-    { list: NUM, s: 8, e: 4, tpl: (a, b) => `Saat ${a} ${b} kadar çalışıyorum.`, ru: (i, j) => `I work from ${i + 1} to ${j + 1}.`, cap: 'Hours. dört has a surprise at the finish: dörde.' },
+    { list: NUM, s: 8, e: 4, tpl: (a, b) => `Saat ${a} ${b} kadar çalışıyorum.`, ru: (i, j) => `I work from ${EN[i]} to ${EN[j]}.`, cap: 'Hours. dört has a surprise at the finish: dörde. In English “four” never changes.' },
     { list: DAYS, s: 0, e: 4, tpl: (a, b) => `${cap1(a)} ${b} kadar okula gidiyorum.`, ru: (i, j) => `I go to school from ${RUD[i][0]} to ${RUD[j][1]}.`, cap: 'Week. Days of the week are written in lowercase in Turkish.' },
     { list: MON, s: 0, e: 11, tpl: (a, b) => `${cap1(a)} ${b} kadar Türkçe öğreniyorum.`, ru: (i, j) => `I study Turkish from ${RUM[i][0]} to ${RUM[j][1]}.`, cap: 'Months. Ocak and aralık soften at the finish: ocağa, aralığa.' },
   ];
   const why = (w, isEnd) => {
     const b = bare(w).split(' ').pop();
     if (isEnd && SOFT[b]) return `${b}: k or t softens before a vowel — ${SOFT[b]}.`;
-    if (isEnd) return endsV(b) ? `${b} ends in a vowel — you need y.` : `${b}: last vowel ${lastV(b)} — tail -${A2(b)}.`;
-    return VOICELESS.includes(b.slice(-1)) ? `${b} ends in voiceless ${b.slice(-1)} — the start takes t.` : `${b}: voiced ending — the start takes d.`;
+    if (isEnd) return endsV(b) ? `${b} ends in a vowel — y goes in between: ${dat(b)}.` : `${b}: last vowel ${lastV(b)} — tail -${A2(b)}. That’s your “to.”`;
+    return VOICELESS.includes(b.slice(-1)) ? `${b} ends in voiceless ${b.slice(-1)} — the start takes t.` : `${b} ends in a vowel or a voiced sound — the start takes d.`;
   };
   const sS = $('#lsS');
   const sE = $('#lsE');
@@ -1595,12 +1727,10 @@ safe('lab', () => {
 /* ловушки */
 safe('traps', () => {
   buildTraps($('#traps'), [
-    { bad: 'Sabahtan akşamda kadar', good: 'Sabahtan akşama kadar', why: 'Before kadar you need the dative: akşama.' },
-    { bad: 'sabahdan', good: 'sabahtan', why: 'h is voiceless. After a voiceless sound, d becomes t.' },
-    { bad: 'Kadıköyden', good: "Kadıköy'den", why: 'A city name — the tail goes after an apostrophe.' },
-    { bad: 'cumaa kadar', good: 'cumaya kadar', why: 'After a vowel comes y: cuma-ya.' },
-    { bad: 'kadar akşama', good: 'akşama kadar', why: 'Kadar always comes after the finish, not before.' },
-    { bad: 'dörte kadar', good: 'dörde kadar', why: 't softens before a vowel: dörde.' },
+    { bad: 'kadar akşama', good: 'akşama kadar', why: 'English says “until evening”: the little word first. Turkish says it last: akşama kadar.' },
+    { bad: 'akşam kadar', good: 'akşama kadar', why: 'English “evening” has no ending, so it’s easy to forget one. When kadar means “until,” it needs -(y)A before it: akşama.' },
+    { bad: 'sabahdan', good: 'sabahtan', why: 'English “from” never changes. Turkish -dan does: after a voiceless h, d becomes t.' },
+    { bad: 'cumaa kadar', good: 'cumaya kadar', why: 'English happily writes two vowels in a row. Turkish puts y between them: cuma-y-a.' },
   ]);
   $('#trapAll').addEventListener('click', () => {
     $$('#traps .trap:not(.is-on)').forEach((t, k) => setTimeout(() => t.click(), reduce ? 0 : k * 220));

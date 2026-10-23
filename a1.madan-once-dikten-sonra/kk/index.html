@@ -314,6 +314,7 @@ p{margin:0 0 12px}
 .two__c--t{background:var(--tl-soft)}
 .two__c small{display:block;font:800 11px/1 var(--disp);letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-bottom:6px}
 .two__c b{font-size:18px}
+.two__c .ru{display:block;margin-top:6px}
 .lab__why{min-height:3em;margin:10px 0 0;color:var(--ink2);text-align:center}
 .flipbox{display:grid;gap:6px;place-items:center;min-height:130px;margin:12px 0;padding:16px;border-radius:18px;background:var(--panel);text-align:center}
 .flipbox b{font:800 clamp(18px,4.4vw,26px)/1.2 var(--disp)}
@@ -336,6 +337,24 @@ p{margin:0 0 12px}
 .cx__boxes button.ok{box-shadow:0 0 0 4px var(--ak-good)}
 .cx__boxes button.no{box-shadow:0 0 0 4px var(--ak-bad)}
 .cx__f{min-height:2.4em;margin:10px 0 0}
+.kd{display:grid;gap:12px;color:var(--ink)}
+.kd__row{display:grid;gap:6px;padding:12px;border-radius:18px;background:var(--panel)}
+.kd__row--tr{background:var(--tl-soft)}
+.kd__row small{font:800 11px/1 var(--disp);letter-spacing:.12em;text-transform:uppercase;color:var(--grey)}
+.kd__row .tiles{justify-content:flex-start;min-height:60px;perspective:600px}
+.kd .tl{min-height:46px;font-size:clamp(17px,4.4vw,24px);padding:0 12px}
+.tl--q{background:#fff;color:#b9bec4;box-shadow:inset 0 0 0 2px #e6e8eb}
+.tl.is-diff{box-shadow:0 0 0 3px var(--pk),0 10px 22px -16px rgba(20,40,40,.5)}
+.kd__w{margin:0;text-align:center;font-weight:700;min-height:1.5em}
+.kd__w b{color:var(--pk)}
+.kd__ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.kd__ctl .seg{box-shadow:none;background:var(--panel)}
+.kd__notes{display:grid;gap:10px;margin:16px 0 0;padding:0;list-style:none;counter-reset:kd}
+.kd__n{position:relative;padding:12px 14px 12px 52px;border-radius:16px;background:#fff;box-shadow:var(--sh-s);font-size:15px;line-height:1.4;color:var(--ink2);transition:box-shadow .3s}
+.kd__n::before{counter-increment:kd;content:counter(kd);position:absolute;left:12px;top:12px;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:var(--g-tl);color:#fff;font:800 14px/1 var(--disp)}
+.kd__n b{color:var(--ink)}
+.kd__n.is-on{box-shadow:0 0 0 3px var(--pk),var(--sh-s)}
+.kd__n.is-on::before{background:var(--g-pk)}
 .exs{display:grid;gap:22px}
 .sec--pk a-quiz{color:var(--ink)}
 .poster{position:relative;border-radius:18px;padding:clamp(20px,5vw,44px);background:#fff;box-shadow:var(--sh);border:2px solid var(--line);overflow:hidden}
@@ -458,7 +477,7 @@ p{margin:0 0 12px}
         <p class="lead hero__lead">Екі құйрық әрекеттерді ретімен қояды. Посылканы бақылау сияқты: не бұрын болды, не кейін. <b lang="tr" data-say="madan önce">-mAdAn önce</b> — ...мас бұрын. <b lang="tr" data-say="dıktan sonra">-DIktAn sonra</b> — ...ғаннан кейін.</p>
         <p class="hero__lead">Он минут — және сен бүкіл күніңді түрікше айтып бересің: кофеге дейін не, жұмыстан кейін не.</p>
         <div class="card demo" id="demo">
-          <p class="cap">Шағын демо: етістік пен жақты таңда.</p>
+          <p class="cap">Шағын демо: етістікті және «бұрын» не «кейін» таңда. Астында — қазақша баламасы.</p>
           <div class="row" data-ui>
             <button type="button" class="chip is-on" id="dV1" lang="tr">uyu</button>
             <button type="button" class="chip" id="dV2" lang="tr">ye</button>
@@ -579,11 +598,11 @@ p{margin:0 0 12px}
         </div>
       </div>
       <div class="card cmp" id="cmp">
-        <p class="cap">Бір ой үш тілде. Ауыстырып көр.</p>
+        <p class="cap">Бір ой екі тілде. Қазақшаны білсең, жартысын білесің. Ауыстырып көр.</p>
         <div class="seg" role="tablist" aria-label="Тіл" data-ui>
-          <button type="button" role="tab" aria-selected="true" id="cRu">Орысша</button>
+          <button type="button" role="tab" aria-selected="true" id="cRu">Қазақша</button>
           <button type="button" role="tab" aria-selected="false" id="cTr">Түрікше</button>
-          <button type="button" role="tab" aria-selected="false" id="cKz">Қазақша</button>
+          <button type="button" role="tab" aria-selected="false" id="cKz">«Кейін»</button>
         </div>
         <div class="cmp__st" id="cmpSt" data-ui></div>
         <p class="cap" id="cmpCap" data-ui></p>
@@ -602,25 +621,25 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-clock"/></svg>бұрын</p>
     <h2>Өз <span class="p">«бұрын» тарифіңді</span> таңда</h2>
-    <p class="txt rv">Схема қарапайым: етістік + mA + dAn + önce. Құйрық тек үндестік бойынша екіге өзгереді: madan немесе meden. Қатаң дыбыстар мұнда маңызды емес: дауыстыдан кейін әрқашан d.</p>
-    <p class="txt rv">Бұл сабақтағы ең арзан тариф. Бір схема, екі нұсқа, тосынсыйсыз. Бір форманы үйрендің — бәрін білесің. Карточканы бас — барлық мысалды қатарынан естисің.</p>
+    <p class="txt rv">«Ұйықтамас бұрын» дейсің бе? Құттықтаймыз, жартысын білесің. Түрікше де болымсыз -ma бар: uyu-ma-dan önce.</p>
+    <p class="txt rv">Айырмасы екеу. Біріншісі: -с орнында -dan тұр. Екіншісі: m ешқашан п не б болмайды. Қазақша шықпас, жазбас — түрікше çıkmadan, yazmadan. Құйрық тек жуан-жіңішкеге қарайды: madan не meden. Бұл сабақтағы ең арзан тариф. Карточканы бас — мысалдарды қатарынан естисің.</p>
     <div class="tariffs">
       <button type="button" class="tariff" data-say="uyumadan önce, çıkmadan önce, yapmadan önce, başlamadan önce">
         <span class="tariff__tk" data-ui>a ı o u</span>
         <span class="tariff__h" lang="tr">-madan önce</span>
-        <ul class="tariff__l" lang="tr"><li>uyumadan önce</li><li>çıkmadan önce</li><li>yapmadan önce</li><li>başlamadan önce</li><li class="no">uyudan önce</li></ul>
+        <ul class="tariff__l" lang="tr"><li>uyumadan önce</li><li>çıkmadan önce</li><li>yapmadan önce</li><li>başlamadan önce</li><li class="no">uyumaz önce</li></ul>
         <span class="tariff__p" data-ui><s>2 ереже</s> <b>1 ереже</b></span> <span class="tariff__st" data-ui>ma = әлі емес</span>
       </button>
       <button type="button" class="tariff tariff--t" data-say="yemeden önce, gelmeden önce, gitmeden önce, binmeden önce">
         <span class="tariff__tk" data-ui>e i ö ü</span>
         <span class="tariff__h" lang="tr">-meden önce</span>
-        <ul class="tariff__l" lang="tr"><li>yemeden önce</li><li>gelmeden önce</li><li>gitmeden önce</li><li>binmeden önce</li><li class="no">yemadan önce</li></ul>
+        <ul class="tariff__l" lang="tr"><li>yemeden önce</li><li>gelmeden önce</li><li>gitmeden önce</li><li>binmeden önce</li><li class="no">içpeden önce</li></ul>
         <span class="tariff__p" data-ui><s>2 ереже</s> <b>1 ереже</b></span> <span class="tariff__st" data-ui>me = әлі емес</span>
       </button>
     </div>
-    <div class="mini" data-mini data-ok="1" data-say="gitmeden önce" data-yes="Иә: дауысты i → -meden." data-no="git-тегі дауысты — i. Демек -meden, ешқандай t-сыз.">
+    <div class="mini" data-mini data-ok="1" data-say="gitmeden önce" data-yes="Иә: дауысты i → -meden. Ал m — әрқашан m." data-no="git t-ға бітеді, бірақ түрікше m өзгермейді: gitmeden. Қазақшадағы «кетпес»-тің п-сы мұнда жоқ. Дауысты i → -meden.">
       <p class="mini__q"><b lang="tr">git</b> + «бұрын» → ?</p>
-      <div class="mini__o"><button type="button" lang="tr">gittmeden önce</button><button type="button" lang="tr">gitmeden önce</button><button type="button" lang="tr">gitmadan önce</button></div>
+      <div class="mini__o"><button type="button" lang="tr">gitpeden önce</button><button type="button" lang="tr">gitmeden önce</button><button type="button" lang="tr">gitmadan önce</button></div>
       <p class="mini__f" data-ui></p>
     </div>
   </div>
@@ -631,8 +650,8 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick kick--t" data-ui><svg aria-hidden="true"><use href="#i-box"/></svg>кейін</p>
     <h2><span class="t">«Кейінге»</span> не кіреді</h2>
-    <p class="txt rv">Схема: етістік + DI + k + tAn + sonra. Мұнда екі ескі ереже де жұмыс істейді. Үндестік төртке: ı, i, u, ü. Қатаң дауыссыздан кейін d t-ға айналады. Сегіз нұсқа — бәрі ереже бойынша. Қазақшадағы «-ғаннан кейін» сияқты: есімше + шығыс септік + кейін.</p>
-    <p class="txt rv">Қорқудың қажеті жоқ. Сен d мен t арасында және төрт дауыстының арасында таңдай аласың. Мұнда екі дағды бір мезетте жұмыс істейді. Карточкаларды сүзіп, ұяңдарды қатаңдармен салыстыр.</p>
+    <p class="txt rv">Мұнда қазақша — дайын шпаргалка. Оқы-ған-нан кейін = oku-duk-tan sonra. -DIk — біздің есімше -ған. -tAn — шығыс септік. Қатаңнан кейін d t-ға айналады: шыққан — çıktıktan. Бұл да таныс.</p>
+    <p class="txt rv">Жаңасы біреу: дауысты төртеу, екеу емес. Қазақша оқығаннан, көргеннен — а не е. Түрікше okuduktan, gördükten — ı, i, u, ü. Етістікте u не ü болса, құйрық та еріндік болады. Карточкаларды сүзіп, ұяңдарды қатаңдармен салыстыр.</p>
     <div class="seg" role="tablist" aria-label="Сүзгі" id="sSeg" data-ui>
       <button type="button" role="tab" aria-selected="true" data-f="all">Барлығы</button>
       <button type="button" role="tab" aria-selected="false" data-f="d">ұяң соңы</button>
@@ -652,6 +671,34 @@ p{margin:0 0 12px}
       <p class="mini__q"><b lang="tr">yap</b> + «кейін» → ?</p>
       <div class="mini__o"><button type="button" lang="tr">yapdıktan</button><button type="button" lang="tr">yaptikten</button><button type="button" lang="tr">yaptıktan</button></div>
       <p class="mini__f" data-ui></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-section="kk-diff" data-words="95">
+  <svg class="float deco-heart" style="right:3%;top:3%" data-sp="-50" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 10c0 5.8-8 11-8 11z" fill="#f53f97"/></svg>
+  <div class="wrap grid2">
+    <div class="txt">
+      <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-route"/></svg>қазақша ↔ түрікше</p>
+      <h2>Туыс, бірақ <span class="p">егіз емес</span></h2>
+      <p class="rv">Қазақша сөзді таңда да, «Түрікшеге» бас. Қазақ қораптары түрік қораптарына ауысады. Көгілдір — сәйкес келеді. Қызғылт жиек — қазақшаша жазсаң, қате кетеді.</p>
+      <ol class="kd__notes" id="kdNotes">
+        <li class="kd__n rv" data-n="1"><b>«Бұрын»: -с орнында -dan.</b> <span lang="tr">uyu-ma-dan önce</span>, ұйықта-ма-с бұрын. Сондықтан <span lang="tr">uyumaz önce</span> емес.</li>
+        <li class="kd__n rv" data-n="2"><b>m — әрқашан m.</b> Шықпас, жазбас — бірақ <span lang="tr">çıkmadan, yazmadan</span>. Түрікшеде п мен б жоқ.</li>
+        <li class="kd__n rv" data-n="3"><b>«Кейін»: дауысты төртеу.</b> Оқығаннан → <span lang="tr">okuduktan</span>, көргеннен → <span lang="tr">gördükten</span>.</li>
+        <li class="kd__n rv" data-n="4"><b><span lang="tr">sonra</span> шығыссыз жүрмейді.</b> «Келген соң» дейміз, ал түрікше тек <span lang="tr">geldikten sonra</span>.</li>
+      </ol>
+    </div>
+    <div class="card kd" id="kd">
+      <div class="chips" id="kdV" data-ui></div>
+      <div class="kd__ctl" data-ui>
+        <span class="seg" role="tablist" aria-label="Бұрын не кейін"><button type="button" role="tab" aria-selected="true" id="kdO">бұрын</button><button type="button" role="tab" aria-selected="false" id="kdS">кейін</button></span>
+        <button type="button" class="tkt tkt--s" id="kdGo">Түрікшеге</button>
+      </div>
+      <div class="kd__row" data-ui><small>қазақша</small><div class="tiles" id="kdKk"></div></div>
+      <div class="kd__row kd__row--tr" data-ui><small>түрікше</small><div class="tiles" id="kdTr"></div></div>
+      <p class="kd__w" id="kdW" data-ui></p>
+      <p class="lab__why" id="kdWhy" data-ui></p>
     </div>
   </div>
 </section>
@@ -685,7 +732,7 @@ p{margin:0 0 12px}
       <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-heart"/></svg>есте сақтағыш</p>
       <h2>Әлі емес — <span class="p">әлде болды</span></h2>
       <p class="rv">-mA құйрығы болымсыздыққа ұқсайды. Қорықпа: мұнда ол «әлі емес» дегенді білдіреді. Қазақшадағы «ұйықтамас бұрын» сияқты — онда да -ма бар. Әлі ұйықтаған жоқ — демек, ұйқыға дейін.</p>
-      <p class="rv">-DI құйрығы өткен шаққа ұқсайды. Солай да: «болды». Жеп қойды — демек, тамақтан кейін.</p>
+      <p class="rv">-DIk құйрығы — біздің -ған: жеген, келген. Іс болып қойды. Жеп қойды — демек, тамақтан кейін.</p>
       <p class="rv">Батырманы бас — мөрлер конвертке басылады. Емтиханда оларды есіңе түсіру оңай.</p>
       <p class="mn__big rv">Әлі емес → önce. Болды → sonra.</p>
     </div>
@@ -770,7 +817,7 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-flask"/></svg>зертхана</p>
     <h2>Күніңді құрастыр</h2>
-    <p class="txt rv">Төрт пульт. Әрекеттерді ретімен қой, сөйлемді аудар, құйрықтарды ұста және «бұрын»-ды болымсыздықпен шатастырма. Әр сөйлем дыбысталады — басып, дауыстап қайтала. Ең жақсысы — өз күнің туралы.</p>
+    <p class="txt rv">Төрт пульт. Әрекеттерді ретімен қой, сөйлемді аудар, құйрықтарды ұста және -maz-ды «-мас бұрын»-мен шатастырма. Әр сөйлем дыбысталады — басып, дауыстап қайтала. Ең жақсысы — өз күнің туралы.</p>
     <div class="seg lab__seg" role="tablist" aria-label="Режимдер" id="labSeg" data-ui>
       <button type="button" role="tab" aria-selected="true" data-m="0">Күн</button>
       <button type="button" role="tab" aria-selected="false" data-m="1">Аудару</button>
@@ -779,13 +826,13 @@ p{margin:0 0 12px}
     </div>
     <div class="card lab" id="lab">
       <div class="lab__p is-on" data-p="0">
-        <p class="cap">Алдымен не (қызғылт қатар) және сосын не (көгілдір) екенін таңда. Мағынасы бірдей екі сөйлем аласың.</p>
+        <p class="cap">Алдымен не (қызғылт қатар) және сосын не (көгілдір) екенін таңда. Мағынасы бірдей екі сөйлем аласың — астында қазақша егізі.</p>
         <div class="chips" id="laA" data-ui></div>
         <div class="chips" id="laB" data-ui></div>
         <div class="day" id="laDay" data-ui></div>
         <div class="two" data-ui>
-          <p class="two__c"><small>önce арқылы</small><b lang="tr" id="laO"></b></p>
-          <p class="two__c two__c--t"><small>sonra арқылы</small><b lang="tr" id="laS"></b></p>
+          <p class="two__c"><small>önce арқылы</small><b lang="tr" id="laO"></b><span class="ru" id="laOk"></span></p>
+          <p class="two__c two__c--t"><small>sonra арқылы</small><b lang="tr" id="laS"></b><span class="ru" id="laSk"></span></p>
         </div>
         <p class="lab__why" id="laWhy" data-ui></p>
       </div>
@@ -802,9 +849,9 @@ p{margin:0 0 12px}
         <p class="lab__why" id="ldWhy" data-ui></p>
       </div>
       <div class="lab__p" data-p="3">
-        <p class="cap">Солда болымсыздық, оңда «бұрын». Ұқсас — бірақ мағынасы әртүрлі.</p>
+        <p class="cap">Солда -maz: «...майды». Ол қазақша -мас-қа ұқсайды, бірақ «бұрын» емес. Оңда — шын «бұрын». Түрікше «-мас бұрын» = -madan önce.</p>
         <div class="chips" id="lnV" data-ui></div>
-        <div class="vs" data-ui><p class="vs__c"><small>болымсыздық</small><b lang="tr" id="lnNeg"></b><span id="lnNegRu"></span></p><p class="vs__c vs__c--p"><small>...мас бұрын</small><b lang="tr" id="lnOnce"></b><span id="lnOnceRu"></span></p></div>
+        <div class="vs" data-ui><p class="vs__c"><small>-maz: болымсыз</small><b lang="tr" id="lnNeg"></b><span id="lnNegRu"></span></p><p class="vs__c vs__c--p"><small>...мас бұрын</small><b lang="tr" id="lnOnce"></b><span id="lnOnceRu"></span></p></div>
       </div>
     </div>
   </div>
@@ -815,7 +862,7 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-warn"/></svg>тұзақтар</p>
     <h2>Қателер <span class="p">бағдарламасы</span></h2>
-    <p class="txt rv">Барлығы дерлік сүрінетін алты модуль. Карточканы бас — ол дұрыс нұсқаны көрсетеді. Оларда қателесу — жолдың қалыпты бөлігі.</p>
+    <p class="txt rv">Алты модуль. Алғашқы төртеуін қазақша өзі «ұсынады»: таныс форманы түрікшеге сөзбе-сөз көшіресің. Карточканы бас — ол дұрыс нұсқаны көрсетеді.</p>
     <div class="row" style="margin-bottom:16px"><button type="button" class="btn" id="trapAll" data-ui><svg aria-hidden="true"><use href="#i-check"/></svg>Бәрін түзету</button></div>
     <div class="traps" id="traps"></div>
   </div>
@@ -825,7 +872,7 @@ p{margin:0 0 12px}
   <div class="wrap">
     <p class="kick kick--t" data-ui><svg aria-hidden="true"><use href="#i-tv"/></svg>видео</p>
     <h2><span class="t">Тіл иелерін</span> тыңда</h2>
-    <p class="txt">Назар аудар: «алдымен … сосын» құйрығы бар бір сөйлемге айналады.</p>
+    <p class="txt">Видео түрікше. Құлақ түр: «алдымен … сосын» құйрығы бар бір сөйлемге айналады — <span lang="tr">-madan önce</span>, <span lang="tr">-dıktan sonra</span>. Әр форманы іштей қазақшаға аударып отыр.</p>
     <a-video yt="ZSNlHulPjuk" start="64" end="179" title="-mAdAn Önce / -DIktAn Sonra" channel="Yunus Emre Enstitüsü"></a-video>
   </div>
 </section>
@@ -873,6 +920,7 @@ p{margin:0 0 12px}
         <button type="button" class="poster__c" data-say="yedikten sonra"><b>Кейін</b><span lang="tr">етістік + dıktan … tükten + sonra</span></button>
         <button type="button" class="poster__c" data-say="yemeden, yedikten"><b>Есте сақтағыш</b><span>әлі емес → önce · болды → sonra</span></button>
         <button type="button" class="poster__c" data-say="yaptıktan, gittikten"><b>Қатаңдар</b><span lang="tr">ç f h k p s ş t → t</span></button>
+        <button type="button" class="poster__c" data-say="gelmeden önce, geldikten sonra"><b>Қазақша кілт</b><span>-мас бұрын → -madan önce · -ғаннан кейін → -dıktan sonra</span></button>
       </div>
       <p class="cap" style="margin-top:14px">Скриншот жасап сақта. Бүкіл сабақ бір посылкада.</p>
     </div>
@@ -1165,17 +1213,21 @@ const onceTiles = (v) => { const [a, b] = onceT(v); return `${tileHtml(v)}${tile
 const sonraTiles = (v) => { const [a, b] = sonraT(v); return `${tileHtml(v)}${tileHtml(a, 's')}${tileHtml(b, 's')}${tileHtml('sonra', 'w')}`; };
 const loopWhenVisible = (el, tw) => whenVisible(el, () => tw.play && tw.play(), () => tw.pause && tw.pause());
 const ACT = [
-  { v: 'uyan', p: 'uyanıyorum', ru: 'оянамын' },
-  { v: 'duş al', p: 'duş alıyorum', ru: 'душқа түсемін' },
-  { v: 'kahvaltı yap', p: 'kahvaltı yapıyorum', ru: 'таңғы ас ішемін' },
-  { v: 'evden çık', p: 'evden çıkıyorum', ru: 'үйден шығамын' },
-  { v: 'işe git', p: 'işe gidiyorum', ru: 'жұмысқа барамын' },
-  { v: 'eve gel', p: 'eve geliyorum', ru: 'үйге келемін' },
-  { v: 'yemek ye', p: 'yemek yiyorum', ru: 'жеймін' },
-  { v: 'çay iç', p: 'çay içiyorum', ru: 'шай ішемін' },
-  { v: 'kitap oku', p: 'kitap okuyorum', ru: 'кітап оқимын' },
-  { v: 'uyu', p: 'uyuyorum', ru: 'ұйықтаймын' },
+  { v: 'uyan', p: 'uyanıyorum', ru: 'оянамын', kp: 'оянамын', ko: 'оянбас бұрын', ks: 'оянғаннан кейін' },
+  { v: 'duş al', p: 'duş alıyorum', ru: 'душқа түсемін', kp: 'душқа түсемін', ko: 'душқа түспес бұрын', ks: 'душқа түскеннен кейін' },
+  { v: 'kahvaltı yap', p: 'kahvaltı yapıyorum', ru: 'таңғы ас ішемін', kp: 'таңғы ас ішемін', ko: 'таңғы ас ішпес бұрын', ks: 'таңғы ас ішкеннен кейін' },
+  { v: 'evden çık', p: 'evden çıkıyorum', ru: 'үйден шығамын', kp: 'үйден шығамын', ko: 'үйден шықпас бұрын', ks: 'үйден шыққаннан кейін' },
+  { v: 'işe git', p: 'işe gidiyorum', ru: 'жұмысқа барамын', kp: 'жұмысқа барамын', ko: 'жұмысқа бармас бұрын', ks: 'жұмысқа барғаннан кейін' },
+  { v: 'eve gel', p: 'eve geliyorum', ru: 'үйге келемін', kp: 'үйге келемін', ko: 'үйге келмес бұрын', ks: 'үйге келгеннен кейін' },
+  { v: 'yemek ye', p: 'yemek yiyorum', ru: 'тамақ жеймін', kp: 'тамақ жеймін', ko: 'тамақ жемес бұрын', ks: 'тамақ жегеннен кейін' },
+  { v: 'çay iç', p: 'çay içiyorum', ru: 'шай ішемін', kp: 'шай ішемін', ko: 'шай ішпес бұрын', ks: 'шай ішкеннен кейін' },
+  { v: 'kitap oku', p: 'kitap okuyorum', ru: 'кітап оқимын', kp: 'кітап оқимын', ko: 'кітап оқымас бұрын', ks: 'кітап оқығаннан кейін' },
+  { v: 'uyu', p: 'uyuyorum', ru: 'ұйықтаймын', kp: 'ұйықтаймын', ko: 'ұйықтамас бұрын', ks: 'ұйықтағаннан кейін' },
 ];
+/* қазақша егізі: әр әрекеттің өз формалары деректе, желімделмейді */
+const kkCap = (x) => x.charAt(0).toLocaleUpperCase('kk') + x.slice(1);
+const onceKk = (A, B) => `${kkCap(B.ko)} ${A.kp}.`;
+const sonraKk = (A, B) => `${kkCap(A.ks)} ${B.kp}.`;
 const onceSent = (A, B) => `${cap1(mAdAn(B.v))} önce ${A.p}.`;
 const sonraSent = (A, B) => `${cap1(DIktAn(A.v))} sonra ${B.p}.`;
 
@@ -1183,14 +1235,14 @@ const sonraSent = (A, B) => `${cap1(DIktAn(A.v))} sonra ${B.p}.`;
 safe('hero', () => {
   const T = $('#demoT');
   const res = $('#demoRes');
-  const RU = { uyu: ['ұйықтамас бұрын', 'ұйқыдан кейін'], ye: ['тамақ алдында', 'тамақтан кейін'], gel: ['келмес бұрын', 'келгеннен кейін'] };
+  const RU = { uyu: ['ұйықтамас бұрын', 'ұйықтағаннан кейін'], ye: ['жемес бұрын', 'жегеннен кейін'], gel: ['келмес бұрын', 'келгеннен кейін'] };
   const st = { v: 'uyu', once: true };
   const vb = [$('#dV1'), $('#dV2'), $('#dV3')];
   const draw = () => {
     T.innerHTML = st.once ? onceTiles(st.v) : sonraTiles(st.v);
     const w = st.once ? `${mAdAn(st.v)} önce` : `${DIktAn(st.v)} sonra`;
     T.dataset.say = w;
-    res.innerHTML = `<span lang="tr">${w}</span> — ${RU[st.v][st.once ? 0 : 1]}`;
+    res.innerHTML = `<span lang="tr">${w}</span> = ${RU[st.v][st.once ? 0 : 1]}`;
     g.from(T.children, { y: -60, rotation: (n) => (n % 2 ? 16 : -16), duration: 0.8, ease: 'bounce.out', stagger: 0.07 });
     say(w);
   };
@@ -1199,7 +1251,7 @@ safe('hero', () => {
   $('#dS').addEventListener('click', () => { st.once = false; $('#dS').classList.add('is-on'); $('#dO').classList.remove('is-on'); $('#dS').setAttribute('aria-pressed', 'true'); $('#dO').setAttribute('aria-pressed', 'false'); draw(); });
   T.innerHTML = onceTiles('uyu');
   T.dataset.say = 'uyumadan önce';
-  res.innerHTML = '<span lang="tr">uyumadan önce</span> — ұйықтамас бұрын';
+  res.innerHTML = '<span lang="tr">uyumadan önce</span> = ұйықтамас бұрын';
   $('#heroGo').addEventListener('click', () => $('[data-section="story"]').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }));
   /* таймер до доставки */
   let left = 599;
@@ -1362,9 +1414,9 @@ safe('rule', () => {
   const sb = $$('#plS button');
   const playBtn = $('#plPlay');
   const S = [
-    { h: onceTiles('uyu'), c: 'uyu + ma + dan + önce: «ұйықтамас бұрын».', s: 'uyumadan önce' },
+    { h: onceTiles('uyu'), c: 'uyu + ma + dan + önce = ұйықта + ма + с + бұрын.', s: 'uyumadan önce' },
     { h: `${onceTiles('uyu')}${tileHtml('kitap okuyorum')}`, c: 'Негізгі әрекетті қосамыз. Ол бұрын болады.', s: 'Uyumadan önce kitap okuyorum.' },
-    { h: sonraTiles('kitap oku'), c: 'oku + duk + tan + sonra: «оқығаннан кейін».', s: 'kitap okuduktan sonra' },
+    { h: sonraTiles('kitap oku'), c: 'oku + duk + tan + sonra = оқы + ған + нан + кейін. Бөлшекпе-бөлшек.', s: 'kitap okuduktan sonra' },
     { h: `${sonraTiles('kitap oku')}${tileHtml('uyuyorum')}`, c: 'Рет сол, құйрық басқа. Мағынасы өзгерген жоқ.', s: 'Kitap okuduktan sonra uyuyorum.' },
   ];
   let i = 0;
@@ -1393,17 +1445,17 @@ safe('rule', () => {
   const capC = $('#cmpCap');
   const tabs = [$('#cRu'), $('#cTr'), $('#cKz')];
   const L = [
-    { w: [['перед тем как', 'o'], ['лечь спать', ''], ['я читаю', '']], c: 'Орысша байланыстырғыш алда тұрады: «перед тем как».', say: '' },
-    { w: [['uyu', ''], ['madan', 'o'], ['önce', 'o'], ['kitap okuyorum', '']], c: 'Түрікше құйрық етістікке жабысады, önce «бұрын» бөлігін жабады.', say: 'Uyumadan önce kitap okuyorum.' },
-    { w: [['ұйықта', ''], ['мас', 'o'], ['бұрын', 'o'], ['кітап оқимын', '']], c: 'Қазақша «ұйықтамас бұрын» — түрікшедегі схеманың дәл өзі.', say: '' },
+    { w: [['ұйықта', ''], ['ма', 'o'], ['с', 'o'], ['бұрын', 'o'], ['кітап оқимын', '']], c: 'Таныс схема: етістік + болымсыз -ма + бұрын. Сөйлем соңында — негізгі етістік.', say: '', lang: 'kk' },
+    { w: [['uyu', ''], ['ma', 'o'], ['dan', 'o'], ['önce', 'o'], ['kitap okuyorum', '']], c: 'Түрікше де -ma бар. Бірақ -с орнында шығыс септік -dan тұр: uyu-ma-dan.', say: 'Uyumadan önce kitap okuyorum.', lang: 'tr' },
+    { w: [['оқы', ''], ['ған', 's'], ['нан', 's'], ['кейін', 's'], ['=', ''], ['oku', ''], ['duk', 's'], ['tan', 's'], ['sonra', 's']], c: '«Кейін» — бөлшекпе-бөлшек көшірме: -ған = -DIk, -нан = -tAn, кейін = sonra.', say: 'okuduktan sonra', lang: 'tr' },
   ];
   const cset = (k) => {
     tabs.forEach((t, j) => t.setAttribute('aria-selected', String(j === k)));
-    st.innerHTML = L[k].w.map(([x, c]) => `<span class="cw${c ? ' cw--' + c : ''}"${k === 1 ? ' lang="tr"' : k === 2 ? ' lang="kk"' : ''}>${x}</span>`).join('');
+    st.innerHTML = L[k].w.map(([x, c], j) => `<span class="cw${c ? ' cw--' + c : ''}" lang="${k === 2 && j < 4 ? 'kk' : L[k].lang}">${x}</span>`).join('');
     st.dataset.say = L[k].say;
     capC.textContent = L[k].c;
     g.from(st.children, { y: 40, rotation: (n) => (n % 2 ? 10 : -10), duration: 0.7, ease: 'back.out(2.4)', stagger: 0.07 });
-    const os = st.querySelectorAll('.cw--o');
+    const os = st.querySelectorAll('.cw--o, .cw--s');
     if (os.length) g.fromTo(os, { x: k ? 60 : -60 }, { x: 0, duration: 0.9, ease: 'power3.out' });
     if (L[k].say) say(L[k].say);
   };
@@ -1444,6 +1496,68 @@ safe('sonra', () => {
   }));
   g.from('#bento .bx', { y: 90, rotation: (i) => (i % 2 ? 4 : -4), scale: 0.9, duration: 0.8, ease: 'back.out(1.7)', stagger: 0.07, scrollTrigger: { trigger: '#bento', start: 'top 88%', once: true } });
   g.from('#bento .bx__ic', { scale: 0, duration: 0.6, ease: 'back.out(3)', stagger: 0.07, scrollTrigger: { trigger: '#bento', start: 'top 75%', once: true } });
+});
+
+/* қазақша ↔ түрікше: бөлшектер ауысады */
+safe('kkdiff', () => {
+  const KD = [
+    { k: 'кел', t: 'gel', o: [['кел', 'ме', 'с', 'бұрын'], ['gel', 'me', 'den', 'önce']], s: [['кел', 'ген', 'нен', 'кейін'], ['gel', 'dik', 'ten', 'sonra']], nd: 0, vd: 0 },
+    { k: 'шық', t: 'çık', o: [['шық', 'па', 'с', 'бұрын'], ['çık', 'ma', 'dan', 'önce']], s: [['шық', 'қан', 'нан', 'кейін'], ['çık', 'tık', 'tan', 'sonra']], nd: 1, vd: 0 },
+    { k: 'оқы', t: 'oku', o: [['оқы', 'ма', 'с', 'бұрын'], ['oku', 'ma', 'dan', 'önce']], s: [['оқы', 'ған', 'нан', 'кейін'], ['oku', 'duk', 'tan', 'sonra']], nd: 0, vd: 1 },
+    { k: 'көр', t: 'gör', o: [['көр', 'ме', 'с', 'бұрын'], ['gör', 'me', 'den', 'önce']], s: [['көр', 'ген', 'нен', 'кейін'], ['gör', 'dük', 'ten', 'sonra']], nd: 0, vd: 1 },
+    { k: 'жаз', t: 'yaz', o: [['жаз', 'ба', 'с', 'бұрын'], ['yaz', 'ma', 'dan', 'önce']], s: [['жаз', 'ған', 'нан', 'кейін'], ['yaz', 'dık', 'tan', 'sonra']], nd: 1, vd: 0 },
+    { k: 'іш', t: 'iç', o: [['іш', 'пе', 'с', 'бұрын'], ['iç', 'me', 'den', 'önce']], s: [['іш', 'кен', 'нен', 'кейін'], ['iç', 'tik', 'ten', 'sonra']], nd: 1, vd: 0 },
+  ];
+  const vb = $('#kdV');
+  const kk = $('#kdKk');
+  const trR = $('#kdTr');
+  const why = $('#kdWhy');
+  const wEl = $('#kdW');
+  const notes = $$('#kdNotes .kd__n');
+  const st = { v: 1, once: true, shown: false };
+  vb.innerHTML = KD.map((d, i) => `<button type="button" class="chip" data-i="${i}">${d.k} · <span lang="tr">${d.t}</span></button>`).join('');
+  /* қай бөлшек қызғылт: бұрын — -с/-dan әрқашан, -ма/-ma тек п/б болса; кейін — дөңгелек дауысты */
+  const diffs = (d) => (st.once ? [false, !!d.nd, true, false] : [false, !!d.vd, false, false]);
+  const cls = (j, df) => (j === 0 ? '' : df ? 'o' : 's');
+  const tile = (x, c, lang, extra = '') => `<span class="tl${c ? ' tl--' + c : ''}${extra}" lang="${lang}">${esc(x)}</span>`;
+  const word = (p, once) => `${p[0]}${p[1]}${p[2]} ${p[3]}`;
+  const draw = (anim = true) => {
+    const d = KD[st.v];
+    const [pk, pt] = st.once ? d.o : d.s;
+    const df = diffs(d);
+    $$('.chip', vb).forEach((c, i) => c.classList.toggle('is-on', i === st.v));
+    $('#kdO').setAttribute('aria-selected', String(st.once));
+    $('#kdS').setAttribute('aria-selected', String(!st.once));
+    kk.innerHTML = pk.map((x, j) => tile(x, j ? (st.shown ? cls(j, df[j]) : 'w') : '', 'kk', st.shown && df[j] ? ' is-diff' : '')).join('');
+    trR.innerHTML = st.shown ? pt.map((x, j) => tile(x, cls(j, df[j]), 'tr', df[j] ? ' is-diff' : '')).join('') : pt.map(() => tile('?', 'q', 'kk')).join('');
+    const tw = word(pt);
+    trR.dataset.say = tw;
+    wEl.innerHTML = st.shown ? `${esc(word(pk))} = <b lang="tr">${esc(tw)}</b>` : `${esc(word(pk))} = <b>?</b>`;
+    const on = st.shown ? (st.once ? [1, d.nd ? 2 : 0] : [d.vd ? 3 : 0, 4]) : [];
+    notes.forEach((n) => n.classList.toggle('is-on', on.includes(+n.dataset.n)));
+    if (!st.shown) why.textContent = st.once ? 'Қазақша таныс: етістік + -ма + -с + бұрын. Түрікшесі қандай? Батырманы бас.' : 'Қазақша таныс: етістік + -ған + -нан + кейін. Түрікшесі қандай? Батырманы бас.';
+    else if (st.once) why.textContent = `Сәйкес: -ма = -ma, бұрын = önce. Айырма: -с орнында -${pt[2]}.${d.nd ? ` Және ${pk[1][0]} емес, m.` : ''}`;
+    else why.textContent = `Сәйкес: -ған = -DIk, -нан = -tAn, кейін = sonra.${d.vd ? ` Айырма: ${pt[0]} сөзінде еріндік дауысты — құйрық та еріндік: -${pt[1]}.` : ' Айырма жоқ дерлік: а → ı, е → i.'}`;
+    $('#kdGo').textContent = st.shown ? 'Қазақшаға' : 'Түрікшеге';
+    if (!anim) return;
+    if (st.shown) {
+      g.fromTo(trR.children, { rotationX: -90, y: -30 }, { rotationX: 0, y: 0, duration: 0.6, ease: 'back.out(2.2)', stagger: 0.12 });
+      const bad = $$('.is-diff', trR);
+      if (bad.length) g.fromTo(bad, { x: -8 }, { x: 0, duration: 0.7, delay: 0.55, ease: 'elastic.out(1, .3)' });
+      g.fromTo($$('.kd__n.is-on'), { scale: 0.94 }, { scale: 1, duration: 0.6, ease: 'back.out(3)' });
+      say(tw);
+      sparks($('#kdGo'), 10);
+    } else {
+      g.from(kk.children, { y: -50, rotation: (n) => (n % 2 ? 12 : -12), duration: 0.7, ease: 'bounce.out', stagger: 0.07 });
+    }
+  };
+  vb.addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (b) { st.v = +b.dataset.i; st.shown = false; draw(); } });
+  $('#kdO').addEventListener('click', () => { st.once = true; st.shown = false; draw(); });
+  $('#kdS').addEventListener('click', () => { st.once = false; st.shown = false; draw(); });
+  $('#kdGo').addEventListener('click', () => { st.shown = !st.shown; draw(); });
+  draw(false);
+  if (ST) ScrollTrigger.create({ trigger: '#kd', start: 'top 60%', once: true, onEnter: () => { st.shown = true; draw(); } });
+  g.from('#kd', { x: 80, rotation: 3, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '#kd', start: 'top 90%', once: true } });
 });
 
 /* запоминалка: печати на конверте */
@@ -1607,7 +1721,9 @@ safe('lab', () => {
     $('#laO').dataset.say = o;
     $('#laS').textContent = s;
     $('#laS').dataset.say = s;
-    $('#laWhy').textContent = `Алдымен ${A.ru}, сосын ${B.ru}. «Бұрын»-да құйрық кейінгі әрекетте, «кейін»-де — бұрынғыда.`;
+    $('#laOk').textContent = onceKk(A, B);
+    $('#laSk').textContent = sonraKk(A, B);
+    $('#laWhy').textContent = `Алдымен ${A.ru}, сосын ${B.ru}. «Бұрын»-да құйрық кейінгі әрекетте, «кейін»-де — бұрынғыда. Қазақшадағыдай.`;
     g.from('#laDay .day__b', { y: -80, rotation: (n) => (n ? 14 : -14), duration: 0.8, ease: 'bounce.out', stagger: 0.1 });
     g.from('.two__c', { scale: 0.85, duration: 0.5, ease: 'back.out(3)', stagger: 0.1 });
     say(o);
@@ -1625,7 +1741,7 @@ safe('lab', () => {
     const s = flipped ? sonraSent(ACT[x], ACT[y]) : onceSent(ACT[x], ACT[y]);
     $('#lfTr').textContent = s;
     $('#lfTr').dataset.say = s;
-    $('#lfRu').textContent = `Алдымен ${ACT[x].ru}, сосын ${ACT[y].ru}.`;
+    $('#lfRu').textContent = flipped ? sonraKk(ACT[x], ACT[y]) : onceKk(ACT[x], ACT[y]);
     $$('.chip', lp).forEach((c, k) => c.classList.toggle('is-on', k === pk));
     g.fromTo('#lfBox', { rotationY: flipped ? -90 : 90, transformPerspective: 700 }, { rotationY: 0, duration: 0.6, ease: 'back.out(2)' });
     say(s);
@@ -1665,7 +1781,7 @@ safe('lab', () => {
     g.fromTo('#ldS', { scale: 1.6 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' });
   });
   /* 4. Не путай */
-  const NP = [['uyu', 'uyumuyorum', 'ұйықтамаймын', 'ұйықтамас бұрын'], ['ye', 'yemiyorum', 'жемеймін', 'жемес бұрын'], ['gel', 'gelmiyorum', 'келмеймін', 'келмес бұрын'], ['çık', 'çıkmıyorum', 'шықпаймын', 'шықпас бұрын'], ['oku', 'okumuyorum', 'оқымаймын', 'оқымас бұрын']];
+  const NP = [['uyu', 'uyumaz', 'ұйықтамайды (әдетте)', 'ұйықтамас бұрын'], ['ye', 'yemez', 'жемейді (әдетте)', 'жемес бұрын'], ['gel', 'gelmez', 'келмейді (әдетте)', 'келмес бұрын'], ['çık', 'çıkmaz', 'шықпайды (әдетте)', 'шықпас бұрын'], ['oku', 'okumaz', 'оқымайды (әдетте)', 'оқымас бұрын']];
   const ln = $('#lnV');
   ln.innerHTML = NP.map((n, k) => `<button type="button" class="chip" data-k="${k}" lang="tr">${n[0]}</button>`).join('');
   const nShow = (k) => {
@@ -1691,13 +1807,15 @@ safe('lab', () => {
   $('#laO').dataset.say = onceSent(A, B);
   $('#laS').textContent = sonraSent(A, B);
   $('#laS').dataset.say = sonraSent(A, B);
+  $('#laOk').textContent = onceKk(A, B);
+  $('#laSk').textContent = sonraKk(A, B);
   $('#laWhy').textContent = `Алдымен ${A.ru}, сосын ${B.ru}.`;
   $('#lfTr').textContent = onceSent(ACT[8], ACT[9]);
   $('#lfTr').dataset.say = onceSent(ACT[8], ACT[9]);
-  $('#lfRu').textContent = `Алдымен ${ACT[8].ru}, сосын ${ACT[9].ru}.`;
-  $('#lnNeg').textContent = 'uyumuyorum';
-  $('#lnNeg').dataset.say = 'uyumuyorum';
-  $('#lnNegRu').textContent = 'ұйықтамаймын';
+  $('#lfRu').textContent = onceKk(ACT[8], ACT[9]);
+  $('#lnNeg').textContent = 'uyumaz';
+  $('#lnNeg').dataset.say = 'uyumaz';
+  $('#lnNegRu').textContent = 'ұйықтамайды (әдетте)';
   $('#lnOnce').textContent = 'uyumadan önce';
   $('#lnOnce').dataset.say = 'uyumadan önce';
   $('#lnOnceRu').textContent = 'ұйықтамас бұрын';
@@ -1706,12 +1824,12 @@ safe('lab', () => {
 /* ловушки */
 safe('traps', () => {
   buildTraps($('#traps'), [
+    { bad: 'Gelmez önce arıyorum', good: 'Gelmeden önce arıyorum', why: '«Келмес бұрын» сөзбе-сөз көшпейді. <span lang="tr">Gelmez</span> — «келмейді». «Бұрын» үшін -mAdAn керек.' },
+    { bad: 'Geldik sonra', good: 'Geldikten sonra', why: '«Келген соң» дейміз, шығыссыз. Түрікше sonra шығыс септікті талап етеді: -DIk + -tAn.' },
+    { bad: 'Çıkpadan önce', good: 'Çıkmadan önce', why: 'Қазақша шықпас — қатаңнан кейін п. Түрікше m әрқашан m.' },
+    { bad: 'Okudıktan sonra', good: 'Okuduktan sonra', why: 'Қазақша оқығаннан — а. Түрікше дауысты төртеу: u-дан кейін u.' },
     { bad: 'Yemek yedikten önce', good: 'Yemek yedikten sonra', why: '-DIktAn тек sonra-мен дос.' },
-    { bad: 'Uyudan önce', good: 'Uyumadan önce', why: '«Бұрын» үшін тұтас -madan құйрығы керек.' },
-    { bad: 'yapdıktan sonra', good: 'yaptıktan sonra', why: 'p — қатаң. Одан кейін d t-ға айналады.' },
-    { bad: 'geldiktan sonra', good: 'geldikten sonra', why: 'Үндестік: gel-де дауысты e, демек -dikten.' },
-    { bad: 'Evden çıkmıyor önce', good: 'Evden çıkmadan önce', why: '-mıyor емес, -madan. Бұл болымсыздық емес.' },
-    { bad: 'Ders bitmeden sonra', good: 'Ders bittikten sonra', why: '-mAdAn тек önce-мен бірге тұрады.' },
+    { bad: 'yapdıktan sonra', good: 'yaptıktan sonra', why: 'p — қатаң. Одан кейін d t-ға айналады. Қазақшадағы «жапқан» сияқты: қатаңнан кейін қатаң.' },
   ]);
   $('#trapAll').addEventListener('click', () => {
     $$('#traps .trap:not(.is-on)').forEach((t, k) => setTimeout(() => t.click(), reduce ? 0 : k * 220));

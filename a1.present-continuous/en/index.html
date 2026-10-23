@@ -179,11 +179,20 @@
   .pc-chi span { font-size: 15px; color: var(--muted); }
   .pc-final { text-align: center; margin-top: 28px; }
 
+  .pc-mx { min-height: 76px; margin-bottom: 4px; }
+  .pc-piece--who { color: var(--muted); }
+  .pc-piece--be { color: #fff; background: var(--steel); }
+  .pc-piece--ing { color: var(--gold-ink); background: var(--gold); }
+  .pc-piece--gap { color: var(--muted); border: 2px dashed var(--ice); padding: 2px 10px; }
+  .pc-qgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .pc-qgrid .pc-chip { padding: 8px 6px; }
+  .pc-st-line s { color: var(--rose); }
+
   /* video note */
   .pc-note { display: flex; gap: 10px; align-items: flex-start; }
   .pc-note svg { width: 28px; height: 28px; flex: none; }
 
-  /* свой скроллбар: киноплёнка, по ней едет камера */
+  /* custom scrollbar: film strip with a camera */
   .pc-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 12px; pointer-events: none; }
   .pc-sb__track { position: absolute; inset: 0; pointer-events: auto; touch-action: none; cursor: pointer;
     background: repeating-linear-gradient(90deg, #2E4557 0 7px, #E4F2FB 7px 10px); background-size: 10px 4px; background-repeat: repeat-x; background-position: 0 0, 0 100%; background-color: #3A5468; }
@@ -282,7 +291,7 @@
     </div>
 
     <p class="pc-formula">root + <b lang="tr">ı / i / u / ü</b> + <b lang="tr">yor</b> + person</p>
-    <p>English does something similar: <span lang="en">I am drinking</span> is a shot too. Only it takes three words, and Turkish packs it all into one.</p>
+    <p>Say it: <a-say>içiyorum</a-say> ≈ “ee-chee-YOR-oom.” <b>ç</b> = ch in “church.” The stress lands on <b lang="tr">yor</b>.</p>
     <p>The vowel before <b lang="tr">yor</b> comes from the last vowel of the root. Tap a tile.</p>
     <div class="pc-harm" data-harm>
       <button type="button" data-v="ı" data-ex="yapıyor"><span class="pc-harm__v" lang="tr">a ı → ı</span><span class="pc-harm__ex" lang="tr">yapıyor</span></button>
@@ -292,10 +301,35 @@
     </div>
   </section>
 
-  <section data-section="persons" data-words="55">
+  <section data-section="en-diff" data-words="95">
+    <span class="pc-tag pc-tag--gold">English ↔ Turkish</span>
+    <h2 class="pc-split">A sentence <em>in a mirror</em></h2>
+    <p>English builds the shot from three words: I + am + drinking. Turkish glues the same pieces into one word, in mirror order: <b lang="tr">iç-iyor-um</b> = drink-ing-I am.</p>
+    <p>So “I am” lives in the tail. Pick a verb and a person, then press Mirror.</p>
+    <div class="pc-card pc-card--ice">
+      <div class="pc-lbl">English</div>
+      <div class="pc-stage pc-mx" data-mx-en lang="en"></div>
+      <div class="pc-lbl">Turkish</div>
+      <div class="pc-stage pc-mx" data-mx-tr lang="tr" aria-live="polite"></div>
+      <div class="pc-row" style="justify-content:center;margin-top:10px" data-mx-verbs></div>
+      <div class="pc-qgrid" data-mx-persons></div>
+      <div class="pc-row" style="justify-content:center;margin-top:12px"><button type="button" class="pc-btn" data-mx-go>Mirror</button></div>
+      <p class="pc-hint" data-ui data-mx-hint style="text-align:center" aria-live="polite"></p>
+    </div>
+    <p style="margin-top:14px">One more twist. English won’t put some verbs in -ing: nobody says “I’m understanding.” Turkish doesn’t care. If it’s true right now, it’s <b lang="tr">-iyor</b>. Tap one.</p>
+    <div class="pc-row" data-st>
+      <button type="button" class="pc-chip" data-st-tr="anlıyorum" data-st-en="I understand"><span lang="tr">anlıyorum</span></button>
+      <button type="button" class="pc-chip" data-st-tr="biliyorum" data-st-en="I know"><span lang="tr">biliyorum</span></button>
+      <button type="button" class="pc-chip" data-st-tr="istiyorum" data-st-en="I want"><span lang="tr">istiyorum</span></button>
+      <button type="button" class="pc-chip" data-st-tr="seviyorum" data-st-en="I love"><span lang="tr">seviyorum</span></button>
+    </div>
+    <p class="pc-hint" data-ui data-st-hint aria-live="polite"></p>
+  </section>
+
+  <section data-section="persons" data-words="80">
     <span class="pc-tag pc-tag--gold">Step 2 · persons</span>
     <h2 class="pc-split">Six persons, <em>one yor</em></h2>
-    <p><b lang="tr">yor</b> stands like a rock. The tails after it always have <b>u</b>: the same ones as in “I am a student,” just with no choice.</p>
+    <p><b lang="tr">yor</b> stands like a rock. The tails after it always have <b>u</b>. Think of them as “am / are / is” glued to the end. And “he is” gets no tail at all.</p>
     <div class="pc-card pc-card--gold">
       <div class="pc-morph__who" data-morph-who>ben · I</div>
       <div class="pc-morph" data-morph lang="tr" data-say="içiyorum" role="button" tabindex="0">içiyor<i>um</i></div>
@@ -304,7 +338,8 @@
     </div>
     <div class="pc-conj" data-conj style="margin-top:14px"></div>
     <p style="margin-top:14px">The “they” tail doesn’t wander either: only <b lang="tr">-lar</b>, never <b lang="tr">-ler</b> after <b lang="tr">yor</b>.</p>
-    <p>You can drop the pronoun: <a-say>Çay içiyorum.</a-say> The tail <b lang="tr">-um</b> already says “I.”</p>
+    <p>You can drop the pronoun: <a-say>Çay içiyorum.</a-say> The tail <b lang="tr">-um</b> already says “I am.” English can’t drop “I.” Turkish usually does.</p>
+    <p><b lang="tr">o</b> is he, she and it at once. Turkish has no gender: <a-say>Ayşe çay içiyor.</a-say> <a-say>Ali çay içiyor.</a-say> Same form.</p>
     <p><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-3px"><circle cx="12" cy="8" r="4" fill="#8FCCEF"/><path d="M4 21c1-5 15-5 16 0" fill="#8FCCEF"/></svg> “He, she” has no tail: <a-say>Ali çay içiyor.</a-say></p>
   </section>
 
@@ -390,26 +425,26 @@
     <div style="text-align:center;margin-top:12px"><button type="button" class="pc-btn pc-btn--ghost" data-chat-reset><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>Rewind the scene</button></div>
   </section>
 
-  <section data-section="traps" data-words="46">
+  <section data-section="traps" data-words="72">
     <span class="pc-tag pc-tag--gold">Traps</span>
-    <h2 class="pc-split">Where everyone <em>trips</em></h2>
-    <p>Four mistakes almost everyone makes. Tap a card to flip it.</p>
+    <h2 class="pc-split">Where English <em>trips you</em></h2>
+    <p>Four mistakes English sets up for you. Tap a card to flip it.</p>
     <div class="pc-traps">
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Ben çay içmek.</s><small>The dictionary form</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Çay içiyorum.</span><small>Speech needs a shot: root, vowel, yor, person.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Ben içiyorum çay.</s><small>English order: verb in the middle</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Ben çay içiyorum.</span><small>The verb goes last. Always.</small></span> </span></button>
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyorım</s><small>Tail matched to the root</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyorum</span><small>After yor the tail always has u.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Ben içiyor.</s><small>“I” is right there, so why a tail?</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Ben içiyorum.</span><small>ben doesn’t do the work, the tail does. Without -um it’s “he’s drinking.”</small></span> </span></button>
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">bekleiyor</s><small>Two vowels in a row</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">bekliyor</span><small>The root vowel drops.</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Anlarım.</s><small>For “I understand” right now</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Anlıyorum.</span><small>English drops -ing here. Turkish keeps -iyor.</small></span> </span></button>
       <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
-        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Ben içiyor.</s><small>Forgot the tail</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Ben içiyorum.</span><small>Without the tail it’s “he’s drinking.”</small></span> </span></button>
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">yapiyor</s><small>Reading ı as i</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">yapıyor</span><small>ı is not i. Say it like the a in “about.”</small></span> </span></button>
     </div>
   </section>
 
   <section data-section="video" data-words="11">
     <h2 class="pc-split">Listen <em>once more</em></h2>
-    <p class="pc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FDF3E2"/><path d="M10 8l6 4-6 4z" fill="#E3A340"/></svg><span>Notice: the vowel before <b lang="tr">yor</b> changes, but <b lang="tr">yor</b> itself never does.</span></p>
-    <a-video yt="VpoPsOEaV4w" start="38" end="218" title="Lesson 14. Present continuous" channel="Turkish Talk"></a-video>
+    <p class="pc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FDF3E2"/><path d="M10 8l6 4-6 4z" fill="#E3A340"/></svg><span>The video is in Turkish. Don’t try to catch every word. Notice: the vowel before <b lang="tr">yor</b> changes, but <b lang="tr">yor</b> itself never does.</span></p>
+    <a-video yt="sVsLFH6oFCo" start="0" end="130" title="A1 – 09 Şimdiki Zaman 1 · Present Continuous 1" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
 
   <section data-section="practice" data-words="1">
@@ -446,7 +481,7 @@
       <div class="pc-chi"><span class="pc-n">03</span><span><b>4-way harmony</b><span lang="tr">yapıyor · geliyor · konuşuyor · görüyor</span></span></div>
       <div class="pc-chi"><span class="pc-n">04</span><span><b>A final vowel drops</b><span lang="tr">bekle → bekliyor · anla → anlıyor</span></span></div>
       <div class="pc-chi"><span class="pc-n">05</span><span><b>Tails always have u</b><span lang="tr">-um · -sun · — · -uz · -sunuz · -lar</span></span></div>
-      <div class="pc-chi"><span class="pc-n">06</span><span><b>The pronoun is optional</b><span lang="tr">Çay içiyorum.</span></span></div>
+      <div class="pc-chi"><span class="pc-n">06</span><span><b>The tail is “I am”</b><span>Verb last, <span lang="tr">ben</span> optional: <span lang="tr">Çay içiyorum.</span></span></span></div>
     </div>
     <p style="margin-top:14px"><b>Memory hook:</b> <b lang="tr">yor</b> is the camera tripod. It stands firm while the vowel and the tail spin around it.</p>
     <div class="pc-final">
@@ -503,7 +538,7 @@ addEventListener('DOMContentLoaded', () => {
   const VOW = 'aıoueiöü';
   const NARROW = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' };
   const ENDS = ['um', 'sun', '', 'uz', 'sunuz', 'lar'];
-  const PERS = [['ben', 'I'], ['sen', 'you'], ['o', 'he, she'], ['biz', 'we'], ['siz', 'you (pl.)'], ['onlar', 'they']];
+  const PERS = [['ben', 'I'], ['sen', 'you'], ['o', 'he/she/it'], ['biz', 'we'], ['siz', 'you (pl.)'], ['onlar', 'they']];
   function parts(root) {
     let stem = root, drop = '';
     if (VOW.includes(root.slice(-1))) { drop = root.slice(-1); stem = root.slice(0, -1); }
@@ -529,7 +564,7 @@ addEventListener('DOMContentLoaded', () => {
   const RIB = {
     now: { l: 47, w: 6, cam: 1, cross: 0, t: 'The camera shoots one point: where you’re standing. Çay içiyorum: I’m drinking right now.' },
     days: { l: 30, w: 40, cam: 1, cross: 0, t: 'The shot can stretch to “these days.” Bu aralar Türkçe öğreniyorum: I’m learning Turkish these days.' },
-    life: { l: 4, w: 92, cam: .35, cross: 1, t: 'The camera doesn’t shoot lifelong habits. Turkish has a different present for those; we’ll get to it later.' },
+    life: { l: 4, w: 92, cam: .35, cross: 1, t: 'The camera doesn’t shoot lifelong habits. For “I drink tea every day” Turkish has a different present, just like English. We’ll get to it later.' },
   };
   const ribHint = $('[data-rib-hint]');
   function rib(k) {
@@ -617,6 +652,55 @@ addEventListener('DOMContentLoaded', () => {
   }));
   if (A) G.from('[data-harm] .pc-harm__ex', { y: 20, rotation: 6, duration: .6, ease: 'back.out(2)', stagger: .12, scrollTrigger: { trigger: '[data-harm]', start: 'top 85%', once: true } });
 
+
+  /* ---------- English ↔ Turkish: the mirror ---------- */
+  const MXV = [
+    { tr: ['iç', 'i'], en: ['drink', 'ing'], g: 'drink', r: 'iç' },
+    { tr: ['gel', 'i'], en: ['com', 'ing'], g: 'come', r: 'gel', note: 'English drops a vowel too: come → coming. Turkish does the same with bekle → bekliyor.' },
+    { tr: ['ok', 'u'], en: ['read', 'ing'], g: 'read', r: 'oku', note: 'oku- lost its u before the new u: ok + u + yor.' },
+    { tr: ['bekl', 'i'], en: ['wait', 'ing'], g: 'wait', r: 'bekle', note: 'bekle- lost its e: bekl + i + yor.' },
+  ];
+  const MXP = [['I', 'am', 'um'], ['you', 'are', 'sun'], ['he', 'is', ''], ['we', 'are', 'uz'], ['you all', 'are', 'sunuz'], ['they', 'are', 'lar']];
+  let mv = 0, mp = 0;
+  const mxEn = $('[data-mx-en]'), mxTr = $('[data-mx-tr]');
+  MXV.forEach((v, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip' + (i === 0 ? ' is-on' : ''); b.dataset.i = i; b.innerHTML = `${v.g} · <span lang="tr">${v.r}-</span>`; $('[data-mx-verbs]').append(b); });
+  MXP.forEach(([w, be], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip is-gold' + (i === 0 ? ' is-on' : ''); b.dataset.i = i; b.textContent = `${w} ${be}`; $('[data-mx-persons]').append(b); });
+  const mxWord = () => MXV[mv].tr.join('') + 'yor' + MXP[mp][2];
+  function mxDraw() {
+    const v = MXV[mv], [w, be, end] = MXP[mp];
+    const W = w[0].toUpperCase() + w.slice(1);
+    mxEn.innerHTML = `<span class="pc-piece pc-piece--who" data-k="who">${W}</span><span class="pc-piece pc-piece--be" data-k="be">${be}</span><span class="pc-piece pc-piece--stem" data-k="root">${v.en[0]}</span><span class="pc-piece pc-piece--ing" data-k="ing">${v.en[1]}</span>`;
+    mxTr.innerHTML = `<span class="pc-piece pc-piece--stem" data-k="root">${v.tr[0]}</span><span class="pc-piece pc-piece--v" data-k="ing">${v.tr[1]}</span><span class="pc-piece pc-piece--yor" data-k="ing">yor</span>` + (end ? `<span class="pc-piece pc-piece--end" data-k="be">${end}</span>` : '<span class="pc-piece pc-piece--gap" aria-label="no tail">∅</span>');
+    $('[data-mx-hint]').textContent = (end ? `${W} ${be} ${v.en.join('')} → ${mxWord()}. “${w} ${be}” lives in -${end}.` : `${W} ${be} ${v.en.join('')} → ${mxWord()}. “He is” has no tail: no ending means he, she or it.`) + (v.note ? ' ' + v.note : '');
+  }
+  function mxPlay() {
+    mxDraw();
+    speak(mxWord());
+    if (!A) return;
+    const c = (el) => { const r = el.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+    $$('[data-k]', mxTr).forEach((t, i) => {
+      const src = $(`[data-k="${t.dataset.k}"]`, mxEn);
+      const [x1, y1] = c(src), [x2, y2] = c(t);
+      G.from(t, { x: x1 - x2, y: y1 - y2, scale: .7, duration: .9, delay: i * .12, ease: 'power3.inOut' });
+    });
+    G.fromTo($('[data-k="who"]', mxEn), { opacity: 1 }, { opacity: .35, duration: .4, delay: .6, yoyo: true, repeat: 1 });
+  }
+  $('[data-mx-verbs]').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; mv = +b.dataset.i; $$('button', $('[data-mx-verbs]')).forEach((x) => x.classList.toggle('is-on', x === b)); mxPlay(); });
+  $('[data-mx-persons]').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; mp = +b.dataset.i; $$('button', $('[data-mx-persons]')).forEach((x) => x.classList.toggle('is-on', x === b)); mxPlay(); });
+  $('[data-mx-go]').addEventListener('click', mxPlay);
+  mxDraw();
+  if (A) ScrollTrigger.create({ trigger: mxTr, start: 'top 80%', once: true, onEnter: mxPlay });
+
+  /* English won’t say “I’m understanding” */
+  $$('[data-st-tr]').forEach((b) => b.addEventListener('click', () => {
+    $$('[data-st-tr]').forEach((x) => x.classList.toggle('is-on', x === b));
+    const en = b.dataset.stEn;
+    const ing = en.replace(/^I (\w+)$/, (m, v) => `I’m ${v === 'love' ? 'lov' : v}ing`);
+    $('[data-st-hint]').innerHTML = `<span class="pc-st-line">English: “${en},” not <s>“${ing}.”</s> Turkish: <b lang="tr">${b.dataset.stTr}</b>, -iyor anyway.</span>`;
+    speak(b.dataset.stTr);
+    if (A) { G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'elastic.out(1,.45)' }); G.from('[data-st-hint]', { y: 10, duration: .4, ease: 'back.out(2)' }); }
+  }));
+
   /* ---------- лица: ползунок и таблица ---------- */
   const conj = $('[data-conj]');
   conj.innerHTML = PERS.map(([p, ru], i) => `<button type="button" class="pc-cw" data-cw="${i}"><span class="pc-p">${p} · ${ru}</span><span class="pc-f" lang="tr">içiyor<i>${ENDS[i]}</i></span></button>`).join('');
@@ -666,12 +750,12 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- лаборатория ---------- */
   const VERBS = [['iç', 'drink'], ['yap', 'do'], ['gel', 'come'], ['konuş', 'talk'], ['gör', 'see'], ['bekle', 'wait'], ['anla', 'understand'], ['oku', 'read']];
-  const RU = {
-    iç: ['drinking', 'drinking', 'drinking', 'drinking', 'drinking', 'drinking'], yap: ['doing', 'doing', 'doing', 'doing', 'doing', 'doing'],
-    gel: ['going', 'going', 'going', 'going', 'going', 'going'], konuş: ['talking', 'talking', 'talking', 'talking', 'talking', 'talking'],
-    gör: ['seeing', 'seeing', 'seeing', 'seeing', 'seeing', 'seeing'], bekle: ['waiting', 'waiting', 'waiting', 'waiting', 'waiting', 'waiting'],
-    anla: ['understanding', 'understanding', 'understanding', 'understanding', 'understanding', 'understanding'], oku: ['reading', 'reading', 'reading', 'reading', 'reading', 'reading'],
-  };
+  /* English sentence per person: -ing verbs use am/are/is; understand, see take no -ing in English */
+  const EN = { iç: 'drinking', yap: 'doing it', gel: 'coming', konuş: 'talking', bekle: 'waiting', oku: 'reading' };
+  const EN_ST = { gör: ['see it', 'sees it'], anla: ['understand', 'understands'] };
+  const EN_BE = ['I’m', 'You’re', 'He’s', 'We’re', 'You all are', 'They’re'];
+  const EN_SUBJ = ['I', 'You', 'He', 'We', 'You all', 'They'];
+  const enSay = (r, p) => (EN_ST[r] ? `${EN_SUBJ[p]} ${EN_ST[r][p === 2 ? 1 : 0]} right now.` : `${EN_BE[p]} ${EN[r]} right now.`);
   let lv = 0, lp = 0;
   const vBox = $('[data-lab-verbs]');
   const pBox = $('[data-lab-persons]');
@@ -682,7 +766,7 @@ addEventListener('DOMContentLoaded', () => {
     const r = VERBS[lv][0];
     const x = parts(r);
     labOut.innerHTML = `<span class="pc-piece pc-piece--stem">${x.stem}</span><span class="pc-piece pc-piece--v">${x.v}</span><span class="pc-piece pc-piece--yor">yor</span>` + (ENDS[lp] ? `<span class="pc-piece pc-piece--end">${ENDS[lp]}</span>` : '');
-    $('[data-lab-ru]').textContent = `${PERS[lp][1]}: ${RU[r][lp]} right now.` + (x.drop ? ` The vowel ${x.drop} dropped.` : '');
+    $('[data-lab-ru]').textContent = enSay(r, lp) + (EN_ST[r] ? ' No -ing in English, but Turkish still uses -iyor.' : '') + (x.drop ? ` The root lost its ${x.drop}.` : '');
     if (A) G.from(labOut.children, { y: -30, rotation: () => G.utils.random(-12, 12), duration: .55, ease: 'back.out(2.5)', stagger: .07 });
   }
   vBox.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lv = +b.dataset.i; $$('button', vBox).forEach((x) => x.classList.toggle('is-on', x === b)); labDraw(); });
@@ -713,7 +797,8 @@ addEventListener('DOMContentLoaded', () => {
     const ok = +b.dataset.i === pw.p;
     b.classList.add(ok ? 'is-ok' : 'is-no');
     const end = ENDS[pw.p];
-    $('[data-parse-hint]').textContent = ok ? `Yes: the tail ${end ? '-' + end : 'is empty, and that'} means ${PERS[pw.p][1]}.` : `Look at the tail: ${end ? '-' + end : 'there isn’t one'}. That’s ${PERS[pw.p][1]}.`;
+    const who = `“${PERS[pw.p][1]}.”`;
+    $('[data-parse-hint]').textContent = ok ? (end ? `Yes: the tail -${end} means ${who}` : `Yes: no tail means ${who}`) : (end ? `Look at the tail: -${end}. That’s ${who}` : `Look at the tail: there isn’t one. That’s ${who}`);
     if (ok) speak(form(pw.r, pw.p));
     if (A) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
   });

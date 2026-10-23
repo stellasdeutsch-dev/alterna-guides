@@ -488,6 +488,15 @@ p { margin: 0 0 12px; max-width: 65ch; }
 @keyframes pull { 50% { transform: translate(-8px, -6px); } }
 
 /* ---------- шесть владельцев ---------- */
+.kd .row { margin-bottom: 6px; }
+.kd__grid { display: grid; grid-template-columns: minmax(70px, auto) 1fr 1fr; gap: 6px 12px; align-items: center; margin-top: 14px; text-align: left; }
+.kd__rows { display: contents; }
+.kd__h { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+.kd__who { font-size: 14px; color: var(--ink-2); }
+.kd__tr { border: 0; cursor: pointer; }
+.kd__kk, .kd__tr { display: inline-block; justify-self: start; padding: 6px 10px; border-radius: 12px; background: #f1f4f1; font: 600 clamp(18px, 5vw, 24px)/1.2 var(--sans); color: var(--ink); }
+.kd__kk.is-same { background: #fbe9e2; box-shadow: inset 0 0 0 2px #e3a682; }
+.kd__tr.is-split { background: #e1f4e8; box-shadow: inset 0 0 0 2px #15814f; }
 .six { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 16px 0; }
 @media (min-width: 760px) { .six { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .six__c { position: relative; display: grid; gap: 4px; justify-items: center; padding: 16px 8px 14px; border: 0; border-radius: 20px; background: #fff; color: var(--ink); cursor: pointer; box-shadow: 0 14px 30px -20px rgba(0,0,0,.5); }
@@ -519,6 +528,35 @@ p { margin: 0 0 12px; max-width: 65ch; }
 .hz__wheel--2 span:nth-child(2) { transform: translateX(30px); }
 .hz__wheel span.is-on { background: var(--peach); color: var(--ink); }
 .hz__res { font: 600 clamp(20px, 5.4vw, 28px)/1.2 var(--sans); color: var(--ink); min-height: 1.2em; }
+
+/* ---------- қазақша ↔ түрікше: бір құйрық екіге бөлінеді ---------- */
+(() => {
+  const rows = $('[data-kd-rows]'), cap = $('[data-kd-cap]');
+  const M = {
+    ol: { rows: [['оның', 3, 3], ['олардың', 3, 6]], same: [0, 1], cap: 'Қазақша ол мен олар — бір құйрық: үйі. Түрікше бөледі: evi — оның, evleri — олардың. (onların evi де естіледі, бірақ есімдіксіз тек evleri.)' },
+    sen: { rows: [['сенің', 2, 2], ['сендердің', 2, 5], ['сіздің', 5, 5]], same: [0, 1], cap: 'Қазақша сенің де, сендердің де — үйің. Түрікшеде бөлек «сендер» жоқ: топқа да, сыпайыға да — siz, eviniz.' },
+  };
+  function show(m) {
+    const d = M[m];
+    rows.innerHTML = '';
+    d.rows.forEach(([who, pk, pt], i) => {
+      const hot = d.same.includes(i);
+      const f = poss('ev', pt);
+      rows.insertAdjacentHTML('beforeend', `<span class="kd__who" data-ui>${who}</span><span class="kd__kk${hot ? ' is-same' : ''}">${kkPoss('ev', pk)}</span><button type="button" class="kd__tr${hot ? ' is-split' : ''}" lang="tr" data-say="${word(f)}">${paint(f)}</button>`);
+    });
+    cap.textContent = d.cap;
+    $$('[data-kd-m]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kdM === m)));
+    if (!A) return;
+    const kk = $$('.kd__kk', rows), tr = $$('.kd__tr', rows);
+    G.timeline()
+      .from(kk, { y: (i) => (d.same.includes(i) ? (i ? -30 : 30) : 0), scale: .7, duration: .5, stagger: .06, ease: 'back.out(2.4)' })
+      .from(tr, { x: -60, rotation: (i) => (i % 2 ? 8 : -8), duration: .6, stagger: .12, ease: 'back.out(2)' }, '-=.1')
+      .fromTo($$('.is-split', rows), { scale: 1.25 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)', stagger: .1 });
+  }
+  $$('[data-kd-m]').forEach((b) => b.addEventListener('click', () => { show(b.dataset.kdM); sparks(b, 8); }));
+  show('ol');
+  if (A) ScrollTrigger.create({ trigger: '[data-kd]', start: 'top 70%', once: true, onEnter: () => show('ol') });
+})();
 
 /* ---------- прожектор benim/bizim ---------- */
 .pr { max-width: 620px; margin: 0 auto 18px; text-align: center; }
@@ -780,6 +818,26 @@ p { margin: 0 0 12px; max-width: 65ch; }
     </div>
   </section>
 
+  <!-- ===== ҚАЗАҚША ↔ ТҮРІКШЕ ===== -->
+  <section class="sec" data-section="kk-diff" data-title="Қазақшадан айырма" data-words="72">
+    <div class="in">
+      <span class="sq" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#f3c2a1" d="M8 14h14v20H8zM26 14h14v20H26z"/><path fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M8 14h14v20H8zM26 14h14v20H26zM22 24h4"/></svg></span><span class="kick">қазақша ↔ түрікше</span>
+      <h2 data-split>Қазақша біріктіреді, түрікше бөледі</h2>
+      <p class="lead">Біздің, сіздің — өз үйіңдей: <b data-ui>үйіміз</b> → <b lang="tr" data-say="evimiz">evimiz</b>, <b data-ui>үйіңіз</b> → <b lang="tr" data-say="eviniz">eviniz</b>. Ал екі жерде қазақша бір құйрықпен жүреді, түрікше екіге бөледі.</p>
+      <div class="cmp card kd rv" data-kd>
+        <div class="row" role="tablist" aria-label="Қай жер">
+          <button type="button" class="ghost" role="tab" data-kd-m="ol" aria-pressed="true">ол · олар</button>
+          <button type="button" class="ghost" role="tab" data-kd-m="sen" aria-pressed="false">сен · сендер · сіз</button>
+        </div>
+        <div class="kd__grid">
+          <span class="kd__h" aria-hidden="true"></span><span class="kd__h" data-ui>қазақша</span><span class="kd__h">Türkçe</span>
+          <div class="kd__rows" data-kd-rows></div>
+        </div>
+        <p class="cmp__cap" data-kd-cap data-ui></p>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== МЕСТОИМЕНИЯ ===== -->
   <section class="sec" data-section="pronouns" data-title="Benim, bizim" data-words="47">
     <div class="panel">
@@ -794,7 +852,7 @@ p { margin: 0 0 12px; max-width: 65ch; }
         </div>
         <p class="pr__cap" data-pr-cap data-ui></p>
       </div>
-      <p class="ctr rv">Орысша ойлайтын ми <b lang="tr">benim ev</b> деп, тынышталғысы келеді. Болмайды: құйрықсыз зат қайтадан ешкімдікі емес. Мөрсіз прожектор ештеңені дәлелдемейді. Қазақша да «менің үй» демейсің ғой.</p>
+      <p class="ctr rv">Қазақша «менің үй» демейсің ғой. Түрікше де <b lang="tr">benim ev</b> — жартылай. Мөрсіз прожектор ештеңені дәлелдемейді.</p>
       <p class="ctr rv">Алты прожектордың бәрі бірдей жұмыс істейді: <b lang="tr">onun evi</b>, <b lang="tr">sizin eviniz</b>, <b lang="tr">onların evleri</b>.</p>
     </div>
   </section>
@@ -804,8 +862,8 @@ p { margin: 0 0 12px; max-width: 65ch; }
     <div class="in">
       <span class="sq" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#f3c2a1" d="M10 18h24v8a12 12 0 0 1-24 0z"/><path fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M10 18h24v8a12 12 0 0 1-24 0zM34 21h3a4 4 0 0 1 0 8h-4M16 8c0 3 3 3 3 6M23 8c0 3 3 3 3 6"/></svg></span> <span class="kick">әдеп</span>
       <h2 data-split>Сыпайы «сіз»</h2>
-      <p class="lead">Бешікташтағы кофехана. Бариста стаканға есімді жазады. Саған ол <b lang="tr" data-say="Adın?">Adın?</b> емес, <b lang="tr" data-say="Adınız?">Adınız?</b> дейді. Бейтаныс адамға — «сіздің», тіпті ол жалғыз болса да.</p>
-      <p class="lead">Дүкенде, таксиде, банкте — әрдайым «сіз». Қате өлімші емес. Жай ғана тым үйдегідей естіледі.</p>
+      <p class="lead">Мұнда қазақша мен түрікше бір ойлайды: бейтанысқа — «сіз». Бешікташтағы бариста <b lang="tr" data-say="Adın?">Adın?</b> емес, <b lang="tr" data-say="Adınız?">Adınız?</b> дейді — атыңыз?</p>
+      <p class="lead">Дүкенде, таксиде, банкте — әрдайым «сіз». Бір айырманы жоғарыда көрдің: түрікше siz сендерді де жабады.</p>
       <div class="pl card rv" data-pl>
         <div class="row" role="tablist" aria-label="Кімге айтасың">
           <button type="button" class="ghost" role="tab" data-pl-m="friend">досыңа</button>
@@ -861,7 +919,7 @@ p { margin: 0 0 12px; max-width: 65ch; }
     <div class="panel panel--light mn">
       <span class="sq" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="14" cy="15" r="5" fill="#f3c2a1"/><circle cx="34" cy="15" r="5" fill="#f3c2a1"/><circle cx="24" cy="27" r="4" fill="#f3c2a1"/><path fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M4 38c0-6 4-10 10-10M44 38c0-6-4-10-10-10M16 42c0-5 3-8 8-8s8 3 8 8"/><circle cx="14" cy="15" r="5" fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="15" r="5" fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="27" r="4" fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="kick">мнемоника</span>
       <h2 data-split>Біз, сіз және олардың лары</h2>
-      <p class="lead">Түрікше ız қазақша біз бен сіз-дегі «із» сияқты естіледі. Біздің — m + ız. Сіздің — n + ız. Ал «олар» байлығын лар-да сақтайды: ları. Қазақшадағы үйіміз, үйіңіз, үйлері — дәл сол.</p>
+      <p class="lead">Түрікше ız қазақша біз бен сіз-дегі «із» сияқты естіледі. Біздің — m + ız. Сіздің — n + ız. Ал «олар» байлығын лар-да сақтайды: ları. Қазақшадағы үйіміз, үйіңіз — дәл сол. Тек «олардың» қазақша үйі, түрікше evleri.</p>
       <div class="mn__line" data-mn>
         <button type="button" class="mn__w" data-mw="0" data-say="evimiz"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="17" cy="17" r="7" fill="#f3c2a1"/><circle cx="32" cy="19" r="6" fill="#e3a682"/><path d="M5 42c0-8 5-12 12-12s12 4 12 12M27 31c7-1 15 2 15 11" fill="#f3c2a1"/></svg><span class="mn__t"><b>m</b> + біз</span><small data-ui>біздің → -mız</small></button>
         <button type="button" class="mn__w" data-mw="1" data-say="eviniz"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 30h26l6-8" fill="none" stroke="#034b2f" stroke-width="4" stroke-linecap="round"/><path d="M34 14l8 8-8 8" fill="none" stroke="#034b2f" stroke-width="4" stroke-linecap="round"/></svg><span class="mn__t"><b>n</b> + сіз</span><small data-ui>сіздің → -nız</small></button>
@@ -931,13 +989,13 @@ p { margin: 0 0 12px; max-width: 65ch; }
     <div class="in">
       <span class="sq" aria-hidden="true"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="10" width="28" height="28" rx="6" fill="#f3c2a1"/><path fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M24 16v16M16 24h16"/><rect x="10" y="10" width="28" height="28" rx="6" fill="none" stroke="#034b2f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="kick">тұзақтар</span>
       <h2 data-split>Бес тұзақ</h2>
-      <p class="lead">Карточканы бас — қате түзеледі. Түрік тілін үйренгендердің әрқайсысы бұлардың әрқайсысын кем дегенде бір рет жіберген.</p>
+      <p class="lead">Алғашқы екеуі — таза қазақ тұзағы: қазақша дұрыс, түрікше қате. Карточканы бас — қате түзеледі.</p>
     </div>
     <div class="traps" data-traps>
-      <button type="button" class="trap rv" data-fix="evimiz"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#f3c2a1"/><path d="M16 16l16 16M32 16 16 32" stroke="#02311f" stroke-width="3" stroke-linecap="round"/></svg><span class="trap__bad" lang="tr">biz ev</span><span class="trap__good" lang="tr">evimiz</span><small>«Біз үй» музыкалық топтың атауы сияқты естіледі. Иесін құйрық көрсетеді.</small></button>
-      <button type="button" class="trap rv" data-fix="evleri"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#8fe3b4"/><text x="24" y="31" text-anchor="middle" font-size="18" font-weight="700" fill="#02311f">e</text></svg><span class="trap__bad" lang="tr">evları</span><span class="trap__good" lang="tr">evleri</span><small>«Олардың» үндестігі екі нұсқалы. Жіңішке ev leri алады.</small></button>
-      <button type="button" class="trap rv" data-fix="arabamız"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#ffe08a"/><path d="M14 24h20" stroke="#02311f" stroke-width="3" stroke-linecap="round"/></svg><span class="trap__bad" lang="tr">arabaımız</span><span class="trap__good" lang="tr">arabamız</span><small>Дауыстыдан кейін дәнекер керек емес. Бірінші сабақтағыдай.</small></button>
-      <button type="button" class="trap rv" data-fix="benim evim"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#c9d6ce"/><rect x="16" y="22" width="16" height="12" rx="2" fill="#02311f"/><path d="M19 22v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#02311f" stroke-width="3"/></svg><span class="trap__bad" lang="tr">benim ev</span><span class="trap__good" lang="tr">benim evim</span><small>Прожектор мөрдің орнын баспайды. Құйрық әрдайым қалады.</small></button>
+      <button type="button" class="trap rv" data-fix="evleri"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#f3c2a1"/><path d="M14 26 24 16l10 10v10H14z" fill="none" stroke="#02311f" stroke-width="3"/></svg><span class="trap__bad"><span lang="tr">evi</span> — олардың үйі</span><span class="trap__good"><span lang="tr">evleri</span> — олардың үйі</span><small>Қазақша ол мен олар — бір құйрық: үйі. Түрікше evi — тек оның. Олардың — evleri.</small></button>
+      <button type="button" class="trap rv" data-fix="eviniz"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#8fe3b4"/><circle cx="18" cy="22" r="4" fill="#02311f"/><circle cx="30" cy="22" r="4" fill="#02311f"/><path d="M14 34c3-4 17-4 20 0" stroke="#02311f" stroke-width="3" fill="none" stroke-linecap="round"/></svg><span class="trap__bad"><span lang="tr">evin</span> — сендердің үйің</span><span class="trap__good"><span lang="tr">eviniz</span> — сендердің үйің</span><small>Қазақша достар тобына да «-ң»: сендердің үйің. Түрікше топ = siz: eviniz. -n тек бір адамға.</small></button>
+      <button type="button" class="trap rv" data-fix="okulumuz"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#c9d6ce"/><text x="24" y="31" text-anchor="middle" font-size="18" font-weight="700" fill="#02311f">u</text></svg><span class="trap__bad" lang="tr">okulımız</span><span class="trap__good" lang="tr">okulumuz</span><small>Қазақша мектебіміз — ы/і. Түрікше u-дан кейін дәнекер де, құйрықтың ішіндегі дауысты да u: okulumuz.</small></button>
+      <button type="button" class="trap rv" data-fix="benim evim"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#ffe08a"/><rect x="16" y="22" width="16" height="12" rx="2" fill="#02311f"/><path d="M19 22v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#02311f" stroke-width="3"/></svg><span class="trap__bad" lang="tr">benim ev</span><span class="trap__good" lang="tr">benim evim</span><small>Прожектор мөрдің орнын баспайды. Құйрық әрдайым қалады.</small></button>
       <button type="button" class="trap rv" data-fix="Adınız?"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="#e3a682"/><path d="M16 30c2 4 14 4 16 0M18 20h.01M30 20h.01" stroke="#02311f" stroke-width="3" stroke-linecap="round"/></svg><span class="trap__bad"><span lang="tr">Adın?</span> — әкімшіге</span><span class="trap__good"><span lang="tr">Adınız?</span> — әкімшіге</span><small>Бейтаныстармен — сыпайы «сіздің». «Сенің»-ді достар мен мысықтарға қалдыр.</small></button>
     </div>
   </section>
@@ -947,8 +1005,8 @@ p { margin: 0 0 12px; max-width: 65ch; }
     <div class="in">
       <span class="kick">тыңда</span>
       <h2>Есіктің кілті</h2>
-      <p class="lead">Назар аудар: мұғалім «беним араба» дегенді қате дейді. Дұрысы — жоғарыдағы тұзақтағыдай, құйрықпен.</p>
-      <a-video yt="nljzByN84kU" start="98" end="176" title="Түрік тілі. 11-сабақ. Тәуелдік жалғаулары" channel="Pratikturkce"></a-video>
+      <p class="lead">Бейне орысша. Назар аудар: мұғалім «benim araba» дегенді қате дейді. Дұрысы — жоғарыдағы тұзақтағыдай, құйрықпен.</p>
+      <a-video yt="nljzByN84kU" start="98" end="176" title="Турецкий язык. Урок 11. Аффиксы принадлежности" channel="Pratikturkce"></a-video>
     </div>
   </section>
 
@@ -1066,22 +1124,30 @@ function poss(w, p) {
   return { st: w, af: back(w) ? 'ları' : 'leri' };
 }
 const word = (f) => f.st + (f.v || '') + (f.b || '') + f.af;
-/* существительные без чередований: только гармония и соединительные согласные */
+/* казахские формы: [атау, дауыстыдан бұрынғы негіз, жуан b / жіңішке f] — тәуелдік қазақша да әр жақта бөлек */
 const N = {
-  ad: ['ат', 'n'], ev: ['үй', 'm'], okul: ['мектеп', 'f'], göz: ['көз', 'm'], çanta: ['сөмке', 'f'], kedi: ['мысық', 'm'],
-  kutu: ['қорап', 'f'], ütü: ['үтік', 'm'], telefon: ['телефон', 'm'], anahtar: ['кілт', 'm'], cüzdan: ['әмиян', 'm'],
-  bilet: ['билет', 'm'], kalem: ['қалам', 'f'], şemsiye: ['қолшатыр', 'm'], şapka: ['бөрік', 'f'], atkı: ['шарф', 'm'],
-  anne: ['ана', 'f'], baba: ['әке', 'm'], arkadaş: ['дос', 'm'], oda: ['бөлме', 'f'], kahve: ['кофе', 'm'],
-  çay: ['шай', 'm'], iş: ['жұмыс', 'f'], kapı: ['есік', 'f'], araba: ['көлік', 'f'], bavul: ['чемодан', 'm'],
-  numara: ['нөмір', 'm'], adres: ['мекенжай', 'm'], ülke: ['ел', 'f'], bahçe: ['бақ', 'm'], komşu: ['көрші', 'm'],
-  öğretmen: ['мұғалім', 'm'], otel: ['қонақүй', 'm'], doktor: ['дәрігер', 'm'], aile: ['отбасы', 'f'], masa: ['үстел', 'm'],
-  sınıf: ['сынып', 'm'], dil: ['тіл', 'm'], apartman: ['үй', 'm'], köy: ['ауыл', 'f'],
+  ad: ['ат', 'ат', 'b'], ev: ['үй', 'үй', 'f'], okul: ['мектеп', 'мектеб', 'f'], göz: ['көз', 'көз', 'f'], çanta: ['сөмке', 'сөмке', 'f'], kedi: ['мысық', 'мысығ', 'b'],
+  kutu: ['қорап', 'қораб', 'b'], ütü: ['үтік', 'үтіг', 'f'], telefon: ['телефон', 'телефон', 'b'], anahtar: ['кілт', 'кілт', 'f'], cüzdan: ['әмиян', 'әмиян', 'b'],
+  bilet: ['билет', 'билет', 'f'], kalem: ['қалам', 'қалам', 'b'], şemsiye: ['қолшатыр', 'қолшатыр', 'b'], şapka: ['қалпақ', 'қалпағ', 'b'], atkı: ['шарф', 'шарф', 'b'],
+  anne: ['ана', 'ана', 'b'], baba: ['әке', 'әке', 'f'], arkadaş: ['дос', 'дос', 'b'], oda: ['бөлме', 'бөлме', 'f'], kahve: ['кофе', 'кофе', 'f'],
+  çay: ['шай', 'шай', 'b'], iş: ['жұмыс', 'жұмыс', 'b'], kapı: ['есік', 'есіг', 'f'], araba: ['көлік', 'көліг', 'f'], bavul: ['чемодан', 'чемодан', 'b'],
+  numara: ['нөмір', 'нөмір', 'f'], adres: ['мекенжай', 'мекенжай', 'b'], ülke: ['ел', 'ел', 'f'], bahçe: ['бақ', 'бағ', 'b'], komşu: ['көрші', 'көрші', 'f'],
+  öğretmen: ['мұғалім', 'мұғалім', 'f'], otel: ['қонақүй', 'қонақүй', 'f'], doktor: ['дәрігер', 'дәрігер', 'f'], aile: ['отбасы', 'отбасы', 'b'], masa: ['үстел', 'үстел', 'f'],
+  sınıf: ['сынып', 'сыныб', 'b'], dil: ['тіл', 'тіл', 'f'], apartman: ['үй', 'үй', 'f'], köy: ['ауыл', 'ауыл', 'b'],
 };
-const PRON = {
-  1: { m: 'менің', f: 'менің', n: 'менің' }, 2: { m: 'сенің', f: 'сенің', n: 'сенің' }, 3: { m: 'оның', f: 'оның', n: 'оның' },
-  4: { m: 'біздің', f: 'біздің', n: 'біздің' }, 5: { m: 'сіздің', f: 'сіздің', n: 'сіздің' }, 6: { m: 'олардың', f: 'олардың', n: 'олардың' },
-};
-const ru = (w, p) => `${PRON[p][N[w][1]]} ${N[w][0]}`;
+/* «отбасы» өзі тәуелді сөз: оның отбасы (отбасысы емес) */
+const KK3 = { aile: 'отбасы' };
+function kkPoss(w, p) {
+  const [nom, stem, h] = N[w];
+  const y = h === 'b' ? 'ы' : 'і';
+  const endV = 'аәеоөұүыіэ'.includes(nom.slice(-1));
+  if (p === 3 || p === 6) return KK3[w] || (endV ? `${nom}с${y}` : stem + y);
+  const tail = { 1: 'м', 2: 'ң', 4: `м${y}з`, 5: `ң${y}з` }[p];
+  return endV ? nom + tail : stem + y + tail;
+}
+const PRON = { 1: 'менің', 2: 'сенің', 3: 'оның', 4: 'біздің', 5: 'сіздің', 6: 'олардың' };
+/* қазақша аудармасы: есімдік + тәуелді зат есім (олардың үйі — қазақшада 3-жақ біреу) */
+const ru = (w, p) => `${PRON[p]} ${kkPoss(w, p)}`;
 const WHO = { 1: 'мен', 2: 'сен', 3: 'ол', 4: 'біз', 5: 'сіз', 6: 'олар' };
 /* почему так: короткое объяснение формы */
 function why(w, p) {
@@ -1466,7 +1532,7 @@ if (A) {
 (() => {
   const f = $('[data-guess-f]');
   const T = [
-    'Орысшаға ұқсайды. Бірақ түрікше «біз»-ді бөлек сөз етіп қоспайды. Ол құйрық өсіреді.',
+    'Қазақша да «біздің үй» деп тоқтамайсың: үйіміз. Түрікше де құйрық өсіреді.',
     'Иә! Evim қосу серіктер — evimiz. Сен тағы ережеден бұрын таптың.',
     '«Біз үй» — өлеңге әдемі. Құжатқа құйрық керек.',
   ];
@@ -1605,6 +1671,35 @@ if (A) {
   });
   show('okul');
   if (A) ScrollTrigger.create({ trigger: '[data-hz]', start: 'top 65%', once: true, onEnter: () => { let k = 0; const t = setInterval(() => { k++; if (k >= WORDS.length) { clearInterval(t); return; } $$('button', wbox)[k].click(); }, 1400); } });
+})();
+
+/* ---------- қазақша ↔ түрікше: бір құйрық екіге бөлінеді ---------- */
+(() => {
+  const rows = $('[data-kd-rows]'), cap = $('[data-kd-cap]');
+  const M = {
+    ol: { rows: [['оның', 3, 3], ['олардың', 3, 6]], same: [0, 1], cap: 'Қазақша ол мен олар — бір құйрық: үйі. Түрікше бөледі: evi — оның, evleri — олардың. (onların evi де естіледі, бірақ есімдіксіз тек evleri.)' },
+    sen: { rows: [['сенің', 2, 2], ['сендердің', 2, 5], ['сіздің', 5, 5]], same: [0, 1], cap: 'Қазақша сенің де, сендердің де — үйің. Түрікшеде бөлек «сендер» жоқ: топқа да, сыпайыға да — siz, eviniz.' },
+  };
+  function show(m) {
+    const d = M[m];
+    rows.innerHTML = '';
+    d.rows.forEach(([who, pk, pt], i) => {
+      const hot = d.same.includes(i);
+      const f = poss('ev', pt);
+      rows.insertAdjacentHTML('beforeend', `<span class="kd__who" data-ui>${who}</span><span class="kd__kk${hot ? ' is-same' : ''}">${kkPoss('ev', pk)}</span><button type="button" class="kd__tr${hot ? ' is-split' : ''}" lang="tr" data-say="${word(f)}">${paint(f)}</button>`);
+    });
+    cap.textContent = d.cap;
+    $$('[data-kd-m]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.kdM === m)));
+    if (!A) return;
+    const kk = $$('.kd__kk', rows), tr = $$('.kd__tr', rows);
+    G.timeline()
+      .from(kk, { y: (i) => (d.same.includes(i) ? (i ? -30 : 30) : 0), scale: .7, duration: .5, stagger: .06, ease: 'back.out(2.4)' })
+      .from(tr, { x: -60, rotation: (i) => (i % 2 ? 8 : -8), duration: .6, stagger: .12, ease: 'back.out(2)' }, '-=.1')
+      .fromTo($$('.is-split', rows), { scale: 1.25 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)', stagger: .1 });
+  }
+  $$('[data-kd-m]').forEach((b) => b.addEventListener('click', () => { show(b.dataset.kdM); sparks(b, 8); }));
+  show('ol');
+  if (A) ScrollTrigger.create({ trigger: '[data-kd]', start: 'top 70%', once: true, onEnter: () => show('ol') });
 })();
 
 /* ---------- прожектор benim/bizim ---------- */
@@ -1875,7 +1970,7 @@ flips($('[data-flips]'), [
           b.type = 'button'; b.className = 'lab__chip'; b.lang = 'tr'; b.textContent = o;
           b.addEventListener('click', () => {
             const ok = o === cur.good;
-            whyEl.textContent = ok ? `Расталды: ${cur.good}. ${why(cur.w, cur.p)}.` : `Жоқ: ${why(cur.w, cur.p)}. Дұрысы — ${cur.good}.`;
+            whyEl.textContent = ok ? `Расталды: ${cur.good}. ${((t) => t[0].toUpperCase() + t.slice(1))(why(cur.w, cur.p))}.` : `Жоқ: ${why(cur.w, cur.p)}. Дұрысы — ${cur.good}.`;
             if (ok) {
               out.innerHTML = tiles(poss(cur.w, cur.p));
               say(cur.good);
