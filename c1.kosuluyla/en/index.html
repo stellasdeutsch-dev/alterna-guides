@@ -1,0 +1,1302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="c1.kosuluyla">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Provided that: -mAsI şartıyla, koşuluyla</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url(../media/manrope-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url(../media/manrope-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url(../media/manrope-cyrillic.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+:root{
+  --bg:#F3F5F3;--ink:#111614;--dark:#0E1211;--dark2:#171E1B;--green:#68E78E;--green-d:#2F9E57;--green-deep:#1F6B3D;--cyan:#3DD6E8;--red:#FF6B6B;--mute:#9AA39E;--charcoal:#000B1A;
+  --frame:radial-gradient(120% 80% at 78% 8%,rgba(104,231,142,.28),transparent 55%),radial-gradient(80% 60% at 8% 100%,rgba(47,158,87,.22),transparent 60%),#0E1211;
+  --ak-font:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;--ak-font-display:"Manrope",system-ui,sans-serif;
+  --ak-accent:#2F9E57;--ak-accent-soft:#E3F7E9;--ak-ink:#111614;--ak-muted:#5E6762;--ak-bg:#fff;--ak-surface:#F3F5F3;--ak-line:#DDE3DF;--ak-radius:20px;--ak-radius-sm:14px;--ak-good:#2F9E57;
+  --r:26px;--side:12px;
+}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ak-font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*{box-sizing:border-box}
+h1,h2,h3{letter-spacing:-.03em;margin:0;font-weight:500}
+.tr{font-weight:700;text-decoration:underline dotted rgba(104,231,142,.9);text-underline-offset:3px;cursor:pointer}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+
+/* ---------- детали пункта: один цвет — одна роль ---------- */
+.m{display:inline-flex;align-items:center;border-radius:.42em;padding:.06em .32em;font-weight:700;line-height:1.15;white-space:nowrap}
+.m.r{background:#F2F4F3;color:#111614;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1)}
+.m.n{background:var(--red);color:#2A0C0C}
+.m.e{background:var(--green);color:#0E1211}
+.m.o{background:var(--cyan);color:#06262A}
+.m.c{background:#0E1211;color:#fff;box-shadow:inset 0 0 0 1.5px var(--green)}
+.word{display:inline-flex;gap:3px;flex-wrap:nowrap}
+
+/* ---------- кнопки ---------- */
+.pill{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 6px 0 20px;border:0;border-radius:999px;background:var(--green);color:#0E1211;font:700 15px/1 var(--ak-font);cursor:pointer;text-decoration:none}
+.pill i{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#fff;color:#0E1211}
+.pill svg{width:16px;height:16px}
+.opt{min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.06);color:#EEF2EF;font:600 15px/1.15 var(--ak-font);cursor:pointer}
+.opt:focus-visible,.pill:focus-visible,.reel button:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+.opt.is-ok{background:var(--green);color:#0E1211;border-color:var(--green)}
+.opt.is-no{background:var(--red);color:#2A0C0C;border-color:var(--red)}
+.chip{display:inline-flex;align-items:center;min-height:30px;padding:0 13px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#DDE3DF;font:500 13px/1 var(--ak-font);white-space:nowrap}
+.chip--g{background:var(--green);color:#0E1211;border-color:var(--green);font-weight:700}
+
+/* ---------- титр (CSS, без GSAP) ---------- */
+.title{position:relative;min-height:100vh;min-height:100svh;padding:var(--side);display:grid}
+.title__frame{position:relative;border-radius:var(--r);overflow:hidden;background:var(--frame);display:grid;align-content:space-between;gap:20px;padding:24px;min-height:560px;color:#fff}
+.title__frame::before,.frame::before,.dark::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px calc(100%/12));pointer-events:none}
+.title__top{position:relative;display:flex;gap:8px;flex-wrap:wrap;z-index:2}
+.title__big{position:absolute;left:0;right:0;top:20%;text-align:center;font-weight:200;font-size:clamp(64px,15vw,240px);letter-spacing:-.05em;line-height:.85;color:rgba(255,255,255,.1);white-space:nowrap;animation:bigIn 1.3s cubic-bezier(.2,.8,.2,1) both}
+.title__fan{position:absolute;right:4%;top:22%;width:min(48vw,520px);height:240px;perspective:900px;animation:fanIn 1.2s .2s cubic-bezier(.2,.9,.25,1.1) both}
+.title__fan span{position:absolute;top:0;left:50%;width:120px;height:160px;margin-left:-60px;border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.8),rgba(255,255,255,.18));box-shadow:0 20px 40px rgba(0,0,0,.4);transform:rotateY(calc(var(--i) * 12deg)) translateX(calc(var(--i) * 46px)) translateZ(calc(var(--i) * -10px))}
+.title__fan span:nth-child(4){background:linear-gradient(160deg,#9CF2B6,#2F9E57)}
+.title__fan b{position:absolute;left:14px;bottom:14px;font-size:13px;color:#0E1211}
+.title__copy{position:relative;z-index:2;max-width:460px;align-self:end;animation:copyIn .9s .35s cubic-bezier(.2,.8,.2,1) both}
+.title__copy h1{font-size:clamp(30px,3.4vw,52px);line-height:1.02;font-weight:300;color:var(--mute)}
+.title__copy h1 b{color:#fff;font-weight:600}
+.title__copy p{margin:12px 0 18px;font-size:16px;line-height:1.5;color:#C9D1CC;font-weight:300}
+.title__copy p b{color:#fff}
+@keyframes bigIn{from{transform:translateY(40px) scale(.95)}to{transform:none}}
+@keyframes fanIn{from{transform:translateY(60px) rotateX(30deg)}to{transform:none}}
+@keyframes copyIn{from{transform:translateY(30px)}to{transform:none}}
+
+/* ---------- сцена-кадр ---------- */
+.scene{position:relative}
+.stage{padding:var(--side)}
+.frame{position:relative;border-radius:var(--r);overflow:hidden;background:var(--frame);display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;isolation:isolate;min-height:640px;color:#EEF2EF}
+.hud{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;padding:14px 16px 0}
+.hud h2{flex-basis:100%;font-size:clamp(22px,2.4vw,36px);line-height:1.05;color:#fff;font-weight:400;margin-top:4px}
+.hud h2 span{color:var(--mute);font-weight:300}
+.view{position:relative;z-index:1;min-height:380px}
+.cam{position:absolute;inset:0;transform-origin:50% 60%}
+.layer{position:absolute;inset:0;pointer-events:none}
+.layer.front{pointer-events:auto}
+.big{position:absolute;left:-5%;right:-5%;top:3%;text-align:center;font-weight:200;font-size:clamp(60px,14vw,220px);line-height:.85;letter-spacing:-.05em;color:rgba(255,255,255,.08);white-space:nowrap}
+.subs{position:relative;z-index:4;padding:8px 16px 2px}
+.subs p{margin:0 0 6px;font-size:clamp(15px,.5vw + 12px,19px);line-height:1.42;font-weight:300;color:#C9D1CC;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:8px 12px;width:fit-content;max-width:66ch}
+.subs p em{font-style:normal;color:#fff;font-weight:600}
+.beat{position:relative;z-index:4;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:6px 16px 16px}
+.beat__q{flex-basis:100%;margin:0;font-weight:600;font-size:15px;color:#fff}
+.fb{flex-basis:100%;margin:0;min-height:44px;padding-left:56px;display:flex;align-items:center;font-size:14px;line-height:1.35;font-weight:600;color:#DDE3DF}
+.shutter,.wipe,.endcard{display:none}
+.anim .shutter{display:block;position:absolute;inset:0;z-index:7;pointer-events:none}
+.anim .wipe{display:block;position:absolute;z-index:7;width:320vmax;height:320vmax;margin:-160vmax 0 0 -160vmax;border-radius:50%;pointer-events:none;background:var(--wipe,#68E78E);transform:scale(0)}
+.anim .endcard{position:absolute;inset:0;z-index:8;display:grid;place-content:center;justify-items:center;gap:6px;color:#0E1211;pointer-events:none;visibility:hidden}
+.endcard b{font-size:clamp(30px,5vw,64px);letter-spacing:-.04em;font-weight:500}
+.endcard span{font-weight:600}
+.anim :is(.doc-wrap,.fan,.bar6,.mag,.kb,.balc){transform:scale(var(--fit,1));transform-origin:50% 50%}
+.anim .stage{height:100vh;height:100svh}
+.anim .frame{height:100%;min-height:0}
+.anim .view{min-height:0}
+.anim .subs{display:grid}
+.anim .subs>p{grid-area:1/1;align-self:end}
+
+/* актёры */
+.actors{position:absolute;left:0;right:0;bottom:0;height:62%;display:flex;justify-content:center;align-items:flex-end;gap:3%}
+.actor{position:relative;width:min(28%,210px);aspect-ratio:200/240;max-height:100%}
+.actor>svg{width:100%;height:100%;display:block;overflow:visible}
+.bub{position:absolute;bottom:96%;margin:0;background:rgba(255,255,255,.94);color:#111614;border-radius:18px;padding:8px 12px;font-weight:600;font-size:clamp(13px,.5vw + 10px,17px);line-height:1.3;box-shadow:0 14px 30px rgba(0,0,0,.35);width:max-content;max-width:min(52vw,300px)}
+.bub--l{left:4%}.bub--r{right:2%}
+.bub--ok{box-shadow:0 0 0 3px var(--green),0 14px 30px rgba(0,0,0,.35)}
+.boxcat{position:relative;width:min(20%,150px);aspect-ratio:1}
+.boxcat svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+
+/* сцена 1: договор и линейка */
+.doc-wrap{position:absolute;left:4%;right:4%;top:2%;height:36%;display:flex;justify-content:center;perspective:1000px}
+.doc{width:min(100%,520px);border-radius:20px;background:linear-gradient(160deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.18);padding:14px 16px;display:grid;gap:7px;align-content:start;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.doc__h{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.12em;color:var(--mute)}
+.ln{height:7px;border-radius:4px;background:rgba(255,255,255,.14)}
+.ln:nth-child(3){width:86%}.ln:nth-child(4){width:70%}
+.clause{display:flex;gap:8px;align-items:center;border-radius:12px;background:rgba(104,231,142,.14);border:1px solid rgba(104,231,142,.5);padding:6px 10px;font-size:clamp(12px,1.2vw,15px);font-weight:500;color:#fff}
+.clause b{color:var(--green)}
+.sign{width:120px;height:34px}
+.ruler{position:absolute;left:4%;right:4%;top:40%;height:44px}
+.ruler::before{content:"";position:absolute;left:0;right:0;bottom:8px;height:12px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 1px,transparent 1px 10px)}
+.ruler .dot{position:absolute;bottom:24px;width:7px;height:7px;border-radius:50%;background:var(--cyan)}
+.ruler .dot.r{background:var(--red)}
+.ruler .here{position:absolute;left:0;top:-8px;background:var(--green);color:#0E1211;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;white-space:nowrap}
+.ruler small{position:absolute;bottom:-12px;font-size:11px;color:var(--mute)}
+
+/* сцена 2: карусель деталей */
+.fan{position:absolute;inset:4%;display:grid;align-content:center;justify-items:center;gap:16px;perspective:1000px}
+.leaves{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;transform-style:preserve-3d}
+.leaf{width:clamp(76px,11vw,140px);aspect-ratio:3/4;border-radius:16px;padding:10px;display:grid;align-content:space-between;background:linear-gradient(160deg,rgba(255,255,255,.88),rgba(255,255,255,.32));color:#111614;box-shadow:0 20px 40px rgba(0,0,0,.4)}
+.leaf small{font-size:11px;font-weight:600;opacity:.7}
+.leaf b{font-size:clamp(15px,2vw,26px);font-weight:700}
+.leaf--e{background:linear-gradient(160deg,#B5F7C8,#3FBF6A)}
+.leaf--o{background:linear-gradient(160deg,#B8F2F8,#3DB6C8)}
+.leaf--c{background:linear-gradient(160deg,#1C2420,#0E1211);color:#fff;box-shadow:inset 0 0 0 1.5px var(--green),0 20px 40px rgba(0,0,0,.4)}
+.leaf--c small{color:var(--green);opacity:1}
+.ex2{font-size:clamp(15px,1.6vw,21px);font-weight:500;color:#fff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:8px 14px;text-align:center}
+.vsk{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.vsk span{font-size:13px;border-radius:999px;padding:5px 12px;border:1px solid rgba(255,255,255,.18);color:#C9D1CC}
+.vsk .on{background:var(--green);color:#0E1211;border-color:var(--green);font-weight:700}
+
+/* сцена 3: зелёная плашка с аватарами */
+.bar6{position:absolute;inset:4%;display:grid;align-content:center;justify-items:center;gap:16px}
+.gbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;border-radius:999px;background:linear-gradient(90deg,#2F9E57,#68E78E 60%,#2F9E57);padding:8px 10px;box-shadow:0 20px 50px rgba(47,158,87,.35)}
+.gbar__date{display:flex;gap:6px;align-items:center;background:#0E1211;color:#fff;border-radius:999px;padding:8px 14px;font-weight:600;font-size:14px}
+.av{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;border:0;padding:0;background:#0E1211;cursor:pointer;position:relative}
+.av svg{width:44px;height:44px;border-radius:50%}
+.av i{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);font:700 10px/1 var(--ak-font);font-style:normal;background:#fff;color:#0E1211;border-radius:999px;padding:2px 6px}
+.av.is-on{box-shadow:0 0 0 3px #fff}
+.out3{font-size:clamp(24px,4vw,50px)}
+.mak{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;font-weight:500;color:#C9D1CC}
+.mak button{min-height:44px}
+
+/* сцена 4: лупа */
+.mag{position:absolute;inset:4%;display:grid;align-content:center;justify-items:center;gap:16px}
+.lens{position:relative;border-radius:50%;width:min(64vw,330px);aspect-ratio:1;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.16),rgba(255,255,255,.03) 60%);border:2px solid rgba(255,255,255,.35);box-shadow:0 0 80px rgba(104,231,142,.25)}
+.lens::after{content:"";position:absolute;right:-12%;bottom:-12%;width:26%;height:7%;border-radius:999px;background:#3A4452;transform:rotate(45deg)}
+.lens .word{font-size:clamp(22px,4.6vw,46px)}
+.lens .wrong{position:absolute;top:22%;font-size:clamp(14px,1.6vw,20px);color:var(--mute);text-decoration:line-through;text-decoration-color:var(--red)}
+.tags4{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.tags4 span{font-size:13px;border-radius:12px;padding:6px 10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#DDE3DF}
+
+/* сцена 5: база знаний */
+.kb{position:absolute;inset:4%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;align-content:center}
+.kcard{border-radius:18px;background:#171E1B;border:1px solid rgba(255,255,255,.1);overflow:hidden;display:grid;align-content:start}
+.kcard svg{display:block;width:100%;height:auto;background:radial-gradient(circle at 60% 40%,rgba(104,231,142,.35),#0E1211 70%)}
+.kcard div{padding:10px 12px 12px;display:grid;gap:4px}
+.kcard b{font-size:14px;color:#fff}
+.kcard p{margin:0;font-size:12px;line-height:1.4;color:var(--mute)}
+.kcard.is-key{border-color:var(--green)}
+
+/* сцена 6: балкон */
+.balc{position:absolute;inset:0}
+.sea{position:absolute;left:0;right:0;bottom:0;width:100%;height:70%}
+.new7{position:absolute;right:4%;top:4%;width:min(42%,280px);z-index:3}
+.new7 .clause{display:grid;gap:4px}
+.stamp{position:absolute;right:-6px;top:-14px;background:var(--green);color:#0E1211;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:800;transform:rotate(8deg)}
+.asm{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.asm .m{font-size:19px;min-height:44px;padding:0 14px;border:0;cursor:pointer;font-family:var(--ak-font)}
+.asm-out{display:inline-flex;gap:3px;min-height:44px;align-items:center;min-width:170px;border-radius:14px;border:1px dashed rgba(255,255,255,.3);padding:4px 8px;font-size:19px}
+
+/* ---------- блоки после сюжета ---------- */
+.block{max-width:1120px;margin:0 auto;padding:56px 18px}
+.block>header{display:grid;gap:10px;margin-bottom:22px}
+.block h2{font-size:clamp(28px,3.4vw,46px);line-height:1.04;color:#111614;font-weight:400}
+.block h2 span{color:#7C8781;font-weight:300}
+.block p{font-size:17px;line-height:1.5;margin:0}
+.lede{max-width:62ch;color:#5E6762}
+.dark{position:relative;border-radius:var(--r);background:var(--frame);color:#EEF2EF;padding:18px;overflow:hidden}
+.dark>*{position:relative}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tabs button{min-height:44px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);color:#EEF2EF;font:600 15px/1 var(--ak-font);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--green);color:#0E1211;border-color:var(--green)}
+.mode{display:grid;gap:14px}
+.mode[hidden]{display:none}
+.grp{display:grid;gap:8px}
+.grp>span{font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.grp>div{display:flex;flex-wrap:wrap;gap:8px}
+.grp .opt[aria-pressed="true"],.grp .opt[aria-checked="true"],.pr .opt[aria-pressed="true"],.pr .opt[aria-checked="true"]{background:var(--green);color:#0E1211;border-color:var(--green)}
+.screen{border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:16px;display:grid;gap:10px;justify-items:start}
+.screen .word{font-size:clamp(24px,3.6vw,44px)}
+.screen .sent{font-size:clamp(16px,1.8vw,22px);font-weight:500;color:#fff}
+.why{font-size:15px;line-height:1.45;color:#C9D1CC;border-left:3px solid var(--green);padding:4px 0 4px 12px;max-width:72ch}
+.why.bad{border-left-color:var(--red)}
+.takes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.take{position:relative;perspective:900px;min-height:240px}
+.take__in{position:relative;height:100%;min-height:240px;transform-style:preserve-3d}
+.face{position:absolute;inset:0;border-radius:20px;padding:16px;display:grid;align-content:start;gap:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.face--bad{background:#fff;border:1px solid #DDE3DF}
+.face--good{background:var(--frame);color:#EEF2EF;transform:rotateY(180deg)}
+.face svg{width:46px;height:auto}
+.face .line{font-size:18px;font-weight:700}
+.face--bad .line{text-decoration:line-through;text-decoration-color:var(--red)}
+.face p{font-size:15px}
+.face--bad .opt{background:#111614;color:#fff;border-color:#111614;justify-self:start}
+.face--good .opt{justify-self:start}
+.prac{display:grid;gap:22px}
+.poster{position:relative;border-radius:var(--r);background:var(--frame);color:#EEF2EF;padding:22px;display:grid;gap:16px;overflow:hidden}
+.poster::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.045) 0 1px,transparent 1px calc(100%/12));pointer-events:none}
+.poster>*{position:relative}
+.poster h2{color:#fff}
+.poster__big{position:absolute;right:-2%;top:-2%;font-weight:200;font-size:clamp(56px,11vw,160px);letter-spacing:-.05em;line-height:.8;color:rgba(255,255,255,.08)}
+.poster__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:12px}
+.pcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px;display:grid;gap:8px;align-content:start}
+.pcard h3{font-size:17px;color:#fff;font-weight:600}
+.pcard p{font-size:15px;line-height:1.45;color:#C9D1CC}
+.recipe{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:clamp(18px,2.4vw,28px);color:var(--mute)}
+.finale{display:flex;gap:14px;align-items:center;background:rgba(255,255,255,.08);border-radius:18px;padding:14px}
+.finale svg{width:80px;height:auto;flex:none}
+.finale p{color:#fff}
+/* пульт переговоров */
+.pult{display:grid;gap:12px;border-radius:20px;background:var(--frame);color:#EEF2EF;padding:16px}
+.pult__head{display:flex;justify-content:space-between;align-items:center}
+.pult__count{font-weight:700}
+.chat{display:grid;gap:6px;max-height:230px;overflow:auto}
+.chat p{margin:0;padding:7px 12px;border-radius:16px;font-weight:600;font-size:15px;width:fit-content;max-width:85%}
+.chat .in{background:#fff;color:#111614;border-bottom-left-radius:4px}
+.chat .in b{display:block;font-size:11px;color:var(--green-d)}
+.chat .out{justify-self:end;background:var(--green);color:#0E1211;border-bottom-right-radius:4px}
+.pult__task{display:grid;gap:4px;border-radius:14px;background:rgba(255,255,255,.07);padding:10px 12px;font-weight:600}
+.pt-ru{color:var(--mute);font-weight:500}
+.pr{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pr>span{flex-basis:100%;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mute)}
+.pult__out{min-height:52px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.pult__out .word{font-size:clamp(20px,3vw,30px);flex-wrap:wrap}
+.pult__foot{display:flex;gap:8px;flex-wrap:wrap}
+.pt-fb{margin:0;font-weight:600;min-height:1.4em}
+
+/* ---------- скроллбар: линейка-таймлайн ---------- */
+.reel{position:fixed;z-index:60;top:8px;left:8px;right:8px;height:46px;border-radius:16px;background:rgba(14,18,17,.94);border:1px solid rgba(255,255,255,.1);padding:4px;touch-action:none}
+.reel__track{position:relative;display:flex;gap:3px;height:100%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 1px,transparent 1px 8px) center/100% 30% no-repeat}
+.reel button{position:relative;flex:1;min-width:0;border:0;border-radius:10px;background:transparent;color:#9AA39E;font:700 12px/1 var(--ak-font);cursor:pointer;padding:0}
+.reel button.is-on{background:var(--green);color:#0E1211}
+.reel button.is-done::after{content:"";position:absolute;right:4px;top:4px;width:6px;height:6px;border-radius:50%;background:var(--cyan)}
+.reel__head{position:absolute;left:0;top:-3px;bottom:-3px;width:3px;border-radius:3px;background:#fff;pointer-events:none;z-index:2}
+.cut{position:fixed;inset:0;z-index:55;background:var(--green);visibility:hidden;pointer-events:none}
+
+/* без анимации: кадр течёт сверху вниз */
+html:not(.anim) .cam,html:not(.anim) .layer.front{position:relative;inset:auto}
+html:not(.anim) .view{min-height:0;padding:10px 0}
+html:not(.anim) :is(.fan,.bar6,.mag,.kb){position:relative;inset:auto;padding:12px 16px}
+html:not(.anim) .doc-wrap,html:not(.anim) .ruler{position:relative;inset:auto;height:auto;margin:10px 4%}
+html:not(.anim) .ruler{height:44px}
+html:not(.anim) .actors{position:relative;inset:auto;height:min(60vw,300px)}
+html:not(.anim) .balc{position:relative;inset:auto;height:min(80vw,420px)}
+html:not(.anim) .b-a{display:none}
+
+@media (max-width:767.98px){
+  .anim .hud{padding-top:62px}
+  .title__frame{padding-top:66px}
+  .title__fan{top:30%;right:auto;left:50%;width:300px;margin-left:-150px;height:200px}
+  .title__fan span{width:84px;height:116px;margin-left:-42px;transform:rotateY(calc(var(--i) * 12deg)) translateX(calc(var(--i) * 30px))}
+  .deep{display:none}
+  .kb{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .actor{width:34%}
+  .boxcat{width:22%}
+  .bub{max-width:44vw;font-size:13px;padding:6px 10px}
+  .bub--l{left:-4%}
+  .bub--r{right:-4%;bottom:118%}
+  .new7{width:56%}
+  .leaf{width:68px;padding:8px}
+  .leaf b{font-size:14px}
+  .lens::after{display:none}
+}
+@media (max-width:767.98px){.title__frame{padding-bottom:72px}}
+@media (max-width:767.98px) and (max-height:700px){.anim .hud h2{font-size:18px}.actors{height:50%}.anim .bub{font-size:12px}}
+@media (min-width:768px){
+  :root{--side:14px}
+  .stage,.title{padding-right:86px}
+  .block{padding-right:96px}
+  .reel{left:auto;right:12px;top:50%;width:58px;height:min(76vh,600px);transform:translateY(-50%);padding:6px}
+  .reel__track{flex-direction:column;background:repeating-linear-gradient(180deg,rgba(255,255,255,.12) 0 1px,transparent 1px 8px) center/30% 100% no-repeat}
+  .reel__head{left:-3px;right:-3px;top:0;bottom:auto;width:auto;height:3px}
+}
+</style>
+</head>
+<body>
+<svg class="defs" aria-hidden="true" focusable="false">
+  <defs>
+    <radialGradient id="gSkin" cx=".38" cy=".3" r=".85"><stop offset="0" stop-color="#F6D7C6"/><stop offset=".7" stop-color="#E0AE93"/><stop offset="1" stop-color="#C98D72"/></radialGradient>
+    <radialGradient id="gGreen" cx=".35" cy=".2" r=".95"><stop offset="0" stop-color="#B5F7C8"/><stop offset=".55" stop-color="#5FD483"/><stop offset="1" stop-color="#2F9E57"/></radialGradient>
+    <radialGradient id="gChar" cx=".35" cy=".2" r=".95"><stop offset="0" stop-color="#4A5868"/><stop offset=".7" stop-color="#2A3442"/><stop offset="1" stop-color="#151C26"/></radialGradient>
+    <radialGradient id="gFur" cx=".4" cy=".3" r=".9"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".7" stop-color="#EEF2F3"/><stop offset="1" stop-color="#C9D2D6"/></radialGradient>
+    <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></linearGradient>
+    <linearGradient id="gSea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16362A"/><stop offset="1" stop-color="#0B1512"/></linearGradient>
+  </defs>
+  <symbol id="tm" viewBox="0 0 200 240">
+    <path d="M34 240 C34 190 62 168 100 168 C138 168 166 190 166 240Z" fill="url(#gGreen)"/>
+    <path d="M84 168 Q100 188 116 168Z" fill="#D9A287"/>
+    <ellipse cx="100" cy="112" rx="50" ry="56" fill="url(#gSkin)"/>
+    <path d="M50 106 C46 62 72 42 102 44 C134 44 156 66 150 106 C146 90 136 80 124 78 C116 70 92 68 80 76 C66 78 54 90 50 106Z" fill="#2B2420"/>
+    <g fill="#2B2420"><circle cx="60" cy="72" r="12"/><circle cx="78" cy="56" r="14"/><circle cx="100" cy="50" r="15"/><circle cx="122" cy="54" r="14"/><circle cx="140" cy="68" r="12"/></g>
+    <g fill="rgba(104,231,142,.18)" stroke="#161616" stroke-width="5"><rect x="60" y="102" width="34" height="25" rx="10"/><rect x="106" y="102" width="34" height="25" rx="10"/></g>
+    <path d="M94 112 h12" stroke="#161616" stroke-width="5"/>
+    <circle cx="78" cy="115" r="4" fill="#2B2420"/><circle cx="122" cy="115" r="4" fill="#2B2420"/>
+    <path d="M80 141 Q100 131 120 141 Q110 148 100 143 Q90 148 80 141Z" fill="#2B2420"/>
+    <path d="M88 152 Q100 160 112 152" stroke="#8A4A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="82" cy="74" rx="16" ry="6" fill="#fff" opacity=".18"/>
+  </symbol>
+  <symbol id="hb" viewBox="0 0 200 240">
+    <path d="M34 240 C34 190 62 168 100 168 C138 168 166 190 166 240Z" fill="url(#gChar)"/>
+    <path d="M82 168 L100 200 L118 168Z" fill="#F2F4F3"/>
+    <ellipse cx="100" cy="116" rx="50" ry="54" fill="url(#gSkin)"/>
+    <path d="M52 112 C50 128 54 142 60 148 L62 112Z M148 112 C150 128 146 142 140 148 L138 112Z" fill="#C9CED3"/>
+    <path d="M48 96 C50 60 78 48 104 48 C134 48 154 64 156 88 C162 90 172 94 172 100 C150 104 120 102 100 102 C80 102 60 102 48 96Z" fill="#3A4452"/>
+    <path d="M66 110 h24 M110 110 h24" stroke="#C9CED3" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="78" cy="122" r="4" fill="#2B2420"/><circle cx="122" cy="122" r="4" fill="#2B2420"/>
+    <path d="M74 142 Q100 126 126 142 Q116 154 100 146 Q84 154 74 142Z" fill="#DADFE3"/>
+    <ellipse cx="82" cy="62" rx="16" ry="5" fill="#fff" opacity=".15"/>
+  </symbol>
+  <symbol id="cat" viewBox="0 0 120 120">
+    <path d="M96 100 C118 96 116 70 104 66" stroke="#E4EAEC" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <ellipse cx="60" cy="88" rx="34" ry="28" fill="url(#gFur)"/>
+    <path d="M30 40 L34 10 L52 28Z M90 40 L86 10 L68 28Z" fill="#F2F5F6"/>
+    <path d="M35 32 L37 17 L46 27Z M85 32 L83 17 L74 27Z" fill="#FFC3D8"/>
+    <circle cx="60" cy="48" r="30" fill="url(#gFur)"/>
+    <path d="M56 58 h8 l-4 4Z" fill="#FF9DBB"/>
+    <path d="M30 56 l-16 -2 M30 60 l-16 4 M90 56 l16 -2 M90 60 l16 4" stroke="#B9C3C7" stroke-width="1.5"/>
+  </symbol>
+  <symbol id="cat-o" viewBox="0 0 120 120"><ellipse cx="48" cy="46" rx="6" ry="7" fill="#68E78E"/><ellipse cx="72" cy="46" rx="6" ry="7" fill="#68E78E"/><rect x="47" y="40" width="2" height="12" rx="1" fill="#0E1211"/><rect x="71" y="40" width="2" height="12" rx="1" fill="#0E1211"/></symbol>
+  <symbol id="cat-c" viewBox="0 0 120 120"><path d="M42 47 Q48 51 54 47 M66 47 Q72 51 78 47" stroke="#5E6762" stroke-width="2.5" fill="none" stroke-linecap="round"/></symbol>
+  <symbol id="box" viewBox="0 0 120 120"><path d="M14 56 L60 70 L106 56 L106 108 L60 120 L14 108Z" fill="#C9A27A"/><path d="M60 70 V120" stroke="#A9825A" stroke-width="2"/><path d="M14 56 L2 40 L48 28 L60 44Z" fill="#D9B48C"/><path d="M106 56 L118 40 L72 28 L60 44Z" fill="#D9B48C"/></symbol>
+  <symbol id="folder" viewBox="0 0 120 90"><path d="M8 18 Q8 10 16 10 H44 L54 20 H104 Q112 20 112 28 V80 Q112 88 104 88 H16 Q8 88 8 80Z" fill="#68E78E" opacity=".9"/><rect x="22" y="2" width="70" height="40" rx="5" fill="#fff" opacity=".9" transform="rotate(-6 57 22)"/><path d="M8 36 H112 V80 Q112 88 104 88 H16 Q8 88 8 80Z" fill="#3FBF6A"/><circle cx="24" cy="74" r="6" fill="#0E1211" opacity=".4"/></symbol>
+  <symbol id="ic-arrow" viewBox="0 0 24 24"><path d="M5 12 H19 M13 6 L19 12 L13 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="clapper" viewBox="0 0 120 100"><rect x="6" y="34" width="108" height="62" rx="10" fill="#0E1211"/><rect x="6" y="14" width="108" height="18" rx="6" fill="#68E78E"/><path d="M20 14 l10 18 M44 14 l10 18 M68 14 l10 18 M92 14 l10 18" stroke="#0E1211" stroke-width="7"/></symbol>
+</svg>
+
+<nav data-scrollbar class="reel" aria-label="Lesson progress">
+  <div class="reel__track">
+    <span class="reel__head" aria-hidden="true"></span>
+    <button type="button" data-goto="story" aria-label="Scene 1. A cat by contract">1</button>
+    <button type="button" data-goto="madde" aria-label="Scene 2. What the clause is made of">2</button>
+    <button type="button" data-goto="sahip" aria-label="Scene 3. Who meets the condition">3</button>
+    <button type="button" data-goto="olumsuz" aria-label="Scene 4. Two me's">4</button>
+    <button type="button" data-goto="uslup" aria-label="Scene 5. Contract or conversation">5</button>
+    <button type="button" data-goto="final" aria-label="Scene 6. Clause 7a">6</button>
+    <button type="button" data-goto="lab" aria-label="Editing room">E</button>
+    <button type="button" data-goto="traps" aria-label="Bad takes">B</button>
+    <button type="button" data-goto="practice" aria-label="Practice">P</button>
+    <button type="button" data-goto="check" aria-label="Quick check">✓</button>
+    <button type="button" data-goto="cheat" aria-label="Cheat sheet">★</button>
+  </div>
+</nav>
+<div class="cut" aria-hidden="true"></div>
+
+<main>
+<!-- ============ СЦЕНА 1 · кот по договору ============ -->
+<section data-section="story" data-words="84" id="s1" class="scene">
+  <header class="title">
+    <div class="title__frame">
+      <div class="title__top"><span class="chip chip--g">C1 · Samsun</span><span class="chip">Episode 1</span><span class="chip">8 minutes</span></div>
+      <div class="title__big" aria-hidden="true" lang="tr">şartıyla</div>
+      <div class="title__fan" aria-hidden="true"><span style="--i:-3"></span><span style="--i:-2"></span><span style="--i:-1"></span><span style="--i:0"><b lang="tr">Madde 7</b></span><span style="--i:1"></span><span style="--i:2"></span></div>
+      <div class="title__copy">
+        <h1>A cat <b>by contract</b></h1>
+        <p>How to set a condition: <b class="tr" data-say="geri vermen şartıyla">geri vermen şartıyla</b>, <b class="tr" data-say="erken gelmek koşuluyla">erken gelmek koşuluyla</b>.</p>
+        <button type="button" class="pill" data-go="s1-stage">Watch <i><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></i></button>
+      </div>
+    </div>
+  </header>
+  <div class="stage" id="s1-stage">
+    <div class="frame" style="--wipe:#68E78E">
+      <div class="shutter" style="background:#68E78E"></div>
+      <div class="hud"><span class="chip chip--g">Scene 1</span><span class="chip" lang="tr">Atakum</span><span class="chip" lang="tr">1 Eylül</span><h2>A cat <span>by contract</span></h2></div>
+      <div class="view">
+        <div class="cam">
+          <div class="layer deep"><div class="big" lang="tr" aria-hidden="true">SAMSUN</div></div>
+          <div class="layer front">
+            <div class="doc-wrap">
+              <div class="doc">
+                <div class="doc__h"><span lang="tr">KİRA SÖZLEŞMESİ</span><span>4 / 4</span></div>
+                <div class="ln"></div><div class="ln"></div><div class="ln"></div>
+                <div class="clause" lang="tr"><span>Madde 7.</span><span data-say="Evcil hayvan beslememeniz şartıyla">Evcil hayvan <b>beslememeniz</b> şartıyla…</span></div>
+                <svg class="sign" viewBox="0 0 120 34" aria-hidden="true"><path class="draw" d="M4 26 C18 4 24 30 34 16 C42 6 46 28 58 18 C66 12 72 26 84 14 C92 8 100 22 116 12" fill="none" stroke="#68E78E" stroke-width="3" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+            <div class="ruler" aria-hidden="true">
+              <span class="dot" style="left:18%"></span><span class="dot r" style="left:41%"></span><span class="dot" style="left:63%"></span><span class="dot" style="left:86%"></span>
+              <span class="here" lang="tr">Buradayız</span>
+              <small style="left:0" lang="tr">1 Eylül</small><small style="right:0" lang="tr">2 Eylül</small>
+            </div>
+            <div class="actors">
+              <div class="actor a-tm">
+                <svg viewBox="0 0 200 240" aria-hidden="true"><use href="#tm"/></svg>
+                <p class="bub bub--l"><a-say>Sözleşmede yazıyor: beslemeniz şartıyla!</a-say></p>
+              </div>
+              <div class="boxcat" aria-hidden="true"><svg viewBox="0 0 120 120"><g class="pamuk"><use href="#cat"/><use href="#cat-o" class="c-o" opacity="0"/><use href="#cat-c" class="c-c"/></g><use href="#box"/></svg></div>
+              <div class="actor a-hb">
+                <svg viewBox="0 0 200 240" aria-hidden="true"><use href="#hb"/></svg>
+                <p class="bub bub--r b-a"><a-say>Kedi mi?</a-say></p>
+                <p class="bub bub--r b-b"><a-say>Beslememeniz. İki tane «me» var.</a-say></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wipe" style="left:50%;top:30%"></div>
+      <div class="subs">
+        <p>Samsun, September first. Timur is renting an apartment by the sea. The lease is <em>four pages</em> long.</p>
+        <p>He skims clause seven. Signs. In the evening he brings over his cat, Pamuk.</p>
+        <p>The landlord, Hasan Bey, drops by to check the faucet. Sees the cat. Says: “A cat?”</p>
+        <p>Timur shows him the lease. Hasan Bey shows him <em>two “me”s</em>. The cat pretends he isn't there.</p>
+      </div>
+      <div class="beat" data-beat="1">
+        <p class="beat__q">What does clause 7 actually say?</p>
+        <button type="button" class="opt" data-ok="1">For rent provided that you don't keep pets</button>
+        <button type="button" class="opt">For rent provided that you keep a pet</button>
+        <button type="button" class="opt">Pets are allowed if you want</button>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 2 · из чего пункт ============ -->
+<section data-section="madde" data-words="45" id="s2" class="scene">
+  <div class="stage">
+    <div class="frame" style="--wipe:#0E1211">
+      <div class="shutter" style="background:#68E78E"></div>
+      <div class="hud"><span class="chip chip--g">Scene 2</span><span class="chip">Freeze-frame</span><h2>What the clause <span>is made of</span></h2></div>
+      <div class="view">
+        <div class="cam">
+          <div class="layer deep"><div class="big" lang="tr" aria-hidden="true">MADDE</div></div>
+          <div class="layer front">
+            <div class="fan">
+              <div class="leaves" lang="tr">
+                <div class="leaf l1" data-say="geri ver"><small>verb</small><b>geri ver</b></div>
+                <div class="leaf leaf--e l2" data-say="verme"><small>-mA</small><b>me</b></div>
+                <div class="leaf leaf--o l3" data-say="vermen"><small>whose</small><b>n</b></div>
+                <div class="leaf leaf--c l4" data-say="şartıyla"><small>clause</small><b>şartıyla</b></div>
+              </div>
+              <p class="ex2" lang="tr"><a-say>Yarın geri vermen şartıyla kitabı alabilirsin.</a-say></p>
+              <div class="vsk"><span lang="tr">-DIğI takdirde · in case</span><span class="on" lang="tr">-mA + whose + şartıyla · provided that</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wipe" style="left:50%;top:50%"></div>
+      <div class="subs">
+        <p>Freeze-frame. The verb gets -mA and an owner: <b class="tr" data-say="geri vermen">geri vermen</b>, “your returning.”</p>
+        <p>Then the word <b class="tr" data-say="şartıyla">şartıyla</b>, “with the condition.” Literally: <em>with the condition of your returning</em>.</p>
+        <p>You remember <b class="tr" data-say="geri verdiğin takdirde">-DIğI takdirde</b>, “in case.” That's a case. This is a requirement.</p>
+        <p>“You can take the book provided that you return it tomorrow.”</p>
+      </div>
+      <div class="beat" data-beat="2">
+        <p class="beat__q">Guess first: “provided that you return it”</p>
+        <button type="button" class="opt" lang="tr">geri verdiğin takdirde</button>
+        <button type="button" class="opt" data-ok="1" lang="tr">geri vermen şartıyla</button>
+        <button type="button" class="opt" lang="tr">geri verirsen şartıyla</button>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 3 · кто выполняет условие ============ -->
+<section data-section="sahip" data-words="48" id="s3" class="scene">
+  <div class="stage">
+    <div class="frame" style="--wipe:#68E78E">
+      <div class="shutter" style="background:#0E1211"></div>
+      <div class="hud"><span class="chip chip--g">Scene 3</span><span class="chip"><span class="m o">whose</span></span><h2>Who <span>meets the condition</span></h2></div>
+      <div class="view">
+        <div class="cam">
+          <div class="layer deep"><div class="big" lang="tr" aria-hidden="true">KİM?</div></div>
+          <div class="layer front">
+            <div class="bar6">
+              <div class="gbar">
+                <span class="gbar__date"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="#fff" stroke-width="2"/><path d="M3 10 H21 M8 3 V7 M16 3 V7" stroke="#fff" stroke-width="2"/></svg><span lang="tr">Madde 3</span></span>
+                <button type="button" class="av" data-p="0"><svg viewBox="0 0 200 240" aria-hidden="true"><use href="#tm"/></svg><i lang="tr">ben</i></button>
+                <button type="button" class="av is-on" data-p="1"><svg viewBox="0 0 200 240" aria-hidden="true"><use href="#tm"/></svg><i lang="tr">sen</i></button>
+                <button type="button" class="av" data-p="2"><svg viewBox="0 0 200 240" aria-hidden="true"><use href="#hb"/></svg><i lang="tr">o</i></button>
+                <button type="button" class="av" data-p="3"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cat"/><use href="#cat-o"/></svg><i lang="tr">biz</i></button>
+                <button type="button" class="av" data-p="4"><svg viewBox="0 0 200 240" aria-hidden="true"><use href="#hb"/></svg><i lang="tr">siz</i></button>
+                <button type="button" class="av" data-p="5"><svg viewBox="0 0 120 90" aria-hidden="true"><use href="#folder"/></svg><i lang="tr">onlar</i></button>
+              </div>
+              <span class="word out3 s3-word" lang="tr" data-say="geri vermen şartıyla"><span class="m r">geri ver</span><span class="m e">me</span><span class="m o">n</span><span class="m c">şartıyla</span></span>
+              <div class="mak"><span>The condition is general or for the same person:</span><button type="button" class="opt s3-mak" lang="tr">erken gelmek koşuluyla</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wipe" style="left:50%;top:40%"></div>
+      <div class="subs">
+        <p>Who meets the condition shows in the owner: <b class="tr" data-say="vermem, vermen, vermesi">vermem, vermen, vermesi</b> and so on.</p>
+        <p>Is the condition for everyone or for the same person? Then the owner is optional: <b class="tr" data-say="erken gelmek koşuluyla">erken gelmek koşuluyla</b>.</p>
+        <p>If a third party meets it, you need the owner, in the genitive: <b class="tr" data-say="Ali'nin ödemesi şartıyla">Ali'nin ödemesi şartıyla</b>.</p>
+      </div>
+      <div class="beat" data-beat="3">
+        <p class="beat__q">Tap each person in the green bar: who will return it?</p>
+        <p class="fb" aria-live="polite">Selected now: <span lang="tr">sen</span>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 4 · два me ============ -->
+<section data-section="olumsuz" data-words="36" id="s4" class="scene">
+  <div class="stage">
+    <div class="frame" style="--wipe:#0E1211">
+      <div class="shutter" style="background:#68E78E"></div>
+      <div class="hud"><span class="chip chip--g">Scene 4</span><span class="chip"><span class="m n">me</span>&nbsp;not</span><h2>Two <span>“me”s</span></h2></div>
+      <div class="view">
+        <div class="cam">
+          <div class="layer deep"><div class="big" lang="tr" aria-hidden="true">MEME</div></div>
+          <div class="layer front">
+            <div class="mag">
+              <div class="lens">
+                <span class="wrong" lang="tr">beslemeniz</span>
+                <span class="word s4-word" lang="tr" data-say="beslememeniz"><span class="m r">besle</span><span class="m n s4-neg">me</span><span class="m e">me</span><span class="m o">niz</span></span>
+              </div>
+              <div class="tags4" lang="tr"><span data-say="sigara içmemeniz şartıyla">sigara iç·<b>me</b>·me·niz</span><span data-say="gürültü yapmamanız şartıyla">gürültü yap·<b>ma</b>·ma·nız</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wipe" style="left:50%;top:45%"></div>
+      <div class="subs">
+        <p>Close-up. Timur read one “me.” But there are <em>two</em>.</p>
+        <p>The first is negation, it comes right after the root. The second is -mA, the clause part itself.</p>
+        <p><b class="tr" data-say="beslememeniz şartıyla">beslememeniz şartıyla</b>: “provided that you <em>don't</em> keep.” One syllable changes the cat's fate.</p>
+      </div>
+      <div class="beat" data-beat="4">
+        <p class="beat__q">Play with it: the verb and “not.”</p>
+        <button type="button" class="opt is-ok" data-v="besle" lang="tr">besle</button>
+        <button type="button" class="opt" data-v="iç" lang="tr">sigara iç</button>
+        <button type="button" class="opt" data-v="yap" lang="tr">gürültü yap</button>
+        <button type="button" class="opt is-ok" role="switch" aria-checked="true" data-neg>not</button>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 5 · договор или разговор ============ -->
+<section data-section="uslup" data-words="44" id="s5" class="scene">
+  <div class="stage">
+    <div class="frame" style="--wipe:#68E78E">
+      <div class="shutter" style="background:#0E1211"></div>
+      <div class="hud"><span class="chip chip--g">Scene 5</span><span class="chip">Knowledge base</span><h2>Contract <span>or conversation</span></h2></div>
+      <div class="view">
+        <div class="cam">
+          <div class="layer deep"><div class="big" lang="tr" aria-hidden="true">ŞART · KOŞUL</div></div>
+          <div class="layer front">
+            <div class="kb">
+              <div class="kcard is-key k1"><svg viewBox="0 0 120 70" aria-hidden="true"><use href="#folder" x="30" y="8" width="60" height="50"/></svg><div><b lang="tr">şartıyla</b><p>Contracts, rules. Sounds strict.</p></div></div>
+              <div class="kcard is-key k2"><svg viewBox="0 0 120 70" aria-hidden="true"><use href="#folder" x="30" y="8" width="60" height="50"/></svg><div><b lang="tr">koşuluyla</b><p>The same thing. A simpler word.</p></div></div>
+              <div class="kcard k3"><svg viewBox="0 0 120 70" aria-hidden="true"><circle cx="60" cy="34" r="20" fill="none" stroke="#3DD6E8" stroke-width="4"/><path d="M52 34 h16" stroke="#3DD6E8" stroke-width="4" stroke-linecap="round"/></svg><div><b lang="tr">-sA</b><p lang="tr">Geri verirsen alabilirsin.</p></div></div>
+              <div class="kcard k4"><svg viewBox="0 0 120 70" aria-hidden="true"><rect x="40" y="16" width="40" height="36" rx="6" fill="none" stroke="#FF6B6B" stroke-width="4"/><path d="M60 24 v14 M60 44 v2" stroke="#FF6B6B" stroke-width="4" stroke-linecap="round"/></svg><div><b lang="tr">-DIğI takdirde</b><p lang="tr">Geciktirdiğiniz takdirde ceza var.</p></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wipe" style="left:50%;top:50%"></div>
+      <div class="subs">
+        <p><b class="tr" data-say="şart">şart</b> and <b class="tr" data-say="koşul">koşul</b> are synonyms. It's also written separately: <b class="tr" data-say="şartı ile">şartı ile</b>.</p>
+        <p>In conversation, -sA is enough: <b class="tr" data-say="Geri verirsen alabilirsin.">geri verirsen alabilirsin</b>. Contracts aren't written that way.</p>
+        <p>“In case of late payment, a fine”: that's <em>takdirde</em>. A case, not a requirement.</p>
+        <p>After the condition there's usually a permission: <b class="tr" data-say="alabilirsin">alabilirsin</b>, <b class="tr" data-say="kalabilirsiniz">kalabilirsiniz</b>.</p>
+      </div>
+      <div class="beat" data-beat="5">
+        <p class="beat__q">What will Hasan Bey write into the lease?</p>
+        <button type="button" class="opt" lang="tr">Kirayı zamanında öderseniz kalabilirsiniz.</button>
+        <button type="button" class="opt" data-ok="1" lang="tr">Kirayı zamanında ödemeniz koşuluyla kalabilirsiniz.</button>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 6 · пункт 7а ============ -->
+<section data-section="final" data-words="62" id="s6" class="scene">
+  <div class="stage">
+    <div class="frame" style="--wipe:#68E78E">
+      <div class="shutter" style="background:#68E78E"></div>
+      <div class="hud"><span class="chip chip--g">Scene 6</span><span class="chip">Take two</span><span class="chip" lang="tr">Balkon</span><h2>Clause <span>7a</span></h2></div>
+      <div class="view">
+        <div class="cam">
+          <div class="layer deep"><div class="big" lang="tr" aria-hidden="true">KARADENİZ</div></div>
+          <div class="layer balc" aria-hidden="true">
+            <svg class="sea" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMax slice">
+              <circle class="moon" cx="900" cy="80" r="46" fill="#68E78E" opacity=".85"/>
+              <path d="M0 200 H1200 V400 H0Z" fill="url(#gSea)"/>
+              <path d="M870 210 h60 M850 236 h100 M880 262 h40" stroke="#68E78E" stroke-width="4" opacity=".6" stroke-linecap="round"/>
+              <path d="M0 300 H1200" stroke="#3A4452" stroke-width="6"/><path d="M0 380 H1200" stroke="#3A4452" stroke-width="10"/>
+              <path d="M40 300 V380 M140 300 V380 M240 300 V380 M340 300 V380 M440 300 V380 M540 300 V380 M640 300 V380 M740 300 V380 M840 300 V380 M940 300 V380 M1040 300 V380 M1140 300 V380" stroke="#3A4452" stroke-width="4"/>
+            </svg>
+          </div>
+          <div class="layer front">
+            <div class="new7"><div class="clause" lang="tr"><span>Madde 7a.</span><span data-say="Halıyı tırmalamaması şartıyla kedi kalabilir.">Halıyı <b>tırmalamaması</b> şartıyla kedi kalabilir.</span></div><span class="stamp" lang="tr">ONAY</span></div>
+            <div class="actors">
+              <div class="actor a-tm">
+                <svg viewBox="0 0 200 240" aria-hidden="true"><use href="#tm"/></svg>
+                <p class="bub bub--l bub--ok"><a-say>Kediyi balkonda tutmam şartıyla kalabilir mi?</a-say></p>
+              </div>
+              <div class="boxcat" aria-hidden="true"><svg viewBox="0 0 120 120"><g class="pamuk"><use href="#cat"/><use href="#cat-o"/></g></svg></div>
+              <div class="actor a-hb">
+                <svg viewBox="0 0 200 240" aria-hidden="true"><use href="#hb"/></svg>
+                <p class="bub bub--r"><a-say>Halıyı tırmalamaması şartıyla.</a-say></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wipe" style="left:50%;top:50%"></div>
+      <div class="endcard" aria-hidden="true"><b>The end</b><span>Next: the editing room</span></div>
+      <div class="subs">
+        <p>Take two. Timur goes in to negotiate. With the cat and a dictionary.</p>
+        <p>Timur: “Can the cat stay, provided that I keep him on the balcony?”</p>
+        <p>Hasan Bey: “Provided that he doesn't scratch the rug.” Two “ma”s. Timur caught both.</p>
+        <p>Clause 7a appeared in the lease. Pamuk didn't read it. Neither did Timur the first time.</p>
+      </div>
+      <div class="beat" data-beat="6">
+        <p class="beat__q">Build Hasan Bey's word in order:</p>
+        <div class="asm" lang="tr">
+          <button type="button" class="m o" data-t="sı">sı</button>
+          <button type="button" class="m e" data-t="ma2">ma</button>
+          <button type="button" class="m r" data-t="tırmala">tırmala</button>
+          <button type="button" class="m n" data-t="ma1">ma</button>
+        </div>
+        <span class="asm-out" lang="tr" aria-live="polite"></span>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ МОНТАЖНАЯ ============ -->
+<section data-section="lab" data-words="61" id="lab" class="block">
+  <header class="rise">
+    <span class="chip chip--g" style="width:fit-content">Editing room</span>
+    <h2>Build the clause <span>yourself</span></h2>
+    <p class="lede">Three modes. I'll show the defects too, with an explanation of why.</p>
+  </header>
+  <div class="dark rise">
+    <div class="tabs" role="tablist" aria-label="Editing room mode">
+      <button type="button" role="tab" aria-selected="true" data-tab="build">Builder</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="edit">Contract editor</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="who">Whose clause</button>
+    </div>
+    <div class="mode" data-mode="build">
+      <div class="grp"><span>Verb</span><div data-g="v">
+        <button type="button" class="opt" data-v="0" aria-pressed="true" lang="tr">geri ver</button>
+        <button type="button" class="opt" data-v="1" aria-pressed="false" lang="tr">kirayı öde</button>
+        <button type="button" class="opt" data-v="2" aria-pressed="false" lang="tr">evcil hayvan besle</button>
+        <button type="button" class="opt" data-v="3" aria-pressed="false" lang="tr">sigara iç</button>
+        <button type="button" class="opt" data-v="4" aria-pressed="false" lang="tr">erken gel</button>
+      </div></div>
+      <div class="grp"><span>Whose</span><div data-g="p">
+        <button type="button" class="opt" data-v="-1" aria-pressed="false">no owner · -mAk</button>
+        <button type="button" class="opt" data-v="0" aria-pressed="false" lang="tr">ben</button>
+        <button type="button" class="opt" data-v="1" aria-pressed="true" lang="tr">sen</button>
+        <button type="button" class="opt" data-v="2" aria-pressed="false" lang="tr">o</button>
+        <button type="button" class="opt" data-v="3" aria-pressed="false" lang="tr">biz</button>
+        <button type="button" class="opt" data-v="4" aria-pressed="false" lang="tr">siz</button>
+        <button type="button" class="opt" data-v="5" aria-pressed="false" lang="tr">onlar</button>
+      </div></div>
+      <div class="grp"><span>“Not” and the word</span><div data-g="w">
+        <button type="button" class="opt b-neg" role="switch" aria-checked="false">+ “not”</button>
+        <button type="button" class="opt" data-v="şartıyla" aria-pressed="true" lang="tr">şartıyla</button>
+        <button type="button" class="opt" data-v="koşuluyla" aria-pressed="false" lang="tr">koşuluyla</button>
+      </div></div>
+      <div class="screen">
+        <span class="word b-word" lang="tr"></span>
+        <span class="sent b-sent" lang="tr"></span>
+        <p class="why b-why"></p>
+      </div>
+    </div>
+    <div class="mode" data-mode="edit" hidden>
+      <div class="screen"><span class="sent ed-q" lang="tr"></span><p class="why ed-ru"></p></div>
+      <div class="grp"><span>Replace with</span><div class="ed-opts">
+        <button type="button" class="opt" lang="tr"></button><button type="button" class="opt" lang="tr"></button><button type="button" class="opt" lang="tr"></button>
+      </div></div>
+      <p class="why ed-why">Find the defect and pick a replacement.</p>
+      <button type="button" class="pill ed-next">Next clause <i><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></i></button>
+    </div>
+    <div class="mode" data-mode="who" hidden>
+      <div class="screen"><span class="sent wh-q"></span></div>
+      <div class="grp"><span>Form</span><div class="wh-opts">
+        <button type="button" class="opt" lang="tr"></button><button type="button" class="opt" lang="tr"></button><button type="button" class="opt" lang="tr"></button>
+      </div></div>
+      <p class="why wh-why">Guess first, then look at the answer.</p>
+      <button type="button" class="pill wh-next">Next clause <i><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ НЕУДАЧНЫЕ ДУБЛИ ============ -->
+<section data-section="traps" data-words="64" id="traps" class="block">
+  <header class="rise">
+    <span class="chip chip--g" style="width:fit-content">Bad takes</span>
+    <h2>This is where <span>everyone</span> trips</h2>
+    <p class="lede">Four clauses a lawyer would strike out. Tap “Reshoot.”</p>
+  </header>
+  <div class="takes">
+    <div class="take rise"><div class="take__in">
+      <div class="face face--bad"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#clapper"/></svg><span class="line" lang="tr" data-say="Geri verdiğin şartıyla">Geri verdiğin şartıyla</span><p>-DIğI lives with takdirde. With şartıyla, only -mA.</p><button type="button" class="opt" data-flip>Reshoot</button></div>
+      <div class="face face--good"><span class="line" lang="tr" data-say="Geri vermen şartıyla">Geri vermen şartıyla</span><p>The clause is built from -mA and the owner.</p><button type="button" class="opt" data-flip>Back</button></div>
+    </div></div>
+    <div class="take rise"><div class="take__in">
+      <div class="face face--bad"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#clapper"/></svg><span class="line" lang="tr" data-say="Geri verirsen şartıyla">Geri verirsen şartıyla</span><p>Two “if”s in a row. Like two locks on one door.</p><button type="button" class="opt" data-flip>Reshoot</button></div>
+      <div class="face face--good"><span class="line" lang="tr" data-say="Geri vermen şartıyla">Geri vermen şartıyla</span><p>Or just “geri verirsen.” One or the other.</p><button type="button" class="opt" data-flip>Back</button></div>
+    </div></div>
+    <div class="take rise"><div class="take__in">
+      <div class="face face--bad"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#clapper"/></svg><span class="line" lang="tr" data-say="Geri vermen şartla">Geri vermen şartla</span><p>The condition belongs to someone, so şart gets its own sticker.</p><button type="button" class="opt" data-flip>Reshoot</button></div>
+      <div class="face face--good"><span class="line" lang="tr" data-say="Geri vermen şartıyla">Geri vermen şartıyla</span><p>şart + ı + (y)la. The letter ı holds the link.</p><button type="button" class="opt" data-flip>Back</button></div>
+    </div></div>
+    <div class="take rise"><div class="take__in">
+      <div class="face face--bad"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#clapper"/></svg><span class="line" lang="tr" data-say="Ali ödemesi şartıyla">Ali ödemesi şartıyla</span><p>The owner of the condition has no genitive. It's hanging in the air.</p><button type="button" class="opt" data-flip>Reshoot</button></div>
+      <div class="face face--good"><span class="line" lang="tr" data-say="Ali'nin ödemesi şartıyla">Ali'nin ödemesi şartıyla</span><p>Whoever meets it goes in the genitive: Ali'nin.</p><button type="button" class="opt" data-flip>Back</button></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКА ============ -->
+<section data-section="practice" data-words="0" id="practice" class="block">
+  <header class="rise"><span class="chip chip--g" style="width:fit-content">Practice</span><h2>Now <span>you</span> write</h2><p class="lede">The last one is negotiations in the building chat.</p></header>
+  <div class="prac">
+    <a-exercise ref="c1.kosuluyla.ex1"></a-exercise>
+    <a-exercise ref="c1.kosuluyla.ex2"></a-exercise>
+    <a-exercise ref="c1.kosuluyla.ex3"></a-exercise>
+    <a-exercise ref="c1.kosuluyla.ex4">
+      <div class="pult" data-ui>
+        <div class="pult__head"><span class="chip chip--g">Building chat · Atakum</span><span class="pult__count">1 / 5</span></div>
+        <div class="chat" aria-live="polite"></div>
+        <div class="pult__task"><span class="pt-ru"></span><span class="pt-tpl" lang="tr"></span></div>
+        <div class="pr" data-k="eng"><span>Form</span><button type="button" class="opt" data-v="ma">-mA</button><button type="button" class="opt" data-v="dik">-DIk</button><button type="button" class="opt" data-v="sa">-sA</button><button type="button" class="opt pr-neg" role="switch" aria-checked="false">“not”</button></div>
+        <div class="pr" data-k="p"><span>Whose</span><button type="button" class="opt" data-v="0" lang="tr">ben</button><button type="button" class="opt" data-v="1" lang="tr">sen</button><button type="button" class="opt" data-v="2" lang="tr">o</button><button type="button" class="opt" data-v="4" lang="tr">siz</button></div>
+        <div class="pr" data-k="link"><span>Connector</span><button type="button" class="opt" data-v="şartıyla" lang="tr">şartıyla</button><button type="button" class="opt" data-v="koşuluyla" lang="tr">koşuluyla</button><button type="button" class="opt" data-v="takdirde" lang="tr">takdirde</button></div>
+        <div class="pult__out"><span class="word pt-word" lang="tr"></span></div>
+        <div class="pult__foot"><button type="button" class="pill pt-send">Send <i><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></i></button><button type="button" class="opt pt-next" hidden>Next</button></div>
+        <p class="pt-fb" aria-live="polite"></p>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<!-- ============ МИНИ-ПРОВЕРКА ============ -->
+<section data-section="check" data-words="0" id="check" class="block">
+  <header class="rise"><span class="chip chip--g" style="width:fit-content">Quick check</span><h2>Five clauses <span>before signing</span></h2></header>
+  <a-quiz ref="c1.kosuluyla.check1"></a-quiz>
+</section>
+
+<!-- ============ ШПАРГАЛКА ============ -->
+<section data-section="cheat" data-words="41" id="cheat" class="block">
+  <div class="poster rise">
+    <div class="poster__big" lang="tr" aria-hidden="true">MADDE 7a</div>
+    <header><span class="chip chip--g" style="width:fit-content">Cheat sheet</span><h2>A clause in four parts</h2></header>
+    <div class="recipe p-recipe" lang="tr" data-say="geri vermemen şartıyla"><span class="m r">geri ver</span>+<span class="m n">me</span>+<span class="m e">me</span>+<span class="m o">n</span>+<span class="m c">şartıyla</span></div>
+    <div class="poster__grid">
+      <div class="pcard"><h3>Form</h3><p>Verb + -mA + owner + <b class="tr" data-say="şartıyla">şartıyla</b> or <b class="tr" data-say="koşuluyla">koşuluyla</b>.</p><p>General condition: -mAk: <b class="tr" data-say="erken gelmek koşuluyla">erken gelmek koşuluyla</b>.</p></div>
+      <div class="pcard"><h3>Owner and “not”</h3><p><b class="tr" data-say="vermem, vermen, vermesi, vermemiz, vermeniz, vermeleri">vermem · vermen · vermesi · vermemiz · vermeniz · vermeleri</b></p><p>“Not” right after the root: <b class="tr" data-say="beslememeniz">besle-me-me-niz</b>.</p></div>
+      <div class="pcard"><h3>Don't mix up</h3><p><b class="tr" data-say="geciktirdiğiniz takdirde">-DIğI takdirde</b>: “in case.”</p><p><b class="tr" data-say="geri verirsen">-sA</b>: a conversational “if.”</p><p>Someone else as owner goes in the genitive: <b class="tr" data-say="Ali'nin ödemesi şartıyla">Ali'nin</b>.</p></div>
+    </div>
+    <div class="finale">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><use href="#cat"/><use href="#cat-c"/></svg>
+      <p>Pamuk stayed. The rug is intact. You set conditions like in a contract: <b class="tr" data-say="geri vermen şartıyla">geri vermen şartıyla</b>, and you notice every “me.”</p>
+    </div>
+    <button type="button" class="pill p-replay" style="justify-self:start">Rewind <i><svg viewBox="0 0 24 24"><use href="#ic-arrow"/></svg></i></button>
+  </div>
+</section>
+</main>
+
+<template data-achievement data-title="Clause signed" data-text="You set a condition: -mA, the owner and şartıyla or koşuluyla. And you see both “me”s in beslememeniz.">
+  <svg viewBox="0 0 120 120" class="ach"><circle cx="60" cy="60" r="56" fill="#0E1211"/><g class="ach-cap"><path d="M30 40 Q30 32 38 32 H54 L60 38 H84 Q90 38 90 44 V84 Q90 90 84 90 H36 Q30 90 30 84Z" fill="#68E78E"/><rect x="40" y="26" width="40" height="26" rx="4" fill="#fff" transform="rotate(-6 60 39)"/></g><path class="ach-star" d="M44 66 L56 78 L80 54" fill="none" stroke="#0E1211" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* kit молчит */ } };
+  const root = document.documentElement;
+
+  /* ---------- морфология пункта ---------- */
+  const VOW = 'aeıioöuü', BACK = 'aıou', HARD = 'fstkçşhp';
+  const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
+  const I4 = (v) => ({ a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' })[v];
+  const A2 = (v) => (BACK.includes(v) ? 'a' : 'e');
+  const GEN = ['benim', 'senin', 'onun', 'bizim', 'sizin', 'onların'];
+  /* eng: ma | mak | dik | sa; p: 0–5 (для mak не нужен) */
+  function cond(rt, eng, p, neg) {
+    const parts = [{ t: rt, role: 'r' }];
+    let cur = rt;
+    if (neg) { const t = 'm' + A2(lastV(cur)); parts.push({ t, role: 'n' }); cur += t; }
+    if (eng === 'mak') { const t = 'm' + A2(lastV(cur)) + 'k'; parts.push({ t, role: 'e' }); return { parts, word: cur + t }; }
+    let e;
+    if (eng === 'ma') e = 'm' + A2(lastV(cur));
+    else if (eng === 'dik') { const D = HARD.includes(cur.at(-1)) ? 't' : 'd'; e = D + I4(lastV(cur)) + (p === 5 ? 'k' : 'ğ'); }
+    else e = 's' + A2(lastV(cur));
+    parts.push({ t: e, role: 'e' }); cur += e;
+    const lv = lastV(cur), i = I4(lv);
+    let o;
+    if (eng === 'sa') o = ['m', 'n', '', 'k', 'n' + i + 'z', 'l' + A2(lv) + 'r'][p];
+    else if (eng === 'ma') o = ['m', 'n', 's' + i, 'm' + i + 'z', 'n' + i + 'z', 'l' + A2(lv) + 'r' + I4(A2(lv))][p];
+    else o = [i + 'm', i + 'n', i, i + 'm' + i + 'z', i + 'n' + i + 'z', 'l' + A2(lv) + 'r' + I4(A2(lv))][p];
+    if (o) { parts.push({ t: o, role: 'o' }); cur += o; }
+    return { parts, word: cur };
+  }
+  const chips = (f, pre, link) => (pre ? `<span class="m r">${pre.trim()}</span>` : '') + f.parts.map((x) => `<span class="m ${x.role}">${x.t}</span>`).join('') + (link ? `<span class="m c">${link}</span>` : '');
+  const cap = (s) => s.charAt(0).toLocaleUpperCase('tr') + s.slice(1);
+  const pop = (els) => { if (G) G.fromTo(els, { y: 18, scale: .6 }, { y: 0, scale: 1, duration: .5, stagger: .06, ease: 'back.out(2.5)' }); };
+  const shake = (el) => { if (G) G.fromTo(el, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1,.3)' }); };
+  const mark = (btns, ok, chosen) => { btns.forEach((b) => b.classList.remove('is-ok', 'is-no')); chosen.classList.add(ok ? 'is-ok' : 'is-no'); };
+
+  /* ---------- кнопка титра ---------- */
+  $('[data-go]').addEventListener('click', () => { const t = $('#' + $('[data-go]').dataset.go); window.scrollTo({ top: t.getBoundingClientRect().top + scrollY, behavior: 'smooth' }); });
+
+  /* ---------- сцена 1: что в пункте 7 ---------- */
+  const b1 = $$('[data-beat="1"] .opt');
+  b1.forEach((b) => b.addEventListener('click', () => {
+    const ok = !!b.dataset.ok; mark(b1, ok, b);
+    $('[data-beat="1"] .fb').textContent = ok ? 'Yes. Beslememeniz means “that you don\'t keep.” The cat is outside the law.' : 'Timur thought so too. Look at the two “me”s.';
+    if (G) G.fromTo('#s1 .pamuk', { y: 0 }, { y: ok ? 30 : -20, duration: .3, yoyo: true, repeat: 1, ease: 'power2.out' });
+  }));
+
+  /* ---------- сцена 2: угадай форму ---------- */
+  const b2 = $$('[data-beat="2"] .opt');
+  b2.forEach((b) => b.addEventListener('click', () => {
+    const ok = !!b.dataset.ok; mark(b2, ok, b);
+    $('[data-beat="2"] .fb').textContent = ok ? 'Yes: -mA, the owner and şartıyla.' : (b.textContent.includes('takdirde') ? 'That\'s “in case.” And we need a requirement.' : 'Two “if”s in a row: -sA and şartıyla. Keep one.');
+    if (G) G.fromTo('#s2 .l4', { rotationY: 0 }, { rotationY: ok ? 360 : 20, duration: .7, ease: 'power2.out' });
+    if (ok) say('geri vermen şartıyla'); else shake(b);
+  }));
+
+  /* ---------- сцена 3: кто вернёт ---------- */
+  const seen3 = new Set([1]);
+  $$('#s3 .av').forEach((b) => b.addEventListener('click', () => {
+    const p = +b.dataset.p; seen3.add(p);
+    $$('#s3 .av').forEach((x) => x.classList.toggle('is-on', x === b));
+    const f = cond('ver', 'ma', p);
+    const w = $('.s3-word'); w.innerHTML = chips(f, 'geri ', 'şartıyla'); w.dataset.say = `geri ${f.word} şartıyla`;
+    pop($$('.m', w));
+    $('[data-beat="3"] .fb').textContent = seen3.size === 6 ? 'All six. Only the owner changes, the clause stays the same.' : `${GEN[p]} → geri ${f.word} şartıyla. Marked ${seen3.size} of 6.`;
+    say(`geri ${f.word} şartıyla`);
+  }));
+  $('.s3-mak').addEventListener('click', (e) => {
+    const w = $('.s3-word'); const f = cond('gel', 'mak');
+    w.innerHTML = '<span class="m r">erken</span>' + chips(f, '', 'koşuluyla'); w.dataset.say = 'erken gelmek koşuluyla';
+    pop($$('.m', w)); e.currentTarget.classList.add('is-ok');
+    $('[data-beat="3"] .fb').textContent = 'erken gelmek koşuluyla: a condition for everyone, no owner needed.';
+    say('erken gelmek koşuluyla');
+  });
+
+  /* ---------- сцена 4: глагол и «не» ---------- */
+  const s4 = { v: 'besle', neg: true };
+  const V4 = { besle: { pre: 'evcil hayvan ', ru: ['keep pets', 'don\'t keep pets'] }, iç: { pre: 'sigara ', ru: ['smoke', 'don\'t smoke'] }, yap: { pre: 'gürültü ', ru: ['make noise', 'don\'t make noise'] } };
+  function paint4() {
+    const f = cond(s4.v, 'ma', 4, s4.neg), x = V4[s4.v];
+    const w = $('.s4-word'); w.innerHTML = chips(f); w.dataset.say = f.word;
+    pop($$('.m', w));
+    $('[data-beat="4"] .fb').textContent = `${x.pre}${f.word} şartıyla: “provided that you ${x.ru[s4.neg ? 1 : 0]}.”`;
+    say(`${x.pre}${f.word} şartıyla`);
+  }
+  $$('[data-beat="4"] .opt[data-v]').forEach((b) => b.addEventListener('click', () => {
+    s4.v = b.dataset.v; $$('[data-beat="4"] .opt[data-v]').forEach((x) => x.classList.toggle('is-ok', x === b)); paint4();
+  }));
+  $('[data-beat="4"] [data-neg]').addEventListener('click', (e) => {
+    s4.neg = !s4.neg; e.currentTarget.setAttribute('aria-checked', String(s4.neg)); e.currentTarget.classList.toggle('is-ok', s4.neg); paint4();
+  });
+
+  /* ---------- сцена 5: договор или разговор ---------- */
+  const b5 = $$('[data-beat="5"] .opt');
+  b5.forEach((b) => b.addEventListener('click', () => {
+    const ok = !!b.dataset.ok; mark(b5, ok, b);
+    $('[data-beat="5"] .fb').textContent = ok ? 'Yes. Ödemeniz koşuluyla is contract language.' : 'Grammatically correct, but that\'s a chat over tea. For a contract: -mA and koşuluyla.';
+    if (G) G.fromTo(ok ? '#s5 .k2' : '#s5 .k3', { y: 0 }, { y: -14, duration: .25, yoyo: true, repeat: 1 });
+    if (ok) say('Kirayı zamanında ödemeniz koşuluyla kalabilirsiniz.');
+  }));
+
+  /* ---------- сцена 6: собери tırmalamaması ---------- */
+  const ORDER = ['tırmala', 'ma', 'ma', 'sı'];
+  let k6 = 0;
+  const out6 = $('#s6 .asm-out');
+  $$('#s6 .asm .m').forEach((b) => b.addEventListener('click', () => {
+    if (b.textContent !== ORDER[k6]) { shake(b); $('[data-beat="6"] .fb').textContent = 'Order: root, “not,” -mA, owner.'; return; }
+    const want = k6 === 1 ? 'ma1' : k6 === 2 ? 'ma2' : b.dataset.t;
+    const real = $$('#s6 .asm .m').find((x) => x.dataset.t === want && x.style.visibility !== 'hidden') || b;
+    k6++; const c = real.cloneNode(true); c.disabled = true; out6.appendChild(c); real.style.visibility = 'hidden';
+    pop(c);
+    if (k6 === 4) {
+      $('[data-beat="6"] .fb').textContent = 'Signed: halıyı tırmalamaması şartıyla.';
+      say('Halıyı tırmalamaması şartıyla.');
+      if (G) G.fromTo('#s6 .stamp', { scale: 3, rotation: -30 }, { scale: 1, rotation: 8, duration: .7, ease: 'elastic.out(1,.45)' });
+    }
+  }));
+
+  /* ---------- монтажная ---------- */
+  const tabs = $$('#lab [role="tab"]');
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('#lab .mode').forEach((m) => { m.hidden = m.dataset.mode !== t.dataset.tab; });
+    pop($$(`#lab .mode[data-mode="${t.dataset.tab}"] .screen`));
+  }));
+  const VB = [
+    { pre: 'kitabı geri ', rt: 'ver', main: 'alabilirsin', ru: 'return the book' },
+    { pre: 'kirayı zamanında ', rt: 'öde', main: 'kalabilirsiniz', ru: 'pay on time' },
+    { pre: 'evcil hayvan ', rt: 'besle', main: 'kiralayabilirsiniz', ru: 'keep pets' },
+    { pre: 'sigara ', rt: 'iç', main: 'kiralayabilirsiniz', ru: 'smoke' },
+    { pre: 'erken ', rt: 'gel', main: 'katılabilirsiniz', ru: 'come early' },
+  ];
+  const P_RU = ['I', 'you', 'he or she', 'we', 'you (pl.)', 'they'];
+  const st = { v: 0, p: 1, neg: false, w: 'şartıyla' };
+  function build() {
+    const V = VB[st.v], f = st.p < 0 ? cond(V.rt, 'mak', 0, st.neg) : cond(V.rt, 'ma', st.p, st.neg);
+    const w = $('.b-word'); w.innerHTML = chips(f, V.pre, st.w); w.dataset.say = `${V.pre}${f.word} ${st.w}`;
+    const s = `${cap(V.pre)}${f.word} ${st.w} ${V.main}.`;
+    const sent = $('.b-sent'); sent.textContent = s; sent.dataset.say = s;
+    const who = st.p < 0 ? 'general condition, no owner (-mAk)' : `the condition is met by “${P_RU[st.p]}”`;
+    $('.b-why').textContent = `${st.neg ? 'Not to ' : ''}${V.ru}: ${who}. ${st.neg ? 'The “not” comes right after the root, before -mA. ' : ''}${st.w} = “with the condition.”`;
+    pop($$('.m', w));
+  }
+  $$('#lab [data-g]').forEach((g) => g.addEventListener('click', (e) => {
+    const b = e.target.closest('.opt'); if (!b) return;
+    if (b.classList.contains('b-neg')) { st.neg = !st.neg; b.setAttribute('aria-checked', String(st.neg)); build(); return; }
+    $$('.opt:not(.b-neg)', g).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    const k = g.dataset.g; st[k] = k === 'w' ? b.dataset.v : +b.dataset.v;
+    build();
+  }));
+  $('.b-sent').addEventListener('click', (e) => say(e.currentTarget.dataset.say));
+  build();
+
+  const EDIT = [
+    { q: 'Kitabı geri verdiğin şartıyla alabilirsin.', ru: 'You can take the book provided that you return it.', a: ['vermen', 'verirsen', 'verdiğinde'], fix: 'Kitabı geri vermen şartıyla alabilirsin.', why: '-DIğI is friends with takdirde. For şartıyla: -mA with an owner.' },
+    { q: 'Kirayı öderseniz şartıyla kalabilirsiniz.', ru: 'You can stay provided that you pay.', a: ['ödemeniz', 'ödediğiniz', 'ödeyin'], fix: 'Kirayı ödemeniz şartıyla kalabilirsiniz.', why: '-sA and şartıyla together make two “if”s. Keep the clause.' },
+    { q: 'Geri vermen şartla alabilirsin.', ru: 'You can take it provided that you return it.', a: ['şartıyla', 'şart', 'şarta'], fix: 'Geri vermen şartıyla alabilirsin.', why: 'The condition belongs to someone: şart + ı + (y)la.' },
+    { q: 'Ali ödemesi şartıyla imzaladık.', ru: 'Signed on condition that Ali pays.', a: ["Ali'nin", "Ali'yi", "Ali'ye"], fix: "Ali'nin ödemesi şartıyla imzaladık.", why: 'The owner of the condition is in the genitive.' },
+    { q: 'Evcil hayvan beslemeniz şartıyla kiralayabilirsiniz.', ru: 'For rent provided that you do NOT keep pets.', a: ['beslememeniz', 'beslediğiniz', 'beslerseniz'], fix: 'Evcil hayvan beslememeniz şartıyla kiralayabilirsiniz.', why: 'You need the “not”: the second “me” is negation after the root.' },
+  ];
+  let edi = 0;
+  const edShow = () => { const it = EDIT[edi]; $('.ed-q').textContent = it.q; $('.ed-ru').textContent = it.ru; $$('.ed-opts .opt').forEach((b, i) => { b.textContent = it.a[i]; b.classList.remove('is-ok', 'is-no'); }); $('.ed-why').textContent = 'Find the defect and pick a replacement.'; };
+  $$('.ed-opts .opt').forEach((b, i) => b.addEventListener('click', () => {
+    const it = EDIT[edi], ok = i === 0; mark($$('.ed-opts .opt'), ok, b);
+    $('.ed-why').textContent = `${ok ? 'Fixed.' : 'Not that one.'} ${it.why}`;
+    if (ok) { $('.ed-q').textContent = it.fix; pop($('.ed-q')); say(it.fix); } else shake(b);
+  }));
+  $('.ed-next').addEventListener('click', () => { edi = (edi + 1) % EDIT.length; edShow(); pop($('#lab [data-mode="edit"] .screen')); });
+  edShow();
+
+  const WHO = [
+    { ru: '…provided that they pay.', a: ['ödemeleri şartıyla', 'ödemesi şartıyla', 'ödemek şartıyla onlar'], why: '“They” pay: owner -ları.' },
+    { ru: '…provided that we come early.', a: ['erken gelmemiz koşuluyla', 'erken gelmeniz koşuluyla', 'erken geldiğimiz koşuluyla'], why: '“We” come: owner -miz, engine -mA.' },
+    { ru: 'You can take part on condition of arriving early (for everyone).', a: ['erken gelmek koşuluyla', 'erken gelmem koşuluyla', 'erken gelirse koşuluyla'], why: 'General condition: -mAk with no owner.' },
+    { ru: '…provided that Ali isn\'t late.', a: ["Ali'nin geç kalmaması şartıyla", "Ali'nin geç kalması şartıyla", 'Ali geç kalmaması şartıyla'], why: 'Owner in the genitive and “not” after the root: kal-ma-ma-sı.' },
+    { ru: '…provided that I return it tomorrow.', a: ['yarın geri vermem şartıyla', 'yarın geri vermen şartıyla', 'yarın geri verdiğim şartıyla'], why: '“I” return it: owner -m.' },
+  ];
+  let whi = 0;
+  const whShow = () => { const it = WHO[whi]; $('.wh-q').textContent = it.ru; const order = [0, 1, 2].sort(() => Math.random() - .5); $$('.wh-opts .opt').forEach((b, i) => { b.dataset.i = order[i]; b.textContent = it.a[order[i]]; b.classList.remove('is-ok', 'is-no'); }); $('.wh-why').textContent = 'Guess first, then look at the answer.'; };
+  $$('.wh-opts .opt').forEach((b) => b.addEventListener('click', () => {
+    const it = WHO[whi], ok = b.dataset.i === '0'; mark($$('.wh-opts .opt'), ok, b);
+    $('.wh-why').textContent = `${ok ? 'Yes.' : `No, the right one is: ${it.a[0]}.`} ${it.why}`;
+    if (ok) say(it.a[0]); else shake(b);
+  }));
+  $('.wh-next').addEventListener('click', () => { whi = (whi + 1) % WHO.length; whShow(); pop($('.wh-q')); });
+  whShow();
+
+  /* ---------- нестандартное упражнение: переговоры в чате дома ---------- */
+  const EX4 = 'c1.kosuluyla.ex4';
+  const R4 = [
+    { id: 'r1', who: 'Emre', msg: 'Abi, bisikletini alabilir miyim?', ru: '“You can take it, provided that you return it tomorrow.”', pre: 'Yarın geri ', rt: 'ver', post: 'alabilirsin.', ok: ['vermen şartıyla', 'vermen koşuluyla'], cfg: { eng: 'ma', neg: false, p: 1, link: 'şartıyla' }, why: '“You” return it → -mA + n, and the clause şartıyla.' },
+    { id: 'r2', who: 'Hasan Bey', msg: 'Yeni kiracıya ne yazalım?', ru: '“For rent provided that you don\'t smoke.”', pre: 'Sigara ', rt: 'iç', post: 'kiralayabilirsiniz.', ok: ['içmemeniz şartıyla', 'içmemeniz koşuluyla'], cfg: { eng: 'ma', neg: true, p: 4, link: 'şartıyla' }, why: '“Not” after the root, the owner is “you” (pl.): iç-me-me-niz.' },
+    { id: 'r3', who: 'Hasan Bey', msg: 'Kira gecikirse ne olacak?', ru: '“In case you delay payment, a fine.”', pre: 'Ödemeyi ', rt: 'geciktir', post: 'ceza var.', ok: ['geciktirdiğiniz takdirde'], cfg: { eng: 'dik', neg: false, p: 4, link: 'takdirde' }, why: 'This is a case, not a requirement: -DIğI takdirde.' },
+    { id: 'r4', who: 'Hasan Bey', msg: 'Kedi kalsın mı?', ru: '“Let him stay, provided that he doesn\'t scratch the rug.”', pre: 'Halıyı ', rt: 'tırmala', post: 'kalsın.', ok: ['tırmalamaması şartıyla', 'tırmalamaması koşuluyla'], cfg: { eng: 'ma', neg: true, p: 2, link: 'şartıyla' }, why: 'The cat is “it”: tırmala-ma-ma-sı.' },
+    { id: 'r5', who: 'Hasan Bey', msg: 'Peki kira?', ru: '“Deal, provided that I pay on time?”', pre: 'Kirayı zamanında ', rt: 'öde', post: 'anlaştık mı?', ok: ['ödemem şartıyla', 'ödemem koşuluyla'], cfg: { eng: 'ma', neg: false, p: 0, link: 'şartıyla' }, why: '“I” pay → öde-me-m.' },
+  ];
+  const px = $('.pult');
+  const ps = { i: 0, right: 0, eng: null, neg: false, p: null, link: null, t0: 0, started: false, done: false };
+  const line = (cls, txt, who) => { const m = document.createElement('p'); m.className = cls; m.textContent = txt; if (who) { const b = document.createElement('b'); b.textContent = who; m.prepend(b); } $('.chat', px).appendChild(m); pop(m); $('.chat', px).scrollTop = 1e6; };
+  function round4() {
+    const r = R4[ps.i];
+    Object.assign(ps, { eng: null, neg: false, p: null, link: null, t0: performance.now() });
+    $$('.pr .opt', px).forEach((b) => b.setAttribute('aria-pressed', 'false'));
+    $('.pr-neg', px).setAttribute('aria-checked', 'false');
+    $('.pult__count', px).textContent = `${ps.i + 1} / ${R4.length}`;
+    $('.pt-ru', px).textContent = r.ru;
+    $('.pt-tpl', px).textContent = `${r.pre}${r.rt}___ ${r.post}`;
+    $('.pt-fb', px).textContent = '';
+    $('.pt-send', px).hidden = false; $('.pt-next', px).hidden = true;
+    line('in', r.msg, r.who);
+    preview4();
+  }
+  const phrase = () => { const r = R4[ps.i]; return `${cond(r.rt, ps.eng, ps.p, ps.neg).word} ${ps.link}`; };
+  function preview4() {
+    const r = R4[ps.i], w = $('.pt-word', px);
+    if (ps.eng && ps.p !== null && ps.link) { const f = cond(r.rt, ps.eng, ps.p, ps.neg); w.innerHTML = chips(f, '', ps.link); w.dataset.say = phrase(); }
+    else w.innerHTML = `<span class="m r">${r.rt}</span>${ps.neg ? '<span class="m n">…</span>' : ''}<span class="m e">${ps.eng ? '-' + ps.eng : '?'}</span><span class="m o">${ps.p === null ? '?' : GEN[ps.p]}</span><span class="m c">${ps.link || '?'}</span>`;
+    pop($$('.m', w));
+  }
+  $$('.pr', px).forEach((row) => row.addEventListener('click', (e) => {
+    const b = e.target.closest('.opt'); if (!b || ps.done) return;
+    if (!ps.started) { ps.started = true; if (window.AlternaTracker) window.AlternaTracker.start(EX4); }
+    if (b.classList.contains('pr-neg')) { ps.neg = !ps.neg; b.setAttribute('aria-checked', String(ps.neg)); }
+    else {
+      $$('.opt:not(.pr-neg)', row).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      const k = row.dataset.k; ps[k] = k === 'p' ? +b.dataset.v : b.dataset.v;
+    }
+    preview4();
+  }));
+  function send4() {
+    const r = R4[ps.i];
+    if (!ps.eng || ps.p === null || !ps.link) { $('.pt-fb', px).textContent = 'Pick the form, the owner and the connector.'; shake($('.pult__out', px)); return; }
+    const ph = phrase(), ok = r.ok.includes(ph);
+    if (window.AlternaTracker) window.AlternaTracker.answer({ exerciseId: EX4, itemId: r.id, correct: ok, answer: ph, timeMs: Math.round(performance.now() - ps.t0) });
+    if (ok) ps.right++;
+    line('out', `${r.pre}${ph} ${r.post}`);
+    $('.pt-fb', px).textContent = ok ? `Accepted. ${r.why}` : `The clause didn't pass. Correct: ${r.pre}${r.ok[0]} ${r.post} ${r.why}`;
+    if (ok) say(`${r.pre}${ph} ${r.post}`);
+    setTimeout(() => line('in', ok ? 'Tamam, anlaştık.' : 'Anlamadım, bir daha yaz.', r.who), 500);
+    $('.pt-send', px).hidden = true; $('.pt-next', px).hidden = false;
+    $('.pt-next', px).textContent = ps.i === R4.length - 1 ? 'Result' : 'Next';
+  }
+  function next4() {
+    if (ps.i < R4.length - 1) { ps.i++; round4(); return; }
+    ps.done = true;
+    if (window.AlternaTracker) window.AlternaTracker.complete({ exerciseId: EX4, correct: ps.right, total: R4.length });
+    $('.pt-fb', px).textContent = `Negotiations over: ${ps.right} of ${R4.length}. ${ps.right >= 4 ? 'Hasan Bey signed everything.' : 'Hasan Bey wants a rewrite. Play again.'}`;
+    $('.pt-next', px).hidden = false; $('.pt-next', px).textContent = 'Again';
+  }
+  function reset4() { Object.assign(ps, { i: 0, right: 0, done: false }); $('.chat', px).innerHTML = ''; round4(); }
+  $('.pt-send', px).addEventListener('click', () => send4());
+  $('.pt-next', px).addEventListener('click', () => { if (ps.done) reset4(); else next4(); });
+  $('.pt-word', px).addEventListener('click', (e) => { const s = e.currentTarget.dataset.say; if (s) say(s); });
+  reset4();
+  if (window.AlternaKit) window.AlternaKit.registerSolver(EX4, async () => {
+    reset4();
+    if (window.AlternaTracker) window.AlternaTracker.start(EX4);
+    ps.started = true;
+    for (const r of R4) { Object.assign(ps, r.cfg); send4(); next4(); }
+  });
+
+  /* ---------- неудачные дубли ---------- */
+  $$('.take').forEach((t) => t.addEventListener('click', (e) => {
+    if (!e.target.closest('[data-flip]')) return;
+    const inner = $('.take__in', t), on = !t.classList.contains('is-fixed');
+    t.classList.toggle('is-fixed', on);
+    if (G) G.to(inner, { rotationY: on ? 180 : 0, duration: .7, ease: 'back.out(1.6)' });
+    else inner.style.transform = on ? 'rotateY(180deg)' : '';
+    if (on) say($('.face--good .line', t).dataset.say);
+  }));
+
+  /* ---------- шпаргалка ---------- */
+  $('.p-replay').addEventListener('click', () => {
+    if (!G) return;
+    G.fromTo('.p-recipe .m', { y: -40, rotation: -12 }, { y: 0, rotation: 0, duration: .7, stagger: .1, ease: 'bounce.out' });
+    G.fromTo('.pcard', { y: 30, scale: .92 }, { y: 0, scale: 1, duration: .6, stagger: .08, ease: 'back.out(2)' });
+    say('geri vermemen şartıyla');
+  });
+
+  /* ---------- свой скроллбар: линейка-таймлайн ---------- */
+  const reel = $('[data-scrollbar]'), head = $('.reel__head'), marks = $$('.reel button');
+  const secs = marks.map((m) => $(`[data-section="${m.dataset.goto}"]`));
+  const desk = () => matchMedia('(min-width: 768px)').matches;
+  function jump(key) {
+    const el = $(`[data-section="${key}"]`); if (!el) return;
+    const y = el.getBoundingClientRect().top + scrollY + (key === 'story' ? $('.title').offsetHeight : 0);
+    if (G) G.fromTo('.cut', { autoAlpha: 1 }, { autoAlpha: 0, duration: .5, ease: 'power2.in' });
+    window.scrollTo({ top: y, behavior: 'instant' });
+  }
+  marks.forEach((m) => m.addEventListener('click', () => jump(m.dataset.goto)));
+  function paint() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const pr = max > 0 ? Math.min(1, scrollY / max) : 0;
+    const tr = $('.reel__track');
+    head.style.transform = desk() ? `translateY(${pr * (tr.clientHeight - 3)}px)` : `translateX(${pr * (tr.clientWidth - 3)}px)`;
+    const mid = innerHeight / 2;
+    let cur = 0;
+    secs.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= mid) cur = i; });
+    marks.forEach((m, i) => m.classList.toggle('is-on', i === cur));
+  }
+  addEventListener('scroll', paint, { passive: true });
+  addEventListener('resize', paint);
+  paint();
+  addEventListener('alterna:read', (e) => { const m = marks.find((x) => x.dataset.goto === e.detail?.key); if (m) m.classList.add('is-done'); });
+  let drag = null;
+  reel.addEventListener('pointerdown', (e) => { if (!desk()) return; drag = { y: e.clientY, moved: false }; });
+  addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    if (Math.abs(e.clientY - drag.y) > 6) drag.moved = true;
+    if (!drag.moved) return;
+    const r = $('.reel__track').getBoundingClientRect();
+    const pr = Math.min(1, Math.max(0, (e.clientY - r.top) / r.height));
+    window.scrollTo({ top: pr * (document.documentElement.scrollHeight - innerHeight), behavior: 'instant' });
+  });
+  addEventListener('pointerup', () => { drag = null; });
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const s = detail.badge && detail.badge.querySelector('svg');
+    if (!s || !detail.timeline) return;
+    detail.timeline.fromTo(s.querySelector('.ach-cap'), { scale: .3, rotation: -40, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: .8, ease: 'back.out(2)' }, 0.9);
+    detail.timeline.fromTo(s.querySelector('.ach-star'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: .5, ease: 'elastic.out(1,.45)' }, 1.5);
+  });
+
+  /* ---------- кино: сцены по скроллу ---------- */
+  if (!G || !ST) return;
+  G.registerPlugin(ST);
+  ST.config({ ignoreMobileResize: true });
+
+  function subs(tl, scene, at) {
+    const ps2 = $$('.subs > p', scene);
+    ps2.forEach((p, i) => {
+      tl.fromTo(p, { y: 22, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .45 }, at[i]);
+      if (i < ps2.length - 1) tl.to(p, { y: -16, autoAlpha: 0, duration: .3 }, at[i + 1] - .35);
+    });
+  }
+  const pinCfg = (stage, desk) => ({ trigger: stage, start: 'top top', end: desk ? '+=210%' : '+=130%', pin: true, scrub: desk ? .8 : .55, anticipatePin: 1, invalidateOnRefresh: true });
+  const FIT = '.doc-wrap,.fan,.bar6,.mag,.kb';
+  function fit() {
+    $$(FIT).forEach((c) => {
+      c.style.setProperty('--fit', 1);
+      const view = c.closest('.view');
+      if (!view || !root.classList.contains('anim')) return;
+      const box = c.classList.contains('doc-wrap') ? view.clientHeight * .36 : view.clientHeight * .94;
+      c.style.bottom = 'auto'; c.style.height = 'auto';
+      const h = c.offsetHeight;
+      c.style.bottom = ''; c.style.height = '';
+      if (h) c.style.setProperty('--fit', Math.min(1, box / h).toFixed(3));
+    });
+  }
+  ST.addEventListener('refreshInit', fit);
+
+  const mm = G.matchMedia();
+  mm.add({ desk: '(min-width: 768px) and (prefers-reduced-motion: no-preference)', mob: '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)' }, (ctx) => {
+    const desk = !!ctx.conditions.desk;
+    root.classList.add('anim');
+    fit();
+
+    /* сцена 1: договор → подпись → кот → два «me» */
+    {
+      const s = $('#s1'), stage = $('.stage', s);
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(stage, desk) });
+      const sig = $('.sign .draw', s);
+      tl.fromTo($('.shutter', s), { yPercent: 0 }, { yPercent: -101, duration: .7, ease: 'power2.inOut' }, 0)
+        .fromTo($('.big', s), { yPercent: 40, scale: 1.2 }, { yPercent: -10, scale: 1, duration: 10 }, 0)
+        .fromTo($('.doc', s), { y: 120, rotationX: 55, transformPerspective: 900 }, { y: 0, rotationX: 0, duration: 1.2, ease: 'power3.out' }, .3)
+        .fromTo($$('.ln', s), { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: .5, stagger: .15 }, 1)
+        .fromTo($('.clause', s), { x: -40, scale: .9 }, { x: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, 1.6)
+        .fromTo(sig, { strokeDasharray: 200, strokeDashoffset: 200 }, { strokeDashoffset: 0, duration: 1 }, 2.2)
+        .fromTo($('.ruler', s), { y: 40, scaleX: .6 }, { y: 0, scaleX: 1, duration: .8, ease: 'power2.out' }, 2.4)
+        .fromTo($('.here', s), { x: 0 }, { x: () => $('.ruler', s).offsetWidth * .55, duration: 3 }, 3)
+        .fromTo($('.a-tm', s), { xPercent: -140 }, { xPercent: 0, duration: 1, ease: 'power2.out' }, 3.2)
+        .fromTo($('.boxcat', s), { y: 140, rotation: -10 }, { y: 0, rotation: 0, duration: .8, ease: 'back.out(2)' }, 3.6)
+        .fromTo($('.pamuk', s), { y: 50 }, { y: 0, duration: .6, ease: 'back.out(3)' }, 4.4)
+        .fromTo($('.a-hb', s), { xPercent: 140 }, { xPercent: 0, duration: 1, ease: 'power2.out' }, 4.6)
+        .fromTo($('.b-a', s), { scale: .3, y: 30, transformOrigin: '100% 100%' }, { scale: 1, y: 0, duration: .5, ease: 'back.out(2.5)' }, 5.4)
+        .fromTo($('.a-tm .bub', s), { scale: .3, y: 30, transformOrigin: '0% 100%' }, { scale: 1, y: 0, duration: .5, ease: 'back.out(2.5)' }, 6.2)
+        .to([$('.doc-wrap', s), $('.ruler', s)], { opacity: .12, duration: .6 }, 5.2)
+        .to($('.b-a', s), { autoAlpha: 0, y: -20, duration: .3 }, 6.8)
+        .fromTo($('.b-b', s), { scale: .3, y: 30, autoAlpha: 0, transformOrigin: '100% 100%' }, { scale: 1, y: 0, autoAlpha: 1, duration: .5, ease: 'back.out(2.5)' }, 7)
+        .fromTo($('.c-o', s), { opacity: 0 }, { opacity: 1, duration: .1 }, 7.4)
+        .fromTo($('.c-c', s), { opacity: 1 }, { opacity: 0, duration: .1 }, 7.4)
+        .to($('.cam', s), { scale: 1.15, transformOrigin: '50% 85%', duration: 1, ease: 'power2.inOut' }, 6.6)
+        .addLabel('beat', 8.2)
+        .fromTo($('.beat', s), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power2.out' }, 'beat')
+        .to($('.cam', s), { scale: 1, duration: .6 }, 8.4)
+        .fromTo($('.wipe', s), { scale: 0 }, { scale: 1, duration: 1.2, ease: 'power2.in' }, 9.6);
+      subs(tl, s, [0.5, 2.2, 4.6, 6.8]);
+    }
+
+    /* сцена 2: карусель разворачивается в пункт */
+    {
+      const s = $('#s2'), stage = $('.stage', s);
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(stage, desk) });
+      const lv = $$('.leaf', s);
+      tl.fromTo($('.shutter', s), { yPercent: 0 }, { yPercent: 101, duration: .7, ease: 'power2.inOut' }, 0)
+        .fromTo($('.big', s), { xPercent: 30 }, { xPercent: -20, duration: 10 }, 0)
+        .fromTo(lv, { rotationY: (i) => -60 + i * 10, x: (i) => (1.5 - i) * 60, z: (i) => -i * 60, scale: .8 }, { rotationY: 0, x: 0, z: 0, scale: 1, duration: 1.6, stagger: .15, ease: 'power3.out' }, .4)
+        .fromTo(lv[1], { y: 0 }, { y: -18, duration: .3, yoyo: true, repeat: 1 }, 2.4)
+        .fromTo(lv[2], { y: 0 }, { y: -18, duration: .3, yoyo: true, repeat: 1 }, 2.8)
+        .fromTo(lv[3], { rotationY: 0 }, { rotationY: 360, duration: 1, ease: 'power2.inOut' }, 3.6)
+        .fromTo($('.ex2', s), { y: 50, scale: .8 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, 6.2)
+        .fromTo($$('.vsk span', s), { y: 30, scale: .7 }, { y: 0, scale: 1, duration: .5, stagger: .3, ease: 'back.out(2)' }, 4.6)
+        .to($('.cam', s), { scale: 1.08, transformOrigin: '50% 40%', duration: 1.4, ease: 'power2.inOut' }, 6.4)
+        .addLabel('beat', 7.8)
+        .fromTo($('.beat', s), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power2.out' }, 'beat')
+        .fromTo($('.wipe', s), { scale: 0 }, { scale: 1, duration: 1.2, ease: 'power2.in' }, 9.6);
+      subs(tl, s, [0.4, 2.6, 4.4, 6.2]);
+    }
+
+    /* сцена 3: зелёная плашка и хозяева */
+    {
+      const s = $('#s3'), stage = $('.stage', s);
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(stage, desk) });
+      tl.fromTo($('.shutter', s), { yPercent: 0 }, { yPercent: -101, duration: .7, ease: 'power2.inOut' }, 0)
+        .fromTo($('.big', s), { scale: 1.4 }, { scale: 1, duration: 10 }, 0)
+        .fromTo($('.gbar', s), { scaleX: .2, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 1, ease: 'power3.out' }, .4)
+        .fromTo($$('.av', s), { y: 30, scale: .3 }, { y: 0, scale: 1, duration: .5, stagger: .12, ease: 'back.out(2.5)' }, 1)
+        .fromTo($('.s3-word', s), { y: 40, scale: .6 }, { y: 0, scale: 1, duration: .7, ease: 'back.out(2)' }, 1.8)
+        .fromTo($$('.s3-word .m.o', s), { scale: 2.4, rotation: -20 }, { scale: 1, rotation: 0, duration: .7, ease: 'elastic.out(1,.45)' }, 2.6)
+        .fromTo($('.mak', s), { y: 40, scale: .8 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2)' }, 3.8)
+        .to($('.cam', s), { scale: 1.1, transformOrigin: '50% 70%', duration: 1.2, ease: 'power2.inOut' }, 5.4)
+        .to($('.cam', s), { scale: 1, duration: .8 }, 7)
+        .addLabel('beat', 7.6)
+        .fromTo($('.beat', s), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power2.out' }, 'beat')
+        .fromTo($('.wipe', s), { scale: 0 }, { scale: 1, duration: 1.2, ease: 'power2.in' }, 9.6);
+      subs(tl, s, [0.4, 3.6, 5.4]);
+    }
+
+    /* сцена 4: камера ныряет в слово, «me» вклинивается */
+    {
+      const s = $('#s4'), stage = $('.stage', s);
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(stage, desk) });
+      const w = $$('.s4-word .m', s);
+      tl.fromTo($('.shutter', s), { yPercent: 0 }, { yPercent: 101, duration: .7, ease: 'power2.inOut' }, 0)
+        .fromTo($('.cam', s), { scale: .6 }, { scale: 1, duration: 2.4, ease: 'power2.out' }, 0)
+        .fromTo($('.big', s), { xPercent: -30 }, { xPercent: 20, duration: 10 }, 0)
+        .fromTo($('.lens', s), { scale: .3, rotation: -40 }, { scale: 1, rotation: 0, duration: 1.2, ease: 'back.out(1.6)' }, .4)
+        .fromTo($('.wrong', s), { y: 30, scale: 1.4 }, { y: 0, scale: 1, duration: .6 }, 1.4)
+        .fromTo(w, { y: 30, scale: .5 }, { y: 0, scale: 1, duration: .5, stagger: .1, ease: 'back.out(2)' }, 2.2)
+        .fromTo($('.s4-neg', s), { y: -120, rotation: -60, scale: 1.8 }, { y: 0, rotation: 0, scale: 1, duration: 1, ease: 'bounce.out' }, 3.2)
+        .fromTo(w.slice(2), { x: -26 }, { x: 0, duration: .6, ease: 'power2.out' }, 3.6)
+        .fromTo($$('.tags4 span', s), { x: 80, scale: .8 }, { x: 0, scale: 1, duration: .5, stagger: .2, ease: 'back.out(2)' }, 5.4)
+        .to($('.lens', s), { scale: 1.08, duration: .8, ease: 'power2.inOut' }, 6.2)
+        .addLabel('beat', 7.6)
+        .fromTo($('.beat', s), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power2.out' }, 'beat')
+        .fromTo($('.wipe', s), { scale: 0 }, { scale: 1, duration: 1.2, ease: 'power2.in' }, 9.6);
+      subs(tl, s, [0.4, 2.8, 5.2]);
+    }
+
+    /* сцена 5: база знаний */
+    {
+      const s = $('#s5'), stage = $('.stage', s);
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(stage, desk) });
+      tl.fromTo($('.shutter', s), { yPercent: 0 }, { yPercent: -101, duration: .7, ease: 'power2.inOut' }, 0)
+        .fromTo($('.big', s), { xPercent: 20 }, { xPercent: -25, duration: 10 }, 0)
+        .fromTo($('.k1', s), { y: 120, rotationX: 50, transformPerspective: 800 }, { y: 0, rotationX: 0, duration: .8, ease: 'power3.out' }, .4)
+        .fromTo($('.k2', s), { y: 120, rotationX: 50, transformPerspective: 800 }, { y: 0, rotationX: 0, duration: .8, ease: 'power3.out' }, 1)
+        .fromTo($('.k3', s), { y: 120, rotationX: 50, transformPerspective: 800 }, { y: 0, rotationX: 0, duration: .8, ease: 'power3.out' }, 2.6)
+        .fromTo($('.k4', s), { y: 120, rotationX: 50, transformPerspective: 800 }, { y: 0, rotationX: 0, duration: .8, ease: 'power3.out' }, 4.4)
+        .fromTo($$('.kcard use, .kcard circle, .kcard rect', s), { scale: .4, transformOrigin: '50% 50%' }, { scale: 1, duration: .6, stagger: .15, ease: 'back.out(2)' }, 1.6)
+        .to($('.cam', s), { scale: 1.06, duration: 1.2, ease: 'power2.inOut' }, 6)
+        .addLabel('beat', 7.8)
+        .fromTo($('.beat', s), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power2.out' }, 'beat')
+        .fromTo($('.wipe', s), { scale: 0 }, { scale: 1, duration: 1.2, ease: 'power2.in' }, 9.6);
+      subs(tl, s, [0.4, 2.6, 4.4, 6.2]);
+    }
+
+    /* сцена 6: балкон, луна, пункт 7а */
+    {
+      const s = $('#s6'), stage = $('.stage', s);
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: pinCfg(stage, desk) });
+      tl.fromTo($('.shutter', s), { yPercent: 0 }, { yPercent: 101, duration: .7, ease: 'power2.inOut' }, 0)
+        .fromTo($('.cam', s), { scale: 1.3, transformOrigin: '75% 20%' }, { scale: 1, duration: 3, ease: 'power2.out' }, 0)
+        .fromTo($('.moon', s), { y: 80 }, { y: 0, duration: 3, ease: 'power1.out' }, 0)
+        .fromTo($('.big', s), { yPercent: 30 }, { yPercent: -5, duration: 10 }, 0)
+        .fromTo($('.a-tm', s), { xPercent: -140 }, { xPercent: 0, duration: 1, ease: 'power2.out' }, 1.2)
+        .fromTo($('.a-hb', s), { xPercent: 140 }, { xPercent: 0, duration: 1, ease: 'power2.out' }, 1.4)
+        .fromTo($('.boxcat', s), { y: 100 }, { y: 0, duration: .8, ease: 'back.out(2)' }, 1.8)
+        .fromTo($('.a-tm .bub', s), { scale: .3, y: 30, transformOrigin: '0% 100%' }, { scale: 1, y: 0, duration: .5, ease: 'back.out(2.5)' }, 2.6)
+        .fromTo($('.a-hb .bub', s), { scale: .3, y: 30, transformOrigin: '100% 100%' }, { scale: 1, y: 0, duration: .5, ease: 'back.out(2.5)' }, 4.4)
+        .fromTo($('.new7', s), { y: -80, rotation: -6 }, { y: 0, rotation: 0, duration: .8, ease: 'back.out(2)' }, 6)
+        .fromTo($('.stamp', s), { scale: 3, rotation: -30 }, { scale: 1, rotation: 8, duration: .6, ease: 'elastic.out(1,.45)' }, 6.8)
+        .addLabel('beat', 7.6)
+        .fromTo($('.beat', s), { y: 60, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .6, ease: 'power2.out' }, 'beat')
+        .fromTo($('.wipe', s), { scale: 0 }, { scale: 1, duration: 1.2, ease: 'power2.in' }, 9.4)
+        .fromTo($('.endcard', s), { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .5, ease: 'back.out(2)' }, 10.4);
+      subs(tl, s, [0.4, 2.6, 4.4, 6.2]);
+    }
+
+    /* живые петли — только пока сюжет на экране */
+    const loop = G.to('.pamuk', { y: -4, duration: 1.2, yoyo: true, repeat: -1, ease: 'sine.inOut', paused: true });
+    ScrollTrigger.create({ trigger: '#s1', start: 'top bottom', endTrigger: '#s6', end: 'bottom top', onToggle: (self) => (self.isActive ? loop.play() : loop.pause()) });
+
+    return () => { root.classList.remove('anim'); loop.kill(); };
+  });
+
+  ScrollTrigger.batch('.rise', { start: 'top 90%', onEnter: (els) => G.fromTo(els, { y: 50, rotation: -1 }, { y: 0, rotation: 0, duration: .7, stagger: .08, ease: 'power3.out', overwrite: true }) });
+  ScrollTrigger.create({ trigger: '#cheat', start: 'top 70%', once: true, onEnter: () => G.fromTo('.p-recipe .m', { y: -50, rotation: -15 }, { y: 0, rotation: 0, duration: .8, stagger: .12, ease: 'bounce.out' }) });
+  ScrollTrigger.create({ trigger: '#lab', start: 'top 75%', once: true, onEnter: () => pop($$('#lab .screen')) });
+  ScrollTrigger.create({ trigger: '#traps', start: 'top 75%', once: true, onEnter: () => G.fromTo('.face--bad svg', { rotation: -25 }, { rotation: 0, duration: .6, stagger: .1, ease: 'back.out(3)' }) });
+
+  const refresh = () => ST.refresh();
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+});
+</script>
+</body>
+</html>
