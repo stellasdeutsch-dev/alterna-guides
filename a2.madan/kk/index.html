@@ -327,6 +327,21 @@ button { font: inherit; color: inherit; }
   .sb__knob { top: calc(var(--p, 0) * 100%); left: auto; right: 18px; translate: 0 -50%; }
   .sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
 }
+/* ---------- қазақша ↔ түрікше ---------- */
+.kz { padding: clamp(16px, 4vw, 30px); overflow: hidden; }
+.kz__ctl { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; margin: 12px 0; }
+.kz__row { display: grid; grid-template-columns: 74px 1fr; gap: 10px; align-items: center; padding: 14px 12px; border-radius: 18px; background: var(--soft);
+  background-image: repeating-linear-gradient(90deg, transparent 0 calc(12.5% - 1px), var(--wire) calc(12.5% - 1px) 12.5%); }
+.kz__row + .kz__row { margin-top: 10px; }
+.kz__row small { font: italic 500 18px/1 var(--serif); color: var(--ink-2); }
+.kz__tiles { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; min-height: 58px; font: 800 clamp(24px, 6.6vw, 44px)/1 var(--sans); letter-spacing: -.03em; }
+.kz__tiles .brick { padding: 6px 10px; }
+.brick.is-c { box-shadow: 0 0 0 3px var(--yellow), 0 10px 20px -12px rgba(0,0,0,.4); }
+.brick--s { background: #fff; color: var(--muted); border: 2px dashed var(--muted); box-shadow: none; }
+.brick--s.is-gone { text-decoration: line-through; text-decoration-color: var(--ma); text-decoration-thickness: 3px; }
+.kz__go { display: flex; justify-content: center; margin: 10px 0 0; }
+.kz .lab__why { display: block; min-height: 3.2em; margin: 12px 0 0; }
+.kzn li { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
@@ -391,7 +406,7 @@ button { font: inherit; color: inherit; }
       <div class="hero__copy">
         <h1 class="h1"><span class="thin">Бәрін</span> <span>істеу</span> <span class="thin">шарт емес</span></h1>
         <p class="lead">Кейде таңғы ас ішпей кетесің. Түрікше бұл құйрығы бар бір сөз: <b lang="tr" data-say="yapmadan">yap<span class="ma">ma</span><span class="dan">dan</span></b>.</p>
-        <p class="lead" style="margin-top:8px">Бүгін істерді түрікше өткізіп жіберуді үйренесің. Әдемі. Бір құйрықпен. Кінә сезімінсіз.</p>
+        <p class="lead" style="margin-top:8px">Қазақшаң бар — жартысы дайын: ішпей, қарамай. Қалғаны — бір құйрық. Әдемі. Кінә сезімінсіз.</p>
         <div class="stats">
           <div class="stat"><b data-count="2">2</b><span>форма: madan, meden</span></div>
           <div class="stat"><b data-count="1">1</b><span>басты тұзақ</span></div>
@@ -509,7 +524,7 @@ button { font: inherit; color: inherit; }
       <button type="button" class="btn" data-cutbtn data-ui>Сөздерді кесу</button>
       <p class="p" style="margin:0">Етістік бүтін. Әрі қарай <b class="ma">ma</b> — «-ма». Сосын <b class="dan">dan</b> — «-дан».</p>
     </div>
-    <p class="p" style="margin-top:14px">Қазақша бұл -май/-мей көсемшесі: ішпей, қарамай. Түрікше жай ғана екі кірпіш іледі. Біреуі «-ма» дейді, екіншісі — «қайдан». Бірге — «істемей».</p>
+    <p class="p" style="margin-top:14px">Таныс па? Қазақша да солай: іш<b class="ma">пе</b>с<b class="dan">тен</b> — болымсыздық пен шығыс септік. Түрікше тек «с» жоқ: iç<b class="ma">me</b><b class="dan">den</b>. Мағынасы — ішпей. Айырмасын төменде көресің.</p>
   </div>
 </section>
 
@@ -536,7 +551,7 @@ button { font: inherit; color: inherit; }
       <ol class="steps" data-f-steps>
         <li><span>Етістіктің түбірін аламыз. <span class="nw" lang="tr">-mak</span>-сыз.</span></li>
         <li><span><b class="ma">ma / me</b> қоямыз — бұл «-ма».</span></li>
-        <li><span><b class="dan">dan / den</b> қоямыз — сол «қайдан» құйрығы.</span></li>
+        <li><span><b class="dan">dan / den</b> қоямыз — шығыс септік, қазақша -дан/-тан.</span></li>
         <li><span>Жапсырып, негізгі әрекетті қосамыз.</span></li>
       </ol>
       <div class="ctrl">
@@ -563,19 +578,56 @@ button { font: inherit; color: inherit; }
     <p class="kicker" data-ui><b>05</b> Үндестік</p>
     <h2 class="h2">Бар-жоғы <span class="thin">екі форма</span></h2>
     <p class="p">Құйрық етістіктің соңғы дауыстысын тыңдайды. Нұсқасы екеу, <span class="nw" lang="tr">-dan / -den</span>-дегідей. Дауыстыны бас — ол өз қорабына кетеді.</p>
-    <p class="p">Бұл <span class="nw" lang="tr">-dan</span> мен <span class="nw" lang="tr">-den</span>-дегі сол үндестік. Жаңа ештеңе жоқ.</p>
+    <p class="p">Қазақшадағыдай: алмай / көрмей — екі нұсқа. ö мен ü — жіңішке, o мен u — жуан. Жаңа ештеңе жоқ.</p>
     <div class="tray" data-tray aria-label="Дауыстылар"></div>
     <div class="duo">
       <div class="box c-violet" data-duo="a"><span class="box__tag" data-ui>a ı<br>o u</span><span class="duo__aff" lang="tr">madan</span><div class="duo__vow" data-duo-vow></div><div class="duo__ex" lang="tr"><button type="button" data-say="yapmadan">yapmadan</button><button type="button" data-say="okumadan">okumadan</button><button type="button" data-say="uyumadan">uyumadan</button></div></div>
       <div class="box c-pink" data-duo="e"><span class="box__tag" data-ui>e i<br>ö ü</span><span class="duo__aff" lang="tr">meden</span><div class="duo__vow" data-duo-vow></div><div class="duo__ex" lang="tr"><button type="button" data-say="gelmeden">gelmeden</button><button type="button" data-say="içmeden">içmeden</button><button type="button" data-say="düşünmeden">düşünmeden</button></div></div>
     </div>
-    <p class="note" style="margin-top:14px">d әрпі t-ға ауыспайды: оның алдында әрқашан дауысты.</p>
+    <p class="note" style="margin-top:14px">Қазақша ішпестен — т, өйткені алдында с. Түрікше d-ның алдында әрқашан дауысты, сондықтан d қалады.</p>
     <div class="mq" data-quiz>
       <p class="mq__q"><span class="note" data-ui>сұрақ:</span> <span lang="tr">gör</span> + «-ма» + «-дан» = ?</p>
       <div class="opts">
         <button type="button" lang="tr" data-fb="gör-де дауысты ö — ол жіңішке. Құйрық та жіңішке.">görmadan</button>
         <button type="button" lang="tr" data-ok data-fb="Дәл. ö → meden.">görmeden</button>
         <button type="button" lang="tr" data-fb="Дауыстыдан кейін d қатаңдамайды.">görmeten</button>
+      </div>
+      <p class="fb" aria-live="polite" data-ui></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ҚАЗАҚША ↔ ТҮРІКШЕ ============ -->
+<section class="s" id="kz" data-section="kk-diff" data-words="88">
+  <svg class="pen" style="left:-6%;top:30px" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M20 30 C 120 140, 220 140, 260 70 C 300 0, 380 10, 420 80 C 450 130, 540 140, 590 100"/></svg>
+  <div class="s__in">
+    <p class="kicker" data-ui><b>KZ</b> қазақша ↔ түрікше</p>
+    <h2 class="h2">Туыс, <span class="thin">бірақ егіз емес</span></h2>
+    <p class="p">Қазақ етістігін таңда, «Түрікшеге» бас. Қазақ кірпіштері түрік кірпіштеріне ауысады. Сары жиек — қазақшаша жазсаң, қате кетеді.</p>
+    <div class="grid2">
+      <ol class="steps kzn" data-kz-notes>
+        <li data-n="0"><span><b>m — әрқашан m.</b> Қазақша м, б, п ауысады: ішпей, ойланбай, сұрамай. Түрікше жоқ: <span class="nw" lang="tr">içmeden</span>, <span class="nw" lang="tr">düşünmeden</span>.</span></li>
+        <li data-n="1"><span><b>-мастан ≈ -madan.</b> Іш-пе-с-тен: болымсыздық + с + шығыс септік. Түрікше с жоқ: <span class="nw" lang="tr">iç-me-den</span>. Алдында дауысты — сондықтан d.</span></li>
+        <li data-n="2"><span><b>Бір құйрық — екі форма.</b> Ішпей де, ішпестен де түрікше бір ғана <span class="nw" lang="tr">içmeden</span>.</span></li>
+        <li data-n="3"><span><b>«Бұрын» — логикасы бірдей.</b> Кетпес бұрын — <span class="nw" lang="tr">gitmeden önce</span>. Екеуінде де болымсыздық бар, ал мағынасы — «бұрын».</span></li>
+      </ol>
+      <div class="kz card" data-kz>
+        <div class="row" role="group" aria-label="Қазақ етістігі" data-kz-verbs></div>
+        <div class="kz__ctl">
+          <button type="button" class="tgl" role="switch" aria-checked="true" aria-label="-май немесе -мастан" data-kz-mode><span data-ui>-май</span><span data-ui>-мастан</span></button>
+          <button type="button" class="btn btn--sm" data-kz-go data-ui>Түрікшеге ↓</button>
+        </div>
+        <div class="kz__row"><small data-ui>қазақша</small><div class="kz__tiles" data-kz-kk></div></div>
+        <div class="kz__row"><small data-ui>түрікше</small><button type="button" class="kz__tiles lab__word" lang="tr" data-kz-tr data-say=""></button></div>
+        <p class="lab__why" aria-live="polite" data-kz-why data-ui></p>
+      </div>
+    </div>
+    <div class="mq" data-quiz>
+      <p class="mq__q"><span class="note" data-ui>сұрақ:</span> «күтпей» түрікше қалай?</p>
+      <div class="opts">
+        <button type="button" lang="tr" data-fb="Қазақша п. Түрікше болымсыздық әрқашан m.">beklepeden</button>
+        <button type="button" lang="tr" data-ok data-fb="Дәл. bekle + me + den. п да, с та жоқ.">beklemeden</button>
+        <button type="button" lang="tr" data-fb="Бұл -мастан-ның көшірмесі. Түрікше с жоқ, ал d қатаңдамайды.">beklemesten</button>
       </div>
       <p class="fb" aria-live="polite" data-ui></p>
     </div>
@@ -601,7 +653,7 @@ button { font: inherit; color: inherit; }
       </div>
       <div class="sent" lang="tr" data-ui><span class="lock">kahvaltı yap<span class="ma">ma</span><span class="dan">dan</span><svg aria-hidden="true"><use href="#i-lock"/></svg></span><button type="button" class="lab__word main-v" data-p-verb data-say="Kahvaltı yapmadan çıkıyorum.">çıkıyorum</button></div>
       <p class="ru sent__ru" data-p-ru data-ui>Таңғы ас ішпей кетемін.</p>
-      <div class="row"><button type="button" class="tgl" role="switch" aria-checked="true" aria-label="Орысша не түрікше сөз тәртібі" data-order><span data-ui>TR</span><span data-ui>RU</span></button><span class="note" data-order-note data-ui>алдымен «істемей», сосын негізгісі</span></div>
+      <div class="row"><button type="button" class="tgl" role="switch" aria-checked="true" aria-label="Орысша не түрікше сөз тәртібі" data-order><span data-ui>TR</span><span data-ui>RU</span></button><span class="note" data-order-note data-ui>алдымен «істемей», сосын негізгісі — қазақшадағыдай</span></div>
     </div>
   </div>
 </section>
@@ -613,7 +665,7 @@ button { font: inherit; color: inherit; }
     <svg class="sparkle" style="left:40%;top:-20px" aria-hidden="true" data-twinkle><use href="#i-star"/></svg>
     <p class="kicker" data-ui><b>07</b> Басты тұзақ</p>
     <h2 class="h2">Бір <span class="thin">önce</span> бәрін өзгертеді</h2>
-    <p class="p">Сен <span class="nw" lang="tr">-madan önce</span> дегенді білесің — «...мас бұрын», қазақшадағы «кетпес бұрын» сияқты. önce-сіз — «істемей». önce-ні қосып, өшір. Уақыт таспасына қара.</p>
+    <p class="p">Сен <span class="nw" lang="tr">-madan önce</span> дегенді білесің. Қазақша да дәл солай: кет<b class="ma">пе</b>с бұрын — болымсыздық бар, бірақ мағынасы «бұрын». <span class="nw" lang="tr">gitmeden önce</span> — сол логика. önce-сіз — «кетпей». önce-ні қосып, өшір. Уақыт таспасына қара.</p>
     <p class="p">Бұл оқиғадағы сол қате. Соның кесірінен бүкіл елде менемендер суып жатыр.</p>
     <div class="tl card" data-tl>
       <div class="row" style="justify-content:space-between">
@@ -648,10 +700,10 @@ button { font: inherit; color: inherit; }
     <p class="p">Бірінші «иә» — жауап. Жағдайды таңда — нүкте жолды жүгіріп өтеді. Дауысты туралы сұрақ — соңғы. Алдымен әрекет мүлде болды ма, соны шеш.</p>
     <div class="tree card" data-tree>
       <div class="row" style="margin-bottom:10px" role="group" aria-label="Жағдай" data-t-btns>
-        <button type="button" class="chip" aria-pressed="false" data-tw="yap" data-tonce="0" data-tru="таңғы ас ішпей" data-tobj="kahvaltı " lang="tr">kahvaltı yap · ✗</button>
-        <button type="button" class="chip" aria-pressed="false" data-tw="git" data-tonce="1" data-tru="кетпес бұрын" data-tobj="" lang="tr">git · бұрын</button>
-        <button type="button" class="chip" aria-pressed="false" data-tw="düşün" data-tonce="0" data-tru="ойланбай" data-tobj="" lang="tr">düşün · ✗</button>
-        <button type="button" class="chip" aria-pressed="false" data-tw="uyu" data-tonce="1" data-tru="ұйықтар алдында" data-tobj="" lang="tr">uyu · бұрын</button>
+        <button type="button" class="chip" aria-pressed="false" data-tw="yap" data-tonce="0" data-tru="таңғы ас ішпей" data-tobj="kahvaltı " lang="tr">kahvaltı yap → ішпей</button>
+        <button type="button" class="chip" aria-pressed="false" data-tw="git" data-tonce="1" data-tru="кетпес бұрын" data-tobj="" lang="tr">git → кетпес бұрын</button>
+        <button type="button" class="chip" aria-pressed="false" data-tw="düşün" data-tonce="0" data-tru="ойланбай" data-tobj="" lang="tr">düşün → ойланбай</button>
+        <button type="button" class="chip" aria-pressed="false" data-tw="uyu" data-tonce="1" data-tru="ұйықтамас бұрын" data-tobj="" lang="tr">uyu → ұйықтамас бұрын</button>
       </div>
       <svg class="map" viewBox="0 0 360 330" role="img" aria-label="Сызба: әрекет болды ма? бұрын ба, онсыз ба? соңғы дауысты">
         <path class="t-path" id="mp-a" d="M180 46 C150 70 110 80 90 108"/>
@@ -828,13 +880,13 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <p class="kicker" data-ui><b>13</b> Тұзақтар</p>
     <h2 class="h2">Мұнда <span class="thin">бәрі сүрінеді</span></h2>
-    <p class="p">Бұл қалыпты. Жасылды бас — қате түзеледі. Мұнда қателесуге болады. Менемен зардап шекпейді.</p>
+    <p class="p">Бұл қалыпты. Қазақша жақсы көмектеседі, бірақ кейде аяқтан шалады. Жасылды бас — қате түзеледі. Менемен зардап шекпейді.</p>
     <div class="traps" data-traps>
-      <div class="trap card"><span class="trap__bad" lang="tr">yapmadan önce çıkıyorum</span><button type="button" class="trap__good" lang="tr" data-fix data-say="Yapmadan çıkıyorum.">→ yapmadan çıkıyorum</button><p>önce-мен — «...мас бұрын». «Істемей» дегің келсе — önce-ні алып таста.</p></div>
-      <div class="trap card"><span class="trap__bad" lang="tr">yapmamadan</span><button type="button" class="trap__good" lang="tr" data-fix data-say="yapmadan">→ yapmadan</button><p>Болымсыздық ішінде тұр. Екінші ma сөйлемді ботқаға айналдырады.</p></div>
+      <div class="trap card"><span class="trap__bad" lang="tr">yapmadan önce çıkıyorum</span><button type="button" class="trap__good" lang="tr" data-fix data-say="Yapmadan çıkıyorum.">→ yapmadan çıkıyorum</button><p>önce-мен — «...мас бұрын», кетпес бұрын сияқты. «Істемей» дегің келсе — önce-ні алып таста.</p></div>
+      <div class="trap card"><span class="trap__bad" lang="tr">içpeden</span><button type="button" class="trap__good" lang="tr" data-fix data-say="içmeden">→ içmeden</button><p>Қазақша ішпей, күтпей — п. Түрікше болымсыздық әрқашан m: içmeden, beklemeden.</p></div>
+      <div class="trap card"><span class="trap__bad" lang="tr">düşünbeden</span><button type="button" class="trap__good" lang="tr" data-fix data-say="düşünmeden">→ düşünmeden</button><p>Қазақша ойланбай, жазбай — б. Түрікше бәрібір m: düşünmeden, yazmadan.</p></div>
       <div class="trap card"><span class="trap__bad" lang="tr">gidmeden</span><button type="button" class="trap__good" lang="tr" data-fix data-say="gitmeden">→ gitmeden</button><p>t тек дауыстының алдында жұмсарады: gidiyor. m алдында ол t болып қалады.</p></div>
-      <div class="trap card"><span class="trap__bad" lang="tr">yapmadanım çıkıyorum</span><button type="button" class="trap__good" lang="tr" data-fix data-say="Yapmadan çıkıyorum.">→ yapmadan çıkıyorum</button><p>Жақ тек негізгі етістікке қойылады. -madan құйрығы жалғаусыз.</p></div>
-      <div class="trap card"><span class="trap__bad" lang="tr">yemedan</span><button type="button" class="trap__good" lang="tr" data-fix data-say="yemeden">→ yemeden</button><p>ye-де дауысты e. Демек, meden.</p></div>
+      <div class="trap card"><span class="trap__bad" lang="tr">yapmamadan</span><button type="button" class="trap__good" lang="tr" data-fix data-say="yapmadan">→ yapmadan</button><p>Болымсыздық ішінде тұр. Екінші ma сөйлемді ботқаға айналдырады.</p></div>
     </div>
   </div>
 </section>
@@ -844,7 +896,7 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <p class="kicker" data-ui><b>14</b> Бейне</p>
     <h2 class="h2"><span class="thin">Мұғалімді</span> тыңда</h2>
-    <p class="p">Назар аудар: болымсыздық құйрықтың ішінде тұр.</p>
+    <p class="p">Бейне орысша. Назар аудар: болымсыздық құйрықтың ішінде, ал m ешқашан п-ға не б-ға ауыспайды.</p>
     <a-video yt="lusiVczYNm8" start="85" end="146" title="А2 деңгейі. ıp, ip, up, üp / madan, meden қосымшалары" channel="Мәскеу ғылым академиясы"></a-video>
   </div>
 </section>
@@ -904,10 +956,10 @@ button { font: inherit; color: inherit; }
         <div class="box c-pink"><h3>e i ö ü</h3><span class="poster__big" lang="tr" data-say="gelmeden">gel·meden</span></div>
         <div class="box c-yellow"><h3>önce-сіз және önce-мен</h3><span lang="tr" style="font-weight:800" data-say="Yemeden çıkıyorum.">yemeden çıkıyorum</span><span>тамақ ішпей</span><span lang="tr" style="font-weight:800" data-say="Yemeden önce su içiyorum.">yemeden önce su içiyorum</span><span>тамақтан бұрын</span></div>
         <div class="box c-lime"><ol>
-          <li>Түбір + ma/me + dan/den.</li>
-          <li>Екінші «-ма» керек емес.</li>
-          <li>Жақ — тек негізгі етістікте.</li>
-          <li><span lang="tr">git → gitmeden</span>, жұмсармайды.</li>
+          <li>Түбір + ma/me + dan/den = -май, -мастан.</li>
+          <li>m әрқашан m: <span lang="tr">içmeden</span>, <span lang="tr">içpeden</span> емес.</li>
+          <li>-мас бұрын = <span lang="tr">-madan önce</span>.</li>
+          <li>Екінші «-ма» жоқ. <span lang="tr">git → gitmeden</span>.</li>
         </ol></div>
       </div>
       <div class="row" style="margin-top:14px;position:relative;z-index:1"><button type="button" class="btn btn--dark btn--sm" data-poster-play data-ui>▶ Мысалдарды тыңдау</button></div>
@@ -1195,6 +1247,65 @@ addEventListener('DOMContentLoaded', () => {
   } else vowBtns.forEach(sendVowel);
   $$('.duo__ex button').forEach((b) => b.addEventListener('click', () => { speak(b.dataset.say); pop(b); }));
 
+  /* ================= ҚАЗАҚША ↔ ТҮРІКШЕ ================= */
+  const KZ = [
+    { kk: 'іш', neg: 'пе', may: 'пей', abl: 'тен', c: 'п', tr: 'iç' },
+    { kk: 'ойлан', neg: 'ба', may: 'бай', abl: 'тан', c: 'б', tr: 'düşün' },
+    { kk: 'күт', neg: 'пе', may: 'пей', abl: 'тен', c: 'п', tr: 'bekle' },
+    { kk: 'жаз', neg: 'ба', may: 'бай', abl: 'тан', c: 'б', tr: 'yaz' },
+    { kk: 'сұра', neg: 'ма', may: 'май', abl: 'тан', c: 'м', tr: 'sor' },
+    { kk: 'тоқта', neg: 'ма', may: 'май', abl: 'тан', c: 'м', tr: 'dur' },
+  ];
+  const K = { i: 0, may: true, shown: false };
+  const kzKk = $('[data-kz-kk]'), kzTr = $('[data-kz-tr]'), kzWhy = $('[data-kz-why]'), kzMode = $('[data-kz-mode]');
+  const kzNotes = $$('[data-kz-notes] li');
+  const kzNote = (n) => kzNotes.forEach((li, i) => li.classList.toggle('is-on', i === n));
+  function kzRender(anim) {
+    const d = KZ[K.i], diff = d.c !== 'м';
+    K.shown = false;
+    kzKk.innerHTML = `<span class="brick" data-kb="0">${d.kk}</span>` + (K.may
+      ? `<span class="brick brick--ma${diff ? ' is-c' : ''}" data-kb="1">${d.may}</span>`
+      : `<span class="brick brick--ma${diff ? ' is-c' : ''}" data-kb="1">${d.neg}</span><span class="brick brick--s" data-kb="2">с</span><span class="brick brick--dan" data-kb="3">${d.abl}</span>`);
+    kzTr.innerHTML = '<span class="brick" data-tb="0">?</span>';
+    kzTr.dataset.say = '';
+    kzWhy.textContent = `${d.kk}${K.may ? d.may : d.neg + 'с' + d.abl} — түрікше қалай болады? «Түрікшеге» бас.`;
+    kzNote(K.may ? (diff ? 0 : 2) : 1);
+    if (A && anim) G.fromTo($$('.brick', kzKk), { y: -60, rotation: (i) => (i % 2 ? 12 : -12) }, { y: 0, rotation: 0, duration: .7, ease: 'bounce.out', stagger: .08 });
+  }
+  function kzGo() {
+    const d = KZ[K.i], diff = d.c !== 'м', [a, b] = parts(d.tr), word = d.tr + a + b;
+    K.shown = true;
+    kzTr.innerHTML = `<span class="brick" data-tb="0">${d.tr}</span><span class="brick brick--ma" data-tb="1">${a}</span><span class="brick brick--dan" data-tb="2">${b}</span>`;
+    kzTr.dataset.say = word;
+    const kkWord = d.kk + (K.may ? d.may : d.neg + 'с' + d.abl);
+    const head = K.may ? `«${kkWord}» — қазақша бір кірпіш, түрікше екеу: ${a} + ${b}.` : `«${kkWord}»: түрікше с жоқ, шығыс септік — ${b}.`;
+    const tail = diff ? ` Қазақша ${d.c}, түрікше тек m.` : ' м — m: мұнда сәйкес.';
+    kzWhy.textContent = `${head}${tail} → ${word}.`;
+    kzNote(diff ? 0 : (K.may ? 2 : 1));
+    speak(word);
+    if (!A) { $$('.brick--s', kzKk).forEach((x) => x.classList.add('is-gone')); return; }
+    const tl = G.timeline();
+    const sTile = $('.brick--s', kzKk), cTile = $('.brick.is-c', kzKk);
+    if (cTile) tl.fromTo(cTile, { rotation: 0 }, { rotation: 8, duration: .1, repeat: 3, yoyo: true, ease: 'power1.inOut' });
+    if (sTile) tl.add(() => sTile.classList.add('is-gone')).fromTo(sTile, { scale: 1 }, { scale: .88, rotation: -10, duration: .4, ease: 'back.out(2)' });
+    tl.fromTo($$('.brick', kzTr), { y: -90, rotation: (i) => (i - 1) * 14, scale: .6 }, { y: 0, rotation: 0, scale: 1, duration: .8, ease: 'back.out(2.2)', stagger: .12 })
+      .add(() => spark($('.brick--dan', kzTr), 14));
+  }
+  KZ.forEach((d, i) => $('[data-kz-verbs]').append(mkChipKz(d.kk, i === 0, (e) => {
+    K.i = i; $$('[data-kz-verbs] .chip').forEach((c) => c.setAttribute('aria-pressed', String(c === e.currentTarget))); kzRender(true);
+  })));
+  function mkChipKz(txt, on, fn) { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.lang = 'kk'; b.textContent = txt; b.setAttribute('aria-pressed', String(on)); b.addEventListener('click', fn); return b; }
+  kzMode.addEventListener('click', () => { K.may = !K.may; kzMode.setAttribute('aria-checked', String(K.may)); kzRender(true); });
+  $('[data-kz-go]').addEventListener('click', (e) => { kzGo(); pop(e.currentTarget); });
+  kzTr.addEventListener('click', () => { if (K.shown) speak(kzTr.dataset.say); else kzGo(); });
+  kzNotes.forEach((li) => li.addEventListener('click', () => { kzNote(+li.dataset.n); if (A) G.fromTo(li, { x: -10 }, { x: 0, duration: .5, ease: 'elastic.out(1, .4)' }); }));
+  kzRender(false);
+  if (A) {
+    ScrollTrigger.create({ trigger: '[data-kz]', start: 'top 70%', once: true, onEnter: () => { kzRender(true); setTimeout(kzGo, 900); } });
+    G.fromTo('[data-kz]', { rotationX: 12, transformPerspective: 1000, y: 40 }, { rotationX: 0, y: 0, ease: 'none', scrollTrigger: { trigger: '[data-kz]', start: 'top bottom', end: 'top 45%', scrub: true } });
+    G.from('[data-kz-notes] li', { x: -40, duration: .6, ease: 'back.out(2)', stagger: .12, scrollTrigger: { trigger: '[data-kz-notes]', start: 'top 80%', once: true } });
+  } else kzGo();
+
   /* ================= PERSONS ================= */
   const PV = ['çıkıyorum', 'çıkıyorsun', 'çıkıyor', 'çıkıyoruz', 'çıkıyorsunuz', 'çıkıyorlar'];
   const PR = ['кетемін', 'кетесің', 'кетеді', 'кетеміз', 'кетесіз', 'кетеді'];
@@ -1217,7 +1328,7 @@ addEventListener('DOMContentLoaded', () => {
     e.currentTarget.setAttribute('aria-checked', String(tr));
     const lock = $('.lock', sent), before = [lock.getBoundingClientRect(), pVerb.getBoundingClientRect()];
     if (tr) sent.prepend(lock); else sent.prepend(pVerb);
-    $('[data-order-note]').textContent = tr ? 'алдымен «істемей», сосын негізгісі' : 'орысша олай да болады. Түрікше — жоқ';
+    $('[data-order-note]').textContent = tr ? 'алдымен «істемей», сосын негізгісі — қазақшадағыдай' : 'орысша солай да айтады. Түрікше де, қазақша да — жоқ';
     if (!A) return;
     [lock, pVerb].forEach((el, i) => { const a = el.getBoundingClientRect(); G.fromTo(el, { x: before[i].left - a.left, y: before[i].top - a.top }, { x: 0, y: 0, duration: .8, ease: 'back.out(1.6)' }); });
   });
@@ -1377,7 +1488,7 @@ addEventListener('DOMContentLoaded', () => {
   renderBuild(false);
 
   /* с önce или без */
-  const PAIRS = [['kahvaltı ', 'yap', 'çıkıyorum', 'Таңғы ас ішпей кетемін.', 'Таңғы астан бұрын кетемін.'], ['', 'ye', 'çıkıyorum', 'Тамақ ішпей кетемін.', 'Тамақтан бұрын кетемін.'], ['', 'uyu', 'kitap okuyorum', 'Ұйықтамай кітап оқимын.', 'Ұйықтар алдында кітап оқимын.'], ['', 'düşün', 'konuşuyorsun', 'Сен ойланбай сөйлейсің.', 'Сен ойланбас бұрын сөйлейсің. Бұл да шындық.']];
+  const PAIRS = [['kahvaltı ', 'yap', 'çıkıyorum', 'Таңғы ас ішпей кетемін.', 'Таңғы астан бұрын кетемін.'], ['', 'ye', 'çıkıyorum', 'Тамақ ішпей кетемін.', 'Тамақтан бұрын кетемін.'], ['', 'uyu', 'kitap okuyorum', 'Ұйықтамай кітап оқимын.', 'Ұйықтамас бұрын кітап оқимын.'], ['', 'düşün', 'konuşuyorsun', 'Сен ойланбай сөйлейсің.', 'Сен ойланбас бұрын сөйлейсің. Бұл да шындық.']];
   const O = { i: 0, once: false };
   const oOut = $('[data-o-out]'), oRu = $('[data-o-ru]'), oTgl = $('[data-o-tgl]');
   function renderOnceLab(anim) {

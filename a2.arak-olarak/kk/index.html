@@ -217,6 +217,26 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
 .kp-mean small { color: var(--muted); font-size: 13px; }
 .kp-mean svg { width: 34px; height: 34px; color: var(--orange); }
 
+/* дубляж: қазақша ↔ түрікше */
+.kp-same { list-style: none; display: grid; gap: 8px; margin: 12px 0 16px; padding: 0; }
+@media (min-width: 760px) { .kp-same { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.kp-same li { display: grid; gap: 4px; padding: 12px 14px; border-radius: 16px; background: var(--panel-2); box-shadow: inset 0 0 0 1px var(--line); }
+.kp-same li b { font: 800 12px/1.2 var(--display); letter-spacing: .04em; text-transform: uppercase; color: var(--green); }
+.kp-same li b::before { content: '✓ '; }
+.kp-same li > span { color: var(--muted); font-size: 15px; }
+.kp-dub { display: grid; gap: 6px; }
+.kp-dub__row { display: grid; grid-template-columns: 40px 1fr; gap: 6px; align-items: center; }
+.kp-dub__line { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-height: 52px; padding: 6px 10px; border-radius: 10px; background: #18181b; font-size: clamp(18px, 4.8vw, 26px); }
+.kp-dub__line .t + .t--main, .kp-dub__line .t--main + .t { margin-left: 4px; }
+.kp-dub__mid { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding-left: 46px; min-height: 40px; }
+.kp-dub__mid svg { width: 28px; height: 28px; color: var(--orange); flex: none; }
+.kp-dub__rule { padding: 6px 12px; border-radius: 999px; background: var(--orange); color: #fff; font: 800 13px/1.2 var(--display); }
+.kp-dub__test { font-size: 14px; color: var(--muted); }
+.kp-dub__test:empty { display: none; }
+.kp-nw { white-space: nowrap; }
+.kp-dub__test.is-yes { color: var(--violet); }
+.kp-dub__test.is-no { color: var(--sun); }
+
 /* один актёр */
 .kp-actor { display: grid; gap: 14px; align-items: center; margin: 16px 0 0; padding: 18px; border-radius: 22px; background: #0c0c0d; box-shadow: inset 0 0 0 1px var(--line); }
 @media (min-width: 760px) { .kp-actor { grid-template-columns: 160px 1fr; } }
@@ -577,7 +597,8 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
         <button type="button" class="kp-chip" lang="tr" data-fv="dinle">dinle-</button>
       </div>
     </div>
-    <p style="margin-top:14px">Екі ерекше актер: <span lang="tr">ye</span> және <span lang="tr">de</span> y алдында e-ні i-ге ауыстырады: <span lang="tr">yiyerek, diyerek</span>. Ал <span lang="tr">git</span>-тің t-сы ұяңдайды: <span lang="tr">giderek</span>.</p>
+    <p style="margin-top:14px">Қазақшаға ұқсас: <span lang="tr">-arak/-erek</span> — екі нұсқа, біздің <b>-а/-е</b> сияқты. Дауыстыдан кейін екеуінде де й/y шығады: сөйле<b>й</b> — <span lang="tr">söyle<b>y</b>erek</span>. Айырмасы: қазақта й құйрықтың орнына тұрады, түрікте y — дәнекер, құйрық толық қалады.</p>
+    <p>Екі ерекше актер: <span lang="tr">ye</span> және <span lang="tr">de</span> y алдында e-ні i-ге ауыстырады: <span lang="tr">yiyerek, diyerek</span>. Ал <span lang="tr">git</span>-тің t-сы ұяңдайды: <span lang="tr">giderek</span>. Біздің жап → жаба сияқты, тек мұнда t → d. Айтпақшы, <span lang="tr">giderek</span> көбіне «бірте-бірте» дегенді білдіреді: <span lang="tr">giderek artıyor</span> — бірте-бірте өсіп келеді.</p>
     <ul class="kp-legend" data-ui><li><i style="background:var(--c-stem)"></i>негіз</li><li><i style="background:var(--c-y)"></i>y дәнекері</li><li><i style="background:var(--c-ar)"></i>-arak / -erek</li><li><i style="background:var(--c-ol)"></i>olarak</li></ul>
     <div class="kp-mq" data-mq>
       <p class="kp-mq__q" data-ui><svg class="ic" aria-hidden="true"><use href="#i-q"/></svg>beklemek (күту) → «күтіп»</p>
@@ -597,7 +618,7 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
     <p class="kp-tag" data-ui><b>2-көрініс</b><span>«қалай?» мағынасы</span></p>
     <h2 class="kp-h2"><span class="kp-h2__t">Басты сұрақ: <em>қалай?</em></span></h2>
     <p><span lang="tr">-arak</span> «қалай?» сұрағына жауап береді. Қалай келді? <span lang="tr">Koşarak</span> — жүгіріп. Қалай жауап берді? <span lang="tr">Gülerek</span> — күліп.</p>
-    <p>Қазақша да дәл осылай: жүгіріп келді, күліп жауап берді. Бірақ қазақтың -ып көсемшесі екі жұмысты атқарады: «тұрып шықты» да, «жүгіріп келді» де. Түрікте олар бөлек: -ıp және -arak.</p>
+    <p>Қазақша да дәл осылай: жүгіріп келді, күле жауап берді. Бір айырмасы бар — оны «Дубляж» көрінісінде көресің.</p>
     <p>Тәсілді ауыстырып, кадрдың қалай өзгеретінін қара.</p>
     <div class="kp-board">
       <div class="kp-frame" data-frame>
@@ -713,13 +734,52 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
   </div>
 </section>
 
+<!-- ============ ДУБЛЯЖ: қазақша ↔ түрікше ============ -->
+<section class="kp-s" data-section="compare" data-words="92">
+  <div class="kp-in">
+    <p class="kp-tag" data-ui><b>Дубляж</b><span>қазақша ↔ түрікше</span></p>
+    <h2 class="kp-h2"><span class="kp-h2__t">Қазақша <em>дубляж</em></span></h2>
+    <p>Жақсы жаңалық: көп нәрсе таныс. Үшеуі бізде де дәл солай:</p>
+    <ul class="kp-same" data-ui>
+      <li><b>Жақ жоқ</b><span>күліп сөйледім · <span lang="tr">gülerek konuştum</span></span></li>
+      <li><b>Екі нұсқа</b><span>-а / -е · <span lang="tr">-arak / -erek</span></span></li>
+      <li><b>Болымсыздық ішінде</b><span>тыңда-ма-й · <span lang="tr">dinle-me-y-erek</span></span></li>
+    </ul>
+    <p>Айырмасы біреу, бірақ ірі. Қазақта «қалай?» сұрағына екі көсемше жауап береді: <b>-ып</b> (күліп) және <b>-а/-е/-й</b> (күле). Түрікте <span lang="tr">-ıp</span> тек «істеді де, сосын» дегенді білдіреді. Қалай? Қатар? Немен? — бәрі <span class="kp-nw"><span lang="tr">-arak</span>-қа</span> кетеді.</p>
+    <p>Тексеру оңай: қазақ сөйлеміне «сосын» сыя ма? Сыйса — <span lang="tr">-ıp</span>. Сыймаса — <span lang="tr">-arak</span>. Сөйлемді таңда — қазақ жолы түрікшеге дубляждалады.</p>
+    <div class="kp-tl kp-dub" data-dub>
+      <div class="kp-dub__row"><span class="kp-lane__lbl" data-ui>KZ</span><div class="kp-dub__line" data-dub-kk></div></div>
+      <div class="kp-dub__mid" data-ui><svg viewBox="0 0 40 40" aria-hidden="true" data-dub-arrow><path d="M20 4v28M10 22l10 10 10-10" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="kp-dub__rule" data-dub-rule></span><span class="kp-dub__test" data-dub-test></span></div>
+      <div class="kp-dub__row"><span class="kp-lane__lbl" data-ui>TR</span><div class="kp-dub__line" lang="tr" data-dub-tr></div></div>
+      <p class="kp-tl__ru" data-ui data-dub-note aria-live="polite"></p>
+      <div class="kp-row" data-ui>
+        <button type="button" class="kp-chip is-on" data-dubi="0">сөйлей жүр</button>
+        <button type="button" class="kp-chip" data-dubi="1">күле жауап берді</button>
+        <button type="button" class="kp-chip" data-dubi="2">жүгіріп келді</button>
+        <button type="button" class="kp-chip" data-dubi="3">тыңдап ұйықтадым</button>
+        <button type="button" class="kp-chip" data-dubi="4">тұрып шықты</button>
+        <button type="button" class="kp-chip" data-dubi="5">тыңдамай</button>
+        <button type="button" class="kp-chip" data-dubi="6">мұғалім болып</button>
+      </div>
+    </div>
+    <div class="kp-mq" data-mq>
+      <p class="kp-mq__q" data-ui><svg class="ic" aria-hidden="true"><use href="#i-q"/></svg>«Кітап оқып ұйықтап кеттім» — кітап қолда, көз жұмылып барады</p>
+      <div class="kp-row">
+        <button type="button" class="kp-chip" lang="tr" data-ok data-why="Иә: қатар — оқып жатып ұйықтадың. «Сосын» сыймайды, демек -arak.">Kitap okuyarak uyudum.</button>
+        <button type="button" class="kp-chip" lang="tr" data-why="Бұл «оқыдым да, сосын ұйықтадым». Қазақтың -ып-ын көшірдің, ал мағынасы — қатар.">Kitap okuyup uyudum.</button>
+      </div>
+      <p class="kp-mq__fb" data-fb data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ ОДИН АКТЁР ============ -->
 <section class="kp-s" data-section="actor" data-words="37">
   <div class="kp-in">
     <p class="kp-tag" data-ui><b>6-көрініс</b><span>кім ойнайды</span></p>
     <h2 class="kp-h2"><span class="kp-h2__t">Жақ <em>сөйлем соңында</em></span></h2>
-    <p><span lang="tr">-arak</span> жақ жалғауын алмайды. Кім істейтінін соңғы басты етістік айтады. Екі әрекетті де бір адам істейді.</p>
-    <p><span lang="tr">Gülerek konuştum</span> — мен күліп сөйледім. <span lang="tr">Gülerek konuştular</span> — олар. <span lang="tr">-erek</span> құйрығы қозғалмады. Ыңғайлы: форманы бір рет үйрендің — бәріне жарайды.</p>
+    <p>Мұнда қазақ үшін жаңалық жоқ: біздің көсемше де жақ жалғауын алмайды. «Күліп сөйледім», «күліп сөйледі» — «күліп» қозғалмайды.</p>
+    <p>Түрікше де солай: <span lang="tr">gülerek konuştum</span>, <span lang="tr">gülerek konuştular</span>. Кім істейтінін соңғы етістік айтады, екі әрекетті де бір адам істейді. Батырмаларды бас та, тексер.</p>
     <div class="kp-actor" data-actor>
       <svg viewBox="0 0 150 180" aria-hidden="true"><circle cx="75" cy="50" r="30" fill="#f2c9a8"/><path d="M45 40c4-30 56-30 60 0-10-8-20-10-30-10s-20 2-30 10z" fill="#c2410c"/><circle cx="64" cy="50" r="3" fill="#111"/><circle cx="86" cy="50" r="3" fill="#111"/><path data-actor-mouth d="M62 62q13 10 26 0" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M30 180c4-50 20-80 45-80s41 30 45 80z" fill="#e8321e"/><g data-actor-badge><rect x="44" y="120" width="62" height="26" rx="8" fill="#ffc23e"/><text x="75" y="138" text-anchor="middle" font-family="Unbounded, Alterna Sans, sans-serif" font-size="12" font-weight="800" fill="#1a1205" data-actor-p>ben</text></g></svg>
       <div>
@@ -745,7 +805,7 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
     <h2 class="kp-h2"><span class="kp-h2__t">Істемей: <em>-mayarak</em></span></h2>
     <p>«Істемей» керек пе? Құйрықтың алдына <span lang="tr">-ma</span> немесе <span lang="tr">-me</span> қой. Арасына y тұрады: <span lang="tr">-mayarak, -meyerek</span>.</p>
     <p><span lang="tr">Annesini dinlemeyerek hata yaptı</span> — анасын тыңдамай, қателесті. Қызыл тақта — сол «-ма».</p>
-    <p>Рет әдеттегідей, солдан оңға: негіз, болымсыздық, y, құйрық.</p>
+    <p>Қазақша бір ғана -май: тыңда<b>май</b>. Түрікше ұзынырақ: негіз, болымсыздық, y, құйрық. Қазақшадан көшіріп <s lang="tr">dinlemey</s> деме — ондай форма жоқ.</p>
     <div class="kp-clap" data-negbox>
       <div class="kp-word" lang="tr" data-neg-word></div>
       <p class="kp-tl__ru" data-ui data-neg-ru style="text-align:center"></p>
@@ -766,7 +826,8 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
     <h2 class="kp-h2"><span class="kp-h2__t"><em>olarak</em>: ретінде</span></h2>
     <p><span lang="tr">olarak</span> — зат есімнен кейінгі бөлек сөз. Қазақшадағы «ретінде», «болып». <span lang="tr">Öğretmen olarak çalışıyorum</span> — мұғалім болып жұмыс істеймін.</p>
     <p>Дайын тіркестер де бар: <span lang="tr">ilk olarak</span> — алдымен, <span lang="tr">genel olarak</span> — жалпы алғанда. Осы сабақтың титрлерін қара.</p>
-    <p>Ең бастысы: <span lang="tr">olarak</span> сөзге жабыспайды. Титрдегі есім астындағы рөл сияқты бөлек жазылады.</p>
+    <p>Қазақ үшін кілт: <span lang="tr">ol-</span> — «болу». <span lang="tr">olarak</span> = <span lang="tr">ol + arak</span>, сөзбе-сөз «болып». Бірақ <s lang="tr">olup</s> емес: ол «болды да, сосын». Және <span lang="tr">gibi</span> емес: <span lang="tr">öğretmen gibi</span> — мұғалім сияқты, ал сен мұғалім емессің.</p>
+    <p><span lang="tr">olarak</span> сөзге жабыспайды. Титрдегі есім астындағы рөл сияқты бөлек жазылады.</p>
     <div class="kp-credits" data-credits data-ui>
       <div class="kp-credits__roll" data-roll>
         <h3>РӨЛДЕРДЕ</h3>
@@ -826,7 +887,7 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
     </div>
     <div class="kp-treebar" data-ui>
       <button type="button" class="kp-chip" data-tw="ol" data-res="rehber olarak">гид ретінде</button>
-      <button type="button" class="kp-chip" data-tw="ip" data-res="gidip aldım">барып сатып алды</button>
+      <button type="button" class="kp-chip" data-tw="ip" data-res="gidip aldım">барып алдым</button>
       <button type="button" class="kp-chip" data-tw="neg" data-res="bakmayarak">қарамай</button>
       <button type="button" class="kp-chip" data-tw="ar" data-res="koşarak">жүгіріп</button>
     </div>
@@ -955,13 +1016,13 @@ p { margin: 0 0 12px; max-width: 64ch; color: #dedad4; }
   <div class="kp-in">
     <p class="kp-tag" data-ui><b>Сәтсіз дубльдер</b><span>жиі қателер</span></p>
     <h2 class="kp-h2"><span class="kp-h2__t">Сәтсіз <em>дубльдер</em></span></h2>
-    <p>Бұл дубльдерді әр жаңадан бастаушы түсіреді. Түк қорқынышты емес: монтажда бәрі қиылады. Аш — ішінде түзету.</p>
+    <p>Бұл дубльдерді көбіне қазақтар түсіреді: қазақшадан тура аударады. Түк қорқынышты емес: монтажда бәрі қиылады. Аш — ішінде түзету.</p>
     <div class="kp-faq">
-      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>Неге <s lang="tr">gülarak</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>gülerek</a-say></div><p><span lang="tr">ü</span> дауыстысы жіңішке. Жіңішкеге — <span lang="tr">-erek</span>.</p></div></div>
-      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>Неге <s lang="tr">okuarak</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>okuyarak</a-say></div><p>Негіз дауыстыға бітеді. <span lang="tr">y</span>-сіз екі дауысты сүрінеді.</p></div></div>
+      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>«Музыка тыңдап ұйықтадым» — неге <s lang="tr">Müzik dinleyip uyudum</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>Müzik dinleyerek uyudum.</a-say></div><p>Қазақтың -ып-ы түрікшеде екіге бөлінеді. «Сосын» сыймайды — музыка ұйықтап жатқанда ойнап тұр. Демек <span lang="tr">-erek</span>. <span lang="tr">dinleyip</span> — «тыңдадым да, сосын».</p></div></div>
+      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>«Тыңдамай» — неге <s lang="tr">dinlemey</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>dinlemeyerek</a-say></div><p>Қазақша -май бір өзі жетеді. Түрікте ондай форма жоқ: <span lang="tr">-me</span>, сосын y, сосын <span lang="tr">-erek</span>.</p></div></div>
+      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>«Мұғалім болып» — неге <s lang="tr">öğretmen olup</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>Öğretmen olarak çalışıyorum.</a-say></div><p>«Болып» = бол + ып, ал рөлге түрікше <span lang="tr">ol + arak</span>. <span lang="tr">Öğretmen olup</span> — «мұғалім болды да, сосын…».</p></div></div>
+      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>«Мұғалім ретінде» — неге <s lang="tr">öğretmen gibi</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>öğretmen olarak</a-say></div><p>Орысшаның «как»-ы екеуін де береді, сондықтан шатасады. Қазақша айырады: «ретінде» мен «сияқты». <span lang="tr">gibi</span> — сияқты: мұғалім емессің, тек ұқсайсың. Рөл — <span lang="tr">olarak</span>.</p></div></div>
       <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>Неге <s lang="tr">yeyerek</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>yiyerek</a-say></div><p>Ерекше актер: <span lang="tr">ye</span> y алдында e-ні i-ге ауыстырады. Сол сияқты <span lang="tr">diyerek</span>.</p></div></div>
-      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>Неге <s lang="tr">öğretmenarak</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>öğretmen olarak</a-say></div><p>Бұл етістік емес, зат есім. Рөл — бөлек <span lang="tr">olarak</span> сөзімен.</p></div></div>
-      <div class="kp-q" data-q><button type="button" class="kp-q__btn" aria-expanded="false"><span>Неге <s lang="tr">konuşarakım</s> емес?</span><span class="kp-q__pm" aria-hidden="true">+</span></button><div class="kp-q__body" hidden><div class="kp-q__fix"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><a-say>Konuşarak yürüyorum.</a-say></div><p><span lang="tr">-arak</span>-та жақ жоқ. «Мен» соңындағы басты етістікте тұрады.</p></div></div>
     </div>
   </div>
 </section>
@@ -1261,7 +1322,7 @@ addEventListener('DOMContentLoaded', () => {
     run: ['koş', 'Бала жүгіріп келді.'],
     cry: ['ağla', 'Бала жылап келді.'],
     sing: ['söyle', 'Бала ән салып келді.'],
-    bike: ['bin', 'Бала велосипедпен келді.'],
+    bike: ['bin', 'Бала велосипед мініп келді.'],
   };
   let kidLoop = null;
   function kid(k, anim) {
@@ -1296,7 +1357,7 @@ addEventListener('DOMContentLoaded', () => {
     ['ders çalışıyorum', 'müzik dinleyerek', 'Müzik dinleyerek ders çalışıyorum.', 'Музыка тыңдап сабақ оқимын.'],
     ['yürüdü', 'telefonla konuşarak', 'Telefonla konuşarak yürüdü.', 'Телефонмен сөйлесіп келе жатты.'],
     ['temizlik yapıyorlar', 'şarkı söyleyerek', 'Şarkı söyleyerek temizlik yapıyorlar.', 'Ән салып жинап жатыр.'],
-    ['sohbet ettik', 'kahve içerek', 'Kahve içerek sohbet ettik.', 'Кофе ішіп отырып әңгімелесті.'],
+    ['sohbet ettik', 'kahve içerek', 'Kahve içerek sohbet ettik.', 'Кофе ішіп отырып әңгімелестік.'],
   ];
   const tlBox = $('[data-tl="ov"]');
   let ovi = 0;
@@ -1338,8 +1399,8 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- СКЛЕЙКА / НАЛОЖЕНИЕ ---------- */
   const CUT = [
     { cut: ['kalkıp', 'çıktı'], ov: ['koşarak', 'çıktı'], ruC: 'Тұрып шықты — кезекпен.', ruO: 'Жүгіріп шықты.' },
-    { cut: ['eve gidip', 'uyudum'], ov: ['müzik dinleyerek', 'uyudum'], ruC: 'Үйге барып ұйықтады.', ruO: 'Музыка тыңдап ұйықтап кетті.' },
-    { cut: ['markete gidip', 'ekmek aldım'], ov: ['konuşarak', 'ekmek aldım'], ruC: 'Дүкенге барып нан сатып алды.', ruO: 'Сөйлесіп тұрып нан сатып алды.' },
+    { cut: ['eve gidip', 'uyudum'], ov: ['müzik dinleyerek', 'uyudum'], ruC: 'Үйге барып ұйықтадым.', ruO: 'Музыка тыңдап ұйықтап кеттім.' },
+    { cut: ['markete gidip', 'ekmek aldım'], ov: ['konuşarak', 'ekmek aldım'], ruC: 'Дүкенге барып нан сатып алдым.', ruO: 'Сөйлесіп тұрып нан сатып алдым.' },
   ];
   let ci = 0, cm = 'cut';
   const cBox = $('[data-tl="cut"]');
@@ -1371,13 +1432,57 @@ addEventListener('DOMContentLoaded', () => {
   renderCut(false);
   if (A) ScrollTrigger.create({ trigger: cBox, start: 'top 60%', once: true, onEnter: () => { cm = 'ov'; renderCut(true); setTimeout(() => { cm = 'cut'; renderCut(true); }, 1800); } });
 
+  /* ---------- ДУБЛЯЖ: қазақша ↔ түрікше ---------- */
+  const DUB = [
+    { kk: [['Сөйле', 'stem'], ['й', 'ar'], ['жүр!', 'main']], tr: [['Konuş', 'stem'], ['arak', 'ar'], ['yürü!', 'main']], say: 'Konuşarak yürü!', rule: '-а/-е/-й → -arak', test: false, note: 'Қатар: сөйлейсің де, жүресің де. -а/-е/-й көсемшесі түрікшеде әрқашан -arak.' },
+    { kk: [['Күл', 'stem'], ['е', 'ar'], ['жауап берді', 'main']], tr: [['Gül', 'stem'], ['erek', 'ar'], ['cevap verdi', 'main']], say: 'Gülerek cevap verdi.', rule: '-а/-е/-й → -arak', test: false, note: 'Қалай жауап берді? Күле. Жіңішке ү — жіңішке -erek, бізде де жіңішке -е.' },
+    { kk: [['Жүгір', 'stem'], ['іп', 'ar'], ['келді', 'main']], tr: [['Koş', 'stem'], ['arak', 'ar'], ['geldi', 'main']], say: 'Koşarak geldi.', rule: '-ып (қалай?) → -arak', test: false, note: 'Қазақша -ып, бірақ сұрақ — қалай келді? Демек -arak.' },
+    { kk: [['Музыка', 'main'], ['тыңда', 'stem'], ['п', 'ar'], ['ұйықтадым', 'main']], tr: [['Müzik', 'main'], ['dinle', 'stem'], ['y', 'y'], ['erek', 'ar'], ['uyudum', 'main']], say: 'Müzik dinleyerek uyudum.', rule: '-ып (қатар) → -arak', test: false, note: 'Сен ұйықтап бара жатқанда музыка ойнап тұр. dinleyip болса — «тыңдадым да, сосын ұйықтадым».' },
+    { kk: [['Тұр', 'stem'], ['ып', 'y'], ['шықты', 'main']], tr: [['Kalk', 'stem'], ['ıp', 'y'], ['çıktı', 'main']], say: 'Kalkıp çıktı.', rule: '-ып (сосын) → -ıp', test: true, note: 'Тұрды да, сосын шықты. Кезекпен — бұл өткен тақырыптағы -ıp.' },
+    { kk: [['Тыңда', 'stem'], ['ма', 'neg'], ['й', 'ar']], tr: [['Dinle', 'stem'], ['me', 'neg'], ['y', 'y'], ['erek', 'ar']], say: 'dinlemeyerek', rule: '-май → -mayarak', test: null, note: 'Қазақша бір -май. Түрікше төрт кірпіш: dinle + me + y + erek. Жалаң «dinlemey» деген форма жоқ.' },
+    { kk: [['мұғалім', 'main'], ['бол', 'stem'], ['ып', 'ar']], tr: [['öğretmen', 'main'], ['ol', 'ol'], ['arak', 'ar']], say: 'öğretmen olarak', rule: 'болып → olarak', test: null, note: 'ol- — «болу», olarak — сөзбе-сөз «болып». Бірақ olup емес: ол «болды да, сосын».' },
+  ];
+  const dubBox = $('[data-dub]');
+  const dubKk = $('[data-dub-kk]'), dubTr = $('[data-dub-tr]'), dubRule = $('[data-dub-rule]'), dubTest = $('[data-dub-test]'), dubNote = $('[data-dub-note]');
+  function renderDub(i, anim) {
+    const d = DUB[i];
+    $$('[data-dubi]').forEach((b) => b.classList.toggle('is-on', +b.dataset.dubi === i));
+    const ks = tiles(dubKk, d.kk), ts = tiles(dubTr, d.tr);
+    dubRule.textContent = d.rule;
+    dubTest.textContent = d.test === null ? '' : d.test ? '«сосын» сыяды → -ıp' : '«сосын» сыймайды → -arak';
+    dubTest.className = 'kp-dub__test' + (d.test === null ? '' : d.test ? ' is-yes' : ' is-no');
+    dubNote.replaceChildren(...d.note.split(/(-[^\s,.:;—]+)/).filter(Boolean).map((x) => (x[0] === '-' ? Object.assign(document.createElement('span'), { className: 'kp-nw', textContent: x }) : document.createTextNode(x))));
+    if (anim) say(d.say);
+    if (!A || !anim) return;
+    const has = (c) => (t) => t.classList.contains('t--' + c);
+    const ksuf = ks.find(has('ar')) || ks.find(has('ol')) || ks.find(has('y')) || ks.find(has('stem'));
+    const ghosts = ks.filter(has('ghost'));
+    if (ghosts.length) G.fromTo(ghosts, { opacity: 1 }, { opacity: .3, duration: .5, delay: .6, ease: 'power2.out' });
+    const tsuf = ts.filter((t) => !t.classList.contains('t--stem') && !t.classList.contains('t--main'));
+    G.from(ks, { y: -24, opacity: 0, duration: .4, stagger: .06, ease: 'back.out(2)' });
+    if (ksuf) G.fromTo(ksuf, { scale: 1 }, { scale: 1.25, yoyo: true, repeat: 1, duration: .2, delay: .4 });
+    G.fromTo('[data-dub-arrow]', { y: -10, opacity: .2 }, { y: 0, opacity: 1, duration: .5, delay: .5, ease: 'bounce.out' });
+    G.fromTo(dubRule, { scale: .4, rotation: -8 }, { scale: 1, rotation: 0, duration: .5, delay: .6, ease: 'back.out(3)' });
+    const ref = ksuf ? ksuf.getBoundingClientRect() : null;
+    G.from(ts.filter((t) => !tsuf.includes(t)), { opacity: 0, y: 16, duration: .4, delay: .8, stagger: .05, ease: 'power2.out' });
+    tsuf.forEach((t, k) => {
+      const r = t.getBoundingClientRect();
+      const dx = ref ? ref.left - r.left : 0, dy = ref ? ref.top - r.top : -60;
+      G.fromTo(t, { x: dx, y: dy, scale: .6, opacity: 0 }, { x: 0, y: 0, scale: 1, opacity: 1, duration: .8, delay: .8 + k * .1, ease: 'power3.inOut' });
+    });
+    if (tsuf[0]) G.delayedCall(1.7, () => sparks(tsuf[tsuf.length - 1], 10));
+  }
+  $$('[data-dubi]').forEach((b) => b.addEventListener('click', () => renderDub(+b.dataset.dubi, true)));
+  renderDub(0, false);
+  if (A) ScrollTrigger.create({ trigger: dubBox, start: 'top 70%', once: true, onEnter: () => renderDub(0, true) });
+
   /* ---------- ОДИН АКТЁР ---------- */
   const PAST = { ben: 'konuştum', sen: 'konuştun', o: 'konuştu', biz: 'konuştuk', siz: 'konuştunuz', onlar: 'konuştular' };
-  const PRU = { ben: 'мен сөйледім', sen: 'сен сөйледің', o: 'ол сөйледі', biz: 'біз сөйледік', siz: 'сіз сөйледіңіз', onlar: 'олар сөйледі' };
+  const PRU = { ben: 'Мен күліп сөйледім', sen: 'Сен күліп сөйледің', o: 'Ол күліп сөйледі', biz: 'Біз күліп сөйледік', siz: 'Сіз күліп сөйледіңіз', onlar: 'Олар күліп сөйледі' };
   function actor(p, anim) {
     $$('[data-ap]').forEach((b) => b.classList.toggle('is-on', b.dataset.ap === p));
     const ts = tiles($('[data-actor-line]'), [['gül', 'stem'], ['erek', 'ar'], [PAST[p], 'main']]);
-    $('[data-actor-ru]').textContent = `${PRU[p]}, күліп — -erek құйрығы сол`;
+    $('[data-actor-ru]').textContent = `${PRU[p]}. «Күліп» те, gülerek те өзгермейді.`;
     $('[data-actor-p]').textContent = p;
     if (anim) say(`Gülerek ${PAST[p]}.`);
     if (A && anim) {
@@ -1489,7 +1594,7 @@ addEventListener('DOMContentLoaded', () => {
     kemeralti: ['Кемералты', [['Satıcı bağırarak simit satıyor.', 'Сатушы симитті айқайлап сатады.']]],
     vapur: ['Паром', [['Martılara simit atarak karşıya geçtik.', 'Шағалаларға симит лақтырып өттік.']]],
     kule: ['Сағат мұнарасы', [['Burada rehber olarak çalışıyorum.', 'Мұнда гид болып жұмыс істеймін.'], ['Turlara gülerek başlıyorum.', 'Экскурсияларды жымиып бастаймын.']]],
-    alsancak: ['Алсанджак', [['Kahve içerek sohbet ettik.', 'Кофе ішіп отырып әңгімелесті.']]],
+    alsancak: ['Алсанджак', [['Kahve içerek sohbet ettik.', 'Кофе ішіп отырып әңгімелестік.']]],
     konak: ['Конак айлағы', [['Telefonla konuşarak vapura bindi.', 'Телефонмен сөйлесіп паромға отырды.']]],
   };
   const pinWho = $('[data-pinwho]'), pinLines = $('[data-pinlines]');
@@ -1529,7 +1634,7 @@ addEventListener('DOMContentLoaded', () => {
     ['ov', 'i-music', 'Müzik dinleyerek ders çalışıyorum.', 'Музыка тыңдап сабақ оқимын.', 'dinle + y + erek'],
     ['ov', 'i-phone', 'Telefonla konuşarak yemek yaptı.', 'Телефонмен сөйлесіп тамақ пісірді.', 'konuş + arak'],
     ['ov', 'i-music', 'Şarkı söyleyerek temizlik yapıyorlar.', 'Ән салып жинап жатыр.', 'söyle + y + erek'],
-    ['ov', 'i-cup', 'Kahve içerek sohbet ettik.', 'Кофе ішіп отырып әңгімелесті.', 'iç + erek'],
+    ['ov', 'i-cup', 'Kahve içerek sohbet ettik.', 'Кофе ішіп отырып әңгімелестік.', 'iç + erek'],
     ['ov', 'i-cam', "Fotoğraf çekerek Kemeraltı'nda dolaştık.", 'Кемералтыда суретке түсіріп серуендедік.', 'çek + erek'],
     ['ov', 'i-ship', 'Martılara simit atarak karşıya geçtik.', 'Шағалаларға симит лақтырып өттік.', 'at + arak'],
     ['mean', 'i-run', 'Spor yaparak kilo verdim.', 'Мен спортпен айналысып арықтадым.', 'yap + arak — тәсіл'],
@@ -1636,7 +1741,7 @@ addEventListener('DOMContentLoaded', () => {
     lr.textContent = LAB[lab.mode][lab.item];
     const v = lastV(lab.item);
     lw.textContent = lab.mode === 'ol'
-      ? `${lab.item} — зат есім. Рөл — бөлек olarak сөзімен: «ретінде».`
+      ? (['ilk', 'genel'].includes(lab.item) ? `${lab.item} olarak — дайын тіркес, бір сөз сияқты жатта.` : `${lab.item} — зат есім. Рөл — бөлек olarak сөзімен: «ретінде», «болып». olup емес.`)
       : `${lab.mode === 'neg' ? `Болымсыздық -${back(lab.item) ? 'ma' : 'me'}, сосын y. ` : ''}Соңғы дауысты ${v} — ${back(lab.item) ? 'жуан → -arak' : 'жіңішке → -erek'}.${!lab.mode.includes('neg') && endsV(lab.item) ? ' Негіз дауыстыға бітеді — y керек.' : ''}${SPECIAL[lab.item] && lab.mode === 'ar' ? ' Ерекше жағдай: e → i.' : ''}${SOFT[lab.item] && lab.mode === 'ar' ? ' t ұяңдап d болады.' : ''} Жақ жоқ: оны басты етістік айтады.`;
     if (A && anim) {
       G.fromTo(ts, { y: -60, rotation: () => G.utils.random(-25, 25), scale: .5 }, { y: 0, rotation: 0, scale: 1, duration: .7, stagger: .1, ease: 'bounce.out' });
