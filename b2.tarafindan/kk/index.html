@@ -211,6 +211,27 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
 .lab__why li::before{content:"→ ";color:var(--pink);font-weight:700}
 .lab__score{font:700 22px/1 var(--f);color:var(--pink)}
 
+/* қазақша ↔ түрікше: две строки-кадра, совпадение серое, различие розовое */
+.kd{background:var(--ink);color:#fff;border-radius:28px;padding:clamp(16px,3vw,30px);display:grid;gap:14px}
+.kd .lab__modes .btn{font-size:14.5px}
+.kd__screen{background:#fff;color:var(--ink);border-radius:22px;padding:18px;display:grid;gap:14px;min-height:260px;align-content:start}
+.kd__pair{position:relative;display:grid;gap:6px;padding:12px 52px 12px 12px;border-radius:18px;background:var(--soft)}
+.kd__row{display:flex;flex-wrap:wrap;align-items:center;gap:4px .35em;font:800 clamp(19px,4.2vw,34px)/1.15 var(--f);letter-spacing:-.02em}
+.kd__w{display:inline-flex;gap:0;white-space:nowrap}
+.kd__lang{flex:none;display:grid;place-items:center;min-width:34px;height:24px;margin-right:4px;padding:0 6px;border-radius:99px;background:var(--ink);color:#fff;font:700 11px/1 var(--f);letter-spacing:.08em}
+.kd__row--tr .kd__lang{background:var(--pink)}
+.kd__row b{display:inline-block;padding:0 .03em;border-radius:.18em}
+@media (max-width:520px){.kd{padding:12px}.kd__screen{padding:12px}.kd__pair{padding:10px 46px 10px 10px}.kd__lang{min-width:30px;height:22px}}
+.kd__row .d{background:var(--pink);color:#fff}
+.kd__row .s{color:var(--gray)}
+.kd__row .x{color:var(--ak-bad);text-decoration:line-through;text-decoration-thickness:3px}
+.kd__row .o{color:var(--gray);font-weight:300;font-style:italic}
+.kd__sign{position:absolute;right:12px;top:50%;translate:0 -50%;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--pink);color:#fff;font:800 20px/1 var(--f)}
+.kd__sign.same{background:var(--ak-good)}
+.kd__note{font-size:16.5px;line-height:1.45;font-weight:500;color:#2b2b2b}
+.kd__note b{color:var(--pink);white-space:nowrap}
+.kd [data-say]{text-decoration:none;cursor:pointer}
+
 /* дубли */
 .takes{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
 .take{perspective:900px;min-height:250px}
@@ -300,6 +321,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
     <li><button type="button" class="reel__btn" data-go="persons" aria-label="04. Мен, сен, біз">04<span class="reel__lbl">Мен, сен, біз</span></button></li>
     <li><button type="button" class="reel__btn" data-go="ca" aria-label="05. Кеңсе тіліндегі -CA">05<span class="reel__lbl">Кеңсе тіліндегі -CA</span></button></li>
     <li><button type="button" class="reel__btn" data-go="register" aria-label="06. Екі регистр">06<span class="reel__lbl">Екі регистр</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="kk-diff" aria-label="Қазақша ↔ түрікше"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg><span class="reel__lbl">Қазақша ↔ түрікше</span></button></li>
     <li><button type="button" class="reel__btn" data-go="lab" aria-label="Конструктор"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><path d="M17.5 14v7M14 17.5h7"/></svg><span class="reel__lbl">Конструктор</span></button></li>
     <li><button type="button" class="reel__btn" data-go="traps" aria-label="Сәтсіз дубльдер"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg><span class="reel__lbl">Дубльдер</span></button></li>
     <li><button type="button" class="reel__btn" data-go="video" aria-label="Бейне"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg><span class="reel__lbl">Бейне</span></button></li>
@@ -393,7 +415,7 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
             <p class="sub" data-at="active">Салыстыр. <a-say>Emre hesabı ödedi.</a-say> Эмре есепшотты төледі. Кейіпкер орнында.</p>
             <p class="sub" data-at="pass">Ырықсыз етіс: <b data-say="ödendi">öde-n-di</b>. <a-say>Hesap ödendi.</a-say> Есепшот төленді. Кім тарапынан — үнсіздік.</p>
             <p class="sub" data-at="chaos">Ырықсыз етіс жаңалықтар мен хабарландыруларды жақсы көреді: не болғаны маңызды. Кім істегені — екінші кезектегі шаруа. Қарыз басталғанша.</p>
-            <p class="sub" data-at="il">Қалай жасалатынын еске салайын: <span class="k k-pass">-Il</span>, ал дауыстыдан немесе <b>l</b>-ден кейін — <span class="k k-pass">-In</span>. Қазақшадағы -ыл/-ын сияқты.</p>
+            <p class="sub" data-at="il">Қалай жасалатынын еске салайын: <span class="k k-pass">-Il</span>, ал дауыстыдан немесе <b>l</b>-ден кейін — <span class="k k-pass">-In</span>. Қазақшадағы -ыл/-ын. Бір айырма: дауыстыдан кейін қазақша көбіне -л (оқылды), түрікше -n: <b data-say="okundu">oku-n-du</b>.</p>
           </div>
           <div class="act" data-yes="yapıldı. Жасалды. Кім тарапынан — әзірге үндемейміз." data-no="Мұндағы ырықсыз етіс — -ıl: yap-ıl-dı.">
             <p class="act__q"><b data-say="yaptı">yaptı</b> ырықсыз етісте қалай болады?</p>
@@ -430,10 +452,10 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
         <div class="side">
           <div class="tag"><span class="num">03</span><h3><span class="it">Кейіпкерді</span> қайтарамыз</h3></div>
           <div class="subs">
-            <p class="sub" data-at="spiral">Кейіпкерді ырықсыз етіске қайтару үшін <span class="k k-taraf">tarafından</span> бар. Сөзбе-сөз — «Эмре тарапынан». Қазақшада да дәл осы сөз.</p>
-            <p class="sub" data-at="build">Схема: кім + tarafından + ырықсыз етістік. <a-say>Hesap Emre tarafından ödendi.</a-say> Есепшот Эмре тарапынан төленді.</p>
-            <p class="sub" data-at="book"><a-say>Bu roman Orhan Pamuk tarafından yazıldı.</a-say> Роман Орхан Памук тарапынан жазылды. Қазақшада да тарап — тарапынан.</p>
-            <p class="sub" data-at="plain">Есімді не сөзді -<b>in</b>-сіз, сол күйінде қоямыз: <b data-say="Emre tarafından">Emre tarafından</b>, <b data-say="öğretmen tarafından">öğretmen tarafından</b>.</p>
+            <p class="sub" data-at="spiral">Кейіпкерді қайтаратын сөз — <span class="k k-taraf">tarafından</span>. Таныс па? Бұл біздің «тарапынан». taraf-ı-n-dan = тарап-ы-нан. Араб сөзі екі тілге де бірдей келген.</p>
+            <p class="sub" data-at="build">Схема да біздікі: кім + tarafından + ырықсыз етістік. <a-say>Hesap Emre tarafından ödendi.</a-say> Есепшот Эмре тарапынан төленді.</p>
+            <p class="sub" data-at="book">Айырма — тонда. Қазақша «тарапынан» көбіне ресми хатта тұрады. Түрікше жаңалықта да, кітап туралы әңгімеде де жүр: <a-say>Bu roman Orhan Pamuk tarafından yazıldı.</a-say></p>
+            <p class="sub" data-at="plain">Есім сол күйінде. Қазақша «Эмренің тарапынан» деуге болады, түрікше <b>-nin</b> жоқ: <b data-say="Emre tarafından">Emre tarafından</b>, <b data-say="öğretmen tarafından">öğretmen tarafından</b>.</p>
           </div>
           <div class="act act--build" data-done="Hesap Emre tarafından ödendi. Эмре қайтадан кадрда.">
             <p class="act__q">Хабарландыруды қайта құрастыр — ретімен бас:</p>
@@ -469,8 +491,8 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
         <div class="side">
           <div class="tag"><span class="num">04</span><h3>Мен, сен, <span class="it">біз</span></h3></div>
           <div class="subs">
-            <p class="sub" data-at="ben">Есімдіктермен қиынырақ: <b>taraf</b> тәуелдік құйрық алады. <b data-say="benim tarafımdan">benim tarafımdan</b> — менің тарапымнан.</p>
-            <p class="sub" data-at="sen"><b data-say="senin tarafından">senin tarafından</b> — сенің тарапыңнан. <b data-say="onun tarafından">onun tarafından</b> — оның тарапынан.</p>
+            <p class="sub" data-at="ben">Есімдікпен — дәл қазақшадағыдай: ілік + тәуелдік. <b data-say="benim tarafımdan">benim tarafımdan</b> — менің тарапымнан. Тек соңы <b>-dan</b>, -nan емес.</p>
+            <p class="sub" data-at="sen"><b data-say="senin tarafından">senin tarafından</b> — сенің тарапыңнан. <b data-say="onun tarafından">onun tarafından</b> — оның тарапынан. Байқадың ба? Түрікшеде екеуі бір сөз. Кім екенін senin не onun айтады.</p>
             <p class="sub" data-at="biz"><b data-say="bizim tarafımızdan">bizim tarafımızdan</b> — біздің тарапымыздан. <b data-say="sizin tarafınızdan">sizin tarafınızdan</b> — сіздің тарапыңыздан. <b data-say="onlar tarafından">onlar tarafından</b> — олар тарапынан.</p>
             <p class="sub" data-at="pay">Дана бірінші болып ақша аударады: <a-say>Para benim tarafımdan gönderildi.</a-say> Ақша менің тарапымнан жіберілді.</p>
           </div>
@@ -507,10 +529,10 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
           <div class="tag"><span class="num">05</span><h3>Кеңсе тіліндегі <span class="it">-CA</span></h3></div>
           <div class="subs">
             <p class="sub" data-at="ticket">Жұмада Генчлик саябағында концерт. Данада билет бар. Бейсенбіде хат келеді.</p>
-            <p class="sub" data-at="letter"><a-say>Konser belediyece iptal edildi.</a-say> Дана <span class="k k-ca">-CA</span>-ны қазақшадағы «-ша/-ше» ретінде біледі: <b data-say="çocukça">çocukça</b> — балаша, <b data-say="Türkçe">Türkçe</b> — түрікше.</p>
+            <p class="sub" data-at="letter"><a-say>Konser belediyece iptal edildi.</a-say> Қазақ құлағы <span class="k k-ca">-CA</span>-ны бірден таниды — бұл біздің «-ша»: <b data-say="çocukça">çocukça</b> — балаша, <b data-say="Türkçe">Türkçe</b> — түрікше.</p>
             <p class="sub" data-at="think">Оқиды: «әкімдікше тоқтатылды». Ренжітетін сияқты, бірақ түсініксіз.</p>
-            <p class="sub" data-at="flip">Ырықсыз етіс пен мекеменің қасында <span class="k k-ca">-CA</span> «тарапынан» дегенді білдіреді. <b data-say="belediyece">belediyece</b> = <b data-say="belediye tarafından">belediye tarafından</b>. Әкімдік тарапынан тоқтатылды.</p>
-            <p class="sub" data-at="forms">Құйрық бейімделеді: дауысты a не e, қатаңнан кейін — <b>ç</b>. <b data-say="bakanlıkça">bakanlıkça</b>, <b data-say="hükümetçe">hükümetçe</b>.</p>
+            <p class="sub" data-at="flip">Ырықсыз етіс пен мекеменің қасында <span class="k k-ca">-CA</span> «тарапынан» дегенді білдіреді. <b data-say="belediyece">belediyece</b> = <b data-say="belediye tarafından">belediye tarafından</b>. Әкімдік тарапынан тоқтатылды. Біздің -ша ондай жұмыс істемейді.</p>
+            <p class="sub" data-at="forms">-ша екі түрлі, -CA төрт: дауысты a не e, қатаңнан кейін — <b>ç</b>, қазақшадағы -да/-та сияқты. <b data-say="bakanlıkça">bakanlıkça</b>, <b data-say="hükümetçe">hükümetçe</b>.</p>
           </div>
           <div class="act" data-yes="hükümetçe: қатаң t-дан кейін — ç, дауысты e — демек -çe." data-no="Қатаң t-дан кейін ç естіледі, ал дауысты e: hükümetçe.">
             <p class="act__q"><b data-say="hükümet">hükümet</b> сөзінен «үкімет тарапынан» қалай болады?</p>
@@ -563,6 +585,29 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
     </div>
   </section>
 
+  <!-- ===== Қазақша ↔ түрікше ===== -->
+  <section data-section="kk-diff" data-words="90" id="sec-kkdiff">
+    <div class="page">
+      <div class="page__head rv">
+        <span class="pill">Қазақша ↔ түрікше</span>
+        <h2>Туыс, <span class="it">бірақ егіз емес</span></h2>
+        <p>Тарап-ы-нан мен taraf-ı-n-dan — бір қалып. Жол төрт жерде ғана айырылады. Батырманы бас: жоғарғы жол — қазақша, төменгісі — түрікше. Қызғылт — айырма.</p>
+      </div>
+      <div class="kd rv">
+        <div class="lab__modes kd__tabs" role="group" aria-label="Айырмашылықтар">
+          <button type="button" class="btn" data-kd="0" aria-pressed="true">-нан ≠ -dan</button>
+          <button type="button" class="btn" data-kd="1" aria-pressed="false">сен = о</button>
+          <button type="button" class="btn" data-kd="2" aria-pressed="false">-ша ≠ -CA</button>
+          <button type="button" class="btn" data-kd="3" aria-pressed="false">-нің жоқ</button>
+        </div>
+        <div class="kd__screen" aria-live="polite">
+          <div class="kd__pairs"></div>
+          <p class="kd__note"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Конструктор ===== -->
   <section data-section="lab" data-words="38" id="sec-lab">
     <div class="page">
@@ -595,25 +640,25 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
     <div class="page">
       <div class="page__head rv">
         <span class="pill">Сәтсіз дубльдер</span>
-        <h2>Бәрі <span class="it">сүрінетін</span> жер</h2>
-        <p>Төрт жиі қате. «Қайта түсіру»-ді бас — таза нұсқаны көресің.</p>
+        <h2>Қазақ құлағы <span class="it">алдайтын</span> жер</h2>
+        <p>Төрт қатені қазақшаның өзі ұсынады. «Қайта түсіру»-ді бас — таза нұсқаны көресің.</p>
       </div>
       <div class="takes">
         <article class="take rv"><div class="take__in">
-          <div class="take__f"><span class="num">01</span><p class="bad">Emre tarafından ödedi.</p><p>tarafından тек ырықсыз етіспен өмір сүреді.</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
-          <div class="take__b"><span class="num">01</span><p class="good" data-say="Hesap Emre tarafından ödendi.">Hesap Emre tarafından ödendi.</p><p>Немесе жай ғана: <b data-say="Emre ödedi.">Emre ödedi.</b></p><button type="button" class="btn take__back">Артқа</button></div>
+          <div class="take__f"><span class="num">01</span><p class="bad">Para benim tarafımnan gönderildi.</p><p>Қазақ құлағы: тарапымнан. Тәуелдіктен кейін қазақша -нан, түрікше — жоқ.</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
+          <div class="take__b"><span class="num">01</span><p class="good" data-say="Para benim tarafımdan gönderildi.">Para benim tarafımdan gönderildi.</p><p>Түрікше әрқашан -dan/-den: tarafımdan, evimden.</p><button type="button" class="btn take__back">Артқа</button></div>
         </div></article>
         <article class="take rv"><div class="take__in">
-          <div class="take__f"><span class="num">02</span><p class="bad">Para ben tarafından gönderildi.</p><p>Есімдікке taraf-та құйрық керек.</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
-          <div class="take__b"><span class="num">02</span><p class="good" data-say="Para benim tarafımdan gönderildi.">Para benim tarafımdan gönderildi.</p><p>Ақша менің тарапымнан жіберілді.</p><button type="button" class="btn take__back">Артқа</button></div>
+          <div class="take__f"><span class="num">02</span><p class="bad">Hesap Emre'nin tarafından ödendi.</p><p>Қазақша «Эмренің тарапынан» жүреді. Түрікше бұл «Эмре жағынан».</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
+          <div class="take__b"><span class="num">02</span><p class="good" data-say="Hesap Emre tarafından ödendi.">Hesap Emre tarafından ödendi.</p><p>Есім жалаң. Ілікті тек есімдік алады: benim tarafımdan.</p><button type="button" class="btn take__back">Артқа</button></div>
         </div></article>
         <article class="take rv"><div class="take__in">
-          <div class="take__f"><span class="num">03</span><p class="bad">Kitap öğretmen tarafında yazıldı.</p><p>tarafında — «жағында». -dan керек.</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
-          <div class="take__b"><span class="num">03</span><p class="good" data-say="Kitap öğretmen tarafından yazıldı.">Kitap öğretmen tarafından yazıldı.</p><p>Кітапты мұғалім жазған.</p><button type="button" class="btn take__back">Артқа</button></div>
+          <div class="take__f"><span class="num">03</span><p class="bad">Kitap öğrenciler tarafından okuldu.</p><p>Қазақша «оқылды». Түрікше okuldu — «мектеп болды».</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
+          <div class="take__b"><span class="num">03</span><p class="good" data-say="Kitap öğrenciler tarafından okundu.">Kitap öğrenciler tarafından okundu.</p><p>Дауыстыдан кейін түрікше -n: oku-n-du. Кітапты студенттер оқыды.</p><button type="button" class="btn take__back">Артқа</button></div>
         </div></article>
         <article class="take rv"><div class="take__in">
-          <div class="take__f"><span class="num">04</span><p class="bad">Yol belediyeçe kapatıldı.</p><p>Дауыстыдан кейін қатаңдайтын ештеңе жоқ.</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
-          <div class="take__b"><span class="num">04</span><p class="good" data-say="Yol belediyece kapatıldı.">Yol belediyece kapatıldı.</p><p>Жолды әкімдік жауып тастады.</p><button type="button" class="btn take__back">Артқа</button></div>
+          <div class="take__f"><span class="num">04</span><p class="bad">Yol belediyeçe kapatıldı.</p><p>Біздің -ша әрқашан ш-дан басталады. Қол ç-ға өзі барады.</p><button type="button" class="btn take__go">Қайта түсіру</button></div>
+          <div class="take__b"><span class="num">04</span><p class="good" data-say="Yol belediyece kapatıldı.">Yol belediyece kapatıldı.</p><p>ç тек қатаңнан кейін. Дауыстыдан кейін — c. Жолды әкімдік жапты.</p><button type="button" class="btn take__back">Артқа</button></div>
         </div></article>
       </div>
     </div>
@@ -626,8 +671,8 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
         <span class="pill">Бейне</span>
         <h2>Негізі: <span class="it">ырықсыз етіс</span></h2>
       </div>
-      <p class="vnote rv">-Il мен -In-ге назар аудар: tarafından дәл осындай етістікке жалғанады.</p>
-      <a-video yt="58_Mr3oer4Q" start="0" end="180" title="B2 деңгейі. Edilgen fiil" channel="Московская академия наук"></a-video>
+      <p class="vnote rv">Бейне орысша — қазақ оқушысына таныс тіл. -Il мен -In-ге назар аудар: tarafından дәл осындай етістікпен тұрады. Дауыстыдан кейін -n екенін тағы бір рет есіңе сал: okundu, ödendi.</p>
+      <a-video yt="58_Mr3oer4Q" start="0" end="180" title="Уровень В2. Edilgen fiil" channel="Московская академия наук"></a-video>
     </div>
   </section>
 
@@ -678,9 +723,9 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.04}
       </div>
       <div class="poster">
         <div class="pc pc--dark rv"><span class="num">01</span><h3>Кім + <span class="it">tarafından</span></h3><p>+ ырықсыз етістік</p><p data-say="Hesap Emre tarafından ödendi.">Hesap Emre tarafından ödendi.</p></div>
-        <div class="pc rv"><span class="num">02</span><h3>Есімдіктер</h3><p><span data-say="benim tarafımdan">benim tarafımdan</span> · <span data-say="senin tarafından">senin tarafından</span> · <span data-say="onun tarafından">onun tarafından</span> · <span data-say="bizim tarafımızdan">bizim tarafımızdan</span> · <span data-say="sizin tarafınızdan">sizin tarafınızdan</span> · <span data-say="onlar tarafından">onlar tarafından</span></p></div>
-        <div class="pc rv"><span class="num">03</span><h3>-CA <span class="it">= тарапынан</span></h3><p>мекемелер, жаңалықтар: <span data-say="bakanlıkça">bakanlıkça</span>, <span data-say="belediyece">belediyece</span>, <span data-say="hükümetçe">hükümetçe</span></p></div>
-        <div class="pc rv"><span class="num">04</span><h3><span class="it">-in</span>-сіз</h3><p><span data-say="Emre tarafından">Emre tarafından</span>, Emre'nin емес. tarafında — бұл «жағында».</p></div>
+        <div class="pc rv"><span class="num">02</span><h3>Есімдіктер</h3><p>Қазақшадағыдай, бірақ -nan емес, -dan: <span data-say="benim tarafımdan">benim tarafımdan</span> · <span data-say="senin tarafından">senin tarafından</span> · <span data-say="onun tarafından">onun tarafından</span> · <span data-say="bizim tarafımızdan">bizim tarafımızdan</span> · <span data-say="sizin tarafınızdan">sizin tarafınızdan</span> · <span data-say="onlar tarafından">onlar tarafından</span></p></div>
+        <div class="pc rv"><span class="num">03</span><h3>-CA <span class="it">= тарапынан</span></h3><p>«-ша» емес. Мекемелер, жаңалықтар: <span data-say="bakanlıkça">bakanlıkça</span>, <span data-say="belediyece">belediyece</span>, <span data-say="hükümetçe">hükümetçe</span></p></div>
+        <div class="pc rv"><span class="num">04</span><h3><span class="it">-in</span>-сіз</h3><p><span data-say="Emre tarafından">Emre tarafından</span>, Emre'nin емес. Етістік ырықсыз: oku-n-du, okuldu емес. tarafında — бұл «жағында».</p></div>
       </div>
       <div class="fin">
         <div class="fin__text rv">
@@ -855,14 +900,70 @@ addEventListener('DOMContentLoaded', () => {
     $('.take__back', take).addEventListener('click', () => flip(false));
   });
 
-  /* ---------- конструктор ---------- */
-  const WHO = [
-    ['Emre', 'Emre', 'Эмре тарапынан', 'name'], ['öğretmen', 'öğretmen', 'мұғалім тарапынан', 'name'], ['şirket', 'şirket', 'компания тарапынан', 'name'], ['Orhan Pamuk', 'Orhan Pamuk', 'Орхан Памук тарапынан', 'name'],
-    ['ben', 'benim taraf|ım|dan', 'менің тарапымнан', 'pro'], ['sen', 'senin taraf|ın|dan', 'сенің тарапыңнан', 'pro'], ['o', 'onun taraf|ı|ndan', 'оның тарапынан', 'pro'],
-    ['biz', 'bizim taraf|ımız|dan', 'біздің тарапымыздан', 'pro'], ['siz', 'sizin taraf|ınız|dan', 'сіздің тарапыңыздан', 'pro'], ['onlar', 'onlar tarafından', 'олар тарапынан', 'name']
+  /* ---------- қазақша ↔ түрікше ---------- */
+  const KD = [
+    { pairs: [
+      { kk: [['менің', 's'], [' тарап', 's'], ['ым', 's'], ['нан', 'd']], tr: [['benim', 's'], [' taraf', 's'], ['ım', 's'], ['dan', 'd']], say: 'benim tarafımdan' },
+      { kk: [['үй', 's'], ['ім', 's'], ['нен', 'd']], tr: [['ev', 's'], ['im', 's'], ['den', 'd']], say: 'evimden' },
+      { kk: [['оның', 's'], [' тарап', 's'], ['ы', 's'], ['нан', 's']], tr: [['onun', 's'], [' taraf', 's'], ['ı', 's'], ['ndan', 's']], say: 'onun tarafından', eq: true }
+    ], note: 'Қазақша тәуелдіктен кейін шығыс септік <b>-нан/-нен</b> болады: тарапымнан, үйімнен. Түрікше бәрібір <b>-dan/-den</b>: tarafımdan, evimden. n тек «оның» формасында шығады — онда екі тіл бірдей: тарапы-нан, tarafı-n-dan.' },
+    { pairs: [
+      { kk: [['сенің', 's'], [' тарап', 's'], ['ың', 'd'], ['нан', 's']], tr: [['senin', 's'], [' tarafından', 'd']], say: 'senin tarafından' },
+      { kk: [['оның', 's'], [' тарап', 's'], ['ы', 'd'], ['нан', 's']], tr: [['onun', 's'], [' tarafından', 'd']], say: 'onun tarafından' }
+    ], note: 'Қазақшада <b>ң</b> мен <b>н</b> айырып тұр: тарапыңнан, тарапынан. Түрікшеде taraf-ın-dan мен taraf-ı-n-dan бір сөзге айналады: <b>tarafından</b>. Сөздің өзі «сен» бе, «ол» ма — айтпайды. Оны senin не onun айтады.' },
+    { pairs: [
+      { kk: [['түрік', 's'], ['ше', 's']], tr: [['Türk', 's'], ['çe', 's']], say: 'Türkçe', eq: true },
+      { kk: [['мен', 's'], ['ің', 's'], ['ше', 's']], tr: [['ben', 's'], ['ce', 's']], say: 'bence', eq: true },
+      { kk: [['әкімдік', 's'], [' тарапынан', 'd']], tr: [['belediye', 's'], ['ce', 'd']], say: 'belediyece' }
+    ], note: 'Тіл мен пікірде -CA = -ша: Türkçe — түрікше, bence — меніңше. Ал ырықсыз етіс пен мекеменің қасында -CA = <b>тарапынан</b>. «Әкімдікше» деп аударма: қазақшада бұл «әкімдік сияқты». Тағы бір айырма: -ша екі түрлі, -CA төрт: -ca, -ce, -ça, -çe.' },
+    { pairs: [
+      { kk: [['Эмре', 's'], ['(нің)', 'o'], [' тарапынан', 's']], tr: [['Emre', 's'], ["'nin", 'x'], [' tarafından', 's']], say: 'Emre tarafından' },
+      { kk: [['менің', 's'], [' тарапымнан', 's']], tr: [['benim', 's'], [' tarafımdan', 's']], say: 'benim tarafımdan', eq: true }
+    ], note: 'Қазақша «Эмре тарапынан» да, «Эмренің тарапынан» да жүреді. Түрікше есім жалаң тұрады: <b>Emre tarafından</b>. Emre’nin tarafından — «Эмре жағынан», басқа мағына. Ілікті тек есімдік алады: benim, senin, bizim.' }
   ];
-  const THINGS = [['Hesap', 'öde', 'n', 'di', 'Есепшот төленді —'], ['Mektup', 'yaz', 'ıl', 'dı', 'Хат жазылды —'], ['Pasta', 'yap', 'ıl', 'dı', 'Торт жасалды —'], ['Para', 'gönder', 'il', 'di', 'Ақша жіберілді —']];
-  const INST = [['bakanlık', 'министрлік тарапынан'], ['belediye', 'әкімдік тарапынан'], ['hükümet', 'үкімет тарапынан'], ['mahkeme', 'сот тарапынан'], ['valilik', 'губернаторлық тарапынан'], ['üniversite', 'университет тарапынан'], ['polis', 'полиция тарапынан'], ['okul', 'мектеп тарапынан'], ['devlet', 'мемлекет тарапынан'], ['yönetim', 'әкімшілік тарапынан']];
+  const kd = $('.kd');
+  if (kd) {
+    const kdBox = $('.kd__pairs', kd), kdNote = $('.kd__note', kd);
+    let kdCur = 0;
+    const kdRow = (lang, parts, say) => `<div class="kd__row kd__row--${lang}"${say ? ` data-say="${say}" lang="tr"` : ''}><span class="kd__lang">${lang === 'kk' ? 'KK' : 'TR'}</span>${kdWords(parts)}</div>`;
+    /* морфемы одного слова держим вместе: новое слово начинается с пробела */
+    const kdWords = (parts) => { const ws = []; parts.forEach(([t, c]) => { if (!ws.length || t.startsWith(' ')) ws.push([]); ws[ws.length - 1].push(`<b class="${c}">${t.trim()}</b>`); }); return ws.map((w) => `<span class="kd__w">${w.join('')}</span>`).join(''); };
+    const kdShow = (i, anim) => {
+      kdCur = i;
+      const d = KD[i];
+      kdBox.innerHTML = d.pairs.map((p) => `<div class="kd__pair">${kdRow('kk', p.kk)}${kdRow('tr', p.tr, p.say)}<span class="kd__sign${p.eq ? ' same' : ''}" aria-label="${p.eq ? 'бірдей' : 'әртүрлі'}">${p.eq ? '=' : '≠'}</span></div>`).join('');
+      kdNote.innerHTML = d.note;
+      $$('[data-kd]', kd).forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.kd) === i)));
+      if (!anim || !moves()) return;
+      const tl = G.timeline();
+      tl.from($$('.kd__pair', kdBox), { x: -30, scale: 0.94, stagger: 0.12, duration: 0.4, ease: 'power3.out' });
+      tl.from($$('.kd__row b', kdBox), { y: -26, scale: 0.5, stagger: 0.025, duration: 0.32, ease: 'back.out(2)' }, 0.1);
+      tl.from($$('.kd__sign', kdBox), { scale: 0, rotation: -120, stagger: 0.1, duration: 0.4, ease: 'back.out(2.4)' }, '-=0.15');
+      tl.fromTo($$('.kd__row .d, .kd__row .x', kdBox), { scale: 1 }, { scale: 1.22, duration: 0.2, yoyo: true, repeat: 1, stagger: 0.05 }, '-=0.1');
+      tl.from(kdNote, { y: 14, duration: 0.35, ease: 'power2.out' }, '-=0.3');
+    };
+    $$('[data-kd]', kd).forEach((b) => b.addEventListener('click', () => kdShow(Number(b.dataset.kd), true)));
+    kdShow(0, false);
+    if (ST) ScrollTrigger.create({ trigger: kd, start: 'top 70%', once: true, onEnter: () => kdShow(kdCur, true) });
+  }
+
+  /* ---------- конструктор ---------- */
+  /* [кнопка, турецкая форма, казахский агент, тип, лицо 0–5 (для казахского глагола), варианты для режима «Тап»] */
+  const WHO = [
+    ['Emre', 'Emre', 'Эмре', 'name', 2, ['Emre tarafından', "Emre'nin tarafından", 'Emrece']], ['öğretmen', 'öğretmen', 'мұғалім', 'name', 2, ['öğretmen tarafından', 'öğretmenin tarafından', 'öğretmen tarafında']], ['şirket', 'şirket', 'компания', 'name', 2], ['Orhan Pamuk', 'Orhan Pamuk', 'Орхан Памук', 'name', 2],
+    ['ben', 'benim taraf|ım|dan', 'мен', 'pro', 0, ['benim tarafımdan', 'benim tarafımnan', 'ben tarafından']], ['sen', 'senin taraf|ın|dan', 'сен', 'pro', 1, ['senin tarafından', 'senin tarafınnan', 'sen tarafından']], ['o', 'onun taraf|ı|ndan', 'ол', 'pro', 2, ['onun tarafından', 'onun tarafınan', 'o tarafından']],
+    ['biz', 'bizim taraf|ımız|dan', 'біз', 'pro', 3, ['bizim tarafımızdan', 'bizim tarafından', 'biz tarafından']], ['siz', 'sizin taraf|ınız|dan', 'сіз', 'pro', 4, ['sizin tarafınızdan', 'sizin tarafımızdan', 'siz tarafından']], ['onlar', 'onlar tarafından', 'олар', 'name', 5]
+  ];
+  /* казахский агент с «тарапынан»: местоимения — со своей формой */
+  const KK_BY = { 'мен': 'менің тарапымнан', 'сен': 'сенің тарапыңнан', 'ол': 'оның тарапынан', 'біз': 'біздің тарапымыздан', 'сіз': 'сіздің тарапыңыздан', 'олар': 'олар тарапынан' };
+  /* [сущ., корень, пассив, окончание, каз. подлежащее, каз. пассив, каз. объект, каз. актив по лицам: мен, сен, ол, біз, сіз, олар] */
+  const THINGS = [
+    ['Hesap', 'öde', 'n', 'di', 'Есепшот', 'төленді', 'Есепшотты', ['төледім', 'төледің', 'төледі', 'төледік', 'төледіңіз', 'төледі']],
+    ['Mektup', 'yaz', 'ıl', 'dı', 'Хат', 'жазылды', 'Хатты', ['жаздым', 'жаздың', 'жазды', 'жаздық', 'жаздыңыз', 'жазды']],
+    ['Pasta', 'yap', 'ıl', 'dı', 'Торт', 'жасалды', 'Тортты', ['жасадым', 'жасадың', 'жасады', 'жасадық', 'жасадыңыз', 'жасады']],
+    ['Para', 'gönder', 'il', 'di', 'Ақша', 'жіберілді', 'Ақшаны', ['жібердім', 'жібердің', 'жіберді', 'жібердік', 'жібердіңіз', 'жіберді']]
+  ];
+  const INST = [['bakanlık', 'министрлік тарапынан'], ['belediye', 'қала әкімдігі тарапынан'], ['hükümet', 'үкімет тарапынан'], ['mahkeme', 'сот тарапынан'], ['valilik', 'облыс әкімдігі тарапынан'], ['üniversite', 'университет тарапынан'], ['polis', 'полиция тарапынан'], ['okul', 'мектеп тарапынан'], ['devlet', 'мемлекет тарапынан'], ['yönetim', 'басшылық тарапынан']];
   const FLIP = [
     ['Emre hesabı ödedi.', [['Hesap ', ''], ['Emre', 'agent'], [' tarafından', 'taraf'], [' öde', ''], ['n', 'pass'], ['di.', '']], 'Hesap Emre tarafından ödendi.', 'Есепшот Эмре тарапынан төленді.', ['hesabı → hesap: толықтауыш бастауышқа айналады', 'Emre + tarafından', 'ödedi → ödendi']],
     ['Deniz mektubu yazdı.', [['Mektup ', ''], ['Deniz', 'agent'], [' tarafından', 'taraf'], [' yaz', ''], ['ıl', 'pass'], ['dı.', '']], 'Mektup Deniz tarafından yazıldı.', 'Хат Дениз тарапынан жазылды.', ['mektubu → mektup', 'Deniz + tarafından', 'yazdı → yazıldı']],
@@ -890,15 +991,20 @@ addEventListener('DOMContentLoaded', () => {
   const mkBtn = (text, fn, say) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = text; if (say) b.dataset.say = say; b.addEventListener('click', () => fn(b)); chipsBox.append(b); return b; };
   const sel = (b) => $$('.btn', chipsBox).forEach((x) => x.classList.toggle('is-sel', x === b));
   function whoBuild(row) {
-    const [, form, ru, kind] = row, [noun, root, ps, end, nru] = THINGS[thing];
+    const [, form, kkWho, kind, pn] = row, [noun, root, ps, end, kkSubj, kkPass, kkObj, kkAct] = THINGS[thing];
     const parts = [[noun + ' ', '']];
     if (kind === 'pro') { const [a, p, z] = form.split('|'); parts.push([a, 'agent'], [p, 'poss'], [z, 'agent']); }
     else parts.push([form.replace(' tarafından', ''), 'agent'], [' tarafından', 'taraf']);
     parts.push([' ' + root, ''], [ps, 'pass'], [end + '.', '']);
     const say = `${noun} ${form.replace(/\|/g, '')}${kind === 'pro' ? '' : (form.includes('tarafından') ? '' : ' tarafından')} ${root}${ps}${end}.`.replace(/\s+/g, ' ');
     show(parts, say);
-    labRu.textContent = `${nru} ${ru}.`;
-    why(kind === 'pro' ? ['есімдік → taraf-та тәуелдік құйрық', 'етістік — ырықсыз етісте'] : ['есім не сөз сол күйінде, -in-сіз', 'етістік — ырықсыз етісте']);
+    const by = KK_BY[kkWho] || `${kkWho} тарапынан`;
+    labRu.textContent = `${kkSubj} ${by} ${kkPass}. Ауызша: ${kkObj} ${kkWho} ${kkAct[pn]}.`;
+    const lines = kind === 'pro' ? ['есімдік → ілік + тәуелдік, қазақшадағыдай'] : row[0] === 'onlar' ? ['onlar ілік алмайды — қазақшадағы «олар тарапынан» сияқты'] : ['есім жалаң тұрады: -nin қоспаймыз'];
+    if (kind === 'pro' && (pn === 1 || pn === 2)) lines.push('senin tarafından = onun tarafından: кім екенін есімдік айтады');
+    else if (kind === 'pro') lines.push('тәуелдіктен кейін -dan, қазақшадағы -нан емес');
+    lines.push('етістік — ырықсыз етісте: ' + root + ps + end);
+    why(lines);
   }
   function render() {
     chipsBox.innerHTML = ''; score.textContent = '';
@@ -911,7 +1017,7 @@ addEventListener('DOMContentLoaded', () => {
         const ca = caOf(w);
         show([[w, 'agent'], [ca, 'ca']], w + ca);
         labRu.textContent = `${w}${ca} = ${w} tarafından — ${ru}`;
-        why([`соңғы дауысты «${lastV(w)}» → ${ca[1]}`, HARD.includes(w[w.length - 1]) ? `соңында қатаң «${w[w.length - 1]}» → ç` : 'соңы қатаң емес → c']);
+        why([`соңғы дауысты «${lastV(w)}» → ${ca[1]}`, HARD.includes(w[w.length - 1]) ? `соңында қатаң «${w[w.length - 1]}» → ç` : 'соңы қатаң емес → c', 'мағынасы — «тарапынан», біздің «-ша» емес']);
       }, w));
     } else if (mode === 'flip') {
       FLIP.forEach((row) => mkBtn(row[0], (b) => { sel(b); show(row[1], row[2]); labRu.textContent = row[3]; why(row[4]); }, row[0]));
@@ -921,7 +1027,7 @@ addEventListener('DOMContentLoaded', () => {
     chipsBox.innerHTML = '';
     const pool = [];
     INST.forEach(([w, ru]) => { const c = caOf(w); const wrong = [w + (c[0] === 'ç' ? 'c' : 'ç') + c[1], w + c[0] + (c[1] === 'a' ? 'e' : 'a')]; pool.push({ q: `${ru} (${w})`, ok: w + c, opts: [w + c, ...wrong] }); });
-    WHO.filter((r) => r[3] === 'pro').forEach((r) => { const ok = r[1].replace(/\|/g, ''); pool.push({ q: r[2] + ` (${r[0]})`, ok, opts: [ok, r[0] + ' tarafından', ok.replace(/taraf\S*dan/, 'tarafından') === ok ? r[0] + ' tarafımdan' : ok.replace(/taraf\S*dan/, 'tarafından')] }); });
+    WHO.filter((r) => r[5]).forEach((r) => { pool.push({ q: `${KK_BY[r[2]] || r[2] + ' тарапынан'} (${r[0]})`, ok: r[5][0], opts: r[5] }); });
     qItem = pool[Math.floor(Math.random() * pool.length)];
     strip.innerHTML = `<b>${qItem.q}</b>`; strip.dataset.say = '';
     labRu.textContent = 'Қай форма дұрыс?'; labWhy.innerHTML = '';
@@ -951,10 +1057,10 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- нестандартное упражнение: лента уведомлений ---------- */
   const EX = 'b2.tarafindan.ex5';
   const FEED = [
-    { id: 'i1', src: 'Deniz pastayı yaptı.', ru: 'Дениз торт пісірді.', opts: ['Pasta Deniz tarafından yapıldı.', 'Pasta Deniz tarafından yaptı.', 'Pasta Deniz tarafında yapıldı.'], ok: 0, why: 'tarafından + ырықсыз етіс: yapıldı. tarafında — «жағында».' },
+    { id: 'i1', src: 'Deniz pastayı yaptı.', ru: 'Дениз торт жасады.', opts: ['Pasta Deniz tarafından yapıldı.', 'Pasta Deniz tarafından yaptı.', 'Pasta Deniz tarafında yapıldı.'], ok: 0, why: 'tarafından + ырықсыз етіс: yapıldı. tarafında — «жағында».' },
     { id: 'i2', src: 'Belediye yolu kapattı.', ru: 'Әкімдік жолды жауып тастады.', opts: ['Yol belediyece kapattı.', 'Yol belediyece kapatıldı.', 'Yol belediyeçe kapatıldı.'], ok: 1, why: 'Мекеме → belediyece. Етістік ырықсыз етісте: kapatıldı.' },
-    { id: 'i3', src: 'Ben parayı gönderdim.', ru: 'Мен ақшаны жібердім.', opts: ['Para ben tarafından gönderildi.', 'Para benim tarafından gönderildi.', 'Para benim tarafımdan gönderildi.'], ok: 2, why: 'ben → benim tarafımdan: taraf-та -ım құйрығы.' },
-    { id: 'i4', src: 'Emre hesabı ödedi.', ru: 'Эмре есепшотты төледі.', opts: ['Hesap Emre tarafından ödendi.', 'Hesap Emrece ödendi.', 'Hesabı Emre tarafından ödendi.'], ok: 0, why: 'Эмре — адам: tarafından. Бастауыш — -ı жоқ hesap.' },
+    { id: 'i3', src: 'Ben parayı gönderdim.', ru: 'Мен ақшаны жібердім.', opts: ['Para ben tarafından gönderildi.', 'Para benim tarafımnan gönderildi.', 'Para benim tarafımdan gönderildi.'], ok: 2, why: 'ben → benim tarafımdan. Тәуелдіктен кейін -dan, қазақшадағы -нан емес.' },
+    { id: 'i4', src: 'Emre hesabı ödedi.', ru: 'Эмре есепшотты төледі.', opts: ['Hesap Emre tarafından ödendi.', "Hesap Emre'nin tarafından ödendi.", 'Hesabı Emre tarafından ödendi.'], ok: 0, why: 'Есім жалаң: Emre tarafından, -nin жоқ. Бастауыш — -ı жоқ hesap.' },
     { id: 'i5', src: 'Siz bileti aldınız.', ru: 'Сіздер билет сатып алдыңыздар.', opts: ['Bilet siz tarafından alındı.', 'Bilet sizin tarafınızdan alındı.', 'Bilet sizin tarafımızdan alındı.'], ok: 1, why: 'siz → sizin tarafınızdan: -ınız құйрығы.' },
     { id: 'i6', src: 'Bakanlık kararı açıkladı.', ru: 'Министрлік шешімді жариялады.', opts: ['Karar bakanlıkça açıklandı.', 'Karar bakanlıkca açıklandı.', 'Kararı bakanlıkça açıklandı.'], ok: 0, why: 'Қатаң k-дан кейін — ç: bakanlıkça. Бастауыш — karar.' }
   ];

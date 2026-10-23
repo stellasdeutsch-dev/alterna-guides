@@ -197,6 +197,8 @@
   .lab__screen > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .lab__word { position: absolute; left: 4%; right: 4%; top: 30%; text-align: center; font: 900 clamp(26px, 9.4cqw, 66px)/1.1 var(--ak-font); }
   .lab__ru { position: absolute; left: 6%; right: 6%; top: 58%; text-align: center; font: 700 clamp(20px, 6cqw, 36px)/1.1 var(--hand); color: var(--neon); }
+  .lab__ru > span { font-family: var(--ak-font); font-weight: 800; font-size: .8em; }
+  .lab__ru small { font-size: .62em; color: var(--lilac); }
   .lab__line { position: absolute; left: 6%; right: 6%; bottom: 8%; text-align: center; font-size: clamp(14px, 3.6cqw, 20px); color: #ddd6ea; }
   .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .tab { min-height: 44px; padding: 10px 16px; border: 2px solid var(--ink); border-radius: 14px; background: transparent; font: 800 14px/1 var(--ak-font); text-transform: uppercase; letter-spacing: .04em; cursor: pointer; }
@@ -228,6 +230,24 @@
   .press__opts .btn kbd { font: 700 11px/1 var(--ak-font); color: var(--muted); margin-right: 6px; }
   .press__fb { margin: 0; min-height: 1.4em; color: #ddd6ea; }
   .press__foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+  /* ---------- айна: қазақша ↔ түрікше ---------- */
+  .mir { display: grid; gap: 14px; }
+  @media (min-width: 900px) { .mir { grid-template-columns: 1.05fr 1fr; align-items: start; } .mir__screen { grid-row: span 3; } }
+  .mir__screen { position: relative; overflow: hidden; display: grid; gap: 10px; justify-items: center; align-content: center; min-height: 320px; padding: 22px 16px 20px; border-radius: 24px; background: var(--bg); color: #fff; container-type: inline-size; }
+  .mir__screen > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .mir__screen > :not(svg) { position: relative; }
+  .mir__lang { margin: 0; font: 700 20px/1 var(--hand); color: var(--lilac); }
+  .mir__w { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; font: 900 clamp(24px, 8.6cqw, 46px)/1.15 var(--ak-font); }
+  .mir__w span { display: inline-block; white-space: pre; }
+  .mir__w .x { text-decoration: underline wavy var(--neon); text-decoration-thickness: 3px; text-underline-offset: 8px; }
+  .mir__sign { display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; background: var(--neon); color: var(--ink); font: 900 34px/1 var(--ak-font); transform: rotate(-6deg); }
+  .mir__sign.is-ne { background: var(--pink); color: #fff; }
+  .mir__sign.is-ap { background: var(--lilac); }
+  .mir__note { margin: 4px 0 0; max-width: 30em; text-align: center; font-size: 15px; color: #ddd6ea; }
+  .mir__tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mir__tabs .tab { text-transform: none; letter-spacing: 0; }
+  .mir__tabs .tab[aria-pressed="true"] { background: var(--ink); color: var(--neon); }
 
   /* ---------- финал ---------- */
   .poster { position: relative; display: grid; gap: 0; border-radius: 26px; overflow: hidden; background: var(--bg); color: #fff; }
@@ -324,6 +344,7 @@
     <li><button type="button" data-goto="layers"><span>02</span><em>Қабаттар</em></button></li>
     <li><button type="button" data-goto="who"><span>03</span><em>Кім бояды</em></button></li>
     <li><button type="button" data-goto="il"><span>04</span><em>Әрдайым -Il</em></button></li>
+    <li><button type="button" data-goto="kk-diff"><span>≠</span><em>Айна</em></button></li>
     <li><button type="button" data-goto="pairs"><span>05</span><em>Өзіміз бе, бізді ме</em></button></li>
     <li><button type="button" data-goto="lab"><span>06</span><em>Шеберхана</em></button></li>
     <li><button type="button" data-goto="traps"><span>07</span><em>Стикерлер</em></button></li>
@@ -480,7 +501,7 @@
       <p class="sub">Дүйсенбіде кеңседе бояу иісі шығады. Арнада хабарландыру.</p>
       <p class="sub">Кемал сұрайды: Селин өзі бояды ма? Жоқ деймін. Онда <b lang="tr" class="cs">-t-</b> бар, демек, сырлаушы жалдаған.</p>
       <p class="sub"><b lang="tr" data-say="boyadı">boyadı</b> — өзі бояды. <b lang="tr" data-say="boyattı">boyattı</b> — бояттырды.</p>
-      <p class="sub"><b lang="tr" data-say="boyandı">boyandı</b> — боялды, ал кім — маңызды емес.</p>
+      <p class="sub"><b lang="tr" data-say="boyandı">boyandı</b> — боялды, ал кім — маңызды емес. Байқа: қазақша -л, түрікше -n.</p>
       <p class="sub"><b lang="tr" data-say="boyatıldı">boyatıldı</b> — біреудің тапсырысымен боялды. Кадр сыртында екеу: тапсырыс беруші мен сырлаушы.</p>
     </div>
     <div class="act" id="s3-act">
@@ -513,9 +534,9 @@
     </div></div>
     <div class="subs">
       <p class="sub">Келесі сұрақ: өзгелік етістен кейін қай ырықсыз етісті қою керек?</p>
-      <p class="sub">Әдетте олар үшеу. Дауыстыдан кейін <b lang="tr">-n</b>: <b lang="tr" data-say="okundu">okundu</b>. <b lang="tr">l</b>-дан кейін — <b lang="tr">-In</b>: <b lang="tr" data-say="bilindi">bilindi</b>. Әйтпесе <b lang="tr">-Il</b>.</p>
-      <p class="sub">Өзгелік етіс әрдайым <b lang="tr">t</b> не <b lang="tr">r</b>-ға бітеді. Демек, әрі қарай тек <b lang="tr" class="ps">-Il</b>.</p>
-      <p class="sub">Үндестік қалады: <b lang="tr">-ıl, -il, -ul, -ül</b>. Таңдау — бір дауысты.</p>
+      <p class="sub">Жай ырықсыз етістің үш түрі бар. Дауыстыдан кейін <b lang="tr">-n</b>: <b lang="tr" data-say="okundu">okundu</b> (қазақша оқылды — -л емес!). <b lang="tr">l</b>-дан кейін <b lang="tr">-In</b>: <b lang="tr" data-say="bilindi">bilindi</b>. Әйтпесе <b lang="tr">-Il</b>.</p>
+      <p class="sub">Өзгелік етіс әрдайым <b lang="tr">t</b> не <b lang="tr">r</b>-ға бітеді. Демек, әрі қарай тек <b lang="tr" class="ps">-Il</b>. Қазақшада да солай: жуғыз-ыл, күттір-іл.</p>
+      <p class="sub">Үндестік қалады, бірақ нұсқа екі емес, төрт: <b lang="tr">-ıl, -il, -ul, -ül</b>. Таңдайтын — соңғы дауысты.</p>
     </div>
     <div class="act" id="s4-act">
       <div class="liftq"><span class="chip" id="s4-chip" lang="tr" data-say="yaptır">yaptır-</span><p class="act__q">Қай ырықсыз етіс?</p></div>
@@ -526,6 +547,34 @@
         <button type="button" class="btn btn--tr" lang="tr" data-v="ül">-ül</button>
       </div>
       <p class="act__fb" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ≠ · АЙНА: ҚАЗАҚША ↔ ТҮРІКШЕ ================= -->
+<section data-section="kk-diff" data-words="74" class="scene scene--light" id="kk-diff">
+  <div class="wrap">
+    <p class="slate"><span>≠</span> Айна</p>
+    <h2>Егіз емес, <em>туыс</em></h2>
+    <p>Жақсы жаңалық: қабаттардың реті қазақшада дәл сондай. <b>таныстырылдық</b> — <b lang="tr" data-say="tanıştırıldık">tanıştırıldık</b>. Сен мұны бала кезден білесің. Ал қазақша дағды төрт жерде сүріндіреді. Белгіні бас: <b>=</b> бірдей, <b>≈</b> рөлі бірдей, <b>≠</b> айырма.</p>
+    <div class="mir" id="mir">
+      <div class="mir__screen" id="mir-screen">
+        <svg viewBox="0 0 400 320" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 250 L60 230 L130 254 L200 226 L270 250 L340 222 L410 240 L410 330 L-10 330Z" fill="#8b12ff"/><path id="mir-squig" d="M268 34 C290 10 312 58 334 34 S 370 10 392 34" fill="none" stroke="#efff1f" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/></svg>
+        <p class="mir__lang">қазақша</p>
+        <p class="mir__w" id="mir-kk"></p>
+        <span class="mir__sign" id="mir-sign" aria-hidden="true">=</span>
+        <p class="mir__w" id="mir-tr" lang="tr"></p>
+        <p class="mir__lang">түрікше</p>
+        <p class="mir__note" id="mir-note" aria-live="polite"></p>
+      </div>
+      <div class="mir__tabs" role="group" aria-label="Қазақша мен түрікшенің айырмалары" id="mir-tabs"></div>
+      <div class="panel" id="mir-quiz">
+        <h3>Қазақша ойла — түрікше жаз</h3>
+        <p class="sent" id="mq-src"></p>
+        <div class="chips" id="mq-opts"></div>
+        <div class="act__row"><button type="button" class="btn" id="mq-next">Әрі қарай</button></div>
+        <p class="why" id="mq-why" hidden></p>
+      </div>
     </div>
   </div>
 </section>
@@ -584,7 +633,7 @@
           <path id="lab-squig" d="M20 60 C60 20 90 100 130 60 S 200 20 240 60" fill="none" stroke="#efff1f" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
         </svg>
         <p class="lab__word" id="lab-word" lang="tr" data-say="boyatıldı"><span class="r">boya</span><span class="cs">t</span><span class="ps">ıl</span><span class="tn">dı</span></p>
-        <p class="lab__ru" id="lab-ru">тапсырыспен боялды</p>
+        <p class="lab__ru" id="lab-ru"><span class="r">боя</span><span class="cs">ттыр</span><span class="ps">ыл</span><span class="tn">ды</span> <small>— қазақша да солай</small></p>
         <p class="lab__line" id="lab-line" lang="tr"></p>
       </div>
       <div class="tabs" role="tablist" aria-label="Шеберхана режимдері">
@@ -644,27 +693,27 @@
       <div class="wall">
         <div class="strip" id="s7-strip">
           <article class="trap"><div class="tcard tcard--pink">
-            <h3>Ырықсыз етіс — соңында</h3>
-            <p class="tcard__bad" lang="tr"><s>Ofis boyanttı.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Ofis boyatıldı.">Ofis boya<span class="cs">t</span><span class="ps">ıl</span><span class="tn">dı</span>.</p><p class="tcard__why">Алдымен өзгелік, сосын ырықсыз етіс. Керісінше болмайды.</p></div>
+            <h3>Дауыстыдан кейін -n, -л емес</h3>
+            <p class="tcard__bad" lang="tr"><s>Duvar boyaldı.</s></p>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Duvar boyandı.">Duvar boya<span class="ps">n</span><span class="tn">dı</span>.</p><p class="tcard__why">Қазақша «боялды», түрікше <b lang="tr">boyandı</b>. Ал тапсырыспен боялса — өзгелік қосылып, <b lang="tr">-ıl</b> келеді: <b lang="tr">boyatıldı</b>.</p></div>
             <button type="button" class="btn trap__btn">Түзету</button>
           </div></article>
           <article class="trap"><div class="tcard tcard--orange">
-            <h3>t мен r-дан кейін — тек -Il</h3>
-            <p class="tcard__bad" lang="tr"><s>Araba yıkatındı.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Araba yıkatıldı.">Araba yıka<span class="cs">t</span><span class="ps">ıl</span><span class="tn">dı</span>.</p><p class="tcard__why">Өзгелік етіс дауыссызға бітеді. <b lang="tr">-n</b> мен <b lang="tr">-In</b> мұнда тұрмайды.</p></div>
+            <h3>Өлтір емес — <span lang="tr">öldür</span></h3>
+            <p class="tcard__bad" lang="tr"><s>Kral öltürildi.</s></p>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Kral öldürüldü.">Kral öl<span class="cs">dür</span><span class="ps">ül</span><span class="tn">dü</span>.</p><p class="tcard__why">Қазақшадан әріп-әрібімен көшірме. Түрікше <b lang="tr">öl-dür</b>: t емес, d. Сосын ü-ға үндесіп: <b lang="tr">-ül, -dü</b>.</p></div>
             <button type="button" class="btn trap__btn">Түзету</button>
           </div></article>
           <article class="trap"><div class="tcard tcard--violet">
             <h3>Өзің тапсырыс бердің — белсенді етіс</h3>
             <p class="tcard__bad" lang="tr"><s>Saçlarım kestirildi.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kes<span class="cs">tir</span><span class="tn">dim</span>.</p><p class="tcard__why">Шаштаразда шашымды алдырдым. Тапсырыс беруші — мен, демек, ырықсыз етіссіз.</p></div>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kes<span class="cs">tir</span><span class="tn">dim</span>.</p><p class="tcard__why">Қазақша да «шашымды алдырдым» — белсенді өзгелік. Тапсырыс беруші — мен. Орысша «меня подстригли» деп ойласаң ғана ырықсызға кетесің.</p></div>
             <button type="button" class="btn trap__btn">Түзету</button>
           </div></article>
           <article class="trap"><div class="tcard tcard--neon">
             <h3>«Кім тарапынан» — тек ырықсыз етіспен</h3>
             <p class="tcard__bad" lang="tr"><s>Selin tarafından tanıştık.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Selin tarafından tanıştırıldık.">Selin tarafından tanış<span class="cs">tır</span><span class="ps">ıl</span><span class="tn">dık</span>.</p><p class="tcard__why"><b lang="tr">tarafından</b> орындаушыны атайды. Ырықсыз етіс керек.</p></div>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Selin tarafından tanıştırıldık.">Selin tarafından tanış<span class="cs">tır</span><span class="ps">ıl</span><span class="tn">dık</span>.</p><p class="tcard__why"><b lang="tr">tarafından</b> орындаушыны атайды, сондықтан ырықсыз етіс керек. Қазақша да «Селин тарапынан таныстық» демейміз.</p></div>
             <button type="button" class="btn trap__btn">Түзету</button>
           </div></article>
         </div>
@@ -672,9 +721,9 @@
       </div>
     </div>
     <div class="subs">
-      <p class="sub">Бір аптадан соң кеңсе тоңазытқышында стикерлер пайда болады. Селин іліпті. Маған арнап.</p>
-      <p class="sub">Екінші стикер. Өзгелік етістен кейінгі ырықсыз етісті табуға тырыстым.</p>
-      <p class="sub">Үшінші. Шашымды мен алдырдым, ал жазғаным — біреудің тапсырысымен мені қырықтырғандай.</p>
+      <p class="sub">Бір аптадан соң кеңсе тоңазытқышында стикерлер пайда болады. Селин іліпті. Маған арнап. Біріншісі — қазақша «боялды» деп ойлағаным үшін.</p>
+      <p class="sub">Екінші. «Өлтірілді» сөзін түрікшеге әріп-әрібімен көшірдім.</p>
+      <p class="sub">Үшінші. Шашымды өзім алдырдым. Ал жазғаным — біреу мені шаштаразға күштеп апарғандай.</p>
       <p class="sub">Төртінші. Бізді таныстырған Селин туралы.</p>
     </div>
     <div class="act" id="s7-act">
@@ -747,6 +796,7 @@
           <dt>өзгелік етістен кейін</dt><dd>тек <b lang="tr" class="ps">-ıl / -il / -ul / -ül</b>: <b lang="tr" data-say="yaptırıldı">yaptırıldı</b>, <b lang="tr" data-say="öldürüldü">öldürüldü</b></dd>
           <dt>кадрда кім бар</dt><dd><b lang="tr">boyadı</b> өзі · <b lang="tr">boyattı</b> жалдады · <b lang="tr">boyandı</b> боялды · <b lang="tr">boyatıldı</b> тапсырыспен боялды</dd>
           <dt>өзіміз бе, бізді ме</dt><dd><b lang="tr" data-say="tanıştık">tanıştık</b> — өзіміз · <b lang="tr" data-say="tanıştırıldık">tanıştırıldık</b> — бізді таныстырды · орындаушы: <b lang="tr">tarafından</b></dd>
+          <dt>қазақшадан айырма</dt><dd>дауыстыдан кейін <b lang="tr">-n</b>: <b lang="tr">boyandı</b> (боялды) · төрт нұсқа: <b lang="tr">buluşturuldu</b> · <b lang="tr">öldür</b>, өлтір емес · сен: <b lang="tr">-n</b>, ң емес</dd>
           <dt>шатастырма</dt><dd>өзің тапсырыс бердің — белсенді етіс: <b lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kestirdim.</b></dd>
         </dl>
       </div>
@@ -799,7 +849,7 @@ addEventListener('DOMContentLoaded', () => {
   }));
 
   /* ---------- 02 · слои: собрать по порядку ---------- */
-  const ROOTS = { 'tanış': [['tanı', 'ş'], 'tır', 'ıl', 'dı', 'оларды таныстырды'], 'buluş': [['bul', 'uş'], 'tur', 'ul', 'du', 'оларды табыстырды'], 'görüş': [['gör', 'üş'], 'tür', 'ül', 'dü', 'оларға әңгіме ұйымдастырды'] };
+  const ROOTS = { 'tanış': [['tanı', 'ş'], 'tır', 'ıl', 'dı', 'қазақша: таныстырылды'], 'buluş': [['bul', 'uş'], 'tur', 'ul', 'du', 'қазақша: табыстырылды'], 'görüş': [['gör', 'üş'], 'tür', 'ül', 'dü', 'қазақша: кездестірілді'] };
   let root = 'tanış', got = 0;
   const s2roots = $$('#s2-roots [data-root]'), s2parts = $$('#s2-parts [data-part]'), s2out = $('#s2-out');
   const s2render = () => {
@@ -869,7 +919,7 @@ addEventListener('DOMContentLoaded', () => {
   }));
 
   /* ---------- 05 · сами или нас ---------- */
-  const SIT = [['Тойда өздері әңгімелесіп кетті.', 0], ['Тимлид бізді бір-бірімізбен таныстырды.', 1], ['Лифтіде қамалып қалып, әңгімелесіп кеттік.', 0], ['Бізді ортақ құрбымыз табыстырды.', 1]];
+  const SIT = [['Тойда өздері әңгімелесіп кетті.', 0], ['Тимлид бізді бір-бірімізбен таныстырды.', 1], ['Лифтіде қамалып қалып, әңгімелесіп кеттік.', 0], ['Бізді ортақ досымыз табыстырды.', 1]];
   let si5 = 0;
   const s5btns = $$('#s5-act [data-f]'), s5fb = $('#s5-act .act__fb');
   s5btns.forEach((b) => b.addEventListener('click', () => {
@@ -885,16 +935,79 @@ addEventListener('DOMContentLoaded', () => {
     } else { s5fb.textContent = 'Ойлан: сендерді біреу табыстырды ма, әлде өздерің бе?'; shake(b); }
   }));
 
+  /* ---------- ≠ · айна: қазақша ↔ түрікше ---------- */
+  const MIR = [
+    ['= реті', '=', [['таны', 'r'], ['с', 'rc'], ['тыр', 'cs'], ['ыл', 'ps'], ['ды', 'tn'], ['қ', 'tn']], [['tanı', 'r'], ['ş', 'rc'], ['tır', 'cs'], ['ıl', 'ps'], ['dı', 'tn'], ['k', 'tn']], [], 'Реті бірдей: түбір, ортақ, өзгелік, ырықсыз, шақ, жақ. Тек ортақ етістің әрпі басқа: -с ↔ -ş.'],
+    ['≠ -л / -n', '≠', [['боя', 'r'], ['л', 'ps'], ['ды', 'tn']], [['boya', 'r'], ['n', 'ps'], ['dı', 'tn']], [1], 'Жай ырықсыз етіс: қазақша дауыстыдан кейін -л, түрікше -n. Ал өзгеліктен кейін екеуінде де -Il: boyatıldı.'],
+    ['≠ үндестік', '≠', [['таб', 'r'], ['ыс', 'rc'], ['тыр', 'cs'], ['ыл', 'ps'], ['ды', 'tn']], [['bul', 'r'], ['uş', 'rc'], ['tur', 'cs'], ['ul', 'ps'], ['du', 'tn']], [1, 2, 3, 4], 'Қазақшада екі нұсқа: -ыл/-іл. Түрікшеде төрт: -ıl/-il/-ul/-ül. Түбірде u не ü болса, жұрнақтар да ерінді.'],
+    ['≠ өл-тір', '≠', [['өл', 'r'], ['тір', 'cs'], ['іл', 'ps'], ['ді', 'tn']], [['öl', 'r'], ['dür', 'cs'], ['ül', 'ps'], ['dü', 'tn']], [1, 2, 3], 'Түбір бір, өзгелік басқа: өл-тір ↔ öl-dür. Түрікше d. Сосын ü-ға үндесіп: -ül, -dü.'],
+    ['≠ сен: -ң / -n', '≠', [['таны', 'r'], ['с', 'rc'], ['тыр', 'cs'], ['ыл', 'ps'], ['ды', 'tn'], ['ң', 'tn']], [['tanı', 'r'], ['ş', 'rc'], ['tır', 'cs'], ['ıl', 'ps'], ['dı', 'tn'], ['n', 'tn']], [5], 'Сен: қазақша -ң, түрікше -n. Түрік әліпбиінде ң жоқ. Tanıştırıldın mı? — Таныстырылдың ба?'],
+    ['≈ тарапынан', '≈', [['Селин ', 'r'], ['тарапынан', 'tn']], [['Selin ', 'r'], ['tarafından', 'tn']], [], 'Орындаушыны атайды. Рөлі бірдей: екеуі де тек ырықсыз етіспен. Selin tarafından tanıştırıldık — Селин тарапынан таныстырылдық.'],
+  ];
+  const mirW = (parts, x) => parts.map(([t, c], i) => `${/^\s/.test(t) ? '<span> </span>' : ''}<span class="${c}${x.includes(i) ? ' x' : ''}">${esc(t.trim())}</span>${/\s$/.test(t) ? '<span> </span>' : ''}`).join('');
+  let mi = 0;
+  const mirTabs = $('#mir-tabs');
+  mirTabs.innerHTML = MIR.map((m, i) => `<button type="button" class="tab" data-m="${i}" aria-pressed="${i === 0}">${esc(m[0])}</button>`).join('');
+  const mirShow = (i, animate) => {
+    mi = i;
+    const [, sign, kk, tr, x, note] = MIR[i];
+    $('#mir-kk').innerHTML = mirW(kk, x);
+    $('#mir-tr').innerHTML = mirW(tr, x);
+    $('#mir-tr').dataset.say = tr.map((p) => p[0]).join('');
+    const sg = $('#mir-sign');
+    sg.textContent = sign;
+    sg.classList.toggle('is-ne', sign === '≠');
+    sg.classList.toggle('is-ap', sign === '≈');
+    $('#mir-note').textContent = note;
+    $$('#mir-tabs [data-m]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.m) === i)));
+    if (!animate || calm()) return;
+    const tl = G.timeline();
+    tl.fromTo('#mir-kk span', { y: -34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .07, duration: .35, ease: 'back.out(2)' })
+      .fromTo(sg, { scale: 0, rotation: -60 }, { scale: 1, rotation: -6, duration: .4, ease: 'back.out(2.6)' }, '-=.1')
+      .fromTo('#mir-tr span', { y: 34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .07, duration: .35, ease: 'back.out(2)' }, '-=.2')
+      .fromTo('#mir-screen .x', { scale: 1 }, { scale: 1.25, duration: .18, yoyo: true, repeat: 1 }, '+=.05')
+      .fromTo('#mir-note', { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .35 }, '-=.2');
+  };
+  mirTabs.addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; mirShow(Number(b.dataset.m), true); say($('#mir-tr').dataset.say); });
+  $('#mir-tr').addEventListener('click', () => say($('#mir-tr').dataset.say));
+  mirShow(0, false);
+
+  const MQ = [
+    ['өлтірілді', ['öltürüldü', 'öldürildi', 'öldürüldü'], 2, 'öl-dür-ül-dü: түрікше d және ü. Қазақшадағы т мен і мұнда жоқ.'],
+    ['боялды', ['boyaldı', 'boyandı', 'boyıldı'], 1, 'Дауыстыдан кейін түрікше -n: boyandı. Қазақша -л мұнда жарамайды.'],
+    ['табыстырылды', ['buluşturıldı', 'buluşturuldu', 'buluşturuldı'], 1, 'Соңғы дауысты u: -tur, -ul, -du. Қазақшадағы -ыл, -ды — екі нұсқалы, түрікше ерінді.'],
+    ['таныстырылдың ба?', ['Tanıştırıldın mı?', 'Tanıştırıldın mu?', 'Tanıştırılding mı?'], 0, 'Сен: -n, ң емес. Сұраулық шылау соңғы дауыстыға үндеседі: dın → mı.'],
+  ];
+  let mq = 0;
+  const mqWhy = $('#mq-why');
+  const mqShow = () => {
+    const [src, opts] = MQ[mq];
+    $('#mq-src').textContent = src;
+    $('#mq-opts').innerHTML = opts.map((o, i) => `<button type="button" class="btn btn--tr" lang="tr" data-q="${i}">${esc(o)}</button>`).join('');
+    mqWhy.hidden = true;
+  };
+  $('#mq-opts').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-q]'); if (!b) return;
+    const [, opts, ok, why] = MQ[mq];
+    const good = Number(b.dataset.q) === ok;
+    pick($$('#mq-opts [data-q]'), b, good);
+    mqWhy.hidden = false;
+    mqWhy.textContent = good ? `Дұрыс. ${why}` : `Әзірге жоқ. ${why}`;
+    if (good) { say(opts[ok]); pop(b, { scale: 1.2 }); } else shake(b);
+  });
+  $('#mq-next').addEventListener('click', () => { mq = (mq + 1) % MQ.length; mqShow(); pop($('#mq-src'), { x: -20, autoAlpha: 0 }); });
+  mqShow();
+
   /* ---------- 06 · мастерская ---------- */
   const LAB = {
-    'boya': ['boya', '', 't', 'ıl', 'dı', 'тапсырыспен боялды', 'a'],
-    'yıka': ['yıka', '', 't', 'ıl', 'dı', 'жуу орнында жуғызылды', 'a'],
-    'bekle': ['bekle', '', 't', 'il', 'di', 'күттірілді', 'e'],
-    'temizle': ['temizle', '', 't', 'il', 'di', 'клининг қызметіне жинатылды', 'e'],
-    'öl': ['öl', '', 'dür', 'ül', 'dü', 'ол өлтірілді', 'ö'],
-    'tanış': ['tanı', 'ş', 'tır', 'ıl', 'dı', 'оларды таныстырды', 'ı'],
-    'buluş': ['bul', 'uş', 'tur', 'ul', 'du', 'оларды табыстырды', 'u'],
-    'görüş': ['gör', 'üş', 'tür', 'ül', 'dü', 'оларға әңгіме ұйымдастырды', 'ü'],
+    'boya': ['boya', '', 't', 'ıl', 'dı', ['боя', '', 'ттыр', 'ыл', 'ды'], 'a'],
+    'yıka': ['yıka', '', 't', 'ıl', 'dı', ['жу', '', 'ғыз', 'ыл', 'ды'], 'a'],
+    'bekle': ['bekle', '', 't', 'il', 'di', ['күт', '', 'тір', 'іл', 'ді'], 'e'],
+    'temizle': ['temizle', '', 't', 'il', 'di', ['тазала', '', 'т', 'ыл', 'ды'], 'e'],
+    'öl': ['öl', '', 'dür', 'ül', 'dü', ['өл', '', 'тір', 'іл', 'ді'], 'ö'],
+    'tanış': ['tanı', 'ş', 'tır', 'ıl', 'dı', ['таны', 'с', 'тыр', 'ыл', 'ды'], 'ı'],
+    'buluş': ['bul', 'uş', 'tur', 'ul', 'du', ['таб', 'ыс', 'тыр', 'ыл', 'ды'], 'u'],
+    'görüş': ['gör', 'üş', 'tür', 'ül', 'dü', ['кездес', '', 'тір', 'іл', 'ді'], 'ü'],
   };
   let lk = 'boya', lgot = 3;
   const labRoots = $$('#lab-roots [data-k]'), labLayers = $$('#lab-layers [data-l]');
@@ -903,7 +1016,8 @@ addEventListener('DOMContentLoaded', () => {
     const d = LAB[lk];
     $('#lab-word').innerHTML = paint([d[0], d[1], lgot > 0 ? d[2] : '', lgot > 1 ? d[3] : '', lgot > 2 ? d[4] : '']);
     $('#lab-word').dataset.say = d[0] + d[1] + (lgot > 0 ? d[2] : '') + (lgot > 1 ? d[3] : '') + (lgot > 2 ? d[4] : '');
-    $('#lab-ru').textContent = lgot === 3 ? d[5] : ['өзгелік етісті қос', 'енді ырықсыз етіс', 'шақ қалды'][lgot];
+    const k = d[5];
+    $('#lab-ru').innerHTML = paint([k[0], k[1], lgot > 0 ? k[2] : '', lgot > 1 ? k[3] : '', lgot > 2 ? k[4] : '']) + (lgot === 3 ? ' <small>— қазақша да солай</small>' : ` <small>+ ${['өзгелік?', 'ырықсыз?', 'шақ?'][lgot]}</small>`);
   };
   labRoots.forEach((b) => b.addEventListener('click', () => {
     lk = b.dataset.k; lgot = 0;
@@ -932,17 +1046,17 @@ addEventListener('DOMContentLoaded', () => {
   $('#lab-why1').addEventListener('click', () => {
     const d = LAB[lk];
     w1.hidden = false;
-    w1.innerHTML = `Өзгелік <b lang="tr">-${d[2]}</b> дауыссызға бітеді, сондықтан ырықсыз етіс — <b lang="tr">-${d[3]}</b>. Дауыстысы <b lang="tr">${d[6]}</b>-мен үндестік бойынша.`;
+    w1.innerHTML = `Өзгелік <b lang="tr">-${d[2]}</b> дауыссызға бітеді, сондықтан ырықсыз етіс — <b lang="tr">-${d[3]}</b>, қазақшадағы <b>-${d[5][3]}</b> сияқты. Бірақ дауыстысын түбірдің соңғы дауыстысы (<b lang="tr">${d[6]}</b>) таңдайды: түрікшеде төрт нұсқа, қазақшада екеу.`;
     pop(w1, { y: 10, autoAlpha: 0 });
   });
 
   const WHOQ = [
-    ['Kemal arabayı yıkadı.', 0, 'Өзгелік те, ырықсыз да жоқ: Кемал өзі жуды.'],
-    ['Kemal arabayı yıkattı.', 1, 'Өзгелік -t: Кемал көлікті жуғызуға берді.'],
-    ['Araba yıkandı.', 2, 'Тек ырықсыз -n: көлік жуылды, кім — маңызды емес.'],
-    ['Araba yıkatıldı.', 3, 'Өзгелік + ырықсыз: көлік біреудің тапсырысымен жуылды.'],
-    ['Misafirler bekletildi.', 3, 'bekle + t + il: қонақтарды күттірді. Кім бұйырды — кадр сыртында.'],
-    ['Selin ofisi temizletti.', 1, 'Өзгелік -t: Селин тазалаушыларды жалдады.'],
+    ['Kemal arabayı yıkadı.', 0, 'Қабат жоқ: Кемал көлікті өзі жуды.'],
+    ['Kemal arabayı yıkattı.', 1, 'Өзгелік -t: Кемал көлікті жуғызды.'],
+    ['Araba yıkandı.', 2, 'Тек ырықсыз: көлік жуылды. Түрікше дауыстыдан кейін -n, қазақшадағыдай -л емес.'],
+    ['Araba yıkatıldı.', 3, 'Өзгелік + ырықсыз: көлік жуғызылды. Кім жуды, кім тапсырыс берді — кадр сыртында.'],
+    ['Misafirler bekletildi.', 3, 'bekle + t + il: қонақтар күттірілді. Кім бұйырды — белгісіз.'],
+    ['Selin ofisi temizletti.', 1, 'Өзгелік -t: Селин кеңсені тазалатты.'],
   ];
   let wi = 0;
   const whoOpts = $$('#who-opts [data-w]');
@@ -958,10 +1072,12 @@ addEventListener('DOMContentLoaded', () => {
   $('#who-next').addEventListener('click', () => { wi = (wi + 1) % WHOQ.length; whoShow(); });
 
   const DEFECT = [
+    [['Duvarlar', 'boyaldı.'], 1, 'boyandı.', 'Қазақша «боялды», түрікше boyandı: дауыстыдан кейін -n.'],
+    [['Kral', 'öltürüldü.'], 1, 'öldürüldü.', 'Қазақша өл-тір, түрікше öl-dür: t емес, d.'],
+    [['Eski', 'arkadaşlar', 'buluşturıldı.'], 2, 'buluşturuldu.', 'Соңғы дауысты u, демек -ul, -du. Қазақшадағы -ыл, -ды мұнда жарамайды.'],
     [['Araba', 'yıkatnıldı.'], 1, 'yıkatıldı.', 'Өзгелік етістен кейін ырықсыз етіс тек -Il: yıka-t-ıl-dı.'],
-    [['Konuklar', 'tanıştırüldı.'], 1, 'tanıştırıldı.', 'Үндестік: соңғы дауысты ı, демек -ıl.'],
-    [['Biz', 'Selin', 'tarafından', 'tanıştık.'], 3, 'tanıştırıldık.', 'tarafından-мен ырықсыз етіс керек: бізді Селин таныстырды.'],
-    [['Saçlarımı', 'kestirildim.'], 1, 'kestirdim.', 'Тапсырыс беруші — өзім, демек, белсенді өзгелік етіс: шашымды алдырдым.'],
+    [['Biz', 'Selin', 'tarafından', 'tanıştık.'], 3, 'tanıştırıldık.', 'tarafından-мен ырықсыз етіс керек: Селин тарапынан таныстырылдық.'],
+    [['Saçlarımı', 'kestirildim.'], 1, 'kestirdim.', 'Тапсырыс беруші — өзім: шашымды алдырдым. Белсенді өзгелік етіс.'],
   ];
   let di = 0;
   const defShow = () => { $('#def-toks').innerHTML = DEFECT[di][0].map((t, i) => `<button type="button" class="btn btn--tr" lang="tr" data-t="${i}">${t}</button>`).join(''); w3.hidden = true; };
@@ -1024,12 +1140,12 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- нестандартное упражнение: принтер бейджей ---------- */
   const EX = 'b2.combined-voices.ex5';
   const PRESS = [
-    ['Қонақтарды бір-бірімен таныстырды.', ['tanı', 'ş'], ['tır', 'ıl', 'dı'], ['ıl', 'n', 'dı', 'tır']],
-    ['Көлікті жуу орнында жуғызды.', ['yıka', ''], ['t', 'ıl', 'dı'], ['dı', 't', 'n', 'ıl']],
-    ['Қонақтарды күттірді.', ['bekle', ''], ['t', 'il', 'di'], ['il', 'di', 'ıl', 't']],
-    ['Ескі достарды табыстырды.', ['bul', 'uş'], ['tur', 'ul', 'du'], ['ul', 'tur', 'du', 'ıl']],
-    ['Патша өлтірілді.', ['öl', ''], ['dür', 'ül', 'dü'], ['ün', 'dü', 'dür', 'ül']],
-    ['Кеңсені клининг қызметіне жинатқызды.', ['temizle', ''], ['t', 'il', 'di'], ['t', 'n', 'il', 'di']],
+    ['Қонақтар бір-бірімен таныстырылды.', ['tanı', 'ş'], ['tır', 'ıl', 'dı'], ['ıl', 'n', 'dı', 'tır']],
+    ['Көлік жуғызылды.', ['yıka', ''], ['t', 'ıl', 'dı'], ['dı', 't', 'n', 'ıl']],
+    ['Қонақтар күттірілді.', ['bekle', ''], ['t', 'il', 'di'], ['il', 'di', 'ıl', 't']],
+    ['Ескі достар табыстырылды.', ['bul', 'uş'], ['tur', 'ul', 'du'], ['ul', 'tur', 'du', 'ıl']],
+    ['Патша өлтірілді.', ['öl', ''], ['dür', 'ül', 'dü'], ['tür', 'dü', 'dür', 'ül']],
+    ['Кеңсе тазалатылды.', ['temizle', ''], ['t', 'il', 'di'], ['t', 'l', 'il', 'di']],
   ];
   const pr = { i: 0, step: 0, score: 0, miss: false, t0: 0 };
   const pOpts = $('#press-opts'), pFb = $('#press-fb');
@@ -1041,7 +1157,7 @@ addEventListener('DOMContentLoaded', () => {
     pWord();
     pOpts.innerHTML = pool.map((o, i) => `<button type="button" class="btn btn--tr" data-o="${i}"><kbd>${i + 1}</kbd><span lang="tr">-${o}</span></button>`).join('');
     $('#press-step').textContent = `${PRESS.length} ішінен ${pr.i + 1}-бейдж`;
-    pFb.textContent = 'Қабаттарды ретімен бас: өзгелік, ырықсыз етіс, шақ.';
+    pFb.textContent = 'Қазақшадағы реті: өзгелік, ырықсыз етіс, шақ. Түрікше де солай.';
     pop($('.press__badge'), { rotation: -6, y: -20, autoAlpha: 0 });
   };
   const pFinish = () => {
@@ -1059,7 +1175,7 @@ addEventListener('DOMContentLoaded', () => {
     const btn = pOpts.querySelector(`[data-o="${k}"]`);
     if (pool[k] !== seq[pr.step]) {
       pr.miss = true;
-      pFb.textContent = pr.step === 0 ? 'Алдымен өзгелік — t не r-ға бітетіні.' : pr.step === 1 ? 'Енді ырықсыз етіс. t мен r-дан кейін — тек -Il.' : 'Шақ қалды: -DI.';
+      pFb.textContent = pr.step === 0 ? (base[0] === 'öl' ? 'Қазақша өл-тір, түрікше öl-d…' : 'Алдымен өзгелік — t не r-ға бітетіні.') : pr.step === 1 ? 'Енді ырықсыз етіс. t мен r-дан кейін — тек -Il, дауыстысы түбірге қарай.' : 'Шақ қалды: -DI.';
       if (btn) { btn.classList.add('is-no'); shake(btn); }
       return;
     }
@@ -1279,6 +1395,10 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   if (!reduceMQ.matches) {
+    ScrollTrigger.create({ trigger: '#mir', start: 'top 75%', once: true, onEnter: () => mirShow(mi, true) });
+    const msq = G.fromTo('#mir-squig', { strokeDasharray: 400, strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 2.4, repeat: -1, yoyo: true, ease: 'sine.inOut', paused: true });
+    ScrollTrigger.create({ trigger: '#mir-screen', start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? msq.play() : msq.pause()) });
+    ScrollTrigger.batch('#kk-diff .mir__tabs, #kk-diff .panel', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .12, duration: .6, ease: 'power2.out', overwrite: true }) });
     ScrollTrigger.batch('#lab .lab__screen, #lab .tabs, #lab .panel', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .12, duration: .6, ease: 'power2.out', overwrite: true }) });
     ScrollTrigger.batch('#practice a-exercise', { start: 'top 90%', once: true, onEnter: (els) => G.fromTo(els, { y: 30 }, { y: 0, stagger: .1, duration: .5, ease: 'power2.out', overwrite: true }) });
     ScrollTrigger.batch('#cheat .poster, #cheat .chatf', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 40, rotation: -1 }, { y: 0, rotation: 0, stagger: .12, duration: .6, ease: 'power2.out', overwrite: true }) });

@@ -332,6 +332,18 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 .tc i{width:8px;height:8px;border-radius:50%;background:#e3489a;animation:hb 1.2s infinite}
 .sec .kick svg{transform-origin:50% 50%}
 
+/* mirror: learner language ↔ Turkish */
+.mir{margin-top:8px;max-width:760px}
+.mir__rows{display:grid;gap:8px;margin:14px 0 6px}
+.mir__row{display:grid;grid-template-columns:minmax(62px,96px) minmax(0,1fr);align-items:center;gap:10px;padding:10px 12px;border-radius:20px;background:linear-gradient(180deg,#fff,#f3f1ff);box-shadow:inset 0 0 0 1.5px #ece4fb}
+.mir__lab{font:600 11px/1.2 var(--ak-font);letter-spacing:.2em;text-transform:lowercase;color:var(--grey);overflow-wrap:anywhere}
+.mir__row .tiles{justify-content:flex-start;min-height:56px;gap:5px}
+.mir .tl{min-height:46px;min-width:34px;padding:0 10px;font-size:clamp(18px,4.8vw,28px)}
+.mir .tl.is-diff{box-shadow:0 0 0 3px var(--pink),0 12px 22px -12px #e3489a}
+.mir__sign{justify-self:center;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font:800 24px/1 var(--disp);color:#fff;background:var(--g-violet);box-shadow:0 10px 20px -10px #8445e8}
+.mir__sign.is-ne{background:linear-gradient(135deg,#ff8cc6,#e3489a);box-shadow:0 10px 20px -10px #e3489a}
+.mir__note{min-height:3.2em;margin:12px 0 0;color:var(--ink2)}
+.mir__note b{color:var(--violet)}
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -518,7 +530,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
       <div class="txt">
         <p class="rv">A regular sentence has two in the shot. Who does it and what gets done. The architect and the bridge.</p>
         <p class="rv">The passive is when the camera pulls back. The doer leaves the shot. The action and the object stay.</p>
-        <p class="rv">The object becomes the main character. So it loses the accusative tail: <b lang="tr" data-say="köprüyü">köprüyü</b> → <b lang="tr" data-say="köprü">köprü</b>.</p>
+        <p class="rv">The object becomes the main character. So it loses the accusative tail: <b lang="tr" data-say="köprüyü">köprüyü</b> → <b lang="tr" data-say="köprü">köprü</b>. English does this only with pronouns: “saw him” → “he was seen.”</p>
       </div>
       <div class="card frame" id="frame">
         <div class="frame__vf">
@@ -597,7 +609,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
   <div class="wrap">
     <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-grid"/></svg>shot 05 · harmony</p>
     <h2>ıl, il, ul, ül</h2>
-    <p class="txt rv">The vowel inside -Il- isn't its own. The last vowel of the verb picks it. Four options, like the question mı.</p>
+    <p class="txt rv">The vowel inside -Il- isn't its own. The last vowel of the verb picks it. Four options, like the question mı. Say ı like the a in “about.”</p>
     <div class="seg hseg" role="tablist" aria-label="Vowel filter" id="hSeg" data-ui>
       <button type="button" role="tab" aria-selected="true" data-h="all">All</button>
       <button type="button" role="tab" aria-selected="false" data-h="ı">a ı</button>
@@ -623,10 +635,39 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 </section>
 <div class="reelstrip reelstrip--r" aria-hidden="true"><div class="reelstrip__in" lang="tr"><span>Telefon <b>çalındı</b></span><span>Pasta <b>yendi</b></span><span>Su <b>içildi</b></span><span>Anahtar <b>bulundu</b></span><span>Hesap <b>ödendi</b></span><span>Telefon <b>çalındı</b></span><span>Pasta <b>yendi</b></span><span>Su <b>içildi</b></span><span>Anahtar <b>bulundu</b></span><span>Hesap <b>ödendi</b></span></div></div>
 
+<section class="sec" data-section="en-diff" data-words="80">
+  <span class="float cube cube--w" style="--s:50px;--r:18deg;right:5%;top:10%" data-sp="70"></span>
+  <div class="wrap">
+    <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-eye"/></svg>shot 06 · English ↔ Turkish</p>
+    <h2>Mirror</h2>
+    <p class="txt rv">The idea is the same as in English: the doer leaves, the object takes the front seat. You already know this.</p>
+    <p class="txt rv">The build is different. English adds words around the verb: was, not, by. Turkish puts everything inside one verb, and the vowels change with it. Tap a pair: “=” is the same, “≠” is different.</p>
+    <div class="card mir" id="mir">
+      <div class="seg" role="tablist" aria-label="Same or different" id="mirSeg" data-ui>
+        <button type="button" role="tab" aria-selected="true" data-m="0">= Same</button>
+        <button type="button" role="tab" aria-selected="false" data-m="1">≠ Different</button>
+      </div>
+      <div class="chips" id="mirPairs"></div>
+      <div class="mir__rows" aria-live="polite">
+        <div class="mir__row"><span class="mir__lab" data-ui>English</span><div class="tiles" id="mirKk"></div></div>
+        <span class="mir__sign" id="mirSign" aria-hidden="true">=</span>
+        <div class="mir__row"><span class="mir__lab" data-ui>Turkish</span><div class="tiles" id="mirTr"></div></div>
+      </div>
+      <div class="row" style="justify-content:center"><button type="button" class="btn" id="mirSay" data-say="Köprü yapıldı"><svg aria-hidden="true"><use href="#i-mic"/></svg><span lang="tr" id="mirSayT">Köprü yapıldı</span></button></div>
+      <p class="mir__note" id="mirNote" data-ui></p>
+    </div>
+    <div class="mini" data-mini data-ok="0" data-say="Mektup yazılmadı." data-yes="Yes. The “not” lives inside the verb: yaz + ıl + ma + dı." data-no="That's English word order in Turkish clothes. Değil doesn't negate verbs. Put -ma- inside: yazılmadı.">
+      <p class="mini__q">“The letter wasn't written.” Which one is Turkish?</p>
+      <div class="mini__o"><button type="button" lang="tr">Mektup yazılmadı.</button><button type="button" lang="tr">Mektup yazıldı değil.</button><button type="button" lang="tr">Mektup değil yazıldı.</button></div>
+      <p class="mini__f" data-ui></p>
+    </div>
+  </div>
+</section>
+
 <section class="sec" data-section="tree" data-words="47">
   <div class="wrap grid2">
     <div class="txt">
-      <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-tree"/></svg>shot 06 · algorithm</p>
+      <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-tree"/></svg>shot 07 · algorithm</p>
       <h2>Two questions and you're done</h2>
       <p class="rv">Ask the questions in order. The first “yes” is your answer.</p>
       <p class="rv">The first question is about the vowel. The second is about l. If both answers are “no,” you're left with -Il-.</p>
@@ -669,7 +710,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
       </div>
     </div>
     <div class="txt">
-      <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-magnet"/></svg>shot 07 · memory hook</p>
+      <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-magnet"/></svg>shot 08 · memory hook</p>
       <h2>Two L's don't get along</h2>
       <p class="rv">Picture it: <b lang="tr">al + ıl</b>. You get “alıl.” Your tongue trips on flat ground.</p>
       <p class="rv">That's why verbs ending in l don't call a second l, they call n: <b lang="tr" data-say="alın, bulun, silin">alın, bulun, silin</b>.</p>
@@ -683,7 +724,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
   <svg class="float filmdeco" style="--w:420px;left:-130px;bottom:2%" data-sp="60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#e3d4fb" stroke-width="24" stroke-linecap="round"/><path d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="7 9"/></svg>
   <svg class="tripod" viewBox="0 0 120 170" aria-hidden="true"><path d="M60 70 L24 168 M60 70 L96 168 M60 70 V168" stroke="#3d3f48" stroke-width="5" stroke-linecap="round"/><g class="tp-cam"><rect x="22" y="34" width="62" height="36" rx="8" fill="#1e1f26"/><path d="M84 44 L108 32 V72 L84 60 Z" fill="#3d3f48"/><circle cx="40" cy="24" r="12" fill="#1e1f26"/><circle cx="66" cy="24" r="12" fill="#1e1f26"/><circle class="tp-rec" cx="32" cy="44" r="4" fill="#e3489a"/></g></svg>
   <div class="wrap">
-    <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-pin"/></svg>shot 08 · the city</p>
+    <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-pin"/></svg>shot 09 · the city</p>
     <h2>Ankara speaks in the passive</h2>
     <p class="txt rv">Ankara is a city of ministries, tours, and breaking news. The capital lives on headlines, signs, and tours. There the doer is almost always offscreen. Tap the dots.</p>
     <div class="city" id="city">
@@ -717,7 +758,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 <section class="sec" data-section="gallery" data-words="36">
   <svg class="float filmdeco" style="--w:420px;right:-120px;top:2%" data-sp="60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#cfe2ff" stroke-width="24" stroke-linecap="round"/><path d="M-10 40 C 100 160, 200 0, 300 130 S 400 200, 420 160" fill="none" stroke="#fff" stroke-width="7" stroke-dasharray="7 9"/></svg>
   <div class="wrap">
-    <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-film"/></svg>shot 09 · gallery</p>
+    <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-film"/></svg>shot 10 · gallery</p>
     <h2>Flip cards</h2>
     <p class="txt rv">Front — passive. Back — the translation and the same verb in the active. Tap, listen, compare.</p>
     <p class="txt rv">The back often has <b lang="tr">biri</b> — “someone.” See how clumsy that is? The passive drops this “someone” entirely, and the sentence gets shorter. Flip all the cards and compare the length.</p>
@@ -732,7 +773,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
   <span class="float cube cube--v" style="--s:70px;--r:-18deg;left:3%;top:8%" data-sp="90"></span>
   <span class="float cube" style="--s:44px;--r:25deg;right:4%;bottom:12%" data-sp="-80"></span>
   <div class="wrap">
-    <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-flask"/></svg>shot 10 · lab</p>
+    <p class="kick" data-ui><svg aria-hidden="true"><use href="#i-flask"/></svg>shot 11 · lab</p>
     <h2>Editing room</h2>
     <p class="txt rv">You're the director here. Build the form, cut the doer, catch the mistakes.</p>
     <div class="seg lab__seg" role="tablist" aria-label="Lab modes" id="labSeg" data-ui>
@@ -776,9 +817,9 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 <section class="sec" data-section="traps" data-words="57">
   <svg class="float filmdeco" style="--w:440px;right:-100px;top:4%" data-sp="-60" viewBox="0 0 400 220" aria-hidden="true"><path class="fd" d="M-10 180 C 100 60, 200 220, 300 90 S 400 40, 420 60" fill="none" stroke="#e3d4fb" stroke-width="26" stroke-linecap="round"/><path d="M-10 180 C 100 60, 200 220, 300 90 S 400 40, 420 60" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="7 9"/></svg>
   <div class="wrap">
-    <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-warn"/></svg>shot 11 · traps</p>
+    <p class="kick kick--b" data-ui><svg aria-hidden="true"><use href="#i-warn"/></svg>shot 12 · traps</p>
     <h2>Where everyone trips</h2>
-    <p class="txt rv">This isn't a reproach. It's a minefield map. Almost everyone learning Turkish has stepped on each of these. Tap a card and the mistake gets fixed.</p>
+    <p class="txt rv">This isn't a reproach. It's a minefield map. Five mistakes that sound fine to an English ear. Tap a card and the mistake gets fixed.</p>
     <div class="row" style="margin-bottom:16px"><button type="button" class="btn" id="trapAll" data-ui><svg aria-hidden="true"><use href="#i-check"/></svg>Fix all</button></div>
     <div class="traps" id="traps"></div>
   </div>
@@ -786,7 +827,7 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
 
 <section class="sec" data-section="video" data-words="13">
   <div class="wrap">
-    <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-tv"/></svg>shot 12 · video</p>
+    <p class="kick kick--s" data-ui><svg aria-hidden="true"><use href="#i-tv"/></svg>shot 13 · video</p>
     <h2>Listen to native speakers</h2>
     <p class="txt">Notice: the teacher splits the verbs into three groups — consonant, vowel, the letter l.</p>
     <a-video yt="gHO8queS7zE" start="100" end="244" title="B2 passive voice in Turkish" channel="Hep Türkçe"></a-video>
@@ -836,9 +877,9 @@ mark{background:var(--g-violet);color:#fff;border-radius:8px;padding:0 4px}
         <button type="button" class="poster__c" data-say="alındı"><b>Letter l</b><span lang="tr">al → al<i>ın</i>dı</span></button>
         <button type="button" class="poster__c" data-say="Köprü yapıldı."><b>Object in the lead</b><span lang="tr">köprüyü → köprü</span></button>
         <button type="button" class="poster__c" data-say="yapıldı, sevildi, soruldu, görüldü"><b>Harmony</b><span lang="tr">ı · i · u · ü</span></button>
-        <button type="button" class="poster__c" data-say="yapılmadı"><b>Not done</b><span lang="tr">yapıl<em>ma</em>dı</span></button>
+        <button type="button" class="poster__c" data-say="yapılmadı"><b>Not · never değil</b><span lang="tr">yapıl<em>ma</em>dı</span></button>
       </div>
-      <p class="cap" style="margin-top:14px">Take a screenshot. Three ways in, one harmony, an object with no tail.</p>
+      <p class="cap" style="margin-top:14px">Take a screenshot. Three ways in, four vowels, an object with no tail. No “was,” no değil: it all fits in one verb.</p>
     </div>
     <div class="final rv">
       <p>Remember the window at Kızılay? <b lang="tr" data-say="Belgeniz hazırlandı.">Belgeniz hazırlandı.</b> The clerk wasn't hiding anything. She was just speaking Turkish.</p>
@@ -1366,6 +1407,63 @@ safe('harmony', () => {
   loopWhenVisible($('#bento'), bob);
 });
 
+/* mirror: English ↔ Turkish, piece under piece */
+safe('mirror', () => {
+  const root = $('#mir');
+  if (!root) return;
+  const SETS = [
+    [
+      { kk: [['The bridge', ''], ['was built', 'p']], tr: [['Köprü', ''], ['yapıldı', 'p']], d: [], say: 'Köprü yapıldı', note: 'Both languages can send the doer offscreen. The object becomes the subject.' },
+      { kk: [['He', ''], ['was seen', 'p']], tr: [['O', ''], ['görüldü', 'p']], d: [], say: 'O görüldü', note: 'English changes the object too: “they saw <b>him</b>” → “<b>he</b> was seen.” Turkish: onu → o, köprüyü → köprü.' },
+    ],
+    [
+      { kk: [['was', 't'], ['written', 'p']], tr: [['yaz', ''], ['ıl', 'p'], ['dı', 't']], dk: [0, 1], dt: [1, 2], say: 'yazıldı', note: 'English needs two words: helper “was” + participle. Turkish needs no helper: <b>-ıl-</b> inside the verb, then the usual tense.' },
+      { kk: [['was', 't'], ['not', 'n'], ['found', 'p']], tr: [['bul', ''], ['un', 'p'], ['ma', 'n'], ['dı', 't']], d: [1], dt: [2], say: 'bulunmadı', note: 'English puts “not” after “was.” Turkish puts <b>-ma-</b> inside the verb, after the passive. Never değil.' },
+      { kk: [['-ed', 'p']], tr: [['-ıl', 'p'], ['-il', 'p'], ['-ul', 'p'], ['-ül', 'p']], dk: [0], dt: [0, 1, 2, 3], say: 'açıldı, silindi, bulundu, görüldü', note: 'English -ed never changes. Turkish -Il- takes its vowel from the verb: açıldı, silindi, bulundu, görüldü.' },
+      { kk: [['by', 'n'], ['the architect', '']], tr: [['mimar', ''], ['tarafından', 'n']], d: [0], dt: [1], say: 'mimar tarafından', note: '“By” is not <b>ile</b> (ile = “together with”). Most of the time Turkish just drops the doer. In formal news: mimar <b>tarafından</b>.' },
+    ],
+  ];
+  const seg = $$('#mirSeg button');
+  const pk = $('#mirPairs');
+  const K = $('#mirKk');
+  const T = $('#mirTr');
+  const S = $('#mirSign');
+  const N = $('#mirNote');
+  const sb = $('#mirSay');
+  const st = $('#mirSayT');
+  let m = 0;
+  const row = (arr, d, tr) => arr.map(([x, c], i) => `<span class="tl${c ? ' tl--' + c : ''}${d.includes(i) ? ' is-diff' : ''}"${tr ? ' lang="tr"' : ''}>${esc(x)}</span>`).join('');
+  const show = (k) => {
+    const p = SETS[m][k];
+    $$('.chip', pk).forEach((c, j) => c.classList.toggle('is-on', j === k));
+    K.innerHTML = row(p.kk, p.dk || p.d, false);
+    T.innerHTML = row(p.tr, p.dt || p.d, true);
+    S.textContent = m ? '≠' : '=';
+    S.classList.toggle('is-ne', !!m);
+    N.innerHTML = p.note;
+    st.textContent = p.say;
+    sb.dataset.say = p.say;
+    g.from(K.children, { y: -40, rotation: -8, opacity: 0, duration: 0.5, ease: 'back.out(2.4)', stagger: 0.07 });
+    g.from(T.children, { y: 40, rotation: 8, opacity: 0, duration: 0.5, ease: 'back.out(2.4)', stagger: 0.07, delay: 0.15 });
+    g.fromTo(S, { rotation: -180, scale: 0.4 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(2.5)' });
+    const dd = $$('.is-diff', root);
+    if (dd.length) g.fromTo(dd, { y: 0 }, { y: -8, duration: 0.22, yoyo: true, repeat: 3, ease: 'power1.inOut', delay: 0.7 });
+  };
+  const fill = () => {
+    pk.innerHTML = SETS[m].map((p) => `<button type="button" class="chip" lang="tr">${esc(p.say)}</button>`).join('');
+    show(0);
+  };
+  seg.forEach((b) => b.addEventListener('click', () => {
+    m = +b.dataset.m;
+    seg.forEach((x) => x.setAttribute('aria-selected', String(x === b)));
+    fill();
+  }));
+  pk.addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (b) { show($$('.chip', pk).indexOf(b)); say(b.textContent); } });
+  sb.addEventListener('click', () => pop(sb));
+  fill();
+  g.from(root, { y: 80, scale: 0.95, duration: 0.9, ease: 'back.out(1.4)', scrollTrigger: { trigger: root, start: 'top 90%', once: true } });
+});
+
 /* алгоритм-дерево: точка бежит по веткам */
 safe('tree', () => {
   const V = ['oku', 'bekle', 'al', 'bul', 'yaz', 'aç', 'sil', 'ye', 'gör', 'temizle', 'sat', 'iç'];
@@ -1534,7 +1632,7 @@ safe('lab', () => {
   g.from('#labSeg button', { y: -30, rotation: -6, duration: 0.6, ease: 'back.out(2.5)', stagger: 0.07, scrollTrigger: { trigger: '#labSeg', start: 'top 92%', once: true } });
 
   /* 1. Сборка */
-  const RU = { yap: 'done', oku: 'read', al: 'taken, bought', sev: 'loved', bul: 'found', temizle: 'cleaned', iç: 'drunk', sil: 'erased', gör: 'seen', bekle: 'waited for', yaz: 'written', ye: 'eaten' };
+  const RU = { yap: 'it was done', oku: 'it was read', al: 'it was taken', sev: 'it was loved', bul: 'it was found', temizle: 'it was cleaned', iç: 'it was drunk', sil: 'it was deleted', gör: 'it was seen', bekle: 'it was waited for', yaz: 'it was written', ye: 'it was eaten' };
   const why = (v) => (endsV(v) ? `${v} ends in a vowel — n is enough.` : v.endsWith('l') ? `${v} ends in l — add -${I4(v)}n-.` : `${v} ends in a consonant — add -${I4(v)}l-.`);
   const vb = $('#lbVerbs');
   const T = $('#lbT');
@@ -1571,7 +1669,7 @@ safe('lab', () => {
     T.insertAdjacentHTML('beforeend', tileHtml(t, 't'));
     g.from(T.lastElementChild, { x: 80, scale: 0.3, duration: 0.6, ease: 'back.out(3)' });
     T.dataset.say = s + t;
-    W.textContent = `${s + t} — ${RU[v]}. By whom — not said.`;
+    W.textContent = `${s + t} — ${RU[v]}. By whom? Not said.`;
     say(s + t);
     sparks(T.lastElementChild);
   });
@@ -1662,6 +1760,8 @@ safe('lab', () => {
 
   /* 4. Да / нет */
   const NV = ['yap', 'oku', 'al', 'temizle', 'bul', 'gör'];
+  /* full English phrases per verb: the participle is irregular, so no gluing */
+  const EN = { yap: ['it was done', 'it was not done'], oku: ['it was read', 'it was not read'], al: ['it was taken', 'it was not taken'], temizle: ['it was cleaned', 'it was not cleaned'], bul: ['it was found', 'it was not found'], gör: ['it was seen', 'it was not seen'] };
   const nb = $('#lnVerbs');
   const nT = $('#lnT');
   const nW = $('#lnWhy');
@@ -1674,7 +1774,7 @@ safe('lab', () => {
     const t = 'd' + I4(ma || s);
     nT.innerHTML = tileHtml(nv) + tileHtml(pasAff(nv), 'p') + (neg ? tileHtml(ma, 'n') : '') + tileHtml(t, 't');
     nT.dataset.say = s + ma + t;
-    nW.textContent = neg ? `${s + ma + t} — not done. -m${A2(s)}- goes after the voice.` : `${s + t} — done.`;
+    nW.textContent = neg ? `${s + ma + t} — ${EN[nv][1]}. English puts “not” after “was”; Turkish puts -m${A2(s)}- inside the verb, after the passive.` : `${s + t} — ${EN[nv][0]}.`;
     $('#lnYes').classList.toggle('is-on', !neg);
     $('#lnNo').classList.toggle('is-on', neg);
     $$('.chip', nb).forEach((c) => c.classList.toggle('is-on', c.textContent === nv));
@@ -1687,17 +1787,17 @@ safe('lab', () => {
   $('#lnYes').addEventListener('click', () => { neg = false; nShow(); });
   $('#lnNo').addEventListener('click', () => { neg = true; nShow(); });
   nT.innerHTML = tileHtml('yap') + tileHtml('ıl', 'p') + tileHtml('dı', 't');
-  nW.textContent = 'yapıldı — done.';
+  nW.textContent = 'yapıldı — it was done.';
 });
 
 /* ловушки */
 safe('traps', () => {
   buildTraps($('#traps'), [
-    { bad: 'yapındı', good: 'yapıldı', why: 'yap ends in a consonant. So -ıl-, not -ın-.' },
+    { bad: 'Köprüyü yapıldı.', good: 'Köprü yapıldı.', why: 'In English “the bridge” looks the same in both sentences. In Turkish the object drops its tail, like “him” becomes “he.”' },
+    { bad: 'Köprü mimar ile yapıldı.', good: 'Köprü mimar tarafından yapıldı.', why: '“By” is not ile: ile means “together with.” Formal Turkish uses tarafından. Most of the time it just drops the doer.' },
+    { bad: 'Bilet alındı değil.', good: 'Bilet alınmadı.', why: 'English adds “not” after “was.” Turkish puts -ma- inside the verb. Değil is for nouns, not verbs.' },
+    { bad: 'Kapı açtı.', good: 'Kapı açıldı.', why: 'English says “the door opened” with no passive. In Turkish açtı means the door opened something. You need -ıl-.' },
     { bad: 'Kitap okuldu.', good: 'Kitap okundu.', why: 'After a vowel, only n. Okuldu means “it was a school.”' },
-    { bad: 'Bilet alıldı.', good: 'Bilet alındı.', why: 'A verb ending in l takes -ın-. Two l\'s in a row don\'t work.' },
-    { bad: 'Köprüyü yapıldı.', good: 'Köprü yapıldı.', why: 'The object became the main character. The accusative tail drops off.' },
-    { bad: 'Kapı açtı.', good: 'Kapı açıldı.', why: 'Without the insert the door opened something itself. You need -ıl-.' },
   ]);
   $('#trapAll').addEventListener('click', () => {
     $$('#traps .trap:not(.is-on)').forEach((t, k) => setTimeout(() => t.click(), reduce ? 0 : k * 220));

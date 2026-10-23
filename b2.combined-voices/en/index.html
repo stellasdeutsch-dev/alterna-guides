@@ -18,9 +18,9 @@
   @font-face { font-family: 'Caveat'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(../media/caveat-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
   @font-face { font-family: 'Caveat'; font-style: normal; font-weight: 400 700; font-display: swap; src: url(../media/caveat-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
 
-  /* Ночной хакатон: графит, неон, фиолетовые рваные плашки, оранжевые рамки телефонов.
-     Роли цветов в слове: основа — белая/чёрная, -Iş (взаимный) — оранжевый, каузатив — неон,
-     пассив -Il — розовый, время и лицо — сиреневый. Фиолетовый — только фон-плашка. */
+  /* Night hackathon: graphite, neon, torn violet strips, orange phone frames.
+     Colors in a word: stem — white/black, -Iş (reciprocal) — orange, causative — neon,
+     passive -Il — pink, tense and person — lilac. Violet is only a background strip. */
   :root {
     --bg: #19191b; --bg-2: #242428; --line: #333338;
     --neon: #efff1f; --violet: #8b12ff; --violet-2: #6a0fd0; --lilac: #c9adff;
@@ -40,7 +40,7 @@
   button { font-family: inherit; }
   [data-say] { cursor: pointer; }
   b[lang="tr"] { font-weight: 700; }
-  /* морфемы: подсветка маркером, читается и на тёмном, и на светлом */
+  /* morphemes: marker highlight, readable on dark and light */
   .r { color: inherit; }
   .rc, .cs, .ps, .tn { border-radius: .22em; padding: 0 .06em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
   .rc { background: var(--orange); color: var(--ink); }
@@ -51,7 +51,7 @@
   .scene { position: relative; scroll-margin-top: var(--bar-h); }
   .scene--light { background: var(--paper); color: var(--ink); }
 
-  /* ---------- сцена-кадр ---------- */
+  /* ---------- scene frame ---------- */
   .stage { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 10px; padding: calc(var(--bar-h) + 10px) 16px 70px; background: var(--bg); }
   .is-film .stage { height: 100vh; height: 100svh; min-height: 560px; }
   .slate { position: relative; z-index: 2; margin: 0; display: flex; gap: 10px; align-items: center; font: 700 22px/1 var(--hand); color: var(--neon); }
@@ -91,13 +91,13 @@
     html:not(.is-film) .vis { height: min(70vh, 620px); }
   }
 
-  /* ---------- общие предметы ---------- */
+  /* ---------- shared objects ---------- */
   .phone { position: absolute; background: #111; border: 1.1cqw solid var(--orange); border-radius: 7cqw; padding: 5cqw 2.4cqw 3cqw; box-shadow: 0 0 6cqw rgba(255, 122, 26, .35); }
   .phone::before { content: ''; position: absolute; left: 50%; top: 1.6cqw; width: 16cqw; height: 2.6cqw; margin-left: -8cqw; border-radius: 2cqw; background: #000; }
   .phone__scr { position: relative; height: 100%; border-radius: 4cqw; overflow: hidden; background: linear-gradient(170deg, #7d2bff, #4b14b8 60%, #2c0f6e); color: #fff; }
   .sticker { display: inline-block; padding: .35em .7em .45em; border-radius: .6em; font-weight: 800; box-shadow: 0 .3em .9em rgba(0, 0, 0, .35); }
 
-  /* ---------- 1. бейджи ---------- */
+  /* ---------- 1. badges ---------- */
   #s1-phone { left: 19%; top: 8%; width: 62%; height: 82%; }
   .msg { position: absolute; inset: 0; padding: 7cqw 3.4cqw 4cqw; display: flex; flex-direction: column; gap: 2.4cqw; }
   .msg__who { display: flex; align-items: center; gap: 2cqw; font-size: 3.4cqw; font-weight: 700; }
@@ -111,7 +111,7 @@
   .badge b { display: block; margin-top: 1.2cqw; font-size: 4cqw; }
   html:not(.is-film) .badges, html:not(.is-film) #s1-board, html:not(.is-film) #s1-boss { display: none; }
 
-  /* ---------- 2. слои ---------- */
+  /* ---------- 2. layers ---------- */
   .wordline { position: absolute; left: 0; right: 0; top: 5%; text-align: center; font: 900 9.6cqw/1.1 var(--ak-font); letter-spacing: -.01em; }
   .stack { position: absolute; left: 6%; width: 46%; bottom: 6%; display: flex; flex-direction: column-reverse; gap: 2cqw; align-items: flex-start; }
   .layer { font-size: 6.4cqw; transform: rotate(-3deg); }
@@ -125,7 +125,7 @@
   .notes svg { position: absolute; }
   .s2out { display: flex; gap: 6px; align-items: baseline; flex-wrap: wrap; font-size: 20px; font-weight: 800; }
 
-  /* ---------- 3. кто красил ---------- */
+  /* ---------- 3. who painted ---------- */
   .matrix { position: absolute; left: 4%; right: 4%; bottom: 3%; display: grid; grid-template-columns: 1fr 1fr; gap: 2cqw; }
   .cell { min-height: 44px; padding: 1.6cqw 2.4cqw; border: .5cqw solid #3a3a40; border-radius: 3cqw; background: rgba(25, 25, 27, .9); color: #fff; text-align: left; cursor: pointer; display: grid; gap: .4cqw; font-family: var(--ak-font); }
   .cell b { font-size: 4.6cqw; }
@@ -134,7 +134,7 @@
   .chat1 { position: absolute; left: 4%; top: 3%; max-width: 64%; padding: 2cqw 3cqw; border-radius: 1cqw 4cqw 4cqw 4cqw; background: #fff; color: var(--ink); font-size: 3.6cqw; font-weight: 600; }
   .chat1 i { display: block; font-style: normal; font-size: 2.6cqw; color: var(--violet); font-weight: 800; letter-spacing: .1em; }
 
-  /* ---------- 4. всегда -Il ---------- */
+  /* ---------- 4. always -Il ---------- */
   .rows { position: absolute; left: 5%; right: 5%; top: 30%; display: grid; gap: 3cqw; }
   .row { display: flex; align-items: center; gap: 1.4cqw; font-size: 6cqw; font-weight: 800; }
   .row .chipw { padding: 1cqw 2cqw; border-radius: 2cqw; background: #fff; color: var(--ink); }
@@ -151,7 +151,7 @@
   .liftq { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .chip { display: inline-grid; place-items: center; min-width: 72px; height: 44px; padding: 0 12px; border-radius: 12px; background: #fff; color: var(--ink); font: 800 20px/1 var(--ak-font); }
 
-  /* ---------- 5. познакомились или познакомили ---------- */
+  /* ---------- 5. met or were introduced ---------- */
   #s5-pl { left: 3%; top: 4%; width: 41%; height: 66%; }
   #s5-pr { right: 3%; top: 4%; width: 41%; height: 66%; }
   .ph-cap { position: absolute; left: 3cqw; right: 3cqw; bottom: 3cqw; display: grid; gap: .6cqw; }
@@ -161,7 +161,7 @@
   .agent { position: absolute; left: 10%; right: 10%; bottom: 4%; text-align: center; }
   .agent .sticker { background: var(--orange); color: var(--ink); font-size: 4.4cqw; transform: rotate(-3deg); }
 
-  /* ---------- 7. ловушки-стикеры ---------- */
+  /* ---------- 7. trap stickers ---------- */
   .wall { position: absolute; inset: 0; overflow: hidden; }
   html:not(.is-film) .wall { position: relative; }
   #traps .vis { container-type: normal; }
@@ -185,7 +185,7 @@
   .megakid { position: absolute; right: 2%; bottom: 0; width: 26%; max-width: 170px; pointer-events: none; }
   html:not(.is-film) .megakid { display: none; }
 
-  /* ---------- светлые секции ---------- */
+  /* ---------- light sections ---------- */
   .wrap { max-width: 1040px; margin: 0 auto; padding: calc(var(--bar-h) + 36px) 16px 56px; }
   @media (min-width: 1024px) { .wrap { padding: 72px 124px 72px 40px; } }
   .wrap h2 { margin: 8px 0 8px; font: 900 clamp(28px, 5vw, 46px)/1.05 var(--ak-font); text-transform: uppercase; letter-spacing: -.01em; }
@@ -197,6 +197,8 @@
   .lab__screen > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
   .lab__word { position: absolute; left: 4%; right: 4%; top: 30%; text-align: center; font: 900 clamp(26px, 9.4cqw, 66px)/1.1 var(--ak-font); }
   .lab__ru { position: absolute; left: 6%; right: 6%; top: 58%; text-align: center; font: 700 clamp(20px, 6cqw, 36px)/1.1 var(--hand); color: var(--neon); }
+  .lab__ru > span { font-family: var(--ak-font); font-weight: 800; font-size: .8em; }
+  .lab__ru small { font-size: .62em; color: var(--lilac); }
   .lab__line { position: absolute; left: 6%; right: 6%; bottom: 8%; text-align: center; font-size: clamp(14px, 3.6cqw, 20px); color: #ddd6ea; }
   .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
   .tab { min-height: 44px; padding: 10px 16px; border: 2px solid var(--ink); border-radius: 14px; background: transparent; font: 800 14px/1 var(--ak-font); text-transform: uppercase; letter-spacing: .04em; cursor: pointer; }
@@ -229,7 +231,25 @@
   .press__fb { margin: 0; min-height: 1.4em; color: #ddd6ea; }
   .press__foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 
-  /* ---------- финал ---------- */
+  /* ---------- mirror: English ↔ Turkish ---------- */
+  .mir { display: grid; gap: 14px; }
+  @media (min-width: 900px) { .mir { grid-template-columns: 1.05fr 1fr; align-items: start; } .mir__screen { grid-row: span 3; } }
+  .mir__screen { position: relative; overflow: hidden; display: grid; gap: 10px; justify-items: center; align-content: center; min-height: 320px; padding: 22px 16px 20px; border-radius: 24px; background: var(--bg); color: #fff; container-type: inline-size; }
+  .mir__screen > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .mir__screen > :not(svg) { position: relative; }
+  .mir__lang { margin: 0; font: 700 20px/1 var(--hand); color: var(--lilac); }
+  .mir__w { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; font: 900 clamp(24px, 8.6cqw, 46px)/1.15 var(--ak-font); }
+  .mir__w span { display: inline-block; white-space: pre; }
+  .mir__w .x { text-decoration: underline wavy var(--neon); text-decoration-thickness: 3px; text-underline-offset: 8px; }
+  .mir__sign { display: grid; place-items: center; width: 62px; height: 62px; border-radius: 50%; background: var(--neon); color: var(--ink); font: 900 34px/1 var(--ak-font); transform: rotate(-6deg); }
+  .mir__sign.is-ne { background: var(--pink); color: #fff; }
+  .mir__sign.is-ap { background: var(--lilac); }
+  .mir__note { margin: 4px 0 0; max-width: 30em; text-align: center; font-size: 15px; color: #ddd6ea; }
+  .mir__tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mir__tabs .tab { text-transform: none; letter-spacing: 0; }
+  .mir__tabs .tab[aria-pressed="true"] { background: var(--ink); color: var(--neon); }
+
+  /* ---------- finale ---------- */
   .poster { position: relative; display: grid; gap: 0; border-radius: 26px; overflow: hidden; background: var(--bg); color: #fff; }
   @media (min-width: 760px) { .poster { grid-template-columns: .8fr 1.2fr; } }
   .poster__l { position: relative; min-height: 260px; background: var(--violet); }
@@ -248,7 +268,7 @@
   .js .bub--me:not(.is-on) { display: none; }
   .fin__line { margin: 6px 0 0; font-size: clamp(17px, 1rem + .4vw, 21px); font-weight: 600; max-width: 36em; }
 
-  /* ---------- свой скроллбар: телефон с подписками ---------- */
+  /* ---------- custom scrollbar: phone with captions ---------- */
   .tower { position: fixed; z-index: 40; font-family: var(--ak-font); }
   .tower__floors { list-style: none; margin: 0; padding: 0; }
   .tower__floors button { border: 0; cursor: pointer; font: 800 12px/1 var(--ak-font); }
@@ -324,6 +344,7 @@
     <li><button type="button" data-goto="layers"><span>02</span><em>Layers</em></button></li>
     <li><button type="button" data-goto="who"><span>03</span><em>Who painted</em></button></li>
     <li><button type="button" data-goto="il"><span>04</span><em>Always -Il</em></button></li>
+    <li><button type="button" data-goto="en-diff"><span>≠</span><em>Mirror</em></button></li>
     <li><button type="button" data-goto="pairs"><span>05</span><em>On our own or us</em></button></li>
     <li><button type="button" data-goto="lab"><span>06</span><em>Workshop</em></button></li>
     <li><button type="button" data-goto="traps"><span>07</span><em>Stickers</em></button></li>
@@ -335,7 +356,7 @@
 </nav>
 
 <main>
-<!-- ================= 01 · БЕЙДЖИ ================= -->
+<!-- ================= 01 · BADGES ================= -->
 <section data-section="story" data-words="72" class="scene" id="story">
   <div class="stage">
     <p class="slate"><span>01</span> Badges</p>
@@ -398,7 +419,7 @@
   </div>
 </section>
 
-<!-- ================= 02 · СЛОИ ================= -->
+<!-- ================= 02 · LAYERS ================= -->
 <section data-section="layers" data-words="61" class="scene" id="layers">
   <div class="stage">
     <div class="shutter" aria-hidden="true"><i>want to</i><b>take apart</b><i>the word?</i><span>02</span></div>
@@ -452,7 +473,7 @@
   </div>
 </section>
 
-<!-- ================= 03 · КТО КРАСИЛ ================= -->
+<!-- ================= 03 · WHO PAINTED ================= -->
 <section data-section="who" data-words="70" class="scene" id="who">
   <div class="stage">
     <div class="shutter" aria-hidden="true"><i>who</i><b>painted this?</b><span>03</span></div>
@@ -479,8 +500,8 @@
     <div class="subs">
       <p class="sub">On Monday the office smells like paint. There's an announcement in the channel.</p>
       <p class="sub">Kemal asks, did Selin paint it herself? I say no. There's a <b lang="tr" class="cs">-t-</b> in there, so she hired painters.</p>
-      <p class="sub"><b lang="tr" data-say="boyadı">boyadı</b> — she painted it herself. <b lang="tr" data-say="boyattı">boyattı</b> — she had it painted.</p>
-      <p class="sub"><b lang="tr" data-say="boyandı">boyandı</b> — it got painted, and by whom doesn't matter.</p>
+      <p class="sub"><b lang="tr" data-say="boyadı">boyadı</b> — she painted it herself. <b lang="tr" data-say="boyattı">boyattı</b> — she had it painted. That English “have it done” is exactly the <b lang="tr" class="cs">-t</b>.</p>
+      <p class="sub"><b lang="tr" data-say="boyandı">boyandı</b> — it got painted, and by whom doesn't matter. English says “was painted” for this one and the next.</p>
       <p class="sub"><b lang="tr" data-say="boyatıldı">boyatıldı</b> — it got painted on someone's orders. Two people off camera: the one who ordered it and the painter.</p>
     </div>
     <div class="act" id="s3-act">
@@ -490,7 +511,7 @@
   </div>
 </section>
 
-<!-- ================= 04 · ВСЕГДА -Il ================= -->
+<!-- ================= 04 · ALWAYS -Il ================= -->
 <section data-section="il" data-words="33" class="scene" id="il">
   <div class="stage">
     <div class="shutter" aria-hidden="true"><i>which</i><b>passive?</b><span>04</span></div>
@@ -530,7 +551,35 @@
   </div>
 </section>
 
-<!-- ================= 05 · САМИ ИЛИ НАС ================= -->
+<!-- ================= ≠ · MIRROR: ENGLISH ↔ TURKISH ================= -->
+<section data-section="en-diff" data-words="72" class="scene scene--light" id="en-diff">
+  <div class="wrap">
+    <p class="slate"><span>≠</span> Mirror</p>
+    <h2>Same layers, <em>different glue</em></h2>
+    <p>English has all these layers too. It just builds them out of extra words: <b>were</b>, <b>had</b>, <b>by</b>. Turkish glues them onto one verb, always in the same order. Tap a sign: <b>≈</b> same job, <b>≠</b> works differently.</p>
+    <div class="mir" id="mir">
+      <div class="mir__screen" id="mir-screen">
+        <svg viewBox="0 0 400 320" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 250 L60 230 L130 254 L200 226 L270 250 L340 222 L410 240 L410 330 L-10 330Z" fill="#8b12ff"/><path id="mir-squig" d="M268 34 C290 10 312 58 334 34 S 370 10 392 34" fill="none" stroke="#efff1f" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/></svg>
+        <p class="mir__lang">English</p>
+        <p class="mir__w" id="mir-kk"></p>
+        <span class="mir__sign" id="mir-sign" aria-hidden="true">≈</span>
+        <p class="mir__w" id="mir-tr" lang="tr"></p>
+        <p class="mir__lang">Turkish</p>
+        <p class="mir__note" id="mir-note" aria-live="polite"></p>
+      </div>
+      <div class="mir__tabs" role="group" aria-label="English and Turkish compared" id="mir-tabs"></div>
+      <div class="panel" id="mir-quiz">
+        <h3>Think in English, write in Turkish</h3>
+        <p class="sent" id="mq-src"></p>
+        <div class="chips" id="mq-opts"></div>
+        <div class="act__row"><button type="button" class="btn" id="mq-next">Next</button></div>
+        <p class="why" id="mq-why" hidden></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 05 · ON OUR OWN OR US ================= -->
 <section data-section="pairs" data-words="40" class="scene" id="pairs">
   <div class="stage">
     <div class="shutter" aria-hidden="true"><i>on our own or</i><b>us?</b><span>05</span></div>
@@ -571,7 +620,7 @@
   </div>
 </section>
 
-<!-- ================= 06 · МАСТЕРСКАЯ ================= -->
+<!-- ================= 06 · WORKSHOP ================= -->
 <section data-section="lab" data-words="51" class="scene scene--light" id="lab">
   <div class="wrap">
     <p class="slate"><span>06</span> Workshop</p>
@@ -584,7 +633,7 @@
           <path id="lab-squig" d="M20 60 C60 20 90 100 130 60 S 200 20 240 60" fill="none" stroke="#efff1f" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
         </svg>
         <p class="lab__word" id="lab-word" lang="tr" data-say="boyatıldı"><span class="r">boya</span><span class="cs">t</span><span class="ps">ıl</span><span class="tn">dı</span></p>
-        <p class="lab__ru" id="lab-ru">painted on order</p>
+        <p class="lab__ru" id="lab-ru"><span class="ps">was </span><span class="r">painted </span><span class="cs">on order</span></p>
         <p class="lab__line" id="lab-line" lang="tr"></p>
       </div>
       <div class="tabs" role="tablist" aria-label="Workshop modes">
@@ -635,7 +684,7 @@
   </div>
 </section>
 
-<!-- ================= 07 · СТИКЕРЫ-ЛОВУШКИ ================= -->
+<!-- ================= 07 · TRAP STICKERS ================= -->
 <section data-section="traps" data-words="85" class="scene" id="traps">
   <div class="stage">
     <div class="shutter" aria-hidden="true"><i>stickers on the</i><b>fridge</b><span>07</span></div>
@@ -646,7 +695,7 @@
           <article class="trap"><div class="tcard tcard--pink">
             <h3>Passive goes last</h3>
             <p class="tcard__bad" lang="tr"><s>Ofis boyanttı.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Ofis boyatıldı.">Ofis boya<span class="cs">t</span><span class="ps">ıl</span><span class="tn">dı</span>.</p><p class="tcard__why">Causative first, then passive. Never the other way around.</p></div>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Ofis boyatıldı.">Ofis boya<span class="cs">t</span><span class="ps">ıl</span><span class="tn">dı</span>.</p><p class="tcard__why">English puts helper words in front of the verb. Turkish stacks suffixes after the stem, in a fixed order: causative first, then passive.</p></div>
             <button type="button" class="btn trap__btn">Fix</button>
           </div></article>
           <article class="trap"><div class="tcard tcard--orange">
@@ -658,13 +707,13 @@
           <article class="trap"><div class="tcard tcard--violet">
             <h3>You ordered it yourself — active</h3>
             <p class="tcard__bad" lang="tr"><s>Saçlarım kestirildi.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kes<span class="cs">tir</span><span class="tn">dim</span>.</p><p class="tcard__why">I got a haircut at the barber's. I'm the one who ordered it, so no passive.</p></div>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kes<span class="cs">tir</span><span class="tn">dim</span>.</p><p class="tcard__why">“I had my hair cut” looks passive because of “cut”. But I’m the one who ordered it. Turkish: active causative, no passive.</p></div>
             <button type="button" class="btn trap__btn">Fix</button>
           </div></article>
           <article class="trap"><div class="tcard tcard--neon">
-            <h3>“By whom” — only with the passive</h3>
-            <p class="tcard__bad" lang="tr"><s>Selin tarafından tanıştık.</s></p>
-            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Selin tarafından tanıştırıldık.">Selin tarafından tanış<span class="cs">tır</span><span class="ps">ıl</span><span class="tn">dık</span>.</p><p class="tcard__why"><b lang="tr">tarafından</b> names who did it. You need a passive.</p></div>
+            <h3>by Selin → <span lang="tr">Selin tarafından</span></h3>
+            <p class="tcard__bad" lang="tr"><s>Tarafından Selin tanıştırıldık.</s></p>
+            <div class="tcard__fix"><p class="tcard__good" lang="tr" data-say="Selin tarafından tanıştırıldık.">Selin tarafından tanış<span class="cs">tır</span><span class="ps">ıl</span><span class="tn">dık</span>.</p><p class="tcard__why">English “by” goes before the name. <b lang="tr">tarafından</b> goes after it. And it only works with a passive verb.</p></div>
             <button type="button" class="btn trap__btn">Fix</button>
           </div></article>
         </div>
@@ -673,9 +722,9 @@
     </div>
     <div class="subs">
       <p class="sub">A week later, stickers show up on the office fridge. Selin put them there. For me.</p>
-      <p class="sub">Second sticker. I was trying to guess the passive after the causative.</p>
-      <p class="sub">Third. I got the haircut, but wrote it like I'd been given one on someone else's orders.</p>
-      <p class="sub">Fourth. About Selin, who introduced us.</p>
+      <p class="sub">Second. I tried to guess the passive after the causative. Guessing lost.</p>
+      <p class="sub">Third. “I had my hair cut.” I saw “cut” and went passive. As if someone dragged me to the barber.</p>
+      <p class="sub">Fourth. About Selin, who introduced us. I put “by” first, like in English.</p>
     </div>
     <div class="act" id="s7-act">
       <p class="act__q" id="s7-count">Fixed: 0 of 4</p>
@@ -683,7 +732,7 @@
   </div>
 </section>
 
-<!-- ================= 08 · ВИДЕО ================= -->
+<!-- ================= 08 · VIDEO ================= -->
 <section data-section="video" data-words="11" class="scene scene--light" id="video">
   <div class="wrap">
     <p class="slate"><span>08</span> Video</p>
@@ -692,7 +741,7 @@
   </div>
 </section>
 
-<!-- ================= 09 · ПРАКТИКА ================= -->
+<!-- ================= 09 · PRACTICE ================= -->
 <section data-section="practice" data-words="12" class="scene scene--light" id="practice">
   <div class="wrap">
     <p class="slate"><span>09</span> Practice</p>
@@ -715,7 +764,7 @@
   </div>
 </section>
 
-<!-- ================= 10 · ПРОВЕРКА ================= -->
+<!-- ================= 10 · CHECK ================= -->
 <section data-section="check" data-words="7" class="scene scene--light" id="check">
   <div class="wrap">
     <p class="slate"><span>10</span> Quick check</p>
@@ -724,7 +773,7 @@
   </div>
 </section>
 
-<!-- ================= 11 · ШПАРГАЛКА И ФИНАЛ ================= -->
+<!-- ================= 11 · CHEAT SHEET AND FINALE ================= -->
 <section data-section="cheat" data-words="60" class="scene scene--light" id="cheat">
   <div class="wrap">
     <p class="slate"><span>11</span> Cheat sheet and finale</p>
@@ -747,7 +796,8 @@
           <dt>after the causative</dt><dd>only <b lang="tr" class="ps">-ıl / -il / -ul / -ül</b>: <b lang="tr" data-say="yaptırıldı">yaptırıldı</b>, <b lang="tr" data-say="öldürüldü">öldürüldü</b></dd>
           <dt>who's in the shot</dt><dd><b lang="tr">boyadı</b> herself · <b lang="tr">boyattı</b> hired someone · <b lang="tr">boyandı</b> got painted · <b lang="tr">boyatıldı</b> got painted on order</dd>
           <dt>on our own or us</dt><dd><b lang="tr" data-say="tanıştık">tanıştık</b> — on our own · <b lang="tr" data-say="tanıştırıldık">tanıştırıldık</b> — we were introduced · who did it: <b lang="tr">tarafından</b></dd>
-          <dt>don't mix up</dt><dd>you ordered it yourself — active: <b lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kestirdim.</b></dd>
+          <dt>vs English</dt><dd>had it painted = <b lang="tr">boyattı</b> · was painted = <b lang="tr">boyandı</b> or <b lang="tr">boyatıldı</b> · by Selin = <b lang="tr">Selin tarafından</b></dd>
+          <dt>don't mix up</dt><dd>I had my hair cut — you ordered it, so active: <b lang="tr" data-say="Saçlarımı kestirdim.">Saçlarımı kestirdim.</b></dd>
         </dl>
       </div>
     </div>
@@ -885,16 +935,79 @@ addEventListener('DOMContentLoaded', () => {
     } else { s5fb.textContent = 'Think: did someone bring you together, or did you meet on your own?'; shake(b); }
   }));
 
+  /* ---------- ≠ · mirror: English ↔ Turkish ---------- */
+  const MIR = [
+    ['≈ words vs suffixes', '≈', [['they ', 'r'], ['were ', 'ps'], ['introduced ', 'cs'], ['to each other', 'rc']], [], [['tanı', 'r'], ['ş', 'rc'], ['tır', 'cs'], ['ıl', 'ps'], ['dı', 'tn']], [], 'tanıştırıldı', 'Same layers, different glue. English adds separate words around the verb. Turkish glues them to the end of one word, always in this order.'],
+    ['≠ had it painted', '≠', [['Selin ', 'r'], ['had ', 'cs'], ['the office ', 'r'], ['painted', 'r']], [1], [['Selin ', 'r'], ['ofisi ', 'r'], ['boya', 'r'], ['t', 'cs'], ['tı', 'tn']], [3], 'Selin ofisi boyattı.', '“Have something done” is the causative. In Turkish it is not a second verb, just -t or -DIr. And it stays active: no passive here.'],
+    ['≠ was painted', '≠', [['The office ', 'r'], ['was ', 'ps'], ['painted', 'r']], [], [['boya', 'r'], ['n', 'ps'], ['dı', 'tn'], [' / ', 'r'], ['boya', 'r'], ['t', 'cs'], ['ıl', 'ps'], ['dı', 'tn']], [5], 'Ofis boyandı. Ofis boyatıldı.', 'One English sentence, two Turkish ones. boyandı: it just got painted. boyatıldı: someone had it painted. English hides the -t layer. Turkish makes you choose.'],
+    ['≠ die → kill', '≠', [['die', 'r'], [' → ', 'r'], ['kill', 'cs'], [' → ', 'r'], ['be ', 'ps'], ['killed', 'cs']], [2, 5], [['öl', 'r'], [' → ', 'r'], ['öl', 'r'], ['dür', 'cs'], [' → ', 'r'], ['öl', 'r'], ['dür', 'cs'], ['ül', 'ps']], [3, 6, 7], 'öl, öldür, öldürül', 'English often needs a new verb: die → kill, meet → introduce. Turkish keeps the root and adds layers: öl → öldür → öldürül.'],
+    ['≈ by', '≈', [['by ', 'tn'], ['Selin', 'r']], [], [['Selin ', 'r'], ['tarafından', 'tn']], [], 'Selin tarafından', 'Same job: it names who did it, and only with a passive. But the order flips. by Selin → Selin tarafından.'],
+    ['≠ verb last', '≠', [['We ', 'tn'], ['were introduced ', 'ps'], ['by Selin', 'r']], [0], [['Selin tarafından ', 'r'], ['tanıştırıl', 'ps'], ['dık', 'tn']], [2], 'Selin tarafından tanıştırıldık.', 'The stacked verb waits at the very end. Even “we” lives inside it: -dık. No separate word for “were” either.'],
+  ];
+  const mirW = (parts, x) => parts.map(([t, c], i) => `${/^\s/.test(t) ? '<span> </span>' : ''}<span class="${c}${x.includes(i) ? ' x' : ''}">${esc(t.trim())}</span>${/\s$/.test(t) ? '<span> </span>' : ''}`).join('');
+  let mi = 0;
+  const mirTabs = $('#mir-tabs');
+  mirTabs.innerHTML = MIR.map((m, i) => `<button type="button" class="tab" data-m="${i}" aria-pressed="${i === 0}">${esc(m[0])}</button>`).join('');
+  const mirShow = (i, animate) => {
+    mi = i;
+    const [, sign, en, xe, tr, xt, sayTr, note] = MIR[i];
+    $('#mir-kk').innerHTML = mirW(en, xe);
+    $('#mir-tr').innerHTML = mirW(tr, xt);
+    $('#mir-tr').dataset.say = sayTr;
+    const sg = $('#mir-sign');
+    sg.textContent = sign;
+    sg.classList.toggle('is-ne', sign === '≠');
+    sg.classList.toggle('is-ap', sign === '≈');
+    $('#mir-note').textContent = note;
+    $$('#mir-tabs [data-m]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.m) === i)));
+    if (!animate || calm()) return;
+    const tl = G.timeline();
+    tl.fromTo('#mir-kk span', { y: -34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .07, duration: .35, ease: 'back.out(2)' })
+      .fromTo(sg, { scale: 0, rotation: -60 }, { scale: 1, rotation: -6, duration: .4, ease: 'back.out(2.6)' }, '-=.1')
+      .fromTo('#mir-tr span', { y: 34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .07, duration: .35, ease: 'back.out(2)' }, '-=.2')
+      .fromTo('#mir-screen .x', { scale: 1 }, { scale: 1.25, duration: .18, yoyo: true, repeat: 1 }, '+=.05')
+      .fromTo('#mir-note', { y: 12, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: .35 }, '-=.2');
+  };
+  mirTabs.addEventListener('click', (e) => { const b = e.target.closest('[data-m]'); if (!b) return; mirShow(Number(b.dataset.m), true); say($('#mir-tr').dataset.say); });
+  $('#mir-tr').addEventListener('click', () => say($('#mir-tr').dataset.say));
+  mirShow(0, false);
+
+  const MQ = [
+    ['I had my hair cut at the barber’s.', ['Saçlarım kestirildi.', 'Saçlarımı kestirdim.', 'Saçlarımı kestim.'], 1, 'You ordered it, so it is an active causative: kestirdim. The English “cut” only looks passive. kestim means you cut it yourself.'],
+    ['The office was painted. (Selin hired painters.)', ['Ofis boyandı.', 'Ofis boyatıldı.', 'Ofis boyattı.'], 1, 'Someone had it done: -t + -ıl. boyandı leaves out the hiring. boyattı is active and needs a person: Selin ofisi boyattı.'],
+    ['We were introduced by Selin.', ['Tarafından Selin tanıştırıldık.', 'Selin tarafından tanıştık.', 'Selin tarafından tanıştırıldık.'], 2, 'Name first, then tarafından, then a passive verb at the end.'],
+    ['The king was killed.', ['Kral öldü.', 'Kral öldürüldü.', 'Kral öldürdü.'], 1, 'kill = öl + dür. Was killed adds the passive: öldürüldü. öldü: he died. öldürdü: he killed someone.'],
+  ];
+  let mq = 0;
+  const mqWhy = $('#mq-why');
+  const mqShow = () => {
+    const [src, opts] = MQ[mq];
+    $('#mq-src').textContent = src;
+    $('#mq-opts').innerHTML = opts.map((o, i) => `<button type="button" class="btn btn--tr" lang="tr" data-q="${i}">${esc(o)}</button>`).join('');
+    mqWhy.hidden = true;
+  };
+  $('#mq-opts').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-q]'); if (!b) return;
+    const [, opts, ok, why] = MQ[mq];
+    const good = Number(b.dataset.q) === ok;
+    pick($$('#mq-opts [data-q]'), b, good);
+    mqWhy.hidden = false;
+    mqWhy.textContent = good ? `Right. ${why}` : `Not quite. ${why}`;
+    if (good) { say(opts[ok]); pop(b, { scale: 1.2 }); } else shake(b);
+  });
+  $('#mq-next').addEventListener('click', () => { mq = (mq + 1) % MQ.length; mqShow(); pop($('#mq-src'), { x: -20, autoAlpha: 0 }); });
+  mqShow();
+
   /* ---------- 06 · мастерская ---------- */
   const LAB = {
-    'boya': ['boya', '', 't', 'ıl', 'dı', 'painted on order', 'a'],
-    'yıka': ['yıka', '', 't', 'ıl', 'dı', 'washed at a car wash', 'a'],
-    'bekle': ['bekle', '', 't', 'il', 'di', 'kept waiting', 'e'],
-    'temizle': ['temizle', '', 't', 'il', 'di', 'cleaned by a cleaning crew', 'e'],
-    'öl': ['öl', '', 'dür', 'ül', 'dü', 'he was killed', 'ö'],
-    'tanış': ['tanı', 'ş', 'tır', 'ıl', 'dı', 'they were introduced', 'ı'],
-    'buluş': ['bul', 'uş', 'tur', 'ul', 'du', 'they were brought together', 'u'],
-    'görüş': ['gör', 'üş', 'tür', 'ül', 'dü', 'a conversation was set up for them', 'ü'],
+    'boya': ['boya', '', 't', 'ıl', 'dı', [['was ', 'ps'], ['painted ', 'r'], ['on order', 'cs']], 'a'],
+    'yıka': ['yıka', '', 't', 'ıl', 'dı', [['was ', 'ps'], ['washed ', 'r'], ['at a car wash', 'cs']], 'a'],
+    'bekle': ['bekle', '', 't', 'il', 'di', [['was ', 'ps'], ['kept ', 'cs'], ['waiting', 'r']], 'e'],
+    'temizle': ['temizle', '', 't', 'il', 'di', [['was ', 'ps'], ['cleaned ', 'r'], ['by hired cleaners', 'cs']], 'e'],
+    'öl': ['öl', '', 'dür', 'ül', 'dü', [['was ', 'ps'], ['killed', 'cs']], 'ö'],
+    'tanış': ['tanı', 'ş', 'tır', 'ıl', 'dı', [['were ', 'ps'], ['introduced ', 'cs'], ['to each other', 'rc']], 'ı'],
+    'buluş': ['bul', 'uş', 'tur', 'ul', 'du', [['were ', 'ps'], ['brought ', 'cs'], ['together', 'rc']], 'u'],
+    'görüş': ['gör', 'üş', 'tür', 'ül', 'dü', [['were ', 'ps'], ['set up ', 'cs'], ['to talk', 'rc']], 'ü'],
   };
   let lk = 'boya', lgot = 3;
   const labRoots = $$('#lab-roots [data-k]'), labLayers = $$('#lab-layers [data-l]');
@@ -903,7 +1016,7 @@ addEventListener('DOMContentLoaded', () => {
     const d = LAB[lk];
     $('#lab-word').innerHTML = paint([d[0], d[1], lgot > 0 ? d[2] : '', lgot > 1 ? d[3] : '', lgot > 2 ? d[4] : '']);
     $('#lab-word').dataset.say = d[0] + d[1] + (lgot > 0 ? d[2] : '') + (lgot > 1 ? d[3] : '') + (lgot > 2 ? d[4] : '');
-    $('#lab-ru').textContent = lgot === 3 ? d[5] : ['add the causative', 'now the passive', 'tense is left'][lgot];
+    $('#lab-ru').innerHTML = lgot === 3 ? d[5].map(([t, c]) => `<span class="${c}">${esc(t)}</span>`).join('') : `<small>${['add the causative', 'now the passive', 'tense is left'][lgot]}</small>`;
   };
   labRoots.forEach((b) => b.addEventListener('click', () => {
     lk = b.dataset.k; lgot = 0;
@@ -932,7 +1045,7 @@ addEventListener('DOMContentLoaded', () => {
   $('#lab-why1').addEventListener('click', () => {
     const d = LAB[lk];
     w1.hidden = false;
-    w1.innerHTML = `The causative <b lang="tr">-${d[2]}</b> ends in a consonant, so the passive is <b lang="tr">-${d[3]}</b>. The vowel harmonizes with <b lang="tr">${d[6]}</b>.`;
+    w1.innerHTML = `The causative <b lang="tr">-${d[2]}</b> ends in a consonant, so the passive is <b lang="tr">-${d[3]}</b>. Its vowel copies the stem’s last vowel, <b lang="tr">${d[6]}</b>. English does the same job with extra words: <b>${d[5].map((p) => p[0]).join('')}</b>.`;
     pop(w1, { y: 10, autoAlpha: 0 });
   });
 
@@ -1279,6 +1392,10 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   if (!reduceMQ.matches) {
+    ScrollTrigger.create({ trigger: '#mir', start: 'top 75%', once: true, onEnter: () => mirShow(mi, true) });
+    const msq = G.fromTo('#mir-squig', { strokeDasharray: 400, strokeDashoffset: 400 }, { strokeDashoffset: 0, duration: 2.4, repeat: -1, yoyo: true, ease: 'sine.inOut', paused: true });
+    ScrollTrigger.create({ trigger: '#mir-screen', start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? msq.play() : msq.pause()) });
+    ScrollTrigger.batch('#en-diff .mir__tabs, #en-diff .panel', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .12, duration: .6, ease: 'power2.out', overwrite: true }) });
     ScrollTrigger.batch('#lab .lab__screen, #lab .tabs, #lab .panel', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: .12, duration: .6, ease: 'power2.out', overwrite: true }) });
     ScrollTrigger.batch('#practice a-exercise', { start: 'top 90%', once: true, onEnter: (els) => G.fromTo(els, { y: 30 }, { y: 0, stagger: .1, duration: .5, ease: 'power2.out', overwrite: true }) });
     ScrollTrigger.batch('#cheat .poster, #cheat .chatf', { start: 'top 88%', once: true, onEnter: (els) => G.fromTo(els, { y: 40, rotation: -1 }, { y: 0, rotation: 0, stagger: .12, duration: .6, ease: 'power2.out', overwrite: true }) });
