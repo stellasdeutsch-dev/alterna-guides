@@ -62,7 +62,7 @@ svg { overflow: visible; }
 /* скроллбар: таймлайн процесса */
 .fl-bar { position: fixed; z-index: 60; top: 0; left: 0; right: 0; height: var(--fl-top); background: var(--fl-dark); color: #fff; display: grid; grid-template-rows: 1fr 4px; user-select: none; }
 .fl-bar__steps { display: flex; padding: 0 6px; }
-.fl-bar__steps button { flex: 1 1 0; min-width: 0; min-height: 40px; font: 600 11px var(--fl-mono); color: #8a8f99; background: none; border: 0; cursor: pointer; display: grid; place-items: center; }
+.fl-bar__steps button { flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0; font: 600 11px var(--fl-mono); color: #8a8f99; background: none; border: 0; cursor: pointer; display: grid; place-items: center; }
 .fl-bar__steps button span { min-width: 24px; height: 24px; padding: 0 4px; display: grid; place-items: center; border-radius: 7px; background: var(--fl-dark-2); }
 .fl-bar__steps button.is-read span { background: #fff; color: var(--fl-ink); }
 .fl-bar__steps button.is-now span { background: var(--fl-blue); color: #fff; box-shadow: 0 0 14px rgba(47,91,255,.7); }
@@ -238,6 +238,7 @@ svg { overflow: visible; }
 .fl-tabs button[aria-selected="true"] { background: var(--fl-blue); color: #fff; border-color: var(--fl-blue); }
 .fl-pick { display: flex; flex-wrap: wrap; gap: 6px; }
 .fl-chip { font: inherit; font-size: 14px; min-height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid #33343b; background: var(--fl-dark-2); color: #fff; cursor: pointer; }
+.fl-pick[lang="kk"] .fl-chip { text-align: left; padding-block: 6px; }
 .fl-chip[aria-pressed="true"] { background: #fff; color: var(--fl-ink); border-color: #fff; }
 .fl-preview { background: linear-gradient(180deg, #fff, #EEF2FF); color: var(--fl-ink); border-radius: 18px; padding: 16px; font-size: clamp(17px, 2.2vw, 24px); font-weight: 500; letter-spacing: -.02em; line-height: 1.35; min-height: 90px; }
 .fl-gauge { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
@@ -308,6 +309,29 @@ svg { overflow: visible; }
 .fl-final p { margin: 0; }
 .fl-final__site { background: linear-gradient(180deg, #fff, #EEF2FF); border-radius: 18px; padding: 16px; display: grid; gap: 6px; font-size: clamp(15px, 1.8vw, 19px); line-height: 1.5; border: 1px solid var(--fl-line); }
 
+/* қазақша ↔ түрікше */
+.fl-w--k { box-shadow: inset 0 0 0 1.5px var(--fl-gray); color: var(--fl-ink); background: #fff; }
+.fl-kzsame { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.fl-kzsame > span { background: var(--fl-blue-soft); border-radius: 10px; padding: 6px 10px; font-size: 14px; }
+.fl-kzsame > .fl-kzsame__t { background: var(--fl-blue); color: #fff; font: 600 12px var(--fl-mono); letter-spacing: .06em; text-transform: uppercase; display: inline-flex; align-items: center; }
+.fl-kzgrid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .fl-kzgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fl-kzr { background: #fff; color: var(--fl-ink); border: 1px solid var(--fl-line); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 14px 34px rgba(15,20,40,.08); perspective: 600px; }
+.fl-kzr.is-tr { border-color: var(--fl-blue); }
+.fl-kzr__top { display: flex; align-items: center; gap: 10px; font: 12px var(--fl-mono); color: var(--fl-gray); }
+.fl-kzr__top b { font: 600 12px var(--fl-mono); color: var(--fl-blue); }
+.fl-kzr__tag { display: inline-block; font: 600 11px var(--fl-mono); border-radius: 6px; padding: 2px 6px; margin-right: 8px; vertical-align: 2px; background: var(--fl-dark); color: #fff; text-decoration: none; }
+.fl-kzr__kz { margin: 0; font-size: clamp(16px, 2vw, 20px); font-weight: 600; letter-spacing: -.01em; }
+.fl-kzr .fl-bad .fl-kzr__tag { background: var(--fl-red); }
+.fl-kzr .fl-good .fl-kzr__tag { background: var(--fl-blue); }
+.fl-kzr .fl-bad, .fl-kzr .fl-good { display: block; transform-origin: 50% 0; }
+.fl-kzr .fl-bad[hidden], .fl-kzr .fl-good[hidden], .fl-kzr__why[hidden] { display: none; }
+.fl-kzr__why { margin: 0; font-size: 14px; color: var(--fl-gray); }
+.fl-kzr .fl-btn { align-self: flex-start; }
+.fl-kzr .fl-w, .fl-kzr .fl-good b { display: inline-block; }
+.fl-kzctl { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.fl-kzq .fl-btn { white-space: normal; text-align: left; }
+
 .fl-static .fl-stage { height: auto; min-height: 100svh; }
 .fl-static .fl-strip { flex-wrap: wrap; justify-content: center; }
 </style>
@@ -343,6 +367,7 @@ svg { overflow: visible; }
     <button type="button" data-goto="hatta" title="Hatta"><span>04</span></button>
     <button type="button" data-goto="bununla" title="Bununla birlikte"><span>05</span></button>
     <button type="button" data-goto="olcek" title="Күш шкаласы"><span>06</span></button>
+    <button type="button" data-goto="kz-tr" title="Қазақша ↔ түрікше"><span>KZ</span></button>
     <button type="button" data-goto="lab" title="Редактор"><span>07</span></button>
     <button type="button" data-goto="traps" title="Пікірлер"><span>08</span></button>
     <button type="button" data-goto="video" title="Бейне"><span>09</span></button>
@@ -422,7 +447,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 2. AYRICA ===== -->
-<section class="fl-scene" data-section="ayrica" data-words="47">
+<section class="fl-scene" data-section="ayrica" data-words="58">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 02 Ayrıca //</span><span class="fl-hud__t">Тағы бір тармақ</span></div>
     <div class="fl-frame fl-frame--l">
@@ -448,7 +473,7 @@ svg { overflow: visible; }
       <p class="fl-sub">Алдымен қарапайым жағдай. <b lang="tr" class="fl-w fl-w--a">Ayrıca</b> — «бұдан бөлек, сондай-ақ». Тізімдегі тағы бір тармақ.</p>
       <p class="fl-sub">Тармақтар тең. Метро орталықтан маңызды емес, тұрақ метродан маңызды емес. Жай тізім.</p>
       <p class="fl-sub">Үні сабырлы, іскерлік. Шарттарда, хаттарда, сайттарда осылай жазады.</p>
-      <p class="fl-sub">Жанында жиі <b lang="tr">de/da</b> тұрады: <b lang="tr" data-say="Ayrıca otoparkımız da var.">Ayrıca otoparkımız da var.</b> Бұдан бөлек, тұрағымыз да бар. Қазақшадағы «да/де» сияқты.</p>
+      <p class="fl-sub">Жанында жиі <b lang="tr">de/da</b> тұрады: <b lang="tr" data-say="Ayrıca otoparkımız da var.">Ayrıca otoparkımız da var.</b> Бұдан бөлек, тұрағымыз да бар. Қазақшадағы «да/де» сияқты — бірақ түрікше ешқашан «та/те» болмайды: <b lang="tr">kitap da</b>, <b lang="tr">kitap ta</b> емес.</p>
     </div>
     <div class="fl-act">
       <p class="fl-act__q">Сайттағы тізімге тармақ қос:</p>
@@ -463,7 +488,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 3. ÜSTELİK ===== -->
-<section class="fl-scene" data-section="ustelik" data-words="41">
+<section class="fl-scene" data-section="ustelik" data-words="47">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 03 Üstelik //</span><span class="fl-hud__t">Үстіндегі дәлел</span></div>
     <div class="fl-frame">
@@ -479,7 +504,7 @@ svg { overflow: visible; }
       <div class="fl-meter" data-ui><span>+</span><div class="fl-meter__t"><i class="fl-meter__f"></i><i class="fl-meter__n"></i><i class="fl-meter__mid"></i></div><span>−</span></div>
     </div>
     <div class="fl-subs">
-      <p class="fl-sub"><b lang="tr" class="fl-w fl-w--u">Üstelik</b> — «оның үстіне». Түбірі де сол: üst — үст. Бұл тағы бір тармақ емес. Бұл үстіне қойылатын дәлел.</p>
+      <p class="fl-sub"><b lang="tr" class="fl-w fl-w--u">Üstelik</b> — «оның үстіне». Түбірі де сол: üst — үст. Тек қазақша екі сөз, түрікше біреу. Бұл тағы бір тармақ емес. Бұл үстіне қойылатын дәлел.</p>
       <p class="fl-sub fl-sub--d"><a-say>Ev çok güzel, üstelik ucuz.</a-say><span>Әдемі — оның үстіне арзан!</span></p>
       <p class="fl-sub">Бағыты біреу. Плюске плюс. Немесе минуске минус:</p>
       <p class="fl-sub fl-sub--d"><a-say>Bu restoran pahalı, üstelik yemekleri soğuk.</a-say><span>Қымбат, оның үстіне тамағы суық.</span></p>
@@ -494,7 +519,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 4. HATTA ===== -->
-<section class="fl-scene" data-section="hatta" data-words="47">
+<section class="fl-scene" data-section="hatta" data-words="54">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 04 Hatta //</span><span class="fl-hud__t">Күткеннен жоғары</span></div>
     <div class="fl-frame fl-frame--l">
@@ -517,7 +542,7 @@ svg { overflow: visible; }
       <p class="fl-sub"><b lang="tr" class="fl-w fl-w--h">Hatta</b> — «тіпті, оның үстіне». Екінші бөлігі біріншісінен күшті, күткеннен жоғары.</p>
       <p class="fl-sub fl-sub--d"><a-say>Hava soğuk, hatta kar yağıyor.</a-say><span>Суық — тіпті қар жауып тұр.</span></p>
       <p class="fl-sub">Суықты күткен. Қар — жоспардан тыс. Графиктегі нүкте үзік сызықтан секіріп шығады.</p>
-      <p class="fl-sub fl-sub--d"><span><b lang="tr">bile</b>-мен жұп болғанды жақсы көреді:</span><a-say>Herkes geldi, hatta müdür bile.</a-say><span>Бәрі келді, тіпті директор да.</span></p>
+      <p class="fl-sub fl-sub--d"><span><b lang="tr">bile</b>-мен жұп болғанды жақсы көреді:</span><a-say>Herkes geldi, hatta müdür bile.</a-say><span>Бәрі келді, тіпті директор да. Қазақшамен бірдей: <b lang="tr">hatta</b> = тіпті, <b lang="tr">bile</b> = да.</span></p>
       <p class="fl-sub"><b lang="tr">hatta</b> үлкен жаққа қарай түзетеді де: «оны білемін — тіпті бір мектепте оқығанбыз».</p>
     </div>
     <div class="fl-act">
@@ -529,7 +554,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 5. BUNUNLA BİRLİKTE ===== -->
-<section class="fl-scene" data-section="bununla" data-words="70">
+<section class="fl-scene" data-section="bununla" data-words="76">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 05 Bununla birlikte //</span><span class="fl-hud__t">Бұрылыс</span></div>
     <div class="fl-frame">
@@ -548,7 +573,7 @@ svg { overflow: visible; }
       <div class="fl-turns" data-ui><span><b lang="tr">çünkü</b> — себеп</span><span><b lang="tr">bu yüzden</b> — салдар</span><span style="background:#F5A524;color:#0E0F12"><b lang="tr">bununla birlikte</b> — дегенмен</span></div>
     </div>
     <div class="fl-subs">
-      <p class="fl-sub">Ал міне Дананың тұзағы. <b lang="tr" class="fl-w fl-w--b">Bununla birlikte</b> сөзбе-сөз «мұнымен бірге» сияқты — birlikte қазақтың «бірге» сөзіне ұқсайды. Мағынасы — «соған қарамастан».</p>
+      <p class="fl-sub">Ал міне Дананың тұзағы. <b lang="tr" class="fl-w fl-w--b">Bununla birlikte</b> сөзбе-сөз — «мұнымен бірге». Қазақ құлағы бірден «сонымен бірге» деп естиді, ал ол қосады. Түрікше мағынасы — керісінше: «соған қарамастан».</p>
       <p class="fl-sub fl-sub--d"><a-say>Ev pahalı. Bununla birlikte konumu harika.</a-say><span>Қымбат. Дегенмен ауданы керемет.</span></p>
       <p class="fl-sub">Бұл бұрылыс: минустан кейін — плюс, плюстан кейін — минус. Таразы теңеседі.</p>
       <p class="fl-sub fl-sub--d"><a-say>Proje zordu; bununla birlikte zamanında bitirdik.</a-say><span>Қиын, бірақ үлгердік.</span></p>
@@ -597,17 +622,74 @@ svg { overflow: visible; }
   </div>
 </section>
 
+<!-- ===== ҚАЗАҚША ↔ ТҮРІКШЕ ===== -->
+<section data-section="kz-tr" data-words="150">
+  <div class="fl-wrap">
+    <span class="fl-eyebrow" data-ui>// KZ ↔ TR //</span>
+    <h2 class="fl-h2">Қазақша ↔ <span class="fl-blue">түрікше</span></h2>
+    <p class="fl-lead">Көбі сәйкес келеді — бұл сенің артықшылығың. Бірақ төрт жерде қазақша әдет мәтінді бұзады. Карточкадағы батырманы бас — қазақша сөйлем түрікшеге аударылады.</p>
+    <div class="fl-kzsame">
+      <span class="fl-kzsame__t" data-ui>Сәйкес</span>
+      <span><b lang="tr">üst</b>elik — <b>үст</b>іне</span>
+      <span><b lang="tr">hatta … bile</b> — тіпті … да</span>
+      <span><b lang="tr">de/da</b> — да/де</span>
+      <span><b lang="tr">buna rağmen</b> — соған қарамастан</span>
+    </div>
+    <div class="fl-kzgrid">
+      <article class="fl-kzr" data-say="Merkezdeyiz. Ayrıca metro yakın.">
+        <div class="fl-kzr__top" data-ui><b>(01)</b><span>сонымен бірге</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>KZ</span>Орталықтамыз. <i class="fl-w fl-w--k">Сонымен бірге</i> метро жақын.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>сөзбе-сөз</span>Merkezdeyiz. Bununla birlikte metro yakın.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span>Merkezdeyiz. <i class="fl-w fl-w--a">Ayrıca</i> metro yakın.</span>
+        <p class="fl-kzr__why" hidden>Сөзбе-сөз дәл келеді: <span lang="tr">bununla</span> — мұнымен, <span lang="tr">birlikte</span> — бірге. Мағынасы — жоқ. Қазақша «сонымен бірге» қосады, түрікше <span lang="tr">bununla birlikte</span> бұрады. Қосу керек болса — <span lang="tr">ayrıca</span>.</p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>Түрікшеге</button>
+      </article>
+      <article class="fl-kzr" data-say="Ev güzel, üstelik ucuz.">
+        <div class="fl-kzr__top" data-ui><b>(02)</b><span>оның үстіне</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>KZ</span>Үй әдемі, <i class="fl-w fl-w--k">оның үстіне</i> арзан.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>сөзбе-сөз</span>Ev güzel, onun üstüne ucuz.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span>Ev güzel, <i class="fl-w fl-w--u">üstelik</i> ucuz.</span>
+        <p class="fl-kzr__why" hidden>Түбірі бір: <span lang="tr">üst</span> — үст. Бірақ қазақша тіркес, түрікше бір сөз. <span lang="tr">Onun üstüne</span> — заттың үсті: «оның үстіне қой». Ауызекі тілде — <span lang="tr">üstüne üstlük</span>.</p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>Түрікшеге</button>
+      </article>
+      <article class="fl-kzr" data-say="Hiç ağrımadı.">
+        <div class="fl-kzr__top" data-ui><b>(03)</b><span>тіпті + болымсыздық</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>KZ</span><i class="fl-w fl-w--k">Тіпті</i> ауырған жоқ.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>сөзбе-сөз</span>Hatta ağrımadı.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span><b>Hiç</b> ağrımadı.</span>
+        <p class="fl-kzr__why" hidden>Болымсыз етістікпен қазақша «тіпті» — «мүлде». Түрікше бұл — <span lang="tr">hiç</span>. <span lang="tr">Hatta</span> тек екінші, күштірек бөлікті қосады: <span lang="tr">Rahat geçti, hatta hiç ağrımadı.</span></p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>Түрікшеге</button>
+      </article>
+      <article class="fl-kzr" data-say="Özellikle çocuklar için uygun bir klinik.">
+        <div class="fl-kzr__top" data-ui><b>(04)</b><span>айрықша</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>KZ</span><i class="fl-w fl-w--k">Айрықша</i> балаларға ыңғайлы клиника.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>ұқсас сөз</span>Ayrıca çocuklar için uygun bir klinik.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span><b>Özellikle</b> çocuklar için uygun bir klinik.</span>
+        <p class="fl-kzr__why" hidden>Түбірі туыс: <span lang="tr">ayrı</span> — айыр. Бірақ <span lang="tr">ayrıca</span> — «бұдан бөлек» не «бөлек, жеке»: <span lang="tr">ayrıca ödemek</span> — бөлек төлеу. «Айрықша, әсіресе» — <span lang="tr">özellikle</span>.</p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>Түрікшеге</button>
+      </article>
+    </div>
+    <div class="fl-kzctl"><button type="button" class="fl-btn fl-btn--b fl-kzall" data-ui>Бәрін аудару</button><button type="button" class="fl-btn fl-kzback" data-ui>Қазақшаға қайтару</button></div>
+    <div class="fl-act fl-kzq">
+      <p class="fl-act__q">Түрікшеге аудар: <b class="fl-kzqq"></b></p>
+      <div class="fl-act__row fl-kzpick" lang="tr"></div>
+      <p class="fl-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== РЕДАКТОР ===== -->
-<section data-section="lab" data-words="27">
+<section data-section="lab" data-words="34">
   <div class="fl-wrap">
     <span class="fl-eyebrow" data-ui>// 07 Редактор //</span>
     <h2 class="fl-h2">Байланыстырғыштар <span class="fl-blue">редакторы</span></h2>
-    <p class="fl-lead">Фактілер мен байланыстырғышты таңдайсың — сайттағы мәтін өзі жиналады, шкала күшін көрсетеді. Астында — неге солай. Үш режим: сөйлем құрастыру, үнді салыстыру және бұрылысты аулау.</p>
+    <p class="fl-lead">Фактілер мен байланыстырғышты таңдайсың — сайттағы мәтін өзі жиналады, шкала күшін көрсетеді. Астында — неге солай. Төрт режим: сөйлем құрастыру, үнді салыстыру, бұрылысты аулау және қазақшадан аудару — «сонымен бірге» тұзағымен.</p>
     <div class="fl-console">
       <div class="fl-tabs" role="tablist" aria-label="Режим" data-ui>
         <button type="button" role="tab" aria-selected="true" data-mode="build">Сөйлем құрастыр</button>
         <button type="button" role="tab" aria-selected="false" data-mode="tone">Үн</button>
         <button type="button" role="tab" aria-selected="false" data-mode="turn">Плюс па, минус па</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="kz">Қазақшадан</button>
       </div>
       <div class="fl-pick fl-pick1" lang="tr" data-ui></div>
       <div class="fl-pick fl-pick2" lang="tr" data-ui></div>
@@ -619,17 +701,17 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== ОТЗЫВЫ: НЕУДАЧНЫЕ ДУБЛИ ===== -->
-<section class="fl-scene" data-section="traps" data-words="43">
+<section class="fl-scene" data-section="traps" data-words="78">
   <div class="fl-stage fl-stage--strip">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 08 //</span><span class="fl-hud__t">Бір жұлдызды пікірлер</span></div>
-    <div class="fl-subs"><p class="fl-sub">Клиенттер бір жұлдыз қоятын төрт мәтін. Бұған бәрі сүрінеді. «Түзету» дегенді бас.</p></div>
+    <div class="fl-subs"><p class="fl-sub">Клиенттер бір жұлдыз қоятын алты мәтін. Үшеуі — қазақша ойлап, түрікше жазғаннан. «Түзету» дегенді бас.</p></div>
     <div class="fl-strip-wrap"><div class="fl-strip">
       <article class="fl-rev">
         <div class="fl-rev__top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#fl-selin"/></svg><div><b lang="tr">Dr. Selin</b><small data-ui>клиника</small></div><span class="fl-rev__g" data-ui>G</span></div>
         <div class="fl-stars" data-ui><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
         <span class="fl-bad" lang="tr">Merkezdeyiz. Bununla birlikte metro yakın.</span>
         <span class="fl-good" lang="tr">Merkezdeyiz. Ayrıca metro yakın.</span>
-        <p>Плюске плюс — бұрылыс емес. <b lang="tr">ayrıca</b> керек.</p>
+        <p>«Сонымен бірге» деп ойладың ғой? Түрікше бұл — бұрылыс. Плюске плюс — <b lang="tr">ayrıca</b>.</p>
         <button type="button" class="fl-btn fl-fix" data-line="Merkezdeyiz. Ayrıca metro yakın." data-ui>Түзету</button>
       </article>
       <article class="fl-rev">
@@ -656,6 +738,22 @@ svg { overflow: visible; }
         <p><b lang="tr">Bile</b> — «тіпті». Оған <b lang="tr">hatta</b> жұбы керек.</p>
         <button type="button" class="fl-btn fl-fix" data-line="Herkes geldi, hatta müdür bile." data-ui>Түзету</button>
       </article>
+      <article class="fl-rev">
+        <div class="fl-rev__top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#fl-ali"/></svg><div><b lang="tr">Murat</b><small data-ui>пациент</small></div><span class="fl-rev__g" data-ui>G</span></div>
+        <div class="fl-stars" data-ui><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
+        <span class="fl-bad" lang="tr">Hatta ağrımadı.</span>
+        <span class="fl-good" lang="tr">Hiç ağrımadı.</span>
+        <p>«Тіпті ауырған жоқ» — яғни «мүлде». Түрікше <b lang="tr">hiç</b>. <b lang="tr">Hatta</b> алдынан бірінші бөлікті күтеді.</p>
+        <button type="button" class="fl-btn fl-fix" data-line="Hiç ağrımadı." data-ui>Түзету</button>
+      </article>
+      <article class="fl-rev">
+        <div class="fl-rev__top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#fl-selin"/></svg><div><b lang="tr">Dr. Selin</b><small data-ui>балалар бөлімі</small></div><span class="fl-rev__g" data-ui>G</span></div>
+        <div class="fl-stars" data-ui><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
+        <span class="fl-bad" lang="tr">Ayrıca çocuklar için uygun bir klinik.</span>
+        <span class="fl-good" lang="tr">Özellikle çocuklar için uygun bir klinik.</span>
+        <p>«Айрықша» деп жаздың, бірақ <b lang="tr">ayrıca</b> — «бұдан бөлек». «Әсіресе» — <b lang="tr">özellikle</b>.</p>
+        <button type="button" class="fl-btn fl-fix" data-line="Özellikle çocuklar için uygun bir klinik." data-ui>Түзету</button>
+      </article>
     </div></div>
   </div>
 </section>
@@ -665,8 +763,8 @@ svg { overflow: visible; }
   <div class="fl-wrap">
     <span class="fl-eyebrow" data-ui>// 09 Бейне //</span>
     <div class="fl-vcard">
-      <p class="fl-vnote"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#2F5BFF"/><path d="M16 13 28 20 16 27Z" fill="#fff"/></svg><span>Назар аудар: диктор bununla birlikte сөзін қай сөйлемдерден кейін қояды — онда әрдайым бұрылыс бар.</span></p>
-      <a-video yt="rUn1j0QdXXo" start="0" end="140" title="B2 деңгейі. Üstelik / Hatta / Ayrıca / Bununla Birlikte жалғаулықтары" channel="Мәскеу ғылым академиясы"></a-video>
+      <p class="fl-vnote"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#2F5BFF"/><path d="M16 13 28 20 16 27Z" fill="#fff"/></svg><span>Бейне орысша. Назар аудар: диктор bununla birlikte сөзін қай сөйлемдерден кейін қояды — онда әрдайым бұрылыс бар, «сонымен бірге» емес.</span></p>
+      <a-video yt="rUn1j0QdXXo" start="0" end="140" title="Уровень В2. Союзы Üstelik / Hatta / Ayrıca / Bununla Birlikte" channel="Московская академия наук"></a-video>
     </div>
   </div>
 </section>
@@ -717,10 +815,10 @@ svg { overflow: visible; }
       <span class="fl-eyebrow" data-ui style="text-align:center">// 12 Жадынама //</span>
       <h2 class="fl-sheet__t">Төрт сөз. Бір бет. <span class="fl-blue">Тосынсыйсыз.</span></h2>
       <div class="fl-plans">
-        <div class="fl-plan"><b lang="tr">AYRICA</b><p>бұдан бөлек</p><ul><li>тағы тармақ</li><li>салмағы бірдей</li><li>сабырлы үн</li></ul></div>
-        <div class="fl-plan"><b lang="tr">ÜSTELİK</b><p>оның үстіне</p><ul><li>үстіндегі дәлел</li><li>бір бағыт</li><li>сезіммен</li></ul></div>
-        <div class="fl-plan fl-plan--hot"><b lang="tr">HATTA</b><p>тіпті</p><ul><li>күткеннен жоғары</li><li><span lang="tr">bile</span>-мен жұп</li><li>үлкен жаққа түзету</li></ul></div>
-        <div class="fl-plan" style="border-color:#F5A524"><b lang="tr">BUNUNLA BİRLİKTE</b><p>соған қарамастан</p><ul><li>бұрылыс</li><li>синонимі <span lang="tr">bununla beraber</span></li><li>«мұнымен бірге» емес</li></ul></div>
+        <div class="fl-plan"><b lang="tr">AYRICA</b><p>бұдан бөлек</p><ul><li>тағы тармақ</li><li>салмағы бірдей</li><li>«айрықша» емес — <span lang="tr">özellikle</span></li></ul></div>
+        <div class="fl-plan"><b lang="tr">ÜSTELİK</b><p>оның үстіне</p><ul><li>үстіндегі дәлел</li><li>бір бағыт</li><li>бір сөз, <span lang="tr">onun üstüne</span> емес</li></ul></div>
+        <div class="fl-plan fl-plan--hot"><b lang="tr">HATTA</b><p>тіпті</p><ul><li>күткеннен жоғары</li><li><span lang="tr">hatta … bile</span> = тіпті … да</li><li>«мүлде» емес — <span lang="tr">hiç</span></li></ul></div>
+        <div class="fl-plan" style="border-color:#F5A524"><b lang="tr">BUNUNLA BİRLİKTE</b><p>соған қарамастан</p><ul><li>бұрылыс</li><li>синонимі <span lang="tr">bununla beraber</span></li><li>«сонымен бірге» емес</li></ul></div>
       </div>
       <div class="fl-big" aria-hidden="true" lang="tr">üstelik</div>
     </div>
@@ -880,6 +978,13 @@ addEventListener('DOMContentLoaded', () => {
     { q: 'Ev pahalı. ___ çok küçük.', o: ['Bununla birlikte', 'Üstelik'], a: 1, full: 'Ev pahalı. Üstelik çok küçük.', why: 'Қымбат, оның үстіне кішкентай — минуске минус, бұрылыссыз.' }
   ]);
 
+  cycle(sec('kz-tr'), $('.fl-kzpick'), $('.fl-kzqq'), [
+    { q: '«Сонымен бірге тегін wifi бар.»', o: ['Ayrıca ücretsiz wifi var.', 'Bununla birlikte ücretsiz wifi var.'], a: 0, full: 'Ayrıca ücretsiz wifi var.', why: '«Сонымен бірге» қазақша қосады — түрікше ayrıca.' },
+    { q: '«Тіпті ауырған жоқ.»', o: ['Hatta ağrımadı.', 'Hiç ağrımadı.'], a: 1, full: 'Hiç ağrımadı.', why: 'Болымсызбен «тіпті» — «мүлде», яғни hiç.' },
+    { q: '«Әдемі, оның үстіне арзан.»', o: ['Güzel, onun üstüne ucuz.', 'Güzel, üstelik ucuz.'], a: 1, full: 'Güzel, üstelik ucuz.', why: 'Түрікше бір сөз: üstelik.' },
+    { q: '«Әсіресе балаларға ыңғайлы.»', o: ['Ayrıca çocuklar için uygun.', 'Özellikle çocuklar için uygun.'], a: 1, full: 'Özellikle çocuklar için uygun.', why: '«Әсіресе, айрықша» — özellikle. Ayrıca — «бұдан бөлек».' }
+  ]);
+
   /* ---------- 6. порядок силы ---------- */
   {
     const s = sec('olcek'), out = $('.fl-act__fb', s), want = ['ayrıca', 'üstelik', 'hatta'];
@@ -908,6 +1013,33 @@ addEventListener('DOMContentLoaded', () => {
     }
   }));
 
+  /* ---------- қазақша ↔ түрікше: карточкалар аударылады ---------- */
+  {
+    const s = sec('kz-tr'), cards = $$('.fl-kzr', s);
+    const flip = (card, on, quiet) => {
+      const bad = $('.fl-bad', card), good = $('.fl-good', card), why = $('.fl-kzr__why', card), btn = $('.fl-kzflip', card);
+      if (card.classList.contains('is-tr') === on) return;
+      card.classList.toggle('is-tr', on);
+      [bad, good, why].forEach((el) => { el.hidden = !on; });
+      btn.textContent = on ? 'Қазақшаға' : 'Түрікшеге';
+      if (!on) return;
+      if (!quiet) say(card.dataset.say);
+      if (ANIM) {
+        G.timeline()
+          .fromTo($('.fl-kzr__kz .fl-w', card), { scale: 1 }, { scale: 1.12, duration: .18, yoyo: true, repeat: 1, ease: 'power2.out' })
+          .fromTo(bad, { rotationX: -90, y: -8 }, { rotationX: 0, y: 0, duration: .45, ease: 'back.out(2)' }, .1)
+          .to(bad, { x: -7, duration: .07, yoyo: true, repeat: 3, ease: 'none' }, .55)
+          .set(bad, { x: 0 }, .85)
+          .fromTo(good, { rotationX: -90, y: -8 }, { rotationX: 0, y: 0, duration: .55, ease: 'back.out(2.2)' }, .8)
+          .fromTo($('.fl-good .fl-w, .fl-good b', card), { scale: .4 }, { scale: 1, duration: .5, ease: 'back.out(3)' }, 1.05)
+          .fromTo(why, { y: 14, scale: .96 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)' }, 1.1);
+      }
+    };
+    cards.forEach((c) => $('.fl-kzflip', c).addEventListener('click', () => flip(c, !c.classList.contains('is-tr'))));
+    $('.fl-kzall', s).addEventListener('click', () => cards.forEach((c, i) => setTimeout(() => flip(c, true, true), ANIM ? i * 220 : 0)));
+    $('.fl-kzback', s).addEventListener('click', () => cards.forEach((c) => flip(c, false)));
+  }
+
   /* ---------- редактор ---------- */
   const lab = sec('lab');
   const p1 = $('.fl-pick1', lab), p2 = $('.fl-pick2', lab), prev = $('.fl-preview', lab), gauge = $$('.fl-gauge span', lab), why = $('.fl-why', lab);
@@ -915,14 +1047,30 @@ addEventListener('DOMContentLoaded', () => {
   const POWER = { ayrıca: 1, üstelik: 2, hatta: 3, 'bununla birlikte': -1 };
   const CLS = { ayrıca: 'fl-w--a', üstelik: 'fl-w--u', hatta: 'fl-w--h', 'bununla birlikte': 'fl-w--b' };
   const PAIRS = {
-    'Ev çok güzel / ucuz': { a: 'Ev çok güzel', b: 'ucuz', dir: '++', ok: ['üstelik'], note: 'Сезіммен плюске плюс — üstelik. Ayrıca құрғақтау естіледі, бірақ ол да болады.' },
+    'Ev çok güzel / ucuz': { a: 'Ev çok güzel', b: 'ucuz', dir: '++', ok: ['üstelik', 'ayrıca'], note: 'Сезіммен плюске плюс — üstelik. Ayrıca да болады, бірақ құрғақтау естіледі.' },
     'Ev pahalı / konumu harika': { a: 'Ev pahalı', b: 'konumu harika', dir: '-+', ok: ['bununla birlikte'], note: 'Минус, сосын плюс — тек бұрылыс.' },
     'Hava soğuk / kar yağıyor': { a: 'Hava soğuk', b: 'kar yağıyor', dir: '>>', ok: ['hatta'], note: 'Қар — күткеннен жоғары. Hatta.' },
     'Merkezdeyiz / metro yakın': { a: 'Merkezdeyiz', b: 'metro yakın', dir: '+=', ok: ['ayrıca', 'üstelik'], note: 'Тағы бір тең плюс — ayrıca. Нығарлап — üstelik.' },
     'Proje zordu / zamanında bitirdik': { a: 'Proje zordu', b: 'zamanında bitirdik', dir: '-+', ok: ['bununla birlikte'], note: 'Қиын, бірақ үлгердік — бұрылыс.' }
   };
+  /* қазақша сөйлем → түрікше жұп; trap — қазақша ойлағанда шығатын қате таңдау */
+  const KZ = {
+    'Орталықтамыз. Сонымен бірге метро жақын.': { pair: 'Merkezdeyiz / metro yakın', trap: { 'bununla birlikte': '«Сонымен бірге» сөзбе-сөз bununla birlikte болып көрінеді. Бірақ қазақшасы қосады, түрікшесі бұрады. Мұнда — ayrıca.' } },
+    'Үй өте әдемі, оның үстіне арзан.': { pair: 'Ev çok güzel / ucuz', trap: {} },
+    'Суық, тіпті қар жауып тұр.': { pair: 'Hava soğuk / kar yağıyor', trap: {} },
+    'Үй қымбат. Дегенмен орналасуы керемет.': { pair: 'Ev pahalı / konumu harika', trap: {} },
+    'Жоба қиын болды. Соған қарамастан уақытында бітірдік.': { pair: 'Proje zordu / zamanında bitirdik', trap: {} }
+  };
+  function verdict(P, c, trap) {
+    if (P.ok.includes(c)) return 'Жарайды. ' + P.note;
+    if (trap && trap[c]) return 'Тұзақ. ' + trap[c];
+    if (c === 'bununla birlikte') return 'Мағына бұзылады: бұрылыс жоқ, екі бөлігі бір бағытта. ' + P.note;
+    if (P.dir === '-+') return 'Мағына бұзылады: минус пен плюс қарама-қарсы, қосатын сөз сыймайды. ' + P.note;
+    if (c === 'hatta') return 'Оғаш: hatta үшін екінші бөлігі біріншісінен әлдеқайда күшті болуы керек. ' + P.note;
+    return 'Әлсіз: екінші бөлігі жай тармақ емес. ' + P.note;
+  }
   const TONE = { base: 'Kliniğimiz merkezde', add: 'metro yakın' };
-  const st = { mode: 'build', pair: 'Ev çok güzel / ucuz', conn: 'üstelik', toneConn: 'ayrıca', turnSecond: '+' };
+  const st = { mode: 'build', pair: 'Ev çok güzel / ucuz', conn: 'üstelik', toneConn: 'ayrıca', turnSecond: '+', kz: 'Орталықтамыз. Сонымен бірге метро жақын.', kzConn: 'bununla birlikte' };
   function chips(host, list, cur, onPick) {
     host.replaceChildren(...list.map((x) => {
       const b = mkBtn(x, 'fl-chip');
@@ -936,13 +1084,20 @@ addEventListener('DOMContentLoaded', () => {
   function renderLab() {
     let w = '';
     p2.hidden = false;
-    if (st.mode === 'build') {
+    p1.lang = st.mode === 'kz' ? 'kk' : 'tr';
+    if (st.mode === 'kz') {
+      const K = KZ[st.kz], P = PAIRS[K.pair];
+      chips(p1, Object.keys(KZ), st.kz, (x) => { st.kz = x; renderLab(); });
+      chips(p2, CONN, st.kzConn, (x) => { st.kzConn = x; renderLab(); say(P.a + ', ' + x + ' ' + P.b); });
+      prev.innerHTML = line(P.a, st.kzConn, P.b);
+      w = verdict(P, st.kzConn, K.trap);
+      setGauge(POWER[st.kzConn]);
+    } else if (st.mode === 'build') {
       chips(p1, Object.keys(PAIRS), st.pair, (x) => { st.pair = x; renderLab(); });
       chips(p2, CONN, st.conn, (x) => { st.conn = x; renderLab(); say(PAIRS[st.pair].a + ', ' + x + ' ' + PAIRS[st.pair].b); });
       const P = PAIRS[st.pair];
       prev.innerHTML = line(P.a, st.conn, P.b);
-      const good = P.ok.includes(st.conn);
-      w = (good ? 'Жарайды. ' : 'Мағына бұзылады. ') + P.note;
+      w = verdict(P, st.conn);
       setGauge(POWER[st.conn]);
     } else if (st.mode === 'tone') {
       chips(p1, CONN.slice(0, 3), st.toneConn, (x) => { st.toneConn = x; renderLab(); say(`${TONE.base}, ${x} ${TONE.add}.`); });
@@ -1215,6 +1370,9 @@ addEventListener('DOMContentLoaded', () => {
   /* --- редактор, видео, практика, шпаргалка --- */
   G.from('.fl-console', { y: 80, rotation: -2, scale: .94, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: lab, start: 'top 80%', toggleActions: 'play none none reverse' } });
   G.from('.fl-tabs button', { y: 20, scale: .7, stagger: .08, duration: .5, ease: 'back.out(2.5)', scrollTrigger: { trigger: '.fl-tabs', start: 'top 90%' } });
+  G.from('.fl-kzsame > span', { y: 24, scale: .7, stagger: .08, duration: .5, ease: 'back.out(2.5)', scrollTrigger: { trigger: '.fl-kzsame', start: 'top 88%' } });
+  G.from('.fl-kzr', { y: 70, rotation: (i) => (i % 2 ? 2.5 : -2.5), scale: .93, stagger: .12, duration: .8, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.fl-kzgrid', start: 'top 82%' } });
+  G.from('.fl-kzq', { y: 40, scale: .95, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.fl-kzq', start: 'top 90%' } });
   G.from('.fl-vcard', { y: 60, scale: .95, duration: .8, ease: 'back.out(1.6)', scrollTrigger: { trigger: sec('video'), start: 'top 80%' } });
   ScrollTrigger.batch('.fl-exgrid > a-exercise, .fl-quizbox', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 50, scale: .96, stagger: .12, duration: .7, ease: 'back.out(1.6)' }) });
   G.from('.fl-plan', { y: 60, rotation: (i) => (i % 2 ? 3 : -3), scale: .9, stagger: .12, duration: .8, ease: 'back.out(1.8)', scrollTrigger: { trigger: '.fl-sheet', start: 'top 75%' } });

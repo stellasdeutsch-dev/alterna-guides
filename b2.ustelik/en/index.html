@@ -62,7 +62,7 @@ svg { overflow: visible; }
 /* скроллбар: таймлайн процесса */
 .fl-bar { position: fixed; z-index: 60; top: 0; left: 0; right: 0; height: var(--fl-top); background: var(--fl-dark); color: #fff; display: grid; grid-template-rows: 1fr 4px; user-select: none; }
 .fl-bar__steps { display: flex; padding: 0 6px; }
-.fl-bar__steps button { flex: 1 1 0; min-width: 0; min-height: 40px; font: 600 11px var(--fl-mono); color: #8a8f99; background: none; border: 0; cursor: pointer; display: grid; place-items: center; }
+.fl-bar__steps button { flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0; font: 600 11px var(--fl-mono); color: #8a8f99; background: none; border: 0; cursor: pointer; display: grid; place-items: center; }
 .fl-bar__steps button span { min-width: 24px; height: 24px; padding: 0 4px; display: grid; place-items: center; border-radius: 7px; background: var(--fl-dark-2); }
 .fl-bar__steps button.is-read span { background: #fff; color: var(--fl-ink); }
 .fl-bar__steps button.is-now span { background: var(--fl-blue); color: #fff; box-shadow: 0 0 14px rgba(47,91,255,.7); }
@@ -238,6 +238,7 @@ svg { overflow: visible; }
 .fl-tabs button[aria-selected="true"] { background: var(--fl-blue); color: #fff; border-color: var(--fl-blue); }
 .fl-pick { display: flex; flex-wrap: wrap; gap: 6px; }
 .fl-chip { font: inherit; font-size: 14px; min-height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid #33343b; background: var(--fl-dark-2); color: #fff; cursor: pointer; }
+.fl-pick[lang="en"] .fl-chip { text-align: left; padding-block: 6px; }
 .fl-chip[aria-pressed="true"] { background: #fff; color: var(--fl-ink); border-color: #fff; }
 .fl-preview { background: linear-gradient(180deg, #fff, #EEF2FF); color: var(--fl-ink); border-radius: 18px; padding: 16px; font-size: clamp(17px, 2.2vw, 24px); font-weight: 500; letter-spacing: -.02em; line-height: 1.35; min-height: 90px; }
 .fl-gauge { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
@@ -308,6 +309,29 @@ svg { overflow: visible; }
 .fl-final p { margin: 0; }
 .fl-final__site { background: linear-gradient(180deg, #fff, #EEF2FF); border-radius: 18px; padding: 16px; display: grid; gap: 6px; font-size: clamp(15px, 1.8vw, 19px); line-height: 1.5; border: 1px solid var(--fl-line); }
 
+/* english ↔ turkish */
+.fl-w--k { box-shadow: inset 0 0 0 1.5px var(--fl-gray); color: var(--fl-ink); background: #fff; }
+.fl-kzsame { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 18px; }
+.fl-kzsame > span { background: var(--fl-blue-soft); border-radius: 10px; padding: 6px 10px; font-size: 14px; }
+.fl-kzsame > .fl-kzsame__t { background: var(--fl-blue); color: #fff; font: 600 12px var(--fl-mono); letter-spacing: .06em; text-transform: uppercase; display: inline-flex; align-items: center; }
+.fl-kzgrid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 760px) { .fl-kzgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.fl-kzr { background: #fff; color: var(--fl-ink); border: 1px solid var(--fl-line); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 9px; box-shadow: 0 14px 34px rgba(15,20,40,.08); perspective: 600px; }
+.fl-kzr.is-tr { border-color: var(--fl-blue); }
+.fl-kzr__top { display: flex; align-items: center; gap: 10px; font: 12px var(--fl-mono); color: var(--fl-gray); }
+.fl-kzr__top b { font: 600 12px var(--fl-mono); color: var(--fl-blue); }
+.fl-kzr__tag { display: inline-block; font: 600 11px var(--fl-mono); border-radius: 6px; padding: 2px 6px; margin-right: 8px; vertical-align: 2px; background: var(--fl-dark); color: #fff; text-decoration: none; }
+.fl-kzr__kz { margin: 0; font-size: clamp(16px, 2vw, 20px); font-weight: 600; letter-spacing: -.01em; }
+.fl-kzr .fl-bad .fl-kzr__tag { background: var(--fl-red); }
+.fl-kzr .fl-good .fl-kzr__tag { background: var(--fl-blue); }
+.fl-kzr .fl-bad, .fl-kzr .fl-good { display: block; transform-origin: 50% 0; }
+.fl-kzr .fl-bad[hidden], .fl-kzr .fl-good[hidden], .fl-kzr__why[hidden] { display: none; }
+.fl-kzr__why { margin: 0; font-size: 14px; color: var(--fl-gray); }
+.fl-kzr .fl-btn { align-self: flex-start; }
+.fl-kzr .fl-w, .fl-kzr .fl-good b { display: inline-block; }
+.fl-kzctl { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+.fl-kzq .fl-btn { white-space: normal; text-align: left; }
+
 .fl-static .fl-stage { height: auto; min-height: 100svh; }
 .fl-static .fl-strip { flex-wrap: wrap; justify-content: center; }
 </style>
@@ -343,6 +367,7 @@ svg { overflow: visible; }
     <button type="button" data-goto="hatta" title="Hatta"><span>04</span></button>
     <button type="button" data-goto="bununla" title="Bununla birlikte"><span>05</span></button>
     <button type="button" data-goto="olcek" title="Strength scale"><span>06</span></button>
+    <button type="button" data-goto="en-tr" title="English ↔ Turkish"><span>EN</span></button>
     <button type="button" data-goto="lab" title="Editor"><span>07</span></button>
     <button type="button" data-goto="traps" title="Reviews"><span>08</span></button>
     <button type="button" data-goto="video" title="Video"><span>09</span></button>
@@ -422,7 +447,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 2. AYRICA ===== -->
-<section class="fl-scene" data-section="ayrica" data-words="47">
+<section class="fl-scene" data-section="ayrica" data-words="62">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 02 Ayrıca //</span><span class="fl-hud__t">One more item</span></div>
     <div class="fl-frame fl-frame--l">
@@ -445,10 +470,10 @@ svg { overflow: visible; }
       </div>
     </div>
     <div class="fl-subs">
-      <p class="fl-sub">The easy case first. <b lang="tr" class="fl-w fl-w--a">Ayrıca</b> — “in addition, also.” One more item on the list.</p>
+      <p class="fl-sub">The easy case first. <b lang="tr" class="fl-w fl-w--a">Ayrıca</b> — “in addition, also.” One more item on the list. Say it “eye-ruh-jah”: c = j in jam, ı like the a in about.</p>
       <p class="fl-sub">The items are equal. The metro isn't more important than downtown, parking isn't more important than the metro. Just a list.</p>
       <p class="fl-sub">The tone is calm, businesslike. That's how contracts, letters, and websites are written.</p>
-      <p class="fl-sub"><b lang="tr">de/da</b> often shows up next to it: <b lang="tr" data-say="Ayrıca otoparkımız da var.">Ayrıca otoparkımız da var.</b> In addition, we have parking too.</p>
+      <p class="fl-sub"><b lang="tr">de/da</b> often shows up next to it: <b lang="tr" data-say="Ayrıca otoparkımız da var.">Ayrıca otoparkımız da var.</b> In addition, we have parking too. That <b lang="tr">da</b> is English “too” — a separate word, after the word it adds.</p>
     </div>
     <div class="fl-act">
       <p class="fl-act__q">Add an item to the site's list:</p>
@@ -463,7 +488,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 3. ÜSTELİK ===== -->
-<section class="fl-scene" data-section="ustelik" data-words="41">
+<section class="fl-scene" data-section="ustelik" data-words="48">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 03 Üstelik //</span><span class="fl-hud__t">An argument on top</span></div>
     <div class="fl-frame">
@@ -479,7 +504,7 @@ svg { overflow: visible; }
       <div class="fl-meter" data-ui><span>+</span><div class="fl-meter__t"><i class="fl-meter__f"></i><i class="fl-meter__n"></i><i class="fl-meter__mid"></i></div><span>−</span></div>
     </div>
     <div class="fl-subs">
-      <p class="fl-sub"><b lang="tr" class="fl-w fl-w--u">Üstelik</b> — “on top of that, besides.” It's not one more item. It's an argument you stack on top.</p>
+      <p class="fl-sub"><b lang="tr" class="fl-w fl-w--u">Üstelik</b> — “on top of that, besides.” Same picture as in English: <b lang="tr">üst</b> means “top.” It's not one more item. It's an argument you stack on top.</p>
       <p class="fl-sub fl-sub--d"><a-say>Ev çok güzel, üstelik ucuz.</a-say><span>Pretty — and cheap on top of that!</span></p>
       <p class="fl-sub">One direction. A plus on a plus. Or a minus on a minus:</p>
       <p class="fl-sub fl-sub--d"><a-say>Bu restoran pahalı, üstelik yemekleri soğuk.</a-say><span>Expensive, and the food is cold on top of that.</span></p>
@@ -494,7 +519,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 4. HATTA ===== -->
-<section class="fl-scene" data-section="hatta" data-words="47">
+<section class="fl-scene" data-section="hatta" data-words="66">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 04 Hatta //</span><span class="fl-hud__t">Beyond expectations</span></div>
     <div class="fl-frame fl-frame--l">
@@ -517,7 +542,7 @@ svg { overflow: visible; }
       <p class="fl-sub"><b lang="tr" class="fl-w fl-w--h">Hatta</b> — “even, in fact.” The second part is stronger than the first, beyond expectations.</p>
       <p class="fl-sub fl-sub--d"><a-say>Hava soğuk, hatta kar yağıyor.</a-say><span>It's cold — it's even snowing.</span></p>
       <p class="fl-sub">Cold was expected. Snow is off the plan. The dot on the chart jumps past the dotted line.</p>
-      <p class="fl-sub fl-sub--d"><span>Loves pairing up with <b lang="tr">bile</b>:</span><a-say>Herkes geldi, hatta müdür bile.</a-say><span>Everyone came, even the director.</span></p>
+      <p class="fl-sub fl-sub--d"><span>Loves pairing up with <b lang="tr">bile</b>:</span><a-say>Herkes geldi, hatta müdür bile.</a-say><span>Everyone came, even the director. Note: English has one “even,” Turkish splits it. <b lang="tr">hatta</b> links the stronger part, <b lang="tr">bile</b> sits after the word.</span></p>
       <p class="fl-sub"><b lang="tr">hatta</b> also corrects upward: “I know him — in fact, we went to the same school.”</p>
     </div>
     <div class="fl-act">
@@ -529,7 +554,7 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== 5. BUNUNLA BİRLİKTE ===== -->
-<section class="fl-scene" data-section="bununla" data-words="70">
+<section class="fl-scene" data-section="bununla" data-words="78">
   <div class="fl-stage">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 05 Bununla birlikte //</span><span class="fl-hud__t">The turn</span></div>
     <div class="fl-frame">
@@ -548,7 +573,7 @@ svg { overflow: visible; }
       <div class="fl-turns" data-ui><span><b lang="tr">çünkü</b> — cause</span><span><b lang="tr">bu yüzden</b> — effect</span><span style="background:#F5A524;color:#0E0F12"><b lang="tr">bununla birlikte</b> — and yet</span></div>
     </div>
     <div class="fl-subs">
-      <p class="fl-sub">And here's Dana's trap. <b lang="tr" class="fl-w fl-w--b">Bununla birlikte</b> looks like “along with this.” It means “nevertheless.”</p>
+      <p class="fl-sub">And here's Dana's trap. <b lang="tr" class="fl-w fl-w--b">Bununla birlikte</b> reads word for word as “with this, together” — and English hears “along with this, also.” Wrong. It means “nevertheless, that said.”</p>
       <p class="fl-sub fl-sub--d"><a-say>Ev pahalı. Bununla birlikte konumu harika.</a-say><span>Expensive. Still, the neighborhood is great.</span></p>
       <p class="fl-sub">It's a turn: after a minus comes a plus, after a plus — a minus. The scale levels out.</p>
       <p class="fl-sub fl-sub--d"><a-say>Proje zordu; bununla birlikte zamanında bitirdik.</a-say><span>Hard, but we made it.</span></p>
@@ -597,17 +622,74 @@ svg { overflow: visible; }
   </div>
 </section>
 
+<!-- ===== ENGLISH ↔ TURKISH ===== -->
+<section data-section="en-tr" data-words="160">
+  <div class="fl-wrap">
+    <span class="fl-eyebrow" data-ui>// EN ↔ TR //</span>
+    <h2 class="fl-h2">English ↔ <span class="fl-blue">Turkish</span></h2>
+    <p class="fl-lead">English has a word for each of the four. Good news. The bad news: in four places, English habits break the Turkish. Tap the button on a card — the English sentence turns Turkish.</p>
+    <div class="fl-kzsame">
+      <span class="fl-kzsame__t" data-ui>Same idea</span>
+      <span><b lang="tr">üst</b>elik — on <b>top</b> of that</span>
+      <span><b lang="tr">ayrıca</b> — in addition</span>
+      <span><b lang="tr">hatta</b> — in fact, even</span>
+      <span><b lang="tr">bununla birlikte</b> — that said</span>
+    </div>
+    <div class="fl-kzgrid">
+      <article class="fl-kzr" data-say="Merkezdeyiz. Ayrıca metro yakın.">
+        <div class="fl-kzr__top" data-ui><b>(01)</b><span>along with that</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>EN</span>We're downtown. <i class="fl-w fl-w--k">Along with that</i>, the metro is close.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>word for word</span>Merkezdeyiz. Bununla birlikte metro yakın.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span>Merkezdeyiz. <i class="fl-w fl-w--a">Ayrıca</i> metro yakın.</span>
+        <p class="fl-kzr__why" hidden>Word for word, <span lang="tr">bununla birlikte</span> is “with this, together.” But it doesn't add — it turns: “nevertheless.” To add, use <span lang="tr">ayrıca</span>.</p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>To Turkish</button>
+      </article>
+      <article class="fl-kzr" data-say="Müdür bile geldi.">
+        <div class="fl-kzr__top" data-ui><b>(02)</b><span>even + a word</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>EN</span><i class="fl-w fl-w--k">Even</i> the director came.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>word for word</span>Hatta müdür geldi.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span>Müdür <b>bile</b> geldi.</span>
+        <p class="fl-kzr__why" hidden>“Even X” is <span lang="tr">bile</span>, and it comes after the word: <span lang="tr">müdür bile</span>. <span lang="tr">Hatta</span> needs a first part to climb from: <span lang="tr">Herkes geldi, hatta müdür bile.</span></p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>To Turkish</button>
+      </article>
+      <article class="fl-kzr" data-say="Aramadılar bile.">
+        <div class="fl-kzr__top" data-ui><b>(03)</b><span>not even</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>EN</span>They didn't <i class="fl-w fl-w--k">even</i> call.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>word for word</span>Hatta aramadılar.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span>Aramadılar <b>bile</b>.</span>
+        <p class="fl-kzr__why" hidden>“Not even” — the negative verb, then <span lang="tr">bile</span>. Again, no first part, no <span lang="tr">hatta</span>. With one: <span lang="tr">Gelmediler, hatta aramadılar bile.</span></p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>To Turkish</button>
+      </article>
+      <article class="fl-kzr" data-say="Otoparkımız da var.">
+        <div class="fl-kzr__top" data-ui><b>(04)</b><span>too</span></div>
+        <p class="fl-kzr__kz"><span class="fl-kzr__tag" data-ui>EN</span>We have parking <i class="fl-w fl-w--k">too</i>.</p>
+        <span class="fl-bad" lang="tr" hidden><span class="fl-kzr__tag" data-ui>glued on</span>Otoparkımızda var.</span>
+        <span class="fl-good" lang="tr" hidden><span class="fl-kzr__tag" data-ui>TR</span>Otoparkımız <b>da</b> var.</span>
+        <p class="fl-kzr__why" hidden>“Too” is <span lang="tr">da/de</span> — a separate word. Glued on, <span lang="tr">-da</span> is a suffix meaning “in, at”: <span lang="tr">otoparkımızda</span> — “in our parking lot.” Same sound, other grammar.</p>
+        <button type="button" class="fl-btn fl-kzflip" data-ui>To Turkish</button>
+      </article>
+    </div>
+    <div class="fl-kzctl"><button type="button" class="fl-btn fl-btn--b fl-kzall" data-ui>Flip all</button><button type="button" class="fl-btn fl-kzback" data-ui>Back to English</button></div>
+    <div class="fl-act fl-kzq">
+      <p class="fl-act__q">Say it in Turkish: <b class="fl-kzqq"></b></p>
+      <div class="fl-act__row fl-kzpick" lang="tr"></div>
+      <p class="fl-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== РЕДАКТОР ===== -->
-<section data-section="lab" data-words="27">
+<section data-section="lab" data-words="36">
   <div class="fl-wrap">
     <span class="fl-eyebrow" data-ui>// 07 Editor //</span>
     <h2 class="fl-h2">Connector <span class="fl-blue">editor</span></h2>
-    <p class="fl-lead">Pick the facts and a connector — the website text builds itself, and the scale shows the strength. Below it — why. Three modes: build a sentence, compare the tone, and catch the turn.</p>
+    <p class="fl-lead">Pick the facts and a connector — the website text builds itself, and the scale shows the strength. Below it — why. Four modes: build a sentence, compare the tone, catch the turn, and translate from English — with the “along with that” trap.</p>
     <div class="fl-console">
       <div class="fl-tabs" role="tablist" aria-label="Mode" data-ui>
         <button type="button" role="tab" aria-selected="true" data-mode="build">Build a sentence</button>
         <button type="button" role="tab" aria-selected="false" data-mode="tone">Tone</button>
         <button type="button" role="tab" aria-selected="false" data-mode="turn">Plus or minus</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="kz">From English</button>
       </div>
       <div class="fl-pick fl-pick1" lang="tr" data-ui></div>
       <div class="fl-pick fl-pick2" lang="tr" data-ui></div>
@@ -619,17 +701,17 @@ svg { overflow: visible; }
 </section>
 
 <!-- ===== ОТЗЫВЫ: НЕУДАЧНЫЕ ДУБЛИ ===== -->
-<section class="fl-scene" data-section="traps" data-words="43">
+<section class="fl-scene" data-section="traps" data-words="80">
   <div class="fl-stage fl-stage--strip">
     <div class="fl-hud" data-ui><span class="fl-hud__n">// 08 //</span><span class="fl-hud__t">One-star reviews</span></div>
-    <div class="fl-subs"><p class="fl-sub">Four texts that get one-star reviews from customers. Everyone trips on these. Tap “Fix.”</p></div>
+    <div class="fl-subs"><p class="fl-sub">Six texts that get one-star reviews. Three of them are English thinking in Turkish words. Tap “Fix.”</p></div>
     <div class="fl-strip-wrap"><div class="fl-strip">
       <article class="fl-rev">
         <div class="fl-rev__top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#fl-selin"/></svg><div><b lang="tr">Dr. Selin</b><small data-ui>clinic</small></div><span class="fl-rev__g" data-ui>G</span></div>
         <div class="fl-stars" data-ui><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
         <span class="fl-bad" lang="tr">Merkezdeyiz. Bununla birlikte metro yakın.</span>
         <span class="fl-good" lang="tr">Merkezdeyiz. Ayrıca metro yakın.</span>
-        <p>A plus on a plus isn't a turn. You need <b lang="tr">ayrıca</b>.</p>
+        <p>Thought “along with this”? In Turkish it's a turn. A plus on a plus — <b lang="tr">ayrıca</b>.</p>
         <button type="button" class="fl-btn fl-fix" data-line="Merkezdeyiz. Ayrıca metro yakın." data-ui>Fix</button>
       </article>
       <article class="fl-rev">
@@ -656,6 +738,22 @@ svg { overflow: visible; }
         <p><b lang="tr">Bile</b> means “even.” It needs its partner <b lang="tr">hatta</b>.</p>
         <button type="button" class="fl-btn fl-fix" data-line="Herkes geldi, hatta müdür bile." data-ui>Fix</button>
       </article>
+      <article class="fl-rev">
+        <div class="fl-rev__top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#fl-ali"/></svg><div><b lang="tr">Murat</b><small data-ui>patient</small></div><span class="fl-rev__g" data-ui>G</span></div>
+        <div class="fl-stars" data-ui><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
+        <span class="fl-bad" lang="tr">Hatta aramadılar.</span>
+        <span class="fl-good" lang="tr">Aramadılar bile.</span>
+        <p>“They didn't even call.” “Not even” is the verb, then <b lang="tr">bile</b>. <b lang="tr">Hatta</b> wants a first part before it.</p>
+        <button type="button" class="fl-btn fl-fix" data-line="Aramadılar bile." data-ui>Fix</button>
+      </article>
+      <article class="fl-rev">
+        <div class="fl-rev__top"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#fl-selin"/></svg><div><b lang="tr">Dr. Selin</b><small data-ui>clinic</small></div><span class="fl-rev__g" data-ui>G</span></div>
+        <div class="fl-stars" data-ui><i class="is-on"></i><i></i><i></i><i></i><i></i></div>
+        <span class="fl-bad" lang="tr">Ayrıca otoparkımızda var.</span>
+        <span class="fl-good" lang="tr">Ayrıca otoparkımız da var.</span>
+        <p>“Too” is a separate <b lang="tr">da</b>. Glued on, it means “in”: “there's … in our parking lot.”</p>
+        <button type="button" class="fl-btn fl-fix" data-line="Ayrıca otoparkımız da var." data-ui>Fix</button>
+      </article>
     </div></div>
   </div>
 </section>
@@ -665,8 +763,8 @@ svg { overflow: visible; }
   <div class="fl-wrap">
     <span class="fl-eyebrow" data-ui>// 09 Video //</span>
     <div class="fl-vcard">
-      <p class="fl-vnote"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#2F5BFF"/><path d="M16 13 28 20 16 27Z" fill="#fff"/></svg><span>Notice which sentences the speaker puts bununla birlikte after: there's always a turn.</span></p>
-      <a-video yt="rUn1j0QdXXo" start="0" end="140" title="Level B2. Conjunctions Üstelik / Hatta / Ayrıca / Bununla Birlikte" channel="Moscow Academy of Sciences"></a-video>
+      <p class="fl-vnote"><svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="12" fill="#2F5BFF"/><path d="M16 13 28 20 16 27Z" fill="#fff"/></svg><span>A short Turkish lesson on conjunctions, from a B1 series. Listen for the words from this lesson. For each one ask: one more item, a jump, or a turn?</span></p>
+      <a-video yt="p3bQPRJgat0" start="0" end="240" title="B1 - 24 Türkçe Bağlaçları Kolayca Öğren! | Turkish Conjunctions Explained | Türkçeyi Çözüyoruz!" channel="Yunus Emre Enstitüsü"></a-video>
     </div>
   </div>
 </section>
@@ -718,9 +816,9 @@ svg { overflow: visible; }
       <h2 class="fl-sheet__t">Four words. One page. <span class="fl-blue">No surprises.</span></h2>
       <div class="fl-plans">
         <div class="fl-plan"><b lang="tr">AYRICA</b><p>in addition</p><ul><li>one more item</li><li>same weight</li><li>calm tone</li></ul></div>
-        <div class="fl-plan"><b lang="tr">ÜSTELİK</b><p>on top of that</p><ul><li>an argument on top</li><li>one direction</li><li>with feeling</li></ul></div>
-        <div class="fl-plan fl-plan--hot"><b lang="tr">HATTA</b><p>even</p><ul><li>beyond expectations</li><li>pairs with <span lang="tr">bile</span></li><li>corrects upward</li></ul></div>
-        <div class="fl-plan" style="border-color:#F5A524"><b lang="tr">BUNUNLA BİRLİKTE</b><p>nevertheless</p><ul><li>a turn</li><li>synonym <span lang="tr">bununla beraber</span></li><li>not “along with this”</li></ul></div>
+        <div class="fl-plan"><b lang="tr">ÜSTELİK</b><p>on top of that</p><ul><li>an argument on top</li><li>one direction</li><li><span lang="tr">üst</span> = top</li></ul></div>
+        <div class="fl-plan fl-plan--hot"><b lang="tr">HATTA</b><p>even</p><ul><li>beyond expectations</li><li><span lang="tr">hatta … bile</span></li><li>“even X” alone — <span lang="tr">X bile</span></li></ul></div>
+        <div class="fl-plan" style="border-color:#F5A524"><b lang="tr">BUNUNLA BİRLİKTE</b><p>nevertheless</p><ul><li>a turn</li><li>synonym <span lang="tr">bununla beraber</span></li><li>not “along with this”</li><li>adds nothing — it turns</li></ul></div>
       </div>
       <div class="fl-big" aria-hidden="true" lang="tr">üstelik</div>
     </div>
@@ -880,6 +978,13 @@ addEventListener('DOMContentLoaded', () => {
     { q: 'Ev pahalı. ___ çok küçük.', o: ['Bununla birlikte', 'Üstelik'], a: 1, full: 'Ev pahalı. Üstelik çok küçük.', why: 'Expensive and small too — a minus on a minus, no turn.' }
   ]);
 
+  cycle(sec('en-tr'), $('.fl-kzpick'), $('.fl-kzqq'), [
+    { q: '“Along with that, there is free wifi.”', o: ['Ayrıca ücretsiz wifi var.', 'Bununla birlikte ücretsiz wifi var.'], a: 0, full: 'Ayrıca ücretsiz wifi var.', why: 'It adds, so — ayrıca. Bununla birlikte would turn.' },
+    { q: '“Even the director came.”', o: ['Hatta müdür geldi.', 'Müdür bile geldi.'], a: 1, full: 'Müdür bile geldi.', why: '“Even X” — X bile, after the word.' },
+    { q: '“They didn\'t even call.”', o: ['Aramadılar bile.', 'Hatta aramadılar.'], a: 0, full: 'Aramadılar bile.', why: '“Not even” — the negative verb, then bile.' },
+    { q: '“We have parking too.”', o: ['Otoparkımızda var.', 'Otoparkımız da var.'], a: 1, full: 'Otoparkımız da var.', why: '“Too” is a separate da. Glued on, it means “in.”' }
+  ]);
+
   /* ---------- 6. порядок силы ---------- */
   {
     const s = sec('olcek'), out = $('.fl-act__fb', s), want = ['ayrıca', 'üstelik', 'hatta'];
@@ -908,6 +1013,33 @@ addEventListener('DOMContentLoaded', () => {
     }
   }));
 
+  /* ---------- english ↔ turkish: cards flip ---------- */
+  {
+    const s = sec('en-tr'), cards = $$('.fl-kzr', s);
+    const flip = (card, on, quiet) => {
+      const bad = $('.fl-bad', card), good = $('.fl-good', card), why = $('.fl-kzr__why', card), btn = $('.fl-kzflip', card);
+      if (card.classList.contains('is-tr') === on) return;
+      card.classList.toggle('is-tr', on);
+      [bad, good, why].forEach((el) => { el.hidden = !on; });
+      btn.textContent = on ? 'To English' : 'To Turkish';
+      if (!on) return;
+      if (!quiet) say(card.dataset.say);
+      if (ANIM) {
+        G.timeline()
+          .fromTo($('.fl-kzr__kz .fl-w', card), { scale: 1 }, { scale: 1.12, duration: .18, yoyo: true, repeat: 1, ease: 'power2.out' })
+          .fromTo(bad, { rotationX: -90, y: -8 }, { rotationX: 0, y: 0, duration: .45, ease: 'back.out(2)' }, .1)
+          .to(bad, { x: -7, duration: .07, yoyo: true, repeat: 3, ease: 'none' }, .55)
+          .set(bad, { x: 0 }, .85)
+          .fromTo(good, { rotationX: -90, y: -8 }, { rotationX: 0, y: 0, duration: .55, ease: 'back.out(2.2)' }, .8)
+          .fromTo($('.fl-good .fl-w, .fl-good b', card), { scale: .4 }, { scale: 1, duration: .5, ease: 'back.out(3)' }, 1.05)
+          .fromTo(why, { y: 14, scale: .96 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)' }, 1.1);
+      }
+    };
+    cards.forEach((c) => $('.fl-kzflip', c).addEventListener('click', () => flip(c, !c.classList.contains('is-tr'))));
+    $('.fl-kzall', s).addEventListener('click', () => cards.forEach((c, i) => setTimeout(() => flip(c, true, true), ANIM ? i * 220 : 0)));
+    $('.fl-kzback', s).addEventListener('click', () => cards.forEach((c) => flip(c, false)));
+  }
+
   /* ---------- редактор ---------- */
   const lab = sec('lab');
   const p1 = $('.fl-pick1', lab), p2 = $('.fl-pick2', lab), prev = $('.fl-preview', lab), gauge = $$('.fl-gauge span', lab), why = $('.fl-why', lab);
@@ -915,14 +1047,30 @@ addEventListener('DOMContentLoaded', () => {
   const POWER = { ayrıca: 1, üstelik: 2, hatta: 3, 'bununla birlikte': -1 };
   const CLS = { ayrıca: 'fl-w--a', üstelik: 'fl-w--u', hatta: 'fl-w--h', 'bununla birlikte': 'fl-w--b' };
   const PAIRS = {
-    'Ev çok güzel / ucuz': { a: 'Ev çok güzel', b: 'ucuz', dir: '++', ok: ['üstelik'], note: 'A plus on a plus with feeling — üstelik. Ayrıca sounds drier, but works too.' },
+    'Ev çok güzel / ucuz': { a: 'Ev çok güzel', b: 'ucuz', dir: '++', ok: ['üstelik', 'ayrıca'], note: 'A plus on a plus with feeling — üstelik. Ayrıca works too, but sounds drier.' },
     'Ev pahalı / konumu harika': { a: 'Ev pahalı', b: 'konumu harika', dir: '-+', ok: ['bununla birlikte'], note: 'A minus, then a plus — only a turn works.' },
     'Hava soğuk / kar yağıyor': { a: 'Hava soğuk', b: 'kar yağıyor', dir: '>>', ok: ['hatta'], note: 'Snow is beyond expectations. Hatta.' },
     'Merkezdeyiz / metro yakın': { a: 'Merkezdeyiz', b: 'metro yakın', dir: '+=', ok: ['ayrıca', 'üstelik'], note: 'One more equal plus — ayrıca. With pressure — üstelik.' },
     'Proje zordu / zamanında bitirdik': { a: 'Proje zordu', b: 'zamanında bitirdik', dir: '-+', ok: ['bununla birlikte'], note: 'Hard, but we made it — a turn.' }
   };
+  /* English sentence → Turkish pair; trap = the choice English thinking leads to */
+  const KZ = {
+    "We're downtown. Along with that, the metro is close.": { pair: 'Merkezdeyiz / metro yakın', trap: { 'bununla birlikte': 'Word for word, “along with that” looks like bununla birlikte. But the Turkish turns, it doesn\'t add. Here — ayrıca.' } },
+    "The house is lovely, and on top of that, it's cheap.": { pair: 'Ev çok güzel / ucuz', trap: {} },
+    "It's cold. In fact, it's snowing.": { pair: 'Hava soğuk / kar yağıyor', trap: {} },
+    'The house is expensive. That said, the location is great.': { pair: 'Ev pahalı / konumu harika', trap: {} },
+    'The project was hard. Nevertheless, we finished on time.': { pair: 'Proje zordu / zamanında bitirdik', trap: {} }
+  };
+  function verdict(P, c, trap) {
+    if (P.ok.includes(c)) return 'Works. ' + P.note;
+    if (trap && trap[c]) return 'Trap. ' + trap[c];
+    if (c === 'bununla birlikte') return 'The meaning breaks: there is no turn, both parts point the same way. ' + P.note;
+    if (P.dir === '-+') return 'The meaning breaks: a minus and a plus pull apart, an adding word can\'t join them. ' + P.note;
+    if (c === 'hatta') return 'Sounds odd: hatta needs a second part much stronger than the first. ' + P.note;
+    return 'Too weak: the second part is more than just one more item. ' + P.note;
+  }
   const TONE = { base: 'Kliniğimiz merkezde', add: 'metro yakın' };
-  const st = { mode: 'build', pair: 'Ev çok güzel / ucuz', conn: 'üstelik', toneConn: 'ayrıca', turnSecond: '+' };
+  const st = { mode: 'build', pair: 'Ev çok güzel / ucuz', conn: 'üstelik', toneConn: 'ayrıca', turnSecond: '+', kz: "We're downtown. Along with that, the metro is close.", kzConn: 'bununla birlikte' };
   function chips(host, list, cur, onPick) {
     host.replaceChildren(...list.map((x) => {
       const b = mkBtn(x, 'fl-chip');
@@ -936,13 +1084,20 @@ addEventListener('DOMContentLoaded', () => {
   function renderLab() {
     let w = '';
     p2.hidden = false;
-    if (st.mode === 'build') {
+    p1.lang = st.mode === 'kz' ? 'en' : 'tr';
+    if (st.mode === 'kz') {
+      const K = KZ[st.kz], P = PAIRS[K.pair];
+      chips(p1, Object.keys(KZ), st.kz, (x) => { st.kz = x; renderLab(); });
+      chips(p2, CONN, st.kzConn, (x) => { st.kzConn = x; renderLab(); say(P.a + ', ' + x + ' ' + P.b); });
+      prev.innerHTML = line(P.a, st.kzConn, P.b);
+      w = verdict(P, st.kzConn, K.trap);
+      setGauge(POWER[st.kzConn]);
+    } else if (st.mode === 'build') {
       chips(p1, Object.keys(PAIRS), st.pair, (x) => { st.pair = x; renderLab(); });
       chips(p2, CONN, st.conn, (x) => { st.conn = x; renderLab(); say(PAIRS[st.pair].a + ', ' + x + ' ' + PAIRS[st.pair].b); });
       const P = PAIRS[st.pair];
       prev.innerHTML = line(P.a, st.conn, P.b);
-      const good = P.ok.includes(st.conn);
-      w = (good ? 'Works. ' : 'The meaning breaks. ') + P.note;
+      w = verdict(P, st.conn);
       setGauge(POWER[st.conn]);
     } else if (st.mode === 'tone') {
       chips(p1, CONN.slice(0, 3), st.toneConn, (x) => { st.toneConn = x; renderLab(); say(`${TONE.base}, ${x} ${TONE.add}.`); });
@@ -1215,6 +1370,9 @@ addEventListener('DOMContentLoaded', () => {
   /* --- редактор, видео, практика, шпаргалка --- */
   G.from('.fl-console', { y: 80, rotation: -2, scale: .94, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: lab, start: 'top 80%', toggleActions: 'play none none reverse' } });
   G.from('.fl-tabs button', { y: 20, scale: .7, stagger: .08, duration: .5, ease: 'back.out(2.5)', scrollTrigger: { trigger: '.fl-tabs', start: 'top 90%' } });
+  G.from('.fl-kzsame > span', { y: 24, scale: .7, stagger: .08, duration: .5, ease: 'back.out(2.5)', scrollTrigger: { trigger: '.fl-kzsame', start: 'top 88%' } });
+  G.from('.fl-kzr', { y: 70, rotation: (i) => (i % 2 ? 2.5 : -2.5), scale: .93, stagger: .12, duration: .8, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.fl-kzgrid', start: 'top 82%' } });
+  G.from('.fl-kzq', { y: 40, scale: .95, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.fl-kzq', start: 'top 90%' } });
   G.from('.fl-vcard', { y: 60, scale: .95, duration: .8, ease: 'back.out(1.6)', scrollTrigger: { trigger: sec('video'), start: 'top 80%' } });
   ScrollTrigger.batch('.fl-exgrid > a-exercise, .fl-quizbox', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 50, scale: .96, stagger: .12, duration: .7, ease: 'back.out(1.6)' }) });
   G.from('.fl-plan', { y: 60, rotation: (i) => (i % 2 ? 3 : -3), scale: .9, stagger: .12, duration: .8, ease: 'back.out(1.8)', scrollTrigger: { trigger: '.fl-sheet', start: 'top 75%' } });

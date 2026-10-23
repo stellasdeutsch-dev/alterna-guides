@@ -251,6 +251,27 @@ html:not(.is-film) .fx { inset: auto !important; }
 .lab__why { font-size: 14px; color: var(--ink-2); padding: 12px 14px; border-radius: var(--r-md); background: #fff; }
 .lab__clock { position: absolute; right: 14px; top: 14px; width: 54px; height: 54px; }
 
+/* English ↔ Turkish */
+.kd { position: relative; }
+.kd__card { position: relative; border-radius: var(--r-lg); background: linear-gradient(180deg, #fbfaf9, #f2eeeb); padding: 26px 18px 18px; display: grid; gap: 10px; overflow: hidden; }
+.kd__card::before { content: 'en ↔ tr'; position: absolute; top: 0; left: 18px; padding: 4px 12px; border-radius: 0 0 6px 6px; background: var(--peach); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.kd__row { display: grid; grid-template-columns: 44px 1fr; gap: 10px; align-items: center; min-height: 48px; }
+.kd__lbl { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
+.kd__vs { height: 18px; margin-left: 66px; border-left: 2px dashed var(--line); }
+.kd .segs { cursor: pointer; }
+.seg.is-diff { box-shadow: 0 0 0 2px #b0524a; }
+.seg.is-same { box-shadow: 0 0 0 2px var(--time); }
+.kd__note { font-size: 14px; color: var(--ink-2); padding: 12px 14px; border-radius: var(--r-md); background: #fff; min-height: 66px; }
+.kd__note b { color: var(--ink); }
+.kd__ghost { position: absolute; z-index: 3; pointer-events: none; margin: 0; }
+.kd__qs { display: grid; gap: 14px; }
+@media (min-width: 900px) { .kd__qs { grid-template-columns: 1fr 1fr; } }
+.kq { display: grid; gap: 8px; padding: 14px; border-radius: var(--r-md); background: #f7f4f2; }
+.kq__q { font-size: 14px; font-weight: 600; }
+.kq__o { display: flex; flex-wrap: wrap; gap: 6px; }
+.kq__o .btn.is-ok { background: var(--time-soft); border-color: var(--time); }
+.kq__f { font-size: 14px; color: var(--ink-2); min-height: 21px; }
+
 /* ошибки как тарифы */
 .traps { position: relative; display: grid; gap: 18px; padding: 24px 16px; padding-right: calc(16px + var(--bar)); overflow: hidden; }
 .traps__head { display: grid; gap: 8px; max-width: 640px; }
@@ -361,6 +382,7 @@ html:not(.is-film) .fx { inset: auto !important; }
     <button class="prog__mark" type="button" data-goto="real"><span>If already</span></button>
     <button class="prog__mark" type="button" data-goto="ahead"><span>If you have to</span></button>
     <button class="prog__mark" type="button" data-goto="unreal"><span>If only</span></button>
+    <button class="prog__mark" type="button" data-goto="en-diff"><span>English ↔ Turkish</span></button>
     <button class="prog__mark" type="button" data-goto="lab"><span>Lab</span></button>
     <button class="prog__mark" type="button" data-goto="traps"><span>Mistakes</span></button>
     <button class="prog__mark" type="button" data-goto="video"><span>Video</span></button>
@@ -483,7 +505,7 @@ html:not(.is-film) .fx { inset: auto !important; }
     <div class="subs">
       <p>You already know plain -sA. <a-say>Gelirsen sevinirim.</a-say> If you come, I'll be glad. <a-say>Keşke gelseydin.</a-say> I wish you'd come.</p>
       <p>Now a C1-level trick. There's a word ise — “if that's so.” It shrinks into the tag -(y)sA.</p>
-      <p>The tag sticks to any tense. Almış + ise = almışsa. Geliyor + ise = geliyorsa. The tense stays, “if” gets added.</p>
+      <p>The tag sticks to any tense. Almış + ise = almışsa. Geliyor + ise = geliyorsa. The tense stays, “if” gets added. English does the same — but its “if” stands in front, and Turkish glues it to the end.</p>
       <p>Harmony looks at the last vowel of the form: -sa or -se. If the form ends in a vowel, add y: gelmeliyse.</p>
     </div>
     <div class="act" data-act>
@@ -645,7 +667,7 @@ html:not(.is-film) .fx { inset: auto !important; }
       <p>Friday again. The fireworks are over. Liza whispers: <a-say>Önceden bilseydim gelirdim.</a-say> If I'd known in advance, I would have come.</p>
       <p>-saydı is “if only.” The door is already shut: didn't know, didn't come.</p>
       <p>The second half is in the past too: -(ı)rdı. <a-say>Erken çıksaydım tramvayı kaçırmazdım.</a-say> If I'd left earlier, I wouldn't have missed the tram.</p>
-      <p>The rule: verb + -sAydI … -(I)rdI = “if I had… I would have.” Regret in two words.</p>
+      <p>The rule: verb + -sAydI … -(I)rdI = “if I had… I would have.” Regret in two words. -(I)rdI is your “would”: gelirdim — I would have come.</p>
     </div>
     <div class="act" data-act>
       <p class="act__q">Can this still happen?</p>
@@ -654,6 +676,34 @@ html:not(.is-film) .fx { inset: auto !important; }
         <button class="btn" type="button" data-real="0" aria-pressed="false">No, too late</button>
       </div>
       <p class="act__out" data-real-out><b data-say="Bileti almışsan gelirim.">Bileti almışsan gelirim.</b> If you've already bought the ticket — I'll come.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5½. English ↔ Turkish -->
+<section data-section="en-diff" data-words="80">
+  <div class="lab kd" data-kdbox>
+    <header class="lab__head">
+      <span class="badge" style="justify-self:start">English ↔ Turkish</span>
+      <h2>Same idea. <span class="lt">Different place</span></h2>
+      <p>Two things you already have: “if” keeps the tense, and “would.” Three things work differently. Tap a button: English on top, Turkish below. Blue outline — same, red — different.</p>
+    </header>
+    <div class="tabs" role="tablist" aria-label="Differences">
+      <button class="tab" type="button" role="tab" aria-selected="true" data-kd="0"><i style="background:var(--time)"></i>if + any tense</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-kd="1"><i style="background:var(--time)"></i>would</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-kd="2"><i style="background:#b0524a"></i>“if” moves</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-kd="3"><i style="background:#b0524a"></i>had ≠ -dı</button>
+      <button class="tab" type="button" role="tab" aria-selected="false" data-kd="4"><i style="background:#b0524a"></i>2 types → 1</button>
+    </div>
+    <div class="kd__card" data-kd-card>
+      <div class="kd__row"><span class="kd__lbl">en</span><span class="segs" lang="en" data-kd-kk></span></div>
+      <div class="kd__vs" aria-hidden="true"></div>
+      <div class="kd__row"><span class="kd__lbl">tr</span><span class="segs" lang="tr" data-kd-tr></span></div>
+      <p class="kd__note" data-kd-note aria-live="polite"></p>
+    </div>
+    <div class="kd__qs">
+      <div class="kq" data-kq><p class="kq__q">“If you're reading it right now…”</p><div class="kq__o" lang="tr"><button class="btn" type="button">Eğer okuyorsun…</button><button class="btn" type="button" data-ok>Okuyorsan…</button><button class="btn" type="button">Okuyorsen…</button></div><p class="kq__f" aria-live="polite" data-yes="Yes: the “if” is the tag at the end, and o in okuyor picks -sa." data-no="Eğer alone isn't enough — Turkish needs the tag: okuyor + sa + n. And o picks -sa, not -se."></p></div>
+      <div class="kq" data-kq><p class="kq__q">“If I had known, I would have told you.”</p><div class="kq__o" lang="tr"><button class="btn" type="button">Bildiysem söylerdim.</button><button class="btn" type="button" data-ok>Bilseydim söylerdim.</button><button class="btn" type="button">Bilseydim söylerim.</button></div><p class="kq__f" aria-live="polite" data-yes="Right: -se first, then -ydi, then the person. Söylerdim = I would have told." data-no="English “had” is not -dı before -se. Bildiysem means “if I did know.” Unreal = bil-se-ydi-m … söyler-di-m."></p></div>
     </div>
   </div>
 </section>
@@ -694,7 +744,7 @@ html:not(.is-film) .fx { inset: auto !important; }
       <div class="lab__screen">
         <svg class="lab__clock" viewBox="0 0 54 54" aria-hidden="true"><circle cx="27" cy="27" r="24" fill="#fff" stroke="#e8c3b1" stroke-width="3"/><g data-hand style="transform-origin:27px 27px"><path d="M27 27 V10" stroke="#d29a80" stroke-width="3" stroke-linecap="round"/></g><circle cx="27" cy="27" r="3" fill="#d29a80"/></svg>
         <div class="lab__out" data-lab-out data-say="Gelmişsem."><span class="seg" data-o-root>gel</span><span class="seg seg--time" data-o-time>miş</span><span class="seg seg--y" data-o-y hidden>y</span><span class="seg seg--tag" data-o-tag>se</span><span class="seg seg--person" data-o-p>m</span></div>
-        <p class="lab__ru" data-lab-ru>If I already arrived…</p>
+        <p class="lab__ru" data-lab-ru>If I've already come…</p>
         <div class="lab__btns">
           <button class="btn" type="button" data-lab-why aria-expanded="false">Why?</button>
           <button class="cta" type="button" data-lab-say><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#play"/></svg>Listen</button>
@@ -710,21 +760,21 @@ html:not(.is-film) .fx { inset: auto !important; }
   <div class="traps" data-traps>
     <header class="traps__head">
       <h2><span class="lt">Common</span> mistakes</h2>
-      <p>Everyone trips over these. Four cards: the mistake on the front, the fix on the back. Tap “Fix.”</p>
+      <p>English speakers trip over these. Four cards: the mistake on the front, the fix on the back. Tap “Fix.”</p>
     </header>
     <div class="strip" data-strip>
       <article class="plan"><div class="plan__in" data-plan>
         <div class="plan__face">
           <svg class="plan__mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" fill="#fdebec"/><path d="M12 12l12 12M24 12L12 24" stroke="#d9474d" stroke-width="3" stroke-linecap="round"/></svg>
           <h3>Meant “if already”</h3>
-          <p class="plan__sit">Eda may have already bought the tickets.</p>
+          <p class="plan__sit">Meant: “If you've already bought the tickets, I'll come.”</p>
           <p class="plan__line plan__line--bad" data-say="Bilet alsaydın gelirdim.">Bilet alsaydın gelirdim.</p>
           <button class="cta cta--ghost" type="button" data-flip>Fix</button>
         </div>
         <div class="plan__face plan__back">
           <h3>Correct</h3>
           <p class="plan__line" data-say="Bileti almışsan gelirim.">Bileti almışsan gelirim.</p>
-          <p class="plan__why">-saydı shuts the door: you didn't buy them — I'm not coming. A live “if” needs a tag on the tense.</p>
+          <p class="plan__why">-saydı is “if you had…” — you didn't, so I'm not coming. “If you've already bought” is a live “if”: put the tag on -mış.</p>
           <button class="cta" type="button" data-flip>Back</button>
         </div>
       </div></article>
@@ -739,37 +789,37 @@ html:not(.is-film) .fx { inset: auto !important; }
         <div class="plan__face plan__back">
           <h3>Correct</h3>
           <p class="plan__line" data-say="Geliyorsan">Geliyorsan</p>
-          <p class="plan__why">Harmony doesn't look at the root, it looks at the last vowel of the form. In geliyor that's o — so -sa.</p>
+          <p class="plan__why">English has no vowel harmony, so it's easy to forget. The tag looks at the last vowel of the whole form, not the root. In geliyor that's o — so -sa.</p>
           <button class="cta" type="button" data-flip>Back</button>
         </div>
       </div></article>
       <article class="plan"><div class="plan__in" data-plan>
         <div class="plan__face">
           <svg class="plan__mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" fill="#fdebec"/><path d="M12 12l12 12M24 12L12 24" stroke="#d9474d" stroke-width="3" stroke-linecap="round"/></svg>
-          <h3>The lost y</h3>
-          <p class="plan__sit">“If I have to come.”</p>
-          <p class="plan__line plan__line--bad" data-say="Gelmelisem">Gelmelisem</p>
+          <h3>“Eğer” instead of the tag</h3>
+          <p class="plan__sit">“If the tram's coming, let's run!”</p>
+          <p class="plan__line plan__line--bad" data-say="Eğer tramvay geliyor, koşalım!">Eğer tramvay geliyor, koşalım!</p>
           <button class="cta cta--ghost" type="button" data-flip>Fix</button>
         </div>
         <div class="plan__face plan__back">
           <h3>Correct</h3>
-          <p class="plan__line" data-say="Gelmeliysem">Gelmeliysem</p>
-          <p class="plan__why">Gelmeli ends in a vowel, the tag attaches with a y: gelmeli-y-sem.</p>
+          <p class="plan__line" data-say="Eğer tramvay geliyorsa koşalım!">Eğer tramvay geliyorsa koşalım!</p>
+          <p class="plan__why">Eğer looks like English “if,” but it's optional. The real “if” is the tag: geliyor-sa. Without it, the sentence says “the tram is coming.”</p>
           <button class="cta" type="button" data-flip>Back</button>
         </div>
       </div></article>
       <article class="plan"><div class="plan__in" data-plan>
         <div class="plan__face">
           <svg class="plan__mark" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="17" fill="#fdebec"/><path d="M12 12l12 12M24 12L12 24" stroke="#d9474d" stroke-width="3" stroke-linecap="round"/></svg>
-          <h3>Half an “if only”</h3>
-          <p class="plan__sit">“If I'd known, I would have come.”</p>
-          <p class="plan__line plan__line--bad" data-say="Önceden bilseydim gelirim.">Önceden bilseydim gelirim.</p>
+          <h3>“Had” turned into -dı</h3>
+          <p class="plan__sit">“If I had known, I would have come.”</p>
+          <p class="plan__line plan__line--bad" data-say="Önceden bildiysem gelirdim.">Önceden bildiysem gelirdim.</p>
           <button class="cta cta--ghost" type="button" data-flip>Fix</button>
         </div>
         <div class="plan__face plan__back">
           <h3>Correct</h3>
           <p class="plan__line" data-say="Önceden bilseydim gelirdim.">Önceden bilseydim gelirdim.</p>
-          <p class="plan__why">“If only” drags its second half along: -(I)rdI. Gelirim is “I'll come,” but you need “I would have come.”</p>
+          <p class="plan__why">Bildiysem is a real word, but it means “if I did know” — maybe I did. For something that didn't happen: -se first, then -ydi: bil-se-ydi-m.</p>
           <button class="cta" type="button" data-flip>Back</button>
         </div>
       </div></article>
@@ -1035,6 +1085,15 @@ addEventListener('DOMContentLoaded', () => {
       .from($$('.lab__ctrl > *', lab), { x: -20, autoAlpha: 0, stagger: 0.05, duration: 0.35 }, 0.2)
       .from($('.lab__screen', lab), { x: 30, autoAlpha: 0, duration: 0.5 }, 0.3);
   }
+  function sceneKd() {
+    const kd = $('[data-kdbox]');
+    G.timeline({ scrollTrigger: { trigger: kd, start: 'top 80%', toggleActions: 'play none none reverse' } })
+      .from(kd, { y: 60, scale: 0.97, duration: 0.6, ease: 'power3.out' })
+      .from($$('.tab', kd), { y: -14, autoAlpha: 0, stagger: 0.06, duration: 0.3 }, 0.2)
+      .from($('.kd__card', kd), { x: 30, autoAlpha: 0, duration: 0.5 }, 0.3)
+      .add(() => kdShow(kdNow), 0.7)
+      .from($$('.kq', kd), { y: 24, autoAlpha: 0, stagger: 0.12, duration: 0.4 }, 0.6);
+  }
   function sceneTraps(desk) {
     const box = $('[data-traps]'), strip = $('[data-strip]');
     if (desk && innerWidth >= 900) {
@@ -1075,6 +1134,7 @@ addEventListener('DOMContentLoaded', () => {
       sceneReal(desk);
       sceneAhead(desk);
       sceneUnreal(desk);
+      sceneKd();
       sceneLab();
       sceneTraps(desk);
       sceneSheet();
@@ -1107,8 +1167,8 @@ addEventListener('DOMContentLoaded', () => {
 
   /* сцена 2: приклеить ярлык */
   const GLUE = [
-    ['almış', 'sa', 'In almış the last vowel is ı — a back vowel, so -sa.'],
-    ['geliyor', 'sa', 'In geliyor the last vowel is o, even though the root is gel. So -sa.'],
+    ['almış', 'sa', 'In almış the last vowel is ı (like the a in about) — a back vowel, so -sa. ş = sh.'],
+    ['geliyor', 'sa', 'In geliyor (ge-li-YOR) the last vowel is o, even though the root is gel. So -sa.'],
     ['gelecek', 'se', 'In gelecek the last vowel is e — a front vowel, so -se.'],
     ['gelmeli', 'yse', 'Gelmeli ends in the vowel i — add y: -yse.'],
   ];
@@ -1165,14 +1225,100 @@ addEventListener('DOMContentLoaded', () => {
     else leaf.setAttribute('transform', open ? 'matrix(.25 0 0 1 6 0)' : '');
   }));
 
+  /* ---------- English ↔ Turkish ---------- */
+  /* piece: [text, role, mark] — role: '' | time | tag | unreal | person | y; mark: s — same, d — different */
+  const KD = [
+    { kk: [['If', 'tag'], ['the tram', ''], ['is coming', 'time', 's']], tr: [['Tramvay', ''], ['geliyor', 'time', 's'], ['sa', 'tag']], say: 'Tramvay geliyorsa', fly: null,
+      note: '<b>Same.</b> English keeps the tense after “if”: if he’s already got it, if it’s coming, if you’re going to, if you have to. Turkish keeps it too: almışsa, geliyorsa, gelecekse, gelmeliyse.' },
+    { kk: [['I', ''], ['would', 'unreal', 's'], ['have', 'unreal', 's'], ['come', '']], tr: [['gel', ''], ['ir', 'unreal', 's'], ['di', 'unreal', 's'], ['m', 'person']], say: 'gelirdim', fly: null,
+      note: '<b>Same idea.</b> “Would” is -(I)r + -dI: gelirdim — I would have come. Wouldn’t is -mAzdI: kaçırmazdım — I wouldn’t have missed. One word instead of three.' },
+    { kk: [['If', 'tag', 'd'], ['you', 'person'], ['have to', 'time'], ['go', '']], tr: [['git', ''], ['meli', 'time'], ['y', 'y'], ['se', 'tag', 'd'], ['n', 'person']], say: 'Gitmeliysen git.', fly: [0, 3],
+      note: '<b>Different.</b> English “if” opens the clause. Turkish “if” closes it — glued to the verb, and the person comes last. Eğer at the front is optional; the tag is not.' },
+    { kk: [['If', 'tag'], ['I', 'person'], ['had', 'unreal', 'd'], ['known', '']], tr: [['bil', ''], ['se', 'tag'], ['ydi', 'unreal', 'd'], ['m', 'person']], say: 'bilseydim', fly: [2, 2],
+      note: '<b>Different.</b> “Had” is a past marker, but it doesn’t become -dı before the tag. Order: verb + se + ydi + person. Bildiysem exists, but it means “if I did know” — a live “if.”' },
+    { kk: [['If I knew', ''], ['/', ''], ['If I had known', 'unreal', 'd']], tr: [['bil', ''], ['se', 'tag'], ['ydi', 'unreal', 'd'], ['m', 'person']], say: 'Bilseydim söylerdim.', fly: null,
+      note: '<b>Different.</b> English has two unreal types: if I knew, I’d tell you / if I had known, I’d have told you. Turkish often uses one pattern for both: bilseydim söylerdim. Context decides.' },
+  ];
+  const kdCard = $('[data-kd-card]'), kdKk = $('[data-kd-kk]'), kdTr = $('[data-kd-tr]'), kdNote = $('[data-kd-note]');
+  const kdSegs = (box, list) => {
+    box.replaceChildren(...list.map(([t, role, m]) => {
+      const e = document.createElement('span');
+      e.className = `seg${role ? ` seg--${role}` : ''}${m === 's' ? ' is-same' : m === 'd' ? ' is-diff' : ''}`;
+      e.textContent = t; return e;
+    }));
+    return [...box.children];
+  };
+  let kdNow = 0;
+  function kdShow(i, anim = true) {
+    kdNow = i;
+    const x = KD[i];
+    $$('[data-kd]').forEach((b) => b.setAttribute('aria-selected', String(Number(b.dataset.kd) === i)));
+    const a = kdSegs(kdKk, x.kk), b = kdSegs(kdTr, x.tr);
+    kdTr.dataset.say = x.say;
+    kdNote.innerHTML = x.note;
+    if (!anim || !film()) return;
+    G.fromTo(a, { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.07, duration: 0.35, ease: 'back.out(2)' });
+    G.fromTo(b, { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, stagger: 0.07, duration: 0.35, delay: 0.25, ease: 'back.out(2)' });
+    G.fromTo(kdNote, { autoAlpha: 0, y: 8 }, { autoAlpha: 1, y: 0, duration: 0.3, delay: 0.5, overwrite: true });
+    if (x.fly) {
+      const from = a[x.fly[0]], to = b[x.fly[1]];
+      const r0 = kdCard.getBoundingClientRect(), r1 = from.getBoundingClientRect(), r2 = to.getBoundingClientRect();
+      const g = from.cloneNode(true); g.classList.add('kd__ghost'); g.setAttribute('aria-hidden', 'true');
+      g.style.left = `${r1.left - r0.left}px`; g.style.top = `${r1.top - r0.top}px`;
+      kdCard.append(g);
+      G.timeline({ delay: 0.75, onComplete: () => g.remove() })
+        .to(g, { x: r2.left - r1.left, y: r2.top - r1.top, scale: 0.7, duration: 0.7, ease: 'power3.inOut' })
+        .to(g, { autoAlpha: 0, duration: 0.2 })
+        .fromTo(to, { scale: 1 }, { scale: 1.3, duration: 0.2, yoyo: true, repeat: 1 }, '-=0.25');
+    } else {
+      G.fromTo([...a, ...b].filter((e) => e.classList.contains('is-same')), { scale: 1 }, { scale: 1.15, duration: 0.2, yoyo: true, repeat: 1, stagger: 0.04, delay: 0.8 });
+    }
+  }
+  $$('[data-kd]').forEach((t) => t.addEventListener('click', () => { kdShow(Number(t.dataset.kd)); speak(KD[Number(t.dataset.kd)].say); }));
+  kdTr.addEventListener('click', () => speak(kdTr.dataset.say));
+  kdShow(0, false);
+  $$('[data-kq]').forEach((q) => {
+    const f = $('.kq__f', q);
+    $$('.kq__o .btn', q).forEach((b) => b.addEventListener('click', () => {
+      const ok = b.hasAttribute('data-ok');
+      $$('.kq__o .btn', q).forEach((x) => { x.classList.remove('is-ok', 'is-bad'); });
+      b.classList.add(ok ? 'is-ok' : 'is-bad');
+      if (!ok) $('[data-ok]', q).classList.add('is-ok');
+      f.textContent = ok ? f.dataset.yes : f.dataset.no;
+      speak($('[data-ok]', q).textContent);
+      ok ? pop(b) : shake(b);
+    }));
+  });
+
   /* ---------- лаборатория ---------- */
   const VERBS = [
-    { root: 'gel', f: { past: 'gelmiş', now: 'geliyor', fut: 'gelecek', must: 'gelmeli', un: 'gelse' }, inf: 'come', past: ['arrived', 'arrived', 'arrived', 'arrived'], now: ['am coming', 'are coming', 'is coming', 'are coming'], fut: ['am going to come', 'are going to come', 'is going to come', 'are going to come'] },
-    { root: 'al', f: { past: 'almış', now: 'alıyor', fut: 'alacak', must: 'almalı', un: 'alsa' }, inf: 'buy', past: ['bought', 'bought', 'bought', 'bought'], now: ['am buying', 'are buying', 'is buying', 'are buying'], fut: ['am going to buy', 'are going to buy', 'is going to buy', 'are going to buy'] },
-    { root: 'bil', f: { past: 'bilmiş', now: 'biliyor', fut: 'bilecek', must: 'bilmeli', un: 'bilse' }, inf: 'know', past: ['found out', 'found out', 'found out', 'found out'], now: ['know', 'know', 'knows', 'know'], fut: ['am going to find out', 'are going to find out', 'is going to find out', 'are going to find out'] },
-    { root: 'oku', f: { past: 'okumuş', now: 'okuyor', fut: 'okuyacak', must: 'okumalı', un: 'okusa' }, inf: 'read', past: ['read it', 'read it', 'read it', 'read it'], now: ['am reading', 'are reading', 'is reading', 'are reading'], fut: ['am going to read', 'are going to read', 'is going to read', 'are going to read'] },
+    { root: 'gel', f: { past: 'gelmiş', now: 'geliyor', fut: 'gelecek', must: 'gelmeli', un: 'gelse' },
+      past: ['If I\'ve already come…', 'If you\'ve already come…', 'If he/she has already come…', 'If we\'ve already come…'],
+      now: ['If I\'m coming right now…', 'If you\'re coming right now…', 'If he/she is coming right now…', 'If we\'re coming right now…'],
+      fut: ['If I\'m going to come…', 'If you\'re going to come…', 'If he/she is going to come…', 'If we\'re going to come…'],
+      must: ['If I have to come…', 'If you have to come…', 'If he/she has to come…', 'If we have to come…'],
+      un: ['If I had come… But I didn\'t.', 'If you had come… But you didn\'t.', 'If he/she had come… But he/she didn\'t.', 'If we had come… But we didn\'t.'] },
+    { root: 'al', f: { past: 'almış', now: 'alıyor', fut: 'alacak', must: 'almalı', un: 'alsa' },
+      past: ['If I\'ve already bought it…', 'If you\'ve already bought it…', 'If he/she has already bought it…', 'If we\'ve already bought it…'],
+      now: ['If I\'m buying it right now…', 'If you\'re buying it right now…', 'If he/she is buying it right now…', 'If we\'re buying it right now…'],
+      fut: ['If I\'m going to buy it…', 'If you\'re going to buy it…', 'If he/she is going to buy it…', 'If we\'re going to buy it…'],
+      must: ['If I have to buy it…', 'If you have to buy it…', 'If he/she has to buy it…', 'If we have to buy it…'],
+      un: ['If I had bought it… But I didn\'t.', 'If you had bought it… But you didn\'t.', 'If he/she had bought it… But he/she didn\'t.', 'If we had bought it… But we didn\'t.'] },
+    { root: 'bil', f: { past: 'bilmiş', now: 'biliyor', fut: 'bilecek', must: 'bilmeli', un: 'bilse' },
+      past: ['If I\'ve already found out…', 'If you\'ve already found out…', 'If he/she has already found out…', 'If we\'ve already found out…'],
+      now: ['If I know…', 'If you know…', 'If he/she knows…', 'If we know…'],
+      fut: ['If I\'m going to find out…', 'If you\'re going to find out…', 'If he/she is going to find out…', 'If we\'re going to find out…'],
+      must: ['If I have to know…', 'If you have to know…', 'If he/she has to know…', 'If we have to know…'],
+      un: ['If I had known… But I didn\'t.', 'If you had known… But you didn\'t.', 'If he/she had known… But he/she didn\'t.', 'If we had known… But we didn\'t.'] },
+    { root: 'oku', f: { past: 'okumuş', now: 'okuyor', fut: 'okuyacak', must: 'okumalı', un: 'okusa' },
+      past: ['If I\'ve already read it…', 'If you\'ve already read it…', 'If he/she has already read it…', 'If we\'ve already read it…'],
+      now: ['If I\'m reading it right now…', 'If you\'re reading it right now…', 'If he/she is reading it right now…', 'If we\'re reading it right now…'],
+      fut: ['If I\'m going to read it…', 'If you\'re going to read it…', 'If he/she is going to read it…', 'If we\'re going to read it…'],
+      must: ['If I have to read it…', 'If you have to read it…', 'If he/she has to read it…', 'If we have to read it…'],
+      un: ['If I had read it… But I didn\'t.', 'If you had read it… But you didn\'t.', 'If he/she had read it… But he/she didn\'t.', 'If we had read it… But we didn\'t.'] },
   ];
-  const SUBJ = ['I', 'you', 'he/she', 'we'], DAT = ['I have', 'you have', 'he/she has', 'we have'], PEND = ['m', 'n', '', 'k'];
+  const ENW = { past: 'English: if + have done. Turkish: -mış + sa.', now: 'English: if + is doing. Turkish: -yor + sa.', fut: 'English: if + going to. Turkish: -ecek + se.', must: 'English: if + have to. Turkish: -meli + y + se — one word.', un: 'The other half is your “would”: gelirdim — I would have come.' };
+  const SUBJ = ['I', 'you', 'he/she', 'we'], PEND = ['m', 'n', '', 'k'];
   const BACK = /[aıou]/, VOW = /[aeıioöuü]/g;
   const lastV = (w) => (w.match(VOW) || ['e']).pop();
   const lab = { mode: 'past', v: 0, p: 0 };
@@ -1190,7 +1336,7 @@ addEventListener('DOMContentLoaded', () => {
       el.tag.textContent = ydi; el.tag.className = 'seg seg--unreal';
       word = un + ydi + pe;
       why = `“If only” is -sA + ydI: ${un} + ${ydi}. The second half of the sentence moves into the past too: -(I)rdI.`;
-      ru = `Had ${SUBJ[p]} ${V.past[p]}…`;
+      ru = V.un[p];
     } else {
       const form = V.f[lab.mode];
       const v = lastV(form);
@@ -1201,14 +1347,14 @@ addEventListener('DOMContentLoaded', () => {
       el.tag.textContent = sa; el.tag.className = 'seg seg--tag';
       word = form + (endsV ? 'y' : '') + sa + pe;
       why = `The last vowel in ${form} is ${v}, so -${sa}.${endsV ? ' The form ends in a vowel — add y.' : ''}`;
-      ru = { past: `If ${SUBJ[p]} already ${V.past[p]}…`, now: `If ${SUBJ[p]} ${V.now[p]} right now…`, fut: `If ${SUBJ[p]} ${V.fut[p]}…`, must: `If ${DAT[p]} to ${V.inf}…` }[lab.mode];
+      ru = V[lab.mode][p];
     }
     el.root.textContent = V.root;
     el.p.textContent = pe || '·';
     el.p.style.opacity = pe ? '1' : '.35';
     el.out.dataset.say = `${word.charAt(0).toUpperCase()}${word.slice(1)}.`;
     el.ru.textContent = ru;
-    el.why.textContent = `${why} The person “${SUBJ[p]}” goes at the very end${pe ? `: -${pe}` : ', “he/she” has no ending'}.`;
+    el.why.textContent = `${why} The person “${SUBJ[p]}” goes at the very end${pe ? `: -${pe}` : ', “he/she” has no ending'}. ${ENW[lab.mode]}`;
     if (film()) {
       if (part !== 'p') G.fromTo([el.time, el.tag], { y: -40, autoAlpha: 0, rotation: -8 }, { y: 0, autoAlpha: 1, rotation: 0, stagger: 0.08, duration: 0.5, ease: 'back.out(2)' });
       G.fromTo(el.p, { x: 30, autoAlpha: 0 }, { x: 0, autoAlpha: pe ? 1 : 0.35, duration: 0.4, ease: 'power3.out' });
