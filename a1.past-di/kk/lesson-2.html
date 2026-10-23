@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.past-di">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="2">
+<title>Өткен шақ -DI · 2-сабақ</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+/* ===== токены: белый фон, персиковые и сиреневые пятна, оранжевый, синий, розовый ===== */
+:root {
+  --ink: #17171c;
+  --ink-2: #3c3c48;
+  --muted: #6e6e82;
+  --line: #efeaf3;
+  --paper: #ffffff;
+  --peach: #fde7db;
+  --peach-2: #fff1e9;
+  --lilac: #f3ebff;
+  --c-di: #1e9fef;          /* хвост -DI и его гласная */
+  --c-di-soft: #e4f4ff;
+  --c-t: #f0186a;           /* оглушённая t */
+  --c-t-soft: #ffe6ef;
+  --c-pers: #ff6a00;        /* окончание лица */
+  --c-pers-soft: #fff0e4;
+  --c-neg: #7c3aed;         /* отрицание */
+  --c-neg-soft: #f1e9ff;
+  --c-q: #0f9f8f;           /* частица mi */
+  --c-q-soft: #e1f7f3;
+  --g-orange: linear-gradient(180deg, #ff8a3b, #ff6a00);
+  --g-blue: linear-gradient(180deg, #42b7f8, #1e9fef);
+  --g-rose: linear-gradient(140deg, #ff6b5b 0%, #f5196b 100%);
+  --g-violet: linear-gradient(140deg, #a855f7, #7c3aed);
+  --sh-sm: 0 6px 20px rgba(90, 40, 80, .06);
+  --sh: 0 16px 44px rgba(90, 40, 80, .10);
+  --sh-r: 0 16px 40px rgba(240, 24, 106, .24);
+  --r: 26px;
+  --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --ak-accent: #ff6a00;
+  --ak-accent-soft: #fff0e4;
+  --ak-ink: #17171c;
+  --ak-muted: #6e6e82;
+  --ak-line: #efeaf3;
+  --ak-surface: #faf7fc;
+  --ak-font: var(--font);
+  --ak-radius: 20px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; overflow-x: clip; background: var(--paper); }
+body { margin: 0; background: var(--paper); color: var(--ink-2); font: 400 var(--ak-text)/1.6 var(--font); overflow-x: clip; }
+main { padding: 0 16px calc(64px + env(safe-area-inset-bottom)); position: relative; }
+main::before { content: ''; position: absolute; inset: 0 0 auto; height: 900px; z-index: -1; pointer-events: none;
+  background: radial-gradient(420px 380px at 0% 4%, #dcefff 0, transparent 70%), radial-gradient(420px 380px at 100% 12%, #ffd9e3 0, transparent 70%), radial-gradient(360px 300px at 50% 60%, #ffe6d6 0, transparent 70%); }
+section { max-width: 760px; margin: 0 auto; padding: clamp(44px, 9vw, 84px) 0 0; position: relative; }
+h1, h2, h3 { font-family: var(--font); color: var(--ink); letter-spacing: -.02em; margin: 0; }
+h1 { font-size: clamp(30px, 8.6vw, 64px); line-height: 1.04; font-weight: 900; margin: 14px 0 14px; }
+h2 { font-size: clamp(26px, 7vw, 44px); line-height: 1.08; font-weight: 850; margin: 10px 0 18px; }
+h3 { font-size: clamp(18px, 4.6vw, 24px); line-height: 1.2; font-weight: 800; }
+p { margin: 0 0 12px; max-width: 66ch; }
+b, strong { color: var(--ink); }
+.pill { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 12px; font-weight: 800; letter-spacing: .05em; color: #7c3aed; box-shadow: var(--sh-sm); }
+.pill::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--g-rose); }
+.card { background: #fff; border-radius: var(--r); padding: clamp(18px, 4.5vw, 30px); box-shadow: var(--sh); position: relative; overflow: hidden; }
+.card--peach { background: linear-gradient(150deg, var(--peach-2), var(--peach)); box-shadow: var(--sh-sm); }
+.lead { font-size: clamp(17px, 2.2vw, 20px); }
+.mut { color: var(--muted); }
+.tr { font-weight: 800; color: var(--ink); }
+.m-di { color: var(--c-di); font-weight: 900; }
+.m-t { color: var(--c-t); font-weight: 900; }
+.m-p { color: var(--c-pers); font-weight: 900; }
+.m-v { color: var(--c-di); text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 5px; }
+.ico { width: 1em; height: 1em; display: inline-block; vertical-align: -.14em; flex: 0 0 auto; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.center { text-align: center; justify-content: center; }
+
+/* кнопки и чипы */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border: 0; border-radius: 16px; cursor: pointer; font: 750 16px/1 var(--font); color: #fff; background: var(--g-orange); box-shadow: 0 10px 26px rgba(255, 106, 0, .3); }
+.btn--blue { background: var(--g-blue); box-shadow: 0 10px 26px rgba(30, 159, 239, .3); }
+.btn--ghost { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line), var(--sh-sm); }
+.btn:focus-visible, .chip:focus-visible, .seg button:focus-visible, .flip:focus-visible { outline: 3px solid var(--c-di); outline-offset: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { min-height: 44px; padding: 8px 15px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; font: 700 15px/1.2 var(--font); color: var(--ink); cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--g-orange); color: #fff; border-color: transparent; box-shadow: 0 8px 20px rgba(255, 106, 0, .28); }
+.chip small { font-weight: 500; opacity: .75; }
+.seg { display: inline-flex; flex-wrap: nowrap; max-width: 100%; background: #f4f1f8; border-radius: 999px; padding: 5px; gap: 4px; }
+.seg button { min-height: 44px; border: 0; border-radius: 999px; padding: 0 16px; font: 750 15px/1 var(--font); background: transparent; color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.seg button[aria-pressed="true"] { background: var(--g-blue); color: #fff; box-shadow: 0 8px 20px rgba(30, 159, 239, .3); }
+.seg button.is-now[aria-pressed="true"] { background: var(--g-violet); }
+@media (hover: hover) {
+  .chip:hover { border-color: #c9b6ef; }
+  .btn:hover { filter: brightness(1.05); }
+}
+
+/* ===== story ===== */
+.hero { display: grid; gap: 18px; }
+.hero h1 .w { display: inline-block; animation: rise .7s cubic-bezier(.2, 1.3, .4, 1) both; }
+.hero h1 .w:nth-child(2) { animation-delay: .08s; } .hero h1 .w:nth-child(3) { animation-delay: .16s; }
+@keyframes rise { from { transform: translateY(40%) rotate(4deg); } to { transform: none; } }
+.witness { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; background: linear-gradient(150deg, #e8f5ff, #d3ebff); border-radius: 22px; padding: 18px; }
+.eye { width: 92px; height: 66px; }
+.eye .lid { transform-origin: 70px 6px; transform-box: view-box; animation: blink 5s infinite; }
+.is-off .eye .lid, .is-off .rec { animation-play-state: paused; }
+@keyframes blink { 0%, 90%, 100% { transform: scaleY(0); } 94% { transform: scaleY(1); } }
+.witness .lb { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #0b4e7a; opacity: .75; }
+.witness .big { font-size: clamp(24px, 6.4vw, 34px); font-weight: 900; color: #0b4e7a; line-height: 1.1; margin: 4px 0; }
+.flash { position: fixed; inset: 0; background: #fff; pointer-events: none; z-index: 60; opacity: 0; }
+.guess { display: grid; gap: 10px; }
+.guess .chips { margin-top: 4px; }
+.verdict { min-height: 1.6em; font-weight: 650; color: var(--ink); }
+.verdict.ok { color: #12693f; } .verdict.no { color: #b3143f; }
+
+/* ===== witness: видео или фото ===== */
+.stage { position: relative; height: 230px; border-radius: 22px; overflow: hidden; border: 1px solid var(--line); background: linear-gradient(180deg, #f6f1ff, #fff); display: grid; place-items: center; }
+.stage.is-photo { background: linear-gradient(180deg, #eef8ff, #fff); }
+.stage .frame { position: absolute; inset: 14px; border: 3px solid transparent; border-radius: 16px; }
+.stage.is-photo .frame { border-color: #fff; box-shadow: 0 0 0 1px var(--line), var(--sh); }
+.stage .ev { width: 112px; height: 112px; color: var(--c-neg); }
+.stage.is-photo .ev { color: var(--c-di); }
+.rec { position: absolute; top: 16px; left: 18px; display: flex; align-items: center; gap: 6px; font: 800 12px/1 var(--font); letter-spacing: .12em; color: var(--c-neg); }
+.rec i { width: 10px; height: 10px; border-radius: 50%; background: #f0186a; animation: recb 1s steps(2) infinite; }
+@keyframes recb { 50% { opacity: .15; } }
+.stage.is-photo .rec { display: none; }
+.stamp { position: absolute; right: 16px; bottom: 16px; padding: 6px 12px; border-radius: 10px; background: var(--g-blue); color: #fff; font: 900 15px/1 var(--font); transform: rotate(-6deg); display: none; }
+.stage.is-photo .stamp { display: block; }
+.sent { text-align: center; margin-top: 14px; }
+.sent .big { font-size: clamp(24px, 6.6vw, 40px); font-weight: 900; color: var(--ink); }
+.sent .gl { color: var(--muted); }
+.duo { display: grid; gap: 12px; margin-top: 18px; }
+.duo > div { border-radius: 18px; padding: 16px 18px; }
+.duo .now { background: var(--c-neg-soft); color: #4c1d95; }
+.duo .past { background: var(--c-di-soft); color: #0b4e7a; }
+.duo .lb { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; opacity: .8; }
+.duo .vl { font-size: 19px; font-weight: 850; margin: 4px 0; }
+.duo p { margin: 0; font-size: 15px; }
+
+/* ===== vowels: колесо ===== */
+.dial { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 520px; margin: 0 auto 14px; }
+.dv { border-radius: 16px; padding: 12px 4px; text-align: center; background: #f4f1f8; }
+.dv b { display: block; font-size: 28px; font-weight: 900; color: #b9b2c6; line-height: 1; }
+.dv span { display: block; font-size: 12px; color: #9e97ad; margin-top: 5px; font-weight: 700; }
+.dv.on { background: var(--g-blue); box-shadow: 0 12px 26px rgba(30, 159, 239, .3); }
+.dv.on b, .dv.on span { color: #fff; }
+.build { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; min-height: 84px; margin: 6px 0; }
+.blk { display: inline-block; font-size: clamp(22px, 6vw, 36px); font-weight: 900; padding: 8px 14px; border-radius: 14px; background: #f4f1f8; color: var(--ink); }
+.blk--root { background: linear-gradient(160deg, #2c2c38, #17171c); color: #fff; }
+.blk--root .m-v { color: #7fd0ff; }
+.blk--di { background: var(--g-blue); color: #fff; }
+.blk--t { background: var(--g-rose); color: #fff; }
+.blk--p { background: var(--g-orange); color: #fff; }
+.blk--neg { background: var(--g-violet); color: #fff; }
+.blk--q { background: linear-gradient(160deg, #2ac4b0, #0f9f8f); color: #fff; }
+.plus { font-size: 22px; color: #c9c4d4; font-weight: 800; }
+.result { text-align: center; font-size: clamp(30px, 8vw, 52px); font-weight: 900; color: var(--ink); letter-spacing: -.02em; }
+.gloss { text-align: center; color: var(--muted); }
+.rule-line { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+.rule-line b { padding: 8px 12px; border-radius: 12px; background: var(--c-di-soft); color: #0b4e7a; font-size: 14px; }
+
+/* ===== hard: Fıstıkçı Şahap ===== */
+.keys { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.key { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 21px; font-weight: 900; background: #f4f1f8; color: #b9b2c6; }
+.key.hot { background: var(--g-rose); color: #fff; box-shadow: var(--sh-r); }
+.mach { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; min-height: 96px; margin: 8px 0 0; }
+.mroot { font-size: clamp(28px, 7.5vw, 48px); font-weight: 900; color: var(--ink); }
+.mroot .lc { color: var(--c-t); display: inline-block; }
+.mroot .lc.soft { color: var(--ink); }
+.suf { display: inline-flex; font-size: clamp(28px, 7.5vw, 48px); font-weight: 900; color: #fff; background: var(--g-blue); border-radius: 16px; padding: 4px 16px; }
+.suf.hard { background: var(--g-rose); }
+.suf .dt { display: inline-block; }
+.mres { font-size: clamp(30px, 8vw, 52px); font-weight: 900; color: var(--ink); }
+.why { display: grid; gap: 12px; margin-top: 16px; }
+
+/* ===== lab ===== */
+.lab-head { display: grid; gap: 12px; margin-bottom: 14px; }
+.lab-head .lbl { font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #7c3aed; margin-bottom: 6px; }
+.para { display: grid; gap: 8px; margin-top: 14px; }
+.prow { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 50px; padding: 8px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; cursor: pointer; font: inherit; text-align: left; color: var(--ink); }
+.prow .pp { flex: 0 0 52px; font-size: 13px; font-weight: 800; color: var(--muted); }
+.prow .pf { flex: 1; font-size: clamp(18px, 5vw, 22px); font-weight: 850; }
+.prow .pr { font-size: 14px; color: var(--muted); }
+.prow svg { width: 22px; height: 22px; color: var(--c-pers); flex: 0 0 auto; }
+.quizbox { display: grid; gap: 12px; text-align: center; }
+.quizbox .q { font-size: clamp(20px, 5.4vw, 28px); font-weight: 850; color: var(--ink); }
+.pane[hidden] { display: none !important; }
+
+/* ===== traps ===== */
+.traps { display: grid; gap: 12px; }
+.flip { position: relative; display: block; width: 100%; min-height: 108px; border: 0; padding: 0; background: none; cursor: pointer; font: inherit; text-align: left; perspective: 900px; }
+.flip .fc { position: absolute; inset: 0; border-radius: 18px; padding: 14px 18px; display: grid; align-content: center; gap: 4px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip .front { background: var(--c-t-soft); color: #9e1348; }
+.flip .back { background: #e7faee; color: #12693f; transform: rotateY(180deg); }
+.flip .fw { font-size: 22px; font-weight: 900; }
+.flip .fw s { text-decoration-thickness: 3px; }
+.flip .fh { font-size: 14px; }
+.flip .tap { position: absolute; right: 12px; top: 10px; width: 22px; height: 22px; opacity: .6; }
+.flip-in { position: absolute; inset: 0; transform-style: preserve-3d; }
+
+/* ===== scene: переписка ===== */
+.chat { display: grid; gap: 10px; background: #f7f3fb; border-radius: 22px; padding: 16px; min-height: 120px; }
+.msg { max-width: 88%; padding: 10px 14px; border-radius: 18px 18px 18px 6px; background: #fff; box-shadow: var(--sh-sm); }
+.msg--me { justify-self: end; border-radius: 18px 18px 6px 18px; background: #e4f4ff; }
+.msg .who { display: block; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.msg small { display: block; color: var(--muted); font-size: 14px; }
+.msg.is-wait { display: none; }
+
+/* ===== cheat ===== */
+.cheat { background: var(--g-rose); color: #fff; border-radius: 30px; padding: clamp(20px, 5vw, 36px); box-shadow: var(--sh-r); }
+.cheat h2 { color: #fff; }
+.cheat-grid { display: grid; gap: 10px; }
+.cheat-grid div { background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .26); border-radius: 16px; padding: 12px 14px; }
+.cheat-grid b { display: block; color: #fff; font-size: 19px; font-weight: 850; }
+.cheat-grid span { font-size: 14.5px; opacity: .92; }
+.final { text-align: center; margin-top: 22px; }
+.final .big { font-size: clamp(26px, 7vw, 44px); font-weight: 900; color: var(--ink); }
+
+/* ===== нестандартное: фотолаборатория ===== */
+.darkroom { display: grid; gap: 12px; }
+.photo { position: relative; width: min(100%, 300px); margin: 0 auto; aspect-ratio: 4 / 3; border-radius: 10px; background: #fff; padding: 10px 10px 34px; box-shadow: var(--sh); }
+.photo .img { width: 100%; height: 100%; border-radius: 6px; background: #2a2236; display: grid; place-items: center; overflow: hidden; }
+.photo .img svg { width: 62%; height: 62%; color: #7fd0ff; }
+.photo .cap { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font-weight: 800; color: var(--ink); }
+.dr-prompt { text-align: center; font-size: clamp(18px, 5vw, 24px); font-weight: 800; color: var(--ink); }
+.dr-opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dr-opts button { min-height: 52px; border-radius: 14px; border: 1.5px solid var(--line); background: #fff; font: 800 clamp(15px, 4vw, 19px)/1.1 var(--font); color: var(--ink); cursor: pointer; padding: 6px; }
+.dr-opts button.is-hit { border-color: var(--ak-good); background: var(--ak-good-soft); }
+.dr-opts button.is-miss { border-color: var(--ak-bad); background: var(--ak-bad-soft); }
+.dr-status { min-height: 1.6em; text-align: center; color: var(--muted); }
+
+.m-q { color: var(--c-q); font-weight: 900; }
+.m-n { color: var(--c-neg); font-weight: 900; }
+.phr { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.ph { min-height: 76px; border: 0; border-radius: 18px; padding: 12px 14px; background: linear-gradient(150deg, var(--c-di-soft), #f1f9ff); color: var(--ink); text-align: left; font: inherit; cursor: pointer; display: grid; gap: 2px; }
+.ph-i { width: 24px; height: 24px; color: var(--c-di); }
+.ph.is-open .ph-i { color: #fff; }
+.ph b { font-size: 19px; font-weight: 900; color: #0b4e7a; }
+.ph span { font-size: 14.5px; color: var(--muted); }
+.ph.is-open { background: var(--g-blue); }
+.ph.is-open b, .ph.is-open span { color: #fff; }
+.when { width: 100%; height: 44px; accent-color: var(--c-di); margin: 0; }
+.when-lbls { display: flex; justify-content: space-between; gap: 4px; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 10px; }
+.when-lbls span.on { color: var(--c-di); }
+@media (min-width: 768px) { .phr { grid-template-columns: repeat(3, 1fr); } }
+/* ===== свой скроллбар: фотоплёнка, по ней едет глаз ===== */
+.sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 14px; pointer-events: none; }
+.sb__track { position: absolute; inset: 0; background: #22202b; pointer-events: auto; touch-action: none; cursor: pointer;
+  background-image: radial-gradient(circle, #fff 1.4px, transparent 1.6px); background-size: 12px 14px; background-position: 0 50%; }
+.sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, #1e9fef, #f0186a); opacity: .9; }
+.sb__eye { position: absolute; top: 1px; left: clamp(14px, calc(var(--p, 0) * 100%), calc(100% - 14px)); width: 30px; height: 20px; translate: -50% 0; pointer-events: none; }
+.sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+.sb__mark::after { content: ''; position: absolute; inset: 9px 8px; border-radius: 2px; background: #fff; box-shadow: 0 0 0 2px #22202b; }
+.sb__mark.is-read::after { background: #ffb347; }
+@media (min-width: 768px) {
+  .sb { left: auto; right: 12px; top: 50%; translate: 0 -50%; width: 14px; height: min(62dvh, 540px); }
+  .sb__track { border-radius: 4px; background-size: 14px 12px; background-position: 50% 0; }
+  .sb__fill { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); }
+  .sb__eye { left: 50%; top: clamp(10px, calc(var(--p, 0) * 100%), calc(100% - 10px)); translate: -50% -50%; }
+  .sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+  .duo { grid-template-columns: 1fr 1fr; }
+  .why, .traps { grid-template-columns: 1fr 1fr; }
+  .cheat-grid { grid-template-columns: 1fr 1fr; }
+  .lab-head { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) { section { padding-top: 96px; } }
+@media (max-width: 420px) { .seg button { padding: 0 11px; font-size: 14px; gap: 5px; } }
+@media (max-width: 380px) { .dr-opts { grid-template-columns: 1fr; } .witness { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- спрайт иконок -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-eye" viewBox="0 0 140 100"><path d="M70 8C36 8 10 38 4 50c6 12 32 42 66 42s60-30 66-42C130 38 104 8 70 8Z" fill="#1e9fef"/><circle cx="70" cy="50" r="27" fill="#fff"/><circle cx="70" cy="50" r="16" fill="#12303f"/><circle cx="63" cy="43" r="5.5" fill="#fff"/></symbol>
+  <symbol id="i-cam" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.5"/></g></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></g></symbol>
+  <symbol id="i-door" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4a1 1 0 0 1 1-1h8v18"/><path d="M14 3l5 2v16l-5-1"/><circle cx="11.5" cy="12.5" r=".8" fill="currentColor"/><path d="M3 21h18"/></g></symbol>
+  <symbol id="i-rain" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 15a4 4 0 0 1-.6-8 5.5 5.5 0 0 1 10.6 1.5A3.3 3.3 0 0 1 17 15Z"/><path d="m8 18-1 3M12 18l-1 3M16 18l-1 3"/></g></symbol>
+  <symbol id="i-ring" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="15" r="6"/><path d="m9 4 3 4 3-4-1.5-1.5h-3Z"/></g></symbol>
+  <symbol id="i-bus" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 11h16M8 18v3M16 18v3"/><circle cx="8" cy="14.5" r=".8" fill="currentColor"/><circle cx="16" cy="14.5" r=".8" fill="currentColor"/></g></symbol>
+  <symbol id="i-cup" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c0 2 2 2 2 4M12 3c0 2 2 2 2 4"/></g></symbol>
+  <symbol id="i-nut" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c4 0 7 4 7 9s-3 9-7 9-7-4-7-9 3-9 7-9Z"/><path d="M12 6c2 2 2 10 0 12"/></g></symbol>
+  <symbol id="i-sound" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></g></symbol>
+  <symbol id="i-turn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></g></symbol>
+  <symbol id="i-brick" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9.3h18M3 14.6h18M9 4v5.3M15 9.3v5.3M9 14.6V20"/></g></symbol>
+  <symbol id="i-fork" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v8a2 2 0 0 0 2 2v8M11 3v8a2 2 0 0 1-2 2M17 21V3c-2 1-3 4-3 8h3"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+  <symbol id="i-done" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></g></symbol>
+</svg>
+
+<div class="flash" aria-hidden="true"></div>
+
+<main>
+
+  <!-- ================= STORY ================= -->
+  <section data-section="story" data-words="66">
+    <div class="hero">
+      <div><span class="pill">A1 · Стамбұл · 2 сабақтың 2-сі</span></div>
+      <h1><span class="w">Таңғы ас</span> <span class="w">іштің бе?</span></h1>
+      <p class="lead">Таң. Пәтер иесі сені баспалдақта көреді. Бірінші сұрақ — «қалайсың» емес.</p>
+      <div class="witness" data-io>
+        <svg class="eye" viewBox="0 0 140 100" aria-hidden="true"><use href="#i-eye"/><rect class="lid" x="0" y="6" width="140" height="88" rx="44" fill="#d3ebff"/></svg>
+        <div>
+          <div class="lb">Үй иесі сұрайды</div>
+          <div class="big"><a-say><span class="say-in">Kahvaltı yap<span class="m-t">tı</span><span class="m-p">n</span> <span class="m-q">mı</span>?</span></a-say></div>
+          <div class="mut">Таңғы ас іштің бе?</div>
+        </div>
+      </div>
+      <div class="row">
+        <button class="btn btn--blue" type="button" data-answer="yes">Yaptım.</button>
+        <button class="btn btn--ghost" type="button" data-answer="no">Yapmadım.</button>
+      </div>
+      <div class="verdict" data-answer-out aria-live="polite" data-ui></div>
+      <p>Түркияда қамқорлық осылай көрінеді. «Жоқ» десең — қазір тамақтандырады.</p>
+      <p>Жауап — бір сөз. Бірақ ішінде болымсыздық отыр, ол таныс <b class="m-t">t</b>-ны бұзады.</p>
+      <p>Бүгін — болымсыздық, сұрақ және орыс тілі осы шақпен айтатын, ал түрік өткен шақпен айтатын сөйлемдер.</p>
+      <div class="card guess">
+        <b>Алдымен тауып көр.</b>
+        <p style="margin:0"><span class="tr" data-say="gitti">gitti</span> — ол кетті. Ал «ол кетпеді»?</p>
+        <div class="chips" role="group" aria-label="Нұсқалар">
+          <button class="chip" type="button" data-guess="0">gitmetti</button>
+          <button class="chip" type="button" data-guess="1">gitmedi</button>
+          <button class="chip" type="button" data-guess="2">gitmadı</button>
+        </div>
+        <div class="verdict" data-guess-out aria-live="polite" data-ui></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= NEGATIVE ================= -->
+  <section data-section="negative" data-words="52">
+    <span class="pill">Болымсыздық</span>
+    <h2>Болымсыздық t-ны өлтіреді</h2>
+    <p>Болымсыздық <b class="m-n">-me / -ma</b> түбір мен құйрықтың арасына тұрады. Үндестік бойынша екі нұсқаның бірі таңдалады: gel → <b>gelme</b>, yap → <b>yapma</b>. Қазақшадағы -ма/-ме сияқты: кел-ме-ді.</p>
+    <p>Құйрықтың дауыстысы енді болымсыздыққа қарайды. Сондықтан нұсқа екеу ғана: <b>i</b> немесе <b>ı</b>.</p>
+    <p>Басты айла: <b data-say="gitti">gitti</b> → <b data-say="gitmedi">gitmedi</b>. Түбір енді құйрыққа тимейді. Қатаңдататын ештеңе жоқ — <b class="m-t">t</b> жоғалды.</p>
+    <p><b>-iyor</b>-да да орны сол: <span class="tr" data-say="gelmiyor">gelmiyor</span>. Болымсыздық әрқашан түбірден кейін бірден тұрады, тек құйрық өзгереді.</p>
+    <div class="card" data-io>
+      <div class="row center" style="margin-bottom:12px">
+        <div class="seg" role="group" aria-label="Белгі">
+          <button type="button" data-pol="pos" aria-pressed="false">+ иә</button>
+          <button type="button" class="is-now" data-pol="neg" aria-pressed="true">− жоқ</button>
+        </div>
+      </div>
+      <div class="build" data-n-build data-ui></div>
+      <div class="result" data-n-res data-ui></div>
+      <p class="gloss" data-n-gloss data-ui></p>
+      <div class="chips center" data-n-chips data-ui></div>
+    </div>
+  </section>
+
+  <!-- ================= QUESTION ================= -->
+  <section data-section="question" data-words="71">
+    <span class="pill">Сұрақ</span>
+    <h2>mi ең соңына тұрады</h2>
+    <p><b>-iyor</b>-мен сен сұрап көргенсің: <span class="tr" data-say="Geliyor musun?">geliyor musun?</span> Онда шылау жақты өзіне алады.</p>
+    <p><b class="m-di">-DI</b>-да керісінше. Жақ етістікке жабысып қойған, ал <b class="m-q">mi</b> бөлек, ең соңында тұрады. Қазақшадағыдай: келдің бе?</p>
+    <p>Неге бұлай? -DI-да жақ — етістіктің өз бөлігі, оны ажыратып алмайсың. Шылауға соңғы орын қалады. Ауыстырып, қызғылт сары кірпіштің қайда секіретініне қара.</p>
+    <div class="card" data-io>
+      <div class="row center" style="margin-bottom:12px">
+        <div class="seg" role="group" aria-label="Шақ">
+          <button type="button" class="is-now" data-qt="iyor" aria-pressed="false">-iyor</button>
+          <button type="button" data-qt="di" aria-pressed="true">-DI</button>
+        </div>
+      </div>
+      <div class="build" data-q-build data-ui></div>
+      <div class="result" data-q-res data-ui></div>
+      <div class="chips center" data-q-pers data-ui></div>
+    </div>
+    <p style="margin-top:16px">mi-дегі дауысты етістіктің соңғы дауыстысы бойынша. Бас та тыңда:</p>
+    <div class="chips" data-qv>
+      <button class="chip" type="button" data-say="Geldin mi?">geldin <b class="m-q">mi</b></button>
+      <button class="chip" type="button" data-say="Aldın mı?">aldın <b class="m-q">mı</b></button>
+      <button class="chip" type="button" data-say="Okudun mu?">okudun <b class="m-q">mu</b></button>
+      <button class="chip" type="button" data-say="Gördün mü?">gördün <b class="m-q">mü</b></button>
+    </div>
+    <p style="margin-top:12px">Сол етістікпен жауап береді: <span class="tr" data-say="Geldin mi? Geldim.">Geldin mi? — Geldim.</span> немесе <span class="tr" data-say="Gelmedim.">Gelmedim.</span></p>
+    <p>Болымсыз сұрақ та солай құралады: <span class="tr" data-say="Gelmedin mi?">gelmedin mi?</span> — сен келмедің бе?</p>
+  </section>
+
+  <!-- ================= LAB ================= -->
+  <section data-section="lab" data-words="32">
+    <span class="pill">Пульт</span>
+    <h2>Иә, жоқ, сұрақ</h2>
+    <p>Төрт режим, бір логика: түбір + болымсыздық + құйрық + жақ + mi. Пультті бұра да тыңда.</p>
+    <p>Кірпіштерді солдан оңға оқы. Керегі жоғы жай қойылмайды: болымсыздық жоқ — күлгін жоқ, сұрақ жоқ — жасыл жоқ.</p>
+    <div class="card">
+      <div class="row center" style="margin-bottom:14px">
+        <div class="seg" role="group" aria-label="Режим">
+          <button type="button" data-lm="pos" aria-pressed="true">+</button>
+          <button type="button" data-lm="neg" aria-pressed="false">−</button>
+          <button type="button" data-lm="q" aria-pressed="false">?</button>
+          <button type="button" data-lm="negq" aria-pressed="false">− ?</button>
+        </div>
+      </div>
+      <div class="lab-head" data-ui>
+        <div><div class="lbl">Етістік</div><div class="chips" data-l-verbs></div></div>
+        <div><div class="lbl">Жақ</div><div class="chips" data-l-pers></div></div>
+      </div>
+      <div data-ui>
+        <div class="build" data-l-build></div>
+        <div class="result" data-l-res></div>
+        <div class="gloss" data-l-gloss></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= USAGE ================= -->
+  <section data-section="usage" data-words="84">
+    <span class="pill">Қиын жағдай</span>
+    <h2>Ашықтым — демек, аш</h2>
+    <p>Орысша «я голоден» дейді — осы шақпен. Түрік <b data-say="Acıktım.">acıktım</b> дейді — «ашықтым». Өзгеріс болып қойды, нәтижесі — қазір. Қазақ та солай: қарным ашты, шаршадым.</p>
+    <p>Орыс тілі күйге қарайды: я голоден. Түрік оқиғаға қарайды: аштық келді. Оқиға болып қойды — демек, -DI.</p>
+    <p>Ондаған тұрмыстық сөйлем осылай естіледі. <b>Anladım</b> түсіндірме жеткенде айтылады. <b>Bitti</b> — сабақ, шай немесе шыдам біткенде. Карточканы бас та тыңда.</p>
+    <div class="phr">
+      <button type="button" class="ph" data-say="Acıktım."><svg class="ico ph-i" aria-hidden="true"><use href="#i-fork"/></svg><b>Acıktım.</b><span>Қарным ашты.</span></button>
+      <button type="button" class="ph" data-say="Yoruldum."><svg class="ico ph-i" aria-hidden="true"><use href="#i-moon"/></svg><b>Yoruldum.</b><span>Шаршадым.</span></button>
+      <button type="button" class="ph" data-say="Susadım."><svg class="ico ph-i" aria-hidden="true"><use href="#i-drop"/></svg><b>Susadım.</b><span>Шөлдедім.</span></button>
+      <button type="button" class="ph" data-say="Anladım."><svg class="ico ph-i" aria-hidden="true"><use href="#i-bulb"/></svg><b>Anladım.</b><span>Түсіндім.</span></button>
+      <button type="button" class="ph" data-say="Geç kaldım."><svg class="ico ph-i" aria-hidden="true"><use href="#i-clock"/></svg><b>Geç kaldım.</b><span>Кешіктім.</span></button>
+      <button type="button" class="ph" data-say="Bitti."><svg class="ico ph-i" aria-hidden="true"><use href="#i-done"/></svg><b>Bitti.</b><span>Болды, бітті.</span></button>
+    </div>
+    <h3 style="margin-top:26px">Жаңа ғана ма, бір жыл бұрын ба</h3>
+    <p>Шақ біреу — <b class="m-di">-DI</b>. Сырғытпаны жылжыт.</p>
+    <div class="card" data-io>
+      <input type="range" min="0" max="4" step="1" value="2" class="when" data-when aria-label="Бұл қашан болды">
+      <div class="when-lbls" data-ui><span>az önce</span><span>bu sabah</span><span>dün</span><span>geçen hafta</span><span>geçen yıl</span></div>
+      <div class="sent" data-ui>
+        <div class="big" data-w-tr data-say="Dün film izledim.">Dün film izledim.</div>
+        <div class="gl" data-w-ru>Кеше мен фильм көрдім.</div>
+      </div>
+    </div>
+    <p style="margin-top:14px">Жаңалықтар мен тарих та осында: <span class="tr" data-say="Deprem oldu.">Deprem oldu.</span> — Жер сілкінісі болды.</p>
+  </section>
+
+  <!-- ================= TRAPS ================= -->
+  <section data-section="traps" data-words="57">
+    <span class="pill">Тұзақтар</span>
+    <h2>Жолдағы төрт шұңқыр</h2>
+    <p>Бұл сабақтың тұзақтары — әдеттен. Ми өткен тақырыптардан және орыс тілінен ережелерді сүйреп әкеледі.</p>
+    <p>Карточканы бас — ол аударылып, қалай болу керегін көрсетеді.</p>
+    <div class="traps">
+      <button class="flip" type="button" aria-label="Тұзақ: gitmetti">
+        <span class="flip-in"><span class="fc front"><svg class="tap" aria-hidden="true"><use href="#i-turn"/></svg><span class="fw"><s>gitmetti</s></span><span class="fh">Әдетпен қатаңдаттың.</span></span> <span class="fc back"><span class="fw" data-say="gitmedi">gitmedi</span><span class="fh">-me-ден кейін қатаңдататын ештеңе жоқ.</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-label="Тұзақ: yapmedim">
+        <span class="flip-in"><span class="fc front"><svg class="tap" aria-hidden="true"><use href="#i-turn"/></svg><span class="fw"><s>yapmedim</s></span><span class="fh">Үндестікті ұмыттың.</span></span> <span class="fc back"><span class="fw" data-say="yapmadım">yapmadım</span><span class="fh">Түбірде a — демек ma және ı.</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-label="Тұзақ: Geldi misin?">
+        <span class="flip-in"><span class="fc front"><svg class="tap" aria-hidden="true"><use href="#i-turn"/></svg><span class="fw"><s>Geldi misin?</s></span><span class="fh">-iyor сызбасын көшірдің.</span></span> <span class="fc back"><span class="fw" data-say="Geldin mi?">Geldin mi?</span><span class="fh">Жақ етістікте, mi соңында.</span></span></span>
+      </button>
+      <button class="flip" type="button" aria-label="Тұзақ: Acıkıyorum">
+        <span class="flip-in"><span class="fc front"><svg class="tap" aria-hidden="true"><use href="#i-turn"/></svg><span class="fw"><s>Acıkıyorum.</s></span><span class="fh">«Қарным ашты» дегің келді.</span></span> <span class="fc back"><span class="fw" data-say="Acıktım.">Acıktım.</span><span class="fh">Аштық келіп қойды — өткен шақ.</span></span></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= SCENE ================= -->
+  <section data-section="scene" data-words="35">
+    <span class="pill">Көрініс</span>
+    <h2>Кадыкёйдегі таң</h2>
+    <p>Элиф саған таңертең жазады. Жауапты таңда. Қатесін ол түсінбей, қайта сұрайды.</p>
+    <p>Түрікше жауап бер: сол етістікпен, «иә, мен мұны істедім» демей. Дұрыс жалғауы бар бір сөз жеткілікті.</p>
+    <div class="chat" data-chat aria-live="polite" data-ui></div>
+    <div class="chips center" style="margin-top:12px" data-chat-opts data-ui></div>
+    <div class="row center" style="margin-top:10px"><button class="btn btn--ghost" type="button" data-chat-reset>Басынан</button></div>
+  </section>
+
+  <!-- ================= VIDEO ================= -->
+  <section data-section="video" data-words="13">
+    <span class="pill">Видео</span>
+    <h2>Мұғалімді тыңда</h2>
+    <p>Алдымен ma мен me болымсыздығы, сосын ең соңындағы mi-мен сұрақ.</p>
+    <a-video yt="PT6Vn_-WOwU" start="136" end="227" title="A1 · Görülen Geçmiş Zaman (Fiil)" channel="Yunus Emre Enstitüsü"></a-video>
+  </section>
+
+  <!-- ================= PRACTICE ================= -->
+  <section data-section="practice" data-words="1">
+    <h2>Практика</h2>
+    <a-exercise ref="a1.past-di.ex5"></a-exercise>
+    <a-exercise ref="a1.past-di.ex6"></a-exercise>
+    <a-exercise ref="a1.past-di.ex7"></a-exercise>
+    <a-exercise ref="a1.past-di.ex8"></a-exercise>
+  </section>
+
+  <!-- ================= CHECK ================= -->
+  <section data-section="check" data-words="1">
+    <h2>Шағын тексеру</h2>
+    <a-quiz ref="a1.past-di.check2"></a-quiz>
+  </section>
+
+  <!-- ================= CHEAT ================= -->
+  <section data-section="cheat" data-words="60">
+    <div class="cheat">
+      <h2>Жадынама</h2>
+      <div class="cheat-grid">
+        <div><b>gel-me-di-m</b><span>Болымсыздық түбір мен құйрықтың арасында. Одан кейін тек i немесе ı.</span></div>
+        <div><b>gitti → gitmedi</b><span>Болымсыздық t-ны өлтіреді: түбір құйрыққа тимейді.</span></div>
+        <div><b>Geldin mi?</b><span>Жақ етістікке жабысты, mi — бөлек, соңында.</span></div>
+        <div><b>Acıktım</b><span>Ашықтым — демек, аш. Нәтижесі қазір.</span></div>
+        <div><b>Yaptın mı? — Yaptım.</b><span>Бір сөзбен жауап береді: сол етістікпен, иә не жоқ.</span></div>
+        <div><b>az önce · dün · geçen yıl</b><span>Жаңа ғана ма, бір жыл бұрын ба — бәрі -DI.</span></div>
+      </div>
+    </div>
+    <div class="final">
+      <p>Үй иесі тағы баспалдақта, тағы сұрайды. Жауап дайын:</p>
+      <div class="big"><a-say><span class="say-in">Yap<span class="m-n">ma</span><span class="m-di">dı</span><span class="m-p">m</span>. Acık<span class="m-t">tı</span><span class="m-p">m</span>!</span></a-say></div>
+      <p class="mut">Таңғы ас ішпедім. Қарным ашты!</p>
+      <button class="btn btn--blue" type="button" data-snap><svg class="ico" aria-hidden="true"><use href="#i-cam"/></svg> Есте қалсын деп шырт</button>
+    </div>
+  </section>
+
+</main>
+
+<nav class="sb" data-scrollbar aria-label="Сабақ барысы">
+  <div class="sb__track"><span class="sb__fill"></span>
+    <svg class="sb__eye" viewBox="0 0 140 100" aria-hidden="true"><use href="#i-eye"/></svg>
+  </div>
+</nav>
+
+<template data-achievement data-title="Сұрақ-жауаптан өттің" data-text="Сен жоққа шығарасың, сұрайсың және түріктің неге «аш» емес, «ашыққанын» білесің.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <g class="pol" transform="rotate(5 60 60)">
+      <rect x="22" y="16" width="76" height="88" rx="6" fill="#fff" stroke="#efeaf3" stroke-width="2"/>
+      <rect class="pic" x="29" y="23" width="62" height="56" rx="3" fill="#2a2236"/>
+      <g class="cup-b" fill="none" stroke="#7fd0ff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M44 44h26v12a10 10 0 0 1-10 10h-6a10 10 0 0 1-10-10Z"/><path d="M70 48h3a5 5 0 0 1 0 10h-3"/><path d="M52 34c0 3 3 3 3 6M60 34c0 3 3 3 3 6"/></g>
+      <text x="60" y="96" text-anchor="middle" font-size="12" font-weight="800" fill="#17171c" font-family="system-ui, sans-serif">yaptın mı?</text>
+    </g>
+    <g class="stamp-b"><circle cx="94" cy="28" r="17" fill="#7c3aed"/><text x="94" y="33" text-anchor="middle" font-size="13" font-weight="900" fill="#fff" font-family="system-ui, sans-serif">-mA</text></g>
+    <g class="q-b"><circle cx="26" cy="30" r="13" fill="#0f9f8f"/><text x="26" y="35" text-anchor="middle" font-size="14" font-weight="900" fill="#fff" font-family="system-ui, sans-serif">mı</text></g>
+    <circle class="flash-b" cx="60" cy="52" r="56" fill="#fff" opacity="0"/>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !reduce;
+  const ST = window.ScrollTrigger || null;
+  if (anim && ST) {
+    G.registerPlugin(ST);
+    if (window.SplitText) G.registerPlugin(window.SplitText);
+    ST.config({ ignoreMobileResize: true });
+  }
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => window.AlternaKit && AlternaKit.speak(t);
+
+  /* ---------- грамматика ---------- */
+  const VOW = 'aeıioöuü', BACK = 'aıou', HARD = 'fstkçşhp';
+  const lastV = (w) => [...w].reverse().find((c) => VOW.includes(c)) || 'e';
+  const H4 = (v) => ('aı'.includes(v) ? 'ı' : 'ei'.includes(v) ? 'i' : 'ou'.includes(v) ? 'u' : 'ü');
+  const back = (v) => BACK.includes(v);
+  function formDI(root, pers, neg) {
+    const lv = lastV(root);
+    const negS = neg ? (back(lv) ? 'ma' : 'me') : '';
+    const vw = H4(neg ? negS[1] : lv);
+    const hard = !neg && HARD.includes(root.slice(-1));
+    const d = hard ? 't' : 'd';
+    const PE = { ben: 'm', sen: 'n', o: '', biz: 'k', siz: 'n' + vw + 'z', onlar: 'l' + (back(vw) ? 'a' : 'e') + 'r' };
+    const word = root + negS + d + vw + PE[pers];
+    return { root, neg: negS, tense: d + vw, pe: PE[pers], vw, hard, word, q: 'm' + H4(lastV(word)) };
+  }
+  const PERS = [['ben', 'мен'], ['sen', 'сен'], ['o', 'ол'], ['biz', 'біз'], ['siz', 'сендер'], ['onlar', 'олар']];
+  const VERBS = [['gel', 'келді', 'келді'], ['yap', 'жасады', 'жасады'], ['git', 'кетті', 'кетті'], ['iç', 'ішті', 'ішті'], ['oku', 'оқыды', 'оқыды'], ['gör', 'көрді', 'көрді']];
+  const bricksHtml = (list) => list.map(([c, t], i) => `<span class="blk ${c}">${t}</span>` + (i < list.length - 1 ? '<span class="plus">+</span>' : '')).join('');
+
+  /* ---------- скроллбар: плёнка, по ней едет глаз ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `«${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}» бөліміне`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll())));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (anim) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout();
+  progress();
+
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('is-off', !e.isIntersecting)));
+  $$('[data-io]').forEach((el) => io.observe(el));
+
+  const flash = $('.flash');
+  $$('[data-snap]').forEach((b) => b.addEventListener('click', () => {
+    say('Yapmadım. Acıktım!');
+    if (anim) G.fromTo(flash, { opacity: .9 }, { opacity: 0, duration: .55, ease: 'power2.out' });
+  }));
+
+  /* ---------- story: ответ хозяйке и угадайка ---------- */
+  const aOut = $('[data-answer-out]');
+  $$('[data-answer]').forEach((b) => b.addEventListener('click', () => {
+    const yes = b.dataset.answer === 'yes';
+    aOut.className = 'verdict ok';
+    aOut.innerHTML = yes ? '<b>Yaptım.</b> Таңғы ас іштім. Үй иесі риза.' : '<b>Yapmadım.</b> Таңғы ас ішпедім. Қазір сені тамақтандырады.';
+    say(yes ? 'Yaptım.' : 'Yapmadım.');
+    if (anim) G.fromTo(b, { scale: .85, rotation: -3 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(3)' });
+  }));
+  const gOut = $('[data-guess-out]');
+  const GUESS = ['-me-ден кейін қатаңдататын ештеңе жоқ: t пайда болмайды.', 'Иә! git + me + di. Түбір құйрыққа тимейді — t кетті.', 'git түбірінде i дауыстысы — демек ma емес, me.'];
+  $$('[data-guess]').forEach((b) => b.addEventListener('click', () => {
+    const k = +b.dataset.guess;
+    gOut.className = 'verdict ' + (k === 1 ? 'ok' : 'no');
+    gOut.textContent = GUESS[k];
+    if (anim) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .45, ease: 'back.out(3)' });
+    if (k === 1) say('gitmedi');
+  }));
+  if (anim) G.from('.witness', { y: 30, rotation: -2, duration: .8, ease: 'back.out(1.8)', delay: .2 });
+
+  /* ---------- negative: клин -me ---------- */
+  let ni = 2, nNeg = true;
+  const nBuild = $('[data-n-build]'), nRes = $('[data-n-res]'), nGloss = $('[data-n-gloss]'), nChips = $('[data-n-chips]');
+  nChips.innerHTML = VERBS.map(([k], i) => `<button type="button" class="chip" data-nv="${i}" aria-pressed="${i === ni}">${k}</button>`).join('');
+  function nRender(move) {
+    const v = VERBS[ni], f = formDI(v[0], 'o', nNeg);
+    const list = [['blk--root', v[0]]];
+    if (f.neg) list.push(['blk--neg', f.neg]);
+    list.push([f.hard ? 'blk--t' : 'blk--di', f.tense]);
+    nBuild.innerHTML = bricksHtml(list);
+    nRes.textContent = f.word;
+    nRes.dataset.say = f.word;
+    nGloss.innerHTML = nNeg ? `болымсыз: «ол ${v[1]}» емес. ${HARD.includes(v[0].slice(-1)) ? 'Түбір енді құйрыққа тимейді — <b>d</b> қайтып келді.' : 'Құйрық -' + f.neg + ' жағына қарайды: дауысты ' + f.vw + '.'}`
+      : `ол ${v[1]}. ${f.hard ? 'Şahap d-ні <b class="m-t">t</b>-ға қатаңдатты.' : 'Қатаңдау жоқ.'}`;
+    $$('[data-nv]').forEach((c, i) => c.setAttribute('aria-pressed', String(i === ni)));
+    $$('[data-pol]').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.pol === 'neg') === nNeg)));
+    if (!move || !anim) return;
+    if (nNeg) {
+      G.from('[data-n-build] .blk--neg', { y: -50, scale: .4, rotation: -20, duration: .6, ease: 'bounce.out' });
+      G.fromTo('[data-n-build] .blk--di', { rotationX: 180 }, { rotationX: 0, duration: .6, ease: 'back.out(1.6)', delay: .35 });
+    } else {
+      G.from('[data-n-build] .blk:last-child', { x: 40, rotation: 8, duration: .5, ease: 'back.out(2)' });
+    }
+    G.fromTo(nRes, { scale: .85 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)', delay: .3 });
+  }
+  nChips.addEventListener('click', (e) => { const b = e.target.closest('[data-nv]'); if (!b) return; ni = +b.dataset.nv; nRender(true); say(nRes.textContent); });
+  $$('[data-pol]').forEach((b) => b.addEventListener('click', () => { nNeg = b.dataset.pol === 'neg'; nRender(true); say(nRes.textContent); }));
+  nRender(false);
+
+  /* ---------- question: -iyor ↔ -DI ---------- */
+  const QP = [['ben', 'yum', 'm'], ['sen', 'sun', 'n'], ['biz', 'yuz', 'k'], ['siz', 'sunuz', 'nız']];
+  const QDI = { ben: 'm', sen: 'n', biz: 'k', siz: 'niz' };
+  let qt = 'di', qpi = 1;
+  const qBuild = $('[data-q-build]'), qRes = $('[data-q-res]'), qPers = $('[data-q-pers]');
+  qPers.innerHTML = QP.map(([k], i) => `<button type="button" class="chip" data-qp="${i}" aria-pressed="${i === qpi}">${k}</button>`).join('');
+  function qRender(move) {
+    const [p, iy] = QP[qpi];
+    let list, text;
+    if (qt === 'iyor') {
+      list = [['blk--root', 'gel'], ['blk', 'iyor'], ['blk--q', 'mu'], ['blk--p', iy]];
+      text = `geliyor mu${iy}?`;
+      qBuild.innerHTML = `<span class="blk blk--root">gel</span><span class="blk">iyor</span><span class="plus">·</span><span class="blk blk--q">mu</span><span class="blk blk--p" data-q-p>${iy}</span>`;
+    } else {
+      const pe = QDI[p];
+      text = `geldi${pe} mi?`;
+      qBuild.innerHTML = `<span class="blk blk--root">gel</span><span class="blk blk--di">di</span><span class="blk blk--p" data-q-p>${pe}</span><span class="plus">·</span><span class="blk blk--q">mi</span>`;
+    }
+    qRes.textContent = text.charAt(0).toUpperCase() + text.slice(1);
+    qRes.dataset.say = qRes.textContent;
+    $$('[data-qp]').forEach((c, i) => c.setAttribute('aria-pressed', String(i === qpi)));
+    $$('[data-qt]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.qt === qt)));
+    if (!move || !anim) return;
+    G.from('[data-q-p]', { x: qt === 'di' ? 80 : -80, y: -30, rotation: qt === 'di' ? 20 : -20, duration: .7, ease: 'back.out(1.8)' });
+    G.from('[data-q-build] .blk--q', { scale: .4, duration: .5, ease: 'back.out(3)', delay: .2 });
+    G.fromTo(qRes, { y: 14 }, { y: 0, duration: .45, ease: 'back.out(2)' });
+  }
+  qPers.addEventListener('click', (e) => { const b = e.target.closest('[data-qp]'); if (!b) return; qpi = +b.dataset.qp; qRender(true); say(qRes.textContent); });
+  $$('[data-qt]').forEach((b) => b.addEventListener('click', () => { qt = b.dataset.qt; qRender(true); say(qRes.textContent); }));
+  qRender(false);
+  $('[data-qv]').addEventListener('click', (e) => {
+    const b = e.target.closest('.chip'); if (!b || !anim) return;
+    G.fromTo($('.m-q', b), { y: 0, scale: 1 }, { y: -8, scale: 1.3, duration: .2, yoyo: true, repeat: 1, ease: 'power2.out' });
+  });
+
+  /* ---------- lab: пульт ---------- */
+  let lvi = 0, lpi = 1, lm = 'pos';
+  const lVerbs = $('[data-l-verbs]'), lPers = $('[data-l-pers]'), lBuild = $('[data-l-build]'), lRes = $('[data-l-res]'), lGloss = $('[data-l-gloss]');
+  lVerbs.innerHTML = VERBS.map(([k], i) => `<button type="button" class="chip" data-lv="${i}" aria-pressed="${i === lvi}">${k}</button>`).join('');
+  lPers.innerHTML = PERS.map(([k], i) => `<button type="button" class="chip" data-lp="${i}" aria-pressed="${i === lpi}">${k}</button>`).join('');
+  function lRender(move) {
+    const v = VERBS[lvi], [p, pru] = PERS[lpi], neg = lm === 'neg' || lm === 'negq', q = lm === 'q' || lm === 'negq';
+    const f = formDI(v[0], p, neg);
+    const list = [['blk--root', v[0]]];
+    if (f.neg) list.push(['blk--neg', f.neg]);
+    list.push([f.hard ? 'blk--t' : 'blk--di', f.tense]);
+    if (f.pe) list.push(['blk--p', f.pe]);
+    if (q) list.push(['blk--q', f.q]);
+    lBuild.innerHTML = bricksHtml(list);
+    const text = f.word + (q ? ' ' + f.q + '?' : '.');
+    lRes.textContent = text;
+    lRes.dataset.say = text;
+    lGloss.textContent = `${pru} ${neg ? '(−) ' : ''}${lpi >= 3 ? v[2] : v[1]}${q ? '?' : ''}`;
+    $$('[data-lv]').forEach((c, i) => c.setAttribute('aria-pressed', String(i === lvi)));
+    $$('[data-lp]').forEach((c, i) => c.setAttribute('aria-pressed', String(i === lpi)));
+    $$('[data-lm]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lm === lm)));
+    if (!move || !anim) return;
+    G.from('[data-l-build] .blk', { y: -26, scale: .7, rotation: -8, stagger: .08, duration: .45, ease: 'back.out(2.5)' });
+    G.fromTo(lRes, { scale: .9 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)', delay: .25 });
+  }
+  lVerbs.addEventListener('click', (e) => { const b = e.target.closest('[data-lv]'); if (!b) return; lvi = +b.dataset.lv; lRender(true); say(lRes.textContent); });
+  lPers.addEventListener('click', (e) => { const b = e.target.closest('[data-lp]'); if (!b) return; lpi = +b.dataset.lp; lRender(true); say(lRes.textContent); });
+  $$('[data-lm]').forEach((b) => b.addEventListener('click', () => { lm = b.dataset.lm; lRender(true); say(lRes.textContent); }));
+  lRender(false);
+
+  /* ---------- usage: фразы и ползунок времени ---------- */
+  $$('.ph').forEach((b) => b.addEventListener('click', () => {
+    b.classList.add('is-open');
+    if (anim) G.fromTo(b, { rotationX: 90 }, { rotationX: 0, duration: .55, ease: 'back.out(1.8)' });
+  }));
+  const WHEN = [
+    ['Az önce geldim.', 'Мен жаңа ғана келдім.'],
+    ['Bu sabah kahve içtim.', 'Бүгін таңертең кофе іштім.'],
+    ['Dün film izledim.', 'Кеше мен фильм көрдім.'],
+    ['Geçen hafta çok çalıştım.', 'Өткен аптада көп жұмыс істедім.'],
+    ['Geçen yıl araba aldım.', 'Былтыр көлік сатып алдым.'],
+  ];
+  const when = $('[data-when]'), wTr = $('[data-w-tr]'), wRu = $('[data-w-ru]');
+  function wRender(move) {
+    const [tr, ru] = WHEN[+when.value];
+    wTr.textContent = tr;
+    wTr.dataset.say = tr;
+    wRu.textContent = ru;
+    $$('.when-lbls span').forEach((s, i) => s.classList.toggle('on', i === +when.value));
+    if (move && anim) {
+      G.fromTo(wTr, { y: 16, scale: .94 }, { y: 0, scale: 1, duration: .4, ease: 'back.out(2)' });
+      G.fromTo('.when-lbls span.on', { y: -6 }, { y: 0, duration: .35, ease: 'bounce.out' });
+    }
+  }
+  when.addEventListener('input', () => wRender(true));
+  when.addEventListener('change', () => say(wTr.textContent));
+  wRender(false);
+
+  /* ---------- traps: карточки-перевёртыши ---------- */
+  $$('.flip').forEach((card) => {
+    let open = false;
+    card.addEventListener('click', () => {
+      open = !open;
+      const inner = $('.flip-in', card);
+      if (anim) G.to(inner, { rotationY: open ? 180 : 0, duration: .6, ease: 'back.out(1.4)' });
+      else inner.style.transform = open ? 'rotateY(180deg)' : '';
+      if (open) { const s = $('.back [data-say]', card); if (s) say(s.dataset.say); }
+    });
+  });
+
+  /* ---------- scene: переписка с выбором ответа ---------- */
+  const SC = [
+    { el: 'Murat geldi mi?', elRu: 'Мұрат келді ме?', opts: [['Hayır, gelmedi.', 1], ['Hayır, gelmedim.', 0]], why: 'Gelmedim — бұл «мен келмедім». Мұрат туралы gelmedi керек.' },
+    { el: 'Simit aldın mı?', elRu: 'Симит алдың ба?', opts: [['Evet, aldın.', 0], ['Evet, aldım.', 1]], why: 'Aldın — «сен алдың». Өзің туралы: aldım.' },
+    { el: 'Kahvaltı yaptın mı?', elRu: 'Таңғы ас іштің бе?', opts: [['Hayır, yapmadım. Acıktım!', 1], ['Hayır, yapmedim. Acıktım!', 0]], why: 'yap-та a дауыстысы — демек ma: yapmadım.' },
+  ];
+  const chat = $('[data-chat]'), chatOpts = $('[data-chat-opts]');
+  let sci = 0;
+  function bubble(tr, ru, me) {
+    const m = document.createElement('div');
+    m.className = 'msg' + (me ? ' msg--me' : '');
+    m.innerHTML = `<span class="who">${me ? 'Сен' : 'Элиф'}</span><span class="tr" data-say="${tr}">${tr}</span><small>${ru}</small>`;
+    chat.append(m);
+    if (anim) G.from(m, { y: 24, scale: .8, duration: .45, ease: 'back.out(2.2)', transformOrigin: me ? '100% 100%' : '0 100%' });
+    return m;
+  }
+  function scStep() {
+    chatOpts.innerHTML = '';
+    if (sci >= SC.length) { bubble('Hadi, kahvaltı!', 'Жүр, таңғы ас ішейік!', false); say('Hadi, kahvaltı!'); return; }
+    const s = SC[sci];
+    bubble(s.el, s.elRu, false);
+    chatOpts.innerHTML = s.opts.map(([t, ok]) => `<button type="button" class="chip" data-co="${ok}">${t}</button>`).join('');
+    if (anim) G.from('[data-chat-opts] .chip', { y: 18, scale: .85, stagger: .08, duration: .4, ease: 'back.out(2.5)' });
+  }
+  chatOpts.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-co]'); if (!b) return;
+    const s = SC[sci];
+    if (b.dataset.co === '1') {
+      bubble(b.textContent, 'Дұрыс!', true);
+      say(b.textContent);
+      sci++;
+      setTimeout(scStep, reduce ? 50 : 700);
+    } else {
+      bubble('Efendim?', s.why, false);
+      if (anim) G.fromTo(b, { x: -10 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' });
+    }
+  });
+  $('[data-chat-reset]').addEventListener('click', () => {
+    chat.innerHTML = '';
+    sci = 0;
+    scStep();
+    if (anim) G.fromTo(chat, { scale: .97 }, { scale: 1, duration: .4, ease: 'back.out(2)' });
+  });
+  scStep();
+
+  /* ---------- ачивка: вспышка, кружка, печать -mA и mı ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.flash-b'), { opacity: .95 }, { opacity: 0, duration: .5, ease: 'power2.out' }, .9)
+      .fromTo(b.querySelector('.pic'), { fill: '#d9d4e2' }, { fill: '#2a2236', duration: .7, ease: 'power1.out' }, 1)
+      .from(b.querySelector('.cup-b'), { y: 14, scale: .5, transformOrigin: '50% 50%', duration: .5, ease: 'back.out(3)' }, 1.1)
+      .from(b.querySelector('.stamp-b'), { scale: 2.4, rotation: 30, opacity: 0, transformOrigin: '94px 28px', duration: .45, ease: 'back.out(2)' }, 1.3)
+      .from(b.querySelector('.q-b'), { scale: 0, rotation: -40, transformOrigin: '26px 30px', duration: .45, ease: 'back.out(3)' }, 1.45);
+  });
+
+  /* ---------- анимации по скроллу ---------- */
+  if (!anim || !ST) return;
+  if (window.SplitText) $$('section h2').forEach((h) => {
+    const sp = new SplitText(h, { type: 'words' });
+    G.from(sp.words, { yPercent: 55, rotation: 5, stagger: .05, duration: .6, ease: 'back.out(2)', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+  });
+  ScrollTrigger.batch('.card, .flip, .ph', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: 34, scale: .96, stagger: .06, duration: .6, ease: 'power3.out' }) });
+  ScrollTrigger.create({ trigger: '[data-n-build]', start: 'top 80%', once: true, onEnter: () => nRender(true) });
+  ScrollTrigger.create({ trigger: '[data-q-build]', start: 'top 80%', once: true, onEnter: () => qRender(true) });
+  ScrollTrigger.create({ trigger: '[data-l-build]', start: 'top 85%', once: true, onEnter: () => lRender(true) });
+  ScrollTrigger.create({ trigger: '[data-when]', start: 'top 85%', once: true, onEnter: () => {
+    G.fromTo(when, { scaleX: .2 }, { scaleX: 1, duration: .8, ease: 'power3.out', transformOrigin: '0 50%' });
+    G.from('.when-lbls span', { y: 12, stagger: .06, duration: .4, ease: 'back.out(2)' });
+  } });
+  ScrollTrigger.create({ trigger: '[data-chat]', start: 'top 80%', once: true, onEnter: () => G.from('[data-chat] .msg', { x: -30, scale: .8, duration: .5, ease: 'back.out(2)' }) });
+  G.from('[data-qv] .chip', { y: 20, rotation: (k) => (k % 2 ? 6 : -6), stagger: .08, duration: .45, ease: 'back.out(2.5)', scrollTrigger: { trigger: '[data-qv]', start: 'top 92%', once: true } });
+  G.from('.cheat-grid div', { y: 26, scale: .9, stagger: .08, duration: .5, ease: 'back.out(2)', scrollTrigger: { trigger: '.cheat-grid', start: 'top 88%', once: true } });
+  G.from('.final .big', { scale: .5, rotation: -6, duration: .8, ease: 'elastic.out(1, .45)', scrollTrigger: { trigger: '.final', start: 'top 85%', once: true } });
+  G.from('.sb__eye', { scale: 0, duration: .6, ease: 'back.out(3)', delay: .4 });
+  const refresh = () => { layout(); ST.refresh(); };
+  addEventListener('load', refresh);
+  addEventListener('orientationchange', refresh);
+  if (document.fonts?.ready) document.fonts.ready.then(refresh);
+});
+</script>
+</body>
+</html>

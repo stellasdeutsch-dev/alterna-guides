@@ -1,0 +1,823 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.present-continuous">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="2">
+<title>Present continuous -(I)yor · lesson 2</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+  :root {
+    --steel: #4C6A80; --steel-2: #3A5468; --steel-3: #2E4557;
+    --ice: #8FCCEF; --ice-2: #B9E0F7; --ice-soft: #E4F2FB; --ice-line: #D7EAF7;
+    --gold: #F8D294; --gold-2: #EFB65F; --gold-3: #E3A340; --gold-ink: #6E5020; --gold-soft: #FDF3E2;
+    --ink: #425260; --muted: #647A8C; --line: #E3EFF8;
+    --rose: #C4685B; --rose-soft: #FBE9E6; --mint: #2E8A57; --mint-soft: #E6F6EC;
+    --sh-sm: 0 6px 18px rgba(60,100,130,.08); --sh: 0 14px 40px rgba(60,100,130,.12);
+    --disp: 'Oswald', 'Arial Narrow', 'Roboto Condensed', system-ui, -apple-system, sans-serif;
+    --ak-font: 'Manrope', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --ak-accent: #4C6A80; --ak-accent-ink: #ffffff; --ak-accent-soft: #E4F2FB;
+    --ak-ink: #3A5468; --ak-muted: #647A8C; --ak-surface: #F3F9FD; --ak-line: #D7EAF7; --ak-bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+  body { margin: 0; color: var(--ink); background: linear-gradient(180deg, #EAF5FD 0, #F8FCFF 520px, #fff 900px) no-repeat, #fff;
+    font: 400 var(--ak-text)/1.62 var(--ak-font); overflow-x: clip; }
+  main { padding: 0 16px calc(72px + env(safe-area-inset-bottom)); }
+  section { max-width: 760px; margin: 0 auto; padding: clamp(48px, 9vw, 88px) 0 0; position: relative; }
+  h1, h2, .pc-disp { font-family: var(--disp); font-weight: 700; text-transform: uppercase; color: var(--steel); line-height: .95; letter-spacing: -.005em; margin: 0; }
+  h1 { font-size: clamp(36px, 8.6vw, 92px); margin: 10px 0 16px; }
+  h2 { font-size: clamp(28px, 6.4vw, 54px); margin: 8px 0 16px; }
+  h1 em, h2 em { font-style: normal; color: var(--gold-3); }
+  p { margin: 0 0 12px; max-width: 65ch; }
+  b, strong { color: var(--steel-2); }
+  .tr { font-family: var(--disp); font-weight: 600; letter-spacing: .01em; color: var(--steel-2); }
+  .tr--gold { color: var(--gold-3); }
+  .pc-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #5C93B5; }
+  .pc-tag--gold { color: var(--gold-3); }
+  .pc-card { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: clamp(16px, 4vw, 28px); box-shadow: var(--sh-sm); position: relative; overflow: hidden; }
+  .pc-card--gold { background: linear-gradient(160deg, #FEF8EE, #FBEBD3); border-color: #F3DCB4; }
+  .pc-card--ice { background: linear-gradient(160deg, #F3FAFE, #E6F4FC); border-color: var(--ice-line); }
+  .pc-hint { font-size: 15px; color: var(--muted); margin-top: 12px; min-height: 1.6em; }
+  .pc-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pc-chip { min-height: 44px; border: 1px solid var(--ice-line); background: #fff; border-radius: 999px; padding: 8px 16px; font: 600 16px/1.2 var(--ak-font); color: var(--steel-2); cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
+  .pc-chip .tr { color: inherit; }
+  .pc-chip.is-on { background: var(--steel); border-color: var(--steel); color: #fff; }
+  .pc-chip.is-gold.is-on { background: var(--gold-2); border-color: var(--gold-2); color: var(--gold-ink); }
+  .pc-chip.is-ok { background: var(--mint-soft); border-color: #A9DDB8; color: var(--mint); }
+  .pc-chip.is-no { background: var(--rose-soft); border-color: #F3BFB6; color: var(--rose); }
+  .pc-chip:focus-visible, .pc-btn:focus-visible, .pc-flip:focus-visible, [data-say]:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 2px; }
+  @media (hover: hover) { .pc-chip:hover { border-color: var(--ice); background: var(--ice-soft); } .pc-chip.is-on:hover { background: var(--steel-2); } }
+  .pc-btn { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 14px; padding: 10px 18px; cursor: pointer;
+    font: 800 13px/1 var(--ak-font); letter-spacing: .12em; text-transform: uppercase; background: linear-gradient(180deg, var(--gold), var(--gold-2)); color: var(--gold-ink); box-shadow: 0 10px 22px rgba(224,163,64,.28); }
+  .pc-btn--ghost { background: #F3F7FA; color: var(--steel-2); box-shadow: none; border: 1px solid var(--line); }
+  .pc-btn svg { width: 16px; height: 16px; flex: none; }
+  .pc-btn[disabled] { opacity: .45; cursor: default; }
+  [data-say] { cursor: pointer; }
+  .ak-speaking { color: var(--gold-3) !important; }
+
+  /* hero */
+  .pc-hero { text-align: center; }
+  .pc-hero h1 { animation: pc-rise .8s cubic-bezier(.2,1.3,.4,1) both; }
+  .pc-hero .pc-lead { margin: 0 auto 22px; font-size: clamp(17px, 2.2vw, 20px); color: #5E7487; animation: pc-rise .8s .12s cubic-bezier(.2,1.3,.4,1) both; }
+  @keyframes pc-rise { from { transform: translateY(28px) rotate(1.5deg); } to { transform: none; } }
+  .pc-frame { position: relative; margin: 0 auto 28px; max-width: 420px; border-radius: 26px; padding: 22px 20px 20px; background: linear-gradient(160deg, #FEF8EE, #FBEBD3); border: 1px solid #F3DCB4; box-shadow: var(--sh); animation: pc-rise .9s .2s cubic-bezier(.2,1.3,.4,1) both; }
+  .pc-frame::before, .pc-frame::after { content: ''; position: absolute; width: 26px; height: 26px; border: 3px solid var(--gold-3); }
+  .pc-frame::before { left: 12px; top: 12px; border-right: 0; border-bottom: 0; border-radius: 8px 0 0 0; }
+  .pc-frame::after { right: 12px; bottom: 12px; border-left: 0; border-top: 0; border-radius: 0 0 8px 0; }
+  .pc-rec { position: absolute; right: 18px; top: 16px; display: flex; gap: 6px; align-items: center; font: 800 11px/1 var(--ak-font); letter-spacing: .18em; color: var(--rose); }
+  .pc-rec i { width: 10px; height: 10px; border-radius: 50%; background: var(--rose); animation: pc-blink 1.4s infinite; }
+  @keyframes pc-blink { 50% { opacity: .2; } }
+  .pc-frame .pc-big { font: 600 clamp(36px, 9vw, 56px)/1 var(--disp); color: var(--gold-3); margin: 6px 0; }
+  .pc-frame small { display: block; color: var(--gold-ink); font-size: 15px; }
+  .pc-steam { position: relative; width: 44px; height: 30px; margin: 0 auto -4px; }
+  .pc-steam i { position: absolute; bottom: 0; width: 5px; height: 20px; border-radius: 3px; background: linear-gradient(180deg, rgba(200,225,240,0), rgba(170,205,228,.95)); animation: pc-steam 2.6s ease-in-out infinite; }
+  .pc-steam i:nth-child(1) { left: 8px; } .pc-steam i:nth-child(2) { left: 20px; height: 26px; animation-delay: .55s; } .pc-steam i:nth-child(3) { left: 32px; animation-delay: 1.1s; }
+  @keyframes pc-steam { 0% { opacity: 0; transform: translateY(6px) scaleY(.6); } 35% { opacity: .85; } 100% { opacity: 0; transform: translateY(-22px) scaleY(1.25); } }
+
+  /* story */
+  .pc-story { font-size: clamp(17px, 2vw, 19px); text-align: left; }
+  .pc-bubble { display: inline-block; max-width: 88%; padding: 12px 16px; border-radius: 18px 18px 18px 6px; background: #F2F7FB; margin: 4px 0 14px; box-shadow: var(--sh-sm); }
+  .pc-bubble--me { border-radius: 18px 18px 6px 18px; background: linear-gradient(160deg, #9BD3F2, #6BB3DF); color: #fff; }
+  .pc-bubble--me .tr { color: #fff; }
+  .pc-punch { font: 700 clamp(24px, 5vw, 38px)/1.04 var(--disp); text-transform: uppercase; color: var(--steel); margin: 26px 0; }
+  .pc-punch em { font-style: normal; color: var(--gold-3); }
+
+  /* ribbon */
+  .pc-ribbon { position: relative; height: 104px; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #F5FAFD, #fff); border: 1px solid var(--ice-line); margin: 6px 0 14px; }
+  .pc-ribbon__base { position: absolute; left: 4%; right: 4%; top: 58px; height: 8px; border-radius: 99px; background: #E7F1F8; }
+  .pc-ribbon__fill { position: absolute; top: 58px; height: 8px; left: 47%; width: 6%; border-radius: 99px; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
+  .pc-ribbon__cap { position: absolute; top: 76px; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); translate: -50% 0; }
+  .pc-ribbon__cam { position: absolute; left: 50%; top: 10px; width: 40px; height: 40px; translate: -50% 0; }
+  .pc-ribbon__cross { position: absolute; left: 50%; top: 8px; width: 46px; height: 46px; translate: -50% 0; scale: 0; }
+
+  /* builder */
+  .pc-stage { display: flex; justify-content: center; align-items: flex-end; flex-wrap: wrap; gap: 2px; min-height: 92px; padding: 18px 8px; border-radius: 18px; background: #FBFDFF; border: 1px solid var(--line); font: 600 clamp(30px, 8vw, 54px)/1 var(--disp); }
+  .pc-piece { display: inline-block; padding: 4px 6px; border-radius: 10px; }
+  .pc-piece--stem { color: var(--steel); }
+  .pc-piece--mek { color: #9AAEBD; }
+  .pc-piece--v { color: #fff; background: var(--ice); }
+  .pc-piece--yor { color: var(--gold-ink); background: var(--gold); }
+  .pc-piece--end { color: #fff; background: var(--steel); }
+  .pc-piece--drop { color: var(--rose); text-decoration: line-through; }
+  .pc-steps { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 6px; counter-reset: s; }
+  .pc-steps li { counter-increment: s; position: relative; padding: 8px 12px 8px 46px; border-radius: 12px; color: var(--muted); font-size: 15px; transition: background-color .25s, color .25s; }
+  .pc-steps li::before { content: counter(s); position: absolute; left: 12px; top: 8px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--ice-soft); color: var(--steel); font-weight: 800; font-size: 13px; }
+  .pc-steps li.is-on { background: var(--gold-soft); color: var(--gold-ink); }
+  .pc-steps li.is-on::before { background: var(--gold-2); color: #fff; }
+  .pc-formula { text-align: center; font-size: 17px; color: var(--muted); margin: 14px 0; }
+  .pc-formula b { font-family: var(--disp); font-size: 20px; }
+  .pc-harm { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+  .pc-harm button { min-height: 72px; border: 1px solid var(--ice-line); border-radius: 16px; background: #fff; padding: 10px; cursor: pointer; text-align: left; font: inherit; color: var(--ink); }
+  .pc-harm button.is-on { border-color: var(--gold-2); background: var(--gold-soft); }
+  .pc-harm .pc-harm__v { font: 600 18px/1.2 var(--disp); color: var(--steel); display: block; }
+  .pc-harm .pc-harm__ex { font: 600 22px/1.2 var(--disp); color: var(--gold-3); display: block; }
+  @media (min-width: 640px) { .pc-harm { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  /* persons */
+  .pc-conj { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .pc-cw { min-height: 64px; border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 10px; text-align: center; cursor: pointer; font: inherit; color: var(--ink); box-shadow: var(--sh-sm); }
+  .pc-cw.is-on { border-color: var(--gold-2); background: var(--gold-soft); }
+  .pc-cw .pc-p { display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .pc-cw .pc-f { display: block; font: 600 21px/1.2 var(--disp); color: var(--steel); margin-top: 4px; }
+  .pc-cw .pc-f i { font-style: normal; color: var(--gold-3); }
+  @media (min-width: 640px) { .pc-conj { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .pc-slider { width: 100%; height: 44px; accent-color: var(--gold-3); }
+  .pc-morph { text-align: center; font: 600 clamp(34px, 9vw, 58px)/1 var(--disp); color: var(--steel); min-height: 1.2em; }
+  .pc-morph i { font-style: normal; color: var(--gold-3); display: inline-block; }
+  .pc-morph__who { text-align: center; font-size: 13px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+  /* lab */
+  .pc-tabs { display: flex; gap: 6px; padding: 4px; border-radius: 999px; background: var(--ice-soft); margin-bottom: 16px; overflow-x: auto; }
+  .pc-tabs button { flex: 1 1 auto; min-height: 44px; border: 0; border-radius: 999px; background: none; font: 700 15px/1 var(--ak-font); color: var(--steel-2); cursor: pointer; padding: 0 8px; }
+  .pc-tabs button[aria-selected="true"] { background: #fff; box-shadow: var(--sh-sm); color: var(--gold-3); }
+  .pc-pane[hidden] { display: none; }
+  .pc-lbl { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 12px 0 6px; }
+  .pc-out { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 14px; padding: 18px 10px; border-radius: 18px; background: linear-gradient(160deg, #F3FAFE, #fff); border: 1px solid var(--ice-line); }
+  .pc-out .pc-stage { border: 0; background: none; min-height: 0; padding: 0; }
+  .pc-ru { color: var(--muted); font-size: 15px; text-align: center; }
+  .pc-big-q { font: 600 clamp(32px, 8vw, 50px)/1 var(--disp); color: var(--steel); text-align: center; margin: 8px 0 14px; }
+  .pc-vowels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .pc-vowels button { min-height: 60px; border: 1px solid var(--ice-line); border-radius: 14px; background: #fff; font: 600 28px/1 var(--disp); color: var(--steel); cursor: pointer; }
+  .pc-vowels button.is-ok { background: var(--mint-soft); border-color: #A9DDB8; color: var(--mint); }
+  .pc-vowels button.is-no { background: var(--rose-soft); border-color: #F3BFB6; color: var(--rose); }
+  .pc-streak { display: flex; gap: 4px; justify-content: center; margin-top: 10px; }
+  .pc-streak i { width: 14px; height: 14px; border-radius: 4px; background: var(--ice-soft); }
+  .pc-streak i.is-on { background: var(--gold-2); }
+
+  /* scene chat */
+  .pc-chat { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 22px; background: #F7FBFE; border: 1px solid var(--line); min-height: 220px; }
+  .pc-chat .pc-bubble { margin: 0; align-self: flex-start; }
+  .pc-chat .pc-bubble--me { align-self: flex-end; }
+  .pc-bubble--re { background: var(--gold-soft); color: var(--gold-ink); font-size: 15px; border-radius: 18px; }
+  .pc-bubble small { display: block; font-size: 14px; opacity: .8; }
+  .pc-phone-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: var(--steel-2); font-weight: 700; }
+  .pc-phone-top svg { width: 36px; height: 36px; }
+
+  /* traps */
+  .pc-traps { display: grid; gap: 12px; }
+  @media (min-width: 640px) { .pc-traps { grid-template-columns: 1fr 1fr; } }
+  .pc-flip { position: relative; min-height: 132px; border: 0; padding: 0; background: none; cursor: pointer; perspective: 900px; text-align: left; font: inherit; color: inherit; width: 100%; }
+  .pc-flip__in { position: relative; display: block; width: 100%; min-height: 132px; transform-style: preserve-3d; }
+  .pc-flip__f, .pc-flip__b { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 14px 16px; border-radius: 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .pc-flip__f { background: var(--rose-soft); border: 1px solid #F3BFB6; }
+  .pc-flip__b { background: var(--mint-soft); border: 1px solid #A9DDB8; transform: rotateY(180deg); }
+  .pc-flip__f s { font: 600 24px/1.1 var(--disp); color: var(--rose); }
+  .pc-flip__b .tr { font-size: 24px; color: var(--mint); }
+  .pc-flip small { font-size: 14px; color: var(--muted); }
+  .pc-flip svg { width: 22px; height: 22px; }
+
+  /* cheat */
+  .pc-cheat { display: grid; gap: 10px; }
+  @media (min-width: 640px) { .pc-cheat { grid-template-columns: 1fr 1fr; } }
+  .pc-chi { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; box-shadow: var(--sh-sm); }
+  .pc-chi .pc-n { font: 600 24px/1 var(--disp); color: var(--ice); flex: none; width: 30px; }
+  .pc-chi b { display: block; line-height: 1.3; }
+  .pc-chi span { font-size: 15px; color: var(--muted); }
+  .pc-final { text-align: center; margin-top: 28px; }
+
+  /* video note */
+  .pc-note { display: flex; gap: 10px; align-items: flex-start; }
+  .pc-note svg { width: 28px; height: 28px; flex: none; }
+
+  /* свой скроллбар: киноплёнка, по ней едет камера */
+  .pc-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 12px; pointer-events: none; }
+  .pc-sb__track { position: absolute; inset: 0; pointer-events: auto; touch-action: none; cursor: pointer;
+    background: repeating-linear-gradient(90deg, #2E4557 0 7px, #E4F2FB 7px 10px); background-size: 10px 4px; background-repeat: repeat-x; background-position: 0 0, 0 100%; background-color: #3A5468; }
+  .pc-sb__fill { position: absolute; left: 0; top: 3px; bottom: 3px; width: calc(var(--p, 0) * 100%); background: var(--gold-2); }
+  .pc-sb__cam { position: absolute; top: 12px; left: clamp(14px, calc(var(--p, 0) * 100%), calc(100% - 14px)); translate: -50% 0; width: 28px; height: 22px; pointer-events: none; }
+  .pc-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .pc-sb__mark::after { content: ''; position: absolute; left: 9px; top: 9px; width: 10px; height: 10px; border-radius: 2px; background: #fff; box-shadow: inset 0 0 0 2px var(--gold-2); }
+  .pc-sb__mark.is-read::after { background: var(--gold-2); }
+  @media (min-width: 768px) {
+    .pc-sb { left: auto; right: 12px; top: 50%; translate: 0 -50%; width: 14px; height: min(62dvh, 540px); }
+    .pc-sb__track { border-radius: 4px; background: repeating-linear-gradient(180deg, #2E4557 0 7px, #E4F2FB 7px 10px); background-color: #3A5468; }
+    .pc-sb__fill { width: auto; left: 3px; right: 3px; top: 0; bottom: auto; height: calc(var(--p, 0) * 100%); }
+    .pc-sb__cam { top: clamp(12px, calc(var(--p, 0) * 100%), calc(100% - 12px)); left: auto; right: 18px; translate: 0 -50%; width: 34px; height: 26px; }
+    .pc-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+  }
+  @media (min-width: 1024px) { section { padding-top: 96px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  /* пульт камеры */
+  .pc-remote { max-width: 440px; margin: 0 auto 26px; border-radius: 28px; padding: 20px 18px 18px; background: linear-gradient(170deg, #3A5468, #2E4557); color: #fff; box-shadow: var(--sh); animation: pc-rise .9s .2s cubic-bezier(.2,1.3,.4,1) both; }
+  .pc-remote__screen { border-radius: 16px; background: linear-gradient(160deg, #FEF8EE, #FBEBD3); padding: 16px 10px; text-align: center; color: var(--gold-ink); }
+  .pc-remote__word { font: 600 clamp(28px, 8vw, 46px)/1.05 var(--disp); color: var(--steel-2); min-height: 1.1em; }
+  .pc-remote__word i { font-style: normal; color: var(--rose); }
+  .pc-remote__word u { text-decoration: none; color: #5C93B5; }
+  .pc-remote__ru { font-size: 15px; margin-top: 4px; }
+  .pc-remote__keys { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+  .pc-key { min-height: 56px; border: 0; border-radius: 16px; background: #4C6A80; color: #fff; font: 700 24px/1 var(--disp); cursor: pointer; box-shadow: inset 0 -4px 0 rgba(0,0,0,.25); }
+  .pc-key small { display: block; font: 700 11px/1.2 var(--ak-font); letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-top: 3px; }
+  .pc-key.is-on { background: var(--gold-2); color: var(--gold-ink); }
+  .pc-key:focus-visible, .pc-switch:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+  .pc-modes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .pc-modes .pc-key { min-height: 52px; font-size: 20px; }
+  .pc-switch { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; border: 0; background: none; cursor: pointer; font: 700 15px/1 var(--ak-font); color: var(--steel-2); }
+  .pc-switch__t { position: relative; width: 56px; height: 32px; border-radius: 999px; background: var(--ice-2); }
+  .pc-switch__k { position: absolute; left: 3px; top: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,.2); }
+  .pc-switch[aria-checked="true"] .pc-switch__t { background: var(--rose); }
+  .pc-piece--neg { color: #fff; background: var(--rose); }
+  .pc-piece--q { color: #fff; background: #5C93B5; margin-left: .3em; }
+  .pc-hardgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  @media (min-width: 640px) { .pc-hardgrid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .pc-hard { min-height: 116px; border: 1px solid #F3DCB4; border-radius: 18px; background: linear-gradient(160deg, #FEF8EE, #FBEBD3); cursor: pointer; font: inherit; color: var(--gold-ink); padding: 12px 8px; text-align: center; }
+  .pc-hard__a { display: block; font: 600 20px/1.1 var(--disp); color: var(--muted); }
+  .pc-hard__b { display: block; font: 600 26px/1.2 var(--disp); color: var(--steel-2); margin-top: 6px; }
+  .pc-hard__b i { font-style: normal; color: var(--gold-3); display: inline-block; }
+  .pc-hard small { display: block; font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .pc-qgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .pc-qgrid .pc-chip { padding: 8px 6px; }
+</style>
+</head>
+<body>
+<main>
+
+  <section data-section="story" data-words="82" class="pc-hero">
+    <span class="pc-tag pc-tag--gold">A1 · Istanbul · lesson 2</span>
+    <h1 class="pc-split">The <em>camera</em> remote</h1>
+    <p class="pc-lead">The camera already shoots. Now it gets two new buttons: “stop” and “question.”</p>
+
+    <div class="pc-remote">
+      <div class="pc-remote__screen">
+        <div class="pc-remote__word" lang="tr" data-remote-word data-say="anlıyorum" role="button" tabindex="0">anlıyorum</div>
+        <div class="pc-remote__ru" data-ui data-remote-ru>I understand</div>
+      </div>
+      <div class="pc-remote__keys" role="group" aria-label="Remote buttons">
+        <button type="button" class="pc-key is-on" data-rk="pos">+<small>shot</small></button>
+        <button type="button" class="pc-key" data-rk="neg">–<small>stop</small></button>
+        <button type="button" class="pc-key" data-rk="q">?<small>question</small></button>
+      </div>
+    </div>
+
+    <div class="pc-story">
+      <p>İstiklal, evening. A simit seller is telling you something fast. You catch a familiar root: <b lang="tr" class="tr">anla-</b>, “understand.”</p>
+      <p>You want to say “I don’t understand.” What comes out is a pause. Everyone learning Turkish knows that pause.</p>
+      <p>The camera from lesson one only shoots “yes.” A conversation needs “no” and questions too. That’s what the remote is for.</p>
+      <p class="pc-punch">“I don’t understand”<br>is a <em>shot</em> too.</p>
+      <p>Three things today: the “stop” button, the “question” button, and four roots with attitude.</p>
+    </div>
+  </section>
+
+  <section data-section="negative" data-words="55">
+    <span class="pc-tag pc-tag--gold">Button 1 · stop</span>
+    <h2 class="pc-split">A shot <em>with “not”</em></h2>
+    <p>Guess first. The root is <b lang="tr" class="tr">gel-</b>. How do you say “I’m not coming”?</p>
+    <div class="pc-row" data-guess>
+      <button type="button" class="pc-chip" data-g="0"><span lang="tr">gelmeyorum</span></button>
+      <button type="button" class="pc-chip" data-g="1"><span lang="tr">gelmiyorum</span></button>
+      <button type="button" class="pc-chip" data-g="2"><span lang="tr">gelmıyorum</span></button>
+    </div>
+    <p class="pc-hint" data-ui data-guess-hint aria-live="polite"></p>
+
+    <div class="pc-card" style="margin-top:12px">
+      <div class="pc-row" data-neg-verbs>
+        <button type="button" class="pc-chip is-on" data-root="gel"><span lang="tr">gel-</span></button>
+        <button type="button" class="pc-chip" data-root="al"><span lang="tr">al-</span></button>
+        <button type="button" class="pc-chip" data-root="oku"><span lang="tr">oku-</span></button>
+        <button type="button" class="pc-chip" data-root="gör"><span lang="tr">gör-</span></button>
+        <button type="button" class="pc-chip" data-root="anla"><span lang="tr">anla-</span></button>
+      </div>
+      <div class="pc-stage" data-neg-stage lang="tr" style="margin-top:12px" aria-live="polite"></div>
+      <div style="text-align:center;margin-top:8px">
+        <button type="button" class="pc-switch" role="switch" aria-checked="false" data-neg-switch><span class="pc-switch__t"><span class="pc-switch__k"></span></span>“Stop” button</button>
+      </div>
+    </div>
+    <p class="pc-formula">root + <b lang="tr">mı / mi / mu / mü</b> + <b lang="tr">yor</b> + person</p>
+    <p>Picture it: <b lang="tr">mı</b> is a little barrier before <b lang="tr">yor</b>. It closes the shot with a “not.” The person tails are the same, with <b>u</b>.</p>
+    <p>The vowel in <b lang="tr">mı</b> follows the same 4-way harmony. Roots ending in a vowel don’t suffer: <a-say>anla → anlamıyorum</a-say></p>
+    <p>The “not now” shot: <a-say>Çay içmiyorum.</a-say> I’m not drinking tea right now. <a-say>Ali çalışmıyor.</a-say> Ali isn’t working.</p>
+  </section>
+
+  <section data-section="question" data-words="53">
+    <span class="pc-tag pc-tag--gold">Button 2 · question</span>
+    <h2 class="pc-split">A shot <em>with a question</em></h2>
+    <p>English flips the word order for a question. Turkish uses your voice and one small word.</p>
+    <p>The question is a separate word, <b lang="tr">mu</b>. After <b lang="tr">yor</b> it always has <b>u</b>. The person tail moves over to it.</p>
+    <div class="pc-card pc-card--ice">
+      <div class="pc-stage" data-q-stage lang="tr" aria-live="polite"></div>
+      <div class="pc-row" style="justify-content:center;margin-top:10px">
+        <button type="button" class="pc-btn" data-q-go><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 9a3 3 0 1 1 4 2.8c-1 .4-1 1.2-1 2.2M12 18h.01" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>Ask the question</button>
+        <button type="button" class="pc-btn pc-btn--ghost" data-q-back>Undo</button>
+      </div>
+      <div class="pc-qgrid" data-q-persons></div>
+      <p class="pc-ru" data-ui data-q-ru></p>
+    </div>
+    <p style="margin-top:12px">Your voice rises on <b lang="tr">mu</b>: that’s how you hear the question. The answer drops <b lang="tr">mu</b>: <a-say>Evet, geliyorum.</a-say></p>
+    <p>Only “they” keeps its tail at home: <a-say>Geliyorlar mı?</a-say> Both buttons at once: <a-say>Gelmiyor musun?</a-say> Aren’t you coming?</p>
+  </section>
+
+  <section data-section="hard" data-words="66">
+    <span class="pc-tag pc-tag--gold">Tricky cases</span>
+    <h2 class="pc-split">Roots <em>with attitude</em></h2>
+    <p>Four short verbs change their root. Tap a card and see what happens.</p>
+    <p>Why did <b lang="tr">t</b> become <b lang="tr">d</b>? Between vowels the sound softens, and Turkish honestly writes it down.</p>
+    <div class="pc-hardgrid">
+      <button type="button" class="pc-hard" data-hard="gidiyor" data-from="t" data-to="d"><span class="pc-hard__a" lang="tr">git-</span><span class="pc-hard__b" lang="tr">gi<i>t</i>iyor</span><small>t → d between vowels</small></button>
+      <button type="button" class="pc-hard" data-hard="ediyor" data-from="t" data-to="d"><span class="pc-hard__a" lang="tr">et-</span><span class="pc-hard__b" lang="tr">e<i>t</i>iyor</span><small>t → d, like git</small></button>
+      <button type="button" class="pc-hard" data-hard="diyor" data-from="e" data-to="i"><span class="pc-hard__a" lang="tr">de-</span><span class="pc-hard__b" lang="tr">d<i>e</i>yor</span><small>e → i</small></button>
+      <button type="button" class="pc-hard" data-hard="yiyor" data-from="e" data-to="i"><span class="pc-hard__a" lang="tr">ye-</span><span class="pc-hard__b" lang="tr">y<i>e</i>yor</span><small>e → i</small></button>
+    </div>
+    <p style="margin-top:14px"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-3px"><circle cx="12" cy="12" r="10" fill="#E6F6EC"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#2E8A57" stroke-width="2.6" stroke-linecap="round"/></svg> With the “stop” button they stay calm: <a-say>gitmiyor, etmiyor, demiyor, yemiyor</a-say></p>
+    <div class="pc-card pc-card--gold" style="margin-top:12px">
+      <span class="pc-tag pc-tag--gold">One more shot: a plan</span>
+      <p style="margin-top:8px">The camera also shoots what’s already settled: <a-say>Yarın geliyorum.</a-say> I’m coming tomorrow; the ticket’s in my pocket. Not a dream, a done deal.</p>
+      <button type="button" class="pc-btn pc-btn--ghost" data-plan>Show on the timeline</button>
+      <div class="pc-ribbon" aria-hidden="true" style="margin-top:12px">
+        <div class="pc-ribbon__base"></div>
+        <div class="pc-ribbon__fill" data-plan-fill></div>
+        <svg class="pc-ribbon__cam" viewBox="0 0 48 48" data-plan-cam><rect x="5" y="14" width="28" height="21" rx="4" fill="#EFB65F"/><path d="M35 22l8-5v14l-8-5z" fill="#F8D294"/><circle cx="16" cy="24.5" r="5.5" fill="#fff" opacity=".85"/></svg>
+        <span class="pc-ribbon__cap" style="left:10%">yesterday</span> <span class="pc-ribbon__cap" style="left:50%">now</span> <span class="pc-ribbon__cap" style="left:90%">tomorrow</span>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="lab" data-words="38">
+    <span class="pc-tag pc-tag--gold">Lab</span>
+    <h2 class="pc-split">The whole <em>remote</em></h2>
+    <p>Verb, person, and mode. Four modes: shot, stop, question, and both buttons at once.</p>
+    <p>Press “–?” and compare: that’s how surprise sounds, “wait, you’re not coming?”</p>
+    <div class="pc-card">
+      <div class="pc-lbl">Verb</div>
+      <div class="pc-row" data-lab-verbs></div>
+      <div class="pc-lbl">Who</div>
+      <div class="pc-row" data-lab-persons></div>
+      <div class="pc-lbl">Mode</div>
+      <div class="pc-modes" data-lab-modes>
+        <button type="button" class="pc-key is-on" data-m="pos">+</button>
+        <button type="button" class="pc-key" data-m="neg">–</button>
+        <button type="button" class="pc-key" data-m="q">?</button>
+        <button type="button" class="pc-key" data-m="negq">–?</button>
+      </div>
+      <div class="pc-out">
+        <div class="pc-stage" data-lab-out lang="tr"></div>
+        <div class="pc-ru" data-ui data-lab-ru></div>
+        <button type="button" class="pc-btn pc-btn--ghost" data-lab-say><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 8a5 5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Listen</button>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="scene" data-words="24">
+    <span class="pc-tag pc-tag--gold">Scene</span>
+    <h2 class="pc-split">A call <em>on the ferry</em></h2>
+    <p>You’re crossing to Kadıköy. Your friend calls. Answer three questions in a row. The rule is simple: the question has <b lang="tr">mu</b>, the answer doesn’t.</p>
+    <div class="pc-phone-top"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="4" width="24" height="40" rx="6" fill="#4C6A80"/><rect x="15" y="9" width="18" height="28" rx="2" fill="#E4F2FB"/><circle cx="24" cy="40.5" r="1.8" fill="#B9E0F7"/></svg><span lang="tr">Emre</span></div>
+    <div class="pc-chat" data-chat aria-live="polite"></div>
+    <div class="pc-row" style="justify-content:center;margin-top:12px" data-chat-opts></div>
+    <div style="text-align:center;margin-top:12px"><button type="button" class="pc-btn pc-btn--ghost" data-chat-reset><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>Rewind the scene</button></div>
+  </section>
+
+  <section data-section="traps" data-words="42">
+    <span class="pc-tag pc-tag--gold">Traps</span>
+    <h2 class="pc-split">Where everyone <em>trips</em></h2>
+    <p>Almost everyone trips on these. Tap a card to flip it.</p>
+    <div class="pc-traps">
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">gelmeyorum</s><small>A low vowel before yor</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">gelmiyorum</span><small>Only high vowels before yor: mı, mi, mu, mü.</small></span> </span></button>
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyormusun?</s><small>Written together</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyor musun?</span><small>The question is written as a separate word.</small></span> </span></button>
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyor misin?</s><small>Vowel taken from the root</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyor musun?</span><small>The question looks at yor, so it’s always u.</small></span> </span></button>
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">gitiyorum</s><small>Root left untouched</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">gidiyorum</span><small>t between vowels sounds like d.</small></span> </span></button>
+    </div>
+  </section>
+
+  <section data-section="video" data-words="12">
+    <h2 class="pc-split">Listen <em>once more</em></h2>
+    <p class="pc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FDF3E2"/><path d="M10 8l6 4-6 4z" fill="#E3A340"/></svg><span>Notice: where <b lang="tr">mı</b> goes and how <b lang="tr">mu</b> splits off from the verb.</span></p>
+    <a-video yt="rZmYUlqGh-s" start="580" end="760" title="Present continuous Şimdiki zaman: rules and examples" channel="online school"></a-video>
+  </section>
+
+  <section data-section="practice" data-words="1">
+    <h2 class="pc-split">Practice</h2>
+    <a-exercise ref="a1.present-continuous.ex5"></a-exercise>
+    <a-exercise ref="a1.present-continuous.ex6"></a-exercise>
+    <a-exercise ref="a1.present-continuous.ex7"></a-exercise>
+
+    <a-exercise ref="a1.present-continuous.ex8" class="ak-ex">
+      <div class="ak-ex__head"><span class="ak-ex__title">Remote: press the right button</span><span class="ak-ex__count" data-rm-count>1 / 5</span></div>
+      <div class="pc-remote" style="animation:none;margin:12px auto">
+        <div class="pc-remote__screen">
+          <div class="pc-remote__ru" data-rm-ru style="font-size:18px;font-weight:700"></div>
+          <div class="pc-remote__word" lang="tr" data-rm-word></div>
+        </div>
+        <div class="pc-modes" style="margin-top:12px" data-rm-keys>
+          <button type="button" class="pc-key" data-rm="pos">+<small>(1)</small></button>
+          <button type="button" class="pc-key" data-rm="neg">–<small>(2)</small></button>
+          <button type="button" class="pc-key" data-rm="q">?<small>(3)</small></button>
+          <button type="button" class="pc-key" data-rm="negq">–?<small>(4)</small></button>
+        </div>
+      </div>
+      <p class="pc-hint" data-rm-status aria-live="polite"></p>
+    </a-exercise>
+  </section>
+
+  <section data-section="check" data-words="5">
+    <h2 class="pc-split">Quick check</h2>
+    <p>No hints. Five questions.</p>
+    <a-quiz ref="a1.present-continuous.check2"></a-quiz>
+  </section>
+
+  <section data-section="cheat" data-words="44">
+    <span class="pc-tag pc-tag--gold">Cheat sheet</span>
+    <h2 class="pc-split">The whole remote <em>on one screen</em></h2>
+    <div class="pc-cheat">
+      <div class="pc-chi"><span class="pc-n">01</span><span><b>Stop</b><span>root + <span lang="tr">mı/mi/mu/mü</span> + <span lang="tr">yor: gelmiyorum</span></span></span></div>
+      <div class="pc-chi"><span class="pc-n">02</span><span><b>Question</b><span><span lang="tr">yor</span> + <span lang="tr">mu</span> + person: <span lang="tr">geliyor musun?</span></span></span></div>
+      <div class="pc-chi"><span class="pc-n">03</span><span><b>They</b><span lang="tr">geliyorlar mı? · gelmiyorlar mı?</span></span></div>
+      <div class="pc-chi"><span class="pc-n">04</span><span><b>t → d</b><span lang="tr">git → gidiyor · et → ediyor</span></span></div>
+      <div class="pc-chi"><span class="pc-n">05</span><span><b>e → i</b><span lang="tr">de → diyor · ye → yiyor</span></span></div>
+      <div class="pc-chi"><span class="pc-n">06</span><span><b>Plan</b><span lang="tr">Yarın geliyorum.</span></span></div>
+    </div>
+    <p style="margin-top:14px"><b>The takeaway:</b> the remote works with any verb. “Stop” lives inside the word, the question is a separate word. The answer to a question has no <b lang="tr">mu</b>.</p>
+    <div class="pc-final">
+      <div class="pc-bubble" style="text-align:left"><a-say>Şimdi Türkçe öğreniyorum.</a-say><small>I’m learning Turkish now.</small></div><br>
+      <div class="pc-bubble pc-bubble--me" data-final-me><span class="tr" lang="tr" data-say="Anlamıyorum. Ali çalışmıyor mu?">Anlamıyorum. Ali çalışmıyor mu?</span></div>
+      <p class="pc-punch" style="margin-top:18px">The pause on İstiklal is over. <em>The remote is yours.</em></p>
+      <svg width="64" height="64" viewBox="0 0 48 48" aria-hidden="true" data-final-cam><rect x="10" y="4" width="28" height="40" rx="8" fill="#3A5468"/><circle cx="24" cy="15" r="5" fill="#EFB65F"/><circle cx="17" cy="29" r="3.5" fill="#C4685B"/><circle cx="31" cy="29" r="3.5" fill="#8FCCEF"/></svg>
+      <div><button type="button" class="pc-btn" data-final-replay>Press every button</button></div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="pc-sb" data-scrollbar aria-label="Lesson progress">
+  <div class="pc-sb__track"><span class="pc-sb__fill"></span></div>
+  <svg class="pc-sb__cam" viewBox="0 0 48 36" aria-hidden="true"><rect x="2" y="6" width="30" height="24" rx="5" fill="#EFB65F" stroke="#6E5020" stroke-width="2"/><path d="M33 13l12-6v22l-12-6z" fill="#F8D294" stroke="#6E5020" stroke-width="2"/><circle cx="14" cy="18" r="6" fill="#fff"/><circle cx="26" cy="11" r="2.4" fill="#C4685B"/></svg>
+</nav>
+
+<template data-achievement data-title="Remote mastered" data-text="You negate and ask in the shot: gelmiyorum, geliyor musun?">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="52" fill="#FDF3E2" stroke="#EFB65F" stroke-width="5"/>
+    <g class="remote"><rect x="38" y="20" width="44" height="80" rx="14" fill="#3A5468"/>
+      <circle class="k k1" cx="60" cy="40" r="8" fill="#EFB65F"/>
+      <circle class="k k2" cx="49" cy="62" r="7" fill="#C4685B"/>
+      <circle class="k k3" cx="71" cy="62" r="7" fill="#8FCCEF"/>
+      <text class="sign" x="60" y="88" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" font-family="system-ui">+ – ?</text></g>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const speak = (t) => { try { window.AlternaKit && AlternaKit.speak(t); } catch (e) { /* без озвучки */ } };
+  if (G) { try { G.registerPlugin(ScrollTrigger, SplitText); } catch (e) { /* уже */ } }
+  if (A) ScrollTrigger.config({ ignoreMobileResize: true });
+
+  /* ---------- грамматика ---------- */
+  const VOW = 'aıoueiöü';
+  const NARROW = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' };
+  const ENDS = ['um', 'sun', '', 'uz', 'sunuz', 'lar'];
+  const QM = ['muyum', 'musun', 'mu', 'muyuz', 'musunuz', 'mı'];
+  const PERS = [['ben', 'I'], ['sen', 'you'], ['o', 'he'], ['biz', 'we'], ['siz', 'you (pl.)'], ['onlar', 'they']];
+  const lastV = (s) => [...s].reverse().find((c) => VOW.includes(c));
+  /* части формы: [текст, класс] */
+  function posStem(root) {
+    if (root === 'de') return [['d', 'stem'], ['i', 'v']];
+    if (root === 'ye') return [['y', 'stem'], ['i', 'v']];
+    const r = { git: 'gid', et: 'ed' }[root] || root;
+    const stem = VOW.includes(r.slice(-1)) ? r.slice(0, -1) : r;
+    return [[stem, 'stem'], [NARROW[lastV(stem)], 'v']];
+  }
+  function pieces(root, p, mode) {
+    const neg = mode === 'neg' || mode === 'negq';
+    const q = mode === 'q' || mode === 'negq';
+    const out = neg ? [[root, 'stem'], ['m' + NARROW[lastV(root)], 'neg']] : posStem(root);
+    out.push(['yor', 'yor']);
+    if (!q) { if (ENDS[p]) out.push([ENDS[p], 'end']); }
+    else { if (p === 5) out.push(['lar', 'end']); out.push([QM[p], 'q']); }
+    return out;
+  }
+  const text = (ps) => ps.map(([t, c]) => (c === 'q' ? ' ' : '') + t).join('') + (ps.some(([, c]) => c === 'q') ? '?' : '');
+  const paint = (ps) => ps.map(([t, c]) => `<span class="pc-piece pc-piece--${c}">${t}</span>`).join('') + (ps.some(([, c]) => c === 'q') ? '<span class="pc-piece pc-piece--stem">?</span>' : '');
+
+  /* ---------- заголовки и появление ---------- */
+  if (A) {
+    $$('.pc-split').forEach((h) => {
+      const st = new SplitText(h, { type: 'words' });
+      G.from(st.words, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    ScrollTrigger.batch('.pc-card, .pc-chi, .pc-flip, .pc-hard', {
+      start: 'top 92%', once: true,
+      onEnter: (b) => G.from(b, { y: 26, scale: .96, duration: .6, ease: 'back.out(1.8)', stagger: .07 }),
+    });
+  }
+
+  /* ---------- пульт в крючке ---------- */
+  const RM = { pos: ['anlıyorum', 'I understand'], neg: ['anlamıyorum', 'I don’t understand'], q: ['anlıyor musun?', 'do you understand?'] };
+  $$('[data-rk]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.rk;
+    $$('[data-rk]').forEach((x) => x.classList.toggle('is-on', x === b));
+    const w = $('[data-remote-word]');
+    w.innerHTML = k === 'neg' ? 'anla<i>mı</i>yorum' : k === 'q' ? 'anlıyor <u>musun</u>?' : 'anlıyorum';
+    w.dataset.say = RM[k][0];
+    $('[data-remote-ru]').textContent = RM[k][1];
+    speak(RM[k][0]);
+    if (A) {
+      G.fromTo(w, { scale: .7, rotation: k === 'q' ? 4 : -4 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1,.45)' });
+      G.fromTo(b, { y: 4 }, { y: 0, duration: .3, ease: 'back.out(3)' });
+    }
+  }));
+
+  /* ---------- стоп: угадай ---------- */
+  const GUESS = [
+    'Almost. A low e can’t live before yor; you need a high i.',
+    'Yes! gel + mi + yor + um. The “stop” button is pressed.',
+    'Close. gel- has the vowel e, so it’s mi, not mı.',
+  ];
+  $$('[data-g]').forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.g === '1';
+    $$('[data-g]').forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    $('[data-guess-hint]').textContent = GUESS[+b.dataset.g];
+    if (ok) speak('gelmiyorum');
+    if (A) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .5, ease: 'elastic.out(1,.45)' });
+  }));
+
+  /* ---------- стоп: переключатель ---------- */
+  let negRoot = 'gel', negOn = false;
+  const negStage = $('[data-neg-stage]');
+  const sw = $('[data-neg-switch]');
+  function negDraw(animate) {
+    const ps = pieces(negRoot, 0, negOn ? 'neg' : 'pos');
+    negStage.innerHTML = paint(ps);
+    sw.setAttribute('aria-checked', String(negOn));
+    if (A) G.to('.pc-switch__k', { x: negOn ? 24 : 0, duration: .35, ease: 'back.out(2.5)' });
+    if (A && animate) {
+      const n = negStage.querySelector('.pc-piece--neg');
+      if (n) G.from(n, { y: -60, scale: .3, rotation: -20, duration: .7, ease: 'bounce.out' });
+      else G.from(negStage.querySelector('.pc-piece--v'), { y: 30, scale: .5, duration: .5, ease: 'back.out(3)' });
+    }
+  }
+  sw.addEventListener('click', () => { negOn = !negOn; negDraw(true); speak(text(pieces(negRoot, 0, negOn ? 'neg' : 'pos'))); });
+  $$('[data-neg-verbs] [data-root]').forEach((b) => b.addEventListener('click', () => {
+    negRoot = b.dataset.root;
+    $$('[data-neg-verbs] [data-root]').forEach((x) => x.classList.toggle('is-on', x === b));
+    negDraw(false);
+    if (A) G.from(negStage.children, { scale: .6, duration: .4, ease: 'back.out(3)', stagger: .05 });
+  }));
+  negDraw(false);
+
+  /* ---------- вопрос ---------- */
+  let qOn = false, qp = 1;
+  const qStage = $('[data-q-stage]');
+  const qBox = $('[data-q-persons]');
+  PERS.forEach(([p, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip' + (i === 1 ? ' is-on' : ''); b.dataset.i = i; b.innerHTML = `<span lang="tr">${p}</span>`; b.setAttribute('aria-label', ru); qBox.append(b); });
+  const QRU = ['I’m coming', 'you’re coming', 'he’s coming', 'we’re coming', 'you (pl.) are coming', 'they’re coming'];
+  function qDraw(animate) {
+    const ps = pieces('gel', qp, qOn ? 'q' : 'pos');
+    qStage.innerHTML = paint(ps);
+    $('[data-q-ru]').textContent = QRU[qp] + (qOn ? '?' : '.');
+    if (A && animate && qOn) {
+      const q = qStage.querySelector('.pc-piece--q');
+      G.from(q, { x: -70, y: -30, rotation: -25, duration: .8, ease: 'back.out(1.8)' });
+    }
+    if (A && animate && !qOn && qStage.querySelector('.pc-piece--end')) G.from(qStage.querySelector('.pc-piece--end'), { x: 50, duration: .5, ease: 'back.out(2)' });
+  }
+  $('[data-q-go]').addEventListener('click', () => { qOn = true; qDraw(true); speak(text(pieces('gel', qp, 'q'))); });
+  $('[data-q-back]').addEventListener('click', () => { qOn = false; qDraw(true); speak(text(pieces('gel', qp, 'pos'))); });
+  qBox.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    qp = +b.dataset.i;
+    $$('button', qBox).forEach((x) => x.classList.toggle('is-on', x === b));
+    qDraw(true);
+    speak(text(pieces('gel', qp, qOn ? 'q' : 'pos')));
+  });
+  qDraw(false);
+
+  /* ---------- корни с характером ---------- */
+  $$('[data-hard]').forEach((b) => b.addEventListener('click', () => {
+    const i = b.querySelector('.pc-hard__b i');
+    const done = b.classList.toggle('is-done');
+    const swap = () => { i.textContent = done ? b.dataset.to : b.dataset.from; };
+    speak(done ? b.dataset.hard : b.querySelector('.pc-hard__a').textContent.replace('-', ''));
+    if (A) G.to(i, { rotationX: 90, duration: .2, ease: 'power2.in', onComplete: () => { swap(); G.fromTo(i, { rotationX: -90 }, { rotationX: 0, duration: .45, ease: 'back.out(3)' }); } });
+    else swap();
+  }));
+  if (A) G.from('.pc-hard__b i', { y: -16, rotation: 20, duration: .6, ease: 'bounce.out', stagger: .1, scrollTrigger: { trigger: '.pc-hardgrid', start: 'top 85%', once: true } });
+
+  /* план на ленте */
+  function plan() {
+    speak('Yarın geliyorum.');
+    if (A) {
+      G.fromTo('[data-plan-fill]', { left: '47%', width: '6%' }, { left: '47%', width: '40%', duration: 1, ease: 'power3.out' });
+      G.fromTo('[data-plan-cam]', { left: '50%' }, { left: '85%', duration: 1, ease: 'power3.out' });
+    } else { Object.assign($('[data-plan-fill]').style, { width: '40%' }); }
+  }
+  $('[data-plan]').addEventListener('click', plan);
+  if (A) ScrollTrigger.create({ trigger: '[data-plan]', start: 'top 75%', once: true, onEnter: () => G.fromTo('[data-plan-cam]', { y: -20 }, { y: 0, duration: .8, ease: 'bounce.out' }) });
+
+  /* ---------- лаборатория ---------- */
+  const VERBS = [['gel', 'come'], ['git', 'go'], ['iç', 'drink'], ['anla', 'understand'], ['çalış', 'work'], ['ye', 'eat'], ['de', 'say'], ['oku', 'read']];
+  const RU = {
+    gel: ['coming', 'coming', 'coming', 'coming', 'coming', 'coming'], git: ['going', 'going', 'going', 'going', 'going', 'going'],
+    iç: ['drinking', 'drinking', 'drinking', 'drinking', 'drinking', 'drinking'], anla: ['understanding', 'understanding', 'understanding', 'understanding', 'understanding', 'understanding'],
+    çalış: ['working', 'working', 'working', 'working', 'working', 'working'], ye: ['eating', 'eating', 'eating', 'eating', 'eating', 'eating'],
+    de: ['talking', 'talking', 'talking', 'talking', 'talking', 'talking'], oku: ['reading', 'reading', 'reading', 'reading', 'reading', 'reading'],
+  };
+  let lv = 0, lp = 0, lm = 'pos';
+  const vBox = $('[data-lab-verbs]');
+  const pBox = $('[data-lab-persons]');
+  VERBS.forEach(([r, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip' + (i === 0 ? ' is-on' : ''); b.innerHTML = `<span lang="tr">${r}-</span> · ${ru}`; b.dataset.i = i; vBox.append(b); });
+  PERS.forEach(([p, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip is-gold' + (i === 0 ? ' is-on' : ''); b.innerHTML = `<span lang="tr">${p}</span>`; b.dataset.i = i; b.setAttribute('aria-label', ru); pBox.append(b); });
+  const labOut = $('[data-lab-out]');
+  const labText = () => text(pieces(VERBS[lv][0], lp, lm));
+  function labDraw() {
+    const r = VERBS[lv][0];
+    labOut.innerHTML = paint(pieces(r, lp, lm));
+    const neg = lm === 'neg' || lm === 'negq';
+    const q = lm === 'q' || lm === 'negq';
+    $('[data-lab-ru]').textContent = `${PERS[lp][1]}: ${neg ? 'not ' : ''}${RU[r][lp]}${q ? '?' : '.'}`;
+    if (A) G.from(labOut.children, { y: -30, rotation: () => G.utils.random(-12, 12), duration: .55, ease: 'back.out(2.5)', stagger: .07 });
+  }
+  vBox.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lv = +b.dataset.i; $$('button', vBox).forEach((x) => x.classList.toggle('is-on', x === b)); labDraw(); });
+  pBox.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lp = +b.dataset.i; $$('button', pBox).forEach((x) => x.classList.toggle('is-on', x === b)); labDraw(); speak(labText()); });
+  $$('[data-lab-modes] [data-m]').forEach((b) => b.addEventListener('click', () => {
+    lm = b.dataset.m;
+    $$('[data-lab-modes] [data-m]').forEach((x) => x.classList.toggle('is-on', x === b));
+    labDraw(); speak(labText());
+    if (A) G.fromTo(b, { y: 5 }, { y: 0, duration: .3, ease: 'back.out(3)' });
+  }));
+  $('[data-lab-say]').addEventListener('click', () => speak(labText()));
+  labDraw();
+
+  /* ---------- сцена: звонок ---------- */
+  const STEPS = [
+    { q: ['Alo! Geliyor musun?', 'Hello! Are you coming?'], o: [['Hayır, gelmeyorum.', 'Only a high vowel before yor: gelmiyorum.'], ['Hayır, gelmiyorum.', ''], ['Hayır, geliyor değil.', 'For “not” there’s the “stop” button: gel + mi + yor.']], a: 1 },
+    { q: ['Ne yapıyorsun?', 'What are you doing?'], o: [['Çalışmak.', 'That’s the dictionary form. You need a shot with a person.'], ['Çalışıyor musun?', 'That’s a question for your friend, but he asked you.'], ['Çalışıyorum.', '']], a: 2 },
+    { q: ['Yarın geliyor musun?', 'Are you coming tomorrow?'], o: [['Evet, yarın geliyorum!', ''], ['Evet, yarın geliyor muyum.', 'That’s another question. The answer has no mu.'], ['Evet, yarın gelmiyorum.', '“Yes” and “I’m not coming” are arguing with each other.']], a: 0 },
+  ];
+  const chat = $('[data-chat]');
+  const opts = $('[data-chat-opts]');
+  let cs = 0;
+  function bubble(html, cls) {
+    const d = document.createElement('div');
+    d.className = 'pc-bubble ' + (cls || '');
+    d.innerHTML = html;
+    chat.append(d);
+    if (A) G.from(d, { y: 16, scale: .8, duration: .5, ease: 'back.out(2.5)' });
+  }
+  function ask() {
+    const s = STEPS[cs];
+    bubble(`<span class="tr" lang="tr" data-say="${s.q[0]}">${s.q[0]}</span><small data-ui>${s.q[1]}</small>`);
+    opts.innerHTML = s.o.map(([t], i) => `<button type="button" class="pc-chip" data-c="${i}"><span lang="tr">${t}</span></button>`).join('');
+  }
+  opts.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-c]'); if (!b) return;
+    const s = STEPS[cs];
+    const k = +b.dataset.c;
+    const ok = k === s.a;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    if (!ok) { bubble(`<span data-ui>${s.o[k][1]}</span>`, 'pc-bubble--re'); return; }
+    bubble(`<span class="tr" lang="tr">${s.o[k][0]}</span>`, 'pc-bubble--me');
+    speak(s.o[k][0]);
+    opts.innerHTML = '';
+    cs++;
+    if (cs < STEPS.length) setTimeout(ask, reduce ? 0 : 700);
+    else setTimeout(() => bubble('<span class="tr" lang="tr" data-say="Tamam, görüşürüz!">Tamam, görüşürüz!</span><small data-ui>Deal, see you!</small>'), reduce ? 0 : 700);
+  });
+  function chatReset() { chat.innerHTML = ''; cs = 0; ask(); }
+  $('[data-chat-reset]').addEventListener('click', chatReset);
+  chatReset();
+
+  /* ---------- ловушки ---------- */
+  $$('[data-flip]').forEach((b) => b.addEventListener('click', () => {
+    const inner = b.querySelector('.pc-flip__in');
+    const on = !b.classList.contains('is-flipped');
+    b.classList.toggle('is-flipped', on);
+    if (on) speak(b.querySelector('.pc-flip__b .tr').textContent);
+    if (G) G.to(inner, { rotationY: on ? 180 : 0, duration: reduce ? 0 : .7, ease: 'back.out(1.6)' });
+    else inner.style.transform = on ? 'rotateY(180deg)' : '';
+  }));
+  if (A) G.from('.pc-flip__f svg', { scale: .3, rotation: -90, duration: .6, ease: 'back.out(3)', stagger: .1, scrollTrigger: { trigger: '.pc-traps', start: 'top 85%', once: true } });
+
+  /* ---------- финал ---------- */
+  function finalPlay() {
+    speak('Anlamıyorum. Ali çalışmıyor mu?');
+    if (!A) return;
+    G.fromTo('[data-final-me]', { x: 80, rotation: 6 }, { x: 0, rotation: 0, duration: .7, ease: 'back.out(2)' });
+    G.fromTo('[data-final-cam]', { scale: .4, rotation: -20 }, { scale: 1, rotation: 0, duration: .8, ease: 'elastic.out(1,.45)' });
+    G.fromTo('.pc-chi .pc-n', { scale: .5 }, { scale: 1, duration: .5, ease: 'back.out(3)', stagger: .06 });
+  }
+  $('[data-final-replay]').addEventListener('click', finalPlay);
+  if (A) {
+    ScrollTrigger.create({ trigger: '.pc-final', start: 'top 80%', once: true, onEnter: () => G.fromTo('[data-final-me]', { x: 80 }, { x: 0, duration: .8, ease: 'back.out(2)' }) });
+    G.from('.pc-chi .pc-n', { yPercent: 60, rotation: 8, duration: .5, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: '.pc-cheat', start: 'top 85%', once: true } });
+    G.from('.pc-note svg', { scale: .3, rotation: -45, duration: .6, ease: 'back.out(3)', scrollTrigger: { trigger: '.pc-note', start: 'top 85%', once: true } });
+    G.from('.pc-phone-top svg', { rotation: -25, y: 10, duration: .6, ease: 'elastic.out(1,.45)', scrollTrigger: { trigger: '.pc-phone-top', start: 'top 85%', once: true } });
+    G.from('.pc-modes .pc-key', { y: 14, duration: .45, ease: 'back.out(2.5)', stagger: .07, scrollTrigger: { trigger: '[data-lab-modes]', start: 'top 88%', once: true } });
+    G.from('.pc-punch', { scale: .8, rotation: -2, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.pc-punch', start: 'top 85%', once: true } });
+    G.from(negStage, { scale: .85, duration: .6, ease: 'back.out(2.5)', scrollTrigger: { trigger: negStage, start: 'top 85%', once: true } });
+    G.from(qStage, { scale: .85, duration: .6, ease: 'back.out(2.5)', scrollTrigger: { trigger: qStage, start: 'top 85%', once: true } });
+    G.to('.pc-remote__keys .pc-key', { y: -3, duration: .5, ease: 'sine.inOut', yoyo: true, repeat: 1, stagger: .15, delay: 1.2 });
+  }
+
+  /* ---------- нестандартное: пульт ---------- */
+  (async () => {
+    const EX = 'a1.present-continuous.ex8';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    if (!root || !window.AlternaKit) return;
+    const data = await AlternaKit.exercise(EX);
+    const items = data.items;
+    const keys = $$('[data-rm]', root);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      const it = items[i];
+      $('[data-rm-count]', root).textContent = `${i + 1} / ${items.length}`;
+      $('[data-rm-ru]', root).textContent = it.ru;
+      $('[data-rm-word]', root).textContent = it.base;
+      $('[data-rm-status]', root).textContent = 'The word is in the shot. Which button gives the translation?';
+      keys.forEach((k) => k.classList.remove('is-on'));
+      if (A) G.fromTo($('[data-rm-word]', root), { scale: .6 }, { scale: 1, duration: .5, ease: 'back.out(2.5)' });
+      t0 = performance.now(); locked = false;
+    }
+    function pick(m) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i];
+      const ok = m === it.answer;
+      if (ok) correct++;
+      root.querySelector(`[data-rm="${m}"]`).classList.add('is-on');
+      $('[data-rm-word]', root).textContent = it.form;
+      $('[data-rm-status]', root).textContent = ok ? `Exactly: ${it.form}` : `Wrong button. You need: ${it.form}. ${it.explanation}`;
+      speak(it.form);
+      if (A) G.fromTo($('[data-rm-word]', root), { rotationX: 90 }, { rotationX: 0, duration: .5, ease: 'back.out(2)' });
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: m, timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          $('[data-rm-ru]', root).textContent = `${correct} of ${items.length}`;
+          $('[data-rm-word]', root).textContent = 'Tamam!';
+          $('[data-rm-count]', root).textContent = 'done';
+          $('[data-rm-status]', root).textContent = 'The remote is in your hands.';
+        }
+      }, reduce ? 300 : (ok ? 1000 : 2000));
+    }
+    keys.forEach((k) => k.addEventListener('click', () => pick(k.dataset.rm)));
+    root.addEventListener('keydown', (e) => { const m = { 1: 'pos', 2: 'neg', 3: 'q', 4: 'negq' }[e.key]; if (m) pick(m); });
+    AlternaKit.registerSolver(EX, async () => {
+      for (const it of items.slice(i)) { pick(it.answer); await new Promise((r) => setTimeout(r, reduce ? 320 : 1100)); }
+    });
+    show();
+  })();
+
+  /* ---------- свой скроллбар: камера едет по плёнке ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.pc-sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pc-sb__mark';
+    b.dataset.key = s.dataset.section;
+    const h = s.querySelector('h1, h2');
+    b.setAttribute('aria-label', `To “${h ? h.textContent.trim() : s.dataset.section}”`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.pc-sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', () => { layout(); if (G) ScrollTrigger.refresh(); });
+  if (document.fonts) document.fonts.ready.then(() => { layout(); if (G) ScrollTrigger.refresh(); });
+  addEventListener('orientationchange', () => { layout(); if (G) ScrollTrigger.refresh(); });
+  addEventListener('alterna:read', (e) => { const m = marks.find((b) => b.dataset.key === e.detail.key); if (m) { m.classList.add('is-read'); if (A) G.fromTo(m, { scale: 1.6 }, { scale: 1, duration: .5, ease: 'back.out(3)' }); } });
+  layout();
+  progress();
+
+  /* ---------- ачивка: кнопки пульта нажимаются по очереди ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.remote'), { rotation: -18, transformOrigin: '50% 50%' }, { rotation: 0, duration: .6, ease: 'elastic.out(1,.45)' }, .9)
+      .fromTo(b.querySelectorAll('.k'), { scale: .2, transformOrigin: '50% 50%' }, { scale: 1, duration: .35, ease: 'back.out(3)', stagger: .15 }, 1)
+      .from(b.querySelector('.sign'), { y: 10, opacity: 0, duration: .4, ease: 'back.out(2)' }, 1.4);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a2.past-mis">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="2">
+<title>Естілген өткен шақ -mIş · 2-сабақ</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+  :root {
+    --blue: #4262ff; --blue2: #5b78ff; --mint: #92fcd2; --pink: #f55cf2; --ink: #0d0d10; --paper: #ffffff; --soft: #f4f4f6;
+    --disp: "Arial Black", "Helvetica Neue", Impact, system-ui, sans-serif;
+    --ak-bg: #ffffff; --ak-surface: #f4f4f6; --ak-ink: #0d0d10; --ak-muted: #4a4a55; --ak-line: #e2e2ea;
+    --ak-accent: #4262ff; --ak-accent-ink: #ffffff; --ak-accent-soft: #e6ebff;
+    --ak-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --ak-font-display: var(--disp);
+    --ease: cubic-bezier(.2, .9, .25, 1.2);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 500 var(--ak-text)/1.55 var(--ak-font); overflow-x: clip; }
+  button { font: inherit; color: inherit; }
+  main { padding-top: 30px; }
+  @media (min-width: 768px) { main { padding-top: 0; } }
+
+  /* полосы-секции, как в исходном гайде: синий, мятный, розовый, чёрный, белый */
+  .pm-band { position: relative; padding: clamp(48px, 9vw, 88px) 16px; overflow: hidden; }
+  .pm-band > .pm-in { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; }
+  .pm-blue { background: var(--blue); color: #fff; --ak-accent: var(--mint); --ak-accent-ink: var(--ink); --ak-accent-soft: rgba(146, 252, 210, .22); }
+  .pm-mint { background: var(--mint); color: var(--ink); --ak-accent: var(--blue); --ak-accent-soft: rgba(66, 98, 255, .14); }
+  .pm-pink { background: var(--pink); color: var(--ink); --ak-accent: var(--ink); --ak-accent-ink: var(--mint); --ak-accent-soft: rgba(13, 13, 16, .12); }
+  .pm-ink { background: var(--ink); color: #fff; --ak-accent: var(--mint); --ak-accent-ink: var(--ink); --ak-accent-soft: rgba(146, 252, 210, .18); }
+  .pm-white { background: var(--paper); color: var(--ink); }
+  .pm-soft { background: var(--soft); color: var(--ink); }
+
+  .pm-chip { display: inline-block; padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 13px; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 18px; background: var(--mint); color: var(--ink); border: 2px solid var(--ink); }
+  .pm-ink .pm-chip, .pm-blue .pm-chip { border-color: var(--mint); }
+  .pm-pink .pm-chip { background: var(--ink); color: var(--mint); }
+  h1, h2 { font-family: var(--disp); font-weight: 900; text-transform: uppercase; letter-spacing: -.03em; line-height: 1.02; margin: 0 0 18px; }
+  h1 { font-size: clamp(30px, 8.4vw, 66px); }
+  h2 { font-size: clamp(26px, 7.6vw, 52px); }
+  h3 { font-size: 19px; margin: 0 0 8px; font-weight: 800; }
+  p { margin: 0 0 12px; max-width: 65ch; }
+  .t-mint { color: var(--mint); } .t-pink { color: var(--pink); } .t-blue { color: var(--blue); }
+  .pm-hl { display: inline-block; background: var(--pink); color: #fff; padding: 0 .14em; border-radius: .12em; rotate: -2deg; }
+  .pm-lead { font-size: 18px; font-weight: 600; }
+  .pm-tr { font-weight: 800; }
+  .pm-ru { opacity: .82; font-size: .95em; }
+  .pm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; border: 2px solid currentColor; background: transparent; font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: .02em; cursor: pointer; }
+  .pm-btn--solid { background: var(--mint); color: var(--ink); border-color: var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .pm-btn[aria-pressed="true"], .pm-btn.is-on { background: var(--ink); color: var(--mint); border-color: var(--ink); }
+  .pm-ink .pm-btn[aria-pressed="true"], .pm-blue .pm-btn[aria-pressed="true"], .pm-ink .pm-btn.is-on, .pm-blue .pm-btn.is-on { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .pm-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  :focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+  .pm-ico { width: 28px; height: 28px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- 1. история ---------- */
+  .pm-morph { display: inline-block; color: var(--mint); animation: pm-wob 3.2s ease-in-out infinite; }
+  @keyframes pm-wob { 0%, 100% { rotate: -2deg; } 50% { rotate: 2deg; } }
+  .pm-loop { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .pm-loop path { fill: none; stroke: var(--blue2); stroke-width: 40; stroke-linecap: round; opacity: .6; }
+  .pm-dialog { background: var(--ink); color: #fff; border-radius: 26px; padding: 18px; margin: 22px 0; display: grid; gap: 10px; }
+  .pm-dialog__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .pm-msg { max-width: 92%; padding: 10px 14px; border-radius: 18px; background: #23232b; }
+  .pm-msg--me { justify-self: end; background: var(--blue); }
+  .pm-msg small { display: block; opacity: .75; font-size: 14px; }
+  .pm-msg--note { background: none; padding: 2px 4px; opacity: .85; font-style: italic; }
+  .pm-punch { font-weight: 800; font-size: 19px; }
+  .pm-whatif { border: 2px dashed rgba(255, 255, 255, .5); border-radius: 18px; padding: 12px; display: grid; gap: 10px; }
+  .pm-whatif__out { min-height: 3.2em; }
+  .pm-vs { display: grid; gap: 12px; margin-top: 18px; }
+  .pm-vs__col { background: #fff; color: var(--ink); border-radius: 22px; padding: 16px; display: grid; gap: 6px; }
+  .pm-tag { display: inline-block; justify-self: start; padding: 4px 12px; border-radius: 999px; font-family: var(--disp); font-size: 15px; }
+  .pm-tag--di { background: var(--pink); color: #fff; }
+  .pm-tag--mis { background: var(--mint); color: var(--ink); border: 2px solid var(--ink); }
+  .pm-vs__mid { justify-self: center; font-family: var(--disp); font-size: 22px; color: var(--mint); }
+  @media (min-width: 720px) { .pm-vs { grid-template-columns: 1fr auto 1fr; align-items: center; } }
+
+  /* ---------- 2. вертушка ---------- */
+  .pm-wheel { position: relative; display: grid; grid-template-columns: 1fr 1fr; max-width: 440px; aspect-ratio: 1; margin: 18px auto; }
+  .pm-petal { position: relative; border: 0; background: var(--pink); color: #fff; padding: 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; font-family: var(--disp); font-size: clamp(14px, 4vw, 20px); text-transform: uppercase; }
+  .pm-petal svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .pm-petal:nth-child(1) { border-radius: 100% 0 0 0; justify-content: flex-end; align-items: flex-end; }
+  .pm-petal:nth-child(2) { border-radius: 0 100% 0 0; justify-content: flex-end; }
+  .pm-petal:nth-child(3) { border-radius: 0 0 0 100%; align-items: flex-end; }
+  .pm-petal:nth-child(4) { border-radius: 0 0 100% 0; }
+  .pm-petal:nth-child(1) { padding: 16px 30% 30% 16px; } .pm-petal:nth-child(2) { padding: 16px 16px 30% 30%; }
+  .pm-petal:nth-child(3) { padding: 30% 30% 16px 16px; } .pm-petal:nth-child(4) { padding: 30% 16px 16px 30%; }
+  .pm-petal.is-on { background: var(--blue); }
+  .pm-core { position: absolute; left: 50%; top: 50%; width: 22%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8%; pointer-events: none; }
+  .pm-eye { width: 30%; aspect-ratio: 1; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+  .pm-eye i { width: 45%; aspect-ratio: 1; border-radius: 50%; background: var(--ink); }
+  .pm-out { background: var(--ink); color: #fff; border-radius: 22px; padding: 16px 18px; min-height: 96px; }
+  .pm-out__tr { font-family: var(--disp); font-size: clamp(20px, 5.6vw, 30px); color: var(--mint); margin: 0 0 6px; cursor: pointer; }
+  .pm-note { border-left: 6px solid var(--ink); padding: 10px 14px; background: rgba(255, 255, 255, .55); border-radius: 0 16px 16px 0; margin-top: 18px; }
+
+  /* ---------- 3. карточки ---------- */
+  .pm-deck { display: grid; gap: 18px; perspective: 900px; }
+  @media (min-width: 720px) { .pm-deck { grid-template-columns: repeat(3, 1fr); } }
+  .pm-card { position: relative; min-height: 230px; border: 0; border-radius: 28px; padding: 0; text-align: left; transform-style: preserve-3d; cursor: pointer; background: none; }
+  .pm-card:nth-child(1) { rotate: -3deg; } .pm-card:nth-child(2) { rotate: 2deg; } .pm-card:nth-child(3) { rotate: -1.5deg; }
+  .pm-card__f, .pm-card__b { position: absolute; inset: 0; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .pm-card__b { transform: rotateY(180deg); justify-content: flex-end; font-weight: 600; background: #fff; color: var(--ink); }
+  .pm-card__b b { display: block; font-family: var(--disp); font-size: 30px; margin-bottom: 8px; }
+  .pm-card--1 .pm-card__f { background: #fff; color: var(--ink); }
+  .pm-card--2 .pm-card__f { background: var(--mint); color: var(--ink); }
+  .pm-card--3 .pm-card__f { background: var(--blue); color: #fff; }
+  .pm-card__t { font-family: var(--disp); font-size: 30px; }
+  .pm-card__tr { font-size: 20px; font-weight: 800; }
+  .pm-card.is-flipped .pm-card__f { visibility: hidden; }
+  .pm-card.is-flipped .pm-card__b { transform: none; }
+  .pm-card.is-gsap .pm-card__f { visibility: visible; }
+  .pm-card.is-gsap .pm-card__b { transform: rotateY(180deg); }
+
+  /* ---------- 4. форма ---------- */
+  .pm-guess { background: var(--soft); border-radius: 22px; padding: 16px; display: grid; gap: 10px; margin: 14px 0 22px; }
+  .pm-guess__q { font-family: var(--disp); font-size: 24px; }
+  .pm-guess__out { min-height: 1.6em; font-weight: 600; }
+  .pm-forge { background: var(--ink); color: #fff; border-radius: 26px; padding: 18px; display: grid; gap: 14px; }
+  .pm-pieces { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; min-height: 64px; font-family: var(--disp); font-size: clamp(24px, 7vw, 40px); }
+  .pm-pc { display: inline-block; padding: 4px 12px; border-radius: 14px; }
+  .pm-pc--root { background: #fff; color: var(--ink); }
+  .pm-pc--tense { background: var(--pink); color: #fff; }
+  .pm-pc--pers { background: var(--mint); color: var(--ink); }
+  .pm-pc--neg { background: #ff6b6b; color: #fff; }
+  .pm-pc--q { background: var(--blue); color: #fff; }
+  .pm-pc--plus { color: rgba(255, 255, 255, .45); padding: 0; }
+  .pm-step { text-align: center; min-height: 3em; margin: 0; }
+  .pm-harm { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0; }
+  @media (min-width: 640px) { .pm-harm { grid-template-columns: repeat(4, 1fr); } }
+  .pm-harm button { border: 2px solid var(--ink); border-radius: 18px; background: #fff; min-height: 76px; padding: 8px; cursor: pointer; display: grid; gap: 2px; }
+  .pm-harm button b { font-family: var(--disp); font-size: 22px; }
+  .pm-harm button.is-on { background: var(--mint); }
+  .pm-harm__out { text-align: center; font-family: var(--disp); font-size: clamp(26px, 7vw, 40px); min-height: 1.3em; }
+  .pm-rules { display: grid; gap: 10px; margin-top: 18px; }
+  @media (min-width: 720px) { .pm-rules { grid-template-columns: repeat(3, 1fr); } }
+  .pm-rule { background: var(--soft); border-radius: 20px; padding: 14px; position: relative; }
+  .pm-rule__n { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 900; margin-bottom: 6px; }
+  .pm-persons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
+  @media (min-width: 640px) { .pm-persons { grid-template-columns: repeat(3, 1fr); } }
+  .pm-persons button { border: 0; border-radius: 14px; background: var(--ink); color: #fff; min-height: 48px; cursor: pointer; font-weight: 700; }
+  .pm-persons button b { color: var(--mint); }
+
+  /* ---------- 5. лаборатория ---------- */
+  .pm-lab { background: #fff; color: var(--ink); border-radius: 28px; padding: 16px; display: grid; gap: 10px; }
+  .pm-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--soft); padding: 5px; border-radius: 999px; }
+  .pm-seg button { border: 0; border-radius: 999px; min-height: 44px; background: transparent; font-weight: 800; cursor: pointer; }
+  .pm-seg button[aria-checked="true"] { background: var(--ink); color: var(--mint); }
+  .pm-lbl { margin: 6px 0 0; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #6a6a75; }
+  .pm-chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: thin; }
+  .pm-chips button { flex: none; border: 2px solid var(--ink); border-radius: 999px; background: #fff; min-height: 44px; padding: 4px 14px; cursor: pointer; font-weight: 700; line-height: 1.1; }
+  .pm-chips button small { display: block; font-weight: 500; font-size: 11px; opacity: .7; }
+  .pm-chips button.is-on { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .pm-lab__out { background: var(--ink); color: #fff; border-radius: 22px; padding: 14px; display: grid; gap: 8px; }
+  .pm-lab__word { text-align: center; font-family: var(--disp); font-size: clamp(22px, 6vw, 34px); color: var(--mint); cursor: pointer; }
+  .pm-lab__ru { text-align: center; margin: 0; }
+  .pm-why { margin: 0; padding-left: 18px; font-size: 15px; opacity: .9; }
+  .pm-why li { margin-bottom: 4px; }
+  .pm-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pm-cmp div { background: #23232b; border-radius: 14px; padding: 8px; text-align: center; }
+  .pm-cmp b { display: block; font-family: var(--disp); color: var(--mint); }
+
+  /* ---------- 6. сцена: чат ---------- */
+  .pm-phone { max-width: 460px; margin: 18px auto 0; background: var(--ink); border-radius: 34px; padding: 14px; border: 4px solid var(--ink); box-shadow: 0 10px 0 rgba(13, 13, 16, .25); }
+  .pm-phone__top { display: flex; align-items: center; gap: 10px; color: #fff; padding: 4px 6px 12px; }
+  .pm-ava { width: 40px; height: 40px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; color: var(--ink); font-weight: 900; }
+  .pm-feed { display: grid; gap: 10px; }
+  .pm-bub { justify-self: start; max-width: 92%; text-align: left; border: 0; border-radius: 18px 18px 18px 6px; background: #fff; color: var(--ink); padding: 10px 14px; cursor: pointer; display: grid; gap: 4px; }
+  .pm-bub small { color: #555; font-size: 14px; }
+  .pm-bub__src { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 14px; color: var(--blue); min-height: 1.4em; }
+  .pm-bub__src svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .pm-bub mark { background: var(--mint); border-radius: 4px; padding: 0 2px; }
+
+  /* ---------- практика: чат-упражнение ---------- */
+  .pm-ex-ctx { display: flex; gap: 10px; align-items: flex-start; background: var(--ak-surface); border-radius: 16px; padding: 12px; min-height: 64px; }
+  .pm-ex-ctx svg { width: 28px; height: 28px; flex: none; fill: none; stroke: var(--blue); stroke-width: 2; }
+  .pm-ex-opts { display: grid; gap: 8px; margin: 10px 0; }
+  @media (min-width: 640px) { .pm-ex-opts { grid-template-columns: 1fr 1fr; } }
+  .pm-ex-opts button { min-height: 52px; border-radius: 16px; border: 2px solid var(--ink); background: #fff; font-weight: 800; font-size: 17px; cursor: pointer; padding: 8px 12px; }
+  .pm-ex-opts button.is-hit { background: var(--ak-good-soft); border-color: var(--ak-good); }
+  .pm-ex-opts button.is-miss { background: var(--ak-bad-soft); border-color: var(--ak-bad); }
+  .pm-ex-log { display: grid; gap: 6px; min-height: 40px; }
+  .pm-ex-log span { justify-self: end; background: var(--blue); color: #fff; padding: 6px 12px; border-radius: 16px 16px 4px 16px; font-weight: 700; max-width: 90%; }
+  .pm-ex-status { min-height: 1.6em; color: var(--ak-muted); margin: 6px 0 0; }
+
+  /* ---------- шпаргалка ---------- */
+  .pm-tbl { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+  .pm-tbl td { padding: 0; }
+  .pm-tbl button { width: 100%; min-height: 46px; border: 0; border-radius: 14px; background: #fff; cursor: pointer; display: grid; grid-template-columns: 70px 1fr; align-items: center; text-align: left; padding: 0 14px; font-size: 18px; }
+  .pm-tbl button b { color: var(--blue); }
+  .pm-tbl button span:first-child { color: #6a6a75; font-weight: 700; }
+  .pm-final { margin-top: 20px; background: var(--ink); color: #fff; border-radius: 24px; padding: 18px; font-weight: 700; font-size: 19px; display: flex; gap: 14px; align-items: center; }
+  .pm-final svg { width: 56px; height: 56px; flex: none; }
+
+  /* ---------- свой скроллбар: автобус едет по маршруту, остановки — секции ---------- */
+  .pm-sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 30px; pointer-events: none; }
+  .pm-sb__track { position: absolute; left: 10px; right: 10px; top: 0; bottom: 0; pointer-events: auto; touch-action: none; cursor: pointer; }
+  .pm-sb__track::before { content: ''; position: absolute; left: 0; right: 0; top: 13px; height: 4px; border-radius: 4px; background: rgba(13, 13, 16, .18); }
+  .pm-sb__fill { position: absolute; left: 0; top: 13px; height: 4px; width: calc(var(--p, 0) * 100%); border-radius: 4px; background: var(--pink); }
+  .pm-sb__bus { position: absolute; top: 1px; left: calc(var(--p, 0) * 100%); translate: -50% 0; width: 34px; height: 26px; pointer-events: none; }
+  .pm-sb__bus svg { width: 100%; height: 100%; }
+  .pm-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 1px; translate: -50% 0; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .pm-sb__mark::after { content: ''; position: absolute; left: 9px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px var(--ink); }
+  .pm-sb__mark.is-read::after { background: var(--mint); }
+  @media (min-width: 768px) {
+    .pm-sb { left: auto; right: 10px; top: 50%; translate: 0 -50%; width: 34px; height: min(62dvh, 540px); }
+    .pm-sb__track { left: 0; right: 0; top: 0; bottom: 0; }
+    .pm-sb__track::before { left: 15px; right: auto; top: 0; bottom: 0; width: 4px; height: auto; }
+    .pm-sb__fill { left: 15px; top: 0; width: 4px; height: calc(var(--p, 0) * 100%); }
+    .pm-sb__bus { left: 0; top: calc(var(--p, 0) * 100%); translate: 0 -50%; rotate: 90deg; }
+    .pm-sb__mark { left: 3px; top: calc(var(--at, 0) * 100%); translate: 0 -50%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .pm-morph { animation: none; } }
+  /* ---------- урок 2 ---------- */
+  .pm-pov { display: grid; gap: 10px; margin-top: 18px; }
+  .pm-pov__lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .pm-pov__lines li { background: #fff; border-radius: 18px; padding: 10px 14px; display: grid; gap: 2px; cursor: pointer; }
+  .pm-pov__lines li b { font-size: 18px; }
+  .pm-pov__lines mark { background: var(--mint); border-radius: 4px; padding: 0 2px; }
+  .pm-pov__lines.is-mom mark { background: var(--blue); color: #fff; }
+  .pm-pov__who { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+  .pm-pov__who svg { width: 40px; height: 40px; fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .pm-jump { position: relative; background: var(--ink); color: #fff; border-radius: 26px; padding: 26px 14px 18px; display: grid; gap: 14px; }
+  .pm-jump__row { display: flex; justify-content: center; align-items: baseline; gap: 10px; font-family: var(--disp); font-size: clamp(24px, 7vw, 40px); min-height: 1.6em; flex-wrap: wrap; }
+  .pm-jump__end { display: inline-block; color: var(--mint); }
+  .pm-jump__q { display: inline-block; color: var(--pink); }
+  .pm-jump__ru { text-align: center; margin: 0; min-height: 1.6em; }
+  .pm-jump__arc { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 60px; pointer-events: none; }
+  .pm-jump__arc path { fill: none; stroke: var(--mint); stroke-width: 2; stroke-dasharray: 5 6; opacity: .6; }
+  .pm-negs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 14px 0; }
+  @media (min-width: 640px) { .pm-negs { grid-template-columns: repeat(4, 1fr); } }
+  .pm-negs button { border: 2px solid var(--ink); border-radius: 18px; background: #fff; min-height: 60px; cursor: pointer; font-weight: 800; font-size: 17px; }
+  .pm-negs button.is-on { background: var(--mint); }
+  .pm-book { background: #fff; border-radius: 26px; padding: 18px; border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); perspective: 900px; }
+  .pm-book__pages { position: relative; min-height: 150px; }
+  .pm-page { display: grid; gap: 6px; padding: 6px 0 12px; border-bottom: 1px dashed #ccc; }
+  .pm-book.is-js .pm-page { border: 0; }
+  .pm-book.is-js .pm-page:not(.is-on) { display: none; }
+  .pm-page__tr { font-family: var(--disp); font-size: clamp(20px, 5.4vw, 28px); cursor: pointer; }
+  .pm-page__tr mark { background: var(--pink); color: #fff; border-radius: 4px; padding: 0 1px; }
+  .pm-book__nav { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 10px; }
+  .pm-book__num { font-weight: 800; }
+  .pm-book svg.pm-book__deco { width: 64px; height: 44px; display: block; margin: 0 auto 6px; }
+  .pm-traps { display: grid; gap: 12px; }
+  .pm-trap { border: 0; border-radius: 22px; background: var(--soft); padding: 14px 16px; text-align: left; cursor: pointer; display: grid; gap: 6px; position: relative; }
+  .pm-trap__bad { font-weight: 800; font-size: 18px; color: #c43d43; position: relative; justify-self: start; }
+  .pm-trap__bad::after { content: ''; position: absolute; left: 0; right: 0; top: 52%; height: 3px; background: currentColor; transform-origin: left; transform: scaleX(var(--strike, 0)); }
+  .pm-trap:not(.is-closed) .pm-trap__bad::after { transform: scaleX(var(--strike, 1)); }
+  .pm-trap__good { font-weight: 800; font-size: 18px; color: #148a4a; }
+  .pm-trap__why { font-size: 15px; }
+  .pm-trap__hint { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--blue); }
+  .pm-trap.is-closed .pm-trap__good, .pm-trap.is-closed .pm-trap__why { display: none; }
+  .pm-minis { display: grid; gap: 10px; margin-top: 14px; }
+  @media (min-width: 720px) { .pm-minis { grid-template-columns: repeat(3, 1fr); } }
+  .pm-mini { border: 0; background: #fff; border-radius: 18px; padding: 14px; text-align: left; cursor: pointer; display: grid; gap: 4px; }
+  .pm-mini span { font-size: 13px; font-weight: 800; text-transform: uppercase; color: #6a6a75; }
+  .pm-mini b { font-size: 18px; }
+  .pm-mini u { text-decoration-color: var(--pink); text-decoration-thickness: 3px; }
+  .pm-tbl2 button { grid-template-columns: 60px 1fr 1fr; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-tv" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M8 2l4 4 4-4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></symbol>
+  </defs>
+</svg>
+
+<main>
+
+  <section class="pm-band pm-pink" data-section="forum" data-words="89">
+    <div class="pm-in">
+      <span class="pm-chip">A2 · Измир · 2-сабақ</span>
+      <h1>Бір форум. <span class="pm-hl">Екі</span> өткен шақ.</h1>
+      <p class="pm-lead">Елестет: Измирге министр келеді. Үлкен форумға.</p>
+      <p>Сен волонтерсің, ұйымдастыруға көмектесесің. Бәрін өз көзіңмен көресің. Басқа қаладағы анаң форум туралы жаңалықтан біледі.</p>
+      <p class="pm-punch">Сен үшін бұл geldi. Анаң үшін — gelmiş. Министр біреу. Грамматика әртүрлі.</p>
+      <div class="pm-pov">
+        <div class="pm-seg" role="radiogroup" aria-label="Кімнің көзімен" style="background:rgba(255,255,255,.6)">
+          <button type="button" role="radio" aria-checked="true" data-pov="me">Менің көзім</button>
+          <button type="button" role="radio" aria-checked="false" data-pov="mom">Анам, жаңалықтар</button>
+        </div>
+        <div class="pm-pov__who" id="pmWho"><svg aria-hidden="true"><use href="#i-eye"/></svg><span data-ui></span></div>
+        <ol class="pm-pov__lines" id="pmPov" data-ui></ol>
+      </div>
+      <p style="margin-top:14px">Ауыстырып, не өзгеретінін қара. Тек құйрық. Сөздер сол.</p>
+      <p>Соңғы жолға назар аудар. Анаң сен туралы айтады, бірақ ол да -mış арқылы: ол мұны теледидардан білді.</p>
+      <p>Анаң өтірік айтпайды және күмәнданбайды. Ол жай адал айтады: мен онда болған жоқпын, мен мұны естідім.</p>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="neg" data-words="58">
+    <div class="pm-in">
+      <span class="pm-chip">01 / болымсыздық</span>
+      <h2>Болымсыздық: <span class="t-blue">-me-</span> түбірден кейін бірден</h2>
+      <div class="pm-guess">
+        <span>Алдымен болжап көр: «келмепті» қалай айтылады?</span>
+        <div class="pm-row">
+          <button type="button" class="pm-btn" data-guess="gelmişme">gelmişme</button>
+          <button type="button" class="pm-btn" data-guess="gelmemiş">gelmemiş</button>
+        </div>
+        <span class="pm-guess__out" id="pmGuess" data-ui></span>
+      </div>
+      <div class="pm-forge">
+        <svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="justify-self:center;color:#ff6b6b"><circle cx="12" cy="12" r="9"/><path d="M5.6 5.6l12.8 12.8"/></svg>
+        <div class="pm-pieces" id="pmPieces" aria-live="polite"></div>
+        <p class="pm-step" id="pmStep" data-ui></p>
+        <div class="pm-row" style="justify-content:center">
+          <button type="button" class="pm-btn" id="pmBack">← артқа</button>
+          <button type="button" class="pm-btn pm-btn--solid" id="pmNext">әрі қарай →</button>
+          <button type="button" class="pm-btn" id="pmAgain">↻ тағы бір рет</button>
+        </div>
+      </div>
+      <p style="margin-top:18px"><b>Лайфхак.</b> me-ден кейін әрдайым miş. ma-дан кейін әрдайым mış. Құйрық дауыстыны түбірден емес, болымсыздықтан алады. Түбірге бас.</p>
+      <div class="pm-negs" id="pmNegs">
+        <button type="button" data-neg="gel">gel</button>
+        <button type="button" data-neg="oku">oku</button>
+        <button type="button" data-neg="gör">gör</button>
+        <button type="button" data-neg="bak">bak</button>
+      </div>
+      <div class="pm-harm__out" id="pmNegOut" lang="tr"></div>
+      <p>oku-ға қара: okumamuş емес, <a-say>okumamış</a-say>. Төрт құйрық екеуге қысқарады.</p>
+      <p>-dı-мен салыстыр. <a-say>Gelmedim</a-say> — мен келмедім, нақты білемін. <a-say>Gelmemişim</a-say> — сөйтсем, мен келмеппін. Мысалы, кездесу күнін шатастырып алдың.</p>
+    </div>
+  </section>
+
+  <section class="pm-band pm-blue" data-section="question" data-words="55">
+    <div class="pm-in">
+      <span class="pm-chip">02 / сұрақ</span>
+      <h2>Сұрақ: жалғау <span class="t-mint">көшеді</span></h2>
+      <p>-dı-да mi шылауы жалғаудан кейін тұрады: <a-say>geldin mi?</a-say></p>
+      <p>-mış-та керісінше. Жалғау шылауға көшеді: <a-say>gelmiş misin?</a-say></p>
+      <div class="pm-jump" id="pmJump">
+        <svg class="pm-jump__arc" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true"><path d="M90 58C120 4 190 4 220 58"/></svg>
+        <div class="pm-jump__row" id="pmJumpRow" lang="tr"></div>
+        <p class="pm-jump__ru" id="pmJumpRu" data-ui></p>
+        <svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="justify-self:center;color:#92fcd2"><path d="M9 9a3 3 0 1 1 4 2.8c-.6.3-1 .9-1 1.6V15M12 18h.01"/><circle cx="12" cy="12" r="10"/></svg>
+        <div class="pm-row" style="justify-content:center" id="pmJumpPers"></div>
+      </div>
+      <p style="margin-top:16px">Екі дауыстының арасына y дәнекері тұрады: miyim, miyiz. Тек onlar қырсық: <a-say>gelmişler mi?</a-say> Оның жалғауы үйде қалады.</p>
+      <p>-mış-пен сұрақ көбіне қайта сұрау сияқты естіледі: «Көшіпсің ғой? Рас па?» Өсекті осылай жұмсақ тексереді.</p>
+      <p>Мұндай сұраққа жауап әдетте -dı-мен: <a-say>Evet, geldim.</a-say> Келдің бе, жоқ па — өзің білесің ғой.</p>
+    </div>
+  </section>
+
+  <section class="pm-band pm-ink" data-section="lab" data-words="51">
+    <div class="pm-in">
+      <span class="pm-chip">03 / құрастырғыш</span>
+      <h2>Бәрі бірге <span class="t-mint">өз қолыңмен</span></h2>
+      <p>Шақты, етістікті, жақты және сөйлем түрін таңда. Дайын сөзге бас — ол дыбысталады.</p>
+      <p>onlar үшін сұрақ құрып көр: жалғау етістікте қалады. Ал болымсыздықта құйрықтың дауыстыны me немесе ma-дан қалай алатынын қара.</p>
+      <div class="pm-lab" id="pmLab">
+        <div class="pm-seg" role="radiogroup" aria-label="Шақ">
+          <button type="button" role="radio" aria-checked="false" data-tense="di">-dı · көрдім</button>
+          <button type="button" role="radio" aria-checked="true" data-tense="mis">-mış · естідім</button>
+        </div>
+        <p class="pm-lbl">Етістік</p>
+        <div class="pm-chips" id="pmVerbs"></div>
+        <p class="pm-lbl">Жақ</p>
+        <div class="pm-chips" id="pmPers"></div>
+        <p class="pm-lbl">Сөйлем түрі</p>
+        <div class="pm-chips" id="pmModes"></div>
+        <div class="pm-lab__out" data-ui>
+          <div class="pm-pieces" id="pmLabPieces"></div>
+          <div class="pm-lab__word" id="pmLabWord" lang="tr"></div>
+          <p class="pm-lab__ru" id="pmLabRu"></p>
+          <ul class="pm-why" id="pmLabWhy"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-mint" data-section="tale" data-words="81">
+    <div class="pm-in">
+      <span class="pm-chip">04 / ертегі</span>
+      <h2 lang="tr">Bir varmış, bir yokmuş</h2>
+      <p>Түрік ертегілері осылай басталады. «Бар екен, жоқ екен» — дәл қазақшадағыдай. Ертегіні ешкім көрмеген. Оны айтып береді. Сондықтан бүкіл ертегі -mış-пен айтылады.</p>
+      <p>-mış тіпті var-ға да жабысады: varmış — «бар екен». Кітапты парақтап, жолдарға бас.</p>
+      <p>Ертегі бір құйрықты соңына дейін ұстайды. Егер кенет -dı естілсе, демек айтушы онда өзі болған. Ертегіде олай болмайды.</p>
+      <div class="pm-book" id="pmBook">
+        <svg class="pm-book__deco" viewBox="0 0 64 44" aria-hidden="true"><path d="M4 6h22a6 6 0 0 1 6 6v28a4 4 0 0 0-4-4H4z" fill="#92fcd2" stroke="#0d0d10" stroke-width="2.5"/><path d="M60 6H38a6 6 0 0 0-6 6v28a4 4 0 0 1 4-4h24z" fill="#f55cf2" stroke="#0d0d10" stroke-width="2.5"/></svg>
+        <div class="pm-book__pages" id="pmPages">
+          <div class="pm-page is-on"><span class="pm-page__tr" data-say="Bir varmış, bir yokmuş.">Bir var<mark>mış</mark>, bir yok<mark>muş</mark>.</span><span>Бар екен, жоқ екен. Сөзбе-сөз дәл солай.</span></div>
+          <div class="pm-page"><span class="pm-page__tr" data-say="Evvel zaman içinde bir padişah varmış.">Evvel zaman içinde bir padişah var<mark>mış</mark>.</span><span>Ерте, ерте, ертеде бір патша болыпты.</span></div>
+          <div class="pm-page"><span class="pm-page__tr" data-say="Padişahın üç kızı varmış.">Padişahın üç kızı var<mark>mış</mark>.</span><span>Патшаның үш қызы болыпты.</span></div>
+          <div class="pm-page"><span class="pm-page__tr" data-say="Bir gün küçük kız ormana gitmiş.">Bir gün küçük kız ormana git<mark>miş</mark>.</span><span>Бір күні кенже қыз орманға барыпты.</span></div>
+          <div class="pm-page"><span class="pm-page__tr" data-say="Orada bir kurt görmüş.">Orada bir kurt gör<mark>müş</mark>.</span><span>Ол жерде бір қасқырды көріпті.</span></div>
+          <div class="pm-page"><span class="pm-page__tr" data-say="Kurt ona Merhaba demiş.">Kurt ona «Merhaba!» de<mark>miş</mark>.</span><span>Қасқыр оған: «Сәлем!» депті.</span></div>
+        </div>
+        <div class="pm-book__nav">
+          <button type="button" class="pm-btn" id="pmPrev" aria-label="Алдыңғы бет">←</button>
+          <span class="pm-book__num" id="pmNum" aria-live="polite">1 / 6</span>
+          <button type="button" class="pm-btn pm-btn--solid" id="pmTurn" aria-label="Келесі бет">→</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="traps" data-words="62">
+    <div class="pm-in">
+      <span class="pm-chip">05 / тұзақтар</span>
+      <h2>Бес қате, <span class="t-blue">бірден естілетін</span></h2>
+      <p>Бұларға бәрі сүрінеді, бұл қалыпты. Алдымен не дұрыс емес екенін өзің тауып көр. Сосын карточкаға бас — дұрысын көресің.</p>
+      <div class="pm-traps" id="pmTraps">
+        <button type="button" class="pm-trap is-closed"><span class="pm-trap__hint"><svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;color:#c43d43"><path d="M6 6l12 12M18 6L6 18"/></svg> өзің туралы, тосынсыйсыз</span><span class="pm-trap__bad" lang="tr">Dün okula gitmişim.</span><span class="pm-trap__good" lang="tr">✓ Dün okula gittim.</span><span class="pm-trap__why">Өз әдеттегі тәжірибең туралы — -dı. Әйтпесе амнезия сияқты естіледі.</span></button>
+        <button type="button" class="pm-trap is-closed"><span class="pm-trap__hint"><svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;color:#c43d43"><path d="M6 6l12 12M18 6L6 18"/></svg> өзің туралы сұрақ</span><span class="pm-trap__bad" lang="tr">gelmişim mi?</span><span class="pm-trap__good" lang="tr">✓ gelmiş miyim?</span><span class="pm-trap__why">Жалғау шылауға кетеді: miyim, misin, miyiz, misiniz.</span></button>
+        <button type="button" class="pm-trap is-closed"><span class="pm-trap__hint"><svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;color:#c43d43"><path d="M6 6l12 12M18 6L6 18"/></svg> олар туралы сұрақ</span><span class="pm-trap__bad" lang="tr">gelmiş miler?</span><span class="pm-trap__good" lang="tr">✓ gelmişler mi?</span><span class="pm-trap__why">Onlar жалғауын өзінде ұстайды.</span></button>
+        <button type="button" class="pm-trap is-closed"><span class="pm-trap__hint"><svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;color:#c43d43"><path d="M6 6l12 12M18 6L6 18"/></svg> болымсыздық</span><span class="pm-trap__bad" lang="tr">okumamuş</span><span class="pm-trap__good" lang="tr">✓ okumamış</span><span class="pm-trap__why">ma-дан кейін құйрық әрдайым mış, түбірде u болса да.</span></button>
+        <button type="button" class="pm-trap is-closed"><span class="pm-trap__hint"><svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="width:22px;height:22px;color:#c43d43"><path d="M6 6l12 12M18 6L6 18"/></svg> meğer-мен</span><span class="pm-trap__bad" lang="tr">Meğer otobüs gitti!</span><span class="pm-trap__good" lang="tr">✓ Meğer otobüs gitmiş!</span><span class="pm-trap__why">Meğer — «сөйтсе». Ол әрдайым -mış-ты шақырады.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="video" data-words="21">
+    <div class="pm-in">
+      <h2>Оқытушыны тыңда</h2>
+      <p>Екінші мағынаға назар аудар: «сөйтсе». Бейне — қосымша, сабақ онсыз да түсінікті.</p>
+      <a-video yt="ndKyizB954w" start="240" end="395" title="-MIŞ түрік тілінде: екінші мағына" channel="Елена Юрчук және түрік тілі"></a-video>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="practice" data-words="1">
+    <div class="pm-in">
+      <h2>Практика</h2>
+      <a-exercise ref="a2.past-mis.ex5"></a-exercise>
+      <a-exercise ref="a2.past-mis.ex6"></a-exercise>
+      <a-exercise ref="a2.past-mis.ex7"></a-exercise>
+      <a-exercise ref="a2.past-mis.ex8"></a-exercise>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="check" data-words="7">
+    <div class="pm-in">
+      <h2>Шағын тексеру</h2>
+      <p>Жадынамасыз. Бес сұрақ.</p>
+      <a-quiz ref="a2.past-mis.check2"></a-quiz>
+    </div>
+  </section>
+
+  <section class="pm-band pm-mint" data-section="cheat" data-words="61">
+    <div class="pm-in">
+      <span class="pm-chip">жадынама</span>
+      <h2>Көрдім бе, естідім бе — бір экранда</h2>
+      <table class="pm-tbl pm-tbl2" id="pmTbl"><tbody></tbody></table>
+      <p>Күмәнің болса — өзіңнен сұра: мен мұны көрдім бе? Иә — -dı. Жоқ, айтты немесе факт бойынша білдім — -mış.</p>
+      <div class="pm-minis" id="pmMinis">
+        <button type="button" class="pm-mini" data-say="gelmemişim"><span>Болымсыздық</span><b>gel<u>me</u>mişim</b>me-ден кейін — miş, ma-дан кейін — mış.</button>
+        <button type="button" class="pm-mini" data-say="gelmiş miyim?"><span>Сұрақ</span><b>gelmiş <u>miyim</u>?</b>Жалғау шылауға көшеді.</button>
+        <button type="button" class="pm-mini" data-say="gelmişler mi?"><span>Onlar</span><b>gelmiş<u>ler</u> mi?</b>Жалғау үйде қалады.</button>
+      </div>
+      <p>Енді не істей аласың: жаңалықты біреудің сөзімен айтып беру, таң қалу, жоққа шығару және қайта сұрау. Және ертегі бастау.</p>
+      <div class="pm-final">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#f55cf2"/><path d="M14 22h14a4 4 0 0 1 4 4v18a3 3 0 0 0-3-3H14zM50 22H36a4 4 0 0 0-4 4v18a3 3 0 0 1 3-3h15z" fill="#fff" stroke="#0d0d10" stroke-width="2.5"/></svg>
+        <span>Куә ме, өсекші ме? Енді сен таңдайсың. Ал ертегіні Түркияда қалай айтса, солай айтасың.</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="pm-sb" data-scrollbar aria-label="Сабақ барысы">
+  <div class="pm-sb__track"><span class="pm-sb__fill"></span>
+    <span class="pm-sb__bus" aria-hidden="true"><svg viewBox="0 0 34 26"><rect x="2" y="2" width="30" height="17" rx="5" fill="#4262ff" stroke="#0d0d10" stroke-width="2"/><rect x="6" y="5" width="8" height="6" rx="1.5" fill="#92fcd2"/><rect x="17" y="5" width="8" height="6" rx="1.5" fill="#92fcd2"/><circle cx="9" cy="21" r="3.2" fill="#0d0d10"/><circle cx="25" cy="21" r="3.2" fill="#0d0d10"/></svg></span>
+  </div>
+</nav>
+
+<template data-achievement data-title="Куә және ертегіші" data-text="Сен ‑mış-пен болымсыздық пен сұрақ құрасың және түрік ертегісіндегідей әңгімелейсің.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#f55cf2"/>
+    <g class="pm-a-book">
+      <path class="pm-a-l" d="M22 40h28a8 8 0 0 1 8 8v36a6 6 0 0 0-6-6H22z" fill="#92fcd2" stroke="#0d0d10" stroke-width="4"/>
+      <path class="pm-a-r" d="M98 40H70a8 8 0 0 0-8 8v36a6 6 0 0 1 6-6h30z" fill="#ffffff" stroke="#0d0d10" stroke-width="4"/>
+    </g>
+    <circle class="pm-a-star" cx="60" cy="26" r="7" fill="#92fcd2" stroke="#0d0d10" stroke-width="3"/>
+    <text class="pm-a-txt" x="60" y="104" text-anchor="middle" font-size="13" font-weight="900" fill="#0d0d10">bir varmış</text>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !reduce;
+  const ST = A ? window.ScrollTrigger : null;
+  const ScrollTrigger = ST || { create() {}, batch() {} };
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => window.AlternaKit && AlternaKit.speak(t);
+  if (ST) {
+    G.registerPlugin(ST);
+    if (window.MotionPathPlugin) G.registerPlugin(window.MotionPathPlugin);
+    ST.config({ ignoreMobileResize: true });
+    addEventListener('load', () => ST.refresh());
+    document.fonts && document.fonts.ready.then(() => ST.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ST.refresh(), 300));
+  }
+  
+  if (ST) {
+    ScrollTrigger.batch('.pm-chip, h2', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 26, rotation: 3, duration: .6, ease: 'back.out(2)', stagger: .08 }) });
+    ScrollTrigger.batch('.pm-mini, .pm-guess', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: 34, scale: .94, duration: .55, ease: 'power3.out', stagger: .1 }) });
+  }
+
+  /* ---------- морфология (как в конструкторе урока 1) ---------- */
+  const VOW = 'aeıioöuü', FRONT = 'eiöü', HARD = 'çfhkpsşt';
+  const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
+  const four = (v) => ({ e: 'i', i: 'i', a: 'ı', ı: 'ı', o: 'u', u: 'u', ö: 'ü', ü: 'ü' })[v];
+  const two = (v) => (FRONT.includes(v) ? 'e' : 'a');
+  const PERS = [['ben', 'мен'], ['sen', 'сен'], ['o', 'ол'], ['biz', 'біз'], ['siz', 'сіз'], ['onlar', 'олар']];
+  function build(stem, tense, p, mode) {
+    const segs = [{ t: stem, k: 'root' }], why = [];
+    let cur = stem;
+    if (mode === 'neg') {
+      const n = 'm' + two(lastV(cur));
+      segs.push({ t: n, k: 'neg' }); cur += n;
+      why.push(`Болымсыздық -${n}: соңғы дауысты «${lastV(stem)}» → ${n.slice(1)}.`);
+    }
+    const lv = lastV(cur), v = four(lv);
+    if (tense === 'di') {
+      const last = cur[cur.length - 1], D = HARD.includes(last) ? 't' : 'd';
+      segs.push({ t: D + v, k: 'tense' }); cur += D + v;
+      why.push(HARD.includes(last) ? `«${last}» қатаң → d емес, t.` : `«${last}» қатаң емес → d.`);
+      const end = ['m', 'n', '', 'k', 'n' + v + 'z', 'l' + two(v) + 'r'][p];
+      if (end) segs.push({ t: end, k: 'pers' }); cur += end;
+      why.push('-dı-ның жалғаулары қысқа: -m, -n, -k, -niz.');
+      if (mode === 'q') { const q = 'm' + four(lastV(cur)) + '?'; segs.push({ t: q, k: 'q' }); why.push('Сұрақ: mi жалғаудан кейін бөлек сөз болып тұрады.'); }
+    } else {
+      segs.push({ t: 'm' + v + 'ş', k: 'tense' });
+      why.push(mode === 'neg' ? `${segs[1].t}-дан кейін құйрық m${v}ş — дауысты болымсыздықтан.` : `Соңғы дауысты «${lv}» → m${v}ş.`);
+      if (mode === 'q') {
+        if (p === 5) {
+          segs.push({ t: 'l' + two(v) + 'r', k: 'pers' });
+          segs.push({ t: 'm' + four(two(v)) + '?', k: 'q' });
+          why.push('onlar-дың жалғауы етістікте қалады: gelmişler mi?');
+        } else {
+          segs.push({ t: 'm' + v + ['y' + v + 'm', 's' + v + 'n', '', 'y' + v + 'z', 's' + v + 'n' + v + 'z'][p] + '?', k: 'q' });
+          why.push('Сұрақ: жалғау шылауға көшеді. Дауыстылар арасында — y дәнекері.');
+        }
+      } else {
+        const end = [v + 'm', 's' + v + 'n', '', v + 'z', 's' + v + 'n' + v + 'z', 'l' + two(v) + 'r'][p];
+        if (end) segs.push({ t: end, k: 'pers' });
+        why.push('-mış-тың жалғаулары ұзын: -im, -sin, -iz, -siniz, -ler.');
+      }
+    }
+    const word = segs.reduce((a, s) => a + (s.k === 'q' ? ' ' + s.t : s.t), '');
+    return { segs, word, why };
+  }
+
+  /* ---------- 1. форум: мои глаза / мама ---------- */
+  const POV = [
+    { me: ['Bakan İzmir\'e geldi.', 'Министр Измирге келді.'], mom: ['Bakan İzmir\'e gelmiş.', 'Министр Измирге келіпті.'] },
+    { me: ['Forum başladı.', 'Форум басталды.'], mom: ['Forum başlamış.', 'Жазуларынша, форум басталыпты.'] },
+    { me: ['Öğrenciler çok çalıştı.', 'Студенттер көп жұмыс істеді.'], mom: ['Öğrenciler çok çalışmış.', 'Студенттер көп жұмыс істепті.'] },
+    { me: ['Ben televizyona çıktım.', 'Мен теледидарға түстім.'], mom: ['Çocuğum televizyona çıkmış!', 'Сөйтсем, менің балам теледидарға түсіпті!'] },
+  ];
+  const povEl = $('#pmPov');
+  const hl = (t) => t.replace(/(\S*?)(d[ıiuü]|t[ıiuü]|m[ıiuü]ş)(\S*?)([.!])$/u, (m, a, b, c, d) => `${a}<mark>${b}${c}</mark>${d}`);
+  const setPov = (w, anim) => {
+    $$('[data-pov]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.pov === w)));
+    povEl.classList.toggle('is-mom', w === 'mom');
+    povEl.innerHTML = POV.map((l) => `<li data-say="${l[w][0]}"><b lang="tr">${hl(l[w][0])}</b><span>${l[w][1]}</span></li>`).join('');
+    const who = $('#pmWho');
+    who.querySelector('use').setAttribute('href', w === 'me' ? '#i-eye' : '#i-tv');
+    who.querySelector('span').textContent = w === 'me' ? 'Мен онда болдым және бәрін көрдім' : 'Анам үйде жаңалық көріп отыр';
+    if (A && anim) {
+      G.from('#pmPov li', { x: w === 'me' ? -40 : 40, rotation: w === 'me' ? -2 : 2, duration: .45, ease: 'back.out(2)', stagger: .08 });
+      G.from('#pmPov mark', { scale: 1.8, duration: .5, ease: 'elastic.out(1, .45)', delay: .3, stagger: .08 });
+      G.fromTo(who.querySelector('svg'), { rotation: -30, scale: .4 }, { rotation: 0, scale: 1, duration: .5, ease: 'back.out(3)' });
+    }
+  };
+  $$('[data-pov]').forEach((b) => b.addEventListener('click', () => setPov(b.dataset.pov, true)));
+  setPov('me', false);
+  ScrollTrigger.create({ trigger: '.pm-pov', start: 'top 78%', once: true, onEnter: () => setPov('me', true) });
+  if (A) G.from('h1', { y: 30, rotation: 2, duration: .7, ease: 'back.out(2)' });
+
+  /* ---------- 2. отрицание ---------- */
+  const guessOut = $('#pmGuess');
+  $$('[data-guess]').forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.guess === 'gelmemiş';
+    guessOut.textContent = ok ? 'Иә! Болымсыздық түбірден кейін бірден тұрады: gel-me-miş.' : 'Сәл қалды. Болымсыздық құйрықта емес, түбірден кейін бірден: gelmemiş.';
+    say('gelmemiş');
+    if (A) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' });
+    if (A && !ok) G.fromTo(guessOut, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' });
+  }));
+  const STEPS = [
+    { p: [['gel', 'root']], t: '1-қадам. Түбір: gel.' },
+    { p: [['gel', 'root'], ['me', 'neg']], t: '2-қадам. Болымсыздық -me — түбірден кейін бірден.' },
+    { p: [['gel', 'root'], ['me', 'neg'], ['miş', 'tense']], t: '3-қадам. -miş құйрығы. Дауыстыны me-ден алады.' },
+    { p: [['gel', 'root'], ['me', 'neg'], ['miş', 'tense'], ['im', 'pers']], t: '4-қадам. -im жалғауы. Gelmemişim: сөйтсем, мен келмеппін.' },
+  ];
+  let step = 0;
+  const pieces = $('#pmPieces');
+  const renderStep = (anim) => {
+    const s = STEPS[step];
+    pieces.innerHTML = s.p.map(([t, k], i) => (i ? '<span class="pm-pc pm-pc--plus">+</span>' : '') + `<span class="pm-pc pm-pc--${k}" data-say="${s.p.slice(0, i + 1).map((x) => x[0]).join('')}">${t}</span>`).join('');
+    $('#pmStep').textContent = s.t;
+    if (A && anim) {
+      G.fromTo(pieces.lastElementChild, { y: -60, rotation: -12, scale: .5 }, { y: 0, rotation: 0, scale: 1, duration: .6, ease: 'bounce.out' });
+      G.fromTo('#pmStep', { y: 10 }, { y: 0, duration: .35, ease: 'power2.out' });
+    }
+  };
+  $('#pmNext').addEventListener('click', () => { step = Math.min(STEPS.length - 1, step + 1); renderStep(true); say(STEPS[step].p.map((x) => x[0]).join('')); });
+  $('#pmBack').addEventListener('click', () => { step = Math.max(0, step - 1); renderStep(false); });
+  $('#pmAgain').addEventListener('click', () => {
+    step = 0; renderStep(true);
+    if (!A) return;
+    const tl = G.timeline();
+    for (let k = 1; k < 4; k++) tl.call(() => { step = k; renderStep(true); }, null, k * .9);
+  });
+  renderStep(false);
+  ScrollTrigger.create({ trigger: '.pm-forge', start: 'top 78%', once: true, onEnter: () => G.from('.pm-forge', { scale: .9, rotation: 2, duration: .6, ease: 'back.out(2)' }) });
+  const negOut = $('#pmNegOut');
+  const setNeg = (stem) => {
+    $$('#pmNegs button').forEach((b) => b.classList.toggle('is-on', b.dataset.neg === stem));
+    const r = build(stem, 'mis', 2, 'neg');
+    negOut.innerHTML = `<span data-say="${r.word}">${stem}<span class="t-pink">${r.segs[1].t}</span><span class="t-blue">${r.segs[2].t}</span></span>`;
+    if (A) {
+      G.fromTo(negOut.querySelector('.t-pink'), { y: -30, scale: .4 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(3)' });
+      G.fromTo(negOut.querySelector('.t-blue'), { x: 30, rotation: 10 }, { x: 0, rotation: 0, duration: .5, ease: 'back.out(2.5)', delay: .15 });
+    }
+  };
+  $$('#pmNegs button').forEach((b) => b.addEventListener('click', () => { setNeg(b.dataset.neg); say(build(b.dataset.neg, 'mis', 2, 'neg').word); }));
+  setNeg('oku');
+  ScrollTrigger.create({ trigger: '#pmNegs', start: 'top 78%', once: true, onEnter: () => G.from('#pmNegs button', { y: 40, rotation: (i) => (i % 2 ? 6 : -6), duration: .5, ease: 'back.out(2.5)', stagger: .08 }) });
+
+  /* ---------- 3. вопрос: окончание перелетает на частицу ---------- */
+  const QRU = ['Шынымен келіппін бе?', 'Келіпсің бе?', 'Ол келіпті ме?', 'Шынымен келіппіз бе?', 'Келіпсіз бе?', 'Олар келіпті ме?'];
+  const ENDS = ['im', 'sin', '', 'iz', 'siniz', 'ler'];
+  const QS = ['miyim?', 'misin?', 'mi?', 'miyiz?', 'misiniz?', 'mi?'];
+  const row = $('#pmJumpRow'), jRu = $('#pmJumpRu');
+  let jp = 1;
+  const jump = (p, anim = true) => {
+    jp = p;
+    $$('#pmJumpPers button').forEach((b, i) => b.setAttribute('aria-pressed', String(i === p)));
+    row.innerHTML = `<span>gelmiş<span class="pm-jump__end">${ENDS[p]}</span></span><span class="pm-jump__q">mi<span class="pm-jump__qm">?</span></span>`;
+    jRu.textContent = QRU[p];
+    const done = () => {
+      row.innerHTML = p === 5
+        ? `<span>gelmiş<span class="pm-jump__end">ler</span></span><span class="pm-jump__q">mi?</span>`
+        : `<span>gelmiş</span><span class="pm-jump__q">${QS[p]}</span>`;
+      row.dataset.say = `gelmiş${p === 5 ? 'ler' : ''} ${QS[p]}`;
+    };
+    if (!A || !anim || p === 2) { done(); return; }
+    const end = row.querySelector('.pm-jump__end'), q = row.querySelector('.pm-jump__q');
+    if (p === 5) {
+      G.fromTo(end, { x: 0 }, { x: 10, duration: .08, repeat: 5, yoyo: true, ease: 'none', onComplete: done });
+      G.fromTo(q, { scale: .7 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+      return;
+    }
+    const a = end.getBoundingClientRect(), b = q.querySelector('.pm-jump__qm').getBoundingClientRect();
+    const dx = b.left - a.left, dy = b.top - a.top;
+    if (window.MotionPathPlugin) {
+      G.to(end, { motionPath: { path: [{ x: 0, y: 0 }, { x: dx / 2, y: -50 }, { x: dx, y: dy }], curviness: 1.4 }, duration: .8, ease: 'power2.inOut', onComplete: done });
+    } else {
+      G.to(end, { x: dx, y: dy, duration: .8, ease: 'power2.inOut', onComplete: done });
+    }
+    G.fromTo(q, { rotation: 0 }, { rotation: 8, duration: .2, yoyo: true, repeat: 1, delay: .7 });
+  };
+  const jpBox = $('#pmJumpPers');
+  PERS.forEach((x, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pm-btn';
+    b.textContent = x[0];
+    b.addEventListener('click', () => { jump(i); setTimeout(() => say(row.dataset.say || ''), A ? 900 : 0); });
+    jpBox.append(b);
+  });
+  jump(1, false);
+  ScrollTrigger.create({ trigger: '#pmJump', start: 'top 78%', once: true, onEnter: () => jump(jp) });
+
+  /* ---------- 4. конструктор с отрицанием и вопросом ---------- */
+  const VERBS = [
+    { s: 'gel', ru: ['келді', 'келді'], inf: 'келу' }, { s: 'git', ru: ['кетті', 'кетті'], inf: 'кету' },
+    { s: 'bak', ru: ['қарады', 'қарады'], inf: 'қарау' }, { s: 'oku', ru: ['оқыды', 'оқыды'], inf: 'оқу' },
+    { s: 'gör', ru: ['көрді', 'көрді'], inf: 'көру' }, { s: 'iç', ru: ['ішті', 'ішті'], inf: 'ішу' },
+    { s: 'yap', ru: ['істеді', 'істеді'], inf: 'істеу' }, { s: 'konuş', ru: ['сөйлесті', 'сөйлесті'], inf: 'сөйлеу' },
+    { s: 'ye', ru: ['жеді', 'жеді'], inf: 'жеу' }, { s: 'unut', ru: ['ұмытты', 'ұмытты'], inf: 'ұмыту' },
+  ];
+  const MODES = [['pos', 'болымды'], ['neg', 'болымсыз'], ['q', 'сұраулы']];
+  const st = { tense: 'mis', v: 0, p: 0, m: 1 };
+  const gloss = (verb, p, mode) => {
+    const f = p >= 3 ? verb.ru[1] : verb.ru[0];
+    let s = `${PERS[p][1]} ${mode === 'neg' ? 'ешқашан ' : ''}${f}`;
+    if (st.tense === 'mis') s = (mode === 'q' ? 'шынымен' : p === 0 ? 'сөйтсем,' : 'айтуынша, ') + s;
+    s = s[0].toUpperCase() + s.slice(1);
+    return s + (mode === 'q' ? '?' : st.tense === 'di' ? ' — нақты білемін.' : '.');
+  };
+  const chips = (box, arr, key, label) => arr.forEach((x, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = label(x);
+    b.classList.toggle('is-on', i === st[key]);
+    b.addEventListener('click', () => { st[key] = i; $$('button', box).forEach((c) => c.classList.toggle('is-on', c === b)); render(true); });
+    box.append(b);
+  });
+  chips($('#pmVerbs'), VERBS, 'v', (x) => `${x.s}${two(lastV(x.s)) === 'a' ? 'mak' : 'mek'}<small>${x.inf}</small>`);
+  chips($('#pmPers'), PERS, 'p', (x) => x[0]);
+  chips($('#pmModes'), MODES, 'm', (x) => x[1]);
+  $$('#pmLab [data-tense]').forEach((b) => b.addEventListener('click', () => {
+    st.tense = b.dataset.tense;
+    $$('#pmLab [data-tense]').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+    render(true);
+  }));
+  const labWord = $('#pmLabWord');
+  function render(anim) {
+    const verb = VERBS[st.v], mode = MODES[st.m][0], r = build(verb.s, st.tense, st.p, mode);
+    $('#pmLabPieces').innerHTML = r.segs.map((s, i) => (i ? '<span class="pm-pc pm-pc--plus">+</span>' : '') + `<span class="pm-pc pm-pc--${s.k}">${s.t}</span>`).join('');
+    labWord.textContent = `${PERS[st.p][0]} ${r.word}`;
+    labWord.dataset.say = labWord.textContent;
+    $('#pmLabRu').textContent = gloss(verb, st.p, mode);
+    $('#pmLabWhy').innerHTML = r.why.map((w) => `<li>${w}</li>`).join('');
+    if (A && anim) {
+      G.from('#pmLabPieces .pm-pc:not(.pm-pc--plus)', { y: -26, scale: .5, rotation: -10, duration: .45, ease: 'back.out(3)', stagger: .09 });
+      G.fromTo(labWord, { scale: .8 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)', delay: .2 });
+    }
+  }
+  render(false);
+  ScrollTrigger.create({ trigger: '#pmLab', start: 'top 78%', once: true, onEnter: () => { G.from('#pmLab', { y: 60, rotation: -2, duration: .7, ease: 'back.out(1.6)' }); render(true); } });
+
+  /* ---------- 5. сказка ---------- */
+  const book = $('#pmBook'), pages = $$('.pm-page', book);
+  let pg = 0;
+  book.classList.add('is-js');
+  const turn = (d) => {
+    const next = (pg + d + pages.length) % pages.length;
+    const show = () => {
+      pages.forEach((p, i) => p.classList.toggle('is-on', i === next));
+      pg = next;
+      $('#pmNum').textContent = `${pg + 1} / ${pages.length}`;
+      if (A) {
+        G.fromTo(pages[pg], { rotationY: d > 0 ? -70 : 70, transformOrigin: d > 0 ? '0% 50%' : '100% 50%' }, { rotationY: 0, duration: .5, ease: 'power3.out' });
+        G.from(pages[pg].querySelectorAll('mark'), { scale: 1.8, rotation: -8, duration: .5, ease: 'elastic.out(1, .45)', delay: .3, stagger: .1 });
+      }
+    };
+    if (A) G.to(pages[pg], { rotationY: d > 0 ? 70 : -70, transformOrigin: d > 0 ? '100% 50%' : '0% 50%', duration: .25, ease: 'power2.in', onComplete: show });
+    else show();
+  };
+  $('#pmTurn').addEventListener('click', () => turn(1));
+  $('#pmPrev').addEventListener('click', () => turn(-1));
+  book.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight') turn(1); if (e.key === 'ArrowLeft') turn(-1); });
+  ScrollTrigger.create({ trigger: '#pmBook', start: 'top 78%', once: true, onEnter: () => {
+    G.from('#pmBook', { y: 60, rotation: -3, duration: .7, ease: 'back.out(1.8)' });
+    G.from('.pm-book__deco', { scale: .3, rotation: -20, duration: .8, ease: 'elastic.out(1, .45)', delay: .2 });
+  } });
+
+  /* ---------- 6. ловушки ---------- */
+  const traps = $$('.pm-trap');
+  traps.forEach((t) => t.addEventListener('click', () => {
+    const open = t.classList.contains('is-closed');
+    t.classList.toggle('is-closed', !open);
+    const bad = t.querySelector('.pm-trap__bad');
+    if (open) say(t.querySelector('.pm-trap__good').textContent.replace('✓', '').trim());
+    if (!A) return;
+    if (open) {
+      G.fromTo(bad, { '--strike': 0 }, { '--strike': 1, duration: .4, ease: 'power2.out' });
+      G.from(t.querySelector('.pm-trap__good'), { x: 40, scale: .6, duration: .5, ease: 'back.out(3)', delay: .3 });
+      G.from(t.querySelector('.pm-trap__why'), { y: 14, duration: .4, ease: 'power2.out', delay: .45 });
+    } else {
+      G.fromTo(t, { x: -6 }, { x: 0, duration: .4, ease: 'elastic.out(1, .3)' });
+    }
+  }));
+  ScrollTrigger.create({ trigger: '#pmTraps', start: 'top 78%', once: true, onEnter: () => G.from(traps, { x: (i) => (i % 2 ? 60 : -60), rotation: (i) => (i % 2 ? 3 : -3), duration: .55, ease: 'back.out(2)', stagger: .1 }) });
+
+  /* ---------- шпаргалка ---------- */
+  const tb = $('#pmTbl tbody');
+  tb.innerHTML = PERS.map((p, i) => {
+    const d = build('gel', 'di', i, 'pos').word, m = build('gel', 'mis', i, 'pos').word;
+    return `<tr><td><button type="button" data-say="${p[0]} ${d}. ${p[0]} ${m}."><span>${p[0]}</span><span>${d}</span><span><b>${m}</b></span></button></td></tr>`;
+  }).join('');
+  ScrollTrigger.create({ trigger: '#pmTbl', start: 'top 78%', once: true, onEnter: () => G.from('#pmTbl button', { x: 40, rotation: 2, duration: .4, ease: 'back.out(2)', stagger: .05 }) });
+  $$('#pmMinis .pm-mini').forEach((b) => b.addEventListener('pointerdown', () => { if (A) G.fromTo(b, { scale: .92 }, { scale: 1, duration: .45, ease: 'back.out(3)' }); }));
+  ScrollTrigger.create({ trigger: '.pm-final', start: 'top 78%', once: true, onEnter: () => {
+    G.from('.pm-final', { scale: .6, rotation: 4, duration: .7, ease: 'elastic.out(1, .45)' });
+    G.from('.pm-final svg', { rotation: 180, scale: .3, duration: .8, ease: 'back.out(2)' });
+  } });
+
+  /* ---------- свой скроллбар: автобус по маршруту ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.pm-sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pm-sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `«${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}» бөліміне`);
+    b.addEventListener('click', (e) => { e.stopPropagation(); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  let lastP = 0;
+  const progress = () => {
+    const p = Math.min(1, scrollY / maxScroll());
+    bar.style.setProperty('--p', p.toFixed(4));
+    if (A && Math.abs(p - lastP) > .002) G.to('.pm-sb__bus svg', { rotation: p > lastP ? -4 : 4, duration: .15, yoyo: true, repeat: 1, overwrite: true });
+    lastP = p;
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.pm-sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (A) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout();
+  progress();
+
+  /* ---------- ачивка: книга сказок раскрывается ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .from(b.querySelector('.pm-a-l'), { rotation: 40, transformOrigin: '100% 100%', duration: .5, ease: 'back.out(2)' }, .9)
+      .from(b.querySelector('.pm-a-r'), { rotation: -40, transformOrigin: '0% 100%', duration: .5, ease: 'back.out(2)' }, .9)
+      .from(b.querySelector('.pm-a-star'), { y: 30, scale: .3, transformOrigin: '50% 50%', duration: .5, ease: 'back.out(3)' }, 1.3)
+      .from(b.querySelector('.pm-a-txt'), { y: 12, scale: .4, transformOrigin: '50% 50%', duration: .4, ease: 'back.out(2.5)' }, 1.5);
+  });
+});
+</script>
+</body>
+</html>

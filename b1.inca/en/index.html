@@ -1,0 +1,1732 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="b1.inca">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>As soon as: -(y)IncA</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+/* Дизайн: иллюстрированный путеводитель-комикс. Обложка — цветная карта старого города (бирюза, песок, терракота, синий),
+   внутренние страницы — рисо-печать синей краской по кремовой бумаге, надписи от руки капслоком.
+   Карточки шпаргалки — плотные наклонные плашки с жирным гротеском. */
+@font-face{font-family:'Amatic SC';font-style:normal;font-weight:700;font-display:swap;src:url(../media/amatic-sc-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Amatic SC';font-style:normal;font-weight:700;font-display:swap;src:url(../media/amatic-sc-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Amatic SC';font-style:normal;font-weight:700;font-display:swap;src:url(../media/amatic-sc-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:500 800;font-display:swap;src:url(../media/rubik-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:500 800;font-display:swap;src:url(../media/rubik-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Rubik';font-style:normal;font-weight:500 800;font-display:swap;src:url(../media/rubik-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(../media/nunito-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(../media/nunito-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Nunito';font-style:normal;font-weight:400 800;font-display:swap;src:url(../media/nunito-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  /* бумага и краска */
+  --paper:#f4ecd8; --card:#fbf6e9; --ink:#22325a; --riso:#2d4ea2; --riso-2:#7d96d1; --riso-3:#c8d5ef; --night:#1e2230;
+  /* декорации города */
+  --sea:#69b8b1; --sand:#f1d58e; --roof:#e7826a; --leaf:#4e9a78; --fruit:#f39a3d; --sky:#dde6f5; --sun:#f6d27a;
+  /* роли грамматики: один цвет — одна роль */
+  --c-root:#2d4ea2;  /* глагол */
+  --c-aff:#de5b48;   /* склейка -IncA */
+  --c-y:#e7b347;     /* прокладка y */
+  --c-then:#2f8f86;  /* второй кадр */
+  --c-neg:#e58fb8;   /* отрицание -mA */
+  --c-td:#ee8b3b;    /* t → d */
+  --f-hand:'Amatic SC','Rubik',sans-serif; --f-disp:'Rubik',system-ui,sans-serif; --f-body:'Nunito',system-ui,sans-serif;
+  --reel-h:0px;
+  --ak-bg:var(--card); --ak-surface:#f1e7cf; --ak-ink:var(--ink); --ak-muted:#56617f; --ak-line:#d9cba6;
+  --ak-accent:var(--riso); --ak-accent-ink:#fff; --ak-accent-soft:#dfe6f6;
+  --ak-good:#3d8b4f; --ak-good-soft:#dcefdc; --ak-bad:#a8323f; --ak-bad-soft:#f6dadd;
+  --ak-radius:18px; --ak-radius-sm:12px; --ak-font:var(--f-body); --ak-font-display:var(--f-disp);
+}
+@media (max-width:899.98px){ :root{ --reel-h:52px; } }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:500 var(--ak-text)/1.5 var(--f-body);overflow-x:clip}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(rgba(45,78,162,.07) 1px,transparent 1.3px);background-size:7px 7px}
+main{position:relative}
+h1,h2,h3{font-family:var(--f-disp);line-height:1.05;margin:0}
+p{margin:0}
+.hand{font-family:var(--f-hand);font-weight:700}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* роли в тексте */
+.k{display:inline-block;font-weight:800;border-radius:.2em;padding:0 .1em;line-height:1.15}
+.k-root{color:var(--c-root)}
+.k-aff{background:var(--c-aff);color:#fff}
+.k-y{background:var(--c-y);color:var(--night)}
+.k-then{color:var(--c-then)}
+.k-neg{background:var(--c-neg);color:var(--night)}
+.k-td{background:var(--c-td);color:var(--night)}
+[data-say]{text-decoration:underline dotted rgba(45,78,162,.45);text-underline-offset:.18em}
+.frame [data-say],.poster [data-say]{text-decoration:none}
+
+/* ---------- титр ---------- */
+.title{position:relative;padding:calc(var(--reel-h) + 28px) 16px 8px;max-width:1100px;margin:0 auto;display:grid;gap:14px;justify-items:center;text-align:center}
+.title__stamp{width:min(300px,78vw);height:auto;rotate:-4deg}
+.title h1{font-size:clamp(40px,7vw,86px);font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.title h1 .k{font-size:.8em}
+.title__sub{font-size:clamp(16px,1rem+.4vw,20px);max-width:36ch}
+.title__row{width:min(760px,100%);height:auto;margin-top:6px}
+.title__cue{font:700 26px/1 var(--f-hand);color:var(--riso);display:inline-flex;gap:8px;align-items:center}
+.title__cue svg{width:22px;height:22px}
+
+/* ---------- сцены ---------- */
+.scene{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:calc(var(--reel-h) + 8px) 16px 12px;background:var(--paper)}
+.shot{width:100%;max-width:1240px;display:grid;gap:10px;align-items:center}
+.frame{position:relative;width:min(100%, calc((100svh - 318px) * 4 / 3));min-width:min(100%,280px);aspect-ratio:4/3;margin-inline:auto;overflow:hidden;border:3px solid var(--riso);border-radius:18px;background:var(--card);container-type:inline-size;box-shadow:6px 6px 0 var(--riso);isolation:isolate}
+@media (min-width:900px){
+  .scene{padding:24px 104px 24px 32px}
+  .shot{grid-template-columns:minmax(0,1fr) minmax(280px,370px);gap:30px}
+  .frame{width:min(100%, calc((100svh - 64px) * 4 / 3))}
+}
+.cam{position:absolute;inset:0;transform-origin:0 0}
+.art{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ov{position:absolute;translate:-50% -50%}
+.grain{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(34,50,90,.09) .8px,transparent 1px);background-size:5px 5px;z-index:3}
+.dot{position:absolute;left:50%;top:50%;width:14%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;background:var(--night);transform:scale(0);pointer-events:none;z-index:5}
+.sh-a,.sh-b{position:absolute;top:0;bottom:0;width:50.5%;background:var(--riso);transform:scaleX(0);z-index:5;pointer-events:none}
+.sh-a{left:0;transform-origin:0 50%}
+.sh-b{right:0;transform-origin:100% 50%;background:var(--riso-2)}
+.side{display:grid;gap:8px;max-width:620px;margin-inline:auto;width:100%}
+.tag{font:700 clamp(22px,1.1rem+1vw,32px)/1 var(--f-hand);color:var(--riso);letter-spacing:.03em}
+.tag b{display:inline-grid;place-items:center;min-width:1.5em;height:1.5em;margin-right:.3em;border-radius:50%;background:var(--riso);color:var(--card);font:800 .55em/1 var(--f-disp)}
+.subs{position:relative;display:grid;gap:8px}
+.film .subs{overflow:hidden;gap:0}
+.film .sub{grid-area:1/1}
+.sub{padding:9px 12px;background:var(--card);border:2px solid var(--riso);border-radius:12px;font-size:clamp(15px,.88rem+.3vw,18px);line-height:1.38}
+.act{padding:10px 12px;border-radius:14px;background:var(--night);color:var(--paper);display:grid;gap:8px}
+.act__q{font-weight:700;font-size:15px;line-height:1.3}
+.act__row{display:flex;flex-wrap:wrap;gap:8px}
+.act__fb{min-height:1.35em;font-size:14.5px;line-height:1.3}
+.act [data-say]{text-decoration-color:rgba(244,236,216,.5)}
+.btn{min-height:44px;min-width:44px;padding:8px 14px;border:2px solid var(--night);border-radius:12px;background:var(--card);color:var(--ink);font:700 15px/1.15 var(--f-disp);cursor:pointer;box-shadow:3px 3px 0 var(--riso-2);touch-action:manipulation;text-decoration:none}
+.btn:hover{background:#fff}
+.btn:focus-visible,.sign:focus-visible,.reel__btn:focus-visible{outline:3px solid var(--c-y);outline-offset:2px}
+.btn[aria-pressed="true"],.btn.is-sel{background:var(--riso);color:var(--card)}
+.btn.is-right{background:var(--ak-good);color:#fff}
+.btn.is-wrong{background:var(--ak-bad);color:#fff}
+
+/* сцена 1: карта и квартира */
+.lay-map{visibility:hidden;opacity:0}
+.note{left:46.25%;top:32.7%;width:15.5%;rotate:-3deg;text-align:center;font:700 2.25cqw/1.02 var(--f-hand);color:var(--riso)}
+.note .uw{position:relative;color:var(--c-aff)}
+.note .u{position:absolute;left:0;right:0;bottom:-.06em;height:.14em;border-radius:2px;background:var(--c-aff);transform-origin:0 50%}
+.bubble{left:75%;top:42%;max-width:30%;padding:.6em .8em;background:var(--card);border:.35cqw solid var(--riso);border-radius:1.6cqw;font:700 2.7cqw/1.15 var(--f-disp);color:var(--ink);transform-origin:80% 100%}
+.bubble::after{content:"";position:absolute;right:22%;bottom:-1.4cqw;width:2.4cqw;height:2.4cqw;background:var(--card);border-right:.35cqw solid var(--riso);border-bottom:.35cqw solid var(--riso);rotate:45deg}
+.okstamp{left:46%;top:58%;padding:.25em .6em;border:.45cqw solid var(--c-then);border-radius:1cqw;color:var(--c-then);font:700 4.4cqw/1 var(--f-hand);background:var(--card);rotate:-8deg;transform:scale(0)}
+
+/* сцена 2: два кадра */
+.big{left:50%;top:15%;font:800 7.4cqw/1 var(--f-disp);white-space:nowrap;display:flex;align-items:baseline}
+.big span{display:inline-block}
+.big .p-root{color:var(--c-root)}
+.big .p-y{background:var(--c-y);color:var(--night);border-radius:.15em;padding:0 .06em}
+.big .p-aff{background:var(--c-aff);color:#fff;border-radius:.15em;padding:0 .08em}
+.panel{top:58%;width:41%;background:var(--card);border:.4cqw solid var(--riso);border-radius:1.6cqw;box-shadow:.8cqw .8cqw 0 var(--riso);overflow:hidden}
+.pa{left:26%}.pb{left:74%}
+.panel svg{display:block;width:100%;height:auto;background:var(--sky)}
+.panel .cap{display:grid;padding:.6em .5em;font:800 3.1cqw/1.1 var(--f-disp);text-align:center;border-top:.35cqw solid var(--riso)}
+.panel .cap > span{grid-area:1/1}
+.pb .cap{color:var(--c-then)}
+.v1{visibility:hidden;opacity:0}
+.stamp-ru{left:50%;top:92%;padding:.2em .7em;border:.4cqw solid var(--riso);border-radius:99px;background:var(--card);font:700 3.8cqw/1 var(--f-hand);color:var(--riso);rotate:-4deg;white-space:nowrap}
+
+/* сцена 3: вывески */
+.sign{top:43%;width:21%;padding:1cqw 1cqw 1.2cqw;display:grid;gap:.6cqw;justify-items:center;background:var(--card);border:.4cqw solid var(--riso);border-radius:1.6cqw;box-shadow:.7cqw .7cqw 0 var(--riso);cursor:pointer;color:var(--ink);font-family:var(--f-disp);min-height:44px}
+.sign.is-target{box-shadow:.7cqw .7cqw 0 var(--c-y);border-color:var(--c-y)}
+.sg-aff{width:100%;font:800 4.6cqw/1.1 var(--f-disp);color:#fff;background:var(--c-aff);border-radius:1cqw}
+.sg-v{font:700 3.6cqw/1 var(--f-hand);color:var(--riso)}
+.sg-form{font:700 2.8cqw/1.1 var(--f-disp)}
+.sg-more{display:grid;gap:.3cqw;font:700 2.5cqw/1.1 var(--f-disp)}
+.guess{left:50%;top:84%;visibility:hidden;padding:.3em .8em;border-radius:99px;background:var(--night);color:var(--card);font:800 3.8cqw/1.1 var(--f-disp)}
+.guess .k-root{color:var(--riso-3)}
+.exb{left:50%;top:85%;width:82%;padding:.5em .8em;background:var(--card);border:.35cqw solid var(--riso);border-radius:1.4cqw;font:700 2.75cqw/1.3 var(--f-disp);text-align:center}
+.chip{font-family:var(--f-disp)}
+.chip.is-done{opacity:.45;pointer-events:none}
+
+/* сцена 4: поводок */
+.wrow{left:50%;top:15%;display:flex;align-items:baseline;font:800 9cqw/1 var(--f-disp);white-space:nowrap}
+.wrow b{display:inline-block}
+.w-oku{color:var(--c-root)}
+.w-y{background:var(--c-y);color:var(--night);border-radius:.14em;padding:0 .08em;margin:0 .04em}
+.w-unca{background:var(--c-aff);color:#fff;border-radius:.14em;padding:0 .08em}
+.bump{left:50%;top:15%;width:9cqw;aspect-ratio:1;transform:scale(0)}
+.tags{left:50%;top:36%;width:94%;display:flex;justify-content:center;gap:2cqw}
+.tg{padding:.45em .7em;border:.35cqw solid var(--riso);border-radius:.6em .6em .6em 1.6em;background:var(--card);font:800 3.2cqw/1 var(--f-disp);white-space:nowrap}
+.tg:nth-child(1){rotate:-4deg}.tg:nth-child(2){rotate:3deg}.tg:nth-child(3){rotate:-2deg}
+.gap{display:inline-grid;place-items:center;min-width:1em;border-bottom:3px solid var(--c-y)}
+
+/* сцена 5: пазар */
+.ph{left:79%;top:33%;width:28%;padding:5cqw 1.6cqw 3cqw;border-radius:3.4cqw;background:var(--night);box-shadow:.8cqw .8cqw 0 var(--riso-2)}
+.ph .scr{background:var(--card);border-radius:1.6cqw;padding:1.6cqw;display:grid;gap:1cqw}
+.ph .who{font:700 3cqw/1 var(--f-hand);color:var(--riso)}
+.ph .msg{padding:.5em .6em;border-radius:1.4cqw 1.4cqw 1.4cqw .3cqw;background:var(--sky);font:700 2.6cqw/1.2 var(--f-disp);transform-origin:0 100%}
+.huh{left:30%;top:20%;padding:.25em .7em;border-radius:99px;background:var(--card);border:.35cqw solid var(--riso);font:800 3.6cqw/1.1 var(--f-disp);visibility:hidden;rotate:-6deg}
+.flap{left:50%;top:13%;display:flex;align-items:center;font:800 8cqw/1 var(--f-disp);white-space:nowrap}
+.flap .fl{position:relative;display:inline-grid;margin:0 .05em}
+.flap .fl b{grid-area:1/1;padding:0 .1em;border-radius:.12em}
+.fl-t{background:var(--night);color:var(--card);transform:scaleY(0)}
+.fl-d{background:var(--c-td);color:var(--night)}
+.tdl{left:50%;top:71%;width:88%;display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw}
+.tdl .col{padding:1.4cqw 1.8cqw;border-radius:1.6cqw;border:.4cqw solid var(--riso);background:var(--card);font:700 3.1cqw/1.35 var(--f-disp);box-shadow:.6cqw .6cqw 0 var(--riso)}
+.tdl .col:nth-child(1){rotate:-2deg}.tdl .col:nth-child(2){rotate:2deg}
+.tdl h4{margin:0 0 .3em;font:700 4.2cqw/1 var(--f-hand);color:var(--riso)}
+
+/* сцена 6: переписка */
+.b1,.b2{width:30%;padding:.55em .7em;border-radius:1.6cqw;font:700 2.9cqw/1.25 var(--f-disp)}
+.b1{left:29%;top:40%;background:var(--riso-3);border-radius:1.6cqw 1.6cqw .3cqw 1.6cqw;transform-origin:100% 100%}
+.b2{left:25%;top:66%;background:#fff;border:.3cqw solid var(--riso-3);border-radius:1.6cqw 1.6cqw 1.6cqw .3cqw;transform-origin:0 100%}
+.nostamp{left:27%;top:22%;visibility:hidden;padding:.25em .6em;border:.45cqw solid var(--c-aff);border-radius:1cqw;color:var(--c-aff);background:var(--card);font:700 4cqw/1.05 var(--f-hand);text-align:center;white-space:nowrap}
+.slotcard{left:72%;top:42%;width:44%;padding:1.6cqw;border-radius:2cqw;background:var(--card);border:.4cqw solid var(--riso);box-shadow:.8cqw .8cqw 0 var(--c-then);display:grid;gap:1cqw;text-align:center}
+.slotcard h4{margin:0;font:700 4cqw/1 var(--f-hand);color:var(--riso)}
+.slot{height:1.3em;overflow:hidden;font:800 4.6cqw/1.3 var(--f-disp);color:var(--c-then)}
+.slot-ru{height:1.3em;overflow:hidden;font:700 3cqw/1.3 var(--f-body);color:var(--ink)}
+.slot > div,.slot-ru > div{display:grid}
+.whocard{left:72%;top:79%;width:44%;display:flex;justify-content:center;gap:1.6cqw;font:800 3.2cqw/1 var(--f-disp)}
+.whocard i{font-style:normal;padding:.4em .6em;border-radius:99px;background:var(--night);color:var(--card)}
+
+/* сцена 7: ботинок */
+.warm{opacity:0}
+.lay-beach{visibility:hidden;opacity:0}
+.ntiles{left:50%;top:14%;display:flex;align-items:baseline;font:800 8.4cqw/1 var(--f-disp);white-space:nowrap}
+.ntiles b{display:inline-block;padding:0 .06em;border-radius:.14em}
+.nt-root{color:var(--c-root)}
+.nt-neg{background:var(--c-neg);color:var(--night)}
+.nt-y{background:var(--c-y);color:var(--night);margin:0 .03em}
+.nt-aff{background:var(--c-aff);color:#fff}
+.frame.is-pos .nt-neg,.frame.is-pos .nt-y{display:none}
+.nsent{left:50%;top:88%;width:88%;padding:.45em .7em;border-radius:1.4cqw;background:var(--card);border:.35cqw solid var(--riso);font:700 2.9cqw/1.25 var(--f-disp);text-align:center}
+.dog-happy{visibility:hidden}
+.frame.is-pos .dog-happy{visibility:visible}
+.frame.is-pos .shoe,.frame.is-pos .bits{visibility:hidden}
+
+/* ---------- обычные секции ---------- */
+.page{max-width:1080px;margin:0 auto;padding:56px 16px}
+@media (min-width:900px){.page{padding:72px 110px 72px 32px}}
+.page__head{display:grid;gap:10px;margin-bottom:22px;max-width:62ch}
+.page__head h2{font-size:clamp(30px,1.4rem+2vw,48px);font-weight:800}
+.page__head p{font-size:clamp(16px,.95rem+.3vw,19px)}
+.kicker{font:700 28px/1 var(--f-hand);color:var(--riso)}
+
+/* монтажная */
+.lab{background:var(--night);color:var(--paper);border-radius:24px;padding:clamp(14px,3vw,28px);display:grid;gap:14px;position:relative;overflow:hidden}
+.lab::before,.lab::after{content:"";position:absolute;left:0;right:0;height:14px;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(244,236,216,.25) 14px 26px)}
+.lab::before{top:6px}.lab::after{bottom:6px}
+.lab__modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.lab__modes .btn{box-shadow:3px 3px 0 var(--c-y)}
+.lab__hint{font-size:15px;color:#d8d2c2;min-height:2.6em}
+.lab__chips{display:flex;flex-wrap:wrap;gap:6px;max-height:212px;overflow:auto;padding:2px}
+.lab__chips .btn{min-width:56px;padding:6px 10px;font-size:16px;box-shadow:2px 2px 0 var(--riso)}
+.lab__tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lab__screen{background:var(--card);color:var(--ink);border-radius:16px;padding:16px;display:grid;gap:10px;min-height:190px;align-content:start}
+.lab__strip{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font:800 clamp(30px,6vw,52px)/1.1 var(--f-disp);min-height:1.2em;cursor:pointer}
+.lab__strip b{display:inline-block;padding:0 .08em;border-radius:.14em}
+.lab__strip .t-root{color:var(--c-root)}
+.lab__strip .t-y{background:var(--c-y);color:var(--night)}
+.lab__strip .t-aff{background:var(--c-aff);color:#fff}
+.lab__strip .t-neg{background:var(--c-neg);color:var(--night)}
+.lab__strip .t-td{background:var(--c-td);color:var(--night)}
+.lab__strip .t-then{color:var(--c-then)}
+.lab__ru{font-size:17px;font-weight:700}
+.lab__why{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-size:15.5px}
+.lab__why li::before{content:"✂ ";color:var(--c-aff)}
+.lab__score{font:700 24px/1 var(--f-hand);color:var(--c-y)}
+
+/* дубли */
+.takes{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
+.take{perspective:900px;min-height:250px}
+.take__in{position:relative;height:100%;min-height:250px;transform-style:preserve-3d;transition:transform .01s}
+.take__f,.take__b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:22px;padding:16px;display:grid;gap:10px;align-content:start;border:3px solid var(--night)}
+.take__f{background:var(--card);box-shadow:5px 5px 0 var(--night)}
+.take__b{background:var(--c-then);color:#fff;transform:rotateY(180deg);box-shadow:5px 5px 0 var(--night)}
+.take.is-flipped .take__in{transform:rotateY(180deg)}
+.take:nth-child(odd){rotate:-1.2deg}.take:nth-child(even){rotate:1.4deg}
+.clap{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;border-radius:10px;background:var(--night);color:var(--card);font:700 22px/1 var(--f-hand)}
+.clap i{font-style:normal;background:repeating-linear-gradient(-45deg,var(--card) 0 6px,var(--night) 6px 12px);width:56px;height:14px;border-radius:3px}
+.bad{font:800 20px/1.25 var(--f-disp);text-decoration:line-through;text-decoration-color:var(--ak-bad);text-decoration-thickness:3px}
+.good{font:800 21px/1.25 var(--f-disp)}
+.take__b [data-say]{text-decoration-color:rgba(255,255,255,.6)}
+.take__b .btn{justify-self:start}
+
+/* видео, практика */
+.vnote{font-weight:700;margin-bottom:10px}
+.glue__box{display:grid;gap:12px}
+.glue__strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:stretch}
+.glue__p{border:3px solid var(--riso);border-radius:16px;background:var(--card);padding:12px;display:grid;gap:8px;align-content:center;min-height:120px}
+.glue__p svg{width:56px;height:56px}
+.glue__tr{font:800 clamp(17px,1rem+.6vw,22px)/1.3 var(--f-disp)}
+.glue__tr .slot-gap{display:inline-block;min-width:4.2em;border-bottom:3px solid var(--c-aff);text-align:center;color:var(--c-aff)}
+.glue__ru{font-weight:700;color:var(--c-then)}
+.glue__opts{display:flex;flex-wrap:wrap;gap:8px}
+.glue__opts .btn{font-size:18px}
+.glue__fb{min-height:1.4em;font-weight:700}
+.glue__dots{display:flex;gap:6px}
+.glue__dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--riso)}
+.glue__dots i.ok{background:var(--ak-good);border-color:var(--ak-good)}
+.glue__dots i.no{background:var(--ak-bad);border-color:var(--ak-bad)}
+@media (max-width:420px){.glue__strip{grid-template-columns:1fr}}
+
+/* постер */
+.poster{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.pc{border-radius:22px;padding:16px 18px;border:3px solid var(--night);box-shadow:5px 5px 0 var(--night);display:grid;gap:6px;align-content:start;font-family:var(--f-disp)}
+.pc h3{font-size:26px;font-weight:800}
+.pc p{font-weight:600}
+.pc:nth-child(odd){rotate:-1.5deg}.pc:nth-child(even){rotate:1.2deg}
+.pc--main{background:var(--night);color:var(--card)}
+.pc--main h3{font-size:44px;color:#fff}
+.pc--har{background:var(--card)}
+.pc--y{background:var(--c-y);color:var(--night)}
+.pc--td{background:var(--c-td);color:var(--night)}
+.pc--neg{background:var(--c-neg);color:var(--night)}
+.pc--then{background:var(--c-then);color:#fff}
+.pc--then [data-say],.pc--main [data-say]{text-decoration-color:rgba(255,255,255,.55)}
+.hrow{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-weight:700;align-items:center}
+.hrow b{background:var(--c-aff);color:#fff;border-radius:8px;padding:0 8px;text-align:center}
+.fin{margin-top:28px;display:grid;gap:14px}
+.fin__frame{position:relative;border:3px solid var(--night);border-radius:22px;overflow:hidden;background:var(--night);box-shadow:6px 6px 0 var(--riso)}
+.fin__frame svg{display:block;width:100%;height:auto}
+.fin__text{display:grid;gap:10px;font-size:clamp(16px,.95rem+.35vw,19px);max-width:62ch}
+.fin__line{font:800 clamp(19px,1rem+.8vw,26px)/1.3 var(--f-disp)}
+
+/* ---------- скроллбар-плёнка ---------- */
+.reel{position:fixed;z-index:50;background:var(--night);color:var(--card);
+  right:0;left:0;top:0;height:var(--reel-h);display:flex;align-items:center;padding:4px 8px}
+.reel__track{position:absolute;left:0;right:0;bottom:0;height:4px;background:rgba(244,236,216,.15)}
+.reel__fill{position:absolute;inset:0;background:var(--c-y);transform-origin:0 50%;transform:scaleX(var(--p,0))}
+.reel__list{list-style:none;margin:0;padding:0 0 0 4px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;width:100%}
+.reel__list::-webkit-scrollbar{display:none}
+.reel__btn{flex:none;width:44px;height:44px;border:2px solid rgba(244,236,216,.35);border-radius:8px;background:var(--night);color:var(--card);font:800 14px/1 var(--f-disp);cursor:pointer;display:grid;place-items:center;position:relative;touch-action:manipulation}
+.reel__btn svg{width:20px;height:20px}
+.reel__btn.is-read{background:var(--c-y);color:var(--night);border-color:var(--c-y)}
+.reel__btn.is-now{border-color:var(--c-aff);box-shadow:0 0 0 2px var(--c-aff)}
+.reel__lbl{display:none}
+@media (min-width:900px){
+  .reel{left:auto;right:12px;top:50%;translate:0 -50%;height:auto;max-height:calc(100vh - 24px);width:72px;flex-direction:column;padding:14px 8px;border-radius:14px;cursor:grab;
+    background-image:radial-gradient(circle at 6px 8px,var(--paper) 3px,transparent 3.5px),radial-gradient(circle at 66px 8px,var(--paper) 3px,transparent 3.5px);background-size:72px 16px;background-color:var(--night)}
+  .reel.is-drag{cursor:grabbing}
+  .reel__track{left:auto;right:auto;top:14px;bottom:14px;width:4px;height:auto;left:50%;translate:-50% 0}
+  .reel__fill{transform-origin:50% 0;transform:scaleY(var(--p,0))}
+  .reel__list{flex-direction:column;overflow:auto;padding:0;width:auto;position:relative;z-index:1}
+  .reel__lbl{display:block;position:absolute;right:56px;top:50%;translate:0 -50%;white-space:nowrap;padding:4px 10px;border-radius:8px;background:var(--night);font:700 13px/1 var(--f-disp);pointer-events:none;transform:scaleX(0);transform-origin:100% 50%;transition:transform .2s}
+  .reel__btn:hover .reel__lbl,.reel__btn:focus-visible .reel__lbl{transform:scaleX(1)}
+}
+@media (prefers-reduced-motion:reduce){ .take__in{transition:none} }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="pt-tiles" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M0 0H40V40" fill="none" stroke="#c8d5ef" stroke-width="2"/></pattern>
+    <pattern id="pt-awn" width="40" height="10" patternUnits="userSpaceOnUse"><rect width="20" height="10" fill="#2d4ea2"/><rect x="20" width="20" height="10" fill="#fbf6e9"/></pattern>
+    <pattern id="pt-cob" width="34" height="22" patternUnits="userSpaceOnUse"><ellipse cx="9" cy="6" rx="7" ry="4" fill="none" stroke="#c8d5ef" stroke-width="2"/><ellipse cx="26" cy="17" rx="7" ry="4" fill="none" stroke="#c8d5ef" stroke-width="2"/></pattern>
+    <symbol id="sy-house" viewBox="0 0 100 120">
+      <path d="M6 46 L50 10 L94 46 Z" fill="var(--rf,#e7826a)" stroke="var(--ln,#22325a)" stroke-width="4" stroke-linejoin="round"/>
+      <rect x="14" y="46" width="72" height="70" fill="var(--wl,#fbf6e9)" stroke="var(--ln,#22325a)" stroke-width="4"/>
+      <rect x="24" y="58" width="16" height="20" rx="3" fill="var(--wn,#2d4ea2)"/>
+      <rect x="60" y="58" width="16" height="20" rx="3" fill="var(--wn,#2d4ea2)"/>
+      <path d="M42 116 V92 a8 8 0 0 1 16 0 V116 Z" fill="var(--wn,#2d4ea2)"/>
+      <path d="M20 84 H44 M56 84 H80" stroke="var(--ln,#22325a)" stroke-width="3"/>
+    </symbol>
+    <symbol id="sy-palm" viewBox="0 0 100 160">
+      <path d="M50 158 C52 120 46 90 52 56" fill="none" stroke="var(--tr,#7b5b3c)" stroke-width="7" stroke-linecap="round"/>
+      <g fill="var(--lf,#4e9a78)" stroke="var(--ln,#22325a)" stroke-width="3" stroke-linejoin="round">
+        <path d="M52 56 C30 40 12 46 4 60 C22 52 36 54 52 56Z"/><path d="M52 56 C70 36 90 40 98 56 C80 48 66 50 52 56Z"/>
+        <path d="M52 56 C44 30 52 12 66 6 C58 22 56 38 52 56Z"/><path d="M52 56 C34 50 22 66 20 84 C30 70 40 62 52 56Z"/>
+        <path d="M52 56 C70 54 82 70 84 86 C74 72 64 62 52 56Z"/>
+      </g>
+    </symbol>
+    <symbol id="sy-tree" viewBox="0 0 100 120">
+      <path d="M50 118 V70" stroke="var(--tr,#7b5b3c)" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="50" cy="52" r="40" fill="var(--lf,#4e9a78)" stroke="var(--ln,#22325a)" stroke-width="4"/>
+      <g fill="var(--fr,#f39a3d)"><circle cx="34" cy="42" r="6"/><circle cx="60" cy="34" r="6"/><circle cx="68" cy="60" r="6"/><circle cx="40" cy="66" r="6"/><circle cx="52" cy="50" r="5"/></g>
+    </symbol>
+    <symbol id="sy-boat" viewBox="0 0 100 70">
+      <path d="M6 40 H94 L82 62 H18 Z" fill="var(--bt,#e7826a)" stroke="var(--ln,#22325a)" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M50 40 V6 L80 36 Z" fill="#fbf6e9" stroke="var(--ln,#22325a)" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="sy-minaret" viewBox="0 0 60 220">
+      <rect x="12" y="198" width="36" height="20" fill="var(--mn,#e7826a)" stroke="var(--ln,#22325a)" stroke-width="3"/>
+      <rect x="18" y="62" width="24" height="136" fill="var(--mn,#e7826a)" stroke="var(--ln,#22325a)" stroke-width="3"/>
+      <path d="M24 66 V194 M30 66 V194 M36 66 V194" stroke="var(--ln,#22325a)" stroke-width="2"/>
+      <rect x="10" y="52" width="40" height="11" rx="3" fill="#fbf6e9" stroke="var(--ln,#22325a)" stroke-width="3"/>
+      <rect x="21" y="30" width="18" height="22" fill="var(--mn,#e7826a)" stroke="var(--ln,#22325a)" stroke-width="3"/>
+      <path d="M18 30 L30 4 L42 30Z" fill="var(--cp,#2d4ea2)" stroke="var(--ln,#22325a)" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="sy-gate" viewBox="0 0 200 130">
+      <rect x="4" y="30" width="192" height="96" fill="#f1e6cc" stroke="var(--ln,#22325a)" stroke-width="4"/>
+      <rect x="0" y="20" width="200" height="12" fill="#fbf6e9" stroke="var(--ln,#22325a)" stroke-width="3"/>
+      <g fill="var(--wn,#2d4ea2)"><path d="M22 126 V76 a18 18 0 0 1 36 0 V126Z"/><path d="M80 126 V70 a20 20 0 0 1 40 0 V126Z"/><path d="M142 126 V76 a18 18 0 0 1 36 0 V126Z"/></g>
+      <path d="M66 40 V126 M134 40 V126" stroke="var(--ln,#22325a)" stroke-width="3"/>
+    </symbol>
+    <symbol id="sy-cloud" viewBox="0 0 120 60">
+      <path d="M14 52 a16 16 0 0 1 8-30 a22 22 0 0 1 40-8 a18 18 0 0 1 34 10 a14 14 0 0 1 10 28 Z" fill="#fbf6e9" stroke="var(--ln,#22325a)" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav data-scrollbar class="reel" aria-label="Lesson progress">
+  <div class="reel__track" aria-hidden="true"><span class="reel__fill"></span></div>
+  <ol class="reel__list">
+    <li><button type="button" class="reel__btn" data-go="story" aria-label="Scene 1. The note">1<span class="reel__lbl">The note</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="frames" aria-label="Scene 2. Two shots">2<span class="reel__lbl">Two shots</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="harmony" aria-label="Scene 3. Signs">3<span class="reel__lbl">Signs</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="buffer" aria-label="Scene 4. The leash">4<span class="reel__lbl">The leash</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="td" aria-label="Scene 5. The pazar">5<span class="reel__lbl">Pazar</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="time" aria-label="Scene 6. The second shot">6<span class="reel__lbl">Second shot</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="negative" aria-label="Scene 7. The shoe">7<span class="reel__lbl">The shoe</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="lab" aria-label="Editing room"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="6" cy="7" r="3"/><circle cx="6" cy="17" r="3"/><path d="M8.5 8.5 20 18M8.5 15.5 20 6"/></svg><span class="reel__lbl">Editing room</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="traps" aria-label="Bad takes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 10h16v10H4zM4 10l3-5 13-1 0 6"/><path d="M9 5l2 5M14 4.5l2 5.5"/></svg><span class="reel__lbl">Takes</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="video" aria-label="Video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M8 5l11 7-11 7z"/></svg><span class="reel__lbl">Video</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="practice" aria-label="Practice"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/></svg><span class="reel__lbl">Practice</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="check" aria-label="Mini check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg><span class="reel__lbl">Check</span></button></li>
+    <li><button type="button" class="reel__btn" data-go="cheat" aria-label="Cheat sheet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M5 3h14v18H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg><span class="reel__lbl">Poster</span></button></li>
+  </ol>
+</nav>
+
+<main>
+  <header class="title">
+    <svg class="title__stamp" viewBox="0 0 300 140" aria-hidden="true">
+      <path d="M14 10 q8 6 16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 t16 0 v14 q-6 8 0 16 t0 16 t0 16 t0 16 t0 16 t0 16 t0 16 h-16 q-8-6-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 t-16 0 v-14 q6-8 0-16 t0-16 t0-16 t0-16 t0-16 t0-16 t0-16 z" fill="#fbf6e9" stroke="#2d4ea2" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M40 34 q20 -12 40 0" fill="none" stroke="#2d4ea2" stroke-width="3" stroke-linecap="round"/>
+      <text x="150" y="84" text-anchor="middle" class="hand" font-size="64" fill="#2d4ea2" letter-spacing="3">KALEİÇİ</text>
+      <text x="150" y="116" text-anchor="middle" class="hand" font-size="26" fill="#22325a">ANTALYA · B1 · 24</text>
+    </svg>
+    <h1>As soon as <span class="k k-aff">-(y)IncA</span></h1>
+    <p class="title__sub">A short film about Timur, a dog named Simit, and one note. Scroll down: scrolling is the rewind.</p>
+    <svg class="title__row" viewBox="0 0 800 170" aria-hidden="true">
+      <path d="M10 150 Q400 120 790 150" fill="none" stroke="#2d4ea2" stroke-width="4" stroke-linecap="round"/>
+      <use href="#sy-house" x="40" y="40" width="90" height="108" style="--rf:#2d4ea2"/>
+      <use href="#sy-house" x="118" y="28" width="96" height="116" style="--rf:#e7826a"/>
+      <use href="#sy-palm" x="200" y="20" width="80" height="128"/>
+      <use href="#sy-house" x="262" y="34" width="92" height="110" style="--rf:#69b8b1"/>
+      <use href="#sy-minaret" x="352" y="2" width="44" height="140"/>
+      <use href="#sy-house" x="392" y="30" width="96" height="114" style="--rf:#2d4ea2;--wl:#f1d58e"/>
+      <use href="#sy-tree" x="482" y="54" width="74" height="90"/>
+      <use href="#sy-house" x="548" y="34" width="92" height="110" style="--rf:#e7826a"/>
+      <use href="#sy-house" x="632" y="44" width="84" height="102" style="--rf:#69b8b1;--wl:#f1d58e"/>
+      <g class="title-dog" transform="translate(700 104) scale(.36)" data-art="dog"></g>
+    </svg>
+    <p class="title__cue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M5 12l7 7 7-7"/></svg>Action</p>
+  </header>
+
+  <!-- ===== Сцена 1. Записка ===== -->
+  <section data-section="story" data-words="83" id="sec-story">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" role="img" aria-label="Map of the old town and Timur's apartment">
+              <g class="lay-in">
+                <rect width="800" height="600" fill="#fbf6e9"/>
+                <rect y="470" width="800" height="130" fill="#eef2fa"/><rect y="470" width="800" height="130" fill="url(#pt-tiles)"/>
+                <path d="M0 470H800" stroke="#2d4ea2" stroke-width="4"/>
+                <g transform="translate(40 90)">
+                  <rect width="170" height="220" fill="#dde6f5" stroke="#2d4ea2" stroke-width="5"/>
+                  <circle cx="122" cy="58" r="26" fill="#f6d27a"/>
+                  <use href="#sy-palm" x="6" y="76" width="90" height="144" style="--lf:#7d96d1;--ln:#2d4ea2;--tr:#2d4ea2"/>
+                  <g class="shut shut-l"><rect width="85" height="220" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/><path d="M10 24H75M10 48H75M10 72H75M10 96H75M10 120H75M10 144H75M10 168H75M10 192H75" stroke="#2d4ea2" stroke-width="3"/></g>
+                  <g class="shut shut-r" transform="translate(85 0)"><rect width="85" height="220" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/><path d="M10 24H75M10 48H75M10 72H75M10 96H75M10 120H75M10 144H75M10 168H75M10 192H75" stroke="#2d4ea2" stroke-width="3"/></g>
+                </g>
+                <g transform="translate(570 90)">
+                  <rect width="170" height="220" fill="#dde6f5" stroke="#2d4ea2" stroke-width="5"/>
+                  <use href="#sy-minaret" x="58" y="30" width="54" height="190" style="--mn:#c8d5ef;--ln:#2d4ea2;--cp:#7d96d1"/>
+                  <g class="shut shut-l"><rect width="85" height="220" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/><path d="M10 24H75M10 48H75M10 72H75M10 96H75M10 120H75M10 144H75M10 168H75M10 192H75" stroke="#2d4ea2" stroke-width="3"/></g>
+                  <g class="shut shut-r" transform="translate(85 0)"><rect width="85" height="220" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/><path d="M10 24H75M10 48H75M10 72H75M10 96H75M10 120H75M10 144H75M10 168H75M10 192H75" stroke="#2d4ea2" stroke-width="3"/></g>
+                </g>
+                <g>
+                  <rect x="286" y="118" width="168" height="352" rx="16" fill="#fbf6e9" stroke="#2d4ea2" stroke-width="5"/>
+                  <path d="M286 262 H454" stroke="#2d4ea2" stroke-width="4"/>
+                  <rect x="426" y="276" width="9" height="84" rx="4" fill="#2d4ea2"/>
+                  <rect x="300" y="150" width="140" height="92" fill="#fff" stroke="#2d4ea2" stroke-width="3" transform="rotate(-3 370 196)"/>
+                  <circle class="magnet" cx="370" cy="150" r="8" fill="#2d4ea2"/>
+                </g>
+                <g transform="translate(476 120)">
+                  <rect width="22" height="150" rx="11" fill="#fff" stroke="#2d4ea2" stroke-width="4"/>
+                  <rect class="merc" x="6" y="22" width="10" height="138" fill="#e7826a"/>
+                  <circle cx="11" cy="162" r="17" fill="#e7826a" stroke="#2d4ea2" stroke-width="4"/>
+                  <text x="34" y="34" class="hand" font-size="36" fill="#2d4ea2">+38°</text>
+                </g>
+                <rect x="500" y="380" width="210" height="16" fill="#7d96d1" stroke="#2d4ea2" stroke-width="3"/>
+                <path d="M520 396V470M690 396V470" stroke="#2d4ea2" stroke-width="5"/>
+                <g class="phone"><rect x="590" y="360" width="64" height="20" rx="6" fill="#22325a"/><rect x="598" y="364" width="40" height="12" rx="3" fill="#c8d5ef"/><path d="M584 352 l-8 -8 M662 352 l8 -8 M622 348 v-10" stroke="#2d4ea2" stroke-width="3" stroke-linecap="round"/></g>
+                <g class="man-in" transform="translate(140 252)" data-art="man"></g>
+                <g class="sweat"><path d="M236 262 q6 10 0 15 q-6-5 0-15Z" fill="#7d96d1"/><path d="M248 282 q6 10 0 15 q-6-5 0-15Z" fill="#7d96d1"/><path d="M226 292 q6 10 0 15 q-6-5 0-15Z" fill="#7d96d1"/></g>
+                <g class="dog-in" transform="translate(540 372)" data-art="dog"></g>
+              </g>
+              <g class="lay-map">
+                <rect width="800" height="600" fill="#f1d58e"/>
+                <g class="map-far">
+                  <path d="M0 300 C90 290 170 330 210 400 C250 470 260 540 300 600 H0Z" fill="#69b8b1" stroke="#22325a" stroke-width="4"/>
+                  <g stroke="#fbf6e9" stroke-width="3" fill="none" stroke-linecap="round"><path d="M30 380 q14-10 28 0 t28 0"/><path d="M80 460 q14-10 28 0 t28 0"/><path d="M40 540 q14-10 28 0 t28 0"/><path d="M150 520 q14-10 28 0 t28 0"/></g>
+                  <use href="#sy-boat" x="50" y="410" width="70" height="49"/>
+                  <use href="#sy-boat" x="120" y="490" width="62" height="43" style="--bt:#2d4ea2"/>
+                  <use href="#sy-boat" x="24" y="520" width="56" height="39" style="--bt:#fbf6e9"/>
+                </g>
+                <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <g stroke="#22325a" stroke-width="26"><path d="M230 120 C300 180 340 240 420 270 S560 330 640 420 L780 520"/><path d="M470 0 C460 120 480 200 520 300 S560 470 540 600"/><path d="M260 330 C360 320 480 360 600 300 S740 220 800 230"/><path d="M320 600 C380 470 430 420 520 380"/></g>
+                  <g stroke="#fbf6e9" stroke-width="18"><path d="M230 120 C300 180 340 240 420 270 S560 330 640 420 L780 520"/><path d="M470 0 C460 120 480 200 520 300 S560 470 540 600"/><path d="M260 330 C360 320 480 360 600 300 S740 220 800 230"/><path d="M320 600 C380 470 430 420 520 380"/></g>
+                </g>
+                <use href="#sy-house" x="250" y="150" width="60" height="72" style="--rf:#2d4ea2"/>
+                <use href="#sy-house" x="320" y="186" width="54" height="65"/>
+                <use href="#sy-house" x="376" y="116" width="58" height="70" style="--rf:#69b8b1"/>
+                <use href="#sy-house" x="296" y="252" width="62" height="74"/>
+                <use href="#sy-house" x="372" y="300" width="56" height="67" style="--rf:#2d4ea2"/>
+                <use href="#sy-house" x="430" y="336" width="60" height="72" style="--rf:#69b8b1"/>
+                <use href="#sy-house" x="566" y="180" width="58" height="70" style="--rf:#69b8b1"/>
+                <use href="#sy-house" x="640" y="150" width="60" height="72"/>
+                <use href="#sy-house" x="696" y="240" width="54" height="65" style="--rf:#2d4ea2"/>
+                <use href="#sy-house" x="500" y="430" width="62" height="74"/>
+                <use href="#sy-house" x="596" y="474" width="58" height="70" style="--rf:#69b8b1"/>
+                <use href="#sy-house" x="670" y="500" width="56" height="67" style="--rf:#2d4ea2"/>
+                <use href="#sy-house" x="400" y="456" width="58" height="70" style="--rf:#69b8b1"/>
+                <use href="#sy-house" x="736" y="366" width="52" height="62"/>
+                <use href="#sy-minaret" x="444" y="66" width="46" height="168"/>
+                <use href="#sy-gate" x="600" y="318" width="140" height="91"/>
+                <use href="#sy-tree" x="226" y="246" width="52" height="62"/>
+                <use href="#sy-tree" x="482" y="236" width="48" height="58"/>
+                <use href="#sy-tree" x="716" y="430" width="54" height="65"/>
+                <use href="#sy-tree" x="350" y="400" width="50" height="60"/>
+                <use href="#sy-palm" x="166" y="282" width="56" height="90"/>
+                <use href="#sy-palm" x="228" y="420" width="60" height="96"/>
+                <use href="#sy-palm" x="262" y="520" width="52" height="84"/>
+                <g transform="translate(494 222)"><use href="#sy-house" x="0" y="0" width="86" height="103" style="--rf:#e7826a;--wl:#fbf6e9"/><path d="M43 -26 c-10 0-16 8-16 16 c0 12 16 22 16 22 s16-10 16-22 c0-8-6-16-16-16z" fill="#22325a"/><circle cx="43" cy="-10" r="6" fill="#f1d58e"/></g>
+                <g class="tiny"><g transform="translate(420 268) scale(.2)" data-art="man"></g><g transform="translate(446 296) scale(.15)" data-art="dog"></g></g>
+                <use class="map-cloud" href="#sy-cloud" x="540" y="24" width="110" height="55"/>
+                <use class="map-cloud" href="#sy-cloud" x="680" y="76" width="86" height="43"/>
+                <g transform="translate(20 20) rotate(-5 120 55)" data-say="Kaleiçi">
+                  <rect x="0" y="0" width="240" height="108" rx="10" fill="#fbf6e9" stroke="#2d4ea2" stroke-width="4" stroke-dasharray="10 6"/>
+                  <text x="120" y="66" text-anchor="middle" class="hand" font-size="58" fill="#2d4ea2" letter-spacing="2">KALEİÇİ</text>
+                  <text x="120" y="96" text-anchor="middle" class="hand" font-size="24" fill="#22325a">ANTALYA</text>
+                </g>
+              </g>
+            </svg>
+            <p class="ov note" data-say="Yağmur başlayınca pencereleri kapat.">Yağmur başla<span class="uw">yınca<i class="u"></i></span> pencereleri kapat.</p>
+            <p class="ov bubble" data-say="Neden kapattın? Yağmur yok ki!">Neden kapattın? Yağmur yok ki!</p>
+            <p class="ov okstamp">as soon as!</p>
+          </div>
+          <div class="dot"></div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>1</b>The note</p>
+          <div class="subs">
+            <p class="sub" data-at="map">Antalya, the old town of Kaleiçi. Oranges, heat, and tourists with maps.</p>
+            <p class="sub" data-at="in">Timur rents an apartment here. The landlady, Ayşe Teyze, went to visit her sister. She left him her dog Simit and a note on the fridge.</p>
+            <p class="sub" data-at="note"><a-say>Yağmur başlayınca pencereleri kapat.</a-say> <b data-say="yağmur">Yağmur</b> — rain. <b data-say="pencere">Pencere</b> — window. <b data-say="kapat">Kapat</b> — close. And the little tail <span class="k k-aff">-yınca</span> Timur decided to ignore.</p>
+            <p class="sub" data-at="close">He closed all the windows. Right away. It's +38 outside. Simit is lying on the tiles, looking at Timur like an enemy of the people.</p>
+            <p class="sub" data-at="call">In the evening Ayşe Teyze calls. She says, <b data-say="Neden kapattın? Yağmur yok ki!">neden kapattın? Yağmur yok ki!</b> Timur says, but you wrote it yourself.</p>
+          </div>
+          <div class="act" data-yes="Yes. -yınca means “as soon as.” The windows were waiting for the rain, not for Timur." data-no="No. The tail -yınca waits for the first thing to happen: the rain.">
+            <p class="act__q">What did the landlady actually ask?</p>
+            <div class="act__row">
+              <button type="button" class="btn">Close the windows right away</button>
+              <button type="button" class="btn" data-ok>Close them once it starts raining</button>
+              <button type="button" class="btn">Close them if it's hot</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Сцена 2. Два кадра ===== -->
+  <section data-section="frames" data-words="47" id="sec-frames">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <rect width="800" height="600" fill="#fbf6e9"/>
+              <g stroke="#c8d5ef" stroke-width="3" stroke-linecap="round"><path d="M30 40 L90 70M770 40 L710 70M30 560 L90 530M770 560 L710 530M400 22 V48"/></g>
+              <path class="arrow" d="M368 360 C384 316 416 316 432 360" fill="none" stroke="#2f8f86" stroke-width="7" stroke-linecap="round"/>
+              <path d="M420 352 L434 364 L440 346" fill="none" stroke="#2f8f86" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <p class="ov big" data-say="başlayınca"><span class="p-root">başla</span><span class="p-y">y</span><span class="p-aff">ınca</span></p>
+            <div class="ov panel pa">
+              <svg viewBox="0 0 300 220" aria-hidden="true">
+                <g class="v1">
+                  <use href="#sy-cloud" x="70" y="18" width="160" height="80"/>
+                  <g stroke="#2d4ea2" stroke-width="5" stroke-linecap="round"><path class="drop" d="M96 110 l-6 18"/><path class="drop" d="M126 106 l-6 18"/><path class="drop" d="M156 112 l-6 18"/><path class="drop" d="M186 106 l-6 18"/><path class="drop" d="M110 146 l-6 18"/><path class="drop" d="M142 150 l-6 18"/><path class="drop" d="M172 144 l-6 18"/><path class="drop" d="M202 150 l-6 18"/></g>
+                  <path d="M0 196 H300" stroke="#2d4ea2" stroke-width="4"/><ellipse cx="150" cy="200" rx="60" ry="8" fill="#7d96d1"/>
+                </g>
+                <g class="v2">
+                  <path d="M0 196 H300" stroke="#2d4ea2" stroke-width="4"/>
+                  <use href="#sy-house" x="140" y="62" width="120" height="144" style="--rf:#7d96d1;--ln:#2d4ea2"/>
+                  <g transform="translate(60 100) scale(.44)" data-art="man"></g>
+                </g>
+              </svg>
+              <p class="cap"><span class="v1" data-say="Yağmur başlayınca">Yağmur başla<b class="k k-aff">yınca</b></span><span class="v2" data-say="Eve gelince">Eve gel<b class="k k-aff">ince</b></span></p>
+            </div>
+            <div class="ov panel pb">
+              <svg viewBox="0 0 300 220" aria-hidden="true">
+                <g class="v1">
+                  <rect x="80" y="26" width="140" height="170" fill="#fbf6e9" stroke="#2d4ea2" stroke-width="5"/>
+                  <g class="bshut-l"><rect x="80" y="26" width="70" height="170" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/></g>
+                  <g class="bshut-r"><rect x="150" y="26" width="70" height="170" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/></g>
+                  <path d="M0 206 H300" stroke="#2d4ea2" stroke-width="4"/>
+                </g>
+                <g class="v2">
+                  <rect x="112" y="30" width="76" height="140" rx="12" fill="#22325a"/><rect x="120" y="44" width="60" height="104" rx="6" fill="#c8d5ef"/>
+                  <path d="M96 60 q-12 20 0 40 M204 60 q12 20 0 40 M82 50 q-20 30 0 60 M218 50 q20 30 0 60" fill="none" stroke="#2f8f86" stroke-width="5" stroke-linecap="round"/>
+                  <path d="M0 196 H300" stroke="#2d4ea2" stroke-width="4"/>
+                </g>
+              </svg>
+              <p class="cap"><span class="v1" data-say="pencereleri kapat">pencereleri kapat</span><span class="v2" data-say="seni ararım">seni ararım</span></p>
+            </div>
+            <p class="ov stamp-ru">as soon as · when</p>
+          </div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>2</b>Two shots</p>
+          <div class="subs">
+            <p class="sub" data-at="word">Cut the word from the note: <span class="k k-root">başla</span> — to begin, <span class="k k-y">y</span> — buffer, <span class="k k-aff">ınca</span> — splice.</p>
+            <p class="sub" data-at="panels"><span class="k k-aff">-(y)IncA</span> splices two shots. The first — something happened. The second — what comes right after it.</p>
+            <p class="sub" data-at="ru">In English it's “as soon as” or “when.” Sometimes an -ing phrase: hearing the news, seeing him.</p>
+            <p class="sub" data-at="more"><a-say>Eve gelince seni ararım.</a-say> As soon as I get home, I'll call you. Home first, then the call.</p>
+          </div>
+          <div class="act" data-yes="Right. First he heard, then he was happy. The shot with the splice always comes first." data-no="The other way around. The shot with the -IncA splice always comes first.">
+            <p class="act__q"><b data-say="Haberi duyunca çok sevindi.">Haberi duyunca çok sevindi.</b> Which shot came first?</p>
+            <div class="act__row">
+              <button type="button" class="btn" data-ok data-say="Haberi duyunca">Haberi duyunca</button>
+              <button type="button" class="btn" data-say="çok sevindi">çok sevindi</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Сцена 3. Вывески ===== -->
+  <section data-section="harmony" data-words="63" id="sec-harmony">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <rect width="800" height="600" fill="#fbf6e9"/>
+              <g class="far">
+                <rect x="-60" width="920" height="150" fill="#dde6f5"/>
+                <path d="M-60 150 L-20 112 L20 150 L60 104 L100 150 L150 116 L200 150 L250 100 L300 150 L470 150 L510 110 L560 150 L620 106 L680 150 L730 116 L780 150 L860 120 V170 H-60Z" fill="#c8d5ef"/>
+                <use href="#sy-minaret" x="380" y="4" width="40" height="150" style="--mn:#c8d5ef;--ln:#7d96d1;--cp:#7d96d1"/>
+              </g>
+              <g>
+                <g fill="#fbf6e9" stroke="#2d4ea2" stroke-width="4">
+                  <rect x="10" y="140" width="180" height="330"/><rect x="210" y="140" width="180" height="330"/><rect x="410" y="140" width="180" height="330"/><rect x="610" y="140" width="180" height="330"/>
+                </g>
+                <g fill="#c8d5ef" stroke="#2d4ea2" stroke-width="3">
+                  <path d="M76 470 V420 a24 24 0 0 1 48 0 V470Z"/><path d="M276 470 V420 a24 24 0 0 1 48 0 V470Z"/><path d="M476 470 V420 a24 24 0 0 1 48 0 V470Z"/><path d="M676 470 V420 a24 24 0 0 1 48 0 V470Z"/>
+                  <rect x="30" y="360" width="36" height="44" rx="4"/><rect x="134" y="360" width="36" height="44" rx="4"/><rect x="230" y="360" width="36" height="44" rx="4"/><rect x="334" y="360" width="36" height="44" rx="4"/><rect x="430" y="360" width="36" height="44" rx="4"/><rect x="534" y="360" width="36" height="44" rx="4"/><rect x="630" y="360" width="36" height="44" rx="4"/><rect x="734" y="360" width="36" height="44" rx="4"/>
+                </g>
+                <g stroke="#2d4ea2" stroke-width="4" stroke-linecap="round"><path d="M60 168 H140 M80 168 V186 M120 168 V186"/><path d="M260 168 H340 M280 168 V186 M320 168 V186"/><path d="M460 168 H540 M480 168 V186 M520 168 V186"/><path d="M660 168 H740 M680 168 V186 M720 168 V186"/></g>
+              </g>
+              <rect y="470" width="800" height="130" fill="#eef2fa"/><rect y="470" width="800" height="130" fill="url(#pt-cob)"/>
+              <path d="M0 470H800" stroke="#2d4ea2" stroke-width="4"/>
+              <g class="walker"><g transform="translate(40 392) scale(.42)" data-art="man"></g><g transform="translate(86 452) scale(.32)" data-art="dog"></g></g>
+              <g class="near">
+                <use href="#sy-palm" x="-60" y="330" width="150" height="240" style="--lf:#7d96d1;--ln:#2d4ea2;--tr:#2d4ea2"/>
+                <use href="#sy-palm" x="720" y="350" width="140" height="224" style="--lf:#7d96d1;--ln:#2d4ea2;--tr:#2d4ea2"/>
+              </g>
+            </svg>
+            <button type="button" class="ov sign" style="left:12.5%" data-sign="0" aria-label="The -ınca sign"><span class="sg-aff">-ınca</span><span class="sg-v">a · ı</span><span class="sg-form" data-say="kalkınca"><span class="k-root">kalk</span><span class="k-aff k">ınca</span></span><span class="sg-more"></span></button>
+            <button type="button" class="ov sign" style="left:37.5%" data-sign="1" aria-label="The -ince sign"><span class="sg-aff">-ince</span><span class="sg-v">e · i</span><span class="sg-form" data-say="gelince"><span class="k-root">gel</span><span class="k-aff k">ince</span></span><span class="sg-more"></span></button>
+            <button type="button" class="ov sign" style="left:62.5%" data-sign="2" aria-label="The -unca sign"><span class="sg-aff">-unca</span><span class="sg-v">o · u</span><span class="sg-form" data-say="durunca"><span class="k-root">dur</span><span class="k-aff k">unca</span></span><span class="sg-more"></span></button>
+            <button type="button" class="ov sign" style="left:87.5%" data-sign="3" aria-label="The -ünce sign"><span class="sg-aff">-ünce</span><span class="sg-v">ö · ü</span><span class="sg-form" data-say="görünce"><span class="k-root">gör</span><span class="k-aff k">ünce</span></span><span class="sg-more"></span></button>
+            <p class="ov guess"><span class="k-root">dur</span> → ?</p>
+            <p class="ov exb"><b data-say="Otobüs durunca in.">Otobüs durunca in.</b> <b data-say="Simit beni görünce kuyruğunu salladı.">Simit beni görünce kuyruğunu salladı.</b></p>
+          </div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>3</b>Signs</p>
+          <div class="subs">
+            <p class="sub" data-at="guess">Timur and Simit are walking through Kaleiçi. There are four signs on the street. Guess first: <b data-say="dur">dur</b> — which one will it go to?</p>
+            <p class="sub" data-at="s1">The splice vowel looks at the verb's last vowel. <b>a</b> and <b>ı</b> → <span class="k k-aff">-ınca</span>: <b data-say="kalkınca">kalkınca</b>.</p>
+            <p class="sub" data-at="s2"><b>e</b> and <b>i</b> → <span class="k k-aff">-ince</span>: <b data-say="gelince">gelince</b>. The sign for front vowels.</p>
+            <p class="sub" data-at="s3"><b>o</b> and <b>u</b> → <span class="k k-aff">-unca</span>: <b data-say="durunca">durunca</b>. Guessed it? Then harmony is already in your ears.</p>
+            <p class="sub" data-at="s4"><b>ö</b> and <b>ü</b> → <span class="k k-aff">-ünce</span>: <b data-say="görünce">görünce</b>.</p>
+            <p class="sub" data-at="ex">Once the bus stops, get off. Seeing me, Simit wagged his tail. The tail isn't grammar, but it's nice.</p>
+          </div>
+          <div class="act act--signs" data-done="All four in place. The splice vowel always looks back at the verb.">
+            <p class="act__q">Send the verbs to the signs: tap a verb, then a sign in the shot.</p>
+            <div class="act__row">
+              <button type="button" class="btn chip" data-v="al" data-to="0" data-form="alınca">al</button>
+              <button type="button" class="btn chip" data-v="iç" data-to="1" data-form="içince">iç</button>
+              <button type="button" class="btn chip" data-v="bul" data-to="2" data-form="bulunca">bul</button>
+              <button type="button" class="btn chip" data-v="dön" data-to="3" data-form="dönünce">dön</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Сцена 4. Поводок ===== -->
+  <section data-section="buffer" data-words="49" id="sec-buffer">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <rect width="800" height="330" fill="#dde6f5"/>
+              <circle cx="726" cy="70" r="40" fill="#f6d27a"/>
+              <g class="far">
+                <rect x="-100" y="236" width="1000" height="100" fill="#a9d3cf"/>
+                <g stroke="#fbf6e9" stroke-width="3" fill="none" stroke-linecap="round"><path d="M40 270 q14-10 28 0 t28 0"/><path d="M300 300 q14-10 28 0 t28 0"/><path d="M560 262 q14-10 28 0 t28 0"/><path d="M740 300 q14-10 28 0 t28 0"/></g>
+                <use href="#sy-boat" x="170" y="214" width="70" height="49" style="--bt:#7d96d1;--ln:#2d4ea2"/>
+                <use href="#sy-boat" x="520" y="226" width="50" height="35" style="--bt:#c8d5ef;--ln:#2d4ea2"/>
+              </g>
+              <rect y="330" width="800" height="270" fill="#fbf6e9"/>
+              <g class="mid">
+                <path class="rail" d="M-20 380 H1640" stroke="#2d4ea2" stroke-width="6" stroke-linecap="round"/>
+                <path class="posts" d="" stroke="#2d4ea2" stroke-width="5" stroke-linecap="round"/>
+                <path d="M-20 440 H1640" stroke="#2d4ea2" stroke-width="4"/>
+              </g>
+              <path d="M0 560 H800" stroke="#c8d5ef" stroke-width="4" stroke-dasharray="20 14"/>
+              <g class="walkers">
+                <g class="w-man" transform="translate(240 322) scale(.92)" data-art="man"></g>
+                <path class="leash" d="M310 456 Q410 530 506 494" fill="none" stroke="#e7b347" stroke-width="6" stroke-linecap="round"/>
+                <g class="w-dog" transform="translate(420 450) scale(.8)" data-art="dog"></g>
+              </g>
+              <g class="zz" font-size="40" fill="#2d4ea2"><text class="hand" x="540" y="430">z</text><text class="hand" x="566" y="404">z</text><text class="hand" x="594" y="374">Z</text></g>
+              <g class="near-l"><use href="#sy-palm" x="-50" y="300" width="170" height="272" style="--lf:#7d96d1;--ln:#2d4ea2;--tr:#2d4ea2"/></g>
+            </svg>
+            <p class="ov wrow" data-say="okuyunca"><b class="w-oku">oku</b><b class="w-y">y</b><b class="w-unca">unca</b></p>
+            <svg class="ov bump" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 2 L24 14 L38 12 L27 21 L34 34 L20 27 L8 36 L12 22 L2 14 L15 14Z" fill="#de5b48"/></svg>
+            <div class="ov tags">
+              <span class="tg" data-say="başlayınca"><span class="k-root">başla</span><span class="k k-y">y</span><span class="k k-aff">ınca</span></span>
+              <span class="tg" data-say="bekleyince"><span class="k-root">bekle</span><span class="k k-y">y</span><span class="k k-aff">ince</span></span>
+              <span class="tg" data-say="yürüyünce"><span class="k-root">yürü</span><span class="k k-y">y</span><span class="k k-aff">ünce</span></span>
+            </div>
+          </div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>4</b>The leash</p>
+          <div class="subs">
+            <p class="sub" data-at="walk">Morning, the waterfront. Timur is walking Simit and learning the verb <b data-say="oku">oku</b> — to read.</p>
+            <p class="sub" data-at="clash"><b>oku</b> + <b>unca</b>. Two vowels collided head-on. Turkish won't stand for that.</p>
+            <p class="sub" data-at="y">A <span class="k k-y">y</span> steps in between them, like the leash between Timur and Simit. It's an old rule: <b data-say="su, suyu">su → suyu</b>.</p>
+            <p class="sub" data-at="list">If the verb ends in a vowel — first <span class="k k-y">y</span>, then the splice. Same harmony.</p>
+            <p class="sub" data-at="ex"><a-say>Simit uyuyunca Timur da uyudu.</a-say> Simit fell asleep — and so did Timur.</p>
+          </div>
+          <div class="act" data-yes="bekleyince. The leash is on, Simit is happy." data-no="Not that. Only y goes between two vowels.">
+            <p class="act__q">Put the leash in: <b>bekle<span class="gap">?</span>ince</b></p>
+            <div class="act__row">
+              <button type="button" class="btn" data-ok>y</button>
+              <button type="button" class="btn">n</button>
+              <button type="button" class="btn">s</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Сцена 5. Пазар ===== -->
+  <section data-section="td" data-words="49" id="sec-td">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <rect width="800" height="600" fill="#fbf6e9"/>
+              <g class="far">
+                <g stroke="#2d4ea2" stroke-width="5"><path d="M10 120 V420M200 120 V420M210 120 V420M400 120 V420M410 120 V420M600 120 V420M610 120 V420M790 120 V420"/></g>
+                <g stroke="#2d4ea2" stroke-width="4" stroke-linejoin="round">
+                  <path d="M0 90 H205 V140 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0Z" fill="url(#pt-awn)"/>
+                  <path d="M205 90 H405 V140 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0Z" fill="#7d96d1"/>
+                  <path d="M405 90 H605 V140 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0Z" fill="url(#pt-awn)"/>
+                  <path d="M605 90 H805 V140 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0 q-12 14-25 0Z" fill="#7d96d1"/>
+                </g>
+              </g>
+              <g class="mid">
+                <g fill="#c8d5ef" stroke="#2d4ea2" stroke-width="4"><rect x="20" y="330" width="170" height="90"/><rect x="220" y="330" width="170" height="90"/><rect x="420" y="330" width="170" height="90"/><rect x="620" y="330" width="170" height="90"/></g>
+                <g fill="#f39a3d" stroke="#2d4ea2" stroke-width="3"><circle cx="50" cy="318" r="16"/><circle cx="84" cy="318" r="16"/><circle cx="118" cy="318" r="16"/><circle cx="152" cy="318" r="16"/><circle cx="67" cy="292" r="16"/><circle cx="101" cy="292" r="16"/><circle cx="135" cy="292" r="16"/></g>
+                <g stroke="#2d4ea2" stroke-width="4"><ellipse cx="262" cy="306" rx="38" ry="26" fill="#69b8b1"/><ellipse cx="344" cy="306" rx="38" ry="26" fill="#69b8b1"/><ellipse cx="303" cy="276" rx="38" ry="26" fill="#69b8b1"/></g>
+                <g stroke="#22325a" stroke-width="3" fill="none"><path d="M244 290 q18 16 0 32M280 290 q-18 16 0 32M326 290 q18 16 0 32M362 290 q-18 16 0 32"/></g>
+                <g fill="#f6d27a" stroke="#2d4ea2" stroke-width="3"><ellipse cx="450" cy="318" rx="16" ry="12"/><ellipse cx="484" cy="318" rx="16" ry="12"/><ellipse cx="518" cy="318" rx="16" ry="12"/><ellipse cx="552" cy="318" rx="16" ry="12"/><ellipse cx="467" cy="296" rx="16" ry="12"/><ellipse cx="501" cy="296" rx="16" ry="12"/><ellipse cx="535" cy="296" rx="16" ry="12"/></g>
+                <g fill="#e7826a" stroke="#2d4ea2" stroke-width="3"><circle cx="652" cy="316" r="14"/><circle cx="682" cy="316" r="14"/><circle cx="712" cy="316" r="14"/><circle cx="742" cy="316" r="14"/><circle cx="667" cy="292" r="14"/><circle cx="697" cy="292" r="14"/><circle cx="727" cy="292" r="14"/></g>
+              </g>
+              <rect y="420" width="800" height="180" fill="#eef2fa"/><path d="M0 420H800" stroke="#2d4ea2" stroke-width="4"/>
+              <g transform="translate(170 280) scale(.9)" data-art="man"></g>
+              <g transform="translate(320 450) scale(.7)" data-art="dog"></g>
+              <g class="slice" transform="translate(470 470)"><path d="M0 40 A60 60 0 0 1 120 40 Z" fill="#de5b48" stroke="#2d4ea2" stroke-width="4"/><path d="M-4 40 H124" stroke="#69b8b1" stroke-width="10" stroke-linecap="round"/><g fill="#22325a"><circle cx="40" cy="24" r="3"/><circle cx="60" cy="16" r="3"/><circle cx="80" cy="24" r="3"/></g></g>
+            </svg>
+            <div class="ov ph"><div class="scr"><p class="who">Ayşe teyze</p><p class="msg" data-say="Pazara gidince karpuz al.">Pazara gi<b class="k k-td">d</b><b class="k k-aff">ince</b> karpuz al.</p></div></div>
+            <p class="ov huh"><span class="k-root">gid</span> = ?</p>
+            <p class="ov flap" data-say="gidince"><b class="k-root">gi</b><span class="fl"><b class="fl-t">t</b><b class="fl-d">d</b></span><b class="k k-aff">ince</b></p>
+            <div class="ov tdl">
+              <div class="col"><h4>switch</h4><span data-say="gidince">git → gi<b class="k k-td">d</b>ince</span><br><span data-say="telefon edince">et → e<b class="k k-td">d</b>ince</span><br><span data-say="tadınca">tat → ta<b class="k k-td">d</b>ınca</span></div>
+              <div class="col"><h4>hold on</h4><span data-say="bitince">bit → bitince</span><br><span data-say="satınca">sat → satınca</span><br><span data-say="atınca">at → atınca</span></div>
+            </div>
+          </div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>5</b>Pazar</p>
+          <div class="subs">
+            <p class="sub" data-at="market">Morning, the pazar — the market. Watermelons the size of Simit. You can smell the oranges down the whole street.</p>
+            <p class="sub" data-at="msg">Ayşe Teyze texts: <a-say>Pazara gidince karpuz al.</a-say> Timur looks up the verb <b>gid</b> in the dictionary. There's no such thing.</p>
+            <p class="sub" data-at="flip">It's <b data-say="git">git</b> — to go. Before a vowel the <b>t</b> softened and became <span class="k k-td">d</span>: <b data-say="gidince">gidince</b>.</p>
+            <p class="sub" data-at="list"><b>git</b>, <b>et</b> and <b>tat</b> do this. The other verbs in&nbsp;<b>&#8209;t</b> hold on. Everyone trips on this, so you're in good company.</p>
+          </div>
+          <div class="act" data-yes="Karpuzu tadınca hemen aldı. He tasted it — and bought it right away. tat likes d too." data-no="tat is one of the trio: t → d. The right form is tadınca.">
+            <p class="act__q">Timur tastes a watermelon. <b>Karpuzu … hemen aldı.</b></p>
+            <div class="act__row">
+              <button type="button" class="btn" data-ok data-say="tadınca">tadınca</button>
+              <button type="button" class="btn" data-say="tatınca">tatınca</button>
+            </div>
+            <p class="act__fb" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Сцена 6. Второй кадр ===== -->
+  <section data-section="time" data-words="61" id="sec-time">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <rect width="800" height="600" fill="#eef2fa"/>
+              <g fill="#c8d5ef"><circle cx="460" cy="80" r="5"/><circle cx="520" cy="120" r="5"/><circle cx="600" cy="70" r="5"/><circle cx="700" cy="110" r="5"/><circle cx="760" cy="60" r="5"/><circle cx="480" cy="560" r="5"/><circle cx="740" cy="560" r="5"/></g>
+              <rect x="70" y="16" width="290" height="568" rx="40" fill="#22325a"/>
+              <rect x="86" y="66" width="258" height="478" rx="16" fill="#fbf6e9"/>
+              <rect x="86" y="66" width="258" height="58" rx="16" fill="#dde6f5"/>
+              <circle cx="118" cy="95" r="17" fill="#e7826a" stroke="#2d4ea2" stroke-width="3"/>
+              <text x="146" y="104" class="hand" font-size="28" fill="#2d4ea2">Ayşe teyze</text>
+              <rect x="180" y="30" width="70" height="12" rx="6" fill="#3a4466"/>
+            </svg>
+            <p class="ov b1" data-say="Eve gelince seni ararım."><span>Eve gel<b class="k k-aff">ince</b></span> <span class="b1-then k-then">seni ararım.</span></p>
+            <p class="ov b2" data-say="Sen gelince Simit çok sevinir.">Sen gel<b class="k k-aff">ince</b> <span class="k-then">Simit çok sevinir.</span></p>
+            <p class="ov nostamp">tense? no<br>person? no</p>
+            <div class="ov slotcard">
+              <h4>second shot</h4>
+              <div class="slot"><div class="slot__in"><span data-say="seni ararım">seni ararım</span><span data-say="seni aradım">seni aradım</span><span data-say="beni ara">beni ara</span></div></div>
+              <div class="slot-ru"><div class="slot__ru-in"><span>I'll call</span><span>I called</span><span>call!</span></div></div>
+            </div>
+            <p class="ov whocard"><i data-say="sen">sen</i><i data-say="Simit">Simit</i></p>
+          </div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>6</b>Second shot</p>
+          <div class="subs">
+            <p class="sub" data-at="chat">Timur texts the landlady: <a-say>Eve gelince seni ararım.</a-say> As soon as I get home, I'll call.</p>
+            <p class="sub" data-at="none">The splice has no tense and no person. <b data-say="gelince">gelince</b> is just “when I get” or “when I got.”</p>
+            <p class="sub" data-at="tenses">The second shot carries the tense. <b data-say="ararım">ararım</b> — aorist, a promise: “I'll call, my word.” <b data-say="aradım">aradım</b> — already called. <b data-say="ara">ara</b> — call!</p>
+            <p class="sub" data-at="who">Who came is shown by the word next to it. <a-say>Sen gelince Simit çok sevinir.</a-say> You come — Simit is happy.</p>
+          </div>
+          <div class="act act--time">
+            <p class="act__q">Switch the second shot:</p>
+            <div class="act__row">
+              <button type="button" class="btn" aria-pressed="true" data-then="seni ararım." data-full="Eve gelince seni ararım." data-ru="As soon as I get home, I'll call you. A promise.">ararım</button>
+              <button type="button" class="btn" aria-pressed="false" data-then="seni aradım." data-full="Eve gelince seni aradım." data-ru="As soon as I got home, I called you. Already happened.">aradım</button>
+              <button type="button" class="btn" aria-pressed="false" data-then="beni ara." data-full="Eve gelince beni ara." data-ru="As soon as you get home, call me. A request.">ara</button>
+            </div>
+            <p class="act__fb" aria-live="polite">As soon as I get home, I'll call you. A promise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Сцена 7. Ботинок ===== -->
+  <section data-section="negative" data-words="54" id="sec-negative">
+    <div class="scene">
+      <div class="shot">
+        <div class="frame">
+          <div class="cam">
+            <svg class="art" viewBox="0 0 800 600" aria-hidden="true">
+              <g class="lay-home">
+                <rect width="800" height="600" fill="#fbf6e9"/>
+                <rect y="470" width="800" height="130" fill="#eef2fa"/><rect y="470" width="800" height="130" fill="url(#pt-tiles)"/>
+                <path d="M0 470H800" stroke="#2d4ea2" stroke-width="4"/>
+                <rect x="60" y="150" width="150" height="320" fill="#7d96d1" stroke="#2d4ea2" stroke-width="5"/><circle cx="186" cy="320" r="8" fill="#fbf6e9"/>
+                <ellipse cx="500" cy="520" rx="230" ry="40" fill="#c8d5ef" stroke="#2d4ea2" stroke-width="4"/>
+                <g transform="translate(400 380)" data-art="dog"></g>
+                <g class="shoe" transform="translate(520 404) rotate(10)"><path d="M0 20 Q4 0 26 2 Q44 4 50 18 L70 22 Q80 26 76 36 H4 Q-4 34 0 20Z" fill="#22325a"/><path d="M20 8 L28 18 M30 6 L36 16" stroke="#fbf6e9" stroke-width="3" stroke-linecap="round"/></g>
+                <g class="bits" fill="#22325a"><path d="M330 480 l10-6 4 9z"/><path d="M620 486 l8-8 6 8z"/><path d="M380 500 l12-2 -4 9z"/><path d="M660 470 l8-4 2 9z"/></g>
+                <g class="dog-happy" fill="#2d4ea2"><path d="M560 330 c-10-14-30-2-20 12 l20 18 20-18 c10-14-10-26-20-12z"/><path d="M600 290 c-7-10-21-1-14 8 l14 13 14-13 c7-9-7-18-14-8z"/></g>
+              </g>
+              <g class="lay-beach">
+                <rect width="800" height="600" fill="#dde6f5"/>
+                <circle class="sun" cx="600" cy="120" r="54" fill="#f6d27a"/>
+                <rect class="warm" width="800" height="600" fill="#f39a3d"/>
+                <rect y="300" width="800" height="90" fill="#a9d3cf"/>
+                <g class="sea-w" stroke="#fbf6e9" stroke-width="3" fill="none" stroke-linecap="round"><path d="M40 330 q14-10 28 0 t28 0"/><path d="M260 350 q14-10 28 0 t28 0"/><path d="M520 330 q14-10 28 0 t28 0"/><path d="M700 356 q14-10 28 0 t28 0"/><path d="M860 336 q14-10 28 0 t28 0"/></g>
+                <rect y="390" width="800" height="210" fill="#f3e2b5"/>
+                <path d="M300 520 V300" stroke="#2d4ea2" stroke-width="6"/>
+                <path d="M180 320 Q300 200 420 320 Z" fill="#7d96d1" stroke="#2d4ea2" stroke-width="4"/>
+                <path d="M240 318 Q300 230 300 318 M360 318 Q300 230 300 318" fill="none" stroke="#2d4ea2" stroke-width="3"/>
+                <rect x="200" y="480" width="260" height="46" rx="6" fill="#c8d5ef" stroke="#2d4ea2" stroke-width="3"/>
+                <g transform="translate(470 500) rotate(-90) scale(.78)" data-art="man"></g>
+              </g>
+            </svg>
+            <p class="ov ntiles" data-say="gelmeyince"><b class="nt-root">gel</b><b class="nt-neg">me</b><b class="nt-y">y</b><b class="nt-aff">ince</b></p>
+            <p class="ov nsent" data-say="Timur gelmeyince Simit ayakkabıyı yedi.">Timur gel<b class="k k-neg">me</b><b class="k k-y">y</b><b class="k k-aff">ince</b> <span class="k-then">Simit ayakkabıyı yedi.</span></p>
+          </div>
+          <div class="sh-a"></div><div class="sh-b"></div>
+          <div class="grain"></div>
+        </div>
+        <div class="side">
+          <p class="tag"><b>7</b>The shoe</p>
+          <div class="subs">
+            <p class="sub" data-at="beach">Timur stayed late at the beach. The sun set. Nobody took Simit out.</p>
+            <p class="sub" data-at="home">The apartment is quiet. Too quiet. In the middle of the rug lies what used to be a shoe.</p>
+            <p class="sub" data-at="build">The negation <span class="k k-neg">-mA</span> goes before the splice, and after it comes a vowel again, so <span class="k k-y">y</span>: <b data-say="gelmeyince">gel-me-y-ince</b>. “Since he didn't come.”</p>
+            <p class="sub" data-at="cause">The splice often sounds like a reason. <a-say>Haberi duyunca çok sevindi.</a-say> He heard the news — and that's why he was happy.</p>
+          </div>
+          <div class="act act--neg">
+            <p class="act__q">Switch the first shot:</p>
+            <div class="act__row">
+              <button type="button" class="btn" aria-pressed="false" data-say="gelince" data-pos="1">gelince</button>
+              <button type="button" class="btn" aria-pressed="true" data-say="gelmeyince">gelmeyince</button>
+            </div>
+            <p class="act__fb" aria-live="polite">Timur didn't come — Simit ate the shoe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Монтажная ===== -->
+  <section data-section="lab" data-words="41" id="sec-lab">
+    <div class="page">
+      <div class="page__head rv">
+        <p class="kicker">Editing room</p>
+        <h2>Splice it yourself</h2>
+        <p>Here you splice the shots. Pick a mode and a verb — the editing table will show what the word is built from and why.</p>
+      </div>
+      <div class="lab rv">
+        <div class="lab__modes" role="group" aria-label="Editing room mode">
+          <button type="button" class="btn" data-mode="glue" aria-pressed="true">Splice</button>
+          <button type="button" class="btn" data-mode="neg" aria-pressed="false">Negation</button>
+          <button type="button" class="btn" data-mode="then" aria-pressed="false">Second shot</button>
+          <button type="button" class="btn" data-mode="quiz" aria-pressed="false">Guess</button>
+        </div>
+        <p class="lab__hint">Tap a verb. The word will build itself piece by piece.</p>
+        <div class="lab__chips" role="group" aria-label="Verbs"></div>
+        <div class="lab__tools"></div>
+        <div class="lab__screen">
+          <p class="lab__strip" aria-live="polite"></p>
+          <p class="lab__ru"></p>
+          <ul class="lab__why"></ul>
+          <p class="lab__score"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Дубли ===== -->
+  <section data-section="traps" data-words="91" id="sec-traps">
+    <div class="page">
+      <div class="page__head rv">
+        <p class="kicker">Bad takes</p>
+        <h2>Cut, bad take</h2>
+        <p>The four most common mistakes. Tap “Reshoot” to see the clean take.</p>
+      </div>
+      <div class="takes">
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><p class="clap">Take 1<i></i></p><p class="bad" data-say="Ne zaman eve gelirim, ararım.">Ne zaman eve gelirim, ararım.</p><p>A word-for-word copy of “when.” But <b data-say="ne zaman">ne zaman</b> is the question “when?”.</p><button type="button" class="btn take__go">Reshoot</button></div>
+          <div class="take__b"><p class="clap">Clean take<i></i></p><p class="good" data-say="Eve gelince ararım.">Eve gelince ararım.</p><p>One splice instead of a whole question.</p><button type="button" class="btn take__back">Back</button></div>
+        </div></article>
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><p class="clap">Take 2<i></i></p><p class="bad">Ben gelincem, ararım.</p><p>We don't hang the person on the splice. It has no person and no tense.</p><button type="button" class="btn take__go">Reshoot</button></div>
+          <div class="take__b"><p class="clap">Clean take<i></i></p><p class="good" data-say="Ben gelince ararım.">Ben gelince ararım.</p><p>The person is in the pronoun and in the second shot.</p><button type="button" class="btn take__back">Back</button></div>
+        </div></article>
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><p class="clap">Take 3<i></i></p><p class="bad">Pazara gitince karpuz al.</p><p><b>git</b> turns <b>t</b> into <b>d</b> before a vowel.</p><button type="button" class="btn take__go">Reshoot</button></div>
+          <div class="take__b"><p class="clap">Clean take<i></i></p><p class="good" data-say="Pazara gidince karpuz al.">Pazara gidince karpuz al.</p><p>But <b data-say="bitince">bitince</b> keeps its t.</p><button type="button" class="btn take__back">Back</button></div>
+        </div></article>
+        <article class="take rv"><div class="take__in">
+          <div class="take__f"><p class="clap">Take 4<i></i></p><p class="bad">Kitabı okunca anladım.</p><p>Forgot the leash: the verb ends in a vowel.</p><button type="button" class="btn take__go">Reshoot</button></div>
+          <div class="take__b"><p class="clap">Clean take<i></i></p><p class="good" data-say="Kitabı okuyunca anladım.">Kitabı okuyunca anladım.</p><p>He read the book — and got it.</p><button type="button" class="btn take__back">Back</button></div>
+        </div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Видео ===== -->
+  <section data-section="video" data-words="15" id="sec-video">
+    <div class="page">
+      <div class="page__head rv">
+        <p class="kicker">Video</p>
+        <h2>Same trick, different shot</h2>
+      </div>
+      <p class="vnote rv">Notice how the splice vowel changes to fit the verb.</p>
+      <a-video yt="pL9qweZhlFs" start="0" end="140" title="B1 - 06 -(y)IncA ve -(I)r…-mAz Kolay Anlatım!" channel="Yunus Emre Enstitüsü"></a-video>
+    </div>
+  </section>
+
+  <!-- ===== Практика ===== -->
+  <section data-section="practice" data-words="11" id="sec-practice">
+    <div class="page">
+      <div class="page__head rv">
+        <p class="kicker">Practice</p>
+        <h2>Now you splice</h2>
+        <p>First we spot it, then we place it, then we build the whole thing.</p>
+      </div>
+      <a-exercise ref="b1.inca.ex1"></a-exercise>
+      <a-exercise ref="b1.inca.ex2"></a-exercise>
+      <a-exercise ref="b1.inca.ex3"></a-exercise>
+      <a-exercise ref="b1.inca.ex4"></a-exercise>
+      <a-exercise ref="b1.inca.ex5" class="glue">
+        <div class="glue__box">
+          <p class="glue__head"><b>Splicing shots.</b> Pick a form — the shots stick together. You can press 1, 2, 3.</p>
+          <div class="glue__dots" aria-hidden="true"></div>
+          <div class="glue__strip">
+            <div class="glue__p glue__p1"><svg class="glue__ico" viewBox="0 0 56 56" aria-hidden="true"></svg><p class="glue__tr"></p></div>
+            <div class="glue__p glue__p2"><svg viewBox="0 0 56 56" aria-hidden="true"><rect x="6" y="10" width="44" height="36" rx="6" fill="none" stroke="#2f8f86" stroke-width="4"/><path d="M6 20h44M14 10v10M28 10v10M42 10v10" stroke="#2f8f86" stroke-width="3"/></svg><p class="glue__ru"></p></div>
+          </div>
+          <div class="glue__opts" role="group" aria-label="Options"></div>
+          <p class="glue__fb" aria-live="polite"></p>
+          <button type="button" class="btn glue__again" hidden>Again</button>
+        </div>
+      </a-exercise>
+    </div>
+  </section>
+
+  <!-- ===== Проверка ===== -->
+  <section data-section="check" data-words="11" id="sec-check">
+    <div class="page">
+      <div class="page__head rv">
+        <p class="kicker">Mini check</p>
+        <h2>Five questions</h2>
+        <p>New sentences, same rules. You need 80% to pass.</p>
+      </div>
+      <a-quiz ref="b1.inca.check1"></a-quiz>
+    </div>
+  </section>
+
+  <!-- ===== Шпаргалка и финал ===== -->
+  <section data-section="cheat" data-words="62" id="sec-cheat">
+    <div class="page">
+      <div class="page__head rv">
+        <p class="kicker">Movie poster</p>
+        <h2>The whole splice on one screen</h2>
+      </div>
+      <div class="poster">
+        <div class="pc pc--main rv"><h3>-(y)IncA</h3><p>as soon as · when · hearing</p><p data-say="Eve gelince seni ararım.">Eve gelince seni ararım.</p></div>
+        <div class="pc pc--har rv"><h3>Vowel</h3><div class="hrow"><b>ınca</b><span>a, ı · <span data-say="kalkınca">kalkınca</span></span><b>ince</b><span>e, i · <span data-say="gelince">gelince</span></span><b>unca</b><span>o, u · <span data-say="durunca">durunca</span></span><b>ünce</b><span>ö, ü · <span data-say="görünce">görünce</span></span></div></div>
+        <div class="pc pc--y rv"><h3>Vowel at the end</h3><p>y first: <span data-say="okuyunca">okuyunca</span>, <span data-say="bekleyince">bekleyince</span></p></div>
+        <div class="pc pc--td rv"><h3>git · et · tat</h3><p>t → d: <span data-say="gidince">gidince</span>, <span data-say="edince">edince</span>, <span data-say="tadınca">tadınca</span>. But <span data-say="bitince">bitince</span>.</p></div>
+        <div class="pc pc--neg rv"><h3>Negation</h3><p><span data-say="gelmeyince">gel-me-y-ince</span> — since he didn't come</p></div>
+        <div class="pc pc--then rv"><h3>Tense and person</h3><p>in the second shot: <span data-say="ararım">ararım</span> · <span data-say="aradım">aradım</span> · <span data-say="ara">ara</span></p></div>
+      </div>
+      <div class="fin">
+        <div class="fin__frame">
+          <svg viewBox="0 0 800 420" role="img" aria-label="Night, rain, Timur closes the window">
+            <rect width="800" height="420" fill="#1e2230"/>
+            <rect class="flash" width="800" height="420" fill="#dde6f5" opacity="0"/>
+            <g fill="#2d3550"><path d="M0 300 L60 250 L120 300 L170 240 L230 300 L300 260 L360 300 V420 H0Z"/><path d="M440 300 L500 246 L560 300 L620 256 L680 300 L740 250 L800 300 V420 H440Z"/></g>
+            <use href="#sy-minaret" x="380" y="120" width="56" height="200" style="--mn:#2d3550;--ln:#3a4466;--cp:#3a4466"/>
+            <rect x="290" y="150" width="220" height="200" fill="#f6d27a" stroke="#fbf6e9" stroke-width="5"/>
+            <g transform="translate(350 182) scale(.76)" data-art="man"></g>
+            <g class="fsh fsh-l"><rect x="290" y="150" width="110" height="200" fill="#7d96d1" stroke="#fbf6e9" stroke-width="4"/></g>
+            <g class="fsh fsh-r"><rect x="400" y="150" width="110" height="200" fill="#7d96d1" stroke="#fbf6e9" stroke-width="4"/></g>
+            <g class="rain" stroke="#c8d5ef" stroke-width="3" stroke-linecap="round"></g>
+          </svg>
+        </div>
+        <div class="fin__text rv">
+          <p>At night thunder rolls over Kaleiçi. Ayşe Teyze calls. Timur says:</p>
+          <p class="fin__line"><a-say>Merak etmeyin. Yağmur başlayınca pencereleri kapatırım.</a-say></p>
+          <p>A minute later the rain starts. Timur closes the windows. Exactly when he should. Simit is asleep.</p>
+          <p><b>Now you can</b> splice two events with one little tail: promise, tell, ask, and explain why.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<template data-achievement data-title="Splicing shots" data-text="You link two events with -(y)IncA">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <rect class="bd-body" x="16" y="44" width="88" height="60" rx="8" fill="#1e2230"/>
+    <g class="bd-top"><rect x="16" y="26" width="88" height="18" rx="4" fill="#fbf6e9" stroke="#1e2230" stroke-width="4"/><path d="M30 28 l10 14 M52 28 l10 14 M74 28 l10 14" stroke="#1e2230" stroke-width="6"/></g>
+    <text class="bd-txt" x="60" y="84" text-anchor="middle" font-family="Rubik, sans-serif" font-weight="800" font-size="22" fill="#de5b48">-IncA</text>
+    <circle class="bd-star" cx="100" cy="24" r="10" fill="#e7b347"/>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  const MP = window.MotionPathPlugin || null;
+  if (G) { const pl = [ST, MP].filter(Boolean); if (pl.length) G.registerPlugin(...pl); }
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const reduceQ = matchMedia('(prefers-reduced-motion: reduce)');
+  const moves = () => !!G && !reduceQ.matches;
+  const speak = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+
+  /* ---------- персонажи: Тимур и Симит ---------- */
+  const MAN = '<g class="man"><path d="M40 150 L37 210 M60 150 L63 210" fill="none" stroke="#22325a" stroke-width="11" stroke-linecap="round"/><path d="M28 212h14M58 212h14" stroke="#22325a" stroke-width="8" stroke-linecap="round"/><path d="M30 152 Q27 104 36 86 Q50 78 64 86 Q73 104 70 152 Z" fill="#c8d5ef" stroke="#2d4ea2" stroke-width="4" stroke-linejoin="round"/><path class="arm-l" d="M36 92 Q20 118 24 146" fill="none" stroke="#2d4ea2" stroke-width="8" stroke-linecap="round"/><path class="arm-r" d="M64 92 Q80 118 76 146" fill="none" stroke="#2d4ea2" stroke-width="8" stroke-linecap="round"/><circle cx="50" cy="58" r="22" fill="#fbf6e9" stroke="#2d4ea2" stroke-width="4"/><path d="M27 52 Q29 30 50 30 Q71 30 73 52 Z" fill="#2d4ea2"/><path d="M70 50 L90 53" stroke="#2d4ea2" stroke-width="6" stroke-linecap="round"/><circle cx="43" cy="61" r="2.6" fill="#22325a"/><circle cx="58" cy="61" r="2.6" fill="#22325a"/><path d="M44 70 Q51 74 58 70" fill="none" stroke="#22325a" stroke-width="3" stroke-linecap="round"/></g>';
+  const DOG = '<g class="dog"><path class="tail" d="M28 46 Q8 34 12 14" fill="none" stroke="#2d4ea2" stroke-width="7" stroke-linecap="round"/><path d="M44 70 L42 96 M58 72 L58 96 M90 72 L92 96 M104 70 L106 96" stroke="#2d4ea2" stroke-width="8" stroke-linecap="round"/><ellipse cx="72" cy="56" rx="46" ry="24" fill="#e9cfa2" stroke="#2d4ea2" stroke-width="4"/><ellipse cx="62" cy="50" rx="14" ry="9" fill="#c8d5ef"/><circle cx="116" cy="38" r="21" fill="#e9cfa2" stroke="#2d4ea2" stroke-width="4"/><path d="M104 22 Q98 2 110 6 Q118 12 114 24 Z" fill="#2d4ea2"/><path d="M98 52 Q110 60 124 56" fill="none" stroke="#22325a" stroke-width="5" stroke-linecap="round"/><circle cx="122" cy="34" r="3" fill="#22325a"/><circle cx="136" cy="42" r="4.5" fill="#22325a"/><path d="M124 48 Q130 52 134 48" fill="none" stroke="#22325a" stroke-width="2.5" stroke-linecap="round"/></g>';
+  $$('[data-art="man"]').forEach((g) => { g.innerHTML = MAN; });
+  $$('[data-art="dog"]').forEach((g) => { g.innerHTML = DOG; });
+  const posts = $('.posts');
+  if (posts) { let d = ''; for (let x = 0; x <= 1600; x += 80) d += `M${x} 380V440`; posts.setAttribute('d', d); }
+  const rain = $('.rain');
+  if (rain) { let h = ''; for (let i = 0; i < 26; i++) { const x = (i * 31) % 800, y = (i * 53) % 380; h += `<path class="rd" d="M${x} ${y} l-8 22"/>`; } rain.innerHTML = h; }
+
+  const wag = (root) => {
+    if (!G) return;
+    $$('.tail', root).forEach((t) => G.fromTo(t, { rotation: -16 }, { rotation: 16, transformOrigin: '100% 100%', duration: 0.12, repeat: 7, yoyo: true, ease: 'sine.inOut', overwrite: true }));
+  };
+  const pop = (el) => { if (G && el) G.fromTo(el, { scale: 0.6 }, { scale: 1, duration: 0.45, ease: 'back.out(2.4)', overwrite: 'auto' }); };
+  const shake = (el) => { if (G && el) G.fromTo(el, { x: -6 }, { x: 0, duration: 0.4, ease: 'elastic.out(1, 0.3)', overwrite: 'auto' }); };
+
+  /* ---------- скроллбар-плёнка ---------- */
+  const reel = $('[data-scrollbar]');
+  const marks = $$('.reel__btn', reel);
+  const reelList = $('.reel__list', reel);
+  const secOf = (b) => $(`[data-section="${b.dataset.go}"]`);
+  const topOf = (el) => el.getBoundingClientRect().top + scrollY;
+  const deskQ = matchMedia('(min-width: 900px)');
+  let dragMoved = false;
+  marks.forEach((b) => b.addEventListener('click', (e) => {
+    if (dragMoved) { e.preventDefault(); return; }
+    const s = secOf(b); if (!s) return;
+    scrollTo({ top: topOf(s) - (deskQ.matches ? 0 : 2), behavior: reduceQ.matches ? 'auto' : 'smooth' });
+  }));
+  let nowIdx = -1;
+  const progress = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    reel.style.setProperty('--p', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : 0);
+    let idx = 0;
+    marks.forEach((b, i) => { const s = secOf(b); if (s && topOf(s) <= scrollY + innerHeight * 0.45) idx = i; });
+    if (idx !== nowIdx) {
+      nowIdx = idx;
+      marks.forEach((b, i) => { b.classList.toggle('is-now', i === idx); if (i === idx) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
+      if (!deskQ.matches) { const b = marks[idx]; reelList.scrollTo({ left: b.offsetLeft - reelList.clientWidth / 2 + 22, behavior: 'smooth' }); }
+    }
+  };
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: progress, onRefresh: progress });
+  else addEventListener('scroll', progress, { passive: true });
+  progress();
+  addEventListener('alterna:read', (e) => {
+    const key = e.detail && e.detail.key;
+    const b = marks.find((m) => m.dataset.go === key);
+    if (b && !b.classList.contains('is-read')) { b.classList.add('is-read'); pop(b); }
+  });
+  /* на компьютере плёнку можно тянуть мышью */
+  let dragging = false, startY = 0;
+  const dragTo = (clientY) => {
+    const r = reel.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (clientY - r.top) / r.height));
+    scrollTo({ top: p * (document.documentElement.scrollHeight - innerHeight), behavior: 'auto' });
+  };
+  reel.addEventListener('pointerdown', (e) => {
+    if (!deskQ.matches || e.pointerType === 'touch') return;
+    dragging = true; dragMoved = false; startY = e.clientY;
+  });
+  addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    if (!dragMoved && Math.abs(e.clientY - startY) > 6) { dragMoved = true; reel.classList.add('is-drag'); }
+    if (dragMoved) { e.preventDefault(); dragTo(e.clientY); }
+  });
+  addEventListener('pointerup', () => {
+    if (!dragging) return;
+    dragging = false; reel.classList.remove('is-drag');
+    setTimeout(() => { dragMoved = false; }, 0);
+  });
+
+  /* ---------- действия в конце сцен ---------- */
+  $$('.act').forEach((act) => {
+    if (act.matches('.act--signs, .act--time, .act--neg')) return;
+    const fb = $('.act__fb', act);
+    const sec = act.closest('[data-section]');
+    $$('.act__row .btn', act).forEach((btn) => btn.addEventListener('click', () => {
+      const ok = btn.hasAttribute('data-ok');
+      $$('.act__row .btn', act).forEach((b) => b.classList.remove('is-right', 'is-wrong'));
+      btn.classList.add(ok ? 'is-right' : 'is-wrong');
+      fb.textContent = ok ? act.dataset.yes : act.dataset.no;
+      if (ok) { reactOk(sec); pop(btn); } else shake(btn);
+    }));
+  });
+  function reactOk(sec) {
+    const key = sec.dataset.section;
+    wag(sec);
+    if (!G) return;
+    if (key === 'story') G.fromTo($('.okstamp', sec), { scale: 2.4, rotation: -30 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)' });
+    if (key === 'frames') G.fromTo($('.pa', sec), { rotation: -4 }, { rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+    if (key === 'buffer') { const g = $('.act .gap', sec); g.textContent = 'y'; pop(g); }
+    if (key === 'td') G.fromTo($('.slice', sec), { y: 60, rotation: -20 }, { y: 0, rotation: 0, duration: 0.6, ease: 'back.out(2)' });
+  }
+
+  /* вывески: глагол → вывеска */
+  const signAct = $('.act--signs');
+  if (signAct) {
+    const sec = signAct.closest('[data-section]');
+    const fb = $('.act__fb', signAct);
+    const signs = $$('.sign', sec);
+    let picked = null, done = 0;
+    $$('.chip', signAct).forEach((chip) => chip.addEventListener('click', () => {
+      picked = chip;
+      $$('.chip', signAct).forEach((c) => c.classList.toggle('is-sel', c === chip));
+      signs.forEach((s) => s.classList.add('is-target'));
+      fb.textContent = `Verb ${chip.dataset.v}. Now tap a sign in the shot.`;
+    }));
+    signs.forEach((sign) => sign.addEventListener('click', () => {
+      speak($('.sg-form', sign).dataset.say);
+      if (!picked) { fb.textContent = 'Pick a verb below first.'; shake(sign); return; }
+      const ok = picked.dataset.to === sign.dataset.sign;
+      if (!ok) { fb.textContent = `Wrong sign. Look at the last vowel in ${picked.dataset.v}.`; shake(sign); return; }
+      const form = picked.dataset.form;
+      const line = document.createElement('span');
+      line.dataset.say = form; line.textContent = form;
+      $('.sg-more', sign).append(line);
+      if (G) {
+        const a = picked.getBoundingClientRect(), b = sign.getBoundingClientRect();
+        G.fromTo(line, { x: a.left - b.left, y: a.top - b.top, scale: 1.6 }, { x: 0, y: 0, scale: 1, duration: 0.6, ease: 'power3.out' });
+      }
+      picked.classList.remove('is-sel'); picked.classList.add('is-done'); picked = null; done++;
+      signs.forEach((s) => s.classList.remove('is-target'));
+      fb.textContent = done === 4 ? signAct.dataset.done : `${form} — in place.`;
+      if (done === 4) wag(sec);
+    }));
+  }
+
+  /* второй кадр: время */
+  const timeAct = $('.act--time');
+  if (timeAct) {
+    const sec = timeAct.closest('[data-section]');
+    const fb = $('.act__fb', timeAct), then = $('.b1-then', sec), b1 = $('.b1', sec);
+    $$('.btn', timeAct).forEach((btn) => btn.addEventListener('click', () => {
+      $$('.btn', timeAct).forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      then.textContent = btn.dataset.then; b1.dataset.say = btn.dataset.full; fb.textContent = btn.dataset.ru;
+      pop(then);
+    }));
+  }
+
+  /* ботинок: gelince / gelmeyince */
+  const negAct = $('.act--neg');
+  if (negAct) {
+    const sec = negAct.closest('[data-section]');
+    const frame = $('.frame', sec), fb = $('.act__fb', negAct), sent = $('.nsent', sec), tiles = $('.ntiles', sec);
+    $$('.btn', negAct).forEach((btn) => btn.addEventListener('click', () => {
+      const pos = btn.hasAttribute('data-pos');
+      $$('.btn', negAct).forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      frame.classList.toggle('is-pos', pos);
+      tiles.dataset.say = pos ? 'gelince' : 'gelmeyince';
+      sent.dataset.say = pos ? 'Timur gelince Simit çok sevindi.' : 'Timur gelmeyince Simit ayakkabıyı yedi.';
+      sent.innerHTML = pos
+        ? 'Timur gel<b class="k k-aff">ince</b> <span class="k-then">Simit çok sevindi.</span>'
+        : 'Timur gel<b class="k k-neg">me</b><b class="k k-y">y</b><b class="k k-aff">ince</b> <span class="k-then">Simit ayakkabıyı yedi.</span>';
+      fb.textContent = pos ? 'Timur came — Simit was happy.' : 'Timur didn\'t come — Simit ate the shoe.';
+      pop(tiles); pop(sent);
+      if (pos) wag(sec);
+    }));
+  }
+
+  /* дубли */
+  $$('.take').forEach((take) => {
+    const inner = $('.take__in', take);
+    const flip = (on) => {
+      take.classList.toggle('is-flipped', on);
+      if (G && !reduceQ.matches) G.fromTo(inner, { rotationY: on ? 0 : 180 }, { rotationY: on ? 180 : 0, duration: 0.7, ease: 'power3.inOut', clearProps: 'transform' });
+      const target = on ? $('.take__back', take) : $('.take__go', take);
+      setTimeout(() => target.focus({ preventScroll: true }), 50);
+    };
+    $('.take__go', take).addEventListener('click', () => flip(true));
+    $('.take__back', take).addEventListener('click', () => flip(false));
+  });
+
+  /* ---------- монтажная ---------- */
+  const VERBS = [
+    ['al', 'after taking', 'he didn\'t take it'], ['kalk', 'after getting up', 'he didn\'t get up'], ['çık', 'after going out', 'he didn\'t go out'], ['gel', 'after coming', 'he didn\'t come'],
+    ['iç', 'after drinking', 'he didn\'t drink'], ['bit', 'as soon as it ends', 'it didn\'t end'], ['bin', 'after getting on (a bus)', 'he didn\'t sit down'],
+    ['dur', 'as soon as it stops', 'it didn\'t stop'], ['bul', 'after finding', 'he didn\'t find it'], ['duy', 'after hearing', 'he didn\'t hear'],
+    ['otur', 'after sitting down', 'he didn\'t sit down'], ['gör', 'after seeing', 'he didn\'t see'], ['dön', 'after coming back', 'he didn\'t come back'],
+    ['başla', 'as soon as it starts', 'it didn\'t start'], ['oku', 'after reading', 'he didn\'t read'], ['bekle', 'after waiting', 'he didn\'t wait'],
+    ['yürü', 'after a walk', 'he didn\'t go for a walk'], ['uyu', 'after falling asleep', 'he didn\'t fall asleep'], ['söyle', 'after saying', 'he didn\'t say'], ['ara', 'after calling', 'he didn\'t call'],
+    ['git', 'as soon as he goes', 'he didn\'t go'], ['telefon et', 'after calling', 'he didn\'t call'], ['tat', 'after tasting', 'he didn\'t taste it'],
+    ['sat', 'after selling', 'he didn\'t sell'], ['at', 'after throwing', 'he didn\'t throw'], ['yat', 'as soon as he lies down', 'he didn\'t lie down']
+  ];
+  const VOW = 'aıoueiöü', BACK = 'aıou';
+  const HAR = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' };
+  const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
+  const SOFT = { git: 'gi', et: 'e', tat: 'ta' };
+  function build(verb, neg) {
+    const cut = verb.lastIndexOf(' ');
+    const pre = cut >= 0 ? verb.slice(0, cut + 1) : '';
+    const st = verb.slice(pre.length);
+    const parts = [], why = [];
+    let tail;
+    if (!neg && SOFT[st]) {
+      parts.push({ t: pre + SOFT[st], c: 'root' }, { t: 'd', c: 'td' });
+      tail = SOFT[st] + 'd';
+      why.push(`${st}: t becomes d before a vowel`);
+    } else { parts.push({ t: pre + st, c: 'root' }); tail = st; }
+    if (neg) {
+      const ng = BACK.includes(lastV(st)) ? 'ma' : 'me';
+      parts.push({ t: ng, c: 'neg' }); tail += ng;
+      why.push(`the negation -${ng} goes before the splice`);
+    }
+    const lv = lastV(tail), v = HAR[lv];
+    const aff = v + 'nc' + (BACK.includes(v) ? 'a' : 'e');
+    why.unshift(`last vowel “${lv}” → -${aff}`);
+    if (VOW.includes(tail[tail.length - 1])) { parts.push({ t: 'y', c: 'y' }); why.push('vowel before the splice → y steps in'); }
+    parts.push({ t: aff, c: 'aff' });
+    return { parts, word: parts.map((p) => p.t).join(''), why, aff };
+  }
+  const lab = $('.lab');
+  const strip = $('.lab__strip'), labRu = $('.lab__ru'), labWhy = $('.lab__why'), hint = $('.lab__hint'), chipsBox = $('.lab__chips'), tools = $('.lab__tools'), score = $('.lab__score');
+  let mode = 'glue', negOn = true, quizN = 0, quizOk = 0, quizItem = null;
+  const HINTS = {
+    glue: 'Tap a verb. The word will build itself piece by piece.',
+    neg: 'Same verbs, but with “not.” Watch where -mA goes.',
+    then: 'The first shot is in the can: Eve gelince. Pick the second.',
+    quiz: 'The verb comes up at random. Pick the right splice.'
+  };
+  const THEN = [
+    ['seni ararım.', 'As soon as I get home, I\'ll call you. Aorist — a promise.'],
+    ['seni aradım.', 'As soon as I got home, I called you. Already happened.'],
+    ['beni ara.', 'As soon as you get home, call me. A request.'],
+    ["Simit'i çıkarırım.", 'As soon as I get home, I\'ll take Simit out. A promise.']
+  ];
+  const showParts = (parts, extraClass) => {
+    strip.innerHTML = parts.map((p) => `<b class="t-${p.c}">${p.t}</b>`).join(extraClass || '');
+    strip.dataset.say = parts.map((p) => p.t).join('').replace(/\s+/g, ' ');
+    if (moves()) G.from($$('b', strip), { y: -34, scale: 0.4, rotation: (i) => (i % 2 ? 12 : -12), stagger: 0.07, duration: 0.4, ease: 'back.out(2)' });
+  };
+  const showWhy = (lines) => {
+    labWhy.innerHTML = lines.map((l) => `<li>${l}</li>`).join('');
+    if (moves()) G.from($$('li', labWhy), { x: -24, stagger: 0.08, duration: 0.35, ease: 'power2.out', delay: 0.2 });
+  };
+  function renderChips() {
+    chipsBox.innerHTML = '';
+    tools.innerHTML = '';
+    score.textContent = '';
+    if (mode === 'glue' || mode === 'neg') {
+      VERBS.forEach(([v]) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'btn'; b.textContent = v; b.dataset.v = v;
+        b.addEventListener('click', () => labVerb(v, b));
+        chipsBox.append(b);
+      });
+      if (mode === 'neg') {
+        const t = document.createElement('button');
+        t.type = 'button'; t.className = 'btn'; t.setAttribute('aria-pressed', String(negOn)); t.textContent = 'not: on';
+        t.addEventListener('click', () => { negOn = !negOn; t.setAttribute('aria-pressed', String(negOn)); t.textContent = negOn ? 'not: on' : 'not: off'; const cur = $('.btn.is-sel', chipsBox); if (cur) labVerb(cur.dataset.v, cur); });
+        tools.append(t);
+      }
+    } else if (mode === 'then') {
+      THEN.forEach(([tr, ru], i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'btn'; b.textContent = tr; b.dataset.say = tr;
+        b.addEventListener('click', () => {
+          $$('.btn', chipsBox).forEach((x) => x.classList.toggle('is-sel', x === b));
+          showParts([{ t: 'Eve gel', c: 'root' }, { t: 'ince', c: 'aff' }, { t: ' ' + tr, c: 'then' }]);
+          strip.dataset.say = 'Eve gelince ' + tr;
+          labRu.textContent = ru;
+          showWhy(['the splice has no tense and no person', i === 2 ? 'second shot — imperative: a request' : i === 1 ? 'second shot — past: already happened' : 'second shot — aorist: a promise']);
+        });
+        chipsBox.append(b);
+      });
+    } else {
+      const nx = document.createElement('button');
+      nx.type = 'button'; nx.className = 'btn'; nx.textContent = 'Next verb';
+      nx.addEventListener('click', nextQuiz);
+      tools.append(nx);
+      nextQuiz();
+    }
+  }
+  function labVerb(v, btn) {
+    $$('.btn', chipsBox).forEach((x) => x.classList.toggle('is-sel', x === btn));
+    const neg = mode === 'neg' && negOn;
+    const r = build(v, neg);
+    const row = VERBS.find((x) => x[0] === v);
+    showParts(r.parts);
+    labRu.textContent = `${r.word} — ${neg ? 'since ' + row[2] : row[1]}`;
+    showWhy(r.why);
+  }
+  function nextQuiz() {
+    const row = VERBS[Math.floor(Math.random() * VERBS.length)];
+    const r = build(row[0], false);
+    const stem = r.word.slice(0, r.word.length - r.aff.length);
+    const opts = new Set([r.word]);
+    const vs = ['ı', 'i', 'u', 'ü'].filter((x) => x !== r.aff[0]).sort(() => Math.random() - 0.5);
+    if (r.parts.some((p) => p.c === 'y')) opts.add(stem.slice(0, -1) + r.aff);
+    else if (r.parts.some((p) => p.c === 'td')) opts.add(stem.slice(0, -1) + 't' + r.aff);
+    for (const x of vs) { if (opts.size >= 4) break; opts.add(stem + x + 'nc' + (BACK.includes(x) ? 'a' : 'e')); }
+    quizItem = { r, row };
+    chipsBox.innerHTML = '';
+    strip.innerHTML = `<b class="t-root">${row[0]}</b> <b>+ ?</b>`;
+    strip.dataset.say = row[0];
+    labRu.textContent = `${row[0]}: ${row[1]}`;
+    labWhy.innerHTML = '';
+    [...opts].sort(() => Math.random() - 0.5).forEach((o) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'btn'; b.textContent = o;
+      b.addEventListener('click', () => {
+        if (!quizItem || quizItem.answered) return;
+        quizItem.answered = true;
+        const ok = o === quizItem.r.word;
+        quizN++; if (ok) quizOk++;
+        b.classList.add(ok ? 'is-right' : 'is-wrong');
+        if (!ok) { const right = $$('.btn', chipsBox).find((x) => x.textContent === quizItem.r.word); if (right) right.classList.add('is-right'); shake(b); }
+        showParts(quizItem.r.parts);
+        showWhy(quizItem.r.why);
+        score.textContent = `${quizOk} of ${quizN}`;
+        pop(score);
+      });
+      chipsBox.append(b);
+    });
+  }
+  $$('[data-mode]', lab).forEach((b) => b.addEventListener('click', () => {
+    mode = b.dataset.mode;
+    $$('[data-mode]', lab).forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    hint.textContent = HINTS[mode];
+    strip.innerHTML = ''; labRu.textContent = ''; labWhy.innerHTML = '';
+    renderChips();
+    if (moves()) G.from(chipsBox.children, { y: 16, scale: 0.8, stagger: 0.015, duration: 0.3, ease: 'power2.out' });
+  }));
+  strip.addEventListener('click', () => { if (strip.dataset.say) speak(strip.dataset.say); });
+  renderChips();
+  labVerb('başla', $('.btn', chipsBox));
+
+  /* ---------- нестандартное упражнение: склейка кадров ---------- */
+  const EX = 'b1.inca.ex5';
+  const ICONS = {
+    bus: '<rect x="8" y="10" width="40" height="32" rx="6" fill="none" stroke="#2d4ea2" stroke-width="4"/><path d="M8 26h40" stroke="#2d4ea2" stroke-width="3"/><circle cx="18" cy="46" r="5" fill="#2d4ea2"/><circle cx="38" cy="46" r="5" fill="#2d4ea2"/>',
+    eye: '<path d="M4 28 Q28 6 52 28 Q28 50 4 28Z" fill="none" stroke="#2d4ea2" stroke-width="4"/><circle cx="28" cy="28" r="7" fill="#2d4ea2"/>',
+    rain: '<path d="M12 30 a10 10 0 0 1 6-18 a14 14 0 0 1 26 4 a9 9 0 0 1 2 14Z" fill="none" stroke="#2d4ea2" stroke-width="4" stroke-linejoin="round"/><path d="M18 38 l-3 8M30 38 l-3 8M42 38 l-3 8" stroke="#2d4ea2" stroke-width="4" stroke-linecap="round"/>',
+    sun: '<circle cx="28" cy="28" r="10" fill="none" stroke="#2d4ea2" stroke-width="4"/><path d="M28 4v8M28 44v8M4 28h8M44 28h8M11 11l6 6M39 39l6 6M45 11l-6 6M17 39l-6 6" stroke="#2d4ea2" stroke-width="4" stroke-linecap="round"/>',
+    walk: '<path d="M14 40 q4-10 10-6 q4 4-2 10z M32 22 q4-10 10-6 q4 4-2 10z" fill="#2d4ea2"/>',
+    shoe: '<path d="M6 34 Q8 18 24 20 Q36 22 40 32 L50 34 Q54 38 50 42 H8 Q4 40 6 34Z" fill="none" stroke="#2d4ea2" stroke-width="4" stroke-linejoin="round"/>'
+  };
+  const GLUE = [
+    { id: 'i1', ic: 'bus', a: 'Otobüs', b: 'in.', opts: ['durınca', 'durunca', 'durünce'], ok: 1, ru: 'Once the bus stops, get off.' },
+    { id: 'i2', ic: 'eye', a: 'Simit beni', b: 'kuyruğunu salladı.', opts: ['görünce', 'görunca', 'görince'], ok: 0, ru: 'Seeing me, Simit wagged his tail.' },
+    { id: 'i3', ic: 'rain', a: 'Yağmur', b: 'pencereleri kapat.', opts: ['başlınca', 'başlayince', 'başlayınca'], ok: 2, ru: 'Once it starts raining, close the windows.' },
+    { id: 'i4', ic: 'sun', a: 'Sabah', b: "Simit'i çıkar.", opts: ['kalkınca', 'kalkince', 'kalkunca'], ok: 0, ru: 'When you get up in the morning, take Simit out.' },
+    { id: 'i5', ic: 'walk', a: 'Biraz', b: 'Simit sakinleşti.', opts: ['yürünce', 'yürüyünce', 'yürüyince'], ok: 1, ru: 'We walked a bit — and Simit calmed down.' },
+    { id: 'i6', ic: 'shoe', a: 'Timur', b: 'Simit ayakkabıyı yedi.', opts: ['gelmeince', 'gelinceme', 'gelmeyince'], ok: 2, ru: 'Timur didn\'t come — and Simit ate the shoe.' }
+  ];
+  const WHY = {
+    i1: 'dur: last vowel u → -unca.',
+    i2: 'gör: last vowel ö → -ünce.',
+    i3: 'başla ends in a vowel: first y, then -ınca.',
+    i4: 'kalk: last vowel a → -ınca.',
+    i5: 'yürü ends in a vowel: y, then -ünce.',
+    i6: 'The negation -me goes before the splice, then y: gelmeyince.'
+  };
+  const game = $('.glue');
+  if (game) {
+    const tr = $('.glue__tr', game), ru = $('.glue__ru', game), ico = $('.glue__ico', game), opts = $('.glue__opts', game), fb = $('.glue__fb', game), dots = $('.glue__dots', game), again = $('.glue__again', game), p1 = $('.glue__p1', game), p2 = $('.glue__p2', game);
+    let idx = 0, right = 0, t0 = 0, busy = false;
+    dots.innerHTML = GLUE.map(() => '<i></i>').join('');
+    const render = () => {
+      const it = GLUE[idx];
+      busy = false;
+      ico.innerHTML = ICONS[it.ic];
+      tr.innerHTML = `${it.a} <span class="slot-gap">?</span> ${it.b}`;
+      tr.dataset.say = '';
+      ru.textContent = it.ru;
+      fb.textContent = `${idx + 1} of ${GLUE.length}`;
+      opts.innerHTML = '';
+      it.opts.forEach((o, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.className = 'btn'; b.textContent = `${i + 1}. ${o}`; b.dataset.i = i;
+        b.addEventListener('click', () => choose(i));
+        opts.append(b);
+      });
+      t0 = performance.now();
+      if (moves()) { G.from(p1, { x: -40, rotation: -3, duration: 0.45, ease: 'power3.out' }); G.from(p2, { x: 40, rotation: 3, duration: 0.45, ease: 'power3.out' }); }
+    };
+    const choose = (i) => {
+      if (busy) return;
+      busy = true;
+      const it = GLUE[idx], ok = i === it.ok, ans = it.opts[i];
+      const btns = $$('.btn', opts);
+      btns[i].classList.add(ok ? 'is-right' : 'is-wrong');
+      if (!ok) btns[it.ok].classList.add('is-right');
+      const sent = `${it.a} ${it.opts[it.ok]} ${it.b}`;
+      tr.innerHTML = `${it.a} <span class="slot-gap">${it.opts[it.ok]}</span> ${it.b}`;
+      tr.dataset.say = sent;
+      fb.textContent = ok ? 'Spliced!' : `Not that. ${WHY[it.id]}`;
+      dots.children[idx].classList.add(ok ? 'ok' : 'no');
+      if (ok) right++;
+      try { window.AlternaTracker && window.AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: ans, timeMs: Math.round(performance.now() - t0) }); } catch (e) { /* офлайн */ }
+      if (moves()) { if (ok) G.to([p1, p2], { x: (k) => (k ? -8 : 8), duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.inOut' }); else shake(btns[i]); }
+      setTimeout(next, ok ? 900 : 1900);
+    };
+    const next = () => {
+      idx++;
+      if (idx < GLUE.length) { render(); return; }
+      try { window.AlternaTracker && window.AlternaTracker.complete({ exerciseId: EX, correct: right, total: GLUE.length }); } catch (e) { /* офлайн */ }
+      opts.innerHTML = '';
+      tr.textContent = `Spliced ${right} of ${GLUE.length}.`;
+      ru.textContent = right === GLUE.length ? 'A clean edit, not a single extra frame.' : 'Look at the red dots and try again.';
+      fb.textContent = '';
+      again.hidden = false;
+      again.focus({ preventScroll: true });
+    };
+    again.addEventListener('click', () => { idx = 0; right = 0; again.hidden = true; $$('i', dots).forEach((d) => d.className = ''); render(); });
+    game.addEventListener('keydown', (e) => { const n = Number(e.key); if (n >= 1 && n <= 3 && idx < GLUE.length && !busy) { e.preventDefault(); choose(n - 1); } });
+    render();
+    const solve = async () => {
+      idx = 0; right = 0; again.hidden = true; $$('i', dots).forEach((d) => d.className = ''); render();
+      for (let k = 0; k < GLUE.length; k++) {
+        choose(GLUE[idx].ok);
+        await new Promise((r) => setTimeout(r, 950));
+      }
+    };
+    const reg = () => { if (window.AlternaKit && window.AlternaKit.registerSolver) { window.AlternaKit.registerSolver(EX, solve); return true; } return false; };
+    if (!reg()) { let n = 0; const t = setInterval(() => { if (reg() || ++n > 50) clearInterval(t); }, 100); }
+  }
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    if (!detail || !detail.timeline || !detail.badge) return;
+    const b = detail.badge, tl = detail.timeline;
+    tl.fromTo(b.querySelector('.bd-top'), { rotation: -28, transformOrigin: '0% 100%' }, { rotation: 0, duration: 0.35, ease: 'back.in(2)' }, 0.9);
+    tl.fromTo(b.querySelector('.bd-txt'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.4, ease: 'back.out(2.5)' }, 1.25);
+    tl.fromTo(b.querySelector('.bd-star'), { scale: 0, rotation: -90, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: 0.45, ease: 'back.out(3)' }, 1.5);
+  });
+
+  /* ---------- кино: закреплённые сцены ---------- */
+  if (!G || !ST) return;
+  ST.config({ ignoreMobileResize: true });
+
+  const zoom = (tl, cam, px, py, s, pos, d = 1) => tl.to(cam, { scale: s, xPercent: 50 - px * s, yPercent: 50 - py * s, duration: d }, pos);
+  const unzoom = (tl, cam, pos, d = 0.8) => tl.to(cam, { scale: 1, xPercent: 0, yPercent: 0, duration: d }, pos);
+  const draw = (tl, path, pos, d = 0.6) => {
+    const L = path.getTotalLength();
+    path.style.strokeDasharray = L;
+    tl.fromTo(path, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: d, ease: 'none' }, pos);
+  };
+
+  const SCENES = {
+    story: { scrollTrigger: { desk: 2.5, mob: 1.5 }, build(tl, S, A, m) {
+      const cam = S('.cam');
+      tl.addLabel('map', 0);
+      if (!m) tl.fromTo(S('.map-far'), { x: -24 }, { x: 24, duration: 1.6, ease: 'none' }, 0);
+      tl.fromTo(A('.map-cloud'), { x: -50 }, { x: 70, duration: 1.6, ease: 'none' }, 0);
+      tl.fromTo(S('.tiny'), { x: -60 }, { x: 0, duration: 1.6, ease: 'none' }, 0);
+      zoom(tl, cam, 50, 50, 1.1, 0, 1.5);
+      tl.addLabel('dive', 1.6);
+      zoom(tl, cam, 67, 46, 3.4, 'dive', 1.1);
+      tl.fromTo(S('.dot'), { scale: 0 }, { scale: 14, duration: 0.45, ease: 'power2.in' }, 'dive+=0.75');
+      tl.addLabel('swap', 'dive+=1.22');
+      tl.fromTo(S('.lay-map'), { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.02 }, 'swap');
+      tl.fromTo(S('.lay-in'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.02 }, 'swap');
+      tl.fromTo(S('.note'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.02 }, 'swap');
+      tl.to(cam, { scale: 1, xPercent: 0, yPercent: 0, duration: 0.02 }, 'swap');
+      tl.to(S('.dot'), { scale: 0, duration: 0.55, ease: 'power2.out' }, 'swap+=0.04');
+      tl.addLabel('in', 'swap+=0.1');
+      tl.from(S('.man-in'), { x: -160, duration: 0.8 }, 'in+=0.2');
+      tl.from(S('.dog-in'), { x: 180, duration: 0.8 }, 'in+=0.3');
+      tl.from(S('.magnet'), { y: -70, duration: 0.45, ease: 'bounce.out' }, 'in+=0.7');
+      tl.addLabel('note', 'in+=1.3');
+      zoom(tl, cam, 46, 33, m ? 2.9 : 2.5, 'note', 0.9);
+      tl.from(S('.note .u'), { scaleX: 0, duration: 0.4 }, 'note+=0.9');
+      tl.addLabel('close', 'note+=1.7');
+      unzoom(tl, cam, 'close', 0.8);
+      tl.from(A('.lay-in .shut-l'), { scaleX: 0, transformOrigin: '0% 50%', duration: 0.5, stagger: 0.12 }, 'close+=0.6');
+      tl.from(A('.lay-in .shut-r'), { scaleX: 0, transformOrigin: '100% 50%', duration: 0.5, stagger: 0.12 }, 'close+=0.6');
+      tl.from(S('.merc'), { scaleY: 0.2, transformOrigin: '50% 100%', duration: 1 }, 'close+=0.8');
+      tl.to(S('.dog-in .dog'), { scaleY: 0.72, transformOrigin: '50% 100%', duration: 0.5 }, 'close+=1.3');
+      tl.from(A('.sweat path'), { scale: 0, transformOrigin: '50% 0%', stagger: 0.1, duration: 0.3 }, 'close+=1.4');
+      tl.addLabel('call', 'close+=2');
+      tl.fromTo(S('.phone'), { rotation: -7 }, { rotation: 7, transformOrigin: '50% 50%', duration: 0.1, repeat: 7, yoyo: true, ease: 'none' }, 'call');
+      tl.from(S('.bubble'), { scale: 0, duration: 0.45, ease: 'back.out(2)' }, 'call+=0.4');
+    } },
+    frames: { scrollTrigger: { desk: 2.0, mob: 1.3 }, build(tl, S, A, m, F) {
+      const big = S('.big');
+      tl.addLabel('word', 0);
+      tl.fromTo(big, { scale: m ? 2.2 : 3.2, y: () => F.offsetHeight * 0.32 }, { scale: 1.5, y: () => F.offsetHeight * 0.32, duration: 1 }, 0);
+      tl.to(S('.p-root'), { xPercent: -10, duration: 0.5 }, 0.9);
+      tl.to(S('.p-aff'), { xPercent: 12, duration: 0.5 }, 0.9);
+      tl.from(S('.p-y'), { yPercent: -180, rotation: -40, duration: 0.5, ease: 'back.out(2)' }, 1.05);
+      tl.addLabel('panels', 1.8);
+      tl.to(big, { scale: 1, y: 0, duration: 0.8 }, 'panels');
+      tl.to([S('.p-root'), S('.p-aff')], { xPercent: 0, duration: 0.6 }, 'panels');
+      tl.from(S('.pa'), { xPercent: -150, rotation: -8, duration: 0.8 }, 'panels+=0.2');
+      tl.from(S('.pb'), { xPercent: 150, rotation: 8, duration: 0.8 }, 'panels+=0.35');
+      tl.fromTo(A('.v1'), { autoAlpha: 1 }, { autoAlpha: 1, duration: 0.01 }, 0);
+      tl.fromTo(A('.v2'), { autoAlpha: 0 }, { autoAlpha: 0, duration: 0.01 }, 0);
+      tl.from(A('.pa .drop'), { y: -40, stagger: 0.04, duration: 0.35 }, 'panels+=1');
+      tl.from(S('.bshut-l'), { scaleX: 0, transformOrigin: '0% 50%', duration: 0.4 }, 'panels+=1.2');
+      tl.from(S('.bshut-r'), { scaleX: 0, transformOrigin: '100% 50%', duration: 0.4 }, 'panels+=1.2');
+      draw(tl, S('.arrow'), 'panels+=1.3', 0.5);
+      tl.addLabel('ru', 'panels+=2');
+      tl.from(S('.stamp-ru'), { scale: 2.6, rotation: -24, duration: 0.5, ease: 'back.out(1.8)' }, 'ru');
+      tl.addLabel('more', 'ru+=1');
+      tl.to(A('.v1'), { autoAlpha: 0, duration: 0.35 }, 'more');
+      tl.fromTo(A('.v2'), { scale: 0.8, transformOrigin: '50% 50%' }, { autoAlpha: 1, scale: 1, duration: 0.45 }, 'more+=0.2');
+    } },
+    harmony: { scrollTrigger: { desk: 2.4, mob: 1.5 }, build(tl, S, A, m) {
+      const cam = S('.cam'), signs = A('.sign');
+      tl.addLabel('guess', 0);
+      tl.fromTo(S('.guess'), { autoAlpha: 1, scale: 0, rotation: -10 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2)' }, 0.1);
+      tl.fromTo(S('.far'), { x: 40 }, { x: -40, duration: 6.6, ease: 'none' }, 0);
+      if (!m) tl.fromTo(S('.near'), { x: -50 }, { x: 50, duration: 6.6, ease: 'none' }, 0);
+      tl.fromTo(S('.walker'), { x: -120 }, { x: 640, duration: 6.6, ease: 'none' }, 0);
+      const pts = [12.5, 37.5, 62.5, 87.5];
+      ['s1', 's2', 's3', 's4'].forEach((l, i) => {
+        tl.addLabel(l, 1 + i * 1.1);
+        zoom(tl, cam, pts[i], 45, m ? 2.3 : 2.1, l, 0.7);
+        tl.from($('.sg-aff', signs[i]), { scale: 0, rotation: -12, duration: 0.35, ease: 'back.out(2.2)' }, `${l}+=0.5`);
+        tl.from($('.sg-form', signs[i]), { scale: 0, duration: 0.35, ease: 'back.out(2)' }, `${l}+=0.7`);
+      });
+      tl.to(S('.guess'), { autoAlpha: 0, scale: 0.3, duration: 0.3 }, 's3+=0.5');
+      tl.addLabel('all', 5.6);
+      unzoom(tl, cam, 'all', 0.8);
+      tl.addLabel('ex', 'all+=1');
+      tl.from(S('.exb'), { scale: 0, transformOrigin: '50% 100%', duration: 0.45, ease: 'back.out(1.8)' }, 'ex');
+    } },
+    buffer: { scrollTrigger: { desk: 2.1, mob: 1.35 }, build(tl, S, A, m, F) {
+      tl.addLabel('walk', 0);
+      tl.fromTo(S('.far'), { x: 0 }, { x: -60, duration: 5.6, ease: 'none' }, 0);
+      tl.fromTo(S('.mid'), { x: 0 }, { x: -480, duration: 5.6, ease: 'none' }, 0);
+      if (!m) tl.fromTo(S('.near-l'), { x: 0 }, { x: -260, duration: 5.6, ease: 'none' }, 0);
+      tl.fromTo(S('.walkers'), { y: 0 }, { y: -6, duration: 0.2, repeat: 15, yoyo: true, ease: 'sine.inOut' }, 0);
+      draw(tl, S('.leash'), 0.2, 0.5);
+      tl.addLabel('clash', 1);
+      tl.from(S('.w-oku'), { x: () => -F.offsetWidth * 0.32, duration: 0.6 }, 'clash');
+      tl.from(S('.w-unca'), { x: () => F.offsetWidth * 0.32, duration: 0.6 }, 'clash');
+      tl.fromTo(S('.bump'), { scale: 0 }, { scale: 1.4, duration: 0.18, yoyo: true, repeat: 1 }, 'clash+=0.58');
+      tl.fromTo(S('.wrow'), { rotation: 0 }, { rotation: 4, duration: 0.07, repeat: 5, yoyo: true }, 'clash+=0.6');
+      tl.addLabel('y', 2.2);
+      const h = F.offsetHeight;
+      if (MP) tl.fromTo(S('.w-y'), { scale: 0.4, x: -70, y: h * 0.5, rotation: -220 }, { scale: 1, rotation: 0, motionPath: { path: [{ x: -70, y: h * 0.5 }, { x: -130, y: h * 0.2 }, { x: 0, y: 0 }], curviness: 1.3 }, duration: 0.9 }, 'y');
+      else tl.from(S('.w-y'), { scale: 0, y: h * 0.4, duration: 0.6 }, 'y');
+      tl.addLabel('list', 3.4);
+      tl.from(A('.tg'), { xPercent: 180, rotation: 14, stagger: 0.15, duration: 0.5 }, 'list');
+      tl.addLabel('ex', 4.6);
+      tl.to(S('.w-dog .dog'), { scaleY: 0.75, transformOrigin: '50% 100%', duration: 0.4 }, 'ex');
+      tl.from(A('.zz text'), { y: 24, scale: 0, stagger: 0.12, duration: 0.3 }, 'ex+=0.3');
+    } },
+    td: { scrollTrigger: { desk: 2.0, mob: 1.3 }, build(tl, S, A, m, F) {
+      const cam = S('.cam');
+      tl.addLabel('market', 0);
+      tl.fromTo(cam, { scale: 1.7, xPercent: 50 - 25 * 1.7, yPercent: 50 - 50 * 1.7 }, { scale: 1.7, xPercent: 50 - 75 * 1.7, yPercent: 50 - 50 * 1.7, duration: 1.4 }, 0);
+      if (!m) tl.fromTo(S('.far'), { x: 30 }, { x: -30, duration: 3, ease: 'none' }, 0);
+      tl.addLabel('msg', 1.5);
+      unzoom(tl, cam, 'msg', 0.7);
+      tl.from(S('.ph'), { yPercent: 140, rotation: 12, duration: 0.6 }, 'msg+=0.4');
+      tl.from(S('.ph .msg'), { scale: 0, duration: 0.35, ease: 'back.out(2)' }, 'msg+=0.9');
+      tl.fromTo(S('.huh'), { autoAlpha: 1, scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2)' }, 'msg+=1.3');
+      tl.addLabel('flip', 3.1);
+      tl.to(S('.huh'), { autoAlpha: 0, scale: 0.4, duration: 0.3 }, 'flip');
+      tl.from(S('.flap'), { y: -50, scale: 0.6, duration: 0.4 }, 'flip');
+      tl.fromTo(S('.fl-t'), { scaleY: 1 }, { scaleY: 0, transformOrigin: '50% 100%', duration: 0.25, ease: 'power2.in' }, 'flip+=0.5');
+      tl.from(S('.fl-d'), { scaleY: 0, transformOrigin: '50% 0%', duration: 0.25, ease: 'power2.out' }, 'flip+=0.75');
+      tl.addLabel('list', 4.2);
+      tl.from(A('.tdl .col'), { y: () => F.offsetHeight * 0.55, rotation: (i) => (i ? 8 : -8), stagger: 0.2, duration: 0.6 }, 'list');
+    } },
+    time: { scrollTrigger: { desk: 2.2, mob: 1.4 }, build(tl, S, A, m) {
+      const cam = S('.cam');
+      tl.addLabel('chat', 0);
+      tl.fromTo(cam, { scale: 2.6, xPercent: 50 - 27 * 2.6, yPercent: 50 - 45 * 2.6 }, { scale: 1, xPercent: 0, yPercent: 0, duration: 1 }, 0);
+      tl.from(S('.b1'), { scale: 0, duration: 0.4, ease: 'back.out(2)' }, 0.9);
+      tl.addLabel('none', 1.8);
+      tl.fromTo(S('.nostamp'), { autoAlpha: 1, scale: 2.2, rotation: -20 }, { scale: 1, rotation: -6, duration: 0.4, ease: 'back.out(1.6)' }, 'none');
+      tl.to(S('.nostamp'), { autoAlpha: 0, scale: 0.6, duration: 0.3 }, 'none+=1.2');
+      tl.addLabel('tenses', 3.4);
+      tl.from(S('.slotcard'), { xPercent: 150, rotation: 8, duration: 0.6 }, 'tenses');
+      [S('.slot__in'), S('.slot__ru-in')].forEach((reelEl) => {
+        tl.to(reelEl, { yPercent: -33.333, duration: 0.35 }, 'tenses+=0.9');
+        tl.to(reelEl, { yPercent: -66.666, duration: 0.35 }, 'tenses+=1.6');
+        tl.to(reelEl, { yPercent: 0, duration: 0.45 }, 'tenses+=2.3');
+      });
+      tl.addLabel('who', 6.4);
+      tl.from(S('.b2'), { scale: 0, duration: 0.4, ease: 'back.out(2)' }, 'who');
+      tl.from(A('.whocard i'), { scale: 0, stagger: 0.15, duration: 0.3, ease: 'back.out(2)' }, 'who+=0.4');
+    } },
+    negative: { scrollTrigger: { desk: 2.1, mob: 1.35 }, build(tl, S, A, m) {
+      const cam = S('.cam');
+      tl.addLabel('beach', 0);
+      tl.fromTo(S('.lay-beach'), { autoAlpha: 1 }, { autoAlpha: 1, duration: 0.01 }, 0);
+      tl.fromTo(S('.sun'), { y: 0 }, { y: 190, duration: 2, ease: 'none' }, 0);
+      tl.fromTo(S('.warm'), { opacity: 0 }, { opacity: 0.5, duration: 2, ease: 'none' }, 0);
+      if (!m) tl.fromTo(S('.sea-w'), { x: 0 }, { x: -80, duration: 2, ease: 'none' }, 0);
+      tl.addLabel('home', 2);
+      tl.fromTo(S('.sh-a'), { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'power2.in' }, 'home');
+      tl.fromTo(S('.sh-b'), { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: 'power2.in' }, 'home');
+      tl.to(S('.lay-beach'), { autoAlpha: 0, duration: 0.02 }, 'home+=0.42');
+      tl.to(S('.sh-a'), { scaleX: 0, duration: 0.5, ease: 'power2.out' }, 'home+=0.46');
+      tl.to(S('.sh-b'), { scaleX: 0, duration: 0.5, ease: 'power2.out' }, 'home+=0.46');
+      tl.from(S('.shoe'), { rotation: -40, y: -30, duration: 0.4 }, 'home+=0.9');
+      tl.from(A('.bits path'), { scale: 0, stagger: 0.05, duration: 0.2 }, 'home+=1');
+      tl.addLabel('build', 3.6);
+      tl.from(A('.ntiles b'), { y: -50, scale: 0, stagger: 0.12, duration: 0.35, ease: 'back.out(2)' }, 'build');
+      tl.from(S('.nsent'), { yPercent: 160, duration: 0.4 }, 'build+=0.6');
+      tl.addLabel('cause', 5);
+      zoom(tl, cam, 62, 66, 1.7, 'cause', 0.7);
+      unzoom(tl, cam, 'cause+=1.4', 0.6);
+    } }
+  };
+
+  function film(key, m, scene) {
+    const sec = $(`[data-section="${key}"]`);
+    if (!sec) return;
+    const pin = $('.scene', sec), F = $('.frame', sec);
+    const S = (s) => $(s, sec), A = (s) => $$(s, sec);
+    const tl = G.timeline({
+      defaults: { ease: 'power2.inOut', duration: 1 },
+      scrollTrigger: { trigger: pin, start: 'top top', end: () => '+=' + Math.round(innerHeight * (m ? scene.scrollTrigger.mob : scene.scrollTrigger.desk)), pin: true, scrub: m ? 0.5 : 0.8, anticipatePin: 1, invalidateOnRefresh: true }
+    });
+    scene.build(tl, S, A, m, F);
+    const box = S('.subs'), subs = A('.sub');
+    subs.forEach((s, i) => {
+      const at = s.dataset.at, nxt = subs[i + 1] && subs[i + 1].dataset.at;
+      if (i > 0) tl.fromTo(s, { y: () => box.offsetHeight + 12 }, { y: 0, duration: 0.45, ease: 'power3.out' }, at);
+      if (nxt) tl.to(s, { y: () => -(box.offsetHeight + 12), duration: 0.4, ease: 'power3.in' }, `${nxt}-=0.42`);
+    });
+    tl.from(S('.act'), { scale: 0, transformOrigin: '50% 100%', duration: 0.5, ease: 'back.out(1.6)' }, '+=0.2');
+    tl.to({}, { duration: 1.2 });
+  }
+
+  const mm = G.matchMedia();
+  mm.add({ desk: '(min-width: 900px) and (prefers-reduced-motion: no-preference)', mob: '(max-width: 899.98px) and (prefers-reduced-motion: no-preference)' }, (ctx) => {
+    const m = !!ctx.conditions.mob;
+    document.documentElement.classList.add('film');
+    Object.keys(SCENES).forEach((k) => film(k, m, SCENES[k]));
+
+    /* появления обычных секций */
+    ScrollTrigger.batch('.rv', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 46, rotation: -1.5, stagger: 0.08, duration: 0.6, ease: 'power3.out' }) });
+
+    /* титр: дом за домом */
+    G.from('.title__row use, .title-dog', { y: 40, stagger: 0.06, duration: 0.6, ease: 'back.out(1.6)', delay: 0.2 });
+    const dogLoop = G.to('.title-dog .tail', { rotation: 14, transformOrigin: '100% 100%', duration: 0.3, repeat: -1, yoyo: true, ease: 'sine.inOut', paused: true });
+    ScrollTrigger.create({ trigger: '.title', start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? dogLoop.play() : dogLoop.pause()) });
+
+    /* финал: гроза, окна закрываются ровно вовремя */
+    const fin = $('.fin__frame');
+    const drops = $$('.rain .rd');
+    const rainLoop = G.fromTo(drops, { y: -60 }, { y: 420, duration: 0.7, ease: 'none', repeat: -1, stagger: { each: 0.05, repeat: -1 }, paused: true });
+    ScrollTrigger.create({ trigger: fin, start: 'top bottom', end: 'bottom top', onToggle: (self) => (self.isActive ? rainLoop.play() : rainLoop.pause()) });
+    const ft = G.timeline({ scrollTrigger: { trigger: fin, start: 'top 80%', end: 'bottom 45%', scrub: 0.6 } });
+    ft.fromTo('.flash', { opacity: 0 }, { opacity: 0.8, duration: 0.15, yoyo: true, repeat: 1 }, 0.2)
+      .from('.fsh-l', { scaleX: 0, transformOrigin: '0% 50%', duration: 0.6 }, 0.6)
+      .from('.fsh-r', { scaleX: 0, transformOrigin: '100% 50%', duration: 0.6 }, 0.6);
+
+    return () => document.documentElement.classList.remove('film');
+  });
+
+  const refresh = () => ST.refresh();
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 350));
+  reduceQ.addEventListener('change', () => setTimeout(refresh, 50));
+});
+</script>
+</body>
+</html>

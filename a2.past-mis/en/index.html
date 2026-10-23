@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a2.past-mis">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Reported past -mIş · lesson 1</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+  :root {
+    --blue: #4262ff; --blue2: #5b78ff; --mint: #92fcd2; --pink: #f55cf2; --ink: #0d0d10; --paper: #ffffff; --soft: #f4f4f6;
+    --disp: "Arial Black", "Helvetica Neue", Impact, system-ui, sans-serif;
+    --ak-bg: #ffffff; --ak-surface: #f4f4f6; --ak-ink: #0d0d10; --ak-muted: #4a4a55; --ak-line: #e2e2ea;
+    --ak-accent: #4262ff; --ak-accent-ink: #ffffff; --ak-accent-soft: #e6ebff;
+    --ak-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --ak-font-display: var(--disp);
+    --ease: cubic-bezier(.2, .9, .25, 1.2);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 500 var(--ak-text)/1.55 var(--ak-font); overflow-x: clip; }
+  button { font: inherit; color: inherit; }
+  main { padding-top: 30px; }
+  @media (min-width: 768px) { main { padding-top: 0; } }
+
+  /* полосы-секции, как в исходном гайде: синий, мятный, розовый, чёрный, белый */
+  .pm-band { position: relative; padding: clamp(48px, 9vw, 88px) 16px; overflow: hidden; }
+  .pm-band > .pm-in { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; }
+  .pm-blue { background: var(--blue); color: #fff; --ak-accent: var(--mint); --ak-accent-ink: var(--ink); --ak-accent-soft: rgba(146, 252, 210, .22); }
+  .pm-mint { background: var(--mint); color: var(--ink); --ak-accent: var(--blue); --ak-accent-soft: rgba(66, 98, 255, .14); }
+  .pm-pink { background: var(--pink); color: var(--ink); --ak-accent: var(--ink); --ak-accent-ink: var(--mint); --ak-accent-soft: rgba(13, 13, 16, .12); }
+  .pm-ink { background: var(--ink); color: #fff; --ak-accent: var(--mint); --ak-accent-ink: var(--ink); --ak-accent-soft: rgba(146, 252, 210, .18); }
+  .pm-white { background: var(--paper); color: var(--ink); }
+  .pm-soft { background: var(--soft); color: var(--ink); }
+
+  .pm-chip { display: inline-block; padding: 8px 16px; border-radius: 999px; font-weight: 800; font-size: 13px; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 18px; background: var(--mint); color: var(--ink); border: 2px solid var(--ink); }
+  .pm-ink .pm-chip, .pm-blue .pm-chip { border-color: var(--mint); }
+  .pm-pink .pm-chip { background: var(--ink); color: var(--mint); }
+  h1, h2 { font-family: var(--disp); font-weight: 900; text-transform: uppercase; letter-spacing: -.03em; line-height: 1.02; margin: 0 0 18px; }
+  h1 { font-size: clamp(30px, 8.4vw, 66px); }
+  h2 { font-size: clamp(26px, 7.6vw, 52px); }
+  h3 { font-size: 19px; margin: 0 0 8px; font-weight: 800; }
+  p { margin: 0 0 12px; max-width: 65ch; }
+  .t-mint { color: var(--mint); } .t-pink { color: var(--pink); } .t-blue { color: var(--blue); }
+  .pm-hl { display: inline-block; background: var(--pink); color: #fff; padding: 0 .14em; border-radius: .12em; rotate: -2deg; }
+  .pm-lead { font-size: 18px; font-weight: 600; }
+  .pm-tr { font-weight: 800; }
+  .pm-ru { opacity: .82; font-size: .95em; }
+  .pm-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 999px; border: 2px solid currentColor; background: transparent; font-weight: 800; text-transform: uppercase; font-size: 13px; letter-spacing: .02em; cursor: pointer; }
+  .pm-btn--solid { background: var(--mint); color: var(--ink); border-color: var(--ink); box-shadow: 0 4px 0 var(--ink); }
+  .pm-btn[aria-pressed="true"], .pm-btn.is-on { background: var(--ink); color: var(--mint); border-color: var(--ink); }
+  .pm-ink .pm-btn[aria-pressed="true"], .pm-blue .pm-btn[aria-pressed="true"], .pm-ink .pm-btn.is-on, .pm-blue .pm-btn.is-on { background: var(--mint); color: var(--ink); border-color: var(--mint); }
+  .pm-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  :focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+  .pm-ico { width: 28px; height: 28px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ---------- 1. история ---------- */
+  .pm-morph { display: inline-block; color: var(--mint); animation: pm-wob 3.2s ease-in-out infinite; }
+  @keyframes pm-wob { 0%, 100% { rotate: -2deg; } 50% { rotate: 2deg; } }
+  .pm-loop { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+  .pm-loop path { fill: none; stroke: var(--blue2); stroke-width: 40; stroke-linecap: round; opacity: .6; }
+  .pm-dialog { background: var(--ink); color: #fff; border-radius: 26px; padding: 18px; margin: 22px 0; display: grid; gap: 10px; }
+  .pm-dialog__top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .pm-msg { max-width: 92%; padding: 10px 14px; border-radius: 18px; background: #23232b; }
+  .pm-msg--me { justify-self: end; background: var(--blue); }
+  .pm-msg small { display: block; opacity: .75; font-size: 14px; }
+  .pm-msg--note { background: none; padding: 2px 4px; opacity: .85; font-style: italic; }
+  .pm-punch { font-weight: 800; font-size: 19px; }
+  .pm-whatif { border: 2px dashed rgba(255, 255, 255, .5); border-radius: 18px; padding: 12px; display: grid; gap: 10px; }
+  .pm-whatif__out { min-height: 3.2em; }
+  .pm-vs { display: grid; gap: 12px; margin-top: 18px; }
+  .pm-vs__col { background: #fff; color: var(--ink); border-radius: 22px; padding: 16px; display: grid; gap: 6px; }
+  .pm-tag { display: inline-block; justify-self: start; padding: 4px 12px; border-radius: 999px; font-family: var(--disp); font-size: 15px; }
+  .pm-tag--di { background: var(--pink); color: #fff; }
+  .pm-tag--mis { background: var(--mint); color: var(--ink); border: 2px solid var(--ink); }
+  .pm-vs__mid { justify-self: center; font-family: var(--disp); font-size: 22px; color: var(--mint); }
+  @media (min-width: 720px) { .pm-vs { grid-template-columns: 1fr auto 1fr; align-items: center; } }
+
+  /* ---------- 2. вертушка ---------- */
+  .pm-wheel { position: relative; display: grid; grid-template-columns: 1fr 1fr; max-width: 440px; aspect-ratio: 1; margin: 18px auto; }
+  .pm-petal { position: relative; border: 0; background: var(--pink); color: #fff; padding: 16px; display: flex; flex-direction: column; gap: 6px; cursor: pointer; font-family: var(--disp); font-size: clamp(14px, 4vw, 20px); text-transform: uppercase; }
+  .pm-petal svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .pm-petal:nth-child(1) { border-radius: 100% 0 0 0; justify-content: flex-end; align-items: flex-end; }
+  .pm-petal:nth-child(2) { border-radius: 0 100% 0 0; justify-content: flex-end; }
+  .pm-petal:nth-child(3) { border-radius: 0 0 0 100%; align-items: flex-end; }
+  .pm-petal:nth-child(4) { border-radius: 0 0 100% 0; }
+  .pm-petal:nth-child(1) { padding: 16px 30% 30% 16px; } .pm-petal:nth-child(2) { padding: 16px 16px 30% 30%; }
+  .pm-petal:nth-child(3) { padding: 30% 30% 16px 16px; } .pm-petal:nth-child(4) { padding: 30% 16px 16px 30%; }
+  .pm-petal.is-on { background: var(--blue); }
+  .pm-core { position: absolute; left: 50%; top: 50%; width: 22%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8%; pointer-events: none; }
+  .pm-eye { width: 30%; aspect-ratio: 1; border-radius: 50%; background: #fff; display: grid; place-items: center; }
+  .pm-eye i { width: 45%; aspect-ratio: 1; border-radius: 50%; background: var(--ink); }
+  .pm-out { background: var(--ink); color: #fff; border-radius: 22px; padding: 16px 18px; min-height: 96px; }
+  .pm-out__tr { font-family: var(--disp); font-size: clamp(20px, 5.6vw, 30px); color: var(--mint); margin: 0 0 6px; cursor: pointer; }
+  .pm-note { border-left: 6px solid var(--ink); padding: 10px 14px; background: rgba(255, 255, 255, .55); border-radius: 0 16px 16px 0; margin-top: 18px; }
+
+  /* ---------- 3. карточки ---------- */
+  .pm-deck { display: grid; gap: 18px; perspective: 900px; }
+  @media (min-width: 720px) { .pm-deck { grid-template-columns: repeat(3, 1fr); } }
+  .pm-card { position: relative; min-height: 230px; border: 0; border-radius: 28px; padding: 0; text-align: left; transform-style: preserve-3d; cursor: pointer; background: none; }
+  .pm-card:nth-child(1) { rotate: -3deg; } .pm-card:nth-child(2) { rotate: 2deg; } .pm-card:nth-child(3) { rotate: -1.5deg; }
+  .pm-card__f, .pm-card__b { position: absolute; inset: 0; border-radius: 28px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .pm-card__b { transform: rotateY(180deg); justify-content: flex-end; font-weight: 600; background: #fff; color: var(--ink); }
+  .pm-card__b b { display: block; font-family: var(--disp); font-size: 30px; margin-bottom: 8px; }
+  .pm-card--1 .pm-card__f { background: #fff; color: var(--ink); }
+  .pm-card--2 .pm-card__f { background: var(--mint); color: var(--ink); }
+  .pm-card--3 .pm-card__f { background: var(--blue); color: #fff; }
+  .pm-card__t { font-family: var(--disp); font-size: 30px; }
+  .pm-card__tr { font-size: 20px; font-weight: 800; }
+  .pm-card.is-flipped .pm-card__f { visibility: hidden; }
+  .pm-card.is-flipped .pm-card__b { transform: none; }
+  .pm-card.is-gsap .pm-card__f { visibility: visible; }
+  .pm-card.is-gsap .pm-card__b { transform: rotateY(180deg); }
+
+  /* ---------- 4. форма ---------- */
+  .pm-guess { background: var(--soft); border-radius: 22px; padding: 16px; display: grid; gap: 10px; margin: 14px 0 22px; }
+  .pm-guess__q { font-family: var(--disp); font-size: 24px; }
+  .pm-guess__out { min-height: 1.6em; font-weight: 600; }
+  .pm-forge { background: var(--ink); color: #fff; border-radius: 26px; padding: 18px; display: grid; gap: 14px; }
+  .pm-pieces { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; min-height: 64px; font-family: var(--disp); font-size: clamp(24px, 7vw, 40px); }
+  .pm-pc { display: inline-block; padding: 4px 12px; border-radius: 14px; }
+  .pm-pc--root { background: #fff; color: var(--ink); }
+  .pm-pc--tense { background: var(--pink); color: #fff; }
+  .pm-pc--pers { background: var(--mint); color: var(--ink); }
+  .pm-pc--neg { background: #ff6b6b; color: #fff; }
+  .pm-pc--q { background: var(--blue); color: #fff; }
+  .pm-pc--plus { color: rgba(255, 255, 255, .45); padding: 0; }
+  .pm-step { text-align: center; min-height: 3em; margin: 0; }
+  .pm-harm { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0; }
+  @media (min-width: 640px) { .pm-harm { grid-template-columns: repeat(4, 1fr); } }
+  .pm-harm button { border: 2px solid var(--ink); border-radius: 18px; background: #fff; min-height: 76px; padding: 8px; cursor: pointer; display: grid; gap: 2px; }
+  .pm-harm button b { font-family: var(--disp); font-size: 22px; }
+  .pm-harm button.is-on { background: var(--mint); }
+  .pm-harm__out { text-align: center; font-family: var(--disp); font-size: clamp(26px, 7vw, 40px); min-height: 1.3em; }
+  .pm-rules { display: grid; gap: 10px; margin-top: 18px; }
+  @media (min-width: 720px) { .pm-rules { grid-template-columns: repeat(3, 1fr); } }
+  .pm-rule { background: var(--soft); border-radius: 20px; padding: 14px; position: relative; }
+  .pm-rule__n { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--blue); color: #fff; font-weight: 900; margin-bottom: 6px; }
+  .pm-persons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 14px; }
+  @media (min-width: 640px) { .pm-persons { grid-template-columns: repeat(3, 1fr); } }
+  .pm-persons button { border: 0; border-radius: 14px; background: var(--ink); color: #fff; min-height: 48px; cursor: pointer; font-weight: 700; }
+  .pm-persons button b { color: var(--mint); }
+
+  /* ---------- 5. лаборатория ---------- */
+  .pm-lab { background: #fff; color: var(--ink); border-radius: 28px; padding: 16px; display: grid; gap: 10px; }
+  .pm-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--soft); padding: 5px; border-radius: 999px; }
+  .pm-seg button { border: 0; border-radius: 999px; min-height: 44px; background: transparent; font-weight: 800; cursor: pointer; }
+  .pm-seg button[aria-checked="true"] { background: var(--ink); color: var(--mint); }
+  .pm-lbl { margin: 6px 0 0; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #6a6a75; }
+  .pm-chips { display: flex; gap: 6px; overflow-x: auto; padding: 2px 2px 6px; scrollbar-width: thin; }
+  .pm-chips button { flex: none; border: 2px solid var(--ink); border-radius: 999px; background: #fff; min-height: 44px; padding: 4px 14px; cursor: pointer; font-weight: 700; line-height: 1.1; }
+  .pm-chips button small { display: block; font-weight: 500; font-size: 11px; opacity: .7; }
+  .pm-chips button.is-on { background: var(--blue); border-color: var(--blue); color: #fff; }
+  .pm-lab__out { background: var(--ink); color: #fff; border-radius: 22px; padding: 14px; display: grid; gap: 8px; }
+  .pm-lab__word { text-align: center; font-family: var(--disp); font-size: clamp(22px, 6vw, 34px); color: var(--mint); cursor: pointer; }
+  .pm-lab__ru { text-align: center; margin: 0; }
+  .pm-why { margin: 0; padding-left: 18px; font-size: 15px; opacity: .9; }
+  .pm-why li { margin-bottom: 4px; }
+  .pm-cmp { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .pm-cmp div { background: #23232b; border-radius: 14px; padding: 8px; text-align: center; }
+  .pm-cmp b { display: block; font-family: var(--disp); color: var(--mint); }
+
+  /* ---------- 6. сцена: чат ---------- */
+  .pm-phone { max-width: 460px; margin: 18px auto 0; background: var(--ink); border-radius: 34px; padding: 14px; border: 4px solid var(--ink); box-shadow: 0 10px 0 rgba(13, 13, 16, .25); }
+  .pm-phone__top { display: flex; align-items: center; gap: 10px; color: #fff; padding: 4px 6px 12px; }
+  .pm-ava { width: 40px; height: 40px; border-radius: 50%; background: var(--mint); display: grid; place-items: center; color: var(--ink); font-weight: 900; }
+  .pm-feed { display: grid; gap: 10px; }
+  .pm-bub { justify-self: start; max-width: 92%; text-align: left; border: 0; border-radius: 18px 18px 18px 6px; background: #fff; color: var(--ink); padding: 10px 14px; cursor: pointer; display: grid; gap: 4px; }
+  .pm-bub small { color: #555; font-size: 14px; }
+  .pm-bub__src { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 14px; color: var(--blue); min-height: 1.4em; }
+  .pm-bub__src svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .pm-bub mark { background: var(--mint); border-radius: 4px; padding: 0 2px; }
+
+  /* ---------- практика: чат-упражнение ---------- */
+  .pm-ex-ctx { display: flex; gap: 10px; align-items: flex-start; background: var(--ak-surface); border-radius: 16px; padding: 12px; min-height: 64px; }
+  .pm-ex-ctx svg { width: 28px; height: 28px; flex: none; fill: none; stroke: var(--blue); stroke-width: 2; }
+  .pm-ex-opts { display: grid; gap: 8px; margin: 10px 0; }
+  @media (min-width: 640px) { .pm-ex-opts { grid-template-columns: 1fr 1fr; } }
+  .pm-ex-opts button { min-height: 52px; border-radius: 16px; border: 2px solid var(--ink); background: #fff; font-weight: 800; font-size: 17px; cursor: pointer; padding: 8px 12px; }
+  .pm-ex-opts button.is-hit { background: var(--ak-good-soft); border-color: var(--ak-good); }
+  .pm-ex-opts button.is-miss { background: var(--ak-bad-soft); border-color: var(--ak-bad); }
+  .pm-ex-log { display: grid; gap: 6px; min-height: 40px; }
+  .pm-ex-log span { justify-self: end; background: var(--blue); color: #fff; padding: 6px 12px; border-radius: 16px 16px 4px 16px; font-weight: 700; max-width: 90%; }
+  .pm-ex-status { min-height: 1.6em; color: var(--ak-muted); margin: 6px 0 0; }
+
+  /* ---------- шпаргалка ---------- */
+  .pm-tbl { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+  .pm-tbl td { padding: 0; }
+  .pm-tbl button { width: 100%; min-height: 46px; border: 0; border-radius: 14px; background: #fff; cursor: pointer; display: grid; grid-template-columns: 70px 1fr; align-items: center; text-align: left; padding: 0 14px; font-size: 18px; }
+  .pm-tbl button b { color: var(--blue); }
+  .pm-tbl button span:first-child { color: #6a6a75; font-weight: 700; }
+  .pm-final { margin-top: 20px; background: var(--ink); color: #fff; border-radius: 24px; padding: 18px; font-weight: 700; font-size: 19px; display: flex; gap: 14px; align-items: center; }
+  .pm-final svg { width: 56px; height: 56px; flex: none; }
+
+  /* ---------- свой скроллбар: автобус едет по маршруту, остановки — секции ---------- */
+  .pm-sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 30px; pointer-events: none; }
+  .pm-sb__track { position: absolute; left: 10px; right: 10px; top: 0; bottom: 0; pointer-events: auto; touch-action: none; cursor: pointer; }
+  .pm-sb__track::before { content: ''; position: absolute; left: 0; right: 0; top: 13px; height: 4px; border-radius: 4px; background: rgba(13, 13, 16, .18); }
+  .pm-sb__fill { position: absolute; left: 0; top: 13px; height: 4px; width: calc(var(--p, 0) * 100%); border-radius: 4px; background: var(--pink); }
+  .pm-sb__bus { position: absolute; top: 1px; left: calc(var(--p, 0) * 100%); translate: -50% 0; width: 34px; height: 26px; pointer-events: none; }
+  .pm-sb__bus svg { width: 100%; height: 100%; }
+  .pm-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 1px; translate: -50% 0; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .pm-sb__mark::after { content: ''; position: absolute; left: 9px; top: 9px; width: 10px; height: 10px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 2px var(--ink); }
+  .pm-sb__mark.is-read::after { background: var(--mint); }
+  @media (min-width: 768px) {
+    .pm-sb { left: auto; right: 10px; top: 50%; translate: 0 -50%; width: 34px; height: min(62dvh, 540px); }
+    .pm-sb__track { left: 0; right: 0; top: 0; bottom: 0; }
+    .pm-sb__track::before { left: 15px; right: auto; top: 0; bottom: 0; width: 4px; height: auto; }
+    .pm-sb__fill { left: 15px; top: 0; width: 4px; height: calc(var(--p, 0) * 100%); }
+    .pm-sb__bus { left: 0; top: calc(var(--p, 0) * 100%); translate: 0 -50%; rotate: 90deg; }
+    .pm-sb__mark { left: 3px; top: calc(var(--at, 0) * 100%); translate: 0 -50%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .pm-morph { animation: none; } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-ear" viewBox="0 0 24 24"><path d="M6 8.5a6 6 0 1 1 12 0c0 6.5-6 6.5-6 10a3.5 3.5 0 0 1-6.5 1.5"/><path d="M15 8.5a3 3 0 1 0-6 0"/></symbol>
+    <symbol id="i-wow" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></symbol>
+  </defs>
+</svg>
+
+<main>
+
+  <section class="pm-band pm-blue" data-section="story" data-words="116">
+    <svg class="pm-loop" viewBox="0 0 600 900" preserveAspectRatio="none" aria-hidden="true"><path id="pmLoop" d="M-40 160C160 40 420 40 470 210S250 460 120 560 90 860 330 880 640 700 660 620"/></svg>
+    <div class="pm-in">
+      <span class="pm-chip">A2 · Izmir · lesson 1</span>
+      <h1>Turkish past: <span class="pm-morph" id="pmMorph" lang="tr">gelmiş</span> — did you see it or <span class="t-mint">hear it?</span></h1>
+      <p class="pm-lead">At first Turkish feels easy. Words stick to the root like beads. Word order makes sense.</p>
+      <p>Right up until the past tense. There are two past tenses. Not two like in English, where one is just longer. Two with different morals.</p>
+
+      <div class="pm-dialog" id="pmDialog">
+        <div class="pm-dialog__top">
+          <svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+          <button type="button" class="pm-btn" id="pmReplay">↻ play the scene</button>
+        </div>
+        <div class="pm-msg">Turkish class. The hoca asks: <a-say>Dün ne yaptın?</a-say><small>What did you do yesterday?</small></div>
+        <div class="pm-msg pm-msg--me">Student: <a-say>Dün sinemaya gitmişim.</a-say><small>meant to say “I went to the movies yesterday”</small></div>
+        <div class="pm-msg">The hoca looks at him: <a-say>Emin misin?</a-say><small>Are you sure?</small></div>
+        <div class="pm-msg">Meaning you don't know yourself whether you went to the movies. Somebody told you.</div>
+        <div class="pm-msg pm-msg--note">The class is dying. Student: “I just wanted it to sound fancier.”</div>
+        <p class="pm-punch">It did sound fancier. As if someone else took him to the movies and he found out in the morning. From Stories.</p>
+        <div class="pm-whatif">
+          <div class="pm-row"><span>What if you answer differently?</span>
+            <button type="button" class="pm-btn" data-whatif="gittim" aria-pressed="false">gittim</button>
+            <button type="button" class="pm-btn" data-whatif="gitmişim" aria-pressed="true">gitmişim</button>
+          </div>
+          <div class="pm-whatif__out" id="pmWhatif" data-ui></div>
+        </div>
+      </div>
+
+      <div class="pm-vs">
+        <div class="pm-vs__col"><span class="pm-tag pm-tag--di">-dı</span><a-say>Dün sinemaya gittim.</a-say><span>I went to the movies. I was there. Ticket in my pocket.</span></div>
+        <div class="pm-vs__mid" aria-hidden="true">vs</div>
+        <div class="pm-vs__col"><span class="pm-tag pm-tag--mis">-mış</span><a-say>Dün sinemaya gitmişim.</a-say><span>Turns out I went to the movies. Don't remember it. Found out.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-mint" data-section="why" data-words="87">
+    <div class="pm-in">
+      <span class="pm-chip">01 / why two</span>
+      <h2>Why Turks need <span class="pm-hl">two</span> pasts</h2>
+      <p class="pm-lead">A Turkish verb always tells how you know. Tap a petal.</p>
+      <div class="pm-wheel" id="pmWheel">
+        <button type="button" class="pm-petal" data-petal="0"><svg aria-hidden="true"><use href="#i-eye"/></svg>Eyes</button>
+        <button type="button" class="pm-petal" data-petal="1"><svg aria-hidden="true"><use href="#i-ear"/></svg>Ears</button>
+        <button type="button" class="pm-petal" data-petal="2"><svg aria-hidden="true"><use href="#i-wow"/></svg>Surprise</button>
+        <button type="button" class="pm-petal" data-petal="3"><svg aria-hidden="true"><use href="#i-book"/></svg>Fairy tale</button>
+        <div class="pm-core" aria-hidden="true"><span class="pm-eye"><i></i></span><span class="pm-eye"><i></i></span></div>
+      </div>
+      <div class="pm-out" id="pmOut" aria-live="polite" data-ui></div>
+      <p><b>Eyes</b> means <b>-dı</b>: I was there, I saw it, I did it. <b>Ears, surprise and fairy tale</b> mean <b>-mış</b>: I was told, I found out from the result, that's how it's retold.</p>
+      <p class="pm-note">If you speak Kazakh, you already have this button. <b>Keldi</b> is geldi. <b>Kelipti</b> is gelmiş. English verbs have no such button. You need extra words like “apparently.” That's why it feels like “the same thing.”</p>
+      <p>And this matters: -mış doesn't mean “not true.” It's not gossip in the bad sense. It's an honest label: I didn't see it myself.</p>
+    </div>
+  </section>
+
+  <section class="pm-band pm-ink" data-section="cards" data-words="80">
+    <div class="pm-in">
+      <span class="pm-chip">02 / one sentence — three morals</span>
+      <h2>One bus. <span class="t-mint">Three different truths.</span></h2>
+      <p>Tap a card to flip it. Each one speaks.</p>
+      <p>The words are the same. Only the tail changes — and the whole story with it. From one syllable a Turk knows whether you were at the bus stop.</p>
+      <div class="pm-deck">
+        <button type="button" class="pm-card pm-card--1" data-say="Otobüs gitti." aria-pressed="false">
+          <span class="pm-card__f"><span class="pm-card__t t-pink">Saw it</span><span class="pm-card__tr" lang="tr">Otobüs gitti.</span></span> <span class="pm-card__b"><b>-dı</b>I was at the stop. It pulled away right in front of me. The rage is personal, eyewitness-grade.</span>
+        </button>
+        <button type="button" class="pm-card pm-card--2" data-say="Otobüs gitmiş." aria-pressed="false">
+          <span class="pm-card__f"><span class="pm-card__t t-blue">Heard it</span><span class="pm-card__tr" lang="tr">Otobüs gitmiş.</span></span> <span class="pm-card__b"><b>-mış</b>Someone texted the chat. I'm still home, in slippers. The bus, they say, is gone.</span>
+        </button>
+        <button type="button" class="pm-card pm-card--3" data-say="Meğer otobüs çoktan gitmiş!" aria-pressed="false">
+          <span class="pm-card__f"><span class="pm-card__t t-mint">Turns out</span><span class="pm-card__tr" lang="tr">Meğer otobüs çoktan gitmiş!</span></span> <span class="pm-card__b"><b>-mış</b>I run up. Empty. Turns out it left ages ago. Found out from the result.</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="form" data-words="72">
+    <div class="pm-in">
+      <span class="pm-chip">03 / form</span>
+      <h2>Build <span class="t-blue">-mış</span> piece by piece</h2>
+      <div class="pm-guess">
+        <span>Guess first. A mistake here costs nothing.</span> <span class="pm-guess__q" lang="tr">oku + mış = ?</span>
+        <div class="pm-row">
+          <button type="button" class="pm-btn" data-guess="okumış">okumış</button>
+          <button type="button" class="pm-btn" data-guess="okumuş">okumuş</button>
+        </div>
+        <span class="pm-guess__out" id="pmGuess" data-ui></span>
+      </div>
+
+      <p>The form goes together like beads on a string: root, the -mış tail, the personal ending. Nothing changes inside the root.</p>
+      <div class="pm-forge">
+        <div class="pm-pieces" id="pmPieces" aria-live="polite"></div>
+        <p class="pm-step" id="pmStep" data-ui></p>
+        <div class="pm-row" style="justify-content:center">
+          <button type="button" class="pm-btn" id="pmBack">← back</button>
+          <button type="button" class="pm-btn pm-btn--solid" id="pmNext">next →</button>
+          <button type="button" class="pm-btn" id="pmAgain">↻ again</button>
+        </div>
+      </div>
+
+      <p style="margin-top:20px">The vowel in the tail follows the last vowel of the root. Four options. Tap a pair of vowels.</p>
+      <div class="pm-harm" id="pmHarm">
+        <button type="button" data-h="0"><b>e · i</b><span>→ miş</span></button>
+        <button type="button" data-h="1"><b>a · ı</b><span>→ mış</span></button>
+        <button type="button" data-h="2"><b>o · u</b><span>→ muş</span></button>
+        <button type="button" data-h="3"><b>ö · ü</b><span>→ müş</span></button>
+      </div>
+      <div class="pm-harm__out" id="pmHarmOut" lang="tr"></div>
+
+      <div class="pm-rules">
+        <div class="pm-rule"><span class="pm-rule__n">1</span><h3>Four tails</h3><p>miş, mış, muş, müş — by the last vowel of the root.</p></div>
+        <div class="pm-rule"><span class="pm-rule__n">2</span><h3>No devoicing</h3><p>-dı can turn into t: baktı. With -mış the m always stays m: <a-say>bakmış</a-say>. One rule fewer.</p></div>
+        <div class="pm-rule"><span class="pm-rule__n">3</span><h3>Long endings</h3><p>Like the present tense: -im, -sin, -iz, -siniz, -ler.</p></div>
+      </div>
+      <p style="margin-top:14px">Tap a person to hear how it sounds. O has no ending.</p>
+      <div class="pm-persons" id="pmPersons">
+        <button type="button" data-say="ben gelmişim">ben gelmiş<b>im</b></button>
+        <button type="button" data-say="sen gelmişsin">sen gelmiş<b>sin</b></button>
+        <button type="button" data-say="o gelmiş">o gelmiş</button>
+        <button type="button" data-say="biz gelmişiz">biz gelmiş<b>iz</b></button>
+        <button type="button" data-say="siz gelmişsiniz">siz gelmiş<b>siniz</b></button>
+        <button type="button" data-say="onlar gelmişler">onlar gelmiş<b>ler</b></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-blue" data-section="lab" data-words="42">
+    <div class="pm-in">
+      <span class="pm-chip">04 / builder</span>
+      <h2>Build the form <span class="t-mint">by hand</span></h2>
+      <p>Pick the tense, verb and person. The form builds up piece by piece. Below it you'll see why it's like that. Tap the finished word to hear it.</p>
+      <div class="pm-lab" id="pmLab">
+        <div class="pm-seg" role="radiogroup" aria-label="Tense">
+          <button type="button" role="radio" aria-checked="false" data-tense="di">-dı · saw it</button>
+          <button type="button" role="radio" aria-checked="true" data-tense="mis">-mış · heard it</button>
+        </div>
+        <p class="pm-lbl">Verb</p>
+        <div class="pm-chips" id="pmVerbs"></div>
+        <p class="pm-lbl">Person</p>
+        <div class="pm-chips" id="pmPers"></div>
+        <div class="pm-lab__out" data-ui>
+          <div class="pm-pieces" id="pmLabPieces"></div>
+          <div class="pm-lab__word" id="pmLabWord" lang="tr"></div>
+          <p class="pm-lab__ru" id="pmLabRu"></p>
+          <ul class="pm-why" id="pmLabWhy"></ul>
+          <div class="pm-cmp" id="pmCmp" hidden></div>
+        </div>
+        <button type="button" class="pm-btn" id="pmCmpBtn" aria-pressed="false">compare -dı and -mış</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-pink" data-section="scene" data-words="80">
+    <div class="pm-in">
+      <span class="pm-chip">05 / Izmir</span>
+      <h2>Chat with a friend from Izmir</h2>
+      <p>You're in Istanbul. Your friend writes from Izmir. Tap a message: how does she know?</p>
+      <div class="pm-phone">
+        <div class="pm-phone__top"><span class="pm-ava">E</span><b>Elif · İzmir</b><svg class="pm-ico" viewBox="0 0 24 24" aria-hidden="true" style="margin-left:auto"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></div>
+        <div class="pm-feed" id="pmFeed">
+          <button type="button" class="pm-bub" data-src="ear" data-say="Ali dün İzmir'e gelmiş."><span lang="tr">Ali dün İzmir'e gel<mark>miş</mark>.</span><small>They say Ali came to Izmir yesterday.</small><span class="pm-bub__src" data-ui></span></button>
+          <button type="button" class="pm-bub" data-src="ear" data-say="Kordon'da yeni bir kafe açmışlar."><span lang="tr">Kordon'da yeni bir kafe aç<mark>mış</mark>lar.</span><small>They say a new café opened on the Kordon.</small><span class="pm-bub__src" data-ui></span></button>
+          <button type="button" class="pm-bub" data-src="wow" data-say="Vapur gitmiş!"><span lang="tr">Vapur git<mark>miş</mark>!</span><small>And the ferry, turns out, has left!</small><span class="pm-bub__src" data-ui></span></button>
+          <button type="button" class="pm-bub" data-src="eye" data-say="Ben de taksiye bindim."><span lang="tr">Ben de taksiye bin<mark>dim</mark>.</span><small>So I took a taxi.</small><span class="pm-bub__src" data-ui></span></button>
+          <button type="button" class="pm-bub" data-src="wow" data-say="Anahtarlarımı evde unutmuşum!"><span lang="tr">Anahtarlarımı evde unut<mark>muş</mark>um!</span><small>Turns out I left my keys at home!</small><span class="pm-bub__src" data-ui></span></button>
+        </div>
+      </div>
+      <p style="margin-top:16px">Notice? You can use -mış about yourself too. But only when you find out from the facts: keys aren't in your pocket — so you forgot them.</p>
+      <p>That's not amnesia, it's surprise: “well, look at that!” The taxi, though, is her own action. So it's bindim, with -dı.</p>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="video" data-words="20">
+    <div class="pm-in">
+      <h2>Listen to the teacher</h2>
+      <p>Notice how she separates “saw it myself” from “I was told.” The video is extra; the lesson works without it.</p>
+      <a-video yt="ndKyizB954w" start="113" end="240" title="-MIŞ in Turkish: the first meaning" channel="Elena Yurchuk and the Turkish language"></a-video>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="practice" data-words="1">
+    <div class="pm-in">
+      <h2>Practice</h2>
+      <a-exercise ref="a2.past-mis.ex1"></a-exercise>
+      <a-exercise ref="a2.past-mis.ex2"></a-exercise>
+      <a-exercise ref="a2.past-mis.ex3"></a-exercise>
+      <a-exercise ref="a2.past-mis.ex4" class="ak-ex">
+        <div class="ak-ex__head"><span class="ak-ex__title">Witness or gossip: what do you send to the chat?</span><span class="ak-ex__count" data-chat-count>1 / 5</span></div>
+        <div class="pm-ex-ctx"><svg aria-hidden="true"><use href="#i-eye"/></svg><span data-chat-ctx></span></div>
+        <div class="pm-ex-opts">
+          <button type="button" data-chat-opt="0"></button>
+          <button type="button" data-chat-opt="1"></button>
+        </div>
+        <div class="pm-ex-log" data-chat-log aria-live="polite"></div>
+        <p class="pm-ex-status" data-chat-status></p>
+      </a-exercise>
+    </div>
+  </section>
+
+  <section class="pm-band pm-white" data-section="check" data-words="7">
+    <div class="pm-in">
+      <h2>Quick check</h2>
+      <p>No cheat sheet. Five questions.</p>
+      <a-quiz ref="a2.past-mis.check1"></a-quiz>
+    </div>
+  </section>
+
+  <section class="pm-band pm-mint" data-section="cheat" data-words="52">
+    <div class="pm-in">
+      <span class="pm-chip">cheat sheet</span>
+      <h2>The whole topic on one screen</h2>
+      <div class="pm-seg" role="radiogroup" aria-label="Which tense to show" style="max-width:420px">
+        <button type="button" role="radio" aria-checked="false" data-cheat="di">-dı · saw it</button>
+        <button type="button" role="radio" aria-checked="true" data-cheat="mis">-mış · heard it</button>
+      </div>
+      <table class="pm-tbl" id="pmTbl"><tbody></tbody></table>
+      <p><b>miş · mış · muş · müş</b> — by the last vowel of the root. No devoicing: bakmış.</p>
+      <p><b>-mış</b> — I was told, or turns out. <b>-dı</b> — I saw it, I know for sure.</p>
+      <p>Not sure — ask the questions in order. Did I see it myself? Yes — -dı. Was I told? Yes — -mış. Did I find out from the result and get surprised? Yes — -mış. In short: eyes — -dı, ears — -mış.</p>
+      <div class="pm-final">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#92fcd2"/><path d="M22 26a10 10 0 1 1 20 0c0 10-10 10-10 16a6 6 0 0 1-11 2" fill="none" stroke="#0d0d10" stroke-width="4" stroke-linecap="round"/></svg>
+        <span>The hoca won't ask “emin misin?” anymore. Now you know how you know.</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="pm-sb" data-scrollbar aria-label="Lesson progress">
+  <div class="pm-sb__track"><span class="pm-sb__fill"></span>
+    <span class="pm-sb__bus" aria-hidden="true"><svg viewBox="0 0 34 26"><rect x="2" y="2" width="30" height="17" rx="5" fill="#4262ff" stroke="#0d0d10" stroke-width="2"/><rect x="6" y="5" width="8" height="6" rx="1.5" fill="#92fcd2"/><rect x="17" y="5" width="8" height="6" rx="1.5" fill="#92fcd2"/><circle cx="9" cy="21" r="3.2" fill="#0d0d10"/><circle cx="25" cy="21" r="3.2" fill="#0d0d10"/></svg></span>
+  </div>
+</nav>
+
+<template data-achievement data-title="Ears on" data-text="Now you can tell “saw it myself” from “I was told” and build ‑mış for any person.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="54" fill="#4262ff"/>
+    <circle cx="60" cy="60" r="44" fill="#92fcd2"/>
+    <path class="pm-a-ear" d="M44 50a16 16 0 1 1 32 0c0 17-16 17-16 26a9 9 0 0 1-17 3" fill="none" stroke="#0d0d10" stroke-width="6" stroke-linecap="round"/>
+    <path class="pm-a-wave" d="M86 40c6 6 6 18 0 24" fill="none" stroke="#f55cf2" stroke-width="5" stroke-linecap="round"/>
+    <path class="pm-a-wave" d="M94 32c11 11 11 29 0 40" fill="none" stroke="#f55cf2" stroke-width="5" stroke-linecap="round"/>
+    <text class="pm-a-txt" x="60" y="104" text-anchor="middle" font-size="15" font-weight="900" fill="#ffffff">-mış</text>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !reduce;
+  const ST = A ? window.ScrollTrigger : null;
+  const ScrollTrigger = ST || { create() {}, batch() {} };
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => window.AlternaKit && AlternaKit.speak(t);
+  if (ST) {
+    G.registerPlugin(ST);
+    ST.config({ ignoreMobileResize: true });
+    addEventListener('load', () => ST.refresh());
+    document.fonts && document.fonts.ready.then(() => ST.refresh());
+    addEventListener('orientationchange', () => setTimeout(() => ST.refresh(), 300));
+  }
+  
+  /* ---------- общие появления ---------- */
+  if (ST) {
+    ScrollTrigger.batch('.pm-chip, h2', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 26, rotation: 3, duration: .6, ease: 'back.out(2)', stagger: .08 }) });
+    ScrollTrigger.batch('.pm-rule, .pm-vs__col, .pm-note', { start: 'top 90%', once: true, onEnter: (els) => G.from(els, { y: 34, scale: .94, duration: .55, ease: 'power3.out', stagger: .1 }) });
+  }
+
+  /* ---------- 1. история ---------- */
+  const morph = $('#pmMorph');
+  const morphWords = ['gelmiş', 'geldi', 'görmüş', 'gördü', 'duymuş', 'duydu'];
+  let mi = 0;
+  if (A) {
+    const loop = $('#pmLoop');
+    const len = loop.getTotalLength();
+    G.fromTo(loop, { strokeDasharray: len, strokeDashoffset: len }, { strokeDashoffset: 0, duration: 2.4, ease: 'power2.out' });
+    setInterval(() => {
+      if (morph.getBoundingClientRect().bottom < 0) return;
+      mi = (mi + 1) % morphWords.length;
+      G.to(morph, { yPercent: -60, rotation: -6, scale: .7, duration: .22, ease: 'power2.in', onComplete: () => {
+        morph.textContent = morphWords[mi];
+        G.fromTo(morph, { yPercent: 60, rotation: 6, scale: .7 }, { yPercent: 0, rotation: 0, scale: 1, duration: .45, ease: 'back.out(2.5)' });
+      } });
+    }, 2600);
+  }
+  const playDialog = () => {
+    if (!A) return;
+    G.fromTo('#pmDialog .pm-msg', { y: 24, scale: .9 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)', stagger: .35 });
+    G.fromTo('#pmDialog .pm-punch', { scale: .6, rotation: -3 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .45)', delay: 1.9 });
+  };
+  ScrollTrigger.create({ trigger: '#pmDialog', start: 'top 78%', once: true, onEnter: playDialog });
+  $('#pmReplay').addEventListener('click', playDialog);
+  const WHATIF = {
+    'gittim': '<b>Hoca:</b> <span data-say="Güzel! Hangi film?" class="pm-tr">Güzel! Hangi film?</span> — Great! Which movie? You were there yourself, no questions.',
+    'gitmişim': '<b>Hoca:</b> <span data-say="Emin misin?" class="pm-tr">Emin misin?</span> — Are you sure? With -mış you\'re passing on what others said about you.',
+  };
+  const whatOut = $('#pmWhatif');
+  const setWhat = (k) => {
+    $$('[data-whatif]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.whatif === k)));
+    whatOut.innerHTML = WHATIF[k];
+    if (A) G.fromTo(whatOut, { x: -18, rotation: -1 }, { x: 0, rotation: 0, duration: .4, ease: 'back.out(2.5)' });
+  };
+  $$('[data-whatif]').forEach((b) => b.addEventListener('click', () => { setWhat(b.dataset.whatif); say(b.dataset.whatif); }));
+  setWhat('gitmişim');
+  ScrollTrigger.create({ trigger: '.pm-vs', start: 'top 78%', once: true, onEnter: () => {
+    G.from('.pm-tag--di', { x: -40, rotation: -12, duration: .6, ease: 'back.out(3)' });
+    G.from('.pm-tag--mis', { x: 40, rotation: 12, duration: .6, ease: 'back.out(3)' });
+    G.from('.pm-vs__mid', { scale: .3, rotation: 180, duration: .7, ease: 'elastic.out(1, .45)' });
+  } });
+
+  /* ---------- 2. вертушка ---------- */
+  const PW = [
+    ['Otobüs gitti.', 'The bus left. I stood at the stop and watched it go.'],
+    ['Otobüs gitmiş.', 'They say the bus left. Someone texted the chat, I\'m still at home.'],
+    ['Meğer otobüs çoktan gitmiş!', 'And the bus, turns out, left ages ago! I ran up — empty.'],
+    ['Bir varmış, bir yokmuş…', 'Once upon a time… That\'s how Turkish fairy tales begin. Nobody saw it, everybody retells it.'],
+  ];
+  const petals = $$('#pmWheel .pm-petal');
+  const out = $('#pmOut');
+  let pwTouched = false, pwAuto = 0, pwVisible = false;
+  const setPetal = (i) => {
+    petals.forEach((p, j) => p.classList.toggle('is-on', i === j));
+    out.innerHTML = `<p class="pm-out__tr" data-say="${PW[i][0]}" lang="tr">${PW[i][0]}</p><p class="pm-ru">${PW[i][1]}</p>`;
+    if (A) {
+      G.fromTo(out, { scale: .92, rotation: i % 2 ? 1.5 : -1.5 }, { scale: 1, rotation: 0, duration: .45, ease: 'back.out(2.5)' });
+      G.fromTo(petals[i], { scale: .9 }, { scale: 1.04, duration: .4, ease: 'back.out(3)' });
+      G.to('.pm-core', { rotation: i * 90, duration: .6, ease: 'back.out(2)' });
+    }
+  };
+  petals.forEach((p) => p.addEventListener('click', () => { pwTouched = true; setPetal(+p.dataset.petal); say(PW[+p.dataset.petal][0]); }));
+  setPetal(0);
+  new IntersectionObserver((es) => { pwVisible = es[0].isIntersecting; }).observe($('#pmWheel'));
+  if (A) setInterval(() => { if (!pwTouched && pwVisible) setPetal(pwAuto = (pwAuto + 1) % 4); }, 3200);
+  ScrollTrigger.create({ trigger: '#pmWheel', start: 'top 78%', once: true, onEnter: () => G.from(petals, { scale: .3, rotation: -90, duration: .8, ease: 'back.out(2)', stagger: .12 }) });
+  const eyes = $$('.pm-eye i');
+  addEventListener('pointermove', (e) => {
+    if (!A) return;
+    eyes.forEach((i) => {
+      const r = i.parentElement.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+      const d = Math.hypot(dx, dy) || 1;
+      G.to(i, { x: dx / d * r.width * .2, y: dy / d * r.height * .2, duration: .3, overwrite: true });
+    });
+  }, { passive: true });
+
+  /* ---------- 3. карточки ---------- */
+  const cards = $$('.pm-card');
+  cards.forEach((c) => {
+    if (A) c.classList.add('is-gsap');
+    c.addEventListener('click', () => {
+      const f = c.getAttribute('aria-pressed') !== 'true';
+      c.setAttribute('aria-pressed', String(f));
+      if (A) G.to(c, { rotationY: f ? 180 : 0, duration: .7, ease: 'back.out(1.6)' });
+      else c.classList.toggle('is-flipped', f);
+    });
+  });
+  ScrollTrigger.create({ trigger: '.pm-deck', start: 'top 78%', once: true, onEnter: () => G.from(cards, { y: 80, rotation: (i) => [-14, 10, -8][i], duration: .8, ease: 'back.out(1.8)', stagger: .15 }) });
+
+  /* ---------- 4. форма ---------- */
+  const guessOut = $('#pmGuess');
+  $$('[data-guess]').forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.guess === 'okumuş';
+    guessOut.textContent = ok ? 'Yes! The last vowel is u — so it\'s muş.' : 'Almost. The last vowel of the root is u, so it\'s muş: okumuş.';
+    say('okumuş');
+    if (A) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)' });
+    if (A && !ok) G.fromTo(guessOut, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' });
+  }));
+
+  const STEPS = [
+    { p: [['gel', 'root']], t: 'Step 1. Root: gel — “to come.”' },
+    { p: [['gel', 'root'], ['miş', 'tense']], t: 'Step 2. The -miş tail. The root has e — so miş.' },
+    { p: [['gel', 'root'], ['miş', 'tense'], ['im', 'pers']], t: 'Step 3. Who? -im — I. Gelmişim: turns out I came.' },
+    { p: [['bak', 'root'], ['mış', 'tense'], ['sın', 'pers']], t: 'Step 4. Another root: bak. The root has a — mış and -sın. Bakmışsın.' },
+  ];
+  let step = 0;
+  const pieces = $('#pmPieces');
+  const renderStep = (animLast) => {
+    const s = STEPS[step];
+    pieces.innerHTML = s.p.map(([t, k], i) => (i ? '<span class="pm-pc pm-pc--plus">+</span>' : '') + `<span class="pm-pc pm-pc--${k}" data-say="${s.p.slice(0, i + 1).map((x) => x[0]).join('')}">${t}</span>`).join('');
+    $('#pmStep').textContent = s.t;
+    if (A && animLast) {
+      const last = pieces.lastElementChild;
+      G.fromTo(last, { x: 70, rotation: 10, scale: .5 }, { x: 0, rotation: 0, scale: 1, duration: .6, ease: 'back.out(2.2)' });
+      G.fromTo('#pmStep', { y: 10 }, { y: 0, duration: .35, ease: 'power2.out' });
+    }
+  };
+  $('#pmNext').addEventListener('click', () => { step = Math.min(STEPS.length - 1, step + 1); renderStep(true); say(STEPS[step].p.map((x) => x[0]).join('')); });
+  $('#pmBack').addEventListener('click', () => { step = Math.max(0, step - 1); renderStep(false); });
+  $('#pmAgain').addEventListener('click', () => {
+    step = 0; renderStep(true);
+    if (!A) return;
+    const tl = G.timeline();
+    for (let k = 1; k < 3; k++) tl.call(() => { step = k; renderStep(true); }, null, k * .9);
+  });
+  renderStep(false);
+  ScrollTrigger.create({ trigger: '.pm-forge', start: 'top 78%', once: true, onEnter: () => { step = 0; renderStep(true); G.from('.pm-forge', { scale: .9, rotation: -2, duration: .6, ease: 'back.out(2)' }); } });
+
+  const HARM = [['gel', 'miş'], ['bak', 'mış'], ['oku', 'muş'], ['gör', 'müş']];
+  const harmOut = $('#pmHarmOut');
+  const setHarm = (i) => {
+    $$('#pmHarm button').forEach((b, j) => b.classList.toggle('is-on', i === j));
+    harmOut.innerHTML = `<span data-say="${HARM[i][0] + HARM[i][1]}">${HARM[i][0]}<span class="t-pink">${HARM[i][1]}</span></span>`;
+    if (A) G.fromTo(harmOut.querySelector('.t-pink'), { y: -30, rotation: -20, scale: .4 }, { y: 0, rotation: 0, scale: 1, duration: .55, ease: 'bounce.out' });
+  };
+  $$('#pmHarm button').forEach((b) => b.addEventListener('click', () => { setHarm(+b.dataset.h); say(HARM[+b.dataset.h].join('')); }));
+  setHarm(0);
+  ScrollTrigger.create({ trigger: '#pmHarm', start: 'top 78%', once: true, onEnter: () => G.from('#pmHarm button', { y: 40, rotation: (i) => (i % 2 ? 6 : -6), duration: .5, ease: 'back.out(2.5)', stagger: .08 }) });
+  $$('#pmPersons button').forEach((b) => b.addEventListener('pointerdown', () => { if (A) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .4, ease: 'back.out(3)' }); }));
+  ScrollTrigger.create({ trigger: '#pmPersons', start: 'top 78%', once: true, onEnter: () => G.from('#pmPersons button', { x: (i) => (i % 2 ? 30 : -30), duration: .5, ease: 'power3.out', stagger: .06 }) });
+
+  /* ---------- 5. конструктор ---------- */
+  const VOW = 'aeıioöuü', FRONT = 'eiöü', HARD = 'çfhkpsşt';
+  const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
+  const four = (v) => ({ e: 'i', i: 'i', a: 'ı', ı: 'ı', o: 'u', u: 'u', ö: 'ü', ü: 'ü' })[v];
+  const two = (v) => (FRONT.includes(v) ? 'e' : 'a');
+  const VERBS = [
+    { s: 'gel', ru: ['came', 'came'], inf: 'come' }, { s: 'git', ru: ['left', 'left'], inf: 'leave' },
+    { s: 'bak', ru: ['looked', 'looked'], inf: 'look' }, { s: 'oku', ru: ['read', 'read'], inf: 'read' },
+    { s: 'gör', ru: ['saw', 'saw'], inf: 'see' }, { s: 'iç', ru: ['drank', 'drank'], inf: 'drink' },
+    { s: 'yap', ru: ['did', 'did'], inf: 'do' }, { s: 'konuş', ru: ['talked', 'talked'], inf: 'talk' },
+    { s: 'ye', ru: ['ate', 'ate'], inf: 'eat' }, { s: 'unut', ru: ['forgot', 'forgot'], inf: 'forget' },
+  ];
+  const PERS = [['ben', 'I'], ['sen', 'you'], ['o', 'he'], ['biz', 'we'], ['siz', 'you all'], ['onlar', 'they']];
+  function build(stem, tense, p) {
+    const segs = [{ t: stem, k: 'root' }], why = [];
+    const lv = lastV(stem), v = four(lv);
+    if (tense === 'di') {
+      const last = stem[stem.length - 1], D = HARD.includes(last) ? 't' : 'd';
+      segs.push({ t: D + v, k: 'tense' });
+      why.push(HARD.includes(last) ? `“${last}” is voiceless → take t, not d.` : `“${last}” isn't voiceless → d.`);
+      why.push(`Last vowel “${lv}” → the tail gets ${v}.`);
+      const end = ['m', 'n', '', 'k', 'n' + v + 'z', 'l' + two(v) + 'r'][p];
+      if (end) segs.push({ t: end, k: 'pers' });
+      why.push(p === 5 ? 'Onlar takes -ler/-lar.' : '-dı takes short endings: -m, -n, -k, -niz.');
+    } else {
+      segs.push({ t: 'm' + v + 'ş', k: 'tense' });
+      why.push(`Last vowel “${lv}” → m${v}ş. Voicing doesn't matter: m stays m.`);
+      const end = [v + 'm', 's' + v + 'n', '', v + 'z', 's' + v + 'n' + v + 'z', 'l' + two(v) + 'r'][p];
+      if (end) segs.push({ t: end, k: 'pers' });
+      why.push(p === 2 ? 'O has no ending.' : '-mış takes long endings: -im, -sin, -iz, -siniz, -ler.');
+    }
+    return { segs, word: segs.map((s) => s.t).join(''), why };
+  }
+  const gloss = (verb, tense, p) => {
+    const f = p >= 3 ? verb.ru[1] : verb.ru[0];
+    const s = `${tense === 'mis' ? (p === 0 ? 'turns out ' : 'they say ') : ''}${PERS[p][1]} ${f}`;
+    return s[0].toUpperCase() + s.slice(1) + (tense === 'di' ? ' — I know for sure.' : '.');
+  };
+  const st = { tense: 'mis', v: 0, p: 0, cmp: false };
+  const vBox = $('#pmVerbs'), pBox = $('#pmPers');
+  VERBS.forEach((x, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = `${x.s}${two(lastV(x.s)) === 'a' ? 'mak' : 'mek'}<small>${x.inf}</small>`;
+    b.classList.toggle('is-on', i === st.v);
+    b.addEventListener('click', () => { st.v = i; $$('button', vBox).forEach((c) => c.classList.toggle('is-on', c === b)); render(true); });
+    vBox.append(b);
+  });
+  PERS.forEach((x, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = x[0];
+    b.classList.toggle('is-on', i === st.p);
+    b.addEventListener('click', () => { st.p = i; $$('button', pBox).forEach((c) => c.classList.toggle('is-on', c === b)); render(true); });
+    pBox.append(b);
+  });
+  $$('#pmLab [data-tense]').forEach((b) => b.addEventListener('click', () => {
+    st.tense = b.dataset.tense;
+    $$('#pmLab [data-tense]').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+    render(true);
+  }));
+  const labWord = $('#pmLabWord');
+  function render(anim) {
+    const verb = VERBS[st.v], r = build(verb.s, st.tense, st.p);
+    $('#pmLabPieces').innerHTML = r.segs.map((s, i) => (i ? '<span class="pm-pc pm-pc--plus">+</span>' : '') + `<span class="pm-pc pm-pc--${s.k}">${s.t}</span>`).join('');
+    labWord.textContent = `${PERS[st.p][0]} ${r.word}`;
+    labWord.dataset.say = labWord.textContent;
+    $('#pmLabRu').textContent = gloss(verb, st.tense, st.p);
+    $('#pmLabWhy').innerHTML = r.why.map((w) => `<li>${w}</li>`).join('');
+    const cmp = $('#pmCmp');
+    cmp.hidden = !st.cmp;
+    if (st.cmp) {
+      const a = build(verb.s, 'di', st.p).word, m = build(verb.s, 'mis', st.p).word;
+      cmp.innerHTML = `<div data-say="${PERS[st.p][0]} ${a}">saw it myself<b>${a}</b></div><div data-say="${PERS[st.p][0]} ${m}">I was told<b>${m}</b></div>`;
+      if (A && anim) G.from('#pmCmp div', { y: 20, rotation: (i) => (i ? 4 : -4), duration: .45, ease: 'back.out(2.5)', stagger: .1 });
+    }
+    if (A && anim) {
+      G.from('#pmLabPieces .pm-pc:not(.pm-pc--plus)', { y: -26, scale: .5, rotation: -10, duration: .45, ease: 'back.out(3)', stagger: .09 });
+      G.fromTo(labWord, { scale: .8 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .45)', delay: .2 });
+    }
+  }
+  $('#pmCmpBtn').addEventListener('click', (e) => { st.cmp = !st.cmp; e.currentTarget.setAttribute('aria-pressed', String(st.cmp)); render(true); });
+  render(false);
+  ScrollTrigger.create({ trigger: '#pmLab', start: 'top 78%', once: true, onEnter: () => { G.from('#pmLab', { y: 60, rotation: 2, duration: .7, ease: 'back.out(1.6)' }); render(true); } });
+
+  /* ---------- 6. сцена: чат ---------- */
+  const SRC = {
+    ear: ['#i-ear', 'ears: someone told her'],
+    wow: ['#i-wow', 'surprise: found out from the result'],
+    eye: ['#i-eye', 'eyes: she did it herself, -dı'],
+  };
+  $$('#pmFeed .pm-bub').forEach((b) => b.addEventListener('click', () => {
+    const [ic, txt] = SRC[b.dataset.src];
+    const src = b.querySelector('.pm-bub__src');
+    src.innerHTML = `<svg aria-hidden="true"><use href="${ic}"/></svg>${txt}`;
+    if (A) {
+      G.fromTo(src, { x: -20, scale: .6 }, { x: 0, scale: 1, duration: .5, ease: 'back.out(3)' });
+      G.fromTo(b.querySelector('mark'), { scale: 1.6 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)' });
+    }
+  }));
+  ScrollTrigger.create({ trigger: '.pm-phone', start: 'top 78%', once: true, onEnter: () => G.from('#pmFeed .pm-bub', { x: -60, scale: .8, duration: .5, ease: 'back.out(2)', stagger: .3 }) });
+
+  /* ---------- шпаргалка ---------- */
+  const tb = $('#pmTbl tbody');
+  const renderTbl = (tense, anim) => {
+    tb.innerHTML = PERS.map((p, i) => {
+      const r = build('gel', tense, i);
+      const end = r.segs.length > 2 ? r.segs[2].t : '';
+      const base = r.segs.slice(0, 2).map((s) => s.t).join('');
+      return `<tr><td><button type="button" data-say="${p[0]} ${r.word}"><span>${p[0]}</span><span>${base}<b>${end}</b></span></button></td></tr>`;
+    }).join('');
+    if (A && anim) G.from('#pmTbl button', { x: 40, rotation: 2, duration: .4, ease: 'back.out(2)', stagger: .05 });
+  };
+  $$('[data-cheat]').forEach((b) => b.addEventListener('click', () => {
+    $$('[data-cheat]').forEach((x) => x.setAttribute('aria-checked', String(x === b)));
+    renderTbl(b.dataset.cheat, true);
+  }));
+  renderTbl('mis', false);
+  ScrollTrigger.create({ trigger: '#pmTbl', start: 'top 78%', once: true, onEnter: () => renderTbl('mis', true) });
+  ScrollTrigger.create({ trigger: '.pm-final', start: 'top 78%', once: true, onEnter: () => {
+    G.from('.pm-final', { scale: .6, rotation: -4, duration: .7, ease: 'elastic.out(1, .45)' });
+    G.from('.pm-final svg', { rotation: -180, scale: .3, duration: .8, ease: 'back.out(2)' });
+  } });
+
+  /* ---------- свой скроллбар: автобус по маршруту ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.pm-sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pm-sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `To the “${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}” section`);
+    b.addEventListener('click', (e) => { e.stopPropagation(); s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  let lastP = 0;
+  const progress = () => {
+    const p = Math.min(1, scrollY / maxScroll());
+    bar.style.setProperty('--p', p.toFixed(4));
+    if (A && Math.abs(p - lastP) > .002) G.to('.pm-sb__bus svg', { rotation: p > lastP ? -4 : 4, duration: .15, yoyo: true, repeat: 1, overwrite: true });
+    lastP = p;
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('.pm-sb__mark')) return;
+    track.setPointerCapture(e.pointerId);
+    seek(e);
+  });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (A) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  layout();
+  progress();
+
+  /* ---------- ачивка: ухо слышит, волны расходятся ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.pm-a-ear'), { strokeDasharray: 120, strokeDashoffset: 120 }, { strokeDashoffset: 0, duration: .7, ease: 'power2.out' }, .9)
+      .from(b.querySelectorAll('.pm-a-wave'), { scale: .3, transformOrigin: '0% 50%', duration: .45, ease: 'back.out(3)', stagger: .15 }, 1.3)
+      .from(b.querySelector('.pm-a-txt'), { y: 12, scale: .4, transformOrigin: '50% 50%', duration: .4, ease: 'back.out(2.5)' }, 1.5);
+  });
+
+  /* ---------- нестандартное упражнение: чат «свидетель или сплетник» (a2.past-mis.ex4) ---------- */
+  (async () => {
+    const EX = 'a2.past-mis.ex4';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const ctxEl = $('[data-chat-ctx]', root), countEl = $('[data-chat-count]', root);
+    const statusEl = $('[data-chat-status]', root), logEl = $('[data-chat-log]', root);
+    const opts = $$('[data-chat-opt]', root);
+    const ex = await AlternaKit.exercise(EX);
+    const items = ex.items;
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    const show = () => {
+      const it = items[i];
+      ctxEl.textContent = it.context;
+      opts.forEach((b, k) => { b.textContent = it.options[k]; b.classList.remove('is-hit', 'is-miss'); });
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      if (A) G.fromTo(ctxEl, { x: 30 }, { x: 0, duration: .4, ease: 'power3.out' });
+      t0 = performance.now(); locked = false;
+    };
+    const pick = (k) => {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i], ok = k === it.answer;
+      if (ok) correct++;
+      opts[k].classList.add(ok ? 'is-hit' : 'is-miss');
+      if (!ok) opts[it.answer].classList.add('is-hit');
+      const sent = document.createElement('span');
+      sent.textContent = it.options[it.answer];
+      logEl.append(sent);
+      if (A) G.from(sent, { x: -120, y: -40, scale: .4, rotation: -10, duration: .55, ease: 'back.out(2)' });
+      statusEl.textContent = ok ? `Right. ${it.explanation}` : `Not quite. ${it.explanation}`;
+      say(it.options[it.answer]);
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.options[k], timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          ctxEl.textContent = `Done: ${correct} of ${items.length}. Chat sent.`;
+          countEl.textContent = 'done';
+          opts.forEach((b) => { b.disabled = true; });
+        }
+      }, reduce ? 300 : 1100);
+    };
+    opts.forEach((b) => b.addEventListener('click', () => pick(+b.dataset.chatOpt)));
+    root.addEventListener('keydown', (e) => { if (e.key === '1') pick(0); if (e.key === '2') pick(1); });
+    AlternaKit.registerSolver(EX, async () => {
+      for (const it of items.slice(i)) { pick(it.answer); await new Promise((r) => setTimeout(r, reduce ? 330 : 1130)); }
+    });
+    show();
+  })();
+});
+</script>
+</body>
+</html>

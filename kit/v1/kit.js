@@ -1,5 +1,41 @@
 /* Alterna kit v1 — web components для гайдов. Контракт: CLAUDE.md, раздел «Контракт гайда». */
 
+/* ---------- язык интерфейса kit: <html lang="ru|kk|en"> ---------- */
+const LANG = (document.documentElement.lang || 'ru').slice(0, 2).toLowerCase();
+const UI = {
+  kk: {
+    'Эмель': 'Эмель', 'Ахмет': 'Ахмет', 'женский': 'әйел дауысы', 'мужской': 'ер дауысы',
+    'Обычно': 'Қалыпты', 'как в жизни': 'өмірдегідей', 'Медленно': 'Баяу', 'по слогам': 'буынға бөліп',
+    'Озвучка: {0}, {1}': 'Дыбыстау: {0}, {1}', 'Озвучка': 'Дыбыстау', 'Голос': 'Дауыс', 'Скорость': 'Жылдамдық',
+    'Послушать: {0}': 'Тыңдау: {0}', 'Видео': 'Бейне', 'Смотреть: {0}': 'Көру: {0}',
+    'Видео не загрузилось — открыть на YouTube': 'Бейне жүктелмеді — YouTube-тан ашу',
+    'Верно': 'Дұрыс', 'Неверно': 'Қате', 'Пропуск {0}': '{0}-бос орын', 'Турецкие буквы': 'Түрік әріптері',
+    'Как правильно?': 'Қалай дұрыс?', 'Нажми на слово с ошибкой': 'Қатесі бар сөзді бас', 'Послушай': 'Тыңда',
+    'Нет связи — упражнение не загрузилось.': 'Байланыс жоқ — жаттығу жүктелмеді.', 'Повторить': 'Қайталау',
+    'Проверить': 'Тексеру', 'Не совсем': 'Толық емес', 'Правильно: ': 'Дұрысы: ', 'Дальше': 'Әрі қарай', 'Результат': 'Нәтиже',
+    'Проверка пройдена': 'Тексеруден өттің', 'Нужно {0}% — попробуй ещё раз': '{0}% керек — тағы байқап көр',
+    'Без ошибок': 'Қатесіз', 'Готово': 'Дайын', 'Ещё раз': 'Тағы бір рет', '{0} из {1}': '{1} ішінен {0}',
+    'прочитано': 'оқылды', 'проверка': 'тексеру', ' мин': ' мин', 'в уроке': 'сабақта', 'Продолжить': 'Жалғастыру',
+    'Урок {0} пройден': '{0}-сабақ өтілді', 'Урок пройден!': 'Сабақ өтілді!',
+  },
+  en: {
+    'Эмель': 'Emel', 'Ахмет': 'Ahmet', 'женский': 'female', 'мужской': 'male',
+    'Обычно': 'Normal', 'как в жизни': 'natural speed', 'Медленно': 'Slow', 'по слогам': 'syllable by syllable',
+    'Озвучка: {0}, {1}': 'Voice: {0}, {1}', 'Озвучка': 'Voice', 'Голос': 'Voice', 'Скорость': 'Speed',
+    'Послушать: {0}': 'Listen: {0}', 'Видео': 'Video', 'Смотреть: {0}': 'Watch: {0}',
+    'Видео не загрузилось — открыть на YouTube': 'The video did not load — open it on YouTube',
+    'Верно': 'Correct', 'Неверно': 'Wrong', 'Пропуск {0}': 'Gap {0}', 'Турецкие буквы': 'Turkish letters',
+    'Как правильно?': 'What is correct?', 'Нажми на слово с ошибкой': 'Tap the word with the mistake', 'Послушай': 'Listen',
+    'Нет связи — упражнение не загрузилось.': 'No connection — the exercise did not load.', 'Повторить': 'Retry',
+    'Проверить': 'Check', 'Не совсем': 'Not quite', 'Правильно: ': 'Correct answer: ', 'Дальше': 'Next', 'Результат': 'Result',
+    'Проверка пройдена': 'Check passed', 'Нужно {0}% — попробуй ещё раз': 'You need {0}% — try again',
+    'Без ошибок': 'No mistakes', 'Готово': 'Done', 'Ещё раз': 'Again', '{0} из {1}': '{0} of {1}',
+    'прочитано': 'read', 'проверка': 'check', ' мин': ' min', 'в уроке': 'in the lesson', 'Продолжить': 'Continue',
+    'Урок {0} пройден': 'Lesson {0} complete', 'Урок пройден!': 'Lesson complete!',
+  },
+};
+const ui = (s, ...a) => (UI[LANG]?.[s] ?? s).replace(/\{(\d)\}/g, (_, i) => a[i]);
+
 /* ---------- связь с трекером ---------- */
 const track = (method, ...args) => {
   if (window.AlternaTracker) window.AlternaTracker[method](...args);
@@ -67,8 +103,8 @@ const findExercise = async (id) => {
 /* Голоса — как у Azure: Эмель (tr-TR-EmelNeural) и Ахмет (tr-TR-AhmetNeural).
    Пока нет mp3 — голос браузера: ищем на устройстве турецкий голос нужного пола.
    data-audio — путь без расширения: content:publish кладёт рядом <путь>.emel.mp3 и <путь>.ahmet.mp3. */
-const VOICES = [{ id: 'emel', name: 'Эмель', note: 'женский' }, { id: 'ahmet', name: 'Ахмет', note: 'мужской' }];
-const RATES = [{ id: 1, name: 'Обычно', note: 'как в жизни' }, { id: 0.7, name: 'Медленно', note: 'по слогам' }];
+const VOICES = [{ id: 'emel', name: ui('Эмель'), note: ui('женский') }, { id: 'ahmet', name: ui('Ахмет'), note: ui('мужской') }];
+const RATES = [{ id: 1, name: ui('Обычно'), note: ui('как в жизни') }, { id: 0.7, name: ui('Медленно'), note: ui('по слогам') }];
 const SAMPLE = 'Merhaba! Türkçe öğreniyoruz.';
 const embedded = window.parent !== window;
 const parentOrigin = document.querySelector('script[src*="kit/v1/tracker.js"]')?.dataset.parentOrigin || location.origin;
@@ -139,7 +175,7 @@ function syncPicker() {
   });
   const v = VOICES.find((x) => x.id === settings.voice);
   const r = RATES.find((x) => x.id === settings.rate);
-  picker._fab.setAttribute('aria-label', `Озвучка: ${v.name}, ${r.name.toLowerCase()}`);
+  picker._fab.setAttribute('aria-label', ui('Озвучка: {0}, {1}', v.name, r.name.toLowerCase()));
   picker._fab.dataset.slow = String(settings.rate < 1);
 }
 
@@ -147,8 +183,8 @@ function mountPicker() {
   if (picker || !settings.picker || !document.querySelector('a-say, a-word, [data-say]')) return;
   const fab = h('button', { type: 'button', class: 'ak-voice__fab', 'aria-expanded': 'false', 'aria-controls': 'ak-voice-panel' });
   fab.innerHTML = ICON.voice;
-  const panel = h('div', { class: 'ak-voice__panel', id: 'ak-voice-panel', role: 'dialog', 'aria-label': 'Озвучка', hidden: true });
-  for (const [label, key, items] of [['Голос', 'voice', VOICES], ['Скорость', 'rate', RATES]]) {
+  const panel = h('div', { class: 'ak-voice__panel', id: 'ak-voice-panel', role: 'dialog', 'aria-label': ui('Озвучка'), hidden: true });
+  for (const [label, key, items] of [[ui('Голос'), 'voice', VOICES], [ui('Скорость'), 'rate', RATES]]) {
     const group = h('div', { class: 'ak-voice__group', role: 'group', 'aria-label': label }, h('span', { class: 'ak-voice__label', text: label }));
     for (const it of items) {
       group.append(h('button', {
@@ -187,7 +223,7 @@ class ASay extends HTMLElement {
     if (this._ready) return;
     this._ready = true;
     const text = this.dataset.text || this.textContent.trim();
-    const btn = h('button', { type: 'button', class: 'ak-say__btn', 'aria-label': `Послушать: ${text}` });
+    const btn = h('button', { type: 'button', class: 'ak-say__btn', 'aria-label': ui('Послушать: {0}', text) });
     btn.innerHTML = ICON.say;
     btn.addEventListener('click', () => {
       this.classList.add('ak-say--on');
@@ -230,11 +266,11 @@ class AVideo extends HTMLElement {
     this.yt = this.getAttribute('yt');
     this.start = Number(this.getAttribute('start') || 0);
     this.end = Number(this.getAttribute('end') || 0);
-    const title = this.getAttribute('title') || 'Видео';
+    const title = this.getAttribute('title') || ui('Видео');
     const channel = this.getAttribute('channel') || '';
     this.classList.add('ak-video');
     /* в режиме экономии трафика или на 2G обложку не грузим — только кнопка */
-    const btn = h('button', { type: 'button', class: 'ak-video__cover', 'aria-label': `Смотреть: ${title}` },
+    const btn = h('button', { type: 'button', class: 'ak-video__cover', 'aria-label': ui('Смотреть: {0}', title) },
       slowNet() ? null : h('img', { src: `https://i.ytimg.com/vi/${this.yt}/mqdefault.jpg`, alt: '', loading: 'lazy', decoding: 'async' }),
       h('span', { class: 'ak-video__play' }));
     btn.querySelector('.ak-video__play').innerHTML = ICON.play;
@@ -246,7 +282,7 @@ class AVideo extends HTMLElement {
 
   fallback() {
     const url = `https://www.youtube.com/watch?v=${this.yt}${this.start ? `&t=${this.start}s` : ''}`;
-    this.frame.replaceChildren(h('a', { class: 'ak-video__fallback', href: url, target: '_blank', rel: 'noopener' }, 'Видео не загрузилось — открыть на YouTube'));
+    this.frame.replaceChildren(h('a', { class: 'ak-video__fallback', href: url, target: '_blank', rel: 'noopener' }, ui('Видео не загрузилось — открыть на YouTube')));
   }
 
   async play() {
@@ -322,7 +358,7 @@ const TYPES = {
   },
 
   true_false(item, ctx) {
-    const list = choiceList(['Верно', 'Неверно'], ctx.changed);
+    const list = choiceList([ui('Верно'), ui('Неверно')], ctx.changed);
     const idx = item.answer ? 0 : 1;
     return {
       el: h('div', {}, item.say ? sayLine(item.say) : null, h('p', { class: 'ak-prompt', text: item.statement }), list.el),
@@ -331,7 +367,7 @@ const TYPES = {
         const ok = list.get() === idx;
         list.btns[idx].classList.add('is-right');
         if (!ok) list.btns[list.get()]?.classList.add('is-wrong');
-        return { correct: ok, answer: list.get() === 0, right: item.answer ? 'Верно' : 'Неверно' };
+        return { correct: ok, answer: list.get() === 0, right: item.answer ? ui('Верно') : ui('Неверно') };
       },
       solve: () => list.set(idx),
     };
@@ -351,7 +387,7 @@ const TYPES = {
           gaps.push({ el: g, get: () => g._value, set: (v) => { g._value = v; g.textContent = v; } });
           line.append(g);
         } else {
-          const inp = h('input', { class: 'ak-gap ak-gap--input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': `Пропуск ${i + 1}`, oninput: ctx.changed });
+          const inp = h('input', { class: 'ak-gap ak-gap--input', type: 'text', autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': ui('Пропуск {0}', i + 1), oninput: ctx.changed });
           gaps.push({ el: inp, get: () => inp.value, set: (v) => { inp.value = v; } });
           line.append(inp);
         }
@@ -366,7 +402,7 @@ const TYPES = {
     const hasInput = gaps.some((g) => g.el.tagName === 'INPUT');
     let lastInput = gaps.find((g) => g.el.tagName === 'INPUT')?.el;
     gaps.forEach((g) => g.el.tagName === 'INPUT' && g.el.addEventListener('focus', () => { lastInput = g.el; }));
-    const kb = hasInput ? h('div', { class: 'ak-trkb', 'aria-label': 'Турецкие буквы' }, TR_CHARS.map((c) => h('button', {
+    const kb = hasInput ? h('div', { class: 'ak-trkb', 'aria-label': ui('Турецкие буквы') }, TR_CHARS.map((c) => h('button', {
       type: 'button', class: 'ak-trkb__k', text: c, tabindex: '-1',
       onclick: () => {
         const inp = lastInput; if (!inp) return;
@@ -473,14 +509,14 @@ const TYPES = {
         fix = null;
         if (item.options) {
           const list = choiceList(item.options, (k) => { fix = item.options[k]; ctx.changed(); });
-          fixBox.replaceChildren(h('p', { class: 'ak-hint', text: 'Как правильно?' }), list.el);
+          fixBox.replaceChildren(h('p', { class: 'ak-hint', text: ui('Как правильно?') }), list.el);
           fixBox._list = list;
         }
         ctx.changed();
       },
     }, t));
     return {
-      el: h('div', { class: 'ak-hunt' }, h('p', { class: 'ak-hint', text: item.prompt || 'Нажми на слово с ошибкой' }), h('div', { class: 'ak-hunt__line' }, toks), fixBox),
+      el: h('div', { class: 'ak-hunt' }, h('p', { class: 'ak-hint', text: item.prompt || ui('Нажми на слово с ошибкой') }), h('div', { class: 'ak-hunt__line' }, toks), fixBox),
       ready: () => tapped >= 0 && (!item.options || fix != null),
       check: () => {
         const ok = tapped === item.wrong && (!item.options || norm(fix) === norm(item.fix));
@@ -495,7 +531,7 @@ const TYPES = {
 
 function sayLine(text) {
   const s = h('a-say', { 'data-text': text });
-  s.textContent = 'Послушай';
+  s.textContent = ui('Послушай');
   return h('div', { class: 'ak-sayline' }, s);
 }
 
@@ -520,8 +556,8 @@ class AExercise extends HTMLElement {
     } catch (e) {
       const offline = e instanceof TypeError || !navigator.onLine;
       if (offline) {
-        this.replaceChildren(h('p', { class: 'ak-hint', text: 'Нет связи — упражнение не загрузилось.' }),
-          h('button', { type: 'button', class: 'ak-btn ak-btn--ghost', onclick: () => { this._load = this.load(); } }, 'Повторить'));
+        this.replaceChildren(h('p', { class: 'ak-hint', text: ui('Нет связи — упражнение не загрузилось.') }),
+          h('button', { type: 'button', class: 'ak-btn ak-btn--ghost', onclick: () => { this._load = this.load(); } }, ui('Повторить')));
       } else {
         this.replaceChildren(h('p', { class: 'ak-error', text: String(e.message || e) }));
         console.error(e);
@@ -560,7 +596,7 @@ class AExercise extends HTMLElement {
     const ctx = { changed: () => { this.primary.disabled = !this.view.ready(); } };
     this.view = TYPES[type](raw, ctx);
     this.feedback = h('div', { class: 'ak-feedback', 'aria-live': 'polite' });
-    this.primary = h('button', { type: 'button', class: 'ak-btn', disabled: true, onclick: () => this.onPrimary() }, 'Проверить');
+    this.primary = h('button', { type: 'button', class: 'ak-btn', disabled: true, onclick: () => this.onPrimary() }, ui('Проверить'));
     this.mode = 'check';
     const head = h('div', { class: 'ak-ex__head' },
       h('span', { class: 'ak-ex__title', text: this.data.instruction || '' }),
@@ -582,11 +618,11 @@ class AExercise extends HTMLElement {
       });
       this.feedback.className = `ak-feedback ${res.correct ? 'is-right' : 'is-wrong'}`;
       this.feedback.replaceChildren(
-        h('b', { text: res.correct ? 'Верно' : 'Не совсем' }),
-        !res.correct && res.right ? h('p', {}, 'Правильно: ', h('b', { text: String(res.right) })) : null,
+        h('b', { text: res.correct ? ui('Верно') : ui('Не совсем') }),
+        !res.correct && res.right ? h('p', {}, ui('Правильно: '), h('b', { text: String(res.right) })) : null,
         raw.explanation ? h('p', { text: raw.explanation }) : null);
       this.mode = 'next';
-      this.primary.textContent = this.idx + 1 < this.data.items.length ? 'Дальше' : 'Результат';
+      this.primary.textContent = this.idx + 1 < this.data.items.length ? ui('Дальше') : ui('Результат');
       this.primary.disabled = false;
       this.primary.focus({ preventScroll: true });
     } else if (this.idx + 1 < this.data.items.length) {
@@ -605,13 +641,13 @@ class AExercise extends HTMLElement {
     track('complete', { exerciseId: this.data.id, correct: this.correct, total, kind: this.kind, passPercent: pass, timeMs: Math.round(performance.now() - this.started) });
     const passed = pct >= pass;
     const msg = this.kind === 'check'
-      ? (passed ? 'Проверка пройдена' : `Нужно ${pass}% — попробуй ещё раз`)
-      : (pct === 100 ? 'Без ошибок' : 'Готово');
+      ? (passed ? ui('Проверка пройдена') : ui('Нужно {0}% — попробуй ещё раз', pass))
+      : (pct === 100 ? ui('Без ошибок') : ui('Готово'));
     this.result = { correct: this.correct, total, pct, passed };
-    const again = h('button', { type: 'button', class: 'ak-btn ak-btn--ghost', onclick: () => { this.attempt++; this.restart(); } }, 'Ещё раз');
+    const again = h('button', { type: 'button', class: 'ak-btn ak-btn--ghost', onclick: () => { this.attempt++; this.restart(); } }, ui('Ещё раз'));
     this.primary = again;
     this.replaceChildren(h('div', { class: `ak-result ${this.kind === 'check' ? (passed ? 'is-right' : 'is-wrong') : ''}` },
-      h('b', { class: 'ak-result__score', text: `${this.correct} из ${total}` }),
+      h('b', { class: 'ak-result__score', text: ui('{0} из {1}', this.correct, total) }),
       h('span', { text: msg })), h('div', { class: 'ak-ex__foot' }, again));
   }
 
@@ -701,9 +737,9 @@ function showAchievement(detail = {}) {
   const tpl = document.querySelector('template[data-achievement]');
   const lesson = detail.lesson ?? st.lesson ?? 1;
   const nums = [
-    [detail.readPct ?? st.readPct ?? 100, '%', 'прочитано'],
-    [detail.checkPct ?? quiz?.scorePct ?? null, '%', 'проверка'],
-    [Math.max(1, Math.round((detail.activeSeconds ?? st.activeSeconds ?? 60) / 60)), ' мин', 'в уроке'],
+    [detail.readPct ?? st.readPct ?? 100, '%', ui('прочитано')],
+    [detail.checkPct ?? quiz?.scorePct ?? null, '%', ui('проверка')],
+    [Math.max(1, Math.round((detail.activeSeconds ?? st.activeSeconds ?? 60) / 60)), ui(' мин'), ui('в уроке')],
   ].filter(([n]) => n != null);
 
   const badge = h('div', { class: 'ak-achv__badge' });
@@ -711,11 +747,11 @@ function showAchievement(detail = {}) {
   const rays = h('div', { class: 'ak-achv__rays', 'aria-hidden': 'true' });
   const stats = h('div', { class: 'ak-achv__stats' }, nums.map(([n, unit, label]) =>
     h('div', { class: 'ak-achv__stat' }, h('b', { 'data-to': n, 'data-unit': unit, text: `${n}${unit}` }), h('span', { text: label }))));
-  const btn = h('button', { type: 'button', class: 'ak-btn ak-achv__btn' }, 'Продолжить');
+  const btn = h('button', { type: 'button', class: 'ak-btn ak-achv__btn' }, ui('Продолжить'));
   const card = h('div', { class: 'ak-achv__card' },
     h('div', { class: 'ak-achv__stage' }, rays, badge),
-    h('p', { class: 'ak-achv__kicker', text: `Урок ${lesson} пройден` }),
-    h('h2', { class: 'ak-achv__title', id: 'ak-achv-title', text: tpl?.dataset.title || 'Урок пройден!' }),
+    h('p', { class: 'ak-achv__kicker', text: ui('Урок {0} пройден', lesson) }),
+    h('h2', { class: 'ak-achv__title', id: 'ak-achv-title', text: tpl?.dataset.title || ui('Урок пройден!') }),
     tpl?.dataset.text ? h('p', { class: 'ak-achv__text', text: tpl.dataset.text }) : null,
     stats, btn);
   const bg = h('div', { class: 'ak-achv__bg' });

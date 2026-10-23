@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.present-continuous">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Осы шақ -(I)yor · 1-сабақ</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+  :root {
+    --steel: #4C6A80; --steel-2: #3A5468; --steel-3: #2E4557;
+    --ice: #8FCCEF; --ice-2: #B9E0F7; --ice-soft: #E4F2FB; --ice-line: #D7EAF7;
+    --gold: #F8D294; --gold-2: #EFB65F; --gold-3: #E3A340; --gold-ink: #6E5020; --gold-soft: #FDF3E2;
+    --ink: #425260; --muted: #647A8C; --line: #E3EFF8;
+    --rose: #C4685B; --rose-soft: #FBE9E6; --mint: #2E8A57; --mint-soft: #E6F6EC;
+    --sh-sm: 0 6px 18px rgba(60,100,130,.08); --sh: 0 14px 40px rgba(60,100,130,.12);
+    --disp: 'Oswald', 'Arial Narrow', 'Roboto Condensed', system-ui, -apple-system, sans-serif;
+    --ak-font: 'Manrope', 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --ak-accent: #4C6A80; --ak-accent-ink: #ffffff; --ak-accent-soft: #E4F2FB;
+    --ak-ink: #3A5468; --ak-muted: #647A8C; --ak-surface: #F3F9FD; --ak-line: #D7EAF7; --ak-bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; overflow-x: clip; }
+  body { margin: 0; color: var(--ink); background: linear-gradient(180deg, #EAF5FD 0, #F8FCFF 520px, #fff 900px) no-repeat, #fff;
+    font: 400 var(--ak-text)/1.62 var(--ak-font); overflow-x: clip; }
+  main { padding: 0 16px calc(72px + env(safe-area-inset-bottom)); }
+  section { max-width: 760px; margin: 0 auto; padding: clamp(48px, 9vw, 88px) 0 0; position: relative; }
+  h1, h2, .pc-disp { font-family: var(--disp); font-weight: 700; text-transform: uppercase; color: var(--steel); line-height: .95; letter-spacing: -.005em; margin: 0; }
+  h1 { font-size: clamp(36px, 8.6vw, 92px); margin: 10px 0 16px; }
+  h2 { font-size: clamp(28px, 6.4vw, 54px); margin: 8px 0 16px; }
+  h1 em, h2 em { font-style: normal; color: var(--gold-3); }
+  p { margin: 0 0 12px; max-width: 65ch; }
+  b, strong { color: var(--steel-2); }
+  .tr { font-family: var(--disp); font-weight: 600; letter-spacing: .01em; color: var(--steel-2); }
+  .tr--gold { color: var(--gold-3); }
+  .pc-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: #5C93B5; }
+  .pc-tag--gold { color: var(--gold-3); }
+  .pc-card { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: clamp(16px, 4vw, 28px); box-shadow: var(--sh-sm); position: relative; overflow: hidden; }
+  .pc-card--gold { background: linear-gradient(160deg, #FEF8EE, #FBEBD3); border-color: #F3DCB4; }
+  .pc-card--ice { background: linear-gradient(160deg, #F3FAFE, #E6F4FC); border-color: var(--ice-line); }
+  .pc-hint { font-size: 15px; color: var(--muted); margin-top: 12px; min-height: 1.6em; }
+  .pc-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .pc-chip { min-height: 44px; border: 1px solid var(--ice-line); background: #fff; border-radius: 999px; padding: 8px 16px; font: 600 16px/1.2 var(--ak-font); color: var(--steel-2); cursor: pointer; transition: background-color .2s, border-color .2s, color .2s; }
+  .pc-chip .tr { color: inherit; }
+  .pc-chip.is-on { background: var(--steel); border-color: var(--steel); color: #fff; }
+  .pc-chip.is-gold.is-on { background: var(--gold-2); border-color: var(--gold-2); color: var(--gold-ink); }
+  .pc-chip.is-ok { background: var(--mint-soft); border-color: #A9DDB8; color: var(--mint); }
+  .pc-chip.is-no { background: var(--rose-soft); border-color: #F3BFB6; color: var(--rose); }
+  .pc-chip:focus-visible, .pc-btn:focus-visible, .pc-flip:focus-visible, [data-say]:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 2px; }
+  @media (hover: hover) { .pc-chip:hover { border-color: var(--ice); background: var(--ice-soft); } .pc-chip.is-on:hover { background: var(--steel-2); } }
+  .pc-btn { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; border: 0; border-radius: 14px; padding: 10px 18px; cursor: pointer;
+    font: 800 13px/1 var(--ak-font); letter-spacing: .12em; text-transform: uppercase; background: linear-gradient(180deg, var(--gold), var(--gold-2)); color: var(--gold-ink); box-shadow: 0 10px 22px rgba(224,163,64,.28); }
+  .pc-btn--ghost { background: #F3F7FA; color: var(--steel-2); box-shadow: none; border: 1px solid var(--line); }
+  .pc-btn svg { width: 16px; height: 16px; flex: none; }
+  .pc-btn[disabled] { opacity: .45; cursor: default; }
+  [data-say] { cursor: pointer; }
+  .ak-speaking { color: var(--gold-3) !important; }
+
+  /* hero */
+  .pc-hero { text-align: center; }
+  .pc-hero h1 { animation: pc-rise .8s cubic-bezier(.2,1.3,.4,1) both; }
+  .pc-hero .pc-lead { margin: 0 auto 22px; font-size: clamp(17px, 2.2vw, 20px); color: #5E7487; animation: pc-rise .8s .12s cubic-bezier(.2,1.3,.4,1) both; }
+  @keyframes pc-rise { from { transform: translateY(28px) rotate(1.5deg); } to { transform: none; } }
+  .pc-frame { position: relative; margin: 0 auto 28px; max-width: 420px; border-radius: 26px; padding: 22px 20px 20px; background: linear-gradient(160deg, #FEF8EE, #FBEBD3); border: 1px solid #F3DCB4; box-shadow: var(--sh); animation: pc-rise .9s .2s cubic-bezier(.2,1.3,.4,1) both; }
+  .pc-frame::before, .pc-frame::after { content: ''; position: absolute; width: 26px; height: 26px; border: 3px solid var(--gold-3); }
+  .pc-frame::before { left: 12px; top: 12px; border-right: 0; border-bottom: 0; border-radius: 8px 0 0 0; }
+  .pc-frame::after { right: 12px; bottom: 12px; border-left: 0; border-top: 0; border-radius: 0 0 8px 0; }
+  .pc-rec { position: absolute; right: 18px; top: 16px; display: flex; gap: 6px; align-items: center; font: 800 11px/1 var(--ak-font); letter-spacing: .18em; color: var(--rose); }
+  .pc-rec i { width: 10px; height: 10px; border-radius: 50%; background: var(--rose); animation: pc-blink 1.4s infinite; }
+  @keyframes pc-blink { 50% { opacity: .2; } }
+  .pc-frame .pc-big { font: 600 clamp(36px, 9vw, 56px)/1 var(--disp); color: var(--gold-3); margin: 6px 0; }
+  .pc-frame small { display: block; color: var(--gold-ink); font-size: 15px; }
+  .pc-steam { position: relative; width: 44px; height: 30px; margin: 0 auto -4px; }
+  .pc-steam i { position: absolute; bottom: 0; width: 5px; height: 20px; border-radius: 3px; background: linear-gradient(180deg, rgba(200,225,240,0), rgba(170,205,228,.95)); animation: pc-steam 2.6s ease-in-out infinite; }
+  .pc-steam i:nth-child(1) { left: 8px; } .pc-steam i:nth-child(2) { left: 20px; height: 26px; animation-delay: .55s; } .pc-steam i:nth-child(3) { left: 32px; animation-delay: 1.1s; }
+  @keyframes pc-steam { 0% { opacity: 0; transform: translateY(6px) scaleY(.6); } 35% { opacity: .85; } 100% { opacity: 0; transform: translateY(-22px) scaleY(1.25); } }
+
+  /* story */
+  .pc-story { font-size: clamp(17px, 2vw, 19px); text-align: left; }
+  .pc-bubble { display: inline-block; max-width: 88%; padding: 12px 16px; border-radius: 18px 18px 18px 6px; background: #F2F7FB; margin: 4px 0 14px; box-shadow: var(--sh-sm); }
+  .pc-bubble--me { border-radius: 18px 18px 6px 18px; background: linear-gradient(160deg, #9BD3F2, #6BB3DF); color: #fff; }
+  .pc-bubble--me .tr { color: #fff; }
+  .pc-punch { font: 700 clamp(24px, 5vw, 38px)/1.04 var(--disp); text-transform: uppercase; color: var(--steel); margin: 26px 0; }
+  .pc-punch em { font-style: normal; color: var(--gold-3); }
+
+  /* ribbon */
+  .pc-ribbon { position: relative; height: 104px; border-radius: 16px; overflow: hidden; background: linear-gradient(180deg, #F5FAFD, #fff); border: 1px solid var(--ice-line); margin: 6px 0 14px; }
+  .pc-ribbon__base { position: absolute; left: 4%; right: 4%; top: 58px; height: 8px; border-radius: 99px; background: #E7F1F8; }
+  .pc-ribbon__fill { position: absolute; top: 58px; height: 8px; left: 47%; width: 6%; border-radius: 99px; background: linear-gradient(90deg, var(--gold), var(--gold-2)); }
+  .pc-ribbon__cap { position: absolute; top: 76px; font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); translate: -50% 0; }
+  .pc-ribbon__cam { position: absolute; left: 50%; top: 10px; width: 40px; height: 40px; translate: -50% 0; }
+  .pc-ribbon__cross { position: absolute; left: 50%; top: 8px; width: 46px; height: 46px; translate: -50% 0; scale: 0; }
+
+  /* builder */
+  .pc-stage { display: flex; justify-content: center; align-items: flex-end; flex-wrap: wrap; gap: 2px; min-height: 92px; padding: 18px 8px; border-radius: 18px; background: #FBFDFF; border: 1px solid var(--line); font: 600 clamp(30px, 8vw, 54px)/1 var(--disp); }
+  .pc-piece { display: inline-block; padding: 4px 6px; border-radius: 10px; }
+  .pc-piece--stem { color: var(--steel); }
+  .pc-piece--mek { color: #9AAEBD; }
+  .pc-piece--v { color: #fff; background: var(--ice); }
+  .pc-piece--yor { color: var(--gold-ink); background: var(--gold); }
+  .pc-piece--end { color: #fff; background: var(--steel); }
+  .pc-piece--drop { color: var(--rose); text-decoration: line-through; }
+  .pc-steps { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 6px; counter-reset: s; }
+  .pc-steps li { counter-increment: s; position: relative; padding: 8px 12px 8px 46px; border-radius: 12px; color: var(--muted); font-size: 15px; transition: background-color .25s, color .25s; }
+  .pc-steps li::before { content: counter(s); position: absolute; left: 12px; top: 8px; width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--ice-soft); color: var(--steel); font-weight: 800; font-size: 13px; }
+  .pc-steps li.is-on { background: var(--gold-soft); color: var(--gold-ink); }
+  .pc-steps li.is-on::before { background: var(--gold-2); color: #fff; }
+  .pc-formula { text-align: center; font-size: 17px; color: var(--muted); margin: 14px 0; }
+  .pc-formula b { font-family: var(--disp); font-size: 20px; }
+  .pc-harm { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+  .pc-harm button { min-height: 72px; border: 1px solid var(--ice-line); border-radius: 16px; background: #fff; padding: 10px; cursor: pointer; text-align: left; font: inherit; color: var(--ink); }
+  .pc-harm button.is-on { border-color: var(--gold-2); background: var(--gold-soft); }
+  .pc-harm .pc-harm__v { font: 600 18px/1.2 var(--disp); color: var(--steel); display: block; }
+  .pc-harm .pc-harm__ex { font: 600 22px/1.2 var(--disp); color: var(--gold-3); display: block; }
+  @media (min-width: 640px) { .pc-harm { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+  /* persons */
+  .pc-conj { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .pc-cw { min-height: 64px; border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 10px; text-align: center; cursor: pointer; font: inherit; color: var(--ink); box-shadow: var(--sh-sm); }
+  .pc-cw.is-on { border-color: var(--gold-2); background: var(--gold-soft); }
+  .pc-cw .pc-p { display: block; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .pc-cw .pc-f { display: block; font: 600 21px/1.2 var(--disp); color: var(--steel); margin-top: 4px; }
+  .pc-cw .pc-f i { font-style: normal; color: var(--gold-3); }
+  @media (min-width: 640px) { .pc-conj { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .pc-slider { width: 100%; height: 44px; accent-color: var(--gold-3); }
+  .pc-morph { text-align: center; font: 600 clamp(34px, 9vw, 58px)/1 var(--disp); color: var(--steel); min-height: 1.2em; }
+  .pc-morph i { font-style: normal; color: var(--gold-3); display: inline-block; }
+  .pc-morph__who { text-align: center; font-size: 13px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+
+  /* lab */
+  .pc-tabs { display: flex; gap: 6px; padding: 4px; border-radius: 999px; background: var(--ice-soft); margin-bottom: 16px; overflow-x: auto; }
+  .pc-tabs button { flex: 1 1 auto; min-height: 44px; border: 0; border-radius: 999px; background: none; font: 700 15px/1 var(--ak-font); color: var(--steel-2); cursor: pointer; padding: 0 8px; }
+  .pc-tabs button[aria-selected="true"] { background: #fff; box-shadow: var(--sh-sm); color: var(--gold-3); }
+  .pc-pane[hidden] { display: none; }
+  .pc-lbl { font-size: 12px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 12px 0 6px; }
+  .pc-out { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 14px; padding: 18px 10px; border-radius: 18px; background: linear-gradient(160deg, #F3FAFE, #fff); border: 1px solid var(--ice-line); }
+  .pc-out .pc-stage { border: 0; background: none; min-height: 0; padding: 0; }
+  .pc-ru { color: var(--muted); font-size: 15px; text-align: center; }
+  .pc-big-q { font: 600 clamp(32px, 8vw, 50px)/1 var(--disp); color: var(--steel); text-align: center; margin: 8px 0 14px; }
+  .pc-vowels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .pc-vowels button { min-height: 60px; border: 1px solid var(--ice-line); border-radius: 14px; background: #fff; font: 600 28px/1 var(--disp); color: var(--steel); cursor: pointer; }
+  .pc-vowels button.is-ok { background: var(--mint-soft); border-color: #A9DDB8; color: var(--mint); }
+  .pc-vowels button.is-no { background: var(--rose-soft); border-color: #F3BFB6; color: var(--rose); }
+  .pc-streak { display: flex; gap: 4px; justify-content: center; margin-top: 10px; }
+  .pc-streak i { width: 14px; height: 14px; border-radius: 4px; background: var(--ice-soft); }
+  .pc-streak i.is-on { background: var(--gold-2); }
+
+  /* scene chat */
+  .pc-chat { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 22px; background: #F7FBFE; border: 1px solid var(--line); min-height: 220px; }
+  .pc-chat .pc-bubble { margin: 0; align-self: flex-start; }
+  .pc-chat .pc-bubble--me { align-self: flex-end; }
+  .pc-bubble--re { background: var(--gold-soft); color: var(--gold-ink); font-size: 15px; border-radius: 18px; }
+  .pc-bubble small { display: block; font-size: 14px; opacity: .8; }
+  .pc-phone-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: var(--steel-2); font-weight: 700; }
+  .pc-phone-top svg { width: 36px; height: 36px; }
+
+  /* traps */
+  .pc-traps { display: grid; gap: 12px; }
+  @media (min-width: 640px) { .pc-traps { grid-template-columns: 1fr 1fr; } }
+  .pc-flip { position: relative; min-height: 132px; border: 0; padding: 0; background: none; cursor: pointer; perspective: 900px; text-align: left; font: inherit; color: inherit; width: 100%; }
+  .pc-flip__in { position: relative; display: block; width: 100%; min-height: 132px; transform-style: preserve-3d; }
+  .pc-flip__f, .pc-flip__b { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 14px 16px; border-radius: 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .pc-flip__f { background: var(--rose-soft); border: 1px solid #F3BFB6; }
+  .pc-flip__b { background: var(--mint-soft); border: 1px solid #A9DDB8; transform: rotateY(180deg); }
+  .pc-flip__f s { font: 600 24px/1.1 var(--disp); color: var(--rose); }
+  .pc-flip__b .tr { font-size: 24px; color: var(--mint); }
+  .pc-flip small { font-size: 14px; color: var(--muted); }
+  .pc-flip svg { width: 22px; height: 22px; }
+
+  /* cheat */
+  .pc-cheat { display: grid; gap: 10px; }
+  @media (min-width: 640px) { .pc-cheat { grid-template-columns: 1fr 1fr; } }
+  .pc-chi { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; box-shadow: var(--sh-sm); }
+  .pc-chi .pc-n { font: 600 24px/1 var(--disp); color: var(--ice); flex: none; width: 30px; }
+  .pc-chi b { display: block; line-height: 1.3; }
+  .pc-chi span { font-size: 15px; color: var(--muted); }
+  .pc-final { text-align: center; margin-top: 28px; }
+
+  /* video note */
+  .pc-note { display: flex; gap: 10px; align-items: flex-start; }
+  .pc-note svg { width: 28px; height: 28px; flex: none; }
+
+  /* свой скроллбар: киноплёнка, по ней едет камера */
+  .pc-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 12px; pointer-events: none; }
+  .pc-sb__track { position: absolute; inset: 0; pointer-events: auto; touch-action: none; cursor: pointer;
+    background: repeating-linear-gradient(90deg, #2E4557 0 7px, #E4F2FB 7px 10px); background-size: 10px 4px; background-repeat: repeat-x; background-position: 0 0, 0 100%; background-color: #3A5468; }
+  .pc-sb__fill { position: absolute; left: 0; top: 3px; bottom: 3px; width: calc(var(--p, 0) * 100%); background: var(--gold-2); }
+  .pc-sb__cam { position: absolute; top: 12px; left: clamp(14px, calc(var(--p, 0) * 100%), calc(100% - 14px)); translate: -50% 0; width: 28px; height: 22px; pointer-events: none; }
+  .pc-sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+  .pc-sb__mark::after { content: ''; position: absolute; left: 9px; top: 9px; width: 10px; height: 10px; border-radius: 2px; background: #fff; box-shadow: inset 0 0 0 2px var(--gold-2); }
+  .pc-sb__mark.is-read::after { background: var(--gold-2); }
+  @media (min-width: 768px) {
+    .pc-sb { left: auto; right: 12px; top: 50%; translate: 0 -50%; width: 14px; height: min(62dvh, 540px); }
+    .pc-sb__track { border-radius: 4px; background: repeating-linear-gradient(180deg, #2E4557 0 7px, #E4F2FB 7px 10px); background-color: #3A5468; }
+    .pc-sb__fill { width: auto; left: 3px; right: 3px; top: 0; bottom: auto; height: calc(var(--p, 0) * 100%); }
+    .pc-sb__cam { top: clamp(12px, calc(var(--p, 0) * 100%), calc(100% - 12px)); left: auto; right: 18px; translate: 0 -50%; width: 34px; height: 26px; }
+    .pc-sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+  }
+  @media (min-width: 1024px) { section { padding-top: 96px; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+
+  <section data-section="story" data-words="94" class="pc-hero">
+    <span class="pc-tag pc-tag--gold">A1 · Стамбул · <span lang="tr">şimdiki zaman</span></span>
+    <h1 class="pc-split"><em lang="tr">-iyor</em> камерасы</h1>
+    <p class="pc-lead">Түрік тілінде камера-шақ бар. Ол дәл қазір болып жатқан нәрсені түсіреді.</p>
+
+    <div class="pc-frame" aria-label="Кадр: дәл қазір шай ішіп отырмын">
+      <span class="pc-rec"><i></i>REC</span>
+      <div class="pc-steam" aria-hidden="true"><i></i><i></i><i></i></div>
+      <svg width="52" height="76" viewBox="0 0 60 88" aria-hidden="true" class="pc-glass">
+        <ellipse cx="30" cy="80" rx="24" ry="6" fill="#F3DCB4"/>
+        <path d="M17 20c0 0-5 20-1 34 2 8 26 8 28 0 4-14-1-34-1-34z" fill="#FFF8EC" stroke="#E3A340" stroke-width="2.4"/>
+        <path d="M19 34c1 12 3 18 4 22 1.6 4 12.4 4 14 0 1-4 3-10 4-22z" fill="#C9772F" opacity=".75"/>
+        <path d="M17 20h26" stroke="#E3A340" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <div class="pc-big" lang="tr" data-say="içiyorum" role="button" tabindex="0">içiyorum</div>
+      <small>Ішіп отырмын. Дәл қазір. Қолымда стақан.</small>
+    </div>
+
+    <div class="pc-story">
+      <p>Кадыкөй, айлақ жанындағы шайхана. Досыңнан хабарлама келеді:</p>
+      <div class="pc-bubble"><a-say>Ne yapıyorsun?</a-say><small>Не істеп жатырсың?</small></div>
+      <p>Сен «ішу» етістігін білесің — <b lang="tr" class="tr">içmek</b>. Сөздіктегідей жауап бересің:</p>
+      <div style="text-align:right"><div class="pc-bubble pc-bubble--me"><span class="tr" lang="tr">Çay içmek.</span></div></div>
+      <p>Досың смайлик жібереді. «Шай ішу» шықты. «Мен» де жоқ, «қазір» де жоқ.</p>
+      <p class="pc-punch">Сөздік формасы керек емес.<br><em>Кадр</em> керек.</p>
+      <p>Қазақшада да солай: «ішемін» — жалпы, «ішіп отырмын» — дәл қазір. Түрік тілі де оларды ажыратады.</p>
+      <p><b lang="tr">-iyor</b> жалғауы — камера. Ол бір-ақ нәрсені біледі: сәтті көрсету. Әдеттерді түсірмейді.</p>
+    </div>
+
+    <div class="pc-card" style="margin-top:18px">
+      <span class="pc-tag">Уақыт таспасы · бас</span>
+      <div class="pc-ribbon" aria-hidden="true">
+        <div class="pc-ribbon__base"></div>
+        <div class="pc-ribbon__fill" data-rib-fill></div>
+        <svg class="pc-ribbon__cam" viewBox="0 0 48 48" data-rib-cam><rect x="5" y="14" width="28" height="21" rx="4" fill="#EFB65F"/><path d="M35 22l8-5v14l-8-5z" fill="#F8D294"/><circle cx="16" cy="24.5" r="5.5" fill="#fff" opacity=".85"/></svg>
+        <svg class="pc-ribbon__cross" viewBox="0 0 48 48" data-rib-cross><circle cx="24" cy="24" r="20" fill="none" stroke="#C4685B" stroke-width="4"/><path d="M10 38L38 10" stroke="#C4685B" stroke-width="4" stroke-linecap="round"/></svg>
+        <span class="pc-ribbon__cap" style="left:10%">кеше</span> <span class="pc-ribbon__cap" style="left:50%">қазір</span> <span class="pc-ribbon__cap" style="left:90%">ертең</span>
+      </div>
+      <div class="pc-row" role="tablist" aria-label="Камера нені түсіреді">
+        <button type="button" class="pc-chip is-gold is-on" data-rib="now">дәл қазір</button>
+        <button type="button" class="pc-chip is-gold" data-rib="days">осы күндері</button>
+        <button type="button" class="pc-chip is-gold" data-rib="life">әрқашан, өмір бойы</button>
+      </div>
+      <p class="pc-hint" data-ui data-rib-hint aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section data-section="form" data-words="69">
+    <span class="pc-tag pc-tag--gold">1-қадам · форма</span>
+    <h2 class="pc-split"><em>Кадрды</em> қалай құрастырамыз</h2>
+    <p>Алдымен тауып көр. <b lang="tr" class="tr">gel-</b> түбірі — келу. «Мен бара жатырмын, жолдамын» қалай болады?</p>
+    <div class="pc-row" data-guess>
+      <button type="button" class="pc-chip" data-g="0"><span lang="tr">gelyorum</span></button>
+      <button type="button" class="pc-chip" data-g="1"><span lang="tr">geliyorum</span></button>
+      <button type="button" class="pc-chip" data-g="2"><span lang="tr">gelıyorum</span></button>
+    </div>
+    <p class="pc-hint" data-ui data-guess-hint aria-live="polite"></p>
+
+    <div class="pc-card" style="margin-top:14px">
+      <div class="pc-stage" data-build aria-live="polite"></div>
+      <ol class="pc-steps" data-build-steps>
+        <li>Сөздіктегі етістік: <span lang="tr" class="tr">gelmek</span>.</li>
+        <li><span lang="tr" class="tr">-mek</span> кесіп тастаймыз. Түбір қалады.</li>
+        <li>Дауыстыны 4 нұсқалы үндестік бойынша қоямыз. e-ден кейін — i.</li>
+        <li><span lang="tr" class="tr">yor</span> жалғаймыз. Ол ешқашан өзгермейді.</li>
+        <li>Жақты қосамыз: <span lang="tr" class="tr">-um</span> — бұл «мен».</li>
+      </ol>
+      <div class="pc-row" style="justify-content:center">
+        <button type="button" class="pc-btn pc-btn--ghost" data-build-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Артқа</button>
+        <button type="button" class="pc-btn" data-build-next>Әрі қарай<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></button>
+        <button type="button" class="pc-btn pc-btn--ghost" data-build-again><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>Тағы бір рет</button>
+      </div>
+    </div>
+
+    <p class="pc-formula">түбір + <b lang="tr">ı / i / u / ü</b> + <b lang="tr">yor</b> + жақ</p>
+    <p>Ағылшын тілінде де ұқсас: <span lang="en">I am drinking</span> — бұл да кадр. Тек онда үш сөз, ал түрікшеде бәрі бір сөзге сыяды.</p>
+    <p><b lang="tr">yor</b> алдындағы дауысты түбірдің соңғы дауыстысына қарай алынады. Плитканы бас.</p>
+    <div class="pc-harm" data-harm>
+      <button type="button" data-v="ı" data-ex="yapıyor"><span class="pc-harm__v" lang="tr">a ı → ı</span><span class="pc-harm__ex" lang="tr">yapıyor</span></button>
+      <button type="button" data-v="i" data-ex="geliyor"><span class="pc-harm__v" lang="tr">e i → i</span><span class="pc-harm__ex" lang="tr">geliyor</span></button>
+      <button type="button" data-v="u" data-ex="konuşuyor"><span class="pc-harm__v" lang="tr">o u → u</span><span class="pc-harm__ex" lang="tr">konuşuyor</span></button>
+      <button type="button" data-v="ü" data-ex="görüyor"><span class="pc-harm__v" lang="tr">ö ü → ü</span><span class="pc-harm__ex" lang="tr">görüyor</span></button>
+    </div>
+  </section>
+
+  <section data-section="persons" data-words="55">
+    <span class="pc-tag pc-tag--gold">2-қадам · жақтар</span>
+    <h2 class="pc-split">Алты жақ, <em>бір yor</em></h2>
+    <p><b lang="tr">yor</b> жартастай тұрады. Одан кейін құйрықтар әрқашан <b>u</b>-мен: «мен студентпін»-дегідей, тек таңдаусыз.</p>
+    <div class="pc-card pc-card--gold">
+      <div class="pc-morph__who" data-morph-who>ben · мен</div>
+      <div class="pc-morph" data-morph lang="tr" data-say="içiyorum" role="button" tabindex="0">içiyor<i>um</i></div>
+      <input class="pc-slider" type="range" min="0" max="5" step="1" value="0" data-morph-range aria-label="Жақ: «мен»-нен «олар»-ға дейін">
+      <p class="pc-hint" style="text-align:center">Жүгірткіні тарт: тек құйрық өзгереді.</p>
+    </div>
+    <div class="pc-conj" data-conj style="margin-top:14px"></div>
+    <p style="margin-top:14px">«Олар» құйрығы да ауытқымайды: тек <b lang="tr">-lar</b>, <b lang="tr">yor</b>-дан кейін ешқандай <b lang="tr">-ler</b> жоқ.</p>
+    <p>Есімдікті түсіріп айтуға болады: <a-say>Çay içiyorum.</a-say> <b lang="tr">-um</b> құйрығы «мен» деп тұр. Қазақшадағы «Шай ішіп отырмын» сияқты.</p>
+    <p><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="vertical-align:-3px"><circle cx="12" cy="8" r="4" fill="#8FCCEF"/><path d="M4 21c1-5 15-5 16 0" fill="#8FCCEF"/></svg> «Ол»-дың құйрығы жоқ: <a-say>Ali çay içiyor.</a-say></p>
+  </section>
+
+  <section data-section="vowels" data-words="37">
+    <span class="pc-tag pc-tag--gold">3-қадам · дауыстыға біткен түбір</span>
+    <h2 class="pc-split">Дауысты <em>түседі</em></h2>
+    <p>Түбір дауыстыға бітсе, ол түсіп қалады. Жаңа дауыстыны оның алдындағы дауысты таңдайды.</p>
+    <p>Неге? Түрік тілі қатар тұрған екі дауыстыны ұнатпайды. Ескісі кетіп, орнын жаңасына береді.</p>
+    <div class="pc-card">
+      <div class="pc-row" data-drop-chips>
+        <button type="button" class="pc-chip is-on" data-root="bekle" data-ru="күту"><span lang="tr">bekle-</span></button>
+        <button type="button" class="pc-chip" data-root="anla" data-ru="түсіну"><span lang="tr">anla-</span></button>
+        <button type="button" class="pc-chip" data-root="oku" data-ru="оқу"><span lang="tr">oku-</span></button>
+        <button type="button" class="pc-chip" data-root="söyle" data-ru="сөйлеу"><span lang="tr">söyle-</span></button>
+        <button type="button" class="pc-chip" data-root="izle" data-ru="қарау"><span lang="tr">izle-</span></button>
+      </div>
+      <div class="pc-stage" data-drop style="margin-top:12px" aria-live="polite"></div>
+      <p class="pc-ru" data-ui data-drop-ru></p>
+      <div class="pc-row" style="justify-content:center">
+        <button type="button" class="pc-btn" data-drop-go><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v13M6 12l6 6 6-6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>Дауыстыны түсіру</button>
+      </div>
+    </div>
+    <p style="margin-top:12px"><a-say>bekle → bekliyor</a-say> · <a-say>anla → anlıyor</a-say> · <a-say>oku → okuyor</a-say></p>
+  </section>
+
+  <section data-section="lab" data-words="49">
+    <span class="pc-tag pc-tag--gold">Зертхана</span>
+    <h2 class="pc-split"><em>Камераның</em> пульті</h2>
+    <p>Үш режим. Форманы өзің құрастыр, біреудікін талда немесе дауыстыны жылдамдыққа ұста.</p>
+    <div class="pc-card">
+      <div class="pc-tabs" role="tablist" data-lab-tabs>
+        <button type="button" role="tab" aria-selected="true" data-tab="build">Құрастыру</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="parse">Талдау</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="speed">Жылдамдық</button>
+      </div>
+
+      <div class="pc-pane" data-pane="build">
+        <div class="pc-lbl">Етістік</div>
+        <div class="pc-row" data-lab-verbs></div>
+        <div class="pc-lbl">Кім</div>
+        <div class="pc-row" data-lab-persons></div>
+        <div class="pc-out">
+          <div class="pc-stage" data-lab-out lang="tr"></div>
+          <div class="pc-ru" data-ui data-lab-ru></div>
+          <button type="button" class="pc-btn pc-btn--ghost" data-lab-say><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 8a5 5 0 0 1 0 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Тыңдау</button>
+        </div>
+      </div>
+
+      <div class="pc-pane" data-pane="parse" hidden>
+        <p class="pc-hint" style="text-align:center">Мұны кім істеп жатыр? Тек құйрыққа қара.</p>
+        <div class="pc-big-q" data-parse-word lang="tr"></div>
+        <div class="pc-row" style="justify-content:center" data-parse-opts></div>
+        <p class="pc-hint" data-ui data-parse-hint style="text-align:center" aria-live="polite"></p>
+        <div style="text-align:center"><button type="button" class="pc-btn pc-btn--ghost" data-parse-next>Келесі сөз</button></div>
+      </div>
+
+      <div class="pc-pane" data-pane="speed" hidden>
+        <p class="pc-hint" style="text-align:center"><b lang="tr">yor</b> алдына қай дауысты тұрады?</p>
+        <div class="pc-big-q" data-speed-word lang="tr"></div>
+        <div class="pc-vowels" data-speed-opts>
+          <button type="button" data-sv="ı" lang="tr">ı</button>
+          <button type="button" data-sv="i" lang="tr">i</button>
+          <button type="button" data-sv="u" lang="tr">u</button>
+          <button type="button" data-sv="ü" lang="tr">ü</button>
+        </div>
+        <div class="pc-streak" data-speed-streak aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="pc-hint" data-ui data-speed-hint style="text-align:center" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <section data-section="scene" data-words="25">
+    <span class="pc-tag pc-tag--gold">Көрініс</span>
+    <h2 class="pc-split"><em>Кадыкөйдегі</em> хат алмасу</h2>
+    <p>Сол дос, сол сұрақ. Енді жауапты өзің таңда. Байқа: досың кадрмен сұрайды — жауапқа да кадр күтеді.</p>
+    <div class="pc-phone-top"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="4" width="24" height="40" rx="6" fill="#4C6A80"/><rect x="15" y="9" width="18" height="28" rx="2" fill="#E4F2FB"/><circle cx="24" cy="40.5" r="1.8" fill="#B9E0F7"/></svg><span lang="tr">Emre</span></div>
+    <div class="pc-chat" data-chat aria-live="polite"></div>
+    <div class="pc-row" style="justify-content:center;margin-top:12px" data-chat-opts>
+      <button type="button" class="pc-chip" data-c="0"><span lang="tr">Çay içmek.</span></button>
+      <button type="button" class="pc-chip" data-c="1"><span lang="tr">Çay içiyorum.</span></button>
+      <button type="button" class="pc-chip" data-c="2"><span lang="tr">Çay içiyor.</span></button>
+    </div>
+    <div style="text-align:center;margin-top:12px"><button type="button" class="pc-btn pc-btn--ghost" data-chat-reset><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>Көріністі кері айналдыру</button></div>
+  </section>
+
+  <section data-section="traps" data-words="46">
+    <span class="pc-tag pc-tag--gold">Тұзақтар</span>
+    <h2 class="pc-split">Бәрі <em>сүрінетін</em> жер</h2>
+    <p>Әркім дерлік жіберетін төрт қате. Карточканы бас — ол аударылады.</p>
+    <div class="pc-traps">
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Ben çay içmek.</s><small>Сөздіктегі форма</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Çay içiyorum.</span><small>Сөйлеуде кадр керек: түбір, дауысты, yor, жақ.</small></span> </span></button>
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">geliyorım</s><small>Құйрықты түбірге бейімдеген</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">geliyorum</span><small>yor-дан кейін құйрық әрқашан u-мен.</small></span> </span></button>
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">bekleiyor</s><small>Қатар екі дауысты</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">bekliyor</span><small>Түбірдің дауыстысы түседі.</small></span> </span></button>
+      <button type="button" class="pc-flip" data-flip><span class="pc-flip__in">
+        <span class="pc-flip__f"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="#C4685B" stroke-width="3" stroke-linecap="round"/></svg><s lang="tr">Ben içiyor.</s><small>Құйрықты ұмытқан</small></span> <span class="pc-flip__b"><span class="tr" lang="tr">Ben içiyorum.</span><small>Құйрықсыз бұл «ол ішіп отыр».</small></span> </span></button>
+    </div>
+  </section>
+
+  <section data-section="video" data-words="11">
+    <h2 class="pc-split"><em>Тағы бір рет</em> тыңда</h2>
+    <p class="pc-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#FDF3E2"/><path d="M10 8l6 4-6 4z" fill="#E3A340"/></svg><span>Назар аудар: <b lang="tr">yor</b> алдындағы дауысты өзгереді, ал <b lang="tr">yor</b> өзі — ешқашан.</span></p>
+    <a-video yt="VpoPsOEaV4w" start="38" end="218" title="14-сабақ. Осы шақ" channel="Turkish Talk"></a-video>
+  </section>
+
+  <section data-section="practice" data-words="1">
+    <h2 class="pc-split">Практика</h2>
+    <a-exercise ref="a1.present-continuous.ex1"></a-exercise>
+    <a-exercise ref="a1.present-continuous.ex2"></a-exercise>
+    <a-exercise ref="a1.present-continuous.ex3"></a-exercise>
+
+    <a-exercise ref="a1.present-continuous.ex4" class="ak-ex">
+      <div class="ak-ex__head"><span class="ak-ex__title">Галата көпіріндегі фотограф: дұрыс кадрды түсір</span><span class="ak-ex__count" data-shot-count>1 / 5</span></div>
+      <div class="pc-shot" data-shot-view>
+        <span class="pc-shot__corner pc-shot__corner--a"></span><span class="pc-shot__corner pc-shot__corner--b"></span>
+        <span class="pc-shot__who" data-shot-who></span>
+        <span class="pc-shot__ru" data-shot-ru></span>
+        <span class="pc-shot__flash" data-shot-flash></span>
+      </div>
+      <div class="pc-row" style="justify-content:center" data-shot-opts></div>
+      <p class="pc-hint" data-shot-status aria-live="polite"></p>
+    </a-exercise>
+  </section>
+
+  <section data-section="check" data-words="5">
+    <h2 class="pc-split">Шағын тексеру</h2>
+    <p>Көмексіз. Бес сұрақ.</p>
+    <a-quiz ref="a1.present-continuous.check1"></a-quiz>
+  </section>
+
+  <section data-section="cheat" data-words="59">
+    <span class="pc-tag pc-tag--gold">Жадынама</span>
+    <h2 class="pc-split">Бүкіл камера <em>бір экранда</em></h2>
+    <div class="pc-cheat">
+      <div class="pc-chi"><span class="pc-n">01</span><span><b><span lang="tr">-iyor</span> — кадр</b><span>Қазір немесе осы күндері не болып жатқаны.</span></span></div>
+      <div class="pc-chi"><span class="pc-n">02</span><span><b>Формула</b><span>түбір + <span lang="tr">ı/i/u/ü</span> + <span lang="tr">yor</span> + жақ</span></span></div>
+      <div class="pc-chi"><span class="pc-n">03</span><span><b>4 нұсқалы үндестік</b><span lang="tr">yapıyor · geliyor · konuşuyor · görüyor</span></span></div>
+      <div class="pc-chi"><span class="pc-n">04</span><span><b>Соңғы дауысты түседі</b><span lang="tr">bekle → bekliyor · anla → anlıyor</span></span></div>
+      <div class="pc-chi"><span class="pc-n">05</span><span><b>Құйрықтар әрқашан u-мен</b><span lang="tr">-um · -sun · — · -uz · -sunuz · -lar</span></span></div>
+      <div class="pc-chi"><span class="pc-n">06</span><span><b>Есімдік міндетті емес</b><span lang="tr">Çay içiyorum.</span></span></div>
+    </div>
+    <p style="margin-top:14px"><b>Есте сақта:</b> <b lang="tr">yor</b> — камераның штативі. Мықты тұрады, ал дауысты мен құйрық оны айнала бұрылады.</p>
+    <div class="pc-final">
+      <div class="pc-bubble" style="text-align:left"><a-say>Ne yapıyorsun?</a-say></div><br>
+      <div class="pc-bubble pc-bubble--me" data-final-me><span class="tr" lang="tr" data-say="Çay içiyorum.">Çay içiyorum.</span></div>
+      <p class="pc-punch" style="margin-top:18px">Енді досың сөздікті емес, <em>кадрды</em> алады.</p>
+      <svg width="64" height="64" viewBox="0 0 48 48" aria-hidden="true" data-final-cam><rect x="5" y="14" width="28" height="21" rx="4" fill="#EFB65F"/><path d="M35 22l8-5v14l-8-5z" fill="#F8D294"/><circle cx="16" cy="24.5" r="5.5" fill="#fff" opacity=".85"/></svg>
+      <div><button type="button" class="pc-btn" data-final-replay>Тағы бір рет түсіру</button></div>
+      <p style="margin:16px auto 0">Екінші сабақта камераның пульті пайда болады: «тоқта» және «сұрақ» батырмалары.</p>
+    </div>
+  </section>
+
+</main>
+
+<nav class="pc-sb" data-scrollbar aria-label="Сабақ барысы">
+  <div class="pc-sb__track"><span class="pc-sb__fill"></span></div>
+  <svg class="pc-sb__cam" viewBox="0 0 48 36" aria-hidden="true"><rect x="2" y="6" width="30" height="24" rx="5" fill="#EFB65F" stroke="#6E5020" stroke-width="2"/><path d="M33 13l12-6v22l-12-6z" fill="#F8D294" stroke="#6E5020" stroke-width="2"/><circle cx="14" cy="18" r="6" fill="#fff"/><circle cx="26" cy="11" r="2.4" fill="#C4685B"/></svg>
+</nav>
+
+<template data-achievement data-title="Кадр ұсталды" data-text="Сен дәл қазір не болып жатқанын айтасың: içiyorum, geliyorum, bekliyorum.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="52" fill="#FDF3E2" stroke="#EFB65F" stroke-width="5"/>
+    <g class="cam"><rect x="26" y="42" width="50" height="38" rx="8" fill="#EFB65F"/><path d="M78 54l18-10v34l-18-10z" fill="#F8D294"/><circle class="lens" cx="46" cy="61" r="11" fill="#fff"/><circle cx="46" cy="61" r="5" fill="#4C6A80"/></g>
+    <circle class="rec" cx="68" cy="50" r="4" fill="#C4685B"/>
+    <text class="word" x="60" y="100" text-anchor="middle" font-size="15" font-weight="800" fill="#3A5468" font-family="system-ui">-iyor</text>
+  </svg>
+</template>
+
+<style>
+  .pc-shot { position: relative; height: 150px; border-radius: 18px; overflow: hidden; margin: 12px 0; background: linear-gradient(180deg, #DCEFFC, #F8FCFF 60%, #B9E0F7); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+  .pc-shot__corner { position: absolute; width: 22px; height: 22px; border: 3px solid var(--steel); }
+  .pc-shot__corner--a { left: 10px; top: 10px; border-right: 0; border-bottom: 0; }
+  .pc-shot__corner--b { right: 10px; bottom: 10px; border-left: 0; border-top: 0; }
+  .pc-shot__who { font: 600 26px/1.1 var(--disp); color: var(--steel-2); text-align: center; padding: 0 30px; }
+  .pc-shot__ru { color: var(--muted); font-size: 15px; text-align: center; padding: 0 30px; }
+  .pc-shot__flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; }
+</style>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const A = !!G && !reduce;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const speak = (t) => { try { window.AlternaKit && AlternaKit.speak(t); } catch (e) { /* без озвучки */ } };
+  if (G) { try { G.registerPlugin(ScrollTrigger, SplitText); } catch (e) { /* уже */ } }
+  if (A) ScrollTrigger.config({ ignoreMobileResize: true });
+
+  /* ---------- грамматика ---------- */
+  const VOW = 'aıoueiöü';
+  const NARROW = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' };
+  const ENDS = ['um', 'sun', '', 'uz', 'sunuz', 'lar'];
+  const PERS = [['ben', 'мен'], ['sen', 'сен'], ['o', 'ол'], ['biz', 'біз'], ['siz', 'сіз'], ['onlar', 'олар']];
+  function parts(root) {
+    let stem = root, drop = '';
+    if (VOW.includes(root.slice(-1))) { drop = root.slice(-1); stem = root.slice(0, -1); }
+    const lv = [...stem].reverse().find((c) => VOW.includes(c));
+    return { stem, drop, v: NARROW[lv] };
+  }
+  const form = (root, p) => { const x = parts(root); return x.stem + x.v + 'yor' + ENDS[p]; };
+
+  /* ---------- заголовки и появление ---------- */
+  if (A) {
+    $$('.pc-split').forEach((h) => {
+      const st = new SplitText(h, { type: 'words' });
+      G.from(st.words, { yPercent: 55, rotation: 5, duration: .7, ease: 'back.out(2)', stagger: .06, scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+    ScrollTrigger.batch('.pc-card, .pc-chi, .pc-flip, .pc-harm button, .pc-cw', {
+      start: 'top 92%', once: true,
+      onEnter: (b) => G.from(b, { y: 26, scale: .96, duration: .6, ease: 'back.out(1.8)', stagger: .07 }),
+    });
+    G.to('.pc-glass', { y: -8, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+  }
+
+  /* ---------- лента времени ---------- */
+  const RIB = {
+    now: { l: 47, w: 6, cam: 1, cross: 0, t: 'Камера бір нүктені түсіреді — сен тұрған жерді. Çay içiyorum: қазір ішіп отырмын.' },
+    days: { l: 30, w: 40, cam: 1, cross: 0, t: 'Кадрды «осы күндерге» созуға болады. Bu aralar Türkçe öğreniyorum: осы күндері түрік тілін үйреніп жүрмін.' },
+    life: { l: 4, w: 92, cam: .35, cross: 1, t: '«Өмір бойғы» әдеттерді камера түсірмейді. Олар үшін түрік тілінде басқа осы шақ бар — оны кейін талдаймыз.' },
+  };
+  const ribHint = $('[data-rib-hint]');
+  function rib(k) {
+    const r = RIB[k];
+    ribHint.textContent = r.t;
+    $$('[data-rib]').forEach((b) => b.classList.toggle('is-on', b.dataset.rib === k));
+    if (A) {
+      G.to('[data-rib-fill]', { left: r.l + '%', width: r.w + '%', duration: .8, ease: 'elastic.out(1,.6)' });
+      G.to('[data-rib-cam]', { opacity: r.cam, y: k === 'life' ? 4 : 0, duration: .4 });
+      G.to('[data-rib-cross]', { scale: r.cross, rotation: r.cross ? 0 : -90, duration: .5, ease: 'back.out(3)' });
+    } else {
+      Object.assign($('[data-rib-fill]').style, { left: r.l + '%', width: r.w + '%' });
+      $('[data-rib-cross]').style.scale = r.cross;
+    }
+  }
+  $$('[data-rib]').forEach((b) => b.addEventListener('click', () => rib(b.dataset.rib)));
+  rib('now');
+  if (A) G.fromTo('[data-rib-fill]', { width: '0%', left: '50%' }, { width: '6%', left: '47%', duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.pc-ribbon', start: 'top 85%', once: true } });
+
+  /* ---------- угадай ---------- */
+  const gHint = $('[data-guess-hint]');
+  const GUESS = [
+    'Сәл қалды. Түбір мен yor арасына дауысты керек — онсыз айту мүмкін емес.',
+    'Иә! gel + i + yor + um. Әрі қарай i қайдан шыққанын талдаймыз.',
+    'Жақсы әрекет. gel- ішінде e дауыстысы, ал e-ден кейін ı емес, i келеді.',
+  ];
+  $$('[data-g]').forEach((b) => b.addEventListener('click', () => {
+    const ok = b.dataset.g === '1';
+    $$('[data-g]').forEach((x) => x.classList.remove('is-ok', 'is-no'));
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    gHint.textContent = GUESS[+b.dataset.g];
+    if (ok) speak('geliyorum');
+    if (A) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .5, ease: 'elastic.out(1,.45)' });
+  }));
+
+  /* ---------- конструктор по шагам ---------- */
+  const STEPS = [
+    [['gel', 'stem'], ['mek', 'mek']],
+    [['gel', 'stem']],
+    [['gel', 'stem'], ['i', 'v']],
+    [['gel', 'stem'], ['i', 'v'], ['yor', 'yor']],
+    [['gel', 'stem'], ['i', 'v'], ['yor', 'yor'], ['um', 'end']],
+  ];
+  let step = 0;
+  const stage = $('[data-build]');
+  function drawStep(dir) {
+    stage.innerHTML = STEPS[step].map(([t, c]) => `<span class="pc-piece pc-piece--${c}" lang="tr">${t}</span>`).join('');
+    $$('[data-build-steps] li').forEach((li, i) => li.classList.toggle('is-on', i === step));
+    $('[data-build-prev]').disabled = step === 0;
+    $('[data-build-next]').disabled = step === STEPS.length - 1;
+    if (A && dir > 0) {
+      const last = stage.lastElementChild;
+      if (step === 1) G.from(stage.children, { x: 20, duration: .4, ease: 'power2.out' });
+      else G.from(last, { y: -50, rotation: -12, scale: .4, duration: .7, ease: 'bounce.out' });
+    }
+    if (A && dir < 0) G.from(stage, { x: -10, duration: .3, ease: 'power2.out' });
+    if (step === STEPS.length - 1) speak('geliyorum');
+  }
+  $('[data-build-next]').addEventListener('click', () => {
+    if (step === 0 && A) {
+      const mek = stage.querySelector('.pc-piece--mek');
+      G.to(mek, { y: 60, rotation: 30, opacity: 0, duration: .45, ease: 'power2.in', onComplete: () => { step = 1; drawStep(1); } });
+      return;
+    }
+    if (step < STEPS.length - 1) { step++; drawStep(1); }
+  });
+  $('[data-build-prev]').addEventListener('click', () => { if (step > 0) { step--; drawStep(-1); } });
+  $('[data-build-again]').addEventListener('click', () => {
+    step = 0; drawStep(0);
+    let k = 0;
+    const tick = () => { if (k++ < 4) { step++; drawStep(1); setTimeout(tick, reduce ? 50 : 700); } };
+    setTimeout(tick, reduce ? 50 : 600);
+  });
+  drawStep(0);
+  if (A) ScrollTrigger.create({ trigger: stage, start: 'top 75%', once: true, onEnter: () => G.fromTo(stage, { scale: .85 }, { scale: 1, duration: .7, ease: 'back.out(2.5)' }) });
+
+  /* ---------- плитки гармонии ---------- */
+  $$('[data-harm] button').forEach((b) => b.addEventListener('click', () => {
+    $$('[data-harm] button').forEach((x) => x.classList.toggle('is-on', x === b));
+    speak(b.dataset.ex);
+    if (A) {
+      G.fromTo(b.querySelector('.pc-harm__ex'), { y: -10, scale: .8 }, { y: 0, scale: 1, duration: .6, ease: 'elastic.out(1,.45)' });
+      G.fromTo(b, { rotation: -3 }, { rotation: 0, duration: .5, ease: 'back.out(3)' });
+    }
+  }));
+  if (A) G.from('[data-harm] .pc-harm__ex', { y: 20, rotation: 6, duration: .6, ease: 'back.out(2)', stagger: .12, scrollTrigger: { trigger: '[data-harm]', start: 'top 85%', once: true } });
+
+  /* ---------- лица: ползунок и таблица ---------- */
+  const conj = $('[data-conj]');
+  conj.innerHTML = PERS.map(([p, ru], i) => `<button type="button" class="pc-cw" data-cw="${i}"><span class="pc-p">${p} · ${ru}</span><span class="pc-f" lang="tr">içiyor<i>${ENDS[i]}</i></span></button>`).join('');
+  const morph = $('[data-morph]');
+  const range = $('[data-morph-range]');
+  function setPerson(i, from) {
+    const f = 'içiyor' + ENDS[i];
+    morph.innerHTML = `içiyor<i>${ENDS[i]}</i>`;
+    morph.dataset.say = f;
+    $('[data-morph-who]').textContent = PERS[i].join(' · ');
+    $$('.pc-cw').forEach((c) => c.classList.toggle('is-on', +c.dataset.cw === i));
+    if (A && morph.querySelector('i')) G.fromTo(morph.querySelector('i'), { y: 24, scale: .5 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(3)' });
+    if (from === 'tile') speak(f);
+  }
+  range.addEventListener('input', () => setPerson(+range.value));
+  range.addEventListener('change', () => speak('içiyor' + ENDS[+range.value]));
+  $$('.pc-cw').forEach((c) => c.addEventListener('click', () => { range.value = c.dataset.cw; setPerson(+c.dataset.cw, 'tile'); }));
+  setPerson(0);
+  if (A) G.from('.pc-cw .pc-f i', { y: 18, rotation: 10, duration: .5, ease: 'back.out(2.5)', stagger: .08, scrollTrigger: { trigger: conj, start: 'top 85%', once: true } });
+
+  /* ---------- гласная уходит ---------- */
+  const dropStage = $('[data-drop]');
+  let dropRoot = 'bekle';
+  function drawDrop(root, done) {
+    const x = parts(root);
+    dropStage.innerHTML = done
+      ? `<span class="pc-piece pc-piece--stem" lang="tr">${x.stem}</span><span class="pc-piece pc-piece--v" lang="tr">${x.v}</span><span class="pc-piece pc-piece--yor" lang="tr">yor</span>`
+      : `<span class="pc-piece pc-piece--stem" lang="tr">${x.stem}</span><span class="pc-piece pc-piece--drop" lang="tr">${x.drop}</span>`;
+    $('[data-drop-ru]').textContent = done ? `${root}- → ${x.stem}${x.v}yor: алдындағы дауысты шешті — ${x.v}.` : `${root}- ${x.drop} дауыстысына бітеді. Батырманы бас.`;
+  }
+  function dropGo() {
+    const x = parts(dropRoot);
+    const d = dropStage.querySelector('.pc-piece--drop');
+    const fin = () => { drawDrop(dropRoot, true); speak(x.stem + x.v + 'yor');
+      if (A) { G.from(dropStage.querySelector('.pc-piece--v'), { y: -60, scale: .3, duration: .7, ease: 'bounce.out' }); G.from(dropStage.querySelector('.pc-piece--yor'), { x: 60, rotation: 8, duration: .6, delay: .3, ease: 'back.out(2)' }); } };
+    if (A && d) G.to(d, { y: 70, rotation: 40, opacity: 0, duration: .5, ease: 'power2.in', onComplete: fin });
+    else fin();
+  }
+  $$('[data-drop-chips] [data-root]').forEach((b) => b.addEventListener('click', () => {
+    dropRoot = b.dataset.root;
+    $$('[data-drop-chips] [data-root]').forEach((x) => x.classList.toggle('is-on', x === b));
+    drawDrop(dropRoot, false);
+    if (A) G.from(dropStage.children, { scale: .6, duration: .4, ease: 'back.out(3)', stagger: .05 });
+  }));
+  $('[data-drop-go]').addEventListener('click', dropGo);
+  drawDrop(dropRoot, false);
+
+  /* ---------- лаборатория ---------- */
+  const VERBS = [['iç', 'ішу'], ['yap', 'істеу'], ['gel', 'келу'], ['konuş', 'сөйлеу'], ['gör', 'көру'], ['bekle', 'күту'], ['anla', 'түсіну'], ['oku', 'оқу']];
+  const RU = {
+    iç: ['ішіп отырмын', 'ішіп отырсың', 'ішіп отыр', 'ішіп отырмыз', 'ішіп отырсыз', 'ішіп отыр'], yap: ['істеп жатырмын', 'істеп жатырсың', 'істеп жатыр', 'істеп жатырмыз', 'істеп жатырсыз', 'істеп жатыр'],
+    gel: ['бара жатырмын', 'бара жатырсың', 'бара жатыр', 'бара жатырмыз', 'бара жатырсыз', 'бара жатыр'], konuş: ['сөйлеп жатырмын', 'сөйлеп жатырсың', 'сөйлеп жатыр', 'сөйлеп жатырмыз', 'сөйлеп жатырсыз', 'сөйлеп жатыр'],
+    gör: ['көріп тұрмын', 'көріп тұрсың', 'көріп тұр', 'көріп тұрмыз', 'көріп тұрсыз', 'көріп тұр'], bekle: ['күтіп тұрмын', 'күтіп тұрсың', 'күтіп тұр', 'күтіп тұрмыз', 'күтіп тұрсыз', 'күтіп тұр'],
+    anla: ['түсініп тұрмын', 'түсініп тұрсың', 'түсініп тұр', 'түсініп тұрмыз', 'түсініп тұрсыз', 'түсініп тұр'], oku: ['оқып отырмын', 'оқып отырсың', 'оқып отыр', 'оқып отырмыз', 'оқып отырсыз', 'оқып отыр'],
+  };
+  let lv = 0, lp = 0;
+  const vBox = $('[data-lab-verbs]');
+  const pBox = $('[data-lab-persons]');
+  VERBS.forEach(([r, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip' + (i === 0 ? ' is-on' : ''); b.innerHTML = `<span lang="tr">${r}-</span> · ${ru}`; b.dataset.i = i; vBox.append(b); });
+  PERS.forEach(([p, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip is-gold' + (i === 0 ? ' is-on' : ''); b.innerHTML = `<span lang="tr">${p}</span>`; b.dataset.i = i; b.setAttribute('aria-label', ru); pBox.append(b); });
+  const labOut = $('[data-lab-out]');
+  function labDraw() {
+    const r = VERBS[lv][0];
+    const x = parts(r);
+    labOut.innerHTML = `<span class="pc-piece pc-piece--stem">${x.stem}</span><span class="pc-piece pc-piece--v">${x.v}</span><span class="pc-piece pc-piece--yor">yor</span>` + (ENDS[lp] ? `<span class="pc-piece pc-piece--end">${ENDS[lp]}</span>` : '');
+    $('[data-lab-ru]').textContent = `${PERS[lp][1]} ${RU[r][lp]} — қазір.` + (x.drop ? ` ${x.drop} дауыстысы түсті.` : '');
+    if (A) G.from(labOut.children, { y: -30, rotation: () => G.utils.random(-12, 12), duration: .55, ease: 'back.out(2.5)', stagger: .07 });
+  }
+  vBox.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lv = +b.dataset.i; $$('button', vBox).forEach((x) => x.classList.toggle('is-on', x === b)); labDraw(); });
+  pBox.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lp = +b.dataset.i; $$('button', pBox).forEach((x) => x.classList.toggle('is-on', x === b)); labDraw(); speak(form(VERBS[lv][0], lp)); });
+  $('[data-lab-say]').addEventListener('click', () => speak(form(VERBS[lv][0], lp)));
+  labDraw();
+
+  $$('[data-lab-tabs] [data-tab]').forEach((t) => t.addEventListener('click', () => {
+    $$('[data-lab-tabs] [data-tab]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('[data-pane]').forEach((p) => { p.hidden = p.dataset.pane !== t.dataset.tab; });
+    const pane = $(`[data-pane="${t.dataset.tab}"]`);
+    if (A) G.from(pane, { y: 16, duration: .4, ease: 'power2.out' });
+  }));
+
+  /* разобрать */
+  const parseOpts = $('[data-parse-opts]');
+  PERS.forEach(([p, ru], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'pc-chip'; b.dataset.i = i; b.innerHTML = `<span lang="tr">${p}</span> · ${ru}`; parseOpts.append(b); });
+  let pw = { r: 'konuş', p: 4 };
+  function parseNew() {
+    pw = { r: VERBS[Math.floor(Math.random() * VERBS.length)][0], p: Math.floor(Math.random() * 6) };
+    $('[data-parse-word]').textContent = form(pw.r, pw.p);
+    $('[data-parse-hint]').textContent = '';
+    $$('button', parseOpts).forEach((b) => b.classList.remove('is-ok', 'is-no'));
+    if (A) G.fromTo('[data-parse-word]', { scale: .5, rotation: -6 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1,.45)' });
+  }
+  parseOpts.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const ok = +b.dataset.i === pw.p;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    const end = ENDS[pw.p];
+    $('[data-parse-hint]').textContent = ok ? `Иә: ${end ? '-' + end : 'бос'} құйрығы — бұл ${PERS[pw.p][1]}.` : `Құйрыққа қара: ${end ? '-' + end : 'ол жоқ'}. Бұл — ${PERS[pw.p][1]}.`;
+    if (ok) speak(form(pw.r, pw.p));
+    if (A) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+  });
+  $('[data-parse-next]').addEventListener('click', parseNew);
+  parseNew();
+
+  /* на скорость */
+  const SPEED = ['yap', 'gel', 'konuş', 'gör', 'iç', 'al', 'otur', 'gül', 'bekle', 'anla', 'oku', 'söyle', 'izle', 'çalış', 'öğren', 'tut'];
+  let sw = 'yap', streak = 0;
+  const streakEls = $$('[data-speed-streak] i');
+  function speedNew() {
+    let n; do { n = SPEED[Math.floor(Math.random() * SPEED.length)]; } while (n === sw);
+    sw = n;
+    $('[data-speed-word]').textContent = sw + '- + ? + yor';
+    $$('[data-sv]').forEach((b) => b.classList.remove('is-ok', 'is-no'));
+    if (A) G.fromTo('[data-speed-word]', { x: -40 }, { x: 0, duration: .45, ease: 'back.out(2)' });
+  }
+  $$('[data-sv]').forEach((b) => b.addEventListener('click', () => {
+    const x = parts(sw);
+    const ok = b.dataset.sv === x.v;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    streak = ok ? Math.min(8, streak + 1) : 0;
+    streakEls.forEach((s, i) => s.classList.toggle('is-on', i < streak));
+    $('[data-speed-hint]').textContent = ok ? `${x.stem}${x.v}yor. ${streak === 8 ? 'Қатарынан сегіз — сен камерадан жылдамсың.' : ''}` : `${x.stem}- ішіндегі соңғы дауысты шешеді: ${x.v}. Шығатыны — ${x.stem}${x.v}yor.`;
+    speak(x.stem + x.v + 'yor');
+    if (A) G.fromTo(b, { y: -8 }, { y: 0, duration: .4, ease: 'bounce.out' });
+    setTimeout(speedNew, ok ? 700 : 1600);
+  }));
+  speedNew();
+
+  /* ---------- сцена: переписка ---------- */
+  const chat = $('[data-chat]');
+  const REPLY = [
+    { me: 'Çay içmek.', re: 'Сөздік осылай естіледі: «шай ішу». Досың кім, қашан екенін түсінбеді. Тағы байқап көр.' },
+    { me: 'Çay içiyorum.', re: 'Кадр! Мен шай ішіп отырмын — дәл қазір.', next: ['Süper! Biz de çay içiyoruz.', 'Керемет! Біз де шай ішіп отырмыз.'] },
+    { me: 'Çay içiyor.', re: 'Құйрықсыз бұл «ол ішіп отыр». Досың енді кім шай ішіп отырғанын болжап жатыр.' },
+  ];
+  function bubble(html, cls) {
+    const d = document.createElement('div');
+    d.className = 'pc-bubble ' + (cls || '');
+    d.innerHTML = html;
+    chat.append(d);
+    if (A) G.from(d, { y: 16, scale: .8, duration: .5, ease: 'back.out(2.5)' });
+    return d;
+  }
+  function chatReset() {
+    chat.innerHTML = '';
+    bubble('<span class="tr" lang="tr" data-say="Selam! Ne yapıyorsun?">Selam! Ne yapıyorsun?</span><small data-ui>Сәлем! Не істеп жатырсың?</small>');
+    $$('[data-c]').forEach((b) => { b.disabled = false; b.classList.remove('is-ok', 'is-no'); });
+  }
+  $$('[data-c]').forEach((b) => b.addEventListener('click', () => {
+    const r = REPLY[+b.dataset.c];
+    const ok = !!r.next;
+    b.classList.add(ok ? 'is-ok' : 'is-no');
+    bubble(`<span class="tr" lang="tr">${r.me}</span>`, 'pc-bubble--me');
+    speak(r.me);
+    setTimeout(() => {
+      bubble(`<span data-ui>${r.re}</span>`, 'pc-bubble--re');
+      if (ok) { $$('[data-c]').forEach((x) => { x.disabled = true; }); setTimeout(() => bubble(`<span class="tr" lang="tr" data-say="${r.next[0]}">${r.next[0]}</span><small data-ui>${r.next[1]}</small>`), reduce ? 0 : 700); }
+    }, reduce ? 0 : 500);
+  }));
+  $('[data-chat-reset]').addEventListener('click', chatReset);
+  chatReset();
+
+  /* ---------- ловушки: карточки переворачиваются ---------- */
+  $$('[data-flip]').forEach((b) => b.addEventListener('click', () => {
+    const inner = b.querySelector('.pc-flip__in');
+    const on = !b.classList.contains('is-flipped');
+    b.classList.toggle('is-flipped', on);
+    if (on) speak(b.querySelector('.pc-flip__b .tr').textContent);
+    if (G) G.to(inner, { rotationY: on ? 180 : 0, duration: reduce ? 0 : .7, ease: 'back.out(1.6)' });
+    else inner.style.transform = on ? 'rotateY(180deg)' : '';
+  }));
+  if (A) G.from('.pc-flip__f svg', { scale: .3, rotation: -90, duration: .6, ease: 'back.out(3)', stagger: .1, scrollTrigger: { trigger: '.pc-traps', start: 'top 85%', once: true } });
+
+  /* ---------- шпаргалка и финал ---------- */
+  function finalPlay() {
+    if (!A) { speak('Çay içiyorum.'); return; }
+    G.fromTo('[data-final-me]', { x: 80, rotation: 6 }, { x: 0, rotation: 0, duration: .7, ease: 'back.out(2)' });
+    G.fromTo('[data-final-cam]', { scale: .4, rotation: -20 }, { scale: 1, rotation: 0, duration: .8, ease: 'elastic.out(1,.45)' });
+    G.fromTo('.pc-chi .pc-n', { scale: .5 }, { scale: 1, duration: .5, ease: 'back.out(3)', stagger: .06 });
+    speak('Çay içiyorum.');
+  }
+  $('[data-final-replay]').addEventListener('click', finalPlay);
+  if (A) {
+    ScrollTrigger.create({ trigger: '.pc-final', start: 'top 80%', once: true, onEnter: () => G.fromTo('[data-final-me]', { x: 80 }, { x: 0, duration: .8, ease: 'back.out(2)' }) });
+    G.from('.pc-chi .pc-n', { yPercent: 60, rotation: 8, duration: .5, ease: 'back.out(2)', stagger: .05, scrollTrigger: { trigger: '.pc-cheat', start: 'top 85%', once: true } });
+    G.from('.pc-note svg', { scale: .3, rotation: -45, duration: .6, ease: 'back.out(3)', scrollTrigger: { trigger: '.pc-note', start: 'top 85%', once: true } });
+    G.from('.pc-phone-top svg', { rotation: -25, y: 10, duration: .6, ease: 'elastic.out(1,.45)', scrollTrigger: { trigger: '.pc-phone-top', start: 'top 85%', once: true } });
+    G.from('.pc-tabs button', { y: 12, duration: .4, ease: 'back.out(2)', stagger: .08, scrollTrigger: { trigger: '.pc-tabs', start: 'top 88%', once: true } });
+    G.from('.pc-punch', { scale: .8, rotation: -2, duration: .7, ease: 'back.out(2)', scrollTrigger: { trigger: '.pc-punch', start: 'top 85%', once: true } });
+  }
+
+  /* ---------- нестандартное: фотограф на мосту ---------- */
+  (async () => {
+    const EX = 'a1.present-continuous.ex4';
+    const root = document.querySelector(`a-exercise[ref="${EX}"]`);
+    if (!root || !window.AlternaKit) return;
+    const data = await AlternaKit.exercise(EX);
+    const items = data.items;
+    const opts = $('[data-shot-opts]', root);
+    let i = 0, correct = 0, t0 = performance.now(), locked = false;
+    AlternaTracker.start(EX, 'practice');
+    function show() {
+      const it = items[i];
+      $('[data-shot-count]', root).textContent = `${i + 1} / ${items.length}`;
+      $('[data-shot-who]', root).textContent = it.cue;
+      $('[data-shot-ru]', root).textContent = it.ru;
+      $('[data-shot-status]', root).textContent = '';
+      opts.innerHTML = it.options.map((o, k) => `<button type="button" class="pc-chip" data-k="${k}"><span lang="tr">${o}</span> <small>(${k + 1})</small></button>`).join('');
+      if (A) G.fromTo('[data-shot-who]', { scale: .6, y: 10 }, { scale: 1, y: 0, duration: .5, ease: 'back.out(2.5)' });
+      t0 = performance.now(); locked = false;
+    }
+    function pick(k) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i];
+      const ok = k === it.answer;
+      if (ok) correct++;
+      opts.querySelector(`[data-k="${k}"]`).classList.add(ok ? 'is-ok' : 'is-no');
+      $('[data-shot-status]', root).textContent = ok ? `Кадр бар: ${it.options[it.answer]}.` : `Бұлыңғыр шықты. Дұрысы: ${it.options[it.answer]}. ${it.explanation}`;
+      if (ok && A) G.fromTo('[data-shot-flash]', { opacity: .9 }, { opacity: 0, duration: .5, ease: 'power2.out' });
+      if (ok) speak(it.options[it.answer]);
+      AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.options[k], timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          $('[data-shot-who]', root).textContent = `${items.length} ішінен ${correct}`;
+          $('[data-shot-ru]', root).textContent = 'Таспа түсіріліп бітті.';
+          $('[data-shot-count]', root).textContent = 'дайын';
+          opts.innerHTML = '';
+        }
+      }, reduce ? 300 : (ok ? 900 : 1800));
+    }
+    opts.addEventListener('click', (e) => { const b = e.target.closest('[data-k]'); if (b) pick(+b.dataset.k); });
+    root.addEventListener('keydown', (e) => { if (['1', '2', '3'].includes(e.key)) pick(+e.key - 1); });
+    AlternaKit.registerSolver(EX, async () => {
+      for (const it of items.slice(i)) { pick(it.answer); await new Promise((r) => setTimeout(r, reduce ? 320 : 1000)); }
+    });
+    show();
+  })();
+
+  /* ---------- свой скроллбар: камера едет по плёнке ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.pc-sb__track', bar);
+  const secs = $$('[data-section]');
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'pc-sb__mark';
+    b.dataset.key = s.dataset.section;
+    const h = s.querySelector('h1, h2');
+    b.setAttribute('aria-label', `«${h ? h.textContent.trim() : s.dataset.section}» бөліміне`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => bar.style.setProperty('--p', Math.min(1, scrollY / maxScroll()).toFixed(4));
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.pc-sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', () => { layout(); if (G) ScrollTrigger.refresh(); });
+  if (document.fonts) document.fonts.ready.then(() => { layout(); if (G) ScrollTrigger.refresh(); });
+  addEventListener('orientationchange', () => { layout(); if (G) ScrollTrigger.refresh(); });
+  addEventListener('alterna:read', (e) => { const m = marks.find((b) => b.dataset.key === e.detail.key); if (m) { m.classList.add('is-read'); if (A) G.fromTo(m, { scale: 1.6 }, { scale: 1, duration: .5, ease: 'back.out(3)' }); } });
+  layout();
+  progress();
+
+  /* ---------- ачивка: камера щёлкает ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.cam'), { rotation: -14, transformOrigin: '50% 50%' }, { rotation: 0, duration: .6, ease: 'elastic.out(1,.45)' }, .9)
+      .fromTo(b.querySelector('.lens'), { scale: .2, transformOrigin: '50% 50%' }, { scale: 1, duration: .4, ease: 'back.out(3)' }, 1)
+      .fromTo(b.querySelector('.rec'), { opacity: 0 }, { opacity: 1, duration: .15, repeat: 4, yoyo: true }, 1.1)
+      .from(b.querySelector('.word'), { y: 12, opacity: 0, duration: .4, ease: 'back.out(2)' }, 1.3);
+  });
+});
+</script>
+</body>
+</html>

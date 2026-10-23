@@ -1,0 +1,1469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.nationality">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Country, nationality, language</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face { font-family: 'Onest'; src: url(../media/onest-cyrillic.woff2) format('woff2'); font-weight: 300 700; font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Onest'; src: url(../media/onest-latin-ext.woff2) format('woff2'); font-weight: 300 700; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Onest'; src: url(../media/onest-latin.woff2) format('woff2'); font-weight: 300 700; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  /* роли цветов: зелёный — -lI «откуда», жёлтый — -CA «язык», чёрный — личное окончание, коралл — ошибка */
+  --nx-green: #2BE264; --nx-green-2: #19C24F; --nx-green-soft: #DDFBE6;
+  --nx-yellow: #F7C92C; --nx-yellow-soft: #FFF3C4;
+  --nx-black: #0F0F0F; --nx-ink: #141414; --nx-muted: #6F6F68;
+  --nx-paper: #F4F4F1; --nx-line: #E6E6E0; --nx-bg: #FFFFFF;
+  --nx-coral: #FF6B3D; --nx-coral-soft: #FFE7DE;
+  --nx-top: 44px;
+  --ak-bg: #ffffff; --ak-surface: #F4F4F1; --ak-ink: #141414; --ak-muted: #6F6F68; --ak-line: #E6E6E0;
+  --ak-accent: #19C24F; --ak-accent-ink: #0F0F0F; --ak-accent-soft: #DDFBE6;
+  --ak-good: #14A846; --ak-good-soft: #DDFBE6; --ak-bad: #E5512B; --ak-bad-soft: #FFE7DE;
+  --ak-radius: 22px; --ak-radius-sm: 14px;
+  --ak-font: 'Onest', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ak-font-display: 'Onest', system-ui, sans-serif;
+}
+@media (min-width: 900px) { :root { --nx-top: 52px; } }
+html { overflow-x: clip; background: var(--nx-bg); }
+body { margin: 0; background: var(--nx-bg); color: var(--nx-ink); font-family: var(--ak-font); font-size: var(--ak-text); line-height: 1.45; overflow-x: clip; -webkit-font-smoothing: antialiased; }
+* { box-sizing: border-box; }
+svg { overflow: visible; }
+.nx-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.nx-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+[lang="tr"] { font-feature-settings: 'ss01' 0; }
+
+/* ---------- кнопки и чипы ---------- */
+.nx-btn { font: inherit; font-weight: 500; color: var(--nx-ink); background: #fff; border: 1.5px solid var(--nx-line); border-radius: 999px; min-height: 44px; padding: 0 18px; cursor: pointer; transition: scale .15s ease, background-color .2s, border-color .2s; }
+.nx-btn:hover { scale: 1.03; border-color: #cfcfc8; }
+.nx-btn:focus-visible { outline: 3px solid var(--nx-green); outline-offset: 2px; }
+.nx-btn--go { background: var(--nx-green); border-color: var(--nx-green); }
+.nx-btn--go:hover { border-color: var(--nx-green-2); }
+.nx-btn--k { background: var(--nx-black); color: #fff; border-color: var(--nx-black); }
+.nx-btn.is-right { background: var(--nx-green); border-color: var(--nx-green); }
+.nx-btn.is-wrong { background: var(--nx-coral-soft); border-color: var(--nx-coral); }
+.nx-btn.is-on { background: var(--nx-black); color: #fff; border-color: var(--nx-black); }
+.nx-suf { display: inline-block; font-style: normal; font-weight: 600; border-radius: 999px; padding: 0 .38em; margin-left: .06em; line-height: 1.35; }
+.nx-suf--g { background: var(--nx-green); color: var(--nx-black); }
+.nx-suf--y { background: var(--nx-yellow); color: var(--nx-black); }
+.nx-suf--k { background: var(--nx-black); color: #fff; }
+.nx-suf--b { background: #fff; color: var(--nx-black); box-shadow: inset 0 0 0 1.5px var(--nx-black); border-radius: 50%; padding: 0 .3em; }
+.nx-pill { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 6px 14px; font-size: 14px; font-weight: 500; background: var(--nx-paper); }
+.nx-pill--y { background: var(--nx-yellow); }
+.nx-pill--g { background: var(--nx-green); }
+.nx-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--nx-green); box-shadow: 0 0 0 5px var(--nx-green-soft); display: inline-block; }
+
+/* ---------- скроллбар: плёнка с главами ---------- */
+.nx-reel { position: fixed; z-index: 60; top: 0; left: 0; right: 0; height: var(--nx-top); background: var(--nx-black); color: #fff; display: grid; grid-template-rows: 1fr 6px; user-select: none; }
+.nx-reel__marks { display: flex; padding: 0 4px; }
+.nx-reel__marks button { flex: 1 1 0; min-width: 0; min-height: 38px; font: inherit; font-size: 12px; font-weight: 600; color: #9b9b94; background: none; border: 0; cursor: pointer; position: relative; display: grid; place-items: center; }
+.nx-reel__marks button::before { content: ''; position: absolute; inset: 7px 3px; border-radius: 6px; border: 1.5px solid #2c2c2a; }
+.nx-reel__marks button.is-read { color: var(--nx-black); }
+.nx-reel__marks button.is-read::before { background: var(--nx-green); border-color: var(--nx-green); }
+.nx-reel__marks button.is-now { color: #fff; }
+.nx-reel__marks button.is-now::before { border-color: var(--nx-yellow); box-shadow: 0 0 0 2px var(--nx-yellow); }
+.nx-reel__marks button.is-read.is-now { color: var(--nx-black); }
+.nx-reel__marks span { position: relative; }
+.nx-reel__track { position: relative; background: repeating-linear-gradient(90deg, #2a2a28 0 6px, transparent 6px 12px); cursor: pointer; touch-action: none; }
+.nx-reel__fill { position: absolute; inset: 0; background: var(--nx-green); transform-origin: 0 50%; transform: scaleX(0); }
+.nx-reel__now { display: none; }
+@media (min-width: 900px) {
+  .nx-reel { grid-template-columns: 1fr auto; grid-template-rows: 1fr 10px; }
+  .nx-reel__track { grid-column: 1 / -1; }
+  .nx-reel__now { display: flex; align-items: center; gap: 8px; padding: 0 18px 0 8px; font-size: 13px; color: #cfcfc8; white-space: nowrap; }
+  .nx-reel__marks button { font-size: 13px; }
+}
+.nx-cutflash { position: fixed; inset: 0; z-index: 59; background: var(--nx-black); opacity: 0; pointer-events: none; }
+
+/* ---------- первый экран ---------- */
+.nx-hero { padding: calc(var(--nx-top) + 16px) 16px 28px; max-width: 1240px; margin: 0 auto; text-align: center; }
+.nx-hero__bar { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 26px; }
+.nx-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 18px; }
+.nx-logo svg { width: 30px; height: 30px; }
+.nx-kicker { margin: 0 0 10px; font-size: 14px; color: var(--nx-muted); text-transform: uppercase; letter-spacing: .08em; }
+.nx-hero__title { margin: 0 auto; font-weight: 500; text-transform: uppercase; font-size: clamp(25px, 7.6vw, 62px); line-height: 1.04; letter-spacing: .005em; max-width: 15ch; }
+.nx-hero__lead { margin: 14px auto 0; max-width: 34ch; color: var(--nx-muted); font-size: clamp(15px, 1rem + .2vw, 18px); }
+.nx-hero__cta { display: flex; justify-content: center; gap: 10px; margin: 20px 0 24px; flex-wrap: wrap; }
+.nx-hero__art { position: relative; border-radius: 28px; overflow: hidden; height: clamp(260px, 52vw, 460px); background: #79B23A; }
+.nx-hero__art > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.nx-hphone { position: absolute; left: 50%; bottom: -18%; width: clamp(150px, 34vw, 250px); aspect-ratio: 9 / 18; margin-left: calc(clamp(150px, 34vw, 250px) / -2); border-radius: 30px; background: var(--nx-black); padding: 8px; box-shadow: 0 30px 60px rgba(0,0,0,.25); animation: nx-rise 1.1s cubic-bezier(.2,.9,.25,1.2) .15s both; }
+.nx-hphone__scr { height: 100%; border-radius: 23px; background: linear-gradient(180deg, #9ACB4C, #6FAA35); padding: 34px 10px 10px; display: flex; flex-direction: column; gap: 8px; align-items: center; text-align: left; }
+.nx-hphone__q { align-self: flex-start; background: #fff; border-radius: 14px 14px 14px 4px; padding: 6px 10px; font-weight: 600; font-size: clamp(12px, 2.6vw, 16px); animation: nx-pop .6s cubic-bezier(.2,.9,.3,1.6) .9s both; }
+.nx-hphone__a { align-self: flex-end; background: var(--nx-yellow); border-radius: 14px 14px 4px 14px; padding: 6px 10px; font-weight: 600; font-size: clamp(12px, 2.6vw, 16px); animation: nx-pop .6s cubic-bezier(.2,.9,.3,1.6) 1.3s both; }
+.nx-bubbles { position: relative; width: 100%; height: 44%; margin-top: 6px; }
+.nx-bubbles span { position: absolute; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,.35); color: #fff; font-weight: 600; font-size: clamp(11px, 2.4vw, 15px); animation: nx-pop .7s cubic-bezier(.2,.9,.3,1.6) both; }
+.nx-bubbles span:nth-child(1) { width: 46%; aspect-ratio: 1; left: 4%; top: 6%; background: rgba(43,226,100,.85); color: var(--nx-black); animation-delay: 1.5s; }
+.nx-bubbles span:nth-child(2) { width: 34%; aspect-ratio: 1; right: 6%; top: 0; animation-delay: 1.65s; }
+.nx-bubbles span:nth-child(3) { width: 30%; aspect-ratio: 1; right: 14%; bottom: 0; animation-delay: 1.8s; }
+.nx-bubbles span:nth-child(4) { width: 24%; aspect-ratio: 1; left: 34%; bottom: 2%; animation-delay: 1.95s; }
+.nx-hcard { position: absolute; border-radius: 16px; padding: 10px 12px; font-size: 13px; text-align: left; animation: nx-slide .9s cubic-bezier(.2,.9,.25,1.1) both; }
+.nx-hcard--k { left: 4%; top: 12%; background: var(--nx-black); color: #fff; animation-delay: .6s; }
+.nx-hcard--w { right: 4%; top: 22%; background: #fff; animation-delay: .8s; }
+.nx-hcard b { display: block; font-size: clamp(14px, 2.6vw, 20px); }
+@keyframes nx-rise { from { transform: translateY(40%) rotate(6deg); } to { transform: none; } }
+@keyframes nx-pop { from { transform: scale(.3); } to { transform: none; } }
+@keyframes nx-slide { from { transform: translateY(30px) scale(.9); } to { transform: none; } }
+@media (max-width: 560px) { .nx-hcard--w { display: none; } .nx-hcard--k { top: 8%; } }
+
+/* ---------- сцена ---------- */
+.nx-scene { position: relative; background: var(--nx-bg); }
+.nx-stage { position: relative; height: 100vh; height: 100svh; min-height: 600px; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(170px, 1fr) auto auto; gap: 10px; padding: calc(var(--nx-top) + 10px) 16px 14px; background: var(--nx-bg); }
+.nx-hud { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.nx-hole { display: inline-flex; align-items: center; gap: 6px; background: var(--nx-yellow); border-radius: 999px; padding: 5px 14px; font-weight: 600; font-size: 14px; white-space: nowrap; }
+.nx-hole svg { width: 12px; height: 12px; }
+.nx-hud__t { font-size: 14px; color: var(--nx-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nx-frame { position: relative; border-radius: 26px; overflow: hidden; background: #79B23A; isolation: isolate; min-height: 0; }
+.nx-layer { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.nx-cam { position: absolute; inset: 0; }
+.nx-subs { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.nx-sub { margin: 0; font-size: clamp(15px, .9rem + .35vw, 20px); line-height: 1.35; }
+.nx-sub--d { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.nx-who { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: #fff; background: var(--nx-black); border-radius: 999px; padding: 2px 8px; }
+.nx-who--g { background: var(--nx-green); color: var(--nx-black); }
+.nx-gl { color: var(--nx-muted); }
+.nx-act { background: var(--nx-paper); border-radius: 22px; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.nx-act__q { margin: 0; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.nx-act__q::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--nx-green); flex: none; }
+.nx-act__row { display: flex; flex-wrap: wrap; gap: 8px; }
+.nx-act__fb { margin: 0; min-height: 1.35em; font-size: 14px; color: var(--nx-muted); }
+.nx-act__fb.is-ok { color: #0d7a33; }
+.nx-act__fb.is-bad { color: #c2410c; }
+.nx-wipe { position: absolute; inset: 0; z-index: 8; display: none; place-items: center; text-align: center; padding: 12px; overflow: hidden; background: var(--nx-green); color: var(--nx-black); }
+.nx-anim .nx-wipe { display: grid; }
+.nx-wipe b { display: block; font-size: clamp(14px, 1.4vw, 18px); font-weight: 600; letter-spacing: .08em; }
+.nx-wipe span { display: block; font-size: clamp(30px, 8.4vw, 96px); font-weight: 500; text-transform: uppercase; line-height: 1; margin-top: 8px; }
+.nx-wipe svg { width: clamp(28px, 4vw, 54px); height: clamp(60px, 9vw, 120px); margin: 0 auto 6px; display: block; }
+.nx-wipe--y { background: var(--nx-yellow); }
+.nx-wipe--k { background: var(--nx-black); color: #fff; }
+@media (min-width: 900px) {
+  .nx-stage { grid-template-columns: minmax(0, 1.3fr) minmax(330px, .85fr); grid-template-rows: auto 1fr auto; grid-template-areas: 'frame hud' 'frame subs' 'frame act'; column-gap: 40px; row-gap: 18px; padding: calc(var(--nx-top) + 22px) 40px 30px; max-width: 1700px; margin: 0 auto; }
+  .nx-frame { grid-area: frame; border-radius: 32px; }
+  .nx-hud { grid-area: hud; }
+  .nx-subs { grid-area: subs; align-self: center; gap: 12px; }
+  .nx-act { grid-area: act; padding: 16px; }
+  .nx-wipe { grid-area: auto; }
+}
+@media (max-width: 899px) {
+  .nx-stage { gap: 8px; padding-bottom: 62px; grid-template-rows: auto minmax(150px, 1fr) auto auto; }
+  .nx-stage .nx-sub { font-size: 14.5px; line-height: 1.32; }
+  .nx-stage .ak-say__btn { width: 28px; height: 28px; min-width: 28px; min-height: 28px; }
+  .nx-anim .nx-stage > .nx-subs { height: clamp(130px, 24svh, 230px); overflow: hidden; display: block; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 16px); mask-image: linear-gradient(180deg, transparent 0, #000 16px); }
+  .nx-anim .nx-stage--strip > .nx-subs { height: auto; }
+  .nx-roll { display: flex; flex-direction: column; gap: 5px; position: relative; }
+  .nx-act { padding: 10px; gap: 6px; border-radius: 18px; }
+  .nx-act__row { gap: 6px; }
+  .nx-act .nx-btn { min-height: 40px; padding: 0 11px; font-size: 15px; }
+  .nx-act__q { font-size: 13px; }
+  .nx-act__fb { font-size: 13px; min-height: 1.3em; }
+}
+.nx-roll { display: flex; flex-direction: column; gap: inherit; }
+@media (max-width: 899px) and (max-height: 700px) { .nx-sub--opt { display: none; } }
+
+/* ---------- сцена 1: такси ---------- */
+.nx-duo { position: absolute; left: 3%; right: 3%; bottom: 4%; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
+.nx-face { position: relative; margin: 0; width: clamp(78px, 24%, 150px); }
+.nx-face > svg { width: 100%; aspect-ratio: 1; border-radius: 22%; display: block; }
+.nx-face--g > svg { background: var(--nx-green); }
+.nx-face--y > svg { background: var(--nx-yellow); }
+.nx-face figcaption { position: absolute; left: 6px; bottom: 6px; font-size: 11px; font-weight: 600; background: #fff; border-radius: 999px; padding: 1px 8px; }
+.nx-bub { position: absolute; bottom: 104%; left: 0; background: #fff; border-radius: 16px 16px 16px 4px; padding: 6px 10px; font-weight: 600; font-size: clamp(12px, 1.5vw, 18px); white-space: nowrap; box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+.nx-bub--r { left: auto; right: 0; border-radius: 16px 16px 4px 16px; }
+.nx-bub--2 { bottom: calc(104% + 2.6em); background: var(--nx-black); color: #fff; }
+.nx-light { position: absolute; inset: 0; background: linear-gradient(200deg, rgba(255,190,90,.45), rgba(255,120,60,.15) 50%, rgba(0,0,0,.12)); opacity: 0; pointer-events: none; }
+.nx-score { position: absolute; top: 4%; right: 4%; background: var(--nx-black); color: #fff; border-radius: 18px; padding: 8px 12px; font-size: 13px; display: flex; gap: 10px; align-items: center; }
+.nx-score b { color: var(--nx-coral); font-size: 18px; }
+.nx-score svg { width: 22px; height: 22px; }
+
+/* ---------- сцена 2: удар ---------- */
+.nx-stat { position: absolute; top: 4%; left: 4%; background: var(--nx-black); color: #fff; border-radius: 20px; padding: 10px 12px; font-size: clamp(13px, 1.3vw, 17px); min-width: min(64%, 300px); }
+.nx-stat__h { display: flex; gap: 6px; align-items: center; font-size: 12px; color: #bdbdb6; margin-bottom: 4px; }
+.nx-stat__h b { color: #fff; font-weight: 600; }
+.nx-stat__row { display: flex; align-items: baseline; gap: 2px; padding: 3px 0; border-top: 1px solid #2a2a28; white-space: nowrap; }
+.nx-stat__row em { margin-left: auto; padding-left: 10px; font-style: normal; color: #a6a69f; font-size: .82em; }
+.nx-stat__row .nx-suf { margin-left: 1px; }
+
+/* ---------- сцена 3: ветер ---------- */
+.nx-tint { position: absolute; inset: 0; background: rgba(12, 40, 18, .38); }
+.nx-wx { position: absolute; top: 4%; left: 4%; background: #fff; border-radius: 18px; padding: 8px 12px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.nx-wx svg { width: 30px; height: 30px; }
+.nx-wx__v { display: block; height: 1.3em; overflow: hidden; font-size: 22px; font-weight: 600; line-height: 1.3; }
+.nx-wx__v > span, .nx-wx__in > span { display: block; white-space: nowrap; }
+.nx-word { position: absolute; left: 50%; top: 40%; translate: -50% -50%; background: #fff; border-radius: 999px; padding: 0 22px; box-shadow: 0 18px 40px rgba(0,0,0,.25); height: clamp(52px, 7vw, 84px); overflow: hidden; font-size: clamp(24px, 4vw, 48px); font-weight: 600; white-space: nowrap; }
+.nx-word__in > span { display: flex; align-items: center; justify-content: center; height: clamp(52px, 7vw, 84px); }
+.nx-v { font-style: normal; position: relative; color: var(--nx-black); }
+.nx-v::after { content: ''; position: absolute; left: 50%; top: 52%; width: 1.25em; height: 1.25em; translate: -50% -50%; border-radius: 50%; border: 2.5px dashed var(--nx-yellow); }
+.nx-clubs { position: absolute; left: 4%; right: 4%; bottom: 4%; background: #fff; color: var(--nx-black); border-radius: 20px; padding: 10px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.nx-club { position: relative; border-radius: 14px; background: var(--nx-paper); padding: 6px 6px 8px; text-align: center; overflow: hidden; }
+.nx-club b { display: block; font-size: clamp(18px, 2.4vw, 26px); position: relative; }
+.nx-club small { display: block; color: #4d4d48; font-size: 12px; position: relative; }
+.nx-club i { position: absolute; inset: 0; background: var(--nx-green); opacity: 0; }
+.nx-club.is-on { color: var(--nx-black); }
+.nx-club.is-on small { color: #1d1d1b; }
+.nx-club.is-on i { opacity: 1; }
+.nx-bar { position: relative; height: 8px; margin-top: 6px; border-radius: 4px; background: repeating-linear-gradient(90deg, #b9b9b2 0 2px, transparent 2px 5px); overflow: hidden; }
+.nx-bar span { position: absolute; inset: 0; background: var(--nx-black); transform-origin: 0 50%; transform: scaleX(.12); }
+.nx-wind line { stroke: rgba(255,255,255,.55); stroke-width: 3; stroke-linecap: round; }
+
+/* ---------- сцена 4: телефон ---------- */
+.nx-frame--y { background: var(--nx-yellow); }
+.nx-checker { position: absolute; left: 0; right: 0; top: 0; height: 18px; background: repeating-conic-gradient(var(--nx-black) 0 25%, var(--nx-yellow) 0 50%) 0 0 / 18px 18px; }
+.nx-beam { position: absolute; top: -20%; bottom: -20%; width: 24%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent); rotate: 16deg; left: -40%; }
+.nx-phone { position: absolute; left: 50%; top: 54%; translate: -50% -50%; width: min(78%, 330px); max-height: 90%; background: var(--nx-black); border-radius: 34px; padding: 8px; box-shadow: 0 30px 60px rgba(0,0,0,.25); }
+.nx-phone__scr { height: 100%; border-radius: 27px; background: #fff; padding: 22px 12px 12px; display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+.nx-phone__notch { position: absolute; left: 50%; top: 14px; width: 30%; height: 14px; translate: -50% 0; background: var(--nx-black); border-radius: 999px; z-index: 2; }
+.nx-chat__top { font-size: 11px; color: var(--nx-muted); display: flex; align-items: center; gap: 6px; }
+.nx-chat__top svg { width: 22px; height: 22px; border-radius: 50%; background: var(--nx-yellow); }
+.nx-bub2 { align-self: flex-start; background: var(--nx-paper); border-radius: 16px 16px 16px 4px; padding: 6px 12px; font-weight: 600; font-size: clamp(15px, 1.6vw, 20px); }
+.nx-cut { display: flex; justify-content: center; align-items: flex-start; gap: 4px; font-size: clamp(17px, 2vw, 24px); font-weight: 600; }
+.nx-cut > span { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.nx-cut small { font-size: 11px; font-weight: 500; color: var(--nx-muted); }
+.nx-persons { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; font-size: clamp(13px, 1.4vw, 17px); }
+.nx-persons li { display: flex; align-items: center; gap: 1px; background: var(--nx-paper); border-radius: 999px; padding: 2px 10px; }
+.nx-persons li > b:first-child { width: 2.6em; font-weight: 500; color: var(--nx-muted); }
+.nx-persons .nx-suf { font-size: .9em; }
+
+/* ---------- сцена 5: хостел ---------- */
+.nx-frame--wall { background: #EFE7DA; }
+.nx-wall { position: absolute; inset: 0; }
+.nx-evening { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(28, 22, 60, .45), rgba(60, 30, 10, .25)); opacity: 0; pointer-events: none; }
+.nx-board { position: absolute; left: 4%; right: 4%; top: 14%; bottom: 5%; display: grid; grid-template-columns: repeat(2, 1fr); align-content: center; gap: 8px; }
+.nx-pcard { font: inherit; color: var(--nx-ink); border: 0; cursor: pointer; background: #fff; border-radius: 18px; padding: 8px; display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 8px; align-items: center; text-align: left; box-shadow: 0 10px 24px rgba(0,0,0,.12); min-height: 44px; }
+.nx-pcard > svg { grid-row: 1 / 3; width: clamp(44px, 7vw, 92px); aspect-ratio: 1; border-radius: 22%; }
+.nx-pcard > b { font-size: clamp(13px, 1.3vw, 17px); align-self: end; }
+.nx-flip { position: relative; display: grid; align-self: start; justify-items: start; }
+.nx-flip > span { grid-area: 1 / 1; font-weight: 600; font-size: clamp(14px, 1.6vw, 20px); border-radius: 999px; padding: 1px 10px; }
+.nx-flip__a { background: var(--nx-paper); }
+.nx-flip__b { background: var(--nx-green); transform: scaleY(0); }
+.nx-pcard.is-flip .nx-flip__a { transform: scaleY(0); }
+.nx-pcard.is-flip .nx-flip__b { transform: none; }
+.nx-stamp { position: absolute; right: 5%; top: 3%; background: var(--nx-black); color: #fff; border-radius: 14px; padding: 6px 10px; font-size: clamp(12px, 1.3vw, 16px); rotate: -4deg; }
+.nx-stamp .nx-suf { font-size: .95em; }
+
+/* ---------- сцена 6: витрина ---------- */
+.nx-frame--shop { background: #D9CBB4; }
+.nx-poster1 { position: absolute; left: 50%; top: 47%; translate: -50% -50%; width: min(74%, 380px); background: var(--nx-yellow); border-radius: 20px; padding: 12px 14px; box-shadow: 0 20px 40px rgba(0,0,0,.3); }
+.nx-poster1__h { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 600; }
+.nx-poster1__h svg { width: 22px; height: 22px; }
+.nx-poster1 h3 { margin: 4px 0 6px; font-size: clamp(20px, 3vw, 34px); font-weight: 500; text-transform: uppercase; line-height: 1; }
+.nx-menu { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; font-size: clamp(15px, 1.7vw, 21px); }
+.nx-menu li { display: flex; align-items: baseline; gap: 1px; border-top: 1.5px solid rgba(0,0,0,.18); padding-top: 3px; }
+.nx-menu em { margin-left: auto; font-style: normal; font-size: .72em; color: rgba(0,0,0,.6); }
+.nx-menu .nx-suf { background: var(--nx-black); color: var(--nx-yellow); }
+.nx-fist { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; font-size: 12px; align-items: center; }
+.nx-fist i { font-style: normal; font-weight: 700; background: var(--nx-black); color: var(--nx-yellow); border-radius: 6px; width: 22px; height: 22px; display: grid; place-items: center; }
+.nx-walker { position: absolute; bottom: 0; height: 78%; left: 0; }
+.nx-kz { position: absolute; left: 4%; bottom: 5%; background: #fff; border-radius: 14px; padding: 6px 10px; font-size: 13px; }
+.nx-kz b { color: var(--nx-black); }
+
+/* ---------- лаборатория ---------- */
+.nx-wrap { max-width: 1120px; margin: 0 auto; padding: 56px 16px; }
+.nx-h2 { margin: 10px 0 8px; font-size: clamp(24px, 6.4vw, 44px); font-weight: 500; text-transform: uppercase; line-height: 1.05; }
+.nx-lead { margin: 0 0 18px; color: var(--nx-muted); max-width: 46ch; }
+.nx-console { background: var(--nx-black); color: #fff; border-radius: 30px; padding: 16px; display: grid; gap: 14px; }
+.nx-tabs { display: flex; gap: 6px; background: #1d1d1b; border-radius: 999px; padding: 4px; width: fit-content; max-width: 100%; }
+.nx-tabs button { font: inherit; font-weight: 500; font-size: 15px; border: 0; border-radius: 999px; min-height: 40px; padding: 0 14px; background: none; color: #cfcfc8; cursor: pointer; }
+.nx-tabs button[aria-selected="true"] { background: var(--nx-green); color: var(--nx-black); }
+.nx-pick, .nx-ppick { display: flex; flex-wrap: wrap; gap: 6px; }
+.nx-chip { font: inherit; font-size: 15px; font-weight: 500; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #3a3a37; background: #1d1d1b; color: #fff; cursor: pointer; }
+.nx-chip[aria-pressed="true"] { background: #fff; color: var(--nx-black); border-color: #fff; }
+.nx-ppick .nx-chip[aria-pressed="true"] { background: var(--nx-yellow); border-color: var(--nx-yellow); }
+.nx-track { position: relative; background: #1d1d1b; border-radius: 20px; padding: 26px 12px 14px; overflow: hidden; }
+.nx-ruler { position: absolute; left: 0; right: 0; top: 0; height: 16px; background: repeating-linear-gradient(90deg, #3a3a37 0 1px, transparent 1px 12px); }
+.nx-head { position: absolute; top: 0; bottom: 0; left: 12px; width: 2px; background: var(--nx-coral); }
+.nx-head::before { content: ''; position: absolute; top: 0; left: -6px; border: 7px solid transparent; border-top-color: var(--nx-coral); }
+.nx-clips { display: flex; flex-wrap: wrap; gap: 4px; min-height: 52px; align-items: stretch; }
+.nx-clip { display: flex; flex-direction: column; justify-content: center; border-radius: 12px; padding: 4px 12px; font-size: clamp(18px, 2.2vw, 26px); font-weight: 600; background: #fff; color: var(--nx-black); }
+.nx-clip small { font-size: 11px; font-weight: 500; opacity: .7; }
+.nx-clip--g { background: var(--nx-green); }
+.nx-clip--y { background: var(--nx-yellow); }
+.nx-clip--k { background: #3a3a37; color: #fff; }
+.nx-clip--w { background: #fff; }
+.nx-arrow { align-self: center; color: #6f6f68; font-size: 20px; padding: 0 2px; }
+.nx-out { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.nx-out__w { font-size: clamp(26px, 5vw, 46px); font-weight: 600; cursor: pointer; }
+.nx-out__ru { color: #a6a69f; }
+.nx-why { margin: 0; color: #dcdcd5; font-size: 15px; border-left: 3px solid var(--nx-green); padding-left: 10px; min-height: 2.6em; }
+
+/* ---------- дубли ---------- */
+.nx-stage--strip { grid-template-rows: auto auto minmax(0, 1fr); grid-template-columns: minmax(0, 1fr); }
+.nx-strip-wrap { min-width: 0; }
+.nx-strip-wrap { position: relative; min-height: 0; display: flex; align-items: center; }
+.nx-strip { display: flex; gap: 14px; padding: 14px 4px; }
+.nx-take { flex: none; width: min(82vw, 420px); background: var(--nx-black); color: #fff; border-radius: 22px; padding: 22px 16px; position: relative; display: flex; flex-direction: column; gap: 10px; }
+.nx-take::before, .nx-take::after { content: ''; position: absolute; left: 14px; right: 14px; height: 8px; background: repeating-linear-gradient(90deg, #3a3a37 0 10px, transparent 10px 20px); border-radius: 2px; }
+.nx-take::before { top: 6px; } .nx-take::after { bottom: 6px; }
+.nx-take__n { font-size: 12px; color: #a6a69f; letter-spacing: .08em; text-transform: uppercase; display: flex; justify-content: space-between; }
+.nx-bad { position: relative; font-size: clamp(22px, 3vw, 30px); font-weight: 600; color: #ffb8a3; width: fit-content; }
+.nx-bad svg { position: absolute; left: -4px; right: -4px; top: 50%; width: calc(100% + 8px); height: 10px; margin-top: -5px; }
+.nx-good { display: flex; align-items: center; gap: 8px; font-size: clamp(22px, 3vw, 30px); font-weight: 600; background: var(--nx-green); color: var(--nx-black); border-radius: 16px; padding: 6px 12px; width: fit-content; }
+.nx-take p { margin: 0; color: #dcdcd5; font-size: 15px; }
+.nx-take .nx-btn { align-self: flex-start; }
+@media (min-width: 900px) { .nx-stage--strip { grid-template-columns: 1fr; grid-template-areas: none; } .nx-stage--strip .nx-subs { grid-area: auto; } }
+.nx-static .nx-strip { flex-wrap: wrap; justify-content: center; }
+
+/* ---------- видео, практика, проверка ---------- */
+.nx-band { background: var(--nx-paper); }
+.nx-vcard { background: #fff; border-radius: 28px; padding: 16px; display: grid; gap: 12px; }
+.nx-vnote { display: flex; gap: 10px; align-items: center; margin: 0; }
+.nx-vnote svg { width: 40px; height: 40px; flex: none; }
+.nx-exgrid { display: grid; gap: 16px; }
+.nx-exgrid > a-exercise, .nx-quizbox { background: #fff; border-radius: 26px; padding: 14px; display: block; border: 1.5px solid var(--nx-line); }
+
+/* ---------- нестандартное: табло прилётов ---------- */
+.nx-arr { display: grid; gap: 12px; }
+.nx-arr__head { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.nx-arr__head svg { width: 28px; height: 28px; }
+.nx-arr__n { margin-left: auto; font-size: 14px; background: var(--nx-paper); border-radius: 999px; padding: 4px 12px; }
+.nx-arr__board { list-style: none; margin: 0; padding: 10px; background: var(--nx-black); color: #fff; border-radius: 18px; display: grid; gap: 4px; font-size: 14px; font-variant-numeric: tabular-nums; }
+.nx-arr__board li { display: grid; grid-template-columns: 4.6em 1fr auto; gap: 8px; padding: 4px 6px; border-radius: 8px; }
+.nx-arr__board li i { font-style: normal; font-size: 12px; color: #a6a69f; }
+.nx-arr__board li.is-now { background: #2a2a28; }
+.nx-arr__board li.is-now i { color: var(--nx-yellow); }
+.nx-arr__board li.is-done i { color: var(--nx-green); }
+.nx-arr__card { background: var(--nx-paper); border-radius: 20px; padding: 12px; display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; }
+.nx-arr__card > svg { width: 64px; height: 64px; border-radius: 22%; background: var(--nx-green); }
+.nx-arr__q { margin: 0; font-weight: 500; }
+.nx-arr__opts { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.nx-arr__fb { grid-column: 1 / -1; margin: 0; min-height: 1.4em; font-size: 14px; color: var(--nx-muted); }
+.nx-arr__end { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.nx-arr__end[hidden] { display: none; }
+
+/* ---------- шпаргалка и финал ---------- */
+.nx-poster { background: var(--nx-yellow); border-radius: 32px; padding: 18px; display: grid; gap: 14px; }
+.nx-poster__top { display: flex; justify-content: space-between; align-items: center; }
+.nx-poster__top svg.nx-qr { width: 40px; height: 40px; }
+.nx-poster__t { margin: 0; font-size: clamp(26px, 8vw, 64px); font-weight: 500; text-transform: uppercase; line-height: 1; }
+.nx-tiles { display: grid; gap: 10px; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .nx-tiles { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .nx-tiles { grid-template-columns: repeat(4, 1fr); } }
+.nx-tile { border-radius: 22px; padding: 14px; display: flex; flex-direction: column; gap: 6px; }
+.nx-tile > b { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
+.nx-tile p { margin: 0; font-size: 19px; font-weight: 600; }
+.nx-tile small { font-size: 14px; opacity: .75; }
+.nx-tile--g { background: var(--nx-green); }
+.nx-tile--k { background: var(--nx-black); color: #fff; }
+.nx-tile--w { background: #fff; }
+.nx-tile--y { background: #FFE07A; }
+.nx-final { margin-top: 18px; border-radius: 32px; background: #fff; border: 1.5px solid var(--nx-line); padding: 16px; display: grid; gap: 12px; }
+.nx-final__frame { position: relative; border-radius: 24px; overflow: hidden; height: clamp(230px, 40vw, 380px); background: #79B23A; }
+.nx-final__frame > svg.nx-layer { position: absolute; }
+.nx-final p { margin: 0; }
+.nx-final .nx-bub { font-size: clamp(12px, 1.5vw, 17px); white-space: normal; width: max-content; max-width: 200%; }
+.nx-flagwin { position: absolute; right: 6%; top: 8%; width: 40px; }
+
+.nx-static .nx-word { height: auto; padding: 10px 22px; top: 38%; border-radius: 26px; font-size: clamp(18px, 3vw, 36px); }
+.nx-static .nx-wx { display: none; }
+.nx-static .nx-word__in > span { height: auto; }
+.nx-static .nx-wx__v { height: auto; }
+.nx-static .nx-stage { height: auto; min-height: 100svh; }
+</style>
+</head>
+<body>
+
+<!-- общие символы: поле, деревья, герои -->
+<svg class="nx-defs" aria-hidden="true" focusable="false">
+  <defs>
+    <pattern id="nx-stripes" width="110" height="110" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><rect width="110" height="110" fill="#A9D35B"/><rect width="55" height="110" fill="#BADD6E"/></pattern>
+    <pattern id="nx-stone" width="80" height="40" patternUnits="userSpaceOnUse"><rect width="80" height="40" fill="#D8C9B1"/><path d="M0 39.5H80M40 0V20M0 19.5H80M20 20V40M60 20V40" stroke="#C8B79C" stroke-width="2"/></pattern>
+    <linearGradient id="nx-water" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3CC9B4"/><stop offset="1" stop-color="#158683"/></linearGradient>
+    <linearGradient id="nx-glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2F4D4A"/><stop offset="1" stop-color="#17272A"/></linearGradient>
+    <symbol id="nx-tree" viewBox="-30 -30 60 60"><circle cx="4" cy="5" r="27" fill="#3F7A22"/><circle r="25" fill="#93BC2E"/><circle cx="-7" cy="-7" r="15" fill="#C9D93A"/><circle cx="-11" cy="-11" r="5" fill="#E2EA6A"/></symbol>
+    <symbol id="nx-tree2" viewBox="-30 -30 60 60"><circle cx="4" cy="5" r="27" fill="#2F6420"/><circle r="25" fill="#5E9C2D"/><circle cx="-8" cy="-8" r="13" fill="#86B83A"/></symbol>
+    <symbol id="nx-ball" viewBox="-12 -12 24 24"><circle r="11" fill="#fff"/><circle r="11" fill="none" stroke="#D9D9D2" stroke-width="1.2"/><circle cx="-3" cy="-4" r="1.3" fill="#DCDCD5"/><circle cx="3" cy="-2" r="1.3" fill="#DCDCD5"/><circle cx="-1" cy="3" r="1.3" fill="#DCDCD5"/><circle cx="5" cy="4" r="1.3" fill="#DCDCD5"/></symbol>
+    <symbol id="nx-flag" viewBox="0 0 40 90"><ellipse cx="9" cy="86" rx="10" ry="3.6" fill="#173D1F"/><rect x="7.6" y="5" width="2.6" height="81" rx="1.3" fill="#F7F7F2"/><path d="M10.2 5 38 14.5 10.2 25Z" fill="#2BE264"/></symbol>
+    <symbol id="nx-taxi" viewBox="-20 -36 40 72"><rect x="-18" y="-34" width="36" height="68" rx="12" fill="#1a1a1a" opacity=".18" transform="translate(3 4)"/><rect x="-18" y="-34" width="36" height="68" rx="12" fill="#F7C92C"/><rect x="-14" y="-22" width="28" height="13" rx="4" fill="#1B1B1B"/><rect x="-14" y="14" width="28" height="9" rx="4" fill="#1B1B1B"/><rect x="-9" y="-4" width="18" height="9" rx="2" fill="#111"/><rect x="-6.5" y="-2" width="13" height="4.6" rx="1" fill="#F7C92C"/><circle cx="-11" cy="-30" r="2.6" fill="#FFF7D0"/><circle cx="11" cy="-30" r="2.6" fill="#FFF7D0"/></symbol>
+    <symbol id="nx-head" viewBox="0 0 120 120">
+      <path d="M12 124C14 95 35 83 60 83S106 95 108 124Z" style="fill:var(--shirt,#1F5B3A)"/>
+      <rect x="51" y="70" width="18" height="18" rx="7" style="fill:var(--skin2,#C98C66)"/>
+      <ellipse cx="38.5" cy="55" rx="4.5" ry="6.5" style="fill:var(--skin,#E2A97F)"/><ellipse cx="81.5" cy="55" rx="4.5" ry="6.5" style="fill:var(--skin,#E2A97F)"/>
+      <ellipse cx="60" cy="52" rx="21.5" ry="24.5" style="fill:var(--skin,#E2A97F)"/>
+      <circle cx="52" cy="54" r="2.4" fill="#231A15"/><circle cx="68" cy="54" r="2.4" fill="#231A15"/>
+      <path d="M53 65.5Q60 70.5 67 65.5" fill="none" stroke="#7A3B2A" stroke-width="2.3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="nx-damir" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#1F5B3A"/><path d="M48 84 60 102 72 84Z" fill="#fff"/><path d="M47 47Q52 44 57 46.5M63 46.5Q68 44 73 47" fill="none" stroke="#2B1C14" stroke-width="2.4" stroke-linecap="round"/><path d="M37 46C37 21 83 21 83 46C70 41 50 41 37 46Z" fill="#fff"/><path d="M80 44C92 43 101 47 104 52C94 51 85 50 77 49Z" fill="#E8E8E2"/><circle cx="60" cy="34" r="3.4" fill="#2BE264"/></symbol>
+    <symbol id="nx-driver" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#2B2B2B;--skin:#D99A73"/><path d="M46 63Q60 56 74 63Q67 68 60 64Q53 68 46 63Z" fill="#3A2A20"/><path d="M46 46.5Q52 43 57 46M63 46Q68 43 74 46.5" fill="none" stroke="#2B1C14" stroke-width="3.2" stroke-linecap="round"/><path d="M35 44C37 24 83 22 86 39C96 41 99 46 93 48C74 43 50 43 35 47Z" fill="#5B5B57"/><rect x="68" y="96" width="16" height="10" rx="2" fill="#F7C92C"/></symbol>
+    <symbol id="nx-waiter" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#F7F7F2;--skin:#C98B62"/><path d="M38 48C36 26 84 24 82 46C76 33 50 32 38 48Z" fill="#2C211B"/><path d="M51 87 60 91 69 87V95L60 91 51 95Z" fill="#111"/><path d="M40 124V104H80V124Z" fill="#111"/></symbol>
+    <symbol id="nx-anna" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#F2E3C9;--skin:#F0C3A2"/><circle cx="60" cy="24" r="11" fill="#E9C46A"/><path d="M38 52C33 24 87 24 82 52C78 37 44 37 38 52Z" fill="#E9C46A"/></symbol>
+    <symbol id="nx-hans" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#355C7D;--skin:#F1C6A6"/><path d="M38 46C38 25 82 25 82 46C72 37 50 37 38 46Z" fill="#C8662F"/><g fill="none" stroke="#111" stroke-width="2.2"><circle cx="52" cy="54" r="6.5"/><circle cx="68" cy="54" r="6.5"/><path d="M58.5 54H61.5"/></g></symbol>
+    <symbol id="nx-kenji" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#0F0F0F;--skin:#EBC09A"/><path d="M37 52C34 21 86 21 83 52C80 39 72 35 66 42C60 33 48 37 37 52Z" fill="#15151A"/></symbol>
+    <symbol id="nx-ayse" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#E86A3E;--skin:#D9A27D"/><path d="M36 58C29 18 91 18 84 58L87 88C80 82 78 70 80 52C74 36 46 36 40 52C42 70 40 82 33 88Z" fill="#3B2416"/></symbol>
+    <symbol id="nx-mike" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#2E6FD8;--skin:#E3AE88"/><path d="M38 45C38 22 82 22 82 45C70 40 50 40 38 45Z" fill="#F7C92C"/><path d="M38 44C30 44 24 48 22 52C30 50 36 49 40 49Z" fill="#E0B21F"/></symbol>
+    <symbol id="nx-lin" viewBox="0 0 120 120"><use href="#nx-head" style="--shirt:#2BE264;--skin:#EFC7A5"/><path d="M36 62C30 20 90 20 84 62L80 64C80 48 76 40 60 38C44 40 40 48 40 64Z" fill="#111"/></symbol>
+    <symbol id="nx-map" viewBox="0 0 1200 800">
+      <rect width="1200" height="800" fill="#7BB43A"/>
+      <path d="M330 820C380 640 520 540 600 450C690 350 720 230 860 140C930 95 1010 70 1090 80C1160 90 1190 150 1160 210C1120 290 1010 300 950 360C880 430 820 560 800 820Z" fill="url(#nx-stripes)"/>
+      <ellipse cx="1040" cy="150" rx="112" ry="72" fill="#C4E67C"/><ellipse cx="1040" cy="150" rx="112" ry="72" fill="none" stroke="#A9D35B" stroke-width="6"/>
+      <ellipse cx="1062" cy="164" rx="7" ry="3.6" fill="#173D1F"/>
+      <path d="M470 600C470 540 590 505 680 530C760 552 745 630 660 650C580 668 470 660 470 600Z" fill="#E7BA8D"/><path d="M505 612C525 574 600 558 662 568" fill="none" stroke="#D6A473" stroke-width="5" stroke-linecap="round"/>
+      <path d="M835 278C870 250 935 262 948 300C960 338 914 360 872 352C832 344 802 304 835 278Z" fill="url(#nx-water)"/>
+      <path d="M-20 250C110 240 230 300 270 400C310 500 250 640 170 820H-20Z" fill="url(#nx-water)"/>
+      <path d="M-20 236C120 226 250 290 292 396C334 502 270 650 192 820" fill="none" stroke="#E6E1D8" stroke-width="12" stroke-dasharray=".5 16" stroke-linecap="round"/>
+      <g fill="none" stroke="#86E3D3" stroke-width="3" stroke-linecap="round" opacity=".8"><path d="M40 430q18-8 36 0t36 0"/><path d="M110 560q18-8 36 0t36 0"/><path d="M30 690q18-8 36 0t36 0"/></g>
+      <g stroke="#FAFAF7" stroke-linecap="round"><path d="M-10 590 300 486" stroke-width="8"/><path d="M70 562V516M220 512V466" stroke-width="6"/></g>
+      <g fill="#F3E9DC"><rect x="24" y="30" width="62" height="46" rx="6"/><rect x="250" y="40" width="54" height="40" rx="6"/><rect x="40" y="160" width="58" height="42" rx="6"/><rect x="272" y="150" width="58" height="44" rx="6"/><rect x="110" y="210" width="50" height="30" rx="6"/></g>
+      <g fill="#E27C4E"><rect x="24" y="30" width="62" height="16" rx="6"/><rect x="250" y="40" width="54" height="14" rx="6"/><rect x="40" y="160" width="58" height="15" rx="6"/><rect x="272" y="150" width="58" height="15" rx="6"/><rect x="110" y="210" width="50" height="12" rx="6"/></g>
+      <g transform="translate(176 118)"><circle r="40" fill="#EFE8DC"/><circle r="27" fill="#E0D6C6"/><circle r="12" fill="#CBBFAC"/><g fill="#EFE8DC"><circle cx="-54" cy="-36" r="7"/><circle cx="54" cy="-36" r="7"/><circle cx="-54" cy="36" r="7"/><circle cx="54" cy="36" r="7"/></g></g>
+      <use href="#nx-tree" x="400" y="20" width="84" height="84"/><use href="#nx-tree2" x="470" y="70" width="70" height="70"/><use href="#nx-tree" x="560" y="10" width="70" height="70"/>
+      <use href="#nx-tree2" x="640" y="70" width="80" height="80"/><use href="#nx-tree" x="360" y="150" width="70" height="70"/><use href="#nx-tree" x="710" y="0" width="60" height="60"/>
+      <use href="#nx-tree" x="1080" y="300" width="84" height="84"/><use href="#nx-tree2" x="1130" y="400" width="80" height="80"/><use href="#nx-tree" x="1040" y="470" width="70" height="70"/>
+      <use href="#nx-tree2" x="1100" y="560" width="90" height="90"/><use href="#nx-tree" x="980" y="660" width="80" height="80"/><use href="#nx-tree" x="900" y="720" width="70" height="70"/>
+      <use href="#nx-tree2" x="400" y="700" width="70" height="70"/><use href="#nx-tree" x="1150" y="230" width="60" height="60"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav data-scrollbar class="nx-reel" aria-label="Lesson progress">
+  <div class="nx-reel__marks">
+    <button type="button" data-goto="story" title="Taxi"><span>1</span></button>
+    <button type="button" data-goto="origin" title="The -lı shot"><span>2</span></button>
+    <button type="button" data-goto="harmony" title="Wind"><span>3</span></button>
+    <button type="button" data-goto="nereli" title="Nerelisin?"><span>4</span></button>
+    <button type="button" data-goto="milliyet" title="Hostel"><span>5</span></button>
+    <button type="button" data-goto="dil" title="Menu"><span>6</span></button>
+    <button type="button" data-goto="lab" title="Editing room"><span>7</span></button>
+    <button type="button" data-goto="traps" title="Outtakes"><span>8</span></button>
+    <button type="button" data-goto="video" title="Video"><span>9</span></button>
+    <button type="button" data-goto="practice" title="Practice"><span>10</span></button>
+    <button type="button" data-goto="check" title="Check"><span>11</span></button>
+    <button type="button" data-goto="cheat" title="Finale"><span>12</span></button>
+  </div>
+  <span class="nx-reel__now" aria-hidden="true"><span class="nx-dot"></span><span class="nx-reel__name">Taxi</span></span>
+  <div class="nx-reel__track" role="slider" aria-label="Rewind the lesson" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i class="nx-reel__fill"></i></div>
+</nav>
+<div class="nx-cutflash" aria-hidden="true"></div>
+
+<header class="nx-hero">
+  <div class="nx-hero__bar">
+    <span class="nx-logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 11 20 27 29 11" fill="none" stroke="#F7C92C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6.5" fill="#F7C92C"/><circle cx="29" cy="11" r="6.5" fill="#F7C92C"/><circle cx="20" cy="29" r="6.5" fill="#F7C92C"/><circle cx="20" cy="29" r="2.4" fill="#fff"/></svg><b lang="tr">nereli</b></span> <span class="nx-pill nx-pill--y">A1 · Istanbul</span>
+  </div>
+  <p class="nx-kicker">A short film in six holes</p>
+  <h1 class="nx-hero__title">Where are you from? Istanbul asks first</h1>
+  <p class="nx-hero__lead">Country, nationality, language. Two clubs, <b lang="tr">-lı</b> and <b lang="tr">-ca</b>, — enough for the whole world.</p>
+  <div class="nx-hero__cta">
+    <button type="button" class="nx-btn nx-btn--go" data-goto="story">Watch the film</button>
+    <button type="button" class="nx-btn" data-goto="cheat">Straight to the cheat sheet</button>
+  </div>
+  <div class="nx-hero__art" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice"><use href="#nx-map"/></svg>
+    <div class="nx-hcard nx-hcard--k">Hole 1<b lang="tr">Nerelisin?</b></div>
+    <div class="nx-hcard nx-hcard--w">Shot<b lang="tr">-lı · -ca</b></div>
+    <div class="nx-hphone"><div class="nx-hphone__scr">
+      <span class="nx-hphone__q" lang="tr">Nerelisin?</span>
+      <span class="nx-hphone__a" lang="tr">Kazakistanlıyım.</span>
+      <div class="nx-bubbles" lang="tr"><span>lı</span><span>li</span><span>lu</span><span>lü</span></div>
+    </div></div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== СЦЕНА 1. ТАКСИ ===== -->
+<section class="nx-scene" data-section="story" data-words="36">
+  <div class="nx-stage">
+    <div class="nx-hud" data-ui><span class="nx-hole">Hole 1 <svg viewBox="0 0 12 12"><path d="M2 4 6 8 10 4" fill="none" stroke="#111" stroke-width="2"/></svg></span><span class="nx-hud__t">Taxi from the airport</span></div>
+    <div class="nx-frame">
+      <div class="nx-cam">
+        <svg class="nx-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#nx-map"/></svg>
+        <svg class="nx-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <path d="M240 820C300 700 380 600 470 470C540 370 640 300 760 250C840 216 900 200 950 190" fill="none" stroke="#CFC9BF" stroke-width="36" stroke-linecap="round"/>
+          <path id="nx-road1" d="M240 820C300 700 380 600 470 470C540 370 640 300 760 250C840 216 900 200 950 190" fill="none" stroke="#ECE8E1" stroke-width="28" stroke-linecap="round"/>
+          <path d="M240 820C300 700 380 600 470 470C540 370 640 300 760 250C840 216 900 200 950 190" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="12 14"/>
+          <path id="nx-throw1" d="M945 195Q930 120 884 305" fill="none"/>
+          <g class="nx-splash" transform="translate(884 305)" fill="none" stroke="#fff" stroke-width="5"><circle r="16"/><circle r="30" stroke-width="3.5"/><circle r="46" stroke-width="2"/></g>
+          <g id="nx-taxi1"><use href="#nx-taxi" x="-20" y="-36" width="40" height="72"/></g>
+          <g class="nx-ball1"><use href="#nx-ball" x="-12" y="-12" width="24" height="24"/></g>
+        </svg>
+      </div>
+      <svg class="nx-layer nx-clouds" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g fill="#0b2a10" opacity=".14"><ellipse cx="300" cy="200" rx="180" ry="70"/><ellipse cx="820" cy="560" rx="220" ry="80"/><ellipse cx="1150" cy="120" rx="140" ry="50"/></g>
+        <g class="nx-plane" fill="#fff"><path d="M0 0 60 -8 72 -30 82 -30 76 -6 110 -2 118 -14 126 -14 122 2 126 18 118 18 110 6 76 10 82 34 72 34 60 12 0 4Z"/></g>
+      </svg>
+      <div class="nx-light"></div>
+      <div class="nx-score" data-ui><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 14q3-3 6 0t6 0 6 0M2 19q3-3 6 0t6 0 6 0" fill="none" stroke="#3CC9B4" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="6" r="4" fill="#fff"/></svg><span>Shot 1<br><b>in the water</b></span></div>
+      <div class="nx-duo">
+        <figure class="nx-face nx-face--g"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#nx-damir"/></svg><figcaption data-ui>Damir</figcaption><span class="nx-bub" lang="tr">Ben Kazakistan.</span></figure>
+        <figure class="nx-face nx-face--y"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#nx-driver"/></svg><figcaption data-ui>Taxi driver</figcaption><span class="nx-bub nx-bub--r" lang="tr">Nerelisin?</span><span class="nx-bub nx-bub--r nx-bub--2" lang="tr">Vay! Sen bir ülkesin!</span></figure>
+      </div>
+    </div>
+    <div class="nx-subs">
+      <p class="nx-sub">Istanbul. The airport. Damir gets into a yellow taxi.</p>
+      <p class="nx-sub nx-sub--d"><span class="nx-who" data-ui>Taxi driver</span><a-say>Nerelisin?</a-say><span class="nx-gl">Where are you from?</span></p>
+      <p class="nx-sub nx-sub--d"><span class="nx-who nx-who--g" data-ui>Damir</span><span>proudly:</span><a-say>Ben Kazakistan.</a-say></p>
+      <p class="nx-sub nx-sub--d"><span class="nx-who" data-ui>Taxi driver</span><a-say>Vay! Sen bir ülkesin!</a-say><span class="nx-gl">Whoa! You're a whole country!</span></p>
+      <p class="nx-sub">Ball in the water. Damir said “I am Kazakhstan,” not “I'm from Kazakhstan.” The driver laughs all the way to Beşiktaş.</p>
+    </div>
+    <div class="nx-act">
+      <p class="nx-act__q">Guess first: what should he have said?</p>
+      <div class="nx-act__row nx-guess">
+        <button type="button" class="nx-btn" data-ok="1" lang="tr">Kazakistanlıyım.</button>
+        <button type="button" class="nx-btn" data-ok="0" lang="tr">Kazakistanım.</button>
+      </div>
+      <p class="nx-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== СЦЕНА 2. УДАР -lı ===== -->
+<section class="nx-scene" data-section="origin" data-words="40">
+  <div class="nx-stage">
+    <div class="nx-hud" data-ui><span class="nx-hole">Hole 2</span><span class="nx-hud__t">Where from: the <b lang="tr">-lı</b> shot</span></div>
+    <div class="nx-frame">
+      <div class="nx-wipe" data-ui><div><svg viewBox="0 0 40 90" aria-hidden="true"><use href="#nx-flag"/></svg><b>HOLE 2</b><span>Where you're from</span></div></div>
+      <svg class="nx-layer nx-o-bg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="800" height="500" fill="#79B23A"/>
+        <path d="M40 520C120 400 250 330 380 280C500 235 600 160 700 60L860 -20V160C760 230 660 300 560 350C430 410 330 460 300 520Z" fill="url(#nx-stripes)"/>
+        <ellipse cx="625" cy="215" rx="100" ry="58" fill="#C4E67C"/>
+        <path d="M430 380C440 340 520 330 560 350C600 372 580 420 530 425C480 430 425 415 430 380Z" fill="#E7BA8D"/>
+        <path d="M650 520C670 440 750 405 830 412V520Z" fill="url(#nx-water)"/>
+        <rect x="128" y="408" width="88" height="46" rx="12" fill="#C4E67C"/><circle cx="160" cy="430" r="4" fill="#fff"/><circle cx="186" cy="430" r="4" fill="#fff"/>
+      </svg>
+      <svg class="nx-layer nx-o-fg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <use href="#nx-tree2" x="-40" y="-50" width="150" height="150"/><use href="#nx-tree" x="70" y="-60" width="110" height="110"/><use href="#nx-tree" x="720" y="290" width="130" height="130"/><use href="#nx-tree2" x="-50" y="380" width="120" height="120"/>
+      </svg>
+      <svg class="nx-layer" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs><mask id="nx-m2" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="500"><path class="nx-m2p" d="M172 428Q360 120 616 212" fill="none" stroke="#fff" stroke-width="14"/></mask></defs>
+        <path d="M172 428Q360 120 616 212" fill="none" stroke="#fff" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round" mask="url(#nx-m2)"/>
+        <path id="nx-shot2" d="M172 428Q360 120 616 212" fill="none"/>
+        <use href="#nx-flag" x="612" y="146" width="30" height="68"/>
+        <g class="nx-ring2" transform="translate(616 212)"><circle r="30" fill="none" stroke="#fff" stroke-width="3"/></g>
+        <g class="nx-hole2" transform="translate(470 250)"><circle r="24" fill="#0F0F0F"/><text y="7" text-anchor="middle" fill="#fff" font-size="20" font-weight="600" lang="tr">lı</text></g>
+        <g id="nx-ball2"><g class="nx-ballin"><use href="#nx-ball" x="-11" y="-11" width="22" height="22"/></g></g>
+      </svg>
+      <div class="nx-stat">
+        <div class="nx-stat__h" data-ui><b>Shot</b><span>· where from</span></div>
+        <div class="nx-stat__row"><span lang="tr">Kazakistan</span><i class="nx-suf nx-suf--g" lang="tr">lı</i><em data-ui>Kazakhstani</em></div>
+        <div class="nx-stat__row"><span lang="tr">Ankara</span><i class="nx-suf nx-suf--g" lang="tr">lı</i><em data-ui>from Ankara</em></div>
+        <div class="nx-stat__row"><span lang="tr">Almatı</span><i class="nx-suf nx-suf--g" lang="tr">lı</i><em data-ui>from Almaty</em></div>
+      </div>
+    </div>
+    <div class="nx-subs">
+      <p class="nx-sub">The country is the ball. The suffix <b lang="tr">-lı</b> is the shot. After the shot, the ball flies into the “where from” hole.</p>
+      <p class="nx-sub"><b lang="tr" data-say="Kazakistanlı">Kazakistan + lı = Kazakistanlı</b>. From Kazakhstan. A Kazakhstani.</p>
+      <p class="nx-sub">In English every city has its own quirk: New Yorker, Londoner, Parisian, Muscovite. Turkish doesn't do quirks. One club for every city.</p>
+      <p class="nx-sub nx-sub--opt">In Kazakh, by the way, it's similar: almatylyq.</p>
+    </div>
+    <div class="nx-act">
+      <p class="nx-act__q">Take your own shot. Pick a city:</p>
+      <div class="nx-act__row nx-cities">
+        <button type="button" class="nx-btn" data-c="Ankara" lang="tr">Ankara</button>
+        <button type="button" class="nx-btn" data-c="Moskova" lang="tr">Moskova</button>
+        <button type="button" class="nx-btn" data-c="Astana" lang="tr">Astana</button>
+        <button type="button" class="nx-btn" data-c="Almatı" lang="tr">Almatı</button>
+      </div>
+      <p class="nx-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== СЦЕНА 3. ВЕТЕР ===== -->
+<section class="nx-scene" data-section="harmony" data-words="42">
+  <div class="nx-stage">
+    <div class="nx-hud" data-ui><span class="nx-hole">Hole 3</span><span class="nx-hud__t">Wind: the last vowel</span></div>
+    <div class="nx-frame">
+      <div class="nx-wipe nx-wipe--y" data-ui><div><svg viewBox="0 0 40 90" aria-hidden="true"><use href="#nx-flag"/></svg><b>HOLE 3</b><span>Wind</span></div></div>
+      <svg class="nx-layer nx-h-bg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#nx-map"/></svg>
+      <div class="nx-tint"></div>
+      <svg class="nx-layer nx-wind" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <line x1="40" y1="90" x2="160" y2="90"/><line x1="300" y1="140" x2="380" y2="140"/><line x1="560" y1="70" x2="700" y2="70"/><line x1="120" y1="300" x2="220" y2="300"/><line x1="520" y1="330" x2="640" y2="330"/><line x1="680" y1="250" x2="760" y2="250"/>
+      </svg>
+      <div class="nx-wx">
+        <svg viewBox="-20 -20 40 40" aria-hidden="true"><g class="nx-sun"><circle r="9" fill="none" stroke="#141414" stroke-width="3" stroke-dasharray="2 3.2"/><g stroke="#141414" stroke-width="2.4" stroke-linecap="round"><path d="M0-17V-14M0 14V17M-17 0H-14M14 0H17M-12-12-10-10M10 10 12 12M-12 12-10 10M10-10 12-12"/></g></g></svg>
+        <span><span data-ui>Wind</span><span class="nx-wx__v" lang="tr"><span class="nx-wx__in"><span>a → lı</span><span>i → li</span><span>u → lu</span><span>ü → lü</span></span></span></span>
+      </div>
+      <div class="nx-word" lang="tr"><div class="nx-word__in">
+        <span>Kazakist<b class="nx-v">a</b>n<i class="nx-suf nx-suf--g">lı</i></span>
+        <span>İzm<b class="nx-v">i</b>r<i class="nx-suf nx-suf--g">li</i></span>
+        <span>İstanb<b class="nx-v">u</b>l<i class="nx-suf nx-suf--g">lu</i></span>
+        <span>Bak<b class="nx-v">ü</b><i class="nx-suf nx-suf--g">lü</i></span>
+      </div></div>
+      <div class="nx-clubs" lang="tr">
+        <div class="nx-club"><i></i><b>lı</b><small>a · ı</small><div class="nx-bar"><span></span></div></div>
+        <div class="nx-club"><i></i><b>li</b><small>e · i</small><div class="nx-bar"><span></span></div></div>
+        <div class="nx-club"><i></i><b>lu</b><small>o · u</small><div class="nx-bar"><span></span></div></div>
+        <div class="nx-club"><i></i><b>lü</b><small>ö · ü</small><div class="nx-bar"><span></span></div></div>
+      </div>
+    </div>
+    <div class="nx-subs">
+      <p class="nx-sub">Now the wind. The <b lang="tr">-lı</b> club comes in four kinds.</p>
+      <p class="nx-sub">The word's last vowel decides. Only that one, the rest stay quiet. On the board, each pair of vowels has its own club.</p>
+      <p class="nx-sub"><b lang="tr" data-say="İstanbullu">İstanbul</b> ends in <b lang="tr">u</b>. So it's <b lang="tr" data-say="İstanbullu">İstanbullu</b>. Say <span lang="tr">İstanbullı</span> — and the ball's in the bushes.</p>
+      <p class="nx-sub nx-sub--opt">It's the same vowel harmony. The shot adjusts to the wind.</p>
+    </div>
+    <div class="nx-act">
+      <p class="nx-act__q">Pick the club: <b class="nx-hq" lang="tr">Tokyo</b></p>
+      <div class="nx-act__row nx-pickclub" lang="tr">
+        <button type="button" class="nx-btn" data-s="lı">-lı</button>
+        <button type="button" class="nx-btn" data-s="li">-li</button>
+        <button type="button" class="nx-btn" data-s="lu">-lu</button>
+        <button type="button" class="nx-btn" data-s="lü">-lü</button>
+        <button type="button" class="nx-btn nx-btn--k nx-hnext" data-ui>More</button>
+      </div>
+      <p class="nx-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== СЦЕНА 4. NERELİSİN? ===== -->
+<section class="nx-scene" data-section="nereli" data-words="41">
+  <div class="nx-stage">
+    <div class="nx-hud" data-ui><span class="nx-hole">Hole 4</span><span class="nx-hud__t" lang="tr">Nerelisin?</span></div>
+    <div class="nx-frame nx-frame--y">
+      <div class="nx-wipe nx-wipe--k" data-ui><div><svg viewBox="0 0 40 90" aria-hidden="true"><use href="#nx-flag"/></svg><b>HOLE 4</b><span>Answer</span></div></div>
+      <div class="nx-checker"></div>
+      <div class="nx-beam"></div><div class="nx-beam nx-beam--2"></div>
+      <div class="nx-phone"><div class="nx-phone__notch"></div><div class="nx-phone__scr">
+        <div class="nx-chat__top" data-ui><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#nx-driver"/></svg>Taxi driver · now</div>
+        <div class="nx-bub2" lang="tr">Nerelisin?</div>
+        <div class="nx-cut" lang="tr"><span><b>nere</b><small data-ui>where</small></span><span><i class="nx-suf nx-suf--g">li</i><small data-ui>from</small></span><span><i class="nx-suf nx-suf--k">sin</i><small data-ui>you</small></span></div>
+        <ul class="nx-persons" lang="tr">
+          <li><b>ben</b>İzmir<i class="nx-suf nx-suf--g">li</i><i class="nx-suf nx-suf--b">y</i><i class="nx-suf nx-suf--k">im</i></li>
+          <li><b>sen</b>İzmir<i class="nx-suf nx-suf--g">li</i><i class="nx-suf nx-suf--k">sin</i></li>
+          <li><b>o</b>İzmir<i class="nx-suf nx-suf--g">li</i></li>
+          <li><b>biz</b>İzmir<i class="nx-suf nx-suf--g">li</i><i class="nx-suf nx-suf--b">y</i><i class="nx-suf nx-suf--k">iz</i></li>
+          <li><b>siz</b>İzmir<i class="nx-suf nx-suf--g">li</i><i class="nx-suf nx-suf--k">siniz</i></li>
+        </ul>
+      </div></div>
+    </div>
+    <div class="nx-subs">
+      <p class="nx-sub">Remember “I'm a teacher”? <a-say>Öğretmenim.</a-say> The “I, you, we” tail sticks to the end of the word.</p>
+      <p class="nx-sub">Same here. <b lang="tr">Nere + li + sin</b>. Literally “where-from-ish you?” Sounds funny, works great. For “he, she” there's no tail: <b lang="tr" data-say="O İzmirli.">O İzmirli.</b></p>
+      <p class="nx-sub"><b lang="tr">-lı</b> always ends in a vowel. So a <b lang="tr">y</b> goes before <b lang="tr">-ım</b>: <a-say>Kazakistanlıyım.</a-say></p>
+      <p class="nx-sub">To a stranger — politely: <a-say>Nerelisiniz?</a-say></p>
+    </div>
+    <div class="nx-act">
+      <p class="nx-act__q">Answer the driver for yourself. Build the word:</p>
+      <div class="nx-act__row nx-bld" lang="tr" data-row="0"><button type="button" class="nx-btn" data-p="Kazakistan">Kazakistan</button><button type="button" class="nx-btn" data-p="İstanbul">İstanbul</button><button type="button" class="nx-btn" data-p="İzmir">İzmir</button></div>
+      <div class="nx-act__row nx-bld" lang="tr" data-row="1"><button type="button" class="nx-btn" data-p="lı">lı</button><button type="button" class="nx-btn" data-p="li">li</button><button type="button" class="nx-btn" data-p="lu">lu</button></div>
+      <div class="nx-act__row nx-bld" lang="tr" data-row="2"><button type="button" class="nx-btn" data-p="yım">yım</button><button type="button" class="nx-btn" data-p="yim">yim</button><button type="button" class="nx-btn" data-p="yum">yum</button><button type="button" class="nx-btn nx-btn--go nx-bldgo" data-ui>Answer</button></div>
+      <p class="nx-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== СЦЕНА 5. ХОСТЕЛ ===== -->
+<section class="nx-scene" data-section="milliyet" data-words="39">
+  <div class="nx-stage">
+    <div class="nx-hud" data-ui><span class="nx-hole">Hole 5</span><span class="nx-hud__t">Hostel in Beyoğlu</span></div>
+    <div class="nx-frame nx-frame--wall">
+      <div class="nx-wipe" data-ui><div><svg viewBox="0 0 40 90" aria-hidden="true"><use href="#nx-flag"/></svg><b>HOLE 5</b><span>Who you are</span></div></div>
+      <svg class="nx-layer nx-wall" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <rect width="800" height="500" fill="#EFE7DA"/>
+        <rect y="430" width="800" height="70" fill="#C9A47A"/><path d="M0 430H800" stroke="#A9835A" stroke-width="4"/>
+        <path d="M-10 40Q200 110 400 50T810 60" fill="none" stroke="#3B3B36" stroke-width="2"/>
+        <g class="nx-bulbs" fill="#F7C92C"><circle cx="60" cy="64" r="8"/><circle cx="160" cy="86" r="8"/><circle cx="260" cy="82" r="8"/><circle cx="360" cy="58" r="8"/><circle cx="460" cy="52" r="8"/><circle cx="560" cy="70" r="8"/><circle cx="660" cy="76" r="8"/><circle cx="760" cy="62" r="8"/></g>
+      </svg>
+      <div class="nx-evening"></div>
+      <div class="nx-board">
+        <button type="button" class="nx-pcard" data-a="Rusya" data-b="Rus"><svg viewBox="0 0 120 120" aria-hidden="true" style="background:#FFE07A"><use href="#nx-anna"/></svg><b lang="tr">Anna</b><span class="nx-flip" lang="tr"><span class="nx-flip__a">Rusya</span><span class="nx-flip__b">Rus</span></span></button>
+        <button type="button" class="nx-pcard" data-a="Almanya" data-b="Alman"><svg viewBox="0 0 120 120" aria-hidden="true" style="background:#DDFBE6"><use href="#nx-hans"/></svg><b lang="tr">Hans</b><span class="nx-flip" lang="tr"><span class="nx-flip__a">Almanya</span><span class="nx-flip__b">Alman</span></span></button>
+        <button type="button" class="nx-pcard" data-a="Japonya" data-b="Japon"><svg viewBox="0 0 120 120" aria-hidden="true" style="background:#F4F4F1"><use href="#nx-kenji"/></svg><b lang="tr">Kenji</b><span class="nx-flip" lang="tr"><span class="nx-flip__a">Japonya</span><span class="nx-flip__b">Japon</span></span></button>
+        <button type="button" class="nx-pcard" data-a="Türkiye" data-b="Türk"><svg viewBox="0 0 120 120" aria-hidden="true" style="background:#2BE264"><use href="#nx-ayse"/></svg><b lang="tr">Ayşe</b><span class="nx-flip" lang="tr"><span class="nx-flip__a">Türkiye</span><span class="nx-flip__b">Türk</span></span></button>
+      </div>
+      <div class="nx-stamp" lang="tr">Amerika<i class="nx-suf nx-suf--g">lı</i> · Çin<i class="nx-suf nx-suf--g">li</i></div>
+    </div>
+    <div class="nx-subs">
+      <p class="nx-sub">Evening. A hostel in Beyoğlu. Everyone's getting to know each other.</p>
+      <p class="nx-sub">Many peoples have their own word: <b lang="tr">Rus, Alman, Japon, Türk</b>. No suffixes at all.</p>
+      <p class="nx-sub">It's like “Russian” by ethnicity vs. “from Russia.” <b lang="tr" data-say="Rus">Rus</b> is the nationality. <b lang="tr" data-say="Rusyalı">Rusyalı</b> means from Russia, by passport or address.</p>
+      <p class="nx-sub">No word of its own — take the country and <b lang="tr">-lı</b>: <b lang="tr" data-say="Amerikalı, Çinli">Amerikalı, Çinli</b>.</p>
+    </div>
+    <div class="nx-act">
+      <p class="nx-act__q">Tap the cards: country or people?</p>
+      <p class="nx-act__fb" data-ui aria-live="polite">The card will flip and say the word.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== СЦЕНА 6. МЕНЮ ===== -->
+<section class="nx-scene" data-section="dil" data-words="43">
+  <div class="nx-stage">
+    <div class="nx-hud" data-ui><span class="nx-hole">Hole 6</span><span class="nx-hud__t">Café in Kadıköy</span></div>
+    <div class="nx-frame nx-frame--shop">
+      <div class="nx-wipe nx-wipe--y" data-ui><div><svg viewBox="0 0 40 90" aria-hidden="true"><use href="#nx-flag"/></svg><b>HOLE 6</b><span>Language</span></div></div>
+      <div class="nx-cam nx-d-cam">
+        <svg class="nx-layer" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="800" height="500" fill="url(#nx-stone)"/>
+          <rect x="96" y="40" width="608" height="410" rx="10" fill="#5B4A36"/>
+          <rect x="112" y="56" width="576" height="378" rx="4" fill="url(#nx-glass)"/>
+          <path d="M150 56 260 56 150 300Z M520 56 600 56 420 434 340 434Z" fill="#fff" opacity=".07"/>
+          <rect x="0" y="450" width="800" height="50" fill="#BDB2A0"/><path d="M0 452H800" stroke="#A89C88" stroke-width="3"/>
+          <path d="M0 0H800V60L0 140Z" fill="#000" opacity=".12"/>
+        </svg>
+        <div class="nx-poster1">
+          <div class="nx-poster1__h"><span class="nx-logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 11 20 27 29 11" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6.5" fill="#111"/><circle cx="29" cy="11" r="6.5" fill="#111"/><circle cx="20" cy="29" r="6.5" fill="#111"/></svg></span><span lang="tr">Kadıköy</span></div>
+          <h3 lang="tr">Menü</h3>
+          <ul class="nx-menu" lang="tr">
+            <li>Türk<i class="nx-suf">çe</i><em>k → ç</em></li>
+            <li>Rus<i class="nx-suf">ça</i><em>s → ç</em></li>
+            <li>Alman<i class="nx-suf">ca</i><em>n → c</em></li>
+            <li>İngiliz<i class="nx-suf">ce</i><em>z → c</em></li>
+            <li>Arap<i class="nx-suf">ça</i><em>p → ç</em></li>
+          </ul>
+          <div class="nx-fist" lang="tr"><span lang="tr">Fıstıkçı Şahap:</span><i>f</i><i>s</i><i>t</i><i>k</i><i>ç</i><i>ş</i><i>h</i><i>p</i></div>
+        </div>
+      </div>
+      <svg class="nx-walker" viewBox="0 0 120 300" aria-hidden="true"><g fill="#1D1D1B"><circle cx="60" cy="40" r="22"/><path d="M34 70Q60 58 86 70L96 170Q60 182 26 170Z"/><path d="M40 168 30 290H48L60 200 72 290H90L80 168Z"/></g><path d="M86 90 108 150" stroke="#1D1D1B" stroke-width="12" stroke-linecap="round"/><rect x="96" y="140" width="24" height="34" rx="4" fill="#F7C92C"/></svg>
+      <div class="nx-kz" lang="kk"><b>qazaq<span class="nx-suf nx-suf--y">şa</span></b> · <b>orys<span class="nx-suf nx-suf--y">şa</span></b></div>
+    </div>
+    <div class="nx-subs">
+      <p class="nx-sub nx-sub--d"><span>Morning. Kadıköy. Damir asks for a menu. The waiter checks:</span><a-say>İngilizce? Rusça?</a-say></p>
+      <p class="nx-sub nx-sub--d"><span class="nx-who nx-who--g" data-ui>Damir</span><a-say>Rusça, lütfen. Kazakça ve Rusça biliyorum.</a-say><span class="nx-gl">I speak Kazakh and Russian. <b lang="tr">biliyorum</b> means “I know” — take it whole.</span></p>
+      <p class="nx-sub">Language = people + <b lang="tr">-ca</b>. Not from the country, from the people: <b lang="tr" data-say="Rusça">Rus → Rusça</b>.</p>
+      <p class="nx-sub">Vowel: <b lang="tr">a, ı, o, u → -ca</b>. <b lang="tr">e, i, ö, ü → -ce</b>.</p>
+      <p class="nx-sub">After voiceless consonants, <b lang="tr">c</b> devoices to <b lang="tr">ç</b>. The voiceless ones hide in the phrase <a-say>Fıstıkçı Şahap</a-say>.</p>
+      <p class="nx-sub nx-sub--opt">Kazakh does the same: qazaqşa, orysşa.</p>
+    </div>
+    <div class="nx-act">
+      <p class="nx-act__q">Build the language: <b class="nx-dq" lang="tr">Japon</b></p>
+      <div class="nx-act__row" lang="tr">
+        <button type="button" class="nx-btn nx-tg" data-g="c" aria-pressed="true">c</button>
+        <button type="button" class="nx-btn nx-tg" data-g="ç" aria-pressed="false">ç</button>
+        <button type="button" class="nx-btn nx-tv" data-v="a" aria-pressed="true">a</button>
+        <button type="button" class="nx-btn nx-tv" data-v="e" aria-pressed="false">e</button>
+        <button type="button" class="nx-btn nx-btn--go nx-dgo" data-ui>Check</button>
+      </div>
+      <p class="nx-act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== МОНТАЖНАЯ ===== -->
+<section data-section="lab" class="nx-lab" data-words="27">
+  <div class="nx-wrap">
+    <div class="nx-hud" data-ui><span class="nx-hole">Editing room</span><span class="nx-hud__t">Cut the shot yourself</span></div>
+    <h2 class="nx-h2">Editing room</h2>
+    <p class="nx-lead">You're the director here. Pick a word and the shot builds itself. Below it — why it's that way. Three modes: where you're from, which language, and the whole chain from country to language.</p>
+    <div class="nx-console">
+      <div class="nx-tabs" role="tablist" aria-label="Mode" data-ui>
+        <button type="button" role="tab" aria-selected="true" data-mode="from">Where from</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="lang">Language</button>
+        <button type="button" role="tab" aria-selected="false" data-mode="chain">Chain</button>
+      </div>
+      <div class="nx-pick" lang="tr" data-ui></div>
+      <div class="nx-ppick" data-ui></div>
+      <div class="nx-track">
+        <div class="nx-ruler" aria-hidden="true"></div><div class="nx-head" aria-hidden="true"></div>
+        <svg class="nx-vh" aria-hidden="true"><rect width="1" height="1"/></svg>
+        <div class="nx-clips" lang="tr" data-ui></div>
+      </div>
+      <div class="nx-out"><b class="nx-out__w" lang="tr" data-say="">Kazakistanlıyım</b><span class="nx-out__ru" data-ui></span></div>
+      <p class="nx-why" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== НЕУДАЧНЫЕ ДУБЛИ ===== -->
+<section class="nx-scene" data-section="traps" data-words="32">
+  <div class="nx-stage nx-stage--strip">
+    <div class="nx-hud" data-ui><span class="nx-hole">Outtakes</span><span class="nx-hud__t">What got cut in editing</span></div>
+    <div class="nx-subs"><p class="nx-sub">Bad takes. Everyone trips on these. Hit “Reshoot.”</p></div>
+    <div class="nx-strip-wrap"><div class="nx-strip">
+      <article class="nx-take">
+        <div class="nx-take__n" data-ui><span>Take 1</span><span>Taxi</span></div>
+        <span class="nx-bad" lang="tr">Ben Kazakistan.<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6Q50 2 100 5" fill="none" stroke="#FF6B3D" stroke-width="3"/></svg></span>
+        <span class="nx-good" lang="tr">Kazakistanlıyım.</span>
+        <p>Without <b lang="tr">-lı</b> you're not from the country. You are the country.</p>
+        <button type="button" class="nx-btn nx-retake" data-say-line="Kazakistanlıyım." data-ui>Reshoot</button>
+      </article>
+      <article class="nx-take">
+        <div class="nx-take__n" data-ui><span>Take 2</span><span>Café</span></div>
+        <span class="nx-bad" lang="tr">Kazakistanca<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6Q50 2 100 5" fill="none" stroke="#FF6B3D" stroke-width="3"/></svg></span>
+        <span class="nx-good" lang="tr">Kazakça</span>
+        <p>The language is built from the people, not the country.</p>
+        <button type="button" class="nx-btn nx-retake" data-say-line="Kazakça" data-ui>Reshoot</button>
+      </article>
+      <article class="nx-take">
+        <div class="nx-take__n" data-ui><span>Take 3</span><span>Menu</span></div>
+        <span class="nx-bad" lang="tr">Türkce<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6Q50 2 100 5" fill="none" stroke="#FF6B3D" stroke-width="3"/></svg></span>
+        <span class="nx-good" lang="tr">Türkçe</span>
+        <p><b lang="tr">k</b> is voiceless. Only <b lang="tr">ç</b> after it.</p>
+        <button type="button" class="nx-btn nx-retake" data-say-line="Türkçe" data-ui>Reshoot</button>
+      </article>
+      <article class="nx-take">
+        <div class="nx-take__n" data-ui><span>Take 4</span><span>Hostel</span></div>
+        <span class="nx-bad" lang="tr">İstanbullı<svg viewBox="0 0 100 10" preserveAspectRatio="none" aria-hidden="true"><path d="M0 6Q50 2 100 5" fill="none" stroke="#FF6B3D" stroke-width="3"/></svg></span>
+        <span class="nx-good" lang="tr">İstanbullu</span>
+        <p>The last vowel is <b lang="tr">u</b>. So, <b lang="tr">-lu</b>.</p>
+        <button type="button" class="nx-btn nx-retake" data-say-line="İstanbullu" data-ui>Reshoot</button>
+      </article>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== ВИДЕО ===== -->
+<section data-section="video" class="nx-band" data-words="7">
+  <div class="nx-wrap">
+    <div class="nx-hud" data-ui><span class="nx-hole">Behind the scenes</span></div>
+    <div class="nx-vcard">
+      <p class="nx-vnote"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#2BE264"/><path d="M16 13 28 20 16 27Z" fill="#111"/></svg><span>The video is in Russian. Notice: the presenter builds the language from the people. Türk — Türkçe, Rus — Rusça.</span></p>
+      <a-video yt="wn1CAGZLz9s" start="0" end="180" title="Learning Turkish, lesson 10 — Nationality, language, country" channel="Learn Turkish Via"></a-video>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ПРАКТИКА ===== -->
+<section data-section="practice" data-words="9">
+  <div class="nx-wrap">
+    <div class="nx-hud" data-ui><span class="nx-hole">Practice</span></div>
+    <h2 class="nx-h2">Five shots at the hole</h2>
+    <p class="nx-lead">The first one's almost a sure thing.</p>
+    <div class="nx-exgrid">
+      <a-exercise ref="a1.nationality.ex1"></a-exercise>
+      <a-exercise ref="a1.nationality.ex2"></a-exercise>
+      <a-exercise ref="a1.nationality.ex3"></a-exercise>
+      <a-exercise ref="a1.nationality.ex4"></a-exercise>
+      <a-exercise ref="a1.nationality.ex5">
+        <div class="nx-arr" data-ui>
+          <div class="nx-arr__head"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#F7C92C"/><path d="M5 13.5 19 9l.8 1.8-6 3 1.6 4.4-1.4.6-2.8-3.6-3.4 1.7-.6-1.4 1.7-1Z" fill="#111"/></svg><span>IST · Arrivals</span><span class="nx-arr__n">1 / 6</span></div>
+          <ol class="nx-arr__board" lang="tr">
+            <li><span>TK 1337</span><b>Almatı</b><i>indi</i></li>
+            <li><span>TK 2411</span><b>İzmir</b><i>bekleniyor</i></li>
+            <li><span>J2 064</span><b>Bakü</b><i>bekleniyor</i></li>
+            <li><span>TK 198</span><b>Tokyo</b><i>bekleniyor</i></li>
+            <li><span>LH 1300</span><b>Almanya</b><i>bekleniyor</i></li>
+            <li><span>TK 7</span><b>Türkiye</b><i>bekleniyor</i></li>
+          </ol>
+          <div class="nx-arr__card">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><use class="nx-arr__face" href="#nx-anna"/></svg>
+            <p class="nx-arr__q"></p>
+            <div class="nx-arr__opts" lang="tr"><button type="button" class="nx-btn" data-k="0"></button><button type="button" class="nx-btn" data-k="1"></button><button type="button" class="nx-btn" data-k="2"></button></div>
+            <p class="nx-arr__fb" aria-live="polite"></p>
+          </div>
+          <div class="nx-arr__end" hidden><b class="nx-arr__res"></b><button type="button" class="nx-btn nx-arr__again">Again</button></div>
+        </div>
+      </a-exercise>
+    </div>
+  </div>
+</section>
+
+<!-- ===== МИНИ-ПРОВЕРКА ===== -->
+<section data-section="check" class="nx-band" data-words="5">
+  <div class="nx-wrap">
+    <div class="nx-hud" data-ui><span class="nx-hole">Check</span></div>
+    <h2 class="nx-h2">Five questions</h2>
+    <div class="nx-quizbox"><a-quiz ref="a1.nationality.check1"></a-quiz></div>
+  </div>
+</section>
+
+<!-- ===== ШПАРГАЛКА И ФИНАЛ ===== -->
+<section data-section="cheat" data-words="60">
+  <div class="nx-wrap">
+    <div class="nx-poster">
+      <div class="nx-poster__top" data-ui><span class="nx-logo"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M11 11 20 27 29 11" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="11" cy="11" r="6.5" fill="#111"/><circle cx="29" cy="11" r="6.5" fill="#111"/><circle cx="20" cy="29" r="6.5" fill="#111"/></svg><b lang="tr">nereli</b></span><svg class="nx-qr" viewBox="0 0 10 10" aria-hidden="true"><path d="M0 0h4v4H0zM6 0h4v4H6zM0 6h4v4H0zM6 6h2v2H6zM8 8h2v2H8zM5 5h1v1H5z" fill="#111"/></svg></div>
+      <h2 class="nx-poster__t">Where you're from. Who you are. What you speak.</h2>
+      <div class="nx-tiles">
+        <div class="nx-tile nx-tile--g"><b>Where from</b><p lang="tr">-lı · -li · -lu · -lü</p><small>the last vowel decides</small><p lang="tr">İstanbullu, Kazakistanlı</p></div>
+        <div class="nx-tile nx-tile--k"><b>Answer</b><p lang="tr">Nerelisin? Nerelisiniz?</p><small>after <span lang="tr">-lı</span>, before “I” and “we” — <span lang="tr">y</span></small><p lang="tr">Kazakistanlıyım.</p></div>
+        <div class="nx-tile nx-tile--w"><b>Who</b><p lang="tr">Türk · Rus · Kazak · Alman</p><small>no word of its own — country + <span lang="tr">-lı</span></small><p lang="tr">Amerikalı, Çinli</p></div>
+        <div class="nx-tile nx-tile--y"><b>Language</b><p lang="tr">-ca · -ce · -ça · -çe</p><small>from the people; after voiceless — <span lang="tr">ç</span></small><p lang="tr">Kazakça, Türkçe</p></div>
+      </div>
+    </div>
+    <div class="nx-final">
+      <p>A week later. Another taxi, the same question.</p>
+      <div class="nx-final__frame">
+        <svg class="nx-layer" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#nx-map"/></svg>
+        <svg class="nx-flagwin" viewBox="0 0 40 90" aria-hidden="true"><use href="#nx-flag"/></svg>
+        <div class="nx-duo">
+          <figure class="nx-face nx-face--g"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#nx-damir"/></svg><figcaption data-ui>Damir</figcaption><span class="nx-bub nx-fin-a" lang="tr">Kazakistanlıyım!</span></figure>
+          <figure class="nx-face nx-face--y"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="#nx-driver"/></svg><figcaption data-ui>Taxi driver</figcaption><span class="nx-bub nx-bub--r nx-fin-q" lang="tr">Nerelisin?</span><span class="nx-bub nx-bub--r nx-bub--2 nx-fin-b" lang="tr">Aferin! Hoş geldin!</span></figure>
+        </div>
+      </div>
+      <p class="nx-sub--d" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span class="nx-who nx-who--g" data-ui>Damir</span><a-say>Kazakistanlıyım. Kazakça ve Rusça biliyorum. Biraz Türkçe biliyorum.</a-say></p>
+      <p class="nx-sub--d" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center"><span class="nx-who" data-ui>Taxi driver</span><a-say>Aferin! Hoş geldin!</a-say><span class="nx-gl">Well done! Welcome!</span></p>
+      <div class="nx-act__row"><button type="button" class="nx-btn nx-btn--go nx-finbtn">Play the finale</button></div>
+      <p>A hole in one. Now you can say where you're from, who you are, and what language you speak. Istanbul's taxi drivers have stopped laughing. Well, almost.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<template data-achievement data-title="Hole in one" data-text="You say where you're from and what you speak: Kazakistanlıyım, Kazakça.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle class="nx-a-bg" cx="60" cy="60" r="56" fill="#2BE264"/>
+    <circle cx="60" cy="60" r="44" fill="none" stroke="#0F0F0F" stroke-width="3" stroke-dasharray="3 6"/>
+    <g class="nx-a-y"><path d="M40 42 60 70 80 42" fill="none" stroke="#F7C92C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="42" r="12" fill="#F7C92C"/><circle cx="80" cy="42" r="12" fill="#F7C92C"/><circle cx="60" cy="74" r="12" fill="#F7C92C"/><circle cx="36" cy="38" r="4" fill="#FFF3C4"/></g>
+    <g class="nx-a-ball"><circle cx="60" cy="96" r="8" fill="#fff"/><circle cx="58" cy="94" r="1.2" fill="#ccc"/><circle cx="62" cy="98" r="1.2" fill="#ccc"/></g>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const ANIM = !!G && !RM;
+  document.documentElement.classList.add(ANIM ? 'nx-anim' : 'nx-static');
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const sec = (k) => $(`[data-section="${k}"]`);
+  const say = (t) => { try { window.AlternaKit && window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const pop = (el) => { if (ANIM && el) G.fromTo(el, { scale: .86 }, { scale: 1, duration: .5, ease: 'back.out(2.5)', clearProps: 'scale' }); };
+  const shake = (el) => { if (ANIM && el) G.fromTo(el, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' }); };
+  const fb = (el, ok, text) => { el.textContent = text; el.classList.toggle('is-ok', ok === true); el.classList.toggle('is-bad', ok === false); pop(el); };
+
+  /* ---------- турецкие правила ---------- */
+  const VOW = 'aeıioöuü';
+  const low = (w) => w.replace(/İ/g, 'i').replace(/I/g, 'ı').toLowerCase();
+  const lastV = (w) => { const s = low(w); for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'a'; };
+  const NARROW = { a: 'ı', ı: 'ı', e: 'i', i: 'i', o: 'u', u: 'u', ö: 'ü', ü: 'ü' };
+  const lI = (w) => 'l' + NARROW[lastV(w)];
+  const VOICELESS = 'fstkçşhp';
+  const CA = (w) => (VOICELESS.includes(low(w).slice(-1)) ? 'ç' : 'c') + ('aıou'.includes(lastV(w)) ? 'a' : 'e');
+  const COP = { ben: (v) => ['y', v + 'm'], sen: (v) => ['', 's' + v + 'n'], o: () => ['', ''], biz: (v) => ['y', v + 'z'], siz: (v) => ['', 's' + v + 'n' + v + 'z'] };
+
+  /* ---------- главы и скроллбар-плёнка ---------- */
+  const reel = $('[data-scrollbar]');
+  const marks = $$('.nx-reel__marks button', reel);
+  const fill = $('.nx-reel__fill', reel);
+  const track = $('.nx-reel__track', reel);
+  const nameEl = $('.nx-reel__name', reel);
+  const flash = $('.nx-cutflash');
+  const topOf = (el) => { const box = el.parentElement && el.parentElement.classList.contains('pin-spacer') ? el.parentElement : el; return box.getBoundingClientRect().top + scrollY; };
+  function goTo(key) {
+    const el = sec(key);
+    if (!el) return;
+    const top = Math.max(0, topOf(el) + 2);
+    const far = Math.abs(top - scrollY) > innerHeight * 3;
+    if (far && ANIM) G.fromTo(flash, { opacity: 1 }, { opacity: 0, duration: .55, ease: 'power2.out' });
+    window.scrollTo({ top, behavior: far || !ANIM ? 'auto' : 'smooth' });
+  }
+  marks.forEach((b) => b.addEventListener('click', () => goTo(b.dataset.goto)));
+  $$('.nx-hero [data-goto]').forEach((b) => b.addEventListener('click', () => goTo(b.dataset.goto)));
+  let ticking = false;
+  function paintReel() {
+    ticking = false;
+    const max = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const p = Math.min(1, Math.max(0, scrollY / max));
+    fill.style.transform = `scaleX(${p.toFixed(4)})`;
+    track.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+    let now = 0;
+    marks.forEach((b, i) => { const el = sec(b.dataset.goto); if (el && topOf(el) <= scrollY + innerHeight * .45) now = i; });
+    marks.forEach((b, i) => b.classList.toggle('is-now', i === now));
+    nameEl.textContent = marks[now].title;
+  }
+  addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(paintReel); } }, { passive: true });
+  addEventListener('resize', paintReel);
+  paintReel();
+  addEventListener('alterna:read', (e) => { const m = marks.find((b) => b.dataset.goto === (e.detail && e.detail.key)); if (m) { m.classList.add('is-read'); pop(m); } });
+  /* перемотка мышью и пальцем по дорожке */
+  let drag = false;
+  const seek = (x) => { const r = track.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (x - r.left) / r.width)); window.scrollTo(0, p * (document.documentElement.scrollHeight - innerHeight)); };
+  track.addEventListener('pointerdown', (e) => { drag = true; track.setPointerCapture(e.pointerId); seek(e.clientX); });
+  track.addEventListener('pointermove', (e) => { if (drag) seek(e.clientX); });
+  track.addEventListener('pointerup', () => { drag = false; });
+  track.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); window.scrollBy(0, (e.key === 'ArrowRight' ? 1 : -1) * innerHeight * .8); } });
+
+  /* ---------- сцена 1: действие ---------- */
+  {
+    const s = sec('story'), out = $('.nx-act__fb', s);
+    $$('.nx-guess .nx-btn', s).forEach((b) => b.addEventListener('click', () => {
+      $$('.nx-guess .nx-btn', s).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      const ok = b.dataset.ok === '1';
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      say(b.textContent);
+      fb(out, ok, ok ? 'In the hole. Why — coming up, shot by shot.' : 'That\'s “I am Kazakhstan” again. The driver is crying with laughter.');
+      if (ok) pop(b); else shake(b);
+      if (ANIM) G.fromTo($('.nx-score b', s), { scale: .4 }, { scale: 1, duration: .6, ease: 'back.out(3)' });
+      $('.nx-score b', s).textContent = ok ? 'in the hole' : 'in the water';
+      $('.nx-score b', s).style.color = ok ? 'var(--nx-green)' : 'var(--nx-coral)';
+    }));
+  }
+
+  /* ---------- сцена 2: действие — свой удар ---------- */
+  const RU_FROM = { Ankara: 'from Ankara', Moskova: 'from Moscow', Astana: 'from Astana', Almatı: 'from Almaty', İzmir: 'from Izmir', İstanbul: 'from Istanbul', Bakü: 'from Baku', Tokyo: 'from Tokyo', Bişkek: 'from Bishkek', Kazakistan: 'from Kazakhstan' };
+  {
+    const s = sec('origin'), out = $('.nx-act__fb', s), ball = $('#nx-ball2'), row = $$('.nx-stat__row', s)[1];
+    $$('.nx-cities .nx-btn', s).forEach((b) => b.addEventListener('click', () => {
+      const c = b.dataset.c, w = c + lI(c);
+      $$('.nx-cities .nx-btn', s).forEach((x) => x.classList.toggle('is-on', x === b));
+      row.firstElementChild.textContent = c;
+      row.querySelector('em').textContent = RU_FROM[c];
+      say(w);
+      fb(out, true, `${w} — ${RU_FROM[c]}. Same shot.`);
+      if (ANIM) {
+        G.fromTo(ball, { motionPath: { path: '#nx-shot2', align: '#nx-shot2', alignOrigin: [.5, .5], start: 0, end: 0 } }, { motionPath: { path: '#nx-shot2', align: '#nx-shot2', alignOrigin: [.5, .5], start: 0, end: 1 }, duration: 1.1, ease: 'power1.inOut' });
+        G.fromTo(row.querySelector('.nx-suf'), { x: -40, scale: .4, rotation: -20 }, { x: 0, scale: 1, rotation: 0, duration: .7, delay: .8, ease: 'back.out(2.5)' });
+        G.fromTo($('.nx-ring2', s), { scale: .3, opacity: 1 }, { scale: 1.6, opacity: 0, duration: .8, delay: 1.05, transformOrigin: '50% 50%' });
+      }
+    }));
+  }
+
+  /* ---------- сцена 3: действие — подбери клюшку ---------- */
+  {
+    const s = sec('harmony'), out = $('.nx-act__fb', s), q = $('.nx-hq', s);
+    const words = ['Tokyo', 'Paris', 'Moskova', 'Bişkek', 'Bakü', 'Ankara', 'İstanbul', 'İzmir'];
+    let i = 0;
+    $$('.nx-pickclub [data-s]', s).forEach((b) => b.addEventListener('click', () => {
+      const w = words[i], right = lI(w), ok = b.dataset.s === right;
+      $$('.nx-pickclub [data-s]', s).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      if (ok) { say(w + right); pop(b); } else shake(b);
+      fb(out, ok, ok ? `${w}${right}. Last vowel “${lastV(w)}” — club -${right}.` : `Missed. Look at the last vowel: “${lastV(w)}.”`);
+    }));
+    $('.nx-hnext', s).addEventListener('click', () => {
+      i = (i + 1) % words.length;
+      q.textContent = words[i];
+      $$('.nx-pickclub [data-s]', s).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      fb(out, null, '');
+      if (ANIM) G.fromTo(q, { yPercent: 80, rotation: 6 }, { yPercent: 0, rotation: 0, duration: .5, ease: 'back.out(2)' });
+    });
+  }
+
+  /* ---------- сцена 4: действие — собери ответ ---------- */
+  {
+    const s = sec('nereli'), out = $('.nx-act__fb', s), pick = ['', '', ''];
+    $$('.nx-bld [data-p]', s).forEach((b) => b.addEventListener('click', () => {
+      const r = Number(b.closest('.nx-bld').dataset.row);
+      pick[r] = b.dataset.p;
+      $$(`.nx-bld[data-row="${r}"] [data-p]`, s).forEach((x) => x.classList.toggle('is-on', x === b));
+      pop(b);
+      fb(out, null, pick.join('') ? pick.join(' + ') : '');
+    }));
+    $('.nx-bldgo', s).addEventListener('click', () => {
+      if (pick.some((p) => !p)) { fb(out, false, 'Pick one piece from each row.'); return; }
+      const [root, suf, end] = pick, v = NARROW[lastV(root)];
+      const ok = suf === 'l' + v && end === 'y' + v + 'm';
+      const word = root + suf + end;
+      if (ok) say(word + '.');
+      fb(out, ok, ok ? `${word}. The driver nods: “Hoş geldin!”` : `${word}? The vowel “${lastV(root)}” in ${root} needs -l${v} and -y${v}m.`);
+      if (!ok) shake($('.nx-bldgo', s));
+    });
+  }
+
+  /* ---------- сцена 5: действие — карточки ---------- */
+  {
+    const s = sec('milliyet'), out = $('.nx-act__fb', s);
+    $$('.nx-pcard', s).forEach((c) => c.addEventListener('click', () => {
+      const on = !c.classList.contains('is-flip');
+      const a = $('.nx-flip__a', c), b = $('.nx-flip__b', c);
+      if (ANIM) {
+        G.timeline().to(on ? a : b, { scaleY: 0, duration: .18, ease: 'power2.in' }).fromTo(on ? b : a, { scaleY: 0 }, { scaleY: 1, duration: .32, ease: 'back.out(3)' });
+      }
+      c.classList.toggle('is-flip', on);
+      const w = on ? c.dataset.b : c.dataset.a;
+      say(w);
+      fb(out, true, on ? `${c.dataset.b} is the people. The country is ${c.dataset.a}.` : `${c.dataset.a} is the country. Someone from there is ${c.dataset.a}${lI(c.dataset.a)}.`);
+    }));
+  }
+
+  /* ---------- сцена 6: действие — собери язык ---------- */
+  {
+    const s = sec('dil'), out = $('.nx-act__fb', s), q = $('.nx-dq', s);
+    const nations = ['Japon', 'Kazak', 'Fransız', 'Arap', 'Türk', 'İngiliz', 'Rus', 'Alman'];
+    let i = 0, g = 'c', v = 'a';
+    const sync = () => { $$('.nx-tg', s).forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.g === g))); $$('.nx-tv', s).forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.v === v))); $$('.nx-tg, .nx-tv', s).forEach((x) => x.classList.toggle('is-on', x.getAttribute('aria-pressed') === 'true')); };
+    $$('.nx-tg', s).forEach((b) => b.addEventListener('click', () => { g = b.dataset.g; sync(); pop(b); fb(out, null, q.textContent + g + v); }));
+    $$('.nx-tv', s).forEach((b) => b.addEventListener('click', () => { v = b.dataset.v; sync(); pop(b); fb(out, null, q.textContent + g + v); }));
+    sync();
+    $('.nx-dgo', s).addEventListener('click', () => {
+      const n = nations[i], right = CA(n), ok = g + v === right;
+      if (ok) {
+        say(n + right);
+        fb(out, true, `${n}${right}. Next: ${nations[(i + 1) % nations.length]}.`);
+        i = (i + 1) % nations.length;
+        q.textContent = nations[i];
+        if (ANIM) G.fromTo(q, { yPercent: 80 }, { yPercent: 0, duration: .5, ease: 'back.out(2)' });
+      } else {
+        const c = low(n).slice(-1);
+        fb(out, false, `${n}${g}${v}? The last letter “${c}” is ${VOICELESS.includes(c) ? 'voiceless, you need ç' : 'voiced, you need c'}; vowel “${lastV(n)}” → ${'aıou'.includes(lastV(n)) ? 'a' : 'e'}.`);
+        shake($('.nx-dgo', s));
+      }
+    });
+  }
+
+  /* ---------- дубли: переснять ---------- */
+  $$('.nx-retake').forEach((b) => b.addEventListener('click', () => {
+    const take = b.closest('.nx-take');
+    say(b.dataset.sayLine);
+    b.textContent = 'That\'s a wrap!';
+    b.classList.add('is-right');
+    if (ANIM) {
+      G.fromTo($('.nx-good', take), { scale: .6, rotation: -6 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .45)' });
+      G.fromTo(take, { rotation: 1.5 }, { rotation: 0, duration: .5, ease: 'back.out(3)' });
+    }
+  }));
+
+  /* ---------- монтажная ---------- */
+  const lab = sec('lab');
+  const pickEl = $('.nx-pick', lab), ppEl = $('.nx-ppick', lab), clipsEl = $('.nx-clips', lab), outW = $('.nx-out__w', lab), outRu = $('.nx-out__ru', lab), why = $('.nx-why', lab), head = $('.nx-head', lab);
+  const LAB = {
+    from: { items: ['Ankara', 'İzmir', 'İstanbul', 'Bakü', 'Tokyo', 'Almatı', 'Bişkek', 'Moskova', 'Kazakistan'] },
+    lang: { items: ['Türk', 'Rus', 'Kazak', 'Alman', 'İngiliz', 'Japon', 'Arap', 'Fransız'], ru: { Türk: 'Turkish', Rus: 'Russian', Kazak: 'Kazakh', Alman: 'German', İngiliz: 'English', Japon: 'Japanese', Arap: 'Arabic', Fransız: 'French' } },
+    chain: { items: ['Türkiye', 'Rusya', 'Kazakistan', 'Almanya', 'Japonya', 'Çin', 'Amerika'] }
+  };
+  const CHAIN = {
+    Türkiye: { n: 'Türk', alt: 'Türkiyeli', l: 'Türkçe', w: 'The people — Türk. From Turkey by passport — Türkiyeli. The language comes from the people: Türk + çe.' },
+    Rusya: { n: 'Rus', alt: 'Rusyalı', l: 'Rusça', w: 'The people — Rus, from Russia — Rusyalı. Language: Rus + ça, s is voiceless.' },
+    Kazakistan: { n: 'Kazak', alt: 'Kazakistanlı', l: 'Kazakça', w: 'The people — Kazak, from Kazakhstan — Kazakistanlı. Language: Kazak + ça, k is voiceless.' },
+    Almanya: { n: 'Alman', l: 'Almanca', w: 'The people — Alman. Language: Alman + ca, n is voiced.' },
+    Japonya: { n: 'Japon', l: 'Japonca', w: 'The people — Japon. Language: Japon + ca, vowel o → a.' },
+    Çin: { n: 'Çinli', l: 'Çince', w: 'No word of its own for the people — Çin + li. The language is Çince.' },
+    Amerika: { n: 'Amerikalı', l: 'İngilizce', w: 'The people — Amerikalı (country + lı). Americans speak English: İngilizce.' }
+  };
+  const PERS = ['ben', 'sen', 'o', 'biz', 'siz'];
+  const PERS_RU = { ben: 'I am', sen: 'you are', o: 'he/she is', biz: 'we are', siz: 'you (pl.) are' };
+  const st = { mode: 'from', item: 'Kazakistan', p: 'ben' };
+  function clip(text, cls, note) {
+    const c = document.createElement('span');
+    c.className = 'nx-clip ' + cls;
+    c.textContent = text;
+    if (note) { const sm = document.createElement('small'); sm.textContent = note; c.prepend(sm); }
+    return c;
+  }
+  function arrow() { const a = document.createElement('span'); a.className = 'nx-arrow'; a.textContent = '→'; return a; }
+  function chips(list, host, cur, onPick) {
+    host.replaceChildren(...list.map((x) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'nx-chip'; b.textContent = x;
+      b.setAttribute('aria-pressed', String(x === cur));
+      b.addEventListener('click', () => onPick(x));
+      return b;
+    }));
+  }
+  function renderLab() {
+    chips(LAB[st.mode].items, pickEl, st.item, (x) => { st.item = x; renderLab(); });
+    ppEl.hidden = st.mode !== 'from';
+    if (st.mode === 'from') chips(PERS, ppEl, st.p, (x) => { st.p = x; renderLab(); });
+    let parts = [], word = '', ru = '', w = '';
+    if (st.mode === 'from') {
+      const suf = lI(st.item), v = suf[1], [buf, end] = COP[st.p](v);
+      parts = [clip(st.item, 'nx-clip--w', 'root'), clip(suf, 'nx-clip--g', 'from')];
+      if (buf) parts.push(clip(buf, 'nx-clip--w', 'bridge'));
+      if (end) parts.push(clip(end, 'nx-clip--k', PERS_RU[st.p]));
+      word = st.item + suf + buf + end;
+      ru = `${PERS_RU[st.p]} ${RU_FROM[st.item] || ''}`;
+      w = `Last vowel “${lastV(st.item)}” → ${suf}.` + (st.p === 'o' ? ' No tail for “he, she.”' : buf ? ` ${suf} ends in a vowel — a y goes before the ending.` : ' The “you” tail starts with s.');
+    } else if (st.mode === 'lang') {
+      const suf = CA(st.item), c = low(st.item).slice(-1);
+      parts = [clip(st.item, 'nx-clip--w', 'people'), clip(suf, 'nx-clip--y', 'language')];
+      word = st.item + suf; ru = LAB.lang.ru[st.item] + ' language';
+      w = `The last letter “${c}” is ${VOICELESS.includes(c) ? 'voiceless, so ç' : 'voiced, so c'}. Vowel “${lastV(st.item)}” → ${suf[1]}.`;
+    } else {
+      const d = CHAIN[st.item];
+      parts = [clip(st.item, 'nx-clip--w', 'country'), arrow(), clip(d.n, 'nx-clip--g', 'people'), arrow(), clip(d.l, 'nx-clip--y', 'language')];
+      if (d.alt) parts.splice(3, 0, clip(d.alt, 'nx-clip--k', 'from the country'));
+      word = d.l; ru = 'language'; w = d.w;
+    }
+    clipsEl.replaceChildren(...parts);
+    outW.textContent = word; outW.dataset.say = word;
+    outRu.textContent = ru; why.textContent = w;
+    if (ANIM) {
+      G.fromTo(clipsEl.children, { x: -30, scale: .5, rotation: -6 }, { x: 0, scale: 1, rotation: 0, duration: .5, stagger: .1, ease: 'back.out(2.2)' });
+      G.fromTo(head, { x: 0 }, { x: () => { const l = clipsEl.lastElementChild; return l ? l.offsetLeft + l.offsetWidth - 8 : 0; }, duration: .9, ease: 'power1.inOut' });
+      G.fromTo(outW, { yPercent: 60, scale: .7 }, { yPercent: 0, scale: 1, duration: .55, delay: .3, ease: 'back.out(2.5)' });
+    }
+  }
+  $$('.nx-tabs [role="tab"]', lab).forEach((t) => t.addEventListener('click', () => {
+    st.mode = t.dataset.mode;
+    st.item = LAB[st.mode].items[st.mode === 'chain' ? 2 : 0];
+    $$('.nx-tabs [role="tab"]', lab).forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    renderLab();
+    say(outW.textContent);
+  }));
+  outW.addEventListener('click', () => say(outW.textContent));
+  renderLab();
+
+  /* ---------- финал ---------- */
+  {
+    const s = sec('cheat');
+    window.nxFinal = () => {
+      if (!ANIM) return;
+      G.timeline()
+        .fromTo($('.nx-fin-q', s), { scale: .3 }, { scale: 1, duration: .4, ease: 'back.out(2.5)', transformOrigin: '90% 100%' })
+        .fromTo($('.nx-fin-a', s), { scale: .3 }, { scale: 1, duration: .45, ease: 'back.out(2.5)', transformOrigin: '10% 100%' }, '+=.3')
+        .fromTo($('.nx-fin-b', s), { scale: .3 }, { scale: 1, duration: .45, ease: 'back.out(2.5)', transformOrigin: '90% 100%' }, '+=.4')
+        .fromTo($('.nx-flagwin', s), { y: 40, rotation: -20 }, { y: 0, rotation: 0, duration: .8, ease: 'elastic.out(1, .45)' }, '<');
+    };
+    $('.nx-finbtn', s).addEventListener('click', () => { say('Kazakistanlıyım. Kazakça ve Rusça biliyorum.'); window.nxFinal(); });
+  }
+
+  /* ---------- нестандартное: табло прилётов ---------- */
+  {
+    const EX = 'a1.nationality.ex5';
+    const root = $('.nx-arr');
+    const ITEMS = [
+      { id: 'i1', face: 'nx-damir', q: 'Flight from Almaty. The driver: “Nerelisin?” What will the passenger say?', o: ['Almatıliyim.', 'Almatılıyım.', 'Almatılüyüm.'], a: 1, why: 'Almatı: last vowel ı → -lı, then -yım.' },
+      { id: 'i2', face: 'nx-ayse', q: 'Flight from Izmir. “Nerelisin?”', o: ['İzmirliyim.', 'İzmirlıyım.', 'İzmirluyum.'], a: 0, why: 'İzmir: last vowel i → -li, then -yim.' },
+      { id: 'i3', face: 'nx-hans', q: 'Flight from Baku. “Nerelisin?”', o: ['Bakülıyım.', 'Bakülüyüm.', 'Bakülüm.'], a: 1, why: 'Bakü: last vowel ü → -lü, then -yüm.' },
+      { id: 'i4', face: 'nx-kenji', q: 'Flight from Tokyo. “Nerelisin?”', o: ['Tokyolüyüm.', 'Tokyolıyım.', 'Tokyoluyum.'], a: 2, why: 'Tokyo: last vowel o → -lu, then -yum.' },
+      { id: 'i5', face: 'nx-anna', q: 'Flight from Germany. A passenger asks for a menu. In which language?', o: ['Almanyaca', 'Almanca', 'Almance'], a: 1, why: 'The language comes from the people: Alman + ca.' },
+      { id: 'i6', face: 'nx-mike', q: 'Domestic flight. The passenger is Turkish. What language does he speak?', o: ['Türkce', 'Türkiyece', 'Türkçe'], a: 2, why: 'Türk + çe: k is voiceless, so ç.' }
+    ];
+    const rows = $$('.nx-arr__board li', root), opts = $$('.nx-arr__opts .nx-btn', root), q = $('.nx-arr__q', root), out = $('.nx-arr__fb', root), n = $('.nx-arr__n', root), face = $('.nx-arr__face', root), end = $('.nx-arr__end', root), card = $('.nx-arr__card', root);
+    let idx = 0, right = 0, t0 = performance.now(), lock = false;
+    const T = () => window.AlternaTracker;
+    function show() {
+      const it = ITEMS[idx];
+      q.textContent = it.q; n.textContent = `${idx + 1} / ${ITEMS.length}`;
+      face.setAttribute('href', '#' + it.face);
+      opts.forEach((b, k) => { b.textContent = it.o[k]; b.classList.remove('is-right', 'is-wrong'); b.disabled = false; });
+      rows.forEach((r, k) => { r.classList.toggle('is-now', k === idx); r.classList.toggle('is-done', k < idx); r.lastElementChild.textContent = k < idx ? 'karşılandı' : k === idx ? 'indi' : 'bekleniyor'; });
+      out.textContent = ''; t0 = performance.now(); lock = false;
+      if (ANIM) G.fromTo(card, { x: 40, rotation: 2 }, { x: 0, rotation: 0, duration: .45, ease: 'back.out(2)' });
+    }
+    function answer(k) {
+      if (lock || idx >= ITEMS.length) return;
+      lock = true;
+      const it = ITEMS[idx], ok = k === it.a;
+      if (ok) right++;
+      opts.forEach((b, j) => { b.disabled = true; if (j === it.a) b.classList.add('is-right'); else if (j === k) b.classList.add('is-wrong'); });
+      out.textContent = (ok ? 'Right. ' : 'Missed. ') + it.why;
+      if (ok) say(it.o[it.a]);
+      try { T() && T().answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.o[k], timeMs: Math.round(performance.now() - t0) }); } catch (e) { /* трекер недоступен */ }
+      idx++;
+      if (idx >= ITEMS.length) finish();
+    }
+    function finish() {
+      rows.forEach((r) => { r.classList.remove('is-now'); r.classList.add('is-done'); r.lastElementChild.textContent = 'karşılandı'; });
+      $('.nx-arr__res', root).textContent = `Met correctly: ${right} of ${ITEMS.length}.`;
+      end.hidden = false; pop(end);
+      try { T() && T().complete({ exerciseId: EX, correct: right, total: ITEMS.length }); } catch (e) { /* трекер недоступен */ }
+    }
+    const next = () => { if (idx < ITEMS.length) show(); };
+    opts.forEach((b) => b.addEventListener('click', () => { answer(Number(b.dataset.k)); setTimeout(next, 900); }));
+    root.addEventListener('keydown', (e) => { if (/^[1-3]$/.test(e.key)) { const b = opts[Number(e.key) - 1]; if (b && !b.disabled) { b.click(); e.preventDefault(); } } });
+    $('.nx-arr__again', root).addEventListener('click', () => { idx = 0; right = 0; end.hidden = true; show(); });
+    show();
+    try {
+      window.AlternaKit && window.AlternaKit.registerSolver(EX, async () => {
+        if (idx >= ITEMS.length) { idx = 0; right = 0; end.hidden = true; }
+        while (idx < ITEMS.length) { lock = false; answer(ITEMS[idx].a); }
+      });
+    } catch (e) { /* kit без автопроверки */ }
+  }
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    if (!G || !detail || !detail.timeline) return;
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.nx-a-bg') || b, { scale: .3, transformOrigin: '50% 50%' }, { scale: 1, duration: .6, ease: 'back.out(2.5)' }, 0)
+      .fromTo(b.querySelector('.nx-a-y') || b, { scale: .3, rotation: -40, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: .9, ease: 'elastic.out(1, .45)' }, .2)
+      .fromTo(b.querySelector('.nx-a-ball') || b, { y: -70 }, { y: 0, duration: .8, ease: 'bounce.out' }, .5);
+  });
+
+  if (!ANIM) return;
+
+  /* субтитры на телефоне: лента внутри окна, последняя реплика всегда в кадре */
+  $$('.nx-stage > .nx-subs').forEach((box) => { const roll = document.createElement('div'); roll.className = 'nx-roll'; roll.append(...box.childNodes); box.append(roll); });
+
+  /* ================= КИНО: сцены по скроллу ================= */
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  let MOB = false;
+  const rollTo = (el) => () => { const box = el.closest('.nx-subs'); return MOB && box ? -Math.max(0, el.offsetTop + el.offsetHeight - box.clientHeight + 4) : 0; };
+  const subsIn = (tl, el, at) => {
+    tl.from(el, { y: 26, scale: .94, transformOrigin: '0% 50%', duration: .7, ease: 'back.out(1.8)' }, at);
+    const roll = el.closest('.nx-roll');
+    if (roll) tl.to(roll, { y: rollTo(el), duration: .6, ease: 'power2.inOut' }, at);
+    return tl;
+  };
+  const actIn = (tl, el, at) => tl.from(el, { y: 34, scale: .94, duration: .8, ease: 'back.out(2)' }, at);
+  const wipeOut = (tl, el, dir) => tl.fromTo(el, { yPercent: 0, xPercent: 0 }, dir === 'x' ? { xPercent: 101, duration: 1, ease: 'power3.inOut' } : { yPercent: -101, duration: 1, ease: 'power3.inOut' }, 0);
+
+  const mm = G.matchMedia();
+  mm.add({ desk: '(min-width: 900px)', mob: '(max-width: 899.98px)' }, (ctx) => {
+    const D = ctx.conditions.desk;
+    MOB = !D;
+
+    /* --- 1. такси --- */
+    {
+      const s = sec('story'), subs = $$('.nx-sub', s), [f1, f2] = $$('.nx-face', s), bubs = $$('.nx-bub', s);
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: D ? '+=240%' : '+=150%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      tl.fromTo($('.nx-cam', s), { scale: 1 }, { scale: D ? 1.55 : 1.85, transformOrigin: '93% 29%', duration: 4.2, ease: 'power1.inOut' }, 0)
+        .to('#nx-taxi1', { motionPath: { path: '#nx-road1', align: '#nx-road1', alignOrigin: [.5, .5], autoRotate: 90 }, duration: 4, ease: 'power1.inOut', immediateRender: true }, 0)
+        .fromTo($('.nx-clouds', s), { xPercent: 6 }, { xPercent: -10, duration: 9, ease: 'none' }, 0)
+        .fromTo($('.nx-plane', s), { x: -200, y: 160 }, { x: 1400, y: -60, duration: 5, ease: 'none' }, 0);
+      subsIn(tl, subs[0], .2);
+      tl.addLabel('close', 3.4)
+        .from(f2, { yPercent: 130, rotation: 10, duration: 1 }, 'close')
+        .from(f1, { yPercent: 130, rotation: -10, duration: 1 }, 'close+=.25')
+        .from(bubs[1], { scale: .3, rotation: 8, transformOrigin: '90% 100%', duration: .6, ease: 'back.out(2.5)' }, 'close+=1');
+      subsIn(tl, subs[1], 'close+=1');
+      tl.addLabel('answer', 'close+=2')
+        .from(bubs[0], { scale: .3, rotation: -8, transformOrigin: '10% 100%', duration: .6, ease: 'back.out(2.5)' }, 'answer');
+      subsIn(tl, subs[2], 'answer');
+      tl.addLabel('laugh', 'answer+=1.2')
+        .fromTo($('.nx-ball1', s), { autoAlpha: 0 }, { autoAlpha: 1, duration: .1 }, 'laugh')
+        .to($('.nx-ball1', s), { motionPath: { path: '#nx-throw1', align: '#nx-throw1', alignOrigin: [.5, .5] }, duration: 1.1, ease: 'power1.in', immediateRender: true }, 'laugh')
+        .fromTo($$('.nx-splash circle', s), { scale: .3, autoAlpha: 0, transformOrigin: '50% 50%' }, { scale: 1, autoAlpha: 1, stagger: .12, duration: .7 }, 'laugh+=1')
+        .to($('.nx-light', s), { opacity: 1, duration: 1.4 }, 'laugh')
+        .to(f2, { rotation: 5, yoyo: true, repeat: 3, duration: .15, ease: 'sine.inOut' }, 'laugh+=1.1')
+        .to(bubs[1], { yPercent: -20, scale: .9, duration: .4 }, 'laugh+=1')
+        .from(bubs[2], { scale: .3, rotation: 6, transformOrigin: '90% 100%', duration: .6, ease: 'back.out(2.5)' }, 'laugh+=1.1');
+      subsIn(tl, subs[3], 'laugh+=1.1');
+      tl.from($('.nx-score', s), { yPercent: -160, rotation: -8, duration: .8, ease: 'back.out(2)' }, 'laugh+=1.7');
+      subsIn(tl, subs[4], 'laugh+=2');
+      actIn(tl, $('.nx-act', s), 'laugh+=2.4');
+      tl.addLabel('pause').to({}, { duration: .8 });
+    }
+
+    /* --- 2. удар -lı --- */
+    {
+      const s = sec('origin'), subs = $$('.nx-sub', s), rows = $$('.nx-stat__row', s), mp = $('.nx-m2p', s), len = mp.getTotalLength();
+      mp.style.strokeDasharray = len;
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: D ? '+=220%' : '+=140%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      wipeOut(tl, $('.nx-wipe', s));
+      tl.fromTo($('.nx-o-bg', s), { scale: 1.35 }, { scale: 1, duration: 3.2, ease: 'power1.out' }, 0)
+        .fromTo($('.nx-o-fg', s), { scale: 1.7 }, { scale: 1.08, duration: 3.2, ease: 'power1.out' }, 0)
+        .from($('.nx-stat', s), { x: -60, rotation: -4, scale: .8, duration: .8, ease: 'back.out(2)' }, 1);
+      subsIn(tl, subs[0], .9);
+      tl.addLabel('shot', 1.6)
+        .fromTo(mp, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 1.8, ease: 'none' }, 'shot')
+        .to('#nx-ball2', { motionPath: { path: '#nx-shot2', align: '#nx-shot2', alignOrigin: [.5, .5] }, duration: 1.8, ease: 'power1.inOut', immediateRender: true }, 'shot')
+        .to($('.nx-ballin', s), { scale: 1.8, duration: .9, ease: 'sine.out', transformOrigin: '50% 50%' }, 'shot')
+        .to($('.nx-ballin', s), { scale: 1, duration: .9, ease: 'sine.in' }, 'shot+=.9')
+        .from($('.nx-hole2', s), { scale: .3, rotation: -90, transformOrigin: '50% 50%', duration: .6, ease: 'back.out(3)' }, 'shot+=.6')
+        .fromTo($('.nx-ring2', s), { scale: .3, autoAlpha: 1, transformOrigin: '50% 50%' }, { scale: 1.6, autoAlpha: 0, duration: .8 }, 'shot+=1.8')
+        .from(rows[0].querySelector('.nx-suf'), { x: -50, rotation: -25, scale: .4, duration: .7, ease: 'back.out(2.5)' }, 'shot+=1.8');
+      subsIn(tl, subs[1], 'shot+=1.9');
+      tl.addLabel('more', 'shot+=2.8')
+        .from(rows[1].querySelector('.nx-suf'), { x: -50, rotation: -25, scale: .4, duration: .6, ease: 'back.out(2.5)' }, 'more')
+        .from(rows[2].querySelector('.nx-suf'), { x: -50, rotation: -25, scale: .4, duration: .6, ease: 'back.out(2.5)' }, 'more+=.3');
+      subsIn(tl, subs[2], 'more');
+      subsIn(tl, subs[3], 'more+=.8');
+      actIn(tl, $('.nx-act', s), 'more+=1.2');
+      tl.addLabel('pause').to({}, { duration: .8 });
+    }
+
+    /* --- 3. ветер --- */
+    {
+      const s = sec('harmony'), subs = $$('.nx-sub', s), clubs = $$('.nx-club', s), vs = $$('.nx-v', s);
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: D ? '+=240%' : '+=150%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      wipeOut(tl, $('.nx-wipe', s), 'x');
+      tl.fromTo($('.nx-h-bg', s), { scale: 1.25, xPercent: 4 }, { scale: 1.05, xPercent: -4, duration: 8, ease: 'none' }, 0)
+        .fromTo($('.nx-wind', s), { xPercent: -30 }, { xPercent: 30, duration: 8, ease: 'none' }, 0)
+        .from($('.nx-word', s), { yPercent: 140, scale: .6, duration: .9, ease: 'back.out(2)' }, .6)
+        .from($('.nx-clubs', s), { yPercent: 130, duration: .9, ease: 'back.out(1.6)' }, .8)
+        .from($('.nx-wx', s), { x: -80, rotation: -8, duration: .8, ease: 'back.out(2)' }, .9);
+      subsIn(tl, subs[0], 1);
+      subsIn(tl, subs[1], 2);
+      for (let k = 0; k < 4; k++) {
+        const at = 1.6 + k * 1.5;
+        if (k) {
+          tl.to($('.nx-word__in', s), { yPercent: -25 * k, duration: .6, ease: 'back.inOut(1.4)' }, at)
+            .to($('.nx-wx__in', s), { yPercent: -25 * k, duration: .6, ease: 'back.inOut(1.4)' }, at)
+            .to(clubs[k - 1].querySelector('i'), { opacity: 0, duration: .3 }, at)
+            .to(clubs[k - 1], { scale: 1, duration: .3 }, at);
+        }
+        tl.fromTo(vs[k], { scale: .4 }, { scale: 1, duration: .5, ease: 'back.out(3)' }, at + .3)
+          .to($('.nx-sun', s), { rotation: 90 * (k + 1), transformOrigin: '50% 50%', duration: .6 }, at + .2)
+          .to(clubs[k].querySelector('i'), { opacity: 1, duration: .3 }, at + .5)
+          .to(clubs[k], { scale: 1.08, duration: .4, ease: 'back.out(3)' }, at + .5)
+          .fromTo(clubs[k].querySelector('.nx-bar span'), { scaleX: .12 }, { scaleX: 1, duration: .7 }, at + .5);
+      }
+      subsIn(tl, subs[2], 6.2);
+      subsIn(tl, subs[3], 6.9);
+      actIn(tl, $('.nx-act', s), 7.4);
+      tl.addLabel('pause').to({}, { duration: .8 });
+    }
+
+    /* --- 4. Nerelisin? --- */
+    {
+      const s = sec('nereli'), subs = $$('.nx-sub', s), cut = $$('.nx-cut > span', s), lis = $$('.nx-persons li', s), ys = $$('.nx-persons .nx-suf--b', s);
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: D ? '+=230%' : '+=145%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      wipeOut(tl, $('.nx-wipe', s));
+      tl.fromTo($$('.nx-beam', s), { xPercent: 0 }, { xPercent: 700, duration: 3, stagger: 2.4, ease: 'none' }, 0)
+        .from($('.nx-phone', s), { yPercent: 70, rotation: 10, scale: .85, duration: 1.4, ease: 'power3.out' }, .5)
+        .from($('.nx-bub2', s), { scale: .3, transformOrigin: '0% 100%', duration: .6, ease: 'back.out(2.5)' }, 1.6);
+      subsIn(tl, subs[0], 1.2);
+      tl.from(cut, { y: -30, scale: .5, stagger: .25, duration: .6, ease: 'back.out(2.5)' }, 2.3)
+        .fromTo(cut[0], { x: 0 }, { x: -10, duration: .4, yoyo: true, repeat: 1 }, 3.2)
+        .fromTo(cut[2], { x: 0 }, { x: 10, duration: .4, yoyo: true, repeat: 1 }, 3.2)
+        .to($('.nx-phone', s), { scale: D ? 1.04 : 1.03, duration: 2 }, 2.6);
+      subsIn(tl, subs[1], 2.4);
+      tl.from(lis, { xPercent: 110, rotation: 4, stagger: .3, duration: .7, ease: 'back.out(1.6)' }, 3.8)
+        .from(ys, { y: -36, scale: .4, duration: .7, stagger: .9, ease: 'bounce.out' }, 4.6)
+        .to($$('.nx-phone__scr > *', s), { y: () => (MOB ? -Math.max(0, $('.nx-persons', s).offsetTop - 30) : 0), duration: 1, ease: 'power2.inOut' }, 3.6);
+      subsIn(tl, subs[2], 4.6);
+      subsIn(tl, subs[3], 5.6);
+      actIn(tl, $('.nx-act', s), 6);
+      tl.addLabel('pause').to({}, { duration: .8 });
+    }
+
+    /* --- 5. хостел --- */
+    {
+      const s = sec('milliyet'), subs = $$('.nx-sub', s), cards = $$('.nx-pcard', s);
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: D ? '+=230%' : '+=145%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      wipeOut(tl, $('.nx-wipe', s), 'x');
+      tl.fromTo($('.nx-wall', s), { scale: 1.2 }, { scale: 1, duration: 6, ease: 'none' }, 0)
+        .to($('.nx-evening', s), { opacity: 1, duration: 2.5 }, .4)
+        .from($$('.nx-bulbs circle', s), { scale: .3, transformOrigin: '50% 50%', stagger: .12, duration: .5, ease: 'back.out(3)' }, 1);
+      subsIn(tl, subs[0], .9);
+      tl.from(cards, { y: (i) => 160 + i * 30, x: (i) => (i % 2 ? 80 : -80), rotation: (i) => (i % 2 ? 14 : -14), scale: .7, stagger: .25, duration: .9, ease: 'back.out(1.6)' }, 1.5);
+      subsIn(tl, subs[1], 2.4);
+      cards.forEach((c, i) => {
+        tl.to($('.nx-flip__a', c), { scaleY: 0, duration: .25, ease: 'power2.in' }, 3.2 + i * .35)
+          .fromTo($('.nx-flip__b', c), { scaleY: 0 }, { scaleY: 1, duration: .35, ease: 'back.out(3)', immediateRender: false }, 3.45 + i * .35);
+      });
+      subsIn(tl, subs[2], 4.1);
+      tl.from($('.nx-stamp', s), { scale: 2.4, rotation: -30, duration: .6, ease: 'back.out(2)' }, 5.1);
+      subsIn(tl, subs[3], 5.2);
+      actIn(tl, $('.nx-act', s), 5.8);
+      tl.addLabel('pause').to({}, { duration: .8 });
+    }
+
+    /* --- 6. меню --- */
+    {
+      const s = sec('dil'), subs = $$('.nx-sub', s), lis = $$('.nx-menu li', s), fist = $$('.nx-fist i', s);
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: D ? '+=250%' : '+=155%', pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      wipeOut(tl, $('.nx-wipe', s));
+      tl.fromTo($('.nx-d-cam', s), { scale: 1 }, { scale: D ? 1.18 : 1.1, transformOrigin: '50% 45%', duration: 6, ease: 'power1.inOut' }, 0)
+        .fromTo($('.nx-walker', s), { xPercent: -120, x: 0 }, { xPercent: 0, x: () => $('.nx-frame', s).clientWidth + 20, duration: 5, ease: 'none' }, .3)
+        .from($('.nx-poster1', s), { yPercent: 40, rotation: -6, scale: .8, duration: 1, ease: 'back.out(1.8)' }, .6);
+      subsIn(tl, subs[0], .8);
+      subsIn(tl, subs[1], 1.6);
+      tl.from(lis.map((l) => l.querySelector('.nx-suf')), { y: -40, rotation: 20, scale: .4, stagger: .35, duration: .6, ease: 'bounce.out' }, 2.3);
+      subsIn(tl, subs[2], 2.4);
+      subsIn(tl, subs[3], 3.4);
+      tl.from(fist, { scale: .3, rotation: -30, stagger: .1, duration: .4, ease: 'back.out(3)' }, 4.2);
+      subsIn(tl, subs[4], 4.2);
+      tl.from($('.nx-kz', s), { x: -60, rotation: -6, duration: .6, ease: 'back.out(2)' }, 5);
+      subsIn(tl, subs[5], 5);
+      actIn(tl, $('.nx-act', s), 5.5);
+      tl.addLabel('pause').to({}, { duration: .8 });
+    }
+
+    /* --- 8. дубли: плёнка едет вбок --- */
+    {
+      const s = sec('traps'), strip = $('.nx-strip', s), takes = $$('.nx-take', s);
+      const dist = () => Math.max(0, strip.scrollWidth - strip.parentElement.clientWidth + 8);
+      const tl = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: s, start: 'top top', end: () => '+=' + Math.round(dist() + innerHeight * (D ? .9 : .5)), pin: true, scrub: .8, anticipatePin: 1, invalidateOnRefresh: true } });
+      tl.from($('.nx-sub', s), { y: 26, scale: .94, duration: .5 }, 0)
+        .from(takes, { y: 80, rotation: (i) => (i % 2 ? 3 : -3), stagger: .15, duration: .6, ease: 'back.out(1.6)' }, 0)
+        .to(strip, { x: () => -dist(), duration: 4, ease: 'none' }, .4);
+      takes.forEach((t, i) => {
+        const p = $('.nx-bad path', t), l = 104;
+        p.style.strokeDasharray = l;
+        tl.fromTo(p, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: .5, ease: 'none' }, .4 + i * .9)
+          .from($('.nx-good', t), { x: -24, scale: .7, duration: .5, ease: 'back.out(2.5)' }, .7 + i * .9);
+      });
+      tl.to({}, { duration: .6 });
+    }
+  });
+
+  /* --- монтажная, видео, практика, шпаргалка: появление по скроллу --- */
+  G.from('.nx-console', { y: 80, rotation: -2, scale: .94, duration: 1, ease: 'back.out(1.6)', scrollTrigger: { trigger: lab, start: 'top 80%', toggleActions: 'play none none reverse' } });
+  G.from('.nx-tabs button', { y: 20, scale: .7, stagger: .08, duration: .5, ease: 'back.out(2.5)', scrollTrigger: { trigger: '.nx-tabs', start: 'top 90%' } });
+  G.from('.nx-vcard', { y: 60, scale: .95, duration: .8, ease: 'back.out(1.6)', scrollTrigger: { trigger: sec('video'), start: 'top 80%' } });
+  G.from('.nx-vnote svg', { scale: .3, rotation: -90, duration: .7, ease: 'back.out(3)', scrollTrigger: { trigger: sec('video'), start: 'top 75%' } });
+  ScrollTrigger.batch('.nx-exgrid > a-exercise, .nx-quizbox', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 50, scale: .96, stagger: .12, duration: .7, ease: 'back.out(1.6)' }) });
+  G.from('.nx-tile', { y: 60, rotation: (i) => (i % 2 ? 4 : -4), scale: .9, stagger: .12, duration: .8, ease: 'back.out(1.8)', scrollTrigger: { trigger: '.nx-poster', start: 'top 75%' } });
+  G.from('.nx-poster__t', { yPercent: 40, scale: .9, duration: .8, ease: 'back.out(2)', scrollTrigger: { trigger: '.nx-poster', start: 'top 80%' } });
+  ScrollTrigger.create({ trigger: '.nx-final', start: 'top 65%', once: true, onEnter: () => window.nxFinal() });
+
+  const refresh = () => ScrollTrigger.refresh();
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+});
+</script>
+</body>
+</html>

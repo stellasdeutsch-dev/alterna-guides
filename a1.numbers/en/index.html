@@ -1,0 +1,1380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.numbers">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Numbers, age, prices</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Dela Gothic One';font-style:normal;font-weight:400;font-display:swap;src:url(../media/dela-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Dela Gothic One';font-style:normal;font-weight:400;font-display:swap;src:url(../media/dela-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Dela Gothic One';font-style:normal;font-weight:400;font-display:swap;src:url(../media/dela-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400 800;font-display:swap;src:url(../media/onest-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400 800;font-display:swap;src:url(../media/onest-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Onest';font-style:normal;font-weight:400 800;font-display:swap;src:url(../media/onest-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+:root{
+  --cream:#f6e2cc; --paper:#fbefe2; --ink:#17120f; --night:#120e0c; --night2:#241812;
+  --red:#e4472c; --red-d:#b8341c; --teal:#1f8f95; --teal-l:#5cc6c7; --muted:#6c584b; --line:#e7c7a8;
+  --display:'Dela Gothic One','Onest',system-ui,sans-serif;
+  --reel:44px;
+  --ak-bg:#fbefe2; --ak-surface:#f6e2cc; --ak-ink:#17120f; --ak-muted:#6c584b; --ak-line:#e6c6a7;
+  --ak-accent:#d93f24; --ak-accent-ink:#fff7ee; --ak-accent-soft:#fbd8cc;
+  --ak-good:#1b8a6b; --ak-good-soft:#d6efe5; --ak-bad:#c8351c; --ak-bad-soft:#fbdcd3;
+  --ak-radius:18px; --ak-radius-sm:12px;
+  --ak-font:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif; --ak-font-display:var(--display);
+}
+@media (max-width:767px){:root{--reel:26px}}
+*{box-sizing:border-box}
+html{background:var(--cream)}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--ak-font);font-size:var(--ak-text);line-height:1.5;overflow-x:clip;-webkit-text-size-adjust:100%}
+main{padding-right:0}
+.sec,.desk{padding-right:calc(var(--reel) + clamp(14px,4vw,56px)) !important}
+button{font:inherit;color:inherit}
+.tr{font-weight:700;color:inherit}
+b[data-say]{cursor:pointer;text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}
+.num{color:var(--teal)} .night .num,.band .num{color:var(--teal-l)}
+.aff{color:var(--red)}
+.hid{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+
+/* ---------- обложка ---------- */
+.cover{min-height:100svh;padding:clamp(18px,3vw,36px) calc(var(--reel) + clamp(12px,3vw,40px)) 28px clamp(16px,4vw,56px);display:grid;grid-template-rows:auto auto 1fr auto;gap:clamp(10px,2vw,22px);position:relative;overflow:hidden}
+.cover__row{display:flex;justify-content:space-between;gap:12px;font-weight:600;font-size:clamp(13px,1.2vw,17px)}
+.cover__row span:nth-child(2){text-align:center}
+.cover__logo{margin:0;font-family:var(--display);font-weight:400;color:var(--red);font-size:clamp(44px,15vw,280px);line-height:.86;letter-spacing:-.02em;text-align:center;white-space:nowrap}
+.cover__tags{display:flex;justify-content:space-between;gap:8px;font-family:var(--display);color:var(--red);font-size:clamp(14px,4.2vw,56px);text-transform:uppercase}
+.cover__art{position:relative;min-height:200px;border-radius:22px;overflow:hidden;background:var(--night)}
+.cover__art svg{position:absolute;inset:0;width:100%;height:100%}
+.cover__hint{display:flex;align-items:center;gap:10px;font-weight:600;margin:0}
+.cover__hint svg{width:28px;height:28px}
+.cover .stk{position:absolute;width:clamp(70px,11vw,150px);right:7%;top:30%;z-index:2}
+
+/* ---------- сцены ---------- */
+.scene{position:relative}
+.stage{position:relative;display:grid;grid-template-rows:1fr auto;background:var(--paper);overflow:hidden}
+.night .stage{background:var(--night)}
+.frame{position:relative;overflow:hidden;min-height:clamp(300px,62vw,560px)}
+.cam{position:absolute;inset:0;transform-origin:50% 55%}
+.ly{position:absolute;inset:0;width:100%;height:100%}
+.chip{position:absolute;z-index:4;left:14px;top:12px;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;background:var(--ink);color:var(--cream);border-radius:99px;padding:5px 12px}
+.night .chip{background:var(--cream);color:var(--ink)}
+.card{position:relative;z-index:6;background:var(--night);color:var(--cream);padding:clamp(26px,5vw,70px) calc(var(--reel) + clamp(16px,5vw,80px)) clamp(26px,5vw,70px) clamp(16px,5vw,80px);display:grid;align-content:center;gap:10px}
+.card__no{font-family:var(--display);font-weight:400;color:var(--red);font-size:clamp(30px,4vw,56px);line-height:1}
+.card__t{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(34px,7.4vw,108px);line-height:.98;letter-spacing:-.01em;text-transform:lowercase}
+.card__t .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.card__t .ln i{display:block;font-style:normal}
+.card__t .r{color:var(--red)}
+.card__k{max-width:34ch;color:#d9c3ad;font-size:clamp(15px,1.4vw,19px);margin:6px 0 0}
+.band{background:var(--ink);color:var(--cream);padding:14px calc(var(--reel) + clamp(14px,4vw,48px)) 60px clamp(14px,4vw,48px);position:relative;z-index:5}
+.subs{display:grid;gap:8px}
+.sub{margin:0;font-size:clamp(16px,1.5vw,21px);line-height:1.38;font-weight:500;max-width:46ch}
+.sub b[data-say]{color:#ffd9b8}
+.act{margin-top:14px;display:grid;gap:10px;justify-items:start}
+.act__q{margin:0;font-weight:700;font-size:clamp(16px,1.5vw,20px)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt,.btn{min-height:44px;padding:9px 16px;border-radius:99px;border:2px solid var(--cream);background:transparent;color:var(--cream);font-weight:700;cursor:pointer;touch-action:manipulation}
+.opt:hover,.btn:hover{background:rgba(246,226,204,.12)}
+.opt.is-right{background:var(--ak-good);border-color:var(--ak-good)}
+.opt.is-wrong{background:var(--red);border-color:var(--red)}
+.btn--fill{background:var(--red);border-color:var(--red)}
+.fb{margin:0;min-height:1.4em;font-size:15px;color:#f0d6bf;max-width:52ch}
+.film .stage{height:100svh;min-height:520px}
+.film .frame{min-height:0}
+.film .card{position:absolute;inset:0}
+.film .band{display:grid;min-height:150px}
+.film .subs,.film .act{grid-area:1/1}
+.film .subs{display:grid;align-content:start}
+.film .sub{grid-area:1/1}
+.film .act{margin-top:0;align-content:start}
+
+/* пузыри */
+.bub{position:absolute;z-index:3;max-width:min(64%,330px);background:var(--cream);color:var(--ink);border-radius:20px;padding:10px 14px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.bub small{display:block;font-weight:500;color:var(--muted);font-size:13px}
+.bub::after{content:"";position:absolute;bottom:-9px;width:18px;height:18px;background:inherit;transform:rotate(45deg)}
+.bub--r{right:calc(6% + var(--reel))}.bub--r::after{right:24px}
+.bub--l{left:7%}.bub--l::after{left:24px}
+.bub--x{background:var(--red);color:var(--cream)}
+.stamp{position:absolute;z-index:4;left:50%;top:40%;translate:-50% -50%;border:4px solid var(--red);color:var(--red);font-family:var(--display);font-size:clamp(18px,3vw,34px);padding:6px 16px;border-radius:12px;background:rgba(18,14,12,.75);rotate:-8deg;white-space:nowrap}
+
+/* табло 0–10 */
+.board{position:absolute;inset:48px calc(var(--reel) + 14px) 10px 14px;display:grid;align-content:center;justify-items:center;gap:clamp(10px,2vw,22px)}
+.flap{display:flex;align-items:center;gap:14px;background:#0c0908;border:2px solid #3a2a22;border-radius:16px;padding:10px 18px;color:var(--cream)}
+.flap__l{font-weight:700;font-size:12px;letter-spacing:.12em;color:#c9b29c;writing-mode:vertical-rl;rotate:180deg}
+.flap__d{font-family:var(--display);font-size:clamp(46px,8vw,96px);color:var(--teal-l);line-height:1;min-width:2ch;text-align:center;perspective:400px}
+.flap__w{font-family:var(--display);font-size:clamp(20px,3vw,40px);color:var(--cream);min-width:5ch}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:min(100%,760px)}
+@media (min-width:768px){.tiles{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.tile{min-height:56px;border-radius:14px;border:2px solid #3a2a22;background:#1d1511;color:var(--cream);display:grid;place-items:center;padding:6px 4px;cursor:pointer;gap:0}
+.tile b{font-family:var(--display);font-weight:400;font-size:clamp(20px,2.4vw,30px);line-height:1;color:var(--teal-l)}
+.tile span{font-weight:700;font-size:clamp(13px,1.3vw,17px)}
+.tile small{font-size:11px;color:#bba48f;line-height:1}
+.tile.on{border-color:var(--red);background:#2b1812}
+
+/* неон десятков */
+.neon{position:absolute;inset:50px calc(var(--reel) + 14px) 10px 14px;display:grid;align-content:center;justify-items:center;gap:clamp(10px,2vw,20px)}
+.neon__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 12px;width:min(100%,640px);position:relative}
+.ncell{display:flex;align-items:baseline;justify-content:center;gap:8px;padding:6px 4px;border-radius:12px;background:rgba(255,255,255,.5);border:1.5px solid var(--line);cursor:pointer;min-height:44px}
+.ncell b{font-family:var(--display);font-weight:400;color:var(--teal);font-size:clamp(18px,2.4vw,30px)}
+.ncell span{font-weight:700}
+.tube{position:absolute;inset:-10px;pointer-events:none}
+.tube i{position:absolute;background:var(--red);border-radius:4px;box-shadow:0 0 14px rgba(228,71,44,.55)}
+.tube .t1{top:0;left:0;right:0;height:4px;transform-origin:0 50%}
+.tube .t2{top:0;right:0;bottom:0;width:4px;transform-origin:50% 0}
+.tube .t3{bottom:0;left:0;right:0;height:4px;transform-origin:100% 50%}
+.tube .t4{top:0;left:0;bottom:0;width:4px;transform-origin:50% 100%}
+.lego{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center}
+.blk{display:inline-flex;flex-direction:column;align-items:center;border-radius:14px;padding:6px 14px;background:var(--ink);color:var(--cream);font-family:var(--display);font-size:clamp(20px,3.2vw,42px);line-height:1.05}
+.blk small{font-family:var(--ak-font);font-weight:700;font-size:13px;color:var(--teal-l)}
+.blk--u{background:var(--red)}
+.lego__eq{font-family:var(--display);font-size:clamp(20px,3vw,40px)}
+.lego__n{font-family:var(--display);font-size:clamp(34px,5vw,72px);color:var(--teal)}
+.wheels{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.wheel{display:flex;align-items:center;gap:6px;background:#2a211c;border-radius:99px;padding:3px}
+.wheel button{width:44px;height:44px;border-radius:50%;border:0;background:var(--cream);color:var(--ink);font-weight:800;font-size:20px;cursor:pointer}
+.wheel output{min-width:2.2ch;text-align:center;font-family:var(--display);color:var(--teal-l);font-size:22px}
+.wout{font-weight:800;color:#ffd9b8}
+
+/* чек и пластинка */
+.track{position:absolute;inset:0;width:200%;display:grid;grid-template-columns:1fr 1fr}
+.pane{position:relative;display:grid;place-items:center;padding:52px calc(var(--reel) + 16px) 12px 16px}
+.printer{position:relative;width:min(300px,78%);display:grid;justify-items:center}
+.printer__top{width:100%;height:46px;border-radius:14px 14px 6px 6px;background:var(--ink);position:relative;z-index:2}
+.printer__top::after{content:"";position:absolute;left:12%;right:12%;bottom:8px;height:6px;border-radius:9px;background:#000}
+.paper{width:86%;overflow:hidden;margin-top:-8px}
+.receipt{background:#fffaf3;padding:18px 16px 22px;font-family:ui-monospace,Menlo,monospace;font-size:clamp(13px,1.3vw,15px);color:var(--ink);box-shadow:0 12px 30px rgba(80,40,20,.15);mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50%/14px 100%}
+.receipt h4{margin:0 0 8px;text-align:center;font-family:var(--display);font-weight:400;font-size:20px;letter-spacing:.06em}
+.rl{display:flex;justify-content:space-between;gap:10px;padding:4px 0;border-bottom:1px dashed #d8bfa6}
+.rl em{font-style:normal;color:var(--teal);font-weight:700;font-family:var(--ak-font);font-size:13px;display:block}
+.rl--t{border:0;font-weight:800;padding-top:8px}
+.crate{position:relative;width:min(420px,92%);aspect-ratio:4/3}
+.crate svg{position:absolute;inset:0;width:100%;height:100%}
+.tag{position:absolute;right:2%;top:4%;background:var(--red);color:var(--cream);border-radius:14px;padding:10px 14px;rotate:6deg;font-family:var(--display);font-size:clamp(22px,3vw,36px);line-height:1.05;box-shadow:0 10px 24px rgba(0,0,0,.2)}
+.tag small{display:block;font-family:var(--ak-font);font-weight:700;font-size:14px}
+.chain{position:absolute;left:4%;right:4%;bottom:4%;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+
+/* возраст */
+.door-bg{background:radial-gradient(120% 80% at 50% 110%,#3a2016 0%,#120e0c 60%)}
+.yas{position:absolute;inset:48px calc(var(--reel) + 12px) 10px 12px;display:grid;align-content:center;justify-items:center;gap:clamp(10px,2vh,22px);color:var(--cream)}
+.word{display:flex;align-items:flex-start;gap:clamp(2px,1vw,12px);font-family:var(--display);font-size:clamp(28px,8.4vw,92px);line-height:1}
+.pc{display:flex;flex-direction:column;align-items:center;gap:6px}
+.pc small{font-family:var(--ak-font);font-weight:700;font-size:clamp(11px,1.3vw,15px);color:#d8c1aa;white-space:nowrap}
+.pc--a span{color:var(--red)}
+.mini{display:flex;gap:8px;align-items:center;font-weight:700;background:#2a1d17;border-radius:99px;padding:6px 14px}
+.persons{display:grid;gap:8px;width:min(100%,640px)}
+@media (min-width:768px){.persons{grid-template-columns:repeat(3,1fr)}}
+.pcard{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--cream);color:var(--ink);border-radius:14px;padding:8px 14px;min-height:44px;cursor:pointer;border:0;text-align:left}
+.pcard i{font-style:normal;color:var(--muted);font-weight:600}
+.pcard b{font-weight:800}
+.glow{position:absolute;inset:0;background:radial-gradient(50% 60% at 50% 70%,rgba(255,170,90,.55),transparent 70%);pointer-events:none;opacity:.25}
+
+/* меню */
+.menu-wrap{position:absolute;inset:48px calc(var(--reel) + 14px) 10px 14px;display:grid;grid-template-columns:1fr;align-content:center;justify-items:center;gap:12px}
+@media (min-width:900px){.menu-wrap{grid-template-columns:1.1fr .9fr;align-items:center}}
+.menu{width:min(100%,460px);background:#fffaf3;border-radius:18px;padding:16px 18px;box-shadow:0 12px 30px rgba(80,40,20,.12)}
+.menu h4{margin:0 0 6px;font-family:var(--display);font-weight:400;color:var(--red);font-size:clamp(24px,3vw,36px)}
+.mi{position:relative;display:grid;grid-template-columns:1fr auto;gap:0 10px;padding:6px 0;cursor:pointer}
+.mi b{font-weight:700}
+.mi span{font-weight:800;color:var(--teal)}
+.mi em{grid-column:1/-1;font-style:normal;font-size:13px;color:var(--muted)}
+.mi i{position:absolute;left:0;right:0;bottom:0;height:1.5px;background:var(--red);transform-origin:0 50%}
+.bar{position:relative;display:grid;gap:10px;width:min(100%,420px)}
+.bar .bub{position:relative;left:auto;right:auto;max-width:100%}
+.bar .bub--r{justify-self:end}
+.cross{position:relative;display:inline-block}
+.cross::after{content:"";position:absolute;left:-4%;right:-4%;top:52%;height:4px;background:var(--red);transform:scaleX(var(--x,1));transform-origin:0 50%;border-radius:4px}
+.glasses{display:flex;gap:6px;justify-content:center}
+.glasses svg{width:46px;height:70px}
+
+/* лаборатория */
+.monitor{position:absolute;inset:50px calc(var(--reel) + 14px) 12px 14px;display:grid;place-items:center;align-content:center;gap:14px}
+.mon{width:min(100%,640px);background:var(--ink);color:var(--cream);border-radius:22px;padding:18px 20px;display:grid;gap:8px;justify-items:center;border:10px solid #2b211c}
+.mon__n{font-family:var(--display);font-size:clamp(48px,10vw,120px);color:var(--teal-l);line-height:1}
+.mon__w{font-weight:800;font-size:clamp(18px,2.4vw,28px);color:#ffd9b8;text-align:center;min-height:1.4em}
+.desk{padding:clamp(18px,4vw,48px) clamp(14px,4vw,56px) clamp(28px,5vw,64px);background:var(--paper);display:grid;gap:16px;justify-items:center}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.tab{min-height:44px;padding:8px 16px;border-radius:99px;border:2px solid var(--ink);background:transparent;font-weight:800;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--cream)}
+.mode{width:min(100%,760px);display:grid;gap:14px;justify-items:center;background:#fffaf3;border-radius:22px;padding:18px;box-shadow:0 12px 30px rgba(80,40,20,.08)}
+.mode[hidden]{display:none}
+.pad{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;width:min(100%,380px)}
+.pad button,.key{min-height:48px;border-radius:14px;border:2px solid var(--ink);background:var(--cream);font-weight:800;font-size:18px;cursor:pointer}
+.screen{width:100%;display:grid;gap:10px;justify-items:center;text-align:center}
+.screen__n{font-family:var(--display);font-size:clamp(40px,7vw,80px);color:var(--teal);line-height:1}
+.blocks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;min-height:56px}
+.why{margin:0;font-size:15px;color:var(--muted);max-width:56ch;text-align:center}
+.why b{color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center}
+.seg{min-height:44px;padding:8px 14px;border-radius:12px;border:2px solid var(--line);background:var(--cream);font-weight:700;cursor:pointer}
+.seg.on{border-color:var(--ink);background:var(--ink);color:var(--cream)}
+.say-line{font-weight:800;font-size:clamp(18px,2.4vw,26px);text-align:center}
+.lbtn{min-height:44px;padding:9px 18px;border-radius:99px;border:2px solid var(--ink);background:var(--ink);color:var(--cream);font-weight:800;cursor:pointer}
+.lbtn--ghost{background:transparent;color:var(--ink)}
+
+/* дубли */
+.sec{padding:clamp(28px,6vw,80px) clamp(14px,4vw,56px)}
+.sec__head{display:grid;gap:6px;margin-bottom:clamp(16px,3vw,32px);max-width:900px}
+.sec__no{font-family:var(--display);color:var(--red);font-size:clamp(26px,3vw,44px);line-height:1}
+.sec__t{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(30px,5.4vw,72px);line-height:1;text-transform:lowercase}
+.sec__t .r{color:var(--red)}
+.sec p{max-width:60ch}
+.takes{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.take{position:relative;border:0;padding:0;background:var(--ink);color:var(--cream);border-radius:18px;text-align:left;cursor:pointer;overflow:hidden;min-height:170px;display:grid;grid-template-rows:auto 1fr}
+.take__strip{display:flex;justify-content:space-between;padding:8px 14px;background:#000;font-size:12px;font-weight:700;letter-spacing:.08em;color:#c7b19c}
+.take__strip::before{content:"";flex:1;order:2;margin:0 10px;background:radial-gradient(circle,#3a2d26 3px,transparent 3.5px) 0 50%/14px 10px repeat-x}
+.take__body{position:relative;padding:14px;display:grid;gap:6px;align-content:start}
+.take__bad{font-weight:800;font-size:19px}
+.take__bad s{text-decoration-color:var(--red);text-decoration-thickness:3px}
+.take__good{font-weight:800;font-size:19px;color:#9fe0cf}
+.take__why{font-size:14px;color:#dcc6b1;margin:0}
+.take__pill{position:absolute;right:12px;top:12px;font-size:12px;font-weight:800;border-radius:99px;padding:3px 10px;background:var(--red)}
+.take.ok .take__pill{background:var(--ak-good)}
+.take .after{display:none}.take.ok .after{display:grid;gap:6px}.take.ok .before{display:none}
+.vid-note{display:flex;gap:12px;align-items:center;font-weight:600}
+.vid-note svg{flex:none;width:40px;height:40px}
+
+/* шпаргалка-постер */
+.poster{background:var(--red);color:var(--cream);border-radius:26px;padding:clamp(18px,3vw,36px);display:grid;gap:16px;position:relative;overflow:hidden;max-width:1080px}
+.poster__h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.poster__h h3{margin:0;font-family:var(--display);font-weight:400;font-size:clamp(30px,5vw,64px);line-height:.95}
+.slots{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.slot{background:var(--cream);color:var(--ink);border-radius:16px;padding:12px 14px;display:grid;gap:4px;align-content:start}
+.slot h4{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red-d)}
+.slot p{margin:0;font-weight:700}
+.slot .mono{font-variant-numeric:tabular-nums}
+.poster .stk{width:clamp(64px,9vw,110px);flex:none}
+.finale{margin-top:clamp(20px,4vw,40px);background:var(--night);color:var(--cream);border-radius:26px;padding:clamp(18px,3vw,40px);display:grid;gap:10px;position:relative;overflow:hidden}
+.finale p{margin:0;max-width:52ch}
+.finale .bub{position:relative;left:auto;right:auto;justify-self:start}
+.finale .bub--r{justify-self:end}
+.end{font-family:var(--display);font-size:clamp(40px,8vw,110px);line-height:.95;text-transform:lowercase;margin:14px 0 4px}
+.end span{display:block}.end span+span{color:var(--red)}
+.got{font-weight:700;color:#ffd9b8}
+
+/* скроллбар-плёнка */
+.reel{position:fixed;z-index:40;right:0;top:50%;translate:0 -50%;height:min(86svh,680px);width:var(--reel);background:#0d0a09;border-radius:14px 0 0 14px;display:flex;flex-direction:column;justify-content:space-between;padding:12px 0;touch-action:none;cursor:ns-resize}
+.reel::before,.reel::after{content:"";position:absolute;top:8px;bottom:8px;width:5px;background:radial-gradient(circle,#3b2f29 2px,transparent 2.5px) 50% 0/5px 12px repeat-y}
+.reel::before{left:2px}.reel::after{right:2px}
+.reel__fill{position:absolute;left:50%;width:4px;margin-left:-2px;top:12px;bottom:12px;background:var(--red);border-radius:4px;transform-origin:50% 0;transform:scaleY(0)}
+.reel button{position:relative;z-index:1;flex:1;max-height:56px;border:0;background:transparent;color:#9b8676;font-family:var(--display);font-size:12px;cursor:pointer;display:grid;place-items:center;padding:0}
+.reel button.done{color:var(--cream)}
+.reel button b{position:relative;z-index:1;background:#0d0a09;padding:1px 2px}
+.reel button.now b{background:var(--cream);color:var(--ink);border-radius:6px;padding:1px 3px}
+.reel button span{position:absolute;right:calc(100% + 8px);white-space:nowrap;background:var(--ink);color:var(--cream);font-family:var(--ak-font);font-weight:700;font-size:13px;padding:4px 10px;border-radius:99px;opacity:0;pointer-events:none;transition:opacity .2s}
+.reel button:hover span,.reel button:focus-visible span{opacity:1}
+@media (max-width:767px){.reel button{font-size:0}.reel button b{display:block;width:8px;height:8px;border-radius:50%;background:#4b3d35;padding:0}.reel button.done b{background:var(--cream)}.reel button.now b{background:var(--red);padding:0;width:10px;height:10px}.reel button span{display:none}}
+
+/* ачивка */
+.ak-achv svg{overflow:visible}
+
+@media (max-width:767px){
+  .cover__row{font-size:12px}.cover__row span:nth-child(2){display:none}
+  .chip{font-size:11px;top:10px;left:10px}
+  .bub{padding:8px 12px;font-size:15px}
+  .film .band{min-height:168px}
+  .tile{min-height:52px}
+}
+@media (prefers-reduced-motion:reduce){.reel__fill{transition:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-star" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="#e4472c"/><g stroke="#fff7ee" stroke-width="6.5" stroke-linecap="round"><path d="M50 17v66M17 50h66M27 27l46 46M73 27 27 73"/></g></symbol>
+    <symbol id="i-glass" viewBox="0 0 46 70"><path d="M8 4h30c0 10-9 16-9 24s11 13 11 26c0 8-6 12-17 12S6 62 6 54c0-13 11-18 11-26S8 14 8 4z" fill="#fff4e6" opacity=".9"/><path d="M12 30c3 3 3 6 3 6 0 4-8 9-8 18 0 6 5 9 16 9s16-3 16-9c0-9-8-14-8-18 0 0 0-3 3-6z" fill="#b8341c"/><ellipse cx="23" cy="66" rx="16" ry="3" fill="#000" opacity=".2"/></symbol>
+    <symbol id="i-vinyl" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#17120f"/><g fill="none" stroke="#3a2d26" stroke-width="1.5"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="33"/><circle cx="50" cy="50" r="26"/></g><circle cx="50" cy="50" r="15" fill="#e4472c"/><circle cx="50" cy="50" r="2.5" fill="#f6e2cc"/></symbol>
+  </defs>
+</svg>
+
+<nav class="reel" data-scrollbar aria-label="Lesson progress">
+  <i class="reel__fill"></i>
+  <button type="button" data-goto="story"><b>01</b><span>Setup</span></button>
+  <button type="button" data-goto="sayilar"><b>02</b><span>Digits 0–10</span></button>
+  <button type="button" data-goto="onlar"><b>03</b><span>Tens</span></button>
+  <button type="button" data-goto="yuz-bin"><b>04</b><span>Hundred and thousand</span></button>
+  <button type="button" data-goto="yas"><b>05</b><span>Age</span></button>
+  <button type="button" data-goto="fiyat"><b>06</b><span>Prices</span></button>
+  <button type="button" data-goto="lab"><b>07</b><span>Editing room</span></button>
+  <button type="button" data-goto="traps"><b>08</b><span>Takes</span></button>
+  <button type="button" data-goto="video"><b>09</b><span>Video</span></button>
+  <button type="button" data-goto="practice"><b>10</b><span>Practice</span></button>
+  <button type="button" data-goto="check"><b>11</b><span>Check</span></button>
+  <button type="button" data-goto="cheat"><b>12</b><span>Finale</span></button>
+</nav>
+
+<header class="cover">
+  <div class="cover__row"><span>Lesson · 10 minutes</span><span>Numbers, age, prices</span><span>A1 · İstanbul</span></div>
+  <h1 class="cover__logo" lang="tr">SAYILAR</h1>
+  <div class="cover__art">
+    <svg viewBox="0 0 1600 600" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <rect width="1600" height="600" fill="#1b1310"/>
+      <g class="cv-far" fill="#2a1c16"><path d="M0 420h120v-90h80v60h70v-120h90v150h100v-70h90v-40h60v110h120v-160h70v160h90v-90h110v60h90v-130h100v130h110v-70h120v100h90V600H0z"/><path d="M230 330a70 70 0 0 1 140 0z"/><rect x="214" y="200" width="10" height="140"/><rect x="376" y="210" width="10" height="130"/></g>
+      <g class="cv-win" fill="#e9a55a" opacity=".75"><rect x="150" y="380" width="14" height="18"/><rect x="420" y="350" width="14" height="18"/><rect x="455" y="350" width="14" height="18"/><rect x="760" y="300" width="14" height="18"/><rect x="1010" y="360" width="14" height="18"/><rect x="1220" y="330" width="14" height="18"/><rect x="1450" y="380" width="14" height="18"/></g>
+      <circle cx="1310" cy="130" r="46" fill="#f6e2cc" opacity=".9"/>
+      <use class="cv-moon" href="#i-vinyl" x="650" y="60" width="300" height="300"/>
+      <g class="cv-bar"><rect x="560" y="300" width="480" height="300" fill="#2f1f18"/><rect x="655" y="330" width="290" height="74" rx="6" fill="#e4472c"/><text x="800" y="386" text-anchor="middle" font-family="Dela Gothic One" font-size="48" fill="#f6e2cc">SEKİZ</text><rect x="600" y="440" width="170" height="160" fill="#f08a4b"/><rect x="820" y="440" width="120" height="160" fill="#ffb46b"/></g>
+    </svg>
+    <svg class="stk" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-star"/></svg>
+  </div>
+  <div class="cover__tags"><span>numbers</span><span>age</span><span>prices</span></div>
+  <p class="cover__hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="5"/><path class="hint-dot" d="M12 7v3"/></svg>Scroll down — the film goes on.</p>
+</header>
+
+<main>
+<!-- 01 · завязка -->
+<section class="scene night" data-section="story" data-words="75">
+  <div class="stage">
+    <div class="frame">
+      <div class="card"><b class="card__no">01</b><h2 class="card__t"><span class="ln"><i>twenty-two years old,</i></span><span class="ln r"><i>zero chance</i></span></h2></div>
+      <span class="chip" data-ui>01 · setup</span>
+      <div class="cam">
+        <svg class="ly ly-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#130d0b"/><stop offset="1" stop-color="#3a2218"/></linearGradient></defs>
+          <rect width="1600" height="900" fill="url(#sky1)"/>
+          <circle cx="1270" cy="150" r="54" fill="#f6e2cc" opacity=".85"/>
+          <g fill="#21160f"><path d="M0 560h90v-120h70v80h80v-150h70v190h60v-60h90v-30h60v120H0z"/><path d="M1180 560v-140h80v60h90v-120h80v140h70v-60h100v120z"/><path d="M190 300a74 74 0 0 1 148 0z"/><rect x="176" y="170" width="9" height="140"/><rect x="342" y="180" width="9" height="130"/></g>
+          <g fill="#e9a55a" opacity=".6"><rect x="40" y="470" width="14" height="18"/><rect x="120" y="500" width="14" height="18"/><rect x="1220" y="460" width="14" height="18"/><rect x="1380" y="470" width="14" height="18"/><rect x="1500" y="490" width="14" height="18"/></g>
+        </svg>
+        <svg class="ly ly-mid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect x="420" y="230" width="760" height="560" fill="#2b1d17"/>
+          <g fill="#3a2a22"><rect x="450" y="260" width="90" height="120"/><rect x="1060" y="260" width="90" height="120"/></g>
+          <rect x="600" y="300" width="400" height="90" rx="8" fill="#e4472c"/>
+          <text x="800" y="366" text-anchor="middle" font-family="Dela Gothic One" font-size="64" fill="#f6e2cc">SEKİZ</text>
+          <text x="800" y="424" text-anchor="middle" font-family="Onest" font-weight="700" font-size="22" fill="#f6e2cc" opacity=".75">bar · plak · çay</text>
+          <rect x="470" y="470" width="220" height="250" fill="#f08a4b"/>
+          <g stroke="#2b1d17" stroke-width="6"><path d="M580 470v250M470 595h220"/></g>
+          <rect class="doorlight" x="765" y="475" width="130" height="285" fill="#ffb46b"/>
+          <rect x="755" y="465" width="150" height="10" fill="#120d0b"/>
+          <rect class="door" x="765" y="475" width="130" height="285" fill="#4a3329"/>
+          <g class="poster1"><rect x="1000" y="470" width="150" height="200" rx="6" fill="#e4472c"/><text x="1075" y="515" text-anchor="middle" font-family="Dela Gothic One" font-size="26" fill="#f6e2cc">CUMA</text><text x="1075" y="555" text-anchor="middle" font-family="Onest" font-weight="800" font-size="26" fill="#f6e2cc">23:00</text><text x="1075" y="592" text-anchor="middle" font-family="Onest" font-weight="700" font-size="17" fill="#f6e2cc">PLAK GECESİ</text><text x="1075" y="650" text-anchor="middle" font-family="Dela Gothic One" font-size="40" fill="#17120f">18+</text></g>
+          <use href="#i-star" x="1118" y="448" width="54" height="54"/>
+        </svg>
+        <svg class="ly ly-near" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect y="760" width="1600" height="140" fill="#1a120f"/>
+          <rect y="760" width="1600" height="8" fill="#3a2a22"/>
+          <rect x="330" y="420" width="10" height="345" fill="#0d0a09"/><circle cx="335" cy="415" r="16" fill="#ffd9a0"/><circle cx="335" cy="415" r="70" fill="#ffd9a0" opacity=".12"/>
+          <g class="timur"><rect x="610" y="610" width="86" height="160" rx="34" fill="#0c0908"/><circle cx="653" cy="582" r="32" fill="#0c0908"/><path d="M620 572h66v-8a33 22 0 0 0-66 0z" fill="#e4472c"/><rect x="682" y="626" width="26" height="80" rx="10" fill="#1f8f95"/></g>
+          <g class="bouncer"><rect x="905" y="560" width="150" height="210" rx="52" fill="#060504"/><circle cx="980" cy="520" r="40" fill="#060504"/><rect x="915" y="640" width="130" height="34" rx="16" fill="#1b1411"/></g>
+        </svg>
+      </div>
+      <div class="bub bub--r b1" style="top:14%"><a-say>Kaç yaşındasın?</a-say><small>How old are you?</small></div>
+      <div class="bub bub--l b2" style="top:38%"><b data-say="Bana yirmi iki yıl." lang="tr">Bana yirmi iki yıl.</b></div>
+      <div class="bub bub--r bub--x b3" style="top:58%"><b data-say="Ne?" lang="tr">Ne?!</b></div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Kadıköy. Friday, five to eleven. Timur is twenty-two.</p>
+        <p class="sub">On the door of the bar <b data-say="Sekiz" lang="tr">Sekiz</b> there’s a poster: vinyl night, eighteen and up. By the door stands a bouncer the size of a wardrobe.</p>
+        <p class="sub">The bouncer says: <b data-say="Kaç yaşındasın?" lang="tr">Kaç yaşındasın?</b> As in, how old are you.</p>
+        <p class="sub">Timur says: <b data-say="Bana yirmi iki yıl." lang="tr">Bana yirmi iki yıl.</b> Word for word the Russian way: “to me twenty-two years”. Flawless Russian.</p>
+        <p class="sub">The bouncer says: <b data-say="Ne?" lang="tr">Ne?</b> And shuts the door.</p>
+        <p class="sub">Timur did hear the music that night. From the street.</p>
+      </div>
+      <div class="act">
+        <p class="act__q">What went wrong? Guess first.</p>
+        <div class="opts" data-q="story">
+          <button type="button" class="opt" data-ok="0">Got the number wrong</button>
+          <button type="button" class="opt" data-ok="1">Age is said differently</button>
+          <button type="button" class="opt" data-ok="0">The bouncer hates vinyl</button>
+        </div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 · цифры -->
+<section class="scene night" data-section="sayilar" data-words="67">
+  <div class="stage">
+    <div class="frame">
+      <div class="card"><b class="card__no">02</b><h2 class="card__t"><span class="ln"><i>from <span lang="tr">sıfır</span></i></span><span class="ln r"><i>to <span lang="tr">on</span></i></span></h2></div>
+      <span class="chip" data-ui>02 · digits</span>
+      <div class="cam">
+        <svg class="ly ly-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <defs><pattern id="brick" width="80" height="40" patternUnits="userSpaceOnUse"><rect width="80" height="40" fill="#1c1310"/><path d="M0 0h80M0 20h80M40 0v20M0 20v20M80 20v20" stroke="#2a1d17" stroke-width="3"/></pattern></defs>
+          <rect width="1600" height="900" fill="url(#brick)"/>
+          <circle cx="800" cy="120" r="240" fill="#ffb46b" opacity=".08"/>
+        </svg>
+        <div class="board">
+          <div class="flap"><span class="flap__l" data-ui>SIRA NO</span><b class="flap__d" aria-live="polite">0</b><span class="flap__w" lang="tr">sıfır</span></div>
+          <div class="tiles">
+            <button type="button" class="tile" data-say="sıfır" data-n="0"><b>0</b><span lang="tr">sıfır</span></button>
+            <button type="button" class="tile" data-say="bir" data-n="1"><b>1</b><span lang="tr">bir</span><small>one</small></button>
+            <button type="button" class="tile" data-say="iki" data-n="2"><b>2</b><span lang="tr">iki</span><small>two</small></button>
+            <button type="button" class="tile" data-say="üç" data-n="3"><b>3</b><span lang="tr">üç</span><small>three</small></button>
+            <button type="button" class="tile" data-say="dört" data-n="4"><b>4</b><span lang="tr">dört</span><small>four</small></button>
+            <button type="button" class="tile" data-say="beş" data-n="5"><b>5</b><span lang="tr">beş</span><small>five</small></button>
+            <button type="button" class="tile" data-say="altı" data-n="6"><b>6</b><span lang="tr">altı</span><small>six</small></button>
+            <button type="button" class="tile" data-say="yedi" data-n="7"><b>7</b><span lang="tr">yedi</span><small>seven</small></button>
+            <button type="button" class="tile" data-say="sekiz" data-n="8"><b>8</b><span lang="tr">sekiz</span><small>eight</small></button>
+            <button type="button" class="tile" data-say="dokuz" data-n="9"><b>9</b><span lang="tr">dokuz</span><small>nine</small></button>
+            <button type="button" class="tile" data-say="on" data-n="10"><b>10</b><span lang="tr">on</span><small>ten</small></button>
+            <button type="button" class="tile" data-say="Sekiz" data-n="8" aria-label="Sekiz — the bar’s name"><svg viewBox="0 0 100 100" width="34" height="34" aria-hidden="true"><use href="#i-star"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">While Timur freezes outside, let’s look at the queue board by the door. It has digits.</p>
+        <p class="sub">From zero to ten — eleven words. Tap a tile and it says itself out loud.</p>
+        <p class="sub">If you know Kazakh, you’re basically in already: bir — <b data-say="bir" lang="tr">bir</b>, eki — <b data-say="iki" lang="tr">iki</b>, üsh — <b data-say="üç" lang="tr">üç</b>.</p>
+        <p class="sub">The bar, by the way, is called <b data-say="sekiz" lang="tr">Sekiz</b>. Eight. The owner clearly likes numbers.</p>
+      </div>
+      <div class="act">
+        <p class="act__q">The board gave out a ticket number. How does it sound?</p>
+        <div class="opts" data-q="flap"></div>
+        <div class="row" style="justify-content:flex-start"><p class="fb" aria-live="polite"></p><button type="button" class="btn" data-next="flap" data-ui>Another ticket</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · десятки -->
+<section class="scene" data-section="onlar" data-words="44">
+  <div class="stage">
+    <div class="frame">
+      <div class="card"><b class="card__no">03</b><h2 class="card__t"><span class="ln"><i>tens</i></span><span class="ln r"><i>and lego</i></span></h2></div>
+      <span class="chip" data-ui>03 · tens</span>
+      <div class="cam">
+        <svg class="ly ly-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="1600" height="900" fill="#f6e2cc"/>
+          <g fill="#efd3b6"><rect x="0" y="700" width="1600" height="200"/></g>
+          <g opacity=".55"><use href="#i-vinyl" x="40" y="80" width="170" height="170"/><use href="#i-vinyl" x="1390" y="520" width="190" height="190"/></g>
+          <use href="#i-star" x="1420" y="90" width="110" height="110"/>
+        </svg>
+        <div class="neon">
+          <div class="neon__grid">
+            <span class="tube" aria-hidden="true"><i class="t1"></i><i class="t2"></i><i class="t3"></i><i class="t4"></i></span>
+            <button type="button" class="ncell" data-say="on"><b>10</b><span lang="tr">on</span></button>
+            <button type="button" class="ncell" data-say="yirmi"><b>20</b><span lang="tr">yirmi</span></button>
+            <button type="button" class="ncell" data-say="otuz"><b>30</b><span lang="tr">otuz</span></button>
+            <button type="button" class="ncell" data-say="kırk"><b>40</b><span lang="tr">kırk</span></button>
+            <button type="button" class="ncell" data-say="elli"><b>50</b><span lang="tr">elli</span></button>
+            <button type="button" class="ncell" data-say="altmış"><b>60</b><span lang="tr">altmış</span></button>
+            <button type="button" class="ncell" data-say="yetmiş"><b>70</b><span lang="tr">yetmiş</span></button>
+            <button type="button" class="ncell" data-say="seksen"><b>80</b><span lang="tr">seksen</span></button>
+            <button type="button" class="ncell" data-say="doksan"><b>90</b><span lang="tr">doksan</span></button>
+          </div>
+          <div class="lego" aria-label="22 = yirmi iki">
+            <span class="lego__n">22</span><span class="lego__eq">=</span>
+            <span class="blk b-t" data-say="yirmi"><small>20</small><span lang="tr">yirmi</span></span>
+            <span class="blk blk--u b-u" data-say="iki"><small>2</small><span lang="tr">iki</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">A neon sign over the bar. These are the tens: nine words, you just learn them.</p>
+        <p class="sub">Guess first how to say “twenty-two”.</p>
+        <p class="sub"><b data-say="yirmi iki" lang="tr">Yirmi iki</b>. Twenty plus two: big on the left, small on the right. Just like in English.</p>
+        <p class="sub">Written as separate words. No hyphens, no “and”.</p>
+      </div>
+      <div class="act">
+        <p class="act__q">Build Timur’s age. Spin the tens and the ones.</p>
+        <div class="wheels">
+          <div class="wheel" data-ui><button type="button" data-w="t" data-d="-1" aria-label="fewer tens">−</button><output data-o="t">1</output><button type="button" data-w="t" data-d="1" aria-label="more tens">+</button></div>
+          <div class="wheel" data-ui><button type="button" data-w="u" data-d="-1" aria-label="fewer ones">−</button><output data-o="u">5</output><button type="button" data-w="u" data-d="1" aria-label="more ones">+</button></div>
+          <button type="button" class="btn" data-wsay data-ui>▶</button>
+        </div>
+        <p class="fb" aria-live="polite"><span class="wout" lang="tr">on beş</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · сто и тысяча -->
+<section class="scene" data-section="yuz-bin" data-words="50">
+  <div class="stage">
+    <div class="frame">
+      <div class="card"><b class="card__no">04</b><h2 class="card__t"><span class="ln"><i>hundred and thousand</i></span><span class="ln r"><i>no extra <span lang="tr">bir</span></i></span></h2></div>
+      <span class="chip" data-ui>04 · hundred and thousand</span>
+      <div class="cam">
+        <div class="track">
+          <div class="pane">
+            <div class="printer">
+              <div class="printer__top"></div>
+              <div class="paper"><div class="receipt">
+                <h4 lang="tr">HESAP</h4>
+                <div class="rl" lang="tr"><span>2 çay</span><span>40</span></div>
+                <div class="rl" lang="tr"><span>1 tost<em>yüz yirmi</em></span><span>120</span></div>
+                <div class="rl rl--t" lang="tr"><span>TOPLAM<em>yüz altmış</em></span><span>160 ₺</span></div>
+              </div></div>
+            </div>
+          </div>
+          <div class="pane">
+            <div class="crate">
+              <svg viewBox="0 0 400 300" aria-hidden="true">
+                <rect x="20" y="150" width="360" height="140" rx="10" fill="#b8341c"/>
+                <rect x="20" y="150" width="360" height="22" fill="#9c2c17"/>
+                <g class="recs"><rect x="60" y="40" width="120" height="130" rx="6" fill="#1f8f95"/><rect x="150" y="30" width="120" height="140" rx="6" fill="#17120f"/><use href="#i-vinyl" x="170" y="45" width="80" height="80"/><rect x="235" y="50" width="120" height="120" rx="6" fill="#f6e2cc" stroke="#17120f" stroke-width="3"/></g>
+              </svg>
+              <div class="tag" data-say="bin dört yüz elli lira"><small lang="tr">plak</small>1450 ₺</div>
+              <div class="chain">
+                <span class="blk c1" data-say="bin"><small>1000</small><span lang="tr">bin</span></span>
+                <span class="blk c2" data-say="dört yüz"><small>400</small><span lang="tr">dört yüz</span></span>
+                <span class="blk blk--u c3" data-say="elli"><small>50</small><span lang="tr">elli</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Timur waits and reads other people’s receipts. A hundred is <b data-say="yüz" lang="tr">yüz</b>. A thousand is <b data-say="bin" lang="tr">bin</b>.</p>
+        <p class="sub">Two hundred is <b data-say="iki yüz" lang="tr">iki yüz</b>. Two thousand is <b data-say="iki bin" lang="tr">iki bin</b>. The multiplier goes in front.</p>
+        <p class="sub">Guess first: a hundred twenty — <span lang="tr">bir yüz yirmi</span> or <span lang="tr">yüz yirmi</span>?</p>
+        <p class="sub"><b data-say="yüz yirmi" lang="tr">Yüz yirmi</b>. No “one” before <span lang="tr">yüz</span> and <span lang="tr">bin</span>. English says “one hundred”, Turkish just says “hundred”.</p>
+        <p class="sub">A long number is the same lego: <b data-say="bin dört yüz elli" lang="tr">bin dört yüz elli</b>. That’s what one record costs.</p>
+      </div>
+      <div class="act">
+        <p class="act__q">The second record has a 1250 ₺ price tag. How do you say it?</p>
+        <div class="opts" data-q="bin">
+          <button type="button" class="opt" data-ok="0"><span lang="tr">bir bin iki yüz elli</span></button>
+          <button type="button" class="opt" data-ok="1"><span lang="tr">bin iki yüz elli</span></button>
+          <button type="button" class="opt" data-ok="0"><span lang="tr">bin iki elli</span></button>
+        </div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · возраст -->
+<section class="scene night" data-section="yas" data-words="73">
+  <div class="stage">
+    <div class="frame door-bg">
+      <div class="card"><b class="card__no">05</b><h2 class="card__t"><span class="ln"><i>I’m twenty-two</i></span><span class="ln r"><i>I’m at twenty-two</i></span></h2></div>
+      <span class="chip" data-ui>05 · age</span>
+      <div class="cam">
+        <svg class="ly ly-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect x="560" y="80" width="480" height="820" fill="#0b0807"/>
+          <rect class="door2" x="580" y="100" width="440" height="800" fill="#3a271f"/>
+          <circle cx="980" cy="520" r="14" fill="#c9a27a"/>
+          <rect x="1140" y="300" width="160" height="210" rx="6" fill="#e4472c" opacity=".9"/>
+          <text x="1220" y="440" text-anchor="middle" font-family="Dela Gothic One" font-size="60" fill="#17120f">18+</text>
+        </svg>
+        <div class="glow"></div>
+        <div class="yas">
+          <div class="word" data-say="yaşındayım" lang="tr">
+            <span class="pc p1"><span>yaş</span><small>age</small></span> <span class="pc p2"><span>ında</span><small>at the age</small></span> <span class="pc pc--a p3"><span>yım</span><small>I am</small></span>
+          </div>
+          <div class="mini m-ogr"><span lang="tr">öğrenci</span><span class="aff" lang="tr">+yim</span><span>= I’m a student</span></div>
+          <div class="mini m-kz"><span>jiyrma eki jas</span><span class="aff">+tamyn</span><span>= <span lang="tr">yirmi iki yaşındayım</span></span></div>
+          <div class="persons">
+            <button type="button" class="pcard" data-say="Ben yirmi iki yaşındayım."><i>I</i><b lang="tr">yaşında<span class="aff">yım</span></b></button>
+            <button type="button" class="pcard" data-say="Sen yirmi iki yaşındasın."><i>you</i><b lang="tr">yaşında<span class="aff">sın</span></b></button>
+            <button type="button" class="pcard" data-say="O yirmi iki yaşında."><i>he, she</i><b lang="tr">yaşında</b></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Back to the door. A Turk doesn’t say “to me twenty-two years”.</p>
+        <p class="sub">He says “I’m at twenty-two years”: <b data-say="Yirmi iki yaşındayım." lang="tr">yirmi iki yaşındayım</b>.</p>
+        <p class="sub"><b data-say="yaş" lang="tr">Yaş</b> is age. <b data-say="yaşında" lang="tr">Yaşında</b> is “at the age”. The tail <span class="aff" lang="tr">yım</span> is “I am”.</p>
+        <p class="sub">You know this tail: <b data-say="öğrenciyim" lang="tr">öğrenciyim</b> — “I’m a student”. Same part, just after the age.</p>
+        <p class="sub">Kazakh does the same: jiyrma eki jastamyn. One to one.</p>
+        <p class="sub">Only the tail changes: <span lang="tr">yaşındayım</span> — I, <span lang="tr">yaşındasın</span> — you, <span lang="tr">yaşında</span> — he or she.</p>
+      </div>
+      <div class="act">
+        <p class="act__q">The bouncer asks again: <b data-say="Kaç yaşındasın?" lang="tr">Kaç yaşındasın?</b> Answer for Timur.</p>
+        <div class="opts" data-q="yas">
+          <button type="button" class="opt" data-ok="0" data-why="“To me twenty-two years” again. The door didn’t even budge."><span lang="tr">Bana yirmi iki yıl.</span></button>
+          <button type="button" class="opt" data-ok="0" data-why="That’s “you’re twenty-two”. The bouncer is flattered, but still won’t let you in."><span lang="tr">Yirmi iki yaşındasın.</span></button>
+          <button type="button" class="opt" data-ok="1"><span lang="tr">Yirmi iki yaşındayım.</span></button>
+        </div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · цены -->
+<section class="scene" data-section="fiyat" data-words="50">
+  <div class="stage">
+    <div class="frame">
+      <div class="card"><b class="card__no">06</b><h2 class="card__t"><span class="ln"><i lang="tr">kaç lira?</i></span><span class="ln r"><i>how much do I owe</i></span></h2></div>
+      <span class="chip" data-ui>06 · prices</span>
+      <div class="cam">
+        <svg class="ly ly-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="1600" height="900" fill="#f6e2cc"/>
+          <rect y="760" width="1600" height="140" fill="#b8341c"/><rect y="760" width="1600" height="14" fill="#17120f"/>
+          <g opacity=".5" fill="#e7c7a8"><circle cx="160" cy="160" r="70"/><circle cx="1460" cy="200" r="90"/></g>
+        </svg>
+        <div class="menu-wrap">
+          <div class="menu">
+            <h4 lang="tr">Menü</h4>
+            <div class="mi" data-say="Çay, yirmi lira."><b lang="tr">Çay</b><span>20 ₺</span><em lang="tr">yirmi lira</em><i></i></div>
+            <div class="mi" data-say="Su, on beş lira."><b lang="tr">Su</b><span>15 ₺</span><em lang="tr">on beş lira</em><i></i></div>
+            <div class="mi" data-say="Ayran, otuz beş lira."><b lang="tr">Ayran</b><span>35 ₺</span><em lang="tr">otuz beş lira</em><i></i></div>
+            <div class="mi" data-say="Kahve, seksen lira."><b lang="tr">Kahve</b><span>80 ₺</span><em lang="tr">seksen lira</em><i></i></div>
+            <div class="mi" data-say="Tost, yüz yirmi lira."><b lang="tr">Tost</b><span>120 ₺</span><em lang="tr">yüz yirmi lira</em><i></i></div>
+          </div>
+          <div class="bar">
+            <div class="bub bub--l f1"><a-say>Bir çay kaç lira?</a-say></div>
+            <div class="bub bub--r f2"><a-say>Yirmi lira.</a-say></div>
+            <div class="bub bub--l f3" lang="tr"><b data-say="İki çay">İki çay</b> · <span class="cross"><span>İki çaylar</span></span></div>
+            <div class="glasses"><svg class="g1" viewBox="0 0 46 70" aria-hidden="true"><use href="#i-glass"/></svg><svg class="g2" viewBox="0 0 46 70" aria-hidden="true"><use href="#i-glass"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Timur is inside. There’s a menu on the wall, and now he reads the prices himself.</p>
+        <p class="sub">You ask the price like this: <b data-say="Bir çay kaç lira?" lang="tr">Bir çay kaç lira?</b> Literally “one tea how many lira?”</p>
+        <p class="sub">The bartender says: <b data-say="Yirmi lira." lang="tr">Yirmi lira.</b> Twenty lira.</p>
+        <p class="sub">Guess first: two teas — <span lang="tr">iki çay</span> or <span lang="tr">iki çaylar</span>?</p>
+        <p class="sub"><b data-say="İki çay." lang="tr">İki çay</b>. After a number you don’t need the plural. The number already said it all.</p>
+        <p class="sub">For the bill you ask shorter: <b data-say="Hesap ne kadar?" lang="tr">Hesap ne kadar?</b> “How much do I owe?”</p>
+      </div>
+      <div class="act">
+        <p class="act__q" data-step="1">Order two teas.</p>
+        <div class="opts" data-q="order">
+          <button type="button" class="opt" data-ok="1"><span lang="tr">İki çay, lütfen.</span></button>
+          <button type="button" class="opt" data-ok="0" data-why="The bartender poured, but gave you a weird look. After a number — no -lar."><span lang="tr">İki çaylar, lütfen.</span></button>
+        </div>
+        <div class="opts" data-q="pay" hidden>
+          <button type="button" class="opt" data-ok="0">14 ₺</button>
+          <button type="button" class="opt" data-ok="1">40 ₺</button>
+          <button type="button" class="opt" data-ok="0">4 ₺</button>
+        </div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · монтажная -->
+<section class="scene" data-section="lab" data-words="56">
+  <div class="stage">
+    <div class="frame">
+      <div class="card"><b class="card__no">07</b><h2 class="card__t"><span class="ln"><i>editing room</i></span><span class="ln r"><i>build it yourself</i></span></h2></div>
+      <span class="chip" data-ui>07 · editing room</span>
+      <div class="cam">
+        <svg class="ly ly-far" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="1600" height="900" fill="#efd3b6"/>
+          <g fill="#17120f" opacity=".9"><rect x="0" y="0" width="1600" height="40"/><rect x="0" y="860" width="1600" height="40"/></g>
+          <g fill="#efd3b6"><rect x="30" y="12" width="40" height="16" rx="3"/><rect x="130" y="12" width="40" height="16" rx="3"/><rect x="230" y="12" width="40" height="16" rx="3"/><rect x="1330" y="872" width="40" height="16" rx="3"/><rect x="1430" y="872" width="40" height="16" rx="3"/><rect x="1530" y="872" width="40" height="16" rx="3"/></g>
+        </svg>
+        <div class="monitor">
+          <div class="mon"><span class="mon__n" data-reel>0</span><span class="mon__w" lang="tr" data-reelw>sıfır</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="band">
+      <div class="subs">
+        <p class="sub">Editing room. The counter spins up to the current year and reads itself place by place.</p>
+        <p class="sub">Thousands, hundreds, tens, ones. Left to right, like in English.</p>
+      </div>
+      <div class="act">
+        <p class="act__q">Now you’re the director. Four modes below: number, age, price, listening.</p>
+      </div>
+    </div>
+  </div>
+  <div class="desk">
+    <div class="tabs" role="tablist" aria-label="Editing room modes">
+      <button type="button" class="tab" role="tab" aria-selected="true" data-mode="num">Number</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-mode="age">Age</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-mode="price">Price</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-mode="ear">Listening</button>
+    </div>
+
+    <div class="mode" data-panel="num">
+      <div class="screen"><span class="screen__n" data-num-n>2026</span><div class="blocks" data-num-b></div></div>
+      <div class="pad" data-ui>
+        <button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button><button type="button" data-k="4">4</button><button type="button" data-k="5">5</button>
+        <button type="button" data-k="6">6</button><button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button><button type="button" data-k="0">0</button>
+      </div>
+      <div class="row" data-ui><button type="button" class="lbtn lbtn--ghost" data-k="del">⌫</button><button type="button" class="lbtn lbtn--ghost" data-k="rnd">Random</button><button type="button" class="lbtn" data-k="say">▶ Listen</button></div>
+      <p class="why" data-num-why></p>
+    </div>
+
+    <div class="mode" data-panel="age" hidden>
+      <div class="row" data-ui><button type="button" class="seg on" data-p="0">I</button><button type="button" class="seg" data-p="1">you</button><button type="button" class="seg" data-p="2">he, she</button></div>
+      <div class="row" data-ui><label for="age-r" class="hid">Age</label><input id="age-r" type="range" min="1" max="99" value="22" style="width:min(100%,320px);accent-color:#e4472c"><b class="screen__n" style="font-size:40px" data-age-n>22</b></div>
+      <p class="say-line" lang="tr" data-age-line></p>
+      <p class="why" data-age-why></p>
+      <button type="button" class="lbtn" data-age-say data-ui>▶ Listen</button>
+    </div>
+
+    <div class="mode" data-panel="price" hidden>
+      <div class="row" data-ui>
+        <button type="button" class="seg on" data-it="çay">çay</button><button type="button" class="seg" data-it="su">su</button><button type="button" class="seg" data-it="ayran">ayran</button><button type="button" class="seg" data-it="kahve">kahve</button><button type="button" class="seg" data-it="tost">tost</button>
+      </div>
+      <div class="row" data-ui><button type="button" class="key" data-q="-1" style="width:48px" aria-label="less">−</button><b class="screen__n" style="font-size:40px" data-qty>2</b><button type="button" class="key" data-q="1" style="width:48px" aria-label="more">+</button></div>
+      <p class="say-line" lang="tr" data-price-line></p>
+      <p class="why" data-price-why></p>
+      <button type="button" class="lbtn" data-price-say data-ui>▶ Listen</button>
+    </div>
+
+    <div class="mode" data-panel="ear" hidden>
+      <button type="button" class="lbtn" data-ear-play data-ui>▶ Play the number</button>
+      <div class="row" data-ear-opts></div>
+      <p class="why" data-ear-why>Hit “Play”, listen and pick the digits.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · дубли -->
+<section class="sec" data-section="traps" data-words="58">
+  <div class="sec__head"><span class="sec__no">08</span><h2 class="sec__t">bad <span class="r">takes</span></h2></div>
+  <p>Everyone trips on these takes. Tap a frame — and we’ll shoot it right.</p>
+  <div class="takes">
+    <button type="button" class="take"><span class="take__strip" data-ui><span>TAKE 1</span><span>SEKİZ</span></span><span class="take__body"><span class="take__pill" data-ui>miss</span> <span class="before"><span class="take__bad" lang="tr"><s>Bana yirmi iki yıl.</s></span><span class="take__why">A Russian “to me … years” pattern.</span></span> <span class="after"><span class="take__good" lang="tr">Yirmi iki yaşındayım.</span><span class="take__why">Age goes through <span lang="tr">yaşında</span> and the “I am” tail.</span></span></span></button>
+    <button type="button" class="take"><span class="take__strip" data-ui><span>TAKE 2</span><span>SEKİZ</span></span><span class="take__body"><span class="take__pill" data-ui>miss</span> <span class="before"><span class="take__bad" lang="tr"><s>İki çaylar, lütfen.</s></span><span class="take__why">English “two teas” drags the plural along.</span></span> <span class="after"><span class="take__good" lang="tr">İki çay, lütfen.</span><span class="take__why">After a number the word stays singular.</span></span></span></button>
+    <button type="button" class="take"><span class="take__strip" data-ui><span>TAKE 3</span><span>SEKİZ</span></span><span class="take__body"><span class="take__pill" data-ui>miss</span> <span class="before"><span class="take__bad" lang="tr"><s>bir yüz yirmi · bir bin</s></span><span class="take__why">An extra “one” before hundred and thousand.</span></span> <span class="after"><span class="take__good" lang="tr">yüz yirmi · bin</span><span class="take__why">Hundred and thousand do fine without <span lang="tr">bir</span>.</span></span></span></button>
+    <button type="button" class="take"><span class="take__strip" data-ui><span>TAKE 4</span><span>SEKİZ</span></span><span class="take__body"><span class="take__pill" data-ui>miss</span> <span class="before"><span class="take__bad" lang="tr"><s>yirmiiki · yirmi-iki</s></span><span class="take__why">The number got glued into one word.</span></span> <span class="after"><span class="take__good" lang="tr">yirmi iki</span><span class="take__why">Each place is written as a separate word.</span></span></span></button>
+  </div>
+</section>
+
+<!-- 09 · видео -->
+<section class="sec" data-section="video" data-words="15">
+  <div class="sec__head"><span class="sec__no">09</span><h2 class="sec__t">listen to <span class="r">native speakers</span></h2></div>
+  <p class="vid-note"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-star"/></svg><span>What to listen for: how <span lang="tr">üç</span>, <span lang="tr">dört</span> and <span lang="tr">altı</span> sound. The letters ü, ö and ı are the main trap in numbers.</span></p>
+  <a-video yt="gtIszhyNaLs" start="0" end="123" title="İzle, Eğlen, Öğren — Sayılar" channel="Yunus Emre Enstitüsü"></a-video>
+</section>
+
+<!-- 10 · практика -->
+<section class="sec" data-section="practice" data-words="15">
+  <div class="sec__head"><span class="sec__no">10</span><h2 class="sec__t">five <span class="r">takes</span></h2></div>
+  <p>The first one almost shoots itself. The last one is the bar register: the bartender says the total, you punch in the digits.</p>
+  <a-exercise ref="a1.numbers.ex1"></a-exercise>
+  <a-exercise ref="a1.numbers.ex2"></a-exercise>
+  <a-exercise ref="a1.numbers.ex3"></a-exercise>
+  <a-exercise ref="a1.numbers.ex4"></a-exercise>
+  <a-exercise ref="a1.numbers.ex5">
+    <div class="till" data-till>
+      <div class="till__top"><span class="till__no" data-ui>Register <span lang="tr">Sekiz</span></span><span class="till__prog" data-till-prog data-ui>1 / 6</span></div>
+      <div class="till__ask"><button type="button" class="lbtn" data-till-say data-ui>▶</button><span class="till__w" lang="tr" data-till-w>…</span></div>
+      <div class="till__scr" data-till-scr aria-live="polite">0</div>
+      <div class="pad" data-ui>
+        <button type="button" data-t="1">1</button><button type="button" data-t="2">2</button><button type="button" data-t="3">3</button><button type="button" data-t="4">4</button><button type="button" data-t="5">5</button>
+        <button type="button" data-t="6">6</button><button type="button" data-t="7">7</button><button type="button" data-t="8">8</button><button type="button" data-t="9">9</button><button type="button" data-t="0">0</button>
+      </div>
+      <div class="row" data-ui><button type="button" class="lbtn lbtn--ghost" data-t="del">⌫</button><button type="button" class="lbtn" data-t="ok">Ring up</button></div>
+      <p class="why" data-till-fb aria-live="polite">The bartender says the total in words. Type it in digits, the keyboard works too.</p>
+    </div>
+  </a-exercise>
+</section>
+
+<!-- 11 · проверка -->
+<section class="sec" data-section="check" data-words="9">
+  <div class="sec__head"><span class="sec__no">11</span><h2 class="sec__t">final <span class="r">run</span></h2></div>
+  <p>Five questions. Four right — and the film is done.</p>
+  <a-quiz ref="a1.numbers.check1"></a-quiz>
+</section>
+
+<!-- 12 · шпаргалка и финал -->
+<section class="sec" data-section="cheat" data-words="55">
+  <div class="poster">
+    <div class="poster__h"><h3><span lang="tr">SEKİZ</span><br>cheat sheet</h3><svg class="stk" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-star"/></svg></div>
+    <div class="slots">
+      <div class="slot"><h4>0–10</h4><p lang="tr">sıfır · bir · iki · üç · dört · beş · altı · yedi · sekiz · dokuz · on</p></div>
+      <div class="slot"><h4>tens</h4><p lang="tr">on · yirmi · otuz · kırk · elli · altmış · yetmiş · seksen · doksan</p></div>
+      <div class="slot"><h4>hundred and thousand</h4><p><span lang="tr">yüz</span> = 100, <span lang="tr">iki yüz</span> = 200, <span lang="tr">bin</span> = 1000. No <span lang="tr">bir</span> in front.</p></div>
+      <div class="slot"><h4>lego</h4><p>Big on the left, written apart: <span lang="tr">bin dört yüz elli</span> = 1450.</p></div>
+      <div class="slot"><h4>age</h4><p><span lang="tr">Kaç yaşındasın?</span> → <span lang="tr">… yaşında<span class="aff">yım</span> / <span class="aff">sın</span> / yaşında</span></p></div>
+      <div class="slot"><h4>price</h4><p><span lang="tr">Kaç lira? · Ne kadar?</span> After a number, no -lar: <span lang="tr">iki çay</span>.</p></div>
+    </div>
+  </div>
+  <div class="finale">
+    <svg class="stk" viewBox="0 0 100 100" aria-hidden="true" style="position:absolute;right:16px;top:16px;width:64px"><use href="#i-star"/></svg>
+    <p class="got">Take two. Friday, five to eleven.</p>
+    <div class="bub bub--r fz1"><a-say>Kaç yaşındasın?</a-say></div>
+    <div class="bub bub--l fz2"><a-say>Yirmi iki yaşındayım.</a-say></div>
+    <div class="bub bub--r fz3"><a-say>Buyur.</a-say><small>Come in.</small></div>
+    <p class="fz4">Inside, Timur gets two teas. <b data-say="İki çay, lütfen." lang="tr">İki çay, lütfen.</b> Forty lira, exact change.</p>
+    <p class="fz5">The tea, by the way, was so-so. But the order was perfect.</p>
+    <p class="end" aria-hidden="true"><span>thanks</span><span>for watching</span></p>
+    <p>Now you can count to a thousand and beyond, say your age and ask for a price.</p>
+    <button type="button" class="btn btn--fill" data-replay data-ui style="justify-self:start">Rewatch the finale</button>
+  </div>
+</section>
+</main>
+
+<template data-achievement data-title="Tab opened" data-text="You count to a thousand, say your age and ask for prices in Turkish.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <g class="bd-ticket"><rect x="14" y="30" width="92" height="62" rx="10" fill="#e4472c"/><circle cx="14" cy="61" r="9" fill="#fbefe2"/><circle cx="106" cy="61" r="9" fill="#fbefe2"/><path d="M78 34v54" stroke="#fbefe2" stroke-width="3" stroke-dasharray="5 5"/><text class="bd-num" x="47" y="74" text-anchor="middle" font-family="Dela Gothic One" font-size="34" fill="#fbefe2">22</text></g>
+    <g class="bd-star" transform="translate(84 18)"><circle r="17" fill="#17120f"/><path d="M0-10v20M-10 0h10 10M-7-7l14 14M7-7-7 7" stroke="#fbefe2" stroke-width="3.4" stroke-linecap="round"/></g>
+  </svg>
+</template>
+
+<style>
+.till{display:grid;gap:12px;justify-items:center;background:var(--ink);color:var(--cream);border-radius:22px;padding:18px}
+.till__top{width:100%;display:flex;justify-content:space-between;font-weight:800}
+.till__ask{display:flex;gap:10px;align-items:center}
+.till__ask .lbtn{background:var(--red);border-color:var(--red)}
+.till__w{font-family:var(--display);font-size:clamp(22px,3vw,34px);color:#ffd9b8}
+.till__scr{font-family:var(--display);font-size:clamp(36px,6vw,64px);color:var(--teal-l);background:#000;border-radius:14px;padding:4px 18px;min-width:6ch;text-align:right}
+.till .pad button{background:#2a211c;color:var(--cream);border-color:#3a2d26}
+.till .lbtn--ghost{color:var(--cream);border-color:var(--cream)}
+.till .why{color:#e8d2bd}
+.till.ok .till__scr{color:#9fe0cf}
+.till.bad .till__scr{color:var(--red)}
+</style>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  if (G && ST) G.registerPlugin(ST);
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const sec = (k) => $(`[data-section="${k}"]`);
+  const speak = (t) => window.AlternaKit?.speak(t);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- числа по-турецки ---------- */
+  const ONES = ['', 'bir', 'iki', 'üç', 'dört', 'beş', 'altı', 'yedi', 'sekiz', 'dokuz'];
+  const TENS = ['', 'on', 'yirmi', 'otuz', 'kırk', 'elli', 'altmış', 'yetmiş', 'seksen', 'doksan'];
+  function parts(n) {
+    if (n === 0) return [{ w: 'sıfır', v: 0 }];
+    const out = [];
+    const th = Math.floor(n / 1000), h = Math.floor((n % 1000) / 100), t = Math.floor((n % 100) / 10), o = n % 10;
+    if (th) out.push({ w: (th > 1 ? ONES[th] + ' ' : '') + 'bin', v: th * 1000 });
+    if (h) out.push({ w: (h > 1 ? ONES[h] + ' ' : '') + 'yüz', v: h * 100 });
+    if (t) out.push({ w: TENS[t], v: t * 10 });
+    if (o) out.push({ w: ONES[o], v: o });
+    return out;
+  }
+  const say = (n) => parts(n).map((p) => p.w).join(' ');
+  const cap = (s) => s.charAt(0).toLocaleUpperCase('tr') + s.slice(1);
+  const fmt = (n) => (n >= 10000 ? String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : String(n));
+
+  /* ---------- кнопки-варианты в конце сцен ---------- */
+  function feedback(box, okText, badText) {
+    const fb = box.closest('.act').querySelector('.fb');
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.opt');
+      if (!b) return;
+      const ok = b.dataset.ok === '1';
+      $$('.opt', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      fb.textContent = ok ? okText : (b.dataset.why || badText);
+      if (G) G.fromTo(b, { scale: 0.92 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' });
+      box.dispatchEvent(new CustomEvent('answer', { detail: { ok, b } }));
+    });
+  }
+
+  /* 01 · завязка */
+  const qStory = $('[data-q="story"]');
+  feedback(qStory, 'Yes. The number was right: yirmi iki is 22. The structure broke. Rewind and reshoot, starting with the digits.', 'No, Timur said the number right. Try again.');
+  qStory.addEventListener('answer', ({ detail }) => {
+    if (!detail.ok || !G) return;
+    const f = $('.frame', sec('story'));
+    let st = $('.stamp', f);
+    if (!st) { st = document.createElement('div'); st.className = 'stamp'; st.textContent = 'take 1 · miss'; st.setAttribute('aria-hidden', 'true'); f.append(st); }
+    G.fromTo(st, { scale: 2.4, opacity: 0, rotation: -24 }, { scale: 1, opacity: 1, rotation: -8, duration: 0.5, ease: 'power4.in' });
+  });
+
+  /* 02 · табло */
+  const flapD = $('.flap__d'), flapW = $('.flap__w');
+  const setFlap = (n) => { flapD.textContent = n; flapW.textContent = say(n); };
+  $$('.tile').forEach((t) => t.addEventListener('click', () => {
+    $$('.tile').forEach((x) => x.classList.remove('on'));
+    t.classList.add('on');
+    setFlap(+t.dataset.n);
+    if (G) G.fromTo(flapD, { rotationX: -90 }, { rotationX: 0, duration: 0.35, ease: 'back.out(2)' });
+  }));
+  const qFlap = $('[data-q="flap"]');
+  let flapN = 7;
+  function newFlap() {
+    flapN = Math.floor(Math.random() * 11);
+    const pool = new Set([flapN]);
+    while (pool.size < 3) pool.add(Math.floor(Math.random() * 11));
+    qFlap.replaceChildren(...[...pool].sort(() => Math.random() - 0.5).map((n) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt'; b.dataset.ok = n === flapN ? '1' : '0'; b.lang = 'tr'; b.textContent = say(n);
+      b.dataset.why = `That’s ${n}. The board shows ${flapN}.`;
+      return b;
+    }));
+    setFlap(flapN); flapW.textContent = '?';
+    qFlap.closest('.act').querySelector('.fb').textContent = '';
+    if (G) G.fromTo(flapD, { rotationX: 90 }, { rotationX: 0, duration: 0.4, ease: 'back.out(2)' });
+  }
+  feedback(qFlap, 'Right. The board blinked, the line moved.', 'Miss.');
+  qFlap.addEventListener('answer', ({ detail }) => { if (detail.ok) { flapW.textContent = say(flapN); speak(say(flapN)); } });
+  $('[data-next="flap"]').addEventListener('click', newFlap);
+  newFlap();
+
+  /* 03 · колёса десятков */
+  const wv = { t: 1, u: 5 };
+  const wOut = $('.wout');
+  function wheelShow() {
+    $('[data-o="t"]').textContent = wv.t; $('[data-o="u"]').textContent = wv.u;
+    const n = wv.t * 10 + wv.u;
+    wOut.textContent = `${n} = ${say(n)}`;
+    const fb = wOut.closest('.fb');
+    fb.dataset.done = n === 22 ? '1' : '';
+    if (n === 22) wOut.textContent += ' — Timur’s age. That’s a wrap!';
+    if (G) G.fromTo(wOut, { y: 8, opacity: 0.3 }, { y: 0, opacity: 1, duration: 0.3 });
+  }
+  $$('[data-w]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.w;
+    wv[k] = (wv[k] + +b.dataset.d + 10) % 10;
+    if (k === 't' && wv.t === 0) wv.t = b.dataset.d === '1' ? 1 : 9;
+    wheelShow();
+  }));
+  $('[data-wsay]').addEventListener('click', () => speak(say(wv.t * 10 + wv.u)));
+  wheelShow();
+
+  /* 04 · ценник */
+  feedback($('[data-q="bin"]'), 'Right: bin + iki yüz + elli. No “one” before the thousand.', 'Miss. There’s no “one” before bin, and hundreds are read whole: iki yüz.');
+
+  /* 05 · возраст */
+  const qYas = $('[data-q="yas"]');
+  feedback(qYas, 'The bouncer says: Buyur. Come in. The door is open.', 'Miss.');
+  qYas.addEventListener('answer', ({ detail }) => {
+    if (!detail.ok) return;
+    speak('Buyur.');
+    if (G) {
+      G.to($('.door2'), { scaleX: 0.08, transformOrigin: '0% 50%', duration: 0.9, ease: 'power3.inOut' });
+      G.to($('.glow', sec('yas')), { opacity: 1, duration: 0.9 });
+    }
+  });
+
+  /* 06 · заказ */
+  const qOrder = $('[data-q="order"]'), qPay = $('[data-q="pay"]');
+  feedback(qOrder, 'The bartender puts down two glasses and says: Kırk lira. How much do you pay?', 'Miss.');
+  feedback(qPay, 'Forty lira, exactly. Kırk is 40. Timur pays and sits by the window.', 'Kırk is forty. Look at the neon with the tens.');
+  qOrder.addEventListener('answer', ({ detail }) => {
+    if (!detail.ok) return;
+    speak('Kırk lira.');
+    qPay.hidden = false;
+    $('[data-step]').textContent = 'Bartender: “Kırk lira”. How much is that?';
+    if (G) G.fromTo(qPay.children, { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.35 });
+  });
+
+  /* ---------- 07 · монтажная ---------- */
+  const tabs = $$('.tab');
+  tabs.forEach((t) => t.addEventListener('click', () => {
+    tabs.forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('[data-panel]').forEach((p) => { p.hidden = p.dataset.panel !== t.dataset.mode; });
+    const p = $(`[data-panel="${t.dataset.mode}"]`);
+    if (G && !reduce) G.fromTo(p, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'power2.out' });
+  }));
+
+  // режим «число»
+  let numStr = '2026';
+  const numN = $('[data-num-n]'), numB = $('[data-num-b]'), numWhy = $('[data-num-why]');
+  function numShow() {
+    const n = +numStr || 0;
+    numN.textContent = fmt(n);
+    const ps = parts(n);
+    numB.replaceChildren(...ps.map((p, i) => {
+      const s = document.createElement('span');
+      s.className = 'blk' + (i === ps.length - 1 && ps.length > 1 ? ' blk--u' : '');
+      s.innerHTML = `<small>${p.v}</small><span lang="tr">${p.w}</span>`;
+      return s;
+    }));
+    const noBir = ps.some((p) => p.w === 'yüz' || p.w === 'bin');
+    numWhy.innerHTML = n === 0 ? 'Zero is <b lang="tr">sıfır</b>.' :
+      `Read place by place, left to right: ${ps.map((p) => `<b lang="tr">${p.w}</b>`).join(' + ')}.` + (noBir ? ' No <b lang="tr">bir</b> before <b lang="tr">yüz</b> and <b lang="tr">bin</b>.' : '');
+    if (G && !reduce) G.fromTo(numB.children, { y: -40, opacity: 0, rotation: () => G.utils.random(-12, 12) }, { y: 0, opacity: 1, rotation: 0, stagger: 0.07, duration: 0.45, ease: 'back.out(2)' });
+  }
+  $$('[data-k]').forEach((b) => b.addEventListener('click', () => {
+    const k = b.dataset.k;
+    if (k === 'del') numStr = numStr.slice(0, -1) || '0';
+    else if (k === 'rnd') numStr = String(Math.floor(Math.random() * 9999) + 1);
+    else if (k === 'say') { speak(say(+numStr || 0)); return; }
+    else numStr = (numStr === '0' || numStr.length >= 4 ? (numStr.length >= 4 ? '' : '') : numStr) + k;
+    numShow();
+  }));
+  numShow();
+
+  // режим «возраст»
+  let ageP = 0;
+  const ageR = $('#age-r'), ageLine = $('[data-age-line]'), ageWhy = $('[data-age-why]');
+  const TAIL = ['yım', 'sın', ''];
+  const WHO = ['Ben', 'Sen', 'O'];
+  function ageShow() {
+    const n = +ageR.value;
+    $('[data-age-n]').textContent = n;
+    ageLine.innerHTML = `${WHO[ageP]} ${say(n)} yaşında<span class="aff">${TAIL[ageP]}</span>.`;
+    ageWhy.innerHTML = ['The tail <b lang="tr">-yım</b> is “I am”. Like in <b lang="tr">öğrenciyim</b>.', 'The tail <b lang="tr">-sın</b> is “you are”. That’s also how the question sounds: <b lang="tr">Kaç yaşındasın?</b>', 'For “he, she” there’s no tail: just <b lang="tr">yaşında</b>.'][ageP];
+    if (G && !reduce) G.fromTo(ageLine, { scale: 0.94, opacity: 0.4 }, { scale: 1, opacity: 1, duration: 0.3 });
+  }
+  $$('[data-p]').forEach((b) => b.addEventListener('click', () => { ageP = +b.dataset.p; $$('[data-p]').forEach((x) => x.classList.toggle('on', x === b)); ageShow(); }));
+  ageR.addEventListener('input', ageShow);
+  $('[data-age-say]').addEventListener('click', () => speak(ageLine.textContent));
+  ageShow();
+
+  // режим «цена»
+  const PRICE = { 'çay': 20, su: 15, ayran: 35, kahve: 80, tost: 120 };
+  let item = 'çay', qty = 2;
+  const pLine = $('[data-price-line]'), pWhy = $('[data-price-why]');
+  function priceShow() {
+    $('[data-qty]').textContent = qty;
+    const total = PRICE[item] * qty;
+    pLine.innerHTML = `${cap(say(qty))} ${item} kaç lira? — <span class="num">${cap(say(total))} lira.</span>`;
+    pWhy.innerHTML = `${qty} × ${PRICE[item]} = ${total}. ` + (qty > 1 ? `After a number, no -lar: <b lang="tr">${say(qty)} ${item}</b>, not <b lang="tr">${item}lar</b>.` : 'One is <b lang="tr">bir</b>, and the question sounds exactly like Timur’s.');
+    if (G && !reduce) G.fromTo(pLine, { x: -16, opacity: 0.3 }, { x: 0, opacity: 1, duration: 0.3 });
+  }
+  $$('[data-it]').forEach((b) => b.addEventListener('click', () => { item = b.dataset.it; $$('[data-it]').forEach((x) => x.classList.toggle('on', x === b)); priceShow(); }));
+  $$('[data-q="-1"],[data-q="1"]').forEach((b) => b.addEventListener('click', () => { qty = Math.min(5, Math.max(1, qty + +b.dataset.q)); priceShow(); }));
+  $('[data-price-say]').addEventListener('click', () => speak(pLine.textContent));
+  priceShow();
+
+  // режим «слух»
+  const EAR = [3, 4, 6, 13, 16, 22, 30, 34, 40, 46, 55, 60, 64, 70, 77, 80, 88, 90, 99, 100, 120, 250, 1000, 1450];
+  let earN = 0;
+  const earOpts = $('[data-ear-opts]'), earWhy = $('[data-ear-why]');
+  $('[data-ear-play]').addEventListener('click', () => {
+    earN = EAR[Math.floor(Math.random() * EAR.length)];
+    speak(say(earN));
+    const pool = new Set([earN]);
+    while (pool.size < 4) pool.add(EAR[Math.floor(Math.random() * EAR.length)]);
+    earOpts.replaceChildren(...[...pool].sort(() => Math.random() - 0.5).map((n) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'seg'; b.textContent = fmt(n);
+      b.addEventListener('click', () => {
+        const ok = n === earN;
+        b.classList.add(ok ? 'on' : '');
+        earWhy.innerHTML = (ok ? 'Yes! ' : `Miss, that was ${fmt(earN)}. `) + `You heard: <b lang="tr">${say(earN)}</b>.`;
+        if (G && !reduce) G.fromTo(b, { scale: 0.85 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' });
+      });
+      return b;
+    }));
+    earWhy.textContent = 'Which number did you hear?';
+  });
+
+  /* ---------- 08 · дубли ---------- */
+  $$('.take').forEach((t) => t.addEventListener('click', () => {
+    t.classList.toggle('ok');
+    t.querySelector('.take__pill').textContent = t.classList.contains('ok') ? 'wrap' : 'miss';
+    if (t.classList.contains('ok')) speak(t.querySelector('.take__good').textContent);
+    if (G && !reduce) G.fromTo(t, { rotationY: 70, opacity: 0.4 }, { rotationY: 0, opacity: 1, duration: 0.45, ease: 'power2.out' });
+  }));
+
+  /* ---------- 10 · касса (custom) ---------- */
+  const TILL = [
+    { id: 'i1', n: 20 }, { id: 'i2', n: 45 }, { id: 'i3', n: 80 },
+    { id: 'i4', n: 120 }, { id: 'i5', n: 250 }, { id: 'i6', n: 1400 },
+  ];
+  const till = $('[data-till]');
+  let ti = 0, tStr = '', tCorrect = 0, tT0 = performance.now(), tDone = false;
+  const tScr = $('[data-till-scr]'), tW = $('[data-till-w]'), tFb = $('[data-till-fb]'), tProg = $('[data-till-prog]');
+  function tillShow() {
+    const it = TILL[ti];
+    tW.textContent = cap(say(it.n)) + ' lira';
+    tProg.textContent = `${ti + 1} / ${TILL.length}`;
+    tScr.textContent = tStr || '0';
+    tT0 = performance.now();
+  }
+  function tillSubmit() {
+    if (tDone) return;
+    const it = TILL[ti];
+    const ans = +tStr || 0;
+    const correct = ans === it.n;
+    window.AlternaTracker?.answer({ exerciseId: 'a1.numbers.ex5', itemId: it.id, correct, answer: ans, timeMs: Math.round(performance.now() - tT0) });
+    till.classList.toggle('ok', correct); till.classList.toggle('bad', !correct);
+    if (G && !reduce) G.fromTo(tScr, { x: correct ? 0 : -10 }, { x: 0, duration: 0.4, ease: correct ? 'power2.out' : 'elastic.out(1,0.3)' });
+    if (correct) {
+      tCorrect++;
+      tFb.innerHTML = `Right: <b lang="tr">${say(it.n)}</b> = ${fmt(it.n)}.`;
+      ti++; tStr = '';
+      if (ti >= TILL.length) {
+        tDone = true;
+        tFb.textContent = `Shift closed: ${tCorrect} of ${TILL.length} on the first try. The register balances.`;
+        tW.textContent = 'Teşekkürler!';
+        window.AlternaTracker?.complete({ exerciseId: 'a1.numbers.ex5', correct: tCorrect, total: TILL.length });
+        return;
+      }
+      setTimeout(() => { till.classList.remove('ok'); if (!tDone) tillShow(); }, 700);
+    } else {
+      tFb.innerHTML = `Miss: ${fmt(ans)} is <b lang="tr">${say(ans)}</b>. Listen again.`;
+      tStr = '';
+      setTimeout(() => { tScr.textContent = '0'; }, 700);
+    }
+  }
+  till.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-t]');
+    if (b) {
+      const k = b.dataset.t;
+      if (tDone) return;
+      if (k === 'del') tStr = tStr.slice(0, -1);
+      else if (k === 'ok') return tillSubmit();
+      else if (tStr.length < 4) tStr = (tStr === '0' ? '' : tStr) + k;
+      tScr.textContent = tStr || '0';
+      till.classList.remove('bad');
+      return;
+    }
+    if (e.target.closest('[data-till-say]') && !tDone) speak(cap(say(TILL[ti].n)) + ' lira');
+  });
+  till.tabIndex = 0;
+  till.addEventListener('keydown', (e) => {
+    if (tDone) return;
+    if (/^\d$/.test(e.key) && tStr.length < 4) { tStr = (tStr === '0' ? '' : tStr) + e.key; tScr.textContent = tStr; e.preventDefault(); }
+    else if (e.key === 'Backspace') { tStr = tStr.slice(0, -1); tScr.textContent = tStr || '0'; e.preventDefault(); }
+    else if (e.key === 'Enter') { tillSubmit(); e.preventDefault(); }
+  });
+  tillShow();
+  const tillSolve = async () => { while (!tDone) { tStr = String(TILL[ti].n); tillSubmit(); } };
+  if (window.AlternaKit) window.AlternaKit.registerSolver('a1.numbers.ex5', tillSolve);
+  else addEventListener('load', () => window.AlternaKit?.registerSolver('a1.numbers.ex5', tillSolve));
+
+  /* ---------- финал ---------- */
+  const fin = $('.finale');
+  function playFinale() {
+    if (!G || reduce) return;
+    const tl = G.timeline();
+    tl.fromTo($('.got', fin), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 })
+      .fromTo($('.fz1', fin), { scale: 0.5, opacity: 0, transformOrigin: '100% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' })
+      .fromTo($('.fz2', fin), { scale: 0.5, opacity: 0, transformOrigin: '0% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' }, '+=0.3')
+      .fromTo($('.fz3', fin), { scale: 0.5, opacity: 0, transformOrigin: '100% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' }, '+=0.3')
+      .fromTo($$('.fz4, .fz5', fin), { y: 20, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.3, duration: 0.4 })
+      .fromTo($$('.end span', fin), { yPercent: 80, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.15, duration: 0.5, ease: 'power3.out' });
+    return tl;
+  }
+  $('[data-replay]').addEventListener('click', () => { playFinale(); speak('Yirmi iki yaşındayım.'); });
+
+  /* ---------- скроллбар-плёнка ---------- */
+  const reel = $('.reel'), fill = $('.reel__fill');
+  const marks = $$('.reel button');
+  const secTop = (k) => { const el = sec(k); const sp = el.closest('.pin-spacer'); return (sp || el).getBoundingClientRect().top + scrollY; };
+  marks.forEach((m) => m.addEventListener('click', (e) => { e.stopPropagation(); scrollTo({ top: secTop(m.dataset.goto) + 2, behavior: reduce ? 'auto' : 'smooth' }); }));
+  function reelUpdate() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    fill.style.transform = `scaleY(${p})`;
+    let cur = marks[0];
+    for (const m of marks) if (secTop(m.dataset.goto) - innerHeight * 0.5 <= scrollY) cur = m;
+    marks.forEach((m) => m.classList.toggle('now', m === cur));
+  }
+  addEventListener('scroll', reelUpdate, { passive: true });
+  addEventListener('alterna:read', ({ detail }) => { const m = marks.find((x) => x.dataset.goto === detail?.key); if (m) m.classList.add('done'); });
+  let drag = false;
+  const dragTo = (y) => {
+    const r = reel.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (y - r.top) / r.height));
+    scrollTo(0, p * (document.documentElement.scrollHeight - innerHeight));
+  };
+  reel.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button') || e.pointerType === 'touch') return;
+    drag = true; reel.setPointerCapture(e.pointerId); dragTo(e.clientY);
+  });
+  reel.addEventListener('pointermove', (e) => { if (drag) dragTo(e.clientY); });
+  reel.addEventListener('pointerup', () => { drag = false; });
+  reelUpdate();
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const root = detail.badge || detail.card;
+    if (!root || !detail.timeline) return;
+    const tk = root.querySelector('.bd-ticket'), stb = root.querySelector('.bd-star'), num = root.querySelector('.bd-num');
+    if (tk) detail.timeline.fromTo(tk, { rotation: -30, scale: 0.3, transformOrigin: '50% 50%' }, { rotation: -6, scale: 1, duration: 0.9, ease: 'back.out(1.7)' }, 0.1);
+    if (stb) detail.timeline.fromTo(stb, { scale: 0, rotation: -180, transformOrigin: '50% 50%' }, { scale: 1, rotation: 0, duration: 0.7, ease: 'back.out(2)' }, 0.6);
+    if (num) detail.timeline.fromTo(num, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 0.9);
+  });
+
+  /* ================= КИНО: сцены по прокрутке ================= */
+  if (!G || !ST) return;
+  ST.config({ ignoreMobileResize: true });
+
+  function card(tl, s) {
+    tl.fromTo($$('.card__t .ln i', s), { yPercent: 105 }, { yPercent: 0, stagger: 0.12, duration: 0.5, ease: 'power3.out' }, 0)
+      .fromTo($('.card__no', s), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 }, 0)
+      .to($('.card', s), { yPercent: -102, duration: 0.8, ease: 'power2.inOut' }, 1.1);
+  }
+  function subs(tl, s, at, step) {
+    $$('.sub', s).forEach((p, i) => {
+      const t = at + i * step;
+      tl.fromTo(p, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.25 }, t)
+        .to(p, { opacity: 0, y: -12, duration: 0.2 }, t + step - 0.22);
+    });
+    return at + $$('.sub', s).length * step;
+  }
+  function act(tl, s, at) {
+    tl.fromTo($('.act', s), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4 }, at);
+    tl.to({}, { duration: 0.6 });
+  }
+  const pinLen = (desk, d, m) => () => '+=' + Math.round(innerHeight * (desk ? d : m));
+
+  const mm = G.matchMedia();
+  mm.add({ desk: '(min-width: 768px) and (prefers-reduced-motion: no-preference)', mob: '(max-width: 767px) and (prefers-reduced-motion: no-preference)' }, (ctx) => {
+    const desk = ctx.conditions.desk;
+    document.documentElement.classList.add('film');
+    ST.refresh();
+
+    /* обложка: лёгкий параллакс */
+    G.timeline({ scrollTrigger: { trigger: '.cover', start: 'top top', end: 'bottom top', scrub: 0.6 } })
+      .to('.cover__logo', { yPercent: 30, ease: 'none' }, 0)
+      .to('.cover .stk', { rotation: 180, y: 80, ease: 'none' }, 0)
+      .to('.cover__art .cv-far', { x: -60, ease: 'none' }, 0)
+      .to('.cover__art .cv-moon', { y: 90, ease: 'none' }, 0);
+    G.fromTo('.hint-dot', { y: -2 }, { y: 4, repeat: -1, yoyo: true, duration: 0.6 });
+
+    /* 01 · завязка */
+    {
+      const s = sec('story');
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 2.4, 1.5), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.addLabel('wide', 1.1)
+        .fromTo($('.cam', s), { scale: 1.3 }, { scale: 1, duration: 1.4 }, 1.1)
+        .fromTo($('.ly-far', s), { x: 60 }, { x: -30, duration: 9 }, 1.1)
+        .fromTo($('.ly-near', s), { x: -50 }, { x: 40, duration: 9 }, 1.1)
+        .fromTo($$('.b1, .b2, .b3', s), { opacity: 0, scale: 0.4 }, { opacity: 0, scale: 0.4, duration: 0.01 }, 1.1);
+      const end = subs(tl, s, 2.2, 1.25);
+      tl.addLabel('door', 3.45)
+        .to($('.cam', s), { scale: desk ? 1.35 : 1.25, xPercent: -2, yPercent: -6, duration: 1.1, ease: 'power1.inOut' }, 3.45)
+        .to($('.b1', s), { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 4.7)
+        .to($('.cam', s), { xPercent: 6, duration: 1, ease: 'power1.inOut' }, 5.9)
+        .to($('.b2', s), { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 5.95)
+        .to($('.b3', s), { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 7.2)
+        .fromTo($('.door', s), { scaleX: 0.12, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.5, ease: 'power3.in' }, 7.5)
+        .fromTo($('.doorlight', s), { opacity: 1 }, { opacity: 0, duration: 0.4 }, 7.6)
+        .to($$('.b1, .b2', s), { opacity: 0, y: -20, duration: 0.4 }, 8.3)
+        .to($('.cam', s), { scale: 0.92, xPercent: 0, yPercent: 0, duration: 1.2, ease: 'power1.inOut' }, 8.4)
+        .to($('.b3', s), { opacity: 0.25, duration: 0.6 }, 9.2);
+      act(tl, s, end);
+    }
+
+    /* 02 · табло */
+    {
+      const s = sec('sayilar');
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 2, 1.3), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.fromTo($('.cam', s), { scale: 1.5, yPercent: -10 }, { scale: 1, yPercent: 0, duration: 1.4, ease: 'power2.out' }, 1.1)
+        .fromTo($('.flap', s), { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 1.8)
+        .fromTo($$('.tile', s), { y: -50, rotationX: -80, opacity: 0 }, { y: 0, rotationX: 0, opacity: 1, stagger: 0.18, duration: 0.4, ease: 'back.out(1.6)' }, 3.0);
+      const counter = { v: 0 };
+      tl.to(counter, { v: 10, duration: 2.2, onUpdate: () => setFlap(Math.round(counter.v)) }, 3.0)
+        .fromTo($$('.tile small', s), { y: 10, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, duration: 0.3 }, 5.4)
+        .fromTo($$('.tile:nth-child(9), .tile:nth-child(12)', s), { scale: 1 }, { scale: 1.12, duration: 0.3, yoyo: true, repeat: 1 }, 6.4);
+      const end = subs(tl, s, 2.0, 1.4);
+      tl.call(() => { setFlap(flapN); flapW.textContent = '?'; }, null, end - 0.05);
+      act(tl, s, end);
+    }
+
+    /* 03 · десятки и лего */
+    {
+      const s = sec('onlar');
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 2, 1.3), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.fromTo($('.ly-far', s), { scale: 1.2, x: 40 }, { scale: 1, x: -20, duration: 6 }, 1.1)
+        .fromTo($('.t1', s), { scaleX: 0 }, { scaleX: 1, duration: 0.4 }, 1.6)
+        .fromTo($('.t2', s), { scaleY: 0 }, { scaleY: 1, duration: 0.3 }, 2.0)
+        .fromTo($('.t3', s), { scaleX: 0 }, { scaleX: 1, duration: 0.4 }, 2.3)
+        .fromTo($('.t4', s), { scaleY: 0 }, { scaleY: 1, duration: 0.3 }, 2.7)
+        .fromTo($$('.ncell', s), { opacity: 0.08, scale: 0.9 }, { opacity: 1, scale: 1, stagger: 0.12, duration: 0.25 }, 1.8)
+        .fromTo($('.lego', s), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3 }, 3.3)
+        .fromTo($('.b-t', s), { x: desk ? -260 : -120, y: -80, rotation: -18, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 4.0)
+        .fromTo($('.b-u', s), { x: desk ? 260 : 120, y: -80, rotation: 18, opacity: 0 }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 4.3)
+        .fromTo($('.lego__n', s), { scale: 1.6 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' }, 4.9)
+        .fromTo($$('.lego .blk', s), { scale: 1 }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1 }, 5.6);
+      const end = subs(tl, s, 2.0, 1.3);
+      act(tl, s, end);
+    }
+
+    /* 04 · чек и пластинка: камера едет вправо */
+    {
+      const s = sec('yuz-bin');
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 2.2, 1.4), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.fromTo($('.receipt', s), { yPercent: -100 }, { yPercent: 0, duration: 1.6, ease: 'steps(12)' }, 1.4)
+        .fromTo($$('.rl em', s), { x: -14, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.3, duration: 0.3 }, 3.0)
+        .fromTo($('.printer', s), { y: 0 }, { y: -4, duration: 0.08, repeat: 9, yoyo: true }, 1.4)
+        .addLabel('pan', 5.4)
+        .to($('.track', s), { xPercent: -50, duration: 1.4, ease: 'power2.inOut' }, 5.4)
+        .fromTo($('.recs', s), { y: 30 }, { y: 0, duration: 1.4 }, 5.4)
+        .fromTo($('.tag', s), { scale: 0, rotation: -30 }, { scale: 1, rotation: 6, duration: 0.4, ease: 'back.out(2)' }, 6.5)
+        .fromTo($('.c1', s), { y: -90, opacity: 0, rotation: -10 }, { y: 0, opacity: 1, rotation: 0, duration: 0.35 }, 7.0)
+        .fromTo($('.c2', s), { y: -90, opacity: 0, rotation: 10 }, { y: 0, opacity: 1, rotation: 0, duration: 0.35 }, 7.25)
+        .fromTo($('.c3', s), { y: -90, opacity: 0, rotation: -6 }, { y: 0, opacity: 1, rotation: 0, duration: 0.35 }, 7.5);
+      const end = subs(tl, s, 2.0, 1.25);
+      act(tl, s, end);
+    }
+
+    /* 05 · возраст: слово разбирается на детали, свет из-за двери */
+    {
+      const s = sec('yas');
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 2.4, 1.5), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.fromTo($('.ly-far', s), { scale: 1.35, yPercent: 8 }, { scale: 1, yPercent: 0, duration: 2 }, 1.1)
+        .fromTo($('.word', s), { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5 }, 2.6)
+        .fromTo($$('.word small', s), { opacity: 0, y: -8 }, { opacity: 1, y: 0, stagger: 0.25, duration: 0.3 }, 3.6)
+        .fromTo($('.p1', s), { x: desk ? 40 : 14 }, { x: 0, duration: 0.6 }, 3.4)
+        .fromTo($('.p3', s), { x: desk ? -40 : -14, y: 0 }, { x: 0, y: -10, duration: 0.6, ease: 'back.out(2)' }, 3.4)
+        .fromTo($('.m-ogr', s), { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.4 }, 4.6)
+        .to($('.m-ogr', s), { opacity: 0.35, duration: 0.3 }, 5.7)
+        .fromTo($('.m-kz', s), { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.4 }, 6.0)
+        .to($('.m-kz', s), { opacity: 0.35, duration: 0.3 }, 7.1)
+        .fromTo($$('.pcard', s), { opacity: 0, y: 30, rotation: (i) => [-4, 3, -2][i] }, { opacity: 1, y: 0, rotation: 0, stagger: 0.25, duration: 0.4, ease: 'back.out(1.6)' }, 7.4)
+        .fromTo($('.glow', s), { opacity: 0.1 }, { opacity: 0.6, duration: 3 }, 6.0);
+      const end = subs(tl, s, 2.0, 1.2);
+      act(tl, s, end);
+    }
+
+    /* 06 · меню и стойка */
+    {
+      const s = sec('fiyat');
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 2.4, 1.5), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.fromTo($('.cam', s), { scale: 1.25, xPercent: desk ? 10 : 0 }, { scale: 1, xPercent: 0, duration: 1.4, ease: 'power2.out' }, 1.1)
+        .fromTo($('.menu', s), { y: 40, rotation: -3, opacity: 0 }, { y: 0, rotation: 0, opacity: 1, duration: 0.5 }, 1.6)
+        .fromTo($$('.mi i', s), { scaleX: 0 }, { scaleX: 1, stagger: 0.15, duration: 0.4 }, 2.0)
+        .fromTo($$('.mi em', s), { opacity: 0, x: -10 }, { opacity: 1, x: 0, stagger: 0.15, duration: 0.3 }, 2.6)
+        .fromTo($('.f1', s), { opacity: 0, scale: 0.4, transformOrigin: '0% 100%' }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 3.3)
+        .fromTo($('.f2', s), { opacity: 0, scale: 0.4, transformOrigin: '100% 100%' }, { opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(2)' }, 4.5)
+        .fromTo($('.f3', s), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3 }, 5.7)
+        .fromTo($('.cross', s), { '--x': 0 }, { '--x': 1, duration: 0.5 }, 6.9)
+        .fromTo($('.g1', s), { x: -160, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 7.0)
+        .fromTo($('.g2', s), { x: 160, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out' }, 7.2);
+      const end = subs(tl, s, 2.0, 1.2);
+      act(tl, s, end);
+    }
+
+    /* 07 · монтажная: счётчик до текущего года */
+    {
+      const s = sec('lab');
+      const reelN = $('[data-reel]', s), reelW = $('[data-reelw]', s);
+      const cnt = { v: 0 };
+      const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, pin: $('.stage', s), start: 'top top', end: pinLen(desk, 1.5, 1.1), scrub: 0.6, anticipatePin: 1 } });
+      card(tl, s);
+      tl.fromTo($('.mon', s), { scale: 0.6, rotation: -4, opacity: 0 }, { scale: 1, rotation: 0, opacity: 1, duration: 0.6, ease: 'back.out(1.4)' }, 1.4)
+        .to(cnt, { v: 2026, duration: 2.6, ease: 'power2.in', onUpdate: () => { const n = Math.round(cnt.v); reelN.textContent = fmt(n); reelW.textContent = say(n); } }, 2.0);
+      const end = subs(tl, s, 1.8, 1.4);
+      act(tl, s, end);
+    }
+
+    /* 08 · дубли: кадры въезжают плёнкой */
+    ST.batch($$('.take'), {
+      start: 'top 88%',
+      onEnter: (els) => G.fromTo(els, { x: 80, rotation: 4, opacity: 0 }, { x: 0, rotation: 0, opacity: 1, stagger: 0.12, duration: 0.6, ease: 'power3.out', overwrite: true }),
+    });
+
+    /* заголовки секций после сюжета */
+    $$('.sec__head').forEach((h) => {
+      G.fromTo(h.children, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.1, duration: 0.6, ease: 'power3.out', scrollTrigger: { trigger: h, start: 'top 85%' } });
+    });
+
+    /* шпаргалка-постер и финал */
+    G.timeline({ scrollTrigger: { trigger: '.poster', start: 'top 80%' } })
+      .fromTo('.poster', { rotation: -2, y: 40 }, { rotation: 0, y: 0, duration: 0.6, ease: 'power3.out' })
+      .fromTo('.slot', { y: 30, opacity: 0, rotation: (i) => (i % 2 ? 3 : -3) }, { y: 0, opacity: 1, rotation: 0, stagger: 0.08, duration: 0.5 }, '-=0.3')
+      .fromTo('.poster .stk', { rotation: -180, scale: 0 }, { rotation: 0, scale: 1, duration: 0.6, ease: 'back.out(2)' }, '-=0.4');
+    ST.create({ trigger: fin, start: 'top 70%', once: true, onEnter: () => playFinale() });
+
+    return () => document.documentElement.classList.remove('film');
+  });
+
+  const refresh = () => ST.refresh();
+  addEventListener('load', refresh);
+  document.fonts?.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  customElements.whenDefined('a-exercise').then(() => setTimeout(refresh, 800));
+});
+</script>
+</body>
+</html>

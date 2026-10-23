@@ -1,0 +1,1417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="a1.dan-once-sonra">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Before / after (with nouns)</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../media/intertight-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../media/intertight-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter Tight'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../media/intertight-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  --blue: #1f4bff; --blue-d: #1238e6; --blue-dd: #0d2fcc;
+  --ink: #0d0e12; --ink-2: #17181f; --ink-3: #22232c;
+  --paper: #ffffff; --mist: #eef1f6; --mist-2: #dfe5ee; --line: #dce2eb; --muted: #5e6675;
+  --onc: #8a3ffc; --onc-l: #c9a8ff;
+  --son: #0fa6e6; --son-l: #8fdcff;
+  --dan: #ff6a2c;
+  --ok: #1fa857; --bad: #b8244e;
+  --dog: #a47d5c; --dog-d: #7a5a40; --dog-l: #cfa882;
+  --ak-accent: var(--blue); --ak-accent-soft: #e8edff; --ak-ink: var(--ink);
+  --ak-font: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ak-font-display: var(--ak-font);
+  --ak-radius: 22px; --ak-radius-sm: 14px;
+  --r-xl: clamp(24px, 3.4vw, 44px);
+  --side: 92px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--ak-font); overflow-x: clip; }
+main { overflow-x: clip; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+button { font-family: inherit; }
+b[data-say], .say { cursor: pointer; text-decoration: underline 2px; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); text-underline-offset: 3px; }
+.t-dan { color: var(--dan); } .t-onc { color: var(--onc); } .t-son { color: var(--son); }
+.on-dark .t-onc { color: var(--onc-l); } .on-dark .t-son { color: var(--son-l); }
+
+/* ---------- сцена: закреплённый экран ---------- */
+.scene { position: relative; }
+.stage {
+  height: 100vh; height: 100svh; box-sizing: border-box; background: var(--paper);
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .9fr); gap: 28px;
+  padding: 22px var(--side) 22px 26px; align-items: stretch;
+}
+.frame { position: relative; border-radius: var(--r-xl); overflow: hidden; container-type: size; background: var(--blue); isolation: isolate; min-height: 0; }
+.frame--ink { background: var(--ink); }
+.frame--mist { background: var(--mist); }
+.bg { position: absolute; inset: 0; pointer-events: none; }
+.mega { position: absolute; font-weight: 800; letter-spacing: -.06em; line-height: .8; white-space: nowrap; color: var(--blue-d); }
+.frame--ink .mega { color: #1b1c25; }
+.frame--mist .mega { color: var(--mist-2); }
+.set { position: absolute; inset: 0; margin: auto; width: min(100cqw, 100cqh); height: min(100cqw, 100cqh); container-type: inline-size; }
+.abs { position: absolute; left: var(--x, 0); top: var(--y, 0); width: var(--w, auto); }
+.side { display: flex; flex-direction: column; justify-content: center; gap: 14px; min-width: 0; }
+.kick { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: #fff; border-radius: 99px; padding: 6px 12px; font-size: 13px; font-weight: 600; letter-spacing: .01em; }
+.kick i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); }
+.side h2 { margin: 0; font-size: clamp(28px, 3.1vw, 48px); line-height: .98; letter-spacing: -.03em; word-spacing: .06em; font-weight: 800; }
+.subs { display: grid; gap: 10px; font-size: clamp(16px, 1.22vw, 20px); line-height: 1.38; }
+.subs p { margin: 0; }
+.motion .subs p { grid-area: 1 / 1; }
+.subs b { font-weight: 700; }
+.act { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 22px; background: var(--mist); }
+.act__q { margin: 0; font-weight: 700; font-size: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { min-height: 44px; padding: 0 18px; border-radius: 99px; border: 0; background: var(--paper); color: var(--ink); font-weight: 700; font-size: 15px; cursor: pointer; box-shadow: inset 0 0 0 1.5px var(--line); transition: background .2s, color .2s, box-shadow .2s; }
+.btn:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn:focus-visible, .chip:focus-visible, .tok:focus-visible, .reel button:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.btn--blue { background: var(--blue); color: #fff; box-shadow: none; }
+.btn--ink { background: var(--ink); color: #fff; box-shadow: none; }
+.btn.is-on { background: var(--ink); color: #fff; box-shadow: none; }
+.btn.is-ok { background: var(--ok); color: #fff; box-shadow: none; }
+.btn.is-bad { background: var(--bad); color: #fff; box-shadow: none; }
+.react { margin: 0; min-height: 1.4em; font-size: 15px; line-height: 1.35; }
+.react.ok { color: var(--ok); } .react.bad { color: var(--bad); }
+
+/* общие детали кадра */
+.card { background: var(--paper); border-radius: 5cqw; box-shadow: 0 2.4cqw 6cqw rgba(6, 18, 90, .18); }
+.tag { display: inline-flex; align-items: center; gap: .4em; background: var(--ink); color: #fff; border-radius: 99px; padding: .35em .85em; font-size: max(10px, 2.3cqw); font-weight: 600; white-space: nowrap; }
+.tag--w { background: var(--paper); color: var(--ink); }
+.wcard { display: inline-flex; align-items: baseline; background: var(--paper); border-radius: 3.4cqw; padding: 1.6cqw 3cqw; font-weight: 800; font-size: 7.2cqw; letter-spacing: -.035em; line-height: 1; box-shadow: 0 2cqw 5cqw rgba(6, 18, 90, .2); white-space: nowrap; }
+.ico { width: 100%; height: auto; display: block; }
+.abs.ico { width: var(--w); }
+.lineicon { fill: none; stroke: url(#gl); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.hv { display: inline-block; color: var(--blue); box-shadow: inset 0 -.16em 0 #c9d4ff; }
+
+/* ---------- сцена 1: клиника ---------- */
+.st-street { position: absolute; inset: 0; transform-origin: 37% 70%; }
+.clinic { --x: 5%; --y: 27%; --w: 60%; height: 62%; padding: 4cqw; box-sizing: border-box; }
+.clinic__top { display: flex; align-items: center; gap: 1.6cqw; font-weight: 800; font-size: 4.2cqw; letter-spacing: -.03em; }
+.clinic__top svg { width: 7cqw; }
+.clinic__top .tag { margin-left: auto; }
+.clinic__name { margin-top: 3cqw; font-size: 8.4cqw; font-weight: 800; letter-spacing: -.05em; line-height: .9; }
+.clinic__win { position: absolute; bottom: 4cqw; width: 12cqw; height: 12cqw; border-radius: 3cqw; background: var(--mist); display: grid; place-items: center; }
+.clinic__win svg { width: 8cqw; }
+.door { position: absolute; left: 34%; bottom: 0; width: 32%; height: 44%; background: var(--blue); border-radius: 4cqw 4cqw 0 0; }
+.door::after { content: ''; position: absolute; right: 16%; top: 48%; width: 2cqw; height: 2cqw; border-radius: 50%; background: #fff; }
+.st-dog { --x: 63%; --y: 54%; --w: 35%; }
+.st-in { position: absolute; inset: 3%; border-radius: 5cqw; background: var(--paper); overflow: hidden; }
+.st-vet { --x: 2%; --y: 20%; --w: 46%; }
+.bubble { position: absolute; max-width: 54%; padding: 2.6cqw 3.4cqw; border-radius: 4cqw; font-size: 5.8cqw; font-weight: 800; letter-spacing: -.035em; line-height: 1.05; }
+.bubble small { display: block; font-size: max(10px, 2.4cqw); font-weight: 600; letter-spacing: 0; color: var(--muted); margin-bottom: 1cqw; }
+.bubble--vet { left: 44%; top: 10%; background: var(--mist); border-bottom-left-radius: 1cqw; }
+.bubble--me { left: 34%; top: 52%; background: var(--ink); color: #fff; border-bottom-right-radius: 1cqw; }
+.bubble--me small { color: #9aa0ad; }
+.rx { --x: 52%; --y: 77%; --w: 42%; display: flex; align-items: center; gap: 2cqw; background: var(--blue); color: #fff; border-radius: 3.6cqw; padding: 2.2cqw 3cqw; box-sizing: border-box; font-weight: 700; font-size: 3.4cqw; }
+.rx svg { width: 8cqw; flex: none; }
+.rx .lineicon { stroke: #fff; }
+.st-home { position: absolute; inset: 3%; border-radius: 5cqw; background: var(--mist); overflow: hidden; }
+.home__line { position: absolute; left: 8%; right: 8%; top: 56%; height: .7cqw; border-radius: 1cqw; background: var(--ink); }
+.home__it { position: absolute; top: 28%; width: 26%; display: grid; justify-items: center; gap: 2cqw; font-weight: 800; font-size: 5cqw; }
+.home__it .ico { width: 70%; background: var(--paper); border-radius: 4cqw; padding: 3cqw; box-sizing: border-box; }
+.home__num { width: 8cqw; height: 8cqw; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 4cqw; }
+.home__bowl { left: 16%; } .home__pill { left: 58%; }
+.home__dog { --x: 66%; --y: 66%; --w: 30%; }
+.home__x { position: absolute; left: 6%; top: 74%; font-size: 4.2cqw; font-weight: 700; color: var(--bad); }
+
+/* ---------- сцена 2: точка и стрелки ---------- */
+.pt-rule { --x: 6%; --y: 6%; --w: 88%; display: flex; flex-wrap: wrap; justify-content: center; gap: 1.4cqw; align-items: center; font-weight: 800; font-size: 4.4cqw; color: #fff; }
+.pt-rule span { background: var(--paper); color: var(--ink); border-radius: 99px; padding: 1.2cqw 2.8cqw; }
+.pt-rule .r-dan { background: var(--dan); color: #fff; } .pt-rule .r-onc { background: var(--onc); color: #fff; } .pt-rule .r-son { background: var(--son); color: #fff; }
+.pt-ruler { --x: 0%; --y: 50%; --w: 100%; height: 12%; }
+.pt-ruler svg { width: 100%; height: 100%; overflow: visible; }
+.pt-pin { --x: 0%; --y: 27%; --w: 100%; display: grid; justify-items: center; }
+.pt-pin::after { content: ''; width: .6cqw; height: 12cqw; background: #fff; border-radius: 1cqw; }
+.pt-lab { position: absolute; top: 66%; font-weight: 800; font-size: 5.4cqw; color: #fff; padding: 1cqw 3cqw; border-radius: 99px; }
+.pt-lab--onc { left: 12%; background: var(--onc); } .pt-lab--son { right: 12%; background: var(--son); }
+.pt-pill { --x: 13%; --y: 77%; --w: 16%; }
+.pt-pill .ico { background: var(--paper); border-radius: 4cqw; padding: 2cqw; box-sizing: border-box; }
+.pt-dog { --x: 70%; --y: 75%; --w: 22%; }
+.pt-say { --x: 6%; --y: 92%; --w: 88%; text-align: center; color: #fff; font-weight: 700; font-size: 4cqw; }
+
+/* ---------- сцена 3: четыре кабинета ---------- */
+.door4 { position: absolute; width: 44%; height: 31%; box-sizing: border-box; padding: 3.4cqw; display: flex; flex-direction: column; justify-content: space-between; border-radius: 5cqw; background: var(--paper); }
+.door4--1 { left: 4%; top: 33%; } .door4--2 { left: 52%; top: 33%; } .door4--3 { left: 4%; top: 66.5%; } .door4--4 { left: 52%; top: 66.5%; }
+.door4__sfx { font-size: 10cqw; font-weight: 800; letter-spacing: -.05em; color: var(--dan); line-height: .9; }
+.door4__v { font-size: 3.6cqw; font-weight: 700; }
+.door4__h { font-size: max(10px, 2.6cqw); color: var(--muted); }
+.door4 .tag { position: absolute; right: 3cqw; top: 3cqw; }
+.door4.is-hit { box-shadow: 0 0 0 1cqw var(--blue); }
+.trav { position: absolute; left: 33%; top: 9%; width: 34%; height: 11%; display: grid; place-items: center; z-index: 3; }
+.trav .wcard { font-size: 6.6cqw; }
+.ha-gl { --x: 4%; --y: 22%; --w: 92%; text-align: center; font-size: 3.4cqw; font-weight: 600; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { min-height: 44px; padding: 0 14px; border-radius: 99px; border: 0; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line); font-weight: 700; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chip small { font-weight: 500; color: var(--muted); font-size: 12px; }
+.chip.is-on { background: var(--ink); color: #fff; box-shadow: none; } .chip.is-on small { color: #aab; }
+.probe { position: fixed; left: 0; top: 0; z-index: 50; pointer-events: none; visibility: hidden; }
+
+/* ---------- сцена 4: рецепт и порядок ---------- */
+.rc { --x: 6%; --y: 8%; --w: 88%; height: 84%; box-sizing: border-box; padding: 4.4cqw; display: flex; flex-direction: column; gap: 3cqw; }
+.rc__top { display: flex; align-items: center; gap: 1.6cqw; font-weight: 800; font-size: 4.6cqw; }
+.rc__top svg { width: 6.4cqw; }
+.rc__top .tag { margin-left: auto; }
+.rc__row { display: flex; align-items: center; gap: 2cqw; flex-wrap: wrap; padding-top: 2.6cqw; border-top: 1px solid var(--line); }
+.rc__row > .tag { min-width: 5cqw; justify-content: center; }
+.tokr { display: inline-flex; gap: 2cqw; }
+.tk { display: inline-flex; align-items: baseline; border-radius: 99px; padding: 1.4cqw 3cqw; font-weight: 800; font-size: 6cqw; letter-spacing: -.03em; background: var(--mist); }
+.tk--ru { font-size: 4.6cqw; font-weight: 700; }
+.tk--son { background: var(--son); color: #fff; }
+.tk--onc { background: var(--onc); color: #fff; }
+.rc__kz { font-weight: 700; font-size: 4.6cqw; }
+.stamp { position: absolute; right: 6cqw; bottom: 6cqw; border: .7cqw solid var(--bad); color: var(--bad); border-radius: 3cqw; padding: 1.6cqw 2.6cqw; font-weight: 800; font-size: 3.8cqw; transform: rotate(-6deg); background: rgba(255,255,255,.9); }
+.stamp b { font-size: 5cqw; }
+.build { display: flex; gap: 8px; min-height: 48px; padding: 6px; border-radius: 16px; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line); align-items: center; flex-wrap: wrap; }
+.build:empty::before { content: attr(data-hint); color: var(--muted); font-size: 14px; padding-left: 8px; }
+.tok { min-height: 44px; padding: 0 14px; border-radius: 99px; border: 0; background: var(--paper); box-shadow: inset 0 0 0 1.5px var(--line); font-weight: 800; font-size: 16px; cursor: pointer; }
+.tok:disabled { opacity: .35; cursor: default; }
+.build .tok { background: var(--ink); color: #fff; box-shadow: none; }
+
+/* ---------- сцена 5: табло ---------- */
+.board { --x: 5%; --y: 6%; --w: 90%; display: grid; gap: 1.8cqw; perspective: 600px; }
+.board__head { display: flex; align-items: center; gap: 2cqw; color: #fff; font-weight: 800; font-size: 4.6cqw; margin-bottom: 1cqw; }
+.board__head svg { width: 7cqw; }
+.board__head .tag { margin-left: auto; background: var(--blue); }
+.brow { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2cqw; background: var(--ink-2); border-radius: 3.6cqw; padding: 2.4cqw 3.2cqw; color: #fff; transform-origin: 50% 0; }
+.brow__tr { font-weight: 800; font-size: 4.9cqw; letter-spacing: -.03em; }
+.brow__ru { display: block; font-size: max(10px, 2.7cqw); font-weight: 500; color: #9aa0ad; letter-spacing: 0; margin-top: .6cqw; }
+.brow__it { background: var(--ink-3); border-radius: 99px; padding: 1.2cqw 2.4cqw; font-weight: 700; font-size: 3.4cqw; }
+.hours { --x: 5%; --y: 82%; --w: 90%; display: flex; align-items: center; justify-content: space-between; gap: 2cqw; background: var(--paper); border-radius: 99px; padding: 2.4cqw 4cqw; box-sizing: border-box; font-weight: 800; font-size: 5cqw; }
+.hours span { font-size: 3.6cqw; color: var(--muted); }
+.on-dark .hours .t-son { color: var(--son); }
+.hours__ring { position: absolute; inset: -1.2cqw; border: .8cqw solid var(--son); border-radius: 99px; }
+
+/* ---------- лаборатория ---------- */
+.lab { padding: 72px 26px 40px; padding-right: var(--side); }
+.lab__in { max-width: 1120px; margin: 0 auto; }
+.lab__head { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; margin-bottom: 22px; }
+.clap { width: 120px; }
+.lab__head h2 { margin: 0 0 6px; font-size: clamp(32px, 4.4vw, 64px); letter-spacing: -.05em; line-height: .95; font-weight: 800; }
+.lab__head p { margin: 0; font-size: 18px; color: var(--muted); }
+.tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.tab { min-height: 44px; padding: 0 20px; border-radius: 99px; border: 0; background: var(--mist); font-weight: 800; font-size: 16px; cursor: pointer; }
+.tab[aria-selected="true"] { background: var(--blue); color: #fff; }
+.lab__box { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; }
+.monitor { position: relative; min-height: 340px; border-radius: 36px; background: var(--blue); color: #fff; overflow: hidden; display: grid; place-items: center; padding: 28px; box-sizing: border-box; isolation: isolate; }
+.monitor .mega { right: -2%; bottom: -6%; font-size: 180px; color: var(--blue-d); z-index: -1; }
+.mon__out { text-align: center; }
+.mon__word { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 12px; align-items: baseline; font-size: clamp(34px, 5vw, 68px); font-weight: 800; letter-spacing: -.045em; line-height: 1; }
+.mon__word .w { background: var(--paper); color: var(--ink); border-radius: 22px; padding: 10px 18px; display: inline-flex; }
+.mon__word .d { border-radius: 22px; padding: 10px 18px; background: var(--onc); }
+.mon__word .d.son { background: var(--son); }
+.mon__ru { margin: 16px 0 0; font-size: 20px; font-weight: 600; }
+.mon__why { margin: 10px auto 0; max-width: 36ch; font-size: 15px; color: #dfe6ff; }
+.ctrl { border-radius: 36px; background: var(--mist); padding: 22px; display: grid; gap: 14px; align-content: start; }
+.ctrl h3 { margin: 0; font-size: 15px; letter-spacing: .02em; color: var(--muted); font-weight: 700; }
+.pane[hidden] { display: none; }
+.ruler2 { position: relative; height: 120px; border-radius: 28px; background: var(--paper); }
+.ruler2__line { position: absolute; left: 6%; right: 6%; top: 60%; height: 4px; background: var(--ink); border-radius: 4px; }
+.ruler2__ev { position: absolute; left: 50%; top: 18%; transform: translateX(-50%); background: var(--ink); color: #fff; border-radius: 99px; padding: 6px 14px; font-weight: 800; font-size: 18px; }
+.ruler2__pill { position: absolute; left: 6%; top: 44%; width: 46px; height: 46px; margin-left: -23px; }
+input[type="range"].rng { width: 100%; height: 44px; accent-color: var(--blue); cursor: pointer; }
+.fix__bad { font-size: 26px; font-weight: 800; letter-spacing: -.03em; color: var(--bad); text-decoration: line-through 3px; }
+
+/* ---------- ловушки: плёнка ---------- */
+.stage--wide { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 16px; }
+.stage--wide .side { justify-content: flex-start; gap: 8px; }
+.stage--wide .subs { max-width: 64ch; }
+.reel-track { position: absolute; left: 0; top: 0; bottom: 0; display: flex; gap: 22px; padding: 0 5cqw; align-items: center; }
+.take { position: relative; flex: none; width: min(420px, 74cqw); height: min(86cqh, 470px); box-sizing: border-box; border-radius: 28px; background: var(--paper); padding: 22px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.take::before, .take::after { content: ''; position: absolute; left: 14px; right: 14px; height: 10px; background: repeating-linear-gradient(90deg, var(--ink) 0 14px, transparent 14px 26px); opacity: .9; }
+.take::before { top: 8px; } .take::after { bottom: 8px; }
+.take__no { margin-top: 12px; display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 14px; letter-spacing: .04em; }
+.take__no svg { width: 38px; }
+.take__flip { position: relative; display: grid; flex: 1; min-height: 0; perspective: 800px; }
+.take__face { grid-area: 1 / 1; border-radius: 20px; padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 8px; backface-visibility: hidden; }
+.take__face--bad { background: #fbe9ee; }
+.take__face--ok { background: #e3f6ea; transform: rotateY(180deg); }
+.take.is-fixed .take__face--bad { transform: rotateY(-180deg); }
+.take.is-fixed .take__face--ok { transform: rotateY(0); }
+.take__face { transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.take__tr { font-size: clamp(26px, 6cqw, 40px); font-weight: 800; letter-spacing: -.035em; line-height: 1; }
+.take__face--bad .take__tr { color: var(--bad); position: relative; align-self: flex-start; }
+.take__face--bad .take__tr::after { content: ''; position: absolute; left: -4px; right: -4px; top: 52%; height: 4px; background: var(--bad); border-radius: 4px; }
+.take__face--ok .take__tr { color: var(--ok); }
+.take__note { margin: 0; font-size: 15px; line-height: 1.35; }
+.take .btn { align-self: flex-start; margin-bottom: 12px; }
+
+/* ---------- видео, практика ---------- */
+.plain { padding: 64px 26px; padding-right: var(--side); }
+.plain__in { max-width: 920px; margin: 0 auto; }
+.plain h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 10px; font-size: clamp(30px, 3.6vw, 52px); letter-spacing: -.045em; font-weight: 800; line-height: 1; }
+.plain h2 svg { width: 48px; flex: none; }
+.plain__lead { margin: 0 0 20px; font-size: 18px; color: var(--muted); }
+.plain a-exercise, .plain a-quiz { margin-bottom: 18px; }
+
+/* нестандартное: таблетница */
+.pb { border-radius: 36px; background: var(--blue); color: #fff; padding: 24px; margin-top: 8px; position: relative; overflow: hidden; isolation: isolate; }
+.pb .mega { right: -1%; top: -10%; font-size: 200px; z-index: -1; }
+.pb__head { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+.pb__head h3 { margin: 0; font-size: 22px; letter-spacing: -.03em; }
+.pb__score { background: var(--paper); color: var(--ink); border-radius: 99px; padding: 6px 14px; font-weight: 800; }
+.pb__label { margin: 18px auto 10px; width: fit-content; max-width: 100%; box-sizing: border-box; background: var(--paper); color: var(--ink); border-radius: 22px; padding: 12px 22px; font-size: clamp(24px, 4vw, 38px); font-weight: 800; letter-spacing: -.035em; text-align: center; }
+.pb__ru { text-align: center; margin: 0 0 16px; color: #dfe6ff; }
+.pb__track { position: relative; display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; }
+.pb__slot { min-height: 96px; border-radius: 26px; border: 2px dashed rgba(255,255,255,.6); background: rgba(255,255,255,.08); color: #fff; font-weight: 800; font-size: 16px; cursor: pointer; display: grid; place-items: center; gap: 4px; padding: 8px; }
+.pb__slot.is-ok { background: var(--ok); border-color: var(--ok); }
+.pb__slot.is-bad { background: var(--bad); border-color: var(--bad); }
+.pb__ev { width: 110px; display: grid; justify-items: center; gap: 6px; font-weight: 800; }
+.pb__ev .ico { width: 84px; background: var(--paper); border-radius: 24px; padding: 14px; box-sizing: border-box; }
+.pb__pill { width: 64px; height: 64px; margin: 16px auto 0; display: block; cursor: grab; touch-action: none; background: var(--paper); border-radius: 22px; padding: 10px; box-sizing: border-box; border: 0; }
+.pb__msg { min-height: 1.4em; text-align: center; margin: 12px 0 0; font-weight: 600; }
+.pb__end { text-align: center; }
+
+/* ---------- шпаргалка-постер и финал ---------- */
+.poster { position: relative; border-radius: 44px; background: var(--blue); color: #fff; padding: clamp(22px, 4vw, 48px); overflow: hidden; isolation: isolate; }
+.poster .mega { left: -2%; bottom: -8%; font-size: clamp(120px, 22vw, 330px); z-index: -1; }
+.poster__k { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.poster h2 { margin: 0 0 18px; font-size: clamp(40px, 7vw, 96px); line-height: .9; letter-spacing: -.055em; font-weight: 800; }
+.pgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ptile { background: var(--paper); color: var(--ink); border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.ptile h3 { margin: 0; font-size: 14px; color: var(--muted); font-weight: 700; }
+.ptile__big { font-size: clamp(22px, 2.6vw, 32px); font-weight: 800; letter-spacing: -.035em; line-height: 1.05; }
+.ptile p { margin: 0; font-size: 15px; line-height: 1.35; }
+.ptile--wide { grid-column: span 2; }
+.forms4 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-weight: 800; font-size: 18px; }
+.forms4 span { background: var(--mist); border-radius: 14px; padding: 8px 10px; }
+.finale { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: stretch; }
+.finale__frame { position: relative; min-height: 320px; border-radius: 36px; background: var(--mist); overflow: hidden; container-type: inline-size; }
+.finale__frame .bubble { font-size: max(18px, 6cqw); }
+.fin-vet { position: absolute; left: 2%; bottom: 0; width: 44%; }
+.fin-dog { position: absolute; right: 2%; bottom: 2%; width: 34%; }
+.fin-b1 { left: 30%; top: 8%; } .fin-b2 { left: 44%; top: 40%; background: var(--paper) !important; color: var(--ink) !important; }
+.finale__txt { border-radius: 36px; background: var(--mist); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.finale__txt p { margin: 0; font-size: 17px; line-height: 1.42; }
+.skills { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.skills li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; }
+.skills svg { width: 22px; flex: none; margin-top: 1px; }
+
+/* ---------- свой скроллбар: лента дня клиники ---------- */
+.reel { position: fixed; z-index: 800; right: 14px; top: 50%; transform: translateY(-50%); width: 58px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0; border-radius: 30px; background: var(--ink); box-shadow: 0 10px 30px rgba(8, 14, 40, .25); touch-action: none; user-select: none; }
+.reel__rail { position: relative; display: flex; flex-direction: column; gap: 4px; }
+.reel__fill { position: absolute; left: 50%; top: 0; width: 4px; margin-left: -2px; height: 100%; border-radius: 4px; background: linear-gradient(var(--blue), #3fd0ff); transform-origin: 50% 0; transform: scaleY(0); z-index: 0; }
+.reel button { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--ink-3); color: #c6cad3; font-weight: 800; font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background .2s, color .2s; }
+.reel button.is-read { background: #e3f6ea; color: var(--ok); }
+.reel button.is-here { background: var(--blue); color: #fff; }
+.reel__thumb { position: absolute; left: 50%; top: 0; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 4px var(--blue); z-index: 2; pointer-events: none; }
+.reel__cap { color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .06em; }
+
+/* ---------- телефон ---------- */
+@media (max-width: 767.98px) {
+  :root { --side: 14px; }
+  .stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 10px; padding: 54px 12px 62px; }
+  .side { justify-content: flex-start; gap: 8px; }
+  .side h2 { font-size: 24px; }
+  .kick { font-size: 12px; padding: 4px 10px; }
+  .subs { font-size: 15.5px; line-height: 1.33; }
+  .act { padding: 10px; border-radius: 18px; gap: 6px; }
+  .act__q { font-size: 15px; }
+  .btn, .chip, .tok { font-size: 14px; padding: 0 12px; }
+  .stage--wide { grid-template-rows: auto minmax(0, 1fr); }
+  .take { width: 78cqw; padding: 18px; }
+  .take__note { font-size: 14px; }
+  .lab, .plain { padding: 56px 14px 32px; }
+  .lab__head { grid-template-columns: 1fr; gap: 8px; }
+  .clap { width: 84px; }
+  .lab__box { grid-template-columns: minmax(0, 1fr); }
+  .monitor { min-height: 260px; border-radius: 28px; padding: 18px; }
+  .monitor .mega { font-size: 120px; }
+  .pgrid { grid-template-columns: minmax(0, 1fr); }
+  .ptile--wide { grid-column: auto; }
+  .finale { grid-template-columns: minmax(0, 1fr); }
+  .pb { padding: 18px; border-radius: 28px; }
+  .pb__track { grid-template-columns: 1fr 86px 1fr; gap: 8px; }
+  .pb__ev { width: 86px; } .pb__ev .ico { width: 70px; }
+  .poster { border-radius: 30px; }
+  .reel { right: auto; left: 8px; top: 6px; transform: none; width: auto; right: 8px; height: 40px; flex-direction: row; padding: 0 6px; gap: 6px; border-radius: 20px; }
+  .reel__cap { display: none; }
+  .reel__rail { flex-direction: row; flex: 1; justify-content: space-between; gap: 2px; }
+  .reel button { width: 26px; height: 26px; font-size: 11px; }
+  .reel__fill { left: 0; top: 50%; width: 100%; height: 4px; margin: -2px 0 0; transform-origin: 0 50%; transform: scaleX(0); }
+  .reel__thumb { top: 50%; left: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; box-shadow: 0 0 0 3px var(--blue); }
+}
+/* без анимации — итоговые кадры */
+html:not(.motion) .trav1 { transform: translate(-56%, 318%) scale(.72); }
+html:not(.motion) .trav2 { transform: translate(-56%, 620%) scale(.72); }
+html:not(.motion) #s-traps .stage { height: auto; }
+html:not(.motion) #s-traps .frame { overflow-x: auto; min-height: 520px; }
+html:not(.motion) #s-traps .reel-track { position: relative; height: 100%; min-height: 520px; padding: 24px; }
+html:not(.motion) #s-traps .take { height: 470px; }
+@media (prefers-reduced-motion: reduce) {
+  .take__face { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gl" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f4bff"/><stop offset="1" stop-color="#3fd0ff"/></linearGradient>
+  </defs>
+  <symbol id="i-dog" viewBox="0 0 124 100">
+    <path d="M24 66c-15-8-15-24-8-32" fill="none" stroke="#7a5a40" stroke-width="7" stroke-linecap="round"/>
+    <path d="M27 88c-5-26 6-44 30-44 19 0 25 18 23 44z" fill="#a47d5c"/>
+    <ellipse cx="38" cy="85" rx="15" ry="9" fill="#7a5a40"/>
+    <rect x="61" y="60" width="9" height="28" rx="4.5" fill="#a47d5c"/>
+    <rect x="71" y="60" width="9" height="28" rx="4.5" fill="#7a5a40"/>
+    <ellipse cx="71" cy="62" rx="9" ry="13" fill="#cfa882"/>
+    <circle cx="79" cy="34" r="18" fill="#a47d5c"/>
+    <ellipse cx="96" cy="41" rx="11" ry="7.5" fill="#cfa882"/>
+    <circle cx="105" cy="37.5" r="3.4" fill="#0d0e12"/>
+    <path d="M68 20c-11 4-10 22-7 27 8-2 12-14 12-24z" fill="#7a5a40"/>
+    <circle cx="85" cy="30" r="2.6" fill="#0d0e12"/>
+    <rect x="64" y="47" width="25" height="5.5" rx="2.7" fill="#1f4bff"/>
+    <circle cx="78" cy="56" r="3.4" fill="#ff6a2c"/>
+    <path d="M103 14c7 5 8 12 5 18M110 6c11 9 12 21 6 30" fill="none" stroke="#5b86ff" stroke-width="3" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-vet" viewBox="0 0 100 112">
+    <circle cx="50" cy="34" r="25" fill="#2a1e1b"/>
+    <path d="M16 112c0-30 14-46 34-46s34 16 34 46z" fill="#ffffff" stroke="#dce2eb" stroke-width="2"/>
+    <path d="M38 68l12 22 12-22z" fill="#1f4bff"/>
+    <rect x="44" y="52" width="12" height="16" rx="5" fill="#eebd9b"/>
+    <circle cx="50" cy="38" r="17" fill="#f2c6a6"/>
+    <path d="M33 36c2-14 12-20 22-18 8 1 13 8 13 16-9-2-17-7-21-12-3 7-8 11-14 14z" fill="#2a1e1b"/>
+    <circle cx="44" cy="40" r="1.8" fill="#0d0e12"/><circle cx="56" cy="40" r="1.8" fill="#0d0e12"/>
+    <path d="M45 47c3 2.4 7 2.4 10 0" fill="none" stroke="#b5684a" stroke-width="2" stroke-linecap="round"/>
+    <path d="M34 70c-4 14 0 22 10 22M66 70c4 14 0 22-10 22" fill="none" stroke="url(#gl)" stroke-width="3.4" stroke-linecap="round"/>
+    <circle cx="50" cy="93" r="4.4" fill="none" stroke="url(#gl)" stroke-width="3.4"/>
+  </symbol>
+  <symbol id="i-heart" viewBox="0 0 48 48"><path class="lineicon" d="M24 40C10 30 6 23 6 16.5 6 11 10.4 7 15.6 7c3.6 0 6.6 2 8.4 5 1.8-3 4.8-5 8.4-5C37.6 7 42 11 42 16.5 42 23 38 30 24 40z"/></symbol>
+  <symbol id="i-pill" viewBox="0 0 48 48"><g class="lineicon"><rect x="7" y="17" width="34" height="14" rx="7" transform="rotate(-35 24 24)"/><path d="M19.8 17.8l8.4 12.4"/></g></symbol>
+  <symbol id="i-bowl" viewBox="0 0 48 48"><g class="lineicon"><path d="M6 24h36c0 9-7.5 15-18 15S6 33 6 24z"/><path d="M15 18c2-3 5-4 9-4s7 1 9 4"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 48 48"><g class="lineicon"><circle cx="24" cy="24" r="17"/><path d="M24 14v10l7 5"/></g></symbol>
+  <symbol id="i-syringe" viewBox="0 0 48 48"><g class="lineicon"><path d="M30 8l10 10M35 13L17 31l-6-6 18-18M14 34l-6 6M21 21l3 3M25 17l3 3"/></g></symbol>
+  <symbol id="i-paw" viewBox="0 0 48 48"><g class="lineicon"><path d="M24 26c-7 0-12 7-12 11 0 3 3 4 6 3s4-2 6-2 3 1 6 2 6 0 6-3c0-4-5-11-12-11z"/><circle cx="14" cy="17" r="3.6"/><circle cx="21" cy="11" r="3.6"/><circle cx="29" cy="11" r="3.6"/><circle cx="36" cy="17" r="3.6"/></g></symbol>
+  <symbol id="i-bath" viewBox="0 0 48 48"><g class="lineicon"><path d="M6 24h36v4c0 6-5 10-11 10H17C11 38 6 34 6 28z"/><path d="M12 24V11a4 4 0 018 0M15 38l-2 4M33 38l2 4"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 48 48"><g class="lineicon"><circle cx="24" cy="24" r="8"/><path d="M24 6v5M24 37v5M6 24h5M37 24h5M11 11l3.5 3.5M33.5 33.5L37 37M11 37l3.5-3.5M33.5 14.5L37 11"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 48 48"><path class="lineicon" d="M34 30A14 14 0 0118 10a15 15 0 1016 20z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1fa857"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clap" viewBox="0 0 120 100">
+    <rect x="8" y="40" width="104" height="54" rx="12" fill="#0d0e12"/>
+    <rect x="22" y="56" width="76" height="8" rx="4" fill="#3a3c48"/><rect x="22" y="72" width="50" height="8" rx="4" fill="#3a3c48"/>
+    <g class="clap__top"><rect x="8" y="16" width="104" height="22" rx="8" fill="#ffffff" stroke="#0d0e12" stroke-width="4"/><path d="M24 18l12 18M48 18l12 18M72 18l12 18M96 18l12 18" stroke="#0d0e12" stroke-width="7"/></g>
+  </symbol>
+</svg>
+
+<nav class="reel" data-scrollbar aria-label="Lesson progress">
+  <span class="reel__cap" data-ui>7/24</span>
+  <div class="reel__rail">
+    <span class="reel__fill"></span>
+    <span class="reel__thumb"></span>
+    <button type="button" data-goto="story" aria-label="The hook">1</button>
+    <button type="button" data-goto="point" aria-label="Point and arrow">2</button>
+    <button type="button" data-goto="harmony" aria-label="Four forms">3</button>
+    <button type="button" data-goto="order" aria-label="Word order">4</button>
+    <button type="button" data-goto="day" aria-label="Daily schedule">5</button>
+    <button type="button" data-goto="lab" aria-label="Editing room">6</button>
+    <button type="button" data-goto="traps" aria-label="Bloopers">7</button>
+    <button type="button" data-goto="video" aria-label="Video">8</button>
+    <button type="button" data-goto="practice" aria-label="Practice">9</button>
+    <button type="button" data-goto="check" aria-label="Quick check">10</button>
+    <button type="button" data-goto="cheat" aria-label="Cheat sheet">11</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ 1. КРЮЧОК ============ -->
+<section id="s-story" class="scene" data-section="story" data-words="49">
+  <div class="stage">
+    <div class="frame">
+      <div class="bg"><span class="mega st-mega" style="left:-2cqw;top:3cqh;font-size:44cqmin">Pati</span></div>
+      <div class="set">
+        <div class="st-street">
+          <div class="abs clinic card">
+            <div class="clinic__top"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-heart"/></svg>Pati Klinik<span class="tag">7/24 açık</span></div>
+            <div class="clinic__name">Veteriner</div>
+            <div class="clinic__win" style="left:4cqw"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pill"/></svg></div>
+            <div class="clinic__win" style="right:4cqw"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-syringe"/></svg></div>
+            <div class="door"></div>
+          </div>
+          <svg class="abs st-dog ico" viewBox="0 0 124 100" aria-hidden="true"><use href="#i-dog"/></svg>
+        </div>
+        <div class="st-in">
+          <svg class="abs st-vet ico" viewBox="0 0 100 112" aria-hidden="true"><use href="#i-vet"/></svg>
+          <div class="bubble bubble--vet"><small lang="tr">Doktor</small><span data-say="Yemekten önce.">Yemek<span class="t-dan">ten</span> <span class="t-onc">önce</span>.</span></div>
+          <div class="bubble bubble--me on-dark"><small lang="tr">Ben</small><span data-say="Önce yemek?"><span class="t-onc">Önce</span> yemek?</span></div>
+          <div class="abs rx"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pill"/></svg><span lang="tr">Reçete · Simit</span></div>
+        </div>
+        <div class="st-home">
+          <span class="tag" style="position:absolute;left:5cqw;top:5cqw" lang="tr">Ev</span>
+          <div class="home__line"></div>
+          <div class="home__it home__bowl"><span class="home__num">1</span><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-bowl"/></svg></div>
+          <div class="home__it home__pill"><span class="home__num">2</span><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pill"/></svg></div>
+          <svg class="abs home__dog ico" viewBox="0 0 124 100" aria-hidden="true"><use href="#i-dog"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>Scene 1 · Kadıköy</span>
+      <h2>Before meals. Or after?</h2>
+      <div class="subs">
+        <p>Istanbul, Kadıköy. I’m taking my dog Simit to the vet. Simit ate a sock.</p>
+        <p>The vet hands me pills. She says: <b data-say="Yemekten önce.">Yemekten önce.</b></p>
+        <p>I say: <b data-say="Önce yemek?">Önce yemek?</b> She says: <b data-say="Hayır. Yemekten önce.">Hayır. Yemekten önce.</b> I say, well, that’s what I said.</p>
+        <p>At home I feed Simit first. Then the pill. Simit is happy. The vet isn’t.</p>
+      </div>
+      <div class="act" id="story-act">
+        <p class="act__q">Guess: what did the vet actually say?</p>
+        <div class="row">
+          <button type="button" class="btn" data-ans="ok">Pill before meals</button>
+          <button type="button" class="btn" data-ans="bad">Food first</button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. ТОЧКА И СТРЕЛКА ============ -->
+<section id="s-point" class="scene" data-section="point" data-words="39">
+  <div class="stage">
+    <div class="frame">
+      <div class="bg"><span class="mega pt-mega" style="right:-4cqw;bottom:-2cqh;font-size:40cqmin">-DAn</span></div>
+      <div class="set">
+        <div class="abs pt-rule"><span>word</span>+<span class="r-dan">-DAn</span>+<span class="r-onc">önce</span>/<span class="r-son">sonra</span></div>
+        <div class="abs pt-ruler">
+          <svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true">
+            <path class="pt-line" d="M6 10H194" pathLength="1" stroke="#fff" stroke-width="1.6" fill="none" stroke-dasharray="1" stroke-dashoffset="0"/>
+            <path class="pt-ticks" d="M22 6v8M38 6v8M54 6v8M70 6v8M86 6v8M114 6v8M130 6v8M146 6v8M162 6v8M178 6v8" stroke="rgba(255,255,255,.5)" stroke-width="1.2"/>
+            <path class="pt-arL" d="M92 10H30M38 4.5L30 10l8 5.5" stroke="#8a3ffc" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="pt-arR" d="M108 10h62M162 4.5l8 5.5-8 5.5" stroke="#0fa6e6" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="abs pt-pin"><span class="wcard" data-say="yemekten">yemek<span class="t-dan pt-sfx">ten</span></span></div>
+        <span class="pt-lab pt-lab--onc" lang="tr">önce</span>
+        <span class="pt-lab pt-lab--son" lang="tr">sonra</span>
+        <div class="abs pt-pill"><svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pill"/></svg></div>
+        <svg class="abs pt-dog ico" viewBox="0 0 124 100" aria-hidden="true"><use href="#i-dog"/></svg>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>Scene 2 · Timeline</span>
+      <h2>Point and arrow</h2>
+      <div class="subs">
+        <p>I lay the day out on a timeline. In the middle is the meal, <b data-say="yemek">yemek</b>. That’s the point.</p>
+        <p>The point gets hooked with <b class="t-dan">-DAn</b>, meaning “from.” As in <b data-say="evden">evden</b>, “from home.” You get <b data-say="yemekten">yemekten</b>, “from the meal.”</p>
+        <p>Then the arrow. <b class="t-onc">önce</b> points back, <b class="t-son">sonra</b> points forward. The rule: word + <b class="t-dan">-DAn</b> + <b class="t-onc">önce</b> or <b class="t-son">sonra</b>.</p>
+      </div>
+      <div class="act" id="point-act">
+        <p class="act__q">Where does the pill go?</p>
+        <div class="row" role="group">
+          <button type="button" class="btn is-on" data-dir="once" lang="tr">önce</button>
+          <button type="button" class="btn" data-dir="sonra" lang="tr">sonra</button>
+        </div>
+        <p class="react" aria-live="polite"><b data-say="Yemekten önce" class="pt-read">Yemekten önce</b> — <span class="pt-ru">before meals</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. ЧЕТЫРЕ КАБИНЕТА ============ -->
+<section id="s-harmony" class="scene" data-section="harmony" data-words="52">
+  <div class="stage">
+    <div class="frame frame--mist">
+      <div class="bg"><span class="mega ha-mega" style="right:-3cqw;top:-6cqh;font-size:70cqmin">4</span></div>
+      <div class="set">
+        <div class="trav trav1"><span class="wcard" data-say="kahvaltıdan">kahval<span class="hv ha-v1">ı</span><span class="t-dan ha-s1">dan</span></span></div>
+        <div class="trav trav2"><span class="wcard" data-say="maçtan">ma<span class="hv ha-c2">ç</span><span class="t-dan ha-s2">tan</span></span></div>
+        <div class="abs ha-gl">Two letters decide: the last vowel and the last sound.</div>
+        <div class="door4 door4--1" data-door="dan"><span class="tag" lang="tr">Kabin 1</span><span class="door4__sfx" lang="tr">-dan</span><span><span class="door4__v" lang="tr">a ı o u</span><br><span class="door4__h">voiced ending</span></span></div>
+        <div class="door4 door4--2" data-door="den"><span class="tag" lang="tr">Kabin 2</span><span class="door4__sfx" lang="tr">-den</span><span><span class="door4__v" lang="tr">e i ö ü</span><br><span class="door4__h">voiced ending</span></span></div>
+        <div class="door4 door4--3" data-door="tan"><span class="tag" lang="tr">Kabin 3</span><span class="door4__sfx" lang="tr">-tan</span><span><span class="door4__v" lang="tr">a ı o u</span><br><span class="door4__h">voiceless ending</span></span></div>
+        <div class="door4 door4--4" data-door="ten"><span class="tag" lang="tr">Kabin 4</span><span class="door4__sfx" lang="tr">-ten</span><span><span class="door4__v" lang="tr">e i ö ü</span><br><span class="door4__h">voiceless ending</span></span></div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>Scene 3 · Exam rooms</span>
+      <h2>Four doors</h2>
+      <div class="subs">
+        <p><b class="t-dan">-DAn</b> has four forms, like four exam rooms. The end of the word decides which one you walk into.</p>
+        <p>Last vowel a, ı, o, u — <b class="t-dan">-dan</b>: <b data-say="kahvaltıdan">kahvaltıdan</b>. Vowel e, i, ö, ü — <b class="t-dan">-den</b>.</p>
+        <p>A voiceless sound at the end — <b>d</b> turns into <b>t</b>: <b data-say="maçtan">maçtan</b>, <b data-say="işten">işten</b>. The voiceless ones hide in the phrase <b data-say="fıstıkçı Şahap">FıStıKÇı ŞaHaP</b>.</p>
+      </div>
+      <div class="act" id="harm-act">
+        <p class="act__q">Send the word to its room</p>
+        <div class="chips">
+          <button type="button" class="chip" data-w="ders">ders <small>class</small></button>
+          <button type="button" class="chip" data-w="okul">okul <small>school</small></button>
+          <button type="button" class="chip" data-w="muayene">muayene <small>checkup</small></button>
+          <button type="button" class="chip" data-w="iş">iş <small>work</small></button>
+          <button type="button" class="chip" data-w="aşı">aşı <small>shot</small></button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <div class="probe" aria-hidden="true"><span class="wcard"></span></div>
+</section>
+
+<!-- ============ 4. ПОРЯДОК ============ -->
+<section id="s-order" class="scene" data-section="order" data-words="43">
+  <div class="stage">
+    <div class="frame frame--ink">
+      <div class="bg"><span class="mega or-mega" style="left:-3cqw;bottom:-4cqh;font-size:46cqmin">Sıra</span></div>
+      <div class="set">
+        <div class="abs rc card">
+          <div class="rc__top"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-heart"/></svg><span lang="tr">Reçete</span><span class="tag" lang="tr">Simit</span></div>
+          <div class="rc__row or-ru"><span class="tag">EN</span><span class="tokr"><span class="tk tk--ru">after</span><span class="tk tk--ru">work</span></span></div>
+          <div class="rc__row or-tr"><span class="tag">TR</span><span class="tokr"><span class="tk or-is" data-say="işten">iş<span class="t-dan or-sfx">ten</span></span><span class="tk tk--son or-son" lang="tr">sonra</span></span></div>
+          <div class="rc__row or-kz"><span class="tag">KZ</span><span class="rc__kz">jumystan keyin</span></div>
+        </div>
+        <div class="stamp or-stamp"><b lang="tr">Önce iş</b> = work first</div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>Scene 4 · Prescription</span>
+      <h2>The point first</h2>
+      <div class="subs">
+        <p>In English, “after” goes first: after work.</p>
+        <p>Turkish flips it. The point first, then the arrow: <b data-say="işten sonra">işten sonra</b>. Literally “from work, after.”</p>
+        <p>Put <b class="t-onc">önce</b> up front and you get “first”: <b data-say="önce iş">önce iş</b>. That’s exactly what the vet heard.</p>
+      </div>
+      <div class="act" id="order-act">
+        <p class="act__q">Build the label for the box: “before the checkup”</p>
+        <div class="build" data-hint="tap the words"></div>
+        <div class="row">
+          <button type="button" class="tok" data-t="önce">önce</button>
+          <button type="button" class="tok" data-t="muayeneden">muayeneden</button>
+          <button type="button" class="tok" data-t="muayene">muayene</button>
+          <button type="button" class="tok" data-t="sonra">sonra</button>
+          <button type="button" class="btn or-reset" aria-label="Start over">↺</button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. РЕЖИМ ДНЯ ============ -->
+<section id="s-day" class="scene" data-section="day" data-words="43">
+  <div class="stage">
+    <div class="frame frame--ink on-dark">
+      <div class="bg"><span class="mega dy-mega" style="right:-4cqw;top:-4cqh;font-size:36cqmin">7/24</span></div>
+      <div class="set">
+        <div class="abs board">
+          <div class="board__head"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-clock"/></svg><span lang="tr">Günlük plan</span><span class="tag" lang="tr">Simit</span></div>
+          <div class="brow"><span class="brow__tr" data-say="Kahvaltıdan önce">Kahvaltı<span class="t-dan">dan</span> <span class="t-onc">önce</span><span class="brow__ru">before breakfast</span></span><span class="brow__it" lang="tr">bir hap</span></div>
+          <div class="brow"><span class="brow__tr" data-say="Yürüyüşten sonra">Yürüyüş<span class="t-dan">ten</span> <span class="t-son">sonra</span><span class="brow__ru">after the walk</span></span><span class="brow__it" lang="tr">su</span></div>
+          <div class="brow"><span class="brow__tr" data-say="Muayeneden önce">Muayene<span class="t-dan">den</span> <span class="t-onc">önce</span><span class="brow__ru">before the checkup</span></span><span class="brow__it" lang="tr">yemek yok</span></div>
+          <div class="brow"><span class="brow__tr" data-say="Aşıdan sonra">Aşı<span class="t-dan">dan</span> <span class="t-son">sonra</span><span class="brow__ru">after the shot</span></span><span class="brow__it" lang="tr">oyun yok</span></div>
+        </div>
+        <div class="abs hours" data-say="Öğleden sonra"><span class="hours__ring"></span><b>Öğle<span class="t-dan">den</span> <span class="t-son">sonra</span></b><span>14:00–18:00</span></div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>Scene 5 · Board</span>
+      <h2>Simit’s schedule</h2>
+      <div class="subs">
+        <p>The vet writes Simit a schedule. A board like at a train station, only for pills.</p>
+        <p>Every line is a point with <b class="t-dan">-DAn</b> plus an arrow. No exceptions.</p>
+        <p>At the bottom, office hours: <b data-say="öğleden sonra">öğleden sonra</b>, “in the afternoon.” Same pattern, just stuck together.</p>
+      </div>
+      <div class="act" id="day-act">
+        <p class="act__q">The receptionist asks: <b data-say="Muayene ne zaman?">Muayene ne zaman?</b> When’s the checkup?</p>
+        <div class="row">
+          <button type="button" class="btn" data-ans="bad" lang="tr">Sonra öğle</button>
+          <button type="button" class="btn" data-ans="ok" lang="tr">Öğleden sonra</button>
+          <button type="button" class="btn" data-ans="bad2" lang="tr">Öğle sonra</button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. МОНТАЖНАЯ ============ -->
+<section id="s-lab" class="lab" data-section="lab" data-words="31">
+  <div class="lab__in">
+    <div class="lab__head">
+      <svg class="clap" viewBox="0 0 120 100" aria-hidden="true"><use href="#i-clap"/></svg>
+      <div>
+        <h2>Editing room</h2>
+        <p>You build it yourself. Three modes, each one answers “why.”</p>
+      </div>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Mode">
+      <button type="button" class="tab" role="tab" aria-selected="true" data-tab="make">Build</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="line">Timeline</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="fix">Fix</button>
+    </div>
+    <div class="lab__box">
+      <div class="monitor">
+        <span class="mega" aria-hidden="true">Kayıt</span>
+        <div class="mon__out">
+          <div class="mon__word" data-say="kahvaltıdan önce"><span class="w">kahvaltı<span class="t-dan mon-sfx">dan</span></span><span class="d mon-dir" lang="tr">önce</span></div>
+          <p class="mon__ru">before breakfast</p>
+          <p class="mon__why">Last vowel ı, voiced ending — so -dan.</p>
+        </div>
+      </div>
+      <div class="ctrl">
+        <div class="pane" data-pane="make">
+          <h3>Word</h3>
+          <div class="chips lab-nouns">
+            <button type="button" class="chip is-on" data-n="kahvaltı">kahvaltı</button>
+            <button type="button" class="chip" data-n="ders">ders</button>
+            <button type="button" class="chip" data-n="maç">maç</button>
+            <button type="button" class="chip" data-n="tatil">tatil</button>
+            <button type="button" class="chip" data-n="uyku">uyku</button>
+            <button type="button" class="chip" data-n="kurs">kurs</button>
+            <button type="button" class="chip" data-n="banyo">banyo</button>
+            <button type="button" class="chip" data-n="yürüyüş">yürüyüş</button>
+          </div>
+          <h3>Arrow</h3>
+          <div class="row lab-dir">
+            <button type="button" class="btn is-on" data-d="önce" lang="tr">önce</button>
+            <button type="button" class="btn" data-d="sonra" lang="tr">sonra</button>
+            <button type="button" class="btn btn--blue lab-say">Listen</button>
+          </div>
+        </div>
+        <div class="pane" data-pane="line" hidden>
+          <h3>Slide the pill along the timeline</h3>
+          <div class="ruler2"><span class="ruler2__line"></span><span class="ruler2__ev lab-ev" lang="tr">yemek</span><svg class="ruler2__pill" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pill"/></svg></div>
+          <input class="rng" type="range" min="0" max="100" value="20" aria-label="Pill position">
+          <div class="chips lab-evs">
+            <button type="button" class="chip is-on" data-e="yemek">yemek</button>
+            <button type="button" class="chip" data-e="iş">iş</button>
+            <button type="button" class="chip" data-e="okul">okul</button>
+          </div>
+        </div>
+        <div class="pane" data-pane="fix" hidden>
+          <h3>The label is broken</h3>
+          <div class="fix__bad lab-bad" lang="tr">Sonra maç</div>
+          <div class="row lab-opts"></div>
+          <button type="button" class="btn btn--ink lab-next">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. НЕУДАЧНЫЕ ДУБЛИ ============ -->
+<section id="s-traps" class="scene" data-section="traps" data-words="59">
+  <div class="stage stage--wide">
+    <div class="side">
+      <span class="kick" data-ui><i></i>Scene 7 · Film</span>
+      <h2>Bloopers</h2>
+      <div class="subs subs--one"><p>Everyone trips on this. Me too. Hit “Reshoot” and the take gets fixed.</p></div>
+    </div>
+    <div class="frame frame--ink">
+      <div class="reel-track">
+        <article class="take">
+          <div class="take__no"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#i-clap"/></svg>TAKE 1</div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Sonra iş</span><p class="take__note">Arrow up front. It came out as “work comes later.”</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="İşten sonra">İşten sonra</span><p class="take__note">The point, then the arrow.</p></div>
+          </div>
+          <button type="button" class="btn btn--ink take__go">Reshoot</button>
+        </article>
+        <article class="take">
+          <div class="take__no"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#i-clap"/></svg>TAKE 2</div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">İş sonra</span><p class="take__note">Forgot <b>-DAn</b>. A point without a hook won’t hold.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="İşten sonra">İşten sonra</span><p class="take__note">The hook is in place.</p></div>
+          </div>
+          <button type="button" class="btn btn--ink take__go">Reshoot</button>
+        </article>
+        <article class="take">
+          <div class="take__no"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#i-clap"/></svg>TAKE 3</div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">İşden sonra</span><p class="take__note">ş is voiceless. Next to it, d doesn’t sound.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="İşten sonra">İşten sonra</span><p class="take__note">Voiceless ending, so t.</p></div>
+          </div>
+          <button type="button" class="btn btn--ink take__go">Reshoot</button>
+        </article>
+        <article class="take">
+          <div class="take__no"><svg viewBox="0 0 120 100" aria-hidden="true"><use href="#i-clap"/></svg>TAKE 4</div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">İki günden önce</span><p class="take__note">Wanted to say “two days ago.”</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="İki gün önce">İki gün önce</span><p class="take__note">A time span comes first: two days, an hour. Then there’s no ending.</p></div>
+          </div>
+          <button type="button" class="btn btn--ink take__go">Reshoot</button>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВИДЕО ============ -->
+<section id="s-video" class="plain" data-section="video" data-words="10">
+  <div class="plain__in">
+    <h2><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-clock"/></svg>Video</h2>
+    <p class="plain__lead">Watch where <b>sonra</b> goes: after the word, not before it.</p>
+    <a-video yt="KLCPUm3HW-I" start="0" end="180" title="Using the postpositions SONRA and ÖNCE with nouns" channel="Happy Turkish"></a-video>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКА ============ -->
+<section id="s-practice" class="plain" data-section="practice" data-words="15">
+  <div class="plain__in">
+    <h2><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-paw"/></svg>Practice</h2>
+    <a-exercise ref="a1.dan-once-sonra.ex1"></a-exercise>
+    <a-exercise ref="a1.dan-once-sonra.ex2"></a-exercise>
+    <a-exercise ref="a1.dan-once-sonra.ex3"></a-exercise>
+    <a-exercise ref="a1.dan-once-sonra.ex4"></a-exercise>
+    <a-exercise ref="a1.dan-once-sonra.ex5"></a-exercise>
+    <div class="pb" id="pillbox">
+      <span class="mega" aria-hidden="true">Hap</span>
+      <div class="pb__head"><h3>Simit’s pill box</h3><span class="pb__score" aria-live="polite">0 / 6</span></div>
+      <div class="pb__label" data-say="Kahvaltıdan önce"><span class="pb-tr">Kahvaltıdan önce</span></div>
+      <p class="pb__ru">Put the pill on the left or the right. Drag it, tap, or use the arrow keys.</p>
+      <div class="pb__track">
+        <button type="button" class="pb__slot" data-side="önce"><span>←</span><span lang="tr">önce</span></button>
+        <div class="pb__ev"><svg class="ico pb-ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-sun"/></svg><span class="pb-ev" lang="tr">kahvaltı</span></div>
+        <button type="button" class="pb__slot" data-side="sonra"><span>→</span><span lang="tr">sonra</span></button>
+      </div>
+      <button type="button" class="pb__pill" aria-label="Pill — drag it to the right side"><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-pill"/></svg></button>
+      <p class="pb__msg" aria-live="polite"></p>
+      <div class="pb__end" hidden><button type="button" class="btn btn--ink pb-again">Again</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ МИНИ-ПРОВЕРКА ============ -->
+<section id="s-check" class="plain" data-section="check" data-words="1">
+  <div class="plain__in">
+    <h2><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>Quick check</h2>
+    <a-quiz ref="a1.dan-once-sonra.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ============ ШПАРГАЛКА И ФИНАЛ ============ -->
+<section id="s-cheat" class="plain" data-section="cheat" data-words="64">
+  <div class="plain__in" style="max-width:1120px">
+    <div class="poster">
+      <span class="mega" aria-hidden="true">önce</span>
+      <div class="poster__k"><span class="tag tag--w">Pati Klinik</span><span class="tag" lang="tr">A1 · İstanbul</span></div>
+      <h2>Before and after</h2>
+      <div class="pgrid">
+        <div class="ptile ptile--wide"><h3>Formula</h3><div class="ptile__big" data-say="yemekten önce, işten sonra">word + <span class="t-dan">-DAn</span> + <span class="t-onc">önce</span> / <span class="t-son">sonra</span></div><p>The point first, then the arrow.</p></div>
+        <div class="ptile"><h3>Four forms</h3><div class="forms4"><span data-say="kahvaltıdan">-dan</span><span data-say="tatilden">-den</span><span data-say="maçtan">-tan</span><span data-say="işten">-ten</span></div><p>Voiceless: FıStıKÇı ŞaHaP.</p></div>
+        <div class="ptile"><h3>Word order trap</h3><div class="ptile__big" data-say="önce yemek"><span class="t-onc">önce</span> yemek</div><p>This is “food first.”</p></div>
+        <div class="ptile"><h3>Time span</h3><div class="ptile__big" data-say="iki gün önce">iki gün <span class="t-onc">önce</span></div><p>Two days ago. No -DAn.</p></div>
+        <div class="ptile"><h3>Office hours</h3><div class="ptile__big" data-say="öğleden sonra">öğle<span class="t-dan">den</span> <span class="t-son">sonra</span></div><p>In the afternoon.</p></div>
+      </div>
+    </div>
+    <div class="finale">
+      <div class="finale__frame">
+        <svg class="fin-vet" viewBox="0 0 100 112" aria-hidden="true"><use href="#i-vet"/></svg>
+        <div class="bubble bubble--me fin-b1 on-dark"><span data-say="Yemekten önce, değil mi?">Yemek<span class="t-dan">ten</span> <span class="t-onc">önce</span>, değil mi?</span></div>
+        <div class="bubble bubble--vet fin-b2"><span data-say="Evet. Aferin!">Evet. Aferin!</span></div>
+        <svg class="fin-dog" viewBox="0 0 124 100" aria-hidden="true"><use href="#i-dog"/></svg>
+      </div>
+      <div class="finale__txt">
+        <p>A week later, back at the clinic. The vet hands me pills. I say: <b data-say="Yemekten önce, değil mi?">Yemekten önce, değil mi?</b> She says: <b data-say="Evet. Aferin!">Evet. Aferin!</b></p>
+        <p>Simit looks at me with respect. He doesn’t eat socks anymore. At least not before meals.</p>
+        <ul class="skills">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>You give the word the right form of -DAn.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>You pick önce or sonra.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>You keep the order: point, then arrow.</li>
+        </ul>
+        <div class="row"><button type="button" class="btn btn--blue fin-say">Tell the vet</button><button type="button" class="btn fin-again">Again</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<template data-achievement data-title="Right on schedule" data-text="You put -DAn and önce or sonra in the right order">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle class="bd-ring" cx="60" cy="60" r="54" fill="#1f4bff"/>
+    <circle cx="60" cy="60" r="42" fill="#ffffff"/>
+    <path class="bd-l" d="M52 60H26M33 53l-7 7 7 7" stroke="#8a3ffc" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path class="bd-r" d="M68 60h26M87 53l7 7-7 7" stroke="#0fa6e6" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="bd-pill"><rect x="49" y="42" width="22" height="36" rx="11" fill="#ff6a2c"/><path d="M49 60h22" stroke="#ffffff" stroke-width="4"/></g>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  if (G && ST) G.registerPlugin(ST);
+  if (G && window.MotionPathPlugin) G.registerPlugin(window.MotionPathPlugin);
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { if (window.AlternaKit) window.AlternaKit.speak(t); };
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !calm;
+  const pop = (el) => { if (anim && el) G.fromTo(el, { scale: 0.9 }, { scale: 1, duration: 0.45, ease: 'back.out(2.2)' }); };
+  const shake = (el) => { if (anim && el) G.fromTo(el, { x: -10 }, { x: 0, duration: 0.6, ease: 'elastic.out(1, 0.3)' }); };
+  const react = (box, ok, text) => { const r = $('.react', box); r.className = 'react ' + (ok ? 'ok' : 'bad'); r.textContent = text; pop(r); };
+
+  /* ---------- -DAn: гармония и оглушение ---------- */
+  const VOW = /[aıoueiöü]/g;
+  const sfx = (w) => {
+    const v = (w.match(VOW) || ['a']).pop();
+    const back = /[aıou]/.test(v);
+    const hard = /[fstkçşhp]$/.test(w);
+    return { s: (hard ? 't' : 'd') + (back ? 'a' : 'e') + 'n', v, hard, last: w.slice(-1) };
+  };
+  const why = (w) => {
+    const f = sfx(w);
+    const vow = /[aıou]/.test(f.v) ? 'a/ı/o/u' : 'e/i/ö/ü';
+    return `Last vowel ${f.v} (${vow}), ` + (f.hard ? `voiceless ending “${f.last}” — d turns into t. So -${f.s}.` : `voiced ending. So -${f.s}.`);
+  };
+  const RU = { kahvaltı: 'breakfast', ders: 'class', maç: 'the match', iş: 'work', muayene: 'the checkup', okul: 'school', yürüyüş: 'the walk', aşı: 'the shot', banyo: 'the bath', uyku: 'bed', tatil: 'the vacation', kurs: 'the course', yemek: 'meals' };
+
+  /* ---------- сцены по скроллу ---------- */
+  if (anim && ST) {
+    const mm = G.matchMedia();
+    mm.add({ desk: '(min-width: 768px)', mob: '(max-width: 767.98px)' }, (ctx) => {
+      const { desk } = ctx.conditions;
+      document.documentElement.classList.add('motion');
+      const len = (d, m) => '+=' + (desk ? d : m) + '%';
+      const subs = (sel) => $$(sel + ' .subs p');
+
+      /* 1. Крючок: улица → наезд в дверь → кабинет → дом */
+      const s1 = subs('#s-story');
+      const t1 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-story .stage', start: 'top top', end: len(240, 150), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t1.addLabel('street')
+        .from('#s-story .st-mega', { xPercent: -30, duration: 2 }, 0)
+        .from('#s-story .clinic', { scale: 0.92, rotate: -2, duration: 1 }, 0)
+        .from('#s-story .st-dog', { xPercent: 60, rotate: 12, duration: 1 }, 0.2)
+        .from('#s-story .clinic__win', { scale: 0, stagger: 0.2, duration: 0.4, ease: 'back.out(2)' }, 0.3)
+        .addLabel('dive')
+        .to('#s-story .st-street', { scale: desk ? 3.2 : 2.6, duration: 1.2, ease: 'power2.in' }, 'dive')
+        .to('#s-story .st-mega', { xPercent: 25, duration: 1.2 }, 'dive')
+        .fromTo('#s-story .st-in', { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 }, 'dive+=0.8')
+        .to('#s-story .st-street', { opacity: 0, duration: 0.3 }, 'dive+=1.3')
+        .from('#s-story .st-vet', { xPercent: -50, duration: 0.6 }, 'dive+=1.1')
+        .from('#s-story .bubble--vet', { scale: 0, transformOrigin: '0% 100%', duration: 0.5, ease: 'back.out(2)' }, 'dive+=1.3')
+        .from('#s-story .rx', { yPercent: 120, duration: 0.5 }, 'dive+=1.4')
+        .to(s1[0], { opacity: 0, y: -16, duration: 0.3 }, 'dive+=0.9')
+        .from(s1[1], { y: 26, opacity: 0, duration: 0.5 }, 'dive+=1.2')
+        .addLabel('talk')
+        .from('#s-story .bubble--me', { scale: 0, transformOrigin: '100% 100%', duration: 0.5, ease: 'back.out(2)' }, 'talk+=0.3')
+        .to(s1[1], { opacity: 0, y: -16, duration: 0.3 }, 'talk+=0.2')
+        .from(s1[2], { y: 26, opacity: 0, duration: 0.5 }, 'talk+=0.4')
+        .to('#s-story .bubble--vet', { x: -6, yoyo: true, repeat: 3, duration: 0.08 }, 'talk+=1')
+        .addLabel('home')
+        .fromTo('#s-story .st-home', { xPercent: 105 }, { xPercent: 0, duration: 0.8, ease: 'power3.inOut' }, 'home')
+        .from('#s-story .home__line', { scaleX: 0, transformOrigin: '0 50%', duration: 0.5 }, 'home+=0.6')
+        .from('#s-story .home__bowl', { y: -120, duration: 0.5, ease: 'bounce.out' }, 'home+=0.8')
+        .from('#s-story .home__pill', { y: -120, duration: 0.5, ease: 'bounce.out' }, 'home+=1.1')
+        .from('#s-story .home__dog', { xPercent: 80, duration: 0.5 }, 'home+=1')
+        .to(s1[2], { opacity: 0, y: -16, duration: 0.3 }, 'home+=0.2')
+        .from(s1[3], { y: 26, opacity: 0, duration: 0.5 }, 'home+=0.5')
+        .from('#story-act', { y: 40, opacity: 0, duration: 0.5 }, 'home+=1.4');
+
+      /* 2. Точка и стрелка */
+      const s2 = subs('#s-point');
+      const t2 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-point .stage', start: 'top top', end: len(220, 140), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t2.addLabel('line')
+        .fromTo('#s-point .pt-line', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.9, ease: 'none' }, 0)
+        .from('#s-point .pt-ticks', { scaleY: 0, transformOrigin: '50% 50%', duration: 0.5 }, 0.5)
+        .from('#s-point .pt-mega', { xPercent: 30, duration: 3 }, 0)
+        .from('#s-point .pt-pin', { yPercent: -180, duration: 0.7, ease: 'bounce.out' }, 0.7)
+        .from(s2[0], { y: 26, opacity: 0, duration: 0.5 }, 0.3)
+        .addLabel('hook')
+        .from('#s-point .pt-sfx', { x: 140, y: -60, rotate: 40, opacity: 0, duration: 0.7, ease: 'back.out(1.6)' }, 'hook')
+        .to(s2[0], { opacity: 0, y: -16, duration: 0.3 }, 'hook')
+        .from(s2[1], { y: 26, opacity: 0, duration: 0.5 }, 'hook+=0.2')
+        .addLabel('arrows')
+        .from('#s-point .pt-arL', { scaleX: 0, transformOrigin: '46% 50%', duration: 0.6 }, 'arrows')
+        .from('#s-point .pt-lab--onc', { xPercent: 60, opacity: 0, duration: 0.5 }, 'arrows+=0.3')
+        .from('#s-point .pt-pill', { scale: 0, rotate: -90, duration: 0.5, ease: 'back.out(2)' }, 'arrows+=0.4')
+        .from('#s-point .pt-arR', { scaleX: 0, transformOrigin: '54% 50%', duration: 0.6 }, 'arrows+=0.8')
+        .from('#s-point .pt-lab--son', { xPercent: -60, opacity: 0, duration: 0.5 }, 'arrows+=1.1')
+        .from('#s-point .pt-dog', { xPercent: 70, duration: 0.6 }, 'arrows+=1.1')
+        .to(s2[1], { opacity: 0, y: -16, duration: 0.3 }, 'arrows+=0.2')
+        .from(s2[2], { y: 26, opacity: 0, duration: 0.5 }, 'arrows+=0.4')
+        .from('#s-point .pt-rule', { yPercent: -150, duration: 0.6 }, 'arrows+=1.4')
+        .from('#point-act', { y: 40, opacity: 0, duration: 0.5 }, 'arrows+=1.8');
+
+      /* 3. Четыре кабинета: слово летит к своей двери */
+      const s3 = subs('#s-harmony');
+      const t3 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-harmony .stage', start: 'top top', end: len(240, 150), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t3.addLabel('doors')
+        .from('#s-harmony .door4', { yPercent: 60, opacity: 0, stagger: 0.12, duration: 0.6 }, 0)
+        .from('#s-harmony .ha-mega', { scale: 0.6, rotate: -10, duration: 2.5 }, 0)
+        .from('#s-harmony .ha-gl', { y: 20, opacity: 0, duration: 0.4 }, 0.5)
+        .from(s3[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .addLabel('w1')
+        .from('#s-harmony .trav1', { yPercent: -200, duration: 0.6, ease: 'back.out(1.6)' }, 'w1')
+        .from('#s-harmony .ha-v1', { scale: 0, duration: 0.4, ease: 'back.out(3)' }, 'w1+=0.5')
+        .to(s3[0], { opacity: 0, y: -16, duration: 0.3 }, 'w1+=0.2')
+        .from(s3[1], { y: 26, opacity: 0, duration: 0.5 }, 'w1+=0.4')
+        .to('#s-harmony .trav1', { xPercent: -56, yPercent: 318, scale: 0.72, duration: 0.8, ease: 'power2.inOut' }, 'w1+=0.95')
+        .from('#s-harmony .ha-s1', { scale: 0, x: 30, duration: 0.4, ease: 'back.out(2)' }, 'w1+=1.6')
+        .to('#s-harmony .door4--1', { scale: 1.05, yoyo: true, repeat: 1, duration: 0.2 }, 'w1+=1.6')
+        .addLabel('w2')
+        .from('#s-harmony .trav2', { yPercent: -200, duration: 0.6, ease: 'back.out(1.6)' }, 'w2')
+        .from('#s-harmony .ha-c2', { scale: 0, duration: 0.4, ease: 'back.out(3)' }, 'w2+=0.5')
+        .to(s3[1], { opacity: 0, y: -16, duration: 0.3 }, 'w2+=0.2')
+        .from(s3[2], { y: 26, opacity: 0, duration: 0.5 }, 'w2+=0.4')
+        .to('#s-harmony .trav2', { xPercent: -56, yPercent: 620, scale: 0.72, duration: 0.8, ease: 'power2.inOut' }, 'w2+=0.95')
+        .from('#s-harmony .ha-s2', { scale: 0, x: 30, duration: 0.4, ease: 'back.out(2)' }, 'w2+=1.6')
+        .to('#s-harmony .door4--3', { scale: 1.05, yoyo: true, repeat: 1, duration: 0.2 }, 'w2+=1.6')
+        .from('#harm-act', { y: 40, opacity: 0, duration: 0.5 }, 'w2+=1.9');
+
+      /* 4. Рецепт: слова меняются местами */
+      const s4 = subs('#s-order');
+      const gap = () => parseFloat(getComputedStyle($('#s-order .tokr')).columnGap) || 8;
+      const t4 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-order .stage', start: 'top top', end: len(220, 140), pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+      t4.addLabel('ru')
+        .from('#s-order .rc', { rotateX: -70, yPercent: 30, transformPerspective: 900, transformOrigin: '50% 100%', duration: 0.8 }, 0)
+        .from('#s-order .or-mega', { xPercent: -25, duration: 3 }, 0)
+        .from('#s-order .or-ru .tk', { y: 30, opacity: 0, stagger: 0.15, duration: 0.4 }, 0.4)
+        .from(s4[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .addLabel('tr')
+        .fromTo('#s-order .or-son', { x: () => -($('#s-order .or-is').offsetWidth + gap()) }, { x: 0, duration: 0.9, ease: 'power2.inOut' }, 'tr+=0.6')
+        .fromTo('#s-order .or-is', { x: () => $('#s-order .or-son').offsetWidth + gap() }, { x: 0, duration: 0.9, ease: 'power2.inOut' }, 'tr+=0.6')
+        .from('#s-order .or-tr .tk', { y: 30, opacity: 0, stagger: 0.1, duration: 0.4 }, 'tr')
+        .from('#s-order .or-sfx', { scale: 0, y: -30, duration: 0.4, ease: 'back.out(2)' }, 'tr+=0.4')
+        .from('#s-order .or-kz', { x: 60, opacity: 0, duration: 0.5 }, 'tr+=1.3')
+        .to(s4[0], { opacity: 0, y: -16, duration: 0.3 }, 'tr')
+        .from(s4[1], { y: 26, opacity: 0, duration: 0.5 }, 'tr+=0.2')
+        .addLabel('stamp')
+        .from('#s-order .or-stamp', { scale: 2.6, rotate: -30, opacity: 0, duration: 0.5, ease: 'power4.in' }, 'stamp+=0.3')
+        .to('#s-order .rc', { x: -5, yoyo: true, repeat: 3, duration: 0.06 }, 'stamp+=0.8')
+        .to(s4[1], { opacity: 0, y: -16, duration: 0.3 }, 'stamp')
+        .from(s4[2], { y: 26, opacity: 0, duration: 0.5 }, 'stamp+=0.2')
+        .from('#order-act', { y: 40, opacity: 0, duration: 0.5 }, 'stamp+=1');
+
+      /* 5. Табло: строки переворачиваются как на вокзале */
+      const s5 = subs('#s-day');
+      const t5 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-day .stage', start: 'top top', end: len(200, 130), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t5.addLabel('board')
+        .from('#s-day .board__head', { y: -40, opacity: 0, duration: 0.5 }, 0)
+        .from('#s-day .dy-mega', { yPercent: 40, duration: 3 }, 0)
+        .from('#s-day .brow', { rotateX: -95, opacity: 0, stagger: 0.35, duration: 0.6, ease: 'back.out(1.4)' }, 0.3)
+        .from(s5[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .to(s5[0], { opacity: 0, y: -16, duration: 0.3 }, 1.2)
+        .from(s5[1], { y: 26, opacity: 0, duration: 0.5 }, 1.4)
+        .addLabel('hours')
+        .from('#s-day .hours', { yPercent: 160, duration: 0.6, ease: 'back.out(1.5)' }, 'hours')
+        .from('#s-day .hours__ring', { scale: 1.4, opacity: 0, duration: 0.5 }, 'hours+=0.5')
+        .to('#s-day .brow', { opacity: 0.45, duration: 0.4 }, 'hours+=0.5')
+        .to(s5[1], { opacity: 0, y: -16, duration: 0.3 }, 'hours')
+        .from(s5[2], { y: 26, opacity: 0, duration: 0.5 }, 'hours+=0.2')
+        .from('#day-act', { y: 40, opacity: 0, duration: 0.5 }, 'hours+=1');
+
+      /* 7. Плёнка дублей едет вбок */
+      const reel = $('#s-traps .reel-track');
+      const t7 = G.timeline({ scrollTrigger: { trigger: '#s-traps .stage', start: 'top top', end: len(230, 170), pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+      t7.from('#s-traps .take', { y: 80, rotate: (i) => (i % 2 ? 4 : -4), stagger: 0.1, duration: 0.5 }, 0)
+        .to(reel, { x: () => Math.min(0, reel.parentElement.clientWidth - reel.scrollWidth), duration: 3, ease: 'none' }, 0.3)
+        .from('#s-traps .take__face--bad .take__tr', { scale: 1.3, stagger: 0.7, duration: 0.3 }, 0.3);
+
+      return () => document.documentElement.classList.remove('motion');
+    });
+
+    /* монтажная: хлопушка закрывается по скроллу */
+    G.timeline({ scrollTrigger: { trigger: '#s-lab', start: 'top 85%', end: 'top 30%', scrub: 0.6 } })
+      .fromTo('#s-lab .clap', { rotate: -14, y: 30 }, { rotate: 0, y: 0, duration: 1 })
+      .from('#s-lab .lab__head h2', { x: -60, opacity: 0, duration: 1 }, 0)
+      .from('#s-lab .monitor', { y: 80, rotate: -2, duration: 1 }, 0.2);
+
+    /* шпаргалка: плитки постера */
+    G.set('#s-cheat .ptile', { y: 50, opacity: 0 });
+    ScrollTrigger.batch('#s-cheat .ptile', { start: 'top 92%', onEnter: (els) => G.to(els, { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out', overwrite: true }) });
+    G.timeline({ scrollTrigger: { trigger: '#s-cheat .poster', start: 'top 90%', end: 'bottom 40%', scrub: 0.8 } })
+      .from('#s-cheat .poster .mega', { xPercent: -30, duration: 1 })
+      .from('#s-cheat .poster h2', { y: 60, duration: 1 }, 0);
+    /* видео въезжает */
+    G.from('#s-video .plain__in', { y: 60, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '#s-video', start: 'top 85%' } });
+  }
+
+  /* ---------- финал: врач и Симит ---------- */
+  const finTl = G ? G.timeline({ paused: true })
+    .fromTo('#s-cheat .fin-vet', { xPercent: -60 }, { xPercent: 0, duration: 0.6, ease: 'power3.out' })
+    .fromTo('#s-cheat .fin-b1', { scale: 0, transformOrigin: '100% 100%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 0.4)
+    .fromTo('#s-cheat .fin-b2', { scale: 0, transformOrigin: '0% 100%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1)
+    .fromTo('#s-cheat .fin-dog', { y: 0 }, { y: -24, yoyo: true, repeat: 3, duration: 0.18, ease: 'power1.out' }, 1.3) : null;
+  if (finTl && anim && ST) ScrollTrigger.create({ trigger: '#s-cheat .finale', start: 'top 80%', once: true, onEnter: () => finTl.play(0) });
+  else if (finTl) finTl.progress(1);
+  $('#s-cheat .fin-again').addEventListener('click', () => { if (finTl) finTl.restart(); });
+  $('#s-cheat .fin-say').addEventListener('click', () => { say('Yemekten önce, değil mi?'); pop($('#s-cheat .fin-b1')); });
+
+  /* ---------- действие сцены 1 ---------- */
+  const storyAct = $('#story-act');
+  storyAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ans]');
+    if (!b) return;
+    $$('[data-ans]', storyAct).forEach((x) => x.classList.remove('is-ok', 'is-bad'));
+    const ok = b.dataset.ans === 'ok';
+    b.classList.add(ok ? 'is-ok' : 'is-bad');
+    react(storyAct, ok, ok ? 'Yes. Pill before meals. It took me three days to get that.' : 'That’s what I thought too. “Food first” is my version, not hers.');
+    if (ok) {
+      say('Yemekten önce');
+      if (anim) {
+        const bowl = $('#s-story .home__bowl');
+        const pill = $('#s-story .home__pill');
+        const d = pill.offsetLeft - bowl.offsetLeft;
+        G.to(bowl, { x: d, duration: 0.6, ease: 'power2.inOut' });
+        G.to(pill, { x: -d, duration: 0.6, ease: 'power2.inOut' });
+      }
+    } else shake(b);
+  });
+
+  /* ---------- действие сцены 2: таблетка слева или справа ---------- */
+  const pointAct = $('#point-act');
+  pointAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-dir]');
+    if (!b) return;
+    $$('[data-dir]', pointAct).forEach((x) => x.classList.toggle('is-on', x === b));
+    const once = b.dataset.dir === 'once';
+    const ph = once ? 'Yemekten önce' : 'Yemekten sonra';
+    const read = $('.pt-read', pointAct);
+    read.textContent = ph; read.dataset.say = ph;
+    $('.pt-ru', pointAct).textContent = once ? 'before meals' : 'after meals';
+    say(ph);
+    if (anim) G.to('#s-point .pt-pill', { xPercent: once ? 0 : 356, rotate: once ? 0 : 360, duration: 0.7, ease: 'power3.inOut' });
+    pop(read);
+  });
+
+  /* ---------- действие сцены 3: слово летит в кабинет ---------- */
+  const harmAct = $('#harm-act');
+  const probe = $('#s-harmony .probe');
+  harmAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-w]');
+    if (!b) return;
+    $$('[data-w]', harmAct).forEach((x) => x.classList.toggle('is-on', x === b));
+    const w = b.dataset.w;
+    const f = sfx(w);
+    const door = $(`#s-harmony [data-door="${f.s}"]`);
+    $$('#s-harmony .door4').forEach((d) => d.classList.toggle('is-hit', d === door));
+    react(harmAct, true, `${w}${f.s} sonra — after ${RU[w]}. ${why(w)}`);
+    say(w + f.s);
+    if (anim) {
+      const card = $('.wcard', probe);
+      card.innerHTML = `${w}<span class="t-dan">${f.s}</span>`;
+      const a = b.getBoundingClientRect();
+      const z = door.getBoundingClientRect();
+      card.style.fontSize = '22px';
+      G.set(probe, { visibility: 'visible', x: a.left, y: a.top, scale: 1, opacity: 1 });
+      G.to(probe, { motionPath: { path: [{ x: a.left, y: a.top }, { x: (a.left + z.left) / 2, y: Math.min(a.top, z.top) - 80 }, { x: z.left + 12, y: z.top + z.height / 2 - 20 }], curviness: 1.2 }, duration: 0.9, ease: 'power2.inOut', onComplete: () => G.to(probe, { opacity: 0, scale: 0.6, duration: 0.3, onComplete: () => G.set(probe, { visibility: 'hidden' }) }) });
+      G.fromTo(door, { scale: 1 }, { scale: 1.06, yoyo: true, repeat: 1, duration: 0.2, delay: 0.85 });
+    }
+  });
+
+  /* ---------- действие сцены 4: собери надпись ---------- */
+  const orderAct = $('#order-act');
+  const build = $('.build', orderAct);
+  const picked = [];
+  const checkBuild = () => {
+    if (picked.length < 2) return;
+    const ok = picked.join(' ') === 'muayeneden önce';
+    react(orderAct, ok, ok ? 'Muayeneden önce — before the checkup. The point, then the arrow.' : picked[0] === 'önce' ? 'Önce up front means “first.” The point with -DAn comes first.' : 'Not that one. You need the point with -DAn and an arrow pointing back.');
+    if (ok) { say('Muayeneden önce'); if (anim) G.fromTo(build, { scale: 0.95 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' }); } else shake(build);
+  };
+  $$('.tok[data-t]', orderAct).forEach((t) => t.addEventListener('click', () => {
+    if (picked.length >= 2) return;
+    picked.push(t.dataset.t);
+    t.disabled = true;
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'tok'; c.textContent = t.dataset.t; c.tabIndex = -1;
+    build.append(c);
+    if (anim) G.from(c, { y: 30, scale: 0.6, duration: 0.35, ease: 'back.out(2)' });
+    checkBuild();
+  }));
+  $('.or-reset', orderAct).addEventListener('click', () => {
+    picked.length = 0; build.replaceChildren();
+    $$('.tok[data-t]', orderAct).forEach((t) => { t.disabled = false; });
+    $('.react', orderAct).textContent = '';
+  });
+
+  /* ---------- действие сцены 5: ответ регистратору ---------- */
+  const dayAct = $('#day-act');
+  dayAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ans]');
+    if (!b) return;
+    $$('[data-ans]', dayAct).forEach((x) => x.classList.remove('is-ok', 'is-bad'));
+    const ok = b.dataset.ans === 'ok';
+    b.classList.add(ok ? 'is-ok' : 'is-bad');
+    react(dayAct, ok, ok ? 'Öğleden sonra. The receptionist nods and writes 2:30 PM.' : b.dataset.ans === 'bad' ? 'Sonra öğle — “then noon.” The receptionist freezes.' : 'Missing -DAn. Without it the point won’t hold.');
+    if (ok) { say('Öğleden sonra'); if (anim) G.fromTo('#s-day .hours', { scale: 1 }, { scale: 1.06, yoyo: true, repeat: 1, duration: 0.2 }); } else shake(b);
+  });
+
+  /* ---------- монтажная ---------- */
+  const lab = $('#s-lab');
+  const mon = { word: $('.mon__word', lab), w: $('.mon__word .w', lab), dir: $('.mon-dir', lab), ru: $('.mon__ru', lab), why: $('.mon__why', lab) };
+  const st = { n: 'kahvaltı', d: 'önce' };
+  const render = (fromSfx) => {
+    const f = sfx(st.n);
+    mon.w.innerHTML = `${st.n}<span class="t-dan mon-sfx">${f.s}</span>`;
+    mon.dir.textContent = st.d;
+    mon.dir.classList.toggle('son', st.d === 'sonra');
+    mon.word.dataset.say = st.n + f.s + ' ' + st.d;
+    mon.ru.textContent = (st.d === 'önce' ? 'before ' : 'after ') + RU[st.n];
+    mon.why.textContent = why(st.n);
+    if (anim) {
+      G.from($('.mon-sfx', lab), { x: 60, y: -40, rotate: 30, opacity: 0, duration: 0.5, ease: 'back.out(1.8)' });
+      if (!fromSfx) G.from(mon.dir, { y: 40, opacity: 0, duration: 0.4, ease: 'power3.out' });
+      G.from(mon.ru, { y: 14, opacity: 0, duration: 0.4 });
+    }
+  };
+  $$('.tab', lab).forEach((t) => t.addEventListener('click', () => {
+    $$('.tab', lab).forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('.pane', lab).forEach((p) => { p.hidden = p.dataset.pane !== t.dataset.tab; });
+    if (t.dataset.tab === 'make') render();
+    if (t.dataset.tab === 'line') moveLine();
+    if (t.dataset.tab === 'fix') showFix();
+    if (anim) G.from($(`.pane[data-pane="${t.dataset.tab}"]`, lab), { x: 30, opacity: 0, duration: 0.35 });
+  }));
+  $('.lab-nouns', lab).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-n]');
+    if (!b) return;
+    $$('[data-n]', lab).forEach((x) => x.classList.toggle('is-on', x === b));
+    st.n = b.dataset.n; render(true);
+  });
+  $('.lab-dir', lab).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-d]');
+    if (!b) return;
+    $$('[data-d]', lab).forEach((x) => x.classList.toggle('is-on', x === b));
+    st.d = b.dataset.d; render(false);
+  });
+  $('.lab-say', lab).addEventListener('click', () => { say(mon.word.dataset.say); pop(mon.word); });
+
+  /* режим «Линейка» */
+  const rng = $('.rng', lab);
+  const lpill = $('.ruler2__pill', lab);
+  const lev = $('.lab-ev', lab);
+  let ev = 'yemek';
+  const moveLine = () => {
+    const v = Number(rng.value);
+    const d = v < 50 ? 'önce' : 'sonra';
+    lpill.style.left = (6 + v * 0.88) + '%';
+    const f = sfx(ev);
+    mon.w.innerHTML = `${ev}<span class="t-dan mon-sfx">${f.s}</span>`;
+    mon.dir.textContent = d; mon.dir.classList.toggle('son', d === 'sonra');
+    mon.word.dataset.say = ev + f.s + ' ' + d;
+    mon.ru.textContent = (d === 'önce' ? 'before ' : 'after ') + RU[ev];
+    mon.why.textContent = d === 'önce' ? 'The pill is left of the point — arrow back, önce.' : 'The pill is right of the point — arrow forward, sonra.';
+  };
+  let lastSide = 'önce';
+  rng.addEventListener('input', () => {
+    moveLine();
+    const side = Number(rng.value) < 50 ? 'önce' : 'sonra';
+    if (side !== lastSide && anim) G.fromTo(mon.dir, { rotateX: -90 }, { rotateX: 0, duration: 0.35 });
+    lastSide = side;
+  });
+  rng.addEventListener('change', () => say(mon.word.dataset.say));
+  $('.lab-evs', lab).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-e]');
+    if (!b) return;
+    $$('[data-e]', lab).forEach((x) => x.classList.toggle('is-on', x === b));
+    ev = b.dataset.e; lev.textContent = ev; moveLine();
+    if (anim) G.from(lev, { y: -30, opacity: 0, duration: 0.4, ease: 'back.out(2)' });
+  });
+
+  /* режим «Почини» */
+  const FIX = [
+    { bad: 'Sonra maç', ok: 'Maçtan sonra', opts: ['Maçtan sonra', 'Sonra maçtan', 'Maçdan sonra'], why: 'First the point with -DAn, then the arrow. ç is voiceless — so -tan.' },
+    { bad: 'Okul sonra', ok: 'Okuldan sonra', opts: ['Okulden sonra', 'Okuldan sonra', 'Okultan sonra'], why: 'Forgot -DAn. Vowel u, voiced ending — -dan.' },
+    { bad: 'Dersden önce', ok: 'Dersten önce', opts: ['Dersten önce', 'Derstan önce', 'Önce ders'], why: 's is voiceless — d turns into t. Vowel e — -ten.' },
+    { bad: 'Kahvaltıden sonra', ok: 'Kahvaltıdan sonra', opts: ['Kahvaltıtan sonra', 'Kahvaltı sonra', 'Kahvaltıdan sonra'], why: 'Last vowel ı — so -dan.' },
+    { bad: 'İki günden önce', ok: 'İki gün önce', opts: ['İki gün önce', 'Önce iki gün', 'İki günten önce'], why: 'A time span comes first — “two days.” No ending: two days ago.' },
+  ];
+  let fi = 0;
+  const optsBox = $('.lab-opts', lab);
+  const showFix = () => {
+    const q = FIX[fi];
+    $('.lab-bad', lab).textContent = q.bad;
+    optsBox.innerHTML = q.opts.map((o) => `<button type="button" class="btn" data-o="${o}" lang="tr">${o}</button>`).join('');
+    mon.w.textContent = '?'; mon.dir.textContent = '…'; mon.dir.classList.remove('son');
+    mon.ru.textContent = 'Pick the right label'; mon.why.textContent = '';
+    if (anim) G.from($('.lab-bad', lab), { x: -40, opacity: 0, duration: 0.4 });
+  };
+  optsBox.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-o]');
+    if (!b) return;
+    const q = FIX[fi];
+    const ok = b.dataset.o === q.ok;
+    $$('[data-o]', optsBox).forEach((x) => x.classList.toggle('is-ok', x.dataset.o === q.ok && ok));
+    b.classList.toggle('is-bad', !ok);
+    const parts = q.ok.split(' ');
+    mon.w.textContent = parts.slice(0, -1).join(' '); mon.dir.textContent = parts[parts.length - 1];
+    mon.dir.classList.toggle('son', parts[parts.length - 1] === 'sonra');
+    mon.word.dataset.say = q.ok;
+    mon.ru.textContent = ok ? 'Fixed.' : 'Almost. The right one is ' + q.ok + '.';
+    mon.why.textContent = q.why;
+    if (ok) { say(q.ok); pop(mon.word); } else shake(b);
+  });
+  $('.lab-next', lab).addEventListener('click', () => { fi = (fi + 1) % FIX.length; showFix(); });
+
+  /* ---------- дубли: переснять ---------- */
+  $$('#s-traps .take__go').forEach((b) => b.addEventListener('click', () => {
+    const take = b.closest('.take');
+    take.classList.toggle('is-fixed');
+    const fixed = take.classList.contains('is-fixed');
+    b.textContent = fixed ? 'Another take' : 'Reshoot';
+    if (fixed) say($('.take__face--ok .take__tr', take).dataset.say);
+    if (anim) G.fromTo(take, { rotate: fixed ? -2 : 2 }, { rotate: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
+  }));
+
+  /* ---------- нестандартное: таблетница ---------- */
+  const EXID = 'a1.dan-once-sonra.ex5';
+  const ROUNDS = [
+    { tr: 'Kahvaltıdan önce', ev: 'kahvaltı', ico: 'i-sun', side: 'önce', ru: 'before breakfast' },
+    { tr: 'Yürüyüşten sonra', ev: 'yürüyüş', ico: 'i-paw', side: 'sonra', ru: 'after the walk' },
+    { tr: 'Uykudan önce', ev: 'uyku', ico: 'i-moon', side: 'önce', ru: 'before bed' },
+    { tr: 'Aşıdan sonra', ev: 'aşı', ico: 'i-syringe', side: 'sonra', ru: 'after the shot' },
+    { tr: 'Banyodan sonra', ev: 'banyo', ico: 'i-bath', side: 'sonra', ru: 'after the bath' },
+    { tr: 'Yemekten önce', ev: 'yemek', ico: 'i-bowl', side: 'önce', ru: 'before meals' },
+  ];
+  const pb = $('#pillbox');
+  const pbPill = $('.pb__pill', pb);
+  const pbMsg = $('.pb__msg', pb);
+  let ri = 0, score = 0, t0 = performance.now(), busy = false;
+  const track = (fn, data) => { try { if (window.AlternaTracker) window.AlternaTracker[fn](data); } catch (e) { /* трекер недоступен */ } };
+  const showRound = () => {
+    const r = ROUNDS[ri];
+    $('.pb-tr', pb).textContent = r.tr;
+    $('.pb__label', pb).dataset.say = r.tr;
+    $('.pb-ev', pb).textContent = r.ev;
+    $('.pb-ico use', pb).setAttribute('href', '#' + r.ico);
+    $$('.pb__slot', pb).forEach((s) => s.classList.remove('is-ok', 'is-bad'));
+    $('.pb__score', pb).textContent = `${score} / ${ROUNDS.length}`;
+    t0 = performance.now(); busy = false;
+    if (anim) { G.set(pbPill, { x: 0, y: 0 }); G.from($('.pb__label', pb), { y: -30, opacity: 0, duration: 0.4, ease: 'back.out(2)' }); }
+  };
+  const answer = (side) => {
+    if (busy || ri >= ROUNDS.length) return;
+    busy = true;
+    const r = ROUNDS[ri];
+    const ok = side === r.side;
+    const slot = $(`.pb__slot[data-side="${side}"]`, pb);
+    slot.classList.add(ok ? 'is-ok' : 'is-bad');
+    if (ok) score++;
+    track('answer', { exerciseId: EXID, itemId: 'r' + (ri + 1), correct: ok, answer: side, timeMs: Math.round(performance.now() - t0) });
+    pbMsg.textContent = ok ? `Yes: ${r.tr} — ${r.ru}.` : `No: ${r.tr} — ${r.ru}. The arrow points ${r.side === 'önce' ? 'back, to the left' : 'forward, to the right'}.`;
+    if (ok) say(r.tr);
+    const next = () => {
+      ri++;
+      if (ri < ROUNDS.length) { showRound(); return; }
+      $('.pb__score', pb).textContent = `${score} / ${ROUNDS.length}`;
+      pbMsg.textContent = score === ROUNDS.length ? 'All six pills in place. Simit is fine.' : `Done: ${score} of ${ROUNDS.length}. Simit is alive, but he’s giving you a suspicious look.`;
+      $('.pb__end', pb).hidden = false;
+      track('complete', { exerciseId: EXID, correct: score, total: ROUNDS.length });
+    };
+    if (anim) {
+      const a = pbPill.getBoundingClientRect(); const z = slot.getBoundingClientRect();
+      G.to(pbPill, { x: '+=' + (z.left + z.width / 2 - a.left - a.width / 2), y: '+=' + (z.top + z.height / 2 - a.top - a.height / 2), rotate: ok ? 360 : 20, duration: 0.5, ease: 'power2.inOut' });
+      if (!ok) G.fromTo(slot, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+      G.delayedCall(ok ? 0.9 : 1.6, next);
+    } else setTimeout(next, ok ? 700 : 1400);
+  };
+  $$('.pb__slot', pb).forEach((s) => s.addEventListener('click', () => answer(s.dataset.side)));
+  pb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { answer('önce'); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { answer('sonra'); e.preventDefault(); }
+  });
+  /* перетаскивание таблетки пальцем или мышью */
+  let drag = null;
+  pbPill.addEventListener('pointerdown', (e) => {
+    if (busy) return;
+    drag = { x: e.clientX, y: e.clientY };
+    pbPill.setPointerCapture(e.pointerId);
+  });
+  pbPill.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    pbPill.style.transform = `translate(${e.clientX - drag.x}px, ${e.clientY - drag.y}px)`;
+  });
+  pbPill.addEventListener('pointerup', (e) => {
+    if (!drag) return;
+    const dx = e.clientX - drag.x;
+    drag = null;
+    pbPill.style.transform = '';
+    if (Math.abs(dx) > 40) answer(dx < 0 ? 'önce' : 'sonra');
+  });
+  $('.pb-again', pb).addEventListener('click', () => { ri = 0; score = 0; pbMsg.textContent = ''; $('.pb__end', pb).hidden = true; showRound(); });
+  if (window.AlternaKit) window.AlternaKit.registerSolver(EXID, async () => {
+    while (ri < ROUNDS.length) {
+      busy = false;
+      const r = ROUNDS[ri];
+      answer(r.side);
+      await new Promise((res) => setTimeout(res, 1700));
+    }
+  });
+  showRound();
+
+  /* ---------- свой скроллбар: лента дня ---------- */
+  const bar = $('[data-scrollbar]');
+  const rail = $('.reel__rail', bar);
+  const fill = $('.reel__fill', bar);
+  const thumb = $('.reel__thumb', bar);
+  const marks = $$('button[data-goto]', bar);
+  const goTo = (key) => {
+    const sec = document.querySelector(`[data-section="${key}"]`);
+    if (!sec) return;
+    const y = sec.getBoundingClientRect().top + scrollY;
+    window.scrollTo({ top: y, behavior: calm ? 'auto' : 'smooth' });
+  };
+  marks.forEach((m) => m.addEventListener('click', () => goTo(m.dataset.goto)));
+  const vertical = () => getComputedStyle(rail).flexDirection === 'column';
+  const paint = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    const v = vertical();
+    fill.style.transform = v ? `scaleY(${p})` : `scaleX(${p})`;
+    thumb.style.transform = v ? `translateY(${p * rail.clientHeight}px)` : `translateX(${p * rail.clientWidth}px)`;
+    let here = marks[0];
+    marks.forEach((m) => { const s = document.querySelector(`[data-section="${m.dataset.goto}"]`); if (s && s.getBoundingClientRect().top < innerHeight * 0.5) here = m; });
+    marks.forEach((m) => m.classList.toggle('is-here', m === here));
+  };
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: paint });
+  addEventListener('scroll', paint, { passive: true });
+  addEventListener('resize', paint);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((x) => x.dataset.goto === (e.detail && e.detail.key));
+    if (m) { m.classList.add('is-read'); pop(m); }
+  });
+  /* на компьютере ленту можно тянуть мышью */
+  let dragBar = false;
+  const seek = (e) => {
+    const r = rail.getBoundingClientRect();
+    const v = vertical();
+    const p = v ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    window.scrollTo(0, Math.min(1, Math.max(0, p)) * (document.documentElement.scrollHeight - innerHeight));
+  };
+  bar.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button')) return;
+    dragBar = true; bar.setPointerCapture(e.pointerId); seek(e);
+  });
+  bar.addEventListener('pointermove', (e) => { if (dragBar) seek(e); });
+  bar.addEventListener('pointerup', () => { dragBar = false; });
+  paint();
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    if (!G || !detail || !detail.timeline) return;
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.bd-ring'), { scale: 0.3, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 0)
+      .fromTo(b.querySelector('.bd-l'), { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 }, 0.4)
+      .fromTo(b.querySelector('.bd-r'), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4 }, 0.4)
+      .fromTo(b.querySelector('.bd-pill'), { rotate: -180, scale: 0, transformOrigin: '50% 50%' }, { rotate: 0, scale: 1, duration: 0.9, ease: 'back.out(1.8)' }, 0.6);
+  });
+
+  /* ---------- пересчёт после шрифтов, загрузки и поворота ---------- */
+  const refresh = () => { if (ST) ST.refresh(); paint(); };
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  /* упражнения kit догружаются позже и меняют высоту страницы — пересчитываем сцены */
+  if (window.ResizeObserver) {
+    let rt = 0, lastH = document.body.scrollHeight;
+    new ResizeObserver(() => {
+      const h = document.body.scrollHeight;
+      if (Math.abs(h - lastH) < 4) return;
+      lastH = h; clearTimeout(rt); rt = setTimeout(refresh, 250);
+    }).observe(document.querySelector('main'));
+  }
+});
+</script>
+</body>
+</html>
