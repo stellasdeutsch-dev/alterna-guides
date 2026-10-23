@@ -26,7 +26,7 @@
   --ak-bg:var(--ivory); --ak-surface:#fff; --ak-ink:var(--burg); --ak-text:var(--char); --ak-muted:#7A5D57; --ak-line:var(--line);
   --ak-accent:#5A1610; --ak-accent-soft:#FBE7DD; --ak-accent-ink:#FFF8F4;
   --ak-good:#2D7A4E; --ak-good-soft:#E2F2E8; --ak-bad:#B3261E; --ak-bad-soft:#FBE4E1;
-  --ak-font:Manrope, 'Alterna Sans',system-ui,sans-serif; --ak-font-display:Onest, 'Alterna Sans',Manrope,system-ui,sans-serif; --ak-radius:20px; --ak-radius-sm:12px;
+  --ak-font:Manrope, Alterna Sans,system-ui,sans-serif; --ak-font-display:Onest, Alterna Sans,Manrope,system-ui,sans-serif; --ak-radius:20px; --ak-radius-sm:12px;
   --gut:16px; --reel:36px;
 }
 *,*::before,*::after{box-sizing:border-box}
@@ -184,6 +184,24 @@ html:not(.js-film) .ghost{display:none}
 .take__fix b{cursor:pointer}
 html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
 
+/* дубляж: қазақша ↔ түрікше */
+.same{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.same span{display:inline-flex;align-items:baseline;gap:6px;background:#fff;border-radius:999px;padding:9px 14px;box-shadow:0 0 0 1px var(--line);font:600 15px/1.2 var(--ak-font-display);color:var(--burg)}
+.same i{font-style:normal;font-weight:700;color:var(--ak-good)}
+.same b[lang="kk"]{color:var(--plum);font-weight:600}
+.same b[lang="tr"]{font-weight:600}
+.dubs{display:grid;gap:14px}
+@media (min-width:768px){.dubs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.dub{position:relative;overflow:hidden;background:#fff;border-radius:22px;padding:0 16px 16px;box-shadow:0 0 0 1px var(--line);display:flex;flex-direction:column}
+.dub__bar{display:flex;align-items:center;margin:0 -16px 14px;padding:0 16px;height:34px;background:var(--plum);color:var(--ivory);font:700 11px/1 var(--ak-font);letter-spacing:.14em;text-transform:uppercase}
+.dub__ln{display:flex;align-items:baseline;gap:10px;margin:0 0 6px;font:600 clamp(22px,2vw + 14px,30px)/1.15 var(--ak-font-display);letter-spacing:-.03em;color:var(--burg)}
+.dub__ln small{flex:0 0 2.6em;font:700 10px/1 var(--ak-font);letter-spacing:.14em;color:var(--ak-muted)}
+.dub__ln [lang="kk"]{color:var(--plum)}
+.dub__ln .dk{color:var(--burg)}
+.dub__why{font-size:15px;line-height:1.45;margin:8px 0 12px;flex:1}
+.dub .chip{align-self:flex-start}
+.act--dub{margin-top:16px}
+
 /* видео, практика */
 .note{display:flex;gap:10px;align-items:center;margin:12px 0 18px;font-size:16px}
 .note svg{flex:0 0 auto;width:34px;height:34px}
@@ -271,12 +289,13 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
     <li><button type="button" data-goto="tail"><span>03</span><em>Айлақтағы табло</em></button></li>
     <li><button type="button" data-goto="whose"><span>04</span><em>Кімдікі ме, қандай ма</em></button></li>
     <li><button type="button" data-goto="city"><span>05</span><em>Жазулы қала</em></button></li>
-    <li><button type="button" data-goto="lab"><span>06</span><em>Монтаж бөлмесі</em></button></li>
-    <li><button type="button" data-goto="traps"><span>07</span><em>Сәтсіз дубльдер</em></button></li>
-    <li><button type="button" data-goto="video"><span>08</span><em>Видео</em></button></li>
-    <li><button type="button" data-goto="practice"><span>09</span><em>Практика</em></button></li>
-    <li><button type="button" data-goto="check"><span>10</span><em>Шағын тексеру</em></button></li>
-    <li><button type="button" data-goto="cheat"><span>11</span><em>Афиша</em></button></li>
+    <li><button type="button" data-goto="kz"><span>06</span><em>Қазақша ↔ түрікше</em></button></li>
+    <li><button type="button" data-goto="lab"><span>07</span><em>Монтаж бөлмесі</em></button></li>
+    <li><button type="button" data-goto="traps"><span>08</span><em>Сәтсіз дубльдер</em></button></li>
+    <li><button type="button" data-goto="video"><span>09</span><em>Видео</em></button></li>
+    <li><button type="button" data-goto="practice"><span>10</span><em>Практика</em></button></li>
+    <li><button type="button" data-goto="check"><span>11</span><em>Шағын тексеру</em></button></li>
+    <li><button type="button" data-goto="cheat"><span>12</span><em>Афиша</em></button></li>
   </ol>
 </nav>
 
@@ -407,19 +426,19 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
         </g>
       </svg>
       <div class="words" lang="tr">
-        <div class="wl" data-row="0"><span class="k">portakal<i class="ul"></i></span><span><span class="b">su</span><span class="g">y</span><span class="t">u</span></span><small lang="ru">апельсин шырыны</small></div>
-        <div class="wl" data-row="1"><span class="k">elma<i class="ul"></i></span><span><span class="b">su</span><span class="g">y</span><span class="t">u</span></span><small lang="ru">алма шырыны</small></div>
-        <div class="wl" data-row="2"><span class="k">Türkçe<i class="ul"></i></span><span><span class="b">kita<span class="sf"><i class="sf-p">p</i><i class="sf-b">b</i></span></span><span class="t">ı</span></span><small lang="ru">түрік тілі оқулығы</small></div>
-        <div class="cmp"><span class="ru" lang="ru"><b>яблоч</b>ный сок</span><span class="vs">vs</span><span>elma su<span class="t">yu</span></span></div>
+        <div class="wl" data-row="0"><span class="k">portakal<i class="ul"></i></span><span><span class="b">su</span><span class="g">y</span><span class="t">u</span></span><small lang="kk">апельсин шырыны</small></div>
+        <div class="wl" data-row="1"><span class="k">elma<i class="ul"></i></span><span><span class="b">su</span><span class="g">y</span><span class="t">u</span></span><small lang="kk">алма шырыны</small></div>
+        <div class="wl" data-row="2"><span class="k">Türkçe<i class="ul"></i></span><span><span class="b">kita<span class="sf"><i class="sf-p">p</i><i class="sf-b">b</i></span></span><span class="t">ı</span></span><small lang="kk">түрік тілі оқулығы</small></div>
+        <div class="cmp"><span lang="kk">алма шырын<span class="t">ы</span></span><span class="vs">=</span><span>elma su<span class="t">yu</span></span></div>
       </div>
     </div>
     <div class="subs">
       <p><span class="tc" data-ui>01:02</span>Алдымен тауып көр. Сөреде үш зат. Атауда қай сөз өзгереді?</p>
       <p><span class="tc" data-ui>01:10</span>Бірінші сөзге тимейді. Ол «қандай» деген сұраққа жауап береді: апельсин, алма, түрік тілі.</p>
       <p><span class="tc" data-ui>01:21</span>Екіншісі өзгереді. Ол құйрық алады: su → suyu, kitap → kitabı. Құйрық екі сөзді бір затқа желімдейді.</p>
-      <p><span class="tc" data-ui>01:33</span>Орыс тілінде бірінші сөз өзгереді: яблоко → яблочный. Түрікше де, қазақша да — екіншісі: алма шырыны. Формула: қандай + не-(s)I.</p>
-      <p><span class="tc" data-ui>01:44</span>Сөзбе-сөз elma suyu — «алма, оның суы». Біртүрлі естіледі. Тамаша жұмыс істейді.</p>
-      <p><span class="tc" data-ui>01:52</span>Қазақша дәл осылай: алма шырыны. Сол құйрық екінші сөзде.</p>
+      <p><span class="tc" data-ui>01:33</span>Қазақша дәл осылай: алма шырыны, автобус аялдамасы. Құйрық екінші сөзде. Мұны сен бала кезден білесің.</p>
+      <p><span class="tc" data-ui>01:44</span>Формула да таныс: қандай + не-(s)I. Қазақшада -ы/-сы, түрікшеде -(s)I.</p>
+      <p><span class="tc" data-ui>01:52</span>Илья неге сүрінді? Орыс тілінде бірінші сөз өзгереді: яблочный сок. Ол құйрықты мүлде ұмытты.</p>
     </div>
     <div class="act">
       <p class="act__q">Құйрықты алып, қайта жапсыр. Ильяның не алатынына қара.</p>
@@ -471,9 +490,9 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
     <div class="subs">
       <p><span class="tc" data-ui>02:05</span>Кадыкёй айлағы. Таблодағы құйрықтар әртүрлі: -si, -sü, -ı, -i. Ереже біреу.</p>
       <p><span class="tc" data-ui>02:13</span>Сөз дауыссызға бітсе — құйрық бір дауысты ғана. meydan → meydanı, bilet → bileti.</p>
-      <p><span class="tc" data-ui>02:22</span>Дауыстыға бітсе — арасына s тұрады. iskele → iskelesi, köprü → köprüsü. Қазақшадағыдай: көпір → көпірі, бірақ аялдама → аялдамасы.</p>
-      <p><span class="tc" data-ui>02:31</span>Құйрықтың дауыстысын сөздің соңғы дауыстысы таңдайды: a, ı → ı; e, i → i; o, u → u; ö, ü → ü. Құйрық сөзге бейімделеді.</p>
-      <p><span class="tc" data-ui>02:42</span>Көбіне p, ç, t, k ұяңдайды: kitap → kitabı, durak → durağı. Бірақ әрқашан емес: bilet → bileti. Ал su ерекше: suyu.</p>
+      <p><span class="tc" data-ui>02:22</span>Дауыстыға бітсе — арасына s тұрады: iskele → iskelesi. Қазақшадағыдай: аялдама → аялдамасы.</p>
+      <p><span class="tc" data-ui>02:31</span>Міне, айырмашылық. Қазақша құйрық екі түрлі: -ы/-і. Түрікше төртеу: a, ı → ı; e, i → i; o, u → u; ö, ü → ü. kurs → kursu, köprü → köprüsü.</p>
+      <p><span class="tc" data-ui>02:42</span>Ұяңдау таныс: кітап → кітабы, kitap → kitabı; durak → durağı. Бірақ билет → билеті, bilet → bileti: t өзгермейді. Ал su ерекше: suyu.</p>
     </div>
     <div class="act">
       <p class="act__q">Табло жыпылықтайды. Құйрықты қой: <b lang="tr" data-tw>bahçe kapı…</b></p>
@@ -512,15 +531,15 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
         </g>
       </svg>
       <div class="words" lang="tr">
-        <div class="wr wr-a"><span class="k">Ali<i class="ul"></i></span><span class="own">'nin</span> <span><span class="b">kitab</span><span class="t">ı</span></span><small lang="ru">Әлидің кітабы</small></div>
-        <div class="wr wr-b"><span class="k">Türkçe<i class="ul"></i></span><span class="own ghost">'nin</span> <span><span class="b">kitab</span><span class="t">ı</span></span><small lang="ru">түрік тілі оқулығы</small></div>
+        <div class="wr wr-a"><span class="k">Ali<i class="ul"></i></span><span class="own">'nin</span> <span><span class="b">kitab</span><span class="t">ı</span></span><small lang="kk">Әлидің кітабы</small></div>
+        <div class="wr wr-b"><span class="k">Türkçe<i class="ul"></i></span><span class="own ghost">'nin</span> <span><span class="b">kitab</span><span class="t">ı</span></span><small lang="kk">түрік тілі оқулығы</small></div>
         <div class="wr wr-c" style="font-size:.78em"><span class="k">Ali<i class="ul"></i></span><span class="own">'nin</span> <span class="k">Türkçe<i class="ul"></i></span> <span><span class="b">kitab</span><span class="t">ı</span></span></div>
       </div>
     </div>
     <div class="subs">
       <p><span class="tc" data-ui>03:01</span>Истикляльдегі кітап дүкені. Илья айтады: <a-say>Türkçenin kitabı var mı?</a-say> Сатушы ойланады. Түрік тіліне тиесілі кітап па?</p>
       <p><span class="tc" data-ui>03:12</span>«Кімдікі» маңызды болса, құйрықты екі сөз де алады: Ali'nin kitabı — Әлидің кітабы.</p>
-      <p><span class="tc" data-ui>03:20</span>«Қандай» маңызды болса, бірінші сөз жалаң: Türkçe kitabı — түрік тілі оқулығы. Кімдікі екені маңызды емес.</p>
+      <p><span class="tc" data-ui>03:20</span>«Қандай» маңызды болса, бірінші сөз жалаң: Türkçe kitabı — түрік тілі оқулығы. Қазақшада да айырмашылық сол: Әлидің кітабы, бірақ автобус аялдамасы.</p>
       <p><span class="tc" data-ui>03:31</span>Бірге де болады: Ali'nin Türkçe kitabı. Түрік тілі оқулығы. Әлиге тиесілі. Әли, айтпақшы, оны ашып та көрмеген.</p>
       <p><span class="tc" data-ui>03:42</span>Тексеру оңай. «Кімдікі?» деп сұрасаң — -nin қой. «Қандай?» деп сұрасаң — бірінші сөз құйрықсыз.</p>
     </div>
@@ -572,12 +591,54 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
       <p><span class="tc" data-ui>04:03</span>Кеш. Илья автобус іздейді. Өтіп бара жатқан адамнан сұрайды: <a-say>Otobüs durağı nerede?</a-say> Ол айтады: <a-say>Şurada.</a-say> Да кетіп қалады.</p>
       <p><span class="tc" data-ui>04:12</span>Бүкіл қала осылай жазылған: Galata Kulesi, Taksim Meydanı, İstanbul Üniversitesi. Қандай мұнара, қандай алаң, қандай университет.</p>
       <p><span class="tc" data-ui>04:23</span>Илья жетеді. Онда қатарынан үш аялдама. Стамбұл таңдауды жақсы көреді.</p>
-      <p><span class="tc" data-ui>04:30</span>Аялдама көп пе? Алдымен -lar, сосын құйрық: durak + lar + ı = durakları. Құйрық әрқашан соңғы. Қазақшада да: аялдама-лар-ы.</p>
+      <p><span class="tc" data-ui>04:30</span>Аялдама көп пе? Алдымен -lar, сосын құйрық: durak + lar + ı = durakları. Қазақшада да: аялдама-лар-ы. Тек түрікше көптік екі түрлі ғана: -lar, -ler.</p>
     </div>
     <div class="act">
       <p class="act__q">Илья үш түрік тілі оқулығын сатып алды. Құрастыр: Türkçe ___</p>
       <div class="slots" lang="tr" aria-live="polite"><span data-slot>·</span><span data-slot>·</span><span data-slot>·</span></div>
       <div class="chips" lang="tr"><button type="button" class="chip" data-p="ı">ı</button><button type="button" class="chip" data-p="kitap">kitap</button><button type="button" class="chip" data-p="lar">lar</button><button type="button" class="chip chip--ghost" data-preset data-ui>қайтадан</button></div>
+      <p class="act__fb" data-ui aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 5½. Дубляж: қазақша ↔ түрікше ===== -->
+<section data-section="kz" data-words="118" id="s-kz">
+  <div class="wrap">
+    <header class="head"><span class="kick" data-ui>Дубляж · қазақша ↔ түрікше</span><h2>Таныс құйрық, басқа дауыс</h2></header>
+    <p class="lead">Бұл тақырыпта қазақ тілі сенің жағыңда. Құрылым бірдей, тіпті ұяңдау да бар. Бірақ дубляжда үш жерде дауыс сәйкес келмейді.</p>
+    <div class="same" data-same>
+      <span><b lang="kk">алма шырыны</b><i>=</i><b lang="tr">elma suyu</b></span>
+      <span><b lang="kk">кітабы</b><i>=</i><b lang="tr">kitabı</b></span>
+      <span><b lang="kk">аялдама-лар-ы</b><i>=</i><b lang="tr">durak-lar-ı</b></span>
+      <span><b lang="kk">Әлидің кітабы</b><i>=</i><b lang="tr">Ali'nin kitabı</b></span>
+    </div>
+    <div class="dubs">
+      <article class="dub">
+        <div class="dub__bar"><span data-ui>1 · Еріндік құйрық</span></div>
+        <p class="dub__ln"><small data-ui>ҚАЗ</small><span lang="kk">курс<span class="t dk">ы</span> · көпір<span class="t dk">і</span></span></p>
+        <p class="dub__ln"><small data-ui>TR</small><span lang="tr">kurs<span class="t dt">u</span> · köprü<span class="g dt">s</span><span class="t dt">ü</span></span></p>
+        <p class="dub__why">Қазақша құйрық екі түрлі: ‑ы, ‑і. Түрікше сөздің соңғы дауыстысы o, u, ö, ü болса, құйрық та еріндік: ‑u, ‑ü.</p>
+        <button type="button" class="chip chip--ghost" data-dub data-ui>Дубляжды қайтала</button>
+      </article>
+      <article class="dub">
+        <div class="dub__bar"><span data-ui>2 · Көптік: тек -lar, -ler</span></div>
+        <p class="dub__ln"><small data-ui>ҚАЗ</small><span lang="kk">кітап<span class="g dk">тар</span><span class="t">ы</span></span></p>
+        <p class="dub__ln"><small data-ui>TR</small><span lang="tr">kitap<span class="g dt">lar</span><span class="t">ı</span></span></p>
+        <p class="dub__why">Қазақша көптіктің алты түрі бар: ‑лар, ‑дар, ‑тар… Түрікшеде екеу ғана: ‑lar, ‑ler. Дауыссыздан кейін де: kitapları.</p>
+        <button type="button" class="chip chip--ghost" data-dub data-ui>Дубляжды қайтала</button>
+      </article>
+      <article class="dub">
+        <div class="dub__bar"><span data-ui>3 · су ↔ su</span></div>
+        <p class="dub__ln"><small data-ui>ҚАЗ</small><span lang="kk">су<span class="t dk">ы</span></span></p>
+        <p class="dub__ln"><small data-ui>TR</small><span lang="tr">su<span class="g dt">y</span><span class="t dt">u</span></span></p>
+        <p class="dub__why">Қазақша у мұнда дауыссыздай: суы. Түрікше u — дауысты, сондықтан тірек керек, бірақ s емес, y: suyu.</p>
+        <button type="button" class="chip chip--ghost" data-dub data-ui>Дубляжды қайтала</button>
+      </article>
+    </div>
+    <div class="act act--dub">
+      <p class="act__q">Қазақшадан түрікшеге дубляжда: <span data-kq data-ui>Түрік тілі курсы</span></p>
+      <div class="chips" lang="tr"><button type="button" class="chip" data-k="0">Türkçe kursı</button><button type="button" class="chip" data-k="1">Türkçe kursu</button></div>
       <p class="act__fb" data-ui aria-live="polite"></p>
     </div>
   </div>
@@ -607,35 +668,35 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
 <section data-section="traps" data-words="56" id="s-traps">
   <div class="wrap">
     <header class="head"><span class="kick" data-ui>07-көрініс · фильмге кірмегені</span><h2>Сәтсіз дубльдер</h2></header>
-    <p class="lead">Бұған бәрі сүрінеді. Фильмге кірмеген төрт дубль.</p>
+    <p class="lead">Мұнда қазақ құлағы алдайды. Фильмге кірмеген төрт дубль.</p>
     <div class="takes">
       <article class="take">
         <div class="clap"><svg viewBox="0 0 72 16" aria-hidden="true"><path d="M0 0h72v16H0z" fill="#FFF8F4"/><path d="M4 0l8 16h8L12 0zM28 0l8 16h8L36 0zM52 0l8 16h8L60 0z" fill="#212020"/></svg><span data-ui>1-дубль</span></div>
-        <p class="take__bad" lang="tr"><s>Elma su, lütfen.</s></p>
-        <p class="take__why">Құйрықсыз бұл екі сөз: алма және су. Сатушы бәрін дұрыс істеді.</p>
+        <p class="take__bad" lang="tr"><s>Türkçe kursı</s></p>
+        <p class="take__why">Қазақша курсы. Түрікше kurs-тың дауыстысы u, сондықтан құйрық та еріндік: ‑u.</p>
         <button type="button" class="chip" data-take data-ui>Қайта түсіру</button>
-        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Elma suyu, lütfen.">Elma suyu, lütfen.</b></div>
+        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Türkçe kursu">Türkçe kursu</b></div>
       </article>
       <article class="take">
         <div class="clap"><svg viewBox="0 0 72 16" aria-hidden="true"><path d="M0 0h72v16H0z" fill="#FFF8F4"/><path d="M4 0l8 16h8L12 0zM28 0l8 16h8L36 0zM52 0l8 16h8L60 0z" fill="#212020"/></svg><span data-ui>2-дубль</span></div>
-        <p class="take__bad" lang="tr"><s>Türkçenin kitabı</s></p>
-        <p class="take__why">-nin «кімдікі» маңызды болғанда керек. Кітап түрік тіліне тиесілі емес.</p>
+        <p class="take__bad" lang="tr"><s>Galata Köprüsi</s></p>
+        <p class="take__why">Қазақша көпірі. Түрікше köprü ü-ге бітеді: s керек және құйрық ‑ü.</p>
         <button type="button" class="chip" data-take data-ui>Қайта түсіру</button>
-        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Türkçe kitabı">Türkçe kitabı</b></div>
+        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Galata Köprüsü">Galata Köprüsü</b></div>
       </article>
       <article class="take">
         <div class="clap"><svg viewBox="0 0 72 16" aria-hidden="true"><path d="M0 0h72v16H0z" fill="#FFF8F4"/><path d="M4 0l8 16h8L12 0zM28 0l8 16h8L36 0zM52 0l8 16h8L60 0z" fill="#212020"/></svg><span data-ui>3-дубль</span></div>
-        <p class="take__bad" lang="tr"><s>kitap Türkçe</s></p>
-        <p class="take__why">Орыс тілінде басты сөз бірінші: учебник турецкого. Түрікшеде, қазақшадағыдай, басты сөз соңында.</p>
+        <p class="take__bad" lang="tr"><s>Türkçe kitaptarı</s></p>
+        <p class="take__why">Қазақша кітаптары. Түрікше көптік тек ‑lar, ‑ler, дауыссыздан кейін де: kitap + lar + ı.</p>
         <button type="button" class="chip" data-take data-ui>Қайта түсіру</button>
-        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Türkçe kitabı">Türkçe kitabı</b></div>
+        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Türkçe kitapları">Türkçe kitapları</b></div>
       </article>
       <article class="take">
         <div class="clap"><svg viewBox="0 0 72 16" aria-hidden="true"><path d="M0 0h72v16H0z" fill="#FFF8F4"/><path d="M4 0l8 16h8L12 0zM28 0l8 16h8L36 0zM52 0l8 16h8L60 0z" fill="#212020"/></svg><span data-ui>4-дубль</span></div>
-        <p class="take__bad" lang="tr"><s>otobüs durağılar</s></p>
-        <p class="take__why">Алдымен -lar, сосын құйрық. Сөзде құйрық әрқашан соңғы.</p>
+        <p class="take__bad" lang="tr"><s>Elma suı, lütfen.</s></p>
+        <p class="take__why">Қазақша суы. Түрікше su дауыстыға бітеді: арасына y тұрады, құйрық ‑u.</p>
         <button type="button" class="chip" data-take data-ui>Қайта түсіру</button>
-        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="otobüs durakları">otobüs durakları</b></div>
+        <div class="take__fix" lang="tr"><span class="ok" data-ui>Таза нұсқа</span><b data-say="Elma suyu, lütfen.">Elma suyu, lütfen.</b></div>
       </article>
     </div>
   </div>
@@ -701,6 +762,7 @@ html:not(.js-on) .take__fix{position:relative;margin:0 -16px -16px}
         <div><p class="lbl">дауыстыдан кейін</p><p class="big" lang="tr">-sı -si -su -sü</p><p class="ex" lang="tr">kapısı · iskelesi · köprüsü</p></div>
         <div><p class="lbl">ұяңдау және su</p><p class="ex" lang="tr">kitap → kitabı · durak → durağı · su → suyu</p></div>
         <div><p class="lbl">көп</p><p class="ex" lang="tr">durak + lar + ı = durakları</p></div>
+        <div><p class="lbl">қазақшадан айырмасы</p><p class="ex"><span lang="kk">курсы</span> → <span lang="tr">kursu</span> · <span lang="kk">көпірі</span> → <span lang="tr">köprüsü</span> · <span lang="kk">кітаптары</span> → <span lang="tr">kitapları</span> · <span lang="kk">суы</span> → <span lang="tr">suyu</span></p></div>
       </div>
       <p class="poster__vs">«кімдікі» — <span class="own" lang="tr" style="background:#CBE6F7;border-radius:.26em;padding:0 .2em">Ali'nin kitabı</span> · «қандай» — <span class="kk" lang="tr">Türkçe kitabı</span></p>
       <ul class="poster__ex">
@@ -1088,10 +1150,43 @@ addEventListener('DOMContentLoaded', () => {
       const n = got.length;
       if (b.dataset.p !== ORDER[n]) { shake(b); fb.textContent = n === 0 ? 'Басты сөзден баста.' : 'Алдымен -lar, құйрық — соңынан.'; return; }
       got.push(b.dataset.p); draw(); pop(slots[n]);
-      if (got.length === 3) { fb.textContent = '✓ Türkçe kitapları. kitap + lar + ı: -lar алдында p ұяңдамайды.'; if (G) G.fromTo(slots, { y: 0 }, { y: -8, stagger: 0.08, yoyo: true, repeat: 1, duration: D(0.2) }); }
+      if (got.length === 3) { fb.textContent = '✓ Türkçe kitapları. kitap + lar + ı: -lar алдында p ұяңдамайды. Қазақша кітаптары, түрікше -tar жоқ.'; if (G) G.fromTo(slots, { y: 0 }, { y: -8, stagger: 0.08, yoyo: true, repeat: 1, duration: D(0.2) }); }
       else fb.textContent = '';
     }));
     $('[data-preset]', S).addEventListener('click', () => { got = []; draw(); fb.textContent = ''; });
+  }
+
+  // 5½. дубляж: қазақша ↔ түрікше
+  {
+    const S = $('#s-kz'), fb = $('.act__fb', S), qtxt = $('[data-kq]', S), btns = $$('[data-k]', S);
+    const dub = (card) => {
+      if (!G) return;
+      const dk = $$('.dk', card), dt = $$('.dt', card);
+      G.timeline()
+        .fromTo(dk, { color: '#400C08', scale: 1 }, { color: '#B3261E', scale: 1.15, transformOrigin: '50% 100%', duration: D(0.25) })
+        .fromTo(dk, { x: -4 }, { x: 0, duration: D(0.4), ease: 'elastic.out(1, 0.3)' }, '<')
+        .fromTo(dt, { x: 40, y: -26, rotation: 90, autoAlpha: 0 }, { x: 0, y: 0, rotation: 0, autoAlpha: 1, stagger: 0.08, duration: D(0.5), ease: 'back.out(1.7)' }, '-=0.1')
+        .to(dk, { color: '#400C08', scale: 1, duration: D(0.4) }, '+=0.3');
+    };
+    $$('.dub', S).forEach((card) => $('[data-dub]', card).addEventListener('click', () => dub(card)));
+    if (film) ST.batch('#s-kz .dub', { start: 'top 85%', once: true, onEnter: (els) => els.forEach((c, k) => setTimeout(() => dub(c), k * 350)) });
+    if (film) G.from('#s-kz .same span', { y: 24, autoAlpha: 0, stagger: 0.08, duration: 0.5, ease: 'power3.out', scrollTrigger: { trigger: '#s-kz .same', start: 'top 85%' } });
+    const R = [
+      { q: 'Түрік тілі курсы', o: ['Türkçe kursı', 'Türkçe kursu'], ok: 1, why: 'kurs-тың соңғы дауыстысы u: құйрық -u. Қазақша курсы, түрікше kursu.' },
+      { q: 'Галата көпірі', o: ['Galata Köprüsü', 'Galata Köprüsi'], ok: 0, why: 'köprü ü-ге бітеді: s және -ü. Köprüsü.' },
+      { q: 'түрік тілі оқулықтары', o: ['Türkçe kitaptarı', 'Türkçe kitapları'], ok: 1, why: 'Түрікше -tar жоқ, тек -lar: kitap + lar + ı.' },
+      { q: 'апельсин шырыны', o: ['portakal suyu', 'portakal suı'], ok: 0, why: 'su-ға y тірегі және -u құйрығы: suyu.' },
+    ];
+    let i = 0;
+    const show = () => { qtxt.textContent = R[i].q; btns.forEach((b, k) => { b.textContent = R[i].o[k]; b.classList.remove('is-ok', 'is-no'); }); };
+    show();
+    btns.forEach((b) => b.addEventListener('click', () => {
+      const k = Number(b.dataset.k);
+      if (k === R[i].ok) {
+        b.classList.add('is-ok'); fb.textContent = '✓ ' + R[i].why; pop(b);
+        i = (i + 1) % R.length; setTimeout(show, RM.matches ? 600 : 1500);
+      } else { b.classList.add('is-no'); fb.textContent = 'Қазақша естілді. ' + R[i].why; shake(b); }
+    }));
   }
 
   /* ---------- монтажная ---------- */
@@ -1108,8 +1203,9 @@ addEventListener('DOMContentLoaded', () => {
       durak: { stem: 'durağ', tail: 'ı', why: '<b>durak</b>: соңында дауыссыз, a дауыстысы → -ı. k ğ-ге ұяңдайды.' },
       bardak: { stem: 'bardağ', tail: 'ı', why: '<b>bardak</b>: дауыссыз, a дауыстысы → -ı, k → ğ.' },
       bilet: { stem: 'bilet', tail: 'i', why: '<b>bilet</b>: дауыссыз, e дауыстысы → -i. Мұнда t ұяңдамайды.' },
+      kurs: { stem: 'kurs', tail: 'u', why: '<b>kurs</b>: дауыссыз, u дауыстысы → -u. Қазақша курсы, түрікше құйрық еріндік: kursu.' },
     };
-    const MEAN = { 'elma su': 'алма шырыны', 'portakal su': 'апельсин шырыны', 'Türkçe kitap': 'түрік тілі оқулығы', 'otobüs durak': 'автобус аялдамасы', 'otobüs bilet': 'автобус билеті', 'çay bardak': 'шай стақаны' };
+    const MEAN = { 'elma su': 'алма шырыны', 'portakal su': 'апельсин шырыны', 'Türkçe kitap': 'түрік тілі оқулығы', 'otobüs durak': 'автобус аялдамасы', 'otobüs bilet': 'автобус билеті', 'çay bardak': 'шай стақаны', 'Türkçe kurs': 'түрік тілі курсы' };
     const MODES = {
       glue() {
         let A = 'elma', B = 'su';
@@ -1142,7 +1238,7 @@ addEventListener('DOMContentLoaded', () => {
           const [k, b, ok] = R[i];
           const last = [...b.toLowerCase()].reverse().find((c) => vowels.includes(c));
           const endV = vowels.includes(b.toLowerCase().slice(-1));
-          const reason = `${b} ${endV ? 'дауыстыға бітеді — s керек' : 'дауыссызға бітеді — s керек емес'}. Соңғы дауысты «${last}» → -${ok}.`;
+          const reason = `${b} ${endV ? 'дауыстыға бітеді — s керек' : 'дауыссызға бітеді — s керек емес'}. Соңғы дауысты «${last}» → -${ok}.` + ('ouöü'.includes(last) ? ' Қазақшада мұнда -ы/-і болар еді, түрікше құйрық еріндік.' : '');
           if (t === ok) {
             task.innerHTML = `<span class="k">${k}</span> ${b}<span class="t">${ok}</span>`;
             why.innerHTML = `<b>Дұрыс.</b> ${reason}`;
@@ -1174,16 +1270,17 @@ addEventListener('DOMContentLoaded', () => {
       },
       many() {
         const R = [
-          { one: 'otobüs durağı', o: ['otobüs durağılar', 'otobüs durakları', 'otobüs durağıler'], ok: 1, why: 'durak + lar + ı. -lar алдында k ұяңдамайды: қасында дауысты жоқ.' },
-          { one: 'Türkçe kitabı', o: ['Türkçe kitapları', 'Türkçe kitabılar', 'Türkçe kitapı'], ok: 0, why: 'kitap + lar + ı. Құйрық соңында, -lar-дан кейін.' },
+          { one: 'otobüs durağı', o: ['otobüs durağılar', 'otobüs durakları', 'otobüs duraktarı'], ok: 1, why: 'durak + lar + ı. -lar алдында k ұяңдамайды: қасында дауысты жоқ. -tar деген қазақша ғана.' },
+          { one: 'Türkçe kitabı', o: ['Türkçe kitapları', 'Türkçe kitaptarı', 'Türkçe kitabılar'], ok: 0, why: 'kitap + lar + ı. Қазақша кітаптары, түрікше p-дан кейін де -lar.' },
           { one: 'çay bardağı', o: ['çay bardağılar', 'çay bardağları', 'çay bardakları'], ok: 2, why: 'bardak + lar + ı = bardakları.' },
-          { one: 'otobüs bileti', o: ['otobüs biletleri', 'otobüs biletiler', 'otobüs biletlerı'], ok: 0, why: 'bilet + ler + i. Дауысты e, сондықтан -ler және -i.' },
+          { one: 'otobüs bileti', o: ['otobüs biletleri', 'otobüs biletteri', 'otobüs biletiler'], ok: 0, why: 'bilet + ler + i. Қазақша билеттері, түрікше тек -ler: biletleri.' },
+          { one: 'Türkçe kursu', o: ['Türkçe kursuları', 'Türkçe kursları', 'Türkçe kurstarı'], ok: 1, why: 'kurs + lar + ı. Құйрық енді -lar-дың a дауыстысына қарайды: -ı.' },
         ];
         let i = 0;
         const task = el('p', 'lab-task'), row = el('div', 'lab-row'), why = el('p', 'lab-why');
         task.lang = 'tr'; row.lang = 'tr';
         const draw = () => {
-          task.innerHTML = `${R[i].one} → <span class="g">×3</span>`; row.replaceChildren(); why.textContent = 'Алдымен -lar немесе -ler, сосын құйрық.';
+          task.innerHTML = `${R[i].one} → <span class="g">×3</span>`; row.replaceChildren(); why.textContent = 'Алдымен -lar немесе -ler (-tar, -ter жоқ), сосын құйрық.';
           R[i].o.forEach((o, k) => row.append(mk(o, (e) => {
             if (k === R[i].ok) { e.currentTarget.classList.add('is-ok'); why.innerHTML = `<b>Дұрыс.</b> ${R[i].why}`; pop(e.currentTarget); i = (i + 1) % R.length; setTimeout(draw, RM.matches ? 700 : 1700); }
             else { e.currentTarget.classList.add('is-no'); why.innerHTML = `<b>Қате.</b> ${R[i].why}`; shake(e.currentTarget); }
@@ -1242,9 +1339,9 @@ addEventListener('DOMContentLoaded', () => {
       { ru: 'алма шырыны', a: ['elma', 'elmanın'], b: ['su', 'suyu', 'susu'], ok: ['elma', 'suyu'], why: 'Қандай шырын? Алма шырыны. Бірінші сөз құйрықсыз, su → suyu.' },
       { ru: 'түрік тілі оқулығы', a: ['Türkçenin', 'Türkçe'], b: ['kitabı', 'kitap', 'kitapı'], ok: ['Türkçe', 'kitabı'], why: 'Кітаптың түрі — «қандай». kitap → kitabı: p ұяңдайды.' },
       { ru: 'автобус аялдамасы', a: ['otobüs', 'otobüsün'], b: ['durakı', 'durak', 'durağı'], ok: ['otobüs', 'durağı'], why: 'durak → durağı: k ğ-ге ұяңдайды.' },
-      { ru: 'шай стақаны', a: ['çayın', 'çay'], b: ['bardağı', 'bardak', 'bardağılar'], ok: ['çay', 'bardağı'], why: 'Бір стақан, түрі «шайға арналған»: çay bardağı.' },
+      { ru: 'Галата көпірі', a: ['Galata', "Galata'nın"], b: ['Köprüsi', 'Köprüsü', 'Köprü'], ok: ['Galata', 'Köprüsü'], why: 'Қандай көпір? Галата. köprü ü-ге бітеді: s және -ü. Қазақша көпірі, түрікше Köprüsü.' },
       { ru: 'Галата мұнарасы', a: ['Galata', "Galata'nın"], b: ['Kule', 'Kulesı', 'Kulesi'], ok: ['Galata', 'Kulesi'], why: 'Kule e-ге бітеді: s және i дауыстысы керек. Kulesi.' },
-      { ru: 'автобус аялдамалары', a: ['otobüs', 'otobüsün'], b: ['durağılar', 'durakları', 'durağı'], ok: ['otobüs', 'durakları'], why: 'Алдымен -lar, сосын құйрық: durak + lar + ı.' },
+      { ru: 'автобус аялдамалары', a: ['otobüs', 'otobüsün'], b: ['duraktarı', 'durakları', 'durağılar'], ok: ['otobüs', 'durakları'], why: 'Алдымен -lar, сосын құйрық: durak + lar + ı. -tar түрікшеде жоқ.' },
       { ru: 'Әлидің кітабы', a: ['Ali', "Ali'nin"], b: ['kitap', 'kitabın', 'kitabı'], ok: ["Ali'nin", 'kitabı'], why: 'Мұнда «кімдікі» маңызды. Иесіне -nin, кітапқа -ı.' },
     ];
     const ra = $('[data-reel="a"]', root), rb = $('[data-reel="b"]', root), label = $('[data-label]', root), ltext = $('[data-ltext]', root);

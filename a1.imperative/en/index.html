@@ -195,6 +195,17 @@ main,section{z-index:1}
 .cmp__val{font-size:clamp(22px,5.4vw,32px);font-weight:800;display:flex;flex-wrap:wrap;gap:4px;align-items:center;min-height:1.3em}
 .cmp__val .pust{color:var(--rose)}
 .cmp__val .end{color:var(--amber)}
+.kdiff{display:grid;gap:12px}
+@media(min-width:760px){.kdiff{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kdc{border-radius:22px;border:1px solid var(--line);background:var(--panel);padding:16px;text-align:left;cursor:pointer;display:grid;gap:10px;align-content:start;perspective:700px}
+.kdc__h{display:flex;justify-content:space-between;align-items:center;gap:8px;font:600 12px var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.kdc__lang{color:var(--violet);white-space:nowrap}
+.kdc[data-lang="tr"] .kdc__lang{color:var(--green)}
+.kdc__t{font-weight:700;font-size:clamp(17px,3.8vw,20px);letter-spacing:-.01em}
+.kdc .word{font-size:clamp(26px,6.4vw,38px);min-height:1.15em;transform-style:preserve-3d}
+.kdc .tile.is-hot{box-shadow:0 0 0 3px var(--amber),0 0 22px rgba(245,165,36,.45)}
+.kdc__n{font-size:15px;color:#d6d2e0}
+.kdc__n b{color:var(--ink)}
 
 /* ---------- он / bento ---------- */
 .broker{width:100%;max-width:560px;display:block;margin:10px auto 0}
@@ -535,7 +546,7 @@ section>.wrap{z-index:1}
         <div class="chips" role="group" aria-label="Who the order is for" data-ui>
           <button class="chip" type="button" data-who="sen" aria-pressed="true">You</button>
           <button class="chip" type="button" data-who="siz" aria-pressed="false">You (polite)</button>
-          <button class="chip" type="button" data-who="o" aria-pressed="false">He</button>
+          <button class="chip" type="button" data-who="o" aria-pressed="false">He/She</button>
           <button class="chip" type="button" data-who="onlar" aria-pressed="false">They</button>
           <button class="chip" type="button" id="demo-neg" aria-pressed="false"><svg class="ico"><use href="#i-lock"/></svg>Don’t</button>
         </div>
@@ -647,8 +658,8 @@ section>.wrap{z-index:1}
     <div class="player">
       <div>
         <div class="prose">
-          <p>To a taxi driver, a seller, a stranger — polite. Add <b lang="tr" class="tr">-in</b> to the root. One syllable, and the tone changes.</p>
-          <p>The vowel in the tail adjusts to the root. Four options: <b lang="tr" class="tr">-ın, -in, -un, -ün</b>.</p>
+          <p>To a taxi driver, a seller, a stranger — polite. English just adds “please.” Turkish adds <b lang="tr" class="tr">-in</b> to the root: <b lang="tr" class="tr" data-say="gelin">gelin</b>. The same form works for a group of friends.</p>
+          <p>The vowel in the tail adjusts to the root. Four options: <b lang="tr" class="tr">-ın, -in, -un, -ün</b>. Sound tips: ı is like the a in “about”; ü is “ee” said with rounded lips.</p>
           <p>Root ends in a vowel? Put in the <b lang="tr" class="tr">y</b> bridge: <b lang="tr" class="tr" data-say="bekleyin">bekle-y-in</b>.</p>
           <p>Need it fully official, like a metro sign? Add <b lang="tr" class="tr">-iz</b> too: <b lang="tr" class="tr" data-say="bekleyiniz">bekleyiniz</b>.</p>
           <p>The key point: the root picks the tail’s vowel. You just look at the last vowel and find its pair.</p>
@@ -692,17 +703,25 @@ section>.wrap{z-index:1}
 
 <div class="ticker ticker--alt" aria-hidden="true" lang="tr" data-ticker="1"><div class="ticker__row"></div></div>
 <!-- ================= COMPARE ================= -->
-<section data-section="compare" data-words="41" id="s-compare">
+<section data-section="compare" data-words="120" id="s-compare">
   <div class="wrap">
     <div class="kicker" data-ui><svg class="ico"><use href="#i-swap"/></svg>05 · Comparison</div>
     <h2>English <em>vs</em> Turkish</h2>
     <div class="prose">
-      <p>English bolts on extra words: come, let him come, don’t come. And one “come” has to serve a friend and a stranger alike.</p>
-      <p>Turkish leaves the root alone. It stacks tails like coins. Flip the switch and see.</p>
-      <p>English hires helper words. Turkish is a construction set: piece onto piece, nothing gets broken.</p>
+      <p>English adds helper words in front: <i>please</i> come, <i>let him</i> come, <i>don’t</i> come. Turkish leaves the front alone and adds tails at the end.</p>
+      <p>Same meaning, opposite end of the word. Flip the switch: each English helper word turns into a Turkish tail of the same color.</p>
     </div>
     <button class="switch" type="button" role="switch" aria-checked="false" id="cmp-switch" data-ui><span>English</span><span class="switch__track"><span class="switch__dot"></span></span><span>Turkish</span></button>
     <div class="cmp" id="cmp" data-ui></div>
+
+    <h3 style="margin-top:34px">Five things English doesn’t do</h3>
+    <div class="prose">
+      <p>English has an imperative too. Easy: drop “to” and go. But Turkish asks questions English never asks. Tap a card: the English phrase turns into Turkish, and the new piece lights up.</p>
+    </div>
+    <div class="viz" data-ui>
+      <div class="viz__head"><span class="viz__t">English ↔ Turkish</span><span class="viz__k">tap a card</span></div>
+      <div class="kdiff" id="kdiff"></div>
+    </div>
   </div>
 </section>
 
@@ -713,7 +732,7 @@ section>.wrap{z-index:1}
     <h2>Let him: <em>an order through a broker</em></h2>
     <div class="grid2">
       <div class="prose">
-        <p>Sometimes the order isn’t for the person next to you. “Let Ali wait.” Turkish hides “let” in the tail <b lang="tr" class="tr">-sin</b>.</p>
+        <p>Sometimes the order isn’t for the person next to you. “Let Ali wait.” English needs two words, “let him.” Turkish hides them in the tail <b lang="tr" class="tr">-sin</b>. No gender: o is he, she and it.</p>
         <p>For “they,” add <b lang="tr" class="tr">-ler</b> on top: <b lang="tr" class="tr" data-say="gelsinler">gelsinler</b>. Same harmony: <b lang="tr" class="tr">-sın, -sin, -sun, -sün</b>.</p>
         <p>Wishes live here too. A holiday, a toast, a new car — Turks say “may it be” with <b lang="tr" class="tr">-sin</b>.</p>
         <p><a-say>Ali beklesin.</a-say> <span class="muted" data-ui>— Let Ali wait.</span></p>
@@ -742,7 +761,7 @@ section>.wrap{z-index:1}
         <svg class="stamp" id="stamp" viewBox="0 0 220 70" aria-hidden="true"><rect x="4" y="4" width="212" height="62" rx="10" fill="none" stroke="#ff7d95" stroke-width="5"/><text x="110" y="45" text-anchor="middle" font-family="ui-monospace,monospace" font-weight="800" font-size="26" fill="#ff7d95" letter-spacing="3">CANCELLED</text></svg></div>
       <div>
         <div class="prose">
-          <p>A ban is a lock. It goes right after the root: <b lang="tr" class="tr" data-say="gelme">gel-me</b>. “Don’t come.”</p>
+          <p>A ban is a lock. It goes right after the root: <b lang="tr" class="tr" data-say="gelme">gel-me</b>. “Don’t come.” No separate “not” word — the lock is part of the verb.</p>
           <p>After the lock — the usual tails. The lock ends in a vowel, so before <b lang="tr" class="tr">-in</b> there’s the bridge again: <b lang="tr" class="tr" data-say="gelmeyin">gelmeyin</b>.</p>
           <p>The lock’s harmony is simple, two options: <b lang="tr" class="tr">-ma</b> or <b lang="tr" class="tr">-me</b>.</p>
           <p>The order is ironclad: lock first, then recipient. The lock always sits closer to the root.</p>
@@ -917,7 +936,7 @@ section>.wrap{z-index:1}
     <div class="kicker" data-ui><svg class="ico"><use href="#i-flask"/></svg>12 · Lab</div>
     <h2>Order <em>terminal</em></h2>
     <p class="prose">Pick a verb. Pick who the order is for. Turn on the lock if you need it. The form builds itself and explains why it looks that way.</p>
-    <p class="prose">Try to break it: turn on <b lang="tr" class="tr">-iz</b> for “he.” The terminal will politely refuse — that only works with polite “you.”</p>
+    <p class="prose">Try to break it: turn on <b lang="tr" class="tr">-iz</b> for “he/she.” The terminal will politely refuse — that only works with polite “you.”</p>
     <div class="lab panel panel--glow">
       <div class="lab__ctl" data-ui>
         <div><div class="lab__lbl">Verb</div><div class="chips" id="lab-verbs" role="group" aria-label="Verb"></div></div>
@@ -925,7 +944,7 @@ section>.wrap{z-index:1}
           <div class="lab__modes" role="group" aria-label="To whom">
             <button class="chip" type="button" data-mode="sen" aria-pressed="true">You<small>sen</small></button>
             <button class="chip" type="button" data-mode="siz" aria-pressed="false">You (polite)<small>siz</small></button>
-            <button class="chip" type="button" data-mode="o" aria-pressed="false">He<small>o</small></button>
+            <button class="chip" type="button" data-mode="o" aria-pressed="false">He/She<small>o</small></button>
             <button class="chip" type="button" data-mode="onlar" aria-pressed="false">They<small>onlar</small></button>
           </div>
         </div>
@@ -951,7 +970,7 @@ section>.wrap{z-index:1}
   <div class="wrap">
     <div class="kicker" data-ui><svg class="ico"><use href="#i-alert"/></svg>13 · Traps</div>
     <h2>Five <em>traps</em></h2>
-    <div class="prose"><p>Everyone trips on these. Every mistake is an order too. Only nobody will execute it.</p><p>Tap a card — the mistake fixes itself before your eyes.</p></div>
+    <div class="prose"><p>English speakers trip on these. Every mistake is an order too. Only nobody will execute it.</p><p>Tap a card — the mistake fixes itself before your eyes.</p></div>
     <div class="traps" id="traps"></div>
   </div>
 </section>
@@ -1081,21 +1100,21 @@ addEventListener('DOMContentLoaded', () => {
   const endsV = (s) => VOW.includes(s.slice(-1));
   const SOFT = { git: 'gid', et: 'ed' };
   const VERBS = [
-    { s: 'gel', ru: ['come', 'come (polite)', 'let him come', 'let them come', 'don’t come', 'don’t come (polite)', 'let him not come', 'let them not come'] },
-    { s: 'bak', ru: ['look', 'look (polite)', 'let him look', 'let them look', 'don’t look', 'don’t look (polite)', 'let him not look', 'let them not look'] },
-    { s: 'otur', ru: ['sit down', 'sit down (polite)', 'let him sit down', 'let them sit down', 'don’t sit down', 'don’t sit down (polite)', 'let him not sit down', 'let them not sit down'] },
-    { s: 'bekle', ru: ['wait', 'wait (polite)', 'let him wait', 'let them wait', 'don’t wait', 'don’t wait (polite)', 'let him not wait', 'let them not wait'] },
-    { s: 'oku', ru: ['read', 'read (polite)', 'let him read', 'let them read', 'don’t read', 'don’t read (polite)', 'let him not read', 'let them not read'] },
-    { s: 'düşün', ru: ['think', 'think (polite)', 'let him think', 'let them think', 'don’t think', 'don’t think (polite)', 'let him not think', 'let them not think'] },
-    { s: 'yürü', ru: ['walk', 'walk (polite)', 'let him walk', 'let them walk', 'don’t walk', 'don’t walk (polite)', 'let him not walk', 'let them not walk'] },
-    { s: 'git', ru: ['go', 'go (polite)', 'let him go', 'let them go', 'don’t go', 'don’t go (polite)', 'let him not go', 'let them not go'] },
-    { s: 'iç', ru: ['drink', 'drink (polite)', 'let him drink', 'let them drink', 'don’t drink', 'don’t drink (polite)', 'let him not drink', 'let them not drink'] },
-    { s: 'dur', ru: ['stop', 'stop (polite)', 'let him stop', 'let them stop', 'don’t stop', 'don’t stop (polite)', 'let him not stop', 'let them not stop'] },
-    { s: 'konuş', ru: ['speak', 'speak (polite)', 'let him speak', 'let them speak', 'don’t speak', 'don’t speak (polite)', 'let him not speak', 'let them not speak'] },
-    { s: 'uyu', ru: ['sleep', 'sleep (polite)', 'let him sleep', 'let them sleep', 'don’t sleep', 'don’t sleep (polite)', 'let him not sleep', 'let them not sleep'] },
+    { s: 'gel', ru: ['come', 'please come', 'let him come', 'let them come', 'don’t come', 'please don’t come', 'he shouldn’t come', 'they shouldn’t come'] },
+    { s: 'bak', ru: ['look', 'please look', 'let him look', 'let them look', 'don’t look', 'please don’t look', 'he shouldn’t look', 'they shouldn’t look'] },
+    { s: 'otur', ru: ['sit down', 'please sit down', 'let him sit down', 'let them sit down', 'don’t sit down', 'please don’t sit down', 'he shouldn’t sit down', 'they shouldn’t sit down'] },
+    { s: 'bekle', ru: ['wait', 'please wait', 'let him wait', 'let them wait', 'don’t wait', 'please don’t wait', 'he shouldn’t wait', 'they shouldn’t wait'] },
+    { s: 'oku', ru: ['read', 'please read', 'let him read', 'let them read', 'don’t read', 'please don’t read', 'he shouldn’t read', 'they shouldn’t read'] },
+    { s: 'düşün', ru: ['think', 'please think', 'let him think', 'let them think', 'don’t think', 'please don’t think', 'he shouldn’t think', 'they shouldn’t think'] },
+    { s: 'yürü', ru: ['walk', 'please walk', 'let him walk', 'let them walk', 'don’t walk', 'please don’t walk', 'he shouldn’t walk', 'they shouldn’t walk'] },
+    { s: 'git', ru: ['go', 'please go', 'let him go', 'let them go', 'don’t go', 'please don’t go', 'he shouldn’t go', 'they shouldn’t go'] },
+    { s: 'iç', ru: ['drink', 'please drink', 'let him drink', 'let them drink', 'don’t drink', 'please don’t drink', 'he shouldn’t drink', 'they shouldn’t drink'] },
+    { s: 'dur', ru: ['stop', 'please stop', 'let him stop', 'let them stop', 'don’t stop', 'please don’t stop', 'he shouldn’t stop', 'they shouldn’t stop'] },
+    { s: 'konuş', ru: ['speak', 'please speak', 'let him speak', 'let them speak', 'don’t speak', 'please don’t speak', 'he shouldn’t speak', 'they shouldn’t speak'] },
+    { s: 'uyu', ru: ['sleep', 'please sleep', 'let him sleep', 'let them sleep', 'don’t sleep', 'please don’t sleep', 'he shouldn’t sleep', 'they shouldn’t sleep'] },
   ];
   const WHO = ['sen', 'siz', 'o', 'onlar'];
-  const WHO_RU = { sen: 'you', siz: 'you (polite)', o: 'he', onlar: 'they' };
+  const WHO_RU = { sen: 'to a friend', siz: 'polite', o: 'he/she', onlar: 'they' };
   /* части слова: k — роль (stem, me, y, in, iz, sin, lar) */
   function build(stem, who, neg = false, formal = false) {
     const parts = [{ t: stem, k: 'stem' }];
@@ -1368,29 +1387,27 @@ addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.create({ trigger: '#siz-screen', start: 'top 75%', once: true, onEnter: () => { if (sizState.step === 0) $('#siz-play').click(); } });
   }
 
-  /* ---------- COMPARE: русский ↔ турецкий ---------- */
+  /* ---------- COMPARE: English helper words ↔ Turkish tails ---------- */
+  const T = (t, k = 'stem', hot) => ({ t, k, hot: !!hot });
   const CMP = [
-    ['you', 'Come!', [{ t: 'Gel', k: 'stem' }]],
-    ['you (polite)', 'Please come!', [{ t: 'Gel', k: 'stem' }, { t: 'in', k: 'in' }]],
-    ['he', 'Let him come!', [{ t: 'Gel', k: 'stem' }, { t: 'sin', k: 'sin' }]],
-    ['they', 'Let them come!', [{ t: 'Gel', k: 'stem' }, { t: 'sin', k: 'sin' }, { t: 'ler', k: 'lar' }]],
-    ['ban', 'Don’t come!', [{ t: 'Gel', k: 'stem' }, { t: 'me', k: 'me' }]],
+    ['to a friend', [T('Come')], [T('Gel')]],
+    ['polite', [T('Please', 'in'), T('come')], [T('Gel'), T('in', 'in')]],
+    ['he/she', [T('Let', 'sin'), T('him', 'sin'), T('come')], [T('Gel'), T('sin', 'sin')]],
+    ['they', [T('Let', 'sin'), T('them', 'lar'), T('come')], [T('Gel'), T('sin', 'sin'), T('ler', 'lar')]],
+    ['ban', [T('Don’t', 'me'), T('come')], [T('Gel'), T('me', 'me')]],
   ];
   const cmpBox = $('#cmp');
-  const cmpRows = CMP.map(([who, ru, tr]) => {
+  const cmpRows = CMP.map(([who, en, tr]) => {
     const row = make('div', 'cmp__row');
     row.append(make('span', 'cmp__who', who));
     const val = make('div', 'cmp__val');
     row.append(val); cmpBox.append(row);
-    return { row, val, ru, tr };
+    return { row, val, en, tr };
   });
-  function renderRu(v, ru) {
-    v.replaceChildren(); v.removeAttribute('data-say'); v.removeAttribute('lang');
-    ru.replace('!', '').split(' ').forEach((w) => {
-      const s = make('span', w === 'Let' || w === 'Don’t' ? 'pust' : '', w);
-      if (s.className === '') { const m = w.match(/^(.*?)(те|и|ёт|ут|ет|ит|й)$/); if (m && w !== 'Let') { s.textContent = m[1]; s.append(make('span', 'end', m[2])); } }
-      v.append(s);
-    });
+  /* English words: shown as tiles, not read by the Turkish voice */
+  function paintEn(v, parts) {
+    v.removeAttribute('data-say'); v.lang = 'en';
+    return paint(v, parts, { say: false });
   }
   function renderCmp(tr) {
     cmpRows.forEach((r, i) => {
@@ -1398,12 +1415,12 @@ addEventListener('DOMContentLoaded', () => {
         r.val.lang = 'tr';
         const tiles = paint(r.val, r.tr);
         if (anim) {
-          gsap.fromTo(tiles[0], { y: -30, scale: 0.8 }, { y: 0, scale: 1, duration: 0.5, ease: 'back.out(2.5)', delay: i * 0.06 });
-          gsap.fromTo(tiles.slice(1), { x: -120, y: -40, rotation: -40, scale: 0.3 }, { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.7, ease: 'back.out(2)', stagger: 0.12, delay: 0.15 + i * 0.06 });
+          gsap.fromTo(tiles[0], { x: -60, scale: 0.8 }, { x: 0, scale: 1, duration: 0.5, ease: 'back.out(2.5)', delay: i * 0.06 });
+          gsap.fromTo(tiles.slice(1), { x: -160, y: -40, rotation: -40, scale: 0.3 }, { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.7, ease: 'back.out(2)', stagger: 0.12, delay: 0.15 + i * 0.06 });
         }
       } else {
-        renderRu(r.val, r.ru);
-        if (anim) gsap.fromTo($$('span', r.val), { y: 24, rotation: 6 }, { y: 0, rotation: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.05, delay: i * 0.05 });
+        const tiles = paintEn(r.val, r.en);
+        if (anim) gsap.fromTo(tiles, { y: 24, rotation: 6 }, { y: 0, rotation: 0, duration: 0.5, ease: 'back.out(2)', stagger: 0.05, delay: i * 0.05 });
       }
     });
   }
@@ -1419,6 +1436,63 @@ addEventListener('DOMContentLoaded', () => {
   if (anim) {
     gsap.from('.cmp__row', { x: (i) => (i % 2 ? 80 : -80), rotation: (i) => (i % 2 ? 2 : -2), duration: 0.7, ease: 'back.out(1.8)', stagger: 0.08, scrollTrigger: { trigger: '#cmp', start: 'top 85%' } });
     ScrollTrigger.create({ trigger: '#cmp', start: 'top 45%', once: true, onEnter: () => { if (cmpSwitch.getAttribute('aria-checked') !== 'true') cmpSwitch.click(); } });
+  }
+
+  /* ---------- KDIFF: five differences, the English phrase turns into Turkish ---------- */
+  const KDIFF = [
+    { t: 'One “you” becomes two', en: [T('Sit'), T('down')], tr: [T('otur'), T('un', 'in', 1)],
+      n: 'In English, “sit down” works for your friend and for your boss. Turkish makes you choose: <b>otur</b> to a friend, <b>oturun</b> to the boss or to a group.' },
+    { t: '“Don’t” moves inside the word', en: [T('Don’t', 'me', 1), T('go')], tr: [T('git'), T('me', 'me', 1)],
+      n: 'No separate word for “not.” The lock <b>-me</b> sits right after the root: <b>gitme</b>. Don’t translate it as değil.' },
+    { t: '“Let him” is one tail', en: [T('Let', 'sin', 1), T('him', 'sin', 1), T('wait')], tr: [T('bekle'), T('sin', 'sin', 1)],
+      n: 'Two English words become one tail: <b>beklesin</b>. And o has no gender: it’s also “let her wait.”' },
+    { t: '“Them” is a tail too', en: [T('Let', 'sin'), T('them', 'lar', 1), T('wait')], tr: [T('bekle'), T('sin', 'sin'), T('ler', 'lar', 1)],
+      n: 'For a group, Turkish adds <b>-ler</b> on top: <b>beklesinler</b>. The order of pieces is fixed: root, “let,” “them.”' },
+    { t: 'Official = one more tail', en: [T('Kindly', 'iz', 1), T('wait')], tr: [T('bekle'), T('y', 'y'), T('in', 'in'), T('iz', 'iz', 1)],
+      n: 'Signs in English add words: “kindly,” “passengers are requested to.” Turkish just adds <b>-iz</b>: <b>bekleyiniz</b>.' },
+  ];
+  const kdiff = $('#kdiff');
+  const kdCards = KDIFF.map((d, i) => {
+    const c = make('button', 'kdc'); c.type = 'button'; c.dataset.lang = 'en';
+    const h = make('span', 'kdc__h');
+    const lang = make('span', 'kdc__lang', 'English');
+    h.append(make('span', '', `${i + 1} / ${KDIFF.length}`), lang);
+    const t = make('span', 'kdc__t', d.t);
+    const w = make('span', 'word');
+    const n = make('span', 'kdc__n'); n.innerHTML = d.n;
+    c.append(h, t, w, n); kdiff.append(c);
+    const draw = (tr) => {
+      const tiles = paint(w, (tr ? d.tr : d.en).map((p, k) => ({ ...p, t: k ? p.t : cap(p.t) })), { say: false });
+      w.lang = tr ? 'tr' : 'en';
+      (tr ? d.tr : d.en).forEach((p, k) => tiles[k].classList.toggle('is-hot', p.hot));
+      c.dataset.lang = tr ? 'tr' : 'en';
+      lang.textContent = tr ? 'Turkish' : 'English';
+      return tiles;
+    };
+    draw(false);
+    const flip = (toTr) => {
+      if (!anim) { draw(toTr); return; }
+      gsap.to($$('.tile', w), { rotationX: 90, duration: 0.22, ease: 'power2.in', stagger: 0.04, onComplete: () => {
+        const tiles = draw(toTr);
+        gsap.fromTo(tiles, { rotationX: -90 }, { rotationX: 0, duration: 0.45, ease: 'back.out(2.2)', stagger: 0.06 });
+        const hot = tiles.filter((x) => x.classList.contains('is-hot'));
+        gsap.fromTo(hot, { scale: 1.45, y: -10 }, { scale: 1, y: 0, duration: 0.8, ease: 'elastic.out(1, .45)', delay: 0.25 });
+        if (toTr) sparks(hot[0], 8);
+      } });
+      gsap.fromTo(lang, { y: -8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: 'back.out(2)', delay: 0.2 });
+    };
+    c.addEventListener('click', () => {
+      const toTr = c.dataset.lang !== 'tr';
+      flip(toTr);
+      if (toTr) speak(cap(d.tr.map((p) => p.t).join('')));
+    });
+    return { c, flip };
+  });
+  if (anim) {
+    ScrollTrigger.batch('#kdiff .kdc', { start: 'top 88%', once: true, onEnter: (els) => {
+      gsap.from(els, { y: 60, rotation: (i) => (i % 2 ? 3 : -3), duration: 0.7, ease: 'back.out(2)', stagger: 0.12 });
+      els.forEach((el, k) => { const kd = kdCards.find((x) => x.c === el); setTimeout(() => { if (kd && el.dataset.lang === 'en') kd.flip(true); }, 1100 + k * 450); });
+    } });
   }
 
   /* ---------- THIRD: брокер и bento-таблица ---------- */
@@ -1711,7 +1785,7 @@ addEventListener('DOMContentLoaded', () => {
     r.parts[0].t = cap(r.parts[0].t);
     const tiles = paint(labWord, r.parts);
     const v = VERBS.find((x) => x.s === lab.stem);
-    $('#lab-ru').textContent = `${cap(r.text)}! — ${ruOf(v, lab.mode, lab.neg)}${lab.iz && lab.mode === 'siz' ? ' (official)' : ''}${lab.iz && lab.mode !== 'siz' ? ' · -iz only goes with polite “you”' : ''}`;
+    $('#lab-ru').textContent = `${cap(r.text)}! — ${ruOf(v, lab.mode, lab.neg)}${lab.iz && lab.mode === 'siz' ? ' — official, like a sign' : ''}${lab.iz && lab.mode !== 'siz' ? ' · -iz only goes with polite “you”' : ''}`;
     const why = $('#lab-why');
     why.replaceChildren(...r.why.map(([k, t]) => { const li = make('li'); const i = make('i'); i.style.background = ROLE_COLOR[k]; li.append(i, document.createTextNode(t)); return li; }));
     if (anim) {
@@ -1726,12 +1800,13 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- TRAPS ---------- */
   const TRAPS = [
-    ['Siz gelsin!', 'Gelin!', '-sin means “let him.” Polite “you” needs -in.'],
-    ['Gitin!', 'Gidin!', 'In git, t becomes d before a vowel. Same with et → edin.'],
-    ['Beklein.', 'Bekleyin.', 'Turkish doesn’t like two vowels in a row. Put in the y bridge.'],
-    ['Gelmein!', 'Gelmeyin!', 'The -me lock ends in a vowel. So, y again.'],
+    ['Gel değil!', 'Gelme!', 'English says “don’t” as a word. Turkish has no such word here: the lock -me goes inside, right after the root.'],
+    ['Bakin!', 'Bakın!', 'ı and i are different letters. ı sounds like the a in about. After a, the tail is -ın, not -in.'],
+    ['Jel!', 'Gel!', 'Turkish g is always hard, like in get. Never like the g in hair gel. And Turkish c is the j sound: cam (glass) sounds like jam.'],
+    ['Gitin!', 'Gidin!', 'In git, t becomes d before a vowel. Same with et → edin. English has nothing like it.'],
     ['Yavaş gidiyorsunuz.', 'Yavaş gidin.', 'The first is news. The second is an order. The driver knows the difference.'],
   ];
+
   const trapsBox = $('#traps');
   TRAPS.forEach(([bad, good, why], i) => {
     const c = make('button', 'trap'); c.type = 'button';
