@@ -192,6 +192,8 @@
   .pm-tbl button { width: 100%; min-height: 46px; border: 0; border-radius: 14px; background: #fff; cursor: pointer; display: grid; grid-template-columns: 70px 1fr; align-items: center; text-align: left; padding: 0 14px; font-size: 18px; }
   .pm-tbl button b { color: var(--blue); }
   .pm-tbl button span:first-child { color: #6a6a75; font-weight: 700; }
+  .pm-tbl button { grid-template-columns: 60px 1fr auto; gap: 8px; }
+  .pm-tbl .pm-kzf { color: #6a6a75; font-size: 15px; font-weight: 600; }
   .pm-final { margin-top: 20px; background: var(--ink); color: #fff; border-radius: 24px; padding: 18px; font-weight: 700; font-size: 19px; display: flex; gap: 14px; align-items: center; }
   .pm-final svg { width: 56px; height: 56px; flex: none; }
 
@@ -213,6 +215,21 @@
     .pm-sb__bus { left: 0; top: calc(var(--p, 0) * 100%); translate: 0 -50%; rotate: 90deg; }
     .pm-sb__mark { left: 3px; top: calc(var(--at, 0) * 100%); translate: 0 -50%; }
   }
+
+  /* ---------- қазақша ↔ түрікше ---------- */
+  .pm-kz { background: #fff; color: var(--ink); border-radius: 28px; padding: 18px 14px; display: grid; gap: 6px; justify-items: center; margin-top: 18px; }
+  .pm-kz__lb { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; color: #6a6a75; }
+  .pm-kz .pm-pieces { font-size: clamp(22px, 6.4vw, 36px); min-height: 56px; cursor: pointer; }
+  .pm-kz .pm-pc--root { background: var(--soft); }
+  .pm-kz .pm-pc--plus { color: #9a9aa5; padding: 0; }
+  .pm-kz .pm-pc--sep { color: #9a9aa5; padding: 0 2px; }
+  .pm-kz .pm-pc.is-diff { box-shadow: 0 0 0 3px var(--ink), 0 0 0 6px var(--pink); }
+  .pm-kz__arrow { width: 34px; height: 34px; fill: none; stroke: var(--blue); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .pm-kz__tag { display: inline-block; padding: 4px 14px; border-radius: 999px; font-family: var(--disp); font-size: 14px; text-transform: uppercase; margin-top: 4px; }
+  .pm-kz__tag.is-same { background: var(--mint); border: 2px solid var(--ink); }
+  .pm-kz__tag.is-diff { background: var(--pink); color: #fff; border: 2px solid var(--pink); }
+  .pm-kz__note { text-align: center; margin: 0; min-height: 4.8em; max-width: 52ch; }
+  .pm-kz .pm-chips { justify-self: stretch; }
 
   @media (prefers-reduced-motion: reduce) { .pm-morph { animation: none; } }
 </style>
@@ -236,8 +253,8 @@
     <div class="pm-in">
       <span class="pm-chip">A2 · Измир · 1-сабақ</span>
       <h1>Түрікше өткен шақ: <span class="pm-morph" id="pmMorph" lang="tr">gelmiş</span> — көрдің бе, <span class="t-mint">естідің бе?</span></h1>
-      <p class="pm-lead">Қазақ үшін түрік тілі алғашында оп-оңай көрінеді. Сөздер түбірге моншақтай тізіледі. Сөз тәртібі таныс.</p>
-      <p>Өткен шаққа дейін. Өткен шақ екеу. Біреуі жай ұзынырақ болатын екеу емес. Моралі әртүрлі екеу.</p>
+      <p class="pm-lead">Қазаққа бұл тақырып — сыйлық. «Келді» мен «келіпті» сенде бұрыннан бар.</p>
+      <p>Түрікте де өткен шақ екеу: geldi және gelmiş. Мағынасы — қазақшадағыдай. Тек форма басқа. Ал форманы шатастырсаң, мағына да кетеді.</p>
 
       <div class="pm-dialog" id="pmDialog">
         <div class="pm-dialog__top">
@@ -247,9 +264,9 @@
         <div class="pm-msg">Түрік тілі сабағы. Ходжа сұрайды: <a-say>Dün ne yaptın?</a-say><small>Кеше не істедің?</small></div>
         <div class="pm-msg pm-msg--me">Студент: <a-say>Dün sinemaya gitmişim.</a-say><small>«кеше киноға бардым» демек болған</small></div>
         <div class="pm-msg">Ходжа оған қарайды: <a-say>Emin misin?</a-say><small>Сенімдісің бе?</small></div>
-        <div class="pm-msg">Яғни киноға барғаныңды өзің білмейсің. Саған біреу айтып беріпті.</div>
-        <div class="pm-msg pm-msg--note">Сынып күлкіден жатыр. Студент: «Мен әдемірек айтайын дегем».</div>
-        <p class="pm-punch">Әдемірек шықты. Киноға оны басқа біреу апарғандай, ал ол бұны таңертең білгендей. Стористен.</p>
+        <div class="pm-msg">Ал шыққаны: «Кеше киноға барыппын». Өзің білмейсің, біреу айтып беріпті.</div>
+        <div class="pm-msg pm-msg--note">Сынып күледі. Студент: «Әдемірек айтайын дедім».</div>
+        <p class="pm-punch">Қазақша да оғаш, иә? Өз басыңнан өткенді «барыппын» деп айтпайсың. Түрікше де айтпайды.</p>
         <div class="pm-whatif">
           <div class="pm-row"><span>Басқаша жауап берсе ше?</span>
             <button type="button" class="pm-btn" data-whatif="gittim" aria-pressed="false">gittim</button>
@@ -262,7 +279,7 @@
       <div class="pm-vs">
         <div class="pm-vs__col"><span class="pm-tag pm-tag--di">-dı</span><a-say>Dün sinemaya gittim.</a-say><span>Киноға бардым. Сонда болдым. Билет қалтада.</span></div>
         <div class="pm-vs__mid" aria-hidden="true">vs</div>
-        <div class="pm-vs__col"><span class="pm-tag pm-tag--mis">-mış</span><a-say>Dün sinemaya gitmişim.</a-say><span>Сөйтсем, киноға барыппын. Өзім есімде жоқ. Білдім.</span></div>
+        <div class="pm-vs__col"><span class="pm-tag pm-tag--mis">-mış</span><a-say>Dün sinemaya gitmişim.</a-say><span>Сөйтсем, киноға барыппын. Өзім есімде жоқ, кейін білдім.</span></div>
       </div>
     </div>
   </section>
@@ -281,7 +298,7 @@
       </div>
       <div class="pm-out" id="pmOut" aria-live="polite" data-ui></div>
       <p><b>Көз</b> — бұл <b>-dı</b>: болдым, көрдім, өзім істедім. <b>Құлақ, тосынсый және ертегі</b> — бұл <b>-mış</b>: маған айтты, нәтижесінен білдім, солай айтып береді.</p>
-      <p class="pm-note">Қазақша сөйлейсің, демек бұл түйме сенде бұрыннан бар. <b>Келді</b> — бұл geldi. <b>Келіпті</b> — бұл gelmiş. Орыс етістігінде мұндай түйме жоқ. Сондықтан орысша ойлағанда «бәрі бір нәрсе» сияқты көрінеді.</p>
+      <p class="pm-note">Бұл түйме сенде бұрыннан бар. <b>Келді</b> — geldi. <b>Келіпті</b>, <b>келген екен</b> — gelmiş. Орыс етістігінде мұндай түйме жоқ, сондықтан орысша ойласаң, екеуі бір сияқты. Қазақша ойла.</p>
       <p>Маңыздысы: -mış «өтірік» дегенді білдірмейді. Бұл жаман мағынадағы өсек емес. Бұл адал белгі: мен өзім көрген жоқпын.</p>
     </div>
   </section>
@@ -294,7 +311,7 @@
       <p>Сөздер бірдей. Тек құйрық өзгереді — онымен бірге бүкіл оқиға. Түрік бір буыннан-ақ аялдамада болдың ба, жоқ па, түсінеді.</p>
       <div class="pm-deck">
         <button type="button" class="pm-card pm-card--1" data-say="Otobüs gitti." aria-pressed="false">
-          <span class="pm-card__f"><span class="pm-card__t t-pink">Көрдім</span><span class="pm-card__tr" lang="tr">Otobüs gitti.</span></span> <span class="pm-card__b"><b>-dı</b>Аялдамада тұрдым. Ол көз алдымда кетіп қалды. Ашу жеке, куәнікі.</span>
+          <span class="pm-card__f"><span class="pm-card__t t-pink">Көрдім</span><span class="pm-card__tr" lang="tr">Otobüs gitti.</span></span> <span class="pm-card__b"><b>-dı</b>Аялдамада тұрдым. Ол көз алдымда кетіп қалды. Мен — куәмін.</span>
         </button>
         <button type="button" class="pm-card pm-card--2" data-say="Otobüs gitmiş." aria-pressed="false">
           <span class="pm-card__f"><span class="pm-card__t t-blue">Естідім</span><span class="pm-card__tr" lang="tr">Otobüs gitmiş.</span></span> <span class="pm-card__b"><b>-mış</b>Маған чатқа жазды. Өзім әлі үйдемін, тәпішкемен. Автобус кетіпті дейді.</span>
@@ -342,7 +359,7 @@
       <div class="pm-rules">
         <div class="pm-rule"><span class="pm-rule__n">1</span><h3>Төрт құйрық</h3><p>miş, mış, muş, müş — түбірдің соңғы дауыстысы бойынша.</p></div>
         <div class="pm-rule"><span class="pm-rule__n">2</span><h3>Қатаңдау жоқ</h3><p>-dı-да t болады: baktı. -mış-та m әрдайым m болып қалады: <a-say>bakmış</a-say>. Бір ереже кем.</p></div>
-        <div class="pm-rule"><span class="pm-rule__n">3</span><h3>Ұзын жалғаулар</h3><p>Осы шақтағыдай: -im, -sin, -iz, -siniz, -ler.</p></div>
+        <div class="pm-rule"><span class="pm-rule__n">3</span><h3>Ұзын жалғаулар</h3><p>-im, -sin, -iz, -siniz, -ler. Қазақшадағы -пын, -сың, -пыз сияқты, тек ң-сіз.</p></div>
       </div>
       <p style="margin-top:14px">Жаққа бас — қалай естілетінін тыңдайсың. o-да жалғау жоқ.</p>
       <div class="pm-persons" id="pmPersons">
@@ -352,6 +369,25 @@
         <button type="button" data-say="biz gelmişiz">biz gelmiş<b>iz</b></button>
         <button type="button" data-say="siz gelmişsiniz">siz gelmiş<b>siniz</b></button>
         <button type="button" data-say="onlar gelmişler">onlar gelmiş<b>ler</b></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="pm-band pm-ink" data-section="kazakh" data-words="78">
+    <div class="pm-in">
+      <span class="pm-chip">қазақша ↔ түрікше</span>
+      <h2>Мағына бірдей. <span class="t-mint">Форма басқа.</span></h2>
+      <p>«Келіпті» мен «gelmiş» — бір нәрсе. Сен оны түсіндірусіз сезесің. Сүрінетін жер — форма: қазақша саусақ өзі -ып, -ты, ң, ы жазып жібереді.</p>
+      <p>Жұпты бас. Қызғылт жиекті бөлшек — қазақшадан басқаша. «Қазақша көмектеседі» белгісі — мұнда дағдың пайдалы.</p>
+      <div class="pm-kz" id="pmKz">
+        <span class="pm-kz__lb">қазақша</span>
+        <div class="pm-pieces" id="pmKzKk" data-ui></div>
+        <svg class="pm-kz__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M6 14l6 6 6-6"/></svg>
+        <div class="pm-pieces" id="pmKzTr" lang="tr" data-ui></div>
+        <span class="pm-kz__lb">түрікше</span>
+        <span class="pm-kz__tag" id="pmKzTag" data-ui></span>
+        <p class="pm-kz__note" id="pmKzNote" aria-live="polite" data-ui></p>
+        <div class="pm-chips" id="pmKzChips"></div>
       </div>
     </div>
   </section>
@@ -405,8 +441,8 @@
   <section class="pm-band pm-white" data-section="video" data-words="20">
     <div class="pm-in">
       <h2>Оқытушыны тыңда</h2>
-      <p>Ол «өзім көрдім» мен «маған айтты»-ны қалай ажырататынына назар аудар. Бейне — қосымша, сабақ онсыз да түсінікті.</p>
-      <a-video yt="ndKyizB954w" start="113" end="240" title="-MIŞ түрік тілінде: бірінші мағына" channel="Елена Юрчук және түрік тілі"></a-video>
+      <p>Бейне орысша. Мұғалім «өзім көрдім» мен «маған айтты»-ны қалай ажырататынына назар аудар — қазақша «келді» мен «келіпті» сияқты. Бейне — қосымша, сабақ онсыз да түсінікті.</p>
+      <a-video yt="ndKyizB954w" start="113" end="240" title="-MIŞ түрік тілінде: бірінші мағына (орысша)" channel="Елена Юрчук және түрік тілі"></a-video>
     </div>
   </section>
 
@@ -446,7 +482,7 @@
         <button type="button" role="radio" aria-checked="true" data-cheat="mis">-mış · естідім</button>
       </div>
       <table class="pm-tbl" id="pmTbl"><tbody></tbody></table>
-      <p><b>miş · mış · muş · müş</b> — түбірдің соңғы дауыстысы бойынша. Қатаңдау жоқ: bakmış.</p>
+      <p><b>miş · mış · muş · müş</b> — түбірдің соңғы дауыстысы бойынша. Қатаңдау жоқ: bakmış. Оң жақта — қазақшасы: geldim — келдім, gelmişim — келіппін.</p>
       <p><b>-mış</b> — маған айтты немесе сөйтсе. <b>-dı</b> — өзім көрдім, нақты білемін.</p>
       <p>Күмәнің болса — сұрақтарды ретімен қой. Өзім көрдім бе? Иә — -dı. Маған айтты ма? Иә — -mış. Нәтижесінен біліп, таң қалдым ба? Иә — -mış. Қысқасы: көз — -dı, құлақ — -mış.</p>
       <div class="pm-final">
@@ -644,17 +680,65 @@ addEventListener('DOMContentLoaded', () => {
   $$('#pmPersons button').forEach((b) => b.addEventListener('pointerdown', () => { if (A) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .4, ease: 'back.out(3)' }); }));
   ScrollTrigger.create({ trigger: '#pmPersons', start: 'top 78%', once: true, onEnter: () => G.from('#pmPersons button', { x: (i) => (i % 2 ? 30 : -30), duration: .5, ease: 'power3.out', stagger: .06 }) });
 
+  /* ---------- қазақша ↔ түрікше: жұптар ---------- */
+  const KZ = [
+    { chip: 'келіпті', kk: [['кел', 'root'], ['іп', 'tense'], ['ті', 'pers']], tr: [['gel', 'root'], ['miş', 'tense', 1]], note: 'Қазақшада екі қабат: -іп + -ті. Түрікшеде бір құйрық: -miş. «Ол» үшін соңына ештеңе жалғамайсың: o gelmiş.' },
+    { chip: 'оқыпты', kk: [['оқы', 'root'], ['п', 'tense'], ['ты', 'pers']], tr: [['oku', 'root'], ['muş', 'tense', 1]], note: 'Қазақшада нұсқа екеу: -ып/-іп, дауыстыдан кейін жай -п. Түрікшеде m әрдайым тұрады, ал дауысты төртеу: oku — u, демек muş. «Оқыпты» әуенімен okumış деп кетпе.' },
+    { chip: 'көріпті', kk: [['көр', 'root'], ['іп', 'tense'], ['ті', 'pers']], tr: [['gör', 'root'], ['müş', 'tense', 1]], note: 'Қазақша жіңішке түбірге -іп. Түрікше тағы бір сұрақ қояды: дауысты еріндік пе? ö — иә, сондықтан ü: görmüş, görmiş емес.' },
+    { chip: 'келіпсің', kk: [['кел', 'root'], ['іп', 'tense'], ['сің', 'pers']], tr: [['gel', 'root'], ['miş', 'tense'], ['sin', 'pers', 1]], note: 'Жақ жалғауы сол орында — етістіктің соңында. Тек түрікшеде ң жоқ: -sin.' },
+    { chip: 'келіпсіз', kk: [['кел', 'root'], ['іп', 'tense'], ['сіз', 'pers']], tr: [['gel', 'root'], ['miş', 'tense'], ['siniz', 'pers', 1]], note: 'Қазақша «сіз» → -сіз. Түрікше siz → -siniz. «Gelmişsiz» деген сөз жоқ.' },
+    { chip: 'ұмытыппын', same: 1, kk: [['ұмыт', 'root'], ['ып', 'tense'], ['пын', 'pers']], tr: [['unut', 'root'], ['muş', 'tense'], ['um', 'pers']], note: 'Қолданысы бірдей. Кілт қалтада жоқ — «Сөйтсем, ұмытыппын!». Түрік те дәл солай таңданады: Unutmuşum! Өзің туралы -mış — тек осындай сәтте.' },
+  ];
+  const kzPc = (arr) => arr.map(([t, k, d], i) => (i ? '<span class="pm-pc pm-pc--plus">+</span>' : '') + `<span class="pm-pc pm-pc--${k}${d ? ' is-diff' : ''}">${t}</span>`).join('');
+  const kzKk = $('#pmKzKk'), kzTr = $('#pmKzTr'), kzTag = $('#pmKzTag');
+  let kzI = 0, kzTouched = false, kzVis = false;
+  const setKz = (i, anim) => {
+    kzI = i;
+    const x = KZ[i];
+    kzKk.innerHTML = kzPc(x.kk);
+    kzTr.innerHTML = kzPc(x.tr);
+    kzTr.dataset.say = x.tr.map((q) => q[0]).join('');
+    kzTag.className = `pm-kz__tag ${x.same ? 'is-same' : 'is-diff'}`;
+    kzTag.textContent = x.same ? 'қазақша көмектеседі' : 'абай бол';
+    $('#pmKzNote').textContent = x.note;
+    $$('#pmKzChips button').forEach((b, j) => b.classList.toggle('is-on', j === i));
+    if (A && anim) {
+      G.from('#pmKzKk .pm-pc:not(.pm-pc--plus)', { y: -30, rotation: -8, scale: .6, duration: .45, ease: 'back.out(2.5)', stagger: .08 });
+      G.from('#pmKzTr .pm-pc:not(.pm-pc--plus)', { y: 30, rotation: 8, scale: .6, duration: .45, ease: 'back.out(2.5)', stagger: .08, delay: .25 });
+      G.fromTo('#pmKzTr .is-diff', { rotation: 0 }, { rotation: 7, duration: .12, yoyo: true, repeat: 3, delay: .8 });
+      G.fromTo('.pm-kz__arrow', { y: -10 }, { y: 0, duration: .6, ease: 'bounce.out' });
+      G.fromTo(kzTag, { scale: .4 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)', delay: .6 });
+    }
+  };
+  KZ.forEach((x, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = x.chip;
+    b.addEventListener('click', () => { kzTouched = true; setKz(i, true); say(kzTr.dataset.say); });
+    $('#pmKzChips').append(b);
+  });
+  setKz(0, false);
+  new IntersectionObserver((es) => { kzVis = es[0].isIntersecting; }).observe($('#pmKz'));
+  if (A) setInterval(() => { if (!kzTouched && kzVis) setKz((kzI + 1) % KZ.length, true); }, 5200);
+  ScrollTrigger.create({ trigger: '#pmKz', start: 'top 78%', once: true, onEnter: () => { G.from('#pmKz', { y: 60, rotation: -2, duration: .7, ease: 'back.out(1.6)' }); setKz(0, true); } });
+
   /* ---------- 5. конструктор ---------- */
   const VOW = 'aeıioöuü', FRONT = 'eiöü', HARD = 'çfhkpsşt';
   const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
   const four = (v) => ({ e: 'i', i: 'i', a: 'ı', ı: 'ı', o: 'u', u: 'u', ö: 'ü', ü: 'ü' })[v];
   const two = (v) => (FRONT.includes(v) ? 'e' : 'a');
+  /* қазақша формалар — әр жаққа бөлек: мен, сен, ол, біз, сіз, олар */
   const VERBS = [
-    { s: 'gel', ru: ['келді', 'келді'], inf: 'келу' }, { s: 'git', ru: ['кетті', 'кетті'], inf: 'кету' },
-    { s: 'bak', ru: ['қарады', 'қарады'], inf: 'қарау' }, { s: 'oku', ru: ['оқыды', 'оқыды'], inf: 'оқу' },
-    { s: 'gör', ru: ['көрді', 'көрді'], inf: 'көру' }, { s: 'iç', ru: ['ішті', 'ішті'], inf: 'ішу' },
-    { s: 'yap', ru: ['істеді', 'істеді'], inf: 'істеу' }, { s: 'konuş', ru: ['сөйлесті', 'сөйлесті'], inf: 'сөйлеу' },
-    { s: 'ye', ru: ['жеді', 'жеді'], inf: 'жеу' }, { s: 'unut', ru: ['ұмытты', 'ұмытты'], inf: 'ұмыту' },
+    { s: 'gel', inf: 'келу', di: ['келдім', 'келдің', 'келді', 'келдік', 'келдіңіз', 'келді'], mis: ['келіппін', 'келіпсің', 'келіпті', 'келіппіз', 'келіпсіз', 'келіпті'] },
+    { s: 'git', inf: 'кету', di: ['кеттім', 'кеттің', 'кетті', 'кеттік', 'кеттіңіз', 'кетті'], mis: ['кетіппін', 'кетіпсің', 'кетіпті', 'кетіппіз', 'кетіпсіз', 'кетіпті'] },
+    { s: 'bak', inf: 'қарау', di: ['қарадым', 'қарадың', 'қарады', 'қарадық', 'қарадыңыз', 'қарады'], mis: ['қараппын', 'қарапсың', 'қарапты', 'қараппыз', 'қарапсыз', 'қарапты'] },
+    { s: 'oku', inf: 'оқу', di: ['оқыдым', 'оқыдың', 'оқыды', 'оқыдық', 'оқыдыңыз', 'оқыды'], mis: ['оқыппын', 'оқыпсың', 'оқыпты', 'оқыппыз', 'оқыпсыз', 'оқыпты'] },
+    { s: 'gör', inf: 'көру', di: ['көрдім', 'көрдің', 'көрді', 'көрдік', 'көрдіңіз', 'көрді'], mis: ['көріппін', 'көріпсің', 'көріпті', 'көріппіз', 'көріпсіз', 'көріпті'] },
+    { s: 'iç', inf: 'ішу', di: ['іштім', 'іштің', 'ішті', 'іштік', 'іштіңіз', 'ішті'], mis: ['ішіппін', 'ішіпсің', 'ішіпті', 'ішіппіз', 'ішіпсіз', 'ішіпті'] },
+    { s: 'yap', inf: 'істеу', di: ['істедім', 'істедің', 'істеді', 'істедік', 'істедіңіз', 'істеді'], mis: ['істеппін', 'істепсің', 'істепті', 'істеппіз', 'істепсіз', 'істепті'] },
+    { s: 'konuş', inf: 'сөйлесу', di: ['сөйлестім', 'сөйлестің', 'сөйлесті', 'сөйлестік', 'сөйлестіңіз', 'сөйлесті'], mis: ['сөйлесіппін', 'сөйлесіпсің', 'сөйлесіпті', 'сөйлесіппіз', 'сөйлесіпсіз', 'сөйлесіпті'] },
+    { s: 'ye', inf: 'жеу', di: ['жедім', 'жедің', 'жеді', 'жедік', 'жедіңіз', 'жеді'], mis: ['жеппін', 'жепсің', 'жепті', 'жеппіз', 'жепсіз', 'жепті'] },
+    { s: 'unut', inf: 'ұмыту', di: ['ұмыттым', 'ұмыттың', 'ұмытты', 'ұмыттық', 'ұмыттыңыз', 'ұмытты'], mis: ['ұмытыппын', 'ұмытыпсың', 'ұмытыпты', 'ұмытыппыз', 'ұмытыпсыз', 'ұмытыпты'] },
   ];
   const PERS = [['ben', 'мен'], ['sen', 'сен'], ['o', 'ол'], ['biz', 'біз'], ['siz', 'сіз'], ['onlar', 'олар']];
   function build(stem, tense, p) {
@@ -677,10 +761,10 @@ addEventListener('DOMContentLoaded', () => {
     }
     return { segs, word: segs.map((s) => s.t).join(''), why };
   }
+  /* қазақша аударма: «Сөйтсем, мен келіппін.» / «Айтуларынша, сен келіпсің.» / «Сен келдің.» */
   const gloss = (verb, tense, p) => {
-    const f = p >= 3 ? verb.ru[1] : verb.ru[0];
-    const s = `${tense === 'mis' ? (p === 0 ? 'сөйтсем, ' : 'айтуынша, ') : ''}${PERS[p][1]} ${f}`;
-    return s[0].toUpperCase() + s.slice(1) + (tense === 'di' ? ' — нақты білемін.' : '.');
+    const s = `${tense === 'mis' ? (p === 0 ? 'сөйтсем, ' : p === 3 ? 'сөйтсек, ' : 'айтуларынша, ') : ''}${PERS[p][1]} ${verb[tense][p]}`;
+    return s[0].toUpperCase() + s.slice(1) + '.';
   };
   const st = { tense: 'mis', v: 0, p: 0, cmp: false };
   const vBox = $('#pmVerbs'), pBox = $('#pmPers');
@@ -712,12 +796,12 @@ addEventListener('DOMContentLoaded', () => {
     labWord.textContent = `${PERS[st.p][0]} ${r.word}`;
     labWord.dataset.say = labWord.textContent;
     $('#pmLabRu').textContent = gloss(verb, st.tense, st.p);
-    $('#pmLabWhy').innerHTML = r.why.map((w) => `<li>${w}</li>`).join('');
+    $('#pmLabWhy').innerHTML = [...r.why, `Қазақша: ${PERS[st.p][1]} ${verb[st.tense][st.p]}. ${st.tense === 'di' ? 'Мұнда екі тіл бір ізбен жүреді: түбір + -ды + жақ.' : st.p === 2 || st.p === 5 ? 'Қазақшадағы -ты түрікшеде жоқ: -mış-тан кейін ештеңе не -ler.' : 'Түрікше -ып орнында -mış тұрады, жақ жалғауы — соңында, қазақшадағыдай.'}`].map((w) => `<li>${w}</li>`).join('');
     const cmp = $('#pmCmp');
     cmp.hidden = !st.cmp;
     if (st.cmp) {
       const a = build(verb.s, 'di', st.p).word, m = build(verb.s, 'mis', st.p).word;
-      cmp.innerHTML = `<div data-say="${PERS[st.p][0]} ${a}">өзім көрдім<b>${a}</b></div><div data-say="${PERS[st.p][0]} ${m}">маған айтты<b>${m}</b></div>`;
+      cmp.innerHTML = `<div data-say="${PERS[st.p][0]} ${a}">өзім көрдім<b>${a}</b>${verb.di[st.p]}</div><div data-say="${PERS[st.p][0]} ${m}">маған айтты<b>${m}</b>${verb.mis[st.p]}</div>`;
       if (A && anim) G.from('#pmCmp div', { y: 20, rotation: (i) => (i ? 4 : -4), duration: .45, ease: 'back.out(2.5)', stagger: .1 });
     }
     if (A && anim) {
@@ -753,7 +837,7 @@ addEventListener('DOMContentLoaded', () => {
       const r = build('gel', tense, i);
       const end = r.segs.length > 2 ? r.segs[2].t : '';
       const base = r.segs.slice(0, 2).map((s) => s.t).join('');
-      return `<tr><td><button type="button" data-say="${p[0]} ${r.word}"><span>${p[0]}</span><span>${base}<b>${end}</b></span></button></td></tr>`;
+      return `<tr><td><button type="button" data-say="${p[0]} ${r.word}"><span>${p[0]}</span><span>${base}<b>${end}</b></span><span class="pm-kzf">${VERBS[0][tense][i]}</span></button></td></tr>`;
     }).join('');
     if (A && anim) G.from('#pmTbl button', { x: 40, rotation: 2, duration: .4, ease: 'back.out(2)', stagger: .05 });
   };

@@ -198,6 +198,38 @@ b[data-say] { cursor: pointer; text-decoration: underline 2px; text-decoration-c
 .tok:disabled { opacity: .35; cursor: default; }
 .build .tok { background: var(--ink); color: #fff; }
 
+/* ---------- қазақша ↔ түрікше ---------- */
+.kd { padding-bottom: 24px; }
+.kd__same { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; padding: 14px 18px; border-radius: 22px; background: var(--bg); font-size: 16px; margin-bottom: 14px; }
+.kd__tag { background: var(--ok); color: #fff; border-radius: 8px; padding: 4px 10px; font-family: var(--cond); font-weight: 700; text-transform: uppercase; font-size: 13px; }
+.kd__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 16px; }
+.kd__row { position: relative; border-radius: 32px; background: var(--bg); padding: 18px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+.kd__no { display: flex; align-items: center; gap: 10px; font-family: var(--cond); font-weight: 700; text-transform: uppercase; font-size: 15px; color: var(--ink-2); }
+.kd__no span { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--vio-g); color: #fff; font-family: var(--disp); font-size: 13px; }
+.kd__side { border-radius: 20px; padding: 12px 14px; display: grid; gap: 4px; }
+.kd__side small { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; opacity: .75; }
+.kd__side--kk { background: #fff; }
+.kd__side--tr { background: var(--sky-g); color: #fff; }
+.kd-2 .kd__side--tr { background: var(--vio-g); }
+.kd-3 .kd__side--tr { background: var(--dark-g); }
+.kd__big { font-family: var(--disp); font-weight: 600; font-size: clamp(16px, 1.6vw, 20px); letter-spacing: -.02em; line-height: 1.3; }
+.kd__hl { color: var(--vio); text-decoration: underline 3px; text-underline-offset: 4px; text-decoration-color: color-mix(in srgb, var(--vio) 40%, transparent); }
+.kd__swap { display: grid; }
+.kd__swap > span { grid-area: 1 / 1; }
+.kd__bad { position: relative; justify-self: start; color: #ffd3dc; opacity: 0; }
+.kd__bad::after { content: ''; position: absolute; left: 0; right: 0; top: 52%; height: 3px; border-radius: 3px; background: #fff; transform-origin: 0 50%; transform: scaleX(var(--s, 1)); }
+.kd__bad u { text-decoration: none; background: var(--bad); color: #fff; border-radius: 6px; padding: 0 3px; }
+.kd__ok { cursor: pointer; }
+.kd__ok b { text-decoration: underline 2px; text-underline-offset: 4px; }
+.kd__ok b.c-ne { color: #fff; }
+.kd__note { margin: 0; font-size: 15px; line-height: 1.42; }
+.kd-act { max-width: 760px; }
+@media (max-width: 767.98px) {
+  .kd__grid { grid-template-columns: minmax(0, 1fr); }
+  .kd__row { border-radius: 26px; padding: 14px; }
+  .kd__same { font-size: 15px; }
+}
+
 /* ---------- черновики ---------- */
 .stage--wide { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 16px; }
 .stage--wide .side { justify-content: flex-start; gap: 8px; }
@@ -370,12 +402,13 @@ html:not(.motion) #s-traps .take { height: 480px; }
     <button type="button" data-goto="ne" aria-label="ne — бірде-бір кадр">3</button>
     <button type="button" data-goto="ya" aria-label="ya — екеуінің бірі">4</button>
     <button type="button" data-goto="pairs" aria-label="Жұпқа не қояды">5</button>
-    <button type="button" data-goto="lab" aria-label="Монтаж">6</button>
-    <button type="button" data-goto="traps" aria-label="Черновиктер">7</button>
-    <button type="button" data-goto="video" aria-label="Видео">8</button>
-    <button type="button" data-goto="practice" aria-label="Практика">9</button>
-    <button type="button" data-goto="check" aria-label="Шағын тексеру">10</button>
-    <button type="button" data-goto="cheat" aria-label="Жадынама">11</button>
+    <button type="button" data-goto="kk-diff" aria-label="Қазақша ↔ түрікше">6</button>
+    <button type="button" data-goto="lab" aria-label="Монтаж">7</button>
+    <button type="button" data-goto="traps" aria-label="Черновиктер">8</button>
+    <button type="button" data-goto="video" aria-label="Видео">9</button>
+    <button type="button" data-goto="practice" aria-label="Практика">10</button>
+    <button type="button" data-goto="check" aria-label="Шағын тексеру">11</button>
+    <button type="button" data-goto="cheat" aria-label="Жадынама">12</button>
   </div>
 </nav>
 
@@ -412,7 +445,7 @@ html:not(.motion) #s-traps .take { height: 480px; }
       <div class="subs">
         <p>Измир, Кордон жағалауы. Құрбым Дениз «менің күнім» деген рилс түсіріп жатыр. Мен кадрдамын.</p>
         <p>Ол: <b data-say="Sabah ne yaptın?">Sabah ne yaptın?</b> Таңертең не істедің?</p>
-        <p>Мен: <b data-say="Ne kahvaltı yapmadım ne kahve içmedim.">Ne kahvaltı yapmadım ne kahve içmedim.</b> Орысша «ни… не» дейді ғой. Дениз кідіртеді.</p>
+        <p>Мен: <b data-say="Ne kahvaltı yapmadım ne kahve içmedim.">Ne kahvaltı yapmadım ne kahve içmedim.</b> Қазақша ойладым: «таңғы ас та ішпедім, кофе де ішпедім». Дениз кідіртеді.</p>
         <p>Ол: <b data-say="Yani yaptın mı, yapmadın mı?">Yani yaptın mı, yapmadın mı?</b> Сонда таңғы ас іштің бе, жоқ па? Қырық екінші дубль.</p>
       </div>
       <div class="act" id="story-act">
@@ -452,7 +485,7 @@ html:not(.motion) #s-traps .take { height: 480px; }
       <div class="subs">
         <p>Дениз монтаждап отыр. Экран екіге бөлінеді: үстінде бойоз, астында шай.</p>
         <p>Екі кадр да жанып тұр: <b data-say="Hem boyoz yedim hem çay içtim.">Hem boyoz yedim hem çay içtim.</b> Әрі бойоз жедім, әрі шай іштім.</p>
-        <p><b class="c-hem">hem</b> әр бөліктің алдына тұрады. Екіншісіне салмақ үшін <b>de</b> қосуға болады. Етістік кәдімгі. Қазақтың «әрі…әрі»-сі сияқты.</p>
+        <p>Қазақтың «әрі…әрі»-сі: <b class="c-hem">hem</b> әр бөліктің алдында. Екіншісіне <b>de</b> қосуға болады: <b data-say="hem de çay">hem de çay</b>. Етістік кәдімгі.</p>
       </div>
       <div class="act" id="hem-act">
         <p class="act__q">Кадрларды қос та, сөйлемге қара</p>
@@ -493,7 +526,7 @@ html:not(.motion) #s-traps .take { height: 480px; }
       <div class="subs">
         <p>Қайта түсіру. Таңның адал нұсқасы: екі кадр да сөнеді.</p>
         <p><b data-say="Ne kahvaltı yaptım ne kahve içtim.">Ne kahvaltı yaptım ne kahve içtim.</b> Таңғы ас та жоқ, кофе де жоқ.</p>
-        <p>Болымсыздық <b class="c-ne">ne</b>-де отыр. Етістік <b>-mA</b>-сыз қалады: <b class="c-verb">yaptım</b>, <b class="c-verb">içtim</b>. Орысшаның «не»-сі мұнда артық.</p>
+        <p>Қазақша болымсыздық етістікте: <i>ішпедім</i>. Түрікше ол <b class="c-ne">ne</b>-де отыр, етістік <b>-mA</b>-сыз: <b class="c-verb">yaptım</b>, <b class="c-verb">içtim</b>.</p>
       </div>
       <div class="act" id="ne-act">
         <p class="act__q">«Қоңырау да шалмады, жазбады да»</p>
@@ -580,6 +613,55 @@ html:not(.motion) #s-traps .take { height: 480px; }
   </div>
 </section>
 
+<!-- ============ 6. ҚАЗАҚША ↔ ТҮРІКШЕ ============ -->
+<section id="s-kk" class="lab kd" data-section="kk-diff" data-words="88">
+  <div class="lab__in">
+    <div class="lab__head">
+      <div>
+        <span class="spaced" data-ui>қ а з а қ ш а · t ü r k ç e</span>
+        <h2 class="gt">Қазақша ↔ түрікше</h2>
+        <p>Ұқсасы көп. Бірақ үш жерде қазақша ойлау кадрды бұзады.</p>
+      </div>
+      <svg class="lab__film" viewBox="0 0 220 60" aria-hidden="true"><use href="#i-film"/></svg>
+    </div>
+    <div class="kd__same">
+      <span class="kd__tag">Бірдей</span>
+      <span><b class="c-hem" lang="tr">hem…hem</b> = әрі…әрі</span>
+      <span><b lang="tr">ya…ya</b> = не…не</span>
+      <span><b lang="tr">… da … da</b> = … да … да</span>
+    </div>
+    <div class="kd__grid">
+      <article class="kd__row kd-1">
+        <div class="kd__no"><span>1</span> Жалған дос: «не»</div>
+        <div class="kd__side kd__side--kk"><small>қазақша</small><div class="kd__big"><span class="kd__hl">не</span> бүгін, <span class="kd__hl">не</span> ертең</div></div>
+        <div class="kd__side kd__side--tr"><small>türkçe</small><div class="kd__big kd__swap" lang="tr"><span class="kd__bad kd-b1">ne bugün ne yarın</span><span class="kd__ok kd-o1" data-say="Ya bugün ya yarın."><b>ya</b> bugün <b>ya</b> yarın</span></div></div>
+        <p class="kd__note">Қазақтың «не…не»-сі көбіне таңдау береді. Түрікше бұл — <b>ya…ya</b>. Ал <b class="c-ne">ne…ne</b> — «да…да жоқ».</p>
+      </article>
+      <article class="kd__row kd-2">
+        <div class="kd__no"><span>2</span> Болымсыздық қайда</div>
+        <div class="kd__side kd__side--kk"><small>қазақша</small><div class="kd__big">шай да, кофе де іш<span class="kd__hl">пе</span>дім</div></div>
+        <div class="kd__side kd__side--tr"><small>türkçe</small><div class="kd__big kd__swap" lang="tr"><span class="kd__bad kd-b2">ne çay ne kahve iç<u>me</u>dim</span><span class="kd__ok kd-o2" data-say="Ne çay ne kahve içtim."><b class="c-ne">ne</b> çay <b class="c-ne">ne</b> kahve içtim</span></div></div>
+        <p class="kd__note">Қазақша «жоқ» етістікте тұрады. Түрікше ол <b class="c-ne">ne</b>-ге көшеді, етістік <b>-mA</b>-ны тастайды.</p>
+      </article>
+      <article class="kd__row kd-3">
+        <div class="kd__no"><span>3</span> Қатаңдау жоқ</div>
+        <div class="kd__side kd__side--kk"><small>қазақша</small><div class="kd__big">симит <span class="kd__hl">те</span>, шай <span class="kd__hl">да</span></div></div>
+        <div class="kd__side kd__side--tr"><small>türkçe</small><div class="kd__big kd__swap" lang="tr"><span class="kd__bad kd-b3">simit te, çay da</span><span class="kd__ok kd-o3" data-say="simit de, çay da">simit <b>de</b>, çay <b>da</b></span></div></div>
+        <p class="kd__note">Түрікше бөлек <b>de/da</b> ешқашан <b>te/ta</b> болмайды. Тек жуан-жіңішке: <b data-say="kahve de">kahve de</b>, <b data-say="ayran da">ayran da</b>.</p>
+      </article>
+    </div>
+    <div class="act kd-act" id="kd-act">
+      <p class="act__q">«Шай да, кофе де ішпедім». Екі дұрыс нұсқа бар — екеуін де тап.</p>
+      <div class="row">
+        <button type="button" class="btn" data-ans="ok1" lang="tr">Ne çay ne kahve içtim.</button>
+        <button type="button" class="btn" data-ans="bad" lang="tr">Ne çay ne kahve içmedim.</button>
+        <button type="button" class="btn" data-ans="ok2" lang="tr">Çay da kahve de içmedim.</button>
+      </div>
+      <p class="react" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 6. МОНТАЖ ============ -->
 <section id="s-lab" class="lab" data-section="lab" data-words="44">
   <div class="lab__in">
@@ -652,41 +734,41 @@ html:not(.motion) #s-traps .take { height: 480px; }
 <section id="s-traps" class="scene" data-section="traps" data-words="57">
   <div class="stage stage--wide">
     <div class="side">
-      <span class="kick" data-ui>7-көрініс · Черновиктер</span>
+      <span class="kick" data-ui>8-көрініс · Черновиктер</span>
       <h2 class="gt">Жарыққа шықпаған черновиктер</h2>
-      <div class="subs"><p>Бұған бәрі сүрінеді. Менде олардың тұтас галереясы бар. «Жариялау» дегенді бас — черновик түзеледі.</p></div>
+      <div class="subs"><p>Қазақша ойлап, түрікше айтсаң — осындай дубльдер шығады. Менде тұтас галерея. «Жариялау» дегенді бас — черновик түзеледі.</p></div>
     </div>
     <div class="frame">
       <div class="reel-track">
         <article class="take">
           <div class="take__no">1-черновик <span lang="tr">ne…ne</span></div>
           <div class="take__flip">
-            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Ne çay ne kahve içmedim.</span><p class="take__note">Қос болымсыздық. Түрік сұрайды: сонда іштің бе, жоқ па?</p></div>
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Ne çay ne kahve içmedim.</span><p class="take__note">Қазақша «шай да, кофе де ішпедім» — етістік болымсыз. Түрікше бұл қос болымсыздық: сонда іштің бе, жоқ па?</p></div>
             <div class="take__face take__face--ok"><span class="take__tr" data-say="Ne çay ne kahve içtim.">Ne çay ne kahve içtim.</span><p class="take__note">Болымсыздық ne-де тұр. Етістік болымды.</p></div>
           </div>
           <button type="button" class="ticket take__go">Жариялау</button>
         </article>
         <article class="take">
-          <div class="take__no">2-черновик <span lang="tr">hem…hem</span></div>
+          <div class="take__no">2-черновик <span lang="tr">ya…ya</span></div>
           <div class="take__flip">
-            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Hem boyoz ve kumru yedim.</span><p class="take__note">hem-мен бастап, ve-мен аяқтаған.</p></div>
-            <div class="take__face take__face--ok"><span class="take__tr" data-say="Hem boyoz hem kumru yedim.">Hem boyoz hem kumru yedim.</span><p class="take__note">hem — әр бөліктің алдында.</p></div>
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Ne bugün ne yarın gidiyoruz.</span><p class="take__note">Ойда: «не бүгін, не ертең барамыз». Түрік естиді: «бүгін де, ертең де бармаймыз».</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Ya bugün ya yarın gidiyoruz.">Ya bugün ya yarın gidiyoruz.</span><p class="take__note">Қазақтың «не…не»-сі = ya…ya. Біреуі қалады.</p></div>
           </div>
           <button type="button" class="ticket take__go">Жариялау</button>
         </article>
         <article class="take">
-          <div class="take__no">3-черновик <span lang="tr">ya…ya</span></div>
+          <div class="take__no">3-черновик <span lang="tr">hem…hem</span></div>
           <div class="take__flip">
-            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Ya çay veya kahve.</span><p class="take__note">ya…ya-ны veya-мен араластырған.</p></div>
-            <div class="take__face take__face--ok"><span class="take__tr" data-say="Ya çay ya kahve.">Ya çay ya kahve.</span><p class="take__note">Бірдей жұп: ya және ya.</p></div>
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Boyoz hem kumru yedim.</span><p class="take__note">Қазақтың кітаби «һәм»-і: бір рет, ортада. Түрікше жалғыз hem жұпты бұзады.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Hem boyoz hem kumru yedim.">Hem boyoz hem kumru yedim.</span><p class="take__note">«Әрі…әрі» сияқты: hem екі рет, әр бөліктің алдында.</p></div>
           </div>
           <button type="button" class="ticket take__go">Жариялау</button>
         </article>
         <article class="take">
-          <div class="take__no">4-черновик <span lang="tr">hem</span></div>
+          <div class="take__no">4-черновик <span lang="tr">de / da</span></div>
           <div class="take__flip">
-            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Boyoz hem kumru yedim.</span><p class="take__note">Бір ғана hem. Жұп бұзылды.</p></div>
-            <div class="take__face take__face--ok"><span class="take__tr" data-say="Hem boyoz hem kumru yedim.">Hem boyoz hem kumru yedim.</span><p class="take__note">Жұп сөз әрқашан екі рет естіледі.</p></div>
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Simit te çay da aldım.</span><p class="take__note">Қазақша қатаң т-дан кейін да → те: «симит те». Түрікше бөлек de қатаңдамайды.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Simit de çay da aldım.">Simit de çay da aldım.</span><p class="take__note">Тек de немесе da: simit de, çay da.</p></div>
           </div>
           <button type="button" class="ticket take__go">Жариялау</button>
         </article>
@@ -748,11 +830,11 @@ html:not(.motion) #s-traps .take { height: 480px; }
       <div class="pgrid">
         <div class="ptile--wide">
           <div class="ptile ptile--sky"><h3>hem…hem = әрі…әрі</h3><div class="ptile__big" data-say="Hem boyoz hem kumru yedim.">Hem boyoz hem kumru yedim.</div><p>Екі кадр да жанып тұр. hem…hem de деуге болады.</p></div>
-          <div class="ptile ptile--vio"><h3>ne…ne = да…да жоқ</h3><div class="ptile__big" data-say="Ne aradı ne sordu.">Ne aradı ne sordu.</div><p>Екеуі де сөнеді. Етістік -mA-сыз.</p></div>
-          <div class="ptile ptile--dark"><h3>ya…ya = не…не</h3><div class="ptile__big" data-say="Ya bugün ya yarın.">Ya bugün ya yarın.</div><p>Біреуі қалады.</p></div>
+          <div class="ptile ptile--vio"><h3>ne…ne = …да …да + жоқ</h3><div class="ptile__big" data-say="Ne aradı ne sordu.">Ne aradı ne sordu.</div><p>Қазақша «қоңырау да шалмады». Түрікше етістік -mA-сыз.</p></div>
+          <div class="ptile ptile--dark"><h3>ya…ya = не…не</h3><div class="ptile__big" data-say="Ya bugün ya yarın.">Ya bugün ya yarın.</div><p>Біреуі қалады. Қазақтың «не»-сі — ne емес.</p></div>
         </div>
         <div class="ptile"><h3>Әрқашан жұп</h3><p>Жалғаулық екі рет, әр бөліктің алдында естіледі.</p></div>
-        <div class="ptile"><h3>Араластырма</h3><p>ve және veya-мен араластырма.</p></div>
+        <div class="ptile"><h3>Араластырма</h3><p>ve, veya-мен араластырма. Бөлек de/da — te/ta емес.</p></div>
         <div class="ptile"><h3>Жұпқа не</h3><p>Заттар, белгілер, тұтас әрекеттер.</p></div>
       </div>
     </div>
@@ -953,6 +1035,21 @@ addEventListener('DOMContentLoaded', () => {
       .from('#s-lab .lab__head h2', { y: 50, opacity: 0, duration: 1 })
       .fromTo('#s-lab .lab__film', { xPercent: 60, rotate: 10 }, { xPercent: 0, rotate: 0, duration: 1 }, 0)
       .from('#s-lab .monitor', { y: 80, rotate: -2, duration: 1 }, 0.2);
+    /* қазақша ↔ түрікше: қазақша ойлау → сызылады → түрікше нұсқа */
+    G.from('#s-kk .kd__same > *', { y: 24, opacity: 0, stagger: 0.08, duration: 0.5, ease: 'back.out(2)', scrollTrigger: { trigger: '#s-kk .kd__same', start: 'top 88%' } });
+    $$('#s-kk .kd__row').forEach((row, i) => {
+      const bad = $('.kd__bad', row), ok = $('.kd__ok', row);
+      G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: row, start: 'top 82%' } })
+        .from(row, { y: 60, rotate: i % 2 ? 2 : -2, opacity: 0, duration: 0.6 })
+        .from($('.kd__side--kk', row), { x: -40, opacity: 0, duration: 0.45 }, 0.3)
+        .from($$('.kd__side--kk .kd__hl', row), { scale: 1.6, color: '#e2445c', stagger: 0.12, duration: 0.4, ease: 'back.out(3)' }, 0.6)
+        .from($('.kd__side--tr', row), { x: 40, opacity: 0, duration: 0.45 }, 0.7)
+        .fromTo(bad, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.35 }, 1)
+        .fromTo(bad, { '--s': 0 }, { '--s': 1, duration: 0.4 }, 1.5)
+        .to(bad, { opacity: 0, yPercent: -80, duration: 0.35, ease: 'power2.in' }, 2.1)
+        .from(ok, { opacity: 0, yPercent: 80, duration: 0.45, ease: 'back.out(2)' }, 2.3)
+        .from($('.kd__note', row), { y: 16, opacity: 0, duration: 0.4 }, 2.5);
+    });
     G.set('#s-cheat .ptile', { y: 50, opacity: 0 });
     ScrollTrigger.batch('#s-cheat .ptile', { start: 'top 92%', onEnter: (els) => G.to(els, { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out', overwrite: true }) });
     G.timeline({ scrollTrigger: { trigger: '#s-cheat .poster', start: 'top 90%', end: 'bottom 40%', scrub: 0.8 } })
@@ -979,7 +1076,7 @@ addEventListener('DOMContentLoaded', () => {
     $$('[data-ans]', storyAct).forEach((x) => x.classList.remove('is-ok', 'is-bad'));
     const ok = b.dataset.ans === 'ok';
     b.classList.add(ok ? 'is-ok' : 'is-bad');
-    react(storyAct, ok, ok ? 'Иә. içmedim де. ne-ден кейін етістік болымсыздықсыз: yaptım, içtim.' : 'Бұл сөз орнында. Сөйлемді етістіктегі болымсыздық бұзады.');
+    react(storyAct, ok, ok ? 'Иә, içmedim де. Қазақша етістік болымсыз, ал түрікше ne-ден кейін болымды: yaptım, içtim.' : 'Бұл сөз орнында. Сөйлемді етістіктегі болымсыздық бұзады.');
     if (!ok) shake(b); else say('Ne kahvaltı yaptım ne kahve içtim.');
   });
 
@@ -1033,6 +1130,24 @@ addEventListener('DOMContentLoaded', () => {
     if (a === 'bad') { shake(b); say('İkisi birden olmaz!'); } else say(b.textContent);
   });
 
+  /* ---------- қазақша ↔ түрікше: екі дұрыс жауап ---------- */
+  const kdAct = $('#kd-act');
+  const kdFound = new Set();
+  kdAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ans]');
+    if (!b) return;
+    const a = b.dataset.ans;
+    if (a === 'bad') {
+      b.classList.add('is-bad'); shake(b);
+      react(kdAct, false, 'Екі болымсыздық: ne де, -me де. Түрік сұрайды: сонда іштің бе?');
+      return;
+    }
+    b.classList.add('is-ok'); kdFound.add(a); say(b.textContent);
+    react(kdAct, true, kdFound.size === 2
+      ? 'Екеуі де дұрыс. ne…ne — етістік болымды. da…da — қазақшадағыдай, етістік болымсыз.'
+      : a === 'ok1' ? 'Дұрыс: болымсыздық ne-де. Енді екінші нұсқаны тап.' : 'Дұрыс: қазақшадағыдай da…da және içmedim. Енді екіншісін тап.');
+  });
+
   /* ---------- действие 5: собери ---------- */
   const prAct = $('#pr-act');
   const build = $('.build', prAct);
@@ -1065,13 +1180,13 @@ addEventListener('DOMContentLoaded', () => {
   const lab = $('#s-lab');
   const mon = { word: $('.mon__word', lab), ru: $('.mon__ru', lab), why: $('.mon__why', lab) };
   const ITEM = {
-    boyoz: { tr: 'boyoz', v: 'yedim', ru: 'бойоз', gen: 'бойоз', act: 'жедім', neg: 'жемедім' },
-    simit: { tr: 'simit', v: 'yedim', ru: 'симит', gen: 'симит', act: 'жедім', neg: 'жемедім' },
-    kumru: { tr: 'kumru', v: 'yedim', ru: 'кумру', gen: 'кумру', act: 'жедім', neg: 'жемедім' },
-    'çay': { tr: 'çay', v: 'içtim', ru: 'шай', gen: 'шай', act: 'іштім', neg: 'ішпедім' },
-    kahve: { tr: 'kahve', v: 'içtim', ru: 'кофе', gen: 'кофе', act: 'іштім', neg: 'ішпедім' },
-    ayran: { tr: 'ayran', v: 'içtim', ru: 'айран', gen: 'айран', act: 'іштім', neg: 'ішпедім' },
-    kumru2: { tr: 'kumru', v: 'yedim', ru: 'кумру', gen: 'кумру', act: 'жедім', neg: 'жемедім' },
+    boyoz: { tr: 'boyoz', v: 'yedim', vn: 'yemedim', ru: 'бойоз', da: 'бойоз да', act: 'жедім', neg: 'жемедім' },
+    simit: { tr: 'simit', v: 'yedim', vn: 'yemedim', ru: 'симит', da: 'симит те', act: 'жедім', neg: 'жемедім' },
+    kumru: { tr: 'kumru', v: 'yedim', vn: 'yemedim', ru: 'кумру', da: 'кумру да', act: 'жедім', neg: 'жемедім' },
+    'çay': { tr: 'çay', v: 'içtim', vn: 'içmedim', ru: 'шай', da: 'шай да', act: 'іштім', neg: 'ішпедім' },
+    kahve: { tr: 'kahve', v: 'içtim', vn: 'içmedim', ru: 'кофе', da: 'кофе де', act: 'іштім', neg: 'ішпедім' },
+    ayran: { tr: 'ayran', v: 'içtim', vn: 'içmedim', ru: 'айран', da: 'айран да', act: 'іштім', neg: 'ішпедім' },
+    kumru2: { tr: 'kumru', v: 'yedim', vn: 'yemedim', ru: 'кумру', da: 'кумру да', act: 'жедім', neg: 'жемедім' },
   };
   const st = { a: 'boyoz', b: 'çay', m: 'hem' };
   const cap = (s) => s[0].toUpperCase() + s.slice(1);
@@ -1082,8 +1197,8 @@ addEventListener('DOMContentLoaded', () => {
     let tr, ru, why;
     if (A.tr === B.tr) { tr = `${cap(A.tr)}… ${A.tr}?`; ru = 'Екі бірдей кадр. Әртүрлісін ал.'; why = 'Жұп — бұл екі түрлі бөлік.'; }
     else if (m === 'ya') { tr = `Ya ${A.tr} ya ${B.tr}.`; ru = `Не ${A.ru}, не ${B.ru}.`; why = 'ya әр бөліктің алдында. Бір кадр қалады.'; }
-    else if (same) { tr = `${cap(m)} ${A.tr} ${m} ${B.tr} ${A.v}.`; ru = m === 'hem' ? `${cap(A.act)}: әрі ${A.ru}, әрі ${B.ru}.` : `${cap(A.neg)}: ${A.gen} жоқ, ${B.gen} жоқ.`; why = m === 'hem' ? 'Етістік ортақ — оны соңында бір рет қоямыз.' : `Етістік ортақ және болымды: ${A.v}, -mA-сыз.`; }
-    else { tr = `${cap(m)} ${A.tr} ${A.v} ${m} ${B.tr} ${B.v}.`; ru = m === 'hem' ? `Әрі ${A.ru} ${A.act}, әрі ${B.ru} ${B.act}.` : `Мен ${A.gen} ${A.neg}, ${B.gen} ${B.neg}.`; why = m === 'hem' ? 'hem әр әрекеттің алдында, етістіктер кәдімгі.' : `${A.v} және ${B.v} етістіктері болымды: болымсыздық ne-де тұр.`; }
+    else if (same) { tr = `${cap(m)} ${A.tr} ${m} ${B.tr} ${A.v}.`; ru = m === 'hem' ? `Әрі ${A.ru}, әрі ${B.ru} ${A.act}.` : `${cap(A.da)}, ${B.da} ${A.neg}.`; why = m === 'hem' ? 'Етістік ортақ — оны соңында бір рет қоямыз.' : `Қазақша ${A.neg}, түрікше ${A.v}: ${A.vn} емес.`; }
+    else { tr = `${cap(m)} ${A.tr} ${A.v} ${m} ${B.tr} ${B.v}.`; ru = m === 'hem' ? `Әрі ${A.ru} ${A.act}, әрі ${B.ru} ${B.act}.` : `${cap(A.da)} ${A.neg}, ${B.da} ${B.neg}.`; why = m === 'hem' ? 'hem әр әрекеттің алдында, етістіктер кәдімгі.' : `Қазақша ${A.neg}, ${B.neg}. Түрікше ${A.v}, ${B.v}: болымсыздық ne-де.`; }
     const cls = { hem: 'c-hem', ne: 'c-ne', ya: 'c-ya' }[m];
     mon.word.innerHTML = tr.replace(new RegExp(`\\b(${cap(m)}|${m})\\b`, 'g'), `<span class="${cls}">$1</span>`);
     mon.word.dataset.say = tr;
@@ -1148,6 +1263,8 @@ addEventListener('DOMContentLoaded', () => {
     { bad: 'Hem boyoz ve kumru yedim.', ok: 'Hem boyoz hem kumru yedim.', opts: ['Hem boyoz ve kumru yedim.', 'Hem boyoz hem kumru yedim.', 'Boyoz hem kumru yedim.'], why: 'hem әр бөліктің алдында естіледі, ve керек емес.' },
     { bad: 'Ya çay veya kahve.', ok: 'Ya çay ya kahve.', opts: ['Ya çay ya kahve.', 'Ya çay ve kahve.', 'Çay ya kahve.'], why: 'Бірдей сөздер жұбы: ya және ya.' },
     { bad: 'Deniz ne aradı ne sormadı.', ok: 'Deniz ne aradı ne sordu.', opts: ['Deniz ne aramadı ne sormadı.', 'Deniz ne aradı ne sordu.', 'Deniz aradı ne sordu.'], why: 'Екі етістік те болымды: aradı, sordu.' },
+    { bad: 'Ne bugün ne yarın gidiyoruz.', ok: 'Ya bugün ya yarın gidiyoruz.', opts: ['Ya bugün ya yarın gidiyoruz.', 'Ne bugün ne yarın gitmiyoruz.', 'Hem bugün ya yarın gidiyoruz.'], why: 'Ойда: «не бүгін, не ертең барамыз». Қазақтың «не…не»-сі = ya…ya. Ne…ne «бүгін де, ертең де бармаймыз» болып шығады.' },
+    { bad: 'Simit te çay da aldım.', ok: 'Simit de çay da aldım.', opts: ['Simit de çay da aldım.', 'Simit te çay ta aldım.', 'Simit de çay de aldım.'], why: 'Түрікше бөлек de/da қатаңдамайды: simit de. Жуан сөзден кейін — da: çay da.' },
   ];
   let fi = 0;
   const optsBox = $('.lab-opts', lab);
