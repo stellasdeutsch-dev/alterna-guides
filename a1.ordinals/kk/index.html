@@ -456,6 +456,23 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 .cube3d .f { backface-visibility: hidden; -webkit-backface-visibility: hidden; background: linear-gradient(145deg, #ffffff, #d9e3fa); }
 .panel--blue .suf { color: var(--peach); }
 .panel--blue .hero__tr { color: #fff; }
+/* адаптация: свой язык ↔ турецкий */
+.xd { display: grid; gap: 18px; margin-top: 18px; }
+@media (min-width: 900px) { .xd { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: start; } }
+.xd__split svg { width: 100%; height: auto; display: block; }
+.xd__split .note { margin: 10px 0 14px; }
+.xd__rows { display: grid; gap: 10px; }
+.xd__row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 10px; align-items: center; width: 100%; padding: 14px 16px; border: 0; border-radius: 18px; background: #fff; box-shadow: var(--shadow); text-align: left; cursor: pointer; color: var(--ink); }
+.xd__w { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; font-size: clamp(18px, 4.8vw, 22px); font-weight: 500; }
+.xd__src { color: #39405a; }
+.xd__src .suf { color: #8a5a1c; }
+.xd__arr { color: var(--muted); font-size: 16px; }
+.xd__tr { display: inline-block; color: var(--blue-3); font-weight: 600; }
+.xd__tr .hl { background: var(--peach-2); color: #8a5a1c; border-radius: 6px; padding: 0 3px; }
+.xd__why { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
+.xd__row:not(.is-on) .xd__tr, .xd__row:not(.is-on) .cmp__b { visibility: hidden; }
+.xd__row:not(.is-on) .xd__why { display: none; }
+.xd__row.is-on { box-shadow: inset 0 0 0 2px var(--sky), var(--shadow); }
 </style>
 <link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
@@ -476,7 +493,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
         <span class="chiplbl" data-ui><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="11" rx="2" fill="none" stroke="#f4d3a3" stroke-width="1.6"/><path d="M2 6h12M5 1v4M11 1v4" stroke="#f4d3a3" stroke-width="1.6"/></svg>Старт: A1 · Ыстамбұл · A1-13</span>
         <h1><span class="w">Реттік</span> <span class="w"><b>сан есімдер</b></span></h1>
         <p class="hero__tr" lang="tr">Kaçıncı? <i>· -(I)ncI</i></p>
-        <p class="lead">Бірінші, екінші, үшінші. Түрікшеде — бір құйрық, төрт костюм. Қазақшадағы -ншы/-нші сияқты. Плюс өмір бал болып көрінбесін деп бір ерекшелік.</p>
+        <p class="lead">Бірінші, екінші, үшінші. Түрікшеде де бір құйрық — қазақшадағы -ншы/-нші-нің туысы. Бірақ костюмі екі емес, төртеу. Плюс өмір бал болып көрінбесін деп бір ерекшелік.</p>
         <div class="demo" data-demo>
           <div class="demo__top" data-ui><span>сан → рет</span><span>± бас</span></div>
           <div class="demo__row">
@@ -591,7 +608,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
     <div class="panel panel--blue">
       <svg class="dia" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0L400 300M400 0L0 300M200 0V300" stroke="#fff" stroke-width=".6"/></svg>
       <h2>Төрт <b>костюм</b></h2>
-      <p class="lead col">Құйрық санның соңғы дауыстысына қарай киінеді. Төрт нұсқалы үндестік — сен оны білесің. Құйрық — сәнқой. Әр санға қарай киімін ауыстырады.</p>
+      <p class="lead col">Құйрық санның соңғы дауыстысына қарай киінеді. Төрт нұсқалы үндестік — сен оны білесің. Қазақшада костюм екеу, мұнда төртеу. Құйрық — сәнқой.</p>
       <div class="suits" data-suits>
         <button type="button" class="suit" data-say="kırkıncı"><span class="suit__v" data-ui>a · ı</span><span class="suit__s" lang="tr">-ıncı</span><span class="suit__ex" lang="tr">kırkıncı · altıncı</span><svg viewBox="0 0 80 80"><path d="M40 6l34 60H6z" fill="#1f5ae6"/></svg></button>
         <button type="button" class="suit" data-say="beşinci"><span class="suit__v" data-ui>e · i</span><span class="suit__s" lang="tr">-inci</span><span class="suit__ex" lang="tr">birinci · beşinci</span><svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34" fill="#8a5a1c"/></svg></button>
@@ -606,6 +623,39 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
           <p class="note" data-wheel-ru data-ui>u → u: dokuzuncu, тоғызыншы</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4б. ҚАЗАҚША ↔ ТҮРІКШЕ: АЙЫРМАСЫ ============ -->
+<section data-section="kzdiff" data-words="62" class="sec">
+  <div class="wrap">
+    <span class="chiplbl chiplbl--light" data-ui><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2l6 11H2z" fill="#e7a64f"/></svg>қазақша ↔ түрікше</span>
+    <h2>Екі костюм → <b>төрт</b></h2>
+    <p class="lead col">Қазақша құйрық тек бір нәрсе сұрайды: жуан ба, жіңішке ме? Сондықтан үш → үшінші. Түрікше екінші сұрақ қояды: ерін домалақ па? Домалақ болса — u, ü. Сондықтан üç → üçüncü. «Üçinci» — қазақша ойлаған адамның қатесі.</p>
+    <div class="xd">
+      <div class="card xd__split">
+        <svg viewBox="0 0 360 214" data-xd-split role="img" aria-label="Сызба: қазақшаның екі құйрығы түрікшеде төртке бөлінеді">
+          <g data-xd-lines fill="none" stroke-width="3" stroke-linecap="round">
+            <path d="M90 50L45 140" stroke="#3b74f7"/><path d="M90 50L135 140" stroke="#e7a64f"/>
+            <path d="M270 50L225 140" stroke="#3b74f7"/><path d="M270 50L315 140" stroke="#e7a64f"/>
+          </g>
+          <g data-xd-top font-size="17" font-weight="700" text-anchor="middle">
+            <g><rect x="36" y="10" width="108" height="40" rx="20" fill="#141a2b"/><text x="90" y="36" fill="#fff">-ыншы</text></g>
+            <g><rect x="216" y="10" width="108" height="40" rx="20" fill="#141a2b"/><text x="270" y="36" fill="#fff">-інші</text></g>
+          </g>
+          <text x="180" y="100" text-anchor="middle" font-size="13" font-weight="700" fill="#687089">ерін домалақ па?</text>
+          <g data-xd-bot font-size="16" font-weight="700" text-anchor="middle" lang="tr">
+            <g><rect x="7" y="140" width="76" height="38" rx="19" fill="#1f5ae6"/><text x="45" y="165" fill="#fff">-ıncı</text><text x="45" y="204" font-size="13" fill="#687089">a ı</text></g>
+            <g><rect x="97" y="140" width="76" height="38" rx="19" fill="#ecbf7f"/><text x="135" y="165" fill="#5a3a0f">-uncu</text><text x="135" y="204" font-size="13" fill="#687089">o u</text></g>
+            <g><rect x="187" y="140" width="76" height="38" rx="19" fill="#1f5ae6"/><text x="225" y="165" fill="#fff">-inci</text><text x="225" y="204" font-size="13" fill="#687089">e i</text></g>
+            <g><rect x="277" y="140" width="76" height="38" rx="19" fill="#ecbf7f"/><text x="315" y="165" fill="#5a3a0f">-üncü</text><text x="315" y="204" font-size="13" fill="#687089">ö ü</text></g>
+          </g>
+        </svg>
+        <p class="note" data-ui>Алтын костюмдер — қазақшада жоқ. Тағы бір ұсақ-түйек: ш орнында c, ол «дж» болып оқылады.</p>
+        <button type="button" class="btn btn--sm" data-xd-run>▶ <span data-ui>бәрін аудару</span></button>
+      </div>
+      <div class="xd__rows" data-xd-rows></div>
     </div>
   </div>
 </section>
@@ -641,7 +691,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
           <button type="button" class="btn btn--gold" data-dort-btn>▶ <span data-ui>айналдыру</span></button>
         </div>
         <div>
-          <p class="lead">Құйрықтың дауыстысы алдында t шаршап, d-ға айналады. Тек төртте ғана. Қалған сандар шыдайды.</p>
+          <p class="lead">Құйрықтың дауыстысы алдында t шаршап, d-ға айналады. Тек төртте ғана. Қазақшада төрт → төртінші, t орнында тұрады. Механизм таныс: кітап → кітабы. Түрікше дәл солай, тек t-мен.</p>
           <p class="scenelet">Айтасың: dörtüncü kat. Лифтші тыжырынады. Айтасың: <b lang="tr" data-say="Dördüncü kat.">dördüncü kat</b>. Лифтші жымияды. Лифт жүреді.</p>
           <ul class="say-list"><li><a-say>Dördüncü kat.</a-say><small data-ui>Төртінші қабат.</small></li><li><a-say>Yirmi dördüncü gün.</a-say><small data-ui>Жиырма төртінші күн.</small></li></ul>
         </div>
@@ -668,7 +718,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 <section data-section="dot" data-words="23" class="sec">
   <div class="wrap">
     <h2>Нүкте = <b>құйрық</b></h2>
-    <p class="lead col">Цифрмен нүкте қойып жазады: 3. — üçüncü. Нүктесіз — жай ғана үш. Бір нүкте, екі қабат айырма. Хабарландыруда, мекенжайда, кестеде оны барлық жерде қояды.</p>
+    <p class="lead col">Қазақша 3-қабат деп сызықша қоясың. Түрікше сызықша жоқ — нүкте: 3. kat, оқылуы üçüncü kat. Нүктесіз — жай ғана үш. Бір нүкте, екі қабат айырма.</p>
     <div class="dot">
       <div class="center">
         <p class="dot__big" data-dotbig>3<i data-dot-i>.</i></p>
@@ -691,7 +741,7 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 <section data-section="kac" data-words="21" class="sec">
   <div class="wrap">
     <h2>Kaç? әлде <b>Kaçıncı?</b></h2>
-    <p class="lead col">Kaç санайды. Kaçıncı кезекке тұрғызады. Сұрақты бас — ғимарат жауап береді.</p>
+    <p class="lead col">Неше ↔ kaç, нешінші ↔ kaçıncı. Қазақшадағыдай, сұраққа да сол құйрық. Сұрақты бас — ғимарат жауап береді.</p>
     <p class="scenelet col">Айтасың: <b lang="tr" data-say="Kaç kat?">kaç kat?</b> Сан аласың. Айтасың: <b lang="tr" data-say="Kaçıncı kat?">kaçıncı kat?</b> Мекенжай аласың. Айырмасы — үш әріп пен жарты сағат өмір.</p>
     <div class="tower">
       <svg viewBox="0 0 260 420" data-tower aria-hidden="true"></svg>
@@ -715,9 +765,9 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
 <!-- ============ 10. РУССКИЙ ↔ ТУРЕЦКИЙ ============ -->
 <section data-section="compare" data-words="24" class="sec">
   <div class="wrap">
-    <h2>Орысша <b>↔</b> түрікше</h2>
-    <p class="lead col">Ұқсастық көп. Бір нәрсе бұзылады: орысшада сөз тұтастай өзгереді, түрікшеде құйрық өседі — қазақшадағыдай. Бір лифтте үйреніп кетесің.</p>
-    <button type="button" class="switch" role="switch" aria-checked="false" data-cmp-switch><span data-ui>орысша</span><span class="switch__k"><i></i></span><span data-ui>түрікше</span></button>
+    <h2>Қазақша <b>↔</b> түрікше</h2>
+    <p class="lead col">Мұның көбін сен бұрыннан білесің. Ауыстырғышты бас — қазақ сөздері түрікшеге аударылады. Жасыл — сол күйі. Сары — айырма, ол жоғарыда.</p>
+    <button type="button" class="switch" role="switch" aria-checked="false" data-cmp-switch><span data-ui>қазақша</span><span class="switch__k"><i></i></span><span data-ui>түрікше</span></button>
     <div class="cmp" data-cmp></div>
   </div>
 </section>
@@ -886,7 +936,8 @@ a-exercise, a-quiz { display: block; margin-top: 18px; }
         <div class="cert__row"><svg class="cert__ic" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#fbead0"/><path d="M11 5l6 10H5z" fill="#d99a45"/></svg><span>Сан + <b lang="tr">-(I)ncI</b>: ıncı, inci, uncu, üncü.</span></div>
         <div class="cert__row"><svg class="cert__ic" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#fbead0"/><path d="M11 5l6 10H5z" fill="#d99a45"/></svg><span>Дауыстыға — <b lang="tr">-ncI</b>: ikinci, altıncı.</span></div>
         <div class="cert__row"><svg class="cert__ic" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#fbead0"/><path d="M11 5l6 10H5z" fill="#d99a45"/></svg><span>Ерекшелік: <b lang="tr">dördüncü</b>.</span></div>
-        <div class="cert__row"><svg class="cert__ic" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#fbead0"/><path d="M11 5l6 10H5z" fill="#d99a45"/></svg><span>Құйрық соңғысына: <b lang="tr">yirmi birinci</b>. Нүкте: <b>3.</b></span></div>
+        <div class="cert__row"><svg class="cert__ic" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#fbead0"/><path d="M11 5l6 10H5z" fill="#d99a45"/></svg><span>Құйрық соңғысына: <b lang="tr">yirmi birinci</b>. Нүкте: <b>3.</b> (3- емес)</span></div>
+        <div class="cert__row"><svg class="cert__ic" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="#fbead0"/><path d="M11 5l6 10H5z" fill="#d99a45"/></svg><span>Қазақшадан айырма: o, u, ö, ü-ден кейін <b lang="tr">-uncu / -üncü</b>: <b lang="tr">onuncu, üçüncü</b>.</span></div>
       </div>
       <div class="cert__table" data-cert-table lang="tr"></div>
     </div>
@@ -1197,6 +1248,76 @@ addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  /* ===================== 4б. ҚАЗАҚША ↔ ТҮРІКШЕ ===================== */
+  {
+    const XD = [
+      ['бір', 'інші', 'bir', 'inci', 1, 'і ↔ i: бірдей. Жіңішке, езулік — костюм сол.'],
+      ['алты', 'ншы', 'altı', 'ncı', 1, 'Дауыстыдан кейін екеуінде де тек -ншы / -ncı.'],
+      ['үш', 'інші', 'üç', 'üncü', 0, 'Қазақша ү-ден кейін де і. Түрікше ерін домалақ қалады: ü → ü.'],
+      ['тоғыз', 'ыншы', 'dokuz', 'uncu', 0, 'Қазақша ы, түрікше u: o мен u — домалақ.'],
+      ['он', 'ыншы', 'on', 'uncu', 0, 'Сол заң: onuncu. «Onıncı» деген сөз жоқ.'],
+      ['жүз', 'інші', 'yüz', 'üncü', 0, 'ü → ü: yüzüncü.'],
+      ['төрт', 'інші', 'dörd', 'üncü', 0, 'Екі айырма бірден: t → d және ü.'],
+      ['елу', 'інші', 'elli', 'nci', 0, 'Қазақша елу-ге -інші қосылады. Түрікше elli дауыстыға бітеді — тек -nci.'],
+    ];
+    const box = $('[data-xd-rows]');
+    const rows = XD.map(([ks, kf, ts, tf, same, why]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'xd__row';
+      b.setAttribute('aria-pressed', 'false');
+      const w = span('xd__w');
+      const src = span('xd__src');
+      src.append(ks, span('suf', kf));
+      src.dataset.ui = '';
+      const arr = span('xd__arr', '→');
+      arr.setAttribute('aria-hidden', 'true');
+      const tr = span('xd__tr');
+      tr.lang = 'tr';
+      tr.append(ts, span(same ? 'suf' : 'suf hl', tf));
+      w.append(src, arr, tr);
+      const badge = span(`cmp__b ${same ? 'cmp__b--same' : 'cmp__b--diff'}`, same ? 'сәйкес' : 'айырма');
+      badge.dataset.ui = '';
+      const y = span('xd__why', why);
+      y.dataset.ui = '';
+      b.append(w, badge, y);
+      box.append(b);
+      const r = { b, tr, badge, src, say: ts + tf, same };
+      b.addEventListener('click', () => { const on = !b.classList.contains('is-on'); xdFlip(r, on); if (on) speak(r.say); });
+      return r;
+    });
+    function xdFlip(r, on) {
+      r.b.classList.toggle('is-on', on);
+      r.b.setAttribute('aria-pressed', String(on));
+      if (!A || !on) return;
+      gsap.fromTo(r.tr, { rotationX: -90, y: -10 }, { rotationX: 0, y: 0, duration: 0.6, ease: 'back.out(2.2)' });
+      gsap.fromTo(r.badge, { scale: 0 }, { scale: 1, duration: 0.5, delay: 0.2, ease: 'back.out(3)' });
+      if (!r.same) { gsap.fromTo($('.hl', r.tr), { scale: 1.6 }, { scale: 1, duration: 0.6, delay: 0.25, ease: 'elastic.out(1, .4)' }); shake(r.src); }
+    }
+    let xdRun = 0;
+    async function xdAll() {
+      const run = ++xdRun;
+      rows.forEach((r) => xdFlip(r, false));
+      for (const r of rows) { if (run !== xdRun) return; xdFlip(r, true); await wait(reduce ? 60 : 420); }
+    }
+    const split = $('[data-xd-split]');
+    const bots = $$('[data-xd-bot] > g', split);
+    const lines = $$('[data-xd-lines] path', split);
+    function xdSplit() {
+      if (!A) return;
+      const tl = gsap.timeline();
+      tl.fromTo(lines, { strokeDasharray: 110, strokeDashoffset: 110 }, { strokeDashoffset: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08 })
+        .fromTo(bots, { y: -110, scale: 0.4, transformOrigin: '50% 0%' }, { y: 0, scale: 1, duration: 0.7, ease: 'bounce.out', stagger: 0.1 }, 0.1)
+        .fromTo([bots[1], bots[3]], { rotation: -12, svgOrigin: '180 160' }, { rotation: 0, duration: 0.5, ease: 'back.out(3)' });
+    }
+    $('[data-xd-run]').addEventListener('click', () => { xdSplit(); xdAll(); });
+    if (A) {
+      gsap.from('[data-xd-top] > g', { scale: 0, transformOrigin: '50% 50%', duration: 0.6, ease: 'back.out(3)', stagger: 0.12, scrollTrigger: { trigger: split, start: 'top 85%', once: true } });
+      ScrollTrigger.create({ trigger: split, start: 'top 70%', once: true, onEnter: xdSplit });
+      ScrollTrigger.create({ trigger: box, start: 'top 70%', once: true, onEnter: xdAll });
+    } else rows.forEach((r) => xdFlip(r, true));
+  }
+
   /* ===================== 5. ГЛАСНАЯ / СОГЛАСНАЯ ===================== */
   const VSET = { v: ['iki', 'altı', 'yedi', 'elli', 'yirmi'], c: ['bir', 'beş', 'kırk', 'on', 'yüz'] };
   const merge = $('[data-merge]');
@@ -1350,11 +1471,13 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ===================== 10. СРАВНЕНИЕ ===================== */
   const CMP = [
-    ['үшінші', 'üçüncü', 0, 'орысшада жаңа сөз, түрікшеде құйрық'],
-    ['жиырма бірінші', 'yirmi birinci', 1, 'тек соңғы сөз өзгереді'],
-    ['3-қабат', '3. kat', 0, 'орысшада «-й», қазақшада сызықша, түрікшеде нүкте'],
-    ['бірінші сабақ', 'ilk ders / birinci ders', 0, 'түрікшеде «бірінші» үшін екі сөз бар'],
-    ['соңғы', 'son / sonuncu', 1, 'екі тілде де «соңғы» деген сөз бар'],
+    ['нешінші қабат?', 'kaçıncı kat?', 1, 'неше → нешінші, kaç → kaçıncı: бір механизм'],
+    ['жиырма бірінші', 'yirmi birinci', 1, 'құйрықты тек соңғы сөз алады'],
+    ['алтыншы', 'altıncı', 1, 'дауыстыдан кейін — тек -ншы / -ncı'],
+    ['үшінші', 'üçüncü', 0, 'ерін домалақ: түрікше ü, қазақша і'],
+    ['3-қабат', '3. kat', 0, 'сызықша емес, нүкте'],
+    ['бірінші сабақ', 'ilk ders / birinci ders', 1, 'ilk — алғашқы, бірінші'],
+    ['соңғы', 'son / sonuncu', 1, 'son мен соң — бір түбір'],
   ];
   const cmpBox = $('[data-cmp]');
   CMP.forEach(([ru, tr, same, why]) => {
@@ -1365,7 +1488,7 @@ addEventListener('DOMContentLoaded', () => {
     t.lang = 'tr';
     t.dataset.say = tr.replace(' / ', ', ');
     w.append(span('ru-side', ru), t);
-    const b = span(`cmp__b ${same ? 'cmp__b--same' : 'cmp__b--diff'}`, same ? 'сәйкес' : 'бұзылады');
+    const b = span(`cmp__b ${same ? 'cmp__b--same' : 'cmp__b--diff'}`, same ? 'сәйкес' : 'айырма');
     b.dataset.ui = '';
     const y = span('cmp__why', why);
     y.dataset.ui = '';
@@ -1443,7 +1566,7 @@ addEventListener('DOMContentLoaded', () => {
     { f: 7, label: 'Doktor', y: 170, lines: [['you', 'Diş doktoru kaçıncı katta?', 'Стоматолог нешінші қабатта?'], ['them', 'Yedinci katta.', 'Жетіншіде.']], dry: 'Жетінші. Онда да кешікпеген жөн.' },
     { f: 3, label: 'Türkçe kursu', y: 290, lines: [['you', 'Türkçe kursu kaçıncı katta?', 'Түрік тілі курсы нешінші қабатта?'], ['them', 'Üçüncü katta. Asansör orada.', 'Үшіншіде. Лифт анау жақта.']], dry: 'Үшінші. Жиырмасыншы емес. Прогресс.' },
     { f: 1, label: 'Kafe', y: 370, lines: [['you', 'Kafe kaçıncı katta?', 'Кафе нешінші қабатта?'], ['them', 'Birinci katta.', 'Біріншіде.']], dry: 'Сабақ алдында кофе. Ересек шешім.' },
-    { f: 0, label: 'Danışma', y: 440, lines: [['you', 'Danışma nerede?', 'Ресепшн қайда?'], ['them', 'Zemin katta.', 'Цокольда, кіреберісте.']], dry: 'Zemin kat — нөлінші қабат. Түріктер адал санайды.' },
+    { f: 0, label: 'Danışma', y: 440, lines: [['you', 'Danışma nerede?', 'Ресепшн қайда?'], ['them', 'Zemin katta.', 'Жер деңгейіндегі қабатта, кіреберісте.']], dry: 'Zemin kat — біздің 1-қабат. Олардың birinci kat — біздің екінші. Түріктер нөлден санайды.' },
   ];
   const lobby = $('[data-lobby]');
   lobby.append(svgEl('path', { d: 'M40 30h300v470H40z', fill: '#0c0e14' }), svgEl('path', { d: 'M20 500h340', stroke: '#141a2b', 'stroke-width': 6 }));
@@ -1585,12 +1708,13 @@ addEventListener('DOMContentLoaded', () => {
     const el = $('[data-lab-sent]');
     el.textContent = `${n}. kat — ${sent}`;
     el.dataset.say = sent;
-    $('[data-lab-ru]').textContent = `${ruOrd(n)} қабат`;
+    $('[data-lab-ru]').textContent = `қазақша: ${n}-қабат — ${ruOrd(n)} қабат`;
     let why;
-    if (last === 'dört') why = '<b>Ерекшелік:</b> dört → dörd-, сосын -üncü.';
+    if (last === 'dört') why = '<b>Ерекшелік:</b> dört → dörd-, сосын -üncü. Қазақша төртінші-де t орнында қалады.';
     else if (VOW.includes(last[last.length - 1])) why = `<b>${last}</b> дауыстыға бітеді — тек -nc${H4[lastV(last)]}.`;
     else why = `<b>${last}</b>: соңғы дауысты ${lastV(last)} → құйрық -${H4[lastV(last)]}nc${H4[lastV(last)]}.`;
     if (ws.length > 1) why += ' Құйрықты тек соңғы сөз алады.';
+    if (last !== 'dört' && 'uü'.includes(H4[lastV(last)])) why += ` Қазақша ы/і болар еді (${ruOrd(n).split(' ').pop()}), түрікше ерін домалақ: ${H4[lastV(last)]}.`;
     $('[data-lab-why]').innerHTML = why;
     if (A && anim) gsap.from(el, { y: 14, duration: 0.4, ease: 'back.out(2)' });
   }
@@ -1617,11 +1741,11 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ===================== 16. ЛОВУШКИ ===================== */
   const TRAPS = [
-    ['dörtüncü', 'dördüncü', 'Төртте t d-ға айналады.'],
-    ['ikiinci', 'ikinci', 'Дауыстыдан кейін екінші i керек емес.'],
-    ['yirminci birinci', 'yirmi birinci', 'Құйрықты тек соңғы сөз алады.'],
-    ['üçinci', 'üçüncü', 'Дауысты ü — демек, құйрық та ü-мен.'],
-    ['3 kat — үшінші қабат', '3. kat', 'Нүктесіз бұл «үш қабат».'],
+    ['üçinci', 'üçüncü', 'Қазақша үшінші — ү-ден кейін і. Түрікше ерін домалақ қалады: ü-ден кейін ü.'],
+    ['dokuzıncı', 'dokuzuncu', 'Тоғызыншы-дағы ы түрікшеде u болады: o, u домалақ. On → onuncu да солай.'],
+    ['dörtüncü', 'dördüncü', 'Қазақша төртінші-де t орнында. Түрікше t → d, кітап → кітабы сияқты.'],
+    ['3-kat', '3. kat', 'Қазақша 3-қабат — сызықшамен. Түрікше нүкте қояды, ал нүктесіз 3 kat — «үш қабат».'],
+    ['birinci kat — кіреберіс', 'zemin kat — кіреберіс', 'Біздің 1-қабат түрікше zemin kat. Birinci kat — бір қабат жоғары.'],
   ];
   const trapBox = $('[data-traps]');
   TRAPS.forEach(([bad, good, why]) => {
@@ -1640,7 +1764,7 @@ addEventListener('DOMContentLoaded', () => {
     hint.dataset.ui = '';
     card.append(ic, b, g, span('trap__why', why), hint);
     card.addEventListener('click', () => {
-      if (card.classList.contains('is-fixed')) { speak(good.replace('3.', 'üçüncü')); return; }
+      if (card.classList.contains('is-fixed')) { speak(good.split(' — ')[0].replace('3.', 'üçüncü')); return; }
       card.classList.add('is-fixed');
       card.setAttribute('aria-pressed', 'true');
       g.hidden = false;
