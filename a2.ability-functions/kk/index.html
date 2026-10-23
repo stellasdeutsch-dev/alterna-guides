@@ -59,7 +59,7 @@
   --ak-font: 'Onest', Alterna Sans, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --ak-font-display: 'Oswald', Alterna Sans, 'Onest', system-ui, sans-serif;
   --disp: 'Oswald', Alterna Sans, 'Onest', system-ui, sans-serif;
-  --script: 'Marck Script', Alterna Sans, 'Onest', cursive;
+  --script: Alterna Sans, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --r: 30px;
   --pad: clamp(18px, 4.5vw, 56px);
   color-scheme: light;
@@ -354,6 +354,24 @@ i[data-ui], .ru { font-style: normal; color: var(--muted); font-size: .92em; dis
 .trap__good { color: var(--green); }
 .trap__good.is-off { visibility: hidden; }
 .trap__ico { width: 26px; height: 26px; flex: none; }
+/* mirror: native language ↔ Turkish */
+.kd { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); margin-top: 16px; }
+.kd__card { display: grid; gap: 10px; align-content: start; padding: 18px; border-radius: 22px; background: #fff; color: var(--ink); box-shadow: 0 12px 28px rgba(5, 58, 94, .14); }
+.kd__card.is-same { box-shadow: 0 0 0 3px var(--green), 0 12px 28px rgba(5, 58, 94, .14); }
+.kd__lab { display: block; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.kd__lane { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-height: 46px; }
+.kd__t { display: inline-grid; place-items: center; min-height: 38px; padding: 6px 9px; border-radius: 10px; font: 700 clamp(18px, 4.4vw, 23px)/1 var(--ak-font); background: #eef8fd; color: var(--ink); box-shadow: 0 4px 0 rgba(4, 56, 91, .14); }
+.kd__t--boss { background: var(--blue); color: #fff; box-shadow: 0 4px 0 #0d4f93; }
+.kd__t--end { background: var(--ink); color: #fff; box-shadow: 0 4px 0 #02121f; }
+.kd__t--q { background: var(--green); color: #fff; box-shadow: 0 4px 0 #0f7a43; }
+.kd__t--neg { background: var(--red); color: #fff; box-shadow: 0 4px 0 #a7180f; }
+.kd__t--sp { min-width: 6px; padding: 0; background: none; box-shadow: none; }
+.kd__bad { color: var(--red2); }
+.kd__bad .kd__t { background: #ffe9e5; color: var(--red2); box-shadow: none; text-decoration: line-through; text-decoration-thickness: 2px; }
+.kd__bad .kd__t--sp { background: none; text-decoration: none; }
+.kd__good[data-say] { cursor: pointer; }
+.kd__note { margin: 0; color: var(--muted); font-weight: 600; }
+.kd__go { justify-self: start; }
 
 /* practice */
 .custom-flag { display: grid; gap: 14px; }
@@ -626,7 +644,7 @@ i[data-ui], .ru { font-style: normal; color: var(--muted); font-size: .92em; dis
     <div class="in">
       <span class="scr">форма</span>
       <h2>Төрт текше</h2>
-      <p class="lead">Форма өткен сабақтағыдай. Етістік. <b class="sfx" lang="tr">-abil</b> не <b class="sfx" lang="tr">-ebil</b> құйрығы. Сосын <b lang="tr">-ir</b>. Сосын жақ. Текшелер <span class="hl">жоғарыдан түседі</span> де, бір-біріне ілінеді.</p>
+      <p class="lead">Форма өткен сабақтағыдай. Қазақшадағы «жаза аламын», тек бір сөз болып жабысқан. Етістік. <b class="sfx" lang="tr">-abil</b> не <b class="sfx" lang="tr">-ebil</b> құйрығы. Сосын <b lang="tr">-ir</b>. Сосын жақ. Текшелер <span class="hl">жоғарыдан түседі</span> де, бір-біріне ілінеді.</p>
       <div class="forge">
         <div class="row" role="group" aria-label="Етістік" data-forge-verbs></div>
         <div class="lane" data-lane aria-live="polite"></div>
@@ -685,7 +703,7 @@ i[data-ui], .ru { font-style: normal; color: var(--muted); font-size: .92em; dis
       <h3 style="margin-top:22px">Қызыл ту — болмайды</h3>
       <p>Тыйым — бұл <b class="sfx" lang="tr">-emez</b>. Жағажайдағы тақталар тек осылай сөйлейді. Бас — тақта тербеліп, айтып береді.</p>
       <div class="signs" data-signs></div>
-      <p style="margin-top:18px">Күнделікті өтініштер. Ал да, қолдан. «Бола ма?» дегенге жауап та солай естіледі, тек сұрақсыз.</p>
+      <p style="margin-top:18px">Күнделікті өтініштер. Ал да, қолдана бер. «Бола ма?» дегенге жауап та солай естіледі, тек сұрақсыз.</p>
       <div class="izin-cards" data-izin-cards></div>
       <div class="mini" data-mini="izin">
         <p class="mini__q">Автобуста біреудің қасына отырғың келеді. Не дейсің?</p>
@@ -726,7 +744,7 @@ i[data-ui], .ru { font-style: normal; color: var(--muted); font-size: .92em; dis
         <button type="button" class="olabilir__word" data-say="Olabilir." lang="tr">Olabilir.</button>
         <p>Сабақтың ең пайдалы сөзі. Мүмкін. Ертең қырық градус болады дейді. Сен: <b lang="tr">olabilir</b>. Бәрін түсіндің бе дейді. Сен: <b lang="tr">olabilir</b>.</p>
       </div>
-      <p style="margin-top:16px">Минусы бар күмән да бар. «Келмеуі мүмкін» — <b lang="tr" data-say="gelmeyebilir">gelmeyebilir</b>. Құйрық сол, тек алдына болымсыздық келеді. Қазақшадағы «келмеуі» сияқты.</p>
+      <p style="margin-top:16px">Болымсыз күмән да бар. «Келмеуі мүмкін» — <b lang="tr" data-say="gelmeyebilir">gelmeyebilir</b>. Құйрық сол, тек алдына болымсыздық келеді. Қазақшадағы «кел<b>ме</b>уі мүмкін» сияқты: <b>me</b> да сол жерде.</p>
       <div class="mini" data-mini="ihtimal">
         <p class="mini__q">Мұражайдың ашық екеніне сенімді емессің. Қалай айтасың?</p>
       </div>
@@ -785,6 +803,18 @@ i[data-ui], .ru { font-style: normal; color: var(--muted); font-size: .92em; dis
       <div class="mini" data-mini="compare">
         <p class="mini__q">«Кешке қар жаууы мүмкін». «Мүмкін» дегенді қай сөз береді?</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ KK-DIFF ============ -->
+  <section data-section="kk-diff" data-words="72" class="pn-sand">
+    <div class="glow"></div>
+    <div class="in">
+      <span class="scr mark-r">қазақша ↔ түрікше</span>
+      <h2>Егіздер. Бірақ айнада</h2>
+      <p class="lead">«Жүзе аламын» мен <b lang="tr">yüzebilirim</b> — бір идея. Бірақ үш жерде түрікше <span class="hl">керісінше</span> істейді. Қазақша ойлаған қол дәл осы жерде қателеседі.</p>
+      <p>«Көрсету» бас: жоғарыда — қазақша, ортада — қолдың жазатыны, төменде — түріктің айтатыны.</p>
+      <div class="kd" data-kd></div>
     </div>
   </section>
 
@@ -957,13 +987,13 @@ i[data-ui], .ru { font-style: normal; color: var(--muted); font-size: .92em; dis
     <div class="in">
       <span class="scr mark-r">мұнда бәрі сүрінеді</span>
       <h2>Тұзақтар</h2>
-      <p>Бұл сөгіс емес. Бұл лайфхак. Карточканы бас — қате сызылады, дұрысы қалқып шығады.</p>
+      <p>Бұл сөгіс емес. Бұл қазақша ойлайтын басқа арналған лайфхак. Карточканы бас — қате сызылады, дұрысы қалқып шығады.</p>
       <div class="traps" data-traps></div>
       <p style="margin-top:14px"><button type="button" class="ghost" data-fix-all><span data-ui>бәрін бірден түзету</span></button></p>
     </div>
   </section>
 
-  <div class="ribbon ribbon--y" aria-hidden="true" data-ribbon><div class="ribbon__in"><span>-ir-ды жоғалтпа</span><span>mi бөлек</span><span>git → gid</span><span>miyim — мен</span><span>misin — сен</span><span>-ir-ды жоғалтпа</span><span>mi бөлек</span><span>git → gid</span><span>miyim — мен</span><span>misin — сен</span><span>-ir-ды жоғалтпа</span><span>mi бөлек</span><span>git → gid</span><span>miyim — мен</span><span>misin — сен</span></div></div>
+  <div class="ribbon ribbon--y" aria-hidden="true" data-ribbon><div class="ribbon__in"><span>miyim, -im mi емес</span><span>bil → i, i, i</span><span>yüzemem</span><span>git → gid</span><span>mi бөлек</span><span>miyim, -im mi емес</span><span>bil → i, i, i</span><span>yüzemem</span><span>git → gid</span><span>mi бөлек</span><span>miyim, -im mi емес</span><span>bil → i, i, i</span><span>yüzemem</span><span>git → gid</span><span>mi бөлек</span></div></div>
   <!-- ============ VIDEO ============ -->
   <section data-section="video" data-words="20" class="pn-light">
     <div class="in narrow">
@@ -1378,7 +1408,7 @@ addEventListener('DOMContentLoaded', () => {
   ];
   const CAPS = [
     'Түбір. Соңғы дауыстыға қара: бәрін сол шешеді.',
-    'Жуан дауысты a, ı, o, u → -abil. Жіңішке e, i, ö, ü → -ebil. Дауыстыдан кейін — y.',
+    'Жуан дауысты a, ı, o, u → -abil. Жіңішке e, i, ö, ü → -ebil. Қазақшадағы жаза / келе сияқты. Дауыстыдан кейін — y: оқи ал- сияқты.',
     'Әрі қарай әрқашан -ir. Басқа нұсқа жоқ. Онсыз құйрық түсіп қалады.',
     'Соңында — кім: -im, -sin, ештеңе, -iz, -siniz, -ler.',
   ];
@@ -1441,7 +1471,7 @@ addEventListener('DOMContentLoaded', () => {
     ihtimal: { o: ['Müze kapalı olabilir.', 'Müze kapalı olabilir miyim?', 'Müzeye gidebilir miyim?'], a: 0, tr: true, ok: 'Дәл солай. Сенімді емессің — olabilir. Мұражай рұқсат сұрамайды.', no: 'Мұражай — үшінші жақ, ешқандай сұрақ жоқ. Болжам керек: kapalı olabilir.' },
     tavsiye: { o: ['Erken yatabilirsin.', 'Erken yatabilir miyim?', 'Erken yatabilir.'], a: 0, tr: true, ok: 'Иә. Хабарлы сөйлем және -sin — досқа кеңес.', no: 'Досыңа кеңес бересің — «сен» формасы керек, сұрақсыз: yatabilirsin.' },
     compare: { o: ['-abilir', 'mi', '-sin'], a: 0, tr: true, ok: 'Иә. «Мүмкін» — бұл құйрық: yağabilir.', no: 'Mi сұрақ жасайды, -sin — «сен». «Мүмкін» -abilir құйрығында тұрады.' },
-    tree: { o: ['жасыл', 'сары', 'көк', 'жай «білемін»'], a: 3, ok: 'Дәл солай. Сұрақ та, ауа райы да, кеңес те жоқ. Жай «мен жүзе аламын».', no: 'Схема бойынша жүр: сұрақ жоқ, ауа райы жоқ, «сен» жоқ. «Аламын» қалады.' },
+    tree: { o: ['жасыл', 'сары', 'көк', 'жай «аламын»'], a: 3, ok: 'Дәл солай. Сұрақ та, ауа райы да, кеңес те жоқ. Жай «мен жүзе аламын».', no: 'Схема бойынша жүр: сұрақ жоқ, ауа райы жоқ, «сен» жоқ. «Аламын» қалады.' },
     scene: { o: ['жасыл', 'сары', 'көк'], a: 1, ok: 'Иә. Жел — болжам. Ал «hırka al» — жай кеңес-бұйрық.', no: 'Жел тұруы да мүмкін, тұрмауы да мүмкін. Бұл болжам — сары.' },
   };
   $$('[data-mini]').forEach((box) => {
@@ -1488,8 +1518,8 @@ addEventListener('DOMContentLoaded', () => {
 
   const THERMO = [
     ['Pencereyi aç.', 'Терезені аш. Бұйрық. Інісіне осылай айтады, онда да әрдайым емес.'],
-    ['Pencereyi açabilir misin?', 'Терезені ашасың ба? Досқа қалыпты.'],
-    ['Pencereyi açabilir misiniz?', 'Терезені аша аласыз ба? Бейтаныс пен таксистке.'],
+    ['Pencereyi açabilir misin?', 'Терезені аша аласың ба? Досқа қалыпты.'],
+    ['Pencereyi açabilir misiniz?', 'Терезені аша аласыз ба? Бейтанысқа, таксистке.'],
   ];
   const tRange = $('[data-thermo-range]');
   const tOut = $('[data-thermo-out]');
@@ -1507,7 +1537,7 @@ addEventListener('DOMContentLoaded', () => {
   const SIGNS = [
     { tr: 'Burada yüzemezsiniz.', ru: 'Мұнда жүзуге болмайды.', ic: 'i-swim' },
     { tr: 'Köpekle giremezsiniz.', ru: 'Итпен кіруге болмайды.', ic: 'i-dog' },
-    { tr: 'Burada sigara içemezsiniz.', ru: 'Мұнда темекі шекпейді.', ic: 'i-smoke' },
+    { tr: 'Burada sigara içemezsiniz.', ru: 'Мұнда темекі шегуге болмайды.', ic: 'i-smoke' },
   ];
   const signsBox = $('[data-signs]');
   SIGNS.forEach((s, i) => {
@@ -1526,7 +1556,7 @@ addEventListener('DOMContentLoaded', () => {
 
   const REQ = [
     { tr: 'Ekmeği uzatabilir misiniz?', ru: 'Нанды беріп жіберіңізші.', ic: 'i-bun' },
-    { tr: 'Hesabı getirebilir misiniz?', ru: 'Есепшотты әкелесіз бе?', ic: 'i-card' },
+    { tr: 'Hesabı getirebilir misiniz?', ru: 'Есепті әкеліп бере аласыз ба?', ic: 'i-card' },
     { tr: 'Biraz yavaş konuşabilir misiniz?', ru: 'Баяуырақ сөйлей аласыз ба?', ic: 'i-chat' },
     { tr: 'Tabii, girebilirsiniz.', ru: 'Әрине, кіріңіз. Бұл жауап: бұл да жасыл.', ic: 'i-door' },
   ];
@@ -1666,6 +1696,47 @@ addEventListener('DOMContentLoaded', () => {
   cmp('ru');
 
   /* =========================================================
+     KK-DIFF: қазақша ↔ түрікше, айна
+     ========================================================= */
+  const KD = [
+    { h: '1 · Соңын кім билейді?', kk: [['кел'], ['е'], [' ', 'sp'], ['ал', 'boss'], ['амын', 'end']], bad: [['yap'], ['abıl'], ['ır'], ['ım']], tr: [['yap'], ['abil', 'boss'], ['ir'], ['im', 'end']], say: 'yapabilirim', note: 'Қазақшада соңы ал-ға бағынады: кел- жіңішке, бірақ келе аламын. Түрікшеде — bil-ге: yap жуан, бірақ yapabilirim. Әрі қарай тек i: açabilir miyim.' },
+    { h: '2 · Жақ қайда тұрады?', kk: [['кіре'], [' ', 'sp'], ['ала'], ['мын', 'end'], [' ', 'sp'], ['ба?', 'q']], bad: [['girebilir'], ['im'], [' ', 'sp'], ['mi?']], tr: [['girebilir'], [' ', 'sp'], ['mi', 'q'], ['yim?', 'end']], say: 'Girebilir miyim?', note: 'Қазақшада жақ етістікте қалады, ба — соңында: аламын ба? Түрікшеде жақ шылауға көшеді: miyim, misin, misiniz.' },
+    { h: '3 · Болымсыздықта не түседі?', kk: [['жүзе'], [' ', 'sp'], ['ал', 'boss'], ['ма', 'neg'], ['ймын', 'end']], bad: [['yüz'], ['ebil'], ['me'], ['m']], tr: [['yüz'], ['e'], ['me', 'neg'], ['m', 'end']], say: 'yüzemem', note: 'Қазақшада ал- орнында қалады: жүзе алмаймын. Түрікшеде bil мүлде түседі: yüzemem, giremezsiniz.' },
+    { h: 'Бонус · Мұнда дәл сәйкес', same: true, kk: [['кір'], ['сем', 'end'], [' ', 'sp'], ['бола'], [' ', 'sp'], ['ма?', 'q']], tr: [['gir'], ['sem', 'end'], [' ', 'sp'], ['olur'], [' ', 'sp'], ['mu?', 'q']], say: 'Girsem olur mu?', note: '«-сам бола ма?» түрікшеде де бар: Girsem olur mu? Екеуі де дұрыс. Бұл сабақтың басты формасы — Girebilir miyim?' },
+  ];
+  const kdBox = $('[data-kd]');
+  const kdLane = (parts, cls, tr) => el('div', { class: `kd__lane ${cls}`, lang: tr ? 'tr' : null }, parts.map(([t, k]) => el('span', { class: `kd__t${k ? ' kd__t--' + k : ''}`, text: t })));
+  const kdCards = KD.map((d) => {
+    const kk = kdLane(d.kk, 'kd__kk', false);
+    const bad = d.bad ? kdLane(d.bad, 'kd__bad', true) : null;
+    const good = kdLane(d.tr, 'kd__good', true);
+    good.dataset.say = d.say;
+    good.addEventListener('click', () => speak(d.say));
+    const go = el('button', { type: 'button', class: 'ghost kd__go' }, el('span', { 'data-ui': '', text: '▶ көрсету' }));
+    const card = el('div', { class: `kd__card${d.same ? ' is-same' : ''}` },
+      el('h3', { text: d.h }),
+      el('span', { class: 'kd__lab', 'data-ui': '', text: 'қазақша' }), kk,
+      bad ? el('span', { class: 'kd__lab', 'data-ui': '', text: 'қол жазады' }) : null, bad,
+      el('span', { class: 'kd__lab', 'data-ui': '', text: 'түрікше' }), good,
+      el('p', { class: 'kd__note', text: d.note }), go);
+    const play = () => {
+      if (!A) return;
+      const tl = G.timeline();
+      tl.fromTo($$('.kd__t', kk), { y: -40, rotation: () => Math.random() * 20 - 10 }, { y: 0, rotation: 0, duration: .6, ease: 'bounce.out', stagger: .06 });
+      if (bad) tl.fromTo(bad, { x: -10 }, { x: 0, duration: .5, ease: 'elastic.out(1, .3)' }, '+=.1');
+      tl.fromTo($$('.kd__t', good), { y: -70, scale: .6 }, { y: 0, scale: 1, duration: .7, ease: 'back.out(2.2)', stagger: .08 }, '+=.15');
+      tl.fromTo($$('.kd__t--boss, .kd__t--end, .kd__t--q, .kd__t--neg', good), { scale: 1 }, { scale: 1.18, duration: .2, yoyo: true, repeat: 1, stagger: .1 });
+    };
+    go.addEventListener('click', () => { play(); speak(d.say); });
+    kdBox.append(card);
+    return { card, play };
+  });
+  if (A) {
+    G.from(kdCards.map((k) => k.card), { y: 60, rotationY: 30, transformPerspective: 900, duration: .9, ease: 'back.out(1.5)', stagger: .1, scrollTrigger: { trigger: kdBox, start: 'top 88%', once: true } });
+    ST.create({ trigger: kdBox, start: 'top 70%', once: true, onEnter: () => kdCards.forEach((k, i) => setTimeout(k.play, 300 + i * 500)) });
+  }
+
+  /* =========================================================
      BENTO: forms table
      ========================================================= */
   const PERS = [['ben', 'im', 'miyim'], ['sen', 'sin', 'misin'], ['o', '', 'mi'], ['biz', 'iz', 'miyiz'], ['siz', 'siniz', 'misiniz'], ['onlar', 'ler', 'mi']];
@@ -1765,7 +1836,7 @@ addEventListener('DOMContentLoaded', () => {
   const HOIST = {
     green: { y: -230, tr: 'Yüzebilir miyim?', ru: 'Жүзсем бола ма?' },
     yellow: { y: -160, tr: 'Dalga olabilir.', ru: 'Толқын болуы мүмкін.' },
-    blue: { y: -90, tr: 'Sabah yüzebilirsin.', ru: 'Жүзуді таңертең жүзе аласың.' },
+    blue: { y: -90, tr: 'Sabah yüzebilirsin.', ru: 'Таңертең жүзе аласың.' },
   };
   const poleSay = $('[data-pole-say]');
   function hoist(f, silent) {
@@ -1789,7 +1860,7 @@ addEventListener('DOMContentLoaded', () => {
      ========================================================= */
   const PEOPLE = [
     { who: 'Даяшы', tr: 'Buraya oturabilirsiniz.', ru: 'Мұнда отыра аласыз.', f: 'green' },
-    { who: 'Турист', tr: 'Menüyü alabilir miyim?', ru: 'Мәзірді берсеңіз?', f: 'green' },
+    { who: 'Турист', tr: 'Menüyü alabilir miyim?', ru: 'Мәзірді алсам бола ма?', f: 'green' },
     { who: 'Апай', tr: 'Akşam rüzgâr çıkabilir, hırka al.', ru: 'Кешке жел тұруы мүмкін, кофта ала жүр.', f: 'yellow' },
     { who: 'Дос', tr: "Yarın Çeşme'ye gidebiliriz.", ru: 'Ертең Чешмеге барып келе аламыз. Ұсыныс.', f: 'blue' },
     { who: 'Паром капитаны', tr: 'Vapur geç kalabilir.', ru: 'Паром кешігуі мүмкін.', f: 'yellow' },
@@ -1833,7 +1904,7 @@ addEventListener('DOMContentLoaded', () => {
     ['Kartla ödeyebilir miyim?', 'Картамен төлесем бола ма?', 'green', 'i-card'],
     ['Bana yardım edebilir misin?', 'Маған көмектесе аласың ба?', 'green', 'i-hand'],
     ['Tekrar edebilir misiniz?', 'Қайталай аласыз ба?', 'green', 'i-repeat'],
-    ['Kapıyı kapatabilir misin?', 'Есікті жабасың ба?', 'green', 'i-door'],
+    ['Kapıyı kapatabilir misin?', 'Есікті жаба аласың ба?', 'green', 'i-door'],
     ['Fotoğraf çekebilir miyim?', 'Суретке түсірсем бола ма?', 'green', 'i-camera'],
     ['Otobüs geç gelebilir.', 'Автобус кешігуі мүмкін.', 'yellow', 'i-bus'],
     ['Müze kapalı olabilir.', 'Мұражай жабық болуы мүмкін.', 'yellow', 'i-museum'],
@@ -1880,15 +1951,16 @@ addEventListener('DOMContentLoaded', () => {
     { id: 'ihtimal', ru: 'Мүмкін', f: 'yellow', persons: ['o', 'onlar'] },
     { id: 'tavsiye', ru: 'Кеңес беремін', f: 'blue', persons: ['sen', 'siz'] },
   ];
+  /* қазақша формалар әр жаққа бөлек: сам/сақ — рұқсат, -а ал- — өтініш, -уы мүмкін — болжам, саң/саңыз — кеңес */
   const LV = [
-    { r: 'otur', inf: 'oturmak', s: 'otur', v: 'u', comp: 'Buraya', ru: 'осында отыра' },
-    { r: 'git', inf: 'gitmek', s: 'gid', v: 'i', comp: "Çeşme'ye", ru: 'Чешмеге бара' },
-    { r: 'yüz', inf: 'yüzmek', s: 'yüz', v: 'ü', comp: 'Sabah', ru: 'таңертең жүзе' },
-    { r: 'aç', inf: 'açmak', s: 'aç', v: 'a', comp: 'Pencereyi', ru: 'терезені аша' },
-    { r: 'bekle', inf: 'beklemek', s: 'bekle', v: 'e', comp: 'Biraz', ru: 'сәл күте' },
-    { r: 'öde', inf: 'ödemek', s: 'öde', v: 'e', comp: 'Kartla', ru: 'картамен төлей' },
-    { r: 'gel', inf: 'gelmek', s: 'gel', v: 'e', comp: 'Yarın', ru: 'ертең келе' },
-    { r: 'al', inf: 'almak', s: 'al', v: 'a', comp: 'Bir şemsiye', ru: 'қолшатыр ала' },
+    { r: 'otur', inf: 'oturmak', s: 'otur', v: 'u', comp: 'Buraya', kk: { c: 'осында', s1: 'отырсам', p1: 'отырсақ', cv: 'отыра', vn: 'отыруы', s2: 'отырсаң', p2: 'отырсаңыз' } },
+    { r: 'git', inf: 'gitmek', s: 'gid', v: 'i', comp: "Çeşme'ye", kk: { c: 'Чешмеге', s1: 'барсам', p1: 'барсақ', cv: 'бара', vn: 'баруы', s2: 'барсаң', p2: 'барсаңыз' } },
+    { r: 'yüz', inf: 'yüzmek', s: 'yüz', v: 'ü', comp: 'Sabah', kk: { c: 'таңертең', s1: 'жүзсем', p1: 'жүзсек', cv: 'жүзе', vn: 'жүзуі', s2: 'жүзсең', p2: 'жүзсеңіз' } },
+    { r: 'aç', inf: 'açmak', s: 'aç', v: 'a', comp: 'Pencereyi', kk: { c: 'терезені', s1: 'ашсам', p1: 'ашсақ', cv: 'аша', vn: 'ашуы', s2: 'ашсаң', p2: 'ашсаңыз' } },
+    { r: 'bekle', inf: 'beklemek', s: 'bekle', v: 'e', comp: 'Biraz', kk: { c: 'сәл', s1: 'күтсем', p1: 'күтсек', cv: 'күте', vn: 'күтуі', s2: 'күтсең', p2: 'күтсеңіз' } },
+    { r: 'öde', inf: 'ödemek', s: 'öde', v: 'e', comp: 'Kartla', kk: { c: 'картамен', s1: 'төлесем', p1: 'төлесек', cv: 'төлей', vn: 'төлеуі', s2: 'төлесең', p2: 'төлесеңіз' } },
+    { r: 'gel', inf: 'gelmek', s: 'gel', v: 'e', comp: 'Yarın', kk: { c: 'ертең', s1: 'келсем', p1: 'келсек', cv: 'келе', vn: 'келуі', s2: 'келсең', p2: 'келсеңіз' } },
+    { r: 'al', inf: 'almak', s: 'al', v: 'a', comp: 'Bir şemsiye', kk: { c: 'бір қолшатыр', s1: 'алсам', p1: 'алсақ', cv: 'ала кете', vn: 'алуы', s2: 'алсаң', p2: 'алсаңыз' } },
   ];
   const END = { ben: 'im', sen: 'sin', o: '', biz: 'iz', siz: 'siniz', onlar: 'ler' };
   const QP = { ben: 'miyim', sen: 'misin', o: 'mi', biz: 'miyiz', siz: 'misiniz', onlar: 'mi' };
@@ -1911,12 +1983,14 @@ addEventListener('DOMContentLoaded', () => {
     const end = q && P !== 'onlar' ? '' : END[P];
     const tail = q ? (P === 'onlar' ? ' mi?' : ` ${QP[P]}?`) : '.';
     const verb = V.s + buf + sfx + 'ir' + end;
-    const ru = {
-      izin: { ben: `Мен ${V.ru} аламын ба?`, biz: `Біз ${V.ru} аламыз ба?` },
-      rica: { sen: `Сен ${V.ru} аласың ба?`, siz: `Сіз ${V.ru} аласыз ба?` },
-      ihtimal: { o: `Ол ${V.ru} алады. Мүмкін.`, onlar: `Олар ${V.ru} алады. Мүмкін.` },
-      tavsiye: { sen: `Сен ${V.ru} аласың. Кеңесім осы.`, siz: `Сіз ${V.ru} аласыз. Кеңесім осы.` },
-    }[M.id][P];
+    const K = V.kk;
+    const up = (t) => t[0].toUpperCase() + t.slice(1);
+    const ru = up({
+      izin: { ben: `${K.c} ${K.s1} бола ма?`, biz: `${K.c} ${K.p1} бола ма?` },
+      rica: { sen: `${K.c} ${K.cv} аласың ба?`, siz: `${K.c} ${K.cv} аласыз ба?` },
+      ihtimal: { o: `ол ${K.c} ${K.vn} мүмкін.`, onlar: `олар ${K.c} ${K.vn} мүмкін.` },
+      tavsiye: { sen: `${K.c} ${K.s2} болады.`, siz: `${K.c} ${K.p2} болады.` },
+    }[M.id][P]);
     return { M, V, P, sfx, buf, q, end, tail, verb, full: `${V.comp} ${verb}${tail}`, ru };
   }
   function labWhy(x) {
@@ -1926,6 +2000,7 @@ addEventListener('DOMContentLoaded', () => {
       'Сосын әрқашан -ir.',
       x.q ? `Ту жасыл: сұрақ. ${PRU[x.P]} → ${x.P === 'onlar' ? '-ler mi' : x.tail.trim().replace('?', '')}, шылау бөлек.` : `Сұрақсыз. ${PRU[x.P]} → ${x.end ? '-' + x.end : 'ештеңе'}.`,
       x.M.id === 'ihtimal' ? 'Басқа туралы айтасың — бұл болжам, сары.' : x.M.id === 'tavsiye' ? '«Сен» деп ұсыныс айтасың — кеңес, көк.' : x.M.id === 'izin' ? 'Өзің туралы сұрайсың — рұқсат.' : 'Басқа туралы сұрайсың — өтініш.',
+      { izin: 'Қазақшада бұл басқа құрал: -сам бола ма? Түрікшеде — сол -ebil.', rica: 'Қазақшада да -а ал-: аша аласың ба? Бірақ жақ шылауда: açabilir misin, açabilirsin mi емес.', ihtimal: 'Қазақшада бұл -уы мүмкін. Түрікшеде бір құйрық, мүмкін сөзі керек емес.', tavsiye: 'Қазақшада -саң болады. Түрікшеде -ebilirsin, бұйрықтан жұмсағырақ.' }[x.M.id],
     ];
     lWhy.replaceChildren(el('ol', { 'data-ui': '' }, items.map((t) => el('li', { text: t }))));
   }
@@ -1984,11 +2059,11 @@ addEventListener('DOMContentLoaded', () => {
      TRAPS
      ========================================================= */
   const TRAPS = [
-    { bad: 'Yüzebilir misin?', good: 'Yüzebilir miyim?', ru: '«Жүзсем бола ма?» дегің келді, бірақ «сен жүзе аласың ба?» деп сұрадың. Өзің туралы — miyim.' },
-    { bad: 'Gidebilsin.', good: 'Gidebilirsin.', ru: '-ir болмаса, құйрық түсіп қалады. -ir текшесі әрқашан міндетті.' },
-    { bad: 'Girebilirmiyim?', good: 'Girebilir miyim?', ru: 'mi шылауы бөлек жазылады. Әрқашан. Түнде де.' },
-    { bad: 'Gitebilir.', good: 'Gidebilir.', ru: 'git дауыстының алдында ұяңдайды: gid-. Өзің білетін gidiyorum сияқты.' },
-    { bad: 'Ali gelemez.', good: 'Ali gelmeyebilir.', ru: '«Келмеуі мүмкін» дегің келді, бірақ «келе алмайды» дедің. Күмән — -meyebilir.' },
+    { bad: 'Girebilirim mi?', good: 'Girebilir miyim?', ru: 'Қазақша «кіре аламын ба?» — жақ етістікте, ба соңында. Түрікшеде жақ шылауға көшеді: miyim, misin, misiniz.' },
+    { bad: 'Açabılır mıyım?', good: 'Açabilir miyim?', ru: 'Үндестік aç-қа емес, bil-ге бағынады. bil-ден кейін тек i: -ir, -im, miyim. Қазақшада да солай: келе аламын — соңы ал-ға бағынады.' },
+    { bad: 'Yüzebilmem.', good: 'Yüzemem.', ru: 'Қазақша «жүзе алмаймын» — ал- орнында. Түрікшеде болымсызда bil түседі: -emem, -emezsin, -emez.' },
+    { bad: 'Gitebilir.', good: 'Gidebilir.', ru: 'Қазақша кет- т-сын сақтайды: кетеді. Түрікше git дауыстының алдында gid- болады. Өзің білетін gidiyorum сияқты.' },
+    { bad: 'Ali gelemez.', good: 'Ali gelmeyebilir.', ru: '«Келмеуі мүмкін» дегің келді, бірақ «келе алмайды» дедің. Қазақшадағыдай me етістіктің өзіне жабысады: gel-me-yebilir.' },
   ];
   const trapsBox = $('[data-traps]');
   TRAPS.forEach((t) => {
@@ -2116,7 +2191,7 @@ addEventListener('DOMContentLoaded', () => {
   const track = $('[data-sb-track]');
   const buoy = $('.sb__buoy svg', bar);
   const secs = $$('[data-section]');
-  const TITLES = { hero: 'Басы', story: 'Ілмек', guess: 'Тауып көр', form: 'Форма', izin: 'Бола ма?', ihtimal: 'Мүмкін', tavsiye: 'Кеңес беремін', compare: 'Салыстыру', bento: 'Кесте', tree: 'Алгоритм', mnemo: 'Мнемоника', scene: 'Кордон', gallery: 'Галерея', lab: 'Зертхана', traps: 'Тұзақтар', video: 'Бейне', practice: 'Жаттығу', check: 'Тексеру', cheat: 'Жадынама' };
+  const TITLES = { hero: 'Басы', story: 'Ілмек', guess: 'Тауып көр', form: 'Форма', izin: 'Бола ма?', ihtimal: 'Мүмкін', tavsiye: 'Кеңес беремін', compare: 'Салыстыру', 'kk-diff': 'Айна', bento: 'Кесте', tree: 'Алгоритм', mnemo: 'Мнемоника', scene: 'Кордон', gallery: 'Галерея', lab: 'Зертхана', traps: 'Тұзақтар', video: 'Бейне', practice: 'Жаттығу', check: 'Тексеру', cheat: 'Жадынама' };
   const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
   const vertical = () => matchMedia('(min-width: 768px)').matches;
   const marks = secs.map((s) => {
