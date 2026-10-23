@@ -53,7 +53,7 @@
   :focus-visible { outline: 3px solid var(--gold-2); outline-offset: 3px; border-radius: 8px; }
   main { padding-bottom: calc(56px + env(safe-area-inset-bottom)); }
 
-  /* общие */
+  /* shared */
   .op-sec { padding: 56px 16px; position: relative; }
   .op-sec--white { background: var(--paper); }
   .op-sec--dark { background: var(--dark); color: #EDE7DF; }
@@ -188,6 +188,22 @@
   .op-ans.is-no { border-color: var(--coral-2); background: var(--coral-soft); }
   .op-why__fb { min-height: 1.4em; margin-top: 8px; font-weight: 600; color: var(--ink-2); }
 
+  /* ---------- mirror: learner language ↔ Turkish ---------- */
+  .op-km { background: #fff; border-radius: var(--radius); padding: 18px 14px 16px; box-shadow: var(--shadow); max-width: 620px; margin: 0 auto; border: 2px dashed var(--brown-1); }
+  .op-km__tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 14px; }
+  .op-km__tab { min-height: 44px; padding: 8px 14px; border-radius: 999px; background: var(--cream); font-weight: 700; font-size: 14px; color: var(--brown-2); border: 2px solid transparent; }
+  .op-km__tab.is-on { border-color: var(--coral-2); background: #fff; color: var(--coral-2); }
+  .op-km__rows { display: grid; gap: 6px; justify-items: center; background: var(--cream-2); border-radius: 18px; padding: 14px 8px; }
+  .op-km__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; font: 700 clamp(22px, 6.6vw, 36px)/1.1 var(--ff-h); }
+  .op-km__row .op-chip { padding: 5px 9px; }
+  .op-km__rows.is-pairs .op-km__row { font-size: clamp(17px, 4.8vw, 28px); }
+  .op-km__lab { font: 700 11px/1 var(--ff); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .op-km__sign { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font: 800 24px/1 var(--ff); background: #DDF2E3; color: var(--green); }
+  .op-km__sign.is-ne { background: var(--coral-soft); color: var(--coral-2); }
+  .op-km__sign.is-ap { background: var(--gold-1); color: #8A5A10; }
+  .op-km__sign.is-empty { visibility: hidden; }
+  .op-km__note { text-align: center; margin: 12px auto 0; min-height: 4.2em; max-width: 46ch; font-weight: 600; color: var(--ink-2); }
+
   /* ---------- traps ---------- */
   .op-trap { background: #fff; border-radius: var(--radius); padding: 18px 16px; box-shadow: var(--shadow); margin: 0 auto 18px; max-width: 620px; }
   .op-trap h3 { margin: 0 0 8px; font: 700 20px/1.2 var(--ff-h); text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 10px; }
@@ -252,7 +268,7 @@
   .op-final__tray { display: flex; justify-content: center; gap: 4px; margin: 12px 0; height: 56px; }
   .op-final__tray svg { width: 42px; height: 54px; color: var(--brown-2); }
 
-  /* ---------- свой скроллбар: стакан чая наполняется по мере чтения ---------- */
+  /* ---------- custom scrollbar: tea glass fills as you read ---------- */
   .op-sb { position: fixed; z-index: 50; top: env(safe-area-inset-top); left: 0; right: 0; height: 6px; }
   .op-sb__track { position: absolute; inset: 0; background: rgba(149, 105, 58, .18); touch-action: none; cursor: pointer; }
   .op-sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--gold-2), var(--tea)); border-radius: 0 6px 6px 0; }
@@ -311,7 +327,7 @@
 <main>
 
   <!-- ============ STORY ============ -->
-  <section data-section="story" data-words="77">
+  <section data-section="story" data-words="95">
     <div class="op-hero">
       <div class="op-hero__deco" aria-hidden="true">
         <svg class="op-float op-f1" viewBox="0 0 80 80"><circle cx="40" cy="40" r="28" fill="none" stroke="#C98B45" stroke-width="16"/><circle cx="40" cy="40" r="28" fill="none" stroke="#E3AE67" stroke-width="7" stroke-dasharray="3 7" stroke-linecap="round"/></svg>
@@ -366,15 +382,16 @@
           </div>
           <p id="opSwTr" data-ui>“Let me have some.” One person's decision.</p>
         </div>
+        <p class="op-lead" style="margin-top:18px">English needs two extra words: <b>let me</b>, <b>let's</b>. Turkish needs one tail at the end. Say it: <span lang="tr">içelim</span> = “ee-cheh-leem” (<span lang="tr">ç</span> = ch in <i>chair</i>).</p>
       </div>
     </div>
   </section>
 
   <!-- ============ FORMULA ============ -->
-  <section data-section="formula" data-words="36" class="op-sec op-sec--white">
+  <section data-section="formula" data-words="52" class="op-sec op-sec--white">
     <div class="op-wrap">
       <h2 class="op-h2 op-split">The wish formula</h2>
-      <p class="op-lead">Get it once, and it works for any verb. Four steps, no cramming.</p>
+      <p class="op-lead">English builds “let’s” in front of the verb. Turkish builds it after, like Lego on the end. Get it once, and it works for any verb. Four steps.</p>
 
       <div class="op-picks" role="group" aria-label="Example">
         <button class="op-pick is-on" type="button" data-ex="gel" lang="tr">gelmek</button>
@@ -387,13 +404,26 @@
       <div class="op-steps" id="opSteps">
         <article class="op-step is-on"><div class="op-step__num">01</div><h3>Stem</h3><p>Cut off <span lang="tr">-mak / -mek</span>. <span lang="tr">gelmek → <b>gel</b></span>, <span lang="tr">okumak → <b>oku</b></span></p></article>
         <article class="op-step"><div class="op-step__num">02</div><h3>Buffer <span lang="tr">-y-</span></h3><p>Stem ends in a vowel? Add <span lang="tr">y</span> so the vowels don't bump heads. <span lang="tr">oku + <b>y</b> + ayım</span></p></article>
-        <article class="op-step"><div class="op-step__num">03</div><h3>Harmony</h3><p>Last vowel <b lang="tr">a ı o u</b> → <span lang="tr">-a-</span>. Vowel <b lang="tr">e i ö ü</b> → <span lang="tr">-e-</span>.</p></article>
-        <article class="op-step"><div class="op-step__num">04</div><h3>Person</h3><p>I — <span lang="tr">-yım / -yim</span>. We — <span lang="tr">-lım / -lim</span>. Questions get a separate <span lang="tr">mi</span>: <span lang="tr">gidelim mi?</span></p></article>
+        <article class="op-step"><div class="op-step__num">03</div><h3>Harmony</h3><p>English has nothing like this. Last vowel <b lang="tr">a ı o u</b> → <span lang="tr">-a-</span>. Vowel <b lang="tr">e i ö ü</b> → <span lang="tr">-e-</span>.</p></article>
+        <article class="op-step"><div class="op-step__num">04</div><h3>Person</h3><p>I — <span lang="tr">-yım / -yim</span>. We — <span lang="tr">-lım / -lim</span>. <span lang="tr">ı</span> sounds like the <i>a</i> in <i>about</i>, not “ee.” Question: no “shall we,” just add <span lang="tr">mi</span>: <span lang="tr">gidelim mi?</span></p></article>
       </div>
       <div class="op-stepnav">
         <button class="op-btn op-btn--ghost" type="button" id="opPrev" aria-label="Step back"><svg><use href="#i-back"/></svg></button>
         <button class="op-btn" type="button" id="opNext">Next <svg><use href="#i-arrow"/></svg></button>
         <button class="op-btn op-btn--ghost" type="button" id="opAgain" aria-label="Again"><svg><use href="#i-replay"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EN-DIFF: English ↔ Turkish ============ -->
+  <section data-section="en-diff" data-words="70" class="op-sec">
+    <div class="op-wrap">
+      <h2 class="op-h2 op-split">English ↔ Turkish</h2>
+      <p class="op-lead">Same idea, different building. Pick one: English on top, Turkish below. <b>=</b> same, <b>≈</b> same job, different shape, <b>≠</b> different.</p>
+      <div class="op-km" id="opKm">
+        <div class="op-km__tabs" id="opKmTabs" role="group" aria-label="Compare"></div>
+        <div class="op-km__rows" id="opKmRows" aria-live="polite"></div>
+        <p class="op-km__note" id="opKmNote"></p>
       </div>
     </div>
   </section>
@@ -456,14 +486,14 @@
   </section>
 
   <!-- ============ TRAPS ============ -->
-  <section data-section="traps" data-words="77" class="op-sec">
+  <section data-section="traps" data-words="125" class="op-sec">
     <div class="op-wrap">
-      <h2 class="op-h2 op-split">Three traps</h2>
+      <h2 class="op-h2 op-split">Four traps for English speakers</h2>
 
       <article class="op-trap">
-        <h3><span class="n">1</span>Look here</h3>
-        <p>The <span lang="tr">öğrenci işleri</span> window — the registrar's office, but with tea. You want to say: “please take a look at my document.” You say: <span lang="tr">Bakın</span>.</p>
-        <p>The woman stops typing. <span lang="tr">Bakın</span> means “Look!” like a drill sergeant.</p>
+        <h3><span class="n">1</span>“Take a look” isn't polite</h3>
+        <p>The <span lang="tr">öğrenci işleri</span> window — the registrar's office, but with tea. In English, “Take a look at my document, please” is fine. Tone and “please” do the work. You translate it: <span lang="tr">Bakın</span>.</p>
+        <p>The woman stops typing. A bare <span lang="tr">Bakın</span> sounds like “Look!” from a drill sergeant.</p>
         <svg class="op-face" id="opFace" viewBox="0 0 80 80" aria-hidden="true">
           <circle cx="40" cy="40" r="34" fill="#FCDB86"/>
           <circle class="eye" cx="28" cy="34" r="4" fill="#3F3B37"/><circle class="eye" cx="52" cy="34" r="4" fill="#3F3B37"/>
@@ -475,7 +505,7 @@
           <button type="button" data-face="good" data-say="Tabii, bir bakayım." lang="tr">Bir bakayım.</button>
         </div>
         <p class="op-duo__fb" id="opFaceFb" data-ui>An order. Fine in a manual, not at the window.</p>
-        <p>The optative is about <b>your own</b> action: “let me take a look.” The woman says it when she takes the document.</p>
+        <p>The optative is about <b>your own</b> action: “let me take a look.” The woman says it when she takes the document. What you need is the ready-made polite question: <span lang="tr" data-say="Bakar mısınız?">Bakar mısınız?</span> “Could you take a look?”</p>
       </article>
 
       <article class="op-trap">
@@ -487,16 +517,28 @@
         </div>
         <button class="op-btn op-btn--ghost" type="button" id="opMuseumBtn">What people really say</button>
         <p style="margin-top:10px">The only living one is the set phrase <span lang="tr" data-say="Sağ olasın!">Sağ olasın!</span> “Thanks, bless you.”</p>
+        <p>And “let him come”? That's not this mood. It's the imperative: <span lang="tr" data-say="Gelsin.">Gelsin.</span></p>
       </article>
 
       <article class="op-trap">
         <h3><span class="n">3</span>Chameleon verbs</h3>
-        <p>Before a vowel, <span lang="tr">t</span> turns into <span lang="tr">d</span>. And <span lang="tr">de</span> and <span lang="tr">ye</span> narrow. Tap a card:</p>
+        <p>In English, <i>go</i> stays <i>go</i>: <i>go, going</i>. Some Turkish verbs change a letter. In <span lang="tr">git</span> and <span lang="tr">et</span>, <span lang="tr">t</span> turns into <span lang="tr">d</span> before a vowel. And <span lang="tr">de</span> and <span lang="tr">ye</span> narrow. Tap a card:</p>
         <div class="op-softs" id="opSofts">
           <button class="op-soft" type="button" data-say="gideyim"><span class="from" lang="tr">git + eyim</span><span class="to" lang="tr">gideyim</span></button>
           <button class="op-soft" type="button" data-say="yardım edelim"><span class="from" lang="tr">et + elim</span><span class="to" lang="tr">edelim</span></button>
           <button class="op-soft" type="button" data-say="ne diyeyim"><span class="from" lang="tr">de + yeyim</span><span class="to" lang="tr">diyeyim</span></button>
           <button class="op-soft" type="button" data-say="yiyelim"><span class="from" lang="tr">ye + yelim</span><span class="to" lang="tr">yiyelim</span></button>
+        </div>
+      </article>
+
+      <article class="op-trap">
+        <h3><span class="n">4</span><span lang="tr">Hadi</span> isn't “let's”</h3>
+        <p>English puts “let's” in front. So the hand writes <span lang="tr">hadi</span> + bare verb: <span lang="tr">Hadi git!</span> But <span lang="tr">hadi</span> just means “come on.” The “we” is in the ending. Tap: who's going?</p>
+        <div class="op-softs" id="opDrops">
+          <button class="op-soft" type="button" data-say="Hadi git!"><span class="from" lang="tr">Hadi git!</span><span class="to">Go on, go! · <u>you</u></span></button>
+          <button class="op-soft" type="button" data-say="Hadi gidelim!"><span class="from" lang="tr">Hadi gidelim!</span><span class="to">Let's go! · <u>we</u></span></button>
+          <button class="op-soft" type="button" data-say="Hadi ye!"><span class="from" lang="tr">Hadi ye!</span><span class="to">Come on, eat! · <u>you</u></span></button>
+          <button class="op-soft" type="button" data-say="Hadi yiyelim!"><span class="from" lang="tr">Hadi yiyelim!</span><span class="to">Let's eat! · <u>we</u></span></button>
         </div>
       </article>
     </div>
@@ -505,7 +547,7 @@
   <!-- ============ PHRASES ============ -->
   <section data-section="phrases" data-words="86" class="op-sec op-sec--white">
     <h2 class="op-h2 op-split">8 everyday phrases</h2>
-    <p class="op-lead">Tap a card to flip it. The phrase plays as it flips.</p>
+    <p class="op-lead">Tap a card to flip it. The phrase plays as it flips. Notice: one Turkish word often equals three English ones.</p>
     <div class="op-flips" id="opFlips"></div>
   </section>
 
@@ -558,17 +600,17 @@
   </section>
 
   <!-- ============ CHEAT ============ -->
-  <section data-section="cheat" data-words="33" class="op-sec op-sec--white">
+  <section data-section="cheat" data-words="48" class="op-sec op-sec--white">
     <div class="op-cheat">
       <h2 class="op-h2 op-split">Cheat sheet</h2>
       <div class="op-cheat__grid" id="opCheat">
         <div class="op-crow" role="button" tabindex="0" data-say="geleyim, okuyayım"><span>I</span><div><span lang="tr">-(y)eyim / -(y)ayım</span><small>geleyim, okuyayım — “let me come”</small></div></div>
         <div class="op-crow" role="button" tabindex="0" data-say="gelelim, okuyalım"><span>We</span><div><span lang="tr">-(y)elim / -(y)alım</span><small>gelelim, okuyalım — “let's”</small></div></div>
-        <div class="op-crow" role="button" tabindex="0" data-say="Gidelim mi?"><span>Question</span><div><span lang="tr">+ mi / mı</span> separate<small>gidelim mi? — “shall we go?”</small></div></div>
-        <div class="op-crow" role="button" tabindex="0" data-say="yapmayalım"><span>Not</span><div><span lang="tr">-me / -ma + y</span><small>yapmayalım — “let's not”</small></div></div>
+        <div class="op-crow" role="button" tabindex="0" data-say="Gidelim mi?"><span>Question</span><div><span lang="tr">+ mi / mı</span> separate, no word swap<small>gidelim mi? — “shall we go?”</small></div></div>
+        <div class="op-crow" role="button" tabindex="0" data-say="yapmayalım"><span>Not</span><div><span lang="tr">-me / -ma + y + a / e</span>, inside the word<small>yapmayalım — “let's not do it”</small></div></div>
         <div class="op-crow" role="button" tabindex="0" data-say="gideyim, diyeyim, yiyeyim"><span>Traps</span><div><span lang="tr">gid-, ed-, diy-, yiy-</span><small>gideyim, diyeyim, yiyeyim</small></div></div>
       </div>
-      <p style="margin-top:12px">For “you,” use the imperative: <span lang="tr">Gel! Gelin!</span></p>
+      <p style="margin-top:12px">For “you,” use the imperative: <span lang="tr">Gel! Gelin!</span> And <span lang="tr">hadi</span> is “come on,” not “let's”: the “let's” lives in the ending.</p>
     </div>
 
     <div class="op-final">
@@ -715,28 +757,75 @@ addEventListener('DOMContentLoaded', () => {
   step = 3; drawEq(); step = 0;
   if (G) ScrollTrigger.create({ trigger: eq, start: 'top 75%', once: true, onEnter: () => $('#opAgain').click() });
 
+  /* ---------- en-diff: English ↔ Turkish, piece by piece ---------- */
+  const KM = [
+    { t: 'Let me', say: 'geleyim', flip: 1, cols: [['let me', 'gel', '≠', 'per', 'stem'], ['come', 'eyim', '≠', 'stem', 'per']],
+      note: 'Same meaning, flipped order. English: “let me” first, then the verb. Turkish: verb first, “let me” glued on the end: gel + eyim.' },
+    { t: "Let's", say: 'gelelim', flip: 1, cols: [["let's", 'gel', '≠', 'per', 'stem'], ['come', 'elim', '≠', 'stem', 'per']],
+      note: 'Same flip. “Let’s” becomes the tail -elim. One word instead of two.' },
+    { t: "Let's not", say: 'gelmeyelim', cols: [["let's", 'gel', '', 'per', 'stem'], ['not', 'me', '≈', 'neg'], ['come', 'y', '', 'stem', 'buf'], ['', 'e', '', 'vow'], ['', 'lim', '', 'per']],
+      note: 'English: “not” is a separate word. Turkish: -me goes inside the word, right after the stem: gelmeyelim.' },
+    { t: 'Shall we?', say: 'Gelelim mi?', cols: [['shall', '', '≠', 'q'], ['we', 'gelelim', '≈', 'per'], ['come?', 'mi?', '≈', 'stem', 'q']],
+      note: 'English swaps words to ask: “we shall” → “shall we.” Turkish never swaps. Same word, add mi at the end.' },
+    { t: 'Two kinds of “let”', say: 'Bakayım.', pairs: [['Let me see.', 'Bakayım.', '='], ['Let me go! (release me)', 'Bırak beni!', '≠'], ['Let him come.', 'Gelsin.', '≠']],
+      note: 'English “let” does many jobs. This mood is only “I want to / let’s do it.” “Let me go!” as in “release me” is a different verb: bırakmak.' }
+  ];
+  const kmTabs = $('#opKmTabs'), kmRows = $('#opKmRows'), kmNote = $('#opKmNote');
+  const sCls = (s) => 'op-km__sign' + (s === '≠' ? ' is-ne' : s === '≈' ? ' is-ap' : '') + (s ? '' : ' is-empty');
+  kmTabs.innerHTML = KM.map((k, i) => `<button type="button" class="op-km__tab${i ? '' : ' is-on'}" data-i="${i}">${k.t}</button>`).join('');
+  function showKM(i, talk) {
+    const k = KM[i];
+    $$('.op-km__tab', kmTabs).forEach((b) => b.classList.toggle('is-on', +b.dataset.i === i));
+    kmRows.classList.toggle('is-pairs', !!k.pairs);
+    if (k.pairs) {
+      kmRows.style.gridTemplateColumns = 'auto auto auto';
+      kmRows.innerHTML = k.pairs.map(([kk, tr, s]) => `<span class="op-km__row kk"><span class="op-chip c-stem">${kk}</span></span><span class="${sCls(s)}">${s}</span><span class="op-km__row tr" lang="tr"><span class="op-chip c-per">${tr}</span></span>`).join('');
+    } else {
+      kmRows.style.gridTemplateColumns = `auto repeat(${k.cols.length}, auto)`;
+      const cell = (txt, c) => txt ? `<span class="op-chip c-${c}">${txt}</span>` : '<span class="op-chip" style="background:none;border:2px dashed var(--brown-1);color:var(--muted)">—</span>';
+      kmRows.innerHTML = '<span class="op-km__lab">EN</span>' + k.cols.map(([kk, , , c]) => `<span class="op-km__row kk">${cell(kk, c)}</span>`).join('')
+        + '<span></span>' + k.cols.map(([, , s]) => `<span class="${sCls(s)}">${s}</span>`).join('')
+        + '<span class="op-km__lab">TR</span>' + k.cols.map(([, tr, , c, c2]) => `<span class="op-km__row tr" lang="tr">${cell(tr, c2 || c)}</span>`).join('');
+    }
+    kmNote.textContent = k.note;
+    if (G) {
+      G.from($$('.kk', kmRows), { y: -30, rotation: -6, duration: .5, ease: 'back.out(2.5)', stagger: .06 });
+      G.from($$('.tr', kmRows), k.flip ? { x: (j) => (j ? -90 : 90), y: 30, duration: .8, ease: 'power3.inOut', stagger: .05, delay: .3 } : { y: 30, rotation: 6, duration: .5, ease: 'back.out(2.5)', stagger: .06, delay: .2 });
+      G.from($$('.op-km__sign', kmRows), { scale: 0, duration: .45, ease: 'back.out(3)', stagger: .08, delay: .45 });
+      const ne = $$('.op-km__sign.is-ne', kmRows);
+      if (ne.length) G.fromTo(ne, { x: -6 }, { x: 0, duration: .6, ease: 'elastic.out(1, .3)', delay: .9 });
+      G.from(kmNote, { y: 12, opacity: 0, duration: .4, delay: .5 });
+    }
+    if (talk) say(k.say);
+  }
+  kmTabs.addEventListener('click', (e) => { const b = e.target.closest('.op-km__tab'); if (b) showKM(+b.dataset.i, true); });
+  kmRows.style.display = 'grid'; kmRows.style.alignItems = 'center'; kmRows.style.justifyContent = 'center'; kmRows.style.gap = '8px 6px';
+  showKM(0, false);
+  if (G) ScrollTrigger.create({ trigger: '#opKm', start: 'top 75%', once: true, onEnter: () => showKM(0, false) });
+
   /* ---------- lab: конструктор ---------- */
   const VOW = 'aeıioöuü';
   const lastV = (s) => { for (let i = s.length - 1; i >= 0; i--) if (VOW.includes(s[i])) return s[i]; return 'e'; };
   const two = (v) => ('aıou'.includes(v) ? 'a' : 'e');
   const endsV = (s) => VOW.includes(s[s.length - 1]);
+  /* en: one verb phrase per verb, full sentences come from templates that are grammatical for every person and mode */
   const VERBS = [
-    { inf: 'gitmek', stem: 'git', soft: 'gid', ru: ['go', 'go', 'let me go', 'let\'s go'] },
-    { inf: 'gelmek', stem: 'gel', ru: ['come', 'come', 'let me come', 'let\'s come'] },
-    { inf: 'içmek', stem: 'iç', ru: ['drink', 'drink', 'let me drink', 'let\'s drink'] },
-    { inf: 'bakmak', stem: 'bak', ru: ['look', 'look', 'let me look', 'let\'s look'] },
-    { inf: 'okumak', stem: 'oku', ru: ['read', 'read', 'let me read', 'let\'s read'] },
-    { inf: 'beklemek', stem: 'bekle', ru: ['wait', 'wait', 'let me wait', 'let\'s wait'] },
-    { inf: 'yapmak', stem: 'yap', ru: ['do', 'do it', 'let me do it', 'let\'s do it'] },
-    { inf: 'demek', stem: 'de', narrow: 'di', ru: ['say', 'say it', 'let me say', 'let\'s say'] },
-    { inf: 'yemek', stem: 'ye', narrow: 'yi', ru: ['eat', 'eat', 'let me eat', 'let\'s eat'] },
-    { inf: 'sormak', stem: 'sor', ru: ['ask', 'ask', 'let me ask', 'let\'s ask'] },
-    { inf: 'konuşmak', stem: 'konuş', ru: ['talk', 'talk', 'let me talk', 'let\'s talk'] },
-    { inf: 'yardım etmek', stem: 'yardım et', soft: 'yardım ed', ru: ['help', 'help', 'let me help', 'let\'s help'] },
-    { inf: 'düşünmek', stem: 'düşün', ru: ['think', 'think about it', 'let me think', 'let\'s think'] },
-    { inf: 'başlamak', stem: 'başla', ru: ['start', 'start', 'let me start', 'let\'s start'] },
-    { inf: 'yürümek', stem: 'yürü', ru: ['take a walk', 'walk', 'let me take a walk', 'let\'s take a walk'] },
-    { inf: 'almak', stem: 'al', ru: ['take', 'take it', 'let me take it', 'let\'s take it'] }
+    { inf: 'gitmek', stem: 'git', soft: 'gid', ru: ['to go', 'go'] },
+    { inf: 'gelmek', stem: 'gel', ru: ['to come', 'come along'] },
+    { inf: 'içmek', stem: 'iç', ru: ['to drink', 'have a drink'] },
+    { inf: 'bakmak', stem: 'bak', ru: ['to look', 'take a look'] },
+    { inf: 'okumak', stem: 'oku', ru: ['to read', 'read it'] },
+    { inf: 'beklemek', stem: 'bekle', ru: ['to wait', 'wait'] },
+    { inf: 'yapmak', stem: 'yap', ru: ['to do', 'do it'] },
+    { inf: 'demek', stem: 'de', narrow: 'di', impPl: 'deyin', ru: ['to say', 'say it'] },
+    { inf: 'yemek', stem: 'ye', narrow: 'yi', ru: ['to eat', 'eat'] },
+    { inf: 'sormak', stem: 'sor', ru: ['to ask', 'ask'] },
+    { inf: 'konuşmak', stem: 'konuş', ru: ['to talk', 'talk'] },
+    { inf: 'yardım etmek', stem: 'yardım et', soft: 'yardım ed', ru: ['to help', 'help out'] },
+    { inf: 'düşünmek', stem: 'düşün', ru: ['to think', 'think about it'] },
+    { inf: 'başlamak', stem: 'başla', ru: ['to start', 'start'] },
+    { inf: 'yürümek', stem: 'yürü', ru: ['to walk', 'take a walk'] },
+    { inf: 'almak', stem: 'al', ru: ['to take', 'take it'] }
   ];
   const PERS = [{ id: 'ben', ru: 'I' }, { id: 'biz', ru: 'we' }, { id: 'sen', ru: 'you', rare: true }];
   const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
@@ -752,13 +841,13 @@ addEventListener('DOMContentLoaded', () => {
     if (neg) {
       const n = 'm' + two(hv);
       parts.push({ t: stem, k: 'stem' }, { t: n, k: 'neg' }, { t: 'y', k: 'buf' });
-      st.push(`Negation <code>-${n}</code> right after the stem, then the buffer <code>y</code>`);
+      st.push(`Negation <code>-${n}</code> goes inside the word, right after the stem (English uses a separate “not”). Then the buffer <code>y</code>`);
       hv = two(hv);
     } else {
       if (v.narrow) { stem = v.narrow; st.push(`Trap: <code>${v.stem}</code> narrows to <code>${stem}</code>`); }
-      else if (v.soft) { stem = v.soft; st.push(`Trap: <code>t → d</code> before a vowel: <code>${stem}</code>`); }
+      else if (v.soft) { stem = v.soft; st.push(`Trap: <code>t → d</code> before a vowel: <code>${stem}</code>. Not <code>${v.stem}-</code>`); }
       parts.push({ t: stem, k: 'stem' });
-      if (endsV(stem)) { parts.push({ t: 'y', k: 'buf' }); st.push('The stem ends in a vowel — buffer <code>y</code>'); }
+      if (endsV(stem)) { parts.push({ t: 'y', k: 'buf' }); st.push('The stem ends in a vowel — buffer <code>y</code>. The <code>-a- / -e-</code> after it stays'); }
     }
     const a = two(hv), i4 = a === 'a' ? 'ı' : 'i';
     parts.push({ t: a, k: 'vow' });
@@ -766,19 +855,19 @@ addEventListener('DOMContentLoaded', () => {
     const per = p === 'ben' ? 'y' + i4 + 'm' : 'l' + i4 + 'm';
     parts.push({ t: per, k: 'per' });
     st.push(`Person <code>${p}</code>: <code>-${per}</code>`);
-    if (q) { parts.push({ t: ' ', k: 'sp' }, { t: 'm' + i4, k: 'q' }); st.push(`Question: <code>m${i4}</code> is written separately`); }
+    if (q) { parts.push({ t: ' ', k: 'sp' }, { t: 'm' + i4, k: 'q' }); st.push(`Question: <code>m${i4}</code> is written separately. No word swap like “shall we”`); }
     return { parts, st };
   }
   function translate(v, p) {
-    const [inf, ipf, p1, p1pl] = v.ru;
-    if (p === 'ben') return neg ? (q ? `Shall I not ${ipf}?` : `I'd better not ${ipf}`) : (q ? `Shall I ${inf}?` : `${cap(p1)}.`);
-    return neg ? (q ? `Shall we not ${ipf}?` : `Let's not ${ipf}`) : (q ? `${cap(p1pl)}?` : `Come on, ${p1pl}!`);
+    const vp = v.ru[1];
+    if (p === 'ben') return neg ? (q ? `Shall I not ${vp}?` : `I'd better not ${vp}.`) : (q ? `Shall I ${vp}?` : `Let me ${vp}.`);
+    return neg ? (q ? `Shall we not ${vp}?` : `Let's not ${vp}.`) : (q ? `Shall we ${vp}?` : `Let's ${vp}!`);
   }
   function imper(v) {
     if (neg) { const n = v.stem + 'm' + two(lastV(v.stem)); return [n, n + 'y' + (two(lastV(v.stem)) === 'a' ? 'ın' : 'in')]; }
     let s2 = v.narrow || v.soft || v.stem;
     const four = { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' }[lastV(s2)];
-    return [v.stem, s2 + (endsV(s2) ? 'y' : '') + four + 'n'];
+    return [v.stem, v.impPl || (s2 + (endsV(s2) ? 'y' : '') + four + 'n')];
   }
   const wordEl = $('#opWord'), trEl = $('#opTr'), liveEl = $('#opLive'), stEl = $('#opBSteps'), sayBtn = $('#opSayBtn');
   function render() {
@@ -787,9 +876,9 @@ addEventListener('DOMContentLoaded', () => {
       const [s, pl] = imper(v);
       current = `${s}! ${pl}!`;
       wordEl.innerHTML = `<span class="c-stem">${s}!</span><span class="sp"></span><span class="c-stem">${pl}!</span>`;
-      trEl.textContent = 'The textbook form in -esin is barely heard. In real life — the imperative:';
+      trEl.textContent = neg ? `Don't ${v.ru[1]}! Just like English, “you” gets the imperative.` : `${cap(v.ru[1])}! Just like English, “you” gets the imperative.`;
       liveEl.className = 'op-live op-live--rare'; liveEl.textContent = 'Museum piece: almost never spoken';
-      stEl.innerHTML = '<li>For “you” (one or many), we use the imperative</li>';
+      stEl.innerHTML = '<li>The textbook form in <code>-esin</code> is barely heard</li><li>For “you”: <code>' + s + '</code> (one person) / <code>' + pl + '</code> (polite or many)</li>';
     } else {
       const { parts, st } = build(v, p.id);
       current = parts.map((x) => x.t).join('') + (q ? '?' : '');

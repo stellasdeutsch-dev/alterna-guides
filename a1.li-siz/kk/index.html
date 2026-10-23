@@ -262,10 +262,41 @@ button { font: inherit; color: inherit; }
 .tile--head { color: var(--ink-2); }
 .tile--with { background: var(--siz-soft); color: var(--siz); border-color: rgba(159,184,234,.35); }
 .tile--noun { background: var(--paper); color: var(--on-paper); }
-.cmp[data-lang="tr"] .tile--with { margin-left: -16px; border-radius: 0 16px 16px 0; }
-.cmp[data-lang="tr"] .tile--noun { border-radius: 16px 0 0 16px; }
 .cmp__why { display: grid; gap: 8px; }
 .cmp__why p { margin: 0; }
+.cmp .tile--with { margin-left: -16px; border-radius: 0 16px 16px 0; }
+.cmp .tile--noun { border-radius: 16px 0 0 16px; }
+.diff { margin-top: 26px; padding: clamp(18px, 4vw, 34px); overflow: hidden; }
+.diff .hand { margin: 0 0 4px; }
+.diff__h { margin: 0 0 12px; font: 600 clamp(20px, 4.6vw, 26px)/1.2 var(--sans); }
+.diff__list { margin: 0 0 18px; padding-left: 22px; display: grid; gap: 8px; color: var(--ink-2); }
+.diff__list b { color: var(--ink); }
+.diff__words { gap: 8px; margin-bottom: 12px; }
+.diff__bar { gap: 14px; align-items: center; margin-bottom: 14px; }
+.diff__legend { display: inline-flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; font-size: 13px; color: var(--muted); }
+.diff__legend i { display: inline-block; width: 14px; height: 4px; border-radius: 2px; margin-right: 2px; }
+.diff__legend .is-c, .dl.is-c { --mark: var(--bad); }
+.diff__legend .is-v, .dl.is-v { --mark: var(--pen); }
+.diff__legend i { background: var(--mark); }
+.diff__rows { display: grid; gap: 10px; }
+.diff__row { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+.diff__lang { font-size: 13px; letter-spacing: .12em; color: var(--muted); font-weight: 700; }
+.diff__word { justify-self: start; border: 0; background: none; padding: 0; cursor: pointer; color: var(--ink); font: 400 clamp(32px, 8vw, 52px)/1.1 var(--serif); text-align: left; }
+.diff__word .aff { font-weight: 500; }
+.dl { display: inline-block; position: relative; }
+.dl.is-c::after, .dl.is-v::after { content: ''; position: absolute; left: 6%; right: 6%; bottom: -4px; height: 4px; border-radius: 2px; background: var(--mark); }
+.diff__note { min-height: 3em; margin: 14px 0 0; color: var(--ink-2); }
+.split { margin-top: 20px; padding: 18px; }
+.split__q { margin: 0 0 12px; font-weight: 650; }
+.split__row { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; }
+.split__kk { font: 400 clamp(30px, 7vw, 46px)/1 var(--serif); color: var(--on-paper); }
+.split__kk b { font-weight: 500; color: var(--siz-deep); }
+.split__tr { display: grid; gap: 8px; }
+.split__tr button { display: grid; gap: 2px; justify-items: start; min-height: 44px; padding: 8px 12px; border-radius: 14px; border: 1px solid rgba(0,0,0,.12); background: rgba(255,255,255,.6); color: var(--on-paper); cursor: pointer; text-align: left; }
+.split__tr button > span { font: 500 clamp(22px, 5vw, 30px)/1.1 var(--serif); }
+.split__tr small { font-size: 13px; color: var(--on-paper-2); }
+.split__you { color: #5a49c9; }
+.split__p { margin: 14px 0 10px; }
 .kz { margin-top: 14px; padding: 12px 16px; border-left: 3px solid var(--pen); background: rgba(133,146,255,.07); border-radius: 0 12px 12px 0; }
 
 /* ---------- мнемоника ---------- */
@@ -524,7 +555,7 @@ button { font: inherit; color: inherit; }
       <div class="panel paper">
         <span class="panel__n" data-ui>2</span>
         <svg viewBox="0 0 240 150" aria-hidden="true"><rect width="240" height="150" fill="#e5e0d6"/><circle cx="60" cy="96" r="26" fill="#fff" stroke="#9b958a" stroke-width="2"/><circle cx="52" cy="92" r="2.4" fill="#1d1b18"/><circle cx="68" cy="92" r="2.4" fill="#1d1b18"/><path d="M52 104c5 4 11 4 16 0" stroke="#1d1b18" stroke-width="2.4" fill="none" stroke-linecap="round"/><g data-bubble><rect x="100" y="34" width="122" height="44" rx="14" fill="#1d1b18"/><path d="M110 78l-10 14 22-14z" fill="#1d1b18"/><text x="161" y="62" text-anchor="middle" font-family="Onest, Alterna Sans, sans-serif" font-size="18" font-weight="700" fill="#f1eee8">çay, siz şeker</text></g></svg>
-        <p>Айтасың, <span lang="tr" class="bubble" data-say="Çay, siz şeker.">çay, siz şeker</span>. Сенімді түрде. Оқығандай.</p>
+        <p>Айтасың, <span lang="tr" class="bubble" data-say="Çay, siz şeker.">çay, siz şeker</span>. Сенімді. Іштей орысша ойлап тұрсың: «без сахара».</p>
       </div>
       <div class="panel paper">
         <span class="panel__n" data-ui>3</span>
@@ -534,7 +565,7 @@ button { font: inherit; color: inherit; }
       <div class="panel paper">
         <span class="panel__n" data-ui>4</span>
         <svg viewBox="0 0 240 150" aria-hidden="true"><rect width="240" height="150" fill="#e5e0d6"/><g data-heart><path d="M120 122c-40-26-56-46-44-66 10-16 34-12 44 6 10-18 34-22 44-6 12 20-4 40-44 66z" fill="#f08c7b"/></g><text x="120" y="80" text-anchor="middle" font-family="Caveat, Alterna Sans, cursive" font-size="26" font-weight="700" fill="#fff">сіз — қант</text></svg>
-        <p>Өйткені <span lang="tr">siz şeker</span> — бұл «сіз — қантсыз» емес, «сіз — қант». Комплимент. Таңғы астан бұрын. Даяшы енді сенің досың.</p>
+        <p>Өйткені <span lang="tr">siz şeker</span> — «қантсыз» емес, «сіз — қант». <span lang="tr">siz</span> — сол баяғы «сіз». Комплимент. Даяшы енді сенің досың.</p>
       </div>
     </div>
     <div class="row" style="margin-bottom:18px"><button type="button" class="btn btn--ghost btn--sm" data-comic-replay data-ui>↻ Тағы бір рет</button></div>
@@ -604,7 +635,7 @@ button { font: inherit; color: inherit; }
       <button type="button" class="btn" data-notice data-ui>Байқадың ба?</button>
       <p class="notice__rule glass">Сөз бүтін. Соңында құйрық ілулі: <b class="aff--li">-lı</b> — бар, <b class="aff--siz">-sız</b> — жоқ.</p>
     </div>
-    <p class="p" style="margin-top:16px">Қазақшада да солай: қантты, қантсыз. Түрікше де жай ғана құйрық іледі. Чемоданға бирка тағатындай. Бір айырмасы: түрікше «бар» құйрығы әрқашан l-дан басталады — tuzlu, sütlü, тұзды, сүтті сияқты d/t емес.</p>
+    <p class="p" style="margin-top:16px">Таныс па? Әрине: қантты, қантсыз. Идея — сенікі, қазақтікі. Түрікше айырма екі-ақ жерде, оларды төменде бөлек талдаймыз.</p>
   </div>
 </section>
 
@@ -665,8 +696,8 @@ button { font: inherit; color: inherit; }
     <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M20 30 C 120 140, 220 140, 260 70 C 300 0, 380 10, 420 80 C 450 130, 540 140, 590 100"/></svg>
     <p class="kicker" data-ui>05 · Сегіз форма</p>
     <h2 class="h2">Сегіз форма. <em>Бір логика.</em></h2>
-    <p class="p">Құйрықтың дауыстысы — сөздің соңғы дауыстысының жаңғырығы. Төрт нұсқалы үндестіктегідей.</p>
-    <p class="p">Бұл сен білетін үндестік. Тек құйрық жаңа. Қазақшада -сыз/-сіз екеу, түрікшеде дауысты төртеу. Төрт дауысты, екі құйрық — сегіз форма. Қорқынышты естіледі, оңай жұмыс істейді.</p>
+    <p class="p">Жуан-жіңішке — қазақшадағыдай. Жаңасы — еріндік: сөзде o, u, ö, ü болса, құйрық та еріндік болады: <span lang="tr">u</span>, <span lang="tr">ü</span>.</p>
+    <p class="p">Қазақша жазуда -сыз/-сіз екеу ғана. Түрікшеде төртеу. Төрт дауысты, екі құйрық — сегіз форма. Қорқынышты естіледі, оңай жұмыс істейді.</p>
     <div class="bento" data-bento>
       <div class="bento__head glass">
         <span class="hand" data-ui>тек соңғысына қара!</span>
@@ -731,7 +762,7 @@ button { font: inherit; color: inherit; }
     <p class="kicker" data-ui>07 · Алгоритм</p>
     <h2 class="h2">Екі сұрақ — <em>болды</em></h2>
     <p class="p">Өзіңнен ретімен сұра. Бар ма, жоқ па? Соңғы дауысты қандай? Сөзді таңда — нүкте жолды жүгіріп өтеді.</p>
-    <p class="p">Рет маңызды: алдымен мағына, сосын дауысты. Сөз дауыстыға біте ме? Ештеңе қоспаймыз. Құйрық бірден жабысады.</p>
+    <p class="p">Рет маңызды: алдымен мағына, сосын дауысты. Сөз дауыстыға біте ме? Қазақшадағыдай, бірден жабысады: <span lang="tr">su → sulu</span>, су → сулы.</p>
     <div class="tree glass" data-tree>
       <div class="row" data-tree-words role="group" aria-label="Алгоритмге арналған сөз" style="margin-bottom:10px">
         <button type="button" class="chip" aria-pressed="false" data-tw="limon" data-th="1" lang="tr">limon <small data-ui>+</small></button>
@@ -770,16 +801,17 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <p class="kicker" data-ui>08 · Салыстыр</p>
     <h2 class="h2">Қазақша <em>↔ түрікше</em></h2>
-    <div class="cmp glass" data-cmp data-lang="ru">
-      <button type="button" class="tgl tgl--dark" role="switch" aria-checked="true" aria-label="Қазақша немесе түрікше" data-cmp-tgl><span data-ui>RU</span><span data-ui>TR</span></button>
+    <p class="p">Алдымен ұқсасы. Қысқа, өйткені мұнда сен алдасың.</p>
+    <div class="cmp glass" data-cmp data-lang="kk">
+      <button type="button" class="tgl tgl--dark" role="switch" aria-checked="true" aria-label="Қазақша немесе түрікше" data-cmp-tgl><span data-ui>KZ</span><span data-ui>TR</span></button>
       <div class="cmp__line" data-cmp-line>
-        <span class="tile tile--head" data-t="head">шай</span> <span class="tile tile--with" data-t="with">—</span> <span class="tile tile--noun" data-t="noun">қантсыз</span>
+        <span class="tile tile--noun" data-t="noun">қант</span><span class="tile tile--with" data-t="with">сыз</span> <span class="tile tile--head" data-t="head">шай</span>
       </div>
       <div class="cmp__why">
-        <p data-cmp-ru>Қазақшада құйрық сөздің соңында, бірге жазылады: қант → қантсыз. Орысшадағыдай «без» алдында тұрмайды.</p>
-        <p data-cmp-tr>Түрікшеде де құйрық соңында. Сөз өзгермейді. Ал жұп толығымен шайдың алдына шығады: <b lang="tr" data-say="şekersiz çay">şekersiz çay</b>.</p>
+        <p data-cmp-ru>Қазақша: құйрық сөзге жабысады, белгі заттың алдында тұрады — <b lang="kk">қантсыз шай</b>.</p>
+        <p data-cmp-tr>Түрікше: тура солай. Плиткалар орнынан қозғалмайды — <b lang="tr" data-say="şekersiz çay">şekersiz çay</b>.</p>
       </div>
-      <p class="kz">Қазақшада дәл солай: <b lang="kk">қантсыз шай</b>. Құйрық, бірге, шайдың алдында. Бұл тақырыпта сен алдасың.</p>
+      <p class="kz">Орысша «без» сөздің алдында тұрады. Қазақ үшін бұл тұзақ емес. Тек орысша ойлама.</p>
     </div>
     <div class="mq" data-mq>
       <p class="mq__q"><span class="hand" data-ui>сұрақ:</span> «сүтті кофе» — бұл…</p>
@@ -789,6 +821,38 @@ button { font: inherit; color: inherit; }
         <button type="button" lang="tr" data-fb="Құйрық бөлек өмір сүрмейді. Тек бірге.">lü süt kahve</button>
       </div>
       <p class="mq__fb" aria-live="polite" data-ui></p>
+    </div>
+
+    <div class="diff glass" data-diff>
+      <p class="hand" data-ui>ал енді — айырмасы</p>
+      <h3 class="diff__h">Үш жер. Қазақ дәл осында сүрінеді.</h3>
+      <ol class="diff__list">
+        <li><b>L әрқашан l.</b> Қазақша -лы/-ды/-ты ауысып тұрады. Түрікше ешқашан: <span lang="tr">tuzlu</span>, <span lang="tr">sütlü</span>. «tuzdu» емес.</li>
+        <li><b>Дауысты төртеу.</b> Қазақша жазуда -сыз/-сіз екеу. Түрікше o, u, ö, ü-ден кейін u, ü: <span lang="tr">tuzsuz</span>. «tuzsız» емес.</li>
+        <li><b>«Сіз» бөлек жүреді.</b> Қазақша -сыз екі жұмыс істейді. Түрікше екі түрлі құйрық. Төменде.</li>
+      </ol>
+      <div class="row diff__words" data-d-words role="group" aria-label="Сөз"></div>
+      <div class="row diff__bar">
+        <button type="button" class="tgl tgl--dark" role="switch" aria-checked="true" aria-label="Бар ма, жоқ па" data-d-tgl><span data-ui>бар</span><span data-ui>жоқ</span></button>
+        <span class="diff__legend" data-ui><i class="is-c"></i>дауыссыз басқа <i class="is-v"></i>дауысты басқа</span>
+      </div>
+      <div class="diff__rows">
+        <div class="diff__row"><span class="diff__lang" data-ui>KZ</span><span class="diff__word" lang="kk" data-d-kk></span></div>
+        <div class="diff__row"><span class="diff__lang" data-ui>TR</span><button type="button" class="diff__word" lang="tr" data-d-tr></button></div>
+      </div>
+      <p class="diff__note" aria-live="polite" data-d-note></p>
+      <div class="split paper" data-split>
+        <p class="split__q" data-ui>Қазақша «қантсыз» — екі мағына. Түрікше — екі сөз.</p>
+        <div class="split__row">
+          <span class="split__kk" lang="kk" data-split-kk>қант<b>сыз</b></span>
+          <div class="split__tr">
+            <button type="button" lang="tr" data-say="şekersiz"><span>şeker<span class="aff aff--siz">siz</span></span><small data-ui>қант жоқ</small></button>
+            <button type="button" lang="tr" data-say="Çok şekersiniz!"><span>şeker<span class="aff split__you">siniz</span></span><small data-ui>«сіз — қант», комплимент</small></button>
+          </div>
+        </div>
+        <p class="split__p">Сол даяшыға <span lang="tr" data-say="Çok şekersiniz!">Çok şekersiniz!</span> десең — дұрыс комплимент. <span lang="tr">siz şeker</span> емес.</p>
+        <button type="button" class="btn btn--ghost btn--sm" style="color:var(--on-paper);border-color:rgba(0,0,0,.2)" data-split-replay data-ui>↻ Тағы бөлу</button>
+      </div>
     </div>
   </div>
 </section>
@@ -877,7 +941,7 @@ button { font: inherit; color: inherit; }
     <p class="p">Аудар. Тыңда. Дауыстап қайтала — көршілер үйреніп кетеді.</p>
     <p class="p">Бір жағы — сөз. Екіншісі — дайын сөйлем. Ал да тапсырыс бер.</p>
     <div class="gal" data-gal>
-      <button type="button" class="card" data-flip data-say="Şekerli bir çay lütfen."><span class="card__f"><svg aria-hidden="true"><use href="#i-tea"/></svg><span><span class="card__w" lang="tr">şekerli çay</span><br><span class="ru" data-ui>тәтті шай</span></span><span class="card__turn" data-ui>↻ аудару</span></span><span class="card__b"><span class="card__w" lang="tr">Şekerli bir çay lütfen.</span><span class="ru" data-ui>Қантты шай, өтінемін.</span></span></button>
+      <button type="button" class="card" data-flip data-say="Şekerli bir çay lütfen."><span class="card__f"><svg aria-hidden="true"><use href="#i-tea"/></svg><span><span class="card__w" lang="tr">şekerli çay</span><br><span class="ru" data-ui>қантты шай</span></span><span class="card__turn" data-ui>↻ аудару</span></span><span class="card__b"><span class="card__w" lang="tr">Şekerli bir çay lütfen.</span><span class="ru" data-ui>Қантты шай, өтінемін.</span></span></button>
       <button type="button" class="card" data-flip data-say="Sütlü kahve lütfen."><span class="card__f"><svg aria-hidden="true"><use href="#i-coffee"/></svg><span><span class="card__w" lang="tr">sütlü kahve</span><br><span class="ru" data-ui>сүтті кофе</span></span><span class="card__turn" data-ui>↻ аудару</span></span><span class="card__b"><span class="card__w" lang="tr">Sütlü kahve lütfen.</span><span class="ru" data-ui>Сүтті кофе, өтінемін.</span></span></button>
       <button type="button" class="card" data-flip data-say="Gazlı su lütfen."><span class="card__f"><svg aria-hidden="true"><use href="#i-gas"/></svg><span><span class="card__w" lang="tr">gazlı su</span><br><span class="ru" data-ui>газды су</span></span><span class="card__turn" data-ui>↻ аудару</span></span><span class="card__b"><span class="card__w" lang="tr">Gazlı su lütfen.</span><span class="ru" data-ui>Газды су, өтінемін.</span></span></button>
       <button type="button" class="card" data-flip data-say="Buzsuz bir ayran lütfen."><span class="card__f"><svg aria-hidden="true"><use href="#i-ice"/></svg><span><span class="card__w" lang="tr">buzsuz ayran</span><br><span class="ru" data-ui>мұзсыз айран</span></span><span class="card__turn" data-ui>↻ аудару</span></span><span class="card__b"><span class="card__w" lang="tr">Buzsuz bir ayran lütfen.</span><span class="ru" data-ui>Мұзсыз айран, өтінемін.</span></span></button>
@@ -975,20 +1039,20 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M10 120 C 90 20, 170 20, 210 80 S 300 150, 360 70 S 480 10, 590 60"/></svg>
     <p class="kicker" data-ui>13 · Тұзақтар</p>
-    <h2 class="h2">Мұнда <em>бәрі сүрінеді</em></h2>
-    <p class="p">Бұл қалыпты. Карточканы бас — қате өзі түзеледі.</p>
+    <h2 class="h2">Қазақ <em>осында сүрінеді</em></h2>
+    <p class="p">Қате қазақшадан келеді — сондықтан сенімді шығады. Карточканы бас — қате өзі түзеледі.</p>
     <div class="traps" data-traps>
-      <div class="trap glass"><span class="trap__bad" lang="tr">siz şeker</span><button type="button" class="trap__good" lang="tr" data-fix data-say="şekersiz">→ şekersiz</button><p>Құйрық бірге жазылады. Бөлек <span lang="tr">siz</span> — бұл «сіз».</p></div>
-      <div class="trap glass"><span class="trap__bad" lang="tr">sütlı</span><button type="button" class="trap__good" lang="tr" data-fix data-say="sütlü">→ sütlü</button><p>Әдетке емес, сөздің дауыстысына қара. <span lang="tr">süt</span> ішінде ü тұр.</p></div>
-      <div class="trap glass"><span class="trap__bad" lang="tr">limonli</span><button type="button" class="trap__good" lang="tr" data-fix data-say="limonlu">→ limonlu</button><p>Тек соңғы дауысты есептеледі. Мұнда ол — o, бірінші i үндемейді.</p></div>
-      <div class="trap glass"><span class="trap__bad" lang="tr">suyulu</span><button type="button" class="trap__good" lang="tr" data-fix data-say="sulu">→ sulu</button><p>Артық әріп жоқ. Сөз дауыстыға біте ме? Құйрық бірден жабысады: <span lang="tr">su + lu</span>.</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">tuzsız</span><button type="button" class="trap__good" lang="tr" data-fix data-say="tuzsuz">→ tuzsuz</button><p>Қазақша тұзсыз — ы. Түрікше tuz ішінде u, құйрықта да u.</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">sütti</span><button type="button" class="trap__good" lang="tr" data-fix data-say="sütlü">→ sütlü</button><p>Қазақша сүтті — т. Түрікше «бар» құйрығы әрқашан l: <span lang="tr">sütlü, tuzlu, gazlı</span>.</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">köpüksiz</span><button type="button" class="trap__good" lang="tr" data-fix data-say="köpüksüz">→ köpüksüz</button><p>Қазақша көбіксіз. Бірақ түрікше сөз басқа: <span lang="tr">köpük</span> ішінде ü → <span lang="tr" style="white-space:nowrap">-süz</span>.</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">Siz şekersiz.</span><button type="button" class="trap__good" lang="tr" data-fix data-say="Siz şekersiniz.">→ Siz şekersiniz.</button><p>Қазақша «Сіз қантсыз» — «сіз — қант» болуы да мүмкін. Түрікше «сіз» жалғауы басқа: <span lang="tr" style="white-space:nowrap">-siniz</span>. <span lang="tr">şekersiz</span> — тек «қант жоқ».</p></div>
     </div>
     <div class="mq" data-mq>
       <p class="mq__q"><span class="hand" data-ui>сұрақ:</span> қайсысында бәрі дұрыс?</p>
       <div class="mq__opts">
+        <button type="button" lang="tr" data-fb="Бұл қазақша «лимонсыз» сияқты. Түрікше o-дан кейін u.">limonsız</button>
         <button type="button" lang="tr" data-fb="Бөлек siz — бұл «сіз».">siz limon</button>
-        <button type="button" lang="tr" data-fb="Соңғы дауысты — o, i емес.">limonsiz</button>
-        <button type="button" lang="tr" data-ok data-fb="Иә. Бірге, соңғы дауысты бойынша.">limonsuz</button>
+        <button type="button" lang="tr" data-ok data-fb="Иә. Бірге, соңғы дауысты o → u.">limonsuz</button>
       </div>
       <p class="mq__fb" aria-live="polite" data-ui></p>
     </div>
@@ -1000,8 +1064,8 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <p class="kicker" data-ui>14 · Бейне</p>
     <h2 class="h2"><em>Мұғалімді</em> тыңда</h2>
-    <p class="p">Назар аудар: алдымен сөздің дауыстысы, сосын құйрық.</p>
-    <a-video yt="wXTOK9LRKKU" start="0" end="158" title="Түрік тілі. 14-сабақ. -lı, -sız қосымшалары" channel="Pratikturkce"></a-video>
+    <p class="p">Бейне орысша. Назар аудар: мұғалім алдымен сөздің соңғы дауыстысын атайды, сосын құйрықты. Әр -lı-дан кейін ішіңнен қазақшасын айт: -лы, -ды ме, -ты ма? Түрікше — әрқашан l.</p>
+    <a-video yt="wXTOK9LRKKU" start="0" end="158" title="Турецкий язык. Урок 14. Аффиксы -lı, -sız" channel="Pratikturkce"></a-video>
   </div>
 </section>
 
@@ -1076,7 +1140,7 @@ button { font: inherit; color: inherit; }
             <li>Бірге жазамыз: <span lang="tr">şekersiz</span>.</li>
             <li>Соңғы дауыстыға қараймыз.</li>
             <li>Белгі сөздің алдында тұрады: <span lang="tr" data-say="sütlü kahve">sütlü kahve</span>.</li>
-            <li>Дауыстыға біткен сөз — артық әріпсіз: <span lang="tr" data-say="sulu">sulu</span>.</li>
+            <li>«Бар» — әрқашан l: <span lang="tr" data-say="tuzlu, sütlü">tuzlu, sütlü</span>. Тұзды, сүтті емес.</li>
           </ol>
         </div>
       </div>
@@ -1400,36 +1464,84 @@ addEventListener('DOMContentLoaded', () => {
   if (A) ScrollTrigger.create({ trigger: '[data-tree]', start: 'top 70%', once: true, onEnter: () => $('[data-tw="limon"]').click() });
   if (A) G.from('.t-node', { scale: .4, transformOrigin: '50% 50%', ease: 'none', stagger: .1, scrollTrigger: { trigger: '[data-tree] svg', start: 'top 90%', end: 'top 50%', scrub: true } });
 
-  /* ================= COMPARE: FLIP между языками ================= */
+  /* ================= COMPARE: қазақша ↔ түрікше — тот же порядок, плитки переворачиваются ================= */
   const cmp = $('[data-cmp]'), line = $('[data-cmp-line]');
-  const TILES = { ru: { head: 'шай', with: '—', noun: 'қантсыз', order: ['head', 'with', 'noun'] }, tr: { head: 'çay', with: 'siz', noun: 'şeker', order: ['noun', 'with', 'head'] } };
+  const TILES = { kk: { head: 'шай', with: 'сыз', noun: 'қант' }, tr: { head: 'çay', with: 'siz', noun: 'şeker' } };
   function setLang(lang, anim) {
     const tiles = $$('.tile', line);
-    const before = tiles.map((t) => t.getBoundingClientRect());
     cmp.dataset.lang = lang;
     const d = TILES[lang];
-    tiles.forEach((t) => { t.textContent = d[t.dataset.t]; t.lang = lang; });
-    d.order.forEach((k) => line.append($(`[data-t="${k}"]`, line)));
+    const swap = () => tiles.forEach((t) => { t.textContent = d[t.dataset.t]; t.lang = lang; });
     line.dataset.say = lang === 'tr' ? 'şekersiz çay' : '';
-    $('[data-cmp-ru]').style.opacity = lang === 'ru' ? 1 : .45;
+    $('[data-cmp-ru]').style.opacity = lang === 'kk' ? 1 : .45;
     $('[data-cmp-tr]').style.opacity = lang === 'tr' ? 1 : .45;
     if (lang === 'tr') speak('şekersiz çay');
-    if (!A || !anim) return;
-    tiles.forEach((t, i) => {
-      const a = t.getBoundingClientRect();
-      G.fromTo(t, { x: before[i].left - a.left, y: before[i].top - a.top, rotation: i === 1 ? 12 : 0 }, { x: 0, y: 0, rotation: 0, duration: .9, ease: 'back.out(1.6)' });
-    });
-    G.fromTo('[data-t="with"]', { scale: 1.3 }, { scale: 1, duration: .6, delay: .5, ease: 'back.out(3)' });
+    if (!A || !anim) { swap(); return; }
+    G.timeline()
+      .to(tiles, { rotationX: 90, duration: .22, ease: 'power2.in', stagger: .1 })
+      .add(swap)
+      .to(tiles, { rotationX: 0, duration: .5, ease: 'back.out(2.4)', stagger: .1 });
+    G.fromTo('[data-t="with"]', { scale: 1.3 }, { scale: 1, duration: .6, delay: .6, ease: 'back.out(3)' });
   }
   $('[data-cmp-tgl]').addEventListener('click', (e) => {
-    const toTr = cmp.dataset.lang === 'ru';
+    const toTr = cmp.dataset.lang === 'kk';
     e.currentTarget.setAttribute('aria-checked', String(!toTr));
-    setLang(toTr ? 'tr' : 'ru', true);
+    setLang(toTr ? 'tr' : 'kk', true);
   });
-  setLang('ru', false);
+  setLang('kk', false);
   if (A) {
     ScrollTrigger.create({ trigger: cmp, start: 'top 60%', once: true, onEnter: () => setTimeout(() => $('[data-cmp-tgl]').click(), 600) });
     G.fromTo('.kz', { x: -40 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.kz', start: 'top 95%', end: 'top 65%', scrub: true } });
+  }
+
+  /* ================= DIFF: что у казаха иначе — формы хранятся целиком ================= */
+  /* [қазақша негіз, түрікше негіз, { with: [kk құйрық, tr құйрық, дауыссыз басқа?, дауысты басқа?, түсініктеме], without: [...] }] */
+  const DW = {
+    tuz: ['тұз', 'tuz', { 1: ['ды', 'lu', 1, 1, 'Екі айырма: д → l (түрікше әрқашан l) және ы → u (tuz ішінде u).'], 0: ['сыз', 'suz', 0, 1, 'с — бірдей. Бірақ ы → u: түрікше құйрық еріндік u-ны да қайталайды.'] }],
+    süt: ['сүт', 'süt', { 1: ['ті', 'lü', 1, 1, 'т → l, і → ü. Қазақша т-дан кейін -ті, түрікше l ешқашан өзгермейді.'], 0: ['сіз', 'süz', 0, 1, 'і → ü: süt ішінде ü, құйрықта да ü.'] }],
+    gaz: ['газ', 'gaz', { 1: ['ды', 'lı', 1, 0, 'Тек д → l. Дауысты бірдей: ы = ı.'], 0: ['сыз', 'sız', 0, 0, 'Айырма жоқ: газсыз — gazsız. Осындайда қазақ алда.'] }],
+    limon: ['лимон', 'limon', { 1: ['ды', 'lu', 1, 1, 'д → l, ы → u: соңғы дауысты o, ал o-дан кейін u.'], 0: ['сыз', 'suz', 0, 1, 'Қазақша лимонсыз, түрікше limonsuz. o-дан кейін u.'] }],
+    köpük: ['көбік', 'köpük', { 1: ['ті', 'lü', 1, 1, 'т → l, і → ü. Құйрықтың екі әрпі де басқа.'], 0: ['сіз', 'süz', 0, 1, 'і → ü. Қазақша жазуда еріндік құйрық жоқ, түрікшеде бар.'] }],
+    şeker: ['қант', 'şeker', { 1: ['ты', 'li', 1, 1, 'т → l. Дауысты сөзден келеді: қант — жуан, şeker — жіңішке.'], 0: ['сыз', 'siz', 0, 1, 'Ереже бірдей, сөз басқа: şeker сөзінің соңғы дауыстысы e → siz.'] }],
+    bahçe: ['бақша', 'bahçe', { 1: ['лы', 'li', 0, 1, 'Дауыстыдан кейін қазақша да л: бақшалы. Тек дауысты басқа: bahçe → li.'], 0: ['сыз', 'siz', 0, 1, 'bahçe соңғы дауысты e → siz. Бақша жуан, сондықтан қазақша -сыз.'] }],
+  };
+  const DF = { w: 'tuz', has: true };
+  const dfKk = $('[data-d-kk]'), dfTr = $('[data-d-tr]'), dfNote = $('[data-d-note]'), dfTgl = $('[data-d-tgl]'), dfWords = $('[data-d-words]');
+  const dfAff = (txt, c, v, cls) => `<span class="aff ${cls}"><span class="dl${c ? ' is-c' : ''}">${txt[0]}</span><span class="dl${v ? ' is-v' : ''}">${txt.slice(1)}</span></span>`;
+  Object.keys(DW).forEach((w) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.lang = 'tr'; b.textContent = w;
+    b.setAttribute('aria-pressed', String(w === DF.w));
+    b.addEventListener('click', () => { DF.w = w; $$('.chip', dfWords).forEach((x) => x.setAttribute('aria-pressed', String(x === b))); renderDiff(true); });
+    dfWords.append(b);
+  });
+  function renderDiff(anim, say = anim) {
+    const [kk, tr, forms] = DW[DF.w], [ka, ta, c, v, note] = forms[DF.has ? 1 : 0], cls = DF.has ? 'aff--li' : 'aff--siz';
+    dfKk.innerHTML = kk + dfAff(ka, c, v, cls);
+    dfTr.innerHTML = tr + dfAff(ta, c, v, cls);
+    dfTr.dataset.say = tr + ta;
+    dfNote.textContent = note;
+    if (say) speak(dfTr.dataset.say);
+    if (!A || !anim) return;
+    G.timeline()
+      .fromTo($('.aff', dfKk), { y: -40, rotation: -10 }, { y: 0, rotation: 0, duration: .55, ease: 'bounce.out' })
+      .fromTo($('.aff', dfTr), { x: 90, rotation: 14 }, { x: 0, rotation: 0, duration: .6, ease: 'back.out(2.2)' }, '-=.25')
+      .fromTo($$('.dl.is-c, .dl.is-v', $('[data-diff]')), { scale: 1.5, y: -6 }, { scale: 1, y: 0, duration: .5, ease: 'back.out(3)', stagger: .08 }, '-=.2')
+      .fromTo(dfNote, { y: 10 }, { y: 0, duration: .4, ease: 'power2.out' }, '<');
+  }
+  dfTgl.addEventListener('click', () => { DF.has = !DF.has; dfTgl.setAttribute('aria-checked', String(DF.has)); renderDiff(true); });
+  renderDiff(false);
+  function playSplit() {
+    if (!A) return;
+    const kk = $('[data-split-kk]'), bs = $$('.split__tr button');
+    G.timeline()
+      .fromTo(kk, { scale: 1.25, rotation: -4 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(2.5)' })
+      .fromTo(bs, { x: -120, y: (i) => (i ? -30 : 30), autoAlpha: 0, rotation: (i) => (i ? 8 : -8) }, { x: 0, y: 0, autoAlpha: 1, rotation: 0, duration: .7, ease: 'back.out(1.8)', stagger: .18 }, '-=.15');
+  }
+  $('[data-split-replay]').addEventListener('click', playSplit);
+  if (A) {
+    ScrollTrigger.create({ trigger: '[data-diff]', start: 'top 70%', once: true, onEnter: () => { G.from('.diff__list li', { x: -40, duration: .6, ease: 'power3.out', stagger: .12 }); renderDiff(true, false); } });
+    ScrollTrigger.create({ trigger: '[data-split]', start: 'top 75%', once: true, onEnter: playSplit });
   }
 
   /* ================= MNEMO ================= */
@@ -1503,7 +1615,8 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   /* режим 1 — сборка */
-  const NOUNS = { şeker: 'қант', tuz: 'тұз', süt: 'сүт', limon: 'лимон', gaz: 'газ', peynir: 'ірімшік', acı: 'бұрыш', buz: 'мұз', soğan: 'пияз', köpük: 'көбік', asansör: 'лифт', şemsiye: 'қолшатыр', kafein: 'кофеин', susam: 'күнжіт', çocuk: 'бала', bilet: 'билет' };
+  /* қазақша дайын формалар: [бар, жоқ] — құрастырмаймыз, -лы/-ды/-ты әр сөзде өзгеше */
+  const NOUNS = { şeker: ['қантты', 'қантсыз'], tuz: ['тұзды', 'тұзсыз'], süt: ['сүтті', 'сүтсіз'], limon: ['лимонды', 'лимонсыз'], gaz: ['газды', 'газсыз'], peynir: ['ірімшікті', 'ірімшіксіз'], acı: ['бұрышты', 'бұрышсыз'], buz: ['мұзды', 'мұзсыз'], soğan: ['пиязды', 'пиязсыз'], köpük: ['көбікті', 'көбіксіз'], asansör: ['лифті бар', 'лифтсіз'], şemsiye: ['қолшатырлы', 'қолшатырсыз'], kafein: ['кофеинді', 'кофеинсіз'], susam: ['күнжітті', 'күнжітсіз'], çocuk: ['балалы', 'баласыз'], bilet: ['билетті', 'билетсіз'] };
   const B = { w: 'şeker', has: true };
   const bWord = $('[data-b-word]'), bWhy = $('[data-b-why]'), bTgl = $('[data-b-tgl]');
   const bNouns = $('[data-b-nouns]');
@@ -1518,7 +1631,7 @@ addEventListener('DOMContentLoaded', () => {
     const t = tail(B.w, B.has), v = lastVowel(B.w);
     bWord.innerHTML = `<span class="stem">${B.w}</span><span class="aff ${B.has ? 'aff--li' : 'aff--siz'}">${t}</span>`;
     bWord.dataset.say = B.w + t;
-    bWhy.textContent = `${NOUNS[B.w]} ${B.has ? 'бар' : 'жоқ'} · соңғы дауысты ${v} → -${t}`;
+    bWhy.textContent = `${NOUNS[B.w][B.has ? 0 : 1]} · соңғы дауысты ${v} → -${t}`;
     if (A && anim) {
       G.fromTo($('.aff', bWord), { x: 80, rotation: 20, scale: .5 }, { x: 0, rotation: 0, scale: 1, duration: .7, ease: 'back.out(2.2)' });
       G.fromTo($('.stem', bWord), { y: -24 }, { y: 0, duration: .6, ease: 'bounce.out' });
@@ -1538,7 +1651,7 @@ addEventListener('DOMContentLoaded', () => {
     const w = FL[fi][0], t = tail(w, fHas);
     fWord.innerHTML = `${w}<span class="aff ${fHas ? 'aff--li' : 'aff--siz'}">${t}</span>`;
     fWord.dataset.say = w + t;
-    fRu.textContent = `${NOUNS[w]}: ${fHas ? 'бар' : 'жоқ'}`;
+    fRu.textContent = NOUNS[w][fHas ? 0 : 1];
   }
   $('[data-fl-go]').addEventListener('click', () => {
     if (!A) { fHas = !fHas; renderFlip(); speak(fWord.dataset.say); return; }
@@ -1584,7 +1697,7 @@ addEventListener('DOMContentLoaded', () => {
     const t = tail(M.ex, M.has), phrase = `${M.ex}${t} ${M.base} lütfen.`;
     mOut.innerHTML = `${M.ex}<span class="aff ${M.has ? 'aff--li' : 'aff--siz'}">${t}</span> ${M.base} lütfen.`;
     mOut.dataset.say = phrase.charAt(0).toUpperCase() + phrase.slice(1);
-    mRu.textContent = `Маған ${CASE[M.ex][M.has ? 0 : 1]} ${MENU[M.base].ru}${M.has ? '' : ''} беріңізші.`;
+    mRu.textContent = `Маған ${CASE[M.ex][M.has ? 0 : 1]} ${MENU[M.base].ru} беріңізші.`;
     if (A && anim) G.fromTo(mOut, { y: 20, scale: .92 }, { y: 0, scale: 1, duration: .5, ease: 'back.out(2.5)' });
     if (anim) speak(mOut.dataset.say);
   }

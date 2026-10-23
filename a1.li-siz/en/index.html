@@ -266,6 +266,11 @@ button { font: inherit; color: inherit; }
 .cmp[data-lang="tr"] .tile--noun { border-radius: 16px 0 0 16px; }
 .cmp__why { display: grid; gap: 8px; }
 .cmp__why p { margin: 0; }
+.cmp__list { margin: 0 0 18px; padding-left: 22px; display: grid; gap: 8px; color: var(--ink-2); }
+.cmp__list b { color: var(--ink); }
+.cmp__bar { gap: 10px; margin-bottom: 12px; }
+.cmp__pairs { gap: 8px; }
+.lv { display: inline-block; font-weight: inherit; color: var(--pen); }
 .kz { margin-top: 14px; padding: 12px 16px; border-left: 3px solid var(--pen); background: rgba(133,146,255,.07); border-radius: 0 12px 12px 0; }
 
 /* ---------- мнемоника ---------- */
@@ -524,7 +529,7 @@ button { font: inherit; color: inherit; }
       <div class="panel paper">
         <span class="panel__n" data-ui>2</span>
         <svg viewBox="0 0 240 150" aria-hidden="true"><rect width="240" height="150" fill="#e5e0d6"/><circle cx="60" cy="96" r="26" fill="#fff" stroke="#9b958a" stroke-width="2"/><circle cx="52" cy="92" r="2.4" fill="#1d1b18"/><circle cx="68" cy="92" r="2.4" fill="#1d1b18"/><path d="M52 104c5 4 11 4 16 0" stroke="#1d1b18" stroke-width="2.4" fill="none" stroke-linecap="round"/><g data-bubble><rect x="100" y="34" width="122" height="44" rx="14" fill="#1d1b18"/><path d="M110 78l-10 14 22-14z" fill="#1d1b18"/><text x="161" y="62" text-anchor="middle" font-family="Onest, sans-serif" font-size="18" font-weight="700" fill="#f1eee8">çay, siz şeker</text></g></svg>
-        <p>You say, <span lang="tr" class="bubble" data-say="Çay, siz şeker.">çay, siz şeker</span>. Confidently. Like you studied.</p>
+        <p>You say, <span lang="tr" class="bubble" data-say="Çay, siz şeker.">çay, siz şeker</span>. Confidently. In perfect English order: tea, without, sugar.</p>
       </div>
       <div class="panel paper">
         <span class="panel__n" data-ui>3</span>
@@ -604,7 +609,7 @@ button { font: inherit; color: inherit; }
       <button type="button" class="btn" data-notice data-ui>Noticed?</button>
       <p class="notice__rule glass">The word stays whole. A tail hangs off the end: <b class="aff--li">-lı</b> — with, <b class="aff--siz">-sız</b> — without.</p>
     </div>
-    <p class="p" style="margin-top:16px">English needs a separate word here: with, without. Turkish just hangs a tail. Like a tag on a suitcase. One word — two meanings. The tail decides. (English -less, as in sugarless, is a close cousin of -sız.)</p>
+    <p class="p" style="margin-top:16px">English needs a separate word: with, without. Turkish just hangs a tail, like a tag on a suitcase. You already know one tail like this: -less. Homeless — <span lang="tr" data-say="evsiz">evsiz</span>. Sugarless — <span lang="tr" data-say="şekersiz">şekersiz</span>. Turkish just uses it with almost any noun.</p>
   </div>
 </section>
 
@@ -666,7 +671,7 @@ button { font: inherit; color: inherit; }
     <p class="kicker" data-ui>05 · Eight forms</p>
     <h2 class="h2">Eight forms. <em>One logic.</em></h2>
     <p class="p">The tail's vowel is an echo of the word's last vowel. Just like four-way harmony.</p>
-    <p class="p">It's the same harmony you already know. Only the tail is new. Four vowels, two tails — eight forms. Sounds scary, works simply.</p>
+    <p class="p">Same four-way harmony as before. Only the tail is new. English -less never changes; this tail does. Four vowels, two tails — eight forms. Sounds scary, works simply.</p>
     <div class="bento" data-bento>
       <div class="bento__head glass">
         <span class="hand" data-ui>look only at the last one!</span>
@@ -770,16 +775,26 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <p class="kicker" data-ui>08 · Compare</p>
     <h2 class="h2">English <em>↔ Turkish</em></h2>
-    <div class="cmp glass" data-cmp data-lang="ru">
-      <button type="button" class="tgl tgl--dark" role="switch" aria-checked="true" aria-label="English or Turkish" data-cmp-tgl><span data-ui>RU</span><span data-ui>TR</span></button>
+    <p class="p">Three things English does differently. This is exactly where English speakers trip.</p>
+    <ol class="cmp__list">
+      <li><b>Two words → one word.</b> “with sugar” is one word: <span lang="tr">şekerli</span>. No separate “with,” no separate “without.”</li>
+      <li><b>The feature goes first.</b> English says “tea with sugar.” Turkish says “sugared tea”: <span lang="tr">şekerli çay</span>.</li>
+      <li><b>The tail changes.</b> English <span style="white-space:nowrap">-less</span> is always <span style="white-space:nowrap">-less</span>. Turkish picks one of four vowels.</li>
+    </ol>
+    <div class="cmp glass" data-cmp data-lang="en">
+      <div class="row cmp__bar">
+        <button type="button" class="tgl tgl--dark" role="switch" aria-checked="true" aria-label="English or Turkish" data-cmp-tgl><span data-ui>EN</span><span data-ui>TR</span></button>
+        <button type="button" class="tgl tgl--dark" role="switch" aria-checked="false" aria-label="With or without" data-cmp-has><span data-ui>with</span><span data-ui>without</span></button>
+      </div>
+      <div class="row cmp__pairs" data-cmp-pairs role="group" aria-label="Phrase"></div>
       <div class="cmp__line" data-cmp-line>
         <span class="tile tile--head" data-t="head">tea</span> <span class="tile tile--with" data-t="with">without</span> <span class="tile tile--noun" data-t="noun">sugar</span>
       </div>
       <div class="cmp__why">
-        <p data-cmp-ru>In English, “without” goes before the noun, as a separate word, and it all comes after the tea.</p>
-        <p data-cmp-tr>In Turkish the tail goes at the end. The word doesn't change. And the whole pair moves in front of the tea: <b lang="tr" data-say="şekersiz çay">şekersiz çay</b>.</p>
+        <p data-cmp-ru>English: three words. “With” or “without” stands alone, in the middle.</p>
+        <p data-cmp-tr>Turkish: the tail sticks to the feature, and the pair jumps in front: <b lang="tr" data-cmp-say data-say="şekersiz çay">şekersiz çay</b>.</p>
       </div>
-      <p class="kz">Know Kazakh? Same thing there: <b lang="kk">qantsyz şai</b>. A tail, attached, before the tea.</p>
+      <p class="kz">English shortcut: think “sugar-free tea,” “salt-free soup.” Same order as Turkish. Feature first, thing second.</p>
     </div>
     <div class="mq" data-mq>
       <p class="mq__q"><span class="hand" data-ui>question:</span> “coffee with milk” is…</p>
@@ -975,20 +990,20 @@ button { font: inherit; color: inherit; }
   <div class="s__in">
     <svg class="pen pen--tr" viewBox="0 0 600 160" aria-hidden="true" data-pen><path d="M10 120 C 90 20, 170 20, 210 80 S 300 150, 360 70 S 480 10, 590 60"/></svg>
     <p class="kicker" data-ui>13 · Traps</p>
-    <h2 class="h2">Where <em>everyone trips</em></h2>
-    <p class="p">That's normal. Tap a card — the mistake fixes itself.</p>
+    <h2 class="h2">Where <em>English speakers trip</em></h2>
+    <p class="p">Your English brain wants three words and a fixed tail. Tap a card — the mistake fixes itself.</p>
     <div class="traps" data-traps>
-      <div class="trap glass"><span class="trap__bad" lang="tr">siz şeker</span><button type="button" class="trap__good" lang="tr" data-fix data-say="şekersiz">→ şekersiz</button><p>The tail is written attached. A separate <span lang="tr">siz</span> means “you.”</p></div>
-      <div class="trap glass"><span class="trap__bad" lang="tr">sütlı</span><button type="button" class="trap__good" lang="tr" data-fix data-say="sütlü">→ sütlü</button><p>Look at the word's vowel, not at habit. <span lang="tr">süt</span> has ü.</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">siz şeker</span><button type="button" class="trap__good" lang="tr" data-fix data-say="şekersiz">→ şekersiz</button><p>“Without” is not a word before the noun. It's a tail after it. A separate <span lang="tr">siz</span> means “you.”</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">çay ile şeker</span><button type="button" class="trap__good" lang="tr" data-fix data-say="şekerli çay">→ şekerli çay</button><p><span lang="tr">ile</span> means “and” or “together with”: tea and sugar, two things on the table. A feature is a tail, and it goes first.</p></div>
+      <div class="trap glass"><span class="trap__bad" lang="tr">tuzsiz</span><button type="button" class="trap__good" lang="tr" data-fix data-say="tuzsuz">→ tuzsuz</button><p>-less never changes, so you want one fixed tail. But <span lang="tr">tuz</span> has u, so the tail has u.</p></div>
       <div class="trap glass"><span class="trap__bad" lang="tr">limonli</span><button type="button" class="trap__good" lang="tr" data-fix data-say="limonlu">→ limonlu</button><p>Only the last vowel counts. Here it's o; the first i stays quiet.</p></div>
-      <div class="trap glass"><span class="trap__bad" lang="tr">suyulu</span><button type="button" class="trap__good" lang="tr" data-fix data-say="sulu">→ sulu</button><p>No extra letters. Word ends in a vowel? The tail attaches right away: <span lang="tr">su + lu</span>.</p></div>
     </div>
     <div class="mq" data-mq>
-      <p class="mq__q"><span class="hand" data-ui>question:</span> which one is all correct?</p>
+      <p class="mq__q"><span class="hand" data-ui>question:</span> “lemonade without ice” — which one is right?</p>
       <div class="mq__opts">
-        <button type="button" lang="tr" data-fb="A separate siz means “you.”">siz limon</button>
-        <button type="button" lang="tr" data-fb="The last vowel is o, not i.">limonsiz</button>
-        <button type="button" lang="tr" data-ok data-fb="Yes. Attached, by the last vowel.">limonsuz</button>
+        <button type="button" lang="tr" data-fb="English order. In Turkish the feature goes first, as a tail.">limonata siz buz</button>
+        <button type="button" lang="tr" data-fb="Right order, wrong vowel: buz has u.">buzsiz limonata</button>
+        <button type="button" lang="tr" data-ok data-fb="Yes. One word, last vowel u, feature first.">buzsuz limonata</button>
       </div>
       <p class="mq__fb" aria-live="polite" data-ui></p>
     </div>
@@ -998,10 +1013,24 @@ button { font: inherit; color: inherit; }
 <!-- ============ VIDEO ============ -->
 <section class="s" id="video" data-section="video" data-words="9">
   <div class="s__in">
-    <p class="kicker" data-ui>14 · Video</p>
-    <h2 class="h2">Listen to <em>the teacher</em></h2>
-    <p class="p">Notice: the word's vowel first, then the tail.</p>
-    <a-video yt="wXTOK9LRKKU" start="0" end="158" title="Turkish. Lesson 14. The suffixes -lı, -sız" channel="Pratikturkce"></a-video>
+    <p class="kicker" data-ui>14 · Listen</p>
+    <h2 class="h2">Train <em>your ear</em></h2>
+    <p class="p">No video this time — the only good one is in Russian. Just your ears. Tap each word. Hear how the tail echoes the last vowel.</p>
+    <div class="pairs" data-listen>
+      <div class="pairs__head" data-ui><span></span><span>with</span><span>without</span></div>
+      <div class="pair glass"><svg aria-hidden="true"><use href="#i-gas"/></svg>
+        <button type="button" data-say="gazlı" lang="tr"><span class="stem">g<b class="lv">a</b>z</span><span class="aff aff--li">lı</span><span class="ru" data-ui>ı = the a in “about”</span></button>
+        <button type="button" data-say="gazsız" lang="tr"><span class="stem">gaz</span><span class="aff aff--siz">sız</span><span class="ru" data-ui>still</span></button></div>
+      <div class="pair glass"><svg aria-hidden="true"><use href="#i-cube"/></svg>
+        <button type="button" data-say="şekerli" lang="tr"><span class="stem">şek<b class="lv">e</b>r</span><span class="aff aff--li">li</span><span class="ru" data-ui>ş = sh in “shop”</span></button>
+        <button type="button" data-say="şekersiz" lang="tr"><span class="stem">şeker</span><span class="aff aff--siz">siz</span><span class="ru" data-ui>no sugar</span></button></div>
+      <div class="pair glass"><svg aria-hidden="true"><use href="#i-salt"/></svg>
+        <button type="button" data-say="tuzlu" lang="tr"><span class="stem">t<b class="lv">u</b>z</span><span class="aff aff--li">lu</span><span class="ru" data-ui>u = oo in “food”</span></button>
+        <button type="button" data-say="tuzsuz" lang="tr"><span class="stem">tuz</span><span class="aff aff--siz">suz</span><span class="ru" data-ui>no salt</span></button></div>
+      <div class="pair glass"><svg aria-hidden="true"><use href="#i-milk"/></svg>
+        <button type="button" data-say="sütlü" lang="tr"><span class="stem">s<b class="lv">ü</b>t</span><span class="aff aff--li">lü</span><span class="ru" data-ui>ü = say “ee,” round your lips</span></button>
+        <button type="button" data-say="sütsüz" lang="tr"><span class="stem">süt</span><span class="aff aff--siz">süz</span><span class="ru" data-ui>no milk</span></button></div>
+    </div>
   </div>
 </section>
 
@@ -1073,7 +1102,7 @@ button { font: inherit; color: inherit; }
         </div>
         <div class="poster__box">
           <ol>
-            <li>Written as one word: <span lang="tr">şekersiz</span>.</li>
+            <li>One word, no “with”: <span lang="tr">şekersiz</span>.</li>
             <li>Look at the last vowel.</li>
             <li>The feature goes before the noun: <span lang="tr" data-say="sütlü kahve">sütlü kahve</span>.</li>
             <li>Word ends in a vowel — no extra letters: <span lang="tr" data-say="sulu">sulu</span>.</li>
@@ -1400,20 +1429,41 @@ addEventListener('DOMContentLoaded', () => {
   if (A) ScrollTrigger.create({ trigger: '[data-tree]', start: 'top 70%', once: true, onEnter: () => $('[data-tw="limon"]').click() });
   if (A) G.from('.t-node', { scale: .4, transformOrigin: '50% 50%', ease: 'none', stagger: .1, scrollTrigger: { trigger: '[data-tree] svg', start: 'top 90%', end: 'top 50%', scrub: true } });
 
-  /* ================= COMPARE: FLIP между языками ================= */
-  const cmp = $('[data-cmp]'), line = $('[data-cmp-line]');
-  const TILES = { ru: { head: 'tea', with: 'without', noun: 'sugar', order: ['head', 'with', 'noun'] }, tr: { head: 'çay', with: 'siz', noun: 'şeker', order: ['noun', 'with', 'head'] } };
-  function setLang(lang, anim) {
+  /* ================= COMPARE: English → Turkish, tiles jump into Turkish order ================= */
+  const cmp = $('[data-cmp]'), line = $('[data-cmp-line]'), cmpHasBtn = $('[data-cmp-has]'), cmpPairs = $('[data-cmp-pairs]');
+  /* full English phrases per mode — nothing glued from bare nouns */
+  const CP = {
+    çay: { en: ['tea', 'sugar'], tr: ['çay', 'şeker'] },
+    kahve: { en: ['coffee', 'milk'], tr: ['kahve', 'süt'] },
+    çorba: { en: ['soup', 'salt'], tr: ['çorba', 'tuz'] },
+    ayran: { en: ['ayran', 'ice'], tr: ['ayran', 'buz'] },
+    oda: { en: ['a room', 'a balcony'], tr: ['oda', 'balkon'] },
+    dürüm: { en: ['a wrap', 'hot pepper'], tr: ['dürüm', 'acı'] },
+  };
+  const C = { p: 'çay', has: false, lang: 'en' };
+  Object.keys(CP).forEach((k) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.lang = 'en'; b.textContent = CP[k].en[0].replace(/^an? /, '');
+    b.setAttribute('aria-pressed', String(k === C.p));
+    b.addEventListener('click', () => { C.p = k; $$('.chip', cmpPairs).forEach((x) => x.setAttribute('aria-pressed', String(x === b))); setLang(C.lang, true, true); });
+    cmpPairs.append(b);
+  });
+  function setLang(lang, anim, quiet) {
     const tiles = $$('.tile', line);
     const before = tiles.map((t) => t.getBoundingClientRect());
-    cmp.dataset.lang = lang;
-    const d = TILES[lang];
+    const P = CP[C.p], trPhrase = P.tr[1] + tail(P.tr[1], C.has) + ' ' + P.tr[0];
+    C.lang = lang; cmp.dataset.lang = lang;
+    const d = lang === 'tr'
+      ? { head: P.tr[0], with: tail(P.tr[1], C.has), noun: P.tr[1], order: ['noun', 'with', 'head'] }
+      : { head: P.en[0], with: C.has ? 'with' : 'without', noun: P.en[1], order: ['head', 'with', 'noun'] };
     tiles.forEach((t) => { t.textContent = d[t.dataset.t]; t.lang = lang; });
     d.order.forEach((k) => line.append($(`[data-t="${k}"]`, line)));
-    line.dataset.say = lang === 'tr' ? 'şekersiz çay' : '';
-    $('[data-cmp-ru]').style.opacity = lang === 'ru' ? 1 : .45;
+    line.dataset.say = lang === 'tr' ? trPhrase : '';
+    const sayEl = $('[data-cmp-say]');
+    sayEl.textContent = trPhrase; sayEl.dataset.say = trPhrase;
+    $('[data-cmp-ru]').style.opacity = lang === 'en' ? 1 : .45;
     $('[data-cmp-tr]').style.opacity = lang === 'tr' ? 1 : .45;
-    if (lang === 'tr') speak('şekersiz çay');
+    if (lang === 'tr' && !quiet) speak(trPhrase);
     if (!A || !anim) return;
     tiles.forEach((t, i) => {
       const a = t.getBoundingClientRect();
@@ -1422,14 +1472,20 @@ addEventListener('DOMContentLoaded', () => {
     G.fromTo('[data-t="with"]', { scale: 1.3 }, { scale: 1, duration: .6, delay: .5, ease: 'back.out(3)' });
   }
   $('[data-cmp-tgl]').addEventListener('click', (e) => {
-    const toTr = cmp.dataset.lang === 'ru';
+    const toTr = cmp.dataset.lang === 'en';
     e.currentTarget.setAttribute('aria-checked', String(!toTr));
-    setLang(toTr ? 'tr' : 'ru', true);
+    setLang(toTr ? 'tr' : 'en', true);
   });
-  setLang('ru', false);
+  cmpHasBtn.addEventListener('click', () => {
+    C.has = !C.has; cmpHasBtn.setAttribute('aria-checked', String(C.has));
+    setLang(C.lang, false);
+    if (A) G.fromTo('[data-t="with"]', { rotationX: -90 }, { rotationX: 0, duration: .5, ease: 'back.out(2.5)' });
+  });
+  setLang('en', false);
   if (A) {
     ScrollTrigger.create({ trigger: cmp, start: 'top 60%', once: true, onEnter: () => setTimeout(() => $('[data-cmp-tgl]').click(), 600) });
     G.fromTo('.kz', { x: -40 }, { x: 0, ease: 'none', scrollTrigger: { trigger: '.kz', start: 'top 95%', end: 'top 65%', scrub: true } });
+    G.from('.cmp__list li', { x: -40, duration: .6, ease: 'power3.out', stagger: .12, scrollTrigger: { trigger: '.cmp__list', start: 'top 85%', once: true } });
   }
 
   /* ================= MNEMO ================= */
@@ -1503,7 +1559,8 @@ addEventListener('DOMContentLoaded', () => {
   });
 
   /* режим 1 — сборка */
-  const NOUNS = { şeker: 'sugar', tuz: 'salt', süt: 'milk', limon: 'lemon', gaz: 'gas', peynir: 'cheese', acı: 'hot pepper', buz: 'ice', soğan: 'onion', köpük: 'foam', asansör: 'elevator', şemsiye: 'umbrella', kafein: 'caffeine', susam: 'sesame', çocuk: 'kid', bilet: 'ticket' };
+  /* full English phrases [with, without] — articles differ per noun, so nothing is glued */
+  const NOUNS = { şeker: ['with sugar', 'without sugar'], tuz: ['salty', 'without salt'], süt: ['with milk', 'without milk'], limon: ['with lemon', 'without lemon'], gaz: ['sparkling (with gas)', 'still (without gas)'], peynir: ['with cheese', 'without cheese'], acı: ['spicy (with hot pepper)', 'not spicy'], buz: ['with ice', 'without ice'], soğan: ['with onion', 'without onion'], köpük: ['with foam', 'without foam'], asansör: ['with an elevator', 'without an elevator'], şemsiye: ['with an umbrella', 'without an umbrella'], kafein: ['with caffeine', 'decaf (without caffeine)'], susam: ['with sesame', 'without sesame'], çocuk: ['with kids', 'without kids'], bilet: ['with a ticket', 'without a ticket'] };
   const B = { w: 'şeker', has: true };
   const bWord = $('[data-b-word]'), bWhy = $('[data-b-why]'), bTgl = $('[data-b-tgl]');
   const bNouns = $('[data-b-nouns]');
@@ -1518,7 +1575,7 @@ addEventListener('DOMContentLoaded', () => {
     const t = tail(B.w, B.has), v = lastVowel(B.w);
     bWord.innerHTML = `<span class="stem">${B.w}</span><span class="aff ${B.has ? 'aff--li' : 'aff--siz'}">${t}</span>`;
     bWord.dataset.say = B.w + t;
-    bWhy.textContent = `${B.has ? 'with' : 'without'} ${NOUNS[B.w]} · last vowel ${v} → -${t}`;
+    bWhy.textContent = `${NOUNS[B.w][B.has ? 0 : 1]} · last vowel ${v} → -${t}`;
     if (A && anim) {
       G.fromTo($('.aff', bWord), { x: 80, rotation: 20, scale: .5 }, { x: 0, rotation: 0, scale: 1, duration: .7, ease: 'back.out(2.2)' });
       G.fromTo($('.stem', bWord), { y: -24 }, { y: 0, duration: .6, ease: 'bounce.out' });
@@ -1538,7 +1595,7 @@ addEventListener('DOMContentLoaded', () => {
     const w = FL[fi][0], t = tail(w, fHas);
     fWord.innerHTML = `${w}<span class="aff ${fHas ? 'aff--li' : 'aff--siz'}">${t}</span>`;
     fWord.dataset.say = w + t;
-    fRu.textContent = `${fHas ? 'with' : 'without'} ${NOUNS[w]}`;
+    fRu.textContent = NOUNS[w][fHas ? 0 : 1];
   }
   $('[data-fl-go]').addEventListener('click', () => {
     if (!A) { fHas = !fHas; renderFlip(); speak(fWord.dataset.say); return; }
@@ -1722,7 +1779,8 @@ addEventListener('DOMContentLoaded', () => {
     G.from('[data-traps] .trap', { y: 70, rotation: (i) => (i % 2 ? 5 : -5), ease: 'none', stagger: .12, scrollTrigger: scrub('[data-traps]', 'top bottom', 'top 40%') });
     ScrollTrigger.batch('#practice a-exercise', { start: 'top 92%', once: true, onEnter: (b) => G.from(b, { y: 50, rotation: 1, duration: .7, ease: 'power3.out', stagger: .1 }) });
     G.fromTo('#check a-quiz', { scale: .94 }, { scale: 1, ease: 'none', scrollTrigger: scrub('#check', 'top bottom', 'top 40%') });
-    G.fromTo('#video a-video', { scale: .88, rotation: -1 }, { scale: 1, rotation: 0, ease: 'none', scrollTrigger: scrub('#video', 'top bottom', 'center 60%') });
+    G.from('[data-listen] .pair', { x: (i) => (i % 2 ? 80 : -80), rotation: (i) => (i % 2 ? 3 : -3), ease: 'none', stagger: .1, scrollTrigger: scrub('[data-listen]', 'top bottom', 'top 45%') });
+    G.fromTo('[data-listen] .lv', { scale: 1 }, { scale: 1.5, yoyo: true, repeat: 1, duration: .35, ease: 'power2.out', stagger: .2, scrollTrigger: { trigger: '[data-listen]', start: 'top 60%', once: true } });
     G.fromTo('.listing__img svg', { scale: 1.25 }, { scale: 1, ease: 'none', scrollTrigger: scrub('#home') });
     G.fromTo('.mnemo__big', { x: -50 }, { x: 0, ease: 'none', scrollTrigger: scrub('.mnemo', 'top bottom', 'center 55%') });
 
