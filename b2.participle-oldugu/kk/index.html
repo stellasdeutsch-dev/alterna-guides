@@ -273,6 +273,20 @@
   .ob-fly { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; }
   .ob-spark { position: fixed; left: 0; top: 0; z-index: 61; width: 9px; height: 9px; border-radius: 3px; pointer-events: none; }
 
+  /* қазақша ↔ түрікше */
+  .ob-kz__pairs { display: grid; gap: 10px; }
+  .ob-kz__pair { display: grid; gap: 4px; padding: 12px 14px; border-radius: 22px; background: #fff; }
+  .ob-kz__row { display: grid; grid-template-columns: 74px 1fr; gap: 10px; align-items: center; }
+  .ob-kz__lbl { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+  .ob-kz__txt { display: inline-block; justify-self: start; font-size: clamp(18px, 4.8vw, 22px); font-weight: 750; line-height: 1.3; border: 0; padding: 0; background: none; text-align: left; }
+  button.ob-kz__txt { cursor: pointer; }
+  .ob-kz__txt mark { display: inline-block; background: var(--amber); color: var(--ink); border-radius: 7px; padding: 0 3px; }
+  .ob-kz__row--tr mark { background: var(--lime); }
+  .ob-kz__row--tr mark.is-wait { background: transparent; box-shadow: inset 0 0 0 2px var(--ink); color: transparent; }
+  .ob-kz__arrow { width: 22px; height: 16px; margin-left: 84px; overflow: visible; }
+  .ob-kz__note { min-height: 3em; margin: 12px 0 10px; font-weight: 600; }
+  .ob-kz__fly { position: fixed; left: 0; top: 0; z-index: 60; pointer-events: none; background: var(--amber); color: var(--ink); border-radius: 7px; padding: 0 3px; font-weight: 750; box-shadow: 0 6px 14px -6px rgba(0,0,0,.45); }
+
   @media (hover: hover) {
     .ob-btn:hover { scale: 1.03; }
     .ob-pick__row button:hover, .ob-answers button:hover { background: #e6e7e2; }
@@ -385,9 +399,9 @@
       </div>
       <p class="ob-guess__out" aria-live="polite" data-yes="Иә. -DIk шақты айтпайды. Түрікке бәрібір." data-no="Солай да болады. Бірақ -DIk нақтыламайды. Бұл әрі «оқып жатқан», әрі «оқыған»."></p>
     </div>
-    <p><span lang="tr">-DIk</span>-ты сен білесің. Мен оқып жатқан кітап. Немесе оқыған. Айырмасы жоқ.</p>
-    <p>Әдетте контекст өзі ажыратады. Бірақ кейде дәлдік керек. Жаңалықтарда, хаттарда, вокзалда.</p>
-    <p>Сонда шақты етістіктің өзіне ілеміз. Ал <span lang="tr">-DIk</span> <span lang="tr">olmak</span>-қа көшеді.</p>
+    <p><span lang="tr">-DIk</span>-ты сен білесің. <span lang="tr">okuduğum kitap</span> — оқып жатқан да, оқыған да. Түрікке бәрібір.</p>
+    <p>Қазаққа бәрібір емес. Біз әрқашан ажыратамыз: оқып <b>жатқан</b>, оқып <b>қойған</b>, оқи<b>тын</b>. Түрікше де ажыратуға болады. Жаңалықта, хатта, вокзалда — керек.</p>
+    <p>Тәсілі таныс: шақ негізгі етістікке ілінеді, есімшені көмекші алады. Бізде көмекші — <b>жат</b>, <b>отыр</b>, <b>қой</b>. Түрікте біреу-ақ: <span lang="tr">ol-</span>.</p>
 
     <div class="ob-card ob-clock" data-clock>
       <svg viewBox="0 0 140 140" aria-hidden="true">
@@ -446,7 +460,7 @@
     </div>
     <p>Құйрыққа қара. Ол кім тұратынын айтады. Қала жай тұр.</p>
     <p>Шақ бірінші вагонда тұрады. Жақ — екіншісінде. Етістіктің өзі жақ құйрығын ешқашан алмайды.</p>
-    <p>Құйрықтар <span lang="tr">okuduğum</span>-дағыдай. Тек <span lang="tr">oldukları</span>: дауыссыз алдында <span lang="tr">k</span> жұмсармайды.</p>
+    <p>Құйрықтар <span lang="tr">okuduğum</span>-дағыдай. Тек <span lang="tr">oldukları</span>: дауыссыз алдында <span lang="tr">k</span> жұмсармайды. Қазақшадағыдай: кіта<b>б</b>ы, бірақ кіта<b>п</b>тары.</p>
   </section>
 
   <section id="who" data-section="who" data-words="57">
@@ -475,15 +489,33 @@
         <button type="button" class="is-done" data-who-mode="oldugu" aria-pressed="false">біз әрекет етеміз</button>
       </div>
       <p class="ob-who__line" lang="tr" data-who-line>Ankara'ya gelmekte <span class="ob-person">olan</span> tren</p>
-      <p class="ob-who__ru ob-ru" data-who-ru>Анкараға бара жатқан пойыз</p>
+      <p class="ob-who__ru ob-ru" data-who-ru>Анкараға келе жатқан пойыз</p>
       <div class="ob-row ob-row--c"><button type="button" class="ob-btn ob-btn--ghost" data-who-next>тағы мысал →</button></div>
     </div>
     <div class="ob-rule">
       <div><b lang="tr">olan</b><span>сөз әрекетті өзі істейді</span></div>
       <div><b lang="tr">olduğ- + жақ</b><span>басқа біреу істейді, құйрық кім екенін айтады</span></div>
     </div>
-    <p>Сұрақ қой: кім істейді? Сөздің өзі болса — <span lang="tr">olan</span>. Басқа біреу болса — <span lang="tr">olduğ-</span> және оның құйрығы. Қазақшада оны «біз» сияқты сөз ажыратады: күтіп тұрған пойыз / біз күтіп отырған пойыз.</p>
+    <p>Сұрақ қой: кім істейді? Сөздің өзі болса — <span lang="tr">olan</span>. Басқа біреу болса — <span lang="tr">olduğ-</span> және оның құйрығы.</p>
     <p><span lang="tr">-An</span> мен <span lang="tr">-DIk</span> сияқты. Тек сағатымен.</p>
+  </section>
+
+  <section id="kz" data-section="kz" data-words="78">
+    <svg class="ob-sep" viewBox="0 0 360 30" aria-hidden="true"><path class="ob-sep__ties" d="M4 24 H356" stroke="#0b0b0b" stroke-width="5" stroke-dasharray="3 9"/><path class="ob-sep__rail" d="M4 20 H356" stroke="#0b0b0b" stroke-width="2.5"/><g class="ob-sep__train" transform="translate(0 2)"><path d="M0 16 V7 Q0 3 4 3 H18 Q26 3 26 11 V16 Z" fill="#27eb62" stroke="#0b0b0b" stroke-width="1.5"/><rect x="4" y="6" width="5" height="4" fill="#0b0b0b"/><rect x="11" y="6" width="5" height="4" fill="#0b0b0b"/><circle cx="6" cy="17" r="2.2" fill="#0b0b0b"/><circle cx="20" cy="17" r="2.2" fill="#0b0b0b"/></g></svg>
+    <span class="ob-tag ob-tag--ink">Қазақша ↔ түрікше</span>
+    <h2>Бір -ған, екі жол</h2>
+    <p>Мұнда сен үйдесің. Есімше бар, көмекші етістік бар, сөз реті бірдей: алдымен әрекет, соңында зат есім.</p>
+    <p>Бірақ үш жерде рельс басқаша салынған. Үшеуін бас. Сары белгі қазақшадан түрікшеге қалай көшетінін көр.</p>
+    <div class="ob-card ob-kz" data-kz>
+      <div class="ob-tabs" role="tablist" aria-label="Айырмашылық" data-kz-tabs>
+        <button type="button" role="tab" aria-selected="true" data-kz-tab="0">Кім істейді?</button>
+        <button type="button" role="tab" aria-selected="false" data-kz-tab="1">Жақ қайда?</button>
+        <button type="button" role="tab" aria-selected="false" data-kz-tab="2">Олар</button>
+      </div>
+      <div class="ob-kz__pairs" data-kz-pairs aria-live="polite"></div>
+      <p class="ob-kz__note" data-kz-note></p>
+      <div class="ob-row ob-row--c"><button type="button" class="ob-btn ob-btn--ink" data-kz-go>Белгіні көшіру</button></div>
+    </div>
   </section>
 
   <section id="lab" data-section="lab" data-words="47">
@@ -491,6 +523,7 @@
     <span class="ob-tag ob-tag--amber">4-аялдама · зертхана</span>
     <h2>Вокзал таблосы</h2>
     <p>Таблоға жол құрастыр. Табло аударылып, дауыстап айтады. Сосын қалған екі режимде өзіңді тексер.</p>
+    <p>Табло астындағы қазақша жолға қара: жақ онда екі рет — <b>менің</b> … кітаб<b>ым</b>. Түрікше тек бір рет, <span lang="tr">olduğ-</span>-да.</p>
     <p>Екінші режимде тек бірінші вагонға қара. Үшіншісінде — кім әрекет ететініне.</p>
     <div class="ob-tabs" role="tablist" aria-label="Зертхана режимі" data-lab-tabs>
       <button type="button" role="tab" aria-selected="true" data-mode="build">Құрастыру</button>
@@ -558,18 +591,18 @@
     <div class="ob-traps">
       <article class="ob-trap" data-trap>
         <span class="ob-trap__n">01</span>
-        <h3>Біз күтетін жерде <span lang="tr">olan</span></h3>
+        <h3>«-ған» деп ойлап, <span lang="tr">olan</span> қою</h3>
         <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="beklemekte olan tren" data-fix="beklemekte olduğumuz tren">beklemekte olan tren</span></div>
         <svg class="ob-trap__rail" viewBox="0 0 160 18" aria-hidden="true"><path d="M2 12 H158" stroke="currentColor" stroke-width="2"/><path d="M2 16 H158" stroke="currentColor" stroke-width="3" stroke-dasharray="2 8"/><g class="ob-trap__mini"><path d="M2 11 V5 Q2 2 5 2 H16 Q22 2 22 8 V11 Z" fill="currentColor"/></g></svg>
-        <p>Бұлай болса, пойыздың өзі біреуді күтіп тұр. Күтіп отырған — біз, демек <span lang="tr">olduğumuz</span>.</p>
+        <p>Қазақша «-ған» екеуіне де жүреді: күтіп тұрған пойыз, біз күтіп отырған пойыз. Түрікше <span lang="tr">olan</span> — пойыздың өзі біреуді күтіп тұр. Күтетін — біз, демек <span lang="tr">olduğumuz</span>.</p>
         <button type="button" class="ob-btn" data-trap-fix>Түзету</button>
       </article>
       <article class="ob-trap" data-trap>
         <span class="ob-trap__n">02</span>
-        <h3>Жақ құйрығы етістікте емес</h3>
-        <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="okumaktayım olduğum kitap" data-fix="okumakta olduğum kitap">okumaktayım olduğum kitap</span></div>
+        <h3>Жақ зат есімге жабысты</h3>
+        <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="okumakta olan kitabım" data-fix="okumakta olduğum kitap">okumakta olan kitabım</span></div>
         <svg class="ob-trap__rail" viewBox="0 0 160 18" aria-hidden="true"><path d="M2 12 H158" stroke="currentColor" stroke-width="2"/><path d="M2 16 H158" stroke="currentColor" stroke-width="3" stroke-dasharray="2 8"/><g class="ob-trap__mini"><path d="M2 11 V5 Q2 2 5 2 H16 Q22 2 22 8 V11 Z" fill="currentColor"/></g></svg>
-        <p>Жақ бір-ақ рет қойылады, <span lang="tr">olduğ-</span>-ге. Етістік жалаңаш қалады.</p>
+        <p>Қазақша «менің оқып жатқан кітабым» — жақ кітапта. Түрікшеге көшірсең, кітап өзі оқып жатыр болып шығады. Жақ <span lang="tr">olduğ-</span>-ға барады, <span lang="tr">kitap</span> жалаңаш.</p>
         <button type="button" class="ob-btn" data-trap-fix>Түзету</button>
       </article>
       <article class="ob-trap" data-trap>
@@ -577,7 +610,7 @@
         <h3><span lang="tr">oldukları</span>, <span lang="tr">olduğları</span> емес</h3>
         <div class="ob-trap__ex"><svg viewBox="0 0 36 36" aria-hidden="true" data-trap-icon><circle cx="18" cy="18" r="16" fill="#e0483e"/><path d="M11 11 L25 25 M25 11 L11 25" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg><span class="ob-trap__txt" lang="tr" data-trap-txt data-wrong="yazacak olduğları rapor" data-fix="yazacak oldukları rapor">yazacak olduğları rapor</span></div>
         <svg class="ob-trap__rail" viewBox="0 0 160 18" aria-hidden="true"><path d="M2 12 H158" stroke="currentColor" stroke-width="2"/><path d="M2 16 H158" stroke="currentColor" stroke-width="3" stroke-dasharray="2 8"/><g class="ob-trap__mini"><path d="M2 11 V5 Q2 2 5 2 H16 Q22 2 22 8 V11 Z" fill="currentColor"/></g></svg>
-        <p><span lang="tr">k</span> тек дауысты алдында жұмсарады. <span lang="tr">-ları</span> алдында сақталады.</p>
+        <p>Қазақшадағыдай: кітабы, бірақ кітаптары. <span lang="tr">k</span> тек дауысты алдында жұмсарады. <span lang="tr">-ları</span> алдында сақталады.</p>
         <button type="button" class="ob-btn" data-trap-fix>Түзету</button>
       </article>
       <article class="ob-trap" data-trap>
@@ -633,7 +666,8 @@
         <button type="button" class="ob-cheat__row is-done" data-say="bitirmiş olduğum iş"><span class="ob-time"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="done"><path d="M6 18 V2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M7 3 H24 L20 7.5 L24 12 H7 Z" fill="currentColor"/></svg>КЕЛДІ</span><b lang="tr">bitirmiş olduğum iş</b><small>мен бітіріп қойған жұмыс</small></button>
         <button type="button" class="ob-cheat__row is-fut" data-say="okuyacak oldukları kitap"><span class="ob-time"><svg class="ob-ico" viewBox="0 0 32 20" aria-hidden="true" data-ico="fut"><circle cx="16" cy="10" r="8.5" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M16 5 V10 L20 12.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>ЖӨНЕЛЕДІ</span><b lang="tr">okuyacak oldukları kitap</b><small>олар оқитын кітап</small></button>
       </div>
-      <p class="ob-cheat__rule"><b>olan</b> — сөз өзі әрекет етеді. <b>olduğ-</b> — басқа біреу әрекет етеді.</p>
+      <p class="ob-cheat__rule"><b>olan</b> — сөз өзі әрекет етеді. <b>olduğ-</b> — басқа біреу әрекет етеді. Қазақшада екеуі де «-ған», түрікшеде — екі жол.</p>
+      <p class="ob-cheat__rule">Жақ — <span lang="tr">olduğ-</span>-да, зат есім жалаңаш: <b lang="tr">okumakta olduğum kitap</b>.</p>
       <p class="ob-cheat__rule"><b lang="tr">olduğum · olduğun · olduğu · olduğumuz · olduğunuz · oldukları</b></p>
     </div>
     <div class="ob-final" data-final>
@@ -685,20 +719,23 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- данные: глаголы, время, лица ---------- */
   const PERSONS = ['olduğum', 'olduğun', 'olduğu', 'olduğumuz', 'olduğunuz', 'oldukları'];
   const PRON_TR = ['ben', 'sen', 'o', 'biz', 'siz', 'onlar'];
-  const PRON_RU = ['мен', 'сен', 'ол', 'біз', 'сіздер', 'олар'];
+  const PRON_RU = ['мен', 'сен', 'ол', 'біз', 'сіз', 'олар'];
+  /* қазақша жақ зат есімде: менің … кітабым. Әр жаққа дайын форма — желімдемейміз */
+  const GEN_KK = ['менің', 'сенің', 'оның', 'біздің', 'сіздің', 'олардың'];
   const TIMES = { now: { label: 'қазір', status: 'ЖОЛДА', aff: '-mAktA' }, done: { label: 'бұрын', status: 'КЕЛДІ', aff: '-mIş' }, fut: { label: 'кейін', status: 'ЖӨНЕЛЕДІ', aff: '-(y)AcAk' } };
   const VERBS = {
-    oku: { inf: 'okumak', noun: 'kitap', head: '⁠', form: { now: 'okumakta', done: 'okumuş', fut: 'okuyacak' },
-      ru: { now: ['оқып жатқан кітап', 'оқып жатқан кітап', 'оқып жатқан кітап', 'оқып жатқан кітап', 'оқып жатқан кітап', 'оқып жатқан кітап'], done: ['оқып қойған кітап', 'оқып қойған кітап', 'оқып қойған кітап', 'оқып қойған кітап', 'оқып қойған кітап', 'оқып қойған кітап'], fut: ['оқитын кітап', 'оқитын кітап', 'оқитын кітап', 'оқитын кітап', 'оқитын кітап', 'оқитын кітап'] } },
-    yaşa: { inf: 'yaşamak', noun: 'şehir', head: '⁠', form: { now: 'yaşamakta', done: 'yaşamış', fut: 'yaşayacak' },
-      ru: { now: ['тұрып жатқан қала', 'тұрып жатқан қала', 'тұрып жатқан қала', 'тұрып жатқан қала', 'тұрып жатқан қала', 'тұрып жатқан қала'], done: ['тұрған қала', 'тұрған қала', 'тұрған қала', 'тұрған қала', 'тұрған қала', 'тұрған қала'], fut: ['тұратын қала', 'тұратын қала', 'тұратын қала', 'тұратын қала', 'тұратын қала', 'тұратын қала'] } },
-    yaz: { inf: 'yazmak', noun: 'rapor', head: '⁠', form: { now: 'yazmakta', done: 'yazmış', fut: 'yazacak' },
-      ru: { now: ['жазып жатқан есеп', 'жазып жатқан есеп', 'жазып жатқан есеп', 'жазып жатқан есеп', 'жазып жатқан есеп', 'жазып жатқан есеп'], done: ['жазып қойған есеп', 'жазып қойған есеп', 'жазып қойған есеп', 'жазып қойған есеп', 'жазып қойған есеп', 'жазып қойған есеп'], fut: ['жазатын есеп', 'жазатын есеп', 'жазатын есеп', 'жазатын есеп', 'жазатын есеп', 'жазатын есеп'] } },
-    bekle: { inf: 'beklemek', noun: 'tren', head: '⁠', form: { now: 'beklemekte', done: 'beklemiş', fut: 'bekleyecek' },
-      ru: { now: ['күтіп отырған пойыз', 'күтіп отырған пойыз', 'күтіп отырған пойыз', 'күтіп отырған пойыз', 'күтіп отырған пойыз', 'күтіп отырған пойыз'], done: ['күткен пойыз', 'күткен пойыз', 'күткен пойыз', 'күткен пойыз', 'күткен пойыз', 'күткен пойыз'], fut: ['күтетін пойыз', 'күтетін пойыз', 'күтетін пойыз', 'күтетін пойыз', 'күтетін пойыз', 'күтетін пойыз'] } },
+    oku: { inf: 'okumak', noun: 'kitap', form: { now: 'okumakta', done: 'okumuş', fut: 'okuyacak' },
+      ru: { now: 'оқып жатқан', done: 'оқып қойған', fut: 'оқитын' }, nounKk: ['кітабым', 'кітабың', 'кітабы', 'кітабымыз', 'кітабыңыз', 'кітабы'] },
+    yaşa: { inf: 'yaşamak', noun: 'şehir', form: { now: 'yaşamakta', done: 'yaşamış', fut: 'yaşayacak' },
+      ru: { now: 'тұрып жатқан', done: 'тұрған', fut: 'тұратын' }, nounKk: ['қалам', 'қалаң', 'қаласы', 'қаламыз', 'қалаңыз', 'қаласы'] },
+    yaz: { inf: 'yazmak', noun: 'rapor', form: { now: 'yazmakta', done: 'yazmış', fut: 'yazacak' },
+      ru: { now: 'жазып жатқан', done: 'жазып қойған', fut: 'жазатын' }, nounKk: ['есебім', 'есебің', 'есебі', 'есебіміз', 'есебіңіз', 'есебі'] },
+    bekle: { inf: 'beklemek', noun: 'tren', form: { now: 'beklemekte', done: 'beklemiş', fut: 'bekleyecek' },
+      ru: { now: 'күтіп отырған', done: 'күткен', fut: 'күтетін' }, nounKk: ['пойызым', 'пойызың', 'пойызы', 'пойызымыз', 'пойызыңыз', 'пойызы'] },
   };
   const phraseTr = (v, t, p) => `${VERBS[v].form[t]} ${PERSONS[p]} ${VERBS[v].noun}`;
-  const phraseRu = (v, t, p) => `${VERBS[v].head} ${PRON_RU[p]} ${VERBS[v].ru[t][p]}`;
+  /* қазақша: «менің оқып жатқан кітабым» — жақ екі рет: ілікте және зат есімде */
+  const phraseRu = (v, t, p) => `${GEN_KK[p]} ${VERBS[v].ru[t]} ${VERBS[v].nounKk[p]}`;
 
   /* ---------- общие эффекты ---------- */
   function whileVisible(el, start, stop) {
@@ -733,7 +770,7 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- свой скроллбар: поезд едет по рельсам ---------- */
   const rail = $('[data-scrollbar]'), railFill = $('[data-rail-fill]'), railTrain = $('[data-rail-train]');
   const sections = $$('main [data-section]');
-  const TITLES = { story: 'Оқиға', clock: 'olduğu не үшін', build: 'Құрастыру', who: 'olan ба, olduğu ма', lab: 'Табло', scene: 'Хат', traps: 'Тұзақтар', practice: 'Практика', check: 'Шағын тексеру', cheat: 'Жадынама' };
+  const TITLES = { story: 'Оқиға', clock: 'olduğu не үшін', build: 'Құрастыру', who: 'olan ба, olduğu ма', kz: 'Қазақша ↔ түрікше', lab: 'Табло', scene: 'Хат', traps: 'Тұзақтар', practice: 'Практика', check: 'Шағын тексеру', cheat: 'Жадынама' };
   const marks = new Map();
   sections.forEach((s) => {
     const b = document.createElement('button');
@@ -896,7 +933,7 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- olan или olduğu ---------- */
   const WHO = [
-    { olan: ["Ankara'ya gelmekte", 'tren', 'Анкараға бара жатқан пойыз'], oldugu: ['beklemekte', 'tren', 'біз күтіп отырған пойыз'] },
+    { olan: ["Ankara'ya gelmekte", 'tren', 'Анкараға келе жатқан пойыз'], oldugu: ['beklemekte', 'tren', 'біз күтіп отырған пойыз'] },
     { olan: ['bitmiş', 'proje', 'біткен жоба'], oldugu: ['bitirmiş', 'proje', 'біз бітірген жоба'] },
     { olan: ['beklemekte', 'adam', 'күтіп тұрған адам'], oldugu: ['beklemekte', 'adam', 'біз күтіп отырған адам'] },
   ];
@@ -918,6 +955,54 @@ addEventListener('DOMContentLoaded', () => {
   }
   $$('[data-who-seg] button').forEach((b) => b.addEventListener('click', () => { whoMode = b.dataset.whoMode; drawWho(); }));
   $('[data-who-next]').addEventListener('click', () => { whoIdx = (whoIdx + 1) % WHO.length; whoMode = 'olan'; drawWho(); });
+
+  /* ---------- қазақша ↔ түрікше: белгі зат есімнен olduğ-ға көшеді ---------- */
+  const KZ = [
+    { note: 'Қазақша екеуінде де -ған. Түрікше екі жол: пойыз өзі келеді — <span lang="tr">olan</span>. Пойызды біз күтеміз — <span lang="tr">olduğ-</span> және «біз» құйрығы.',
+      pairs: [['келе жат[қан] пойыз', 'gelmekte [olan] tren'], ['біз күтіп отыр[ған] пойыз', 'beklemekte [olduğumuz] tren']] },
+    { note: 'Қазақша жақ зат есімге жабысады: кітаб<b>ым</b>, қала<b>мыз</b>. Түрікше жақты <span lang="tr">olduğ-</span> алады, ал <span lang="tr">kitap</span> пен <span lang="tr">şehir</span> жалаңаш қалады.',
+      pairs: [['менің оқып жатқан кітаб[ым]', 'okumakta olduğ[um] kitap'], ['біздің тұрып жатқан қала[мыз]', 'yaşamakta olduğ[umuz] şehir']] },
+    { note: 'Қазақша оның да, олардың да — кітаб<b>ы</b>. Түрікше олар үшін бөлек құйрық бар: <span lang="tr">oldukları</span>. <span lang="tr">k</span> сақталады — артында дауыссыз.',
+      pairs: [['оның оқитын кітаб[ы]', 'okuyacak olduğ[u] kitap'], ['олардың оқитын кітаб[ы]', 'okuyacak olduk[ları] kitap']] },
+  ];
+  const kzBox = $('[data-kz-pairs]'), kzNote = $('[data-kz-note]');
+  let kzI = 0;
+  const kzMark = (str, attr, wait) => str.replace(/\[(.+?)\]/, `<mark ${attr}${wait ? ' class="is-wait"' : ''}>$1</mark>`);
+  function kzDraw() {
+    const { note, pairs } = KZ[kzI];
+    $$('[data-kz-tab]').forEach((b) => b.setAttribute('aria-selected', String(Number(b.dataset.kzTab) === kzI)));
+    kzBox.innerHTML = pairs.map(([kk, tr]) => `<div class="ob-kz__pair"><div class="ob-kz__row"><span class="ob-kz__lbl" data-ui>қазақша</span><span class="ob-kz__txt" lang="kk">${kzMark(kk, 'data-kz-from', false)}</span></div><svg class="ob-kz__arrow" viewBox="0 0 22 16" aria-hidden="true"><path d="M11 0 V13 M5 8 L11 14 L17 8" fill="none" stroke="#0b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="ob-kz__row ob-kz__row--tr"><span class="ob-kz__lbl" data-ui>түрікше</span><button type="button" class="ob-kz__txt" lang="tr">${kzMark(tr, 'data-kz-to', anim)}</button></div></div>`).join('');
+    kzNote.innerHTML = note;
+    if (anim) {
+      G.fromTo($$('.ob-kz__pair', kzBox), { rotationX: -90 }, { rotationX: 0, duration: .45, stagger: .12, ease: 'back.out(2)' });
+      G.fromTo(kzNote, { x: -16, opacity: 0 }, { x: 0, opacity: 1, duration: .45, delay: .2, ease: 'back.out(2)' });
+    }
+  }
+  function kzGo() {
+    const froms = $$('[data-kz-from]', kzBox), tos = $$('[data-kz-to]', kzBox);
+    say($$('button.ob-kz__txt', kzBox).map((b) => b.textContent).join('. '));
+    if (!anim) { tos.forEach((t) => t.classList.remove('is-wait')); return; }
+    froms.forEach((f, k) => {
+      const to = tos[k];
+      to.classList.add('is-wait');
+      const a = f.getBoundingClientRect(), b = to.getBoundingClientRect();
+      const fly = document.createElement('span');
+      fly.className = 'ob-kz__fly';
+      fly.textContent = f.textContent;
+      fly.style.fontSize = getComputedStyle(f).fontSize;
+      document.body.append(fly);
+      G.set(fly, { x: a.left, y: a.top });
+      G.timeline({ delay: k * .35, onComplete: () => { fly.remove(); to.classList.remove('is-wait'); G.fromTo(to, { scale: 1.5 }, { scale: 1, duration: .5, ease: 'elastic.out(1, .4)' }); } })
+        .to(fly, { y: a.top - 26, rotation: -8, duration: .3, ease: 'power2.out' })
+        .to(fly, { x: b.left, y: b.top, rotation: 0, duration: .6, ease: 'power3.inOut' })
+        .call(() => { fly.textContent = to.textContent; fly.style.background = 'var(--lime)'; }, null, .55);
+      G.fromTo(f, { y: 0 }, { y: -6, duration: .15, yoyo: true, repeat: 1, delay: k * .35 });
+    });
+  }
+  $$('[data-kz-tab]').forEach((b) => b.addEventListener('click', () => { kzI = Number(b.dataset.kzTab); kzDraw(); setTimeout(kzGo, anim ? 650 : 0); }));
+  $('[data-kz-go]').addEventListener('click', kzGo);
+  kzBox.addEventListener('click', (e) => { const b = e.target.closest('button.ob-kz__txt'); if (b) say(b.textContent); });
+  kzDraw();
 
   /* ---------- лаборатория: табло ---------- */
   const flaps = $('[data-board-flaps]'), boardRu = $('[data-board-ru]'), boardStatus = $('[data-board-status]');
@@ -951,7 +1036,7 @@ addEventListener('DOMContentLoaded', () => {
     if (anim) G.fromTo(flaps.children, { y: -6 }, { y: 0, duration: .4, stagger: .06, ease: 'bounce.out' });
   });
   const WHO_QUIZ = [
-    ['Анкараға бара жатқан пойыз', 'olan', [["Ankara'ya gelmekte", ''], ['olan', ''], ['tren', 'is-noun']]],
+    ['Анкараға келе жатқан пойыз', 'olan', [["Ankara'ya gelmekte", ''], ['olan', ''], ['tren', 'is-noun']]],
     ['Анкарада тұратын адамдар', 'olan', [["Ankara'da yaşamakta", ''], ['olan', ''], ['insanlar', 'is-noun']]],
     ['сен жазған есеп', 'oldugu', [['yazmış', ''], ['olduğun', ''], ['rapor', 'is-noun']]],
     ['біткен жоба', 'olan', [['bitmiş', ''], ['olan', ''], ['proje', 'is-noun']]],
@@ -1072,6 +1157,7 @@ addEventListener('DOMContentLoaded', () => {
     ScrollTrigger.create({ trigger: '[data-clock]', start: 'top 70%', once: true, onEnter: () => { setTimeout(() => $('[data-clock-seg] [data-time="done"]').click(), 300); setTimeout(() => $('[data-clock-seg] [data-time="now"]').click(), 1700); } });
     ScrollTrigger.create({ trigger: '[data-builder]', start: 'top 70%', once: true, onEnter: () => { [1, 2, 3].forEach((k) => setTimeout(() => { bStep = k; drawBuild(true); }, 500 * k)); } });
     ScrollTrigger.create({ trigger: '[data-who]', start: 'top 70%', once: true, onEnter: () => G.from('[data-who-train]', { x: -300, duration: 1.2, ease: 'power3.out' }) });
+    ScrollTrigger.create({ trigger: '[data-kz]', start: 'top 70%', once: true, onEnter: () => setTimeout(kzGo, 300) });
     ScrollTrigger.create({ trigger: '[data-board]', start: 'top 75%', once: true, onEnter: () => showBoard(lab.verb, lab.time, lab.person, false) });
     ScrollTrigger.create({ trigger: '[data-mail]', start: 'top 75%', once: true, onEnter: () => G.from('[data-envelope]', { y: -40, rotation: -20, duration: .8, ease: 'bounce.out' }) });
     ScrollTrigger.create({ trigger: '.ob-cheat__formula', start: 'top 85%', once: true, onEnter: () => G.from('.ob-cheat__formula span', { x: 60, duration: .6, stagger: .15, ease: 'back.out(2)' }) });

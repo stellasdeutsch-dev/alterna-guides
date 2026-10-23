@@ -195,6 +195,22 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
 .cmp__c mark { background: #f6e3f0; color: var(--purple); border-radius: 6px; padding: 0 .2em; display: inline-block; }
 .cmp [data-v="tr"] { display: none; } .cmp-on [data-v="tr"] { display: block; } .cmp-on [data-v="ru"] { display: none; }
 
+/* COMPARE+: English → Turkish, piece by piece */
+.kz { margin-top: 18px; }
+.kz h3 { margin-bottom: .35em; }
+.kz__pick { margin: 6px 0 16px; }
+.kz__box { display: grid; gap: 8px; padding: 18px 14px; border-radius: 20px; background: var(--mist); }
+.kz__lbl { font: 700 12px var(--ak-font); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.kz__row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-height: 2em; font-size: clamp(15px, 4vw, 22px); }
+.kz__row[data-row="tr"] { margin-bottom: 2px; }
+.kz__row .t { cursor: pointer; }
+.kz__row .t.is-cur { outline: 3px solid var(--sky); outline-offset: 3px; }
+.kz__row .t.is-x { opacity: .35; text-decoration: line-through 2px; }
+.kz__row .t.is-off { opacity: .18; }
+.kz__row .t--p[lang="tr"], .kz__row .t--m[lang="tr"], .kz__row .t--e[lang="tr"] { color: #fff; }
+.kz__steps { margin-top: 14px; }
+.kz__steps li { cursor: pointer; }
+
 /* PIPELINE: флоу-карты */
 .pl { position: relative; display: grid; gap: 22px; margin-top: 16px; }
 @media (min-width: 900px) { .pl { grid-template-columns: repeat(4, 1fr); gap: 26px; } }
@@ -376,10 +392,10 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
     <div class="w hero__grid">
       <div>
         <span class="kick">B1 · Antalya · <span lang="tr">-(A/I)r … -mAz</span></span>
-        <h1>Not even yet — <span class="hl">already</span></h1>
+        <h1>Barely landed — <span class="hl">already</span> calling</h1>
         <p class="tx">The plane touches the runway. The wheels are still rolling. And you're already calling Mom.</p>
         <p class="tx">In Turkish it's one verb, clicked twice. Plus, minus. Zero seconds in between.</p>
-        <p class="tx">Today: how to click, which tail to use, and why the pair never conjugates.</p>
+        <p class="tx">English needs three words for this: “as soon as.” Turkish needs none. Today: how to click, which tail to use, and why the pair never conjugates.</p>
         <button class="big" type="button" data-say="gelir gelmez" lang="tr" aria-label="Listen: gelir gelmez"><span class="big__a">gelir</span><span class="big__b">gelmez</span></button>
         <ul class="cnt" data-ui>
           <li><b data-count="2">2</b><span>clicks</span></li>
@@ -510,7 +526,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
           <li><span><b lang="tr">gel-</b> — the verb. Just “come.”</span></li>
           <li><span><b lang="tr" class="p">gelir</b> — first click, plus. The aorist.</span></li>
           <li><span><b lang="tr" class="m">gelmez</b> — second click, minus. Same verb.</span></li>
-          <li><span><b lang="tr" class="p">gelir</b> <b lang="tr" class="m">gelmez</b> + the main action. “Barely came — already.”</span></li>
+          <li><span><b lang="tr" class="p">gelir</b> <b lang="tr" class="m">gelmez</b> + the main action. “As soon as I came…”</span></li>
         </ol>
         <p>The minus here isn't negation. It's the click of a stopwatch: the first thing hasn't cooled down, and the second is already going.</p>
       </div>
@@ -563,7 +579,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
       <span class="kick">First click</span>
       <h2><span class="no">4.0</span>Which tail goes on the plus</h2>
       <p class="tx">The first click is the aorist. You pick the tail by the old rules. The second click is easier: always <b lang="tr" class="m">-maz</b> or <b lang="tr" class="m">-mez</b>.</p>
-      <p class="tx">Better learn the thirteen exceptions as a list: <span lang="tr">al, bil, bul, dur, gel, gör, kal, ol, öl, san, var, ver, vur</span>. Tap a verb. The dot will carry it to the right lane.</p>
+      <p class="tx">Better learn the thirteen exceptions as a list: <span lang="tr">al, bil, bul, dur, gel, gör, kal, ol, öl, san, var, ver, vur</span>. Sound tip: <b lang="tr">ı</b> is the a in “about,” so <b lang="tr">alır</b> ≈ “ah-luhr.” Tap a verb. The dot will carry it to the right lane.</p>
       <div class="ao__verbs" lang="tr" role="group" aria-label="Verbs"></div>
       <div class="ao__lanes">
         <span class="ao__dot"></span>
@@ -598,7 +614,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
       <div class="tx">
         <span class="kick">Persons</span>
         <h2><span class="no">5.0</span>The pair doesn't conjugate</h2>
-        <p>The pair doesn't know who came. It's frozen. Person and tense live in the main verb, at the very end. Even if all six came. Tap an avatar.</p>
+        <p>The pair doesn't know who came. It's frozen. English says “as soon as <b>I</b> got home, <b>I</b>…” — Turkish says “I” once, at the very end. Tap an avatar.</p>
         <p>The subjects can be different: <a-say>Otobüs gelir gelmez bindik.</a-say></p>
       </div>
       <div>
@@ -672,19 +688,36 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
   </section>
 
   <!-- ================= COMPARE ================= -->
-  <section class="s" data-section="compare" data-words="40">
+  <section class="s" data-section="compare" data-words="95">
     <svg class="fl rd rd-compare" viewBox="0 0 120 120" aria-hidden="true" style="right:4%;top:24px;width:96px;color:#dde9f1;height:auto"><use href="#i-ring"/></svg>
     <div class="w">
       <div class="panel">
         <span class="kick">English ↔ Turkish</span>
-        <h2><span class="no">7.0</span>English says “not” too</h2>
-        <p class="tx">Funny, but English does the same thing. “I hadn't even walked in when the phone rang.” There's a minus. There's no negation.</p>
-        <p class="tx">One difference: English says “hadn't even,” while Turkish takes the verb itself with a minus. And repeats it twice. Flip the switch.</p>
+        <h2><span class="no">7.0</span>English says “no” too</h2>
+        <p class="tx">English has its own minus that denies nothing: “<b>No sooner</b> had I walked in than the phone rang.” There's a “no.” Nobody's saying no.</p>
+        <p class="tx">Everyday English just says “as soon as” or “the moment.” Turkish has no such word. It takes the verb itself: plus, then minus. Flip the switch.</p>
         <button class="sw" type="button" role="switch" aria-checked="false" data-ui><span>English</span><span class="sw__k"></span><span>Türkçe</span></button>
         <div class="cmp" data-ui>
-          <div class="cmp__c"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color:#921279;display:block;margin-bottom:8px"><use href="#g-door"/></svg><div data-v="ru"><mark>I hadn't even</mark> walked in when the phone rang.</div><div data-v="tr" lang="tr" data-say="Eve girer girmez telefon çaldı.">Eve <mark>girer girmez</mark> telefon çaldı.</div></div>
-          <div class="cmp__c"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color:#921279;display:block;margin-bottom:8px"><use href="#g-moon"/></svg><div data-v="ru"><mark>As soon as I wake up</mark>, I drink coffee.</div><div data-v="tr" lang="tr" data-say="Uyanır uyanmaz kahve içerim.">Uyanır <mark>uyanmaz</mark> kahve içerim.</div></div>
-          <div class="cmp__c"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color:#921279;display:block;margin-bottom:8px"><use href="#g-cap"/></svg><div data-v="ru"><mark>As soon as</mark> exams are over, we're leaving.</div><div data-v="tr" lang="tr" data-say="Sınav biter bitmez tatile çıkacağız.">Sınav <mark>biter bitmez</mark> tatile çıkacağız.</div></div>
+          <div class="cmp__c"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color:#921279;display:block;margin-bottom:8px"><use href="#g-door"/></svg><div data-v="ru"><mark>No sooner</mark> had I walked in than the phone rang.</div><div data-v="tr" lang="tr" data-say="Eve girer girmez telefon çaldı.">Eve <mark>girer girmez</mark> telefon çaldı.</div></div>
+          <div class="cmp__c"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color:#921279;display:block;margin-bottom:8px"><use href="#g-moon"/></svg><div data-v="ru"><mark>As soon as</mark> I wake up, I drink coffee.</div><div data-v="tr" lang="tr" data-say="Uyanır uyanmaz kahve içerim.">Uyanır <mark>uyanmaz</mark> kahve içerim.</div></div>
+          <div class="cmp__c"><svg width="32" height="32" viewBox="0 0 24 24" aria-hidden="true" style="color:#921279;display:block;margin-bottom:8px"><use href="#g-cap"/></svg><div data-v="ru"><mark>The moment</mark> exams are over, we're leaving.</div><div data-v="tr" lang="tr" data-say="Sınav biter bitmez tatile çıkacağız.">Sınav <mark>biter bitmez</mark> tatile çıkacağız.</div></div>
+        </div>
+        <div class="kz card">
+          <h3>Same idea, four differences</h3>
+          <p>Top row — English, bottom row — Turkish. Pick a sentence and press “▶”: the Turkish pieces fly in from the English ones, step by step.</p>
+          <div class="row kz__pick" role="group" aria-label="Sentence" data-ui></div>
+          <div class="kz__box">
+            <small class="kz__lbl" data-ui>English</small>
+            <div class="kz__row" data-row="en"></div>
+            <small class="kz__lbl" data-ui>Türkçe</small>
+            <div class="kz__row" data-row="tr" lang="tr" aria-live="polite"></div>
+          </div>
+          <ol class="steps kz__steps"></ol>
+          <div class="row" style="justify-content:center" data-ui>
+            <button class="btn btn--ghost" type="button" data-kz="prev" aria-label="Step back">←</button>
+            <button class="btn" type="button" data-kz="play">▶ Translate</button>
+            <button class="btn btn--ghost" type="button" data-kz="next" aria-label="Step forward">→</button>
+          </div>
         </div>
       </div>
     </div>
@@ -828,7 +861,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
       <div class="panel panel--dark">
         <span class="kick" style="color:#9fd0e8">Lab</span>
         <h2><span class="no" style="color:#9fd0e8;border-color:rgba(255,255,255,.2)">12.0</span>Chain builder</h2>
-        <p class="tx">Pick the first action, the second, the tense and the person. The pair builds and freezes. Only the tail changes. Try a request: the pair stays the same, only the ending changes.</p>
+        <p class="tx">Pick the first action, the second, the tense and the person. The pair builds and freezes. Only the tail changes. Watch the English line: it changes in two places, Turkish in one.</p>
         <div class="lab">
           <div class="lab__ctl">
             <div><small data-ui>First action</small><div class="row" data-lab="a" role="group" aria-label="First action" data-ui></div></div>
@@ -854,13 +887,13 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
     <div class="w">
       <span class="kick">Traps</span>
       <h2><span class="no">13.0</span>Five rakes to step on</h2>
-      <p class="tx">Every other learner steps on them. Tap a card — the mistake fixes itself before your eyes.</p>
+      <p class="tx">English sets three of them for you: it wants a tense, a subject and its own word order in every clause. Two more catch everyone. Tap a card — the mistake fixes itself before your eyes.</p>
       <div class="tp">
-        <button class="trap" type="button" data-say="Eve gelir gelmez uyudum."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Eve gelirim gelmem uyudum.</span><span class="trap__good" lang="tr">Eve gelir gelmez uyudum.</span><span>The pair doesn't conjugate. The person is only in <b lang="tr">uyudum</b>.</span></button>
-        <button class="trap" type="button" data-say="Haberi alır almaz aradım."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Haberi alar almaz aradım.</span><span class="trap__good" lang="tr">Haberi alır almaz aradım.</span><span><b lang="tr">al-</b> is one of the thirteen exceptions: <b lang="tr">alır</b>, not <b lang="tr">alar</b>.</span></button>
-        <button class="trap" type="button" data-say="Misafirler gider gitmez yattık."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Misafirler gitir gitmez yattık.</span><span class="trap__good" lang="tr">Misafirler gider gitmez yattık.</span><span><b lang="tr">git-</b> is one syllable: <b lang="tr">gider</b>. And t becomes d.</span></button>
-        <button class="trap" type="button" data-say="Eve gelir gelmez uyudum."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Eve gelmez gelir uyudum.</span><span class="trap__good" lang="tr">Eve gelir gelmez uyudum.</span><span>Plus first, then minus. The other way round is nonsense.</span></button>
-        <button class="trap" type="button" data-say="Eve gelir gelmez uyudum."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Eve gelir gitmez uyudum.</span><span class="trap__good" lang="tr">Eve gelir gelmez uyudum.</span><span>One and the same verb. Two different verbs — that's another story.</span></button>
+        <button class="trap" type="button" data-say="Eve gelir gelmez uyudum."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Eve geldim gelmedim uyudum.</span><span class="trap__good" lang="tr">Eve gelir gelmez uyudum.</span><span>English says “as soon as I <b>got</b> home” — past twice. Turkish puts the past only on <b lang="tr">uyudum</b>. The pair is timeless.</span></button>
+        <button class="trap" type="button" data-say="Eve gelir gelmez uyudum."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Eve gelirim gelmem uyudum.</span><span class="trap__good" lang="tr">Eve gelir gelmez uyudum.</span><span>English needs “I” in both clauses. The Turkish pair has no person — only <b lang="tr">uyudum</b> says “I.”</span></button>
+        <button class="trap" type="button" data-say="Eve gelir gelmez uyudum."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Gelir gelmez eve uyudum.</span><span class="trap__good" lang="tr">Eve gelir gelmez uyudum.</span><span>English: “as soon as I got <b>home</b>.” Turkish: <b lang="tr">Eve</b> first, the pair right before the main verb.</span></button>
+        <button class="trap" type="button" data-say="Haberi alır almaz aradım."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Haberi alar almaz aradım.</span><span class="trap__good" lang="tr">Haberi alır almaz aradım.</span><span><b lang="tr">al-</b> is one of the thirteen exceptions: not <b lang="tr">alar</b> but <b lang="tr">alır</b> (ı = the a in “about”).</span></button>
+        <button class="trap" type="button" data-say="Misafirler gider gitmez yattık."><svg class="trap__ic trap__no" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-no"/></svg><svg class="trap__ic trap__ok" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-ok"/></svg><span class="trap__bad" lang="tr">Misafirler gitir gitmez yattık.</span><span class="trap__good" lang="tr">Misafirler gider gitmez yattık.</span><span><b lang="tr">git-</b> is one syllable: <b lang="tr">gider</b>. And t turns into d.</span></button>
       </div>
       <div class="row" style="margin-top:14px" data-ui><button class="btn" type="button" data-tp-all>Fix all</button></div>
     </div>
@@ -870,9 +903,9 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
   <section class="s" data-section="video" data-words="15">
     <div class="w tx">
       <span class="kick">Video</span>
-      <h2><span class="no">14.0</span>Three minutes at the board</h2>
-      <p>The explanation is in Russian. Notice: the pair doesn't change, no matter who came.</p>
-      <a-video yt="XROQN7IBBmY" start="38" end="218" title="Lesson #72. The “ir/mez” and “eli” constructions" channel="Anastasia Pektas"></a-video>
+      <h2><span class="no">14.0</span>Four minutes at the board</h2>
+      <p>All in Turkish. It covers two forms: <b lang="tr">-(y)IncA</b> (“when”) and our pair. Notice: the pair never takes a person.</p>
+      <a-video yt="pL9qweZhlFs" start="0" end="269" title="B1 - 06 -(y)IncA ve -(I)r…-mAz Kolay Anlatım! | Turkish When &amp; As Soon As" channel="Yunus Emre Enstitüsü"></a-video>
     </div>
   </section>
 
@@ -915,7 +948,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
         <span class="kick">Cheat sheet</span>
         <h2><span class="no">17.0</span>Save as a screenshot</h2>
         <div class="poster">
-          <button type="button" data-say="gelir gelmez"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" style="color:#2f80ed"><use href="#g-team"/></svg><small data-ui>Formula</small><b lang="tr"><span class="p">V-(A/I)r</span> <span class="m">V-mAz</span></b><span>One verb twice: plus, then minus.</span></button>
+          <button type="button" data-say="gelir gelmez"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" style="color:#2f80ed"><use href="#g-team"/></svg><small data-ui>Formula</small><b lang="tr"><span class="p">V-(A/I)r</span> <span class="m">V-mAz</span></b><span>One verb twice: plus, then minus. No “as soon as” word, no person, no tense.</span></button>
           <button type="button" data-say="okur okumaz, gider gitmez, uyanır uyanmaz"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" style="color:#2f80ed"><use href="#g-sun"/></svg><small data-ui>First click</small><b lang="tr">okur · gider · uyanır</b><span>Vowel → -r. One syllable → -Ar. Long ones and 13 exceptions → -Ir.</span></button>
           <button type="button" data-say="Eve gelir gelmez uyudum."><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" style="color:#2f80ed"><use href="#g-msg"/></svg><small data-ui>Person and tense</small><b lang="tr">gelir gelmez uyu<span class="p">dum</span></b><span>The pair is frozen. Everything changes at the end.</span></button>
           <button type="button" data-say="Ders bitince. Ders biter bitmez."><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" style="color:#2f80ed"><use href="#g-rain"/></svg><small data-ui>Don't mix up</small><b lang="tr">bitince ≠ biter bitmez</b><span>-ince — when. -ir -mez — right away.</span></button>
@@ -955,7 +988,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--purple); ou
   <div class="sb__track"><span class="sb__fill"></span><svg class="sb__thumb av" viewBox="0 0 64 64" aria-hidden="true"><use href="#a5"/></svg></div>
 </nav>
 
-<template data-achievement data-title="Zero seconds" data-text="Now you can say “as soon as,” “the moment” and “hadn't even — already” in Turkish.">
+<template data-achievement data-title="Zero seconds" data-text="Now you can say “as soon as,” “the moment” and “no sooner … than” in Turkish — with zero extra words.">
   <svg viewBox="0 0 120 120" aria-hidden="true">
     <circle cx="60" cy="60" r="56" fill="#1d5b82"/>
     <g class="ac-ph"><rect x="38" y="20" width="44" height="80" rx="10" fill="#fff"/><rect x="52" y="25" width="16" height="4" rx="2" fill="#dde9f1"/></g>
@@ -1183,7 +1216,7 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- PERSON: аватары в офисе ---------- */
   const person = sec('person');
   const PV = ['dum', 'dun', 'du', 'duk', 'dunuz', 'dular'];
-  const PR = ['I fell asleep', 'you fell asleep', 'he/she fell asleep', 'we fell asleep', 'you all fell asleep', 'they fell asleep'];
+  const PR = ['I fell asleep', 'you fell asleep', 'she fell asleep', 'we fell asleep', 'you all fell asleep', 'they fell asleep'];
   $$('.fp__av', person).forEach((b) => b.addEventListener('click', () => {
     const p = Number(b.dataset.p), tr = `Eve gelir gelmez uyu${PV[p]}.`;
     const out = $('[data-fp-tr]', person);
@@ -1242,6 +1275,79 @@ addEventListener('DOMContentLoaded', () => {
     }
   });
   $$('.cmp__c', cmpSec).forEach((c) => c.addEventListener('click', () => { if (A) G.fromTo(c, { y: -8 }, { y: 0, duration: 0.5, ease: 'bounce.out' }); }));
+
+  /* ---------- COMPARE+: English → Turkish, the pieces fly over ---------- */
+  const KZ = [
+    { name: 'got home', en: [['As soon as', 'as'], ['I', 'who'], ['got', 'v'], ['home,', 'obj'], ['I fell asleep.', 'main']],
+      tr: [['Eve', 'obj', 't--v'], ['gelir', 'v', 't--p'], ['gelmez', 'v', 't--m'], ['uyudum.', 'main', 't--e']], bad: 'geldim gelmedim', main: '<b lang="tr">uyudum</b> = “I fell asleep.”' },
+    { name: 'the hotel', en: [['As soon as', 'as'], ['we', 'who'], ['got', 'v'], ['to the hotel,', 'obj'], ['we ran to the sea.', 'main']],
+      tr: [['Otele', 'obj', 't--v'], ['varır', 'v', 't--p'], ['varmaz', 'v', 't--m'], ['denize koştuk.', 'main', 't--e']], bad: 'vardık varmadık', main: '<b lang="tr">denize koştuk</b> = “we ran to the sea.”' },
+    { name: 'saw me', en: [['As soon as', 'as'], ['she', 'who'], ['saw', 'v'], ['me,', 'obj'], ['she waved.', 'main']],
+      tr: [['Beni', 'obj', 't--v'], ['görür', 'v', 't--p'], ['görmez', 'v', 't--m'], ['el salladı.', 'main', 't--e']], bad: 'gördü görmedi', main: '<b lang="tr">el salladı</b> = “she waved.” And “she” is hiding inside: no word for it.' },
+    { name: 'text me', en: [['As soon as', 'as'], ['you', 'who'], ['get', 'v'], ['home,', 'obj'], ['text me!', 'main']],
+      tr: [['Eve', 'obj', 't--v'], ['varır', 'v', 't--p'], ['varmaz', 'v', 't--m'], ['bana yaz!', 'main', 't--e']], bad: 'varırsın varmazsın', main: '<b lang="tr">bana yaz</b> = “text me!” The request lives only here.' },
+  ];
+  const kzSec = cmpSec, kzPick = $('.kz__pick', kzSec), kzEn = $('[data-row="en"]', kzSec), kzTr = $('[data-row="tr"]', kzSec), kzSteps = $('.kz__steps', kzSec);
+  const KZK = [['as', 'v'], ['obj'], ['who', 'v'], ['main']];
+  let kzI = 0, kzStep = -1, kzTimer = null;
+  KZ.forEach((v, i) => { const b = mk('button', 'chip', v.name); b.type = 'button'; b.dataset.val = i; b.setAttribute('aria-pressed', String(!i)); kzPick.append(b); });
+  function kzRender() {
+    const v = KZ[kzI], pair = v.tr.filter((x) => x[1] === 'v').map((x) => x[0]).join(' ');
+    kzEn.innerHTML = v.en.map(([w, k]) => `<span class="t ${k === 'as' ? 't--s' : k === 'main' ? 't--e' : 't--v'}" data-k="${k}">${w}</span>`).join('');
+    kzTr.innerHTML = v.tr.map(([w, k, c]) => `<span class="t ${c} is-off" data-k="${k}" lang="tr">${w}</span>`).join('');
+    kzTr.dataset.say = v.tr.map((x) => x[0]).join(' ');
+    const sent = v.en.map((x) => x[0]).join(' ');
+    kzSteps.innerHTML = [
+      `“As soon as” is a separate word. Turkish has none: the verb twice, <b lang="tr">${pair}</b>, does the job.`,
+      `Order flips. English puts “${v.en[3][0].replace(',', '')}” after the verb. Turkish puts <b lang="tr">${v.tr[0][0]}</b> first.`,
+      `English says who and when: “${v.en[1][0]} ${v.en[2][0]}.” The Turkish pair says neither. Never <b lang="tr">${v.bad}</b>.`,
+      `Person and tense go at the very end, once: ${v.main}`,
+    ].map((h) => `<li><span>${h}</span></li>`).join('');
+    kzSteps.setAttribute('aria-label', sent);
+    kzStep = -1;
+  }
+  function kzShow(i, anim = true) {
+    kzStep = i;
+    const on = KZK[i], seen = new Set(KZK.slice(0, i + 1).flat());
+    $$('.t', kzEn).forEach((t) => {
+      t.classList.toggle('is-cur', on.includes(t.dataset.k));
+      t.classList.toggle('is-x', (t.dataset.k === 'as' && i >= 0) || (t.dataset.k === 'who' && i >= 2));
+    });
+    $$('.t', kzTr).forEach((t) => {
+      t.classList.toggle('is-cur', on.includes(t.dataset.k));
+      t.classList.toggle('is-off', !seen.has(t.dataset.k));
+    });
+    $$('li', kzSteps).forEach((s, j) => s.classList.toggle('is-cur', j === i));
+    if (!A || !anim) return;
+    const from = $$('.t', kzEn).filter((t) => on.includes(t.dataset.k) && t.dataset.k !== 'who');
+    const src = (from.find((t) => t.dataset.k !== 'as') || from[0]);
+    $$('.t', kzTr).filter((t) => on.includes(t.dataset.k)).forEach((t, j) => {
+      if (!src) return;
+      const a = src.getBoundingClientRect(), b = t.getBoundingClientRect();
+      G.fromTo(t, { x: a.left - b.left, y: a.top - b.top, rotation: j % 2 ? 10 : -10, scale: 0.7 }, { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.8, delay: j * 0.08, ease: 'back.out(1.8)' });
+    });
+    from.forEach((t) => G.fromTo(t, { scale: 1.2 }, { scale: 1, duration: 0.5, ease: 'elastic.out(1, .4)' }));
+    G.fromTo($$('li', kzSteps)[i], { x: -18 }, { x: 0, duration: 0.45, ease: 'back.out(2)' });
+  }
+  function kzPlay() {
+    clearInterval(kzTimer); kzRender(); kzShow(0); let i = 0;
+    kzTimer = setInterval(() => {
+      i++;
+      if (i > 3) { clearInterval(kzTimer); sparks(kzTr, 12); if (window.AlternaKit) AlternaKit.speak(kzTr.dataset.say); return; }
+      kzShow(i);
+    }, reduce ? 250 : 1500);
+  }
+  kzPick.addEventListener('click', (e) => { const b = e.target.closest('.chip'); if (!b) return; press(kzPick, b); kzI = Number(b.dataset.val); kzPlay(); });
+  $('[data-kz="play"]').addEventListener('click', kzPlay);
+  $('[data-kz="prev"]').addEventListener('click', () => { clearInterval(kzTimer); kzShow(Math.max(0, kzStep - 1)); });
+  $('[data-kz="next"]').addEventListener('click', () => { clearInterval(kzTimer); kzShow(Math.min(3, kzStep + 1)); });
+  kzSteps.addEventListener('click', (e) => { const li = e.target.closest('li'); if (!li) return; clearInterval(kzTimer); kzShow($$('li', kzSteps).indexOf(li)); });
+  kzEn.addEventListener('click', (e) => { const t = e.target.closest('.t'); if (!t) return; const k = KZK.findIndex((x) => x.includes(t.dataset.k)); if (k > -1) { clearInterval(kzTimer); kzShow(k); } });
+  kzTr.addEventListener('click', () => { if (window.AlternaKit) AlternaKit.speak(kzTr.dataset.say); });
+  new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) clearInterval(kzTimer); })).observe(kzTr);
+  kzRender();
+  if (A) ScrollTrigger.create({ trigger: '.kz__box', start: 'top 72%', once: true, onEnter: kzPlay });
+  else kzShow(3, false);
 
   /* ---------- PIPELINE: точка бежит по пунктиру ---------- */
   const pl = $('.pl'), plCards = $$('.pl__c', pl), plPath = $('.pl__path', pl), plDot = $('.pl__dot', pl);
@@ -1388,13 +1494,13 @@ addEventListener('DOMContentLoaded', () => {
   ];
   const LB = [
     { k: 'uyu', label: 'sleep', tr: { past: ['uyudum', 'uyudun', 'uyudu', 'uyuduk', 'uyudunuz', 'uyudular'], fut: ['uyuyacağım', 'uyuyacaksın', 'uyuyacak', 'uyuyacağız', 'uyuyacaksınız', 'uyuyacaklar'], imp: [null, 'uyu', null, null, 'uyuyun', null], hab: ['uyurum', 'uyursun', 'uyur', 'uyuruz', 'uyursunuz', 'uyurlar'] },
-      ru: { past: ['I fell asleep', 'you fell asleep', 'he/she fell asleep', 'we fell asleep', 'you all fell asleep', 'they fell asleep'], fut: ['I\'ll fall asleep', 'you\'ll fall asleep', 'he/she will fall asleep', 'we\'ll fall asleep', 'you all will fall asleep', 'they\'ll fall asleep'], imp: [null, 'go to sleep', null, null, 'go to sleep, all of you', null], hab: ['I fall asleep', 'you fall asleep', 'he/she falls asleep', 'we fall asleep', 'you all fall asleep', 'they fall asleep'] } },
+      ru: { past: ['I fell asleep', 'you fell asleep', 'she fell asleep', 'we fell asleep', 'you all fell asleep', 'they fell asleep'], fut: ['I\'ll fall asleep', 'you\'ll fall asleep', 'she\'ll fall asleep', 'we\'ll fall asleep', 'you all will fall asleep', 'they\'ll fall asleep'], imp: [null, 'go to sleep', null, null, 'go to sleep, all of you', null], hab: ['I fall asleep', 'you fall asleep', 'she falls asleep', 'we fall asleep', 'you all fall asleep', 'they fall asleep'] } },
     { k: 'kahve iç', label: 'coffee', tr: { past: ['kahve içtim', 'kahve içtin', 'kahve içti', 'kahve içtik', 'kahve içtiniz', 'kahve içtiler'], fut: ['kahve içeceğim', 'kahve içeceksin', 'kahve içecek', 'kahve içeceğiz', 'kahve içeceksiniz', 'kahve içecekler'], imp: [null, 'kahve iç', null, null, 'kahve için', null], hab: ['kahve içerim', 'kahve içersin', 'kahve içer', 'kahve içeriz', 'kahve içersiniz', 'kahve içerler'] },
-      ru: { past: ['I had coffee', 'you had coffee', 'he/she had coffee', 'we had coffee', 'you all had coffee', 'they had coffee'], fut: ['I\'ll have coffee', 'you\'ll have coffee', 'he/she will have coffee', 'we\'ll have coffee', 'you all will have coffee', 'they\'ll have coffee'], imp: [null, 'have some coffee', null, null, 'have some coffee, all of you', null], hab: ['I have coffee', 'you have coffee', 'he/she has coffee', 'we have coffee', 'you all have coffee', 'they have coffee'] } },
+      ru: { past: ['I had coffee', 'you had coffee', 'she had coffee', 'we had coffee', 'you all had coffee', 'they had coffee'], fut: ['I\'ll have coffee', 'you\'ll have coffee', 'she\'ll have coffee', 'we\'ll have coffee', 'you all will have coffee', 'they\'ll have coffee'], imp: [null, 'have some coffee', null, null, 'have some coffee, all of you', null], hab: ['I have coffee', 'you have coffee', 'she has coffee', 'we have coffee', 'you all have coffee', 'they have coffee'] } },
     { k: 'duş al', label: 'shower', tr: { past: ['duş aldım', 'duş aldın', 'duş aldı', 'duş aldık', 'duş aldınız', 'duş aldılar'], fut: ['duş alacağım', 'duş alacaksın', 'duş alacak', 'duş alacağız', 'duş alacaksınız', 'duş alacaklar'], imp: [null, 'duş al', null, null, 'duş alın', null], hab: ['duş alırım', 'duş alırsın', 'duş alır', 'duş alırız', 'duş alırsınız', 'duş alırlar'] },
-      ru: { past: ['I took a shower', 'you took a shower', 'he/she took a shower', 'we took a shower', 'you all took a shower', 'they took a shower'], fut: ['I\'ll take a shower', 'you\'ll take a shower', 'he/she will take a shower', 'we\'ll take a shower', 'you all will take a shower', 'they\'ll take a shower'], imp: [null, 'take a shower', null, null, 'take a shower, all of you', null], hab: ['I take a shower', 'you take a shower', 'he/she takes a shower', 'we take a shower', 'you all take a shower', 'they take a shower'] } },
+      ru: { past: ['I took a shower', 'you took a shower', 'she took a shower', 'we took a shower', 'you all took a shower', 'they took a shower'], fut: ['I\'ll take a shower', 'you\'ll take a shower', 'she\'ll take a shower', 'we\'ll take a shower', 'you all will take a shower', 'they\'ll take a shower'], imp: [null, 'take a shower', null, null, 'take a shower, all of you', null], hab: ['I take a shower', 'you take a shower', 'she takes a shower', 'we take a shower', 'you all take a shower', 'they take a shower'] } },
     { k: 'mesaj at', label: 'message', tr: { past: ['mesaj attım', 'mesaj attın', 'mesaj attı', 'mesaj attık', 'mesaj attınız', 'mesaj attılar'], fut: ['mesaj atacağım', 'mesaj atacaksın', 'mesaj atacak', 'mesaj atacağız', 'mesaj atacaksınız', 'mesaj atacaklar'], imp: [null, 'mesaj at', null, null, 'mesaj atın', null], hab: ['mesaj atarım', 'mesaj atarsın', 'mesaj atar', 'mesaj atarız', 'mesaj atarsınız', 'mesaj atarlar'] },
-      ru: { past: ['I wrote a message', 'you wrote a message', 'he/she wrote a message', 'we wrote a message', 'you all wrote a message', 'they wrote a message'], fut: ['I\'ll write a message', 'you\'ll write a message', 'he/she will write a message', 'we\'ll write a message', 'you all will write a message', 'they\'ll write a message'], imp: [null, 'write a message', null, null, 'write a message, all of you', null], hab: ['I write a message', 'you write a message', 'he/she writes a message', 'we write a message', 'you all write a message', 'they write a message'] } },
+      ru: { past: ['I wrote a message', 'you wrote a message', 'she wrote a message', 'we wrote a message', 'you all wrote a message', 'they wrote a message'], fut: ['I\'ll write a message', 'you\'ll write a message', 'she\'ll write a message', 'we\'ll write a message', 'you all will write a message', 'they\'ll write a message'], imp: [null, 'write a message', null, null, 'write a message, all of you', null], hab: ['I write a message', 'you write a message', 'she writes a message', 'we write a message', 'you all write a message', 'they write a message'] } },
   ];
   const LT = [['past', 'yesterday'], ['fut', 'tomorrow'], ['imp', 'request'], ['hab', 'always']];
   const WHY = { past: 'The pair is frozen. Past and person go at the end of the main verb.', fut: 'Same pair. The future lives only in the main verb.', imp: 'A request — to “you” or “you all.” The pair doesn\'t change.', hab: 'A habit — the aorist at the end. The pair is still frozen.' };
@@ -1414,7 +1520,7 @@ addEventListener('DOMContentLoaded', () => {
     tiles.innerHTML = `<span class="t t--v">${a.tr}</span><span class="t t--p">${a.p[0]}${a.p[1]}</span><span class="t t--m">${a.p[2]}${a.p[3]}</span><span class="t t--e">${main}</span>`;
     const sent = $('[data-lab-tr]'); sent.textContent = tr; sent.dataset.say = tr;
     $('[data-lab-ru]').textContent = `${a.ru}, ${ru}.`;
-    $('[data-lab-why]').textContent = `${a.p[0]}${a.p[1]} — plus, ${a.p[2]}${a.p[3]} — minus. ${WHY[lab.t]}`;
+    $('[data-lab-why]').textContent = `${a.p[0]}${a.p[1]} — plus, ${a.p[2]}${a.p[3]} — minus. No “as soon as” word and no person in the pair. ${WHY[lab.t]}${lab.p === 2 ? ' O = he or she: Turkish has no gender.' : ''}`;
     if (A) {
       G.fromTo($$('.t', tiles), { y: -60, rotation: (i) => (i % 2 ? 12 : -12), scale: 0.5 }, { y: 0, rotation: 0, scale: 1, duration: 0.8, stagger: 0.08, ease: 'elastic.out(1, .5)' });
       G.fromTo('[data-lab-why]', { x: 20 }, { x: 0, duration: 0.5, delay: 0.3, ease: 'back.out(2)' });

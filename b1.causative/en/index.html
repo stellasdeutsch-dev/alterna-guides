@@ -188,6 +188,21 @@
   .gq .fb { min-height: 3em; margin: 0; color: var(--g1); max-width: 30em; }
   .ftnote { font-size: 14px; color: var(--mute); margin-top: 12px; }
 
+  /* ---------- English ↔ Türkçe ---------- */
+  .mirror { display: grid; gap: 14px; }
+  .mrow { display: grid; justify-items: center; gap: 10px; padding: 18px 12px; border-radius: 14px; text-align: center; background: radial-gradient(70% 100% at 50% 100%, rgba(242,201,108,.14), rgba(5,9,30,.92)); border: 1px solid rgba(242,201,108,.3); }
+  .mside { display: grid; justify-items: center; gap: 6px; min-width: 0; }
+  .mside small { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+  .men { font: 400 clamp(22px, 6vw, 30px)/1.25 var(--sans); color: var(--ink); }
+  .men span { display: inline-block; white-space: pre; }
+  .men .x { color: var(--bad); font-weight: 650; }
+  .mw { font: 400 clamp(30px, 9vw, 46px)/1.05 var(--serif); color: #fff; }
+  .mw span { display: inline-block; white-space: pre; }
+  .mw .c { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .msign { display: grid; place-items: center; min-width: 52px; height: 36px; padding: 0 14px; border-radius: 999px; font: 700 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: #2b1a04; background: var(--goldg); }
+  .mnote { margin: 0; flex: 1; min-width: 0; min-height: 3em; color: var(--g1); }
+  .mfoot { display: flex; align-items: center; gap: 12px; }
+
   /* ---------- квитанции ---------- */
   .receipts { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
   .rc { position: relative; min-height: 150px; padding: 0; border: 0; background: none; perspective: 900px; text-align: left; }
@@ -431,7 +446,7 @@
   <section data-section="tower" data-words="47">
     <div class="sh">
       <div><div class="eyebrow"><i></i>02 · floors</div><h2 class="gt">One verb</h2></div>
-      <p class="sd">English adds extra words: cut, have it cut, get it cut. <b>Turkish takes one verb and stacks floors on it.</b></p>
+      <p class="sd">English adds extra words around the verb: cut, have it cut, get it cut. <b>Turkish takes one verb and stacks floors on it.</b> No helper verbs, no word order games.</p>
     </div>
     <div class="two">
       <div class="card tower" id="tower"></div>
@@ -502,9 +517,31 @@
     <p class="ftnote">There are short stubborn ones with their own suffixes. They're waiting in lesson two.</p>
   </section>
 
+  <section data-section="en-diff" data-words="72">
+    <div class="sh">
+      <div><div class="eyebrow"><i></i>04 · English ↔ Türkçe</div><h2 class="gt">Extra words</h2></div>
+      <p class="sd">English builds the causative out of extra words: <b>have</b> it done, <b>get</b> it done, <b>make</b> someone do it. Sometimes it even swaps the verb: die → kill. Turkish does all of that with a few letters inside one verb. Pick a pair and watch the extra words melt into the suffix.</p>
+    </div>
+    <div class="card pad mirror">
+      <div class="tabs" role="tablist" id="mmode">
+        <button type="button" role="tab" aria-selected="true" data-m="0">have / get</button>
+        <button type="button" role="tab" aria-selected="false" data-m="1">make</button>
+        <button type="button" role="tab" aria-selected="false" data-m="2">new verb</button>
+      </div>
+      <div class="vchips" id="mpairs"></div>
+      <div class="mrow" aria-live="polite">
+        <div class="mside"><small>English</small><div class="men" id="mEn"></div></div>
+        <div class="msign" id="mSign" aria-hidden="true">+ had</div>
+        <div class="mside"><small>Türkçe</small><div class="mw" id="mTr" lang="tr"></div></div>
+      </div>
+      <div class="mfoot"><button class="say" type="button" id="mSay" data-say="Saçımı kestirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button><p class="mnote" id="mNote"></p></div>
+    </div>
+    <div class="hint" style="margin-top:16px"><svg class="ic"><use href="#i-spark"/></svg><p>Same idea in both languages: you are the boss, someone else does the job. The difference is only where it lives. In English it's a separate word. In Turkish it's glued to the verb, right after the root.</p></div>
+  </section>
+
   <section data-section="scene" data-words="69">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>04 · scene</div><h2 class="gt">Saturday in Antalya</h2></div>
+      <div><div class="eyebrow"><i></i>05 · scene</div><h2 class="gt">Saturday in Antalya</h2></div>
       <p class="sd">You spent the whole day handing out jobs and never once picked up a tool. In the evening, receipts on the table. Tap each one: what it means and how to say it.</p>
     </div>
     <div class="receipts" id="receipts">
@@ -515,26 +552,26 @@
       <button class="rc" type="button" data-say="Vesikalık fotoğraf çektirdim"><span class="in"><span class="f"><svg class="ic"><use href="#i-camera"/></svg><b>Fotoğrafçı</b><small>ID photo · 200 ₺</small></span><span class="b"><b lang="tr">Vesikalık fotoğraf çektirdim.</b><small>I had my ID photo taken.</small><span class="stmp">photographer</span></span></span></button>
       <button class="rc" type="button" data-say="Mektubu yazdırdım"><span class="in"><span class="f"><svg class="ic"><use href="#i-book"/></svg><b>Kırtasiye</b><small>printing · 10 ₺</small></span><span class="b"><b lang="tr">Mektubu yazdırdım.</b><small>I had the letter printed.</small><span class="stmp">printer</span></span></span></button>
     </div>
-    <p class="ftnote">Notice: English says “I had it done.” Turkish says “I” too, and puts the order inside the verb.</p>
+    <p class="ftnote">English: I + had + it + done. Turkish: one word. The order sits inside the verb, and “I” sits in the ending.</p>
   </section>
 
   <section data-section="traps" data-words="54">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>05 · traps</div><h2 class="gt">Where people trip</h2></div>
-      <p class="sd">Almost everyone trips on these. Tap to see the right way.</p>
+      <div><div class="eyebrow"><i></i>06 · traps</div><h2 class="gt">Where people trip</h2></div>
+      <p class="sd">Four mistakes that sound fine to an English ear. Tap to see the right way.</p>
     </div>
     <div class="traps" id="traps">
-      <div class="trap"><span class="bad" lang="tr">Berberde saçımı kestim.</span><p>Sounds like you cut your own hair right there in the barbershop.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Saçımı kestirdim.</span><button class="say" type="button" data-say="Saçımı kestirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
-      <div class="trap"><span class="bad" lang="tr">okudur</span><p>Two syllables, ends in a vowel. The long suffix is too much here.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">okut</span><button class="say" type="button" data-say="okut" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
-      <div class="trap"><span class="bad" lang="tr">yet</span><p>Ends in a vowel, but only one syllable. A short verb needs -DIr.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">yedir</span><button class="say" type="button" data-say="yedir" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
-      <div class="trap"><span class="bad" lang="tr">yapdır</span><p>After voiceless p, D sounds like t.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">yaptır</span><button class="say" type="button" data-say="yaptır" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">Berberde saçımı kestim.</span><p>In English, “I cut my hair” often means the barber did it. In Turkish, kestim means your own hands and your own scissors.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Saçımı kestirdim.</span><button class="say" type="button" data-say="Saçımı kestirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">Beni bir saat bekledi.</span><p>You meant “She kept me waiting for an hour.” But bekledi is “she waited for me.” The “kept me waiting” part is one t.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Beni bir saat bekletti.</span><button class="say" type="button" data-say="Beni bir saat bekletti" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">Patron bizi çalışmak yaptı.</span><p>“Make” is not yapmak here. Don’t build it word by word, like in English. The “make” lives inside the verb: çalış + tır.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Patron bizi çalıştırdı.</span><button class="say" type="button" data-say="Patron bizi çalıştırdı" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">yapdır</span><p>English spelling keeps d no matter what. Turkish writes what you hear: after voiceless p, D turns into t.</p><div class="row"><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">yaptır</span><button class="say" type="button" data-say="yaptır" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
     </div>
   </section>
 
   <section data-section="video" data-words="15">
     <h2 class="gt" style="font-size:clamp(28px,7vw,48px)">Listen again</h2>
-    <p>Notice: first -dır/-tır by harmony, then the short -t after a vowel.</p>
-    <a-video yt="cgzPJY-dD3w" start="110" end="260" title="Lesson 34. The causative" channel="Anastasia Pektas"></a-video>
+    <p>A Turkish teacher, in Turkish. Don't try to catch every word. Listen for long verbs and spot the -DIr or -t right after the root.</p>
+    <a-video yt="LPEv_coRgmI" start="0" end="240" title="83. Ders (B1)-Çoklu Çatı-Murat BAYIR" channel="ALTIN KÖPRÜ - TÜRKÇE"></a-video>
   </section>
 
   <section data-section="practice" data-words="7">
@@ -565,10 +602,10 @@
 
   <section data-section="cheat" data-words="49">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>06 · cheat sheet</div><h2 class="gt">All on one page</h2></div>
+      <div><div class="eyebrow"><i></i>07 · cheat sheet</div><h2 class="gt">All on one page</h2></div>
     </div>
     <div class="card cheat">
-      <div class="crow"><h3>Meaning</h3><p>I get it done by someone else, or I make someone do it.</p><div class="ex"><button type="button" data-say="yaptım">yaptım</button><button type="button" data-say="yaptırdım">yaptırdım</button></div></div>
+      <div class="crow"><h3>Meaning</h3><p>have / get it done, make someone do it. English: extra words. Turkish: a suffix.</p><div class="ex"><button type="button" data-say="yaptım">yaptım</button><button type="button" data-say="yaptırdım">yaptırdım</button></div></div>
       <div class="crow"><h3>-t</h3><p>More than one syllable, ends in a vowel, l or r.</p><div class="ex"><button type="button" data-say="okut">oku → okut</button><button type="button" data-say="beklet">bekle → beklet</button><button type="button" data-say="oturt">otur → oturt</button></div></div>
       <div class="crow"><h3>-DIr</h3><p>Everything else. D: after f s t k ç ş h p it's t. I: ı i u ü by harmony.</p><div class="ex"><button type="button" data-say="yaptır">yap → yaptır</button><button type="button" data-say="yedir">ye → yedir</button><button type="button" data-say="öldür">öl → öldür</button></div></div>
       <div class="crow"><h3>Order of parts</h3><p>Root, order, tense, person.</p><div class="ex"><button type="button" data-say="kestirdim"><span class="k">kes</span><span class="c">tir</span><span class="t">di</span><span class="l">m</span></button></div></div>
@@ -740,7 +777,7 @@ addEventListener('DOMContentLoaded', () => {
   const TW = {
     kes: [['kes', 'k', 'root', 'cut'], ['tir', 'c', 'order', 'have it cut'], ['di', 't', 'tense', 'he got a haircut'], ['m', 'l', 'person', 'I got a haircut']],
     oku: [['oku', 'k', 'root', 'read'], ['t', 'c', 'order', 'make someone read'], ['tu', 't', 'tense', 'he made someone read'], ['m', 'l', 'person', 'I made someone read']],
-    yap: [['yap', 'k', 'root', 'do'], ['tır', 'c', 'order', 'have done'], ['dı', 't', 'tense', 'he had it done'], ['m', 'l', 'person', 'I had it done']],
+    yap: [['yap', 'k', 'root', 'do'], ['tır', 'c', 'order', 'have it done'], ['dı', 't', 'tense', 'he had it done'], ['m', 'l', 'person', 'I had it done']],
   };
   let troot = 'kes';
   $('#troots').innerHTML = Object.keys(TW).map((k) => `<button type="button" class="vc${k === troot ? ' on' : ''}" data-r="${k}" lang="tr">${k}</button>`).join('');
@@ -766,12 +803,12 @@ addEventListener('DOMContentLoaded', () => {
   /* ---------- машина приказов ---------- */
   const CV = [
     { v: 'yap', r: 'dir', s: 'tır', a: 'do', b: 'have it done, make someone do', n: 'p is voiceless, so d became t. The vowel is a, so ı.' },
-    { v: 'yaz', r: 'dir', s: 'dır', a: 'write', b: 'print, have written', n: 'z is voiced, d stays. The vowel is a, so ı.' },
+    { v: 'yaz', r: 'dir', s: 'dır', a: 'write', b: 'print, have it written', n: 'z is voiced, d stays. The vowel is a, so ı.' },
     { v: 'kes', r: 'dir', s: 'tir', a: 'cut', b: 'get a haircut', n: 's is voiceless, so t. The vowel is e, so i.' },
     { v: 'çalış', r: 'dir', s: 'tır', a: 'work', b: 'make someone work', n: 'ş is voiceless, so t. The last vowel is ı.' },
-    { v: 'ye', r: 'dir', s: 'dir', a: 'eat', b: 'feed', n: 'Ends in a vowel, but only one syllable. So -DIr, not -t.' },
-    { v: 'öl', r: 'dir', s: 'dür', a: 'die', b: 'kill', n: 'One syllable ending in -l. Short ones take -DIr. The vowel is ö, so ü.' },
-    { v: 'gül', r: 'dir', s: 'dür', a: 'laugh', b: 'make laugh', n: 'One syllable ending in -l. The vowel is ü, so dür.' },
+    { v: 'ye', r: 'dir', s: 'dir', a: 'eat', b: 'feed', n: 'Ends in a vowel, but only one syllable. So -DIr, not -t. English needs a new verb, feed. Turkish says “make eat.”' },
+    { v: 'öl', r: 'dir', s: 'dür', a: 'die', b: 'kill', n: 'One syllable ending in -l. Short ones take -DIr. The vowel is ö, so ü. English: die → kill. Turkish: “make die.”' },
+    { v: 'gül', r: 'dir', s: 'dür', a: 'laugh', b: 'make someone laugh', n: 'One syllable ending in -l. The vowel is ü, so dür.' },
     { v: 'oku', r: 't', s: 't', a: 'read', b: 'make someone read', n: 'Two syllables, ends in a vowel. One t is enough.' },
     { v: 'bekle', r: 't', s: 't', a: 'wait', b: 'keep someone waiting', n: 'Two syllables, ends in a vowel.' },
     { v: 'anla', r: 't', s: 't', a: 'understand', b: 'tell, explain', n: 'In Turkish, to tell is “to make understand.”' },
@@ -816,6 +853,7 @@ addEventListener('DOMContentLoaded', () => {
 
   /* угадай */
   let gi = 0;
+  /* wrong options: for voiceless roots, the “English spelling” d (yapdır) */
   const wrongs = (x) => (x.r === 't' ? [x.v + 'dir'.replace('i', lastV(x.v)), x.v + 't' + lastV(x.v) + 'r'] : [x.v + 't', x.v + (x.s[0] === 't' ? 'd' : 't') + x.s.slice(1)]);
   function lastV(w) { const v = (w.match(/[aıoueiöü]/g) || ['a']).pop(); return { a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' }[v]; }
   function newGuess() {
@@ -856,11 +894,53 @@ addEventListener('DOMContentLoaded', () => {
     const x = BV[bi];
     if (!bd || !bv) { $('#bfb').textContent = 'Pick both letters: D and I.'; return; }
     const ok = bd + bv + 'r' === x.s;
-    $('#bfb').textContent = (ok ? `Yes! ${x.v}${x.s}. ` : `Almost. Correct: ${x.v}${x.s}. `) + x.n;
+    const enHint = !ok && bd !== x.s[0] ? (x.s[0] === 't' ? 'Say it out loud: after a voiceless sound, d turns into t, and Turkish writes what you hear. ' : 'After a voiced sound or a vowel, D stays d. ') : '';
+    $('#bfb').textContent = (ok ? `Yes! ${x.v}${x.s}. ` : `Almost. Correct: ${x.v}${x.s}. `) + enHint + x.n;
     if (ok) { $$('#bD button, #bI button').forEach((b) => { if (b.getAttribute('aria-pressed') === 'true') b.classList.add('ok'); }); speak(x.v + x.s); }
     if (G) G.fromTo('#bword', { x: ok ? 0 : -10 }, { x: 0, duration: .6, ease: 'elastic.out(1.2,.25)' });
   });
   $('#bnext').addEventListener('click', newBuild);
+
+  /* ---------- English ↔ Türkçe ---------- */
+  const MP = [
+    [
+      { en: [['I ', ''], ['had ', 'x'], ['my hair ', ''], ['cut', '']], tr: [['Saçımı ', 'k'], ['kes', 'k'], ['tir', 'c'], ['dim', 't']], sign: '+ had', n: 'Without “had” it can sound like you did it yourself. Turkish: kestim = your scissors, kestirdim = the barber\'s.' },
+      { en: [['I ', ''], ['got ', 'x'], ['my car ', ''], ['washed', '']], tr: [['Arabamı ', 'k'], ['yıka', 'k'], ['t', 'c'], ['tım', 't']], sign: '+ got', n: '“Got” does the ordering. Turkish: one t. yıka has two syllables and ends in a vowel, so -t is enough.' },
+      { en: [['I ', ''], ['had ', 'x'], ['my room ', ''], ['painted', '']], tr: [['Odamı ', 'k'], ['boya', 'k'], ['t', 'c'], ['tım', 't']], sign: '+ had', n: '“Had” does the ordering. Turkish: boya + t. Then the past -tım, also with t after t.' },
+    ],
+    [
+      { en: [['She ', ''], ['made ', 'x'], ['me ', ''], ['wait', '']], tr: [['Beni ', 'k'], ['bekle', 'k'], ['t', 'c'], ['ti', 't']], sign: '+ made', n: '“Made” is not yapmak here. It is the t in beklet. Without it, beni bekledi means “she waited for me.”' },
+      { en: [['He ', ''], ['made ', 'x'], ['the kid ', ''], ['laugh', '']], tr: [['Çocuğu ', 'k'], ['gül', 'k'], ['dür', 'c'], ['dü', 't']], sign: '+ made', n: 'make + laugh = güldür. ü in the root, so ü in the suffix too.' },
+      { en: [['The boss ', ''], ['made ', 'x'], ['us ', ''], ['work', '']], tr: [['Patron bizi ', 'k'], ['çalış', 'k'], ['tır', 'c'], ['dı', 't']], sign: '+ made', n: 'make + work = çalıştır. After ş, D becomes t.' },
+    ],
+    [
+      { en: [['die', 'x'], [' → ', ''], ['kill', 'x']], tr: [['öl', 'k'], ['dür', 'c']], sign: 'new verb', n: 'English needs a whole new verb. Turkish keeps öl and adds dür: “make die.”' },
+      { en: [['eat', 'x'], [' → ', ''], ['feed', 'x']], tr: [['ye', 'k'], ['dir', 'c']], sign: 'new verb', n: 'eat → feed. Turkish: ye + dir, “make eat.” One syllable, so -DIr, not -t.' },
+      { en: [['sit', 'x'], [' → ', ''], ['seat', 'x']], tr: [['otur', 'k'], ['t', 'c']], sign: 'new verb', n: 'sit → seat. Turkish: otur + t. Two syllables, ends in -r, so one t.' },
+      { en: [['sleep', 'x'], [' → ', ''], ['put to sleep', 'x']], tr: [['uyu', 'k'], ['t', 'c']], sign: 'new verb', n: 'English needs three words. Turkish needs one letter: uyut.' },
+    ],
+  ];
+  let mm = 0, mi = 0, mtouched = false;
+  const mword = (segs) => segs.map((s) => s[0]).join('').trim();
+  const enHTML = (segs) => segs.map(([t, c]) => `<span${c ? ` class="${c}"` : ''}>${t}</span>`).join('');
+  function mirror(animate) {
+    const p = MP[mm][mi];
+    $$('#mmode button').forEach((b) => b.setAttribute('aria-selected', String(+b.dataset.m === mm)));
+    $('#mpairs').innerHTML = MP[mm].map((x, i) => `<button type="button" class="vc${i === mi ? ' on' : ''}" data-i="${i}" lang="tr">${mword(x.tr.filter((s) => !s[0].endsWith(' ')))}</button>`).join('');
+    $('#mEn').innerHTML = enHTML(p.en); $('#mTr').innerHTML = segHTML(p.tr);
+    $('#mSign').textContent = p.sign; $('#mNote').textContent = p.n; $('#mSay').dataset.say = mword(p.tr);
+    if (!G || !animate) return;
+    const tl = G.timeline();
+    tl.fromTo('#mEn .x', { scale: 1.3, y: -6 }, { scale: 1, y: 0, duration: .5, ease: 'back.out(3)' })
+      .fromTo('#mSign', { scale: 0, rotation: -12 }, { scale: 1, rotation: 0, duration: .5, ease: 'back.out(3)' }, '-=.1')
+      .to('#mEn .x', { y: 34, opacity: .25, duration: .45, ease: 'power2.in' })
+      .fromTo('#mTr .c', { y: -40, scale: .3, rotation: -14 }, { y: 0, scale: 1, rotation: 0, duration: .8, ease: 'elastic.out(1,.45)' }, '-=.15')
+      .to('#mEn .x', { y: 0, opacity: 1, duration: .4, ease: 'power2.out' }, '+=.3');
+  }
+  $$('#mmode button').forEach((b) => b.addEventListener('click', () => { mtouched = true; mm = +b.dataset.m; mi = 0; mirror(true); }));
+  $('#mpairs').addEventListener('click', (e) => { const b = e.target.closest('.vc'); if (!b) return; mtouched = true; mi = +b.dataset.i; mirror(true); speak(mword(MP[mm][mi].tr)); });
+  mirror(false);
+  if (ST) ST.create({ trigger: '.mrow', start: 'top 80%', once: true, onEnter: () => { mirror(true); setTimeout(() => { if (mtouched) return; mm = 1; mi = 0; mirror(true); }, 3200); } });
 
   /* ---------- квитанции ---------- */
   $$('#receipts .rc').forEach((r) => r.addEventListener('click', () => {

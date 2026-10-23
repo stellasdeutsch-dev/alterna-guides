@@ -38,6 +38,21 @@
   .tiles { display: flex; flex-wrap: wrap; gap: 8px; }
   .built { display: flex; flex-wrap: wrap; gap: 8px; min-height: 52px; padding: 8px; border-radius: 16px; background: var(--ak-surface); }
   .wfall { width: clamp(70px, 10vw, 120px); }
+  /* қазақша ↔ түрікше */
+  .kd { display: grid; gap: 14px; justify-items: center; margin: 8px 0 4px; }
+  .kd .strip { width: min(100%, 680px); }
+  .kd .strip > span { flex-direction: column; gap: 2px; }
+  .kd__w { white-space: nowrap; }
+  .kd .strip .cut { text-decoration: none; }
+  .kd .strip .cut .kd__w { text-decoration: line-through; text-decoration-thickness: 2px; }
+  #kd-note b { white-space: nowrap; }
+  .kd .strip small { font: 600 12px/1.1 var(--ak-font); color: var(--ink-2); }
+  .kd .strip .ok { background: var(--lime); }
+  .kd__lbl { display: flex; align-items: center; gap: 8px; font: 600 clamp(12px, 1.2vw, 14px)/1 'Oswald', sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); }
+  .kd__arr { font: 300 clamp(26px, 3.6vw, 44px)/1 'Oswald', sans-serif; color: var(--ink-2); }
+  .kk-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin: 4px 0 10px; }
+  .kk-row > span { padding: 4px 12px; border-radius: 999px; background: var(--ak-surface); color: var(--ink-2); font-weight: 600; font-size: 15px; transition: background .3s, color .3s; }
+  .kk-row > span.is-on { background: var(--lime); color: #2d4d12; }
   @media (max-width: 767px) {
     .b1 { left: 2%; top: 51%; } .b2 { left: 34%; top: 46%; } .b3 { left: 62%; top: 53%; }
     .hero { left: 6%; top: 36%; } .sailor { left: 76%; top: 33%; }
@@ -81,12 +96,13 @@
     <li><button type="button" data-goto="buffer">5<span data-ui>y жастығы</span></button></li>
     <li><button type="button" data-goto="order">6<span data-ui>Монтаж</span></button></li>
     <li><button type="button" data-goto="who">7<span data-ui>Орындаушы</span></button></li>
-    <li><button type="button" data-goto="lab">8<span data-ui>Монтаж бөлмесі</span></button></li>
-    <li><button type="button" data-goto="traps">9<span data-ui>Дубльдер</span></button></li>
-    <li><button type="button" data-goto="video">10<span data-ui>Видео</span></button></li>
-    <li><button type="button" data-goto="practice">11<span data-ui>Практика</span></button></li>
-    <li><button type="button" data-goto="check">12<span data-ui>Тексеру</span></button></li>
-    <li><button type="button" data-goto="cheat">13<span data-ui>Постер</span></button></li>
+    <li><button type="button" data-goto="kk-diff">8<span data-ui>Қазақша ↔ түрікше</span></button></li>
+    <li><button type="button" data-goto="lab">9<span data-ui>Монтаж бөлмесі</span></button></li>
+    <li><button type="button" data-goto="traps">10<span data-ui>Дубльдер</span></button></li>
+    <li><button type="button" data-goto="video">11<span data-ui>Видео</span></button></li>
+    <li><button type="button" data-goto="practice">12<span data-ui>Практика</span></button></li>
+    <li><button type="button" data-goto="check">13<span data-ui>Тексеру</span></button></li>
+    <li><button type="button" data-goto="cheat">14<span data-ui>Постер</span></button></li>
   </ol>
 </nav>
 
@@ -208,7 +224,7 @@
       <div class="subs">
         <p class="sub">Кәдімгі сөйлем аламыз: <a-say>Tekne Düden'e gidiyor.</a-say> Қайық Дүденге бара жатыр.</p>
         <p class="sub"><b>-iyor</b>-ды жұлып аламыз, <b class="sx">-en</b> ілеміз. Негіз gidiyor-дағыдай: gid-.</p>
-        <p class="sub"><a-say>Düden'e giden tekne</a-say> — Дүденге баратын қайық. Негіз + <b class="sx">-(y)An</b> = істеуші.</p>
+        <p class="sub"><a-say>Düden'e giden tekne</a-say> — Дүденге баратын қайық. Таныс қой: бара жатыр → бар<b class="sx">атын</b>. Түрікше де солай: gidiyor → gid<b class="sx">en</b>.</p>
       </div>
       <div class="act">
         <p class="act__q"><a-say>Rusça bilen kaptan</a-say> нені білдіреді?</p>
@@ -252,7 +268,7 @@
       <div class="subs">
         <p class="sub">Порттағы табло. Мәртебелер де — тақтайшалар: <a-say>kalkan</a-say>, <a-say>dönen</a-say>, <a-say>bekleyen</a-say>, <a-say>duran</a-say>.</p>
         <p class="sub">Құйрықты негіздің соңғы дауыстысы таңдайды. a, ı, o, u — <b class="sx">-an</b>. e, i, ö, ü — <b class="sx">-en</b>.</p>
-        <p class="sub">Бар болғаны екі нұсқа. Мұнда түрікше мейірімді.</p>
+        <p class="sub">Екі-ақ нұсқа — біздің -атын/-етін сияқты. -ған/-ген/-қан/-кен төртеуінен оңай.</p>
       </div>
       <div class="act">
         <p class="act__q">Құйрық ил. Бассаң — ауысады.</p>
@@ -270,7 +286,7 @@
 </section>
 
 <!-- ===== СЦЕНА 5: кранец y ===== -->
-<section data-section="buffer" data-words="37" class="scene" id="s-buffer">
+<section data-section="buffer" data-words="42" class="scene" id="s-buffer">
   <div class="stage">
     <div class="world" aria-hidden="true">
       <svg class="layer" preserveAspectRatio="xMidYMid slice" data-depth="0.2"><use href="#sky"/></svg>
@@ -300,7 +316,7 @@
     <div class="foot">
       <div class="subs">
         <p class="sub">Негіз дауыстыға бітсе — бәле. <a-say>oku</a-say> + an — екі дауысты бортпен соғысады.</p>
-        <p class="sub">Арасына жастық іламыз — <b class="yy">y</b> әрпін. <a-say>okuyan</a-say>, <a-say>bekleyen</a-say>.</p>
+        <p class="sub">Арасына жастық ілеміз — <b class="yy">y</b> әрпін. <a-say>okuyan</a-say>, <a-say>bekleyen</a-say>. Қазақша да солай: сөйле<b class="yy">й</b>тін, ойна<b class="yy">й</b>тын.</p>
         <p class="sub"><a-say>bekliyor</a-say>-мен шатастырма: онда e i-ге айналады. <b>bekleyen</b>-де e қалады.</p>
       </div>
       <div class="act">
@@ -318,7 +334,7 @@
 </section>
 
 <!-- ===== СЦЕНА 6: монтаж — порядок слов ===== -->
-<section data-section="order" data-words="50" class="scene" id="s-order">
+<section data-section="order" data-words="40" class="scene" id="s-order">
   <div class="stage">
     <div class="world" aria-hidden="true">
       <svg class="layer" preserveAspectRatio="xMidYMid slice" data-depth="0.2"><use href="#sky"/></svg>
@@ -333,20 +349,20 @@
     <div class="frame">
       <div class="pair">
         <div class="strip" id="or-ru">
-          <span class="or-noun">қайық,</span><span class="cut or-cut">которая</span><span>барады</span><span>Дүденге</span>
+          <span>Дүденге</span><span>бар<b class="sx">атын</b></span><span class="nn or-noun">қайық</span>
         </div>
-        <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><circle cx="12" cy="34" r="8" fill="none" stroke="#26282a" stroke-width="3"/><circle cx="34" cy="34" r="8" fill="none" stroke="#26282a" stroke-width="3"/><path d="M16 27 36 4M30 27 10 4" stroke="#26282a" stroke-width="3" stroke-linecap="round"/></svg>
+        <svg width="46" height="46" viewBox="0 0 46 46" aria-hidden="true"><path d="M8 16h30M8 30h30" stroke="#26282a" stroke-width="4" stroke-linecap="round"/></svg>
         <div class="strip strip--tr" id="or-tr" lang="tr">
           <span>Düden'e</span><span>gid<b class="sx">en</b></span><span class="nn or-tnoun">tekne</span>
         </div>
-        <p class="rule">Ереже: детальдар, сосын тақтайша, ең соңында сөз. «Который» керек емес — қазақшадағыдай.</p>
+        <p class="rule">Ереже: тәртіп қазақшадағыдай — детальдар, тақтайша, ең соңында сөз.</p>
       </div>
     </div>
     <div class="foot">
       <div class="subs">
-        <p class="sub">Орысша тәртіп: алдымен қайық. Сосын «которая» және қалғанының бәрі.</p>
-        <p class="sub">Түрікшеде «которая» қиылады. Алдымен бүкіл детальдар, соңында қайықтың өзі. Қазақшада да дәл солай: Дүденге баратын қайық.</p>
-        <p class="sub">Тұмсықтағы тақтайша сияқты: жазуды оқисың — кім туралы екенін көресің.</p>
+        <p class="sub">Мұнда сен орыстан озасың. Оған «которая» керек. Саған — жоқ.</p>
+        <p class="sub">Қазақша сөзбе-сөз түрікшенің үстіне түседі: Дүденге — <span lang="tr">Düden'e</span>, баратын — <span lang="tr">giden</span>, қайық — <span lang="tr">tekne</span>.</p>
+        <p class="sub">Тек бір сақтық: детальдар көбейсе де, қайық орнынан қозғалмайды. Соңында.</p>
       </div>
       <div class="act">
         <p class="act__q">Монтажда: қайықта ұйықтап жатқан мысық.</p>
@@ -364,7 +380,7 @@
 </section>
 
 <!-- ===== СЦЕНА 7: кто делает ===== -->
-<section data-section="who" data-words="43" class="scene" id="s-who">
+<section data-section="who" data-words="52" class="scene" id="s-who">
   <div class="stage">
     <div class="world" aria-hidden="true">
       <svg class="layer" preserveAspectRatio="xMidYMid slice" data-depth="0.2"><use href="#sky"/></svg>
@@ -386,14 +402,14 @@
           <svg viewBox="0 0 200 170" aria-hidden="true"><rect x="20" y="110" width="160" height="56" rx="10" fill="#26282a"/><rect x="34" y="122" width="40" height="18" rx="4" fill="#b7e08c"/><g class="fish"><path d="M50 70c26-40 90-40 110 0-20 40-84 40-110 0z" fill="#7fcdd8"/><path d="M50 70 22 50v40z" fill="#7fcdd8"/><circle cx="138" cy="62" r="5" fill="#26282a"/><path d="M96 46h28v40H96z" fill="#fff"/><path d="M150 78q-6 6-14 4" stroke="#26282a" stroke-width="2" fill="none"/></g></svg>
           <figcaption lang="tr" data-say="satan balık">sat<span class="sx">an</span> <span class="nn">balık</span> ?!</figcaption>
         </figure>
-        <p class="rule" style="flex-basis:100%">Ереже: тақтайша әрекетті өзі істейтінге ғана ілінеді.</p>
+        <p class="rule" style="flex-basis:100%">Ереже: тақтайша әрекетті өзі істейтінге ғана ілінеді. Қазақша -ған екі жаққа жүреді, түрікше -(y)An — бір жаққа.</p>
       </div>
     </div>
     <div class="foot">
       <div class="subs">
         <p class="sub">Тақтайша әрекетті өзі істейтінді сипаттайды.</p>
         <p class="sub"><a-say>Balık satan çocuk</a-say> — балық сататын бала. Бәрі әділ.</p>
-        <p class="sub">Ал <a-say>satan balık</a-say> — өзі сауда жасайтын балық. Балық кассада отыр. Мұны тек мультфильмде айтады.</p>
+        <p class="sub">Ал <a-say>satan balık</a-say> — өзі сауда жасайтын балық, кассада отыр. Қазақша «мен сатқан балық» десең, бәрі түсінеді. Түрікше — мультфильм.</p>
       </div>
       <div class="act">
         <p class="act__q"><a-say>Limanda bekleyen tekne.</a-say> Кім күтіп тұр?</p>
@@ -404,6 +420,29 @@
         <p class="react" aria-live="polite"></p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== қазақша ↔ түрікше ===== -->
+<section data-section="kk-diff" data-words="85" class="sect" id="s-kd">
+  <p class="spaced" data-ui>Қазақша ↔ түрікше</p>
+  <h2 class="title" aria-label="Туыс, бірақ егіз емес">Туыс, бірақ егіз емес</h2>
+  <p class="lead">Тәртіп, y жастығы, «который»-сыз сөйлем — бәрі таныс. Бірақ үш жерде қазақшаң сені алдайды. Батырманы бас: жоғарғы лента — қазақша, төменгісі — түрікше. Сызылғаны түрікшеге өтпейді.</p>
+  <div class="panel">
+    <div class="tabs" role="tablist">
+      <button type="button" class="btn btn--ghost" role="tab" aria-selected="true" data-kd="0">Кім істейді?</button>
+      <button type="button" class="btn btn--ghost" role="tab" aria-selected="false" data-kd="1">Шақ</button>
+      <button type="button" class="btn btn--ghost" role="tab" aria-selected="false" data-kd="2">бар → <span lang="tr">olan</span></button>
+    </div>
+    <div class="kd">
+      <span class="kd__lbl" data-ui>қазақша</span>
+      <div class="strip" id="kd-kk"></div>
+      <span class="kd__arr" aria-hidden="true">↓</span>
+      <span class="kd__lbl" data-ui>түрікше</span>
+      <div class="strip strip--tr" id="kd-tr" lang="tr"></div>
+    </div>
+    <p class="why" id="kd-note" aria-live="polite"></p>
+    <button type="button" class="btn" id="kd-go">Тағы бір рет</button>
   </div>
 </section>
 
@@ -439,6 +478,7 @@
     </div>
     <div id="lab-cut" data-pane hidden>
       <p class="act__q" id="lc-ask">Түрікше монтажда</p>
+      <div class="kk-row" id="lc-kk" aria-hidden="true"></div>
       <div class="tiles" lang="tr" id="lc-tiles"></div>
       <div class="built lab-out" id="lc-built" lang="tr"></div>
     </div>
@@ -449,16 +489,16 @@
 </section>
 
 <!-- ===== неудачные дубли ===== -->
-<section data-section="traps" data-words="39" class="sect" id="s-traps">
+<section data-section="traps" data-words="60" class="sect" id="s-traps">
   <p class="spaced" data-ui>Сәтсіз дубльдер</p>
   <h2 class="title" aria-label="Дубльдер">Дубльдер</h2>
-  <p class="lead">Бұған бәрі сүрінеді. «2-дубль»-ді бас — таза нұсқасын көресің.</p>
+  <p class="lead">Бұл дубльдерді қазақшаның өзі ұсынады. «2-дубль»-ді бас — таза нұсқасын көресің.</p>
   <div class="takes">
     <article class="take">
       <div class="take__clap" data-ui><span>1-ДУБЛЬ</span><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><rect y="8" width="34" height="18" rx="3" fill="#26282a"/><path d="M0 8 30 0l2 6L2 14z" fill="#26282a"/><path d="M8 6l4 6M18 3l4 6" stroke="#fff" stroke-width="2"/></svg></div>
-      <p class="take__bad" lang="tr"><span class="no">okuyen</span> rehber</p>
-      <p class="take__good" lang="tr" hidden>oku<span class="yy">y</span><span class="sx">an</span> rehber</p>
-      <p>oku-да соңғы дауысты u. Демек, құйрық a-лы.</p>
+      <p class="take__bad" lang="tr">balıkçının <span class="no">satan</span> balık</p>
+      <p class="take__good" lang="tr" hidden>balıkçının sattığı <span class="nn">balık</span></p>
+      <p>Қазақша «балықшы сатқан балық» — дұрыс. Түрікше -(y)An тек сатушыға: balık satan balıkçı. Балыққа басқа форма керек — sattığı, келесі тақырып.</p>
       <button type="button" class="btn btn--ghost" data-take>2-дубль</button>
     </article>
     <article class="take">
@@ -470,25 +510,25 @@
     </article>
     <article class="take">
       <div class="take__clap" data-ui><span>1-ДУБЛЬ</span><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><rect y="8" width="34" height="18" rx="3" fill="#26282a"/><path d="M0 8 30 0l2 6L2 14z" fill="#26282a"/><path d="M8 6l4 6M18 3l4 6" stroke="#fff" stroke-width="2"/></svg></div>
-      <p class="take__bad" lang="tr"><span class="no">tekne Düden'e giden</span></p>
-      <p class="take__good" lang="tr" hidden>Düden'e gid<span class="sx">en</span> <span class="nn">tekne</span></p>
-      <p>Орысша тәртіп. Түрікшеде қайық соңына тұрады.</p>
+      <p class="take__bad" lang="tr">dün <span class="no">geldi</span> turist</p>
+      <p class="take__good" lang="tr" hidden>dün gel<span class="sx">en</span> <span class="nn">turist</span></p>
+      <p>«Келген» өткен шақ сияқты, қол -di іздейді. Тақтайша біреу — gelen. «Кеше»-ні dün айтады.</p>
       <button type="button" class="btn btn--ghost" data-take>2-дубль</button>
     </article>
     <article class="take">
       <div class="take__clap" data-ui><span>1-ДУБЛЬ</span><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><rect y="8" width="34" height="18" rx="3" fill="#26282a"/><path d="M0 8 30 0l2 6L2 14z" fill="#26282a"/><path d="M8 6l4 6M18 3l4 6" stroke="#fff" stroke-width="2"/></svg></div>
       <p class="take__bad" lang="tr"><span class="no">giten</span> otobüs</p>
       <p class="take__good" lang="tr" hidden>gid<span class="sx">en</span> otobüs</p>
-      <p>gidiyor-дағыдай: дауысты алдында t d-ға айналады.</p>
+      <p>Қазақша кет → кетеді, t орнында. Түрікше git дауысты алдында d болады: gidiyor, giden.</p>
       <button type="button" class="btn btn--ghost" data-take>2-дубль</button>
     </article>
   </div>
 </section>
 
 <!-- ===== видео ===== -->
-<section data-section="video" data-words="13" class="sect" id="s-video">
+<section data-section="video" data-words="24" class="sect" id="s-video">
   <p class="spaced" data-ui>Кинокөрсетілім</p>
-  <p class="lead">Етістіктен жалғауды қалай жұлып, сөздің алдына -an немесе -en құйрығын қоятынына назар аудар.</p>
+  <p class="lead">Видео түрікше, баяу әрі анық. Етістіктен жалғау қалай жұлынып, -an немесе -en ілінетініне және сөз қалай соңына кететініне назар аудар — қазақшадағыдай.</p>
   <a-video yt="ShOxJYpLWho" start="0" end="180" title="A2 - -(y)an / -(y)en Sıfat Fiil Ekleri" channel="Yunus Emre Enstitüsü"></a-video>
 </section>
 
@@ -519,14 +559,15 @@
 </section>
 
 <!-- ===== постер и финал ===== -->
-<section data-section="cheat" data-words="39" class="sect" id="s-cheat">
+<section data-section="cheat" data-words="52" class="sect" id="s-cheat">
   <p class="spaced" data-ui>Жадынама</p>
   <h2 class="title" aria-label="Постер">П<span class="o-ico" aria-hidden="true"><svg viewBox="0 0 40 40"><use href="#palm-ico"/></svg></span>стер</h2>
   <div class="poster">
     <div class="poster__cell"><h3>Форма</h3><p>негіз + <b class="sx">-(y)An</b> = істеуші. <span lang="tr">gel → gel<b class="sx">en</b></span></p></div>
     <div class="poster__cell"><h3>Құйрық</h3><p>a ı o u → <b class="sx">-an</b>, e i ö ü → <b class="sx">-en</b>. <span lang="tr">otur<b class="sx">an</b>, bil<b class="sx">en</b></span></p></div>
     <div class="poster__cell"><h3>Жастық</h3><p>негіз дауыстыға бітсе → <b class="yy">y</b>. <span lang="tr">oku<b class="yy">y</b><b class="sx">an</b>, bekle<b class="yy">y</b><b class="sx">en</b></span></p></div>
-    <div class="poster__cell"><h3>Сөз тәртібі</h3><p>детальдар → тақтайша → <b class="nn">сөз</b>. <span lang="tr">Düden'e gid<b class="sx">en</b> <b class="nn">tekne</b></span></p></div>
+    <div class="poster__cell"><h3>Сөз тәртібі</h3><p>қазақшадағыдай: детальдар → тақтайша → <b class="nn">сөз</b>. <span lang="tr">Düden'e gid<b class="sx">en</b> <b class="nn">tekne</b></span></p></div>
+    <div class="poster__cell"><h3>Қазақшадан айырма</h3><p>келген, келетін, келіп жатқан → бәрі <span lang="tr">gel<b class="sx">en</b></span>. Тек істеушіге: <span lang="tr">satan balık</span> — балық өзі сатады.</p></div>
   </div>
   <div class="finale">
     <svg viewBox="0 0 200 160" aria-hidden="true"><g class="fin-boat"><use href="#cat" width="200" height="140" y="10"/></g><g class="wfall" transform="translate(150 0)"><rect width="40" height="70" rx="6" fill="#a6dde4"/><path d="M8 4v60M20 4v60M32 4v60" stroke="#fff" stroke-width="3" stroke-dasharray="8 6" class="fin-water"/></g></svg>
@@ -675,16 +716,16 @@ addEventListener('DOMContentLoaded', () => {
       subs(t5, '#s-buffer', [0.6, 3.2, 6.2]);
       finish(t5, '#s-buffer');
 
-      /* 6 — монтаж: «которая» вырезается ножницами, лодка уезжает в конец ленты */
+      /* 6 — монтаж: қазақша лента, «=» түседі, түрікше плиткалар әрқайсысы өз жұбының астына */
       const t6 = G.timeline({ scrollTrigger: pin('#s-order') });
       camera(t6, '#s-order', 9);
       t6.from('#s-order .title', { yPercent: 60, autoAlpha: 0, duration: 1 }, 0.4)
-        .from('#or-ru span', { x: () => innerWidth * 0.4, stagger: 0.18, duration: 1, ease: 'power3.out' }, 0.5)
+        .from('#or-ru > span', { x: () => innerWidth * 0.4, stagger: 0.18, duration: 1, ease: 'power3.out' }, 0.5)
         .addLabel('cut', 3)
-        .from('#s-order .pair > svg', { rotation: -180, scale: 0, duration: 0.8 }, 'cut')
-        .to('#or-ru .or-cut', { y: 70, rotation: 18, autoAlpha: 0.2, duration: 1 }, 'cut+=0.6')
-        .from('#or-tr span', { y: 50, autoAlpha: 0, stagger: 0.2, duration: 0.7 }, 'cut+=1')
-        .from('#or-tr .or-tnoun', { x: () => -innerWidth * 0.35, duration: 1.4, ease: 'power2.inOut' }, 'cut+=1.5')
+        .from('#s-order .pair > svg', { scaleX: 0, duration: 0.6 }, 'cut')
+        .from('#or-tr > span', { y: -60, autoAlpha: 0, stagger: 0.35, duration: 0.7, ease: 'back.out(2)' }, 'cut+=0.6')
+        .to('#or-ru > span', { backgroundColor: '#e2f4c9', stagger: 0.35, duration: 0.4 }, 'cut+=0.6')
+        .fromTo('#or-tr .or-tnoun', { scale: 1 }, { scale: 1.15, duration: 0.5, yoyo: true, repeat: 1 }, 'cut+=2')
         .to('#s-order .world', { scale: 1.15, duration: 2.2 }, 'cut+=2.6')
         .from('#s-order .rule', { y: 30, scale: 0.8, autoAlpha: 0, duration: 0.7 }, 'cut+=3');
       subs(t6, '#s-order', [0.5, 3, 6]);
@@ -706,7 +747,7 @@ addEventListener('DOMContentLoaded', () => {
     });
 
     /* лаборатория, дубли, постер — появляются пачками */
-    ScrollTrigger.batch('#s-lab .panel, .take, .poster__cell, #game', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 50, rotation: -1.5, stagger: 0.1, duration: 0.7, ease: 'power3.out' }) });
+    ScrollTrigger.batch('#s-kd .panel, #s-lab .panel, .take, .poster__cell, #game', { start: 'top 88%', once: true, onEnter: (els) => G.from(els, { y: 50, rotation: -1.5, stagger: 0.1, duration: 0.7, ease: 'power3.out' }) });
 
     /* финал: катамаран отчаливает, вода течёт — только когда постер на экране */
     const water = G.to('.fin-water', { strokeDashoffset: -28, duration: 0.8, ease: 'none', repeat: -1, paused: true });
@@ -806,18 +847,63 @@ addEventListener('DOMContentLoaded', () => {
     react(reactOf('who'), ok ? 'Қайық. Портта күтіп тұрған — сол. Тақтайша әрқашан істеуші туралы.' : 'Жоқ: -(y)An өзі істейтінді сипаттайды. Күтіп тұрған — қайық.', ok);
   }));
 
+  /* ===================== қазақша ↔ түрікше ===================== */
+  /* әр чип: [html, кіші жазу, класс] — cut: түрікшеге өтпейді, ok: дұрыс жауап */
+  const KD = [
+    { kk: [['балық сат<b class="sx">қан</b> бала', 'бала сатты'], ['мен сат<b class="sx">қан</b> балық', 'балықты саттым']],
+      tr: [['balık sat<b class="sx">an</b> çocuk', 'бала сатады', 'ok'], ['sat<b class="sx">an</b> balık', 'балық өзі сатады', 'cut'], ['sattığım balık', '-DIk · келесі тақырып']],
+      note: 'Қазақша <b>-ған</b> екі жаққа жүреді: сатқан бала да, сатқан балық та. Түрікше <b class="sx">-(y)An</b> тек істеушіге ілінеді. <span lang="tr">satan balık</span> — сауда жасайтын балық. «Мен сатқан балық» үшін басқа форма бар: <span lang="tr">sattığım balık</span>.',
+      say: 'balık satan çocuk' },
+    { kk: [['кеше кел<b class="sx">ген</b>', 'өткен'], ['қазір кел<b class="sx">іп жатқан</b>', 'қазір'], ['күнде кел<b class="sx">етін</b>', 'әдет']],
+      tr: [['dün gel<b class="sx">en</b>', 'dün'], ['şimdi gel<b class="sx">en</b>', 'şimdi'], ['her gün gel<b class="sx">en</b>', 'her gün']],
+      note: 'Қазақша есімшенің өз шағы бар: <b>-ған</b>, <b>-іп жатқан</b>, <b>-етін</b>. Түрікше біреу ғана — <span lang="tr">gelen</span>. Шақты көрші сөз айтады: <span lang="tr">dün, şimdi, her gün</span>. Үш форманы іздеме.',
+      say: 'dün gelen, şimdi gelen, her gün gelen' },
+    { kk: [['қалпағы', ''], ['бар', ''], ['адам', '']],
+      tr: [['şapkası', ''], ['var', 'болмайды', 'cut'], ['olan', 'бар', 'ok'], ['adam', '']],
+      note: 'Қазақша «бар» мен «жоқ» сөздің алдына тура тұрады: қалпағы бар адам. Түрікше <span lang="tr">var</span> тақтайша бола алмайды — <span lang="tr">olan</span> керек, <span lang="tr">yok</span> орнына <span lang="tr">olmayan</span>. Толығы 2-сабақта.',
+      say: 'şapkası olan adam' },
+  ];
+  let kdK = 0, kdTl = null;
+  const kdChip = ([h, s, c]) => `<span${c ? ` class="${c}"` : ''}><span class="kd__w">${h}</span>${s ? `<small lang="kk">${s}</small>` : ''}</span>`;
+  const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const kdShow = (k) => {
+    kdK = k;
+    const d = KD[k];
+    $$('[data-kd]').forEach((t) => t.setAttribute('aria-selected', String(+t.dataset.kd === k)));
+    $('#kd-kk').innerHTML = d.kk.map(kdChip).join('');
+    $('#kd-tr').innerHTML = d.tr.map(kdChip).join('');
+    $('#kd-note').innerHTML = d.note;
+    if (G && !calm()) {
+      if (kdTl) kdTl.kill();
+      kdTl = G.timeline()
+        .from('#kd-kk > span', { x: -60, autoAlpha: 0, stagger: 0.12, duration: 0.5, ease: 'power3.out' })
+        .fromTo('#s-kd .kd__arr', { y: -20, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.35 })
+        .from('#kd-tr > span', { y: -40, autoAlpha: 0, stagger: 0.15, duration: 0.5, ease: 'back.out(2)' })
+        .fromTo('#kd-tr > .cut', { rotation: 0 }, { rotation: -4, y: 6, duration: 0.4, ease: 'power2.in' })
+        .fromTo('#kd-tr > .ok', { scale: 1 }, { scale: 1.12, duration: 0.3, yoyo: true, repeat: 1 }, '<')
+        .fromTo('#kd-note', { y: 16, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4 });
+    }
+  };
+  $$('[data-kd]').forEach((t) => t.addEventListener('click', () => { kdShow(+t.dataset.kd); say(KD[+t.dataset.kd].say); }));
+  $('#kd-go').addEventListener('click', () => { kdShow(kdK); say(KD[kdK].say); });
+  kdShow(0);
+  if (G && ST) ScrollTrigger.create({ trigger: '#s-kd .kd', start: 'top 80%', once: true, onEnter: () => kdShow(kdK) });
+
   /* ===================== монтажная ===================== */
-  const tails = [['gel', 'en'], ['otur', 'an'], ['bekle', 'yen'], ['oku', 'yan'], ['bak', 'an'], ['iç', 'en'], ['uyu', 'yan'], ['bil', 'en'], ['ara', 'yan'], ['yüz', 'en']];
+  const tails =[['gel', 'en'], ['otur', 'an'], ['bekle', 'yen'], ['oku', 'yan'], ['bak', 'an'], ['iç', 'en'], ['uyu', 'yan'], ['bil', 'en'], ['ara', 'yan'], ['yüz', 'en']];
   const pics = [
     { ru: 'мысық ұйықтап жатыр', sym: '#kedi', vb: '0 0 80 70', opts: ['uyuyan kedi', 'uyuyen kedi', 'kedi uyuyan'], ok: 0 },
     { ru: 'ер адам балық сатады', sym: '#sailor', vb: '0 0 100 200', opts: ['balık saten adam', 'balık satan adam', 'adam balık satan'], ok: 1 },
     { ru: 'қайық портта күтіп тұр', sym: '#blueboat', vb: '0 0 200 120', opts: ['limanda bekliyen tekne', 'tekne limanda bekleyen', 'limanda bekleyen tekne'], ok: 2 },
     { ru: 'турист карта оқып отыр', sym: '#hero', vb: '0 0 100 200', opts: ['harita okuyan turist', 'harita okuyen turist', 'harita okuan turist'], ok: 0 },
   ];
+  /* kk — қазақша бөліктер, түрікше плиткалармен бір ретте: қазақша тәртіп түрікшенің үстіне түседі */
   const cuts = [
-    { ru: 'орысша білетін капитан', w: ['Rusça', 'bilen', 'kaptan'] },
-    { ru: 'есік алдында күтіп тұрған ер адам', w: ['kapıda', 'bekleyen', 'adam'] },
-    { ru: 'Кемерге баратын қайық', w: ['Kemer\'e', 'giden', 'tekne'] },
+    { ru: 'орысша білетін капитан', kk: ['орысша', 'білетін', 'капитан'], w: ['Rusça', 'bilen', 'kaptan'] },
+    { ru: 'есік алдында күтіп тұрған ер адам', kk: ['есік алдында', 'күтіп тұрған', 'ер адам'], w: ['kapıda', 'bekleyen', 'adam'] },
+    { ru: 'Кемерге баратын қайық', kk: ['Кемерге', 'баратын', 'қайық'], w: ['Kemer\'e', 'giden', 'tekne'] },
+    { ru: 'кеше келген турист', kk: ['кеше', 'келген', 'турист'], w: ['dün', 'gelen', 'turist'] },
+    { ru: 'балық сататын бала', kk: ['балық', 'сататын', 'бала'], w: ['balık', 'satan', 'çocuk'] },
   ];
   let mode = 'tail', li = 0;
   const lr = $('#lab-react'), why = $('#lab-why');
@@ -845,21 +931,23 @@ addEventListener('DOMContentLoaded', () => {
     cutGot = [];
     $('#lc-ask').textContent = `Монтажда: ${c.ru}`;
     $('#lc-built').replaceChildren();
+    $('#lc-kk').replaceChildren(...c.kk.map((t) => { const s = document.createElement('span'); s.textContent = t; return s; }));
     const tiles = $('#lc-tiles');
     tiles.replaceChildren(...[...c.w].reverse().map((w) => {
       const b = document.createElement('button');
       b.type = 'button'; b.className = 'chip'; b.textContent = w;
       b.addEventListener('click', () => {
         if (b.disabled) return;
-        if (w !== c.w[cutGot.length]) { shake(b); react(lr, 'Ол кадр емес. Алдымен детальдар, соңында — кім.', false); return; }
+        if (w !== c.w[cutGot.length]) { shake(b); react(lr, `Ол кадр емес. Қазақшаға қара: келесісі — «${c.kk[cutGot.length]}».`, false); return; }
         cutGot.push(w); b.disabled = true;
         const s = document.createElement('span'); s.className = 'chip is-on'; s.textContent = w; $('#lc-built').append(s); pop(s);
-        if (cutGot.length === c.w.length) { react(lr, `${c.w.join(' ')}. Желімделді.`, true); say(c.w.join(' ')); }
+        const kkOn = $$('#lc-kk > span')[cutGot.length - 1]; if (kkOn) { kkOn.classList.add('is-on'); pop(kkOn); }
+        if (cutGot.length === c.w.length) { react(lr, `${c.w.join(' ')}. Желімделді — қазақшамен сөзбе-сөз.`, true); say(c.w.join(' ')); }
       });
       return b;
     }));
-    why.textContent = 'Себебі: түрікшеде «который» деген сөз жоқ — қазақшада да жоқ. Оның жұмысын құйрық атқарады, ал сөз соңына кетеді.';
-    if (G) G.from('#lc-tiles .chip', { y: 30, stagger: 0.08, duration: 0.4 });
+    why.textContent = 'Себебі: «который» түрікшеде де, қазақшада да жоқ. Тәртіп бірдей — қазақша сөйлемді солдан оңға қарай жина. Тек «келген», «сататын» — бәрі бір -(y)An.';
+    if (G) { G.from('#lc-kk > span', { x: -30, autoAlpha: 0, stagger: 0.08, duration: 0.35 }); G.from('#lc-tiles .chip', { y: 30, stagger: 0.08, duration: 0.4, delay: 0.2 }); }
   };
   const show = () => { lr.textContent = ''; lr.className = 'react'; (mode === 'tail' ? showTail : mode === 'pic' ? showPic : showCut)(); };
   $$('[data-mode]').forEach((t) => t.addEventListener('click', () => {
@@ -932,7 +1020,7 @@ addEventListener('DOMContentLoaded', () => {
       gi++;
       if (gi < rounds.length) return gDraw();
       $('#gm-bar').style.transform = 'scaleX(1)';
-      $('#gm-ask').textContent = `Барлық рейс кетті. ${rounds.length}-ден ${gGood} дұрыс.`;
+      $('#gm-ask').textContent = `Барлық рейс кетті. ${rounds.length}-дан ${gGood} дұрыс.`;
       window.AlternaTracker && AlternaTracker.complete({ exerciseId: GID, correct: gGood, total: rounds.length });
       $('#gm-again').hidden = false;
     };

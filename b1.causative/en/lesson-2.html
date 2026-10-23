@@ -179,6 +179,22 @@
   .msg small[hidden] { display: none; }
   .msg .nm { font-size: 12px; color: var(--mute); letter-spacing: .08em; text-transform: uppercase; }
 
+  /* ---------- one English verb, two Turkish ---------- */
+  .same { display: grid; gap: 14px; }
+  .sw { display: inline-flex; justify-self: start; padding: 4px; border-radius: 999px; background: rgba(5,10,30,.7); border: 1px solid var(--line); }
+  .sw button { min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: none; color: var(--mute); font-weight: 600; font-size: 14px; }
+  .sw button[aria-pressed="true"] { background: var(--goldg); color: #2b1a04; }
+  .sboard { display: grid; gap: 10px; padding: 16px 14px; border-radius: 14px; background: radial-gradient(70% 100% at 50% 100%, rgba(242,201,108,.14), rgba(5,9,30,.92)); border: 1px solid rgba(242,201,108,.3); }
+  .sboard > div { display: grid; gap: 4px; }
+  .sboard small { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); }
+  .sen { font: 400 clamp(20px, 5.6vw, 26px)/1.3 var(--sans); color: var(--ink); }
+  .sen b { display: inline-block; color: var(--g2); font-weight: 650; }
+  .str { font: 400 clamp(26px, 7.6vw, 38px)/1.15 var(--serif); color: #fff; }
+  .str span { display: inline-block; white-space: pre; }
+  .str .c { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+  .sfoot { display: flex; align-items: center; gap: 12px; }
+  .snote { margin: 0; flex: 1; min-width: 0; color: var(--g1); min-height: 3em; }
+
   /* ---------- ловушки ---------- */
   .traps { display: grid; gap: 12px; }
   .trap { display: grid; gap: 8px; padding: 16px; border-radius: 16px; background: linear-gradient(180deg,rgba(80,20,40,.35),rgba(10,10,30,.8)); border: 1px solid rgba(255,122,138,.3); }
@@ -251,13 +267,14 @@
       <div class="actor"><svg class="ic" aria-hidden="true"><use href="#i-box"/></svg><b lang="tr">saçım<span class="o">ı</span></b><small>object</small></div>
     </div>
     <div class="sline"><span class="tk" lang="tr">Berbere saçımı kestirdim.</span><button class="say" type="button" data-say="Berbere saçımı kestirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div>
-    <p class="ftnote">Why <span lang="tr">berbere</span> and not <span lang="tr">berberi</span>? The answer is in office two.</p>
+    <p class="ftnote">Why <span lang="tr">berbere</span> and not <span lang="tr">berberi</span>? The answer is in office three.</p>
     <div class="rooms" id="rooms">
       <button type="button" data-go="stubborn"><b>01</b>Stubborn ones</button>
-      <button type="button" data-go="who"><b>02</b>The doer</button>
-      <button type="button" data-go="chain"><b>03</b>Chain</button>
-      <button type="button" data-go="lab"><b>04</b>Breakdown</button>
-      <button type="button" data-go="speech"><b>05</b>Speech</button>
+      <button type="button" data-go="en-same"><b>02</b>One verb</button>
+      <button type="button" data-go="who"><b>03</b>The doer</button>
+      <button type="button" data-go="chain"><b>04</b>Chain</button>
+      <button type="button" data-go="lab"><b>05</b>Breakdown</button>
+      <button type="button" data-go="speech"><b>06</b>Speech</button>
     </div>
   </section>
 
@@ -288,9 +305,25 @@
     </div>
   </section>
 
+  <section data-section="en-same" data-words="66">
+    <div class="sh">
+      <div><div class="eyebrow"><i></i>02 · English ↔ Türkçe</div><h2 class="gt">One verb, two jobs</h2></div>
+      <p class="sd">English has lazy verbs. Cook, finish, stop, melt work both ways: the soup cooks, and you cook the soup. Same verb. Turkish never lets that slide. If someone makes it happen, the verb gets an order suffix. Flip the switch.</p>
+    </div>
+    <div class="card pad same">
+      <div class="vchips" id="sverbs"></div>
+      <div class="sw" role="group" aria-label="Who does it" id="sw"><button type="button" data-s="0" aria-pressed="true">by itself</button><button type="button" data-s="1" aria-pressed="false">someone does it</button></div>
+      <div class="sboard" aria-live="polite">
+        <div><small>English</small><span class="sen" id="sEn"></span></div>
+        <div><small>Türkçe</small><span class="str" id="sTr" lang="tr"></span></div>
+      </div>
+      <div class="sfoot"><button class="say" type="button" id="sSay" data-say="Çorba pişiyor" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button><p class="snote" id="sNote"></p></div>
+    </div>
+  </section>
+
   <section data-section="who" data-words="61">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>02 · who did the work</div><h2 class="gt">Where the doer goes</h2></div>
+      <div><div class="eyebrow"><i></i>03 · who did the work</div><h2 class="gt">Where the doer goes</h2></div>
       <p class="sd">With an order, a third person shows up in the scene: the one who actually does the work. Their case depends on one question: does the verb have an object?</p>
     </div>
     <div class="card pad">
@@ -308,12 +341,12 @@
       <div class="rulebox"><p id="wrule">The object took the -I slot. The doer moves to the dative: who you assigned it to.</p></div>
     </div>
     <p class="mnemo gold">There's only one -I slot. If it's taken, the doer goes to -A.</p>
-    <p class="ftnote" style="text-align:center;margin-inline:auto">English marks this with word choice: “made the kid laugh,” but “had the barber cut my hair.” Turkish just turns it into a strict case rule.</p>
+    <p class="ftnote" style="text-align:center;margin-inline:auto">Careful: in English both look like objects, “made the kid laugh” and “had the barber cut my hair.” In Turkish only the kid is. The barber goes to -A.</p>
   </section>
 
   <section data-section="chain" data-words="50">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>03 · double order</div><h2 class="gt">The king doesn't get his hands dirty</h2></div>
+      <div><div class="eyebrow"><i></i>04 · double order</div><h2 class="gt">The king doesn't get his hands dirty</h2></div>
       <p class="sd">An order can go through a middleman. One more <b>-t</b>, one more link in the chain.</p>
     </div>
     <div class="two">
@@ -336,7 +369,7 @@
 
   <section data-section="lab" data-words="55">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>04 · lab</div><h2 class="gt">Cut from the end</h2></div>
+      <div><div class="eyebrow"><i></i>05 · lab</div><h2 class="gt">Cut from the end</h2></div>
       <p class="sd">A long word isn't scary. Cut from the tail: person, tense, order. Whatever's left is the root.</p>
     </div>
     <div class="card pad">
@@ -368,7 +401,7 @@
 
   <section data-section="speech" data-words="64">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>05 · in speech</div><h2 class="gt">A week of errands</h2></div>
+      <div><div class="eyebrow"><i></i>06 · in speech</div><h2 class="gt">A week of errands</h2></div>
       <p class="sd">Monday in Antalya. Your friend Selin asks about the weekend. Tap a message to see the translation.</p>
     </div>
     <div class="two">
@@ -390,21 +423,21 @@
 
   <section data-section="traps" data-words="51">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>06 · traps</div><h2 class="gt">Where people trip</h2></div>
-      <p class="sd">Everyone trips on these. Tap to see the right way.</p>
+      <div><div class="eyebrow"><i></i>07 · traps</div><h2 class="gt">Where people trip</h2></div>
+      <p class="sd">Where English logic leads you astray. Tap to see the right way.</p>
     </div>
     <div class="traps" id="traps">
-      <div class="trap"><span class="bad" lang="tr">Berberi saçımı kestirdim.</span><p>There's already an object, the -I slot is taken. The barber moves to the dative.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Berbere saçımı kestirdim.</span><button class="say" type="button" data-say="Berbere saçımı kestirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
-      <div class="trap"><span class="bad" lang="tr">Çocuğa güldürdüm.</span><p>No object, so the kid takes the -I slot.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Çocuğu güldürdüm.</span><button class="say" type="button" data-say="Çocuğu güldürdüm" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
-      <div class="trap"><span class="bad" lang="tr">Yemek pişdirdim.</span><p>piş is a short stubborn one from the -Ir drawer, the rule doesn't work here.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Yemek pişirdim.</span><button class="say" type="button" data-say="Yemek pişirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
-      <div class="trap"><span class="bad" lang="tr">Kahve geldirdim.</span><p>gel goes its own way: to bring is getir. You just have to memorize it.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Kahve getirdim.</span><button class="say" type="button" data-say="Kahve getirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">Berberi saçımı kestirdim.</span><p>English: “I had the barber cut my hair,” so the barber feels like an object. But saçımı already took the -I slot. The barber goes to the dative.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Berbere saçımı kestirdim.</span><button class="say" type="button" data-say="Berbere saçımı kestirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">İşi bittim.</span><p>English “I finished the work” uses the same verb as “the work finished.” Turkish doesn’t. You end it, so bit gets the order: bitir.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">İşi bitirdim.</span><button class="say" type="button" data-say="İşi bitirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">Yemek pişdirdim.</span><p>piş is a short stubborn one from the -Ir drawer. The -DIr rule doesn’t work here.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Yemek pişirdim.</span><button class="say" type="button" data-say="Yemek pişirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
+      <div class="trap"><span class="bad" lang="tr">Kahve geldirdim.</span><p>English has two verbs, come and bring. Turkish too, almost: gel goes its own way, getir. Just memorize it.</p><div><button class="btn ghost" type="button">What's right?</button></div><div class="good" hidden><span lang="tr">Kahve getirdim.</span><button class="say" type="button" data-say="Kahve getirdim" aria-label="Listen"><svg class="ic"><use href="#i-say"/></svg></button></div></div>
     </div>
   </section>
 
   <section data-section="video" data-words="15">
     <h2 class="gt" style="font-size:clamp(28px,7vw,48px)">Listen again</h2>
-    <p>Pay attention to when the doer goes into the dative and when into the accusative.</p>
-    <a-video yt="cgzPJY-dD3w" start="620" end="800" title="Lesson 34. The causative" channel="Anastasia Pektas"></a-video>
+    <p>In Turkish, with English in the title. It's about stacking voices, like the double order öldürt. Listen for two suffixes in a row after the root.</p>
+    <a-video yt="mmj7D5Upx1I" start="0" end="188" title="B2 - 2 Çoklu Çatı Nasıl Kullanılır? | Turkish Verb Voice Explained | Türkçeyi Çözüyoruz!" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
 
   <section data-section="practice" data-words="2">
@@ -423,10 +456,10 @@
 
   <section data-section="cheat" data-words="40">
     <div class="sh">
-      <div><div class="eyebrow"><i></i>07 · cheat sheet</div><h2 class="gt">All on one page</h2></div>
+      <div><div class="eyebrow"><i></i>08 · cheat sheet</div><h2 class="gt">All on one page</h2></div>
     </div>
     <div class="card cheat">
-      <div class="crow"><h3>-Ir · -Ar · -It</h3><p>Short stubborn ones.</p><div class="ex"><button type="button" data-say="pişir">piş → pişir</button><button type="button" data-say="bitir">bit → bitir</button><button type="button" data-say="çıkar">çık → çıkar</button><button type="button" data-say="korkut">kork → korkut</button></div></div>
+      <div class="crow"><h3>-Ir · -Ar · -It</h3><p>Short stubborn ones. English “cook” and “finish” work both ways, Turkish doesn't: piş / pişir, bit / bitir.</p><div class="ex"><button type="button" data-say="pişir">piş → pişir</button><button type="button" data-say="bitir">bit → bitir</button><button type="button" data-say="çıkar">çık → çıkar</button><button type="button" data-say="korkut">kork → korkut</button></div></div>
       <div class="crow"><h3>Own way</h3><p>Just memorize.</p><div class="ex"><button type="button" data-say="getir">gel → getir</button><button type="button" data-say="göster">gör → göster</button><button type="button" data-say="kaldır">kalk → kaldır</button></div></div>
       <div class="crow"><h3>The doer</h3><p>Object present — the doer goes in -A. No object — in -I.</p><div class="ex"><button type="button" data-say="Berbere saçımı kestirdim">Berbere saçımı kestirdim</button><button type="button" data-say="Çocuğu güldürdüm">Çocuğu güldürdüm</button></div></div>
       <div class="crow"><h3>Chain and et</h3><p>One more -t — one more link. et takes the order.</p><div class="ex"><button type="button" data-say="öldürt">öldür → öldürt</button><button type="button" data-say="tamir ettir">tamir et → tamir ettir</button></div></div>
@@ -562,6 +595,34 @@ addEventListener('DOMContentLoaded', () => {
   $('#qnext').addEventListener('click', nextQ);
   qi = 0;
 
+  /* ---------- one English verb, two Turkish ---------- */
+  const SV = [
+    { k: 'cook', en: ['The soup is <b>cooking</b>.', 'I\'m <b>cooking</b> the soup.'], tr: [[['Çorba ', 'k'], ['piş', 'k'], ['iyor', 't']], [['Çorbayı ', 'k'], ['piş', 'k'], ['ir', 'c'], ['iyorum', 't']]], n: 'piş is a stubborn one from the -Ir drawer: pişir.' },
+    { k: 'finish', en: ['The movie <b>finished</b>.', 'I <b>finished</b> the movie.'], tr: [[['Film ', 'k'], ['bit', 'k'], ['ti', 't']], [['Filmi ', 'k'], ['bit', 'k'], ['ir', 'c'], ['dim', 't']]], n: 'bit is another -Ir one: bitir. Never “filmi bittim.”' },
+    { k: 'stop', en: ['The car <b>stopped</b>.', 'I <b>stopped</b> the car.'], tr: [[['Araba ', 'k'], ['dur', 'k'], ['du', 't']], [['Arabayı ', 'k'], ['dur', 'k'], ['dur', 'c'], ['dum', 't']]], n: 'dur is short, so the usual -DIr: durdur.' },
+    { k: 'melt', en: ['The ice <b>melted</b>.', 'The sun <b>melted</b> the ice.'], tr: [[['Buz ', 'k'], ['eri', 'k'], ['di', 't']], [['Güneş buzu ', 'k'], ['eri', 'k'], ['t', 'c'], ['ti', 't']]], n: 'eri has two syllables and ends in a vowel, so one t: erit.' },
+    { k: 'start', en: ['The class <b>started</b>.', 'The teacher <b>started</b> the class.'], tr: [[['Ders ', 'k'], ['başla', 'k'], ['dı', 't']], [['Öğretmen dersi ', 'k'], ['başla', 'k'], ['t', 'c'], ['tı', 't']]], n: 'başla ends in a vowel, two syllables: başlat.' },
+  ];
+  let svi = 0, sst = 0, stouched = false;
+  $('#sverbs').innerHTML = SV.map((x, i) => `<button type="button" class="vc${i ? '' : ' on'}" data-i="${i}">${x.k}</button>`).join('');
+  function same(animate) {
+    const x = SV[svi];
+    $$('#sverbs .vc').forEach((b) => b.classList.toggle('on', +b.dataset.i === svi));
+    $$('#sw button').forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.s === sst)));
+    $('#sEn').innerHTML = x.en[sst];
+    $('#sTr').innerHTML = x.tr[sst].map(([t, c]) => `<span class="${c}">${t}</span>`).join('');
+    $('#sSay').dataset.say = x.tr[sst].map((s) => s[0]).join('');
+    $('#sNote').textContent = sst ? `English kept “${x.k}.” Turkish added an order. ${x.n}` : `Nobody makes it happen. English: “${x.k}.” Turkish: the plain verb.`;
+    if (!G || !animate) return;
+    G.fromTo('#sEn b', { scale: 1.25 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
+    if (sst) G.fromTo('#sTr .c', { y: -40, scale: .3, rotation: -14 }, { y: 0, scale: 1, rotation: 0, duration: .8, ease: 'elastic.out(1,.45)' });
+    else G.fromTo('#sTr span', { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .4, stagger: .06, ease: 'power2.out' });
+  }
+  $('#sverbs').addEventListener('click', (e) => { const b = e.target.closest('.vc'); if (!b) return; stouched = true; svi = +b.dataset.i; same(true); speak($('#sSay').dataset.say); });
+  $$('#sw button').forEach((b) => b.addEventListener('click', () => { stouched = true; sst = +b.dataset.s; same(true); speak($('#sSay').dataset.say); }));
+  same(false);
+  if (ST) ST.create({ trigger: '.sboard', start: 'top 80%', once: true, onEnter: () => { same(true); setTimeout(() => { if (stouched) return; sst = 1; same(true); }, 1800); } });
+
   /* ---------- исполнитель: место -I одно ---------- */
   const W2 = [
     { acc: 'saçım<span>ı</span>', accC: 'o', ex: 'berber<span>e</span>', exTo: 'dat', s: 'Berbere saçımı kestirdim.', t: 'I had the barber cut my hair.', r: 'The object took the -I slot. The doer moves to the dative: who you assigned it to.' },
@@ -609,8 +670,8 @@ addEventListener('DOMContentLoaded', () => {
     { w: [['oku', 'k'], ['t', 'c'], ['tu', 't']], tr: 'he made someone read', o: ['he read', 'he made someone read', 'he\'s reading'] },
     { w: [['ye', 'k'], ['dir', 'c'], ['di', 't'], ['k', 'l']], tr: 'we fed', o: ['we ate', 'we fed', 'we were fed'] },
     { w: [['piş', 'k'], ['ir', 'c'], ['di', 't'], ['m', 'l']], tr: 'I cooked', o: ['I cooked', 'it got cooked', 'I had it cooked'] },
-    { w: [['çık', 'k'], ['ar', 'c'], ['dı', 't'], ['n', 'l']], tr: 'you took out', o: ['you went out', 'you took out', 'he took out'] },
-    { w: [['kork', 'k'], ['ut', 'c'], ['tu', 't'], ['n', 'l']], tr: 'you scared', o: ['you got scared', 'you scared', 'you were scared by someone'] },
+    { w: [['çık', 'k'], ['ar', 'c'], ['dı', 't'], ['n', 'l']], tr: 'you took it out', o: ['you went out', 'you took it out', 'he took it out'] },
+    { w: [['kork', 'k'], ['ut', 'c'], ['tu', 't'], ['n', 'l']], tr: 'you scared someone', o: ['you got scared', 'you scared someone', 'someone scared you'] },
     { w: [['öl', 'k'], ['dür', 'c'], ['t', 'c'], ['tü', 't']], tr: 'he had someone killed', o: ['he died', 'he killed', 'he had someone killed'] },
     { w: [['bekle', 'k'], ['t', 'c'], ['ti', 't'], ['m', 'l']], tr: 'I kept someone waiting', o: ['I waited', 'I kept someone waiting', 'I was waited for'] },
   ];

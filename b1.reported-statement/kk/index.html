@@ -250,6 +250,7 @@
   .l1-sound__w b { display: inline-block; background: var(--bb-ink); color: #fff; padding: 0 3px; }
 
   .l1-lab { background: var(--bb-paper); color: var(--bb-ink); padding: 14px; }
+  .l1-lab .bb-btn.is-on, .l1-lab .bb-btn--fill { background: var(--bb-ink); color: #fff; border-color: var(--bb-ink); }
   .l1-who { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
   .l1-quotes { display: grid; gap: 6px; margin: 8px 0 12px; }
   .l1-press { border-top: 1.5px solid var(--bb-ink); border-bottom: 1.5px solid var(--bb-ink); padding: 12px 0; margin-top: 10px; }
@@ -281,6 +282,31 @@
   .l1-ic { width: 34px; height: 34px; }
   .l1-news { width: 140px; height: auto; display: block; margin-bottom: 6px; }
   .l1-card { transition: rotate .2s ease; }
+
+  /* ---------- қазақша ↔ түрікше ---------- */
+  .kd-box { background: var(--bb-paper); color: var(--bb-ink); padding: 14px; }
+  .kd-times { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .kd-rail { display: grid; grid-template-columns: 38px 1fr; gap: 8px; align-items: center; margin: 8px 0; }
+  .kd-rail__lab { font: 800 11px/1 var(--ak-font); letter-spacing: .06em; }
+  .kd-track { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); height: 46px; border: 1.5px solid var(--bb-ink); }
+  .kd-cell { display: flex; align-items: center; justify-content: center; font: 800 13px/1 var(--ak-font); border-right: 1px solid rgba(11,11,11,.25); transition: opacity .2s ease; }
+  .kd-cell:last-of-type { border-right: 0; }
+  .kd-past { background: var(--bb-green); } .kd-fut { background: var(--bb-orange); }
+  .kd-track.is-pick .kd-cell:not(.is-on) { opacity: .45; }
+  .kd-wall { position: absolute; top: -7px; bottom: -7px; left: var(--x); width: 4px; translate: -50% 0; background: var(--bb-ink); }
+  .kd-pin { position: absolute; top: -9px; left: 12.5%; width: 12px; height: 12px; translate: -50% 0; background: var(--bb-red); }
+  .kd-axis { display: grid; grid-template-columns: 38px repeat(4, 1fr); gap: 0 8px; font: 700 11px/1.2 var(--ak-font); text-align: center; }
+  .kd-axis span:first-child { grid-column: 1; }
+  .kd-out { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; margin-top: 14px; border-top: 1.5px solid var(--bb-ink); padding-top: 12px; }
+  .kd-lines { display: grid; gap: 6px; }
+  .kd-lines .bb-line-tr { font-size: clamp(16px, 4.4vw, 22px); min-height: 1.3em; }
+  .kd-badge { font: 900 clamp(46px, 13vw, 76px)/1 var(--ak-font); letter-spacing: -.05em; min-width: 1em; text-align: center; }
+  .kd-badge.is-diff { color: var(--bb-red); }
+  .kd-pairs { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; margin-top: 10px; }
+  .kd-pair { border: 0; padding: 14px; text-align: left; cursor: pointer; color: var(--bb-ink); font: inherit; display: grid; gap: 8px; min-height: 150px; }
+  .kd-pair__w { font: 900 clamp(20px, 5.6vw, 28px)/1.1 var(--ak-font); letter-spacing: -.03em; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+  .kd-pair__w b { background: var(--bb-ink); color: #fff; padding: 0 3px; }
+  .kd-pair .bb-flip__tag { color: var(--bb-ink); }
   @media (min-width: 900px) { .l1-end { grid-template-columns: 160px 1fr; align-items: center; } .l1-hero__stage { margin: 0 -32px; } }
   @media (prefers-reduced-motion: reduce) { .l1-hero__words span, .l1-card { animation: none; } }
 </style>
@@ -332,16 +358,17 @@
   <section data-section="route" data-words="26" class="bb-sec bb-white">
     <div class="bb-in">
       <div class="bb-meta" aria-hidden="true"><span>Contents</span><span>8 Stories</span><span>p. 02</span></div>
-      <h2>Нөмірде<sup>(8)</sup></h2>
+      <h2>Нөмірде<sup>(9)</sup></h2>
       <div class="bb-table" role="list">
         <button type="button" class="bb-row" data-goto="machine"><b>01</b><span>Дәйексөзден мақалаға</span><span class="bb-small">бес қадам</span></button>
         <button type="button" class="bb-row" data-goto="baskets"><b>02</b><span>Екі себет</span><span class="bb-small" lang="tr">-DIk · -AcAk</span></button>
-        <button type="button" class="bb-row" data-goto="persons"><b>03</b><span>Кімнің сөзі</span><span class="bb-small">алты жақ</span></button>
-        <button type="button" class="bb-row" data-goto="sounds"><b>04</b><span>Әріптер өзгереді</span><span class="bb-small" lang="tr">k → ğ</span></button>
-        <button type="button" class="bb-row" data-goto="lab"><b>05</b><span>Редакция</span><span class="bb-small">үш режим</span></button>
-        <button type="button" class="bb-row" data-goto="traps"><b>06</b><span>Тұзақтар</span><span class="bb-small">төртеу</span></button>
-        <button type="button" class="bb-row" data-goto="practice"><b>07</b><span>Практика</span><span class="bb-small">нөмірге</span></button>
-        <button type="button" class="bb-row" data-goto="cheat"><b>08</b><span>Жадынама</span><span class="bb-small">скриншот</span></button>
+        <button type="button" class="bb-row" data-goto="kk-diff"><b>03</b><span>Қазақша ↔ түрікше</span><span class="bb-small">шекара</span></button>
+        <button type="button" class="bb-row" data-goto="persons"><b>04</b><span>Кімнің сөзі</span><span class="bb-small">алты жақ</span></button>
+        <button type="button" class="bb-row" data-goto="sounds"><b>05</b><span>Әріптер өзгереді</span><span class="bb-small" lang="tr">k → ğ</span></button>
+        <button type="button" class="bb-row" data-goto="lab"><b>06</b><span>Редакция</span><span class="bb-small">үш режим</span></button>
+        <button type="button" class="bb-row" data-goto="traps"><b>07</b><span>Тұзақтар</span><span class="bb-small">төртеу</span></button>
+        <button type="button" class="bb-row" data-goto="practice"><b>08</b><span>Практика</span><span class="bb-small">нөмірге</span></button>
+        <button type="button" class="bb-row" data-goto="cheat"><b>09</b><span>Жадынама</span><span class="bb-small">скриншот</span></button>
       </div>
     </div>
   </section>
@@ -381,8 +408,8 @@
           <p>Сөйлем қай себетке түсетінін тап. Себетті бас.</p>
           <div class="l1-quotecard bb-black" data-qcard><big lang="tr" data-qtext></big><span class="bb-small" data-qcount data-ui></span></div>
           <div class="l1-baskets">
-            <button type="button" class="l1-basket bb-orange" data-basket="acak"><b lang="tr">-AcAğ</b><small>келер шақ: келемін, жасаймын</small><span class="l1-basket__got" data-got="acak"></span></button>
-            <button type="button" class="l1-basket bb-green" data-basket="dik"><b lang="tr">-DIğ</b><small>қалғанының бәрі: болды, бар, болып тұрады</small><span class="l1-basket__got" data-got="dik"></span></button>
+            <button type="button" class="l1-basket bb-orange" data-basket="acak"><b lang="tr">-AcAğ</b><small>келер шақ: ертең, келесі аптада</small><span class="l1-basket__got" data-got="acak"></span></button>
+            <button type="button" class="l1-basket bb-green" data-basket="dik"><b lang="tr">-DIğ</b><small>қалғанының бәрі: кеше, қазір, күнде</small><span class="l1-basket__got" data-got="dik"></span></button>
           </div>
           <p class="bb-status" data-ui data-bout></p>
         </div>
@@ -391,9 +418,37 @@
           <div class="bb-small">ЖЕТКІЗУ ШАҚТЫ ЖЕП ҚОЯДЫ ***</div>
           <div class="bb-poster__big" lang="tr">Geldim<span class="bb-sup">(1)</span><br>Geliyorum<span class="bb-sup">(2)</span><br>Gelirim<span class="bb-sup">(3)</span></div>
           <p style="font-weight:800">Үш түрлі сөйлем. Жеткізуде — біреу: <a-say>geldiğini söyledi</a-say></p>
-          <p>Шақтың қандай болғанын тек жанындағы сөз айтады: <span lang="tr">dün</span>, <span lang="tr">şimdi</span>, <span lang="tr">her gün</span>. Абайла: қазақша «күнде істейтінін» дейміз, ал түрікше бұл да -DIk.</p>
+          <p>Шақтың қандай болғанын тек жанындағы сөз айтады: <span lang="tr">dün</span>, <span lang="tr">şimdi</span>, <span lang="tr">her gün</span>. Абайла: қазақша «күнде істейтінін» дейміз, ал түрікше бұл да -DIk. Неге — келесі бетте.</p>
           <div class="bb-poster__foot"><span>© Alterna 2026</span><span>B1-26</span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ҚАЗАҚША ↔ ТҮРІКШЕ ================= -->
+  <section data-section="kk-diff" data-words="74" class="bb-sec bb-yellow">
+    <div class="bb-in">
+      <div class="bb-meta" aria-hidden="true"><span>Story 03</span><span>Qazaqşa ↔ Türkçe</span><span>p. 05</span></div>
+      <h2>Шекара басқа жерде<span class="bb-sq" aria-hidden="true"></span></h2>
+      <div class="bb-two">
+        <div>
+          <p class="bb-lead">Қазақша да солай: келгенін айтты — <span lang="tr">geldiğini söyledi</span>. Бөлшектер де, реті де бірдей.</p>
+          <p>Қазақшада да екі себет бар: <b>-ған</b> және <b>-атын</b>. Бірақ шекара басқа жерден өтеді. <b>-атын</b> — әрі келер шақ, әрі әдет. Түрікше <span lang="tr">-AcAk</span> — тек келер шақ.</p>
+          <p>Уақытты бас. Үстіңгі жол — қазақша, астыңғысы — түрікше.</p>
+        </div>
+        <div class="kd-box">
+          <div class="kd-times" role="group" aria-label="Қашан"><button type="button" class="bb-btn" data-kt="0">кеше</button><button type="button" class="bb-btn" data-kt="1">қазір</button><button type="button" class="bb-btn" data-kt="2">күнде</button><button type="button" class="bb-btn" data-kt="3">ертең</button></div>
+          <div class="kd-rail"><span class="kd-rail__lab">ҚАЗ</span><div class="kd-track" data-kdrail><span class="kd-cell kd-past">-ған</span><span class="kd-cell kd-past">-ған</span><span class="kd-cell kd-fut">-атын</span><span class="kd-cell kd-fut">-атын</span><i class="kd-wall" style="--x:50%"></i><i class="kd-pin" aria-hidden="true"></i></div></div>
+          <div class="kd-rail"><span class="kd-rail__lab">TÜR</span><div class="kd-track" data-kdrail lang="tr"><span class="kd-cell kd-past">-DIk</span><span class="kd-cell kd-past">-DIk</span><span class="kd-cell kd-past">-DIk</span><span class="kd-cell kd-fut">-AcAk</span><i class="kd-wall" style="--x:75%"></i><i class="kd-pin" aria-hidden="true"></i></div></div>
+          <div class="kd-axis" aria-hidden="true"><span></span><span>кеше</span><span>қазір</span><span>күнде</span><span>ертең</span></div>
+          <div class="kd-out" aria-live="polite"><div class="kd-lines"><div class="bb-line-tr" data-kdkk></div><div class="bb-line-tr" data-kdtr lang="tr"></div></div><span class="kd-badge" data-kdbadge>=</span></div>
+          <p class="bb-status" data-kdnote></p>
+        </div>
+      </div>
+      <p style="margin-top:18px;font-weight:800">Құйрықта тағы екі айырма. Карточканы бас.</p>
+      <div class="kd-pairs">
+        <button type="button" class="kd-pair bb-cyan" data-kdpair="0"><span class="bb-flip__tag">Ерін үндестігі</span><span class="kd-pair__w" data-kdw></span><span class="bb-small">Қазақша аффикс тек жуан не жіңішке: -ған / -ген, -ы / -і. Түрікше ерінге де қарайды: o, u-дан кейін — u, ö, ü-ден кейін — ü.</span></button>
+        <button type="button" class="kd-pair bb-pink" data-kdpair="1"><span class="bb-flip__tag">«Нені?» жалғауы</span><span class="kd-pair__w" data-kdw></span><span class="bb-small">Қазақша -ды / -ді немесе -н. Түрікше -ı / -i немесе -nı / -ni.</span></button>
       </div>
     </div>
   </section>
@@ -405,11 +460,11 @@
       <h2>Кімнің сөзі</h2>
       <div class="bb-two">
         <div>
-          <p class="bb-lead">Шақтан кейін — «кімдікі» құйрығы. Тәуелдік жалғаудағыдай: менің, сенің, оның.</p>
+          <p class="bb-lead">Шақтан кейін — «кімдікі» құйрығы. Тәуелдік жалғау, қазақшадағыдай. Әр жолда — қазақ айнасы.</p>
           <p>Сосын тағы <b lang="tr">-ı / -i / -u / -ü</b>: айту етістігі «нені?» деп сұрайды. Бұл — табыс септік.</p>
           <div class="l1-verbs" role="group" aria-label="Етістік"><button type="button" class="bb-btn is-on" data-pverb="gel" lang="tr">gel</button><button type="button" class="bb-btn" data-pverb="yap" lang="tr">yap</button><button type="button" class="bb-btn" data-pverb="oku" lang="tr">oku</button><button type="button" class="bb-btn" data-pverb="gör" lang="tr">gör</button></div>
           <div class="bb-row-btns" role="group" aria-label="Шақ"><button type="button" class="bb-btn is-on" data-ptense="dik" lang="tr">-DIk</button><button type="button" class="bb-btn" data-ptense="acak" lang="tr">-AcAk</button></div>
-          <p class="bb-small" style="margin-top:12px">Жолды бас — естисің. Кеңес: «оның» мен «сенің» формасы бірдей. Бұл туралы — екінші сабақта.</p>
+          <p class="bb-small" style="margin-top:12px">Жолды бас — естисің. Байқа: түрікше «оның» мен «сенің» бірдей — <span lang="tr">geldiğini</span>. Қазақшада екеуі бөлек: келгенін, келгеніңді. Бұл туралы — екінші сабақта.</p>
           <p>Құйрық жаңалық кім туралы екенін көрсетеді. Оны айтып жатқанды емес.</p>
         </div>
         <div><svg class="l1-heads" viewBox="0 0 300 70" aria-hidden="true"><g data-ph="0" transform="translate(10 4)"><rect width="40" height="40" fill="#fff"/><circle cx="20" cy="16" r="8" fill="#0b0b0b"/><path d="M6 40c1-10 6-14 14-14s13 4 14 14z" fill="#0b0b0b"/><text x="20" y="60" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="800" font-size="12" fill="#0b0b0b">ben</text></g><g data-ph="1" transform="translate(58 4)"><rect width="40" height="40" fill="#fff"/><circle cx="20" cy="16" r="8" fill="#0b0b0b"/><path d="M6 40c1-10 6-14 14-14s13 4 14 14z" fill="#0b0b0b"/><text x="20" y="60" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="800" font-size="12" fill="#0b0b0b">sen</text></g><g data-ph="2" transform="translate(106 4)"><rect width="40" height="40" fill="#fff"/><circle cx="20" cy="16" r="8" fill="#0b0b0b"/><path d="M6 40c1-10 6-14 14-14s13 4 14 14z" fill="#0b0b0b"/><text x="20" y="60" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="800" font-size="12" fill="#0b0b0b">o</text></g><g data-ph="3" transform="translate(154 4)"><rect width="40" height="40" fill="#fff"/><circle cx="20" cy="16" r="8" fill="#0b0b0b"/><path d="M6 40c1-10 6-14 14-14s13 4 14 14z" fill="#0b0b0b"/><text x="20" y="60" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="800" font-size="12" fill="#0b0b0b">biz</text></g><g data-ph="4" transform="translate(202 4)"><rect width="40" height="40" fill="#fff"/><circle cx="20" cy="16" r="8" fill="#0b0b0b"/><path d="M6 40c1-10 6-14 14-14s13 4 14 14z" fill="#0b0b0b"/><text x="20" y="60" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="800" font-size="12" fill="#0b0b0b">siz</text></g><g data-ph="5" transform="translate(250 4)"><rect width="40" height="40" fill="#fff"/><circle cx="20" cy="16" r="8" fill="#0b0b0b"/><path d="M6 40c1-10 6-14 14-14s13 4 14 14z" fill="#0b0b0b"/><text x="20" y="60" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="800" font-size="12" fill="#0b0b0b">onlar</text></g></svg><div class="bb-table l1-ptable" data-ptable></div></div>
@@ -422,13 +477,13 @@
     <div class="bb-in">
       <div class="bb-meta" aria-hidden="true"><span>Story 04</span><span>Refined details</span><span>p. 06</span></div>
       <h2>Әріптер өзгереді</h2>
-      <p class="bb-lead">Төрт ұсақ-түйек. Карточканы бас — әріптің қалай қайта боялатынын көресің.</p>
+      <p class="bb-lead">Төрт ұсақ-түйек. Үшеуін қазақша да істейді. Карточканы бас.</p>
       <p>Оларды бөлек жаттаудың қажеті жоқ. «Япдығыны» деп дауыстап айтып көр. Тіл сүрінеді. Түрікше айтуға ыңғайлысын ғана таңдайды.</p>
       <div class="l1-sounds">
-        <button type="button" class="l1-sound bb-orange" data-sound="0"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 30 20 8l14 22" stroke="#0b0b0b" stroke-width="4" fill="none"/><circle cx="20" cy="30" r="4" fill="#0b0b0b"/></svg><span class="l1-sound__rule" lang="tr">k → ğ</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">дауысты алдында k ұяңдайды</span></button>
-        <button type="button" class="l1-sound bb-yellow" data-sound="1"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="6" width="28" height="28" fill="none" stroke="#0b0b0b" stroke-width="4"/><path d="M14 20h12" stroke="#0b0b0b" stroke-width="4"/></svg><span class="l1-sound__rule" lang="tr">d → t</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">қатаң дауыссыздан кейін</span></button>
-        <button type="button" class="l1-sound bb-pink" data-sound="2"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="20" r="6" fill="#0b0b0b"/><circle cx="30" cy="20" r="6" fill="#0b0b0b"/><path d="M17 20h6" stroke="#0b0b0b" stroke-width="4"/></svg><span class="l1-sound__rule" lang="tr">+ y</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">екі дауыстының арасында</span></button>
-        <button type="button" class="l1-sound bb-green" data-sound="3"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 32V8h12a8 8 0 0 1 0 16H8" stroke="#0b0b0b" stroke-width="4" fill="none"/></svg><span class="l1-sound__rule" lang="tr">t → d</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">кейбір етістіктерде дауысты алдында</span></button>
+        <button type="button" class="l1-sound bb-orange" data-sound="0"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><path d="M6 30 20 8l14 22" stroke="#0b0b0b" stroke-width="4" fill="none"/><circle cx="20" cy="30" r="4" fill="#0b0b0b"/></svg><span class="l1-sound__rule" lang="tr">k → ğ</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">дауысты алдында k ұяңдайды. Қазақша да: жүрек → жүрегі</span></button>
+        <button type="button" class="l1-sound bb-yellow" data-sound="1"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><rect x="6" y="6" width="28" height="28" fill="none" stroke="#0b0b0b" stroke-width="4"/><path d="M14 20h12" stroke="#0b0b0b" stroke-width="4"/></svg><span class="l1-sound__rule" lang="tr">d → t</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">қатаң дауыссыздан кейін. Қазақша да: жат → жатқан</span></button>
+        <button type="button" class="l1-sound bb-pink" data-sound="2"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><circle cx="10" cy="20" r="6" fill="#0b0b0b"/><circle cx="30" cy="20" r="6" fill="#0b0b0b"/><path d="M17 20h6" stroke="#0b0b0b" stroke-width="4"/></svg><span class="l1-sound__rule" lang="tr">+ y</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">екі дауыстының арасында. Қазақша да: жаса → жасайтын</span></button>
+        <button type="button" class="l1-sound bb-green" data-sound="3"><svg class="l1-ic" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 32V8h12a8 8 0 0 1 0 16H8" stroke="#0b0b0b" stroke-width="4" fill="none"/></svg><span class="l1-sound__rule" lang="tr">t → d</span><span class="l1-sound__w" lang="tr" data-sw></span><span class="bb-small">кейбір етістіктерде дауысты алдында. Қазақшада жоқ: кет → кетеді</span></button>
       </div>
       <p style="margin-top:14px">Және болымсыздық: <span lang="tr">-me-</span> түбірден кейін бірден тұрады. <a-say>gelmediğini söyledi</a-say> <a-say>gelmeyeceğini söyledi</a-say></p>
     </div>
@@ -486,16 +541,16 @@
     <div class="bb-in">
       <div class="bb-meta" aria-hidden="true"><span>Story 06</span><span>Errata</span><span>p. 08</span></div>
       <h2>Тұзақтар<span class="bb-ast" aria-hidden="true">**</span></h2>
-      <p class="bb-lead">Бұған бәрі сүрінеді. Карточканы аудар.</p>
+      <p class="bb-lead">Үшеуі — қазақшадан келеді. Біреуі — бәріне ортақ. Аудар.</p>
       <div class="bb-traps">
         <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
-          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Бұлай айтпайды</span><big lang="tr">geleceğim söyledi</big><span>Дәйексөзді сол күйі қоя салған.</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Былай айтады</span><big lang="tr">geleceğini söyledi</big><span><span lang="tr">-im</span>-мен «мен» шығады. Үй иесі сені келеді деп ойлайды.</span></span> </span></button>
+          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Қазақтың тұзағы</span><big lang="tr">her gün çalışacağını</big><span>«Күнде істейтінін» — -атын. Демек -AcAk?</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Былай айтады</span><big lang="tr">her gün çalıştığını</big><span>Қазақша -атын — әрі әдет, әрі келер шақ. Түрікше әдет — <span lang="tr">-DIk</span>. <span lang="tr">-AcAk</span> — тек «ертең».</span></span> </span></button>
         <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
-          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Шатастырады</span><big lang="tr">geleceğini dedi</big><span>Қай етістікті алу керек?</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Айырмасы</span><big lang="tr">geleceğini söyledi</big><span>Жеткізумен — <span lang="tr">söyledi</span>. <span lang="tr">dedi</span>-ні дәйексөзге қалдыр: <span lang="tr">“Geleceğim” dedi.</span></span></span> </span></button>
+          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Қазақтың тұзағы</span><big lang="tr">okudığını söyledi</big><span>Қазақшадағыдай жуан ы қойылған.</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Былай айтады</span><big lang="tr">okuduğunu söyledi</big><span><span lang="tr">oku</span>-дан кейін ерін дөңгеленеді: <span lang="tr">oku-duğ-u-nu</span>. Сол сияқты <span lang="tr">gördüğünü</span>.</span></span> </span></button>
         <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
-          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Бұлай айтпайды</span><big lang="tr">geleceği söyledi</big><span>«Нені?» құйрығы жоғалып кеткен.</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Былай айтады</span><big lang="tr">geleceğini söyledi</big><span>Айтты — нені? Табыс септік міндетті.</span></span> </span></button>
+          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Қазақтың тұзағы</span><big lang="tr">geldiğin söyledi</big><span>«Келгенін» — соңында -н. Сол -н көшірілген.</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Былай айтады</span><big lang="tr">geldiğini söyledi</big><span><span lang="tr">geldiğin</span> — «сенің келгенің». Түрікше «оның» + «нені?» = <span lang="tr">-i</span> + <span lang="tr">-ni</span>.</span></span> </span></button>
         <button type="button" class="bb-flip" data-flip aria-pressed="false"><span class="bb-flip__in">
-          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Шатастырады</span><big lang="tr">Geldim. → geldiğimi?</big><span>Мұрат «мен» деді ғой.</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Айырмасы</span><big lang="tr">Murat geldiğini söyledi</big><span>Мұрат туралы айтамыз — демек, «оның». <span lang="tr">geldiğimi</span> — бұл сен туралы.</span></span> </span></button>
+          <span class="bb-flip__f"><svg class="bb-stamp" viewBox="0 0 70 70" aria-hidden="true"><circle cx="35" cy="35" r="30" fill="none" stroke="#ff2a1a" stroke-width="3"/><circle cx="35" cy="35" r="24" fill="none" stroke="#ff2a1a" stroke-width="1.5"/><text x="35" y="39" text-anchor="middle" font-family="Inter Tight, Alterna Sans, sans-serif" font-weight="900" font-size="11" fill="#ff2a1a">ERRATA</text></svg><span class="bb-flip__tag">Бұлай айтпайды</span><big lang="tr">geleceğim söyledi</big><span>Дәйексөзді сол күйі қоя салған.</span><span class="bb-flip__hint">аудару →</span></span> <span class="bb-flip__b"><span class="bb-flip__tag">Былай айтады</span><big lang="tr">geleceğini söyledi</big><span>Қазақша да «келемін айтты» демейміз — «келетінін айтты». <span lang="tr">-im</span>-мен Мұрат емес, сен келесің.</span></span> </span></button>
       </div>
     </div>
   </section>
@@ -561,7 +616,8 @@
             <li>Келер шақ — <span lang="tr">-(y)AcAğ</span>. Қалғанының бәрі — <span lang="tr">-DIğ</span>.</li>
             <li>Сосын «кімдікі»: <span lang="tr">-ım, -ın, -ı, -ımız, -ınız, -ları</span>.</li>
             <li>Сосын «нені?»: <span lang="tr">-ı</span>, ал «оның»-нан кейін — <span lang="tr">-nı</span>.</li>
-            <li>Айту етістігі — <span lang="tr">söyledi</span>. <span lang="tr">dedi</span> — дәйексөзге.</li>
+            <li>Айту етістігі — <span lang="tr">söyledi</span>. <span lang="tr">dedi</span> — дәйексөзге. Қазақшадағы айтты / деді сияқты.</li>
+            <li>Қазақша -атын ≠ <span lang="tr">-AcAk</span>: «күнде істейтінін» — <span lang="tr">çalıştığını</span>.</li>
           </ul>
           <p>Енді сен жеткізе аласың. Тырнақшасыз және біреудің «мен»-інсіз.</p>
           <div class="bb-row-btns"><button type="button" class="bb-btn bb-btn--fill" data-cheatplay data-ui>Қайта құрастыру</button></div>
@@ -799,8 +855,8 @@ addEventListener('DOMContentLoaded', () => {
     { p: [['“Yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['im', 'person'], ['”', 'word']], c: 'Мұраттың дәйексөзі. -im — бұл «мен». Бірақ мұндағы «мен» — Мұрат, сен емес.' },
     { p: [['Yarın', 'word'], ['gel', 'root'], ['ecek', 'tense'], ['im', 'cut']], c: '1-қадам. Тырнақшаны алып, «мен»-ді кесеміз.', cut: true },
     { p: [['Yarın', 'word'], ['gel', 'root'], ['ecek', 'tense']], c: '2-қадам. Шақ келер шақ еді — -ecek қалады.' },
-    { p: [['Yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['i', 'person']], c: '3-қадам. «Келемін» кімдікі? Оның. Плюс -i. Ал дауысты алдында k ğ болды.' },
-    { p: [['Yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['i', 'person'], ['ni', 'case']], c: '4-қадам. Айтты — нені? Табыс септік: -ni.' },
+    { p: [['Yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['i', 'person']], c: '3-қадам. «Келемін» кімдікі? Оның: -i. Дауысты алдында k ğ болды. Қазақша да: келетін-і.' },
+    { p: [['Yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['i', 'person'], ['ni', 'case']], c: '4-қадам. Айтты — нені? Табыс септік: -ni. Қазақшада мұнда жай -н: келетіні-н.' },
     { p: [['Murat', 'word'], ['yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['i', 'person'], ['ni', 'case'], ['söyledi.', 'verb']], c: '5-қадам. Айту етістігі соңына. Дайын: Мұрат ертең келетінін айтты.' },
   ];
   let mi = 0;
@@ -867,14 +923,65 @@ addEventListener('DOMContentLoaded', () => {
   }));
   showQ();
 
+  /* =============== ҚАЗАҚША ↔ ТҮРІКШЕ =============== */
+  const KD = [
+    { kk: [['Кеше', 'word'], ['кел', 'root'], ['ген', 'tense'], ['і', 'person'], ['н', 'case'], ['айтты.', 'verb']], tr: [['Dün', 'word'], ['gel', 'root'], ['diğ', 'tense'], ['i', 'person'], ['ni', 'case'], ['söyledi.', 'verb']], diff: false, say: 'Dün geldiğini söyledi.', note: 'Екеуі де — өткен себетте.' },
+    { kk: [['Қазір кітап оқып', 'word'], ['отыр', 'root'], ['ған', 'tense'], ['ы', 'person'], ['н', 'case'], ['айтты.', 'verb']], tr: [['Şimdi kitap', 'word'], ['oku', 'root'], ['duğ', 'tense'], ['u', 'person'], ['nu', 'case'], ['söyledi.', 'verb']], diff: false, say: 'Şimdi kitap okuduğunu söyledi.', note: 'Қазақша да -ған: оқып отырғанын. Сәйкес.' },
+    { kk: [['Күнде жұмыс', 'word'], ['істе', 'root'], ['йтін', 'tense'], ['і', 'person'], ['н', 'case'], ['айтты.', 'verb']], tr: [['Her gün', 'word'], ['çalış', 'root'], ['tığ', 'tense'], ['ı', 'person'], ['nı', 'case'], ['söyledi.', 'verb']], diff: true, say: 'Her gün çalıştığını söyledi.', note: 'Міне, айырма. Қазақша -атын, түрікше -DIk. çalışacağını — «жұмыс істейтін болады».' },
+    { kk: [['Ертең', 'word'], ['кел', 'root'], ['етін', 'tense'], ['і', 'person'], ['н', 'case'], ['айтты.', 'verb']], tr: [['Yarın', 'word'], ['gel', 'root'], ['eceğ', 'tense'], ['i', 'person'], ['ni', 'case'], ['söyledi.', 'verb']], diff: false, say: 'Yarın geleceğini söyledi.', note: 'Екеуі де — келер шақ себетінде.' },
+  ];
+  const kdRails = $$('[data-kdrail]');
+  const renderKD = (k, anim) => {
+    const d = KD[k];
+    $$('[data-kt]').forEach((b) => b.classList.toggle('is-on', +b.dataset.kt === k));
+    kdRails.forEach((r) => { r.classList.add('is-pick'); $$('.kd-cell', r).forEach((c, j) => c.classList.toggle('is-on', j === k)); });
+    $('[data-kdkk]').innerHTML = M(d.kk); $('[data-kdtr]').innerHTML = M(d.tr);
+    const badge = $('[data-kdbadge]');
+    badge.textContent = d.diff ? '≠' : '='; badge.classList.toggle('is-diff', d.diff);
+    $('[data-kdnote]').textContent = d.note;
+    const left = `${(k + .5) * 25}%`;
+    if (A && anim) {
+      gsap.to($$('.kd-pin', sec('kk-diff')), { left, duration: .55, ease: 'back.out(2)', stagger: .08 });
+      gsap.from($$('.bb-m', $('[data-kdkk]')).concat($$('.bb-m', $('[data-kdtr]'))), { y: -18, duration: .4, ease: 'back.out(2.4)', stagger: .03 });
+      gsap.fromTo(badge, { scale: 2.2, rotation: d.diff ? -25 : 0 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1,.4)' });
+      if (d.diff) gsap.fromTo($$('[data-kdkk] [data-r="tense"], [data-kdtr] [data-r="tense"]'), { x: -6 }, { x: 0, duration: .5, ease: 'elastic.out(1,.25)' });
+    } else $$('.kd-pin', sec('kk-diff')).forEach((p) => { p.style.left = left; });
+    if (anim) say(d.say);
+  };
+  $$('[data-kt]').forEach((b) => b.addEventListener('click', () => renderKD(+b.dataset.kt, true)));
+  renderKD(0, false);
+  if (A && ST) ScrollTrigger.create({ trigger: '.kd-box', start: 'top 75%', once: true, onEnter: () => { gsap.from($$('.kd-wall', sec('kk-diff')), { left: '0%', duration: 1, ease: 'power3.inOut', stagger: .25 }); setTimeout(() => renderKD(2, true), 1100); } });
+  const KDP = [
+    [['оқы<b>ғаны</b>н', 'oku<b>duğu</b>nu'], ['көр<b>гені</b>н', 'gör<b>düğü</b>nü'], ['тұр<b>ғаны</b>н', 'dur<b>duğu</b>nu']],
+    [['келгенім<b>ді</b>', 'geldiğim<b>i</b>'], ['келгені<b>н</b>', 'geldiği<b>ni</b>'], ['келгендері<b>н</b>', 'geldikleri<b>ni</b>']],
+  ];
+  $$('[data-kdpair]').forEach((b) => {
+    const set = KDP[+b.dataset.kdpair], w = $('[data-kdw]', b);
+    let n = 0;
+    const draw = (anim) => {
+      const [kk, tr] = set[n];
+      w.innerHTML = `<span>${kk}</span><span aria-hidden="true">↔</span><span lang="tr">${tr}</span>`;
+      if (A && anim) gsap.from($$('b', w), { rotationX: -180, scale: 1.5, duration: .6, ease: 'back.out(2.4)', stagger: .1 });
+    };
+    draw(false);
+    b.addEventListener('click', () => { n = (n + 1) % set.length; draw(true); say(set[n][1].replace(/<\/?b>/g, '')); });
+  });
+
   /* =============== ЧЬИ СЛОВА =============== */
-  const PERS = [['ben', 'мен'], ['sen', 'сен'], ['o', 'ол'], ['biz', 'біз'], ['siz', 'сендер'], ['onlar', 'олар']];
+  const PERS = [['ben', 'мен'], ['sen', 'сен'], ['o', 'ол'], ['biz', 'біз'], ['siz', 'сіз'], ['onlar', 'олар']];
+  /* қазақ айнасы: әр жаққа дайын форма (желімдемейміз) */
+  const KKP = {
+    gel: { dik: ['келгенімді', 'келгеніңді', 'келгенін', 'келгенімізді', 'келгеніңізді', 'келгендерін'], acak: ['келетінімді', 'келетініңді', 'келетінін', 'келетінімізді', 'келетініңізді', 'келетіндерін'] },
+    yap: { dik: ['жасағанымды', 'жасағаныңды', 'жасағанын', 'жасағанымызды', 'жасағаныңызды', 'жасағандарын'], acak: ['жасайтынымды', 'жасайтыныңды', 'жасайтынын', 'жасайтынымызды', 'жасайтыныңызды', 'жасайтындарын'] },
+    oku: { dik: ['оқығанымды', 'оқығаныңды', 'оқығанын', 'оқығанымызды', 'оқығаныңызды', 'оқығандарын'], acak: ['оқитынымды', 'оқитыныңды', 'оқитынын', 'оқитынымызды', 'оқитыныңызды', 'оқитындарын'] },
+    gör: { dik: ['көргенімді', 'көргеніңді', 'көргенін', 'көргенімізді', 'көргеніңізді', 'көргендерін'], acak: ['көретінімді', 'көретініңді', 'көретінін', 'көретінімізді', 'көретініңізді', 'көретіндерін'] },
+  };
   let pverb = 'gel', ptense = 'dik', pOn = 2;
   const ptable = $('[data-ptable]');
   const renderP = (anim) => {
     $$('[data-ph]').forEach((g) => g.classList.toggle('is-on', +g.dataset.ph === pOn));
     if (A && anim !== false) gsap.fromTo(`[data-ph="${pOn}"]`, { y: 0 }, { y: -6, duration: .2, yoyo: true, repeat: 1 });
-    ptable.innerHTML = PERS.map(([p, ru], i) => `<button type="button" class="bb-row${i === pOn ? ' is-on' : ''}" data-pi="${i}"><b lang="tr">${p}</b><span><span lang="tr">${M(report(pverb, ptense, p, false))}</span> <span class="bb-small" data-ui>${ru}</span></span></button>`).join('');
+    ptable.innerHTML = PERS.map(([p, ru], i) => `<button type="button" class="bb-row${i === pOn ? ' is-on' : ''}" data-pi="${i}"><b lang="tr">${p}</b><span><span lang="tr">${M(report(pverb, ptense, p, false))}</span> <span class="bb-small" data-ui>${ru} · ${KKP[pverb][ptense][i]}</span></span></button>`).join('');
     $$('[data-pi]', ptable).forEach((r) => r.addEventListener('click', () => { pOn = +r.dataset.pi; $$('[data-pi]', ptable).forEach((x) => x.classList.toggle('is-on', x === r)); $$('[data-ph]').forEach((g) => g.classList.toggle('is-on', +g.dataset.ph === pOn)); if (A) gsap.fromTo(`[data-ph="${pOn}"]`, { y: 0 }, { y: -8, duration: .2, yoyo: true, repeat: 1 }); say(word(report(pverb, ptense, PERS[pOn][0], false)) + ' söyledi'); if (A) gsap.fromTo($$('.bb-m[data-r="person"], .bb-m[data-r="case"]', r), { y: -10 }, { y: 0, duration: .45, ease: 'bounce.out' }); }));
     if (A && anim) gsap.from($$('.bb-m[data-r="tense"]', ptable), { rotationX: 90, duration: .5, ease: 'back.out(2)', stagger: .05 });
   };
@@ -907,11 +1014,11 @@ addEventListener('DOMContentLoaded', () => {
   /* =============== РЕДАКЦИЯ =============== */
   const WHO = [['Murat', 'o', 'Мұрат'], ['Ayşe', 'o', 'Айше'], ['Çocuklar', 'onlar', 'Балалар']];
   const QUOTES = [
-    { o: 'Yarın geleceğim.', on: 'Yarın geleceğiz.', pre: 'yarın', v: 'gel', t: 'acak', n: false, ru: 'ол ертең келеді' },
-    { o: 'Dün geldim.', on: 'Dün geldik.', pre: 'dün', v: 'gel', t: 'dik', n: false, ru: 'ол кеше келді' },
-    { o: 'Her gün çalışırım.', on: 'Her gün çalışırız.', pre: 'her gün', v: 'çalış', t: 'dik', n: false, ru: 'ол күнде жұмыс істейді' },
-    { o: 'Şimdi kitap okuyorum.', on: 'Şimdi kitap okuyoruz.', pre: 'şimdi kitap', v: 'oku', t: 'dik', n: false, ru: 'ол қазір кітап оқып отыр' },
-    { o: 'Bir daha yapmayacağım.', on: 'Bir daha yapmayacağız.', pre: 'bir daha', v: 'yap', t: 'acak', n: true, ru: 'ол енді бұлай істемейді' },
+    { o: 'Yarın geleceğim.', on: 'Yarın geleceğiz.', pre: 'yarın', v: 'gel', t: 'acak', n: false, kk: 'ертең келетінін', kkPl: 'ертең келетіндерін' },
+    { o: 'Dün geldim.', on: 'Dün geldik.', pre: 'dün', v: 'gel', t: 'dik', n: false, kk: 'кеше келгенін', kkPl: 'кеше келгендерін' },
+    { o: 'Her gün çalışırım.', on: 'Her gün çalışırız.', pre: 'her gün', v: 'çalış', t: 'dik', n: false, kk: 'күнде жұмыс істейтінін', kkPl: 'күнде жұмыс істейтіндерін' },
+    { o: 'Şimdi kitap okuyorum.', on: 'Şimdi kitap okuyoruz.', pre: 'şimdi kitap', v: 'oku', t: 'dik', n: false, kk: 'қазір кітап оқып отырғанын', kkPl: 'қазір кітап оқып отырғандарын' },
+    { o: 'Bir daha yapmayacağım.', on: 'Bir daha yapmayacağız.', pre: 'bir daha', v: 'yap', t: 'acak', n: true, kk: 'енді қайталамайтынын', kkPl: 'енді қайталамайтындарын' },
   ];
   let wi = 0, qi = 0;
   const press = $('[data-press]');
@@ -922,7 +1029,7 @@ addEventListener('DOMContentLoaded', () => {
     const parts = [[name, 'word'], [q.pre, 'word'], ...report(q.v, q.t, pers, q.n), [pers === 'onlar' ? 'söylediler.' : 'söyledi.', 'verb']];
     press.innerHTML = M(parts);
     press.dataset.say = `${name} ${q.pre} ${word(report(q.v, q.t, pers, q.n))} ${pers === 'onlar' ? 'söylediler' : 'söyledi'}.`;
-    $('[data-pressru]').textContent = `${ru} ${pers === 'onlar' ? 'айтты' : 'айтты'}, ${q.ru.replace('ол ', pers === 'onlar' ? 'олар ' : 'ол ')}`;
+    $('[data-pressru]').textContent = `${ru} ${pers === 'onlar' ? q.kkPl : q.kk} айтты.`;
     if (A && anim) {
       gsap.from($$('.bb-m', press), { yPercent: 120, duration: .5, ease: 'power3.out', stagger: .05 });
       gsap.fromTo('.l1-press', { backgroundColor: '#ffef2e' }, { backgroundColor: 'rgba(255,239,46,0)', duration: 1.2 });
