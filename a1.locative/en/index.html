@@ -28,13 +28,13 @@
   --wood:#C47B3E; --wood-d:#8E5326; --roof:#A44A33; --green:#5E9B4F; --green-d:#3F7536;
   /* роли: один цвет — одна роль */
   --c-suf:#DCE9FE; --c-suf-b:#3D86F2; --c-hard:#FFE3B0; --c-hard-b:#E39A1F; --c-cop:#DDF1D6; --c-cop-b:#4F9A3F; --c-ap:#C47B3E;
-  --serif:'Lora',Georgia,'Times New Roman',serif;
+  --serif:'Alterna Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --ak-bg:#fff; --ak-surface:#F3F5F7; --ak-ink:#2F333B; --ak-muted:#8A909B; --ak-line:#E3E6EA;
   --ak-accent:#3D86F2; --ak-accent-ink:#fff; --ak-accent-soft:#E7F0FE;
   --ak-good:#3F9A5A; --ak-good-soft:#E3F4E8; --ak-bad:#D2563F; --ak-bad-soft:#FBE8E3;
   --ak-radius:14px; --ak-radius-sm:10px;
   --ak-font:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --ak-font-display:'Lora',Georgia,serif;
+  --ak-font-display:'Alterna Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --shadow:0 24px 60px rgba(32,42,60,.09),0 4px 12px rgba(32,42,60,.04);
 }
 *{box-sizing:border-box}
@@ -142,6 +142,23 @@ h2 em,h1 em{font-style:italic}
 .dp-mini .ak-say{font:500 18px/1.2 var(--serif)}
 .dp-mini small{display:block;color:var(--mute);font-size:13px}
 
+/* ---------- English → Turkish: предлог прыгает в конец ---------- */
+.dp-turn{margin:22px 0 4px;padding:18px 14px 14px;border-radius:10px;background:var(--paper)}
+.dp-turn h3{margin:0 0 4px;font:400 22px/1.2 var(--serif);color:var(--ink)}
+.dp-turn__row{display:grid;grid-template-columns:30px 1fr;align-items:center;gap:8px;min-height:64px}
+.dp-turn__lang{font:600 11px/1 var(--ak-font);letter-spacing:.14em;color:var(--mute)}
+.dp-turn__en{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font:400 clamp(24px,7vw,36px)/1.2 var(--serif);color:var(--ink)}
+.dp-turn__en span{display:inline-block;padding:0 6px;border-radius:6px}
+.dp-turn__en .t-prep{background:var(--c-suf);box-shadow:inset 0 -3px 0 var(--c-suf-b)}
+.dp-turn__en .t-art.is-out{color:var(--mute);text-decoration:line-through 2px #D2563F}
+.dp-turn__tr{justify-content:flex-start;margin:0;font-size:clamp(28px,8vw,42px)}
+.dp-turn__arrow{padding-left:38px;color:var(--mute);font-size:20px;line-height:1}
+.dp-turn__steps{margin:10px 0 0;padding-left:22px;font-size:15px;line-height:1.45}
+.dp-turn__steps li{margin:4px 0;opacity:.45;transition:opacity .3s}
+.dp-turn__steps li.is-on{opacity:1}
+.dp-turn .dp-row{margin:12px 0 0}
+.dp-turn .dp-chip{font-size:14px}
+
 /* ---------- гармония ---------- */
 .dp-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
 .dp-col{padding:14px 10px;border-radius:10px;background:var(--paper);text-align:center}
@@ -213,7 +230,7 @@ h2 em,h1 em{font-style:italic}
 /* ---------- ловушки ---------- */
 .dp-traps{display:grid;gap:12px}
 @media (min-width:720px){.dp-traps{grid-template-columns:1fr 1fr}}
-.dp-flip{position:relative;min-height:132px;border:0;padding:0;background:none;cursor:pointer;perspective:900px;font:inherit;color:inherit;text-align:left}
+.dp-flip{position:relative;min-height:150px;border:0;padding:0;background:none;cursor:pointer;perspective:900px;font:inherit;color:inherit;text-align:left}
 .dp-flip__in{position:absolute;inset:0;transition:rotate .6s cubic-bezier(.3,1.2,.4,1);transform-style:preserve-3d}
 .dp-flip.is-on .dp-flip__in{rotate:y 180deg}
 .dp-flip__f,.dp-flip__b{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:10px;padding:18px 18px 16px;display:grid;align-content:center;gap:6px;box-shadow:var(--shadow)}
@@ -285,6 +302,7 @@ h2 em,h1 em{font-style:italic}
 @media (min-width:1024px){section{padding-top:96px}}
 @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
+<link rel="stylesheet" href="../../kit/v1/sans.css">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -373,9 +391,9 @@ h2 em,h1 em{font-style:italic}
           <div class="dp-call"><svg aria-hidden="true"><use href="#phone"/></svg><div><a-say>Neredesiniz?</a-say><small>“Where are you?” Call number seven.</small></div></div>
           <p><b>Guess.</b> How do you answer “I’m at home”?</p>
           <div class="dp-guess" role="group" aria-label="Guess the answer">
-            <button type="button" class="dp-btn" data-guess="0" lang="tr">Ben ev.</button>
+            <button type="button" class="dp-btn" data-guess="0" data-why="That’s “I house.” Where did the “at” go?" lang="tr">Ben ev.</button>
             <button type="button" class="dp-btn" data-guess="1" lang="tr">Ben evdeyim.</button>
-            <button type="button" class="dp-btn" data-guess="0" lang="tr">Ben evim.</button>
+            <button type="button" class="dp-btn" data-guess="0" data-why="That’s “my house,” or “I’m a house.” English says “I’m home” with no “at.” Turkish can’t skip it." lang="tr">Ben evim.</button>
           </div>
           <p class="dp-fb" id="guessFb" aria-live="polite"></p>
         </div>
@@ -400,12 +418,12 @@ h2 em,h1 em{font-style:italic}
     <div class="dp-kit" id="kit"></div>
   </section>
 
-  <section data-section="where" data-words="42">
+  <section data-section="where" data-words="110">
     <svg class="dp-deco" style="right:-20px;top:40px;width:90px;height:90px" aria-hidden="true"><use href="#hammer"/></svg>
     <div class="dp-card">
       <span class="dp-label">01 · Foundation</span>
       <h2>Three prepositions. <em>One box.</em></h2>
-      <p>English has three prepositions here: in, on, at. Turkish can’t be bothered to carry them. It takes one tail, <b>-DA</b>, and sticks it on the end of the word.</p>
+      <p>In English a place needs a little word in front: <b>in</b> the house, <b>on</b> the roof, <b>at</b> the door. Three words, and you have to pick the right one. Turkish can’t be bothered. It takes one tail, <b>-DA</b>, and sticks it on the end of the word.</p>
       <div class="dp-funnel" id="funnel" aria-hidden="true">
         <span class="dp-prep" style="left:8%">in</span><span class="dp-prep" style="left:calc(50% - 29px)">on</span><span class="dp-prep" style="right:8%">at</span> <span class="dp-box" lang="tr">-DA</span>
       </div>
@@ -415,7 +433,16 @@ h2 em,h1 em{font-style:italic}
         <button type="button" class="dp-mini dp-chip" style="border-radius:10px" data-say="çatıda"><svg aria-hidden="true" viewBox="0 0 400 280"><use href="#house"/></svg><span><span class="tr" lang="tr">çatıda</span><small>on the roof</small></span></button>
         <button type="button" class="dp-mini dp-chip" style="border-radius:10px" data-say="kapıda"><svg aria-hidden="true" viewBox="0 0 400 280"><use href="#house2"/></svg><span><span class="tr" lang="tr">kapıda</span><small>at the door</small></span></button>
       </div>
-      <p style="margin-top:14px">The tail has just one question too: <b lang="tr">Nerede?</b> Where?</p>
+      <div class="dp-turn" id="turn">
+        <h3>Now turn it around</h3>
+        <p>Pick an English phrase. Watch what Turkish does with it.</p>
+        <div class="dp-turn__row"><span class="dp-turn__lang">EN</span><div class="dp-turn__en" id="turnEn"></div></div>
+        <div class="dp-turn__arrow" aria-hidden="true">↓</div>
+        <div class="dp-turn__row"><span class="dp-turn__lang">TR</span><div class="dp-word dp-turn__tr" id="turnTr" lang="tr"></div></div>
+        <ol class="dp-turn__steps" id="turnSteps" aria-live="polite"></ol>
+        <div class="dp-row" id="turnChips" role="group" aria-label="English phrases"></div>
+      </div>
+      <p style="margin-top:14px">So <span class="tr" lang="tr">evde</span> reads “house-in.” Backwards for you, normal for Turkey. The tail has just one question: <b lang="tr">Nerede?</b> Where?</p>
     </div>
   </section>
 
@@ -450,11 +477,11 @@ h2 em,h1 em{font-style:italic}
     </div>
   </section>
 
-  <section data-section="names" data-words="27">
+  <section data-section="names" data-words="40">
     <div class="dp-card">
       <span class="dp-label">04 · Sign</span>
       <h2>Names get a <em>nail</em></h2>
-      <p>Cities, neighborhoods, and people’s names are capitalized. Put an apostrophe before the tail. Like a nail between the sign and the wall.</p>
+      <p>Cities, neighborhoods, and people’s names start with a capital, same as in English. In Turkish they also get an apostrophe before the tail. Like a nail between the sign and the wall. English: <b>in</b> Istanbul. Turkish: <span class="tr" lang="tr">İstanbul'da</span>.</p>
       <div class="dp-sign">
         <svg class="dp-hammer" id="hammerEl" viewBox="0 0 100 100" aria-hidden="true"><use href="#hammer"/></svg>
         <div class="dp-plate" id="plate" lang="tr"></div>
@@ -464,12 +491,12 @@ h2 em,h1 em{font-style:italic}
     </div>
   </section>
 
-  <section data-section="persons" data-words="26">
+  <section data-section="persons" data-words="52">
     <svg class="dp-deco" style="right:-26px;top:30px;width:90px;height:90px" aria-hidden="true"><use href="#roller"/></svg>
     <div class="dp-card">
       <span class="dp-label">05 · Tenants</span>
       <h2>Who lives <em>where</em></h2>
-      <p>Want to say “I’m at home” or “we’re in the park”? Add the personal ending; you already know it. After a vowel you need the buffer <b>y</b>.</p>
+      <p>English needs a separate <b>am / is / are</b>: I’m at home. Turkish has no such word. It glues the person onto the end: <span class="tr" lang="tr" style="white-space:nowrap">ev-de-yim</span>, “house-at-I-am.” After a vowel, add the buffer <b>y</b>. <b lang="tr">o</b> is he, she and it at once, and it gets no ending at all.</p>
       <div class="dp-row" style="justify-content:center" id="pPlace"></div>
       <div class="dp-people" id="people"></div>
       <div class="dp-word" id="pWord" lang="tr"></div>
@@ -504,7 +531,7 @@ h2 em,h1 em{font-style:italic}
   <section data-section="scene" data-words="40">
     <span class="dp-label">Our projects</span>
     <h2>We’ve built five houses <em>all over Istanbul</em></h2>
-    <p>Flip through the projects. Every address answers the question <span class="tr" lang="tr">Nerede?</span> Tap the button and listen.</p>
+    <p>Flip through the projects. Every address answers the question <span class="tr" lang="tr">Nerede?</span> English says “in Kadıköy.” Turkish says “Kadıköy-in.” Tap the button and listen.</p>
     <div class="dp-car" id="car">
       <div class="dp-car__view"><div class="dp-car__track" id="carTrack"></div></div>
       <button type="button" class="dp-car__arr dp-car__arr--l" id="carL" aria-label="Previous project"><svg class="ic" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
@@ -513,23 +540,25 @@ h2 em,h1 em{font-style:italic}
     </div>
   </section>
 
-  <section data-section="traps" data-words="59">
+  <section data-section="traps" data-words="95">
     <span class="dp-label">Traps</span>
     <h2>Didn’t find the mistake? <em>It’s right here</em></h2>
-    <p>Everyone trips on these. Tap a card; the right version is on the back.</p>
+    <p>These are the ones English speakers fall into. Tap a card; the right version is on the back.</p>
     <div class="dp-traps">
+      <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">de ev</span><small>“in the house,” word by word.</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">evde</span><small>In English the little word goes first. In Turkish it goes last, and it sticks to the noun.</small></span> </span></button>
+      <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">ev de</span><small>Right order, but with a gap.</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">evde</span><small>No gap. Written apart, <span lang="tr">de</span> is another word: “too.” <span lang="tr">Ev de</span> = “the house too.”</small></span> </span></button>
+      <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">Bir evdeyim.</span><small>Meant to say “I’m in the house.”</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">Evdeyim.</span><small><span lang="tr">Bir</span> means “a” or “one.” For “the,” Turkish says nothing at all.</small></span> </span></button>
+      <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">Evim.</span><small>Meant to say “I’m home.”</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">Evdeyim.</span><small>English can drop “at”: I’m home. Turkish can’t drop <span lang="tr">-de</span>. <span lang="tr">Evim</span> = “my house.”</small></span> </span></button>
       <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">parkda</span><small>Sounds almost fine. Almost.</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">parkta</span><small>park ends in k. Fıstıkçı Şahap: the d goes voiceless.</small></span> </span></button>
-      <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">İstanbulda</span><small>A city with no sign.</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">İstanbul'da</span><small>A proper name gets an apostrophe.</small></span> </span></button>
       <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">kitapte</span><small>Did the voiceless p change the vowel too?</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">kitapta</span><small>The consonant only changes d to t. The vowel still follows harmony: a → a.</small></span> </span></button>
-      <button type="button" class="dp-flip"><span class="dp-flip__in"> <span class="dp-flip__f"><span class="dp-flip__tag">wrong</span><span class="tr" lang="tr">Ben evde.</span><small>Meant to say “I’m at home.”</small></span> <span class="dp-flip__b"><span class="dp-flip__tag">right</span><span class="tr" lang="tr">Ben evdeyim.</span><small>You have to say “I” at the end of the word too: -yim. Buffer y after a vowel.</small></span> </span></button>
     </div>
   </section>
 
   <section data-section="video" data-words="14">
     <span class="dp-label">Video</span>
     <h2>Listen <em>once more</em></h2>
-    <p>Notice how the tail changes after voiceless consonants.</p>
-    <a-video yt="UfF4EuskDok" start="0" end="180" title="The locative case in Turkish" channel="Turkish with Yulia Akalın"></a-video>
+    <p>Listen for the tail: <span lang="tr">-da, -de, -ta, -te</span>. The <span lang="tr">var / yok</span> part is a bonus.</p>
+    <a-video yt="R8QlWXW55H8" start="0" end="240" title="A1– 05 Bulunma Durumu / Var, Yok | Locative Case / “There is, There isn’t” in Turkish" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
 
   <section data-section="practice" data-words="10">
@@ -548,22 +577,24 @@ h2 em,h1 em{font-style:italic}
 
   <section data-section="check" data-words="8">
     <span class="dp-label">Quick check</span>
-    <h2>Five questions. <em>No cheat sheet.</em></h2>
+    <h2>Six questions. <em>No cheat sheet.</em></h2>
     <a-quiz ref="a1.locative.check1"></a-quiz>
   </section>
 
-  <section data-section="cheat" data-words="33">
+  <section data-section="cheat" data-words="45">
     <div class="dp-card">
       <span class="dp-label">Turnkey cheat sheet</span>
       <h2>The whole topic <em>on one screen</em></h2>
       <svg aria-hidden="true" viewBox="0 0 400 280" style="width:100%;max-width:520px;display:block;margin:0 auto"><use href="#house2"/></svg>
       <div class="dp-specs">
         <div class="dp-spec" data-say="Nerede?"><small>Question</small><b lang="tr">Nerede?</b></div>
+        <div class="dp-spec" data-say="çatıda"><small>in / on / at → after the word</small><b lang="tr">çatıda</b></div>
+        <div class="dp-spec" data-say="kapıda"><small>No “the,” no gap</small><b lang="tr">kapıda</b></div>
         <div class="dp-spec" data-say="okulda"><small>After a ı o u</small><b lang="tr">-da · okulda</b></div>
         <div class="dp-spec" data-say="evde"><small>After e i ö ü</small><b lang="tr">-de · evde</b></div>
         <div class="dp-spec" data-say="parkta, işte"><small>After f s t k ç ş h p</small><b lang="tr">-ta / -te · parkta</b></div>
         <div class="dp-spec" data-say="İstanbul'da"><small>Names</small><b lang="tr">İstanbul'da</b></div>
-        <div class="dp-spec" data-say="evdeyim"><small>With a person</small><b lang="tr">evdeyim</b></div>
+        <div class="dp-spec" data-say="evdeyim"><small>I’m (at) home</small><b lang="tr">evdeyim</b></div>
       </div>
       <div class="dp-call" style="margin-inline:auto"><svg aria-hidden="true"><use href="#phone"/></svg><div><a-say>Neredesiniz? — Evdeyim!</a-say><small>The foreman’s eighth call. Now the answer’s ready in a second.</small></div></div>
       <p class="dp-punch">English lugs around three prepositions. Turkish wears one tail.</p>
@@ -617,7 +648,9 @@ addEventListener('DOMContentLoaded', () => {
   };
   const COP = { ben: (a) => 'y' + (a === 'a' ? 'ı' : 'i') + 'm', sen: (a) => 's' + (a === 'a' ? 'ı' : 'i') + 'n', o: () => '', biz: (a) => 'y' + (a === 'a' ? 'ı' : 'i') + 'z', siz: (a) => 's' + (a === 'a' ? 'ı' : 'i') + 'n' + (a === 'a' ? 'ı' : 'i') + 'z', onlar: (a) => 'l' + a + 'r' };
   const PRON = { ben: 'Ben', sen: 'Sen', o: 'O', biz: 'Biz', siz: 'Siz', onlar: 'Onlar' };
-  const RUP = { ben: 'I’m', sen: 'You’re', o: 'He’s', biz: 'We’re', siz: 'You’re', onlar: 'They’re' };
+  const RUP = { ben: 'I’m', sen: 'You’re', o: 'She’s', biz: 'We’re', siz: 'You’re all', onlar: 'They’re' };
+  const WHO = { ben: 'I', sen: 'you', o: 'he / she', biz: 'we', siz: 'you all', onlar: 'they' };
+  const BE = { ben: 'am', sen: 'are', o: 'is', biz: 'are', siz: 'are', onlar: 'are' };
   const markV = (w) => { const i = [...w].map((c, k) => (VOW.includes(c) ? k : -1)).filter((k) => k >= 0).pop(); return i == null ? w : w.slice(0, i) + `<span class="pc--v">${w[i]}</span>` + w.slice(i + 1); };
   const pieces = (L, cop) => `<span>${markV(L.w)}</span>${L.ap ? '<span class="pc pc--ap">\'</span>' : ''}<span class="pc ${L.d === 't' ? 'pc--hard' : 'pc--suf'}">${L.suf}</span>${cop ? `<span class="pc pc--cop">${cop}</span>` : ''}`;
   const popIn = (box) => { if (A) G.from($$('.pc', box), { y: -28, scale: .5, rotation: -10, duration: .6, ease: 'back.out(2.6)', stagger: .08 }); };
@@ -627,7 +660,7 @@ addEventListener('DOMContentLoaded', () => {
   $$('[data-guess]').forEach((b) => b.addEventListener('click', () => {
     const ok = b.dataset.guess === '1';
     $$('[data-guess]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
-    fb.textContent = ok ? 'Yes. ev + de + yim. House, “at,” I. Three bricks.' : 'No worries. Everyone trips here. In ten minutes you’ll answer the foreman without thinking.';
+    fb.textContent = ok ? 'Yes. ev + de + yim: house + at + I am. Four English words, one Turkish word.' : `${b.dataset.why} In ten minutes you’ll answer the foreman without thinking.`;
     fb.style.color = ok ? 'var(--green-d)' : '#B9472F';
     if (ok) speak('Ben evdeyim.');
     if (A) ok ? G.fromTo(b, { scale: .94 }, { scale: 1, duration: .6, ease: 'elastic.out(1,.45)' }) : G.fromTo(b, { x: -8 }, { x: 0, duration: .5, ease: 'elastic.out(1.2,.25)' });
@@ -677,6 +710,47 @@ addEventListener('DOMContentLoaded', () => {
     $$('#ex3 .dp-mini').forEach((x) => x.classList.toggle('is-on', x === m));
     if (A) G.fromTo($('svg', m), { scale: .8, rotation: -6 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1,.45)' });
   }));
+
+  /* ---------- English → Turkish: «the» уходит, предлог прыгает в конец и прилипает ---------- */
+  const TURN = [['in', 'the', 'house', 'ev', false], ['on', 'the', 'roof', 'çatı', false], ['at', 'the', 'door', 'kapı', false], ['at', '', 'home', 'ev', false], ['in', 'the', 'park', 'park', false], ['in', '', 'Istanbul', 'İstanbul', true]];
+  const turnEn = $('#turnEn'), turnTr = $('#turnTr'), turnSteps = $('#turnSteps'), turnChips = $('#turnChips');
+  turnChips.innerHTML = TURN.map(([p, a, n], i) => `<button type="button" class="dp-chip" data-t="${i}">${[p, a, n].filter(Boolean).join(' ')}</button>`).join('');
+  let turnTl = null;
+  function showTurn(i) {
+    const [prep, art, noun, w, proper] = TURN[i];
+    const L = loc(w, proper);
+    turnTl?.kill();
+    $$('[data-t]', turnChips).forEach((b) => b.setAttribute('aria-pressed', String(+b.dataset.t === i)));
+    turnEn.innerHTML = `<span class="t-prep">${prep}</span>${art ? `<span class="t-art">${art}</span>` : ''}<span class="t-noun">${noun}</span>`;
+    turnTr.innerHTML = `<span class="t-trn">${w}</span>${L.ap ? '<span class="pc pc--ap">\'</span>' : ''}<span class="pc ${L.d === 't' ? 'pc--hard' : 'pc--suf'}">${L.suf}</span>`;
+    const extra = (L.d === 't' ? ` ${w} ends in a voiceless ${w.slice(-1)}, so -${L.suf}.` : '') + (proper ? ' A name, so an apostrophe.' : '');
+    turnSteps.innerHTML = [
+      art ? 'No <b>the</b>. Turkish has no article, so it just goes.' : 'No article here anyway. One less thing to drop.',
+      `The noun goes first: <b>${noun}</b> → <b lang="tr">${w}</b>.`,
+      `<b>${prep}</b> jumps to the end and sticks: <b lang="tr">${L.word}</b>. Literally “${noun}-${prep}.”${extra}`,
+    ].map((t) => `<li>${t}</li>`).join('');
+    const li = $$('li', turnSteps), artEl = $('.t-art', turnEn), prepEl = $('.t-prep', turnEn), nounEl = $('.t-noun', turnEn);
+    const trn = $('.t-trn', turnTr), suf = $$('.pc', turnTr);
+    if (!A) { artEl?.classList.add('is-out'); li.forEach((x) => x.classList.add('is-on')); return L.word; }
+    const off = (from, to) => { const a = from.getBoundingClientRect(), b = to.getBoundingClientRect(); return { x: a.left - b.left, y: a.top - b.top }; };
+    const nO = off(nounEl, trn), pO = off(prepEl, suf[suf.length - 1]);
+    G.set([trn, ...suf], { opacity: 0 });
+    turnTl = G.timeline()
+      .from($$('span', turnEn), { y: -20, opacity: 0, duration: .45, ease: 'back.out(2)', stagger: .08 })
+      .call(() => { li[0].classList.add('is-on'); artEl?.classList.add('is-out'); }, null, '+=.25');
+    if (artEl) turnTl.to(artEl, { y: 10, opacity: .3, rotation: -8, duration: .5, ease: 'power2.in' });
+    turnTl.call(() => li[1].classList.add('is-on'), null, '+=.35')
+      .fromTo(trn, { x: nO.x, y: nO.y, opacity: 0 }, { x: 0, y: 0, opacity: 1, duration: .7, ease: 'power3.inOut' })
+      .call(() => li[2].classList.add('is-on'), null, '+=.35')
+      .to(prepEl, { scale: 1.15, duration: .15, yoyo: true, repeat: 1 })
+      .fromTo(suf, { x: pO.x, y: pO.y, opacity: 1, rotation: -20 }, { x: 0, y: 0, rotation: 0, duration: .9, ease: 'power2.inOut', stagger: .05 })
+      .to(prepEl, { opacity: .3, duration: .3 }, '<')
+      .fromTo(turnTr, { scale: 1 }, { scale: 1.08, duration: .15, yoyo: true, repeat: 1, transformOrigin: '0 50%' });
+    return L.word;
+  }
+  turnChips.addEventListener('click', (e) => { const b = e.target.closest('[data-t]'); if (b) speak(showTurn(+b.dataset.t)); });
+  showTurn(0);
+  if (A) { turnTl?.pause(0); if (ST) ScrollTrigger.create({ trigger: '#turn', start: 'top 70%', once: true, onEnter: () => showTurn(0) }); else showTurn(0); }
 
   /* ---------- гармония ---------- */
   const HA = ['oda', 'okul', 'banyo', 'çatı'], HE = ['ev', 'bahçe', 'otel', 'köprü'];
@@ -757,7 +831,7 @@ addEventListener('DOMContentLoaded', () => {
   const PERS = ['ben', 'sen', 'o', 'biz', 'siz', 'onlar'];
   const P = { place: 0, p: 'ben' };
   $('#pPlace').innerHTML = PLACES.map(([w], i) => `<button type="button" class="dp-chip" data-pl="${i}" lang="tr">${w}</button>`).join('');
-  $('#people').innerHTML = PERS.map((p, i) => `<button type="button" class="dp-person" data-p="${p}" style="color:${['#3D86F2', '#E39A1F', '#4F9A3F', '#C47B3E', '#8A6FD6', '#D2563F'][i]}"><svg aria-hidden="true"><use href="#ppl"/></svg>${RUP[p].toLowerCase()}<small lang="tr">${p}</small></button>`).join('');
+  $('#people').innerHTML = PERS.map((p, i) => `<button type="button" class="dp-person" data-p="${p}" style="color:${['#3D86F2', '#E39A1F', '#4F9A3F', '#C47B3E', '#8A6FD6', '#D2563F'][i]}"><svg aria-hidden="true"><use href="#ppl"/></svg>${WHO[p]}<small lang="tr">${p}</small></button>`).join('');
   const pWord = $('#pWord'), pRu = $('#pRu');
   function showP(animate) {
     const [w, proper, ru] = PLACES[P.place];
@@ -788,7 +862,7 @@ addEventListener('DOMContentLoaded', () => {
       labBody.innerHTML = '<p class="dp-q">Pick where you are right now:</p><div class="dp-picks">' + LPL.map(([w, ic], i) => `<button type="button" class="dp-pick" data-i="${i}" aria-pressed="${lab.place === i}"><svg viewBox="0 0 160 110" aria-hidden="true"><use href="#${ic}"/></svg><span lang="tr">${w}<i></i></span></button>`).join('') + '</div>';
       $('#labNext').disabled = lab.place == null;
     } else if (lab.step === 1) {
-      labBody.innerHTML = '<p class="dp-q">Who’s there?</p><div class="dp-people">' + PERS.map((p, i) => `<button type="button" class="dp-person" data-lp="${p}" aria-pressed="${lab.p === p}" style="color:${['#3D86F2', '#E39A1F', '#4F9A3F', '#C47B3E', '#8A6FD6', '#D2563F'][i]}"><svg aria-hidden="true"><use href="#ppl"/></svg>${RUP[p].toLowerCase()}<small lang="tr">${p}</small></button>`).join('') + '</div>';
+      labBody.innerHTML = '<p class="dp-q">Who’s there?</p><div class="dp-people">' + PERS.map((p, i) => `<button type="button" class="dp-person" data-lp="${p}" aria-pressed="${lab.p === p}" style="color:${['#3D86F2', '#E39A1F', '#4F9A3F', '#C47B3E', '#8A6FD6', '#D2563F'][i]}"><svg aria-hidden="true"><use href="#ppl"/></svg>${WHO[p]}<small lang="tr">${p}</small></button>`).join('') + '</div>';
       $('#labNext').disabled = lab.p == null;
     } else {
       labBody.innerHTML = '';
@@ -796,7 +870,7 @@ addEventListener('DOMContentLoaded', () => {
       const L = loc(w, proper), cop = COP[lab.p](L.a);
       $('#labWord').innerHTML = `<span style="margin-right:10px">${PRON[lab.p]}</span>` + pieces(L, cop);
       $('#labRu').textContent = `${RUP[lab.p]} ${ru}.`;
-      $('#labWhy').innerHTML = `Last vowel <b>${lastV(w)}</b> → <b>${L.a}</b>. ${L.d === 't' ? `Ends in a voiceless <b>${w.slice(-1)}</b> → <b>t</b>.` : 'Ends in a voiced consonant or a vowel → <b>d</b>.'} ${proper ? 'Name → apostrophe. ' : ''}${cop ? `Person: <b>${cop}</b>${cop[0] === 'y' ? ', buffer y after a vowel' : ''}.` : 'No ending needed for “he.”'}`;
+      $('#labWhy').innerHTML = `Last vowel <b>${lastV(w)}</b> → <b>${L.a}</b>. ${L.d === 't' ? `Ends in a voiceless <b>${w.slice(-1)}</b> → <b>t</b>.` : 'Ends in a voiced consonant or a vowel → <b>d</b>.'} ${proper ? 'Name → apostrophe. ' : ''}${cop ? `Person: <b>${cop}</b>${cop[0] === 'y' ? ', buffer y after a vowel' : ''}.` : 'o (he, she, it) needs no ending.'}<br>English needs <b>${BE[lab.p]}</b> and <b>${ru.split(' ')[0]}</b> as separate words. ${cop ? `Turkish glues both onto <b>${w}</b>.` : `Turkish keeps only the tail on <b>${w}</b> and drops “is.”`}`;
       lab.phrase = `${PRON[lab.p]} ${L.word}${cop}.`;
       if (A) { G.from($$('.pc', $('#labWord')), { y: 40, scale: .4, rotation: (i) => (i % 2 ? 14 : -14), duration: .6, ease: 'back.out(2.4)', stagger: .1 }); G.from('#labWhy', { y: 12, duration: .5, ease: 'power2.out', delay: .3 }); }
       speak(lab.phrase);
@@ -855,7 +929,7 @@ addEventListener('DOMContentLoaded', () => {
   (async () => {
     const EX = 'a1.locative.ex4';
     const root = document.querySelector(`a-exercise[ref="${EX}"]`);
-    const ROOMS = [['çatı', 'attic', 'cati'], ['bahçe', 'garden', 'bahce'], ['salon', 'living room', 'salon'], ['mutfak', 'kitchen', 'mutfak'], ['banyo', 'bathroom', 'banyo'], ['garaj', 'garage', 'garaj']];
+    const ROOMS = [['çatı', 'roof', 'cati'], ['bahçe', 'garden', 'bahce'], ['salon', 'living room', 'salon'], ['mutfak', 'kitchen', 'mutfak'], ['banyo', 'bathroom', 'banyo'], ['garaj', 'garage', 'garaj']];
     const rooms = $('#rooms', root), q = $('#tQ', root), st = $('#tSt', root), cnt = $('#tCount', root);
     rooms.innerHTML = ROOMS.map(([r, ru, id], i) => `<button type="button" class="dp-room" data-room="${r}"><svg aria-hidden="true"><use href="#r-${id}"/></svg><span lang="tr">${r}</span><small>${i + 1} · ${ru}</small></button>`).join('');
     const { items } = await AlternaKit.exercise(EX);
