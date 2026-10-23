@@ -230,6 +230,16 @@ main, .sec { z-index: 1; }
 .cmp__row .lbl { margin-bottom: 8px; }
 .cmp .ch { font-size: clamp(16px, 4.6vw, 26px); }
 .cmp__note { margin: 8px 0 0; color: var(--muted); font-size: 15px; min-height: 2.6em; }
+.cmp__row--diff { box-shadow: var(--sh), inset 4px 0 0 var(--pink); }
+.pm { margin: 16px 0 0; padding: 16px; border-radius: 22px; background: linear-gradient(180deg, #fff, #fff7f0); box-shadow: var(--sh); }
+.pm__lead { margin: 6px 0 0; font-size: 15px; }
+.pm__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0 0; perspective: 800px; }
+@media (min-width: 720px) { .pm__grid { grid-template-columns: repeat(3, 1fr); } }
+.pm__c { min-height: 64px; border: 0; cursor: pointer; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1.5px var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; padding: 8px; font: 800 clamp(16px, 4.4vw, 20px)/1.1 var(--f-body); color: var(--ink); }
+.pm__c small { flex-basis: 100%; text-align: center; font: 700 10px/1 var(--f-body); letter-spacing: .24em; color: var(--muted); }
+.pm__k { padding: 4px 9px; border-radius: 10px; color: #fff; background: linear-gradient(160deg, var(--pink-2), var(--pink-d)); }
+.pm__c.is-tr .pm__k { color: #5a3712; background: linear-gradient(160deg, #fde7bd, var(--gold-2) 40%, #e3a95e); }
+.pm__c.is-tr { box-shadow: inset 0 0 0 2px var(--gold); }
 
 /* ===== ask: замок с пинами ===== */
 .lockbox { display: grid; gap: 16px; }
@@ -553,7 +563,7 @@ main, .sec { z-index: 1; }
       <div class="txt">
         <p>Қолға қара. <b lang="tr" data-say="Yorgunum.">Yorgunum</b> сөйлемі — «мен шаршадым».</p>
         <p>Құйрықты кесесің. Сөзден кейін <b lang="tr" data-say="değil">değil</b> қоясың. Құйрық <b lang="tr" data-say="değil">değil</b>-ге секіреді. Дайын.</p>
-        <p>Орысша «не» алда жүгіреді. Түрікше <b lang="tr" data-say="değil">değil</b> артта сүйретіледі. Құйрықты чемодандай сүйрейді. Қазақша «емес» те дәл солай: шаршаған емеспін.</p>
+        <p>Таныс па? Әрине. Қазақша да солай: шаршаған <span lang="kk">емес</span>пін. <b lang="tr" data-say="değil">Değil</b> — сенің «емесің». Құйрықты чемодандай артынан сүйрейді.</p>
       </div>
       <div class="stage" id="cutStage">
         <svg class="scis" viewBox="0 0 140 90" id="cutScis" aria-hidden="true"><g class="bl-a"><circle cx="22" cy="22" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 31 64 44l74-12-72 20Z"/></g><g class="bl-b"><circle cx="22" cy="68" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 59 64 46l74 12-72-20Z"/></g><circle cx="64" cy="45" r="5" fill="#b57631"/></svg>
@@ -576,7 +586,7 @@ main, .sec { z-index: 1; }
       </div>
       <div class="legend" data-ui><span><i style="background:#fff;box-shadow:inset 0 0 0 1.5px #ddd"></i>сөз</span><span><i style="background:var(--pink)"></i>değil қайшысы</span><span><i style="background:var(--gold-2)"></i>mı кілті</span><span><i style="background:#2a2a2e"></i>құйрық</span></div>
       <ul class="exl" data-ui>
-        <li><a-say>Yorgun değilim.</a-say><small>Мен шаршаған жоқпын.</small></li>
+        <li><a-say>Yorgun değilim.</a-say><small>Мен шаршаған емеспін.</small></li>
         <li><a-say>Aç değilim.</a-say><small>Мен аш емеспін.</small></li>
         <li><a-say>Hasta değilim.</a-say><small>Мен ауру емеспін.</small></li>
       </ul>
@@ -611,7 +621,7 @@ main, .sec { z-index: 1; }
         <button class="pcard" type="button" data-p="5"><span class="ava"><svg viewBox="0 0 100 100"><use href="#p-d"/></svg></span><span><span class="pcard__pr">Onlar · олар</span><span class="pcard__tr" lang="tr"></span><small></small></span></button>
       </div>
       <div class="mq" data-mq>
-        <p class="mq__q">Шағын сұрақ: «біз шаршаған жоқпыз» — бұл…</p>
+        <p class="mq__q">Шағын сұрақ: «біз шаршаған емеспіз» — бұл…</p>
         <div class="mq__o" lang="tr"><button type="button">Biz yorgun değilsiniz.</button><button type="button">Biz yorgun değilim.</button><button type="button" data-ok>Biz yorgun değiliz.</button></div>
         <p class="mq__f" data-ui aria-live="polite" data-yes="Дұрыс: biz → -iz, және ол değil-де отырады." data-no="Biz — бұл «біз», -iz құйрығы: değiliz."></p>
       </div>
@@ -658,20 +668,28 @@ main, .sec { z-index: 1; }
   <section class="sec" data-section="compare" data-words="40" id="s-compare"><span class="num" data-ui aria-hidden="true">06</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:1%;top:36px;rotate:2deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">салыстыр</span>
-      <h2 data-split>Орысша <span class="pk">↔</span> түрікше</h2>
+      <h2 data-split>Қазақша <span class="pk">↔</span> түрікше</h2>
       <div class="txt">
-        <p>Орысшада «не» сөздің алдында тұрады. Түрікшеде <b lang="tr" data-say="değil">değil</b> — кейін, құйрық соған мінеді.</p>
-        <p>Қазақша білсең, ол мұнда одақтас: <span data-ui lang="kk">емес</span> дәл солай жұмыс істейді. Ал сұрақта жолдар екіге айырылады.</p>
+        <p>Болымсыздықта сен үйдесің. <span lang="kk">Емес</span> = <b lang="tr" data-say="değil">değil</b>: сөзден кейін тұрады, жіктік жалғауды өзіне алады. Мұғалім емеспін — <b lang="tr" data-say="öğretmen değilim">öğretmen değilim</b>.</p>
+        <p>Сұрақта жол айырылады. Қазақша құйрық сөзде қалады, шылау — ең соңында. Түрікше құйрық шылауға көшеді. KZ мен TR-ды ауыстыр: қара құйрық қалай секіреді?</p>
       </div>
       <div class="tabs" role="tablist" aria-label="Тіл" data-ui>
-        <button type="button" role="tab" aria-selected="true" data-lang="ru">RU</button>
+        <button type="button" role="tab" aria-selected="true" data-lang="kk">KZ</button>
         <button type="button" role="tab" aria-selected="false" data-lang="tr">TR</button>
-        <button type="button" role="tab" aria-selected="false" data-lang="kk">KZ</button>
         <button type="button" role="tab" aria-selected="false" data-lang="auto">▶ кезекпен</button>
       </div>
       <div class="cmp" data-ui>
-        <div class="cmp__row"><span class="lbl">болымсыздық</span><div class="chips" id="cmpA"></div><p class="cmp__note" id="cmpAn"></p></div>
-        <div class="cmp__row"><span class="lbl">сұрақ</span><div class="chips" id="cmpB"></div><p class="cmp__note" id="cmpBn"></p></div>
+        <div class="cmp__row"><span class="lbl">болымсыздық · бірдей</span><div class="chips" id="cmpA"></div><p class="cmp__note" id="cmpAn"></p></div>
+        <div class="cmp__row cmp__row--diff"><span class="lbl">сұрақ · басқаша</span><div class="chips" id="cmpB"></div><p class="cmp__note" id="cmpBn"></p></div>
+        <div class="cmp__row cmp__row--diff"><span class="lbl">емес + сұрақ · басқаша</span><div class="chips" id="cmpC"></div><p class="cmp__note" id="cmpCn"></p></div>
+        <div class="cmp__row cmp__row--diff"><span class="lbl">сіз · басқаша</span><div class="chips" id="cmpD"></div><p class="cmp__note" id="cmpDn"></p></div>
+      </div>
+      <div class="pm" data-ui>
+        <span class="lbl">шылау: алты нұсқа ↔ төрт нұсқа</span>
+        <p class="pm__lead">Қазақша шылаудың дауыссызы ауысады: ма, ба, па. Түрікше дауыссыз әрқашан <b lang="tr" data-say="m">m</b>, ауысатын тек дауысты — және ол еріндік бола алады. Карточканы аудар.</p>
+        <div class="pm__grid" id="pmGrid"></div>
+        <p class="cmp__note" id="pmNote" aria-live="polite"></p>
+        <button class="lnk" type="button" id="pmAll">▶ бәрін аудар</button>
       </div>
       <div class="mq" data-mq>
         <p class="mq__q">Шағын сұрақ: түрікше «сен дәрігерсің бе?» сөйлемінде құйрық қайда тұрады?</p>
@@ -717,7 +735,7 @@ main, .sec { z-index: 1; }
       <ul class="exl" data-ui>
         <li><a-say>Aç mısın?</a-say><small>Ашсың ба?</small></li>
         <li><a-say>Öğretmen misin?</a-say><small>Мұғалімсің бе?</small></li>
-        <li><a-say>Yorgun musun?</a-say><small>Шаршадың ба?</small></li>
+        <li><a-say>Yorgun musun?</a-say><small>Шаршадың ба? (mı емес — u еріндік)</small></li>
         <li><a-say>Türk müsün?</a-say><small>Түріксің бе?</small></li>
       </ul>
       <div class="mq" data-mq>
@@ -734,9 +752,9 @@ main, .sec { z-index: 1; }
       <span class="script">үшінші ереже</span>
       <h2 data-split>Қайшы <span class="pk">+</span> кілт</h2>
       <div class="txt">
-        <p>«Емес» бар сұрақ: алдымен қайшы, сосын кілт. Құйрық кілтке отырады.</p>
+        <p>«Емес» бар сұрақ: алдымен қайшы, сосын кілт. Құйрық кілтке отырады. Қазақша «емессің бе» — құйрық емес-те. Түрікше емес: <b lang="tr" data-say="değil misin?">değil misin?</b></p>
         <p><b lang="tr" data-say="değil">değil</b>-ден кейін кілт әрқашан <b class="tq" lang="tr" data-say="mi">mi</b>. Ондағы соңғы дауысты — i. Басқа нұсқа жоқ.</p>
-        <p>Ал сөйлем соңындағы <b lang="tr" data-say="değil mi?">değil mi?</b> — қазақша «солай ма?» немесе «иә?» деген сияқты.</p>
+        <p>Ал сөйлем соңындағы <b lang="tr" data-say="değil mi?">değil mi?</b> — сөзбе-сөз «емес пе?». Қазақша «солай емес пе?» дейсің ғой — дәл сол. Ешқашан өзгермейді.</p>
       </div>
       <div class="stage" style="min-height:150px"><div class="chips" id="nqChips" data-ui></div></div>
       <div class="row" style="justify-content:center;margin-top:12px" data-ui>
@@ -747,8 +765,8 @@ main, .sec { z-index: 1; }
       <p class="cap" id="nqRu" data-ui></p>
       <div class="forms6" data-ui id="forms6"></div>
       <div class="tag" data-ui>
-        <button class="tagc" type="button" data-say="Çay sıcak, değil mi?"><span lang="tr">Çay sıcak, değil mi?</span><small>Шай ыстық, иә?</small></button>
-        <button class="tagc" type="button" data-say="Simit taze, değil mi?"><span lang="tr">Simit taze, değil mi?</span><small>Симит жаңа, солай ма?</small></button>
+        <button class="tagc" type="button" data-say="Çay sıcak, değil mi?"><span lang="tr">Çay sıcak, değil mi?</span><small>Шай ыстық, солай емес пе?</small></button>
+        <button class="tagc" type="button" data-say="Simit taze, değil mi?"><span lang="tr">Simit taze, değil mi?</span><small>Симит жаңа, солай емес пе?</small></button>
       </div>
       <div class="mq" data-mq>
         <p class="mq__q">Шағын сұрақ: «сен аш емессің бе?» — бұл…</p>
@@ -764,8 +782,8 @@ main, .sec { z-index: 1; }
       <span class="script">жауап</span>
       <h2 data-split><span class="pk" lang="tr">Hayır</span> — <span lang="tr">değil</span> емес</h2>
       <div class="txt">
-        <p><b lang="tr" data-say="Hayır">Hayır</b> — жауаптың басындағы «жоқ». <b lang="tr" data-say="değil">Değil</b> — сөйлемнің ішіндегі «емес». «Иә» — бұл <b lang="tr" data-say="evet">evet</b> және сөздегі құйрық.</p>
-        <p><b lang="tr" data-say="değil">değil</b>-сіз жалғыз <b lang="tr" data-say="hayır">hayır</b> дәріханадағыдай естіледі: «жоқ, мен аурумын». Екеуі де керек.</p>
+        <p><b lang="tr" data-say="Hayır">Hayır</b> — жауаптың басындағы «жоқ». <b lang="tr" data-say="değil">Değil</b> — сөйлемнің ішіндегі «емес». Қазақшадағыдай екі бөлек сөз: «Жоқ, ауру емеспін». «Иә» — бұл <b lang="tr" data-say="evet">evet</b>.</p>
+        <p>Бір тұзақ бар. Қазақша «шаршаған <i>жоқ</i>пын» дейміз. Түрікше <b lang="tr" data-say="yok">yok</b> — тек «бар/жоқ» үшін. Сын есім мен зат есімді тек <b lang="tr" data-say="değil">değil</b> терістейді.</p>
       </div>
       <div class="ans">
         <div class="pinkbox qcard" data-ui><span class="lbl" style="color:#ffe3e8">сұрақ</span><div class="qcard__q" id="ansQ" lang="tr" data-say="Yorgun musun?">Yorgun musun?</div><small id="ansQr" style="color:#ffe3e8">Шаршадың ба?</small></div>
@@ -943,13 +961,13 @@ main, .sec { z-index: 1; }
     <div class="wrap">
       <span class="script">тұзақтар</span>
       <h2 data-split>Бұған <span class="pk">бәрі сүрінеді</span></h2>
-      <div class="txt"><p>Орыс тілінде сөйлейтіндердің бес қатесі. Ұят емес. Билетті бас — қайшы жөндейді.</p></div>
+      <div class="txt"><p>Қазақтың бес қатесі. Қазақша тым ұқсас — тұзақты сол ұқсастық құрады. Билетті бас — қайшы жөндейді.</p></div>
       <div class="tks" id="tks">
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Ben değil öğretmen.</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Ben öğretmen değilim.">Ben öğretmen değilim.</div><p>Değil сөздің алдында емес, кейін тұрады.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmenim değil.</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değilim.">Öğretmen değilim.</div><p>Құйрық сөзде қалмайды. Ол değil-ге көшеді.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Hayır, açım.</span> <small data-ui>(айтпақ болғаны: «жоқ, аш емеспін»)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Hayır, aç değilim.">Hayır, aç değilim.</div><p>Жалғыз hayır ештеңені терістемейді. Тағы değil керек.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmen değil musun?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değil misin?">Öğretmen değil misin?</div><p>değil-ден кейін кілт әрқашан mi. Онда i дауыстысы.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Sen öğretmensin mi?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Sen öğretmen misin?">Sen öğretmen misin?</div><p>Сұрақта құйрық сөзге емес, кілтке мінеді.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Sen öğretmensin mi?</span> <small data-ui>(қазақша: мұғалімсің бе?)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Sen öğretmen misin?">Sen öğretmen misin?</div><p>Қазақша құйрық сөзде қалады. Түрікше ол mi кілтіне көшеді.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Yorgun değilsin mi?</span> <small data-ui>(қазақша: шаршаған емессің бе?)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Yorgun değil misin?">Yorgun değil misin?</div><p>Құйрық değil-де емес, mi-де. Емессің бе ≠ değilsin mi.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Ben yorgun yokum.</span> <small data-ui>(қазақша: шаршаған жоқпын)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Ben yorgun değilim.">Ben yorgun değilim.</div><p>Yok — тек «бар/жоқ» үшін. Сын есімді değil терістейді.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Yorgun mısın?</span> <small data-ui>(қазақша: шаршаған ба? — жуан, а)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Yorgun musun?">Yorgun musun?</div><p>Қазақшада екі нұсқа: а/е. Түрікшеде төртеу: u-дан кейін еріндік mu.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Siz öğretmen değilsiz.</span> <small data-ui>(қазақша: мұғалім емессіз)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>жөндеу үшін бас</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Siz öğretmen değilsiniz.">Siz öğretmen değilsiniz.</div><p>Сіздің құйрығы ұзын: -siniz. Ал -siz түрікше «онсыз» дегенді білдіреді: öğretmensiz — мұғалімі жоқ.</p></div></div></button>
       </div>
     </div>
   </section>
@@ -959,8 +977,8 @@ main, .sec { z-index: 1; }
     <div class="wrap">
       <span class="script">тыңда</span>
       <h2><span class="pk">Мұғалімді</span> тыңда</h2>
-      <p>Назар аудар: <span lang="tr">değil</span> ең соңында тұрады және үндестік бойынша өзгермейді.</p>
-      <a-video yt="fc2DH5c9XJQ" start="302" end="457" title="6-сабақ. mı шылауы бар сұрақтар, değil болымсыз шылауы" channel="SEVE SEVE TÜRKÇE Түрік тілі — қуанышпен"></a-video>
+      <p>Видео орысша. Назар аудар: <span lang="tr">değil</span> сөзден кейін тұрады және үндестік бойынша өзгермейді, ал сұрақта құйрық <span lang="tr">mı</span>-ға көшеді — қазақшадағыдай сөзде қалмайды.</p>
+      <a-video yt="fc2DH5c9XJQ" start="302" end="457" title="Урок 6. Вопросы с частицей mı, отрицательная частица değil" channel="SEVE SEVE TÜRKÇE Турецкий в радость"></a-video>
     </div>
   </section>
 
@@ -1081,7 +1099,21 @@ addEventListener('DOMContentLoaded', () => {
   const endsV = (w) => VOW.includes(w.slice(-1).toLocaleLowerCase('tr'));
   const tail = (base, p) => { const v = I4(base), y = endsV(base) ? 'y' : ''; return [y + v + 'm', 's' + v + 'n', '', y + v + 'z', 's' + v + 'n' + v + 'z', 'l' + A2(base) + 'r'][p]; };
   const PR = [['Ben', 'Мен'], ['Sen', 'Сен'], ['O', 'Ол'], ['Biz', 'Біз'], ['Siz', 'Сіз'], ['Onlar', 'Олар']];
-  const WORDS = { 'öğretmen': ['мұғалім', 'мұғалімдер'], 'öğrenci': ['студент', 'студенттер'], 'doktor': ['дәрігер', 'дәрігерлер'], 'turist': ['турист', 'туристер'], 'Türk': ['түрік', 'түріктер'], 'yorgun': ['шаршаған', 'шаршаған'], 'aç': ['аш', 'аш'], 'hasta': ['ауру', 'ауру'], 'mutlu': ['бақытты', 'бақытты'], 'hazır': ['дайын', 'дайын'] };
+  /* казахский перевод собираем по правилам казахского, а не склейкой: [основа, твёрдая?] */
+  const WORDS = { 'öğretmen': ['мұғалім', 0], 'öğrenci': ['студент', 0], 'doktor': ['дәрігер', 0], 'turist': ['турист', 0], 'Türk': ['түрік', 0], 'yorgun': ['шаршаған', 1], 'aç': ['аш', 1], 'hasta': ['ауру', 1], 'mutlu': ['бақытты', 1], 'hazır': ['дайын', 1] };
+  const kT = (w) => { const c = w.slice(-1); return 'аәеиоөұүыіуюяэ'.includes(c) ? 'v' : 'рй'.includes(c) ? 'r' : 'лмнң'.includes(c) ? 's' : 'жз'.includes(c) ? 'z' : 'x'; };
+  /* жіктік жалғау: мен -мын/-бын/-пын, сен -сың, біз -мыз/-быз/-пыз, сіз -сыз */
+  const kPred = (w, back, p) => { const V = back ? 'ы' : 'і', t = kT(w); return w + ['' + ({ v: 'м', r: 'м', s: 'м', z: 'б', x: 'п' })[t] + V + 'н', 'с' + V + 'ң', '', ({ v: 'м', r: 'м', s: 'б', z: 'б', x: 'п' })[t] + V + 'з', 'с' + V + 'з', ''][p]; };
+  /* сұраулық шылау: ма/ме, ба/бе, па/пе */
+  const kQ = (w, back) => ({ v: 'м', r: 'м', s: 'б', z: 'б', x: 'п' })[kT(w)] + (back ? 'а' : 'е');
+  const KPR = ['Мен', 'Сен', 'Ол', 'Біз', 'Сіз', 'Олар'];
+  function kSent(word, p, mode) {
+    const [w, b] = WORDS[word];
+    if (mode === '+') return `${KPR[p]} ${kPred(w, b, p)}.`;
+    if (mode === '-') return `${KPR[p]} ${w} ${kPred('емес', 0, p)}.`;
+    if (mode === '?') { const pr = kPred(w, b, p); return `${KPR[p]} ${pr} ${kQ(pr, b)}?`; }
+    const pr = kPred('емес', 0, p); return `${KPR[p]} ${w} ${pr} ${kQ(pr, 0)}?`;
+  }
   function build(word, p, mode) {
     const neg = mode === '-' || mode === 'nq', q = mode === '?' || mode === 'nq', pl = p === 5;
     const c = [['p', PR[p][0]]];
@@ -1096,7 +1128,7 @@ addEventListener('DOMContentLoaded', () => {
       else { const t = tail('mi', p); c.push(['w', word], ['n', 'değil'], ['q', 'mi']); if (t) c.push(['t', t]); tr = word + ' değil mi' + t; }
     }
     const sent = PR[p][0] + ' ' + tr + (q ? '?' : '.');
-    const ru = PR[p][1] + ' ' + (neg ? '(емес) ' : '') + WORDS[word][p >= 3 ? 1 : 0] + (q ? '?' : '.');
+    const ru = kSent(word, p, mode);
     return { c, sent, ru, word, p, mode, neg, q };
   }
   const CH = { w: 'ch ch--w', n: 'ch ch--n', q: 'ch ch--q', t: 'ch ch--t is-glue', p: 'ch ch--p' };
@@ -1257,7 +1289,7 @@ addEventListener('DOMContentLoaded', () => {
   /* =========================== GUESS: замки =========================== */
   safe(() => {
     const fb = $('#guessFb');
-    const msg = ['Қате. Değil орысша «не» сияқты алда жүгірмейді.', 'Иә! Сөз, сосын değil, ал -im құйрығы değil-ге көшті. Келесі экранда — неге екені.', 'Сәл қалды. Құйрық сөзде қалмайды — ол көшеді. Келесі экранда қайда екенін көресің.'];
+    const msg = ['Қате. Değil сөздің алдында тұрмайды — қазақша «емес мұғаліммін» демейсің ғой.', 'Иә! Сөз, сосын değil, ал -im құйрығы değil-ге көшті. Келесі экранда — неге екені.', 'Сәл қалды. Құйрық сөзде қалмайды — ол көшеді. Келесі экранда қайда екенін көресің.'];
     $$('.lock').forEach((b) => b.addEventListener('click', () => {
       const ok = b.dataset.g === '1';
       $$('.lock').forEach((x) => x.classList.remove('is-ok', 'is-no'));
@@ -1393,39 +1425,68 @@ addEventListener('DOMContentLoaded', () => {
 
   /* =========================== COMPARE =========================== */
   safe(() => {
+    /* четыре ряда: в отрицании хвост стоит на месте, в вопросе — перелетает со слова на ключ */
     const L = {
-      ru: { a: [['p', 'Мен'], ['n', 'не'], ['w', 'дәрігер']], an: 'Орысша «не» — сөздің алдында. Құйрық жоқ.', b: [['p', 'Сен'], ['w', 'дәрігер'], ['p', '?']], bn: 'Сұрақты интонация жасайды. Ешқандай кілт жоқ.', sa: '', sb: '' },
-      tr: { a: [['p', 'Ben'], ['w', 'doktor'], ['n', 'değil'], ['t', 'im']], an: 'Değil — сөзден кейін. -im құйрығы değil-де.', b: [['p', 'Sen'], ['w', 'doktor'], ['q', 'mu'], ['t', 'sun'], ['p', '?']], bn: 'mu кілті сөзден кейін, -sun құйрығы кілтте.', sa: 'Ben doktor değilim.', sb: 'Sen doktor musun?' },
-      kk: { a: [['p', 'Мен'], ['w', 'дәрігер'], ['n', 'емес'], ['t', 'пін']], an: 'Қазақша: емес сөзден кейін, құйрық емес-те. Түрікшедегідей!', b: [['p', 'Сен'], ['w', 'дәрігер'], ['t', 'сің'], ['q', 'бе'], ['p', '?']], bn: 'Ал мұнда басқаша: құйрық сөзде қалады, бе шылауы — кейін.', sa: '', sb: '' },
+      kk: [
+        [[['p', 'Мен'], ['w', 'дәрігер'], ['n', 'емес'], ['t', 'пін']], 'Емес сөзден кейін, құйрық емес-те.', ''],
+        [[['p', 'Сен'], ['w', 'дәрігер'], ['t', 'сің'], ['q', 'бе'], ['p', '?']], 'Құйрық сөзде қалады, бе — ең соңында.', ''],
+        [[['p', 'Сен'], ['w', 'дәрігер'], ['n', 'емес'], ['t', 'сің'], ['q', 'бе'], ['p', '?']], 'Құйрық емес-те, бе — ең соңында.', ''],
+        [[['p', 'Сіз'], ['w', 'дәрігер'], ['t', 'сіз']], 'Қысқа құйрық: -сыз/-сіз.', ''],
+      ],
+      tr: [
+        [[['p', 'Ben'], ['w', 'doktor'], ['n', 'değil'], ['t', 'im']], 'Дәл солай: değil + im. Мұнда жаңалық жоқ.', 'Ben doktor değilim.'],
+        [[['p', 'Sen'], ['w', 'doktor'], ['q', 'mu'], ['t', 'sun'], ['p', '?']], 'Құйрық кілтке көшті. Doktorsun mu? — қате.', 'Sen doktor musun?'],
+        [[['p', 'Sen'], ['w', 'doktor'], ['n', 'değil'], ['q', 'mi'], ['t', 'sin'], ['p', '?']], 'Құйрық değil-ден mi-ге көшті. Değilsin mi? — қате.', 'Sen doktor değil misin?'],
+        [[['p', 'Siz'], ['w', 'doktor'], ['t', 'sunuz']], 'Ұзын құйрық: -sınız/-siniz/-sunuz/-sünüz. Doktorsuz — қате.', 'Siz doktorsunuz.'],
+      ],
     };
-    const a = $('#cmpA'), b = $('#cmpB'), an = $('#cmpAn'), bn = $('#cmpBn');
+    const rows = ['A', 'B', 'C', 'D'].map((x) => [$('#cmp' + x), $('#cmp' + x + 'n')]);
     let timer = null;
     function show(k, sp) {
-      const o = L[k];
-      a.innerHTML = chipsHTML(o.a); b.innerHTML = chipsHTML(o.b);
-      $$('[data-k]', a).concat($$('[data-k]', b)).forEach((c) => c.setAttribute('lang', k === 'ru' ? 'ru' : k));
-      an.textContent = o.an; bn.textContent = o.bn;
-      a.dataset.say = o.sa; b.dataset.say = o.sb;
-      if (!o.sa) { delete a.dataset.say; delete b.dataset.say; }
+      L[k].forEach(([c, note, s], r) => {
+        const [box, nt] = rows[r];
+        renderChips(box, c);
+        $$('[data-k]', box).forEach((ch) => ch.setAttribute('lang', k));
+        nt.textContent = note;
+        if (s) box.dataset.say = s; else delete box.dataset.say;
+        if (A) gsap.fromTo(nt, { x: -20 }, { x: 0, duration: .4, ease: 'power2.out', delay: r * .08 });
+      });
       $$('#s-compare [data-lang]').forEach((t) => t.setAttribute('aria-selected', t.dataset.lang === k || (t.dataset.lang === 'auto' && !!timer)));
-      if (A) {
-        gsap.fromTo(a.children, { y: -40, rotation: () => Math.random() * 20 - 10 }, { y: 0, rotation: 0, duration: .6, ease: 'bounce.out', stagger: .07 });
-        gsap.fromTo(b.children, { x: 60 }, { x: 0, duration: .5, ease: 'back.out(2)', stagger: .07, delay: .1 });
-        gsap.fromTo([an, bn], { x: -20 }, { x: 0, duration: .4, ease: 'power2.out' });
-      }
-      if (sp && o.sa) say(o.sa);
+      if (sp && k === 'tr') say(L.tr[1][2]);
     }
     $$('#s-compare [data-lang]').forEach((t) => t.addEventListener('click', () => {
       if (t.dataset.lang === 'auto') {
-        if (timer) { clearInterval(timer); timer = null; show('ru'); return; }
-        const order = ['ru', 'tr', 'kk']; let i = 0;
-        timer = setInterval(() => { i = (i + 1) % 3; show(order[i]); }, 2600);
-        show('ru');
+        if (timer) { clearInterval(timer); timer = null; show('kk'); return; }
+        const order = ['kk', 'tr']; let i = 0;
+        timer = setInterval(() => { i = (i + 1) % 2; show(order[i]); }, 2600);
+        show('kk');
         return;
       }
       clearInterval(timer); timer = null; show(t.dataset.lang, true);
     }));
-    show('ru');
+    show('kk');
+    /* частица: казахские 6 вариантов ↔ турецкие 4 — карточка переворачивается */
+    const PM = [
+      ['Аш', 'па', 'Aç', 'mı', 'Қазақша ш-дан кейін п. Түрікше дауыссыз ешқашан ауыспайды: әрқашан m.'],
+      ['Дайын', 'ба', 'Hazır', 'mı', 'Қазақша н-нан кейін б. Түрікше — тағы m, дауысты ı.'],
+      ['Шаршаған', 'ба', 'Yorgun', 'mu', 'Қазақша жуан сөзге — а, болды. Түрікше соңғы дауысты u еріндік, сондықтан mu. Mı емес!'],
+      ['Түрік', 'пе', 'Türk', 'mü', 'Қазақша жіңішке сөзге — е. Түрікше ü еріндік: mü.'],
+      ['Мұғалім', 'бе', 'Öğretmen', 'mi', 'Мұнда бәрі таныс: жіңішке сөз — i.'],
+      ['Бақытты', 'ма', 'Mutlu', 'mu', 'Дауыстыдан кейін қазақша да м. Бірақ түрікше u еріндік: mu.'],
+    ];
+    const grid = $('#pmGrid'), pmNote = $('#pmNote');
+    const face = (d, tr) => (tr ? `<span lang="tr">${d[2]}</span><span class="pm__k" lang="tr">${d[3]}</span><small>TR</small>` : `<span lang="kk">${d[0]}</span><span class="pm__k" lang="kk">${d[1]}</span><small>KZ</small>`);
+    grid.innerHTML = PM.map((d, i) => `<button type="button" class="pm__c" data-pm="${i}">${face(d, false)}</button>`).join('');
+    function flip(c, toTr, quiet) {
+      const d = PM[+c.dataset.pm];
+      const swap = () => { c.innerHTML = face(d, toTr); c.classList.toggle('is-tr', toTr); };
+      if (A) gsap.timeline().to(c, { rotationX: 90, duration: .18, ease: 'power2.in', onComplete: swap }).to(c, { rotationX: 0, duration: .45, ease: 'back.out(2.5)' }).fromTo(c, { scale: 1 }, { scale: 1.06, duration: .15, yoyo: true, repeat: 1 }, '>-.2');
+      else swap();
+      if (!quiet) { pmNote.textContent = toTr ? d[4] : `${d[0]} ${d[1]}? → ${d[2]} ${d[3]}?`; if (toTr) say(`${d[2]} ${d[3]}?`); }
+    }
+    grid.addEventListener('click', (e) => { const c = e.target.closest('.pm__c'); if (c) flip(c, !c.classList.contains('is-tr')); });
+    $('#pmAll').addEventListener('click', () => { const toTr = !$$('.pm__c', grid).every((c) => c.classList.contains('is-tr')); $$('.pm__c', grid).forEach((c, i) => setTimeout(() => flip(c, toTr, true), i * 140)); pmNote.textContent = toTr ? 'Түрікше бір дауыссыз (m) × төрт дауысты. Қазақша үш дауыссыз × екі дауысты.' : ''; });
+    if (A) gsap.from('.pm__c', { rotationX: -70, y: 30, duration: .6, ease: 'back.out(2)', stagger: .07, scrollTrigger: { trigger: '#pmGrid', start: 'top 85%', once: true } });
     if (A) ScrollTrigger.create({ trigger: '#s-compare', start: 'top bottom', end: 'bottom top', onLeave: () => { clearInterval(timer); timer = null; }, onLeaveBack: () => { clearInterval(timer); timer = null; } });
     if (A) gsap.from('#s-compare .tabs', { y: 30, scale: .8, duration: .6, ease: 'back.out(2.5)', scrollTrigger: { trigger: '#s-compare .tabs', start: 'top 85%', once: true } });
   });
@@ -1588,7 +1649,7 @@ addEventListener('DOMContentLoaded', () => {
   safe(() => {
     const S = [
       ['Simit taze mi?', 'Симит жаңа ма?', 'Evet, çok taze!', 'Иә, өте жаңа!'],
-      ['Siz Türk müsünüz?', 'Сіз түріксіз бе?', 'Hayır, Türk değilim. Rusum.', 'Жоқ, мен түрік емеспін. Мен орыспын.'],
+      ['Siz Türk müsünüz?', 'Сіз түріксіз бе?', 'Hayır, Türk değilim. Kazakistanlıyım.', 'Жоқ, мен түрік емеспін. Қазақстанданмын.'],
       ['Çay sıcak mı?', 'Шай ыстық па?', 'Hayır, sıcak değil. Soğuk.', 'Жоқ, ыстық емес. Суық.'],
       ['Martı aç mı?', 'Шағала аш па?', 'Evet, martı hep aç.', 'Иә, шағала әрқашан аш.'],
       ['Kedi hasta mı?', 'Мысық ауру ма?', 'Hayır, hasta değil. Tembel.', 'Жоқ, ауру емес. Жалқау.'],
@@ -1638,9 +1699,9 @@ addEventListener('DOMContentLoaded', () => {
       ['ic-ring', 'Evli değilim.', 'Мен үйленбегенмін. Күйеуге шықпағанмын.', 'n', 'değil + im'],
       ['ic-clock', 'Meşgul müsünüz?', 'Бос емессіз бе?', 'q', 'mü + sünüz'],
       ['ic-people', 'Biz hazır değiliz.', 'Біз дайын емеспіз.', 'n', 'değil + iz'],
-      ['ic-book', 'Onlar öğrenci mi?', 'Олар студенттер ме?', 'q', 'мұнда «олар»-дың құйрығы жоқ'],
+      ['ic-book', 'Onlar öğrenci mi?', 'Олар студент пе?', 'q', 'мұнда «олар»-дың құйрығы жоқ'],
       ['ic-cat', 'Kedi aç değil mi?', 'Мысық аш емес пе?', 'nq', 'değil mi'],
-      ['ic-simit', 'Simit taze, değil mi?', 'Симит жаңа, иә?', 'nq', 'değil mi = «иә?»'],
+      ['ic-simit', 'Simit taze, değil mi?', 'Симит жаңа, солай емес пе?', 'nq', 'değil mi = «емес пе?»'],
     ];
     const tool = (t) => (t === 'n' ? '<i style="background:#ef4f6c"></i>' : t === 'q' ? '<i style="background:#f6d48f"></i>' : '<i style="background:#ef4f6c"></i><i style="background:#f6d48f"></i>');
     const gal = $('#gal');

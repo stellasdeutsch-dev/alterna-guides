@@ -296,6 +296,31 @@
   .dm-final { position: relative; overflow: hidden; }
   .dm-conf { position: absolute; left: 50%; top: 60%; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; }
 
+  /* ---------- қазақша ↔ түрікше ---------- */
+  .dm-same { display: grid; gap: 8px; margin: 16px 0 6px; }
+  .dm-same__row { display: grid; grid-template-columns: auto minmax(12px, 1fr) auto 28px; min-width: 0; align-items: center; gap: 4px 6px; width: 100%; min-height: 56px; padding: 8px; border: 1.5px solid var(--ak-line); border-radius: 16px; background: var(--ak-surface); cursor: pointer; text-align: left; -webkit-tap-highlight-color: transparent; }
+  .dm-same__kz { justify-self: start; padding: 2px 8px; border-radius: 10px; border: 2px solid var(--ink); background: #fff; font: 800 16px/1.3 var(--ak-font-display); white-space: nowrap; }
+  .dm-same__tr { font-size: 16px; font-family: var(--ak-font-display); white-space: nowrap; }
+  .dm-same__link { height: 3px; border-radius: 3px; background: var(--ink); transform-origin: 50% 50%; }
+  .dm-same__ok { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ak-good); color: #fff; font-weight: 900; rotate: -8deg; }
+  .dm-same__row small { grid-column: 1 / -1; color: var(--muted); font-size: 14px; font-weight: 600; }
+  .dm-kz-h { margin: 26px 0 8px; font-size: clamp(20px, 5.4vw, 26px); }
+  .dm-tok--kz { flex-direction: column; align-items: flex-start; gap: 0; padding: 4px 14px; border-radius: 16px; line-height: 1.15; }
+  .dm-tok--kz b { font: 800 17px var(--ak-font-display); }
+  .dm-tok--kz small { font-size: 11px; font-weight: 700; color: var(--muted); }
+  .dm-kz-bins { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 4px 0 12px; }
+  .dm-kz-bin { display: grid; gap: 6px; align-content: start; padding: 10px 8px; border-radius: var(--ak-radius); background: #fff; border: 2px solid var(--c); }
+  .dm-kz-bin--bu { --c: var(--c-bu); }
+  .dm-kz-bin--su { --c: var(--c-su); }
+  .dm-kz-bin--o { --c: #b9d23a; }
+  .dm-kz-bin > span { justify-self: start; font-size: 22px; font-family: var(--ak-font-display); cursor: pointer; }
+  .dm-kz-bin > small { font-size: 12px; font-weight: 700; line-height: 1.25; color: var(--muted); }
+  .dm-kz-bin .dm-drop { min-height: 120px; flex-direction: column; flex-wrap: nowrap; }
+  .dm-kz-bin .dm-tok--kz { width: 100%; padding: 4px 8px; border-color: var(--ak-line); background: var(--ak-surface); }
+  .dm-kz-bin .dm-tok--kz b { font-size: 15px; }
+  .dm-kz-bin .dm-tok--kz small { font-size: 10px; }
+  .dm-kz-say { font-weight: 600; color: var(--muted); }
+
   @media (min-width: 768px) {
     .dm-bros { grid-template-columns: repeat(3, 1fr); }
     .dm-bro { grid-template-columns: 1fr; justify-items: start; }
@@ -310,8 +335,8 @@
     section { padding-top: 96px; }
   }
   @media (hover: hover) {
-    .dm-zone:hover, .dm-chip:hover:not(:disabled), .dm-guess__btn:hover, .dm-obj:hover, .dm-who:hover, .dm-bro:hover { scale: 1.03; }
-    .dm-zone, .dm-chip, .dm-guess__btn, .dm-obj, .dm-who, .dm-bro { transition: scale .2s ease; }
+    .dm-zone:hover, .dm-chip:hover:not(:disabled), .dm-guess__btn:hover, .dm-obj:hover, .dm-who:hover, .dm-bro:hover, .dm-same__row:hover { scale: 1.02; }
+    .dm-zone, .dm-chip, .dm-guess__btn, .dm-obj, .dm-who, .dm-bro, .dm-same__row { transition: scale .2s ease; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -387,6 +412,7 @@
     <li><a href="#brothers">Үш ағайынды</a></li>
     <li><a href="#lab">Қашықтық өлшегіш</a></li>
     <li><a href="#nekim">Ne әлде kim</a></li>
+    <li><a href="#kz">Қазақша ↔ түрікше</a></li>
     <li><a href="#scene">Эминөню</a></li>
     <li><a href="#traps">Тұзақтар</a></li>
     <li><a href="#video">Видео</a></li>
@@ -421,7 +447,7 @@
       </article>
       <article class="dm-reel__card">
         <p>Екі сөз керек еді. <span lang="tr" data-say="Bu ne?">Bu ne?</span> Бұл не?</p>
-        <p>Бүгін соларды үйренесің. Тағы біреуін: <span lang="tr">kim</span>.</p>
+        <p>Естідің бе? Қазақша дерлік. Бүгін соларды үйренесің. Тағы біреуін: <span lang="tr">kim</span>.</p>
         <p class="dm-reel__n">3 / 3</p>
       </article>
     </div>
@@ -446,7 +472,7 @@
         <svg viewBox="0 0 130 120" aria-hidden="true"><g data-bro-body><use href="#i-blob" style="color:var(--c-su)"/><path d="M40 66c4-6 10-6 14 0" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="71" cy="64" r="5" fill="#fff"/><path d="M50 80c7 5 15 4 22-2" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/></g><g data-arm><path d="M104 76l20-14" fill="none" stroke="#161616" stroke-width="5" stroke-linecap="round"/><circle cx="125" cy="61" r="4" fill="#161616"/></g></svg>
         <div>
           <h3 lang="tr">şu</h3>
-          <p>Саусағымен нұсқайды. Анау, сенің жаныңдағы.</p>
+          <p>Саусағымен нұсқайды. Мына, сенің жаныңдағы. Қол созым жерде.</p>
           <div class="dm-bro__meter">қашықтық <i></i></div>
         </div>
       </article>
@@ -461,11 +487,11 @@
     </div>
 
     <p class="dm-tap">Ағайындыны бас. Ол өз сөзін айтады.</p>
-    <p>Ағайындылар сөздің дәл алдына тұрады. Қазақшадағы «бұл», «анау», «ол» сияқты.</p>
+    <p>Ағайындылар сөздің дәл алдына тұрады және өзгермейді. Қазақшадағыдай: бұл шай, анау шай.</p>
     <ul class="dm-pairs">
-      <li><span class="w-bu">bu</span> <a-say>bu çay</a-say> <span class="ru">бұл шай, менде</span></li>
-      <li><span class="w-su">şu</span> <a-say>şu çay</a-say> <span class="ru">анау шай, сенде</span></li>
-      <li><span class="w-o">o</span> <a-say>o çay</a-say> <span class="ru">ол шай, алыста</span></li>
+      <li><span class="w-bu">bu</span> <a-say>bu çay</a-say> <span class="ru">бұл шай — менде</span></li>
+      <li><span class="w-su">şu</span> <a-say>şu çay</a-say> <span class="ru">мына шай — сенде, нұсқаймын</span></li>
+      <li><span class="w-o">o</span> <a-say>o çay</a-say> <span class="ru">анау шай — алыста</span></li>
     </ul>
   </section>
 
@@ -507,15 +533,15 @@
 
       <div class="dm-lab__read" aria-live="polite">
         <button type="button" class="dm-lab__phrase" data-phrase data-say="bu çay" lang="tr"><b class="w-bu">bu</b> çay</button>
-        <span class="dm-lab__ru" data-ru>бұл шай, қолда</span>
+        <span class="dm-lab__ru" data-ru>бұл шай — менің қолымда</span>
       </div>
     </div>
   </section>
 
-  <section id="nekim" data-section="nekim" data-words="62">
+  <section id="nekim" data-section="nekim" data-words="67">
     <span class="dm-kicker">2-ереже · сұрақ</span>
     <h2>Ne әлде kim?</h2>
-    <p><span class="w-ne">ne</span> — «не». <span class="w-kim">kim</span> — «кім».</p>
+    <p><span class="w-ne">ne</span> — «не». <span class="w-kim">kim</span> — «кім». Иә, дәл солай. Ережесі де бірдей: kim — тек адамға.</p>
 
     <div class="dm-card dm-guess" data-guess>
       <div class="dm-guess__pic">
@@ -551,7 +577,7 @@
       </div>
     </div>
     <div class="dm-flyline"><span class="dm-flyline__say" lang="tr" data-fly-say aria-live="polite"></span><button class="dm-replay" type="button" data-fly-reset hidden>↻ тағы бір рет</button></div>
-    <p>Мұғалім, капитан, Әли: <span lang="tr">kim</span>. Кітап, бублик және мысық: <span lang="tr">ne</span>.</p>
+    <p>Мұғалім, капитан, Әли: <span lang="tr">kim</span>. Кітап, симит және мысық: <span lang="tr">ne</span>.</p>
 
     <h3>Жауап сұрақтың орнына тұрады</h3>
     <div class="dm-card dm-swap" data-swap>
@@ -560,50 +586,90 @@
       <div class="dm-swap__row" lang="tr" data-say="Bu bir kitap." data-swap-a><span class="dm-swap__p w-bu" data-slot-p2>Bu</span> <span class="dm-slot dm-slot--a" data-slot-a>bir kitap.</span></div>
       <button class="dm-replay" type="button" data-swap-next>Тағы мысал →</button>
     </div>
-    <p>Сөз тәртібі өзгермейді. Артық етістік жоқ — қазақшадағыдай. <span lang="tr">bir</span> — қазақша «бір» сияқты. Онсыз да болады.</p>
+    <p>Қазақшадағыдай: жауап сұрақтың орнын алады, етістік керек емес. Бұл не? Бұл — кітап.</p>
     <p><a-say>O kim?</a-say> Ол кім? <a-say>O öğretmen.</a-say> Ол — мұғалім.</p>
+  </section>
+
+  <section id="kz" data-section="compare" data-words="116">
+    <span class="dm-kicker">Қазақша ↔ түрікше</span>
+    <h2>Мұның жартысын сен білесің</h2>
+    <p>Бұл тақырыпта түрікше қазақшаға жабысып тұр. Жолды бас — жұбы қосылады.</p>
+    <div class="dm-card dm-same" data-same>
+      <button type="button" class="dm-same__row" data-say="Bu ne?"><span class="dm-same__kz">не</span><i class="dm-same__link" aria-hidden="true"></i><span class="dm-same__tr w-ne" lang="tr">ne</span><span class="dm-same__ok" aria-hidden="true">✓</span><small>Бұл не? — <span lang="tr">Bu ne?</span></small></button>
+      <button type="button" class="dm-same__row" data-say="O kim?"><span class="dm-same__kz">кім</span><i class="dm-same__link" aria-hidden="true"></i><span class="dm-same__tr w-kim" lang="tr">kim</span><span class="dm-same__ok" aria-hidden="true">✓</span><small>тек адамға, мысыққа — не</small></button>
+      <button type="button" class="dm-same__row" data-say="O öğretmen."><span class="dm-same__kz">ол</span><i class="dm-same__link" aria-hidden="true"></i><span class="dm-same__tr w-o" lang="tr">o</span><span class="dm-same__ok" aria-hidden="true">✓</span><small>ер де, әйел де, зат та</small></button>
+      <button type="button" class="dm-same__row" data-say="Bu bir kitap."><span class="dm-same__kz">бұл — кітап</span><i class="dm-same__link" aria-hidden="true"></i><span class="dm-same__tr w-bu" lang="tr">bu kitap</span><span class="dm-same__ok" aria-hidden="true">✓</span><small>етістік жоқ, екеуінде де: <span lang="tr">Bu (bir) kitap.</span></small></button>
+    </div>
+
+    <h3 class="dm-kz-h">Ал мұнда — айырмашылық</h3>
+    <p>Қазақшада сілтеу сөзі көп: бұл, осы, мына, анау, ол, сол. Түрікшеде үшеу ғана. Сөзді аударма. Зат қайда тұрғанын ойла.</p>
+    <p class="dm-tap">Қазақ сөзін бас. Ол өз түрік ағайынына ұшады.</p>
+    <div class="dm-tray dm-kz-tray" data-kz-tray>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="bu" data-say="bu çay" data-kz="бұл шай"><b>бұл</b><small>қолымда</small></button>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="o" data-say="o vapur" data-kz="анау паром"><b>анау</b><small>көкжиекте</small></button>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="su" data-say="şu simit" data-kz="мына симит"><b>мына</b><small>сенің қолыңда</small></button>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="o" data-say="O kim?" data-kz="ол кім?"><b>ол</b><small>бөлмеде жоқ</small></button>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="bu" data-say="bu kitap" data-kz="осы кітап"><b>осы</b><small>дәл жанымда</small></button>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="o" data-say="o kaptan" data-kz="сол капитан"><b>сол</b><small>кеше айтқан</small></button>
+      <button type="button" class="dm-tok dm-tok--kz" data-to="bu" data-say="bu simit" data-kz="мына симит"><b>мына</b><small>менің қолымда</small></button>
+    </div>
+    <div class="dm-kz-bins">
+      <div class="dm-kz-bin dm-kz-bin--bu"><span class="w-bu" lang="tr" data-say="bu">bu</span><small>менде</small><div class="dm-drop" data-kz-drop="bu"></div></div>
+      <div class="dm-kz-bin dm-kz-bin--su"><span class="w-su" lang="tr" data-say="şu">şu</span><small>сенде, нұсқаймын</small><div class="dm-drop" data-kz-drop="su"></div></div>
+      <div class="dm-kz-bin dm-kz-bin--o"><span class="w-o" lang="tr" data-say="o">o</span><small>алыста, көзден тыс</small><div class="dm-drop" data-kz-drop="o"></div></div>
+    </div>
+    <div class="dm-flyline"><span class="dm-flyline__say" data-kz-say aria-live="polite"></span><button class="dm-replay" type="button" data-kz-reset hidden>↻ тағы бір рет</button></div>
+    <p>Байқадың ба? <b>Мына</b> екі қорапқа түсті. Менің қолымда — <span lang="tr">bu</span>, сенде — <span lang="tr">şu</span>. Ал <b>ол</b>, <b>сол</b>, <b>анау</b> — бәрі бір <span lang="tr">o</span>. Түрікше бір-ақ нәрсе сұрайды: қаншалықты алыс?</p>
   </section>
 
   <section id="scene" data-section="scene" data-words="38">
     <span class="dm-kicker">Көрініс</span>
     <h2>Эминөню. Симит арбасы</h2>
     <div class="dm-chat" data-chat>
-      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>Bu ne?</a-say><small>Бұл не? (бубликті түртесің)</small></div>
-      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-simit"/></svg><span class="dm-msg__who">сатушы</span><a-say>Bu bir simit.</a-say><small>Бұл симит. Күнжітті бублик.</small></div>
-      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>Şu ne?</a-say><small>Ал анау, сіздегі?</small></div>
-      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-pogaca"/></svg><span class="dm-msg__who">сатушы</span><a-say>Şu bir poğaça.</a-say><small>Анау — бәліш.</small></div>
-      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>O ne?</a-say><small>Ал ол, алыстағы?</small></div>
-      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-vapur"/></svg><span class="dm-msg__who">сатушы</span><a-say>O bir vapur.</a-say><small>Ол — паром. Саған соған міну керек.</small></div>
-      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>O kim?</a-say><small>Ал ол кім?</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>Bu ne?</a-say><small>Бұл не? (симитті түртесің)</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-simit"/></svg><span class="dm-msg__who">сатушы</span><a-say>Bu bir simit.</a-say><small>Бұл — симит. Күнжітті тоқаш.</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>Şu ne?</a-say><small>Ал мынау, сіздегі?</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-pogaca"/></svg><span class="dm-msg__who">сатушы</span><a-say>Şu bir poğaça.</a-say><small>Мынау — поача. Жұмсақ тоқаш.</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>O ne?</a-say><small>Ал анау, алыстағы?</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-vapur"/></svg><span class="dm-msg__who">сатушы</span><a-say>O bir vapur.</a-say><small>Анау — паром. Сен соған мінесің.</small></div>
+      <div class="dm-msg dm-msg--me"><span class="dm-msg__who">сен</span><a-say>O kim?</a-say><small>Ал анау кім?</small></div>
       <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan"/></svg><span class="dm-msg__who">сатушы</span><a-say>O kaptan.</a-say><small>Ол — капитан.</small></div>
     </div>
     <button class="dm-replay" type="button" data-chat-replay>↻ тағы бір рет</button>
   </section>
 
-  <section id="traps" data-section="traps" data-words="52">
+  <section id="traps" data-section="traps" data-words="86">
     <span class="dm-kicker">Аман қалғаннан кеңес</span>
-    <h2>Үш тұзақ</h2>
+    <h2>Төрт тұзақ</h2>
     <div class="dm-traps">
       <div class="dm-trap dm-pop">
         <p><b>Мысық — kim емес.</b> Мұнда бастық болса да.</p>
-        <p><span class="dm-bad" lang="tr">Bu kim?<i class="dm-strike" aria-hidden="true"></i></span> мысық туралы. Құлаққа түрпідей тиеді.</p>
+        <p>Қазақша ойласаң, қателеспейсің: «Бұл не? — Мысық». Құлататын — орысша «Кто это? — Кошка».</p>
+        <p><span class="dm-bad" lang="tr">Bu kim?<i class="dm-strike" aria-hidden="true"></i></span> мысық туралы.</p>
         <p class="dm-good">Дұрысы: <a-say>Bu ne?</a-say> <span class="dm-stamp" aria-hidden="true">✓</span></p>
       </div>
       <div class="dm-trap dm-pop">
-        <p><b>O-да жыныс жоқ.</b> <a-say>O kim?</a-say> Қазақшадағы «ол кім?» сияқты: ер де, әйел де.</p>
-        <p>Нақты кім екенін жағдай айтады.</p>
+        <p><b>Ол, сол, анау — бәрі бір o.</b> Түрікшеде «сол» деген бөлек сөз жоқ. Бөлмеде жоқ адам, кеше айтқан капитан — бәрі <span class="w-o">o</span>.</p>
+        <p><span class="dm-bad" lang="tr">Şu kim?<i class="dm-strike" aria-hidden="true"></i></span> көзден тыс адам туралы.</p>
+        <p class="dm-good">Дұрысы: <a-say>O kim?</a-say> <span class="dm-stamp" aria-hidden="true">✓</span></p>
+        <p>Жынысы да жоқ — нақ «ол» сияқты. Бас:</p>
         <button type="button" class="dm-who" data-who data-say="O kim?" aria-label="O kim? Адамды ауыстыру"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan" data-who-use/></svg><span lang="tr">O</span><small>↻</small></button>
       </div>
       <div class="dm-trap dm-pop">
-        <p><b>Şu «алыс» дегенді білдірмейді.</b> Şu — саусақпен нұсқайтын нәрсе. Сенің не әңгімелесушінің жанында.</p>
-        <p>Алыста немесе көрінбейді: <span class="w-o">o</span>.</p>
+        <p><b>Şu — «анау» емес.</b> Şu — саусақпен нұсқайтын, қол созым жердегі нәрсе. Әдетте сенің не әңгімелесушінің жанында.</p>
+        <p>Көкжиектегі паром — <a-say>o vapur</a-say>. «Анау» деп естісең, алдымен <span class="w-o">o</span> туралы ойла.</p>
+      </div>
+      <div class="dm-trap dm-pop">
+        <p><b>Сызықша қойма.</b> Қазақша жазамыз: «Бұл — кітап». Түрікше сызықша жоқ.</p>
+        <p><span class="dm-bad" lang="tr">Bu — kitap.<i class="dm-strike" aria-hidden="true"></i></span></p>
+        <p class="dm-good">Дұрысы: <a-say>Bu bir kitap.</a-say> <span class="dm-stamp" aria-hidden="true">✓</span></p>
       </div>
     </div>
   </section>
 
-  <section id="video" data-section="video" data-words="10">
+  <section id="video" data-section="video" data-words="22">
     <h2>Тіл иелерін тыңда</h2>
-    <p>Bu, şu немесе o естілгенде зат қайда тұрғанына назар аудар.</p>
+    <p>Екі видео да түрікше, қысқа әрі баяу. Bu, şu не o естілгенде зат қайда тұрғанына қара. Екіншісінде құлақ түр: kim тек адамға қойылады.</p>
     <a-video yt="-u7Sp_-oLNM" start="0" end="70" title="İzle, Eğlen, Öğren: «Bu», «Şu», «O»" channel="Yunus Emre Enstitüsü"></a-video>
     <a-video yt="2Hhm6W2_iIY" start="0" end="63" title="İzle, Eğlen, Öğren: Bu kim? Şu kim?" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
@@ -647,7 +713,7 @@
     <a-quiz ref="a1.demonstratives.check1"></a-quiz>
   </section>
 
-  <section id="cheat" data-section="cheat" data-words="57">
+  <section id="cheat" data-section="cheat" data-words="75">
     <div class="dm-card dm-cheat">
       <h2>Жадынама</h2>
       <svg class="dm-ruler" viewBox="0 0 320 84" role="img" aria-label="Қашықтық: bu, şu, o" data-ruler>
@@ -660,12 +726,13 @@
       </svg>
       <div class="dm-cheat__grid">
         <button type="button" class="w-bu dm-chip-say" lang="tr" data-say="bu çay">bu</button><span>бұл, қолда</span>
-        <button type="button" class="w-su dm-chip-say" lang="tr" data-say="şu simit">şu</button><span>анау, саусақпен нұсқаймын</span>
-        <button type="button" class="w-o dm-chip-say" lang="tr" data-say="o vapur">o</button><span>ол, алыста · ол (ер/әйел)</span>
-        <button type="button" class="w-ne dm-chip-say" lang="tr" data-say="Bu ne?">ne</button><span>не? Заттар мен жануарлар</span>
+        <button type="button" class="w-su dm-chip-say" lang="tr" data-say="şu simit">şu</button><span>мына, сенде · саусақпен нұсқаймын</span>
+        <button type="button" class="w-o dm-chip-say" lang="tr" data-say="o vapur">o</button><span>анау, ол, сол · алыста не көзден тыс · ол (ер/әйел)</span>
+        <button type="button" class="w-ne dm-chip-say" lang="tr" data-say="Bu ne?">ne</button><span>не? Заттар мен жануарлар, қазақшадағыдай</span>
         <button type="button" class="w-kim dm-chip-say" lang="tr" data-say="O kim?">kim</button><span>кім? Тек адамдар</span>
       </div>
       <div class="dm-cheat__formula" lang="tr">Bu ne? → Bu bir kitap.<br>O kim? → O kaptan.</div>
+      <p class="dm-cheat__save" style="text-transform:none;letter-spacing:0;font-size:14px;color:#ddd">Сызықша жоқ. Ол, сол, анау — бәрі o.</p>
       <p class="dm-cheat__save">Скриншот жасап сақта</p>
     </div>
 
@@ -681,6 +748,7 @@
     <ul class="dm-can">
       <li>Жақындағы, анадағы және алыстағы затты нұсқайсың.</li>
       <li>«Бұл не?» және «бұл кім?» деп сұрайсың.</li>
+      <li>Қазақтың алты сілтеу сөзін үш түрік сөзіне сыйғызасың.</li>
       <li>Сөз тәртібін өзгертпей жауап бересің.</li>
     </ul>
   </section>
@@ -833,9 +901,9 @@ addEventListener('DOMContentLoaded', () => {
     const objs = $$('[data-obj]', lab);
     const OBJ = { cay: { tr: 'çay', ru: 'шай' }, simit: { tr: 'simit', ru: 'симит' }, kedi: { tr: 'kedi', ru: 'мысық' } };
     const Z = [
-      { w: 'bu', cls: 'w-bu', ru: (n) => `бұл ${n}, қолда` },
-      { w: 'şu', cls: 'w-su', ru: (n) => `анау ${n}, сенің жаныңда` },
-      { w: 'o', cls: 'w-o', ru: (n) => `ол ${n}, алыста` },
+      { w: 'bu', cls: 'w-bu', ru: (n) => `бұл ${n} — менің қолымда` },
+      { w: 'şu', cls: 'w-su', ru: (n) => `мына ${n} — сенің жаныңда, нұсқаймын` },
+      { w: 'o', cls: 'w-o', ru: (n) => `анау ${n} — алыста` },
     ];
     const zoneOf = (v) => (v < 34 ? 0 : v < 67 ? 1 : 2);
     let cur = -1;
@@ -927,7 +995,7 @@ addEventListener('DOMContentLoaded', () => {
       const ok = b.dataset.guessOpt === 'ne';
       $$('[data-guess-opt]', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
       b.classList.add(ok ? 'is-right' : 'is-wrong');
-      fb.textContent = ok ? 'Иә. Мысық — ne. Kim тек адамдар туралы.' : 'Бұған бәрі сүрінеді. Kim тек адамдар туралы. Мысық — ne.';
+      fb.textContent = ok ? 'Иә. Қазақша да солай: бұл не? — мысық. Kim тек адамға.' : 'Орысша ойладың: «Кто это? — Кошка». Қазақша ойла: бұл не? Мысық — ne.';
       if (!anim) return;
       if (ok) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
       else G.fromTo(b, { x: -10 }, { x: 0, duration: .6, ease: 'elastic.out(1, .3)' });
@@ -969,6 +1037,70 @@ addEventListener('DOMContentLoaded', () => {
       reset.hidden = true;
       say.textContent = '';
       delete say.dataset.say;
+    });
+  })();
+
+  /* ---------- қазақша ↔ түрікше: жұптар жабысады ---------- */
+  (() => {
+    const rows = $$('[data-same] .dm-same__row');
+    function snap(r, delay = 0) {
+      if (!anim) return;
+      const kz = $('.dm-same__kz', r), tr = $('.dm-same__tr', r), ln = $('.dm-same__link', r), ok = $('.dm-same__ok', r);
+      G.timeline({ delay })
+        .fromTo(kz, { x: -40, rotation: -8, opacity: 0 }, { x: 0, rotation: 0, opacity: 1, duration: .45, ease: 'back.out(2.2)' })
+        .fromTo(tr, { x: 40, rotation: 8, opacity: 0 }, { x: 0, rotation: 0, opacity: 1, duration: .45, ease: 'back.out(2.2)' }, '<')
+        .fromTo(ln, { scaleX: 0 }, { scaleX: 1, duration: .35, ease: 'power2.out' }, '-=.1')
+        .fromTo(ok, { scale: 0, rotation: -60 }, { scale: 1, rotation: 0, duration: .55, ease: 'back.out(3)' }, '-=.1');
+    }
+    if (anim) ScrollTrigger.create({ trigger: '[data-same]', start: 'top 78%', once: true, onEnter: () => rows.forEach((r, i) => snap(r, i * .25)) });
+    rows.forEach((r) => r.addEventListener('click', () => snap(r)));
+  })();
+
+  /* ---------- жеті қазақ сөзі — үш түрік қорабы ---------- */
+  (() => {
+    const tray = $('[data-kz-tray]');
+    const say = $('[data-kz-say]');
+    const reset = $('[data-kz-reset]');
+    const toks = $$('.dm-tok', tray);
+    const home = new Map(toks.map((t, i) => [t, i]));
+    function line(t) {
+      say.textContent = '';
+      const kz = document.createElement('span');
+      kz.className = 'dm-kz-say';
+      kz.textContent = `${t.dataset.kz} → `;
+      const tr = document.createElement('span');
+      tr.lang = 'tr'; tr.textContent = t.dataset.say; tr.dataset.say = t.dataset.say;
+      say.append(kz, tr);
+    }
+    function fly(t) {
+      if (t.parentElement !== tray) return;
+      const drop = $(`[data-kz-drop="${t.dataset.to}"]`);
+      const a = t.getBoundingClientRect();
+      drop.append(t);
+      const b = t.getBoundingClientRect();
+      line(t);
+      if (!tray.children.length) reset.hidden = false;
+      if (!anim) return;
+      const dx = a.left - b.left;
+      const dy = a.top - b.top;
+      G.set(t, { x: dx, y: dy, rotation: 10 });
+      const path = window.MotionPathPlugin
+        ? { motionPath: { path: [{ x: dx, y: dy }, { x: dx / 2, y: Math.min(dy, 0) - 60 }, { x: 0, y: 0 }], curviness: 1.4 } }
+        : { x: 0, y: 0 };
+      G.to(t, { ...path, rotation: 0, duration: .75, ease: 'power2.inOut', onComplete: () => {
+        G.fromTo(t, { scale: 1.2 }, { scale: 1, duration: .45, ease: 'back.out(3)' });
+        G.fromTo(drop.parentElement.firstElementChild, { scale: .7, rotation: -10 }, { scale: 1, rotation: 0, duration: .6, ease: 'elastic.out(1, .4)' });
+      } });
+      G.fromTo(say, { y: 10, scale: .9 }, { y: 0, scale: 1, duration: .45, ease: 'back.out(2)' });
+    }
+    toks.forEach((t) => t.addEventListener('click', () => fly(t)));
+    reset.addEventListener('click', () => {
+      toks.sort((x, y) => home.get(x) - home.get(y)).forEach((t, i) => {
+        tray.append(t);
+        if (anim) G.fromTo(t, { x: 0, y: -30, scale: .5 }, { y: 0, scale: 1, duration: .5, delay: i * .05, ease: 'back.out(2.5)' });
+      });
+      reset.hidden = true;
+      say.textContent = '';
     });
   })();
 
@@ -1028,17 +1160,18 @@ addEventListener('DOMContentLoaded', () => {
 
   /* ---------- ловушки: зачёркивание, печать, он/она ---------- */
   (() => {
-    const strike = $('.dm-strike');
-    const stamp = $('.dm-stamp');
-    const card = strike.closest('.dm-trap');
-    function play() {
-      if (!anim) return;
-      G.timeline()
-        .fromTo(strike, { scaleX: 0 }, { scaleX: 1, duration: .5, ease: 'power2.out' })
-        .fromTo(stamp, { scale: 3, rotation: -40 }, { scale: 1, rotation: 0, duration: .7, ease: 'bounce.out' });
-    }
-    if (anim) ScrollTrigger.create({ trigger: card, start: 'top 70%', once: true, onEnter: play });
-    card.addEventListener('click', (e) => { if (!e.target.closest('a-say')) play(); });
+    $$('.dm-trap').forEach((card) => {
+      const strike = $('.dm-strike', card);
+      const stamp = $('.dm-stamp', card);
+      if (!strike) return;
+      function play() {
+        if (!anim) return;
+        const tl = G.timeline().fromTo(strike, { scaleX: 0 }, { scaleX: 1, duration: .5, ease: 'power2.out' });
+        if (stamp) tl.fromTo(stamp, { scale: 3, rotation: -40 }, { scale: 1, rotation: 0, duration: .7, ease: 'bounce.out' });
+      }
+      if (anim) ScrollTrigger.create({ trigger: card, start: 'top 70%', once: true, onEnter: play });
+      card.addEventListener('click', (e) => { if (!e.target.closest('a-say, [data-who]')) play(); });
+    });
 
     const who = $('[data-who]');
     const use = $('[data-who-use]');

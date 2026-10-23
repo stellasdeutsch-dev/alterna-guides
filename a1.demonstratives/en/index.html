@@ -296,6 +296,38 @@
   .dm-final { position: relative; overflow: hidden; }
   .dm-conf { position: absolute; left: 50%; top: 60%; width: 12px; height: 12px; border-radius: 50%; pointer-events: none; }
 
+  /* ---------- English ↔ Türkçe: два слова против трёх ---------- */
+  .dm-say-like { margin: 12px 0 0; padding: 10px 14px; border-radius: 14px; background: var(--lime-soft); font-size: 15px; }
+  .dm-vs { display: grid; gap: 14px; margin-top: 18px; }
+  .dm-vs__tag { display: inline-block; min-width: 64px; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .dm-vs__row { display: grid; grid-template-columns: 64px 1fr; align-items: center; gap: 10px; }
+  .dm-vs__bar { position: relative; display: grid; gap: 6px; }
+  .dm-vs__bar--en { grid-template-columns: 1fr 2fr; }
+  .dm-vs__bar--tr { grid-template-columns: 1fr 1fr 1fr; }
+  .dm-vs__seg { min-height: 48px; display: grid; place-items: center; border-radius: 14px; font: 800 clamp(17px, 5vw, 22px) var(--ak-font-display); border: 0; }
+  .dm-vs__seg--this { background: var(--c-bu); color: #fff; }
+  .dm-vs__seg--that { background: repeating-linear-gradient(90deg, var(--c-su) 0 50%, #b9d23a 50% 100%); color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,.25); }
+  .dm-vs__seg.w-bu, .dm-vs__seg.w-su, .dm-vs__seg.w-o { padding: 0; border-radius: 14px; line-height: 1; }
+  .dm-vs__scale { display: flex; justify-content: space-between; padding-left: 74px; font-size: 12px; font-weight: 700; color: var(--muted); }
+  .dm-vs__q { margin: 4px 0 0; font-weight: 700; }
+  .dm-vs__opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dm-vs__fb { min-height: 1.6em; margin: 0; font-weight: 600; }
+
+  /* ---------- English ↔ Türkçe: порядок слов ---------- */
+  .dm-order { display: grid; gap: 10px; }
+  .dm-order__line { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; min-height: 48px; }
+  .dm-order__line--en { font: 700 clamp(17px, 5vw, 22px)/1.2 var(--ak-font); }
+  .dm-order__line--tr { font: 800 clamp(22px, 6.6vw, 32px)/1.1 var(--ak-font-display); padding: 8px 10px; border-radius: 14px; background: var(--ak-surface); cursor: pointer; }
+  .dm-order__en { position: relative; display: inline-block; padding: 4px 10px; border-radius: 10px; border: 2px solid var(--ak-line); background: #fff; }
+  .dm-order__en.is-gone { color: var(--muted); }
+  .dm-order__en.is-gone::after { content: ''; position: absolute; left: 4px; right: 4px; top: 52%; height: 3px; border-radius: 3px; background: var(--ak-bad); transform-origin: 0 50%; transform: scaleX(var(--s, 1)); }
+  .dm-order__tr { display: inline-block; }
+  .dm-order__tr:not([class*="w-"]) { padding: 0 .1em; }
+  .dm-order__sep { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .dm-order__note { margin: 0; font-weight: 600; min-height: 3em; }
+  .dm-h3-gap { margin-top: 22px; }
+  .dm-order__ctl { display: flex; flex-wrap: wrap; gap: 4px; }
+
   @media (min-width: 768px) {
     .dm-bros { grid-template-columns: repeat(3, 1fr); }
     .dm-bro { grid-template-columns: 1fr; justify-items: start; }
@@ -461,12 +493,42 @@
     </div>
 
     <p class="dm-tap">Tap a brother. He’ll say his word.</p>
-    <p>The brothers go right before the word. Like English “this” and “that.”</p>
+    <p>Good news: they stand where English “this” and “that” stand. Right before the word.</p>
     <ul class="dm-pairs">
       <li><span class="w-bu">bu</span> <a-say>bu çay</a-say> <span class="ru">this tea, with me</span></li>
       <li><span class="w-su">şu</span> <a-say>şu çay</a-say> <span class="ru">that tea there, with you</span></li>
       <li><span class="w-o">o</span> <a-say>o çay</a-say> <span class="ru">that tea, far away</span></li>
     </ul>
+    <p class="dm-say-like"><b>Say it:</b> <span lang="tr">bu</span> like “boo.” <span lang="tr">şu</span> like “shoe”: ş is “sh.” <span lang="tr">o</span> like the “o” in “or,” but short. And ç in <span lang="tr">çay</span> is “ch”: “chai.”</p>
+
+    <div class="dm-card dm-vs" data-vs>
+      <span class="dm-kicker">English ↔ Türkçe</span>
+      <h3>English has two. Turkish has three.</h3>
+      <div class="dm-vs__row">
+        <span class="dm-vs__tag">English</span>
+        <div class="dm-vs__bar dm-vs__bar--en">
+          <span class="dm-vs__seg dm-vs__seg--this" data-vs-this>this</span>
+          <span class="dm-vs__seg dm-vs__seg--that" data-vs-that>that</span>
+        </div>
+      </div>
+      <div class="dm-vs__row">
+        <span class="dm-vs__tag">Türkçe</span>
+        <div class="dm-vs__bar dm-vs__bar--tr" lang="tr">
+          <button type="button" class="dm-vs__seg w-bu" data-say="bu" data-vs-tr="0">bu</button>
+          <button type="button" class="dm-vs__seg w-su" data-say="şu" data-vs-tr="1">şu</button>
+          <button type="button" class="dm-vs__seg w-o" data-say="o" data-vs-tr="2">o</button>
+        </div>
+      </div>
+      <div class="dm-vs__scale" aria-hidden="true"><span>✋ in hand</span><span>👉 I point</span><span>far 👀</span></div>
+      <p>English “that” is one word. Turkish cuts it in two. You point at it, it’s near you or your friend: <span class="w-su">şu</span>. Far away or out of sight: <span class="w-o">o</span>.</p>
+      <p class="dm-vs__q" data-vs-q aria-live="polite"></p>
+      <div class="dm-vs__opts" lang="tr">
+        <button type="button" class="dm-guess__btn" data-vs-opt="şu">şu</button>
+        <button type="button" class="dm-guess__btn" data-vs-opt="o">o</button>
+      </div>
+      <p class="dm-vs__fb" data-vs-fb aria-live="polite"></p>
+      <button class="dm-replay" type="button" data-vs-replay>↻ split “that” again</button>
+    </div>
   </section>
 
   <section id="lab" data-section="lab" data-words="25">
@@ -515,7 +577,7 @@
   <section id="nekim" data-section="nekim" data-words="62">
     <span class="dm-kicker">Rule 2 · the question</span>
     <h2>Ne or kim?</h2>
-    <p><span class="w-ne">ne</span> is “what.” <span class="w-kim">kim</span> is “who.”</p>
+    <p><span class="w-ne">ne</span> is “what.” <span class="w-kim">kim</span> is “who.” Same split as in English. Easy. <span lang="tr">ne</span> sounds like “neh,” <span lang="tr">kim</span> like the name Kim.</p>
 
     <div class="dm-card dm-guess" data-guess>
       <div class="dm-guess__pic">
@@ -553,14 +615,28 @@
     <div class="dm-flyline"><span class="dm-flyline__say" lang="tr" data-fly-say aria-live="polite"></span><button class="dm-replay" type="button" data-fly-reset hidden>↻ again</button></div>
     <p>Teacher, captain, Ali: <span lang="tr">kim</span>. Book, bagel and cat: <span lang="tr">ne</span>.</p>
 
-    <h3>The answer takes the question’s spot</h3>
+    <div class="dm-card dm-order" data-order>
+      <span class="dm-kicker">English ↔ Türkçe</span>
+      <h3>Here English and Turkish part ways</h3>
+      <p>English pulls “what” to the front and needs “is.” Turkish does neither. Watch the words travel.</p>
+      <div class="dm-order__line dm-order__line--en" data-order-en></div>
+      <span class="dm-order__sep" aria-hidden="true">↓ Türkçe</span>
+      <div class="dm-order__line dm-order__line--tr" lang="tr" data-order-tr></div>
+      <p class="dm-order__note" data-order-note aria-live="polite"></p>
+      <div class="dm-order__ctl">
+        <button class="dm-replay" type="button" data-order-play>↻ again</button>
+        <button class="dm-replay" type="button" data-order-next>Next →</button>
+      </div>
+    </div>
+
+    <h3 class="dm-h3-gap">The answer takes the question’s spot</h3>
     <div class="dm-card dm-swap" data-swap>
       <div class="dm-swap__row" lang="tr" data-say="Bu ne?" data-swap-q><span class="dm-swap__p w-bu" data-slot-p>Bu</span> <span class="dm-slot dm-slot--q" data-slot-q>ne?</span></div>
       <div class="dm-swap__arrow" aria-hidden="true">↓</div>
       <div class="dm-swap__row" lang="tr" data-say="Bu bir kitap." data-swap-a><span class="dm-swap__p w-bu" data-slot-p2>Bu</span> <span class="dm-slot dm-slot--a" data-slot-a>bir kitap.</span></div>
       <button class="dm-replay" type="button" data-swap-next>Another example →</button>
     </div>
-    <p>The word order doesn’t change. No “is.” <span lang="tr">bir</span> works like English “a.” You can skip it.</p>
+    <p>Question and answer: same order. Swap <span lang="tr">ne</span> for the thing, done. <span lang="tr">bir</span> is like English “a.” You can skip it. There is no “the” at all.</p>
     <p><a-say>O kim?</a-say> Who is he? <a-say>O öğretmen.</a-say> He’s a teacher.</p>
   </section>
 
@@ -573,7 +649,7 @@
       <div class="dm-msg dm-msg--me"><span class="dm-msg__who">you</span><a-say>Şu ne?</a-say><small>And that one, by you?</small></div>
       <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-pogaca"/></svg><span class="dm-msg__who">seller</span><a-say>Şu bir poğaça.</a-say><small>That one’s a pastry.</small></div>
       <div class="dm-msg dm-msg--me"><span class="dm-msg__who">you</span><a-say>O ne?</a-say><small>And that, way over there?</small></div>
-      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-vapur"/></svg><span class="dm-msg__who">seller</span><a-say>O bir vapur.</a-say><small>That’s a ferry. It’s yours.</small></div>
+      <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-vapur"/></svg><span class="dm-msg__who">seller</span><a-say>O bir vapur.</a-say><small>That’s a ferry. Your ride.</small></div>
       <div class="dm-msg dm-msg--me"><span class="dm-msg__who">you</span><a-say>O kim?</a-say><small>And who’s he?</small></div>
       <div class="dm-msg dm-msg--them"><svg class="dm-msg__pic" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan"/></svg><span class="dm-msg__who">seller</span><a-say>O kaptan.</a-say><small>He’s the captain.</small></div>
     </div>
@@ -582,28 +658,32 @@
 
   <section id="traps" data-section="traps" data-words="52">
     <span class="dm-kicker">Tips from a survivor</span>
-    <h2>Three traps</h2>
+    <h2>Four traps for English speakers</h2>
     <div class="dm-traps">
       <div class="dm-trap dm-pop">
-        <p><b>A cat is not kim.</b> Even if he runs the place.</p>
+        <p><b>Your dog is a “who.” In Turkish, it’s a ne.</b> In English you can ask “Who’s this?” about a pet. In Turkish, animals get <span lang="tr">ne</span>. Even a cat who runs the place.</p>
         <p><span class="dm-bad" lang="tr">Bu kim?<i class="dm-strike" aria-hidden="true"></i></span> about a cat. Hurts the ear.</p>
         <p class="dm-good">The right way: <a-say>Bu ne?</a-say> <span class="dm-stamp" aria-hidden="true">✓</span></p>
       </div>
       <div class="dm-trap dm-pop">
-        <p><b>O has no gender.</b> <a-say>O kim?</a-say> It’s both “who is he?” and “who is she?”.</p>
-        <p>Which one, the situation will tell you.</p>
-        <button type="button" class="dm-who" data-who data-say="O kim?" aria-label="O kim? Switch the person"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan" data-who-use/></svg><span lang="tr">O</span><small>↻</small></button>
+        <p><b>He, she, it: all o.</b> Turkish has no gender. <a-say>O kim?</a-say> is “Who is he?”, “Who is she?” and “Who’s that?”.</p>
+        <p>Which one? The situation tells you. Tap and switch.</p>
+        <button type="button" class="dm-who" data-who data-say="O kim?" aria-label="O kim? Switch the person"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#i-kaptan" data-who-use/></svg><span lang="tr">O</span><small data-who-en>he? ↻</small></button>
       </div>
       <div class="dm-trap dm-pop">
-        <p><b>Şu doesn’t mean “far.”</b> Şu is what you point your finger at. Next to you or to the person you’re talking to.</p>
-        <p>Far away or out of sight: <span class="w-o">o</span>.</p>
+        <p><b>“That” is two words.</b> Don’t grab <span lang="tr">o</span> every time you think “that.”</p>
+        <p>That bagel, in her hand, you point: <a-say>şu simit</a-say>. That ferry at the horizon: <a-say>o vapur</a-say>.</p>
+      </div>
+      <div class="dm-trap dm-pop">
+        <p><b>No “is,” no “the.”</b> Stop looking for them. They aren’t hiding.</p>
+        <p>He<span class="dm-bad">’s<i class="dm-strike" aria-hidden="true"></i></span> <span class="dm-bad">the<i class="dm-strike" aria-hidden="true"></i></span> captain → <a-say>O kaptan.</a-say> <span class="dm-stamp" aria-hidden="true">✓</span></p>
       </div>
     </div>
   </section>
 
   <section id="video" data-section="video" data-words="10">
     <h2>Listen to native speakers</h2>
-    <p>Notice where the thing is when you hear bu, şu or o.</p>
+    <p>Turkish only, no subtitles needed. Watch where the thing is when you hear bu, şu or o. And who gets kim.</p>
     <a-video yt="-u7Sp_-oLNM" start="0" end="70" title="İzle, Eğlen, Öğren: «Bu», «Şu», «O»" channel="Yunus Emre Enstitüsü"></a-video>
     <a-video yt="2Hhm6W2_iIY" start="0" end="63" title="İzle, Eğlen, Öğren: Bu kim? Şu kim?" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
@@ -661,11 +741,12 @@
       <div class="dm-cheat__grid">
         <button type="button" class="w-bu dm-chip-say" lang="tr" data-say="bu çay">bu</button><span>this, in hand</span>
         <button type="button" class="w-su dm-chip-say" lang="tr" data-say="şu simit">şu</button><span>that one there, I’m pointing</span>
-        <button type="button" class="w-o dm-chip-say" lang="tr" data-say="o vapur">o</button><span>that, far away · he, she</span>
-        <button type="button" class="w-ne dm-chip-say" lang="tr" data-say="Bu ne?">ne</button><span>what? Things and animals</span>
+        <button type="button" class="w-o dm-chip-say" lang="tr" data-say="o vapur">o</button><span>that, far away · he, she, it</span>
+        <button type="button" class="w-ne dm-chip-say" lang="tr" data-say="Bu ne?">ne</button><span>what? Things and animals, pets too</span>
         <button type="button" class="w-kim dm-chip-say" lang="tr" data-say="O kim?">kim</button><span>who? People only</span>
       </div>
       <div class="dm-cheat__formula" lang="tr">Bu ne? → Bu bir kitap.<br>O kim? → O kaptan.</div>
+      <p style="margin:0">English “that” = <span class="w-su">şu</span> or <span class="w-o">o</span>. No “is.” No “the.” The question word stays where the answer goes.</p>
       <p class="dm-cheat__save">Save it as a screenshot</p>
     </div>
 
@@ -682,6 +763,7 @@
       <li>You point at things close by, over there and far away.</li>
       <li>You ask “what is this?” and “who is this?”.</li>
       <li>You answer without changing the word order.</li>
+      <li>You know which “that” is şu and which is o.</li>
     </ul>
   </section>
 
@@ -927,7 +1009,7 @@ addEventListener('DOMContentLoaded', () => {
       const ok = b.dataset.guessOpt === 'ne';
       $$('[data-guess-opt]', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
       b.classList.add(ok ? 'is-right' : 'is-wrong');
-      fb.textContent = ok ? 'Yes. A cat is ne. Kim is only for people.' : 'Everyone trips on this one. Kim is only for people. A cat is ne.';
+      fb.textContent = ok ? 'Yes. A cat is ne. Kim is only for people.' : 'In English a cat can be a “who.” Not in Turkish. Kim is only for people. A cat is ne.';
       if (!anim) return;
       if (ok) G.fromTo(b, { scale: .85 }, { scale: 1, duration: .5, ease: 'back.out(3)' });
       else G.fromTo(b, { x: -10 }, { x: 0, duration: .6, ease: 'elastic.out(1, .3)' });
@@ -1007,6 +1089,121 @@ addEventListener('DOMContentLoaded', () => {
     $('[data-swap-next]').addEventListener('click', () => { k = (k + 1) % EXS.length; apply(); play(); });
   })();
 
+  /* ---------- English ↔ Türkçe: «that» раскалывается на şu и o; выбери нужный ---------- */
+  (() => {
+    const box = $('[data-vs]');
+    const that = $('[data-vs-that]', box);
+    const thisEl = $('[data-vs-this]', box);
+    const tr = $$('[data-vs-tr]', box);
+    const qEl = $('[data-vs-q]', box);
+    const fb = $('[data-vs-fb]', box);
+    const opts = $$('[data-vs-opt]', box);
+    const QS = [
+      { en: '“That bagel.” It’s in the seller’s hand. You point at it.', w: 'şu', tr: 'şu simit', why: 'You point, it’s near him: şu.' },
+      { en: '“That ferry.” Far away, at the horizon.', w: 'o', tr: 'o vapur', why: 'Far away: o.' },
+      { en: '“That cat.” On the chair next to your friend. You point.', w: 'şu', tr: 'şu kedi', why: 'Near your friend, you point: şu.' },
+      { en: '“That man.” He left an hour ago. Out of sight.', w: 'o', tr: 'o adam', why: 'Out of sight: o.' },
+    ];
+    let k = 0, done = false;
+    function ask() {
+      done = false;
+      qEl.textContent = `Which “that”? ${QS[k].en}`;
+      fb.textContent = '';
+      opts.forEach((b) => b.classList.remove('is-right', 'is-wrong'));
+    }
+    function split() {
+      if (!anim) return;
+      const a = that.getBoundingClientRect();
+      G.timeline()
+        .fromTo(thisEl, { scale: .6 }, { scale: 1, duration: .5, ease: 'back.out(3)' })
+        .fromTo(tr[0], { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: 'back.out(2)' }, '<.1')
+        .fromTo(that, { scaleX: 1 }, { scaleX: 1.08, duration: .2, yoyo: true, repeat: 1, ease: 'power2.inOut', transformOrigin: '50% 50%' })
+        .fromTo(tr.slice(1), {
+          x: (i, el) => (a.left + a.width / 2) - (el.getBoundingClientRect().left + el.getBoundingClientRect().width / 2),
+          y: -40, rotation: (i) => (i ? 10 : -10), opacity: .2,
+        }, { x: 0, y: 0, rotation: 0, opacity: 1, duration: .8, ease: 'elastic.out(1, .5)', stagger: .12 });
+    }
+    opts.forEach((b) => b.addEventListener('click', () => {
+      if (done) { k = (k + 1) % QS.length; ask(); return; }
+      const q = QS[k];
+      const ok = b.dataset.vsOpt === q.w;
+      opts.forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      if (ok) {
+        done = true;
+        fb.textContent = `Yes: ${q.tr}. ${q.why} Tap again for the next one.`;
+        const z = tr[q.w === 'şu' ? 1 : 2];
+        if (anim) G.fromTo(z, { y: -12 }, { y: 0, duration: .7, ease: 'bounce.out' });
+      } else {
+        fb.textContent = `Not this time. ${q.why}`;
+        if (anim) G.fromTo(b, { x: -10 }, { x: 0, duration: .6, ease: 'elastic.out(1, .3)' });
+      }
+    }));
+    tr.forEach((b) => b.addEventListener('click', () => { if (anim) G.fromTo(b, { scale: .8 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .4)' }); }));
+    $('[data-vs-replay]', box).addEventListener('click', split);
+    if (anim) ScrollTrigger.create({ trigger: box, start: 'top 70%', once: true, onEnter: split });
+    ask();
+  })();
+
+  /* ---------- English ↔ Türkçe: слова переезжают, «is» и «the» исчезают ---------- */
+  (() => {
+    const box = $('[data-order]');
+    const enEl = $('[data-order-en]', box);
+    const trEl = $('[data-order-tr]', box);
+    const note = $('[data-order-note]', box);
+    /* tr: [слово, индекс английского слова-источника, класс] — порядок и формы хранятся целиком, ничего не склеиваем */
+    const ORD = [
+      { en: ['What', 'is', 'this?'], tr: [['Bu', 2, 'w-bu'], ['ne?', 0, 'w-ne']], note: '“this” becomes bu and goes first. “what” becomes ne and goes last. “is” just disappears.' },
+      { en: ['This', 'is', 'a', 'book.'], tr: [['Bu', 0, 'w-bu'], ['bir', 2], ['kitap.', 3]], note: 'The answer. Same order as the question: ne → bir kitap. “a” becomes bir.' },
+      { en: ['Who', 'is', 'he?'], tr: [['O', 2, 'w-o'], ['kim?', 0, 'w-kim']], note: 'He is far away: o. Who: kim, at the end.' },
+      { en: ['He’s', 'the', 'captain.'], tr: [['O', 0, 'w-o'], ['kaptan.', 2]], note: '“He’s” is just o. “the” has no Turkish word. Two words, done.' },
+      { en: ['What’s', 'that?'], tr: [['Şu', 1, 'w-su'], ['ne?', 0, 'w-ne']], note: 'You point at it: şu. “What’s” is just ne.' },
+      { en: ['That’s', 'a', 'pastry.'], tr: [['Şu', 0, 'w-su'], ['bir', 1], ['poğaça.', 2]], note: '“That’s” is just şu. A poğaça is a soft Turkish pastry.' },
+    ];
+    let k = 0;
+    function build() {
+      const e = ORD[k];
+      const used = new Set(e.tr.map((t) => t[1]));
+      enEl.innerHTML = '';
+      trEl.innerHTML = '';
+      e.en.forEach((w, i) => {
+        const s = document.createElement('span');
+        s.className = 'dm-order__en' + (used.has(i) ? '' : ' is-gone');
+        s.textContent = w;
+        enEl.append(s);
+      });
+      e.tr.forEach(([w, , c]) => {
+        const s = document.createElement('span');
+        s.className = 'dm-order__tr' + (c ? ` ${c}` : '');
+        s.textContent = w;
+        trEl.append(s);
+      });
+      trEl.dataset.say = e.tr.map((t) => t[0]).join(' ');
+      note.textContent = e.note;
+    }
+    function play() {
+      if (!anim) return;
+      const e = ORD[k];
+      const ens = [...enEl.children];
+      const trs = [...trEl.children];
+      const gone = ens.filter((s) => s.classList.contains('is-gone'));
+      const tl = G.timeline();
+      tl.fromTo(ens, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: .35, ease: 'back.out(2)', stagger: .07 });
+      if (gone.length) tl.fromTo(gone, { '--s': 0 }, { '--s': 1, duration: .4, ease: 'power2.out', stagger: .15 });
+      trs.forEach((t, j) => {
+        const src = ens[e.tr[j][1]].getBoundingClientRect();
+        const dst = t.getBoundingClientRect();
+        tl.fromTo(t, { x: src.left - dst.left, y: src.top - dst.top, scale: .7, opacity: .3 },
+          { x: 0, y: 0, scale: 1, opacity: 1, duration: .75, ease: 'power3.inOut' }, j ? '<.15' : '>');
+      });
+      tl.fromTo(note, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .4 });
+    }
+    build();
+    if (anim) ScrollTrigger.create({ trigger: box, start: 'top 70%', once: true, onEnter: play });
+    $('[data-order-play]', box).addEventListener('click', play);
+    $('[data-order-next]', box).addEventListener('click', () => { k = (k + 1) % ORD.length; build(); play(); });
+  })();
+
   /* ---------- сцена: реплики появляются по очереди, картинки товара прыгают ---------- */
   (() => {
     const chat = $('[data-chat]');
@@ -1027,25 +1224,27 @@ addEventListener('DOMContentLoaded', () => {
   })();
 
   /* ---------- ловушки: зачёркивание, печать, он/она ---------- */
-  (() => {
-    const strike = $('.dm-strike');
-    const stamp = $('.dm-stamp');
-    const card = strike.closest('.dm-trap');
+  $$('.dm-trap').filter((c) => $('.dm-strike', c)).forEach((card) => {
+    const strikes = $$('.dm-strike', card);
+    const stamp = $('.dm-stamp', card);
     function play() {
       if (!anim) return;
       G.timeline()
-        .fromTo(strike, { scaleX: 0 }, { scaleX: 1, duration: .5, ease: 'power2.out' })
+        .fromTo(strikes, { scaleX: 0 }, { scaleX: 1, duration: .45, ease: 'power2.out', stagger: .25 })
         .fromTo(stamp, { scale: 3, rotation: -40 }, { scale: 1, rotation: 0, duration: .7, ease: 'bounce.out' });
     }
     if (anim) ScrollTrigger.create({ trigger: card, start: 'top 70%', once: true, onEnter: play });
     card.addEventListener('click', (e) => { if (!e.target.closest('a-say')) play(); });
-
+  });
+  (() => {
     const who = $('[data-who]');
     const use = $('[data-who-use]');
+    const en = $('[data-who-en]');
     let w = 0;
     who.addEventListener('click', () => {
       w ^= 1;
       use.setAttribute('href', w ? '#i-ogretmen' : '#i-kaptan');
+      en.textContent = w ? 'she? ↻' : 'he? ↻';
       if (anim) G.fromTo($('svg', who), { rotationY: 90 }, { rotationY: 0, duration: .5, ease: 'back.out(2)' });
     });
   })();

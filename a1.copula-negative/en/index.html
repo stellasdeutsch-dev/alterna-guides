@@ -230,6 +230,16 @@ main, .sec { z-index: 1; }
 .cmp__row .lbl { margin-bottom: 8px; }
 .cmp .ch { font-size: clamp(16px, 4.6vw, 26px); }
 .cmp__note { margin: 8px 0 0; color: var(--muted); font-size: 15px; min-height: 2.6em; }
+.cmp__row--diff { box-shadow: var(--sh), inset 4px 0 0 var(--pink); }
+.pm { margin: 16px 0 0; padding: 16px; border-radius: 22px; background: linear-gradient(180deg, #fff, #fff7f0); box-shadow: var(--sh); }
+.pm__lead { margin: 6px 0 0; font-size: 15px; }
+.pm__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 12px 0 0; perspective: 800px; }
+@media (min-width: 720px) { .pm__grid { grid-template-columns: repeat(3, 1fr); } }
+.pm__c { min-height: 64px; border: 0; cursor: pointer; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1.5px var(--line); display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; padding: 8px; font: 800 clamp(16px, 4.4vw, 20px)/1.1 var(--f-body); color: var(--ink); }
+.pm__c small { flex-basis: 100%; text-align: center; font: 700 10px/1 var(--f-body); letter-spacing: .24em; color: var(--muted); }
+.pm__k { padding: 4px 9px; border-radius: 10px; color: #fff; background: linear-gradient(160deg, var(--pink-2), var(--pink-d)); }
+.pm__c.is-tr .pm__k { color: #5a3712; background: linear-gradient(160deg, #fde7bd, var(--gold-2) 40%, #e3a95e); }
+.pm__c.is-tr { box-shadow: inset 0 0 0 2px var(--gold); }
 
 /* ===== ask: замок с пинами ===== */
 .lockbox { display: grid; gap: 16px; }
@@ -553,7 +563,7 @@ main, .sec { z-index: 1; }
       <div class="txt">
         <p>Watch the hands. The phrase <b lang="tr" data-say="Yorgunum.">Yorgunum</b> means “I’m tired.”</p>
         <p>Cut off the tail. Put <b lang="tr" data-say="değil">değil</b> after the word. The tail jumps onto <b lang="tr" data-say="değil">değil</b>. Done.</p>
-        <p>English “not” leans on a helper: am not, is not. Turkish <b lang="tr" data-say="değil">değil</b> trails behind the word. And drags the tail along like a suitcase.</p>
+        <p>English says “I am not tired”: the verb, then not, then the word. Turkish has no “am”. The word goes first, <b lang="tr" data-say="değil">değil</b> trails behind it and drags the tail along like a suitcase.</p>
       </div>
       <div class="stage" id="cutStage">
         <svg class="scis" viewBox="0 0 140 90" id="cutScis" aria-hidden="true"><g class="bl-a"><circle cx="22" cy="22" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 31 64 44l74-12-72 20Z"/></g><g class="bl-b"><circle cx="22" cy="68" r="15" fill="none" stroke="url(#gGold)" stroke-width="8"/><path fill="url(#gGold)" d="M32 59 64 46l74 12-72-20Z"/></g><circle cx="64" cy="45" r="5" fill="#b57631"/></svg>
@@ -658,20 +668,28 @@ main, .sec { z-index: 1; }
   <section class="sec" data-section="compare" data-words="40" id="s-compare"><span class="num" data-ui aria-hidden="true">06</span><svg class="dec flt" viewBox="0 0 140 90" style="width:96px;height:62px;right:1%;top:36px;rotate:2deg" aria-hidden="true"><use href="#i-scissors"/></svg>
     <div class="wrap frame"><div class="pn">
       <span class="script">compare</span>
-      <h2 data-split>Russian <span class="pk">↔</span> Turkish</h2>
+      <h2 data-split>English <span class="pk">↔</span> Turkish</h2>
       <div class="txt">
-        <p>In English “not” sits between “am” and the word. In Turkish <b lang="tr" data-say="değil">değil</b> comes after the word, and the tail rides on it.</p>
-        <p>If you know Kazakh, it’s on your side here: <span data-ui lang="kk">emes</span> works the same way. But in questions they part ways.</p>
+        <p>English needs “be”: I <i>am</i> not, <i>are</i> you? Turkish has no “be” here. The tail does its job: <b lang="tr" data-say="değilim">değil-im</b> = “not-I-am”.</p>
+        <p>The big difference is the question. English flips the words. Turkish flips nothing: it adds a key after the word. Switch EN and TR and watch the dark tail jump.</p>
       </div>
       <div class="tabs" role="tablist" aria-label="Language" data-ui>
-        <button type="button" role="tab" aria-selected="true" data-lang="ru">RU</button>
+        <button type="button" role="tab" aria-selected="true" data-lang="en">EN</button>
         <button type="button" role="tab" aria-selected="false" data-lang="tr">TR</button>
-        <button type="button" role="tab" aria-selected="false" data-lang="kk">KZ</button>
         <button type="button" role="tab" aria-selected="false" data-lang="auto">▶ loop</button>
       </div>
       <div class="cmp" data-ui>
         <div class="cmp__row"><span class="lbl">negative</span><div class="chips" id="cmpA"></div><p class="cmp__note" id="cmpAn"></p></div>
-        <div class="cmp__row"><span class="lbl">question</span><div class="chips" id="cmpB"></div><p class="cmp__note" id="cmpBn"></p></div>
+        <div class="cmp__row cmp__row--diff"><span class="lbl">question · different</span><div class="chips" id="cmpB"></div><p class="cmp__note" id="cmpBn"></p></div>
+        <div class="cmp__row cmp__row--diff"><span class="lbl">negative question · different</span><div class="chips" id="cmpC"></div><p class="cmp__note" id="cmpCn"></p></div>
+        <div class="cmp__row cmp__row--diff"><span class="lbl">tag · different</span><div class="chips" id="cmpD"></div><p class="cmp__note" id="cmpDn"></p></div>
+      </div>
+      <div class="pm" data-ui>
+        <span class="lbl">tag questions: six ↔ one</span>
+        <p class="pm__lead">In English the tag copies the verb and the person: isn’t it, aren’t you, aren’t I. In Turkish it is always <b lang="tr" data-say="değil mi">değil mi</b>. Flip a card.</p>
+        <div class="pm__grid" id="pmGrid"></div>
+        <p class="cmp__note" id="pmNote" aria-live="polite"></p>
+        <button class="lnk" type="button" id="pmAll">▶ flip all</button>
       </div>
       <div class="mq" data-mq>
         <p class="mq__q">Quick question: in Turkish “are you a doctor?”, where does the tail go?</p>
@@ -688,7 +706,7 @@ main, .sec { z-index: 1; }
       <h2 data-split><span class="gd">Key</span>: question</h2>
       <div class="txt">
         <p>You know the key <b class="tq" lang="tr" data-say="mı">mı</b>. Four forms: <b class="tq" lang="tr" data-say="mı, mi, mu, mü">mı, mi, mu, mü</b>, picked by the word’s last vowel.</p>
-        <p>Only one thing is new. The tail moves onto the key. <b lang="tr" data-say="Öğretmensin.">Öğretmensin</b> → <b class="tq" lang="tr" data-say="Öğretmen misin?">Öğretmen misin?</b></p>
+        <p>Only one thing is new. The tail moves onto the key. <b lang="tr" data-say="Öğretmensin.">Öğretmensin</b> → <b class="tq" lang="tr" data-say="Öğretmen misin?">Öğretmen misin?</b> No “Are you…” flip: the order stays the same.</p>
         <p>Keep this order in your head: word, key, tail. When two vowels meet, a y goes between them: <b class="tq" lang="tr" data-say="Hazır mıyım?">Hazır mıyım?</b></p>
       </div>
       <div class="cine" id="askCine"><div class="cine-cap" data-ui><b lang="tr">mı · mi · mu · mü</b></div><div class="lockbox">
@@ -736,7 +754,7 @@ main, .sec { z-index: 1; }
       <div class="txt">
         <p>A question with “not”: scissors first, then the key. The tail sits on the key.</p>
         <p>After <b lang="tr" data-say="değil">değil</b> the key is always <b class="tq" lang="tr" data-say="mi">mi</b>. The last vowel there is i. No options.</p>
-        <p>And <b lang="tr" data-say="değil mi?">değil mi?</b> at the end of a phrase is like “right?” or “isn’t it?”</p>
+        <p>And <b lang="tr" data-say="değil mi?">değil mi?</b> at the end of a phrase is your tag question: isn’t it, aren’t you, don’t they. English has dozens. Turkish has one, and it never changes.</p>
       </div>
       <div class="stage" style="min-height:150px"><div class="chips" id="nqChips" data-ui></div></div>
       <div class="row" style="justify-content:center;margin-top:12px" data-ui>
@@ -764,7 +782,7 @@ main, .sec { z-index: 1; }
       <span class="script">answer</span>
       <h2 data-split><span class="pk" lang="tr">Hayır</span> isn’t <span lang="tr">değil</span></h2>
       <div class="txt">
-        <p><b lang="tr" data-say="Hayır">Hayır</b> is the “no” at the start of an answer. <b lang="tr" data-say="değil">Değil</b> is the “not” inside the phrase. “Yes” is <b lang="tr" data-say="evet">evet</b> plus the tail on the word.</p>
+        <p><b lang="tr" data-say="Hayır">Hayır</b> = “no”. <b lang="tr" data-say="değil">Değil</b> = “not”. Same split as English: “No, I’m not sick.” “Yes” is <b lang="tr" data-say="evet">evet</b> plus the tail on the word.</p>
         <p>A lone <b lang="tr" data-say="hayır">hayır</b> without <b lang="tr" data-say="değil">değil</b> sounds like the pharmacy: “no, I’m sick.” You need both.</p>
       </div>
       <div class="ans">
@@ -943,13 +961,13 @@ main, .sec { z-index: 1; }
     <div class="wrap">
       <span class="script">traps</span>
       <h2 data-split>Where <span class="pk">everyone trips</span></h2>
-      <div class="txt"><p>Five classic learner mistakes. Nothing to be ashamed of. Tap a ticket and the scissors will fix it.</p></div>
+      <div class="txt"><p>Five mistakes English speakers make. English grammar pulls you the wrong way. Tap a ticket and the scissors will fix it.</p></div>
       <div class="tks" id="tks">
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Ben değil öğretmen.</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Ben öğretmen değilim.">Ben öğretmen değilim.</div><p>Değil comes after the word, not before it.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmenim değil.</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değilim.">Öğretmen değilim.</div><p>The tail doesn’t stay on the word. It moves onto değil.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Hayır, açım.</span> <small data-ui>(meant: “no, I’m not hungry”)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Hayır, aç değilim.">Hayır, aç değilim.</div><p>Hayır alone doesn’t negate anything. You need değil too.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Öğretmen değil musun?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Öğretmen değil misin?">Öğretmen değil misin?</div><p>After değil the key is always mi. Its vowel is i.</p></div></div></button>
-        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Sen öğretmensin mi?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Sen öğretmen misin?">Sen öğretmen misin?</div><p>In a question the tail rides on the key, not on the word.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Ben değil öğretmen.</span> <small data-ui>(English order: I am not a teacher)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Ben öğretmen değilim.">Ben öğretmen değilim.</div><p>Değil goes after the word, and the ending -im sits on değil.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Mi sen öğretmensin?</span> <small data-ui>(English: Are you a teacher?)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Sen öğretmen misin?">Sen öğretmen misin?</div><p>Turkish doesn’t flip. The key goes after the word, the tail rides on the key.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Yorgunsun, değilsin mi?</span> <small data-ui>(English: …, aren’t you?)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Yorgunsun, değil mi?">Yorgunsun, değil mi?</div><p>The tag never copies the person. It is always değil mi.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Yorgun değil musun?</span></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Yorgun değil misin?">Yorgun değil misin?</div><p>After değil the key is always mi. Its vowel comes from değil, not from yorgun.</p></div></div></button>
+        <button class="tk" type="button"><div class="tk__top"><span class="wrong" lang="tr">Hayır, açım.</span> <small data-ui>(meant: “No, I’m not hungry”)</small></div><div class="tk__mid"><svg class="tk__sc" viewBox="0 0 140 90" aria-hidden="true"><use href="#i-scissors"/></svg></div><div class="tk__bot"><span class="tk__lock" data-ui><svg viewBox="0 0 48 56"><use href="#i-lock"/></svg>tap to fix</span><div class="tk__ans"><div class="tk__fix" lang="tr" data-say="Hayır, aç değilim.">Hayır, aç değilim.</div><p>Hayır is only “no”. You still need değil for “not”, just like in English.</p></div></div></button>
       </div>
     </div>
   </section>
@@ -959,8 +977,8 @@ main, .sec { z-index: 1; }
     <div class="wrap">
       <span class="script">listen</span>
       <h2>Listen to <span class="pk">a teacher</span></h2>
-      <p>Notice: <span lang="tr">değil</span> goes at the very end and doesn’t change with harmony.</p>
-      <a-video yt="fc2DH5c9XJQ" start="302" end="457" title="Lesson 6. Questions with the particle mı, the negative değil" channel="SEVE SEVE TÜRKÇE Turkish with joy"></a-video>
+      <p>A short cartoon in easy Turkish. Notice: the question key <span lang="tr">mı</span> comes after the word, and nobody flips the order like English “Are you…?”.</p>
+      <a-video yt="-R6-lX316yk" start="0" end="124" title="İzle, Eğlen, Öğren - Soru Eki // Question Sentence" channel="Yunus Emre Enstitüsü"></a-video>
     </div>
   </section>
 
@@ -1080,8 +1098,17 @@ addEventListener('DOMContentLoaded', () => {
   const A2 = (w) => ('aıou'.includes(lastV(w)) ? 'a' : 'e');
   const endsV = (w) => VOW.includes(w.slice(-1).toLocaleLowerCase('tr'));
   const tail = (base, p) => { const v = I4(base), y = endsV(base) ? 'y' : ''; return [y + v + 'm', 's' + v + 'n', '', y + v + 'z', 's' + v + 'n' + v + 'z', 'l' + A2(base) + 'r'][p]; };
-  const PR = [['Ben', 'I’m'], ['Sen', 'You’re'], ['O', 'He’s (she’s)'], ['Biz', 'We’re'], ['Siz', 'You’re'], ['Onlar', 'They’re']];
-  const WORDS = { 'öğretmen': ['a teacher', 'teachers'], 'öğrenci': ['a student', 'students'], 'doktor': ['a doctor', 'doctors'], 'turist': ['a tourist', 'tourists'], 'Türk': ['a Turk', 'Turks'], 'yorgun': ['tired', 'tired'], 'aç': ['hungry', 'hungry'], 'hasta': ['sick', 'sick'], 'mutlu': ['happy', 'happy'], 'hazır': ['ready', 'ready'] };
+  const PR = [['Ben', 'I'], ['Sen', 'you'], ['O', 'he/she'], ['Biz', 'we'], ['Siz', 'you (pl.)'], ['Onlar', 'they']];
+  /* English gloss: own form of “be” for every person, not glued pieces */
+  const WORDS = { 'öğretmen': ['a teacher', 'teachers'], 'öğrenci': ['a student', 'students'], 'doktor': ['a doctor', 'doctors'], 'turist': ['a tourist', 'tourists'], 'Türk': ['Turkish', 'Turkish'], 'yorgun': ['tired', 'tired'], 'aç': ['hungry', 'hungry'], 'hasta': ['sick', 'sick'], 'mutlu': ['happy', 'happy'], 'hazır': ['ready', 'ready'] };
+  const E_POS = ['I’m', 'You’re', 'He/she is', 'We’re', 'You’re', 'They’re'], E_NEG = ['I’m not', 'You aren’t', 'He/she isn’t', 'We aren’t', 'You aren’t', 'They aren’t'];
+  const E_SUB = ['I', 'you', 'he/she', 'we', 'you', 'they'], E_Q = ['Am', 'Are', 'Is', 'Are', 'Are', 'Are'], E_NQ = ['Aren’t', 'Aren’t', 'Isn’t', 'Aren’t', 'Aren’t', 'Aren’t'];
+  function eSent(word, p, mode) {
+    const x = WORDS[word][p >= 3 ? 1 : 0];
+    if (mode === '+') return `${E_POS[p]} ${x}.`;
+    if (mode === '-') return `${E_NEG[p]} ${x}.`;
+    return `${(mode === '?' ? E_Q : E_NQ)[p]} ${E_SUB[p]} ${x}?`;
+  }
   function build(word, p, mode) {
     const neg = mode === '-' || mode === 'nq', q = mode === '?' || mode === 'nq', pl = p === 5;
     const c = [['p', PR[p][0]]];
@@ -1096,11 +1123,11 @@ addEventListener('DOMContentLoaded', () => {
       else { const t = tail('mi', p); c.push(['w', word], ['n', 'değil'], ['q', 'mi']); if (t) c.push(['t', t]); tr = word + ' değil mi' + t; }
     }
     const sent = PR[p][0] + ' ' + tr + (q ? '?' : '.');
-    const ru = PR[p][1] + ' ' + (neg ? 'not ' : '') + WORDS[word][p >= 3 ? 1 : 0] + (q ? '?' : '.');
+    const ru = eSent(word, p, mode);
     return { c, sent, ru, word, p, mode, neg, q };
   }
-  const CH = { w: 'ch ch--w', n: 'ch ch--n', q: 'ch ch--q', t: 'ch ch--t is-glue', p: 'ch ch--p' };
-  const chipsHTML = (arr) => arr.map(([k, t]) => `<span class="${CH[k]}" lang="tr" data-k="${k}">${t}</span>`).join('');
+  const CH = { w: 'ch ch--w', n: 'ch ch--n', q: 'ch ch--q', t: 'ch ch--t is-glue', T: 'ch ch--t', p: 'ch ch--p' };
+  const chipsHTML = (arr) => arr.map(([k, t]) => `<span class="${CH[k]}" lang="tr" data-k="${k === 'T' ? 't' : k}">${t}</span>`).join('');
   /* хвост прилетает по дуге (MotionPath): координаты меряем в момент запуска */
   function flyTail(box, fromRect) {
     if (!A) return;
@@ -1257,7 +1284,7 @@ addEventListener('DOMContentLoaded', () => {
   /* =========================== GUESS: замки =========================== */
   safe(() => {
     const fb = $('#guessFb');
-    const msg = ['Miss. Değil doesn’t run up front.', 'Yes! The word, then değil, and the tail -im moved onto değil. The next screen shows why.', 'Almost. The tail doesn’t stay on the word; it moves. The next screen shows where.'];
+    const msg = ['Miss. That’s the English order. Değil never goes before the word.', 'Yes! The word, then değil, and the tail -im moved onto değil. The next screen shows why.', 'Almost. The tail doesn’t stay on the word; it moves. The next screen shows where.'];
     $$('.lock').forEach((b) => b.addEventListener('click', () => {
       const ok = b.dataset.g === '1';
       $$('.lock').forEach((x) => x.classList.remove('is-ok', 'is-no'));
@@ -1393,39 +1420,68 @@ addEventListener('DOMContentLoaded', () => {
 
   /* =========================== COMPARE =========================== */
   safe(() => {
+    /* четыре ряда: в отрицании хвост стоит на месте, в вопросе — перелетает со слова на ключ */
     const L = {
-      ru: { a: [['p', 'I’m'], ['n', 'not'], ['w', 'a doctor']], an: 'Russian puts its “not” before the word. No tail.', b: [['p', 'You’re'], ['w', 'a doctor'], ['p', '?']], bn: 'Intonation alone makes it a question. No key at all.', sa: '', sb: '' },
-      tr: { a: [['p', 'Ben'], ['w', 'doktor'], ['n', 'değil'], ['t', 'im']], an: 'Değil goes after the word. The tail -im sits on değil.', b: [['p', 'Sen'], ['w', 'doktor'], ['q', 'mu'], ['t', 'sun'], ['p', '?']], bn: 'The key mu goes after the word, the tail -sun sits on the key.', sa: 'Ben doktor değilim.', sb: 'Sen doktor musun?' },
-      kk: { a: [['p', 'Men'], ['w', 'dáriger'], ['n', 'emes'], ['t', 'pin']], an: 'Kazakh: emes goes after the word, and the tail sits on emes. Just like Turkish!', b: [['p', 'Sen'], ['w', 'dáriger'], ['t', 'siñ'], ['q', 'be'], ['p', '?']], bn: 'But here it’s different: the tail stays on the word, and the particle be comes after.', sa: '', sb: '' },
+      en: [
+        [[['p', 'I'], ['T', 'am'], ['n', 'not'], ['w', 'a doctor']], 'English: “be”, then not, then the word.', ''],
+        [[['T', 'Are'], ['p', 'you'], ['w', 'a doctor'], ['p', '?']], 'English flips the verb to the front.', ''],
+        [[['T', 'Are'], ['n', 'n’t'], ['p', 'you'], ['w', 'a doctor'], ['p', '?']], 'English: flip, and glue n’t to the verb.', ''],
+        [[['w', 'You’re tired'], ['p', ','], ['n', 'aren’t'], ['T', 'you'], ['p', '?']], 'The tag copies the verb and the person.', ''],
+      ],
+      tr: [
+        [[['p', 'Ben'], ['w', 'doktor'], ['n', 'değil'], ['t', 'im']], 'Word first, then değil. The tail -im does the job of “am”.', 'Ben doktor değilim.'],
+        [[['p', 'Sen'], ['w', 'doktor'], ['q', 'mu'], ['t', 'sun'], ['p', '?']], 'Nothing flips. The key mu comes after the word, the tail rides on it.', 'Sen doktor musun?'],
+        [[['p', 'Sen'], ['w', 'doktor'], ['n', 'değil'], ['q', 'mi'], ['t', 'sin'], ['p', '?']], 'Same order as the statement, plus mi at the end.', 'Sen doktor değil misin?'],
+        [[['w', 'Yorgunsun'], ['p', ','], ['n', 'değil'], ['q', 'mi'], ['p', '?']], 'The tag never changes: always değil mi. No tail.', 'Yorgunsun, değil mi?'],
+      ],
     };
-    const a = $('#cmpA'), b = $('#cmpB'), an = $('#cmpAn'), bn = $('#cmpBn');
+    const rows = ['A', 'B', 'C', 'D'].map((x) => [$('#cmp' + x), $('#cmp' + x + 'n')]);
     let timer = null;
     function show(k, sp) {
-      const o = L[k];
-      a.innerHTML = chipsHTML(o.a); b.innerHTML = chipsHTML(o.b);
-      $$('[data-k]', a).concat($$('[data-k]', b)).forEach((c) => c.setAttribute('lang', k === 'ru' ? 'ru' : k));
-      an.textContent = o.an; bn.textContent = o.bn;
-      a.dataset.say = o.sa; b.dataset.say = o.sb;
-      if (!o.sa) { delete a.dataset.say; delete b.dataset.say; }
+      L[k].forEach(([c, note, s], r) => {
+        const [box, nt] = rows[r];
+        renderChips(box, c);
+        $$('[data-k]', box).forEach((ch) => ch.setAttribute('lang', k));
+        nt.textContent = note;
+        if (s) box.dataset.say = s; else delete box.dataset.say;
+        if (A) gsap.fromTo(nt, { x: -20 }, { x: 0, duration: .4, ease: 'power2.out', delay: r * .08 });
+      });
       $$('#s-compare [data-lang]').forEach((t) => t.setAttribute('aria-selected', t.dataset.lang === k || (t.dataset.lang === 'auto' && !!timer)));
-      if (A) {
-        gsap.fromTo(a.children, { y: -40, rotation: () => Math.random() * 20 - 10 }, { y: 0, rotation: 0, duration: .6, ease: 'bounce.out', stagger: .07 });
-        gsap.fromTo(b.children, { x: 60 }, { x: 0, duration: .5, ease: 'back.out(2)', stagger: .07, delay: .1 });
-        gsap.fromTo([an, bn], { x: -20 }, { x: 0, duration: .4, ease: 'power2.out' });
-      }
-      if (sp && o.sa) say(o.sa);
+      if (sp && k === 'tr') say(L.tr[1][2]);
     }
     $$('#s-compare [data-lang]').forEach((t) => t.addEventListener('click', () => {
       if (t.dataset.lang === 'auto') {
-        if (timer) { clearInterval(timer); timer = null; show('ru'); return; }
-        const order = ['ru', 'tr', 'kk']; let i = 0;
-        timer = setInterval(() => { i = (i + 1) % 3; show(order[i]); }, 2600);
-        show('ru');
+        if (timer) { clearInterval(timer); timer = null; show('en'); return; }
+        const order = ['en', 'tr']; let i = 0;
+        timer = setInterval(() => { i = (i + 1) % 2; show(order[i]); }, 2600);
+        show('en');
         return;
       }
       clearInterval(timer); timer = null; show(t.dataset.lang, true);
     }));
-    show('ru');
+    show('en');
+    /* хвостовой вопрос: шесть английских ↔ один турецкий — карточка переворачивается */
+    const PM = [
+      ['It’s hot,', 'isn’t it?', 'Sıcak,', 'değil mi?', 'English: is → isn’t it. Turkish: değil mi.'],
+      ['You’re tired,', 'aren’t you?', 'Yorgunsun,', 'değil mi?', 'English: are + you → aren’t you. Turkish: still değil mi. The tail stays on yorgun.'],
+      ['He’s a doctor,', 'isn’t he?', 'O doktor,', 'değil mi?', 'English needs he or she. Turkish o has no gender, and the tag doesn’t care anyway.'],
+      ['We’re ready,', 'aren’t we?', 'Hazırız,', 'değil mi?', 'Not “değiliz mi”. The tag takes no tail.'],
+      ['They’re Turkish,', 'aren’t they?', 'Onlar Türk,', 'değil mi?', 'Same two words again.'],
+      ['I’m right,', 'aren’t I?', 'Haklıyım,', 'değil mi?', 'Even English breaks its own rule here (aren’t I). Turkish doesn’t: değil mi.'],
+    ];
+    const grid = $('#pmGrid'), pmNote = $('#pmNote');
+    const face = (d, tr) => (tr ? `<span lang="tr">${d[2]}</span><span class="pm__k" lang="tr">${d[3]}</span><small>TR</small>` : `<span lang="en">${d[0]}</span><span class="pm__k" lang="en">${d[1]}</span><small>EN</small>`);
+    grid.innerHTML = PM.map((d, i) => `<button type="button" class="pm__c" data-pm="${i}">${face(d, false)}</button>`).join('');
+    function flip(c, toTr, quiet) {
+      const d = PM[+c.dataset.pm];
+      const swap = () => { c.innerHTML = face(d, toTr); c.classList.toggle('is-tr', toTr); };
+      if (A) gsap.timeline().to(c, { rotationX: 90, duration: .18, ease: 'power2.in', onComplete: swap }).to(c, { rotationX: 0, duration: .45, ease: 'back.out(2.5)' }).fromTo(c, { scale: 1 }, { scale: 1.06, duration: .15, yoyo: true, repeat: 1 }, '>-.2');
+      else swap();
+      if (!quiet) { pmNote.textContent = toTr ? d[4] : `${d[0]} ${d[1]} → ${d[2]} ${d[3]}`; if (toTr) say(`${d[2]} ${d[3]}`); }
+    }
+    grid.addEventListener('click', (e) => { const c = e.target.closest('.pm__c'); if (c) flip(c, !c.classList.contains('is-tr')); });
+    $('#pmAll').addEventListener('click', () => { const toTr = !$$('.pm__c', grid).every((c) => c.classList.contains('is-tr')); $$('.pm__c', grid).forEach((c, i) => setTimeout(() => flip(c, toTr, true), i * 140)); pmNote.textContent = toTr ? 'Six English tags. One Turkish tag.' : ''; });
+    if (A) gsap.from('.pm__c', { rotationX: -70, y: 30, duration: .6, ease: 'back.out(2)', stagger: .07, scrollTrigger: { trigger: '#pmGrid', start: 'top 85%', once: true } });
     if (A) ScrollTrigger.create({ trigger: '#s-compare', start: 'top bottom', end: 'bottom top', onLeave: () => { clearInterval(timer); timer = null; }, onLeaveBack: () => { clearInterval(timer); timer = null; } });
     if (A) gsap.from('#s-compare .tabs', { y: 30, scale: .8, duration: .6, ease: 'back.out(2.5)', scrollTrigger: { trigger: '#s-compare .tabs', start: 'top 85%', once: true } });
   });
@@ -1588,7 +1644,7 @@ addEventListener('DOMContentLoaded', () => {
   safe(() => {
     const S = [
       ['Simit taze mi?', 'Is the simit fresh?', 'Evet, çok taze!', 'Yes, very fresh!'],
-      ['Siz Türk müsünüz?', 'Are you Turkish?', 'Hayır, Türk değilim. Rusum.', 'No, I’m not Turkish. I’m Russian.'],
+      ['Siz Türk müsünüz?', 'Are you Turkish?', 'Hayır, Türk değilim. Turistim.', 'No, I’m not Turkish. I’m a tourist.'],
       ['Çay sıcak mı?', 'Is the tea hot?', 'Hayır, sıcak değil. Soğuk.', 'No, it’s not hot. It’s cold.'],
       ['Martı aç mı?', 'Is the seagull hungry?', 'Evet, martı hep aç.', 'Yes, the seagull is always hungry.'],
       ['Kedi hasta mı?', 'Is the cat sick?', 'Hayır, hasta değil. Tembel.', 'No, it’s not sick. It’s lazy.'],
@@ -1665,7 +1721,7 @@ addEventListener('DOMContentLoaded', () => {
   safe(() => {
     let m = '+', p = 0, w = 'öğretmen';
     const lp = $('#labP'), lw = $('#labW'), chips = $('#labChips'), sent = $('#labSent'), ru = $('#labRu'), why = $('#labWhy');
-    lp.innerHTML = PR.map((x, i) => `<button type="button" data-p="${i}" aria-pressed="${i === 0}">${x[0].toLowerCase()} · ${x[1].toLowerCase()}</button>`).join('');
+    lp.innerHTML = PR.map((x, i) => `<button type="button" data-p="${i}" aria-pressed="${i === 0}">${x[0].toLowerCase()} · ${x[1]}</button>`).join('');
     lw.innerHTML = Object.keys(WORDS).map((x) => `<button type="button" data-w="${x}" aria-pressed="${x === w}"><span lang="tr">${x}</span></button>`).join('');
     function whyText(o) {
       const t = o.c.filter((x) => x[0] === 't').map((x) => x[1]).join('');

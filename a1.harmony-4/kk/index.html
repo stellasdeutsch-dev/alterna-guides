@@ -199,6 +199,30 @@
   .h4-trap__good { font-size: 24px; font-weight: 700; color: #1f6f82; }
   .h4-trap small { color: var(--muted); font-size: 14px; line-height: 1.4; }
 
+  /* ---------- қазақша ↔ түрікше: жалғау дауыстысы ауысады ---------- */
+  .h4-kz__same { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; padding: 0; list-style: none; }
+  .h4-kz__same li { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--teal-soft); color: #1f6f82; font-size: 14px; font-weight: 600; }
+  .h4-kz__same svg { width: 14px; height: 14px; flex: none; }
+  .h4-kz__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 12px 0; perspective: 700px; }
+  .h4-kz__card {
+    position: relative; display: grid; justify-items: center; gap: 4px; min-height: 104px; padding: 14px 6px 12px; border-radius: 20px; border: 1px solid #f1eaf1;
+    background: #fff; box-shadow: var(--shadow); cursor: pointer; font: inherit; color: var(--ink); transition: border-color .2s, background-color .2s;
+  }
+  .h4-kz__card[aria-pressed="true"] { border-color: var(--pink); background: var(--pink-soft); }
+  .h4-kz__kk { font-size: 22px; font-weight: 600; line-height: 1.1; }
+  .h4-kz__sv { display: inline-block; color: var(--teal); font-weight: 800; }
+  .h4-kz__tr { font-size: 26px; font-weight: 700; line-height: 1.1; display: none; white-space: nowrap; }
+  .h4-kz__q { display: inline-grid; place-items: center; min-width: 64px; height: 32px; border-radius: 999px; border: 2px dashed var(--teal-2); color: var(--teal); font-weight: 700; }
+  .h4-kz__card.is-shown .h4-kz__q { display: none; }
+  .h4-kz__tr .h4-tail { font-size: .8em; }
+  .h4-kz__card.is-shown .h4-kz__tr { display: block; }
+  .h4-kz__card.is-shown[data-changed="true"] .h4-kz__sv { color: var(--pink); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .h4-kz__flag { position: absolute; top: -9px; right: 10px; padding: 2px 8px; border-radius: 999px; background: var(--pink); color: #fff; font-size: 11px; font-weight: 700; visibility: hidden; }
+  .h4-kz__card.is-shown[data-changed="true"] .h4-kz__flag { visibility: visible; }
+  .h4-kz__card.is-shown.is-hit { border-color: var(--teal); background: #fff; }
+  .h4-kz__card.is-shown.is-miss { border-color: var(--ak-bad); background: #fff; }
+  .h4-kz__out { min-height: 3em; margin: 6px 0 0; }
+
   /* ---------- шпаргалка ---------- */
   .h4-cheat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .h4-cheat__cell { display: grid; gap: 2px; justify-items: center; padding: 14px 8px; border-radius: 18px; border: 1px solid #f1eaf1; background: #fff; cursor: pointer; font: inherit; color: var(--ink); }
@@ -251,7 +275,7 @@
   }
 
   @media (min-width: 560px) {
-    .h4-hook, .h4-pairs, .h4-cheat { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .h4-hook, .h4-pairs, .h4-cheat, .h4-kz__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .h4-traps { grid-template-columns: 1fr 1fr; }
   }
   @media (min-width: 900px) {
@@ -271,7 +295,7 @@
     <h1 data-split>Стамбул сені <em lang="tr">canım</em> деп шақырады</h1>
     <p>Стамбулдағы бірінші күн. Симит сатушы саған <i class="tr" lang="tr">canım</i> дейді. Таксист <i class="tr" lang="tr">dostum</i> дейді. Көрші әйел <i class="tr" lang="tr">güzelim</i> дейді.</p>
     <p>Сен басыңды изейсің. Жымиясың. Ештеңе түсінбейсің.</p>
-    <p>Құпиясы қарапайым. Бұл сөздердің бәрі «менің» туралы. Жаным, досым, көзім — естіліп тұр ма? Карточканы бас та, сөзді кес.</p>
+    <p>Қазақ үшін бұл құпия емес. Жаным, досым, көзім — естіліп тұр ма? Сол тәуелдік жалғау, «менің». Карточканы бас та, сөзді кес.</p>
     <div class="h4-hook">
       <button type="button" class="h4-hook__card" data-hook data-say="canım"><span class="h4-hook__word" lang="tr"><span class="h4-stem">can</span><span class="h4-tail">ım</span></span><span class="h4-hook__ru">жаным</span></button>
       <button type="button" class="h4-hook__card" data-hook data-say="dostum"><span class="h4-hook__word" lang="tr"><span class="h4-stem">dost</span><span class="h4-tail">um</span></span><span class="h4-hook__ru">досым</span></button>
@@ -279,7 +303,7 @@
       <button type="button" class="h4-hook__card" data-hook data-say="gözüm"><span class="h4-hook__word" lang="tr"><span class="h4-stem">göz</span><span class="h4-tail">üm</span></span><span class="h4-hook__ru">көзім</span></button>
     </div>
     <div class="h4-ctrl" data-ui><button type="button" class="h4-btn" data-split-all>Бәрін кесу</button></div>
-    <p>Көрдің бе? Құйрық — сол бір «менің». Бірақ ол әр жолы жаңа кейіпте: <b lang="tr">-ım, -um, -im, -üm</b>. Неге?</p>
+    <p>Көрдің бе? Құйрық — сол бір «менің». Қазақшада оның екі-ақ кейпі бар: <b>-ым, -ім</b>. Түрікшеде төртеу: <b lang="tr">-ım, -um, -im, -üm</b>. Неге?</p>
     <div class="h4-card h4-pinkcard">
       <p><b>Ережеге дейін тауып көр.</b> <i lang="tr">ev</i> — үй. «Менің үйім» — бұл…</p>
       <div class="h4-guess" data-ui>
@@ -330,14 +354,14 @@
     </div>
     <p class="h4-formula">Соңғы дауысты → оның төмендегі жұбы → <b>құйрық</b>. Болды.</p>
     <button type="button" class="h4-switch" role="switch" aria-checked="false" data-ru-switch><span class="h4-switch__knob"></span><span>Қазақ әріптерін көрсету</span></button>
-    <p>Лайфхак. Жұптар қазақ дыбыстарымен бірдей дерлік: а → ы, е → і, о → ұ, ө → ү.</p>
+    <p>Лайфхак. Дыбысы қазақшаға жақын: <b lang="tr">ı</b> ≈ ы, <b lang="tr">i</b> ≈ і, <b lang="tr">u</b> ≈ ұ, <b lang="tr">ü</b> ≈ ү. Бірақ қазақша жалғауда тек ы мен і жазылады. Түрікше ұ мен ү де құйрыққа кіреді.</p>
   </section>
 
   <!-- ===================== ГУБЫ ===================== -->
-  <section data-section="lips" data-words="69">
+  <section data-section="lips" data-words="125">
     <h2 data-split>Жұптар неге осындай? <em>Ерін</em></h2>
     <p>Құйрық екі нәрсені көшіреді. Біріншісін білесің: дауысты жуан ба, жіңішке ме. Қазақшадағы сингармонизм — дәл сол.</p>
-    <p>Екіншісі жаңа. Ерін. «О» деп айт: ерін түтік болады. «А» деп айт: ерін жайылады. Бар физика осы. Қазақ жазуы мұны көрсетпейді, түрік жазуы көрсетеді.</p>
+    <p>Екіншісі жаңа. Ерін. «О» деп айт: ерін түтік болады. «А» деп айт: ерін жайылады. Бар физика осы. Ауызша қазақ та жиі [көзүм] дейді — бірақ «көзім» деп жазады. Түрікше естігенін жазады: <b lang="tr">gözüm</b>.</p>
     <div class="h4-card h4-lipslab" data-lips>
       <div>
         <div class="h4-mirror">
@@ -380,6 +404,21 @@
     </div>
     <p>Құйрық әрқашан қысаң. Жуандық пен ерінді ол соңғы дауыстыдан алады. Екі сұрақ, төрт жауап.</p>
     <p>Былай жатта: құйрық Стамбул маршруткасының есігіндей тар. Тек <b lang="tr">ı, i, u, ü</b> сыяды.</p>
+    <div class="h4-card" data-kz>
+      <p class="h4-kicker">қазақша ↔ түрікше</p>
+      <p><b>Не бірдей — қысқаша.</b> Мұны сен бұрыннан білесің:</p>
+      <ul class="h4-kz__same">
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>соңғы дауысты шешеді</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>жуан ↔ жіңішке</li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>құйрықта қысаң дауысты: жаным — <span lang="tr">canım</span></span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>дауыстыдан кейін тек -м: анам — <span lang="tr">annem</span></span></li>
+      </ul>
+      <p><b>Не басқа — мұқият.</b> Қазақша жалғауда екі дауысты: ы, і. Ерін оны өзгертпейді: досым, көзім. Түрікше ерін құйрыққа да жетеді: <b lang="tr">dostum, gözüm</b>.</p>
+      <p>Болжап көр. Түрікшеде құйрығы <b>өзгеше</b> жазылатын сөздерді белгіле. Сосын тексер.</p>
+      <div class="h4-kz__grid" data-kz-grid data-ui></div>
+      <div class="h4-ctrl" data-ui><button type="button" class="h4-btn h4-btn--go" data-kz-check>Тексеру</button></div>
+      <p class="h4-kz__out" data-kz-out aria-live="polite">Кемі бір сөзді белгіле — немесе бірден тексер.</p>
+    </div>
   </section>
 
   <!-- ===================== ЛАБОРАТОРИЯ ===================== -->
@@ -452,24 +491,24 @@
   </section>
 
   <!-- ===================== ЛОВУШКИ ===================== -->
-  <section data-section="traps" data-words="62">
+  <section data-section="traps" data-words="80">
     <h2 data-split>Бәрі <em>сүрінетін</em> жер</h2>
-    <p>Мұнда бәрі сүрінеді. Бұл қалыпты. Қатені бас — ол дұрыс жағымен аударылады.</p>
+    <p>Қазақ мұнда өз тілінен сүрінеді: қол үйреншікті ы-ны, і-ні жаза салады. Бұл қалыпты. Қатені бас — ол дұрыс жағымен аударылады.</p>
     <div class="h4-traps" data-traps>
-      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">telefonim</span><small>Бірінші дауыстыға қарадың</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">telefonum</span><small>Тек соңғы дауысты шешеді. Бұл сөзде ол — <b lang="tr">o</b>.</small></span> </span></button>
-      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">anneim</span><small>Қатар екі дауысты</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">annem</span><small>Сөз дауыстыға біте ме? Құйрық дауыстысыз, жай ғана <b lang="tr">-m</b>. Анам сияқты.</small></span> </span></button>
-      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">canam</span><small>Дауыстыны тұтас көшірдің</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">canım</span><small>Құйрық әрқашан қысаң. Ашық <b lang="tr">a</b>-ны құйрыққа жібермейміз.</small></span> </span></button>
-      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">kızim</span><small>Нүктені жоғалттың… немесе керісінше</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">kızım</span><small>Нүкте шешеді. <b lang="tr">ı</b> «ы» сияқты, <b lang="tr">i</b> «і» сияқты естіледі.</small></span> </span></button>
+      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">gözim</span><small>Қазақша «көзім» деп жазасың</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">gözüm</span><small>Соңғы дауысты <b lang="tr">ö</b> — еріндік. Түрікше ерін құйрыққа жетеді: <b lang="tr">ü</b>.</small></span> </span></button>
+      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">dostım</span><small>Қазақша «досым» — ы-мен</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">dostum</span><small><b lang="tr">o</b>-дан кейін ы емес, <b lang="tr">u</b>. Қазақша «телефоным», түрікше <b lang="tr">telefonum</b>.</small></span> </span></button>
+      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">kalemım</span><small>«Қаламым» құлағыңда тұр</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">kalemim</span><small>Туыс сөзге сенбе: «қалам» жуан, ал <b lang="tr">kalem</b>-де соңғы дауысты <b lang="tr">e</b>.</small></span> </span></button>
+      <button type="button" class="h4-trap" aria-pressed="false"><span class="h4-trap__in"> <span class="h4-trap__face h4-trap__front"><span class="h4-trap__bad" lang="tr">kızim</span><small>Нүктені жоғалттың… немесе керісінше</small></span> <span class="h4-trap__face h4-trap__back"><span class="h4-trap__good" lang="tr">kızım</span><small>Нүкте шешеді: <b lang="tr">ı</b> ≈ «ы», <b lang="tr">i</b> ≈ «і». Құлағың ажыратады — енді көзің де ажыратсын.</small></span> </span></button>
     </div>
     <div class="h4-ctrl" data-ui><button type="button" class="h4-btn" data-flip-all>Бәрін аудару</button></div>
     <svg class="h4-petal" style="right:2px;top:26px" viewBox="0 0 80 100" aria-hidden="true"><path d="M40 4C64 22 76 52 62 78 54 92 26 96 16 80 2 56 14 22 40 4Z" fill="#f7a8bf"/></svg>
   </section>
 
   <!-- ===================== ВИДЕО ===================== -->
-  <section data-section="video" data-words="12">
+  <section data-section="video" data-words="22">
     <h2>Тағы бір рет тыңда</h2>
-    <p>Нұсқамаларға назар аудар: соңғы дауыстыдан құйрыққа қарай.</p>
-    <a-video yt="CnmUdb2oq3E" start="171" end="346" title="«4 нұсқалы» дауысты үндестігі" channel="Anastasia Pektas"></a-video>
+    <p>Видео орысша. Жебелерге назар аудар: соңғы дауыстыдан құйрыққа қарай. Әсіресе <b lang="tr">o, u, ö, ü</b>-дан кейінгі жерге — қазақша жазуда ол жоқ.</p>
+    <a-video yt="CnmUdb2oq3E" start="171" end="346" title="«4 нұсқалы» дауысты үндестігі (орысша)" channel="Anastasia Pektas"></a-video>
   </section>
 
   <!-- ===================== ПРАКТИКА ===================== -->
@@ -521,6 +560,7 @@
         <li>Соңғы дауыстыны тап.</li>
         <li>Сөз дауыстыға біте ме? Құйрық жай ғана <b lang="tr">-m</b>.</li>
         <li>Жоқ па? Қысаң жұбын ал да, <b lang="tr">m</b> қос.</li>
+        <li>Соңғы дауысты <b lang="tr">o, u, ö, ü</b> ме? Қазақша әдетпен ы, і жазба — <b lang="tr">-um, -üm</b>.</li>
       </ol>
       <button type="button" class="h4-switch" role="switch" aria-checked="false" data-cheat-switch><span class="h4-switch__knob"></span><span>Құйрықтарды жауып, есіңе түсір</span></button>
     </div>
@@ -736,8 +776,67 @@ addEventListener('DOMContentLoaded', () => {
     G.fromTo('.h4-cell', { y: 26, scale: .8 }, { y: 0, scale: 1, duration: .6, ease: 'back.out(2)', stagger: .1, scrollTrigger: { trigger: '[data-grid]', start: 'top 85%', once: true } });
   }
 
+  /* ===================== ҚАЗАҚША ↔ ТҮРІКШЕ: болжа да тексер ===================== */
+  /* [қазақша түбір, қазақша жалғау, түрікше түбір, түрікше құйрық] — түбірлес жұптар */
+  const KZ = [['жан', 'ым', 'can', 'ım'], ['тіл', 'ім', 'dil', 'im'], ['дос', 'ым', 'dost', 'um'], ['көз', 'ім', 'göz', 'üm'], ['қыз', 'ым', 'kız', 'ım'], ['жол', 'ым', 'yol', 'um'], ['бас', 'ым', 'baş', 'ım'], ['күн', 'ім', 'gün', 'üm']];
+  const kzGrid = $('[data-kz-grid]'), kzOut = $('[data-kz-out]'), kzBtn = $('[data-kz-check]');
+  const KZ_HINT = kzOut.textContent;
+  let kzDone = false;
+  function kzMorph(b) {
+    if (!A) return;
+    const tl = G.timeline();
+    tl.fromTo($('.h4-kz__sv', b), { y: 0, scale: 1 }, { y: -6, scale: 1.4, duration: .2, yoyo: true, repeat: 1, ease: 'power2.out' })
+      .fromTo($('.h4-kz__tr', b), { y: -22, rotationX: -80, opacity: 0 }, { y: 0, rotationX: 0, opacity: 1, duration: .55, ease: 'back.out(2.2)' })
+      .fromTo($('.h4-kz__tr .h4-tail', b), { x: 30, rotation: 14, scale: .5 }, { x: 0, rotation: 0, scale: 1, duration: .5, ease: 'back.out(2.6)' }, '-=.3');
+    if (b.dataset.changed === 'true') tl.fromTo($('.h4-kz__flag', b), { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: .45, ease: 'back.out(3)' }, '-=.2');
+  }
+  const kzCards = KZ.map(([kk, ks, tr, ts]) => {
+    const same = (ks === 'ым' && ts === 'ım') || (ks === 'ім' && ts === 'im');
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'h4-kz__card';
+    b.dataset.changed = String(!same);
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = `<span class="h4-kz__kk">${kk}<span class="h4-kz__sv">${ks[0]}</span>${ks.slice(1)}</span><span class="h4-kz__q" aria-hidden="true">?</span><span class="h4-kz__tr" lang="tr">${tr}<span class="h4-tail">${ts}</span></span><span class="h4-kz__flag">ерін</span>`;
+    b.addEventListener('click', () => {
+      if (kzDone) { say(tr + ts); kzMorph(b); return; }
+      b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true'));
+      if (A) G.fromTo(b, { scale: .9 }, { scale: 1, duration: .45, ease: 'back.out(3)' });
+    });
+    kzGrid.append(b);
+    return b;
+  });
+  kzBtn.addEventListener('click', () => {
+    if (kzDone) {
+      kzDone = false;
+      kzCards.forEach((b) => { b.classList.remove('is-shown', 'is-hit', 'is-miss'); b.setAttribute('aria-pressed', 'false'); });
+      kzOut.textContent = KZ_HINT;
+      kzBtn.textContent = 'Тексеру';
+      if (A) G.fromTo(kzCards, { rotationY: 90 }, { rotationY: 0, duration: .45, ease: 'back.out(2)', stagger: .04 });
+      return;
+    }
+    kzDone = true;
+    let hit = 0;
+    kzCards.forEach((b, i) => {
+      const ok = (b.dataset.changed === 'true') === (b.getAttribute('aria-pressed') === 'true');
+      if (ok) hit++;
+      b.classList.add('is-shown', ok ? 'is-hit' : 'is-miss');
+      if (A) setTimeout(() => kzMorph(b), reduce ? 0 : i * 110);
+    });
+    kzOut.innerHTML = `${KZ.length} ішінен ${hit} дұрыс. Өзгергені — тек <b lang="tr">o, u, ö, ü</b> бар сөздер: <b lang="tr">dostum, gözüm, yolum, günüm</b>. Қазақша оларда да ы, і жазылады. Түрікше ерін құйрыққа жетеді. Карточканы бас — тыңда.`;
+    kzBtn.textContent = 'Қайтадан';
+    if (A) G.fromTo(kzOut, { y: 12 }, { y: 0, duration: .45, ease: 'back.out(2)' });
+  });
+  if (A && ST) {
+    ScrollTrigger.create({ trigger: kzGrid, start: 'top 85%', once: true, onEnter: () => {
+      G.fromTo(kzCards, { y: 36, rotation: (i) => (i % 2 ? 4 : -4) }, { y: 0, rotation: 0, duration: .7, ease: 'back.out(1.8)', stagger: .06 });
+      G.fromTo('.h4-kz__same li', { x: -20, scale: .8 }, { x: 0, scale: 1, duration: .5, ease: 'back.out(2.5)', stagger: .08 });
+    } });
+  }
+
   /* ===================== ЛАБОРАТОРИЯ «ЗЕРКАЛО» ===================== */
-  const LAB = [['kız', 'қызым'], ['can', 'жаным'], ['masa', 'үстелім'], ['oda', 'бөлмем'], ['ev', 'үйім'], ['kalem', 'қаламым'], ['defter', 'дәптерім'], ['dost', 'менің досым'], ['okul', 'мектебім'], ['göz', 'көзім'], ['gün', 'күнім'], ['otobüs', 'автобусым']];
+  /* [сөз, қазақша «менің …», қазақшада түбірлес сөз бар ма] — түбірлес сөзде қазақша жалғаумен салыстырамыз */
+  const LAB = [['kız', 'қызым', 1], ['can', 'жаным', 1], ['masa', 'үстелім', 0], ['oda', 'бөлмем', 0], ['ev', 'үйім', 0], ['kalem', 'қаламым', 1], ['defter', 'дәптерім', 1], ['dost', 'досым', 1], ['okul', 'мектебім', 0], ['göz', 'көзім', 1], ['gün', 'күнім', 1], ['otobüs', 'автобусым', 1]];
   const lab = $('[data-lab]');
   const screen = $('.h4-lab__screen', lab), lw = $('[data-lab-word]'), beam = $('.h4-lab__beam', lab), lsteps = $('[data-lab-steps]'), lout = $('[data-lab-out]'), ltip = $('[data-lab-tip]'), lscore = $('[data-lab-score]');
   const TIPS = { watch: 'Сөзді бас та, сәулені бақыла.', steps: 'Айнаның сұрақтарына өзің жауап бер.', guess: 'Алдымен құйрықты таңда. Сосын айна тексереді.' };
@@ -747,11 +846,20 @@ addEventListener('DOMContentLoaded', () => {
     lw.innerHTML = chars(w).map((ch, i) => `<span class="h4-l" data-i="${i}">${ch}</span>`).join('') + '<span class="h4-tail" data-lab-tail hidden></span>';
     if (A) G.fromTo($$('.h4-l', lw), { y: 30, rotation: 8 }, { y: 0, rotation: 0, duration: .45, ease: 'back.out(2.4)', stagger: .04 });
   }
+  /* қазақша жалғаумен салыстыру: тек түбірлес сөздерге */
+  function kkNote(w) {
+    const row = LAB.find((x) => x[0] === w);
+    if (!row || !row[2] || endsV(w)) return '';
+    const kk = row[1], kv = kk.at(-2), tv = tailOf(w)[0], v = chars(w)[lastV(w)];
+    if ((kv === 'ы') !== V[tv].hard) return ` <br>Абайла: қазақша «${kk}» — ${kv === 'ы' ? 'жуан' : 'жіңішке'}, ал <b lang="tr">${w}</b> сөзінде соңғы дауысты <b>${v}</b>.`;
+    if (V[tv].round) return ` <br>Қазақша «${kk}» деп ${kv} жазамыз. Түрікше ерін құйрыққа жетеді: <b>${tv}</b>.`;
+    return ` <br>Қазақшадағыдай: «${kk}».`;
+  }
   function explain(w) {
     const v = chars(w)[lastV(w)];
     if (endsV(w)) return `Сөз <b>${v}</b> дауыстысына бітеді. Құйрық дауыстысыз: <b lang="tr">${w}m</b>, ${ruOf(w)}.`;
-    if (V[v].pair === v) return `Соңғы дауысты <b>${v}</b>. Ол онсыз да қысаң, құйрыққа сол күйінде барады: <b lang="tr">${w}${tailOf(w)}</b>, ${ruOf(w)}.`;
-    return `Соңғы дауысты <b>${v}</b>. Оның қысаң жұбы <b>${V[v].pair}</b>. Демек <b lang="tr">${w}${tailOf(w)}</b>, ${ruOf(w)}.`;
+    if (V[v].pair === v) return `Соңғы дауысты <b>${v}</b>. Ол онсыз да қысаң, құйрыққа сол күйінде барады: <b lang="tr">${w}${tailOf(w)}</b>, ${ruOf(w)}.` + kkNote(w);
+    return `Соңғы дауысты <b>${v}</b>. Оның қысаң жұбы <b>${V[v].pair}</b>. Демек <b lang="tr">${w}${tailOf(w)}</b>, ${ruOf(w)}.` + kkNote(w);
   }
   function reveal(w, after) {
     const i = lastV(w), tail = tailOf(w), target = $(`[data-i="${i}"]`, lw), t = $('[data-lab-tail]', lw);
@@ -877,7 +985,7 @@ addEventListener('DOMContentLoaded', () => {
   const POLA = [
     { w: 'ev', t: 'im', ru: 'үйім', re: 'Çok güzel!', reRu: 'Өте әдемі!' },
     { w: 'anne', t: 'm', ru: 'анам', re: 'Çok tatlı!', reRu: 'Қандай сүйкімді!' },
-    { w: 'dost', t: 'um', ru: 'менің досым', re: 'Yakışıklı!', reRu: 'Сымбатты екен!' },
+    { w: 'dost', t: 'um', ru: 'досым', re: 'Yakışıklı!', reRu: 'Сымбатты екен!' },
     { w: 'kız', t: 'ım', ru: 'қызым', re: 'Maşallah!', reRu: 'Машаллах! Балаларды осылай мақтайды.' },
     { w: 'kedi', t: 'm', ru: 'мысығым', re: 'Ay, ne tatlı!', reRu: 'Ой, қандай тамаша!' },
   ];

@@ -188,10 +188,20 @@
   /* ---------- сравнение ---------- */
   .hd-langs { max-width: 620px; margin: 0 auto; padding: 18px; border-radius: 8px; background: #fff; box-shadow: var(--hd-shadow); }
   .hd-langs__rows { display: grid; gap: 8px; margin-top: 12px; }
-  .hd-row { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; background: var(--fog); font-size: 18px; font-weight: 600; }
+  .hd-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; background: var(--fog); font-size: 18px; font-weight: 600; }
   .hd-row em { font-style: normal; padding: 0 .2em; border-radius: 4px; }
   .hd-row .ea { background: var(--costume-a); }
   .hd-row .ee { background: var(--costume-e); }
+  .hd-row small { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--ink-2); }
+  .hd-row .hd-tok { display: inline-block; }
+  .hd-row .hd-gone { color: var(--ink-2); text-decoration: line-through 3px var(--coral); }
+  .hd-ar { display: inline-block; color: var(--coral); font-weight: 800; transform-origin: 50% 50%; }
+  .hd-diff { max-width: 620px; margin: 22px auto 0; padding: 18px; border-radius: 8px; background: #fff; box-shadow: var(--hd-shadow); }
+  .hd-diff h3 { margin: 0 0 4px; font-family: var(--ak-font-display); font-weight: 500; font-size: clamp(20px, 5.4vw, 26px); }
+  .hd-diff .hd-tabs { margin-top: 10px; }
+  .hd-diff__stage { display: grid; gap: 8px; }
+  .hd-diff__note { margin: 12px 0 0; }
+  .hd-hear { max-width: 620px; margin: 0 auto 10px; color: var(--ink-2); font-size: 15px; }
 
   /* ---------- ловушки ---------- */
   .hd-traps { display: grid; gap: 12px; }
@@ -372,7 +382,7 @@
   </section>
 
   <!-- 2. Большая A -->
-  <section data-section="costume" data-words="87">
+  <section data-section="costume" data-words="140">
     <svg class="hd-divider" viewBox="0 0 600 54" preserveAspectRatio="none" aria-hidden="true"></svg>
     <div class="hd-head">
       <span class="hd-label" data-ui>Rule</span>
@@ -381,10 +391,10 @@
     </div>
     <p>Examples first. Tap a card.</p>
     <div class="hd-cards" id="cards">
-      <button type="button" class="hd-card" data-ico="book" data-w="kitap" data-t="lAr" data-r="a"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">kitap + lAr</span><span class="hd-card__ru">book → many</span></button>
-      <button type="button" class="hd-card" data-ico="house" data-w="ev" data-t="lAr" data-r="e"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">ev + lAr</span><span class="hd-card__ru">house → many</span></button>
-      <button type="button" class="hd-card" data-ico="school" data-w="okul" data-t="DA" data-r="a"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">okul + DA</span><span class="hd-card__ru">school → where</span></button>
-      <button type="button" class="hd-card" data-ico="sea" data-w="deniz" data-t="DA" data-r="e"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">deniz + DA</span><span class="hd-card__ru">sea → where</span></button>
+      <button type="button" class="hd-card" data-ico="book" data-w="kitap" data-t="lAr" data-r="a"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">kitap + lAr</span><span class="hd-card__ru">books</span></button>
+      <button type="button" class="hd-card" data-ico="house" data-w="ev" data-t="lAr" data-r="e"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">ev + lAr</span><span class="hd-card__ru">houses</span></button>
+      <button type="button" class="hd-card" data-ico="school" data-w="okul" data-t="DA" data-r="a"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">okul + DA</span><span class="hd-card__ru">at school</span></button>
+      <button type="button" class="hd-card" data-ico="sea" data-w="deniz" data-t="DA" data-r="e"><span class="hd-plus" aria-hidden="true">+</span><svg class="hd-card__ico" aria-hidden="true"><use href=""/></svg><span class="hd-card__w" lang="tr">deniz + DA</span><span class="hd-card__ru">in the sea</span></button>
     </div>
     <p>Notice what the outfit depends on? Test yourself.</p>
 
@@ -427,23 +437,24 @@
         <div class="hd-vow" lang="tr"><button type="button" data-say="e">e</button><button type="button" data-say="i">i</button><button type="button" data-say="ö">ö</button><button type="button" data-say="ü">ü</button></div>
       </div>
     </div>
+    <p class="hd-hear"><b>Back</b> vowels are made deep in the mouth: <span lang="tr">a</span> as in <i>father</i>, <span lang="tr">ı</span> like the a in <i>about</i>, <span lang="tr">o</span> as in <i>or</i>, <span lang="tr">u</span> like oo in <i>food</i>. <b>Front</b> vowels push the tongue forward: <span lang="tr">e</span> as in <i>bed</i>, <span lang="tr">i</span> like ee in <i>see</i>, <span lang="tr">ö</span> is e with round lips, <span lang="tr">ü</span> is ee with round lips. Tap a letter to hear it.</p>
     <p>The word’s other vowels don’t matter. Even if there are lots of them.</p>
   </section>
 
   <!-- 3. Четыре хвоста -->
-  <section data-section="tails" data-words="39">
+  <section data-section="tails" data-words="52">
     <svg class="hd-divider" viewBox="0 0 600 54" preserveAspectRatio="none" aria-hidden="true"></svg>
     <div class="hd-head">
       <span class="hd-label" data-ui>One rule</span>
       <h2 class="hd-h2">Four tails. <b>One closet.</b></h2>
-      <p>There are four tails with a capital <span lang="tr">A</span>. What they mean comes in their own topics. For now, just watch the outfit.</p>
+      <p>There are four tails with a capital <span lang="tr">A</span>. English says <i>in</i>, <i>from</i>, <i>to</i> as separate little words. Turkish glues a tail to the end. Their meaning gets its own topics. For now, just watch the outfit.</p>
     </div>
     <div class="hd-words" id="tailWords" aria-label="Word"></div>
     <div class="hd-tails" id="tailCards">
-      <div class="hd-tailcard"><small>-lAr · many</small><svg class="hd-diag" data-diag="lAr" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="lAr"></b><span data-ru="lAr"></span></div>
-      <div class="hd-tailcard"><small>-DA · where</small><svg class="hd-diag" data-diag="DA" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="DA"></b><span data-ru="DA"></span></div>
-      <div class="hd-tailcard"><small>-DAn · from where</small><svg class="hd-diag" data-diag="DAn" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="DAn"></b><span data-ru="DAn"></span></div>
-      <div class="hd-tailcard"><small>-(y)A · to where</small><svg class="hd-diag" data-diag="yA" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="yA"></b><span data-ru="yA"></span></div>
+      <div class="hd-tailcard"><small>-lAr · plural</small><svg class="hd-diag" data-diag="lAr" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="lAr"></b><span data-ru="lAr"></span></div>
+      <div class="hd-tailcard"><small>-DA · in / at / on</small><svg class="hd-diag" data-diag="DA" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="DA"></b><span data-ru="DA"></span></div>
+      <div class="hd-tailcard"><small>-DAn · from</small><svg class="hd-diag" data-diag="DAn" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="DAn"></b><span data-ru="DAn"></span></div>
+      <div class="hd-tailcard"><small>-(y)A · to</small><svg class="hd-diag" data-diag="yA" viewBox="0 0 120 56" aria-hidden="true"></svg><b lang="tr" data-tail="yA"></b><span data-ru="yA"></span></div>
     </div>
     <p style="margin-top:16px">Change the word — the outfit changes for all four at once. One closet for everyone.</p>
   </section>
@@ -493,48 +504,60 @@
   </section>
 
   <!-- 5. Где ты это уже видел -->
-  <section data-section="compare" data-words="29">
+  <section data-section="compare" data-words="92">
     <svg class="hd-divider" viewBox="0 0 600 54" preserveAspectRatio="none" aria-hidden="true"></svg>
     <div class="hd-head">
-      <span class="hd-label" data-ui>Familiar</span>
+      <span class="hd-label" data-ui>English and Turkish</span>
       <h2 class="hd-h2">You’ve <b>seen this before</b></h2>
-      <p>Turkish isn’t the only language where words adjust to sound.</p>
+      <p>English also changes a small piece to fit a sound. You do it without thinking.</p>
     </div>
     <div class="hd-langs" id="langs">
-      <div class="hd-tabs" role="tablist" aria-label="Language" data-ui>
-        <button type="button" role="tab" aria-selected="true" data-l="kz">Kazakh</button>
-        <button type="button" role="tab" aria-selected="false" data-l="en">English</button>
-        <button type="button" role="tab" aria-selected="false" data-l="ru">Russian</button>
+      <div class="hd-tabs" role="tablist" aria-label="Example" data-ui style="grid-template-columns:repeat(2,minmax(0,1fr))">
+        <button type="button" role="tab" aria-selected="true" data-l="an">a / an</button>
+        <button type="button" role="tab" aria-selected="false" data-l="s">plural -s</button>
       </div>
       <div class="hd-langs__rows" id="langRows"></div>
       <p style="margin:12px 0 0" id="langNote"></p>
     </div>
+
+    <div class="hd-diff" id="diff">
+      <h3>What’s new for you</h3>
+      <p style="margin:0;color:var(--ink-2)">Same idea, three differences. Tap a tab and watch.</p>
+      <div class="hd-tabs" role="tablist" aria-label="Difference" data-ui>
+        <button type="button" role="tab" aria-selected="true" data-d="dir">Look back</button>
+        <button type="button" role="tab" aria-selected="false" data-d="spell">Spelling</button>
+        <button type="button" role="tab" aria-selected="false" data-d="glue">One word</button>
+      </div>
+      <div class="hd-diff__stage" id="diffRows" aria-live="polite"></div>
+      <p class="hd-diff__note" id="diffNote"></p>
+      <div class="hd-labrow"><button type="button" class="hd-btn hd-btn--ghost" id="diffAgain">Play again</button></div>
+    </div>
   </section>
 
   <!-- 6. Ловушки -->
-  <section data-section="traps" data-words="24">
+  <section data-section="traps" data-words="62">
     <svg class="hd-divider" viewBox="0 0 600 54" preserveAspectRatio="none" aria-hidden="true"></svg>
     <div class="hd-head">
       <span class="hd-label" data-ui>Traps</span>
       <h2 class="hd-h2">Where everyone <b>gets confused</b></h2>
-      <p>Everyone trips here. Tap — the entertainer will change.</p>
+      <p>English speakers trip here. Tap — the entertainer will change.</p>
     </div>
     <div class="hd-traps">
-      <button type="button" class="hd-trap" data-fix="otelde" data-why="The first o fooled you. The last one is e."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">otelda</b><small>Looked at the first vowel.</small></span></button>
-      <button type="button" class="hd-trap" data-fix="telefonlar" data-why="The last one is o. It’s a back vowel."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">telefonler</b><small>Two e’s at the start. So what?</small></span></button>
-      <button type="button" class="hd-trap" data-fix="evde" data-why="A isn’t always a. After e — the e outfit."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">evda</b><small>Read the capital A literally.</small></span></button>
-      <button type="button" class="hd-trap" data-fix="kahveler" data-why="a and e in one word. The last one decides."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">kahvelar</b><small>The first a seemed to be the boss.</small></span></button>
+      <button type="button" class="hd-trap" data-fix="otelde" data-why="It looks like hotel, but the tail ignores the first o. The last vowel is e."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">otelda</b><small>Looked at the start, like in English hotel.</small></span></button>
+      <button type="button" class="hd-trap" data-fix="kızlar" data-why="ı without a dot is a back vowel, like the a in about. Back means a."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">kızler</b><small>Read ı as an English i.</small></span></button>
+      <button type="button" class="hd-trap" data-fix="göller" data-why="The dots matter. ö is a front vowel, so the e outfit."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">göllar</b><small>Saw an o and forgot the dots.</small></span></button>
+      <button type="button" class="hd-trap" data-fix="evde" data-why="One word. Written apart, de means “too”: ev de = the house too."><span class="hd-trap__ico"><svg aria-hidden="true"><use href="#i-x"/></svg></span><span><b class="hd-wrong" lang="tr">ev de</b><small>Wrote the tail as a word, like English in.</small></span></button>
     </div>
   </section>
 
   <!-- 7. Видео -->
-  <section data-section="video" data-words="16">
+  <section data-section="video" data-words="36">
     <div class="hd-head">
       <span class="hd-label" data-ui>Video</span>
-      <h2 class="hd-h2">Two minutes with a teacher</h2>
-      <p>The explanation is in Russian. Watch the table: the same two groups of vowels.</p>
+      <h2 class="hd-h2">One minute in Turkish</h2>
+      <p>A short Turkish cartoon about <span lang="tr">-lar</span> and <span lang="tr">-ler</span>. You don’t need every word. Listen to the tail: after a back vowel you hear <span lang="tr">-lar</span>, after a front one <span lang="tr">-ler</span>.</p>
     </div>
-    <a-video yt="nCilw0vm-aA" start="190" end="320" title="Turkish from scratch. Lesson 2: two-way vowel harmony" channel="Anastasia Pektas"></a-video>
+    <a-video yt="ue8OzH_OLec" start="0" end="66" title="İzle, Eğlen, Öğren - Çokluk eki" channel="Yunus Emre Enstitüsü"></a-video>
   </section>
 
   <!-- 8. Практика -->
@@ -601,6 +624,7 @@
         <h3>The last vowel decides</h3>
         <p><span class="hd-tail hd-tail--a" lang="tr">a ı o u</span> → <b lang="tr">a</b></p>
         <p><span class="hd-tail hd-tail--e" lang="tr">e i ö ü</span> → <b lang="tr">e</b></p>
+        <p>No dot: <span lang="tr">ı</span> → <b lang="tr">a</b>. Dots: <span lang="tr">ö ü</span> → <b lang="tr">e</b>.</p>
         <button type="button" class="hd-flip" data-a="otel + DA" data-b="otelde" lang="tr">otel + DA</button>
       </div>
       <div class="hd-tile">
@@ -656,13 +680,21 @@ addEventListener('DOMContentLoaded', () => {
   const TAIL_LABEL = { lAr: 'lAr', DA: 'DA', DAn: 'DAn', yA: '(y)A' };
   const dress = (w, t) => TAILS[t](kind(w));
   const tailHtml = (txt, v) => `<span class="hd-tail hd-tail--${v}">${txt}</span>`;
+  /* английский перевод каждой формы — готовой фразой, не склейкой: у каждого слова свой предлог (in / at / on) */
   const WORDS = [
-    ['ev', 'house'], ['okul', 'school'], ['deniz', 'sea'], ['vapur', 'ferry'], ['köy', 'village'],
-    ['otel', 'hotel'], ['salon', 'hall'], ['göl', 'lake'], ['istasyon', 'station'], ['saray', 'palace'],
+    ['ev', { lAr: 'houses', DA: 'in the house', DAn: 'from the house', yA: 'to the house', lArDA: 'in the houses', lArDAn: 'from the houses', lAryA: 'to the houses' }],
+    ['okul', { lAr: 'schools', DA: 'at school', DAn: 'from school', yA: 'to school', lArDA: 'at the schools', lArDAn: 'from the schools', lAryA: 'to the schools' }],
+    ['deniz', { lAr: 'seas', DA: 'in the sea', DAn: 'from the sea', yA: 'to the sea', lArDA: 'in the seas', lArDAn: 'from the seas', lAryA: 'to the seas' }],
+    ['vapur', { lAr: 'ferries', DA: 'on the ferry', DAn: 'from the ferry', yA: 'to the ferry', lArDA: 'on the ferries', lArDAn: 'from the ferries', lAryA: 'to the ferries' }],
+    ['köy', { lAr: 'villages', DA: 'in the village', DAn: 'from the village', yA: 'to the village', lArDA: 'in the villages', lArDAn: 'from the villages', lAryA: 'to the villages' }],
+    ['otel', { lAr: 'hotels', DA: 'at the hotel', DAn: 'from the hotel', yA: 'to the hotel', lArDA: 'at the hotels', lArDAn: 'from the hotels', lAryA: 'to the hotels' }],
+    ['salon', { lAr: 'halls', DA: 'in the hall', DAn: 'from the hall', yA: 'to the hall', lArDA: 'in the halls', lArDAn: 'from the halls', lAryA: 'to the halls' }],
+    ['göl', { lAr: 'lakes', DA: 'at the lake', DAn: 'from the lake', yA: 'to the lake', lArDA: 'at the lakes', lArDAn: 'from the lakes', lAryA: 'to the lakes' }],
+    ['istasyon', { lAr: 'stations', DA: 'at the station', DAn: 'from the station', yA: 'to the station', lArDA: 'at the stations', lArDAn: 'from the stations', lAryA: 'to the stations' }],
+    ['saray', { lAr: 'palaces', DA: 'in the palace', DAn: 'from the palace', yA: 'to the palace', lArDA: 'in the palaces', lArDAn: 'from the palaces', lAryA: 'to the palaces' }],
   ];
-  const RU = {
-    lAr: (r) => `many: ${r}`, DA: (r) => `where: ${r}`, DAn: (r) => `from where: ${r}`, yA: (r) => `to where: ${r}`,
-  };
+  const RU = { lAr: (m) => m.lAr, DA: (m) => m.DA, DAn: (m) => m.DAn, yA: (m) => m.yA };
+  const vName = (k) => (k === 'a' ? 'a back vowel' : 'a front vowel');
 
   /* ---------- турецкие слова в тексте звучат по нажатию ---------- */
   $$('main p [lang="tr"], .hd-tile p [lang="tr"]').forEach((el) => {
@@ -866,12 +898,12 @@ addEventListener('DOMContentLoaded', () => {
     if (mode === 'build') {
       const w = lw[0], k = kind(w), lv = lastV(w), out = w + dress(w, lt);
       stageWord.innerHTML = `${w.slice(0, lv)}<span class="hd-last">${w[lv]}</span>${w.slice(lv + 1)}${tailHtml(dress(w, lt), k)}`;
-      stageWhy.textContent = `The last vowel ${w[lv]} is ${k === 'a' ? 'a back vowel' : 'a front vowel'}. The ${k} outfit.`;
+      stageWhy.textContent = `${out} — “${lw[1][lt]}”. The last vowel ${w[lv]} is ${vName(k)}, so the ${k} outfit.`;
       $('#labSay').dataset.text = out; suit(k);
     } else if (mode === 'chain') {
       const w = lw[0], k1 = kind(w), t1 = dress(w, 'lAr'), mid = w + t1, k2 = kind(mid), t2 = dress(mid, ct);
       stageWord.innerHTML = `${w}${tailHtml(t1, k1)}${tailHtml(t2, k2)}`;
-      stageWhy.textContent = `The first tail looks at ${w[lastV(w)]} in the word. The second looks at ${k1} in the first tail.`;
+      stageWhy.textContent = `${mid + t2} — “${lw[1]['lAr' + ct]}”. The first tail looks at ${w[lastV(w)]} in the word. The second looks at ${k1} in the first tail.`;
       $('#labSay').dataset.text = mid + t2; suit(k2);
       if (G && anim) G.from($$('.hd-tail', stageWord), { y: -30, stagger: 0.25, duration: 0.5, ease: 'back.out(3)' });
     } else {
@@ -892,7 +924,7 @@ addEventListener('DOMContentLoaded', () => {
     streak = ok ? streak + 1 : 0;
     $('#streak').textContent = `Streak: ${streak}`;
     stageWord.innerHTML = `${w}${tailHtml(dress(w, quiz.t), k)}`;
-    stageWhy.textContent = (ok ? 'Spot on. ' : 'Wrong outfit. ') + `The last vowel ${w[lastV(w)]} is ${k === 'a' ? 'a back vowel' : 'a front vowel'}.`;
+    stageWhy.textContent = (ok ? 'Spot on. ' : 'Wrong outfit. ') + `The last vowel ${w[lastV(w)]} is ${vName(k)}. ${out} — “${quiz.w[1][quiz.t]}”.`;
     $('#labSay').dataset.text = out; suit(k); speak(out);
     if (G) {
       if (ok) { const r = $('#stage').getBoundingClientRect(); $('#stageFx').setAttribute('viewBox', `0 0 ${r.width} ${r.height}`); burst($('#stageFxG'), r.width / 2, r.height / 2); }
@@ -914,20 +946,26 @@ addEventListener('DOMContentLoaded', () => {
   }));
   renderLab(false);
 
-  /* ---------- где ты это уже видел ---------- */
-  const LANGS = {
-    kz: { rows: [['қала', 'қала<em class="ea">лар</em>'], ['үй', 'үй<em class="ee">лер</em>']], note: 'Kazakh: same party, same outfits. If you know Kazakh, this topic is already yours.' },
-    en: { rows: [['a banana', 'a banana'], ['a apple', '<em class="ee">an</em> apple']], note: 'English: the form adjusts to the sound next to it. It’s easier on the mouth.' },
-    ru: { rows: [['house', 'дом<em class="ea">а</em>'], ['sea', 'мор<em class="ea">я</em>']], note: 'Russian doesn’t do this. So it feels weird at first. That passes in a week.' },
-  };
+  /* ---------- английский ↔ турецкий: что знакомо и что ново ---------- */
+  const starPts = (cx, cy, R, r) => Array.from({ length: 10 }, (_, i) => { const a = -Math.PI / 2 + (i * Math.PI) / 5, d = i % 2 ? r : R; return `${(cx + d * Math.cos(a)).toFixed(2)},${(cy + d * Math.sin(a)).toFixed(2)}`; }).join(' ');
   const FLAGS = {
-    kz: '<rect width="34" height="24" fill="#00AFCA"/><circle cx="17" cy="11" r="5" fill="#FEC50C"/><path d="M10 18 Q17 21 24 18" stroke="#FEC50C" stroke-width="1.5" fill="none"/>',
     en: '<rect width="34" height="24" fill="#22408C"/><path d="M0 0 L34 24 M34 0 L0 24" stroke="#fff" stroke-width="4"/><path d="M17 0 V24 M0 12 H34" stroke="#fff" stroke-width="6"/><path d="M17 0 V24 M0 12 H34" stroke="#C8102E" stroke-width="3"/>',
-    ru: '<rect width="34" height="8" fill="#fff"/><rect y="8" width="34" height="8" fill="#1C57A5"/><rect y="16" width="34" height="8" fill="#D52B1E"/>',
+    tr: `<rect width="34" height="24" fill="#E30A17"/><circle cx="13" cy="12" r="6" fill="#fff"/><circle cx="14.6" cy="12" r="4.8" fill="#E30A17"/><polygon points="${starPts(21.4, 12, 3, 1.2)}" fill="#fff"/>`,
+  };
+  const row = (f, html, hint) => `<div class="hd-row"><svg class="hd-langflag" viewBox="0 0 34 24" aria-hidden="true">${FLAGS[f]}</svg><span${f === 'tr' ? ' lang="tr"' : ''}>${html}</span>${hint ? `<small>${hint}</small>` : ''}</div>`;
+  const LANGS = {
+    an: {
+      rows: [row('en', 'a + banana <span aria-hidden="true">→</span> <em class="ea">a</em> banana'), row('en', 'a + apple <span aria-hidden="true">→</span> <em class="ee">an</em> apple'), row('tr', 'okul + lAr <span aria-hidden="true">→</span> okul<em class="ea">lar</em>'), row('tr', 'ev + lAr <span aria-hidden="true">→</span> ev<em class="ee">ler</em>')],
+      note: 'Same idea: a small piece changes so the words are easy to say. Nobody says “a apple”. Turks don’t say “evlar”.',
+    },
+    s: {
+      rows: [row('en', 'cat<em class="ea">s</em>', 'sounds like s'), row('en', 'dog<em class="ee">s</em>', 'sounds like z'), row('tr', 'kitap<em class="ea">lar</em>', 'after a'), row('tr', 'göl<em class="ee">ler</em>', 'after ö')],
+      note: 'The English plural ending fits the end of the word. The Turkish one does too. Only the rule is different — see below.',
+    },
   };
   function drawLang(l) {
     const box = $('#langRows');
-    box.innerHTML = LANGS[l].rows.map(([a, b]) => `<div class="hd-row"><svg class="hd-langflag" viewBox="0 0 34 24" aria-hidden="true">${FLAGS[l]}</svg><span>${a}</span><span aria-hidden="true">→</span><span>${b}</span></div>`).join('');
+    box.innerHTML = LANGS[l].rows.join('');
     $('#langNote').textContent = LANGS[l].note;
     if (G) G.from($$('.hd-row', box), { x: -30, stagger: 0.1, duration: 0.5, ease: 'back.out(2)' });
   }
@@ -935,7 +973,55 @@ addEventListener('DOMContentLoaded', () => {
     $$('#langs [role="tab"]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
     drawLang(t.dataset.l);
   }));
-  drawLang('kz');
+  drawLang('an');
+
+  /* три отличия для англоязычного: смотрит назад, пишется буквой, приклеивается */
+  const DIFF = {
+    dir: {
+      rows: [row('en', '<em class="ee hd-tok" data-hl>an</em> <span class="hd-ar" data-ar="1">→</span> <span class="hd-tok">a</span>pple', 'looks forward'), row('tr', 'ev <span class="hd-ar" data-ar="-1">←</span> <em class="ee hd-tok" data-hl>ler</em>', 'looks back')],
+      note: 'English a / an checks the next word. A Turkish tail checks the word before it — its last vowel. Look back, not forward.',
+    },
+    spell: {
+      rows: [row('en', 'cat<em class="ea hd-tok" data-hl>s</em> · dog<em class="ee hd-tok" data-hl>s</em>', 'one spelling'), row('tr', 'okul<em class="ea hd-tok" data-hl>lar</em> · ev<em class="ee hd-tok" data-hl>ler</em>', 'two spellings')],
+      note: 'In English the s sounds different but looks the same. In Turkish you write what you hear. The wrong letter is a spelling mistake.',
+    },
+    glue: {
+      rows: [row('en', '<span class="hd-tok">in</span> <span class="hd-tok" data-gone>the</span> <span class="hd-tok">house</span>', 'three words'), row('tr', 'ev<em class="ee hd-tok" data-glue>de</em>', 'one word')],
+      note: 'Turkish has no “the”. And “in” is not a word here: it is the tail -DA, glued to the end. Only glued tails wear the outfit.',
+    },
+  };
+  let dm = 'dir';
+  function drawDiff(anim = true) {
+    const box = $('#diffRows');
+    box.innerHTML = DIFF[dm].rows.join('');
+    $('#diffNote').textContent = DIFF[dm].note;
+    if (!G || !anim) { $$('[data-gone]', box).forEach((x) => x.classList.add('hd-gone')); return; }
+    const tl = G.timeline();
+    tl.from($$('.hd-row', box), { y: 20, opacity: 0, stagger: 0.12, duration: 0.45, ease: 'back.out(2)' });
+    if (dm === 'dir') {
+      $$('[data-ar]', box).forEach((a) => {
+        tl.fromTo(a, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: 'back.out(3)' })
+          .to(a, { x: 6 * Number(a.dataset.ar), duration: 0.25, yoyo: true, repeat: 3, ease: 'sine.inOut' })
+          .fromTo(a.closest('.hd-row').querySelector('[data-hl]'), { scale: 1 }, { scale: 1.35, duration: 0.2, yoyo: true, repeat: 1, ease: 'power2.out' });
+      });
+    } else if (dm === 'spell') {
+      tl.from($$('[data-hl]', box), { rotationX: 90, y: -12, stagger: 0.2, duration: 0.5, ease: 'back.out(2.5)' });
+    } else {
+      const gone = $('[data-gone]', box), glue = $('[data-glue]', box);
+      tl.from($$('.hd-tok', box).filter((x) => x !== glue), { y: -16, stagger: 0.1, duration: 0.35, ease: 'back.out(2)' })
+        .add(() => gone.classList.add('hd-gone'))
+        .to(gone, { opacity: 0.45, duration: 0.3 })
+        .fromTo(glue, { x: 70, rotation: 12 }, { x: 0, rotation: 0, duration: 0.7, ease: 'elastic.out(1, .5)' });
+    }
+  }
+  $$('#diff [role="tab"]').forEach((t) => t.addEventListener('click', () => {
+    $$('#diff [role="tab"]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    dm = t.dataset.d; drawDiff();
+    if (dm === 'glue') speak('evde');
+  }));
+  $('#diffAgain').addEventListener('click', () => drawDiff());
+  drawDiff(false);
+  if (G && ST) ScrollTrigger.create({ trigger: '#diff', start: 'top 80%', once: true, onEnter: () => drawDiff() });
 
   /* ---------- ловушки ---------- */
   $$('.hd-trap').forEach((b) => b.addEventListener('click', () => {
@@ -1005,7 +1091,8 @@ addEventListener('DOMContentLoaded', () => {
     if (ok) gCorrect++;
     garWord.innerHTML = `${it.word}${tailHtml(TAILS[it.tail](it.answer), it.answer)}`;
     const lv = it.word[lastV(it.word)];
-    garFb.textContent = (ok ? 'Yes! ' : 'Almost. ') + `The last vowel ${lv} is ${it.answer === 'a' ? 'a back vowel' : 'a front vowel'}: ${out}.`;
+    const mean = WORDS.find((x) => x[0] === it.word)?.[1][it.tail];
+    garFb.textContent = (ok ? 'Yes! ' : 'Almost. ') + `The last vowel ${lv} is ${vName(it.answer)}: ${out}${mean ? ` (${mean})` : ''}.`;
     speak(out);
     window.AlternaTracker?.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: v, timeMs: Math.round(performance.now() - gStart) });
     if (ok) hangFlag(it.answer, out);
