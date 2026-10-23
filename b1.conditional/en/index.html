@@ -1,0 +1,1877 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="alterna:topic" content="b1.conditional">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>If: the conditional -(y)sA · lesson 1</title>
+<link rel="preload" href="../media/cg-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../media/inter-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face { font-family: 'Cormorant Garamond'; src: url(../media/cg-cyrillic.woff2) format('woff2'); font-weight: 500; font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Cormorant Garamond'; src: url(../media/cg-latin-ext.woff2) format('woff2'); font-weight: 500; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Cormorant Garamond'; src: url(../media/cg-latin.woff2) format('woff2'); font-weight: 500; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Inter'; src: url(../media/inter-cyrillic.woff2) format('woff2'); font-weight: 300 700; font-display: swap; unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Inter'; src: url(../media/inter-latin-ext.woff2) format('woff2'); font-weight: 300 700; font-display: swap; unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; src: url(../media/inter-latin.woff2) format('woff2'); font-weight: 300 700; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+:root {
+  --black: #0E0E0E; --coal: #161616; --card: #1D1C1A; --line: #34322E; --trav: #DEC9AB; --trav2: #EADBC3; --bone: #F2EEE7;
+  --orange: #F2A65A; --orange2: #E08A3A; --gold: #C9A97A; --mute: #9C958A; --concrete: #8D8780; --cond: #F2A65A; --res: #9FC8C0; --green: #7FC59B; --red: #E07A5F;
+  --ak-bg: #1D1C1A; --ak-surface: #26241F; --ak-ink: #F2EEE7; --ak-muted: #B3AB9E; --ak-line: #3A3833;
+  --ak-accent: #F2A65A; --ak-accent-ink: #0E0E0E; --ak-accent-soft: #3A2C1E;
+  --ak-good: #7FC59B; --ak-good-soft: #1E3328; --ak-bad: #E07A5F; --ak-bad-soft: #3A221C;
+  --ak-radius: 18px; --ak-radius-sm: 12px;
+  --ak-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ak-font-display: 'Cormorant Garamond', Georgia, serif;
+  --fd: 'Cormorant Garamond', Georgia, serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--black); overflow-x: clip; }
+body { margin: 0; overflow-x: clip; background: var(--black); color: var(--bone); font: 300 var(--ak-text)/1.62 var(--ak-font); }
+main { position: relative; z-index: 2; }
+[data-section] { position: relative; padding: clamp(64px, 11vw, 120px) 16px; }
+.wrap { max-width: 1080px; margin: 0 auto; position: relative; }
+h1, h2, h3 { font-family: var(--fd); font-weight: 500; letter-spacing: -.01em; color: var(--bone); }
+h1 { font-size: clamp(30px, 8.6vw, 92px); line-height: .98; margin: 0; }
+h2 { font-size: clamp(28px, 8.2vw, 64px); line-height: 1.02; margin: 0 0 14px; }
+h3 { font-size: clamp(22px, 5.6vw, 32px); line-height: 1.1; margin: 0 0 8px; }
+p { margin: 0 0 12px; max-width: 62ch; }
+b, strong { font-weight: 600; }
+em.g { font-style: italic; color: var(--gold); font-family: var(--fd); }
+.bracket { position: relative; display: inline-block; padding: .05em .55em; }
+.bracket::before, .bracket::after { content: ''; position: absolute; top: 0; bottom: 0; width: .28em; border: 2px solid var(--concrete); }
+.bracket::before { left: 0; border-right: 0; } .bracket::after { right: 0; border-left: 0; }
+.kicker { display: inline-block; padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; font: 400 12px/1.3 var(--ak-font); color: var(--mute); margin-bottom: 14px; }
+.lead { color: #CFC8BC; font-size: 1.05em; }
+.note { color: var(--mute); font-size: .95em; }
+.c-cond { color: var(--cond); } .c-res { color: var(--res); }
+.tr { font-weight: 600; color: var(--trav); }
+.tr-ru { display: block; color: var(--mute); font-size: .86em; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.sect-head { display: grid; gap: 6px; margin-bottom: 26px; }
+@media (min-width: 900px) { .sect-head--split { grid-template-columns: 1.2fr 1fr; align-items: end; gap: 40px; } }
+.num { font: 500 13px/1 var(--ak-font); color: var(--mute); letter-spacing: .12em; }
+
+/* бетон с отверстиями опалубки */
+.concrete { background-color: #5E5A55; background-image: radial-gradient(circle at 50% 50%, #1b1a18 0 3px, transparent 4px), linear-gradient(90deg, rgba(0,0,0,.18) 1px, transparent 1px), linear-gradient(rgba(0,0,0,.18) 1px, transparent 1px), radial-gradient(ellipse at 30% 20%, #8a847c, #57534e 70%); background-size: 120px 120px, 240px 240px, 240px 240px, 100% 100%; background-position: 60px 60px, 0 0, 0 0, 0 0; }
+.trav-bg { background: var(--trav); color: #1A1714; }
+.trav-bg h2, .trav-bg h3 { color: #141210; }
+.trav-bg .lead { color: #3D362D; }
+.trav-bg .note { color: #5D5447; }
+.trav-bg .bracket::before, .trav-bg .bracket::after { border-color: #6E6455; }
+.trav-bg .tr { color: #2B2116; }
+.trav-bg .card:not(.card--trav) { color: var(--bone); }
+
+/* кнопки */
+.pill { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 10px 22px; border: 0; border-radius: 999px; background: var(--orange); color: #141210; font: 600 13px/1.2 var(--ak-font); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; }
+.pill::after { content: ''; width: 22px; height: 1.5px; background: currentColor; box-shadow: 4px -3px 0 -1px currentColor, 4px 3px 0 -1px currentColor; }
+.pill--ghost { background: transparent; color: var(--bone); box-shadow: inset 0 0 0 1.5px var(--bone); }
+.trav-bg .pill--ghost { color: #141210; box-shadow: inset 0 0 0 1.5px #141210; }
+.pill--plain::after { display: none; }
+.chip { min-height: 44px; min-width: 44px; padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 999px; background: transparent; color: var(--bone); font: 500 15px/1.2 var(--ak-font); cursor: pointer; }
+.chip[aria-pressed="true"], .chip.is-on { background: var(--bone); color: #111; border-color: var(--bone); }
+.trav-bg .chip { border-color: #8E816E; color: #141210; }
+.trav-bg .chip[aria-pressed="true"] { background: #141210; color: var(--trav); border-color: #141210; }
+.pill:focus-visible, .chip:focus-visible, .tbtn:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+@media (hover: hover) { .pill:hover { scale: 1.04; } .chip:hover { translate: 0 -2px; } }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.row--c { justify-content: center; }
+
+/* карточки */
+.card { position: relative; border-radius: 22px; padding: clamp(18px, 4vw, 30px); background: var(--card); border: 1px solid var(--line); }
+.card--trav { background: var(--trav); color: #1A1714; border-color: transparent; }
+.card--trav h3 { color: #141210; }
+.card .idx { position: absolute; right: 18px; bottom: 14px; font: 500 12px var(--ak-font); color: var(--mute); }
+.card--trav .idx { color: #6E6455; }
+.big { font: 500 clamp(44px, 12vw, 84px)/.9 var(--fd); }
+
+/* плитки аффиксов */
+.tile { display: inline-flex; align-items: center; min-height: 48px; padding: 6px 14px; border-radius: 12px; font: 600 clamp(19px, 5vw, 28px)/1.1 var(--ak-font); background: #26241F; border: 1px solid var(--line); color: var(--bone); white-space: nowrap; }
+.tile--root { background: var(--bone); color: #141210; border-color: var(--bone); }
+.tile--aor { background: #2C3B38; border-color: #4E6B65; color: var(--res); }
+.tile--sa { background: var(--orange); border-color: var(--orange2); color: #141210; }
+.tile--p { background: #3A2C1E; border-color: #6B4A2A; color: var(--orange); }
+.tile--ghost { border-style: dashed; color: var(--mute); background: transparent; }
+.trav-bg .tile { background: #F2E6D2; border-color: #B9A88E; color: #141210; }
+.trav-bg .tile--sa { background: var(--orange); border-color: var(--orange2); }
+.trav-bg .tile--root { background: #141210; color: var(--trav); }
+.tline { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; }
+
+/* мини-вопрос */
+.mq { max-width: 680px; margin: 34px auto 0; padding: 20px; border-radius: 22px; background: #141412; border: 1px dashed #4A4740; text-align: center; }
+.trav-bg .mq { background: #E9DAC2; border-color: #8E816E; }
+.mq__q { font: 500 clamp(20px, 5vw, 26px)/1.2 var(--fd); margin-bottom: 12px; }
+.mq__q::before { content: '[ ? ] '; color: var(--orange); }
+.mq__o { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.mq__o button { min-height: 46px; padding: 8px 16px; border: 1.5px solid var(--line); border-radius: 999px; background: transparent; color: inherit; font: 500 16px/1.2 var(--ak-font); cursor: pointer; }
+.trav-bg .mq__o button { border-color: #8E816E; }
+.mq__o button.is-right { background: var(--ak-good-soft); border-color: var(--ak-good); color: var(--bone); }
+.mq__o button.is-wrong { background: var(--ak-bad-soft); border-color: var(--ak-bad); color: var(--bone); }
+.mq__a { min-height: 1.5em; margin-top: 10px; font-weight: 500; }
+
+/* общие */
+.mk-sparks { position: fixed; z-index: 90; width: 0; height: 0; pointer-events: none; }
+.mk-sparks i { position: absolute; width: 7px; height: 7px; margin: -3px; border-radius: 50%; background: hsl(calc(var(--h) * 1deg) 85% 64%); }
+.mk-glow { position: fixed; z-index: 1; left: 0; top: 0; width: 420px; height: 420px; margin: -210px 0 0 -210px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, rgba(242, 166, 90, .13), rgba(242, 166, 90, 0) 62%); display: none; }
+@media (hover: hover) and (pointer: fine) { .mk-glow { display: block; } }
+.say-line { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin: 6px 0; }
+.ticker { overflow: hidden; border-block: 1px solid var(--line); padding: 14px 0; white-space: nowrap; }
+.ticker__in { display: inline-flex; gap: 48px; font: 500 clamp(22px, 5vw, 36px)/1 var(--fd); color: #7D776E; }
+.ticker__in b { color: var(--orange); font-weight: 500; }
+.phone { width: min(100%, 360px); margin: 0 auto; border: 9px solid #2A2826; border-radius: 40px; background: #0B0B0B; padding: 12px 12px 18px; box-shadow: 0 30px 70px rgba(0, 0, 0, .6), inset 0 0 0 1px #3A3733; position: relative; }
+.phone__bar { display: flex; justify-content: space-between; font: 600 11px var(--ak-font); color: var(--bone); padding: 2px 10px 8px; }
+.phone__nav { display: flex; justify-content: space-between; align-items: center; padding: 6px 4px 12px; border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+.logo { display: inline-flex; padding: 3px 12px; border: 1px solid #6E6A63; border-radius: 999px; font: 500 15px/1.2 var(--fd); letter-spacing: .08em; color: var(--bone); }
+.chat { display: grid; gap: 8px; }
+.msg { max-width: 88%; padding: 9px 13px; border-radius: 16px 16px 16px 4px; background: #1F1E1C; border: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+.msg--me { justify-self: end; border-radius: 16px 16px 4px 16px; background: #3A2C1E; border-color: #6B4A2A; }
+.msg--sys { justify-self: center; background: transparent; border: 0; color: var(--mute); font-size: 13px; text-align: center; }
+.choices { display: grid; gap: 8px; margin-top: 12px; }
+.choice { min-height: 48px; padding: 9px 14px; border: 1.5px solid var(--line); border-radius: 14px; background: #141412; color: var(--bone); font: 500 15px/1.3 var(--ak-font); cursor: pointer; text-align: left; }
+.choice.is-right { border-color: var(--ak-good); background: var(--ak-good-soft); }
+.choice.is-wrong { border-color: var(--ak-bad); background: var(--ak-bad-soft); }
+.typing { display: inline-flex; gap: 4px; padding: 10px 12px; border-radius: 14px; background: #1F1E1C; width: max-content; margin-top: 8px; }
+.typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--mute); }
+
+/* опросы */
+.polls { display: grid; gap: 16px; }
+@media (min-width: 860px) { .polls { grid-template-columns: 1fr 1fr; } }
+.poll__opts { display: grid; gap: 8px; margin-top: 12px; }
+.poll__opt { position: relative; overflow: hidden; min-height: 52px; padding: 10px 16px; border: 1.5px solid #8E816E; border-radius: 14px; background: transparent; color: #141210; font: 500 17px/1.2 var(--ak-font); text-align: left; cursor: pointer; }
+.poll__opt .fill { position: absolute; inset: 0; transform-origin: left; transform: scaleX(0); background: rgba(127, 197, 155, .35); }
+.poll__opt span { position: relative; }
+.poll__opt.is-right { border-color: #2F7A55; } .poll__opt.is-right .fill { transform: scaleX(1); }
+.poll__opt.is-wrong { border-color: #A8452E; background: rgba(224, 122, 95, .2); }
+.poll__why { min-height: 1.5em; margin-top: 10px; font-weight: 500; }
+
+/* bento */
+.bento { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+@media (min-width: 860px) { .bento { grid-template-columns: repeat(3, 1fr); } }
+.bcell { position: relative; display: grid; gap: 6px; align-content: start; min-height: 120px; padding: 16px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); color: var(--bone); text-align: left; font: inherit; cursor: pointer; }
+.bcell b { font: 500 26px/1 var(--fd); color: var(--gold); }
+.bcell .f { font: 600 clamp(16px, 4.4vw, 22px)/1.2 var(--ak-font); overflow-wrap: anywhere; }
+.bcell .end { color: var(--orange); }
+.bcell.is-special { background: var(--trav); color: #141210; border-color: transparent; }
+.bcell.is-special b { color: #6E4A1E; }
+.bcell.is-special .end { color: #B1561B; }
+.bcell small { color: var(--mute); }
+.bcell.is-special small { color: #5D5447; }
+
+/* дом в разрезе */
+.house { width: 100%; height: auto; display: block; }
+.floor-tag { font: 500 11px var(--ak-font); letter-spacing: .14em; fill: var(--mute); }
+
+/* карточки-перевёртыши */
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+@media (min-width: 860px) { .cards { grid-template-columns: repeat(4, 1fr); } }
+.fc { position: relative; height: 200px; border: 0; padding: 0; background: none; cursor: pointer; perspective: 900px; font: inherit; color: inherit; }
+.fc__in { position: absolute; inset: 0; transform-style: preserve-3d; }
+.fc__f, .fc__b { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 10px; padding: 14px; border-radius: 18px; backface-visibility: hidden; -webkit-backface-visibility: hidden; text-align: center; overflow-wrap: anywhere; hyphens: auto; }
+.fc__f { background: var(--card); border: 1px solid var(--line); font-size: 14px; color: #D8D1C5; }
+.fc__b { background: var(--trav); color: #141210; transform: rotateY(180deg); font-weight: 600; font-size: 15px; line-height: 1.3; }
+.fc svg { width: 42px; height: 42px; fill: none; stroke: var(--orange); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.fc__b svg { stroke: #6E4A1E; width: 26px; height: 26px; }
+
+/* лаборатория */
+.tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 18px; }
+.tabs [role="tab"] { min-height: 44px; padding: 8px 18px; border: 1.5px solid var(--line); border-radius: 999px; background: transparent; color: var(--bone); font: 500 15px/1.2 var(--ak-font); cursor: pointer; }
+.tabs [role="tab"][aria-selected="true"] { background: var(--orange); color: #141210; border-color: var(--orange); }
+.panel { display: grid; gap: 14px; }
+.panel[hidden] { display: none; }
+.lab-lbl { text-align: center; font: 500 11px var(--ak-font); letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.lab-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.lab-out { min-height: 110px; display: grid; place-items: center; gap: 8px; padding: 16px; border-radius: 18px; background: #121211; border: 1px solid var(--line); }
+.lab-why { text-align: center; color: #CFC8BC; min-height: 1.5em; max-width: 54ch; margin: 0 auto; }
+.lab-big { font: 600 clamp(28px, 8.4vw, 52px)/1.05 var(--ak-font); text-align: center; overflow-wrap: anywhere; }
+.lab-big .let { display: inline-block; }
+
+/* ловушки */
+.traps { display: grid; gap: 14px; }
+@media (min-width: 860px) { .traps { grid-template-columns: 1fr 1fr; } }
+.trap { position: relative; display: grid; gap: 10px; padding: 20px; border-radius: 22px; background: var(--card); border: 1px solid var(--line); }
+.trap__n { font: 500 44px/1 var(--fd); color: var(--orange); }
+.trap__bad, .trap__good { font: 600 18px/1.35 var(--ak-font); }
+.trap__bad s { color: var(--red); text-decoration-thickness: 2px; }
+.trap__good { color: var(--green); transform-origin: left; }
+.trap__good.is-hidden { visibility: hidden; }
+.trap__why { font-size: 15px; color: #CFC8BC; margin: 0; }
+
+/* шпаргалка */
+.poster { position: relative; max-width: 1000px; margin: 0 auto; padding: clamp(20px, 5vw, 48px); border-radius: 28px; background: var(--trav); color: #141210; }
+.poster h3 { color: #141210; }
+.poster__grid { display: grid; gap: 12px; }
+@media (min-width: 760px) { .poster__grid { grid-template-columns: 1.3fr 1fr; } }
+.pbox { padding: 16px; border-radius: 18px; background: #E9DAC2; }
+.pbox .tile { font-size: clamp(16px, 4.2vw, 22px); }
+.finale { max-width: 680px; margin: 56px auto 0; text-align: center; }
+.finale p { margin-left: auto; margin-right: auto; }
+
+/* kit в тёмной теме */
+a-exercise, a-quiz { display: block; max-width: 780px; margin: 0 auto 18px; }
+.ak-ex { border: 1px solid var(--line); }
+[data-pair="0"] { background: #2C3B38; border-color: #4E6B65; }
+[data-pair="1"] { background: #3A2C1E; border-color: #8A5A2B; }
+[data-pair="2"] { background: #2E2A3A; border-color: #5D5480; }
+[data-pair="3"] { background: #3A2525; border-color: #8A4A4A; }
+[data-pair="4"] { background: #2B3324; border-color: #5E7444; }
+[data-pair="5"] { background: #22313A; border-color: #4A6E85; }
+
+/* свой скроллбар: глубиномер */
+.sb { position: fixed; z-index: 60; top: env(safe-area-inset-top); left: 0; right: 0; height: 6px; pointer-events: none; }
+.sb__track { position: absolute; inset: 0; background: #222; pointer-events: auto; touch-action: none; }
+.sb__fill { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--p, 0) * 100%); background: linear-gradient(90deg, var(--trav), var(--orange)); }
+.sb__read { position: absolute; top: 9px; left: clamp(36px, calc(var(--p, 0) * 100%), calc(100% - 36px)); translate: -50% 0; padding: 2px 7px; border-radius: 999px; background: var(--orange); color: #141210; font: 600 10px/1.4 var(--ak-font); white-space: nowrap; pointer-events: none; }
+.sb__mark { position: absolute; left: calc(var(--at, 0) * 100%); top: 50%; translate: -50% -50%; width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }
+.sb__mark::after { content: ''; position: absolute; left: 13px; top: 6px; width: 2px; height: 16px; background: #6E6A63; }
+.sb__mark.is-read::after { background: var(--orange); }
+@media (min-width: 768px) {
+  .sb { left: auto; right: 14px; top: 50%; translate: 0 -50%; width: 4px; height: min(64dvh, 560px); }
+  .sb__track { border-radius: 2px; background: #2A2826; }
+  .sb__fill { width: auto; right: 0; bottom: auto; height: calc(var(--p, 0) * 100%); background: linear-gradient(180deg, var(--trav), var(--orange)); }
+  .sb__read { top: calc(var(--p, 0) * 100%); left: auto; right: 14px; translate: 0 -50%; }
+  .sb__mark { left: 50%; top: calc(var(--at, 0) * 100%); }
+  .sb__mark::after { left: 6px; top: 13px; width: 16px; height: 2px; }
+}
+@media (min-width: 1024px) { [data-section] { padding-left: 32px; padding-right: 64px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@supports not (color: color-mix(in srgb, red, blue)) { body::before { content: 'Please update your browser'; display: block; padding: 8px; background: var(--orange); color: #000; text-align: center; } }
+
+/* значок уровня */
+.lvl-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.lvl { width: 46px; height: 46px; flex: none; color: var(--bone); }
+.trav-bg .lvl { color: #141210; }
+.lvl-t { font: 500 11px var(--ak-font); letter-spacing: .16em; text-transform: uppercase; color: var(--mute); }
+.trav-bg .lvl-t { color: #6E6455; }
+.cmp .lvl-row, .finale .lvl-row { justify-content: center; }
+.ico { width: 28px; height: 28px; fill: none; stroke: var(--orange); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; display: block; margin-bottom: 10px; }
+.trav-bg .ico, .card--trav .ico, .pbox .ico { stroke: #B1561B; }
+.cap3d { position: absolute; width: 90px; height: 40px; border-radius: 20px; border: 1.5px solid rgba(242,166,90,.55); z-index: -1; transform-style: preserve-3d; }
+.cap3d--a { top: 14%; right: 8%; } .cap3d--b { bottom: 18%; left: 6%; width: 64px; height: 30px; }
+@media (max-width: 700px) { .cap3d { display: none; } }
+.sect-head .lvl-row { grid-column: 1 / -1; }
+
+/* ---------- HERO: бетонная стена, планшет с домом в разрезе ---------- */
+.hero { position: relative; overflow: hidden; width: 100vw; margin-left: calc(50% - 50vw); margin-top: calc(-1 * clamp(64px, 11vw, 120px)); padding: clamp(70px, 10vw, 110px) 16px clamp(50px, 8vw, 90px); isolation: isolate; }
+.hero__wall { position: absolute; inset: 0; z-index: -2; }
+.hero__light { position: absolute; inset: 0; z-index: -1; background: linear-gradient(115deg, rgba(0,0,0,.65) 0 22%, rgba(255,226,180,.10) 38%, rgba(0,0,0,.25) 60%, rgba(0,0,0,.75)); }
+.hero__grid { display: grid; gap: clamp(22px, 4vw, 48px); align-items: center; max-width: 1180px; margin: 0 auto; }
+@media (min-width: 960px) { .hero__grid { grid-template-columns: 1fr 1.05fr; } }
+.hero__copy h1 span { display: inline-block; animation: mkUp 1s cubic-bezier(.2, 1.2, .3, 1) both; }
+.hero__copy h1 span:nth-child(2) { animation-delay: .1s; } .hero__copy h1 span:nth-child(3) { animation-delay: .2s; } .hero__copy h1 span:nth-child(4) { animation-delay: .3s; }
+@keyframes mkUp { from { transform: translateY(45%) rotate(3deg); } to { transform: none; } }
+.hero__copy h1 i { font-style: italic; color: var(--trav); }
+.hero__sub { margin: 18px 0 22px; color: #D9D2C6; font-size: 1.06em; max-width: 46ch; }
+.hero__stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 26px; max-width: 520px; }
+.stat { padding: 14px; border-radius: 16px; background: rgba(14,14,14,.72); border: 1px solid #3A3733; }
+.stat b { display: block; font: 500 clamp(34px, 9vw, 52px)/.9 var(--fd); color: var(--bone); }
+.stat span { font-size: 12px; color: var(--mute); }
+.tablet { position: relative; border-radius: 34px; padding: 10px; background: linear-gradient(145deg, #9E8E78, #4A4136); box-shadow: 0 40px 90px rgba(0,0,0,.65); }
+.tablet__in { position: relative; border-radius: 26px; overflow: hidden; background: #141210; }
+.tablet__logo { position: absolute; top: 16px; left: 18px; z-index: 2; }
+.depth { position: absolute; right: 14px; top: 18%; bottom: 10%; z-index: 2; display: grid; align-content: space-between; text-align: right; font: 500 10px/1.3 var(--ak-font); letter-spacing: .14em; color: #CFC8BC; }
+.depth b { display: block; font: 600 11px var(--ak-font); color: var(--orange); }
+@media (max-width: 600px) { .depth { display: none; } }
+.hd { display: grid; gap: 10px; justify-items: center; padding: 16px; background: #0E0E0E; border-top: 1px solid #2A2826; }
+.hd .tline { min-height: 56px; }
+.hd-ru { color: var(--mute); font-size: 14px; }
+
+/* ---------- этажи ---------- */
+.floors { display: grid; gap: 20px; align-items: center; }
+@media (min-width: 900px) { .floors { grid-template-columns: 1.15fr 1fr; } }
+.fl-svg text.fl-tr { font: 600 22px var(--ak-font); }
+.fl-ctrl { display: grid; gap: 12px; }
+
+/* ---------- широкое время ---------- */
+.aor-grid { display: grid; gap: 12px; }
+@media (min-width: 860px) { .aor-grid { grid-template-columns: repeat(3, 1fr); } }
+.aor-out { display: grid; gap: 10px; justify-items: center; margin-top: 18px; }
+
+/* ---------- сравнение ---------- */
+.cmp { display: grid; gap: 18px; justify-items: center; text-align: center; }
+.cmp__line { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; min-height: 60px; }
+.cmp__count { font: 500 clamp(48px, 13vw, 96px)/.9 var(--fd); color: var(--orange); }
+
+/* ---------- нижний этаж: шахта лифта ---------- */
+.res { display: grid; gap: 22px; align-items: center; }
+@media (min-width: 900px) { .res { grid-template-columns: 300px 1fr; } }
+.shaft { width: min(62%, 300px); margin: 0 auto; display: block; }
+.res-out { display: grid; gap: 10px; }
+.res-line { font: 600 clamp(20px, 5.4vw, 30px)/1.25 var(--ak-font); }
+
+/* ---------- дерево ---------- */
+.tree { width: 100%; max-width: 520px; display: block; margin: 0 auto; }
+.tree text { font: 500 15px var(--ak-font); fill: var(--bone); }
+.tree .node { fill: #1D1C1A; stroke: #4A4740; stroke-width: 1.5; }
+.tree .edge { fill: none; stroke: #4A4740; stroke-width: 2; stroke-dasharray: 5 6; }
+.tree .edge.is-on { stroke: var(--orange); stroke-dasharray: none; }
+.tree-ui { display: grid; gap: 12px; justify-items: center; margin-top: 14px; text-align: center; }
+.tree-q { font: 500 clamp(20px, 5vw, 26px)/1.2 var(--fd); min-height: 1.4em; }
+.tree-res { font: 600 clamp(18px, 4.6vw, 24px)/1.3 var(--ak-font); min-height: 1.4em; color: var(--orange); }
+
+/* ---------- мнемоника ---------- */
+.mn { display: grid; gap: 20px; align-items: center; }
+@media (min-width: 900px) { .mn { grid-template-columns: 1fr 1fr; } }
+.mn svg { width: min(100%, 460px); margin: 0 auto; display: block; overflow: visible; }
+
+/* ---------- сцена: квартира в Коньяалты ---------- */
+.scene { position: relative; max-width: 1000px; margin: 0 auto; border-radius: 28px; overflow: hidden; border: 1px solid var(--line); background: #1B1A18; }
+.scene svg.bld { display: block; width: 100%; height: auto; }
+.hs { position: absolute; translate: -50% -50%; width: 44px; height: 44px; border-radius: 50%; border: 2px solid #141210; background: var(--orange); color: #141210; font: 700 15px/1 var(--ak-font); cursor: pointer; box-shadow: 0 8px 22px rgba(0,0,0,.45); }
+.hs[aria-pressed="true"] { background: var(--bone); }
+.hs::after { content: ''; position: absolute; inset: -7px; border-radius: 50%; border: 1.5px solid var(--orange); animation: mkPulse 2.4s infinite; }
+@keyframes mkPulse { from { transform: scale(.75); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
+.dlg { max-width: 780px; margin: 18px auto 0; }
+.dlg__who { font: 500 26px/1.1 var(--fd); color: var(--orange); margin-bottom: 8px; }
+.dlg__note { color: var(--mute); margin-top: 10px; }
+
+/* ---------- погода ---------- */
+.wx { display: grid; gap: 20px; align-items: center; margin-bottom: 34px; }
+@media (min-width: 900px) { .wx { grid-template-columns: 360px 1fr; } }
+.wx__icons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 8px 0 14px; }
+.wx__btn { display: grid; place-items: center; gap: 4px; min-height: 76px; border-radius: 16px; border: 1px solid var(--line); background: #141412; color: var(--bone); font: 500 12px var(--ak-font); cursor: pointer; }
+.wx__btn[aria-pressed="true"] { border-color: var(--orange); background: #2A1F14; }
+.wx__btn svg { width: 30px; height: 30px; fill: none; stroke: var(--orange); stroke-width: 1.6; stroke-linecap: round; }
+.wx__temp { font: 500 64px/1 var(--fd); text-align: center; }
+.wx__out { font: 600 clamp(19px, 5vw, 26px)/1.3 var(--ak-font); text-align: center; min-height: 2.6em; }
+
+/* ---------- лифт: нестандартное упражнение ---------- */
+.lift { display: grid; gap: 14px; grid-template-columns: 74px 1fr; align-items: start; }
+.lift__shaft { position: relative; height: 330px; border-radius: 14px; background: repeating-linear-gradient(#1C1B19 0 54px, #2A2826 54px 55px); border: 1px solid var(--line); }
+.lift__cab { position: absolute; left: 8px; right: 8px; top: 6px; height: 44px; border-radius: 8px; background: var(--orange); display: grid; place-items: center; font: 700 12px var(--ak-font); color: #141210; }
+.lift__q { font: 500 clamp(19px, 5vw, 24px)/1.25 var(--fd); margin: 2px 0 12px; }
+.lift__opts { display: grid; gap: 8px; }
+.lift__opts button { min-height: 48px; padding: 9px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: #141412; color: var(--bone); font: 600 16px/1.2 var(--ak-font); text-align: left; cursor: pointer; }
+.lift__opts button.is-right { border-color: var(--ak-good); background: var(--ak-good-soft); }
+.lift__opts button.is-wrong { border-color: var(--ak-bad); background: var(--ak-bad-soft); }
+.lift__status { min-height: 1.6em; margin-top: 10px; }
+
+
+</style>
+</head>
+<body>
+<div class="mk-glow" aria-hidden="true"></div>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="tree" viewBox="0 0 60 90"><path d="M30 90V50" stroke="#1B1A18" stroke-width="4"/><path d="M30 6C12 20 8 44 18 56c8 8 16 6 12-2 4 8 14 8 18 0 8-14 0-38-18-48Z" fill="#232B22"/></symbol>
+  <symbol id="palm" viewBox="0 0 80 120"><path d="M40 120c2-30 4-60 0-84" stroke="#2A2620" stroke-width="5" fill="none"/><path d="M40 36C28 22 12 22 2 30c14-2 26 2 38 6ZM40 36c12-14 28-14 38-6-14-2-26 2-38 6ZM40 36C34 20 36 8 44 2c-2 12 0 24-4 34ZM40 36c-16 0-28 10-32 22 8-10 20-16 32-22ZM40 36c16 0 28 10 32 22-8-10-20-16-32-22Z" fill="#1F2A22"/></symbol>
+  <symbol id="cap" viewBox="0 0 140 140"><circle cx="70" cy="70" r="64" fill="#1D1C1A" stroke="#C9A97A" stroke-width="3"/><rect x="34" y="46" width="72" height="48" rx="24" fill="none" stroke="#F2A65A" stroke-width="3"/></symbol>
+</svg>
+
+<main>
+
+<!-- ============ STORY ============ -->
+<section data-section="story" data-words="113">
+  <div class="hero">
+    <div class="hero__wall concrete" aria-hidden="true"></div>
+    <div class="hero__light" aria-hidden="true"></div>
+    <span class="cap3d cap3d--a" aria-hidden="true"></span><span class="cap3d cap3d--b" aria-hidden="true"></span>
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <span class="kicker" data-ui>[ B1-12 · Antalya · lesson 1 of 2 ]</span>
+        <h1><span>“If”</span> <span>lives</span> <span><i>in the tail</i></span> <span>of the verb.</span></h1>
+        <p class="hero__sub">In English “if” comes first. In Turkish it hides at the end of the verb. Condition upstairs, result downstairs. Like a house with a bunker.</p>
+        <div class="row" data-ui>
+          <button type="button" class="pill" data-hero-play>Build a phrase</button>
+          <button type="button" class="pill pill--ghost pill--plain" data-hero-say>Listen</button>
+        </div>
+        <div class="hero__stats" data-ui>
+          <div class="stat"><b data-count="1">1</b><span>suffix</span></div>
+          <div class="stat"><b data-count="6">6</b><span>persons</span></div>
+          <div class="stat"><b data-count="2">2</b><span>floors</span></div>
+        </div>
+      </div>
+      <div class="tablet">
+        <div class="tablet__in">
+          <span class="logo tablet__logo" lang="tr">EĞER</span>
+          <div class="depth" data-ui aria-hidden="true">
+            <div><b>−0.0 m</b>surface</div>
+            <div>condition</div>
+            <div><b>−12.0 m</b>capsule</div>
+            <div>result</div>
+          </div>
+          <svg class="house" viewBox="0 0 600 560" aria-hidden="true">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2622"/><stop offset="1" stop-color="#7A6450"/></linearGradient>
+              <linearGradient id="earth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2724"/><stop offset="1" stop-color="#0F0E0D"/></linearGradient>
+            </defs>
+            <rect width="600" height="270" fill="url(#sky)"/>
+            <circle class="h-moon" cx="470" cy="70" r="26" fill="#F2E3C6" opacity=".85"/>
+            <g class="h-trees"><use href="#palm" x="20" y="140" width="80" height="130"/><use href="#palm" x="500" y="150" width="70" height="120"/><use href="#tree" x="96" y="190" width="50" height="80"/></g>
+            <g class="h-house">
+              <rect x="140" y="160" width="320" height="110" fill="#E8DCC8" stroke="#1A1714" stroke-width="2"/>
+              <rect x="220" y="96" width="260" height="64" fill="#3A3530" stroke="#1A1714" stroke-width="2"/>
+              <path d="M200 96h300v-8H200Z" fill="#1A1714"/><path d="M120 160h360v-7H120Z" fill="#1A1714"/>
+              <g class="h-win" fill="#F6C77A"><rect x="236" y="108" width="54" height="40"/><rect x="300" y="108" width="54" height="40"/><rect x="364" y="108" width="54" height="40"/><rect x="160" y="180" width="70" height="72"/><rect x="250" y="180" width="90" height="72"/><rect x="360" y="180" width="80" height="72"/></g>
+              <path d="M240 108v40M310 108v40M380 108v40" stroke="#1A1714" stroke-width="1.5"/>
+            </g>
+            <text x="300" y="72" text-anchor="middle" fill="#F2EEE7" font-family="Inter" font-weight="600" font-size="26" class="h-up">Yağmur yağarsa,</text>
+            <rect y="270" width="600" height="290" fill="url(#earth)"/>
+            <path d="M0 270h600" stroke="#C9A97A" stroke-width="1.5"/>
+            <path d="M0 330c120 8 240-6 360 4s180 6 240-2M0 400c140 10 260-4 380 6s160 4 220-4" stroke="#2F2C28" stroke-width="2" fill="none"/>
+            <path class="h-stairs" d="M300 270v28h-24v26h-24v26h-24v24" stroke="#C9A97A" stroke-width="2" fill="none" stroke-dasharray="4 5"/>
+            <g class="h-cap"><rect x="120" y="380" width="360" height="130" rx="65" fill="#1E1D1B" stroke="#8D8780" stroke-width="2.5"/>
+              <rect x="150" y="402" width="300" height="86" rx="43" fill="#2A2724"/>
+              <circle class="h-lamp" cx="300" cy="418" r="5" fill="#F2A65A"/></g>
+            <text x="300" y="456" text-anchor="middle" fill="#F2A65A" font-family="Inter" font-weight="600" font-size="24" class="h-down">müzeye gideriz.</text>
+          </svg>
+          <div class="hd">
+            <div class="tline" lang="tr">
+              <span class="tile tile--root hd-root">yağ</span><span class="tile tile--aor hd-aor">ar</span><span class="tile tile--sa hd-sa">sa</span>
+            </div>
+            <span class="hd-ru" data-ui>Yağmur yağarsa — if it rains</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true" data-ui><div class="ticker__in"><span>gelir<b>sem</b></span><span>yapar<b>sak</b></span><span>okur<b>san</b></span><span>gider<b>se</b></span><span>alır<b>sanız</b></span><span>gelir<b>lerse</b></span><span>konuşur<b>sam</b></span><span>ister<b>sen</b></span></div></div>
+
+  <div class="wrap" style="margin-top:clamp(50px,9vw,90px)">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −0 · surface</span></div>
+    <h2><span class="bracket">Saturday in Antalya</span></h2>
+      <p class="lead">Two letters. That's all that separates a plan from a dream.</p>
+    </div>
+    <div class="hero__grid" style="padding:0">
+      <div>
+        <p>You rented an apartment in Antalya. For a month. Sea view, AC, the landlady on WhatsApp.</p>
+        <p>The landlady texts. Asks what you're doing this weekend.</p>
+        <p>You want to answer: if it rains, we'll go to the museum. You remember -sa. You proudly type: <a-say>Yağmur yağsa!</a-say></p>
+        <p>The landlady goes quiet for a long time. Then she writes that Antalya gets three hundred sunny days a year. A tourist who dreams of rain is news for the local paper.</p>
+        <p>You weren't dreaming. You were planning. The difference is two letters.</p>
+      </div>
+      <div class="phone" aria-label="Chat with the landlady">
+        <div class="phone__bar" data-ui><span>10:12</span><span>●●● ▮</span></div>
+        <div class="phone__nav"><span class="logo" data-ui>Ev sahibi</span><span class="note" data-ui>online</span></div>
+        <div class="chat" data-chat>
+          <div class="msg msg--sys" data-ui>Saturday</div>
+          <div class="msg"><a-say>Hafta sonu ne yapıyorsunuz?</a-say><span class="tr-ru" data-ui>What are you doing this weekend?</span></div>
+          <div class="msg msg--me"><a-say>Yağmur yağsa!</a-say></div>
+          <div class="msg"><a-say>Neden? Yağmur mu istiyorsun?</a-say><span class="tr-ru" data-ui>Why? You want rain?</span></div>
+          <div class="msg msg--sys">You wished for rain. Out loud. In a resort town.</div>
+        </div>
+        <div class="typing" data-typing aria-hidden="true"><i></i><i></i><i></i></div>
+        <p class="msg--sys" style="margin:12px 0 0;font-weight:600">What should you have written?</p>
+        <div class="choices" data-ui>
+          <button type="button" class="choice" data-choice="0" lang="tr">Eğer yağmur yağar, müzeye gideriz.</button>
+          <button type="button" class="choice" data-choice="1" lang="tr">Yağmur yağarsa, müzeye gideriz.</button>
+          <button type="button" class="choice" data-choice="2" lang="tr">Yağmur yağsa, müze!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GUESS ============ -->
+<section data-section="guess" data-words="40" class="trav-bg">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −1 · scouting</span></div>
+    <h2><span class="bracket">Guess first</span></h2>
+      <p class="lead">No rule yet. Just instinct. Nothing happens if you get it wrong. Not even rain.</p>
+    </div>
+    <div class="polls">
+      <div class="card card--trav poll" data-poll="0" style="background:#E9DAC2">
+        <h3>If I come…</h3>
+        <p class="note">To come — <a-say>gelmek</a-say>. Aorist — <a-say>gelir</a-say>.</p>
+        <div class="poll__opts" data-ui>
+          <button type="button" class="poll__opt" data-ok="0"><i class="fill"></i><span lang="tr">Gelsem…</span></button>
+          <button type="button" class="poll__opt" data-ok="1"><i class="fill"></i><span lang="tr">Gelirsem…</span></button>
+          <button type="button" class="poll__opt" data-ok="0"><i class="fill"></i><span lang="tr">Gelirim eğer…</span></button>
+        </div>
+        <p class="poll__why" data-ui aria-live="polite"></p>
+      </div>
+      <div class="card card--trav poll" data-poll="1" style="background:#E9DAC2">
+        <h3>If we're late…</h3>
+        <p class="note">To be late — <a-say>geç kalmak</a-say>. Aorist — <a-say>kalır</a-say>.</p>
+        <div class="poll__opts" data-ui>
+          <button type="button" class="poll__opt" data-ok="1"><i class="fill"></i><span lang="tr">Geç kalırsak…</span></button>
+          <button type="button" class="poll__opt" data-ok="0"><i class="fill"></i><span lang="tr">Geç kalırsız…</span></button>
+          <button type="button" class="poll__opt" data-ok="0"><i class="fill"></i><span lang="tr">Geç kalırız…</span></button>
+        </div>
+        <p class="poll__why" data-ui aria-live="polite"></p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:20px">Guessed right? Good. Guessed wrong? Also good. Your brain saved the question and is now waiting for the answer.</p>
+  </div>
+</section>
+
+<!-- ============ FLOORS ============ -->
+<section data-section="floors" data-words="61">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −2 · two floors</span></div>
+    <h2><span class="bracket">Two floors</span></h2>
+      <p class="lead">Every “if” is a two-story house. Upstairs, the condition. There's always -sa or -se in it. Downstairs, what will happen. Normal life down there: aorist, future, a request.</p>
+    </div>
+    <div class="floors">
+      <svg class="fl-svg" viewBox="0 0 520 440" aria-hidden="true" data-fl>
+        <rect x="0" y="0" width="520" height="210" fill="#1B1A18"/>
+        <rect x="0" y="210" width="520" height="230" fill="#121110"/>
+        <path d="M0 210h520" stroke="#C9A97A" stroke-width="1.5"/>
+        <text x="16" y="30" class="floor-tag">UPSTAIRS · CONDITION · -sa / -se</text>
+        <text x="16" y="240" class="floor-tag">DOWNSTAIRS · RESULT</text>
+        <rect x="440" y="20" width="60" height="400" rx="10" fill="#0E0E0E" stroke="#3A3733"/>
+        <g class="fl-cab"><rect x="446" y="40" width="48" height="150" rx="8" fill="#F2A65A"/><path d="M470 52v126" stroke="#141210" stroke-width="2"/></g>
+        <text class="fl-tr fl-up" x="30" y="120" fill="#F2A65A" font-family="Inter" font-weight="600" font-size="28">Yağmur yağarsa,</text>
+        <text class="fl-tr fl-down" x="30" y="330" fill="#9FC8C0" font-family="Inter" font-weight="600" font-size="28">müzeye gideriz.</text>
+      </svg>
+      <div class="fl-ctrl">
+        <div class="row" role="group" aria-label="Phrase" data-ui>
+          <button type="button" class="chip" data-fl-set="0" aria-pressed="true">Rain</button>
+          <button type="button" class="chip" data-fl-set="1" aria-pressed="false">Get up early</button>
+          <button type="button" class="chip" data-fl-set="2" aria-pressed="false">You come</button>
+        </div>
+        <p class="lead" data-fl-ru data-ui>If it rains, we'll go to the museum.</p>
+        <div class="row" data-ui>
+          <button type="button" class="pill" data-fl-ride>Elevator down</button>
+          <button type="button" class="pill pill--ghost pill--plain" data-fl-say>Read both floors</button>
+        </div>
+        <p class="note">The elevator runs between floors. The voice reads upstairs first, then downstairs. That's almost always the order.</p>
+        <p class="note">English builds it the same way. Only our “if” hangs outside, like a sign. In Turkish it's inside the verb.</p>
+      </div>
+    </div>
+    <div class="mq" data-mq="0"></div>
+  </div>
+</section>
+
+<!-- ============ BUILD ============ -->
+<section data-section="build" data-words="53" class="trav-bg">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −3 · assembly</span></div>
+    <h2><span class="bracket">Four-step assembly</span></h2>
+      <p class="lead">Hit “Play.” Or flip through the steps yourself. Each step is one brick.</p>
+    </div>
+    <div class="card card--trav" data-player style="background:#E9DAC2">
+      <div class="row row--c" data-ui>
+        <button type="button" class="chip" data-step="0" aria-pressed="true" aria-label="Step 1">01</button>
+        <button type="button" class="chip" data-step="1" aria-pressed="false" aria-label="Step 2">02</button>
+        <button type="button" class="chip" data-step="2" aria-pressed="false" aria-label="Step 3">03</button>
+        <button type="button" class="chip" data-step="3" aria-pressed="false" aria-label="Step 4">04</button>
+      </div>
+      <div class="tline" lang="tr" data-pl-line style="min-height:120px;margin:16px 0"></div>
+      <p data-cap="0" style="text-align:center;margin:0 auto;font-weight:500">Take the root. To come — <span lang="tr" class="tr">gel</span>.</p>
+      <p data-cap="1" hidden style="text-align:center;margin:0 auto;font-weight:500">Add the aorist. You know it: <span lang="tr" class="tr">gelir</span> — comes, usually.</p>
+      <p data-cap="2" hidden style="text-align:center;margin:0 auto;font-weight:500">Attach -se. The last vowel <span lang="tr">i</span> is front. So -se, not -sa.</p>
+      <p data-cap="3" hidden style="text-align:center;margin:0 auto;font-weight:500">Add the person. I is -m. <span lang="tr" class="tr">Gelirsem</span> — if I come.</p>
+      <div class="row row--c" style="margin-top:18px" data-ui>
+        <button type="button" class="pill pill--ghost pill--plain" data-pl="prev">Back</button>
+        <button type="button" class="pill" data-pl="play">Play</button>
+        <button type="button" class="pill pill--ghost pill--plain" data-pl="next">Next</button>
+        <button type="button" class="pill pill--ghost pill--plain" data-pl="again">Again</button>
+      </div>
+    </div>
+    <p class="note" style="text-align:center;margin:18px auto 0">Four bricks. The order never changes: root, tense, “if,” who. Mix it up and you get an art installation, not a house.</p>
+    <div class="mq" data-mq="1"></div>
+  </div>
+</section>
+
+<!-- ============ AORIST ============ -->
+<section data-section="aorist" data-words="62">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −4 · foundation</span></div>
+    <h2><span class="bracket">Foundation: the aorist</span></h2>
+      <p class="lead">The condition stands on the aorist. No foundation, no house. Here it is in a minute.</p>
+    </div>
+    <div class="aor-grid">
+      <div class="card"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4V8h4V4"/></svg><span class="num">01</span><h3>One syllable → -ar / -er</h3><p lang="tr" class="tr">yap → yapar · git → gider</p><p class="note">Almost all short verbs.</p></div>
+      <div class="card card--trav"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2ZM12 10v5M12 18h.01"/></svg><span class="num">02</span><h3>Stubborn ones → -ır / -ir / -ur / -ür</h3><p lang="tr" class="tr">gel → gelir · al → alır · ol → olur · gör → görür</p><p class="note">Thirteen exceptions. Know them by sight.</p></div>
+      <div class="card"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5ZM3 13l9 5 9-5"/></svg><span class="num">03</span><h3>Long ones and vowel-final ones</h3><p lang="tr" class="tr">konuş → konuşur · oku → okur</p><p class="note">Long verbs take -ır by harmony. Vowel-final ones just take -r.</p></div>
+    </div>
+    <div class="aor-out">
+      <div class="row row--c" data-aor data-ui></div>
+      <div class="tline" lang="tr" data-aor-line style="min-height:60px"></div>
+      <p class="note" data-aor-why data-ui></p>
+    </div>
+    <p class="note" style="text-align:center;margin:12px auto 0">After the aorist the choice is easy. Last vowel a, ı, o, u — -sa. e, i, ö, ü — -se.</p>
+    <p class="note" style="text-align:center;margin:8px auto 0">Can't remember a verb's aorist? Say “he usually…” out loud. Your mouth remembers better than your head.</p>
+  </div>
+</section>
+
+<!-- ============ PERSONS ============ -->
+<section data-section="persons" data-words="33">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −5 · residents</span></div>
+    <h2><span class="bracket">Six residents</span></h2>
+      <p class="lead">Each person has its own tail. Four follow the rules. Two don't.</p>
+    </div>
+    <div class="row" role="group" aria-label="Verb" style="margin-bottom:14px" data-ui>
+      <button type="button" class="chip" data-pv="0" aria-pressed="true" lang="tr">yap</button>
+      <button type="button" class="chip" data-pv="1" aria-pressed="false" lang="tr">gel</button>
+      <button type="button" class="chip" data-pv="2" aria-pressed="false" lang="tr">oku</button>
+    </div>
+    <div class="bento" data-bento></div>
+    <p class="note" style="margin-top:16px">We is -k: <span lang="tr" class="tr">gelirsek</span>. Not -iz. They: -ler goes before -se: <span lang="tr" class="tr">gelirlerse</span>. Two doors everyone walks into.</p>
+    <p class="note">The other four are boring. They take their tail and live in peace.</p>
+    <div class="mq" data-mq="2"></div>
+  </div>
+</section>
+
+<!-- ============ COMPARE ============ -->
+<section data-section="compare" data-words="38" class="trav-bg">
+  <div class="wrap cmp">
+    <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −6 · comparison</span></div>
+    <h2><span class="bracket">Five words against two</span></h2>
+    <p class="lead">English: if I come, I call. Five words. Turkish: two. “If,” “I” and “come” moved into one verb.</p>
+    <div class="row row--c" role="group" aria-label="Language" data-ui>
+      <button type="button" class="chip" data-lang="ru" aria-pressed="true">English</button>
+      <button type="button" class="chip" data-lang="tr" aria-pressed="false">Turkish</button>
+    </div>
+    <div class="cmp__count" data-cmp-count data-ui>5</div>
+    <div class="cmp__line" data-cmp></div>
+    <p class="note">Kazakh does the same, by the way: <span lang="kk" data-ui>келсем, қоңырау шаламын</span>. The “if” lives in the verb.</p>
+    <p class="note">Turkish saves words. Like the landlady saves on AC.</p>
+  </div>
+</section>
+
+<!-- ============ RESULT ============ -->
+<section data-section="result" data-words="38">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −7 · lower floor</span></div>
+    <h2><span class="bracket">What's on the lower floor</span></h2>
+      <p class="lead">Upstairs is always -sa or -se. Downstairs is freedom. Four common options. Tap one and the elevator moves.</p>
+    </div>
+    <div class="res">
+      <svg class="shaft" viewBox="0 0 300 420" aria-hidden="true" data-shaft>
+        <rect x="110" y="10" width="80" height="400" rx="12" fill="#121110" stroke="#3A3733" stroke-width="2"/>
+        <g fill="#8D8780" font-family="Inter" font-size="12" letter-spacing="1.5">
+          <path d="M70 70h40M70 160h40M70 250h40M70 340h40" stroke="#3A3733" stroke-width="2"/>
+          <text x="62" y="74" text-anchor="end">-1</text><text x="62" y="164" text-anchor="end">-2</text><text x="62" y="254" text-anchor="end">-3</text><text x="62" y="344" text-anchor="end">-4</text>
+        </g>
+        <g class="sh-cab"><rect x="118" y="44" width="64" height="52" rx="8" fill="#F2A65A"/><rect x="128" y="54" width="20" height="32" rx="3" fill="#141210"/><rect x="152" y="54" width="20" height="32" rx="3" fill="#141210"/></g>
+        <path class="sh-cable" d="M150 10v34" stroke="#C9A97A" stroke-width="2"/>
+      </svg>
+      <div class="res-out">
+        <div class="row" role="group" aria-label="Lower floor" data-ui>
+          <button type="button" class="chip" data-res="0" aria-pressed="true">Usually</button>
+          <button type="button" class="chip" data-res="1" aria-pressed="false">Future</button>
+          <button type="button" class="chip" data-res="2" aria-pressed="false">Request</button>
+          <button type="button" class="chip" data-res="3" aria-pressed="false">I want</button>
+        </div>
+        <div class="card">
+          <div class="res-line" lang="tr"><span class="c-cond">Akşam gelirsen,</span> <span class="c-res" data-res-tr>konuşuruz.</span></div>
+          <p class="note" data-res-ru data-ui style="margin-top:8px">If you come tonight, we'll talk.</p>
+        </div>
+        <p class="note">In this lesson upstairs gets only the aorist and -sa. Every other tense lives downstairs.</p>
+        <p class="note">Want to ask? Ask. Want to promise? Promise. Want to plan? Plan. The lower floor doesn't care.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TREE ============ -->
+<section data-section="tree" data-words="34" class="trav-bg">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −8 · forks</span></div>
+    <h2><span class="bracket">Three questions</span></h2>
+      <p class="lead">You go through the questions top to bottom. Answer with the buttons. A dot runs along your path. The finished phrase waits at the bottom.</p>
+      <p class="note">Answered “dream”? That's the next lesson. It has its own staircase.</p>
+    </div>
+    <div class="card card--trav" style="background:#141210;color:var(--bone)">
+      <svg class="tree" viewBox="0 0 400 380" aria-hidden="true" data-tree>
+        <path class="edge" id="e-dream" d="M200 56C170 80 110 88 85 110"/>
+        <path class="edge" id="e-real" d="M200 56C230 80 290 88 315 110"/>
+        <path class="edge" id="e-aor" d="M315 150C315 175 315 195 315 220"/>
+        <path class="edge" id="e-p0" d="M315 260C290 290 200 305 170 326"/>
+        <path class="edge" id="e-p3" d="M315 260C300 290 270 305 262 326"/>
+        <path class="edge" id="e-p5" d="M315 260C330 290 350 305 352 326"/>
+        <rect class="node" x="80" y="16" width="240" height="40" rx="20"/><text x="200" y="42" text-anchor="middle">Can this happen?</text>
+        <rect class="node" x="10" y="110" width="150" height="40" rx="20"/><text x="85" y="136" text-anchor="middle">No, a dream</text>
+        <rect class="node" x="240" y="110" width="150" height="40" rx="20"/><text x="315" y="136" text-anchor="middle">Yes, a plan</text>
+        <rect class="node" x="250" y="220" width="130" height="40" rx="20"/><text x="315" y="246" text-anchor="middle">kalk → kalkar</text>
+        <rect class="node" x="128" y="326" width="84" height="36" rx="18"/><text x="170" y="350" text-anchor="middle">I</text>
+        <rect class="node" x="218" y="326" width="88" height="36" rx="18"/><text x="262" y="350" text-anchor="middle">we</text>
+        <rect class="node" x="312" y="326" width="80" height="36" rx="18"/><text x="352" y="350" text-anchor="middle">they</text>
+        <circle class="tree-dot" cx="200" cy="56" r="8" fill="#F2A65A"/>
+      </svg>
+      <div class="tree-ui">
+        <p class="tree-q" data-tree-q data-ui>Can this happen?</p>
+        <div class="row row--c" data-tree-btns data-ui></div>
+        <p class="tree-res" data-tree-res lang="tr" aria-live="polite"></p>
+        <button type="button" class="pill pill--ghost pill--plain" data-tree-reset data-ui>Start over</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MNEMONIC ============ -->
+<section data-section="mnemonic" data-words="27">
+  <div class="wrap mn">
+    <div>
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −9 · lock</span></div>
+    <h2><span class="bracket">A lock in the door</span></h2>
+      <p class="lead">The English “if” is a sign in front of the door. The Turkish one is a lock built into the door itself. At the end of the verb. Listen for it: -rsa, -rse.</p>
+      <p class="note">You can take a sign down. Not a lock.</p>
+      <div class="row" data-ui>
+        <button type="button" class="pill" data-mn-play>Install the lock</button>
+        <button type="button" class="pill pill--ghost pill--plain" data-mn-say>Listen</button>
+      </div>
+    </div>
+    <svg viewBox="0 0 460 340" aria-hidden="true" data-mn>
+      <rect x="150" y="20" width="200" height="300" rx="6" fill="#1D1C1A" stroke="#8D8780" stroke-width="2"/>
+      <rect x="170" y="40" width="160" height="260" rx="4" fill="#2A2724"/>
+      <g class="mn-lock"><rect x="296" y="160" width="40" height="56" rx="8" fill="#F2A65A"/><circle cx="316" cy="182" r="7" fill="#141210"/><rect x="313" y="186" width="6" height="16" fill="#141210"/></g>
+      <text class="mn-suf" x="316" y="244" text-anchor="middle" fill="#F2A65A" font-family="Inter" font-weight="700" font-size="18">-rsa</text>
+      <g class="mn-sign"><rect x="20" y="140" width="110" height="50" rx="6" fill="#DEC9AB"/><text x="75" y="172" text-anchor="middle" fill="#141210" font-family="Inter" font-weight="700" font-size="20">IF</text><path d="M75 190v70" stroke="#DEC9AB" stroke-width="4"/></g>
+      <text x="250" y="120" text-anchor="middle" fill="#F2EEE7" font-family="Inter" font-weight="600" font-size="24">geli<tspan fill="#F2A65A">rse</tspan>m</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ SCENE ============ -->
+<section data-section="scene" data-words="27" class="trav-bg">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −10 · apartment</span></div>
+    <h2><span class="bracket">An apartment in Konyaaltı</span></h2>
+      <p class="lead">A realtor shows you a place by the sea. He speaks only in conditions. Occupational hazard. Tap the dots.</p>
+      <p class="note">A realtor in Antalya says “if” more often than “hello.” Learn from a pro.</p>
+    </div>
+    <div class="scene">
+      <svg class="bld" viewBox="0 0 1000 560" aria-hidden="true">
+        <defs><linearGradient id="dusk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A3530"/><stop offset="1" stop-color="#C7A57E"/></linearGradient></defs>
+        <rect width="1000" height="560" fill="url(#dusk)"/>
+        <circle class="sc-sun" cx="820" cy="300" r="60" fill="#F6C77A" opacity=".9"/>
+        <path class="sc-mount" d="M0 330l120-60 110 40 140-80 130 70 120-50 150 60 130-40 100 40v100H0Z" fill="#5A5048"/>
+        <rect y="380" width="1000" height="70" fill="#2C5A63"/>
+        <g class="sc-waves" stroke="#BFD9D4" stroke-width="2" fill="none"><path d="M30 400c30-8 60-8 90 0M260 420c30-8 60-8 90 0M560 405c30-8 60-8 90 0M800 425c30-8 60-8 90 0"/></g>
+        <rect y="450" width="1000" height="110" fill="#1B1A18"/>
+        <g class="sc-bld">
+          <rect x="240" y="120" width="440" height="330" fill="#E8DCC8" stroke="#141210" stroke-width="2"/>
+          <g fill="#F6C77A"><rect x="270" y="150" width="110" height="70"/><rect x="400" y="150" width="110" height="70"/><rect x="530" y="150" width="120" height="70"/><rect x="270" y="250" width="110" height="70"/><rect x="400" y="250" width="110" height="70" class="sc-kitchen"/><rect x="530" y="250" width="120" height="70"/><rect x="270" y="350" width="110" height="70"/><rect x="530" y="350" width="120" height="70"/></g>
+          <path d="M240 228h470M240 328h470" stroke="#141210" stroke-width="5"/>
+          <path d="M520 228v-14M550 228v-14M580 228v-14M610 228v-14M640 228v-14M670 228v-14M700 228v-14" stroke="#141210" stroke-width="2"/>
+          <rect x="400" y="350" width="110" height="100" fill="#3A3530"/>
+          <rect class="sc-ac" x="652" y="160" width="40" height="26" rx="3" fill="#F2EEE7" stroke="#141210"/>
+        </g>
+        <rect class="sc-pool" x="700" y="470" width="220" height="40" rx="6" fill="#4FA3B0"/>
+        <g class="sc-car"><rect x="70" y="480" width="110" height="34" rx="10" fill="#F2A65A"/><circle cx="96" cy="516" r="10" fill="#0E0E0E"/><circle cx="154" cy="516" r="10" fill="#0E0E0E"/></g>
+        <use href="#palm" x="150" y="330" width="80" height="130"/><use href="#palm" x="690" y="330" width="70" height="120"/>
+        <g class="sc-doc"><rect x="880" y="160" width="70" height="90" rx="4" fill="#F2EEE7" stroke="#141210"/><path d="M892 182h46M892 196h46M892 210h30M892 232h20" stroke="#8D8780" stroke-width="2"/></g>
+      </svg>
+      <button type="button" class="hs" style="left:60%;top:41%" data-hs="0" aria-label="Balcony" data-ui>01</button>
+      <button type="button" class="hs" style="left:41%;top:54%" data-hs="1" aria-label="Kitchen" data-ui>02</button>
+      <button type="button" class="hs" style="left:77%;top:24%" data-hs="2" aria-label="AC" data-ui>03</button>
+      <button type="button" class="hs" style="left:81%;top:87%" data-hs="3" aria-label="Pool" data-ui>04</button>
+      <button type="button" class="hs" style="left:12.5%;top:89%" data-hs="4" aria-label="Parking" data-ui>05</button>
+      <button type="button" class="hs" style="left:91.5%;top:36%" data-hs="5" aria-label="Lease" data-ui>06</button>
+    </div>
+    <div class="card dlg" aria-live="polite">
+      <div class="dlg__who" data-dlg-who data-ui></div>
+      <div data-dlg-lines></div>
+      <p class="dlg__note" data-dlg-note data-ui></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section data-section="gallery" data-words="29">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −11 · gallery</span></div>
+    <h2><span class="bracket">Sixteen “ifs”</span></h2>
+      <p class="lead">Weather first. Antalya lives by the forecast. Then the cards: English on the front, Turkish with audio on the back.</p>
+    </div>
+    <div class="wx">
+      <div class="phone">
+        <div class="phone__bar" data-ui><span>9:41</span><span>●●● ▮</span></div>
+        <div class="phone__nav"><span class="logo" lang="tr">Antalya</span><span class="note" data-ui>forecast</span></div>
+        <div class="wx__temp" data-wx-temp data-ui>28°</div>
+        <div class="wx__icons" data-wx data-ui></div>
+      </div>
+      <div class="card">
+        <span class="num" data-ui>IF THE WEATHER…</span>
+        <div class="wx__out" lang="tr" data-wx-tr></div>
+        <p class="note" data-wx-ru data-ui></p>
+      </div>
+    </div>
+    <p class="note" style="margin-bottom:14px">All sixteen are from real life. Beach, bus, keys, guests. Stuff you'll need as soon as tomorrow.</p>
+    <div class="cards" data-cards></div>
+  </div>
+</section>
+
+<!-- ============ LAB ============ -->
+<section data-section="lab" data-words="26">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −12 · lab</span></div>
+    <h2><span class="bracket">Condition lab</span></h2>
+      <p class="lead">Four modes. “Build” is a constructor. “Persons” is a slider. “Floors” is find-the-pair. “From the aorist” goes step by step.</p>
+      <p class="note">Start with “Build.” Then move the slider and watch the tail change.</p>
+    </div>
+    <div class="card">
+      <div class="tabs" role="tablist" data-ui>
+        <button type="button" role="tab" aria-selected="true" data-tab="0">Build</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="1">Persons</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="2">Floors</button>
+        <button type="button" role="tab" aria-selected="false" data-tab="3">From the aorist</button>
+      </div>
+      <div class="panel" data-panel="0" role="tabpanel">
+        <div class="lab-lbl" data-ui>Verb</div><div class="lab-row" data-lab-verbs data-ui></div>
+        <div class="lab-lbl" data-ui>Who</div><div class="lab-row" data-lab-persons data-ui></div>
+        <div class="lab-out"><div class="tline" data-lab-out lang="tr"></div><div class="tr-ru" data-lab-ru data-ui></div></div>
+        <p class="lab-why" data-lab-why data-ui></p>
+      </div>
+      <div class="panel" data-panel="1" role="tabpanel" hidden>
+        <div class="lab-big" data-sl-word lang="tr"></div>
+        <p class="lab-why" data-sl-ru data-ui></p>
+        <input type="range" min="0" max="5" step="1" value="0" data-sl aria-label="Person" style="width:min(100%,420px);margin:0 auto;display:block;accent-color:#F2A65A;min-height:44px">
+        <div class="lab-row" data-ui><button type="button" class="chip" data-sl-verb aria-pressed="false">Another verb</button></div>
+      </div>
+      <div class="panel" data-panel="2" role="tabpanel" hidden>
+        <p class="lab-why" data-ui>Tap an upper floor, then a lower one. Find four pairs.</p>
+        <div class="lab-lbl" data-ui>Upstairs · condition</div><div class="lab-row" data-pair-up data-ui></div>
+        <div class="lab-lbl" data-ui>Downstairs · result</div><div class="lab-row" data-pair-down data-ui></div>
+        <p class="lab-why" data-pair-why data-ui aria-live="polite"></p>
+      </div>
+      <div class="panel" data-panel="3" role="tabpanel" hidden>
+        <div class="lab-big" data-ys-word lang="tr"></div>
+        <p class="lab-why" data-ys-why data-ui aria-live="polite"></p>
+        <div class="lab-row" data-ui><button type="button" class="pill" data-ys-step>Next step</button><button type="button" class="chip" data-ys-next>Another verb</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRAPS ============ -->
+<section data-section="traps" data-words="62">
+  <div class="wrap">
+    <div class="sect-head sect-head--split">
+      <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −13 · traps</span></div>
+    <h2><span class="bracket">Five traps</span></h2>
+      <p class="lead">Everyone trips on these. That's normal. Wishing rain on your landlady is not.</p>
+    </div>
+    <div class="traps">
+      <div class="trap" data-trap><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2ZM12 10v5M12 18h.01"/></svg><span class="trap__n" data-ui>01</span><div class="trap__bad" lang="tr"><s>Eğer gelirim</s>, ararım.</div><div class="trap__good is-hidden" lang="tr">Eğer gelirsem, ararım.</div><p class="trap__why">Eğer is just a sign. -se makes the “if.” Without it, eğer means nothing.</p><button type="button" class="pill pill--ghost pill--plain" data-fix data-ui>Fix</button></div>
+      <div class="trap" data-trap><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7Z"/></svg><span class="trap__n" data-ui>02</span><div class="trap__bad" lang="tr">Erken <s>kalkarsız</s>, yüzeriz.</div><div class="trap__good is-hidden" lang="tr">Erken kalkarsak, yüzeriz.</div><p class="trap__why">We in a condition is -k. Not -iz.</p><button type="button" class="pill pill--ghost pill--plain" data-fix data-ui>Fix</button></div>
+      <div class="trap" data-trap><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 21V3h12v18M14 12h.01"/></svg><span class="trap__n" data-ui>03</span><div class="trap__bad" lang="tr"><s>Gelersem</s>, ararım.</div><div class="trap__good is-hidden" lang="tr">Gelirsem, ararım.</div><p class="trap__why"><span lang="tr">gel</span> is a stubborn verb; its aorist is <span lang="tr">gelir</span>. Crooked foundation, the house falls.</p><button type="button" class="pill pill--ghost pill--plain" data-fix data-ui>Fix</button></div>
+      <div class="trap" data-trap><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"/></svg><span class="trap__n" data-ui>04</span><div class="trap__bad" lang="tr">Yağmur <s>yağarse</s>, müzeye gideriz.</div><div class="trap__good is-hidden" lang="tr">Yağmur yağarsa, müzeye gideriz.</div><p class="trap__why">The last vowel <span lang="tr">a</span> is back. So -sa.</p><button type="button" class="pill pill--ghost pill--plain" data-fix data-ui>Fix</button></div>
+      <div class="trap" data-trap><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2-2a5 5 0 1 0 1 6"/></svg><span class="trap__n" data-ui>05</span><div class="trap__bad" lang="tr"><s>Yağmur yağsa</s>, müzeye gideriz.</div><div class="trap__good is-hidden" lang="tr">Yağmur yağarsa, müzeye gideriz.</div><p class="trap__why">Without the aorist it's a dream, not a plan. The landlady will think you want rain again.</p><p class="trap__why">The fifth one is the priciest. It already cost you your reputation.</p><button type="button" class="pill pill--ghost pill--plain" data-fix data-ui>Fix</button></div>
+    </div>
+    <div class="row row--c" style="margin-top:18px" data-ui><button type="button" class="pill" data-fix-all>Fix them all</button></div>
+    <div class="mq" data-mq="3"></div>
+  </div>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section data-section="video" data-words="18">
+  <div class="wrap">
+    <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −14 · video</span></div>
+    <h2><span class="bracket">Listen one more time</span></h2>
+    <p class="lead">Notice: aorist first, then -sa or -se, then the person. And how “we” and “they” sound.</p>
+    <a-video yt="xt3kdDmlWcc" start="221" end="285" title="The suffixes SE/SA and the conditional mood" channel="Turkish with Maria Zhdanova"></a-video>
+  </div>
+</section>
+
+<!-- ============ PRACTICE ============ -->
+<section data-section="practice" data-words="12">
+  <div class="wrap">
+    <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −15 · practice</span></div>
+    <h2><span class="bracket">Practice</span></h2>
+    <p class="lead">Five tasks. From recognizing to your own phrase. The last one is the elevator to the bunker.</p>
+    <a-exercise ref="b1.conditional.ex1"></a-exercise>
+    <a-exercise ref="b1.conditional.ex2"></a-exercise>
+    <a-exercise ref="b1.conditional.ex3"></a-exercise>
+    <a-exercise ref="b1.conditional.ex4"></a-exercise>
+    <a-exercise ref="b1.conditional.ex5" class="ak-ex">
+      <div class="ak-ex__head"><span class="ak-ex__title">Elevator to the capsule</span><span class="ak-ex__count" data-lift-count>1 / 6</span></div>
+      <div class="lift">
+        <div class="lift__shaft" aria-hidden="true"><div class="lift__cab" data-lift-cab>−0</div></div>
+        <div>
+          <p class="lift__q" data-lift-q></p>
+          <div class="lift__opts" data-lift-opts></div>
+          <p class="lift__status" data-lift-status aria-live="polite"></p>
+        </div>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<!-- ============ CHECK ============ -->
+<section data-section="check" data-words="5">
+  <div class="wrap">
+    <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −16 · check</span></div>
+    <h2><span class="bracket">Quick check</span></h2>
+    <p class="lead">Five questions. No cheat sheet.</p>
+    <a-quiz ref="b1.conditional.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ============ CHEAT ============ -->
+<section data-section="cheat" data-words="63">
+  <div class="wrap">
+    <div class="lvl-row" data-ui><svg class="lvl" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-opacity=".35"/><g class="lvl__ring"><circle cx="32" cy="32" r="24" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="2 5"/></g><path class="lvl__hand" d="M32 32V12" stroke="#F2A65A" stroke-width="2.5" stroke-linecap="round"/><circle cx="32" cy="32" r="3" fill="currentColor"/></svg><span class="lvl-t">level −17 · capsule</span></div>
+    <h2><span class="bracket">Cheat sheet</span></h2>
+    <p class="lead" data-ui>Save it as a screenshot.</p>
+    <div class="poster" data-poster>
+      <div class="poster__grid">
+        <div class="pbox">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5ZM3 13l9 5 9-5"/></svg><h3>Formula</h3>
+          <div class="tline" lang="tr" style="justify-content:flex-start"><span class="tile tile--root">gel</span><span class="tile tile--aor">ir</span><span class="tile tile--sa">se</span><span class="tile tile--p">m</span></div>
+          <p style="margin-top:10px">Root → aorist → -sa / -se → person.</p>
+        </div>
+        <div class="pbox">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v10H3ZM9 21v-6h6v6"/></svg><h3>Persons</h3>
+          <p lang="tr">gelirsem · gelirsen · gelirse · <b>gelirsek</b> · gelirseniz · <b>gelirlerse</b></p>
+        </div>
+        <div class="pbox">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4v-4h4v-4h4V8h4V4"/></svg><h3>Two floors</h3>
+          <p>Upstairs, the condition with -sa. Downstairs, anything: <a-say>Gelirsen, beni ara.</a-say></p>
+        </div>
+        <div class="pbox">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 14a4 4 0 1 1 3.5-6H21v3h-2v3h-3v-3h-4.5A4 4 0 0 1 8 14Z"/></svg><h3>Remember</h3>
+          <p><span lang="tr">eğer</span> is optional, -sa is required. No aorist means a dream, not a plan.</p>
+        </div>
+      </div>
+    </div>
+    <div class="finale">
+      <svg width="140" height="140" viewBox="0 0 140 140" aria-hidden="true" data-cloud><path class="cl" d="M30 86c-16 0-16-24 2-24 0-22 28-28 38-12 10-18 44-14 44 10 18-2 22 26 4 26Z" fill="#2A2826" stroke="#8D8780" stroke-width="2"/><g class="drops" stroke="#9FC8C0" stroke-width="3" stroke-linecap="round"><path d="M44 98l-4 10M64 98l-4 10M84 98l-4 10M104 98l-4 10"/></g></svg>
+      <h3>A week later</h3>
+      <p>Saturday. The sky over Antalya is gray. First time in a month. The landlady texts: what are you up to?</p>
+      <p>You write: <a-say>Yağmur yağarsa, müzeye gideriz.</a-say></p>
+      <p>A minute later: <a-say>Yağmur yağıyor. Müzeye gidin.</a-say></p>
+      <p>The rain came. The landlady is sure you summoned it. Last time.</p>
+      <p>Word your wishes carefully. In Antalya they come true.</p>
+      <div class="row row--c" data-ui><button type="button" class="pill" data-final>Send to the landlady</button></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<nav class="sb" data-scrollbar data-depth="24" aria-label="Lesson progress">
+  <div class="sb__track"><span class="sb__fill"></span><span class="sb__read" aria-hidden="true">−0.0 m</span></div>
+</nav>
+
+<template data-achievement data-title="First floor built" data-text="Now you build “if” on the aorist. The landlady no longer mixes up your plans and your dreams.">
+  <svg viewBox="0 0 140 140" aria-hidden="true">
+    <circle cx="70" cy="70" r="64" fill="#1D1C1A" stroke="#C9A97A" stroke-width="3"/>
+    <g class="a-ring"><circle cx="70" cy="70" r="54" fill="none" stroke="#F2A65A" stroke-width="2" stroke-dasharray="3 6"/></g>
+    <g class="a-door"><rect x="34" y="46" width="72" height="48" rx="24" fill="#DEC9AB"/><text x="70" y="76" text-anchor="middle" font-family="Inter" font-weight="700" font-size="15" fill="#141210">-rsa</text></g>
+    <g fill="#F2A65A"><circle class="a-tick" cx="70" cy="18" r="4"/><circle class="a-tick" cx="122" cy="70" r="4"/><circle class="a-tick" cx="70" cy="122" r="4"/><circle class="a-tick" cx="18" cy="70" r="4"/></g>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const G = !reduce && window.gsap ? window.gsap : null;
+  const ST = G && window.ScrollTrigger ? window.ScrollTrigger : null;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const speak = (t) => { try { if (window.AlternaKit) window.AlternaKit.speak(t); } catch (e) { /* без звука */ } };
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  if (ST) ST.config({ ignoreMobileResize: true });
+  const refresh = () => { if (ST) ST.refresh(); };
+  addEventListener('load', refresh);
+  if (document.fonts) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  const onScreen = (el, fn) => { if (!el) return; const io = new IntersectionObserver(([e]) => fn(e.isIntersecting)); io.observe(el); };
+  const loopST = (trigger) => ({ trigger, toggleActions: 'play pause resume pause' });
+
+  /* ---------- искры, свечение за курсором, заголовки ---------- */
+  function spark(el, n = 12) {
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const host = document.createElement('div');
+    host.className = 'mk-sparks';
+    host.style.left = r.left + r.width / 2 + 'px';
+    host.style.top = r.top + r.height / 2 + 'px';
+    document.body.append(host);
+    for (let i = 0; i < n; i++) {
+      const s = document.createElement('i');
+      s.style.setProperty('--h', [28, 36, 40, 150, 32][i % 5]);
+      host.append(s);
+      const a = (i / n) * Math.PI * 2;
+      const d = 38 + (i % 4) * 18;
+      if (G) G.to(s, { x: Math.cos(a) * d, y: Math.sin(a) * d, scale: 0.2, duration: 0.8, ease: 'power3.out' });
+    }
+    setTimeout(() => host.remove(), 850);
+  }
+  const glow = $('.mk-glow');
+  if (G && glow && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    addEventListener('pointermove', (e) => { G.to(glow, { x: e.clientX, y: e.clientY, duration: 0.7, ease: 'power3.out', overwrite: true }); }, { passive: true });
+  }
+  if (G && window.SplitText) {
+    $$('[data-section] h2').forEach((h) => {
+      const sp = new SplitText(h, { type: 'words' });
+      G.from(sp.words, { yPercent: 60, rotation: 4, duration: 0.8, stagger: 0.05, ease: 'back.out(2)', scrollTrigger: { trigger: h, start: 'top 88%', once: true } });
+    });
+  }
+  if (ST) {
+    ST.batch('.card, .trap, .pbox, .bcell', { start: 'top 92%', once: true, onEnter: (els) => G.from(els, { y: 46, scale: 0.96, duration: 0.8, ease: 'power3.out', stagger: 0.06 }) });
+    ST.batch('.kicker, .bracket', { start: 'top 92%', once: true, onEnter: (els) => G.fromTo(els, { letterSpacing: '0.2em' }, { letterSpacing: '0em', duration: 0.9, ease: 'power3.out', stagger: 0.08 }) });
+  }
+  $$('.ticker__in').forEach((t) => {
+    t.innerHTML += t.innerHTML;
+    if (G) G.to(t, { xPercent: -50, duration: 38, ease: 'none', repeat: -1, scrollTrigger: loopST(t.parentElement) });
+  });
+
+  /* ---------- мини-вопрос после блока ---------- */
+  function miniQ(box, d) {
+    box.setAttribute('data-ui', '');
+    box.innerHTML = '<div class="mq__q"></div><div class="mq__o"></div><div class="mq__a" aria-live="polite"></div>';
+    $('.mq__q', box).textContent = d.q;
+    d.o.forEach((txt, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.lang = 'tr';
+      b.textContent = txt;
+      b.addEventListener('click', () => {
+        $$('button', box).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+        const ok = i === d.a;
+        b.classList.add(ok ? 'is-right' : 'is-wrong');
+        $('.mq__a', box).textContent = d.why[i];
+        speak(d.say || d.o[d.a]);
+        if (ok) { spark(b, 16); if (G) G.fromTo(box, { scale: 1 }, { scale: 1.03, duration: 0.18, yoyo: true, repeat: 1 }); }
+        else if (G) G.fromTo(b, { x: -10 }, { x: 0, duration: 0.6, ease: 'elastic.out(1, .3)' });
+      });
+      $('.mq__o', box).append(b);
+    });
+    if (G) G.from(box, { y: 40, rotation: -1, duration: 0.8, ease: 'back.out(2)', scrollTrigger: { trigger: box, start: 'top 92%', once: true } });
+  }
+
+  /* ---------- карточки-перевёртыши ---------- */
+  const ICON = {
+    sun: 'M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z',
+    rain: 'M7 15a5 5 0 1 1 9.5-2.5A4 4 0 1 1 17 18H7a3 3 0 0 1 0-6M8 20l-1 2M12 20l-1 2M16 20l-1 2',
+    phone: 'M7 2h10v20H7ZM11 18h2',
+    tram: 'M6 3h12v13H6ZM6 11h12M9 20l-2 2M15 20l2 2M9 16v4M15 16v4M10 3V1h4v2',
+    fall: 'M4 4h16M6 4v6c0 4 2 6 2 10M12 4v16M18 4v6c0 4-2 6-2 10',
+    fish: 'M3 12c4-6 12-6 16 0-4 6-12 6-16 0ZM19 12l3-3v6ZM8 11h.01',
+    ticket: 'M3 8a2 2 0 0 0 0 4v4h18v-4a2 2 0 0 1 0-4V4H3ZM14 4v12',
+    clock: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18ZM12 7v5l3 3',
+    talk: 'M4 5h16v10H9l-5 4Z',
+    hot: 'M12 3v11a3 3 0 1 0 2 0V3a1 1 0 0 0-2 0ZM16 6h2M16 9h2',
+    wave: 'M2 12c3-3 5-3 8 0s5 3 8 0 3-2 4-1M2 17c3-3 5-3 8 0s5 3 8 0 3-2 4-1',
+    cup: 'M6 9h11v6a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5ZM17 11h2a2 2 0 0 1 0 4h-2',
+    map: 'M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2ZM9 4v14M15 6v14',
+    key: 'M8 14a4 4 0 1 1 3.5-6H21v3h-2v3h-3v-3h-4.5A4 4 0 0 1 8 14Z',
+    guests: 'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3 20a6 6 0 0 1 12 0M17 11a3 3 0 1 0 0-6M21 20a6 6 0 0 0-4-5.6',
+    plane: 'M2 13l20-8-6 16-4-6-6 3 2-5Z',
+    house: 'M3 11l9-7 9 7v10H3ZM9 21v-6h6v6',
+    lock: 'M5 11h14v10H5ZM8 11V7a4 4 0 0 1 8 0v4',
+    money: 'M3 6h18v12H3ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
+    bus: 'M5 4h14v13H5ZM5 11h14M8 17v3M16 17v3',
+  };
+  const mkIcon = (name) => {
+    const svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', ICON[name] || ICON.house);
+    svg.append(p);
+    return svg;
+  };
+  function flipCards(box, list) {
+    box.setAttribute('data-ui', '');
+    list.forEach(([ic, ru, tr]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'fc';
+      b.setAttribute('aria-label', ru);
+      b.innerHTML = '<span class="fc__in"><span class="fc__f"></span><span class="fc__b" lang="tr"></span></span>';
+      $('.fc__f', b).append(mkIcon(ic), ru);
+      $('.fc__b', b).append(mkIcon(ic), tr);
+      let open = false;
+      b.addEventListener('click', () => {
+        open = !open;
+        if (open) speak(tr);
+        if (G) G.to($('.fc__in', b), { rotationY: open ? 180 : 0, duration: 0.8, ease: 'back.out(1.5)' });
+        else $('.fc__in', b).style.transform = open ? 'rotateY(180deg)' : '';
+      });
+      box.append(b);
+    });
+    if (G) {
+      G.from($$('.fc', box), { y: 70, rotationX: -35, transformPerspective: 700, duration: 0.8, ease: 'back.out(1.6)', stagger: 0.05, scrollTrigger: { trigger: box, start: 'top 85%', once: true } });
+      G.to($$('.fc:nth-child(3n+2) .fc__in', box), { y: -7, duration: 1.8, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: loopST(box) });
+    }
+  }
+
+  /* ---------- ловушки «до / после» ---------- */
+  function fixTrap(card) {
+    const good = $('.trap__good', card);
+    if (!good || !good.classList.contains('is-hidden')) return;
+    good.classList.remove('is-hidden');
+    speak(good.textContent.trim());
+    if (!G) return;
+    G.fromTo($('.trap__bad', card), { x: 0 }, { x: 8, duration: 0.07, yoyo: true, repeat: 5 });
+    G.fromTo(good, { y: -26, scaleX: 0.3 }, { y: 0, scaleX: 1, duration: 0.7, ease: 'back.out(2.2)', delay: 0.4 });
+    G.fromTo($('.trap__n', card), { rotation: 0 }, { rotation: 360, duration: 0.9, ease: 'power3.inOut' });
+  }
+  $$('[data-trap]').forEach((card) => $('[data-fix]', card).addEventListener('click', (e) => { fixTrap(card); spark(e.currentTarget, 10); }));
+  const fixAll = $('[data-fix-all]');
+  if (fixAll) fixAll.addEventListener('click', async () => { for (const c of $$('[data-trap]')) { fixTrap(c); await wait(reduce ? 50 : 650); } });
+
+  /* ---------- свой скроллбар: глубиномер ---------- */
+  const bar = $('[data-scrollbar]');
+  const track = $('.sb__track', bar);
+  const readout = $('.sb__read', bar);
+  const secs = $$('[data-section]');
+  const DEPTH = Number(bar.dataset.depth || 40);
+  const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  const vertical = () => matchMedia('(min-width: 768px)').matches;
+  const marks = secs.map((s) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sb__mark';
+    b.dataset.key = s.dataset.section;
+    b.setAttribute('aria-label', `To the section “${(s.querySelector('h1, h2')?.textContent || s.dataset.section).trim()}”`);
+    b.addEventListener('click', () => s.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }));
+    track.append(b);
+    return b;
+  });
+  const layout = () => marks.forEach((b, i) => b.style.setProperty('--at', Math.min(1, secs[i].offsetTop / maxScroll()).toFixed(4)));
+  const progress = () => {
+    const p = Math.min(1, scrollY / maxScroll());
+    bar.style.setProperty('--p', p.toFixed(4));
+    readout.textContent = '−' + (p * DEPTH).toFixed(1).replace('.', ',') + ' m';
+  };
+  const seek = (e) => {
+    const r = track.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    scrollTo(0, Math.max(0, Math.min(1, p)) * maxScroll());
+  };
+  track.addEventListener('pointerdown', (e) => { if (e.target.closest('.sb__mark')) return; track.setPointerCapture(e.pointerId); seek(e); });
+  track.addEventListener('pointermove', (e) => { if (track.hasPointerCapture(e.pointerId)) seek(e); });
+  addEventListener('scroll', progress, { passive: true });
+  addEventListener('resize', layout);
+  addEventListener('load', layout);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((b) => b.dataset.key === e.detail.key);
+    if (!m) return;
+    m.classList.add('is-read');
+    if (G) G.fromTo(m, { scale: 1.8 }, { scale: 1, duration: 0.6, ease: 'elastic.out(1, .4)' });
+  });
+  layout();
+  progress();
+
+  /* ---------- ачивка: капсула закрывается ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.a-door'), { scaleX: 0, transformOrigin: '70px 70px' }, { scaleX: 1, duration: 0.5, ease: 'power3.out' }, 0.9)
+      .fromTo(b.querySelector('.a-ring'), { rotation: -180, transformOrigin: '70px 70px' }, { rotation: 0, duration: 1, ease: 'power3.out' }, 1)
+      .fromTo(b.querySelectorAll('.a-tick'), { scale: 0, transformOrigin: '70px 70px' }, { scale: 1, duration: 0.4, stagger: 0.08, ease: 'back.out(3)' }, 1.3);
+  });
+
+  /* ---------- грамматика: широкое время + -sa ---------- */
+  const BACK = 'aıou';
+  const lastV = (s) => [...s].reverse().find((c) => 'aıoueiöü'.includes(c));
+  function cond(aor, p) {
+    const back = BACK.includes(lastV(aor));
+    const sa = back ? 'sa' : 'se';
+    return [aor + sa + 'm', aor + sa + 'n', aor + sa, aor + sa + 'k', aor + sa + (back ? 'nız' : 'niz'), aor + (back ? 'lar' : 'ler') + sa][p];
+  }
+  const PRON = ['Ben', 'Sen', 'O', 'Biz', 'Siz', 'Onlar'];
+  const PRU = ['I', 'you', 'he, she', 'we', 'you', 'they'];
+
+  /* ---------- HERO ---------- */
+  $$('[data-count]').forEach((el) => {
+    if (!G) return;
+    const o = { v: 0 };
+    G.to(o, { v: Number(el.dataset.count), duration: 1.6, delay: 0.5, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(o.v); } });
+  });
+  function heroDemo() {
+    speak('Yağmur yağarsa, müzeye gideriz.');
+    if (!G) return;
+    const tl = G.timeline();
+    tl.fromTo('.hd-aor', { y: -120, rotation: -20 }, { y: 0, rotation: 0, duration: 0.8, ease: 'bounce.out' })
+      .fromTo('.hd-sa', { y: -140, rotation: 24 }, { y: 0, rotation: 0, duration: 0.8, ease: 'bounce.out' }, '-=0.45')
+      .fromTo('.h-up', { y: -20, scale: 0.9, transformOrigin: '50% 50%' }, { y: 0, scale: 1, duration: 0.5, ease: 'back.out(2)' }, '-=0.2')
+      .fromTo('.h-stairs', { strokeDashoffset: 120 }, { strokeDashoffset: 0, duration: 0.8, ease: 'power2.out' })
+      .fromTo('.h-down', { y: 30, scale: 0.8, transformOrigin: '50% 50%' }, { y: 0, scale: 1, duration: 0.6, ease: 'back.out(2)' }, '-=0.3')
+      .fromTo('.h-lamp', { scale: 1, transformOrigin: '50% 50%' }, { scale: 2.4, duration: 0.25, yoyo: true, repeat: 3 });
+    spark($('.hd-sa'), 14);
+  }
+  $('[data-hero-play]').addEventListener('click', heroDemo);
+  $('[data-hero-say]').addEventListener('click', () => { speak('Yağmur yağarsa'); if (G) G.fromTo('.hd .tile', { y: 0 }, { y: -12, duration: 0.2, stagger: 0.08, yoyo: true, repeat: 1 }); });
+  if (G) {
+    G.delayedCall(1.1, () => G.fromTo('.hd-sa', { y: -90 }, { y: 0, duration: 0.9, ease: 'bounce.out' }));
+    const hs = { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true };
+    G.to('.hero__wall', { yPercent: 14, ease: 'none', scrollTrigger: hs });
+    G.to('.tablet', { yPercent: -8, rotation: -1.5, ease: 'none', scrollTrigger: { ...hs } });
+    G.to('.hero__copy', { yPercent: 12, ease: 'none', scrollTrigger: { ...hs } });
+    G.to('.h-house', { y: -16, ease: 'none', scrollTrigger: { ...hs } });
+    G.to('.h-cap', { y: 14, ease: 'none', scrollTrigger: { ...hs } });
+    G.to('.h-trees', { x: -12, ease: 'none', scrollTrigger: { ...hs } });
+    G.to('.h-win rect', { opacity: 0.55, duration: 1.4, stagger: { each: 0.3, repeat: -1, yoyo: true }, ease: 'sine.inOut', scrollTrigger: loopST('.hero') });
+    G.to('.h-moon', { y: -8, duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: loopST('.hero') });
+    G.to('.h-lamp', { opacity: 0.4, duration: 0.9, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: loopST('.hero') });
+  }
+
+  /* ---------- CHAT ---------- */
+  if (G) {
+    G.from('[data-chat] .msg', { y: 24, scale: 0.85, transformOrigin: 'left bottom', duration: 0.5, stagger: 0.38, ease: 'back.out(2)', scrollTrigger: { trigger: '.phone', start: 'top 72%', once: true } });
+    G.to('[data-typing] i', { y: -5, duration: 0.35, stagger: 0.12, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: loopST('[data-typing]') });
+  }
+  const REPLIES = [
+    ['There\'s eğer, but no -sa. The landlady sees two statements and no “if.”', false],
+    ['The landlady likes the message. Writes: Tamam! The museum is open on Saturday.', true],
+    ['Dreaming of rain again. The landlady closes the chat. So as not to jinx it.', false],
+  ];
+  $$('[data-choice]').forEach((b) => b.addEventListener('click', () => {
+    const [text, ok] = REPLIES[Number(b.dataset.choice)];
+    $$('[data-choice]').forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+    b.classList.add(ok ? 'is-right' : 'is-wrong');
+    const m = document.createElement('div');
+    m.className = 'msg';
+    m.setAttribute('data-ui', '');
+    m.textContent = text;
+    $('[data-chat]').append(m);
+    if (G) G.from(m, { y: 20, scale: 0.8, duration: 0.45, ease: 'back.out(2.5)' });
+    if (ok) { speak('Yağmur yağarsa, müzeye gideriz.'); spark(b); }
+    else if (G) G.fromTo(b, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, .3)' });
+  }));
+
+  /* ---------- GUESS ---------- */
+  const WHY = [
+    ['That\'s “if only I\'d come.” A dream. A plan needs the aorist.', 'Yes. gelir + se + m. A plan, not a dream.', 'Eğer doesn\'t make an “if” by itself. You need the -se tail.'],
+    ['Yes. kalır + sa + k. We is -k.', 'Almost. But “we” in a condition is -k, not -iz.', 'That\'s just “we\'re late.” No -sa, no condition.'],
+  ];
+  const ANS = ['Gelirsem', 'Geç kalırsak'];
+  $$('[data-poll]').forEach((poll) => {
+    const pi = Number(poll.dataset.poll);
+    $$('.poll__opt', poll).forEach((b, oi) => b.addEventListener('click', () => {
+      const ok = b.dataset.ok === '1';
+      $$('.poll__opt', poll).forEach((x) => x.classList.remove('is-right', 'is-wrong'));
+      b.classList.add(ok ? 'is-right' : 'is-wrong');
+      $('.poll__why', poll).textContent = WHY[pi][oi];
+      speak(ANS[pi]);
+      if (ok) { spark(b); if (G) G.fromTo($('.fill', b), { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: 'power3.out' }); }
+      else if (G) G.fromTo(b, { x: -10 }, { x: 0, duration: 0.6, ease: 'elastic.out(1, .3)' });
+    }));
+  });
+  if (G) G.from('[data-poll]', { y: 60, rotation: (i) => (i ? 2 : -2), duration: 0.9, ease: 'back.out(1.7)', stagger: 0.15, scrollTrigger: { trigger: '.polls', start: 'top 80%', once: true } });
+
+  /* ---------- FLOORS: дом в два этажа и лифт ---------- */
+  const FL = [
+    ['Yağmur yağarsa,', 'müzeye gideriz.', 'If it rains, we\'ll go to the museum.'],
+    ['Erken kalkarsak,', 'plaja gideriz.', 'If we get up early, we\'ll go to the beach.'],
+    ['Gelirsen,', 'beni ara.', 'If you come, call me.'],
+  ];
+  let flI = 0;
+  let flDown = false;
+  function flSet(i) {
+    flI = i;
+    $$('[data-fl-set]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.flSet) === i)));
+    $('.fl-up').textContent = FL[i][0];
+    $('.fl-down').textContent = FL[i][1];
+    $('[data-fl-ru]').textContent = FL[i][2];
+    if (G) {
+      G.fromTo('.fl-up', { x: -40 }, { x: 0, duration: 0.6, ease: 'back.out(2)' });
+      G.fromTo('.fl-down', { x: 40 }, { x: 0, duration: 0.6, ease: 'back.out(2)', delay: 0.15 });
+    }
+  }
+  function flRide() {
+    flDown = !flDown;
+    $('[data-fl-ride]').textContent = flDown ? 'Elevator up' : 'Elevator down';
+    speak(flDown ? FL[flI][1] : FL[flI][0]);
+    if (G) G.to('.fl-cab', { y: flDown ? 220 : 0, duration: 1, ease: 'power3.inOut' });
+    else $('.fl-cab').setAttribute('transform', flDown ? 'translate(0 220)' : '');
+  }
+  $$('[data-fl-set]').forEach((b) => b.addEventListener('click', () => { flSet(Number(b.dataset.flSet)); speak(FL[flI][0] + ' ' + FL[flI][1]); }));
+  $('[data-fl-ride]').addEventListener('click', flRide);
+  $('[data-fl-say]').addEventListener('click', async () => { speak(FL[flI][0]); if (G) G.fromTo('.fl-up', { scale: 1, transformOrigin: 'left center' }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1 }); await wait(1600); speak(FL[flI][1]); if (G) G.fromTo('.fl-down', { scale: 1, transformOrigin: 'left center' }, { scale: 1.08, duration: 0.25, yoyo: true, repeat: 1 }); });
+  if (G) {
+    G.fromTo('.fl-up', { y: 110 }, { y: 0, ease: 'none', scrollTrigger: { trigger: '[data-fl]', start: 'top 85%', end: 'center 50%', scrub: true } });
+    G.fromTo('.fl-down', { y: -100 }, { y: 0, ease: 'none', scrollTrigger: { trigger: '[data-fl]', start: 'top 85%', end: 'center 50%', scrub: true } });
+  }
+  miniQ($('[data-mq="0"]'), { q: 'Where\'s the condition here: “Erken kalkarsak, plaja gideriz”?', o: ['Erken kalkarsak', 'plaja gideriz'], a: 0, why: ['Yes. -sa sits there. That\'s the upper floor.', 'That\'s the lower floor: what will happen. The condition is where -sa is.'], say: 'Erken kalkarsak, plaja gideriz.' });
+
+  /* ---------- BUILD: плеер 1→2→3→4 ---------- */
+  const STEPS = [
+    [['gel', 'tile--root']],
+    [['gel', 'tile--root'], ['ir', 'tile--aor']],
+    [['gel', 'tile--root'], ['ir', 'tile--aor'], ['se', 'tile--sa']],
+    [['gel', 'tile--root'], ['ir', 'tile--aor'], ['se', 'tile--sa'], ['m', 'tile--p']],
+  ];
+  const STEP_SAY = ['gel', 'gelir', 'gelirse', 'gelirsem'];
+  const plLine = $('[data-pl-line]');
+  let step = 0;
+  let playing = null;
+  function renderStep(i, anim = true) {
+    step = (i + STEPS.length) % STEPS.length;
+    plLine.innerHTML = '';
+    const tiles = STEPS[step].map(([t, c]) => { const s = document.createElement('span'); s.className = 'tile ' + c; s.textContent = t; plLine.append(s); return s; });
+    $$('[data-step]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.step) === step)));
+    $$('[data-cap]').forEach((p) => { p.hidden = Number(p.dataset.cap) !== step; });
+    if (!G || !anim) return;
+    const last = tiles[tiles.length - 1];
+    G.fromTo(last, { y: -110, rotation: -18 }, { y: 0, rotation: 0, duration: 0.85, ease: 'bounce.out' });
+    if (step === 3) G.fromTo(tiles, { scale: 1 }, { scale: 1.08, duration: 0.2, yoyo: true, repeat: 1, stagger: 0.08, delay: 0.7 });
+    G.fromTo('[data-cap]:not([hidden])', { x: 30 }, { x: 0, duration: 0.5, ease: 'power3.out' });
+  }
+  const stopPlay = () => { clearInterval(playing); playing = null; $('[data-pl="play"]').textContent = 'Play'; };
+  function startPlay() {
+    stopPlay();
+    renderStep(0);
+    speak(STEP_SAY[0]);
+    $('[data-pl="play"]').textContent = 'Pause';
+    playing = setInterval(() => { if (step === STEPS.length - 1) { stopPlay(); return; } renderStep(step + 1); speak(STEP_SAY[step]); }, 2500);
+  }
+  $$('[data-step]').forEach((b) => b.addEventListener('click', () => { stopPlay(); renderStep(Number(b.dataset.step)); speak(STEP_SAY[step]); }));
+  $('[data-pl="prev"]').addEventListener('click', () => { stopPlay(); renderStep(step - 1); speak(STEP_SAY[step]); });
+  $('[data-pl="next"]').addEventListener('click', () => { stopPlay(); renderStep(step + 1); speak(STEP_SAY[step]); });
+  $('[data-pl="again"]').addEventListener('click', startPlay);
+  $('[data-pl="play"]').addEventListener('click', () => (playing ? stopPlay() : startPlay()));
+  onScreen($('[data-player]'), (vis) => { if (!vis && playing) stopPlay(); });
+  renderStep(3, false);
+  if (ST) ST.create({ trigger: '[data-player]', start: 'top 65%', once: true, onEnter: startPlay });
+  miniQ($('[data-mq="1"]'), { q: 'If I do… (yap → yapar)', o: ['yaparsam', 'yaparsem', 'yapsarım'], a: 0, why: ['Yes. yapar + sa + m.', 'The last vowel a is back. So -sa.', 'The order\'s broken: aorist first, then -sa, then the person.'] });
+
+  /* ---------- AORIST: фундамент ---------- */
+  const AOR = [['yap', 'yapar', 'to do', 'One syllable: -ar.'], ['git', 'gider', 'to go', 'One syllable: -er. And the t softens: gider.'], ['gel', 'gelir', 'to come', 'Stubborn verb: -ir.'], ['al', 'alır', 'to take', 'Stubborn: -ır.'], ['ol', 'olur', 'to become, to be', 'Stubborn: -ur.'], ['gör', 'görür', 'to see', 'Stubborn: -ür.'], ['konuş', 'konuşur', 'to talk', 'Long: -ur by harmony.'], ['oku', 'okur', 'to read', 'Ends in a vowel: just -r.'], ['iste', 'ister', 'to want', 'Ends in a vowel: just -r.'], ['bekle', 'bekler', 'to wait', 'Ends in a vowel: just -r.']];
+  const aorBox = $('[data-aor]');
+  function aorShow(i) {
+    const [root, aor, ru, why] = AOR[i];
+    $$('button', aorBox).forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
+    const line = $('[data-aor-line]');
+    line.innerHTML = '';
+    const c = cond(aor, 2);
+    const parts = [[root, 'tile--root'], [aor.slice(root.length), 'tile--aor'], [c.slice(aor.length), 'tile--sa']];
+    if (root === 'git') parts.splice(0, 2, ['gid', 'tile--root'], ['er', 'tile--aor']);
+    const tiles = parts.map(([t, cl]) => { const s = document.createElement('span'); s.className = 'tile ' + cl; s.textContent = t; line.append(s); return s; });
+    $('[data-aor-why]').textContent = `${why} Condition: ${c}.`;
+    speak(c);
+    if (G) G.fromTo(tiles, { y: -60, rotation: (k) => (k - 1) * 12 }, { y: 0, rotation: 0, duration: 0.7, ease: 'back.out(2.5)', stagger: 0.12 });
+  }
+  AOR.forEach(([root], i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.lang = 'tr';
+    b.textContent = root;
+    b.addEventListener('click', () => aorShow(i));
+    aorBox.append(b);
+  });
+  aorShow(0);
+  if (G) G.from('.aor-grid .card', { rotationY: -30, transformPerspective: 800, y: 40, duration: 0.9, ease: 'back.out(1.6)', stagger: 0.15, scrollTrigger: { trigger: '.aor-grid', start: 'top 82%', once: true } });
+
+  /* ---------- PERSONS: bento ---------- */
+  const PV = ['yapar', 'gelir', 'okur'];
+  const bento = $('[data-bento]');
+  bento.setAttribute('data-ui', '');
+  function renderBento(v) {
+    $$('[data-pv]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.pv) === v)));
+    bento.innerHTML = '';
+    PRON.forEach((p, i) => {
+      const f = cond(PV[v], i);
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'bcell' + (i === 3 || i === 5 ? ' is-special' : '');
+      const cut = PV[v].length;
+      b.innerHTML = `<b></b><span class="f" lang="tr"></span><small></small>`;
+      b.querySelector('b').textContent = p;
+      b.querySelector('.f').innerHTML = `${f.slice(0, cut)}<span class="end">${f.slice(cut)}</span>`;
+      b.querySelector('small').textContent = i === 3 ? 'we: -k, not -iz' : i === 5 ? 'they: -lar before -sa' : 'if ' + PRU[i];
+      b.addEventListener('click', () => { speak(f); if (G) G.fromTo(b.querySelector('.end'), { y: -16, scale: 1.6 }, { y: 0, scale: 1, duration: 0.7, ease: 'elastic.out(1, .4)' }); });
+      bento.append(b);
+    });
+    if (G) G.from($$('.bcell', bento), { scale: 0.85, rotation: (i) => (i % 2 ? 2 : -2), duration: 0.6, ease: 'back.out(2)', stagger: 0.05 });
+  }
+  $$('[data-pv]').forEach((b) => b.addEventListener('click', () => renderBento(Number(b.dataset.pv))));
+  renderBento(0);
+  miniQ($('[data-mq="2"]'), { q: 'If they come…', o: ['gelirlerse', 'gelirsek', 'gelirsen'], a: 0, why: ['Yes. -ler goes before -se.', 'gelirsek means “if we come.”', 'gelirsen means “if you come.”'] });
+
+  /* ---------- COMPARE: пять слов → два ---------- */
+  const cmp = $('[data-cmp]');
+  const RU = ['If', 'I', 'come,', 'I', 'call.'];
+  const TRW = ['Gelirsem,', 'ararım.'];
+  function setLang(lang) {
+    $$('[data-lang]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+    const words = lang === 'tr' ? TRW : RU;
+    const old = $$('.tile', cmp).map((t) => t.getBoundingClientRect());
+    cmp.innerHTML = '';
+    const tiles = words.map((w, i) => { const s = document.createElement('span'); s.className = 'tile ' + (lang === 'tr' ? (i ? 'tile--aor' : 'tile--sa') : ''); s.textContent = w; s.lang = lang; s.setAttribute('data-ui', ''); cmp.append(s); return s; });
+    if (lang === 'tr') speak('Gelirsem, ararım.');
+    const cnt = $('[data-cmp-count]');
+    if (!G) { cnt.textContent = words.length; return; }
+    const o = { v: lang === 'tr' ? 5 : 2 };
+    G.to(o, { v: words.length, duration: 0.8, ease: 'power2.out', onUpdate: () => { cnt.textContent = Math.round(o.v); } });
+    tiles.forEach((t, i) => {
+      const from = old[lang === 'tr' ? (i ? 3 : 0) : (i < 3 ? 0 : 1)];
+      const b = t.getBoundingClientRect();
+      if (from) G.fromTo(t, { x: from.left - b.left, y: from.top - b.top, scale: 0.7 }, { x: 0, y: 0, scale: 1, duration: 0.9, ease: 'power3.inOut', delay: i * 0.05 });
+    });
+  }
+  $$('[data-lang]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  setLang('ru');
+  if (ST) ST.create({ trigger: cmp, start: 'top 60%', once: true, onEnter: () => setTimeout(() => setLang('tr'), 600) });
+  if (G) G.fromTo('.cmp__count', { scale: 0.6 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: cmp, start: 'top 90%', end: 'top 40%', scrub: true } });
+
+  /* ---------- RESULT: лифт по нижним этажам ---------- */
+  const RES = [['konuşuruz.', 'If you come tonight, we\'ll talk.'], ['seni bekleyeceğim.', 'If you come tonight, I\'ll be waiting for you.'], ['bana mesaj at.', 'If you come tonight, text me.'], ['film izlemek istiyorum.', 'If you come tonight, I want to watch a movie.']];
+  $$('[data-res]').forEach((b) => b.addEventListener('click', () => {
+    const i = Number(b.dataset.res);
+    $$('[data-res]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    $('[data-res-tr]').textContent = RES[i][0];
+    $('[data-res-ru]').textContent = RES[i][1];
+    speak('Akşam gelirsen, ' + RES[i][0]);
+    if (G) {
+      G.to('.sh-cab', { y: i * 90, duration: 0.9, ease: 'power3.inOut' });
+      G.to('.sh-cable', { attr: { d: `M150 10v${34 + i * 90}` }, duration: 0.9, ease: 'power3.inOut' });
+      G.fromTo('[data-res-tr]', { y: 20, scale: 0.85 }, { y: 0, scale: 1, duration: 0.6, ease: 'back.out(2.2)' });
+    }
+  }));
+  if (G) G.from('[data-shaft]', { y: 80, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '[data-shaft]', start: 'top 85%', once: true } });
+
+  /* ---------- TREE ---------- */
+  const treeQ = $('[data-tree-q]');
+  const treeBtns = $('[data-tree-btns]');
+  const treeRes = $('[data-tree-res]');
+  const dot = $('.tree-dot');
+  const TREE = {
+    start: { q: 'Can this happen?', o: [['No, a dream', 'dream'], ['Yes, a plan', 'real']] },
+    dream: { res: 'Keşke erken kalksam! is a wish. Lesson 2.' },
+    real: { q: 'What\'s the aorist of kalk-?', o: [['kalkar', 'aor'], ['kalkır', 'bad']] },
+    bad: { q: 'One syllable, so -ar: kalkar. Try again.', o: [['kalkar', 'aor']] },
+    aor: { q: 'Who\'s getting up early?', o: [['I', 'p0'], ['we', 'p3'], ['they', 'p5']] },
+    p0: { res: 'Erken kalkarsam, yüzerim.' },
+    p3: { res: 'Erken kalkarsak, yüzeriz.' },
+    p5: { res: 'Erken kalkarlarsa, yüzerler.' },
+  };
+  function runDot(id) {
+    const e = document.getElementById('e-' + id);
+    if (!e) return;
+    e.classList.add('is-on');
+    if (G) G.to(dot, { motionPath: { path: e, align: e, alignOrigin: [0.5, 0.5] }, duration: 0.9, ease: 'power2.inOut' });
+  }
+  function treeGo(key) {
+    const n = TREE[key];
+    if (key !== 'start' && key !== 'bad') runDot(key);
+    treeBtns.innerHTML = '';
+    if (n.res) {
+      treeQ.textContent = 'Done:';
+      treeRes.textContent = n.res;
+      speak(n.res.split(' — ')[0]);
+      if (G) G.fromTo(treeRes, { scale: 0.5, rotation: -5 }, { scale: 1, rotation: 0, duration: 0.7, ease: 'elastic.out(1, .45)' });
+      spark(treeRes);
+      return;
+    }
+    treeQ.textContent = n.q;
+    treeRes.textContent = '';
+    n.o.forEach(([label, next]) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'chip';
+      b.textContent = label;
+      b.style.borderColor = '#4A4740';
+      b.style.color = '#F2EEE7';
+      b.addEventListener('click', () => treeGo(next));
+      treeBtns.append(b);
+    });
+    if (G) G.from(treeBtns.children, { y: 20, scale: 0.6, duration: 0.45, ease: 'back.out(2.5)', stagger: 0.08 });
+  }
+  $('[data-tree-reset]').addEventListener('click', () => {
+    $$('.tree .edge').forEach((e) => e.classList.remove('is-on'));
+    if (G) G.to(dot, { x: 0, y: 0, duration: 0.5, ease: 'power2.inOut', onComplete: () => G.set(dot, { clearProps: 'transform' }) });
+    treeGo('start');
+  });
+  treeGo('start');
+  if (G) {
+    G.from('.tree .node', { scale: 0.6, transformOrigin: '50% 50%', duration: 0.6, ease: 'back.out(2.5)', stagger: 0.07, scrollTrigger: { trigger: '[data-tree]', start: 'top 80%', once: true } });
+    G.fromTo('.tree .edge', { strokeDashoffset: 120 }, { strokeDashoffset: 0, ease: 'none', scrollTrigger: { trigger: '[data-tree]', start: 'top 85%', end: 'bottom 50%', scrub: true } });
+  }
+
+  /* ---------- MNEMONIC: табличка уезжает в замок ---------- */
+  function mnPlay() {
+    speak('Gelirsem');
+    if (!G) return;
+    const tl = G.timeline();
+    tl.fromTo('.mn-sign', { x: 0, y: 0, rotation: 0, scale: 1 }, { x: 250, y: 10, rotation: 12, scale: 0.3, duration: 1, ease: 'power2.in' })
+      .fromTo('.mn-lock', { scale: 1, transformOrigin: '316px 188px' }, { scale: 1.35, duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out' })
+      .fromTo('.mn-suf', { y: 16, scale: 0.4, transformOrigin: '316px 238px' }, { y: 0, scale: 1, duration: 0.6, ease: 'back.out(3)' }, '-=0.2')
+      .to('.mn-sign', { x: 0, y: 0, rotation: 0, scale: 1, duration: 0.8, ease: 'back.out(1.6)', delay: 0.8 });
+  }
+  $('[data-mn-play]').addEventListener('click', mnPlay);
+  $('[data-mn-say]').addEventListener('click', () => { speak('gelirsem, yaparsam, okursam'); if (G) G.fromTo('.mn-lock', { rotation: -8, transformOrigin: '316px 188px' }, { rotation: 0, duration: 0.7, ease: 'elastic.out(1, .3)' }); });
+  if (ST) ST.create({ trigger: '[data-mn]', start: 'top 70%', once: true, onEnter: mnPlay });
+
+  /* ---------- SCENE: просмотр квартиры ---------- */
+  const SC = [
+    ['Balcony', 'The realtor says this in every apartment. Even the ones with no balcony.', [['Balkona çıkarsanız, denizi görürsünüz.', 'If you step out on the balcony, you\'ll see the sea.']]],
+    ['Kitchen', 'The kitchen is the size of an elevator. But it\'s practical.', [['Yemek yaparsanız, mutfak çok rahat.', 'If you cook, the kitchen is very practical.']]],
+    ['AC', 'In Antalya “if it gets hot” isn\'t a condition. It\'s a forecast.', [['Sıcak olursa, klimayı açarsınız.', 'If it gets hot, turn on the AC.']]],
+    ['Pool', 'The only people who get up early here are realtors.', [['Sabah erken kalkarsanız, havuz boş olur.', 'If you get up early, the pool will be empty.']]],
+    ['Parking', 'The only free things in Antalya are the sun and this spot.', [['Araba kiralarsanız, otopark ücretsiz.', 'If you rent a car, parking is free.']]],
+    ['Lease', 'The main condition. It\'s what he came for.', [['Bugün imzalarsak, yarın taşınırsınız.', 'If we sign today, you move in tomorrow.'], ['Düşünürsem, yarın ararım.', 'If I think it over, I\'ll call tomorrow.']]],
+  ];
+  const dlgLines = $('[data-dlg-lines]');
+  function openHs(i) {
+    const [who, note, lines] = SC[i];
+    $$('[data-hs]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.hs) === i)));
+    $('[data-dlg-who]').textContent = who;
+    $('[data-dlg-note]').textContent = note;
+    dlgLines.innerHTML = '';
+    lines.forEach(([tr, ru]) => {
+      const row = document.createElement('div');
+      row.className = 'say-line';
+      const s = document.createElement('a-say');
+      s.textContent = tr;
+      const r = document.createElement('span');
+      r.className = 'tr-ru';
+      r.setAttribute('data-ui', '');
+      r.textContent = ru;
+      row.append(s, r);
+      dlgLines.append(row);
+    });
+    if (G) G.from(dlgLines.children, { x: (k) => (k % 2 ? 40 : -40), duration: 0.5, ease: 'back.out(2)', stagger: 0.15 });
+  }
+  $$('[data-hs]').forEach((b) => b.addEventListener('click', () => { const i = Number(b.dataset.hs); openHs(i); speak(SC[i][2][0][0]); if (G) G.fromTo(b, { scale: 0.7 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' }); }));
+  openHs(0);
+  if (G) {
+    G.to('.sc-waves path', { x: 26, duration: 2.6, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: loopST('.scene') });
+    G.to('.sc-sun', { y: 30, ease: 'none', scrollTrigger: { trigger: '.scene', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('.sc-mount', { y: 14, ease: 'none', scrollTrigger: { trigger: '.scene', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.to('.sc-car', { x: 30, duration: 4, ease: 'sine.inOut', yoyo: true, repeat: -1, scrollTrigger: loopST('.scene') });
+    G.to('.sc-ac', { y: -3, duration: 0.3, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: loopST('.scene') });
+    G.to('.sc-pool', { opacity: 0.75, duration: 1.8, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: loopST('.scene') });
+    G.from('.hs', { scale: 0.5, duration: 0.5, ease: 'back.out(3)', stagger: 0.1, scrollTrigger: { trigger: '.scene', start: 'top 70%', once: true } });
+  }
+
+  /* ---------- GALLERY: погода и карточки ---------- */
+  const WX = [
+    ['sun', 'Sun', '28°', 'Hava güzel olursa, plaja gideriz.', 'If the weather\'s nice, we\'ll go to the beach.'],
+    ['rain', 'Rain', '19°', 'Yağmur yağarsa, müzeye gideriz.', 'If it rains, we\'ll go to the museum.'],
+    ['wave', 'Wind', '22°', 'Rüzgâr çıkarsa, denize girmeyiz.', 'If the wind picks up, we won\'t go in the sea.'],
+    ['hot', 'Heat', '39°', 'Çok sıcak olursa, evde kalırız.', 'If it\'s very hot, we\'ll stay home.'],
+  ];
+  const wxBox = $('[data-wx]');
+  function wxSet(i) {
+    const [, , t, tr, ru] = WX[i];
+    $$('button', wxBox).forEach((b, k) => b.setAttribute('aria-pressed', String(k === i)));
+    $('[data-wx-tr]').textContent = tr;
+    $('[data-wx-ru]').textContent = ru;
+    speak(tr);
+    if (!G) { $('[data-wx-temp]').textContent = t; return; }
+    const o = { v: parseInt($('[data-wx-temp]').textContent, 10) || 20 };
+    G.to(o, { v: parseInt(t, 10), duration: 0.8, ease: 'power2.out', onUpdate: () => { $('[data-wx-temp]').textContent = Math.round(o.v) + '°'; } });
+    G.fromTo('[data-wx-tr]', { y: 24, scale: 0.9 }, { y: 0, scale: 1, duration: 0.6, ease: 'back.out(2)' });
+  }
+  WX.forEach(([ic, label], i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'wx__btn';
+    b.append(mkIcon(ic), label);
+    b.addEventListener('click', () => wxSet(i));
+    wxBox.append(b);
+  });
+  $('[data-wx-tr]').textContent = WX[0][3];
+  $('[data-wx-ru]').textContent = WX[0][4];
+  $$('button', wxBox)[0].setAttribute('aria-pressed', 'true');
+  flipCards($('[data-cards]'), [
+    ['sun', 'If we get up early, we\'ll go to the beach', 'Erken kalkarsak, plaja gideriz.'],
+    ['rain', 'If it rains, we\'ll go to the museum', 'Yağmur yağarsa, müzeye gideriz.'],
+    ['phone', 'If you come, call me', 'Gelirsen, beni ara.'],
+    ['tram', 'If you take the tram, you\'ll get to Kaleiçi fast', 'Tramvaya binersen, Kaleiçi’ne çabuk gidersin.'],
+    ['fall', 'If we go to Düden, we\'ll take photos', 'Düden’e gidersek, fotoğraf çekeriz.'],
+    ['fish', 'If you like fish, this restaurant is very good', 'Balık seversen, bu restoran çok iyi.'],
+    ['ticket', 'If you buy early, the ticket will be cheap', 'Erken alırsan, bilet ucuz olur.'],
+    ['bus', 'If we\'re late, the bus will leave', 'Geç kalırsak, otobüs gider.'],
+    ['talk', 'If you speak Turkish, the seller will give you a discount', 'Türkçe konuşursan, satıcı indirim yapar.'],
+    ['hot', 'If it\'s very hot, we\'ll go back home', 'Çok sıcak olursa, eve döneriz.'],
+    ['wave', 'If the sea is calm, we\'ll swim', 'Deniz sakin olursa, yüzeriz.'],
+    ['cup', 'If you get tired, we\'ll have coffee', 'Yorulursan, kahve içeriz.'],
+    ['map', 'If you get lost, text me', 'Kaybolursan, bana yaz.'],
+    ['key', 'If you forget the key, call the concierge', 'Anahtarı unutursanız, kapıcıyı arayın.'],
+    ['guests', 'If guests come, I\'ll cook fish', 'Misafirler gelirse, balık pişiririm.'],
+    ['plane', 'If the plane is late, we\'ll wait at the hotel', 'Uçak geç kalırsa, otelde bekleriz.'],
+  ]);
+
+  /* ---------- LAB ---------- */
+  const LV = [
+    ['gelir', ['come', 'come', 'comes', 'come', 'come', 'come']],
+    ['yapar', ['do', 'do', 'does', 'do', 'do', 'do']],
+    ['okur', ['read', 'read', 'reads', 'read', 'read', 'read']],
+    ['gider', ['go', 'go', 'goes', 'go', 'go', 'go']],
+    ['alır', ['take', 'take', 'takes', 'take', 'take', 'take']],
+    ['konuşur', ['talk', 'talk', 'talks', 'talk', 'talk', 'talk']],
+    ['ister', ['want', 'want', 'wants', 'want', 'want', 'want']],
+    ['bekler', ['wait', 'wait', 'waits', 'wait', 'wait', 'wait']],
+  ];
+  const lab = { v: 0, p: 0 };
+  function labBuild(say) {
+    const [aor, ru] = LV[lab.v];
+    const f = cond(aor, lab.p);
+    const out = $('[data-lab-out]');
+    out.innerHTML = '';
+    const sa = lab.p === 5 ? f.slice(-2) : f.slice(aor.length, aor.length + 2);
+    const pers = lab.p === 5 ? f.slice(aor.length, aor.length + 3) : f.slice(aor.length + 2);
+    const parts = [[PRON[lab.p], 'tile--ghost'], [aor, 'tile--aor'], ...(lab.p === 5 ? [[pers, 'tile--p'], [sa, 'tile--sa']] : [[sa, 'tile--sa'], ...(pers ? [[pers, 'tile--p']] : [])])];
+    const tiles = parts.map(([t, c]) => { const s = document.createElement('span'); s.className = 'tile ' + c; s.textContent = t; out.append(s); return s; });
+    $('[data-lab-ru]').textContent = `if ${PRU[lab.p]} ${ru[lab.p]}`;
+    $('[data-lab-why]').textContent = lab.p === 3 ? 'We is -k. Not -iz.' : lab.p === 5 ? 'They: -lar before -sa.' : `The last vowel is ${lastV(aor)}, so ${sa === 'sa' ? '-sa' : '-se'}.`;
+    if (say) speak(`${PRON[lab.p]} ${f}`);
+    if (G && say) G.fromTo(tiles, { y: -36, rotation: (i) => (i % 2 ? 8 : -8) }, { y: 0, rotation: 0, duration: 0.55, ease: 'back.out(2.5)', stagger: 0.07 });
+  }
+  const chips = (box, list, key) => list.forEach((label, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.lang = 'tr';
+    b.textContent = label;
+    b.setAttribute('aria-pressed', String(i === 0));
+    b.addEventListener('click', () => { lab[key] = i; $$('button', box).forEach((x) => x.setAttribute('aria-pressed', String(x === b))); labBuild(true); });
+    box.append(b);
+  });
+  chips($('[data-lab-verbs]'), LV.map((x) => x[0]), 'v');
+  chips($('[data-lab-persons]'), PRON, 'p');
+  labBuild(false);
+  $$('[role="tab"]').forEach((t) => t.addEventListener('click', () => {
+    const k = t.dataset.tab;
+    $$('[role="tab"]').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('[data-panel]').forEach((p) => { p.hidden = p.dataset.panel !== k; });
+    if (G) G.from(`[data-panel="${k}"]`, { y: 26, duration: 0.5, ease: 'back.out(2)' });
+  }));
+  $('[role="tablist"]').addEventListener('keydown', (e) => {
+    const tabs = $$('[role="tab"]');
+    const cur = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+    if (e.key === 'ArrowRight') tabs[(cur + 1) % tabs.length].click();
+    if (e.key === 'ArrowLeft') tabs[(cur + tabs.length - 1) % tabs.length].click();
+  });
+  /* «Лица»: ползунок */
+  let slV = 0;
+  const sl = $('[data-sl]');
+  function slShow(say) {
+    const p = Number(sl.value);
+    const [aor, ru] = LV[slV];
+    const f = cond(aor, p);
+    const w = $('[data-sl-word]');
+    w.innerHTML = [...f].map((c, i) => `<span class="let" style="color:${i >= aor.length ? '#F2A65A' : 'inherit'}">${c}</span>`).join('');
+    $('[data-sl-ru]').textContent = `${PRON[p]} · if ${PRU[p]} ${ru[p]}`;
+    if (say) speak(f);
+    if (G && say) G.fromTo($$('.let', w).slice(aor.length), { y: -30, scale: 0.5 }, { y: 0, scale: 1, duration: 0.5, ease: 'back.out(3)', stagger: 0.05 });
+  }
+  sl.addEventListener('input', () => slShow(true));
+  $('[data-sl-verb]').addEventListener('click', () => { slV = (slV + 1) % LV.length; slShow(true); });
+  slShow(false);
+  /* «Этажи»: найди пару */
+  const PAIRS = [['Yağmur yağarsa,', 'müzeye gideriz.'], ['Gelirsen,', 'kapıyı açarım.'], ['Erken kalkarsak,', 'denizde yüzeriz.'], ['Kaybolursan,', 'haritaya bak.']];
+  let pickUp = null;
+  let found = 0;
+  function pairsRender() {
+    const up = $('[data-pair-up]');
+    const down = $('[data-pair-down]');
+    up.innerHTML = '';
+    down.innerHTML = '';
+    found = 0;
+    PAIRS.forEach(([u], i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.lang = 'tr'; b.textContent = u; b.dataset.i = i; up.append(b); });
+    [2, 0, 3, 1].forEach((i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'chip'; b.lang = 'tr'; b.textContent = PAIRS[i][1]; b.dataset.i = i; down.append(b); });
+    $$('button', up).forEach((b) => b.addEventListener('click', () => { pickUp = b; $$('button', up).forEach((x) => x.setAttribute('aria-pressed', String(x === b))); speak(b.textContent); }));
+    $$('button', down).forEach((b) => b.addEventListener('click', () => {
+      if (!pickUp) { $('[data-pair-why]').textContent = 'Upper floor first.'; return; }
+      const ok = pickUp.dataset.i === b.dataset.i;
+      if (ok) {
+        found++;
+        [pickUp, b].forEach((x) => { x.disabled = true; x.style.borderColor = '#7FC59B'; x.style.color = '#7FC59B'; });
+        speak(pickUp.textContent + ' ' + b.textContent);
+        spark(b);
+        $('[data-pair-why]').textContent = found === PAIRS.length ? 'All four houses are built.' : 'Yes. Upstairs and downstairs match.';
+        if (G) G.fromTo([pickUp, b], { scale: 1.2 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' });
+      } else {
+        $('[data-pair-why]').textContent = 'Wrong floor. Think about what would logically happen.';
+        if (G) G.fromTo(b, { x: -8 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, .3)' });
+      }
+      pickUp = null;
+    }));
+  }
+  pairsRender();
+  /* «Из широкого»: по шагам */
+  const YS = [['gelirim', 'gelir', 'gelirsem'], ['yaparım', 'yapar', 'yaparsam'], ['okurum', 'okur', 'okursam'], ['alırım', 'alır', 'alırsam'], ['giderim', 'gider', 'gidersem'], ['beklerim', 'bekler', 'beklersem']];
+  const YW = ['This is “I usually do.” The aorist with a person.', 'Take off the person. The foundation remains.', 'Attach -sa or -se by the last vowel.', 'Put the person back. Done: “if I…”'];
+  let yi = 0;
+  let ys = 0;
+  function ysShow() {
+    const [a, b, c] = YS[yi % YS.length];
+    const v = [a, `${b}<span style="color:#E07A5F;text-decoration:line-through">${a.slice(b.length)}</span>`, `${b}<span style="color:#F2A65A">${c.slice(b.length, -1)}</span>`, `${b}<span style="color:#F2A65A">${c.slice(b.length)}</span>`][ys];
+    $('[data-ys-word]').innerHTML = v;
+    $('[data-ys-why]').textContent = YW[ys];
+    if (ys === 0) speak(a);
+    if (ys === 3) { speak(c); spark($('[data-ys-word]')); }
+    if (G) G.fromTo('[data-ys-word]', { scale: 0.85, rotation: -2 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2.5)' });
+  }
+  $('[data-ys-step]').addEventListener('click', () => { ys = (ys + 1) % 4; ysShow(); });
+  $('[data-ys-next]').addEventListener('click', () => { yi++; ys = 0; ysShow(); });
+  ysShow();
+  if (G) G.from('.tabs [role="tab"]', { y: -20, scale: 0.7, duration: 0.5, ease: 'back.out(3)', stagger: 0.06, scrollTrigger: { trigger: '.tabs', start: 'top 85%', once: true } });
+
+  /* ---------- TRAPS ---------- */
+  miniQ($('[data-mq="3"]'), { q: 'Where\'s the mistake: “Eğer gelirim, ararım”?', o: ['gelirim', 'ararım'], a: 0, why: ['Yes. It should be gelirsem: eğer doesn\'t work without -se.', 'The lower floor is fine. The upper one is broken: gelirsem.'], say: 'Eğer gelirsem, ararım.' });
+  if (G) G.from('.trap__n', { rotation: -90, scale: 0.5, duration: 0.8, ease: 'back.out(2)', stagger: 0.1, scrollTrigger: { trigger: '.traps', start: 'top 80%', once: true } });
+
+  /* ---------- CHEAT + финал ---------- */
+  if (G) {
+    G.fromTo('[data-poster]', { rotation: -1.5, scale: 0.94 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-poster]', start: 'top bottom', end: 'center center', scrub: true } });
+    G.from('.poster .tile', { y: -80, rotation: (i) => (i - 1.5) * 10, duration: 0.9, ease: 'bounce.out', stagger: 0.12, scrollTrigger: { trigger: '[data-poster]', start: 'top 70%', once: true } });
+    G.to('.drops path', { y: 8, duration: 0.6, ease: 'power1.in', repeat: -1, scrollTrigger: loopST('[data-cloud]') });
+    G.to('.cl', { x: 6, duration: 2.4, yoyo: true, repeat: -1, ease: 'sine.inOut', scrollTrigger: loopST('[data-cloud]') });
+  }
+  $('[data-final]').addEventListener('click', (e) => {
+    speak('Yağmur yağarsa, müzeye gideriz.');
+    spark(e.currentTarget, 18);
+    if (G) G.fromTo('[data-cloud]', { y: 0, scale: 1 }, { y: -20, scale: 1.15, duration: 0.4, yoyo: true, repeat: 1, ease: 'power2.out' });
+  });
+
+  /* ---------- нестандартное упражнение «Лифт в капсулу» (b1.conditional.ex5) ---------- */
+  (async () => {
+    const EX = 'b1.conditional.ex5';
+    const root = $(`a-exercise[ref="${EX}"]`);
+    const qEl = $('[data-lift-q]', root);
+    const optsEl = $('[data-lift-opts]', root);
+    const statusEl = $('[data-lift-status]', root);
+    const countEl = $('[data-lift-count]', root);
+    const cab = $('[data-lift-cab]', root);
+    let items = [];
+    try { ({ items } = await window.AlternaKit.exercise(EX)); } catch (e) { statusEl.textContent = 'No connection. Reload the page.'; return; }
+    let i = 0;
+    let correct = 0;
+    let locked = false;
+    let t0 = performance.now();
+    if (window.AlternaTracker && AlternaTracker.start) AlternaTracker.start(EX, 'practice');
+    function show() {
+      const it = items[i];
+      qEl.textContent = it.prompt;
+      countEl.textContent = `${i + 1} / ${items.length}`;
+      statusEl.textContent = 'Pick the upper floor. Keys 1–3.';
+      optsEl.innerHTML = '';
+      it.options.forEach((txt, k) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.lang = 'tr';
+        b.textContent = `${k + 1}. ${txt}`;
+        b.addEventListener('click', () => choose(k));
+        optsEl.append(b);
+      });
+      locked = false;
+      t0 = performance.now();
+      if (G) G.from(optsEl.children, { x: 30, duration: 0.45, ease: 'back.out(2)', stagger: 0.06 });
+    }
+    function choose(k) {
+      if (locked || i >= items.length) return;
+      locked = true;
+      const it = items[i];
+      const ok = k === it.answer;
+      if (ok) correct++;
+      $$('button', optsEl)[k].classList.add(ok ? 'is-right' : 'is-wrong');
+      if (!ok) $$('button', optsEl)[it.answer].classList.add('is-right');
+      statusEl.textContent = ok ? `Yes! ${it.full}` : `${it.explanation} ${it.full}`;
+      speak(it.full);
+      if (ok) {
+        cab.textContent = `−${correct * 2}`;
+        if (G) G.to(cab, { y: correct * 46, duration: 0.8, ease: 'power3.inOut' });
+        spark(cab, 10);
+      } else if (G) G.fromTo(cab, { x: -6 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, .3)' });
+      window.AlternaTracker.answer({ exerciseId: EX, itemId: it.id, correct: ok, answer: it.options[k], timeMs: Math.round(performance.now() - t0) });
+      setTimeout(() => {
+        i++;
+        if (i < items.length) show();
+        else {
+          window.AlternaTracker.complete({ exerciseId: EX, correct, total: items.length });
+          qEl.textContent = `Depth: −${correct * 2} m. Correct: ${correct} of ${items.length}.`;
+          countEl.textContent = 'done';
+          optsEl.innerHTML = '';
+          statusEl.textContent = correct === items.length ? 'The capsule. Quiet, cool, all conditions met.' : 'The elevator got stuck between floors. Review the rule and try again later.';
+        }
+      }, reduce ? 300 : 1300);
+    }
+    root.addEventListener('keydown', (e) => { const n = Number(e.key); if (n >= 1 && n <= 3) choose(n - 1); });
+    window.AlternaKit.registerSolver(EX, async () => {
+      while (i < items.length) { choose(items[i].answer); await wait(reduce ? 330 : 1340); }
+    });
+    show();
+  })();
+
+
+  /* ---------- сцены по скроллу для каждого уровня: значок-глубиномер, стрелка, лид ---------- */
+  if (G) {
+    G.fromTo('[data-section="story"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="story"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="story"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="story"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="story"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="guess"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="guess"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="guess"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="guess"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="guess"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="floors"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="floors"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="floors"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="floors"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="floors"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="floors"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="build"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="build"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="build"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="build"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="build"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="build"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="aorist"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="aorist"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="aorist"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="aorist"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="aorist"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="aorist"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="persons"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="persons"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="persons"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="persons"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="persons"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="persons"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="compare"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="compare"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="compare"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="compare"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="compare"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="compare"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="result"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="result"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="result"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="result"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="result"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="result"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="tree"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="tree"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="tree"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="tree"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="tree"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="tree"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="mnemonic"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="mnemonic"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="mnemonic"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="mnemonic"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="mnemonic"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="mnemonic"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="scene"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="scene"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="scene"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="scene"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="scene"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="gallery"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="gallery"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="gallery"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="gallery"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="gallery"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="lab"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="lab"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="lab"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="lab"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="lab"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="lab"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="traps"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="traps"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="traps"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="traps"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="traps"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="traps"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="video"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="video"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="video"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="video"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="video"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="video"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="practice"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="practice"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="practice"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="practice"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="practice"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="practice"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="check"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="check"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="check"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="check"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="check"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="check"] .lvl-row', start: 'top 92%', once: true } });
+    G.fromTo('[data-section="cheat"] .lvl', { rotation: -120, scale: 0.6 }, { rotation: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: '[data-section="cheat"]', start: 'top 92%', end: 'top 45%', scrub: true } });
+    G.to('[data-section="cheat"] .lvl__hand', { rotation: 300, svgOrigin: '32 32', ease: 'none', scrollTrigger: { trigger: '[data-section="cheat"]', start: 'top bottom', end: 'bottom top', scrub: true } });
+    G.from('[data-section="cheat"] .lvl-t', { x: -30, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '[data-section="cheat"] .lvl-row', start: 'top 92%', once: true } });
+    G.to('.cap3d--a', { rotationY: 360, rotationX: 25, y: -18, duration: 9, ease: 'none', repeat: -1, scrollTrigger: loopST('.hero') });
+    G.to('.cap3d--b', { rotationY: -360, rotationX: -20, y: 14, duration: 11, ease: 'none', repeat: -1, scrollTrigger: loopST('.hero') });
+    G.from('.stat', { y: 30, scale: 0.8, duration: 0.7, ease: 'back.out(2.5)', stagger: 0.1, delay: 0.4 });
+    G.from('.ico', { scale: 0.4, rotation: -45, duration: 0.6, ease: 'back.out(3)', stagger: 0.05, scrollTrigger: { trigger: '.ico', start: 'top 95%', once: true } });
+  }
+  /* наклон карточек за курсором — только мышь */
+  if (G && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    $$('.card, .trap, .pbox').forEach((c) => {
+      c.addEventListener('pointermove', (e) => {
+        const r = c.getBoundingClientRect();
+        G.to(c, { rotationY: ((e.clientX - r.left) / r.width - 0.5) * 6, rotationX: -((e.clientY - r.top) / r.height - 0.5) * 6, transformPerspective: 900, duration: 0.5, ease: 'power2.out' });
+      });
+      c.addEventListener('pointerleave', () => G.to(c, { rotationY: 0, rotationX: 0, duration: 0.6, ease: 'power3.out' }));
+    });
+    $$('.pill').forEach((p) => p.addEventListener('pointerdown', () => G.fromTo(p, { scale: 0.94 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' })));
+  }
+
+});
+</script>
+</body>
+</html>

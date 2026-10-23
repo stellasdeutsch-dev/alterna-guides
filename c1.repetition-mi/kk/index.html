@@ -1,0 +1,1382 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="c1.repetition-mi">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>Қайталау арқылы күшейту: güzel mi güzel</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../media/inter-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../media/inter-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 100 900; font-display: swap; src: url(../media/inter-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 200 700; font-display: swap; src: url(../media/oswald-cyrillic.woff2) format('woff2'); unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 200 700; font-display: swap; src: url(../media/oswald-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 200 700; font-display: swap; src: url(../media/oswald-latin.woff2) format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+*, *::before, *::after { box-sizing: border-box; }
+:root {
+  --blue: #0055ff; --blue-2: #3d7bff; --blue-soft: #dfe9fd;
+  --orange: #ff6430; --orange-soft: #ffe4d9;
+  --gray: #eef4fd; --gray-2: #dde7f8; --pale: #c4d3ee; --pale-2: #7d95c9;
+  --ink: #16191b; --ink-2: #23272b; --ink-3: #30353a; --muted: #5d6a80;
+  --ok: #17a34a; --bad: #e5484d;
+  --ak-accent: var(--blue); --ak-accent-soft: var(--blue-soft); --ak-ink: var(--ink);
+  --ak-font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ak-font-display: 'Oswald', 'Inter', sans-serif;
+  --ak-radius: 24px; --ak-radius-sm: 14px;
+  --disp: 'Oswald', 'Inter', sans-serif;
+  --r-xl: clamp(26px, 3.4vw, 46px);
+  --side: 92px;
+  --glass: linear-gradient(165deg, rgba(255, 255, 255, .95) 0%, rgba(233, 241, 253, .85) 100%);
+}
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: #fff; color: var(--ink); font-family: var(--ak-font); overflow-x: clip; }
+main { overflow-x: clip; }
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+button { font-family: inherit; }
+b[data-say] { cursor: pointer; text-decoration: underline 2px; text-decoration-color: color-mix(in srgb, currentColor 28%, transparent); text-underline-offset: 3px; }
+.c-mi { color: var(--orange); } .c-w { color: var(--blue); } .c-sfx { color: var(--blue); } .c-ama { color: var(--pale-2); }
+.on-dark .c-ama { color: #8ea3c7; }
+
+/* ---------- сцена ---------- */
+.scene { position: relative; }
+.stage {
+  height: 100vh; height: 100svh; background: #fff;
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .9fr); gap: 28px;
+  padding: 22px var(--side) 22px 26px; align-items: stretch;
+}
+.frame { position: relative; border-radius: var(--r-xl); overflow: hidden; container-type: size; background: var(--glass), var(--gray); isolation: isolate; min-height: 0; }
+.frame--ink { background: var(--ink); }
+.frame--white { background: #fff; box-shadow: inset 0 0 0 1.5px var(--gray-2); }
+.bg { position: absolute; inset: 0; pointer-events: none; }
+.mega { position: absolute; font-weight: 300; letter-spacing: -.05em; line-height: .82; white-space: nowrap; color: var(--gray-2); }
+.frame--ink .mega { color: #24292d; }
+.set { position: absolute; inset: 0; margin: auto; width: min(100cqw, 100cqh); height: min(100cqw, 100cqh); container-type: inline-size; }
+.abs { position: absolute; left: var(--x, 0); top: var(--y, 0); width: var(--w, auto); }
+.side { display: flex; flex-direction: column; justify-content: center; gap: 14px; min-width: 0; }
+.kick { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; background: var(--gray); color: var(--ink); border-radius: 99px; padding: 6px 14px; font-size: 13px; font-weight: 500; }
+.kick i { width: 8px; height: 8px; border-radius: 3px; background: var(--blue); }
+.side h2 { margin: 0; font-family: var(--disp); text-transform: uppercase; font-weight: 500; font-size: clamp(32px, 3.4vw, 56px); line-height: .98; letter-spacing: -.005em; }
+.side h2 .pale { color: var(--pale); }
+.subs { display: grid; gap: 10px; font-size: clamp(16px, 1.22vw, 20px); line-height: 1.4; font-weight: 400; }
+.subs p { margin: 0; }
+.motion .subs p { grid-area: 1 / 1; }
+.subs b { font-weight: 600; }
+.act { display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 24px; background: var(--gray); }
+.act__q { margin: 0; font-weight: 600; font-size: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { min-height: 44px; padding: 0 18px; border-radius: 99px; border: 0; background: #fff; color: var(--ink); font-weight: 500; font-size: 15px; cursor: pointer; box-shadow: inset 0 0 0 1.5px var(--gray-2); transition: background .2s, color .2s, box-shadow .2s; }
+.btn:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.btn:focus-visible, .chip:focus-visible, .tok:focus-visible, .tbar button:focus-visible, .pb__seg:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.btn--blue { background: var(--blue); color: #fff; box-shadow: none; }
+.btn--ink { background: var(--ink); color: #fff; box-shadow: none; }
+.btn.is-on { background: var(--ink); color: #fff; box-shadow: none; }
+.btn.is-ok { background: var(--ok); color: #fff; box-shadow: none; }
+.btn.is-bad { background: var(--bad); color: #fff; box-shadow: none; }
+.react { margin: 0; min-height: 1.4em; font-size: 15px; line-height: 1.38; }
+.react.ok { color: var(--ok); } .react.bad { color: var(--bad); }
+
+/* общие детали кадра */
+.glass { background: var(--glass); border: 1px solid rgba(255, 255, 255, .9); border-radius: 5cqw; box-shadow: 0 2.4cqw 6cqw rgba(0, 60, 180, .12); }
+.pill { display: inline-flex; align-items: center; gap: .4em; border-radius: 99px; padding: .4em .95em; font-size: max(10px, 2.4cqw); font-weight: 500; background: #fff; color: var(--ink); white-space: nowrap; box-shadow: 0 .6cqw 2cqw rgba(0, 60, 180, .1); }
+.pill--ink { background: var(--ink); color: #fff; }
+.pill--blue { background: var(--blue); color: #fff; }
+.word { display: inline-flex; align-items: baseline; gap: .26em; font-weight: 600; letter-spacing: -.035em; line-height: 1; white-space: nowrap; }
+.ico { width: 100%; height: auto; display: block; }
+.abs.ico { width: var(--w); }
+.hv { display: inline; color: var(--orange); box-shadow: inset 0 -.14em 0 var(--orange-soft); }
+
+/* ---------- 1. выставка ---------- */
+.st-hall { position: absolute; inset: 0; transform-origin: 50% 62%; }
+.booth { --x: 8%; --y: 18%; --w: 84%; height: 58%; background: var(--ink); border-radius: 5cqw; overflow: hidden; }
+.booth__t { position: absolute; left: 6%; top: 9%; font-family: var(--disp); text-transform: uppercase; color: #fff; font-size: 9cqw; line-height: .95; font-weight: 500; }
+.booth__t span { color: var(--orange); }
+.booth__p { position: absolute; left: 6%; bottom: 8%; display: flex; gap: 1.4cqw; }
+.cube { position: absolute; }
+.st-c1 { --x: 52%; --y: 34%; --w: 22%; } .st-c2 { --x: 68%; --y: 48%; --w: 22%; } .st-c3 { --x: 58%; --y: 58%; --w: 24%; }
+.st-fur { --x: 2%; --y: 58%; --w: 34%; }
+.st-floor { --x: 0%; --y: 76%; --w: 100%; height: 24%; background: linear-gradient(#dfe8f8, #eef4fd); }
+.st-av { position: absolute; width: 15cqw; }
+.st-av--el { left: 6%; top: 8%; }
+.bub { position: absolute; padding: 2.6cqw 3.6cqw; border-radius: 4cqw; font-size: 5.4cqw; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; max-width: 70%; }
+.bub small { display: block; font-size: max(10px, 2.4cqw); font-weight: 500; letter-spacing: 0; color: var(--muted); margin-bottom: .8cqw; }
+.bub--el { left: 24%; top: 8%; background: #fff; box-shadow: 0 2cqw 6cqw rgba(0, 60, 180, .16); border-top-left-radius: 1cqw; }
+.bub--me { right: 6%; top: 36%; background: var(--ink); color: #fff; border-top-right-radius: 1cqw; }
+.bub--me small { color: #9aa6b8; }
+.bub--el2 { left: 24%; top: 64%; background: var(--blue); color: #fff; border-top-left-radius: 1cqw; }
+.bub--el2 small { color: #cfe0ff; }
+.st-talk { position: absolute; inset: 0; }
+.st-q { position: absolute; right: 10%; bottom: 6%; font-family: var(--disp); font-size: 34cqw; line-height: .8; color: var(--blue); font-weight: 600; }
+.st-ex { position: absolute; right: 10%; bottom: 6%; font-family: var(--disp); font-size: 34cqw; line-height: .8; color: var(--orange); font-weight: 600; }
+
+/* ---------- 2. жирный ---------- */
+.bd-type { --x: 0%; --y: 40%; --w: 100%; display: flex; justify-content: center; align-items: baseline; gap: 2.4cqw; color: #fff; font-size: 13cqw; font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+.bd-type .c-mi { font-size: .62em; }
+.bd-type .bd-w2 { color: var(--blue-2); }
+.bd-cursor { --x: 50%; --y: 36%; width: .5cqw; height: 22cqw; background: var(--blue-2); border-radius: 1cqw; }
+.tbar { position: absolute; display: flex; gap: 1.6cqw; padding: 1.4cqw; border-radius: 99px; background: rgba(48, 53, 58, .9); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), 0 3cqw 6cqw rgba(0, 0, 0, .35); }
+.tbar span { width: 10cqw; height: 10cqw; border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 600; font-size: 4.4cqw; background: #3d4349; }
+.tbar span svg { width: 5cqw; }
+.bd-t1 { left: 18%; top: 16%; }
+.bd-t2 { left: 44%; top: 66%; border-radius: 5cqw; }
+.bd-t2 span { border-radius: 3cqw; }
+.bd-t2 .bd-b { background: var(--blue); }
+.bd-rule { --x: 6%; --y: 86%; --w: 88%; display: flex; justify-content: center; gap: 1.4cqw; align-items: center; color: #fff; font-size: 4cqw; font-weight: 500; flex-wrap: wrap; }
+.bd-rule span { background: #2a2f34; border-radius: 99px; padding: 1cqw 2.8cqw; }
+.bd-rule .r-w { background: var(--blue); } .bd-rule .r-mi { background: var(--orange); }
+.slider { position: relative; height: 18px; border-radius: 99px; background: linear-gradient(90deg, rgba(0, 85, 255, 0) 0%, var(--blue) 100%), repeating-conic-gradient(#e6ecf5 0 25%, #fff 0 50%) 0 0 / 12px 12px; }
+input[type="range"].rng { width: 100%; height: 44px; margin: 0; accent-color: var(--blue); cursor: pointer; }
+.vol { display: grid; gap: 6px; }
+.vol__out { font-size: 22px; font-weight: 600; letter-spacing: -.03em; }
+.vol__ru { font-size: 14px; color: var(--muted); }
+
+/* ---------- 3. палитра ---------- */
+.sw { position: absolute; top: 34%; width: 22.5%; height: 60%; border-radius: 4.4cqw; padding: 3cqw; display: flex; flex-direction: column; justify-content: space-between; }
+.sw--1 { left: 2%; background: var(--gray); color: var(--ink); } .sw--2 { left: 26.5%; background: var(--orange); color: #fff; }
+.sw--3 { left: 51%; background: var(--blue); color: #fff; } .sw--4 { left: 75.5%; background: var(--ink); color: #fff; }
+.sw__meta { font-size: max(9px, 2cqw); line-height: 1.5; opacity: .75; }
+.sw__big { font-size: 9cqw; font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+.sw__v { font-size: 3.4cqw; font-weight: 500; }
+.sw.is-hit { box-shadow: 0 0 0 1cqw rgba(0, 85, 255, .25); }
+.ha-trav { position: absolute; left: 25%; top: 9%; width: 50%; height: 12%; display: grid; place-items: center; z-index: 3; }
+.ha-trav .word { font-size: 6cqw; background: #fff; border-radius: 3cqw; padding: 1.8cqw 3cqw; box-shadow: 0 2cqw 5cqw rgba(0, 60, 180, .18); }
+.ha-gl { --x: 4%; --y: 24%; --w: 92%; text-align: center; font-size: 3.2cqw; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { min-height: 44px; padding: 0 14px; border-radius: 99px; border: 0; background: #fff; box-shadow: inset 0 0 0 1.5px var(--gray-2); font-weight: 500; font-size: 15px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+.chip small { font-weight: 400; color: var(--muted); font-size: 12px; }
+.chip.is-on { background: var(--ink); color: #fff; box-shadow: none; } .chip.is-on small { color: #aab3c2; }
+.probe { position: fixed; left: 0; top: 0; z-index: 50; pointer-events: none; visibility: hidden; }
+.probe .word { font-size: 22px; background: #fff; border-radius: 14px; padding: 8px 14px; box-shadow: 0 10px 30px rgba(0, 60, 180, .25); }
+
+/* ---------- 4. уступка ---------- */
+.cg-card { --x: 6%; --y: 6%; --w: 88%; height: 58%; padding: 4cqw; overflow: hidden; }
+.cg-card__t { font-family: var(--disp); text-transform: uppercase; font-size: 8cqw; font-weight: 500; line-height: 1; }
+.cg-card__s { font-size: 3cqw; color: var(--muted); margin-top: 1cqw; }
+.cg-c1 { --x: 40%; --y: 30%; --w: 24%; } .cg-c2 { --x: 62%; --y: 26%; --w: 26%; } .cg-c3 { --x: 50%; --y: 50%; --w: 22%; }
+.cg-crack { --x: 62%; --y: 26%; --w: 26%; }
+.cg-tag { position: absolute; left: 4cqw; bottom: 4cqw; }
+.cg-parts { --x: 6%; --y: 68%; --w: 88%; display: flex; justify-content: center; gap: 1cqw; }
+.part { display: grid; justify-items: center; gap: 1cqw; }
+.part b { font-size: 6.4cqw; font-weight: 600; letter-spacing: -.03em; background: #fff; border-radius: 2.6cqw; padding: 1.2cqw 2.2cqw; box-shadow: 0 1.4cqw 4cqw rgba(0, 60, 180, .12); }
+.part small { font-size: max(10px, 2.4cqw); color: var(--muted); }
+.part--s b { color: var(--blue); }
+.cg-line { --x: 4%; --y: 86%; --w: 92%; text-align: center; font-size: 4.4cqw; font-weight: 600; letter-spacing: -.02em; }
+.build { display: flex; gap: 8px; min-height: 48px; padding: 6px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1.5px var(--gray-2); align-items: center; flex-wrap: wrap; }
+.build:empty::before { content: attr(data-hint); color: var(--muted); font-size: 14px; padding-left: 8px; }
+.tok { min-height: 44px; padding: 0 14px; border-radius: 99px; border: 0; background: #fff; box-shadow: inset 0 0 0 1.5px var(--gray-2); font-weight: 600; font-size: 15px; cursor: pointer; }
+.tok:disabled { opacity: .35; cursor: default; }
+.build .tok { background: var(--ink); color: #fff; box-shadow: none; }
+
+/* ---------- 5. лица: переписка ---------- */
+.ch-tabs { --x: 6%; --y: 6%; --w: 88%; isolation: isolate; display: flex; gap: 1.4cqw; padding: 1.4cqw; border-radius: 99px; background: rgba(255, 255, 255, .7); }
+.ch-tabs span { flex: 1; text-align: center; border-radius: 99px; padding: 1.6cqw 0; font-size: 3.6cqw; font-weight: 500; color: var(--ink); }
+.ch-hl { position: absolute; top: 1.4cqw; bottom: 1.4cqw; left: 1.4cqw; width: calc((100% - 2.8cqw - 4.2cqw) / 4); border-radius: 99px; background: #fff; box-shadow: 0 1cqw 3cqw rgba(0, 60, 180, .14); z-index: -1; }
+.ch-msg { position: absolute; display: flex; gap: 2cqw; align-items: flex-start; }
+.ch-msg svg { width: 9cqw; flex: none; }
+.ch-b { background: #fff; border-radius: 4cqw; border-top-left-radius: 1cqw; padding: 2.6cqw 3.4cqw; font-size: 4.4cqw; font-weight: 500; line-height: 1.3; box-shadow: 0 1.6cqw 4cqw rgba(0, 60, 180, .1); }
+.ch-b small { display: block; font-size: max(10px, 2.4cqw); color: var(--muted); margin-bottom: .6cqw; }
+.ch-m1 { left: 5%; top: 22%; width: 90%; }
+.ch-m2 { left: 5%; top: 56%; width: 90%; }
+.ch-lock { display: inline-flex; align-items: center; gap: .3em; }
+.ch-lock svg { width: 1em; height: 1em; }
+.swap { display: inline-grid; vertical-align: baseline; }
+.swap > span { grid-area: 1 / 1; }
+.ch-note { --x: 5%; --y: 84%; --w: 90%; display: flex; justify-content: center; gap: 1.4cqw; flex-wrap: wrap; }
+
+/* ---------- лаборатория: редактор ---------- */
+.lab { padding: 72px 26px 40px; padding-right: var(--side); }
+.lab__in { max-width: 1120px; margin: 0 auto; }
+.lab__head { position: relative; margin-bottom: 22px; }
+.lab__head .mega { position: static; display: block; font-size: clamp(54px, 10vw, 150px); color: var(--gray-2); }
+.lab__head h2 { margin: -.55em 0 8px; position: relative; font-family: var(--disp); text-transform: uppercase; font-weight: 500; font-size: clamp(34px, 4.6vw, 66px); line-height: .95; }
+.lab__head p { margin: 0; font-size: 18px; color: var(--muted); }
+.tabs { display: inline-flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; padding: 6px; border-radius: 99px; background: var(--gray); }
+.tab { min-height: 44px; padding: 0 20px; border-radius: 99px; border: 0; background: transparent; color: var(--pale-2); font-weight: 500; font-size: 16px; cursor: pointer; }
+.tab[aria-selected="true"] { background: #fff; color: var(--ink); box-shadow: 0 4px 14px rgba(0, 60, 180, .12); }
+.lab__box { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 18px; }
+.monitor { position: relative; min-height: 340px; border-radius: 36px; background: var(--ink); color: #fff; overflow: hidden; display: grid; place-items: center; padding: 28px; isolation: isolate; }
+.monitor .mega { right: -2%; bottom: -8%; font-size: 170px; color: #24292d; z-index: -1; }
+.mon__out { text-align: center; }
+.mon__word { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: .28em; align-items: baseline; font-size: clamp(30px, 4.4vw, 58px); font-weight: 600; letter-spacing: -.04em; line-height: 1.08; }
+.mon__word .w2 { color: var(--blue-2); }
+.mon__word .tail { color: #8ea3c7; font-weight: 500; }
+.mon__ru { margin: 16px 0 0; font-size: 19px; font-weight: 500; }
+.mon__why { margin: 10px auto 0; max-width: 38ch; font-size: 15px; color: #b9c4d6; }
+.ctrl { border-radius: 36px; background: var(--gray); padding: 22px; display: grid; gap: 14px; align-content: start; }
+.ctrl h3 { margin: 0; font-size: 14px; letter-spacing: .02em; color: var(--muted); font-weight: 500; }
+.pane[hidden] { display: none; }
+.fix__bad { font-size: 24px; font-weight: 600; letter-spacing: -.03em; color: var(--bad); text-decoration: line-through 2px; }
+
+/* ---------- ловушки: баги ---------- */
+.stage--wide { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); gap: 16px; }
+.stage--wide .side { justify-content: flex-start; gap: 8px; }
+.stage--wide .subs { max-width: 64ch; }
+.reel-track { position: absolute; left: 0; top: 0; bottom: 0; display: flex; gap: 22px; padding: 0 5cqw; align-items: center; }
+.take { position: relative; flex: none; width: min(420px, 74cqw); height: min(84cqh, 460px); border-radius: 30px; background: var(--glass), var(--gray); padding: 22px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+.take__no { display: flex; align-items: center; gap: 10px; font-family: var(--disp); text-transform: uppercase; font-size: 20px; font-weight: 500; }
+.take__no .pill { font-size: 12px; font-family: var(--ak-font); text-transform: none; }
+.take__flip { position: relative; display: grid; flex: 1; min-height: 0; perspective: 800px; }
+.take__face { grid-area: 1 / 1; border-radius: 22px; padding: 16px; display: flex; flex-direction: column; justify-content: center; gap: 8px; backface-visibility: hidden; background: #fff; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.take__face--ok { transform: rotateY(180deg); }
+.take.is-fixed .take__face--bad { transform: rotateY(-180deg); }
+.take.is-fixed .take__face--ok { transform: rotateY(0); }
+.take__tr { font-size: clamp(22px, 5.4cqw, 32px); font-weight: 600; letter-spacing: -.035em; line-height: 1.1; }
+.take__face--bad .take__tr { color: var(--bad); text-decoration: line-through 3px; }
+.take__face--ok .take__tr { color: var(--ok); }
+.take__note { margin: 0; font-size: 15px; line-height: 1.38; }
+.take .btn { align-self: flex-start; }
+
+/* ---------- видео, практика ---------- */
+.plain { padding: 64px 26px; padding-right: var(--side); }
+.plain__in { max-width: 920px; margin: 0 auto; }
+.plain h2 { display: flex; align-items: center; gap: 14px; margin: 0 0 10px; font-family: var(--disp); text-transform: uppercase; font-weight: 500; font-size: clamp(32px, 3.8vw, 54px); line-height: 1; }
+.plain h2 svg { width: 46px; flex: none; }
+.plain__lead { margin: 0 0 20px; font-size: 18px; color: var(--muted); }
+.plain a-exercise, .plain a-quiz { margin-bottom: 18px; }
+
+/* нестандартное: ползунок частицы */
+.pb { border-radius: 36px; background: var(--ink); color: #fff; padding: 24px; margin-top: 8px; position: relative; overflow: hidden; isolation: isolate; }
+.pb .mega { right: -1%; top: -12%; font-size: 190px; z-index: -1; color: #24292d; }
+.pb__head { display: flex; justify-content: space-between; gap: 12px; align-items: center; flex-wrap: wrap; }
+.pb__head h3 { margin: 0; font-family: var(--disp); text-transform: uppercase; font-weight: 500; font-size: 24px; }
+.pb__score { background: #fff; color: var(--ink); border-radius: 99px; padding: 6px 14px; font-weight: 600; }
+.pb__task { margin: 18px auto 6px; text-align: center; font-size: clamp(26px, 4.4vw, 44px); font-weight: 600; letter-spacing: -.035em; }
+.pb__slot { display: inline-block; min-width: 2.4em; border-bottom: 3px solid var(--orange); color: var(--orange); }
+.pb__ru { text-align: center; margin: 0 0 18px; color: #b9c4d6; }
+.pb__track { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 6px; border-radius: 22px; background: linear-gradient(90deg, rgba(0, 85, 255, .05), rgba(0, 85, 255, .55)), repeating-conic-gradient(#2a2f34 0 25%, #23272b 0 50%) 0 0 / 16px 16px; touch-action: none; }
+.pb__seg { position: relative; z-index: 1; min-height: 64px; border-radius: 16px; border: 0; background: transparent; color: #fff; font-weight: 600; font-size: 20px; cursor: pointer; }
+.pb__seg small { display: block; font-size: 12px; font-weight: 400; color: #b9c4d6; }
+.pb__seg.is-ok { background: var(--ok); } .pb__seg.is-bad { background: var(--bad); }
+.pb__knob { position: absolute; z-index: 0; top: 6px; bottom: 6px; left: 6px; width: calc((100% - 30px) / 4); border-radius: 16px; box-shadow: inset 0 0 0 3px #fff; pointer-events: none; }
+.pb__msg { min-height: 1.4em; text-align: center; margin: 14px 0 0; font-weight: 500; }
+.pb__end { text-align: center; margin-top: 10px; }
+
+/* ---------- постер и финал ---------- */
+.poster { position: relative; border-radius: 44px; background: var(--glass), var(--gray); padding: clamp(22px, 4vw, 48px); overflow: hidden; isolation: isolate; }
+.poster .mega { left: -1%; top: -4%; font-size: clamp(90px, 16vw, 240px); z-index: -1; color: var(--gray-2); }
+.poster__k { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.poster h2 { margin: 0 0 18px; font-family: var(--disp); text-transform: uppercase; font-weight: 500; font-size: clamp(40px, 7vw, 100px); line-height: .9; }
+.poster h2 .pale { color: var(--pale); }
+.pgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.ptile { background: #fff; border-radius: 28px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+.ptile h3 { margin: 0; font-size: 13px; color: var(--muted); font-weight: 500; }
+.ptile__big { font-size: clamp(21px, 2.4vw, 30px); font-weight: 600; letter-spacing: -.035em; line-height: 1.1; }
+.ptile p { margin: 0; font-size: 15px; line-height: 1.38; }
+.ptile--wide { grid-column: span 2; }
+.ptile--ink { background: var(--ink); color: #fff; }
+.ptile--ink h3 { color: #9aa6b8; }
+.mi4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; font-weight: 600; font-size: 18px; text-align: center; }
+.mi4 span { border-radius: 14px; padding: 10px 4px; }
+.finale { margin-top: 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 18px; align-items: stretch; }
+.finale__chat { position: relative; min-height: 330px; border-radius: 36px; background: var(--glass), var(--gray); padding: 22px; display: flex; flex-direction: column; gap: 12px; justify-content: center; }
+.fmsg { display: flex; gap: 10px; align-items: flex-start; max-width: 92%; }
+.fmsg svg { width: 40px; flex: none; }
+.fmsg .ch-b { font-size: 17px; border-radius: 20px; border-top-left-radius: 6px; padding: 12px 16px; }
+.fmsg--me { align-self: flex-end; flex-direction: row-reverse; }
+.fmsg--me .ch-b { background: var(--ink); color: #fff; border-top-left-radius: 20px; border-top-right-radius: 6px; }
+.finale__txt { border-radius: 36px; background: var(--gray); padding: 24px; display: flex; flex-direction: column; gap: 12px; }
+.finale__txt p { margin: 0; font-size: 17px; line-height: 1.45; }
+.skills { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.skills li { display: flex; gap: 10px; align-items: flex-start; font-size: 16px; }
+.skills svg { width: 22px; flex: none; margin-top: 1px; }
+
+/* ---------- свой скроллбар: панель инструментов ---------- */
+.reel { position: fixed; z-index: 800; right: 14px; top: 50%; transform: translateY(-50%); width: 60px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0; border-radius: 22px; background: rgba(255, 255, 255, .92); box-shadow: 0 10px 34px rgba(0, 50, 160, .18), inset 0 0 0 1px var(--gray-2); touch-action: none; user-select: none; backdrop-filter: blur(10px); }
+.reel__rail { position: relative; display: flex; flex-direction: column; gap: 4px; }
+.reel__fill { position: absolute; left: 50%; top: 0; width: 4px; margin-left: -2px; height: 100%; border-radius: 4px; background: linear-gradient(var(--blue), var(--orange)); transform-origin: 50% 0; transform: scaleY(0); }
+.reel button { position: relative; z-index: 1; width: 44px; height: 44px; border-radius: 13px; border: 0; background: var(--gray); color: var(--pale-2); font-weight: 600; font-size: 13px; cursor: pointer; display: grid; place-items: center; transition: background .2s, color .2s; }
+.reel button.is-read { background: #e2f6ea; color: var(--ok); }
+.reel button.is-here { background: var(--blue); color: #fff; }
+.reel__thumb { position: absolute; left: 50%; top: 0; width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 5px; background: #fff; box-shadow: 0 0 0 3px var(--ink); z-index: 2; pointer-events: none; }
+.reel__cap { font-family: var(--disp); font-size: 15px; font-weight: 600; color: var(--ink); }
+
+/* ---------- телефон ---------- */
+@media (max-width: 767.98px) {
+  :root { --side: 14px; }
+  .stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 10px; padding: 54px 12px 62px; }
+  .side { justify-content: flex-start; gap: 8px; }
+  .side h2 { font-size: 26px; }
+  .kick { font-size: 12px; padding: 4px 10px; }
+  .subs { font-size: 15.5px; line-height: 1.35; }
+  .act { padding: 10px; border-radius: 18px; gap: 6px; }
+  .act__q { font-size: 15px; }
+  .btn, .chip, .tok { font-size: 14px; padding: 0 12px; }
+  .stage--wide { grid-template-rows: auto minmax(0, 1fr); padding-bottom: 62px; }
+  .take { width: 80cqw; padding: 16px; }
+  .take__note { font-size: 14px; }
+  .lab, .plain { padding: 56px 14px 32px; }
+  .lab__box { grid-template-columns: minmax(0, 1fr); }
+  .monitor { min-height: 250px; border-radius: 28px; padding: 18px; }
+  .monitor .mega { font-size: 110px; }
+  .pgrid { grid-template-columns: minmax(0, 1fr); }
+  .ptile--wide { grid-column: auto; }
+  .finale { grid-template-columns: minmax(0, 1fr); }
+  .pb { padding: 18px; border-radius: 28px; }
+  .pb__seg { font-size: 17px; min-height: 58px; }
+  .poster { border-radius: 30px; }
+  .reel { left: 8px; right: 8px; top: 6px; transform: none; width: auto; height: 40px; flex-direction: row; padding: 0 6px; gap: 6px; border-radius: 14px; }
+  .reel__cap { display: none; }
+  .reel__rail { flex-direction: row; flex: 1; justify-content: space-between; gap: 2px; }
+  .reel button { width: 26px; height: 26px; font-size: 11px; border-radius: 8px; }
+  .reel__fill { left: 0; top: 50%; width: 100%; height: 4px; margin: -2px 0 0; transform-origin: 0 50%; transform: scaleX(0); }
+  .reel__thumb { top: 50%; left: 0; width: 12px; height: 12px; margin: -6px 0 0 -6px; }
+}
+/* без анимации — итоговые кадры */
+html:not(.motion) .st-hall { opacity: 0; }
+html:not(.motion) .ha-trav1 { transform: translate(-24.5%, 308%) scale(.45); }
+html:not(.motion) .ha-trav2 { transform: translate(24.5%, 308%) scale(.45); }
+html:not(.motion) .st-q { opacity: 0; }
+html:not(.motion) .ch-w0, html:not(.motion) .ch-w1, html:not(.motion) .ch-w2 { opacity: 0; }
+html:not(.motion) #s-traps .stage { height: auto; }
+html:not(.motion) #s-traps .frame { overflow-x: auto; min-height: 520px; }
+html:not(.motion) #s-traps .reel-track { position: relative; height: 100%; min-height: 520px; padding: 24px; }
+html:not(.motion) #s-traps .take { height: 460px; }
+@media (prefers-reduced-motion: reduce) { .take__face { transition: none; } }
+</style>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3d7bff"/><stop offset="1" stop-color="#0055ff"/></linearGradient>
+    <linearGradient id="gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cddcf6"/></linearGradient>
+    <linearGradient id="go" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff8a5c"/><stop offset="1" stop-color="#ff4d12"/></linearGradient>
+    <filter id="fur" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="7"/></filter>
+  </defs>
+  <symbol id="i-cube" viewBox="0 0 100 100">
+    <path d="M50 8 90 28 50 48 10 28z" fill="var(--t, #6fa0ff)"/>
+    <path d="M10 28 50 48v44L10 72z" fill="var(--l, #2f6dff)"/>
+    <path d="M90 28 50 48v44l40-20z" fill="var(--r, #0047d6)"/>
+    <path d="M50 8 90 28 50 48 10 28z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+  </symbol>
+  <symbol id="i-fur" viewBox="0 0 120 100">
+    <path filter="url(#fur)" d="M14 70c-6-22 10-46 36-50 24-4 46 8 54 28 4 10-6 16-14 10-10-8-20-14-34-12-14 2-22 12-24 24-2 10-14 10-18 0z" fill="url(#go)"/>
+    <path d="M30 40c10-8 26-10 40-4" fill="none" stroke="#ffb08f" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+  </symbol>
+  <symbol id="i-elif" viewBox="0 0 80 80">
+    <circle cx="40" cy="40" r="40" fill="#dfe9fd"/>
+    <path d="M14 80c2-16 12-24 26-24s24 8 26 24z" fill="#ff6430"/>
+    <path d="M22 40c0-16 8-26 18-26s18 10 18 26c0 6-2 12-4 14H26c-2-2-4-8-4-14z" fill="#3a2a24"/>
+    <rect x="34" y="44" width="12" height="12" rx="5" fill="#e9b593"/>
+    <circle cx="40" cy="36" r="13" fill="#f2c6a6"/>
+    <path d="M27 34c2-9 8-13 15-13 6 0 11 4 12 10-7 0-13-2-17-6-2 5-6 8-10 9z" fill="#3a2a24"/>
+    <circle cx="35" cy="38" r="1.5" fill="#16191b"/><circle cx="45" cy="38" r="1.5" fill="#16191b"/>
+    <path d="M36 43c2.4 1.8 5.6 1.8 8 0" fill="none" stroke="#b5684a" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-me" viewBox="0 0 80 80">
+    <circle cx="40" cy="40" r="40" fill="#16191b"/>
+    <path d="M14 80c2-16 12-24 26-24s24 8 26 24z" fill="#0055ff"/>
+    <rect x="34" y="44" width="12" height="12" rx="5" fill="#e3b08c"/>
+    <circle cx="40" cy="36" r="13" fill="#eebd9b"/>
+    <path d="M27 33c1-9 7-13 13-13 7 0 13 4 13 12-8-1-14-4-17-8-2 5-5 8-9 9z" fill="#2a1d18"/>
+    <circle cx="35" cy="38" r="1.5" fill="#16191b"/><circle cx="45" cy="38" r="1.5" fill="#16191b"/>
+    <path d="M36 44h8" stroke="#b5684a" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="3" fill="currentColor"/><path d="M8 10V7a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="7" fill="#17a34a"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-play" viewBox="0 0 48 48"><rect x="2" y="2" width="44" height="44" rx="14" fill="#0055ff"/><path d="M20 15l14 9-14 9z" fill="#fff"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 48 48"><rect x="2" y="2" width="44" height="44" rx="14" fill="#16191b"/><rect x="13" y="13" width="9" height="9" rx="2.5" fill="#fff"/><rect x="26" y="13" width="9" height="9" rx="2.5" fill="#ff6430"/><rect x="13" y="26" width="9" height="9" rx="2.5" fill="#0055ff"/><rect x="26" y="26" width="9" height="9" rx="2.5" fill="#fff"/></symbol>
+</svg>
+
+<nav class="reel" data-scrollbar aria-label="Сабақ барысы">
+  <span class="reel__cap" data-ui>B</span>
+  <div class="reel__rail">
+    <span class="reel__fill"></span>
+    <span class="reel__thumb"></span>
+    <button type="button" data-goto="story" aria-label="Ілмек">1</button>
+    <button type="button" data-goto="bold" aria-label="Қалың: mi-мен қайталау">2</button>
+    <button type="button" data-goto="harmony" aria-label="mi-дің төрт түсі">3</button>
+    <button type="button" data-goto="concession" aria-label="Иә, бірақ: -mAsInA">4</button>
+    <button type="button" data-goto="person" aria-label="Жақ пен шақ">5</button>
+    <button type="button" data-goto="lab" aria-label="Редактор">6</button>
+    <button type="button" data-goto="traps" aria-label="Багтар">7</button>
+    <button type="button" data-goto="video" aria-label="Бейне">8</button>
+    <button type="button" data-goto="practice" aria-label="Жаттығу">9</button>
+    <button type="button" data-goto="check" aria-label="Шағын тексеру">10</button>
+    <button type="button" data-goto="cheat" aria-label="Жадынама">11</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ 1. КРЮЧОК ============ -->
+<section id="s-story" class="scene" data-section="story" data-words="54">
+  <div class="stage">
+    <div class="frame">
+      <div class="bg"><span class="mega st-mega" style="left:-2cqw;top:2cqh;font-size:34cqmin">Samsun</span></div>
+      <div class="set">
+        <div class="st-hall">
+          <div class="abs st-floor"></div>
+          <div class="abs booth">
+            <div class="booth__t" lang="tr">Samsun<br>fuarı <span>2026</span></div>
+            <div class="booth__p"><span class="pill" lang="tr">Stant 2.32</span><span class="pill pill--blue" lang="tr">Atakum</span></div>
+          </div>
+          <svg class="abs cube ico st-c1" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-cube"/></svg>
+          <svg class="abs cube ico st-c2" viewBox="0 0 100 100" aria-hidden="true" style="--t:#ffffff;--l:#dbe6fa;--r:#b9cdf2"><use href="#i-cube"/></svg>
+          <svg class="abs cube ico st-c3" viewBox="0 0 100 100" aria-hidden="true" style="--t:#ffa07c;--l:#ff6430;--r:#e04a17"><use href="#i-cube"/></svg>
+          <svg class="abs ico st-fur" viewBox="0 0 120 100" aria-hidden="true"><use href="#i-fur"/></svg>
+        </div>
+        <div class="st-talk">
+          <svg class="st-av st-av--el" viewBox="0 0 80 80" aria-hidden="true"><use href="#i-elif"/></svg>
+          <div class="bub bub--el"><small lang="tr">Elif</small><span data-say="Stant güzel mi güzel!"><span class="c-w">Stant güzel</span> <span class="c-mi">mi</span> <span class="c-w">güzel</span>!</span></div>
+          <div class="bub bub--me"><small lang="tr">Ben</small><span data-say="Bilmiyorum. Sence?">Bilmiyorum. Sence?</span></div>
+          <div class="bub bub--el2"><small lang="tr">Elif</small><span data-say="Soru değil bu.">Soru değil bu.</span></div>
+          <span class="st-q" aria-hidden="true">?</span>
+          <span class="st-ex" aria-hidden="true">!</span>
+        </div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>1-көрініс · Самсун</span>
+      <h2>Бұл <span class="pale">сұрақ емес еді</span></h2>
+      <div class="subs">
+        <p>Самсун, көрме. Стенд құрып жатырмыз: көк кубтар, қызғылт сары үлпілдек бірдеңе. Әріптесім Элиф үш қадам артқа шегінеді.</p>
+        <p>Айтады: <b data-say="Stant güzel mi güzel!">Stant güzel mi güzel!</b></p>
+        <p>Мен: <b data-say="Bilmiyorum. Sence?">Bilmiyorum. Sence?</b> Білмеймін, сен қалай ойлайсың? Ол ұзақ қарап тұрады. Айтады: <b data-say="Soru değil bu.">Soru değil bu.</b> Бұл сұрақ емес.</p>
+        <p>Жарты сағат стендтің қасында тұрып, қай сұраққа жауап бермегенімді ойладым.</p>
+      </div>
+      <div class="act" id="story-act">
+        <p class="act__q">Тап: Элиф не деді?</p>
+        <div class="row">
+          <button type="button" class="btn" data-ans="bad">Стенд әдемі ме?</button>
+          <button type="button" class="btn" data-ans="ok">Стенд әп-әдемі!</button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. ЖИРНЫЙ ============ -->
+<section id="s-bold" class="scene" data-section="bold" data-words="40">
+  <div class="stage">
+    <div class="frame frame--ink on-dark">
+      <div class="bg"><span class="mega bd-mega" style="left:3cqw;top:4cqh;font-size:30cqmin">Vurgu</span></div>
+      <div class="set">
+        <div class="tbar bd-t1"><span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pen"/></svg></span><span>H1</span></div>
+        <div class="abs bd-type" data-say="güzel mi güzel"><span class="bd-w1">güzel</span><span class="c-mi bd-mi">mi</span><span class="bd-w2">güzel</span><span class="bd-ex">!</span></div>
+        <div class="abs bd-cursor"></div>
+        <div class="tbar bd-t2"><span class="bd-b">B</span><span><i>I</i></span><span><u>U</u></span></div>
+        <div class="abs bd-rule"><span class="r-w">сөз</span>+<span class="r-mi">mI</span>+<span class="r-w">сол сөз</span></div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>2-көрініс · Қалың</span>
+      <h2><span class="pale">«Қалың»</span> батырмасы</h2>
+      <div class="subs">
+        <p>Элиф майлықтың үстіне түсіндіреді. Сөз аласың: <b data-say="güzel">güzel</b>, «әдемі».</p>
+        <p>Сұрақтағы <b data-say="güzel mi?">güzel mi?</b> сияқты сол <b class="c-mi">mi</b>-ді қоясың. Сосын сөзді тағы қайталайсың.</p>
+        <p>Сұрақ жоғалады. «Өте-өте» қалады: әп-әдемі. Дауыс төмен, соңында леп белгісі.</p>
+      </div>
+      <div class="act" id="bold-act">
+        <p class="act__q">Сөздің дыбысын көтер</p>
+        <div class="vol">
+          <div class="slider" aria-hidden="true"></div>
+          <input class="rng" type="range" min="0" max="2" step="1" value="2" aria-label="Сөздің күші">
+          <div class="vol__out" data-say="Stant güzel mi güzel!" lang="tr">Stant güzel mi güzel!</div>
+          <div class="vol__ru">стенд әп-әдемі</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. ЧЕТЫРЕ ЦВЕТА ============ -->
+<section id="s-harmony" class="scene" data-section="harmony" data-words="44">
+  <div class="stage">
+    <div class="frame frame--white">
+      <div class="bg"><span class="mega ha-mega" style="right:-3cqw;top:0;font-size:32cqmin">Palet</span></div>
+      <div class="set">
+        <div class="ha-trav ha-trav1"><span class="word" data-say="kalabalık mı kalabalık"><span>kalabal<span class="hv ha-v1">ı</span>k</span><span class="c-mi ha-p1">mı</span></span></div>
+        <div class="ha-trav ha-trav2"><span class="word" data-say="soğuk mu soğuk"><span>soğ<span class="hv ha-v2">u</span>k</span><span class="c-mi ha-p2">mu</span></span></div>
+        <div class="abs ha-gl">Шылау дауыстыны сөздің соңғы дауыстысынан алады.</div>
+        <div class="sw sw--1" data-sw="mi"><span class="sw__meta" lang="tr">HEX · e i</span><span><span class="sw__big" lang="tr">mi</span><br><span class="sw__v" lang="tr">e · i</span></span></div>
+        <div class="sw sw--2" data-sw="mı"><span class="sw__meta" lang="tr">HEX · a ı</span><span><span class="sw__big" lang="tr">mı</span><br><span class="sw__v" lang="tr">a · ı</span></span></div>
+        <div class="sw sw--3" data-sw="mu"><span class="sw__meta" lang="tr">HEX · o u</span><span><span class="sw__big" lang="tr">mu</span><br><span class="sw__v" lang="tr">o · u</span></span></div>
+        <div class="sw sw--4" data-sw="mü"><span class="sw__meta" lang="tr">HEX · ö ü</span><span><span class="sw__big" lang="tr">mü</span><br><span class="sw__v" lang="tr">ö · ü</span></span></div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>3-көрініс · Палитра</span>
+      <h2><span class="pale">mi</span>-дің төрт түсі</h2>
+      <div class="subs">
+        <p>Көрмені аралап жүрмін. Қайталауды әр стендтен естимін. Тек <b class="c-mi">mi</b> үнемі түсін өзгертеді.</p>
+        <p><b data-say="Kalabalık mı kalabalık!">Kalabalık mı kalabalık!</b> Адам лық толы. <b data-say="Deniz soğuk mu soğuk!">Deniz soğuk mu soğuk!</b> Теңіз мұздай.</p>
+        <p>Үндестік сұрақтағыдай: <b data-say="büyük mü büyük">büyük mü büyük</b>, <b data-say="güzel mi güzel">güzel mi güzel</b>. Бөлек жазылады.</p>
+      </div>
+      <div class="act" id="harm-act">
+        <p class="act__q">Сөзді өз түсіне жібер</p>
+        <div class="chips">
+          <button type="button" class="chip" data-w="pahalı">pahalı <small>қымбат</small></button>
+          <button type="button" class="chip" data-w="uzun">uzun <small>ұзын</small></button>
+          <button type="button" class="chip" data-w="ilginç">ilginç <small>қызық</small></button>
+          <button type="button" class="chip" data-w="üzgün">üzgün <small>мұңды</small></button>
+          <button type="button" class="chip" data-w="sıcak">sıcak <small>ыстық</small></button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+  <div class="probe" aria-hidden="true"><span class="word"></span></div>
+</section>
+
+<!-- ============ 4. ДА, НО ============ -->
+<section id="s-concession" class="scene" data-section="concession" data-words="44">
+  <div class="stage">
+    <div class="frame">
+      <div class="bg"><span class="mega cg-mega" style="right:-2cqw;bottom:-2cqh;font-size:40cqmin">ama</span></div>
+      <div class="set">
+        <div class="abs glass cg-card">
+          <div class="cg-card__t" lang="tr">Kargo</div>
+          <div class="cg-card__s" lang="tr">09:00 · Stant 2.32</div>
+          <span class="pill pill--ink cg-tag" lang="tr">3 kutu</span>
+        </div>
+        <svg class="abs cube ico cg-c1" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-cube"/></svg>
+        <svg class="abs cube ico cg-c2" viewBox="0 0 100 100" aria-hidden="true" style="--t:#ffa07c;--l:#ff6430;--r:#e04a17"><use href="#i-cube"/></svg>
+        <svg class="abs cube ico cg-c3" viewBox="0 0 100 100" aria-hidden="true" style="--t:#ffffff;--l:#dbe6fa;--r:#b9cdf2"><use href="#i-cube"/></svg>
+        <svg class="abs ico cg-crack" viewBox="0 0 100 100" aria-hidden="true"><path class="cg-crackline" d="M52 22 44 40l10 8-8 16 6 10-4 14" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0" fill="none" stroke="#16191b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="abs cg-parts">
+          <div class="part"><b lang="tr">gel</b><small>етістік</small></div>
+          <div class="part part--s"><b lang="tr">me</b><small>-mA</small></div>
+          <div class="part part--s"><b lang="tr">si</b><small>-sI</small></div>
+          <div class="part part--s"><b lang="tr">ne</b><small>-nA</small></div>
+        </div>
+        <div class="abs cg-line" data-say="Kargo gelmesine geldi ama kutular kırık."><span>Kargo gel<span class="c-sfx">mesine</span> geldi</span> <span class="c-ama cg-ama">ama kutular kırık.</span></div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>4-көрініс · Жүк</span>
+      <h2>Иә, <span class="pale">бірақ</span></h2>
+      <div class="subs">
+        <p>Таңғы тоғызда жүк келеді. Кубтар орнында. Қызғылт сарысы жарылған.</p>
+        <p>Элиф бастыққа жазады: <b data-say="Kargo gelmesine geldi ama kutular kırık.">Kargo gelmesine geldi ama kutular kırık.</b> Жүк келуін келді, бірақ қораптар сынық.</p>
+        <p>Сызба: <b class="c-sfx">-mAsInA</b> тұрған етістік, сол етістік әдеттегідей, сосын <b>ama</b> және жаман жаңалық. <b data-say="gelmesine">gel-me-si-ne</b> — <b>-sI</b> тәуелдігі бар етістіктен жасалған зат есім, барыс септікте. Қазақшадағы «келуін келді» дәл осылай құралады.</p>
+      </div>
+      <div class="act" id="con-act">
+        <p class="act__q">Құрастыр: «Келуін келді, бірақ кешікті»</p>
+        <div class="build" data-hint="сөздерді бас"></div>
+        <div class="row">
+          <button type="button" class="tok" data-t="geldi">geldi</button>
+          <button type="button" class="tok" data-t="ama">ama</button>
+          <button type="button" class="tok" data-t="Gelmesine">Gelmesine</button>
+          <button type="button" class="tok" data-t="rağmen">rağmen</button>
+          <button type="button" class="tok" data-t="geç kaldı.">geç kaldı.</button>
+          <button type="button" class="btn con-reset" aria-label="Қайта құрастыру">↺</button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5. ЛИЦО И ВРЕМЯ ============ -->
+<section id="s-person" class="scene" data-section="person" data-words="46">
+  <div class="stage">
+    <div class="frame">
+      <div class="bg"><span class="mega ps-mega" style="left:-2cqw;bottom:-3cqh;font-size:36cqmin">Mesaj</span></div>
+      <div class="set">
+        <div class="abs ch-tabs"><span class="ch-hl"></span><span class="ch-tab0" lang="tr">ben</span><span lang="tr">sen</span><span lang="tr">o</span><span lang="tr">biz</span></div>
+        <div class="ch-msg ch-m1">
+          <svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-me"/></svg>
+          <div class="ch-b" data-say="Aramasına aradım ama açmadı."><small lang="tr">Ben → Elif</small><span class="ch-lock c-sfx"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg><span lang="tr">Aramasına</span></span> <span class="swap"><span class="ch-w0" lang="tr">aradın</span><span class="ch-w1" lang="tr">aradı</span><span class="ch-w2" lang="tr">aradık</span><span class="ch-w3" lang="tr">aradım</span></span> <span class="c-ama" lang="tr">ama açmadı.</span></div>
+        </div>
+        <div class="ch-msg ch-m2">
+          <svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-elif"/></svg>
+          <div class="ch-b" data-say="Gitmesine gidiyorum ama istemiyorum."><small lang="tr">Elif → Ben</small><span class="c-sfx" lang="tr">Gitmesine</span> <span lang="tr">gidiyorum</span> <span class="c-ama" lang="tr">ama istemiyorum.</span></div>
+        </div>
+        <div class="abs ch-note"><span class="pill pill--blue">бірінші бөлік қатып қалған</span><span class="pill pill--ink">екіншісі өзгереді</span></div>
+      </div>
+    </div>
+    <div class="side">
+      <span class="kick" data-ui><i></i>5-көрініс · Хат алмасу</span>
+      <h2>Бірінші бөлік <span class="pale">қатып қалған</span></h2>
+      <div class="subs">
+        <p>Курьерге қоңырау шаламын. Жиырма гудок. Элифке жазамын: <b data-say="Aramasına aradım ama açmadı.">Aramasına aradım ama açmadı.</b> Шалуын шалдым, бірақ ол алмады.</p>
+        <p>Бірінші бөлік өзгермейді: әрдайым <b class="c-sfx">-mAsInA</b>. Жақты екінші етістік көтереді: <b>aradım</b>, <b>aradık</b>.</p>
+        <p>Шақ та кез келген. Элиф ұйымдастырушылардың кешінен: <b data-say="Gitmesine gidiyorum ama istemiyorum.">Gitmesine gidiyorum ama istemiyorum.</b> Баруын барамын, бірақ барғым келмейді.</p>
+      </div>
+      <div class="act" id="per-act">
+        <p class="act__q">«Оқуын оқыдым, бірақ түсінбедім»</p>
+        <div class="row">
+          <button type="button" class="btn" data-ans="bad" lang="tr">Okumasını okudum ama anlamadım.</button>
+          <button type="button" class="btn" data-ans="ok" lang="tr">Okumasına okudum ama anlamadım.</button>
+          <button type="button" class="btn" data-ans="bad2" lang="tr">Okumasına okudum ve anladım.</button>
+        </div>
+        <p class="react" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. РЕДАКТОР ============ -->
+<section id="s-lab" class="lab" data-section="lab" data-words="29">
+  <div class="lab__in">
+    <div class="lab__head">
+      <span class="mega lab-mega" aria-hidden="true">Editör</span>
+      <h2>Редактор</h2>
+      <p>Өзің құрастырасың. Үш режим, әр жауаптың «неге»-сі бар.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Режим">
+      <button type="button" class="tab" role="tab" aria-selected="true" data-tab="amp">Күшейт</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="but">Иә, бірақ</button>
+      <button type="button" class="tab" role="tab" aria-selected="false" data-tab="fix">Түзет</button>
+    </div>
+    <div class="lab__box">
+      <div class="monitor on-dark">
+        <span class="mega" aria-hidden="true">Önizleme</span>
+        <div class="mon__out">
+          <div class="mon__word" data-say="güzel mi güzel!"><span class="w1">güzel</span><span class="c-mi mon-mi">mi</span><span class="w2">güzel!</span></div>
+          <p class="mon__ru">өте-өте әдемі</p>
+          <p class="mon__why">Соңғы дауысты e — демек mi. Бөлек жазылады.</p>
+        </div>
+      </div>
+      <div class="ctrl">
+        <div class="pane" data-pane="amp">
+          <h3>Сөз</h3>
+          <div class="chips lab-adj">
+            <button type="button" class="chip is-on" data-a="güzel">güzel</button>
+            <button type="button" class="chip" data-a="pahalı">pahalı</button>
+            <button type="button" class="chip" data-a="soğuk">soğuk</button>
+            <button type="button" class="chip" data-a="büyük">büyük</button>
+            <button type="button" class="chip" data-a="kalabalık">kalabalık</button>
+            <button type="button" class="chip" data-a="tatlı">tatlı</button>
+            <button type="button" class="chip" data-a="yorgun">yorgun</button>
+            <button type="button" class="chip" data-a="ilginç">ilginç</button>
+          </div>
+          <div class="row"><button type="button" class="btn btn--blue lab-say">Тыңдау</button></div>
+        </div>
+        <div class="pane" data-pane="but" hidden>
+          <h3>Етістік</h3>
+          <div class="chips lab-verb">
+            <button type="button" class="chip is-on" data-v="gel">gelmek</button>
+            <button type="button" class="chip" data-v="git">gitmek</button>
+            <button type="button" class="chip" data-v="ara">aramak</button>
+            <button type="button" class="chip" data-v="oku">okumak</button>
+            <button type="button" class="chip" data-v="ye">yemek</button>
+            <button type="button" class="chip" data-v="bak">bakmak</button>
+          </div>
+          <h3>Кім</h3>
+          <div class="row lab-per">
+            <button type="button" class="btn is-on" data-p="ben" lang="tr">ben</button>
+            <button type="button" class="btn" data-p="sen" lang="tr">sen</button>
+            <button type="button" class="btn" data-p="o" lang="tr">o</button>
+            <button type="button" class="btn" data-p="biz" lang="tr">biz</button>
+          </div>
+        </div>
+        <div class="pane" data-pane="fix" hidden>
+          <h3>Макетте баг</h3>
+          <div class="fix__bad lab-bad" lang="tr">Hava güzelmi güzel!</div>
+          <div class="row lab-opts"></div>
+          <button type="button" class="btn btn--ink lab-next">Келесі</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 7. БАГИ ============ -->
+<section id="s-traps" class="scene" data-section="traps" data-words="64">
+  <div class="stage stage--wide">
+    <div class="side">
+      <span class="kick" data-ui><i></i>7-көрініс · Багтар</span>
+      <h2>Макеттегі <span class="pale">багтар</span></h2>
+      <div class="subs"><p>Бұған бәрі сүрінеді, мен де. «Түзету»-ді бас, карточка аударылады.</p></div>
+    </div>
+    <div class="frame frame--ink">
+      <div class="reel-track">
+        <article class="take">
+          <div class="take__no">1-баг <span class="pill">бос орын</span></div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Hava güzelmi güzel!</span><p class="take__note">Шылауды сөзге жабыстырып жазды.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Hava güzel mi güzel!">Hava güzel mi güzel!</span><p class="take__note">mi әрдайым бөлек жазылады.</p></div>
+          </div>
+          <button type="button" class="btn btn--blue take__go">Түзету</button>
+        </article>
+        <article class="take">
+          <div class="take__no">2-баг <span class="pill">үндестік</span></div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Deniz soğuk mı soğuk!</span><p class="take__note">Дауыстыны басқа сөзден алды.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Deniz soğuk mu soğuk!">Deniz soğuk mu soğuk!</span><p class="take__note">Соңғы дауысты o, демек mu.</p></div>
+          </div>
+          <button type="button" class="btn btn--blue take__go">Түзету</button>
+        </article>
+        <article class="take">
+          <div class="take__no">3-баг <span class="pill">интонация</span></div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Stant güzel mi güzel?</span><p class="take__note">Сұрақ белгісін қойды. Элиф жоқ жауапты күтіп отыр.</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Stant güzel mi güzel!">Stant güzel mi güzel!</span><p class="take__note">Дауыс төмен, соңында леп белгісі.</p></div>
+          </div>
+          <button type="button" class="btn btn--blue take__go">Түзету</button>
+        </article>
+        <article class="take">
+          <div class="take__no">4-баг <span class="pill">rağmen</span></div>
+          <div class="take__flip">
+            <div class="take__face take__face--bad"><span class="take__tr" lang="tr">Kargo gelmesine rağmen geldi.</span><p class="take__note">Екі құрылымды араластырды. Rağmen — «қарамастан».</p></div>
+            <div class="take__face take__face--ok"><span class="take__tr" data-say="Kargo gelmesine geldi ama kutular kırık.">Kargo gelmesine geldi ama kutular kırık.</span><p class="take__note">Етістіктің қайталануы және ama.</p></div>
+          </div>
+          <button type="button" class="btn btn--blue take__go">Түзету</button>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВИДЕО ============ -->
+<section id="s-video" class="plain" data-section="video" data-words="12">
+  <div class="plain__in">
+    <h2><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-play"/></svg>Бейне</h2>
+    <p class="plain__lead">Етістік қалай қайталанатынын және оның екінші жартысында не өзгеретінін бақыла.</p>
+    <a-video yt="9J6QBtfnxUw" start="0" end="180" title="Yinelemeler (fiillerde)" channel="ALTIN KÖPRÜ - TÜRKÇE"></a-video>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКА ============ -->
+<section id="s-practice" class="plain" data-section="practice" data-words="13">
+  <div class="plain__in">
+    <h2><svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-grid"/></svg>Жаттығу</h2>
+    <a-exercise ref="c1.repetition-mi.ex1"></a-exercise>
+    <a-exercise ref="c1.repetition-mi.ex2"></a-exercise>
+    <a-exercise ref="c1.repetition-mi.ex3"></a-exercise>
+    <a-exercise ref="c1.repetition-mi.ex4"></a-exercise>
+    <a-exercise ref="c1.repetition-mi.ex5"></a-exercise>
+    <div class="pb" id="pb" tabindex="-1">
+      <span class="mega" aria-hidden="true">mI</span>
+      <div class="pb__head"><h3>Шылау жүгірткісі</h3><span class="pb__score" aria-live="polite">0 / 6</span></div>
+      <div class="pb__task"><span class="pb-w" lang="tr">güzel</span> <span class="pb__slot" lang="tr">?</span> <span class="pb-w2" lang="tr">güzel</span>!</div>
+      <p class="pb__ru">Жақтауды сүйре, түсті бас немесе ← → және Enter бас.</p>
+      <div class="pb__track">
+        <span class="pb__knob"></span>
+        <button type="button" class="pb__seg" data-m="mi" lang="tr">mi<small>e i</small></button>
+        <button type="button" class="pb__seg" data-m="mı" lang="tr">mı<small>a ı</small></button>
+        <button type="button" class="pb__seg" data-m="mu" lang="tr">mu<small>o u</small></button>
+        <button type="button" class="pb__seg" data-m="mü" lang="tr">mü<small>ö ü</small></button>
+      </div>
+      <p class="pb__msg" aria-live="polite"></p>
+      <div class="pb__end" hidden><button type="button" class="btn pb-again">Тағы бір рет</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ МИНИ-ПРОВЕРКА ============ -->
+<section id="s-check" class="plain" data-section="check" data-words="1">
+  <div class="plain__in">
+    <h2><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>Шағын тексеру</h2>
+    <a-quiz ref="c1.repetition-mi.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ============ ШПАРГАЛКА И ФИНАЛ ============ -->
+<section id="s-cheat" class="plain" data-section="cheat" data-words="83">
+  <div class="plain__in" style="max-width:1120px">
+    <div class="poster">
+      <span class="mega" aria-hidden="true">Tipografi</span>
+      <div class="poster__k"><span class="pill pill--ink" lang="tr">C1 · Samsun</span><span class="pill pill--blue">жадынама</span></div>
+      <h2>Қайталау <span class="pale">күшейткіш ретінде</span></h2>
+      <div class="pgrid">
+        <div class="ptile ptile--wide"><h3>Қалың</h3><div class="ptile__big" data-say="güzel mi güzel"><span class="c-w">сөз</span> + <span class="c-mi">mI</span> + <span class="c-w">сөз</span> !</div><p>Өте-өте. Сұрақ емес: дауыс төмен.</p></div>
+        <div class="ptile"><h3>Төрт түс</h3><div class="mi4"><span style="background:var(--gray)" data-say="güzel mi güzel">mi</span><span style="background:var(--orange);color:#fff" data-say="pahalı mı pahalı">mı</span><span style="background:var(--blue);color:#fff" data-say="soğuk mu soğuk">mu</span><span style="background:var(--ink);color:#fff" data-say="büyük mü büyük">mü</span></div><p>Бөлек жазылады.</p></div>
+        <div class="ptile ptile--ink on-dark"><h3>Иә, бірақ</h3><div class="ptile__big" data-say="Gelmesine geldi ama geç kaldı.">gel<span class="c-sfx" style="color:#7fa6ff">mesine</span> geldi <span class="c-ama">ama…</span></div><p>Істеуін істедім, бірақ.</p></div>
+        <div class="ptile"><h3>Кім және қашан</h3><div class="ptile__big" data-say="Aramasına aradık ama açmadı.">aramasına <span class="c-w">aradık</span></div><p>Бірінші бөлік қатып қалған, екіншісі өзгереді.</p></div>
+        <div class="ptile"><h3>Шатастырма</h3><div class="ptile__big" data-say="gelmesine rağmen">gelmesine rağmen</div><p>Бұл — «келгеніне қарамастан».</p></div>
+      </div>
+    </div>
+    <div class="finale">
+      <div class="finale__chat">
+        <div class="fmsg fmsg--me fin-1"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-me"/></svg><div class="ch-b" data-say="Fuar kalabalık mı kalabalık! Gelmesine geldik ama stant son dakikada hazır oldu.">Fuar kalabalık mı kalabalık! Gelmesine geldik ama stant son dakikada hazır oldu.</div></div>
+        <div class="fmsg fin-2"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-elif"/></svg><div class="ch-b" data-say="Stant güzel mi güzel!">Stant güzel mi güzel!</div></div>
+        <div class="fmsg fmsg--me fin-3"><svg viewBox="0 0 80 80" aria-hidden="true"><use href="#i-me"/></svg><div class="ch-b" data-say="Biliyorum. Soru değil bu.">Biliyorum. Soru değil bu.</div></div>
+      </div>
+      <div class="finale__txt">
+        <p>Кешке ортақ чатқа жазамын. Адам лық толы болды, келуін келдік, бірақ стендті соңғы минутта жинадық.</p>
+        <p>Элиф жауап береді: <b data-say="Stant güzel mi güzel!">Stant güzel mi güzel!</b> Мен: <b data-say="Biliyorum. Soru değil bu.">Biliyorum. Soru değil bu.</b> Білемін, бұл сұрақ емес. Ол үш смайлик жібереді. Бұл да сұрақ емес сияқты.</p>
+        <ul class="skills">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>Сөзді mI-мен қайталап күшейтесің.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>mi, mı, mu немесе mü-ді таңдайсың.</li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>«Істеуін істедім, бірақ»-ты -mAsInA арқылы айтасың.</li>
+        </ul>
+        <div class="row"><button type="button" class="btn btn--blue fin-say">Тағы жіберу</button><button type="button" class="btn fin-again">Чатты қайта ойнау</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<template data-achievement data-title="Қалың қаріппен" data-text="mI-мен қайталап күшейтесің және «иә, бірақ»-ты -mAsInA арқылы айтасың">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <rect class="bd-sq" x="10" y="10" width="100" height="100" rx="30" fill="#0055ff"/>
+    <text class="bd-b" x="44" y="80" font-family="Oswald, sans-serif" font-size="62" font-weight="600" fill="#ffffff" text-anchor="middle">B</text>
+    <rect class="bd-mi" x="64" y="46" width="34" height="26" rx="13" fill="#ff6430"/>
+    <text class="bd-mit" x="81" y="65" font-family="Inter, sans-serif" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">mi</text>
+    <rect class="bd-line" x="30" y="90" width="60" height="6" rx="3" fill="#ffffff"/>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  if (G && ST) G.registerPlugin(ST);
+  if (G && window.MotionPathPlugin) G.registerPlugin(window.MotionPathPlugin);
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const say = (t) => { if (window.AlternaKit) window.AlternaKit.speak(t); };
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anim = !!G && !calm;
+  const pop = (el) => { if (anim && el) G.fromTo(el, { scale: 0.9 }, { scale: 1, duration: 0.45, ease: 'back.out(2.2)' }); };
+  const shake = (el) => { if (anim && el) G.fromTo(el, { x: -10 }, { x: 0, duration: 0.6, ease: 'elastic.out(1, 0.3)' }); };
+  const react = (box, ok, text) => { const r = $('.react', box); r.className = 'react ' + (ok ? 'ok' : 'bad'); r.textContent = text; pop(r); };
+
+  /* ---------- морфология ---------- */
+  const lastV = (w) => (w.match(/[aıoueiöü]/g) || ['e']).pop();
+  const mI = (w) => ({ a: 'mı', ı: 'mı', o: 'mu', u: 'mu', e: 'mi', i: 'mi', ö: 'mü', ü: 'mü' })[lastV(w)];
+  const masina = (s) => (/[aıou]/.test(lastV(s)) ? 'masına' : 'mesine');
+  const past = (s, p) => {
+    const v = ({ a: 'ı', ı: 'ı', o: 'u', u: 'u', e: 'i', i: 'i', ö: 'ü', ü: 'ü' })[lastV(s)];
+    const c = /[fstkçşhp]$/.test(s) ? 't' : 'd';
+    return s + c + v + ({ ben: 'm', sen: 'n', o: '', biz: 'k' })[p];
+  };
+  const whyMi = (w) => `Соңғы дауысты ${lastV(w)} — демек ${mI(w)}. Бөлек жазылады.`;
+  const ADJ = { güzel: 'әдемі', pahalı: 'қымбат', soğuk: 'суық', büyük: 'үлкен', kalabalık: 'адамға толы', tatlı: 'тәтті', yorgun: 'шаршаған', ilginç: 'қызық', uzun: 'ұзын', üzgün: 'мұңды', sıcak: 'ыстық' };
+
+  /* ---------- сцены по скроллу ---------- */
+  if (anim && ST) {
+    const mm = G.matchMedia();
+    mm.add({ desk: '(min-width: 768px)', mob: '(max-width: 767.98px)' }, (ctx) => {
+      const { desk } = ctx.conditions;
+      document.documentElement.classList.add('motion');
+      const len = (d, m) => '+=' + (desk ? d : m) + '%';
+      const subs = (sel) => $$(sel + ' .subs p');
+
+      /* 1. Выставка: общий план → стенд → разговор → «?» становится «!» */
+      const s1 = subs('#s-story');
+      const t1 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-story .stage', start: 'top top', end: len(240, 150), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t1.addLabel('hall')
+        .from('#s-story .st-mega', { xPercent: -20, duration: 2.2 }, 0)
+        .from('#s-story .st-c1', { y: -60, rotate: -8, duration: 0.6, ease: 'bounce.out' }, 0.1)
+        .from('#s-story .st-c2', { y: -80, rotate: 6, duration: 0.6, ease: 'bounce.out' }, 0.25)
+        .from('#s-story .st-c3', { y: -100, duration: 0.6, ease: 'bounce.out' }, 0.4)
+        .from('#s-story .st-fur', { xPercent: -60, rotate: -20, duration: 0.8 }, 0.2)
+        .addLabel('push')
+        .to('#s-story .st-hall', { scale: desk ? 1.7 : 1.5, yPercent: 8, duration: 1, ease: 'power2.inOut' }, 'push')
+        .to('#s-story .st-hall', { opacity: 0, duration: 0.5 }, 'push+=0.6')
+        .from('#s-story .st-av--el', { scale: 0, duration: 0.5, ease: 'back.out(2)' }, 'push+=0.7')
+        .from('#s-story .bub--el', { scale: 0, transformOrigin: '0% 0%', duration: 0.5, ease: 'back.out(2)' }, 'push+=0.9')
+        .to(s1[0], { opacity: 0, y: -16, duration: 0.3 }, 'push+=0.6')
+        .from(s1[1], { y: 26, opacity: 0, duration: 0.5 }, 'push+=0.8')
+        .addLabel('talk')
+        .from('#s-story .bub--me', { scale: 0, transformOrigin: '100% 0%', duration: 0.5, ease: 'back.out(2)' }, 'talk')
+        .from('#s-story .st-q', { scale: 0, rotate: -30, duration: 0.6, ease: 'back.out(2)' }, 'talk+=0.2')
+        .to(s1[1], { opacity: 0, y: -16, duration: 0.3 }, 'talk')
+        .from(s1[2], { y: 26, opacity: 0, duration: 0.5 }, 'talk+=0.2')
+        .from('#s-story .bub--el2', { scale: 0, transformOrigin: '0% 0%', duration: 0.5, ease: 'back.out(2)' }, 'talk+=0.8')
+        .addLabel('turn')
+        .to('#s-story .st-q', { rotateY: 90, opacity: 0, duration: 0.4 }, 'turn')
+        .from('#s-story .st-ex', { rotateY: -90, opacity: 0, duration: 0.4 }, 'turn+=0.35')
+        .to(s1[2], { opacity: 0, y: -16, duration: 0.3 }, 'turn')
+        .from(s1[3], { y: 26, opacity: 0, duration: 0.5 }, 'turn+=0.2')
+        .from('#story-act', { y: 40, opacity: 0, duration: 0.5 }, 'turn+=0.8');
+
+      /* 2. Жирный: слово → B → копия → mi */
+      const s2 = subs('#s-bold');
+      const t2 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-bold .stage', start: 'top top', end: len(220, 140), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t2.addLabel('type')
+        .from('#s-bold .bd-mega', { xPercent: 25, duration: 3 }, 0)
+        .from('#s-bold .bd-t1', { y: -40, opacity: 0, duration: 0.5 }, 0.1)
+        .from('#s-bold .bd-cursor', { scaleY: 0, duration: 0.4 }, 0.2)
+        .from(s2[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .addLabel('press')
+        .from('#s-bold .bd-t2', { y: 60, opacity: 0, duration: 0.5 }, 'press')
+        .fromTo('#s-bold .bd-b', { scale: 1 }, { scale: 0.82, yoyo: true, repeat: 1, duration: 0.15 }, 'press+=0.6')
+        .to('#s-bold .bd-cursor', { opacity: 0, duration: 0.2 }, 'press+=0.6')
+        .from('#s-bold .bd-mi', { y: -90, rotate: -25, opacity: 0, duration: 0.6, ease: 'back.out(1.8)' }, 'press+=0.8')
+        .from('#s-bold .bd-w2', { x: -120, opacity: 0, duration: 0.7 }, 'press+=0.9')
+        .to(s2[0], { opacity: 0, y: -16, duration: 0.3 }, 'press+=0.4')
+        .from(s2[1], { y: 26, opacity: 0, duration: 0.5 }, 'press+=0.6')
+        .addLabel('bang')
+        .from('#s-bold .bd-ex', { scale: 3, opacity: 0, duration: 0.5, ease: 'power4.in' }, 'bang')
+        .fromTo('#s-bold .bd-type', { scale: 1 }, { scale: 1.06, yoyo: true, repeat: 1, duration: 0.2 }, 'bang+=0.5')
+        .from('#s-bold .bd-rule', { y: 40, opacity: 0, duration: 0.5 }, 'bang+=0.6')
+        .to(s2[1], { opacity: 0, y: -16, duration: 0.3 }, 'bang')
+        .from(s2[2], { y: 26, opacity: 0, duration: 0.5 }, 'bang+=0.2')
+        .from('#bold-act', { y: 40, opacity: 0, duration: 0.5 }, 'bang+=1');
+
+      /* 3. Палитра: слова летят к своим цветам */
+      const s3 = subs('#s-harmony');
+      const t3 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-harmony .stage', start: 'top top', end: len(240, 150), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t3.addLabel('sw')
+        .from('#s-harmony .sw', { yPercent: 70, opacity: 0, stagger: 0.14, duration: 0.6 }, 0)
+        .from('#s-harmony .ha-mega', { xPercent: 30, duration: 2.6 }, 0)
+        .from('#s-harmony .ha-gl', { y: 20, opacity: 0, duration: 0.4 }, 0.6)
+        .from(s3[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .addLabel('w1')
+        .from('#s-harmony .ha-trav1', { yPercent: -220, duration: 0.6, ease: 'back.out(1.6)' }, 'w1')
+        .from('#s-harmony .ha-v1', { scale: 0, duration: 0.3 }, 'w1+=0.5')
+        .from('#s-harmony .ha-p1', { scale: 0, y: -30, duration: 0.4, ease: 'back.out(2)' }, 'w1+=0.7')
+        .to('#s-harmony .ha-trav1', { xPercent: -24.5, yPercent: 308, scale: 0.45, duration: 0.8, ease: 'power2.inOut' }, 'w1+=1')
+        .to('#s-harmony .sw--2', { scale: 1.05, yoyo: true, repeat: 1, duration: 0.2 }, 'w1+=1.7')
+        .to(s3[0], { opacity: 0, y: -16, duration: 0.3 }, 'w1+=0.2')
+        .from(s3[1], { y: 26, opacity: 0, duration: 0.5 }, 'w1+=0.4')
+        .addLabel('w2')
+        .from('#s-harmony .ha-trav2', { yPercent: -220, duration: 0.6, ease: 'back.out(1.6)' }, 'w2')
+        .from('#s-harmony .ha-v2', { scale: 0, duration: 0.3 }, 'w2+=0.5')
+        .from('#s-harmony .ha-p2', { scale: 0, y: -30, duration: 0.4, ease: 'back.out(2)' }, 'w2+=0.7')
+        .to('#s-harmony .ha-trav2', { xPercent: 24.5, yPercent: 308, scale: 0.45, duration: 0.8, ease: 'power2.inOut' }, 'w2+=1')
+        .to('#s-harmony .sw--3', { scale: 1.05, yoyo: true, repeat: 1, duration: 0.2 }, 'w2+=1.7')
+        .to(s3[1], { opacity: 0, y: -16, duration: 0.3 }, 'w2+=0.2')
+        .from(s3[2], { y: 26, opacity: 0, duration: 0.5 }, 'w2+=0.4')
+        .from('#harm-act', { y: 40, opacity: 0, duration: 0.5 }, 'w2+=1.9');
+
+      /* 4. Груз: кубы падают, трещина рисуется, слово собирается из частей */
+      const s4 = subs('#s-concession');
+      const t4 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-concession .stage', start: 'top top', end: len(230, 150), pin: true, scrub: 0.8, anticipatePin: 1 } });
+      t4.addLabel('cargo')
+        .from('#s-concession .cg-card', { rotateX: -70, yPercent: 30, transformPerspective: 900, transformOrigin: '50% 100%', duration: 0.8 }, 0)
+        .from('#s-concession .cg-mega', { xPercent: 30, duration: 3 }, 0)
+        .from('#s-concession .cg-c1', { y: -200, duration: 0.6, ease: 'bounce.out' }, 0.3)
+        .from('#s-concession .cg-c2', { y: -240, duration: 0.6, ease: 'bounce.out' }, 0.45)
+        .from('#s-concession .cg-c3', { y: -260, duration: 0.6, ease: 'bounce.out' }, 0.6)
+        .fromTo('#s-concession .cg-crackline', { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, ease: 'none' }, 1.1)
+        .to('#s-concession .cg-c2', { x: 4, yoyo: true, repeat: 3, duration: 0.05 }, 1.1)
+        .from(s4[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .addLabel('line')
+        .from('#s-concession .cg-line', { y: 30, opacity: 0, duration: 0.5 }, 'line')
+        .from('#s-concession .cg-ama', { x: 40, opacity: 0, duration: 0.5 }, 'line+=0.5')
+        .to(s4[0], { opacity: 0, y: -16, duration: 0.3 }, 'line')
+        .from(s4[1], { y: 26, opacity: 0, duration: 0.5 }, 'line+=0.2')
+        .addLabel('parts')
+        .from('#s-concession .part', { y: 50, opacity: 0, rotate: (i) => (i % 2 ? 10 : -10), stagger: 0.2, duration: 0.5, ease: 'back.out(1.8)' }, 'parts')
+        .to(s4[1], { opacity: 0, y: -16, duration: 0.3 }, 'parts')
+        .from(s4[2], { y: 26, opacity: 0, duration: 0.5 }, 'parts+=0.2')
+        .from('#con-act', { y: 40, opacity: 0, duration: 0.5 }, 'parts+=1.2');
+
+      /* 5. Переписка: вкладки лиц, меняется только второй глагол */
+      const s5 = subs('#s-person');
+      const tabW = () => ($('#s-person .ch-tabs span:nth-child(3)').offsetLeft - $('#s-person .ch-tabs span:nth-child(2)').offsetLeft);
+      const t5 = G.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: '#s-person .stage', start: 'top top', end: len(230, 150), pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+      t5.addLabel('msg')
+        .from('#s-person .ch-tabs', { y: -40, opacity: 0, duration: 0.5 }, 0)
+        .from('#s-person .ps-mega', { xPercent: -25, duration: 3 }, 0)
+        .from('#s-person .ch-m1', { x: -80, opacity: 0, duration: 0.6 }, 0.3)
+        .from(s5[0], { y: 26, opacity: 0, duration: 0.5 }, 0.2)
+        .addLabel('lock')
+        .from('#s-person .ch-lock svg', { scale: 0, rotate: -90, duration: 0.4, ease: 'back.out(3)' }, 'lock')
+        .fromTo('#s-person .ch-hl', { x: 0 }, { x: () => tabW(), duration: 0.4 }, 'lock+=0.4')
+        .fromTo('#s-person .ch-w3', { opacity: 1 }, { opacity: 0, yPercent: -60, duration: 0.25 }, 'lock+=0.4')
+        .fromTo('#s-person .ch-w0', { opacity: 0, yPercent: 60 }, { opacity: 1, yPercent: 0, duration: 0.25 }, 'lock+=0.55')
+        .to('#s-person .ch-hl', { x: () => tabW() * 2, duration: 0.4 }, 'lock+=1')
+        .to('#s-person .ch-w0', { opacity: 0, yPercent: -60, duration: 0.25 }, 'lock+=1')
+        .fromTo('#s-person .ch-w1', { opacity: 0, yPercent: 60 }, { opacity: 1, yPercent: 0, duration: 0.25 }, 'lock+=1.15')
+        .to('#s-person .ch-hl', { x: () => tabW() * 3, duration: 0.4 }, 'lock+=1.6')
+        .to('#s-person .ch-w1', { opacity: 0, yPercent: -60, duration: 0.25 }, 'lock+=1.6')
+        .fromTo('#s-person .ch-w2', { opacity: 0, yPercent: 60 }, { opacity: 1, yPercent: 0, duration: 0.25 }, 'lock+=1.75')
+        .to('#s-person .ch-w2', { opacity: 0, duration: 0.25 }, 'lock+=2.3')
+        .to('#s-person .ch-w3', { opacity: 1, yPercent: 0, duration: 0.25 }, 'lock+=2.4')
+        .to('#s-person .ch-hl', { x: 0, duration: 0.4 }, 'lock+=2.3')
+        .to(s5[0], { opacity: 0, y: -16, duration: 0.3 }, 'lock')
+        .from(s5[1], { y: 26, opacity: 0, duration: 0.5 }, 'lock+=0.2')
+        .addLabel('elif')
+        .from('#s-person .ch-m2', { x: 80, opacity: 0, duration: 0.6 }, 'elif')
+        .from('#s-person .ch-note .pill', { y: 30, opacity: 0, stagger: 0.2, duration: 0.4 }, 'elif+=0.4')
+        .to(s5[1], { opacity: 0, y: -16, duration: 0.3 }, 'elif')
+        .from(s5[2], { y: 26, opacity: 0, duration: 0.5 }, 'elif+=0.2')
+        .from('#per-act', { y: 40, opacity: 0, duration: 0.5 }, 'elif+=1');
+
+      /* 7. Баги едут вбок */
+      const reel = $('#s-traps .reel-track');
+      const t7 = G.timeline({ scrollTrigger: { trigger: '#s-traps .stage', start: 'top top', end: len(230, 170), pin: true, scrub: 0.8, anticipatePin: 1, invalidateOnRefresh: true } });
+      t7.from('#s-traps .take', { y: 80, rotate: (i) => (i % 2 ? 3 : -3), stagger: 0.1, duration: 0.5 }, 0)
+        .to(reel, { x: () => Math.min(0, reel.parentElement.clientWidth - reel.scrollWidth), duration: 3, ease: 'none' }, 0.3)
+        .from('#s-traps .take__face--bad .take__tr', { scale: 1.2, stagger: 0.7, duration: 0.3 }, 0.3);
+
+      return () => document.documentElement.classList.remove('motion');
+    });
+
+    /* редактор: заголовок выезжает */
+    G.timeline({ scrollTrigger: { trigger: '#s-lab', start: 'top 85%', end: 'top 30%', scrub: 0.6 } })
+      .fromTo('#s-lab .lab-mega', { xPercent: -20 }, { xPercent: 0, duration: 1 })
+      .from('#s-lab .lab__head h2', { y: 50, opacity: 0, duration: 1 }, 0)
+      .from('#s-lab .monitor', { y: 80, rotate: -2, duration: 1 }, 0.2);
+
+    /* постер: плитки */
+    G.set('#s-cheat .ptile', { y: 50, opacity: 0 });
+    ScrollTrigger.batch('#s-cheat .ptile', { start: 'top 92%', onEnter: (els) => G.to(els, { y: 0, opacity: 1, stagger: 0.08, duration: 0.6, ease: 'power3.out', overwrite: true }) });
+    G.timeline({ scrollTrigger: { trigger: '#s-cheat .poster', start: 'top 90%', end: 'bottom 40%', scrub: 0.8 } })
+      .from('#s-cheat .poster .mega', { xPercent: -25, duration: 1 })
+      .from('#s-cheat .poster h2', { y: 60, duration: 1 }, 0);
+    G.from('#s-video .plain__in', { y: 60, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '#s-video', start: 'top 85%' } });
+  }
+
+  /* ---------- финал: чат ---------- */
+  const finTl = G ? G.timeline({ paused: true })
+    .fromTo('#s-cheat .fin-1', { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power3.out' })
+    .fromTo('#s-cheat .fin-2', { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 0.7)
+    .fromTo('#s-cheat .fin-3', { x: 60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'power3.out' }, 1.4) : null;
+  if (finTl && anim && ST) ScrollTrigger.create({ trigger: '#s-cheat .finale', start: 'top 80%', once: true, onEnter: () => finTl.play(0) });
+  else if (finTl) finTl.progress(1);
+  $('#s-cheat .fin-again').addEventListener('click', () => { if (finTl) finTl.restart(); });
+  $('#s-cheat .fin-say').addEventListener('click', () => { say('Biliyorum. Soru değil bu.'); pop($('#s-cheat .fin-3')); });
+
+  /* ---------- действие 1 ---------- */
+  const storyAct = $('#story-act');
+  storyAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ans]');
+    if (!b) return;
+    $$('[data-ans]', storyAct).forEach((x) => x.classList.remove('is-ok', 'is-bad'));
+    const ok = b.dataset.ans === 'ok';
+    b.classList.add(ok ? 'is-ok' : 'is-bad');
+    react(storyAct, ok, ok ? 'Иә. Бұл сұрақ емес, тамсану. Жауап берудің керегі жоқ.' : 'Мен де солай ойладым. Сосын жарты сағат жауап іздедім.');
+    if (ok) { say('Stant güzel mi güzel!'); if (anim) G.fromTo('#s-story .st-ex', { scale: 1 }, { scale: 1.25, yoyo: true, repeat: 1, duration: 0.2 }); } else shake(b);
+  });
+
+  /* ---------- действие 2: громкость ---------- */
+  const boldAct = $('#bold-act');
+  const vol = $('.rng', boldAct);
+  const VOL = [['Stant güzel.', 'стенд әдемі'], ['Stant çok güzel.', 'стенд өте әдемі'], ['Stant güzel mi güzel!', 'стенд әп-әдемі']];
+  vol.addEventListener('input', () => {
+    const [tr, ru] = VOL[Number(vol.value)];
+    const out = $('.vol__out', boldAct);
+    out.textContent = tr; out.dataset.say = tr;
+    $('.vol__ru', boldAct).textContent = ru;
+    if (anim) G.fromTo(out, { scale: 0.9 + Number(vol.value) * 0.05 }, { scale: 1, duration: 0.4, ease: 'back.out(2)' });
+  });
+  vol.addEventListener('change', () => say($('.vol__out', boldAct).dataset.say));
+
+  /* ---------- действие 3: к своему цвету ---------- */
+  const harmAct = $('#harm-act');
+  const probe = $('#s-harmony .probe');
+  harmAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-w]');
+    if (!b) return;
+    $$('[data-w]', harmAct).forEach((x) => x.classList.toggle('is-on', x === b));
+    const w = b.dataset.w;
+    const m = mI(w);
+    const sw = $(`#s-harmony [data-sw="${m}"]`);
+    $$('#s-harmony .sw').forEach((d) => d.classList.toggle('is-hit', d === sw));
+    react(harmAct, true, `${w} ${m} ${w}! Өте-өте ${ADJ[w]}. ${whyMi(w)}`);
+    say(`${w} ${m} ${w}`);
+    if (anim) {
+      const card = $('.word', probe);
+      card.innerHTML = `${w} <span class="c-mi">${m}</span>`;
+      const a = b.getBoundingClientRect();
+      const z = sw.getBoundingClientRect();
+      G.set(probe, { visibility: 'visible', x: a.left, y: a.top, scale: 1, opacity: 1 });
+      G.to(probe, { motionPath: { path: [{ x: a.left, y: a.top }, { x: (a.left + z.left) / 2, y: Math.min(a.top, z.top) - 90 }, { x: z.left, y: z.top + z.height / 2 }], curviness: 1.2 }, duration: 0.9, ease: 'power2.inOut', onComplete: () => G.to(probe, { opacity: 0, scale: 0.6, duration: 0.3, onComplete: () => G.set(probe, { visibility: 'hidden' }) }) });
+      G.fromTo(sw, { scale: 1 }, { scale: 1.06, yoyo: true, repeat: 1, duration: 0.2, delay: 0.85 });
+    }
+  });
+
+  /* ---------- действие 4: собери фразу ---------- */
+  const conAct = $('#con-act');
+  const build = $('.build', conAct);
+  const picked = [];
+  const RIGHT = 'Gelmesine geldi ama geç kaldı.';
+  const checkBuild = () => {
+    if (picked.length < 4 && !picked.includes('rağmen')) return;
+    const s = picked.join(' ');
+    const ok = s === RIGHT;
+    let msg = 'Реті мынадай: -mAsInA, сол етістік, ama, жаман жаңалық.';
+    if (ok) msg = 'Gelmesine geldi ama geç kaldı. Келуін келді, бірақ кешікті.';
+    else if (picked.includes('rağmen')) msg = 'Rağmen — «қарамастан». Мұнда етістіктің қайталануы мен ama керек.';
+    react(conAct, ok, msg);
+    if (ok) { say(RIGHT); if (anim) G.fromTo(build, { scale: 0.95 }, { scale: 1, duration: 0.5, ease: 'back.out(3)' }); } else shake(build);
+  };
+  $$('.tok[data-t]', conAct).forEach((t) => t.addEventListener('click', () => {
+    if (picked.length >= 4) return;
+    picked.push(t.dataset.t);
+    t.disabled = true;
+    const c = document.createElement('button');
+    c.type = 'button'; c.className = 'tok'; c.textContent = t.dataset.t; c.tabIndex = -1;
+    build.append(c);
+    if (anim) G.from(c, { y: 30, scale: 0.6, duration: 0.35, ease: 'back.out(2)' });
+    checkBuild();
+  }));
+  $('.con-reset', conAct).addEventListener('click', () => {
+    picked.length = 0; build.replaceChildren();
+    $$('.tok[data-t]', conAct).forEach((t) => { t.disabled = false; });
+    $('.react', conAct).textContent = '';
+  });
+
+  /* ---------- действие 5 ---------- */
+  const perAct = $('#per-act');
+  perAct.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-ans]');
+    if (!b) return;
+    $$('[data-ans]', perAct).forEach((x) => x.classList.remove('is-ok', 'is-bad'));
+    const ok = b.dataset.ans === 'ok';
+    b.classList.add(ok ? 'is-ok' : 'is-bad');
+    react(perAct, ok, ok ? 'Иә. Бірінші бөлік қатып қалған, «мен»-ді okudum көтереді.' : b.dataset.ans === 'bad' ? 'Мұнда барыс септік керек: okumasına, okumasını емес.' : '«Бірақ»-сыз құрылымның мағынасы жоқ: ama және жаман жаңалық керек.');
+    if (ok) say('Okumasına okudum ama anlamadım.'); else shake(b);
+  });
+
+  /* ---------- редактор ---------- */
+  const lab = $('#s-lab');
+  const mon = { word: $('.mon__word', lab), ru: $('.mon__ru', lab), why: $('.mon__why', lab) };
+  const st = { a: 'güzel', v: 'gel', p: 'ben' };
+  const VERB = {
+    gel: { inf: 'келуін', ru: ['келді(м/ң)', 'келдік'], tail: 'ama kapı kapalıydı.', tailRu: 'есік жабық еді' },
+    git: { inf: 'баруын', ru: ['барды(м/ң)', 'бардық'], tail: 'ama kimse yoktu.', tailRu: 'онда ешкім жоқ еді' },
+    ara: { inf: 'қоңырау шалуын', ru: ['шалды(м/ң)', 'шалдық'], tail: 'ama telefon kapalıydı.', tailRu: 'телефон өшірулі еді' },
+    oku: { inf: 'оқуын', ru: ['оқыды(м/ң)', 'оқыдық'], tail: 'ama kitap çok zordu.', tailRu: 'кітап өте қиын еді' },
+    ye: { inf: 'жеуін', ru: ['жеді(м/ң)', 'жедік'], tail: 'ama tadı yoktu.', tailRu: 'дәмі жоқ еді' },
+    bak: { inf: 'қарауын', ru: ['қарады(м/ң)', 'қарадық'], tail: 'ama bir şey yoktu.', tailRu: 'онда ештеңе жоқ еді' },
+  };
+  const PRON = { ben: 'Мен', sen: 'Сен', o: 'Ол', biz: 'Біз' };
+  const flash = () => { if (anim) { G.from($$('span', mon.word), { y: 30, opacity: 0, stagger: 0.08, duration: 0.4, ease: 'back.out(1.8)' }); G.from(mon.ru, { y: 14, opacity: 0, duration: 0.4 }); } };
+  const renderAmp = () => {
+    const m = mI(st.a);
+    mon.word.innerHTML = `<span class="w1">${st.a}</span><span class="c-mi">${m}</span><span class="w2">${st.a}!</span>`;
+    mon.word.dataset.say = `${st.a} ${m} ${st.a}!`;
+    mon.ru.textContent = 'өте-өте ' + ADJ[st.a];
+    mon.why.textContent = whyMi(st.a);
+    flash();
+  };
+  const renderBut = () => {
+    const d = VERB[st.v];
+    const first = st.v + masina(st.v);
+    const second = past(st.v, st.p);
+    const cap = first[0].toUpperCase() + first.slice(1);
+    mon.word.innerHTML = `<span>${st.v}<span class="c-sfx" style="color:#7fa6ff">${masina(st.v)}</span></span><span class="w2">${second}</span><span class="tail">${d.tail}</span>`;
+    mon.word.dataset.say = `${cap} ${second} ${d.tail}`;
+    mon.ru.textContent = `${PRON[st.p]} ${d.inf} ${st.p === 'biz' ? d.ru[1] : d.ru[0]}, бірақ ${d.tailRu}.`;
+    mon.why.textContent = `Бірінші бөлік әрдайым ${first}: ${lastV(st.v)} дауыстысы -${masina(st.v)} береді. Жақты ${second} көтереді.`;
+    flash();
+  };
+  $$('.tab', lab).forEach((t) => t.addEventListener('click', () => {
+    $$('.tab', lab).forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    $$('.pane', lab).forEach((p) => { p.hidden = p.dataset.pane !== t.dataset.tab; });
+    if (t.dataset.tab === 'amp') renderAmp();
+    if (t.dataset.tab === 'but') renderBut();
+    if (t.dataset.tab === 'fix') showFix();
+    if (anim) G.from($(`.pane[data-pane="${t.dataset.tab}"]`, lab), { x: 30, opacity: 0, duration: 0.35 });
+  }));
+  $('.lab-adj', lab).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-a]');
+    if (!b) return;
+    $$('[data-a]', lab).forEach((x) => x.classList.toggle('is-on', x === b));
+    st.a = b.dataset.a; renderAmp();
+  });
+  $('.lab-say', lab).addEventListener('click', () => { say(mon.word.dataset.say); pop(mon.word); });
+  $('.lab-verb', lab).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-v]');
+    if (!b) return;
+    $$('[data-v]', lab).forEach((x) => x.classList.toggle('is-on', x === b));
+    st.v = b.dataset.v; renderBut(); say(mon.word.dataset.say);
+  });
+  $('.lab-per', lab).addEventListener('click', (e) => {
+    const b = e.target.closest('[data-p]');
+    if (!b) return;
+    $$('[data-p]', lab).forEach((x) => x.classList.toggle('is-on', x === b));
+    st.p = b.dataset.p; renderBut(); say(mon.word.dataset.say);
+  });
+  const FIX = [
+    { bad: 'Hava güzelmi güzel!', ok: 'Hava güzel mi güzel!', opts: ['Hava güzel mı güzel!', 'Hava güzel mi güzel!', 'Hava güzel mi güzel?'], why: 'mi бөлек жазылады, e дауыстысы mi береді, соңында леп белгісі.' },
+    { bad: 'Deniz soğuk mı soğuk!', ok: 'Deniz soğuk mu soğuk!', opts: ['Deniz soğuk mu soğuk!', 'Deniz soğuk mü soğuk!', 'Deniz soğukmu soğuk!'], why: 'Соңғы дауысты o — демек mu.' },
+    { bad: 'Kargo gelmesine geldi ve kutular kırık.', ok: 'Kargo gelmesine geldi ama kutular kırık.', opts: ['Kargo gelmesine rağmen kutular kırık.', 'Kargo gelmesine geldi ama kutular kırık.', 'Kargo geldi mi geldi ama kutular kırık.'], why: 'Құрылымға «бірақ» керек: ama және жаман жаңалық.' },
+    { bad: 'Okumasını okudum ama anlamadım.', ok: 'Okumasına okudum ama anlamadım.', opts: ['Okumasına okudum ama anlamadım.', 'Okumaya okudum ama anlamadım.', 'Okumama okudum ve anlamadım.'], why: 'Бірінші бөлік барыс септікте: -mAsInA.' },
+    { bad: 'Ekran büyük mu büyük!', ok: 'Ekran büyük mü büyük!', opts: ['Ekran büyük mi büyük!', 'Ekran büyük mü büyük!', 'Ekran büyükmü büyük!'], why: 'Соңғы дауысты ü — демек mü.' },
+  ];
+  let fi = 0;
+  const optsBox = $('.lab-opts', lab);
+  const showFix = () => {
+    const q = FIX[fi];
+    $('.lab-bad', lab).textContent = q.bad;
+    optsBox.innerHTML = q.opts.map((o) => `<button type="button" class="btn" data-o="${o}" lang="tr">${o}</button>`).join('');
+    mon.word.innerHTML = '<span>?</span>';
+    mon.ru.textContent = 'Дұрыс жолды таңда'; mon.why.textContent = '';
+    if (anim) G.from($('.lab-bad', lab), { x: -40, opacity: 0, duration: 0.4 });
+  };
+  optsBox.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-o]');
+    if (!b) return;
+    const q = FIX[fi];
+    const ok = b.dataset.o === q.ok;
+    b.classList.toggle('is-ok', ok);
+    b.classList.toggle('is-bad', !ok);
+    mon.word.innerHTML = `<span>${q.ok}</span>`;
+    mon.word.dataset.say = q.ok;
+    mon.ru.textContent = ok ? 'Түзеттім.' : 'Сәл қалды. Дұрысы — былай.';
+    mon.why.textContent = q.why;
+    if (ok) { say(q.ok); pop(mon.word); } else shake(b);
+  });
+  $('.lab-next', lab).addEventListener('click', () => { fi = (fi + 1) % FIX.length; showFix(); });
+
+  /* ---------- баги: исправить ---------- */
+  $$('#s-traps .take__go').forEach((b) => b.addEventListener('click', () => {
+    const take = b.closest('.take');
+    take.classList.toggle('is-fixed');
+    const fixed = take.classList.contains('is-fixed');
+    b.textContent = fixed ? 'Багты қайтару' : 'Түзету';
+    if (fixed) say($('.take__face--ok .take__tr', take).dataset.say);
+    if (anim) G.fromTo(take, { rotate: fixed ? -2 : 2 }, { rotate: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
+  }));
+
+  /* ---------- нестандартное: ползунок частицы ---------- */
+  const EXID = 'c1.repetition-mi.ex5';
+  const ROUNDS = [
+    { w: 'güzel', ru: 'әп-әдемі' },
+    { w: 'sıcak', ru: 'ып-ыстық' },
+    { w: 'soğuk', ru: 'мұздай суық' },
+    { w: 'büyük', ru: 'үп-үлкен' },
+    { w: 'zor', ru: 'өте-өте қиын' },
+    { w: 'ilginç', ru: 'өте-өте қызық' },
+  ];
+  const pb = $('#pb');
+  const segs = $$('.pb__seg', pb);
+  const knob = $('.pb__knob', pb);
+  const track = $('.pb__track', pb);
+  let ri = 0, score = 0, pos = 0, t0 = performance.now(), busy = false;
+  const tr = (fn, data) => { try { if (window.AlternaTracker) window.AlternaTracker[fn](data); } catch (e) { /* трекер недоступен */ } };
+  const place = (i) => {
+    pos = Math.max(0, Math.min(3, i));
+    const x = segs[pos].offsetLeft - segs[0].offsetLeft;
+    if (anim) G.to(knob, { x, duration: 0.3, ease: 'power3.out' }); else knob.style.transform = `translateX(${x}px)`;
+  };
+  const showRound = () => {
+    const r = ROUNDS[ri];
+    $('.pb-w', pb).textContent = r.w; $('.pb-w2', pb).textContent = r.w;
+    $('.pb__slot', pb).textContent = '?';
+    segs.forEach((s) => s.classList.remove('is-ok', 'is-bad'));
+    $('.pb__score', pb).textContent = `${score} / ${ROUNDS.length}`;
+    t0 = performance.now(); busy = false;
+    if (anim) G.from('#pb .pb__task', { y: -24, opacity: 0, duration: 0.4, ease: 'back.out(2)' });
+  };
+  const answer = (i) => {
+    if (busy || ri >= ROUNDS.length) return;
+    busy = true;
+    place(i);
+    const r = ROUNDS[ri];
+    const right = mI(r.w);
+    const pick = segs[i].dataset.m;
+    const ok = pick === right;
+    segs[i].classList.add(ok ? 'is-ok' : 'is-bad');
+    $('.pb__slot', pb).textContent = right;
+    if (ok) score++;
+    tr('answer', { exerciseId: EXID, itemId: 'r' + (ri + 1), correct: ok, answer: pick, timeMs: Math.round(performance.now() - t0) });
+    $('.pb__msg', pb).textContent = ok ? `Иә: ${r.w} ${right} ${r.w} — ${r.ru}.` : `Жоқ: соңғы дауысты ${lastV(r.w)}, демек ${right}. ${r.w} ${right} ${r.w}!`;
+    if (ok) say(`${r.w} ${right} ${r.w}`); else shake(segs[i]);
+    const next = () => {
+      ri++;
+      if (ri < ROUNDS.length) { showRound(); return; }
+      $('.pb__score', pb).textContent = `${score} / ${ROUNDS.length}`;
+      $('.pb__msg', pb).textContent = score === ROUNDS.length ? 'Алтыдан алты. Элиф лайк басады.' : `Дайын: ${ROUNDS.length}-тен ${score}. Элиф лайк басады, бірақ ойланып.`;
+      $('.pb__end', pb).hidden = false;
+      tr('complete', { exerciseId: EXID, correct: score, total: ROUNDS.length });
+    };
+    if (anim) G.delayedCall(ok ? 0.9 : 1.6, next); else setTimeout(next, ok ? 700 : 1400);
+  };
+  let suppress = false;
+  segs.forEach((s, i) => s.addEventListener('click', () => { if (!suppress) answer(i); }));
+  pb.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { place(pos - 1); segs[pos].focus(); e.preventDefault(); }
+    if (e.key === 'ArrowRight') { place(pos + 1); segs[pos].focus(); e.preventDefault(); }
+    if (e.key === 'Enter' && !e.target.closest('button')) { answer(pos); e.preventDefault(); }
+  });
+  /* рамку можно тащить пальцем или мышью: отпустил — ответ */
+  let dragK = null;
+  const segAt = (x) => { let best = 0; segs.forEach((s, i) => { const r = s.getBoundingClientRect(); if (x >= r.left) best = i; }); return best; };
+  track.addEventListener('pointerdown', (e) => { dragK = { x: e.clientX, moved: false }; });
+  track.addEventListener('pointermove', (e) => {
+    if (!dragK) return;
+    if (Math.abs(e.clientX - dragK.x) > 8) dragK.moved = true;
+    if (dragK.moved) place(segAt(e.clientX));
+  });
+  track.addEventListener('pointerup', (e) => {
+    if (!dragK) return;
+    const moved = dragK.moved; dragK = null;
+    if (!moved) return;
+    suppress = true; setTimeout(() => { suppress = false; }, 0);
+    answer(segAt(e.clientX));
+  });
+  $('.pb-again', pb).addEventListener('click', () => { ri = 0; score = 0; $('.pb__msg', pb).textContent = ''; $('.pb__end', pb).hidden = true; showRound(); });
+  if (window.AlternaKit) window.AlternaKit.registerSolver(EXID, async () => {
+    while (ri < ROUNDS.length) {
+      busy = false;
+      const right = mI(ROUNDS[ri].w);
+      answer(segs.findIndex((s) => s.dataset.m === right));
+      await new Promise((res) => setTimeout(res, 1700));
+    }
+  });
+  showRound();
+
+  /* ---------- свой скроллбар: панель инструментов ---------- */
+  const bar = $('[data-scrollbar]');
+  const rail = $('.reel__rail', bar);
+  const fill = $('.reel__fill', bar);
+  const thumb = $('.reel__thumb', bar);
+  const marks = $$('button[data-goto]', bar);
+  const goTo = (key) => {
+    const sec = document.querySelector(`[data-section="${key}"]`);
+    if (!sec) return;
+    window.scrollTo({ top: sec.getBoundingClientRect().top + scrollY, behavior: calm ? 'auto' : 'smooth' });
+  };
+  marks.forEach((m) => m.addEventListener('click', () => goTo(m.dataset.goto)));
+  const vertical = () => getComputedStyle(rail).flexDirection === 'column';
+  const paint = () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+    const v = vertical();
+    fill.style.transform = v ? `scaleY(${p})` : `scaleX(${p})`;
+    thumb.style.transform = v ? `translateY(${p * rail.clientHeight}px)` : `translateX(${p * rail.clientWidth}px)`;
+    let here = marks[0];
+    marks.forEach((m) => { const s = document.querySelector(`[data-section="${m.dataset.goto}"]`); if (s && s.getBoundingClientRect().top < innerHeight * 0.5) here = m; });
+    marks.forEach((m) => m.classList.toggle('is-here', m === here));
+  };
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: paint });
+  addEventListener('scroll', paint, { passive: true });
+  addEventListener('resize', paint);
+  addEventListener('alterna:read', (e) => {
+    const m = marks.find((x) => x.dataset.goto === (e.detail && e.detail.key));
+    if (m) { m.classList.add('is-read'); pop(m); }
+  });
+  let dragBar = false;
+  const seek = (e) => {
+    const r = rail.getBoundingClientRect();
+    const p = vertical() ? (e.clientY - r.top) / r.height : (e.clientX - r.left) / r.width;
+    window.scrollTo(0, Math.min(1, Math.max(0, p)) * (document.documentElement.scrollHeight - innerHeight));
+  };
+  bar.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button')) return;
+    dragBar = true; bar.setPointerCapture(e.pointerId); seek(e);
+  });
+  bar.addEventListener('pointermove', (e) => { if (dragBar) seek(e); });
+  bar.addEventListener('pointerup', () => { dragBar = false; });
+  paint();
+
+  /* ---------- ачивка ---------- */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    if (!G || !detail || !detail.timeline) return;
+    const b = detail.badge;
+    detail.timeline
+      .fromTo(b.querySelector('.bd-sq'), { scale: 0.3, rotate: -45, transformOrigin: '50% 50%' }, { scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2)' }, 0)
+      .fromTo(b.querySelector('.bd-b'), { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, 0.4)
+      .fromTo(b.querySelector('.bd-mi'), { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 0.7)
+      .fromTo(b.querySelector('.bd-mit'), { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, ease: 'back.out(2)' }, 0.7)
+      .fromTo(b.querySelector('.bd-line'), { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.5 }, 1.1);
+  });
+
+  /* ---------- пересчёт ---------- */
+  const refresh = () => { if (ST) ST.refresh(); paint(); place(pos); };
+  addEventListener('load', refresh);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+  if (window.ResizeObserver) {
+    let rt = 0, lastH = document.body.scrollHeight;
+    new ResizeObserver(() => {
+      const h = document.body.scrollHeight;
+      if (Math.abs(h - lastH) < 4) return;
+      lastH = h; clearTimeout(rt); rt = setTimeout(refresh, 250);
+    }).observe(document.querySelector('main'));
+  }
+});
+</script>
+</body>
+</html>

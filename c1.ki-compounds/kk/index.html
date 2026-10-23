@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="kk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="alterna:topic" content="c1.ki-compounds">
+<meta name="alterna:version" content="1">
+<meta name="alterna:lesson" content="1">
+<title>ki бар жалғаулықтар: demek ki, yeter ki, kaldı ki</title>
+<link rel="stylesheet" href="../../kit/v1/kit.css">
+<style>
+@font-face{font-family:'Inter';font-weight:400 800;font-display:swap;src:url(../media/inter-cyrillic.woff2) format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Inter';font-weight:400 800;font-display:swap;src:url(../media/inter-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-weight:400 800;font-display:swap;src:url(../media/inter-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+
+/* светлая «тревел-аппка»: серые, белые карточки, пастельные иконки; один цвет — один союз */
+:root{
+  --bg:#F4F4F2; --card:#FFFFFF; --ink:#202020; --g1:#646464; --g2:#737373; --g3:#B4B4B4; --line:#E6E6E6;
+  --demek:#2F6FEB; --demek-s:#E6F0FF;
+  --yeter:#1F9D5C; --yeter-s:#E3F7EC;
+  --kaldi:#D9650A; --kaldi-s:#FFEEDD;
+  --tut:#7C4DFF;   --tut-s:#EFE9FF;
+  --soyle:#9A7300; --soyle-s:#FFF5D1;
+  --nasil:#D6336C; --nasil-s:#FFE6F0;
+  --orb:conic-gradient(from 210deg,#A5C8FF,#F6C9E8,#C9F0E3,#FFF2C2,#A5C8FF);
+  --shadow:0 18px 40px rgba(32,32,32,.08),0 2px 6px rgba(32,32,32,.05);
+  --ak-bg:var(--bg); --ak-ink:var(--ink); --ak-surface:var(--card); --ak-line:var(--line); --ak-muted:var(--g1);
+  --ak-accent:#202020; --ak-accent-ink:#fff; --ak-accent-soft:#EFEFEF;
+  --ak-good:#1F8A50; --ak-good-soft:#E3F7EC; --ak-bad:#C8382E; --ak-bad-soft:#FFE8E5;
+  --ak-radius:24px; --ak-radius-sm:14px;
+  --ak-font:'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --ak-font-display:'Inter', system-ui, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ak-font);font-size:var(--ak-text);line-height:1.5;overflow-x:clip;-webkit-text-size-adjust:100%}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.035em;line-height:1.02}
+.mute{color:var(--g3)}
+b.tr,.tr{font-weight:600}
+[data-say]{cursor:pointer}
+
+/* ---------- союзы-чипы: цвет = роль ---------- */
+.k{display:inline-block;font-weight:700;border-radius:999px;padding:.12em .55em;line-height:1.25;white-space:nowrap}
+.k--demek{background:var(--demek-s);color:var(--demek)}
+.k--yeter{background:var(--yeter-s);color:var(--yeter)}
+.k--kaldi{background:var(--kaldi-s);color:var(--kaldi)}
+.k--tut{background:var(--tut-s);color:var(--tut)}
+.k--soyle{background:var(--soyle-s);color:var(--soyle)}
+.k--nasil{background:var(--nasil-s);color:var(--nasil)}
+.k--illaki{background:var(--ink);color:#fff}
+.k--ama{background:#EEEEEE;color:var(--g1)}
+
+.chip{min-height:44px;min-width:44px;padding:.45em 1.05em;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);font:600 .98rem/1.2 var(--ak-font);cursor:pointer;box-shadow:0 2px 8px rgba(32,32,32,.06);transition:background .15s,border-color .15s}
+.chip:hover{border-color:var(--g3)}
+.chip:focus-visible,.pin-btn:focus-visible,.reel__thumb:focus-visible,.tab:focus-visible{outline:3px solid var(--demek);outline-offset:2px}
+.chip.is-right{background:var(--yeter-s);border-color:var(--yeter)}
+.chip.is-wrong{background:#FFE8E5;border-color:var(--ak-bad)}
+.chip--dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ---------- скроллбар: маршрут с самолётиком ---------- */
+.reel{position:fixed;z-index:800;top:0;left:0;right:0;height:46px;background:rgba(244,244,242,.94);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 8px}
+.reel__track{position:absolute;left:14px;right:14px;top:50%;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,var(--g3) 0 6px,transparent 6px 12px);pointer-events:none}
+.reel__fill{position:absolute;inset:0;background:var(--ink);transform-origin:0 50%;transform:scaleX(0)}
+.reel__pins{position:relative;display:flex;flex:1;justify-content:space-between}
+.pin-btn{position:relative;width:28px;height:44px;border:0;background:none;padding:0;cursor:pointer;display:grid;place-items:center}
+.pin-btn i{display:block;width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--g3);transition:transform .2s,background .2s,border-color .2s}
+.pin-btn.is-read i{background:var(--yeter-s);border-color:var(--yeter)}
+.pin-btn.is-on i{background:var(--ink);border-color:var(--ink);transform:scale(1.35)}
+.pin-btn span{position:absolute;bottom:2px;font:600 9px/1 var(--ak-font);color:var(--g2)}
+.reel__thumb{display:none}
+@media (min-width:1024px){
+  .reel{top:50%;right:18px;left:auto;bottom:auto;height:auto;width:60px;transform:translateY(-50%);flex-direction:column;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:var(--shadow);padding:12px 8px}
+  .reel__track{left:50%;right:auto;top:14px;bottom:14px;width:2px;height:auto;margin:0 0 0 -1px;background:repeating-linear-gradient(180deg,var(--g3) 0 6px,transparent 6px 12px)}
+  .reel__fill{transform-origin:50% 0;transform:scaleY(0)}
+  .reel__pins{flex-direction:column;gap:2px}
+  .pin-btn{width:44px;height:44px}
+  .pin-btn span{bottom:auto;right:-2px;top:4px}
+  .reel__thumb{display:grid;place-items:center;position:absolute;left:50%;top:12px;width:40px;height:40px;margin-left:-20px;border-radius:50%;background:var(--orb);border:2px solid #fff;box-shadow:0 6px 16px rgba(32,32,32,.18);cursor:grab;touch-action:none;z-index:2}
+  .reel__thumb:active{cursor:grabbing}
+  .reel__thumb svg{width:22px;height:22px}
+}
+
+/* ---------- кадр сцены ---------- */
+.scene{position:relative;overflow:clip;background:var(--bg)}
+.frame{position:relative;min-height:100svh;padding:60px 16px 18px;display:grid;grid-template-rows:auto auto auto;align-content:start;gap:12px;max-width:1320px;margin:0 auto}
+.frame__head{display:grid;gap:8px}
+.tag{display:inline-flex;align-items:center;gap:6px;justify-self:start;font:600 13px/1 var(--ak-font);color:var(--g1);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 12px}
+.tag::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--orb)}
+.title{font-size:clamp(30px,8.4vw,72px)}
+.frame__head h2{font-size:clamp(28px,7.6vw,62px)}
+.stage{position:relative;width:min(100%,46svh);aspect-ratio:1;margin-inline:auto;container-type:inline-size;border-radius:32px;overflow:hidden;background:var(--card);box-shadow:var(--shadow)}
+.layer{position:absolute;inset:0}
+.layer>svg{width:100%;height:100%;display:block}
+.ov{position:absolute;font-size:clamp(11px,3.6cqw,20px);line-height:1.25}
+.glass{background:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.9);border-radius:18px;box-shadow:0 10px 26px rgba(32,32,32,.10);padding:.55em .8em}
+.hud{display:grid;gap:10px;align-content:start;max-width:640px;width:100%;margin-inline:auto}
+.sub{font-weight:500;font-size:clamp(17px,.95rem + .45vw,22px);line-height:1.4;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:.6em .9em;box-shadow:0 4px 14px rgba(32,32,32,.05)}
+.act{background:var(--ink);color:#fff;border-radius:26px;padding:14px 16px}
+.act__q{font-weight:600;margin-bottom:10px}
+.act__row{display:flex;flex-wrap:wrap;gap:8px}
+.act .chip{border-color:#3a3a3a;background:#2c2c2c;color:#fff;box-shadow:none}
+.act .chip:hover{border-color:#8a8a8a}
+.act .chip.is-right{background:#1F5F3D;border-color:#46C98A}
+.act .chip.is-wrong{background:#5A2420;border-color:#E2675C}
+.act__fb{margin-top:10px;min-height:1.4em;font-size:.95em;color:#d6d6d6}
+.act__fb.ok{color:#7DE0AC}.act__fb.no{color:#FF9C92}
+.is-cine .hud{grid-template-areas:'h'}
+.is-cine .hud>*{grid-area:h;align-self:start}
+@media (min-width:768px){ .stage{width:min(100%,calc(58svh * 1.25));aspect-ratio:5/4} }
+@media (min-width:1024px){
+  .frame{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);grid-template-rows:auto 1fr;padding:30px 108px 30px 40px;column-gap:36px;align-items:center}
+  .frame__head{grid-column:1/-1}
+  .stage{width:min(100%,calc(76svh * 1.25 - 120px))}
+  .hud{align-self:center}
+}
+@media (max-width:767.98px){ .p-extra{display:none} }
+
+/* аватары */
+.av{display:inline-grid;place-items:center;width:1.9em;height:1.9em;border-radius:50%;font:700 .78em/1 var(--ak-font);color:#fff;border:2px solid #fff;margin-left:-.45em}
+.av:first-child{margin-left:0}
+.av--d{background:#E58FB4}.av--m{background:#5C7CFA}.av--e{background:#F0A23B}.av--me{background:var(--ink)}
+
+/* ---------- сцена 1: море и чат ---------- */
+.hl{left:6%;top:6%;color:#fff;font-weight:800;letter-spacing:-.04em;font-size:clamp(26px,11cqw,76px);line-height:.95;text-shadow:0 2px 18px rgba(30,60,90,.25)}
+.hl span{display:block;color:rgba(255,255,255,.62)}
+.phone{position:absolute;left:50%;top:22%;width:68%;height:98%;margin-left:-34%;background:#fff;border:7px solid #1b1b1b;border-radius:34px;box-shadow:0 30px 60px rgba(0,0,0,.25);overflow:hidden;padding:9% 5% 0;font-size:clamp(10px,3.3cqw,16px)}
+.island{position:absolute;left:50%;top:2.5%;width:30%;height:4.2%;margin-left:-15%;background:#1b1b1b;border-radius:999px}
+.trip{position:relative;display:flex;gap:.6em;align-items:center;background:var(--bg);border-radius:16px;padding:.5em;margin-bottom:.7em}
+.trip__img{width:3.2em;height:3.2em;border-radius:12px;overflow:hidden;flex:none}
+.trip__img svg{width:100%;height:100%;display:block}
+.trip b{display:block;font-size:1em}
+.trip small{display:block;color:var(--g1);font-size:.8em}
+.trip .avs{margin-top:.25em}
+.stamp{position:absolute;right:6%;top:18%;font:800 1.05em/1 var(--ak-font);letter-spacing:.08em;color:var(--ak-bad);border:3px solid var(--ak-bad);border-radius:10px;padding:.2em .45em;transform:rotate(-10deg);background:rgba(255,255,255,.8)}
+.msgs{display:grid;gap:.5em}
+.msg{justify-self:start;max-width:88%;background:var(--bg);border-radius:16px 16px 16px 5px;padding:.4em .65em;line-height:1.25}
+.msg small{display:block;font-weight:700;font-size:.72em;color:var(--g1);margin-bottom:.1em}
+.msg--me{justify-self:end;background:var(--ink);color:#fff;border-radius:16px 16px 5px 16px}
+.msg--me small{color:#bbb}
+
+/* ---------- сцена 2: карта ---------- */
+.pin{display:flex;align-items:center;gap:.5em;max-width:46%}
+.pin__ic{flex:none;width:2em;height:2em;border-radius:50%;display:grid;place-items:center;background:var(--bg)}
+.pin__ic svg{width:60%;height:60%}
+.pin--a{left:5%;bottom:10%}
+.pin--b{right:5%;top:9%}
+.k-mid{left:41%;top:47%;font-size:clamp(12px,4.2cqw,24px)}
+.ov-duydum{left:5%;top:7%;max-width:52%;font-size:clamp(10px,3.2cqw,17px)}
+
+/* ---------- сцена 3: замок ---------- */
+.tcard{left:5%;top:6%;width:52%;background:#fff;border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+.tcard__img{position:relative;aspect-ratio:16/11}
+.tcard__img svg{width:100%;height:100%;display:block}
+.tcard__body{padding:.6em .8em .8em}
+.tcard__body b{display:block}
+.tcard__body small{color:var(--g1)}
+.lock{position:absolute;right:6%;top:6%;width:22%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.lock svg{width:58%;height:auto;overflow:visible}
+.b-deniz{right:4%;top:7%;width:38%}
+.b-me{right:4%;bottom:7%;width:44%;background:var(--ink);color:#fff;border-color:var(--ink)}
+.forms{left:5%;bottom:7%;display:flex;flex-wrap:wrap;gap:.35em;max-width:50%}
+.forms .k{font-size:1em}
+
+/* ---------- сцена 4: весы ---------- */
+#sc-kaldi .stage{background:linear-gradient(180deg,#fff,#F7F7F5)}
+.scale-lbl{font:600 15px var(--ak-font);fill:var(--g1)}
+.tagtxt{font:700 17px var(--ak-font)}
+
+/* ---------- сцена 5: план и план Б ---------- */
+.cardE{left:5%;top:6%;width:54%;background:var(--soyle-s);border-radius:24px;padding:.8em;box-shadow:var(--shadow)}
+.cardE .who,.cardM .who{font-weight:700;font-size:.8em;color:var(--g1);margin-bottom:.3em;display:flex;gap:.4em;align-items:center}
+.plan{display:grid;gap:.45em;margin-top:.5em}
+.plan li{list-style:none;display:flex;gap:.5em;align-items:center;background:#fff;border-radius:12px;padding:.35em .5em}
+.plan{padding:0;margin:.5em 0 0}
+.plan i{font-style:normal;font-weight:700;font-size:.78em;color:var(--soyle);min-width:3.6em}
+.cardM{right:4%;bottom:6%;width:50%;background:var(--tut-s);border-radius:24px;padding:.8em;box-shadow:var(--shadow)}
+.cloud{width:44%;display:block;margin:0 auto .3em}
+
+/* ---------- сцена 6: открытки ---------- */
+.pc{top:7%;width:43%;background:#fff;border-radius:20px;padding:.4em .4em .6em;box-shadow:var(--shadow)}
+.pc svg{width:100%;height:auto;display:block;border-radius:14px}
+.pc b{display:block;text-align:center;margin-top:.3em}
+.pc--ist{left:5%;transform:rotate(-4deg)}
+.pc--sam{right:5%;transform:rotate(4deg)}
+.k-l{left:12%;top:58%}.k-r{right:15%;top:58%}
+.mirror{left:50%;top:6%;bottom:30%;width:0;border-left:2px dashed var(--g3)}
+.pide{left:50%;bottom:5%;width:56%;margin-left:-28%;display:flex;align-items:center;gap:.6em;background:#fff;border-radius:18px;padding:.45em .6em;box-shadow:var(--shadow)}
+.pide svg{width:34%;flex:none}
+.pide .k--illaki{transform:rotate(-8deg)}
+
+/* ---------- финал ---------- */
+#sc-final .stage{background:linear-gradient(180deg,#BFD9EE,#EEF4F8)}
+.board{left:5%;top:6%;width:52%;background:#1b1b1b;color:#fff;border-radius:18px;padding:.6em .7em;font-size:clamp(10px,3.2cqw,17px)}
+.board b{display:block;font-size:.75em;letter-spacing:.12em;color:#9a9a9a;margin-bottom:.3em}
+.board p{display:flex;justify-content:space-between;gap:.5em;border-top:1px solid #333;padding:.3em 0}
+.board .ok{color:#7DE0AC;font-weight:700}
+.trip2{right:5%;top:8%;width:36%}
+.fmsg{left:5%;right:5%;bottom:5%;background:var(--ink);color:#fff;border-radius:20px;padding:.6em .8em;font-size:clamp(11px,3.4cqw,18px)}
+
+/* ---------- страницы ---------- */
+.page{width:min(900px,calc(100% - 32px));margin-inline:auto;padding:72px 0 48px}
+.page>h2{font-size:clamp(30px,7vw,58px);margin:10px 0 12px}
+.page>p{max-width:62ch;margin-bottom:12px;color:#333}
+@media (min-width:1024px){ .page{width:min(900px,calc(100% - 240px))} }
+.desk{background:var(--card);border-radius:32px;box-shadow:var(--shadow);padding:16px;position:relative;overflow:hidden}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;background:var(--bg);border-radius:999px;padding:5px;margin-bottom:14px;width:max-content;max-width:100%}
+.tab{min-height:44px;padding:.4em 1em;border:0;border-radius:999px;background:transparent;color:var(--g1);font:600 .95rem/1 var(--ak-font);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:#fff}
+.flights{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.flights .chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.route{position:relative;background:var(--bg);border-radius:24px;padding:18px 14px 14px;display:grid;gap:12px}
+.route svg.path{position:absolute;left:0;top:0;width:100%;height:46px;overflow:visible;pointer-events:none}
+.rline{display:flex;flex-wrap:wrap;align-items:center;gap:.4em;font-size:clamp(17px,4.6vw,26px);font-weight:600;line-height:1.5;padding-top:30px;min-height:3em}
+.slotk{display:inline-block;min-width:4.5em;min-height:1.4em;border:2px dashed var(--g3);border-radius:999px;text-align:center}
+.slotk.k{border:0}
+.answers{display:flex;flex-wrap:wrap;gap:8px}
+.rfb{min-height:1.4em;font-weight:600}
+.rfb.ok{color:var(--ak-good)}.rfb.no{color:var(--ak-bad)}
+.why{background:#fff;border-radius:16px;padding:.55em .8em;border:1px solid var(--line)}
+.why b{font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+
+/* дубли-посадочные */
+#sc-traps .frame{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center}
+.traps-intro{max-width:56ch;color:#333}
+.strip{display:flex;flex-wrap:wrap;gap:16px;padding:6px 2px 12px}
+.is-cine .strip{flex-wrap:nowrap;width:max-content}
+.take{position:relative;width:min(82vw,370px);background:var(--card);border-radius:26px;box-shadow:var(--shadow);padding:16px;display:grid;gap:9px;align-content:start}
+.take::after{content:'';position:absolute;left:16px;right:16px;top:58px;border-top:2px dashed var(--line)}
+.take__head{display:flex;align-items:center;justify-content:space-between;gap:8px;font:600 13px/1 var(--ak-font);color:var(--g1);height:30px}
+.take__head svg{width:26px;height:26px}
+.take__bad{margin-top:10px;font-size:1.05em;text-decoration:line-through;text-decoration-color:var(--ak-bad);text-decoration-thickness:2px;color:var(--g1)}
+.take__good{font-size:1.08em;font-weight:600;background:var(--yeter-s);border-radius:14px;padding:.35em .6em}
+.take__why{font-size:.95em;color:#333}
+.stampx{position:absolute;right:14px;top:62px;font:800 14px/1 var(--ak-font);letter-spacing:.1em;text-transform:uppercase;color:var(--ak-bad);border:2.5px solid var(--ak-bad);border-radius:8px;padding:4px 7px;transform:rotate(-10deg);pointer-events:none;background:rgba(255,255,255,.85)}
+
+/* видео, игра, постер */
+.film{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.film svg{width:44px;height:44px;flex:none}
+.game{background:var(--card);border-radius:30px;box-shadow:var(--shadow);overflow:hidden}
+.game__top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700}
+.game__top .ttl{display:flex;align-items:center;gap:8px}
+.game__top .ttl::before{content:'';width:22px;height:22px;border-radius:50%;background:var(--orb)}
+.dots{display:flex;gap:5px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line);display:block}
+.dots i.ok{background:var(--yeter)}.dots i.no{background:var(--ak-bad)}
+.game__body{padding:16px;display:grid;gap:12px}
+.game__hint{color:var(--g1)}
+.game__in{justify-self:start;max-width:94%;background:var(--bg);border-radius:18px 18px 18px 6px;padding:.5em .8em}
+.game__in small{display:block;font-weight:700;font-size:.78em;color:var(--g1)}
+.slot{display:inline-block;min-width:4.6em;border-bottom:2px dashed var(--g2);text-align:center}
+.slot.is-full{border-bottom-color:transparent;border-radius:999px;padding:0 .4em}
+.game__opts{display:flex;flex-wrap:wrap;gap:8px}
+.game__fb{min-height:1.4em;color:#333}
+.game__end{text-align:center;display:grid;gap:10px;justify-items:center}
+.poster{background:var(--card);border-radius:34px;box-shadow:var(--shadow);padding:22px 18px;position:relative;overflow:hidden}
+.poster__kicker{font:600 13px/1 var(--ak-font);color:var(--g1);margin-bottom:10px}
+.poster__title{font-weight:800;letter-spacing:-.05em;font-size:clamp(34px,10vw,84px);line-height:.92;text-transform:uppercase}
+.poster__title .oval{display:inline-block;border:3px solid var(--ink);border-radius:999px;padding:0 .18em;transform:rotate(-3deg)}
+.prow{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:baseline;border-top:1px solid var(--line);padding:10px 0}
+.prow:first-of-type{margin-top:14px}
+.prow .k{justify-self:start}
+.prow p{color:#333}
+.poster__deco{position:absolute;right:-20px;top:-20px;width:150px;height:150px;border-radius:50%;background:var(--orb);opacity:.7;filter:blur(2px);pointer-events:none}
+.finale{margin-top:16px;font-size:1.08em;font-weight:500}
+</style>
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5Z" fill="currentColor"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-face" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 16c2-2 6-2 8 0M8 9l2 1M16 9l-2 1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12Z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></symbol>
+    <symbol id="sea-mini" viewBox="0 0 100 100">
+      <rect width="100" height="100" fill="#A9CBE6"/><path d="M0 55C20 40 40 48 60 40S90 44 100 46V100H0Z" fill="#7C9D7A"/><rect y="66" width="100" height="34" fill="#3F78A6"/><path d="M8 78h18M40 86h22M70 76h20" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".6"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav data-scrollbar aria-label="Сабақ барысы" class="reel">
+  <div class="reel__track" aria-hidden="true"><i class="reel__fill"></i></div>
+  <div class="reel__pins">
+    <button type="button" class="pin-btn" data-goto="story" aria-label="Тарау: чат"><i></i><span data-ui>1</span></button>
+    <button type="button" class="pin-btn" data-goto="demek" aria-label="Тарау: demek ki"><i></i><span data-ui>2</span></button>
+    <button type="button" class="pin-btn" data-goto="yeter" aria-label="Тарау: yeter ki"><i></i><span data-ui>3</span></button>
+    <button type="button" class="pin-btn" data-goto="kaldi" aria-label="Тарау: kaldı ki"><i></i><span data-ui>4</span></button>
+    <button type="button" class="pin-btn" data-goto="plan" aria-label="Тарау: tut ki және şöyle ki"><i></i><span data-ui>5</span></button>
+    <button type="button" class="pin-btn" data-goto="mirror" aria-label="Тарау: nasıl ki және illaki"><i></i><span data-ui>6</span></button>
+    <button type="button" class="pin-btn" data-goto="lab" aria-label="Тарау: диспетчерлік"><i></i><span data-ui>7</span></button>
+    <button type="button" class="pin-btn" data-goto="traps" aria-label="Тарау: қате маршруттар"><i></i><span data-ui>8</span></button>
+    <button type="button" class="pin-btn" data-goto="video" aria-label="Тарау: видео"><i></i><span data-ui>9</span></button>
+    <button type="button" class="pin-btn" data-goto="practice" aria-label="Тарау: практика"><i></i><span data-ui>10</span></button>
+    <button type="button" class="pin-btn" data-goto="check" aria-label="Тарау: шағын тексеру"><i></i><span data-ui>11</span></button>
+    <button type="button" class="pin-btn" data-goto="cheat" aria-label="Тарау: финал"><i></i><span data-ui>12</span></button>
+  </div>
+  <div class="reel__thumb" role="slider" tabindex="0" aria-label="Сабақты айналдыру" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plane" fill="#202020"/></svg>
+  </div>
+</nav>
+
+<main>
+
+<!-- ============ СЦЕНА 1 ============ -->
+<section data-section="story" data-words="67" id="story">
+  <div class="scene" id="sc-story">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>1-сахна · Самсун</p>
+        <h1 class="title"><span class="mute">Бір ki —</span> сапар жоқ</h1>
+      </header>
+      <div class="stage">
+        <div class="layer p0" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FB8DD"/><stop offset=".65" stop-color="#D7E6F1"/><stop offset="1" stop-color="#F1F4F6"/></linearGradient>
+              <filter id="blur6" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+            </defs>
+            <rect width="500" height="400" fill="url(#sky1)"/>
+            <g filter="url(#blur6)" fill="#fff" opacity=".8"><ellipse cx="110" cy="120" rx="80" ry="18"/><ellipse cx="390" cy="80" rx="100" ry="20"/><ellipse cx="300" cy="160" rx="60" ry="12"/></g>
+          </svg>
+        </div>
+        <div class="layer p1" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7E9C82"/><stop offset="1" stop-color="#4E6B55"/></linearGradient>
+              <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5F7F68"/><stop offset="1" stop-color="#36503F"/></linearGradient>
+              <linearGradient id="sea1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B8DB3"/><stop offset="1" stop-color="#22506F"/></linearGradient>
+            </defs>
+            <path d="M0 250C70 205 140 222 200 244 260 200 330 186 400 222 440 206 470 210 500 222V300H0Z" fill="url(#hill1)" opacity=".75"/>
+            <path d="M0 278C60 252 120 262 170 276 230 246 300 250 360 270 420 254 470 262 500 270V310H0Z" fill="url(#hill2)"/>
+            <rect y="300" width="500" height="100" fill="url(#sea1)"/>
+            <path d="M30 330h60M150 350h80M300 325h50M380 360h80M60 380h70" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".45"/>
+            <g transform="translate(340 296)"><path d="M0 8h60l-8 10H8Z" fill="#F4F4F2"/><rect x="18" y="0" width="22" height="8" rx="2" fill="#F4F4F2"/><rect x="26" y="-8" width="6" height="8" fill="#D9650A"/></g>
+            <g transform="translate(60 248)"><rect x="0" y="0" width="10" height="34" fill="#F4F4F2"/><rect x="0" y="8" width="10" height="6" fill="#C8382E"/><path d="M-3 0h16L5-10Z" fill="#202020"/></g>
+          </svg>
+        </div>
+        <p class="ov hl" lang="tr" data-say="Samsun, 19 Mayıs">Samsun<span>19 Mayıs</span></p>
+        <div class="phone">
+          <span class="island" aria-hidden="true"></span>
+          <div class="trip">
+            <div class="trip__img" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#sea-mini" width="100" height="100"/></svg></div>
+            <div><b lang="tr">Samsun'a gidiyoruz</b><small lang="tr">19–21 Mayıs · 4 kişi</small>
+              <div class="avs" aria-hidden="true"><i class="av av--d">D</i><i class="av av--m">M</i><i class="av av--e">E</i><i class="av av--me" data-ui>Мен</i></div>
+            </div>
+            <span class="stamp" lang="tr">İPTAL</span>
+          </div>
+          <div class="msgs">
+            <p class="msg m1" data-say="19 Mayıs'ta Samsun'a gelelim mi?"><small data-ui>Дениз</small><span lang="tr">19 Mayıs'ta Samsun'a gelelim mi?</span></p>
+            <p class="msg msg--me m2" data-say="Otel pahalı, kaldı ki deniz soğuk."><small data-ui>Мен</small><span lang="tr">Otel pahalı, kaldı ki deniz soğuk.</span></p>
+            <p class="msg m3" data-say="Anladık. Gelmiyoruz."><small data-ui>Мерт</small><span lang="tr">Anladık. Gelmiyoruz.</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="hud">
+        <p class="sub">Самсун. Осында жарты жыл тұрып жатырмын. Қара теңіз, солтүстік жел, әр бұрышта пиде.</p>
+        <p class="sub">Ыстамбұлдағы достар ортақ чатқа жазады: он тоғызыншы мамырға саған барғымыз келеді.</p>
+        <p class="sub">Жауап бергім келеді: қонақүй қымбат, есесіне теңіз бар. Сенімді жазамын: <b class="tr" lang="tr" data-say="Otel pahalı, kaldı ki deniz soğuk.">Otel pahalı, kaldı ki deniz soğuk.</b></p>
+        <p class="sub">Бір минуттан кейін Мерт: <b class="tr" lang="tr" data-say="Anladık. Gelmiyoruz.">Anladık. Gelmiyoruz.</b> Сапар тоқтатылды.</p>
+        <p class="sub">Мен ештеңені тоқтатқан жоқпын. Жай ғана ki бар басқа жалғаулықты алдым.</p>
+        <div class="act" id="act-story">
+          <p class="act__q">Достар не деп оқыды?</p>
+          <div class="act__row"><button type="button" class="chip" data-a="0">Қонақүй қымбат, есесіне теңіз бар</button><button type="button" class="chip" data-a="1">Қонақүй қымбат, оның үстіне теңіз суық</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 2: demek ki ============ -->
+<section data-section="demek" data-words="49" id="demek">
+  <div class="scene" id="sc-demek">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>2-сахна · кеш</p>
+        <h2><span class="mute">Факт →</span> қорытынды</h2>
+      </header>
+      <div class="stage">
+        <div class="layer p0" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="500" height="400" fill="#DCEAF5"/>
+            <path d="M0 150C60 170 110 140 170 160 220 176 250 150 300 158 360 168 400 140 450 150 470 154 490 160 500 158V400H0Z" fill="#EEF1EA"/>
+            <path d="M120 400C160 330 140 270 190 220" fill="none" stroke="#C9D8E6" stroke-width="10" stroke-linecap="round"/>
+            <g fill="none" stroke="#D9DDD4" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"><path d="M0 260C120 240 220 290 500 250"/><path d="M300 400C320 320 380 300 440 200"/></g>
+            <g font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#9A9A9A"><text x="40" y="196" lang="tr">Bafra</text><text x="250" y="190" lang="tr">Samsun</text><text x="390" y="186" lang="tr">Atakum</text><text x="200" y="110" fill="#7FA2C2" lang="tr">Karadeniz</text></g>
+          </svg>
+        </div>
+        <div class="layer p1" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <path id="route-demek" d="M90 320C150 210 300 330 420 90" fill="none" stroke="#BFC6CF" stroke-width="3" stroke-dasharray="6 9" stroke-linecap="round"/>
+            <path class="draw-demek" d="M90 320C150 210 300 330 420 90" fill="none" stroke="#2F6FEB" stroke-width="4" stroke-linecap="round" stroke-dasharray="520" stroke-dashoffset="0"/>
+            <g class="plane-demek"><circle r="15" fill="#fff"/><use href="#i-plane" x="-10" y="-10" width="20" height="20" color="#202020" transform="rotate(90)"/></g>
+          </svg>
+        </div>
+        <p class="ov ov-duydum glass"><span class="tr" lang="tr" data-say="Duydum ki gidiyorsun.">Duydum ki gidiyorsun.</span><br>кетіп бара жатқаныңды естідім</p>
+        <div class="ov pin pin--a glass" data-say="Mert telefonu açmıyor."><span class="pin__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-phone" color="#646464"/></svg></span><span lang="tr">Mert telefonu açmıyor</span></div>
+        <span class="ov k k--demek k-mid" lang="tr" data-say="demek ki">demek ki</span>
+        <div class="ov pin pin--b glass" data-say="kızgın"><span class="pin__ic" aria-hidden="true"><svg viewBox="0 0 24 24"><use href="#i-face" color="#2F6FEB"/></svg></span><span lang="tr">kızgın</span></div>
+      </div>
+      <div class="hud">
+        <p class="sub">Алдымен тауып көр. Мертке қоңырау шаламын. Гудок. Телефон алмайды. Бұдан не шығады?</p>
+        <p class="sub">ki өзі — екі ойдың байланысы: <b class="tr" lang="tr" data-say="Duydum ki gidiyorsun.">Duydum ki gidiyorsun</b> — «кетіп бара жатқаныңды естідім». Бүгін ki басқа сөздерге жабысады.</p>
+        <p class="sub">Бірінші жұп. Сол жақта факт, оң жақта қорытынды: <b class="tr" lang="tr" data-say="Mert telefonu açmıyor, demek ki kızgın.">Mert telefonu açmıyor, demek ki kızgın.</b></p>
+        <p class="sub"><span class="k k--demek" lang="tr">demek ki</span> — «демек». Қазақшадағыдай, тіпті сөзі де ұқсас. Алдымен көргенің. Сосын одан не шығатыны.</p>
+        <div class="act" id="act-demek">
+          <p class="act__q">Қай маршрут қисынды?</p>
+          <div class="act__row"><button type="button" class="chip" lang="tr" data-a="1">Işıklar kapalı, demek ki evde yoklar.</button><button type="button" class="chip" lang="tr" data-a="0">Evde yoklar, demek ki ışıklar kapalı.</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 3: yeter ki ============ -->
+<section data-section="yeter" data-words="42" id="yeter">
+  <div class="scene" id="sc-yeter">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>3-сахна · түн</p>
+        <h2><span class="mute">Тек</span> болса болды</h2>
+      </header>
+      <div class="stage">
+        <div class="layer p0" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="500" height="400" fill="#F7F7F5"/>
+            <circle cx="420" cy="330" r="140" fill="#E3F7EC"/>
+            <circle cx="60" cy="40" r="80" fill="#EEF3FA"/>
+          </svg>
+        </div>
+        <div class="ov tcard">
+          <div class="tcard__img">
+            <svg viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><use href="#sea-mini" width="160" height="160" y="-30"/></svg>
+            <div class="lock" aria-hidden="true">
+              <svg viewBox="0 0 24 28"><g class="shackle"><path d="M7 12V8a5 5 0 0 1 10 0v4" fill="none" stroke="#202020" stroke-width="2.6" stroke-linecap="round"/></g><rect x="4" y="12" width="16" height="13" rx="3.5" fill="#1F9D5C"/><circle cx="12" cy="18.5" r="2" fill="#fff"/></svg>
+            </div>
+          </div>
+          <div class="tcard__body"><b lang="tr">Samsun · 19–21 Mayıs</b><small data-ui>сапар жабық</small></div>
+        </div>
+        <p class="ov b-deniz glass"><small data-ui>Дениз</small><br><span lang="tr" data-say="Geliriz, yeter ki sen bizi karşıla.">Geliriz, <span class="k k--yeter">yeter ki</span> sen bizi karşıla.</span></p>
+        <div class="ov forms" lang="tr"><span class="k k--yeter" data-say="karşıla">karşıla</span><span class="k k--yeter" data-say="gelin">gelin</span><span class="k k--yeter" data-say="olsun">olsun</span></div>
+        <p class="ov b-me glass"><span lang="tr" data-say="Her şeyi ayarlarım, yeter ki gelin.">Her şeyi ayarlarım, yeter ki gelin.</span></p>
+      </div>
+      <div class="hud">
+        <p class="sub">Денизге жазамын. Ол Мерттен мейірімдірек, тезірек жауап береді және әрқашан шешім іздейді.</p>
+        <p class="sub">Дениз: <b class="tr" lang="tr" data-say="Geliriz, yeter ki sen bizi karşıla.">Geliriz, yeter ki sen bizi karşıla.</b> — «Барамыз, тек сен бізді қарсы алсаң болды».</p>
+        <p class="sub"><span class="k k--yeter" lang="tr">yeter ki</span> — «тек... болса болды». Сөзбе-сөз «соның өзі жетеді». Бір шарт — және бәрі күшінде.</p>
+        <p class="sub">yeter ki сөзінен кейін тілек не өтініш тұрады: <b class="tr" lang="tr">karşıla</b>, <b class="tr" lang="tr">gelin</b>, <b class="tr" lang="tr">olsun</b>.</p>
+        <p class="sub">Бірден жауап беремін: <b class="tr" lang="tr" data-say="Her şeyi ayarlarım, yeter ki gelin.">Her şeyi ayarlarım, yeter ki gelin.</b></p>
+        <div class="act" id="act-yeter">
+          <p class="act__q">Аяқта: <span lang="tr">Her şeye razıyım, yeter ki deniz…</span></p>
+          <div class="act__row"><button type="button" class="chip" lang="tr" data-a="1">olsun</button><button type="button" class="chip" lang="tr" data-a="0">var</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 4: kaldı ki ============ -->
+<section data-section="kaldi" data-words="60" id="kaldi">
+  <div class="scene" id="sc-kaldi">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>4-сахна · талдау</p>
+        <h2><span class="mute">Оның</span> үстіне</h2>
+      </header>
+      <div class="stage">
+        <div class="layer p1">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="215" y="352" width="70" height="14" rx="7" fill="#202020"/>
+            <rect x="245" y="110" width="10" height="246" rx="5" fill="#202020"/>
+            <g class="beam"><rect x="70" y="104" width="360" height="12" rx="6" fill="#202020"/></g>
+            <circle cx="250" cy="110" r="11" fill="#fff" stroke="#202020" stroke-width="4"/>
+            <g class="pan pan-l">
+              <path d="M90 116 50 240M90 116 130 240" stroke="#B4B4B4" stroke-width="2"/>
+              <path d="M30 240H150A60 26 0 0 1 30 240Z" fill="#E3F7EC" stroke="#1F9D5C" stroke-width="3"/>
+              <text class="scale-lbl" x="90" y="292" text-anchor="middle">сапарды жақтайды</text>
+              <g class="tg tg-ama" data-say="ama deniz var"><rect x="12" y="200" width="156" height="34" rx="17" fill="#EEEEEE"/><text class="tagtxt" x="90" y="223" text-anchor="middle" fill="#646464" lang="tr">ama deniz var</text></g>
+              <g class="tg tg-bayram" data-say="kaldı ki bayram var"><rect x="4" y="162" width="172" height="34" rx="17" fill="#FFEEDD" stroke="#D9650A" stroke-width="2"/><text class="tagtxt" x="90" y="185" text-anchor="middle" fill="#D9650A" lang="tr">kaldı ki bayram var</text></g>
+            </g>
+            <g class="pan pan-r">
+              <path d="M410 116 370 240M410 116 450 240" stroke="#B4B4B4" stroke-width="2"/>
+              <path d="M350 240H470A60 26 0 0 1 350 240Z" fill="#FFE8E5" stroke="#C8382E" stroke-width="3"/>
+              <text class="scale-lbl" x="410" y="292" text-anchor="middle">қарсы</text>
+              <g class="tg tg-otel" data-say="Otel pahalı"><rect x="340" y="200" width="140" height="34" rx="17" fill="#fff" stroke="#E6E6E6" stroke-width="2"/><text class="tagtxt" x="410" y="223" text-anchor="middle" fill="#202020" lang="tr">Otel pahalı</text></g>
+              <g class="tg tg-soguk" data-say="kaldı ki deniz soğuk"><rect x="320" y="162" width="180" height="34" rx="17" fill="#FFEEDD" stroke="#D9650A" stroke-width="2"/><text class="tagtxt" x="410" y="185" text-anchor="middle" fill="#D9650A" lang="tr">kaldı ki deniz soğuk</text></g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="hud">
+        <p class="sub">Хабарламамды кері айналдырамын. kaldı ki — «есесіне» деп сенімді едім. «Қалды» сияқты естіледі ғой.</p>
+        <p class="sub">Ал <span class="k k--kaldi" lang="tr">kaldı ki</span> — «оның үстіне, онсыз да». Екінші дәлел сол таразы басына түседі.</p>
+        <p class="sub">Қонақүй қымбат. Оның үстіне теңіз суық. Екі тас та — сапарға қарсы.</p>
+        <p class="sub">«Есесіне» түрікше — ama: <b class="tr" lang="tr" data-say="Otel pahalı ama deniz var.">Otel pahalı ama deniz var.</b> Таразы теңеседі.</p>
+        <p class="sub">Ал дәлел дұрыс болса, kaldı ki менің жағымда да ойнай алады: <b class="tr" lang="tr" data-say="Gelin, kaldı ki 19 Mayıs'ta bayram var.">Gelin, kaldı ki 19 Mayıs'ta bayram var.</b></p>
+        <div class="act" id="act-kaldi">
+          <p class="act__q">Қай сөйлем достарды шақырады?</p>
+          <div class="act__row"><button type="button" class="chip" lang="tr" data-a="0">Gelin, kaldı ki deniz soğuk.</button><button type="button" class="chip" lang="tr" data-a="1">Gelin, kaldı ki bayram var.</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 5: tut ki, şöyle ki ============ -->
+<section data-section="plan" data-words="47" id="plan">
+  <div class="scene" id="sc-plan">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>5-сахна · жоспар</p>
+        <h2><span class="mute">Айталық.</span> Атап айтқанда.</h2>
+      </header>
+      <div class="stage">
+        <div class="layer p0" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <rect width="500" height="400" fill="#F7F7F5"/>
+            <path class="draw-plan" d="M40 380C140 300 300 380 470 250" fill="none" stroke="#B4B4B4" stroke-width="3" stroke-dasharray="8 10"/>
+            <circle cx="460" cy="60" r="90" fill="#FFF5D1" class="p-extra"/>
+          </svg>
+        </div>
+        <div class="ov cardE">
+          <p class="who"><span class="av av--e" aria-hidden="true">E</span><span data-ui>Элиф</span></p>
+          <p lang="tr" data-say="Planım hazır, şöyle ki: sabah Amisos Tepesi, akşam Batıpark.">Planım hazır, <span class="k k--soyle">şöyle ki</span>:</p>
+          <ul class="plan" lang="tr">
+            <li data-say="sabah Amisos Tepesi"><i>sabah</i>Amisos Tepesi</li>
+            <li data-say="akşam Batıpark"><i>akşam</i>Batıpark</li>
+          </ul>
+        </div>
+        <div class="ov cardM">
+          <svg class="cloud" viewBox="0 0 80 50" aria-hidden="true"><path d="M20 34a12 12 0 0 1 2-23 16 16 0 0 1 30-2 12 12 0 0 1 8 25Z" fill="#fff" stroke="#7C4DFF" stroke-width="3"/><g class="drops" stroke="#7C4DFF" stroke-width="3" stroke-linecap="round"><path d="M28 40l-3 7M42 40l-3 7M56 40l-3 7"/></g></svg>
+          <p class="who"><span class="av av--m" aria-hidden="true">M</span><span data-ui>Мерт</span></p>
+          <p lang="tr" data-say="Tut ki yağmur yağdı. Ne yapacağız?"><span class="k k--tut">Tut ki</span> yağmur yağdı. Ne yapacağız?</p>
+        </div>
+      </div>
+      <div class="hud">
+        <p class="sub">Чат жанданады. Элиф бағдарламаны құрып қойыпты: сағатпен және қосалқы шығуымен.</p>
+        <p class="sub">Элиф: <b class="tr" lang="tr" data-say="Planım hazır, şöyle ki: sabah Amisos Tepesi, akşam Batıpark.">Planım hazır, şöyle ki: sabah Amisos Tepesi, akşam Batıpark.</b></p>
+        <p class="sub"><span class="k k--soyle" lang="tr">şöyle ki</span> — «атап айтқанда, мәселе мынада». Одан кейін егжей-тегжейі келеді, көбіне қос нүкте арқылы.</p>
+        <p class="sub">Мерт берілмейді: <b class="tr" lang="tr" data-say="Tut ki yağmur yağdı. Ne yapacağız?">Tut ki yağmur yağdı. Ne yapacağız?</b></p>
+        <p class="sub"><span class="k k--tut" lang="tr">tut ki</span> — «айталық, делік». Ойдан жағдай құрады. Әрі қарай — сұрақ не Б жоспары.</p>
+        <div class="act" id="act-plan">
+          <p class="act__q">Қалай айтамыз: «Айталық, рейс кешіктірілді»?</p>
+          <div class="act__row"><button type="button" class="chip" lang="tr" data-a="1">Tut ki uçak rötar yaptı.</button><button type="button" class="chip" lang="tr" data-a="0">Şöyle ki uçak rötar yaptı.</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ СЦЕНА 6: nasıl ki, illaki ============ -->
+<section data-section="mirror" data-words="44" id="mirror">
+  <div class="scene" id="sc-mirror">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>6-сахна · татуласу</p>
+        <h2><span class="mute">Қалай…</span> солай</h2>
+      </header>
+      <div class="stage">
+        <div class="layer p0" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice"><rect width="500" height="400" fill="#F7F7F5"/><circle cx="250" cy="420" r="200" fill="#FFE6F0"/></svg>
+        </div>
+        <span class="ov mirror" aria-hidden="true"></span>
+        <div class="ov pc pc--ist">
+          <svg viewBox="0 0 160 110" aria-hidden="true">
+            <rect width="160" height="110" fill="#F2D9C4"/><rect y="70" width="160" height="40" fill="#6E95B8"/>
+            <path d="M0 70Q80 30 160 70" fill="none" stroke="#202020" stroke-width="2"/><path d="M30 70V48M130 70V48" stroke="#202020" stroke-width="3"/>
+            <g fill="#8C6A55"><rect x="70" y="26" width="16" height="44"/><path d="M66 28h24L78 8Z"/></g>
+          </svg>
+          <b lang="tr">İstanbul</b>
+        </div>
+        <div class="ov pc pc--sam">
+          <svg viewBox="0 0 160 110" aria-hidden="true"><use href="#sea-mini" width="160" height="160" y="-40"/><g transform="translate(96 66)"><path d="M0 6h40l-6 8H6Z" fill="#fff"/><rect x="12" y="0" width="14" height="6" fill="#fff"/></g></svg>
+          <b lang="tr">Samsun</b>
+        </div>
+        <span class="ov k k--nasil k-l" lang="tr" data-say="nasıl ki">nasıl ki</span>
+        <span class="ov k k--nasil k-r" lang="tr" data-say="sen de">sen de</span>
+        <div class="ov pide">
+          <svg viewBox="0 0 120 50" aria-hidden="true"><path d="M4 25C20 6 100 6 116 25 100 44 20 44 4 25Z" fill="#E9B26B" stroke="#8C5A2B" stroke-width="3"/><path d="M24 25C40 16 80 16 96 25 80 34 40 34 24 25Z" fill="#F6D9A8"/><circle cx="50" cy="25" r="3" fill="#C8382E"/><circle cx="70" cy="24" r="3" fill="#C8382E"/></svg>
+          <span><span lang="tr" data-say="Bafra pidesi">Bafra pidesi</span><br><span class="k k--illaki" lang="tr" data-say="illaki">illaki</span></span>
+        </div>
+      </div>
+      <div class="hud">
+        <p class="sub">Мерттің ашуы басылды. Ұзақ, салтанатты дерлік жазады, демалыстан жіберген ашықхаттағыдай.</p>
+        <p class="sub"><b class="tr" lang="tr" data-say="Nasıl ki biz sana İstanbul'u gösterdik, sen de bize Samsun'u göstereceksin.">Nasıl ki biz sana İstanbul'u gösterdik, sen de bize Samsun'u göstereceksin.</b></p>
+        <p class="sub"><span class="k k--nasil" lang="tr">nasıl ki</span> — «қалай... солай». Екінші жарты айнадай жауап береді, әдетте de арқылы.</p>
+        <p class="sub">Ойланбай жауап беремін: <b class="tr" lang="tr" data-say="Bafra pidesini illaki yiyeceksiniz.">Bafra pidesini illaki yiyeceksiniz.</b> — «Бафра пидесін міндетті түрде жейсіңдер».</p>
+        <p class="sub"><span class="k k--illaki" lang="tr">illaki</span> — «міндетті түрде, қаласаң да, қаламасаң да». Бірге жазылады. ki бар қалған жалғаулықтар — бөлек.</p>
+        <div class="act" id="act-mirror">
+          <p class="act__q">Бәрі қай жерде дұрыс жазылған?</p>
+          <div class="act__row"><button type="button" class="chip" lang="tr" data-a="0">illaki · demekki</button><button type="button" class="chip" lang="tr" data-a="1">illaki · demek ki</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ДИСПЕТЧЕРСКАЯ ============ -->
+<section data-section="lab" data-words="42" id="lab">
+  <div class="page">
+    <p class="tag" data-ui>7-сахна · диспетчерлік</p>
+    <h2><span class="mute">Маршруттар</span> диспетчері</h2>
+    <p>Мұнда сен — диспетчерсің. Режимді, сосын рейсті таңда. Жалғаулық екі ойдың арасына тұрады, ал төменде «неге» болады.</p>
+    <div class="desk">
+      <div class="tabs" role="tablist" aria-label="Режимдер">
+        <button type="button" class="tab" role="tab" aria-selected="true" data-mode="route">Құрастыр</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-mode="argue">Жақтай ма, қарсы ма</button>
+        <button type="button" class="tab" role="tab" aria-selected="false" data-mode="spell">Қалай жазылады</button>
+      </div>
+      <div class="flights" role="group" aria-label="Рейстер"></div>
+      <div class="route" aria-live="polite">
+        <svg class="path" viewBox="0 0 400 46" preserveAspectRatio="none" aria-hidden="true"><path class="rpath" d="M10 30C120 -6 280 -6 390 30" fill="none" stroke="#B4B4B4" stroke-width="2" stroke-dasharray="5 7" vector-effect="non-scaling-stroke"/><g class="rplane"><use href="#i-plane" x="-9" y="-9" width="18" height="18" color="#202020"/></g></svg>
+        <p class="rline" lang="tr"></p>
+        <div class="answers" role="group" aria-label="Жалғаулықтар"></div>
+        <p class="rfb"></p>
+        <p class="why"></p>
+      </div>
+      <div class="legend" data-ui>
+        <span class="k k--demek">demek ki</span><span class="k k--yeter">yeter ki</span><span class="k k--kaldi">kaldı ki</span><span class="k k--tut">tut ki</span><span class="k k--soyle">şöyle ki</span><span class="k k--nasil">nasıl ki</span><span class="k k--illaki">illaki</span><span class="k k--ama">ama</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ НЕВЕРНЫЕ МАРШРУТЫ ============ -->
+<section data-section="traps" data-words="54" id="traps">
+  <div class="scene" id="sc-traps">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>8-сахна · тоқтату</p>
+        <h2><span class="mute">Қате</span> маршруттар</h2>
+        <p class="traps-intro">Бұл маршруттарда бәрі сүрінеді. «Қайта құру» батырмасын бас — дұрысын аласың.</p>
+      </header>
+      <div class="strip">
+        <article class="take">
+          <p class="take__head"><span data-ui>1-рейс</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plane" color="#B4B4B4"/></svg></p>
+          <p class="take__bad" lang="tr">Otel pahalı, kaldı ki deniz var.</p>
+          <p class="take__good" lang="tr" data-say="Otel pahalı ama deniz var.">Otel pahalı ama deniz var.</p>
+          <p class="take__why">kaldı ki — «есесіне» емес. Ол сол жаққа дәлел қосады. «Есесіне» үшін ama бар.</p>
+          <button type="button" class="chip take__btn">Қайта құру</button>
+          <span class="stampx" aria-hidden="true" data-ui>тоқтатылды</span>
+        </article>
+        <article class="take">
+          <p class="take__head"><span data-ui>2-рейс</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plane" color="#B4B4B4"/></svg></p>
+          <p class="take__bad" lang="tr">Demekki haklıymışsın.</p>
+          <p class="take__good" lang="tr" data-say="Demek ki haklıymışsın.">Demek ki haklıymışsın.</p>
+          <p class="take__why">Бұл жалғаулықтарда ki бөлек тұрады. Бірге тек illaki жазылады.</p>
+          <button type="button" class="chip take__btn">Қайта құру</button>
+          <span class="stampx" aria-hidden="true" data-ui>тоқтатылды</span>
+        </article>
+        <article class="take">
+          <p class="take__head"><span data-ui>3-рейс</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plane" color="#B4B4B4"/></svg></p>
+          <p class="take__bad" lang="tr">Yeter ki deniz var.</p>
+          <p class="take__good" lang="tr" data-say="Yeter ki deniz olsun.">Yeter ki deniz olsun.</p>
+          <p class="take__why">yeter ki сөзінен кейін тілек керек: olsun, gel, ara. Жалаң факт мұнда жүрмейді.</p>
+          <button type="button" class="chip take__btn">Қайта құру</button>
+          <span class="stampx" aria-hidden="true" data-ui>тоқтатылды</span>
+        </article>
+        <article class="take">
+          <p class="take__head"><span data-ui>4-рейс</span><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-plane" color="#B4B4B4"/></svg></p>
+          <p class="take__bad" lang="tr">Evde yoklar, demek ki ışıklar kapalı.</p>
+          <p class="take__good" lang="tr" data-say="Işıklar kapalı, demek ki evde yoklar.">Işıklar kapalı, demek ki evde yoklar.</p>
+          <p class="take__why">demek ki фактіден қорытындыға апарады. Алдымен көрінгені, сосын болжам.</p>
+          <button type="button" class="chip take__btn">Қайта құру</button>
+          <span class="stampx" aria-hidden="true" data-ui>тоқтатылды</span>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ВИДЕО ============ -->
+<section data-section="video" data-words="20" id="video">
+  <div class="page">
+    <p class="film"><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="2" y="7" width="40" height="30" rx="10" fill="#202020"/><path d="M18 15v14l12-7Z" fill="#fff"/></svg><span class="tag" data-ui>9-сахна · кино</span></p>
+    <h2><span class="mute">Түрікше</span> үш минут</h2>
+    <p>Сабақ толығымен түрікше. ki бар жалғаулықтар екі ойды бір сөйлемге қалай байлайтынын тыңда. Пауза — сенің досың.</p>
+    <a-video yt="YW8b12xfBgc" start="0" end="180" title="126. Ders (C1) Bağlaçlar (ki bağlacıyla yapılanlar)" channel="ALTIN KÖPRÜ - TÜRKÇE"></a-video>
+  </div>
+</section>
+
+<!-- ============ ПРАКТИКА ============ -->
+<section data-section="practice" data-words="14" id="practice">
+  <div class="page">
+    <p class="tag" data-ui>10-сахна · практика</p>
+    <h2><span class="mute">Практика</span></h2>
+    <p>Алдымен таны, сосын таңда, сосын құрастыр. Соңында — диспетчерлік: алты хабарлама, алты жалғаулық.</p>
+    <a-exercise ref="c1.ki-compounds.ex1"></a-exercise>
+    <a-exercise ref="c1.ki-compounds.ex2"></a-exercise>
+    <a-exercise ref="c1.ki-compounds.ex3"></a-exercise>
+    <a-exercise ref="c1.ki-compounds.ex4"></a-exercise>
+    <a-exercise ref="c1.ki-compounds.ex5">
+      <div class="game" id="game">
+        <div class="game__top"><span class="ttl" lang="tr">Samsun · 19 Mayıs</span><span class="dots" aria-hidden="true"></span></div>
+        <div class="game__body">
+          <p class="game__hint">Достар чатқа жазады. Әр хабарламадан жалғаулық жоғалған. Оны орнына қайтар.</p>
+          <p class="game__in" lang="tr"><small></small><span class="g-pre"></span> <span class="slot">?</span> <span class="g-post"></span></p>
+          <div class="game__opts" role="group" aria-label="Жалғаулықтар"></div>
+          <p class="game__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </a-exercise>
+  </div>
+</section>
+
+<!-- ============ МИНИ-ПРОВЕРКА ============ -->
+<section data-section="check" data-words="10" id="check">
+  <div class="page">
+    <p class="tag" data-ui>11-сахна · тексеру</p>
+    <h2><span class="mute">Шағын</span> тексеру</h2>
+    <p>Бес сұрақ. Тек сахналарда болғаны ғана.</p>
+    <a-quiz ref="c1.ki-compounds.check1"></a-quiz>
+  </div>
+</section>
+
+<!-- ============ ФИНАЛ + ШПАРГАЛКА ============ -->
+<section data-section="cheat" data-words="96" id="cheat">
+  <div class="scene" id="sc-final">
+    <div class="frame">
+      <header class="frame__head">
+        <p class="tag" data-ui>12-сахна · 19 мамыр</p>
+        <h2><span class="mute">Екінші</span> дубль</h2>
+      </header>
+      <div class="stage">
+        <div class="layer p1" aria-hidden="true">
+          <svg viewBox="0 0 500 400" preserveAspectRatio="xMidYMid slice">
+            <path d="M0 360H500" stroke="#202020" stroke-width="4"/>
+            <path d="M120 360H480" stroke="#fff" stroke-width="3" stroke-dasharray="18 14"/>
+            <path id="route-final" d="M-20 120C120 110 260 200 330 300 360 340 400 356 470 358" fill="none" stroke="#9AA6B2" stroke-width="2.5" stroke-dasharray="6 9"/>
+            <g class="plane-final"><circle r="18" fill="#fff"/><use href="#i-plane" x="-12" y="-12" width="24" height="24" color="#202020" transform="rotate(90)"/></g>
+          </svg>
+        </div>
+        <div class="ov board">
+          <b data-ui>келу · Чаршамба әуежайы</b>
+          <p lang="tr"><span>İstanbul 09:40</span><span class="ok">İNDİ</span></p>
+          <p lang="tr"><span>Ankara 10:15</span><span>11:20</span></p>
+        </div>
+        <div class="ov trip2 glass">
+          <b lang="tr">Samsun'a gidiyoruz</b>
+          <div class="avs" aria-hidden="true"><i class="av av--d">D</i><i class="av av--m">M</i><i class="av av--e">E</i><i class="av av--me" data-ui>Мен</i></div>
+        </div>
+        <div class="ov fmsg"><a-say>Otel pahalı ama deniz var. Kaldı ki 19 Mayıs'ta bayram var. Yeter ki gelin.</a-say></div>
+      </div>
+      <div class="hud">
+        <p class="sub">Бірінші хабарламаны өшіремін. Маршрут бойынша қайта жазамын: дәлел, тағы дәлел, шарт.</p>
+        <p class="sub">Дениз жүрекше қояды. Мерт төрт минутта билет сатып алады.</p>
+        <p class="sub">Он тоғызыншы мамыр. Чаршамба әуежайы. Чемоданы бар үш адам. Пиде пеште пісіп жатыр.</p>
+        <div class="act" id="act-final">
+          <p class="act__q">Жаңа хабарлама жібер.</p>
+          <div class="act__row"><button type="button" class="chip final-send">Жіберу</button></div>
+          <p class="act__fb" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page">
+    <div class="poster">
+      <span class="poster__deco" aria-hidden="true"></span>
+      <p class="poster__kicker" data-ui>жадынама · бір экран</p>
+      <p class="poster__title" lang="tr">Plan<br><span class="oval">ki</span> rota</p>
+      <div class="prow"><span class="k k--demek" lang="tr">demek ki</span><p>демек: факт → қорытынды</p></div>
+      <div class="prow"><span class="k k--yeter" lang="tr">yeter ki</span><p>тек... болса болды: әрі қарай тілек — olsun, gel</p></div>
+      <div class="prow"><span class="k k--kaldi" lang="tr">kaldı ki</span><p>оның үстіне: сол жаққа дәлел</p></div>
+      <div class="prow"><span class="k k--tut" lang="tr">tut ki</span><p>айталық: ойдан құралған жағдай</p></div>
+      <div class="prow"><span class="k k--soyle" lang="tr">şöyle ki</span><p>атап айтқанда: әрі қарай егжей-тегжейі</p></div>
+      <div class="prow"><span class="k k--nasil" lang="tr">nasıl ki</span><p>қалай... солай: екінші жарты de арқылы</p></div>
+      <div class="prow"><span class="k k--illaki" lang="tr">illaki</span><p>міндетті түрде — бірге; қалғандары бөлек</p></div>
+      <div class="prow"><span class="k k--ama" lang="tr">ama</span><p>есесіне, бірақ — бұл kaldı ki емес</p></div>
+      <p class="finale">Енді сен ойларды тіл иесіндей байланыстырасың: қорытынды шығарасың, шарт қоясың, дәлел қосасың, болжайсың, түсіндіресің және салыстырасың. Әрі бір ki үшін ешкім сапарды тоқтатпайды.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<template data-achievement data-title="Маршрут құрылды" data-text="Ойларды ki бар жалғаулықтармен байланыстырасың: demek ki, yeter ki, kaldı ki және тағы төртеуі.">
+  <svg viewBox="0 0 120 120" aria-hidden="true">
+    <circle cx="60" cy="60" r="56" fill="#F4F4F2" stroke="#202020" stroke-width="4"/>
+    <path class="bpath" d="M22 84C40 40 80 92 98 36" fill="none" stroke="#202020" stroke-width="4" stroke-dasharray="6 7" stroke-linecap="round"/>
+    <circle class="bpin" cx="22" cy="84" r="8" fill="#2F6FEB"/>
+    <circle class="bpin" cx="60" cy="62" r="8" fill="#1F9D5C"/>
+    <circle class="bpin" cx="98" cy="36" r="8" fill="#D9650A"/>
+    <g class="bplane"><circle cx="98" cy="36" r="15" fill="#fff" stroke="#202020" stroke-width="3"/><use href="#i-plane" x="88" y="26" width="20" height="20" color="#202020"/></g>
+  </svg>
+</template>
+
+<script src="../../kit/v1/gsap.min.js"></script>
+<script type="module" src="../../kit/v1/kit.js"></script>
+<script src="../../kit/v1/tracker.js" defer></script>
+<script>
+addEventListener('DOMContentLoaded', () => {
+  const G = window.gsap || null;
+  const ST = window.ScrollTrigger || null;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const calm = !G || !ST || matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const say = (t) => { try { window.AlternaKit?.speak(t); } catch (e) { /* без звука */ } };
+  const fb = (box, ok, text) => { const p = $('.act__fb', box); p.textContent = text; p.className = 'act__fb ' + (ok ? 'ok' : 'no'); };
+  const react = (el, from, to) => { if (!G || !el) return; if (calm) { G.set(el, to); return; } G.fromTo(el, from, to); };
+  const mark = (btn, ok) => { btn.classList.remove('is-right', 'is-wrong'); btn.classList.add(ok ? 'is-right' : 'is-wrong'); };
+
+  /* ---------- субтитры и пауза-действие ---------- */
+  function cues(tl, s, at, actAt) {
+    const subs = $$('.sub', s), act = $('.act', s);
+    subs.forEach((el, i) => {
+      if (i) tl.fromTo(el, { autoAlpha: 0, y: 26 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power2.out' }, at[i]);
+      const next = i < subs.length - 1 ? at[i + 1] : actAt;
+      tl.to(el, { autoAlpha: 0, y: -18, duration: 0.35, ease: 'power1.in' }, next - 0.4);
+    });
+    tl.fromTo(act, { autoAlpha: 0, y: 34 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'back.out(1.6)' }, actAt);
+    tl.to({}, { duration: 1.3 });
+  }
+
+  /* ---------- 1. пейзаж → телефон → отмена ---------- */
+  function sceneStory(len) {
+    const s = $('#sc-story');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    tl.fromTo($('.p0', s), { scale: 1.15, yPercent: 0 }, { scale: 1, yPercent: -6, duration: 7 }, 0)
+      .fromTo($('.p1', s), { yPercent: 0, scale: 1 }, { yPercent: 8, scale: 1.12, duration: 2.2 }, 0)
+      .fromTo($('.hl', s), { y: 0, opacity: 1 }, { y: -50, opacity: 0, duration: 1.2 }, 1.4)
+      .fromTo($('.phone', s), { yPercent: 70, rotation: 6 }, { yPercent: 0, rotation: 0, duration: 1.4, ease: 'power2.out' }, 1.2)
+      .fromTo($('.m1', s), { scale: 0.4, opacity: 0, transformOrigin: '0% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' }, 2.6)
+      .fromTo($('.m2', s), { scale: 0.4, opacity: 0, transformOrigin: '100% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' }, 3.6)
+      .fromTo($('.phone', s), { scale: 1 }, { scale: 1.08, immediateRender: false, duration: 1.6 }, 3.6)
+      .fromTo($('.m3', s), { scale: 0.4, opacity: 0, transformOrigin: '0% 100%' }, { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' }, 4.6)
+      .fromTo($$('.trip .av', s), { x: 0, y: 0, rotation: 0, opacity: 1 }, { x: () => G.utils.random(-60, 60), y: -80, rotation: () => G.utils.random(-90, 90), opacity: 0, stagger: 0.08, duration: 0.6, ease: 'power2.in' }, 5.1)
+      .fromTo($('.stamp', s), { scale: 2.8, opacity: 0, rotation: -40 }, { scale: 1, opacity: 1, rotation: -10, duration: 0.35, ease: 'back.out(3)' }, 5.5);
+    cues(tl, s, [0, 1.4, 3.6, 4.6, 5.6], 6.8);
+    return tl;
+  }
+
+  /* ---------- 2. маршрут «факт → вывод» ---------- */
+  function sceneDemek(len) {
+    const s = $('#sc-demek');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    tl.fromTo($('.p0', s), { scale: 1.35, xPercent: 8 }, { scale: 1, xPercent: 0, duration: 2.4, ease: 'power1.inOut' }, 0)
+      .fromTo($('.p1', s), { scale: 1.35, xPercent: 8 }, { scale: 1, xPercent: 0, duration: 2.4, ease: 'power1.inOut' }, 0)
+      .fromTo($('.ov-duydum', s), { y: -40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, 1.3)
+      .to($('.ov-duydum', s), { y: -40, opacity: 0, duration: 0.4 }, 2.9)
+      .fromTo($('.pin--a', s), { scale: 0, transformOrigin: '0% 100%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 2.6)
+      .fromTo($('.draw-demek', s), { strokeDashoffset: 520 }, { strokeDashoffset: 0, duration: 1.6 }, 3.1)
+      .fromTo($('.plane-demek', s), { opacity: 0 }, { opacity: 1, duration: 0.2 }, 3.1)
+      .to($('.plane-demek', s), { motionPath: { path: '#route-demek', align: '#route-demek', alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 1.6 }, 3.1)
+      .fromTo($('.k-mid', s), { scale: 0, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.4, ease: 'back.out(2.5)' }, 3.7)
+      .fromTo($('.pin--b', s), { scale: 0, transformOrigin: '100% 0%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 4.6);
+    cues(tl, s, [0, 1.3, 3.1, 4.7], 5.9);
+    return tl;
+  }
+
+  /* ---------- 3. условие открывает замок ---------- */
+  function sceneYeter(len) {
+    const s = $('#sc-yeter');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    tl.fromTo($('.tcard', s), { yPercent: 30, rotation: -6, opacity: 0 }, { yPercent: 0, rotation: -2, opacity: 1, duration: 0.8, ease: 'power2.out' }, 0)
+      .fromTo($('.p0', s), { scale: 1.2 }, { scale: 1, duration: 6 }, 0)
+      .fromTo($('.b-deniz', s), { scale: 0, transformOrigin: '100% 0%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1.4)
+      .fromTo($('.lock', s), { scale: 1 }, { scale: 1.25, yoyo: true, repeat: 1, duration: 0.3 }, 2.6)
+      .fromTo($('.shackle', s), { rotation: 0, y: 0 }, { rotation: -35, y: -3, svgOrigin: '17 12', duration: 0.5, ease: 'back.out(2)' }, 3)
+      .fromTo($$('.forms .k', s), { y: 30, opacity: 0, rotation: () => G.utils.random(-20, 20) }, { y: 0, opacity: 1, rotation: 0, stagger: 0.2, duration: 0.45, ease: 'back.out(2)' }, 3.8)
+      .fromTo($('.tcard', s), { rotation: -2 }, { rotation: 0, immediateRender: false, duration: 0.5 }, 3.2)
+      .fromTo($('.b-me', s), { scale: 0, transformOrigin: '100% 100%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 4.9);
+    cues(tl, s, [0, 1.4, 2.6, 3.8, 4.9], 6.1);
+    return tl;
+  }
+
+  /* ---------- 4. весы доводов ---------- */
+  function sceneKaldi(len) {
+    const s = $('#sc-kaldi');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    const tilt = (deg, at) => {
+      tl.to($('.beam', s), { rotation: deg, svgOrigin: '250 110', duration: 0.6, ease: 'back.out(1.4)' }, at)
+        .to($('.pan-r', s), { y: deg * 2.8, duration: 0.6, ease: 'back.out(1.4)' }, at)
+        .to($('.pan-l', s), { y: -deg * 2.8, duration: 0.6, ease: 'back.out(1.4)' }, at);
+    };
+    tl.fromTo($('.layer', s), { scale: 1.2, yPercent: 6 }, { scale: 1, yPercent: 0, duration: 1.2, ease: 'power2.out' }, 0)
+      .fromTo($('.tg-otel', s), { y: -260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'bounce.out' }, 0.6);
+    tilt(4, 1.1);
+    tl.fromTo($('.tg-soguk', s), { y: -260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'bounce.out' }, 1.6);
+    tilt(10, 2.1);
+    tl.fromTo($('.tg-ama', s), { y: -260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'bounce.out' }, 3.6);
+    tilt(0, 4.1);
+    tl.fromTo($('.tg-bayram', s), { y: -260, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'bounce.out' }, 4.8);
+    tilt(-8, 5.3);
+    cues(tl, s, [0, 1.3, 2.3, 3.6, 4.8], 6.2);
+    return tl;
+  }
+
+  /* ---------- 5. план и план Б ---------- */
+  function scenePlan(len) {
+    const s = $('#sc-plan');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    tl.fromTo($('.cardE', s), { xPercent: -40, rotation: -8, opacity: 0 }, { xPercent: 0, rotation: -2, opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.2)
+      .fromTo($('.draw-plan', s), { strokeDashoffset: 600 }, { strokeDashoffset: 0, duration: 6 }, 0)
+      .fromTo($$('.plan li', s), { x: -30, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.3, duration: 0.4 }, 1.6)
+      .fromTo($('.cardE .k', s), { scale: 1 }, { scale: 1.25, yoyo: true, repeat: 1, duration: 0.25 }, 2.7)
+      .fromTo($('.cardM', s), { rotationY: -90, transformPerspective: 700, opacity: 0 }, { rotationY: 0, opacity: 1, duration: 0.7, ease: 'back.out(1.5)' }, 3.8)
+      .fromTo($('.drops', s), { y: -6, opacity: 0 }, { y: 4, opacity: 1, duration: 0.5, yoyo: true, repeat: 3 }, 4.2)
+      .fromTo($('.cardE', s), { scale: 1 }, { scale: 0.94, immediateRender: false, duration: 0.6 }, 4)
+      .fromTo($('.cardM .k', s), { scale: 1 }, { scale: 1.25, yoyo: true, repeat: 1, duration: 0.25 }, 5);
+    cues(tl, s, [0, 1.4, 2.6, 3.8, 5], 6.3);
+    return tl;
+  }
+
+  /* ---------- 6. зеркало открыток и штамп ---------- */
+  function sceneMirror(len) {
+    const s = $('#sc-mirror');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    tl.fromTo($('.pc--ist', s), { xPercent: -80, rotation: -20, opacity: 0 }, { xPercent: 0, rotation: -4, opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.2)
+      .fromTo($('.mirror', s), { scaleY: 0, transformOrigin: '50% 0%' }, { scaleY: 1, duration: 0.6 }, 1.6)
+      .fromTo($('.pc--sam', s), { xPercent: 80, rotation: 20, opacity: 0 }, { xPercent: 0, rotation: 4, opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.8)
+      .fromTo($('.k-l', s), { scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(2.5)' }, 2.6)
+      .fromTo($('.k-r', s), { scale: 0 }, { scale: 1, duration: 0.4, ease: 'back.out(2.5)' }, 2.9)
+      .fromTo($('.p0', s), { yPercent: 6, scale: 1.14 }, { yPercent: -4, scale: 1.14, duration: 7 }, 0)
+      .fromTo($('.pide', s), { yPercent: 160 }, { yPercent: 0, duration: 0.6, ease: 'back.out(1.6)' }, 3.8)
+      .fromTo($('.pide .k--illaki', s), { scale: 3, rotation: -40, opacity: 0 }, { scale: 1, rotation: -8, opacity: 1, duration: 0.35, ease: 'back.out(3)' }, 4.6);
+    cues(tl, s, [0, 1.2, 2.6, 3.8, 4.9], 6.1);
+    return tl;
+  }
+
+  /* ---------- 8. лента посадочных едет вбок ---------- */
+  function sceneTraps(desk) {
+    const s = $('#sc-traps');
+    const strip = $('.strip', s); const frame = $('.frame', s);
+    const dist = () => { const last = strip.lastElementChild; return Math.max(0, last.getBoundingClientRect().right - (Number(G.getProperty(strip, 'x')) || 0) - (frame.getBoundingClientRect().right - parseFloat(getComputedStyle(frame).paddingRight))); };
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: () => '+=' + Math.round(dist() + innerHeight * (desk ? 0.8 : 0.5)), pin: true, scrub: 0.7, anticipatePin: 1, invalidateOnRefresh: true } });
+    tl.to(strip, { x: () => -dist(), duration: 4 }, 0);
+    $$('.take', s).forEach((t, i) => {
+      tl.fromTo($('.stampx', t), { scale: 2.6, opacity: 0, rotation: -40 }, { scale: 1, opacity: 1, rotation: -10, duration: 0.25, ease: 'back.out(3)' }, 0.2 + i * 0.95);
+    });
+    tl.to({}, { duration: 0.6 });
+    return tl;
+  }
+
+  /* ---------- 12. посадка и второй дубль ---------- */
+  function sceneFinal(len) {
+    const s = $('#sc-final');
+    const tl = G.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: s, start: 'top top', end: '+=' + len + '%', pin: true, scrub: 0.7, anticipatePin: 1 } });
+    tl.fromTo($('.fmsg', s), { yPercent: 160 }, { yPercent: 0, duration: 0.6, ease: 'back.out(1.5)' }, 0.3)
+      .fromTo($('.board', s), { rotationX: -90, transformPerspective: 600, transformOrigin: '50% 0%' }, { rotationX: 0, duration: 0.6, ease: 'back.out(1.6)' }, 1.2)
+      .to($('.plane-final', s), { motionPath: { path: '#route-final', align: '#route-final', alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 2.2, ease: 'power1.inOut' }, 1.4)
+      .fromTo($('.trip2', s), { scale: 0, transformOrigin: '100% 0%' }, { scale: 1, duration: 0.5, ease: 'back.out(2)' }, 2.4)
+      .fromTo($$('.trip2 .av', s), { y: -60, opacity: 0, rotation: -60 }, { y: 0, opacity: 1, rotation: 0, stagger: 0.12, duration: 0.45, ease: 'back.out(2)' }, 2.8)
+      .fromTo($('.board .ok', s), { scale: 1 }, { scale: 1.3, yoyo: true, repeat: 1, duration: 0.25 }, 3.5);
+    cues(tl, s, [0, 1.4, 2.8], 4.1);
+    return tl;
+  }
+
+  if (!calm) {
+    const mm = G.matchMedia();
+    mm.add({ desk: '(min-width: 768px) and (prefers-reduced-motion: no-preference)', mob: '(max-width: 767.98px) and (prefers-reduced-motion: no-preference)' }, (ctx) => {
+      const desk = !!ctx.conditions.desk;
+      const L = desk ? 220 : 130;
+      $$('.scene').forEach((s) => s.classList.add('is-cine'));
+      sceneStory(L); sceneDemek(desk ? 200 : 125); sceneYeter(L); sceneKaldi(L);
+      scenePlan(L); sceneMirror(L); sceneTraps(desk); sceneFinal(desk ? 170 : 115);
+      G.fromTo('.desk', { y: 60, scale: 0.97 }, { y: 0, scale: 1, ease: 'power2.out', scrollTrigger: { trigger: '.desk', start: 'top 92%', end: 'top 55%', scrub: 0.6 } });
+      ScrollTrigger.batch('.prow', { start: 'top 94%', once: true, onEnter: (els) => G.fromTo(els, { x: -30, opacity: 0 }, { x: 0, opacity: 1, stagger: 0.07, duration: 0.45, ease: 'power2.out' }) });
+      ScrollTrigger.batch('#practice a-exercise, #check a-quiz', { start: 'top 95%', once: true, onEnter: (els) => G.fromTo(els, { y: 40 }, { y: 0, stagger: 0.1, duration: 0.6, ease: 'power2.out' }) });
+      ScrollTrigger.create({ trigger: '.poster', start: 'top 85%', onEnter: () => G.fromTo('.poster__title .oval', { rotation: -30, scale: 0.6 }, { rotation: -3, scale: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)' }) });
+      return () => $$('.scene').forEach((s) => s.classList.remove('is-cine'));
+    });
+  }
+  const refresh = () => ST && ST.refresh();
+  addEventListener('load', refresh);
+  document.fonts?.ready.then(refresh);
+  addEventListener('orientationchange', () => setTimeout(refresh, 300));
+
+  /* ================= действия в конце сцен ================= */
+  const pick = (id, ok, no, after) => {
+    const box = $(id);
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('.act__row button'); if (!b) return;
+      const right = b.dataset.a === '1';
+      mark(b, right); fb(box, right, right ? ok : no);
+      if (right) after?.(b);
+    });
+  };
+  /* 1 */
+  $('#act-story').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    const box = $('#act-story'); const right = b.dataset.a === '1';
+    $$('button', box).forEach((x) => mark(x, x.dataset.a === '1'));
+    fb(box, right, right ? 'Иә. Сапарға қарсы екі дәлел. Оларды өзім айтып қойдым.' : 'Мен осылай айтқым келген. Ал басқаша оқыды: қонақүй қымбат, оның үстіне теңіз суық.');
+    react($('#sc-story .stamp'), { scale: 1.6, rotation: -30 }, { scale: 1, rotation: -10, duration: 0.5, ease: 'back.out(3)' });
+  });
+  /* 2 */
+  pick('#act-demek', 'Иә. Фактіден қорытындыға: жарық сөнді — демек, ешкім жоқ.', 'Маршрут кері бағытта. demek ki көрінгеннен қорытындыға апарады.', (b) => {
+    say(b.textContent);
+    react($('#sc-demek .pin--b'), { scale: 1.3 }, { scale: 1, duration: 0.5, ease: 'back.out(2)' });
+  });
+  /* 3 */
+  pick('#act-yeter', 'Иә. Тілек: теңіз болсын. Құлып ашық.', 'var — жай ғана факт. yeter ki сөзінен кейін тілек керек: deniz olsun.', () => {
+    say('Her şeye razıyım, yeter ki deniz olsun.');
+    react($('#sc-yeter .shackle'), { rotation: 0 }, { rotation: -35, svgOrigin: '17 12', duration: 0.5, ease: 'back.out(2)' });
+  });
+  /* 4 */
+  pick('#act-kaldi', 'Иә. Жақтайтын дәлел, әрі біріншісінен салмақты. Таразы басы төмен түседі.', 'Бұл тағы қарсы: теңіз суық. Мереке туралы дәлел шақырады.', (b) => {
+    say(b.textContent);
+    react($('#sc-kaldi .tg-bayram'), { y: -40 }, { y: 0, duration: 0.6, ease: 'bounce.out' });
+  });
+  /* 5 */
+  pick('#act-plan', 'Иә. Ойдан құралған жағдай — бұл tut ki.', 'şöyle ki егжей-тегжейін ашады. «Айталық» үшін tut ki керек.', (b) => {
+    say(b.textContent);
+    react($('#sc-plan .cardM'), { rotation: -6 }, { rotation: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+  });
+  /* 6 */
+  pick('#act-mirror', 'Иә. Бірге тек illaki. demek ki — бөлек.', 'demekki деп бірге жазбайды. Бірге — тек illaki.', () => {
+    react($('#sc-mirror .pide .k--illaki'), { scale: 1.8, rotation: -30 }, { scale: 1, rotation: -8, duration: 0.4, ease: 'back.out(3)' });
+  });
+  /* 12 */
+  $('#act-final').addEventListener('click', (e) => {
+    if (!e.target.closest('.final-send')) return;
+    say('Otel pahalı ama deniz var. Kaldı ki 19 Mayıs\'ta bayram var. Yeter ki gelin.');
+    fb($('#act-final'), true, 'Жіберілді. Билеттер алынды. Төрт адамға пиде тапсырылып қойды.');
+    react($$('#sc-final .trip2 .av'), { y: -24 }, { y: 0, stagger: 0.08, duration: 0.5, ease: 'bounce.out' });
+  });
+  /* дубли */
+  $('#sc-traps .strip').addEventListener('click', (e) => {
+    const b = e.target.closest('.take__btn'); if (!b) return;
+    const t = b.closest('.take'); const good = $('.take__good', t);
+    react($('.take__bad', t), { x: -10 }, { x: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
+    react(good, { rotationX: -90, transformPerspective: 500 }, { rotationX: 0, duration: 0.6, ease: 'back.out(1.8)' });
+    react($('.stampx', t), { scale: 1.6 }, { scale: 1, duration: 0.4, ease: 'back.out(3)' });
+    say(good.dataset.say);
+  });
+
+  /* ================= диспетчерская ================= */
+  const KEYS = { 'demek ki': 'demek', 'yeter ki': 'yeter', 'kaldı ki': 'kaldi', 'tut ki': 'tut', 'şöyle ki': 'soyle', 'nasıl ki': 'nasil', 'ama': 'ama' };
+  const LAB = {
+    route: { opts: ['demek ki', 'yeter ki', 'kaldı ki', 'tut ki', 'şöyle ki', 'nasıl ki'], items: [
+      { chip: 'Мерт үндемейді', a: 'Mert telefonu açmıyor,', b: 'kızgın.', k: 'demek ki', ru: 'Мерт телефон алмайды — демек, ашулы.', why: 'Факт және одан шыққан қорытынды — demek ki.' },
+      { chip: 'Тек келсеңдер болды', a: 'Her şeyi ayarlarım,', b: 'gelin.', k: 'yeter ki', ru: 'Бәрін реттеймін, тек сендер келсеңдер болды.', why: 'Бір шарт, одан кейін өтініш — yeter ki.' },
+      { chip: 'Тағы бір дәлел', a: 'Bu akşam çıkmayalım,', b: 'hava da soğuk.', k: 'kaldı ki', ru: 'Бүгін бармайық, оның үстіне суық.', why: 'Сол жаққа екінші дәлел — kaldı ki.' },
+      { chip: 'Б жоспары', a: '', b: 'uçak rötar yaptı. Ne yapacağız?', k: 'tut ki', start: true, ru: 'Айталық, рейс кешіктірілді. Не істейміз?', why: 'Ойдан құралған жағдай — tut ki, сөйлемнің басында.' },
+      { chip: 'Егжей-тегжейі', a: 'Planım hazır,', b: 'sabah Amisos Tepesi, akşam Batıpark.', k: 'şöyle ki', colon: true, ru: 'Жоспар дайын, атап айтқанда: таңертең Амисос, кешке Батыпарк.', why: 'Әрі қарай егжей-тегжейі келеді — şöyle ki және қос нүкте.' },
+      { chip: 'Айна', a: '', b: "biz sana İstanbul'u gösterdik, sen de bize Samsun'u göstereceksin.", k: 'nasıl ki', start: true, ru: 'Біз саған Ыстамбұлды қалай көрсетсек, сен де бізге Самсунды солай көрсетесің.', why: 'Айнадай екі жарты, екіншісі de арқылы — nasıl ki.' },
+    ] },
+    argue: { opts: ['kaldı ki', 'ama'], items: [
+      { chip: 'Қымбат, бірақ теңіз бар', a: 'Otel pahalı', b: 'deniz var.', k: 'ama', ru: 'Қонақүй қымбат, есесіне теңіз бар.', why: 'Басқа жаққа дәлел — ama, «есесіне».' },
+      { chip: 'Қымбат әрі суық', a: 'Otel pahalı,', b: 'deniz de soğuk.', k: 'kaldı ki', ru: 'Қонақүй қымбат, оның үстіне теңіз суық.', why: 'Екі дәлел де қарсы — kaldı ki.' },
+      { chip: 'Келіңдер!', a: 'Gelin,', b: "19 Mayıs'ta bayram var.", k: 'kaldı ki', ru: 'Келіңдер, оның үстіне он тоғызыншы мамырда мереке.', why: 'Дәлел шақыруды күшейтеді — kaldı ki.' },
+      { chip: 'Суық, бірақ әдемі', a: 'Hava soğuk', b: 'manzara harika.', k: 'ama', ru: 'Суық, есесіне көрініс керемет.', why: 'Минус пен плюс — ama.' },
+    ] },
+    spell: { opts: ['бірге', 'бөлек'], items: [
+      { chip: 'illa + ki', w: ['illa', 'ki'], k: 'бірге', ru: 'illaki — «міндетті түрде».', why: 'illaki — бір сөз, бірге жазылады.' },
+      { chip: 'demek + ki', w: ['demek', 'ki'], k: 'бөлек', ru: 'demek ki — «демек».', why: 'Жалғаулықтағы ki бөлек тұрады.' },
+      { chip: 'yeter + ki', w: ['yeter', 'ki'], k: 'бөлек', ru: 'yeter ki — «тек... болса болды».', why: 'Бөлек, ki бар жалғаулықтардың көбі сияқты.' },
+      { chip: 'kaldı + ki', w: ['kaldı', 'ki'], k: 'бөлек', ru: 'kaldı ki — «оның үстіне».', why: 'Бөлек. Әрі ki-де үндестік жоқ: әрқашан ki.' },
+      { chip: 'şöyle + ki', w: ['şöyle', 'ki'], k: 'бөлек', ru: 'şöyle ki — «атап айтқанда».', why: 'Бөлек, одан кейін — егжей-тегжейі.' },
+    ] },
+  };
+  const lab = { mode: 'route', idx: 0 };
+  const lf = $('#lab .flights'), lline = $('#lab .rline'), lans = $('#lab .answers'), lfb = $('#lab .rfb'), lwhy = $('#lab .why');
+  const kcls = (k) => 'k k--' + (KEYS[k] || (k === 'бірге' ? 'illaki' : 'ama'));
+  function labLine(it, k) {
+    if (lab.mode === 'spell') {
+      const glued = k === 'бірге';
+      return `<span class="w1">${it.w[0]}</span>${glued ? '' : ' '}<span class="w2">${it.w[1]}</span>`;
+    }
+    const slot = k ? `<span class="slotk ${kcls(k)}">${k}</span>` : '<span class="slotk"></span>';
+    if (it.start) return `${slot}<span>${it.b}</span>`;
+    return `<span>${it.a}</span>${slot}${it.colon ? '<span>:</span>' : ''}<span>${it.b}</span>`;
+  }
+  function labDraw() {
+    const m = LAB[lab.mode]; const it = m.items[lab.idx];
+    lf.innerHTML = m.items.map((x, i) => `<button type="button" class="chip" aria-pressed="${i === lab.idx}" data-i="${i}">${x.chip}</button>`).join('');
+    lline.innerHTML = labLine(it, null);
+    lans.innerHTML = m.opts.map((o) => `<button type="button" class="chip" data-k="${o}" ${lab.mode === 'spell' ? '' : 'lang="tr"'}>${o}</button>`).join('');
+    lfb.textContent = lab.mode === 'spell' ? 'Бұл қалай жазылады?' : 'Бос орынға қай жалғаулық тұрады?'; lfb.className = 'rfb';
+    lwhy.innerHTML = `<b>Аудармасы:</b> ${it.ru}`;
+  }
+  function labAnswer(k) {
+    const m = LAB[lab.mode]; const it = m.items[lab.idx]; const ok = k === it.k;
+    lline.innerHTML = labLine(it, k);
+    lfb.textContent = ok ? 'Маршрут құрылды.' : 'Басқа жалғаулық — не шыққанына қара.'; lfb.className = 'rfb ' + (ok ? 'ok' : 'no');
+    lwhy.innerHTML = `<b>Неге:</b> ${it.why} <br><b>Аудармасы:</b> ${it.ru}`;
+    $$('button', lans).forEach((b) => { b.classList.remove('is-right', 'is-wrong'); if (b.dataset.k === it.k) b.classList.add('is-right'); else if (b.dataset.k === k) b.classList.add('is-wrong'); });
+    if (ok && lab.mode !== 'spell') say(lline.textContent.replace(/\s+/g, ' ').trim());
+    if (G && !calm) {
+      G.fromTo($('.slotk, .w2', lline), { y: -40, scale: 0.6, opacity: 0 }, { y: 0, scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2.2)' });
+      G.to('#lab .rplane', { motionPath: { path: '#lab .rpath', align: '#lab .rpath', alignOrigin: [0.5, 0.5], autoRotate: true }, duration: 0.9, ease: 'power1.inOut' });
+    }
+  }
+  $('#lab .tabs').addEventListener('click', (e) => {
+    const t = e.target.closest('.tab'); if (!t) return;
+    $$('#lab .tab').forEach((x) => x.setAttribute('aria-selected', String(x === t)));
+    lab.mode = t.dataset.mode; lab.idx = 0; labDraw();
+    if (G && !calm) G.fromTo(lf.children, { y: 16, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.05, duration: 0.3 });
+  });
+  lf.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; lab.idx = Number(b.dataset.i); labDraw(); });
+  lans.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; labAnswer(b.dataset.k); });
+  lline.addEventListener('click', () => { if (lab.mode !== 'spell') say(lline.textContent.replace(/\s+/g, ' ').trim()); });
+  labDraw();
+  if (G) G.set('#lab .rplane', { x: 10, y: 30 });
+
+  /* ================= нестандартное упражнение: чат с пропусками ================= */
+  const EX = 'c1.ki-compounds.ex5';
+  const GAME = [
+    { id: 'g1', who: 'Дениз', pre: 'Mert mesajları okumuyor,', post: 'uyuyor.', opts: ['demek ki', 'yeter ki', 'kaldı ki'], a: 0, why: 'Факт пен қорытынды: оқымай жатыр — демек, ұйықтап жатыр.' },
+    { id: 'g2', who: 'Мен', pre: 'Ne isterseniz yaparım,', post: 'gelin.', opts: ['tut ki', 'yeter ki', 'demek ki'], a: 1, why: 'Шарт пен өтініш: тек келсеңдер болды.' },
+    { id: 'g3', who: 'Элиф', pre: 'Bu akşam çıkmayalım,', post: 'hava çok soğuk.', opts: ['nasıl ki', 'şöyle ki', 'kaldı ki'], a: 2, why: 'Сол жаққа екінші дәлел: оның үстіне суық.' },
+    { id: 'g4', who: 'Мерт', pre: '', post: 'otobüs gelmedi. Taksiye mi bineriz?', opts: ['Tut ki', 'Demek ki', 'Yeter ki'], a: 0, why: 'Ойдан құралған жағдай және Б жоспары — tut ki.' },
+    { id: 'g5', who: 'Элиф', pre: 'Sorun basit,', post: 'otel cumartesi dolu.', opts: ['kaldı ki', 'şöyle ki', 'yeter ki'], a: 1, why: 'Әрі қарай мәселенің егжей-тегжейі — şöyle ki.' },
+    { id: 'g6', who: 'Мен', pre: "Samsun'a gelen", post: 'Bafra pidesi yer.', opts: ['demek ki', 'illaki', 'şöyle ki'], a: 1, why: '«Міндетті түрде, қайткенде де» — illaki, бірге.' },
+  ];
+  const game = $('#game'); const st = { i: 0, correct: 0, t: 0, lock: false };
+  const dots = $('.dots', game);
+  dots.innerHTML = GAME.map(() => '<i></i>').join('');
+  const gameBody = $('.game__body', game).cloneNode(true);
+  const gk = (o) => 'k k--' + (KEYS[o.toLowerCase()] || (o === 'illaki' ? 'illaki' : 'ama'));
+  function gameDraw() {
+    const g = GAME[st.i];
+    $('.game__in small', game).textContent = g.who;
+    $('.g-pre', game).textContent = g.pre; $('.g-post', game).textContent = g.post;
+    const slot = $('.slot', game); slot.textContent = '?'; slot.className = 'slot';
+    $('.game__opts', game).innerHTML = g.opts.map((o, k) => `<button type="button" class="chip" lang="tr" data-k="${k}">${o}</button>`).join('');
+    $('.game__fb', game).textContent = '';
+    st.t = performance.now(); st.lock = false;
+    if (G && !calm) G.fromTo($('.game__in', game), { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: 'back.out(1.8)' });
+  }
+  function gameEnd() {
+    window.AlternaTracker?.complete({ exerciseId: EX, correct: st.correct, total: GAME.length });
+    $('.game__body', game).innerHTML = `<div class="game__end"><p><b>${GAME.length} ішінен ${st.correct}</b> жалғаулық орнында.</p><p>${st.correct === GAME.length ? 'Чат бәріне түсінікті. Сапар күшінде.' : 'Сәл қалды. Бұл жалғаулықтарда бәрі сүрінеді — тағы ойнап көр.'}</p><button type="button" class="chip chip--dark game-again">Тағы бір рет</button></div>`;
+  }
+  function gameAnswer(k, instant) {
+    if (st.lock) return;
+    const g = GAME[st.i]; const ok = k === g.a; st.lock = true;
+    window.AlternaTracker?.answer({ exerciseId: EX, itemId: g.id, correct: ok, answer: g.opts[k], timeMs: Math.round(performance.now() - st.t) });
+    if (ok) st.correct++;
+    dots.children[st.i].className = ok ? 'ok' : 'no';
+    $$('.game__opts button', game).forEach((b, j) => { if (j === g.a) mark(b, true); else if (j === k) mark(b, false); });
+    const slot = $('.slot', game); slot.textContent = g.opts[g.a]; slot.className = 'slot is-full ' + gk(g.opts[g.a]);
+    $('.game__fb', game).textContent = (ok ? 'Иә. ' : 'Ол емес. ') + g.why;
+    if (!instant) { say(`${g.pre} ${g.opts[g.a]} ${g.post}`.trim()); if (G && !calm) G.fromTo(slot, { scale: 1.5, rotation: -8 }, { scale: 1, rotation: 0, duration: 0.5, ease: 'back.out(2.4)' }); }
+    const next = () => { st.i++; if (st.i < GAME.length) gameDraw(); else gameEnd(); };
+    if (instant) next(); else setTimeout(next, ok ? 1500 : 2600);
+  }
+  const gameReset = () => { game.querySelector('.game__body').replaceWith(gameBody.cloneNode(true)); st.i = 0; st.correct = 0; [...dots.children].forEach((d) => (d.className = '')); gameDraw(); };
+  game.addEventListener('click', (e) => {
+    const b = e.target.closest('.game__opts button');
+    if (b) { gameAnswer(Number(b.dataset.k), false); return; }
+    if (e.target.closest('.game-again')) gameReset();
+  });
+  game.addEventListener('keydown', (e) => {
+    if (!['1', '2', '3'].includes(e.key) || st.i >= GAME.length) return;
+    gameAnswer(Number(e.key) - 1, false);
+  });
+  gameDraw();
+  const solve = async () => {
+    if (st.i >= GAME.length) gameReset();
+    while (st.i < GAME.length) { st.lock = false; gameAnswer(GAME[st.i].a, true); }
+  };
+  window.AlternaKit?.registerSolver?.(EX, solve);
+  addEventListener('load', () => window.AlternaKit?.registerSolver?.(EX, solve));
+
+  /* ================= скроллбар: маршрут ================= */
+  const reel = $('[data-scrollbar]'); const fill = $('.reel__fill', reel); const thumb = $('.reel__thumb', reel); const track = $('.reel__track', reel);
+  const marks = $$('.pin-btn', reel);
+  const secs = marks.map((m) => document.querySelector(`[data-section="${m.dataset.goto}"]`));
+  const topOf = (el) => el.getBoundingClientRect().top + scrollY;
+  const vertical = () => matchMedia('(min-width: 1024px)').matches;
+  const maxY = () => Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  function paint() {
+    const p = Math.min(1, Math.max(0, scrollY / maxY()));
+    const v = vertical();
+    fill.style.transform = v ? `scaleY(${p})` : `scaleX(${p})`;
+    if (v) thumb.style.transform = `translateY(${p * Math.max(0, track.offsetHeight - thumb.offsetHeight + 4)}px)`;
+    thumb.setAttribute('aria-valuenow', String(Math.round(p * 100)));
+    let cur = 0;
+    secs.forEach((s, i) => { if (s && topOf(s) - innerHeight * 0.45 <= scrollY) cur = i; });
+    marks.forEach((m, i) => m.classList.toggle('is-on', i === cur));
+  }
+  addEventListener('scroll', paint, { passive: true });
+  addEventListener('resize', paint);
+  if (ST) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: paint, onRefresh: paint });
+  paint();
+  reel.addEventListener('click', (e) => {
+    const m = e.target.closest('.pin-btn'); if (!m) return;
+    const s = document.querySelector(`[data-section="${m.dataset.goto}"]`); if (!s) return;
+    window.scrollTo({ top: topOf(s) + 2, behavior: calm ? 'auto' : 'smooth' });
+  });
+  addEventListener('alterna:read', (e) => { marks.find((m) => m.dataset.goto === e.detail?.key)?.classList.add('is-read'); });
+  const seek = (clientY) => {
+    const r = track.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (clientY - r.top - thumb.offsetHeight / 2) / Math.max(1, r.height - thumb.offsetHeight)));
+    window.scrollTo(0, p * maxY());
+  };
+  let drag = false;
+  thumb.addEventListener('pointerdown', (e) => { drag = true; thumb.setPointerCapture(e.pointerId); e.preventDefault(); });
+  thumb.addEventListener('pointermove', (e) => { if (drag) seek(e.clientY); });
+  thumb.addEventListener('pointerup', (e) => { drag = false; thumb.releasePointerCapture?.(e.pointerId); });
+  thumb.addEventListener('keydown', (e) => {
+    const step = { ArrowDown: 0.04, ArrowUp: -0.04, PageDown: 0.12, PageUp: -0.12 }[e.key];
+    if (e.key === 'Home') window.scrollTo(0, 0);
+    else if (e.key === 'End') window.scrollTo(0, maxY());
+    else if (step) window.scrollBy(0, step * maxY());
+    else return;
+    e.preventDefault();
+  });
+
+  /* ================= ачивка: самолётик пролетает маршрут ================= */
+  addEventListener('alterna:achievement', ({ detail }) => {
+    const b = detail?.badge; if (!b || !detail.timeline) return;
+    detail.timeline.fromTo(b.querySelectorAll('.bpin'), { scale: 0, transformOrigin: '50% 50%' }, { scale: 1, stagger: 0.15, duration: 0.35, ease: 'back.out(3)' }, 0.6)
+      .fromTo(b.querySelector('.bplane'), { x: -76, y: 48, rotation: -30, transformOrigin: '50% 50%' }, { x: 0, y: 0, rotation: 0, duration: 0.8, ease: 'power2.out' }, 1);
+  });
+});
+</script>
+</body>
+</html>
