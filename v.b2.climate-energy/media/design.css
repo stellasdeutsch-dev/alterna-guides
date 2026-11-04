@@ -1,0 +1,233 @@
+/* Enerji: полосы потепления вместо неба, под ними ветряки, солнечные панели, плотина, зарядная станция. Вкладки как шкала A-G, карточки как энергетические этикетки */
+.lx[data-design="enerji"] {
+  --lx-accent: #0f4a7a; --lx-accent-2: #0b6a3a; --lx-paper: #f6f8fa; --lx-surf: #ffffff; --lx-surf2: #eef3f7; --lx-card: #ffffff;
+  --lx-ink: #10231c; --lx-muted: #455a60; --lx-line: #c7d5dd; --lx-soft: #e2eef8; --lx-on: #ffffff; --lx-tabs-bg: #ffffff; --lx-r: 8px; --lx-shadow: 0 0 0 1.500px #10231c;
+  --stripes: linear-gradient(90deg,#8fbfe0 0% 5%,#97c4e2 5% 10%,#96c3e2 10% 15%,#9ec8e5 15% 20%,#a8cde8 20% 25%,#bad8ee 25% 30%,#b6d6ed 30% 35%,#cbe2f1 35% 40%,#d8eaf4 40% 45%,#e4edf2 45% 50%,#e2edf3 50% 55%,#efebe8 55% 60%,#fce5d6 60% 65%,#facfba 65% 70%,#fbd3bf 70% 75%,#f6b196 75% 80%,#f39e83 80% 85%,#ee886f 85% 90%,#f1947a 90% 95%,#e26250 95% 100%);
+  --disp: 'LX Unbounded', 'Arial Black', sans-serif;
+  --ak-font: 'LX Nunito', system-ui, sans-serif; --ak-font-display: var(--disp); --ak-bg: #ffffff; --ak-surface: #f6f8fa; --ak-radius: 8px; --ak-radius-sm: 6px; --ak-good: #0b6a3a; --ak-good-soft: #dcf3e5; --ak-bad: #a82a18; --ak-bad-soft: #fde3dc;
+  font-family: var(--ak-font); font-size: 1.03em; overflow-x: clip;
+  background: #f6f8fa;
+}
+.lx[data-design="enerji"] main { overflow-x: clip; }
+
+/* шапка */
+.lx[data-design="enerji"] .lx-app { position: relative; background: #fff; border-bottom: 0; }
+.lx[data-design="enerji"] .lx-app::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 5px; background: var(--stripes); }
+.lx[data-design="enerji"] .lx-app__logo { border-radius: 8px; background: #10231c; }
+.lx[data-design="enerji"] .lx-app__t b { font: 700 .92em/1.25 var(--disp); }
+.lx[data-design="enerji"] .lx-app__t small { color: var(--lx-muted); font-weight: 600; }
+.lx[data-design="enerji"] .lx-lessons { border-radius: 8px; background: #eef3f7; }
+.lx[data-design="enerji"] .lx-lessons a { border-radius: 6px; color: #10231c; font-family: var(--disp); font-size: .86em; }
+.lx[data-design="enerji"] .lx-lessons a[aria-current] { background: #39b56a; color: #10231c; box-shadow: inset 0 0 0 2px #10231c; }
+.lx[data-design="enerji"] .lx-app__ring .lx-ring__bg { stroke: #dbe6ec; }
+.lx[data-design="enerji"] .lx-app__ring .lx-ring__fg { stroke: #0b6a3a; }
+
+/* первый экран: сцена во весь блок, заголовок на белой полосе */
+.lx[data-design="enerji"] .lx-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); max-width: none; margin: 0 calc(50% - 50vw) !important; padding: 16px 0 12px; border-radius: 0; background: var(--stripes) 0 0 / 100% 46px no-repeat; box-shadow: none; }
+.lx[data-design="enerji"] .lx-hero > * { grid-column: 1; }
+.lx[data-design="enerji"] .lx-scene { order: 4; height: 280px; overflow: hidden; border-bottom: 2px solid #10231c; }
+.lx[data-design="enerji"] .lx-scene svg { display: block; width: 220%; height: 100%; margin-left: -68%; }
+.lx[data-design="enerji"] .en-sun { transform: translate(-190px, -30px); }
+.lx[data-design="enerji"] .lx-tag { position: relative; order: 1; justify-self: start; margin: 0 16px !important; padding: 4px 10px 12px; border-radius: 4px 4px 0 0; background: #fff; color: #10231c; font: 600 9.500px/1.3 var(--disp); }
+.lx[data-design="enerji"] .lx-hero h1 { position: relative; order: 2; margin: -6px 0 0; padding: 10px 16px 2px; background: #fff; color: #10231c; font: 800 clamp(34px, 10vw, 46px)/1.06 var(--disp); letter-spacing: -.04em; hyphens: manual; }
+.lx[data-design="enerji"] .lx-hero__tr { position: relative; order: 3; margin: 0 !important; padding: 2px 16px 10px; background: #fff; color: #0b6a3a; font: 800 clamp(15px, 4vw, 18px)/1.2 var(--ak-font); box-shadow: 0 2px 0 #10231c; }
+.lx[data-design="enerji"] .lx-hero__meta { position: relative; order: 5; margin: 10px 16px 2px; color: var(--lx-muted); font-weight: 700; font-size: .86em; }
+.lx[data-design="enerji"] .lx-hero__intro { position: relative; order: 6; margin: 0 16px 8px; color: var(--lx-ink); font-weight: 500; }
+/* числа: стрелки как на этикетке */
+.lx[data-design="enerji"] .lx-stats { position: relative; order: 7; grid-template-columns: minmax(0, 1fr); gap: 3px; margin: 6px 16px 8px; }
+.lx[data-design="enerji"] .lx-stats li { display: flex; align-items: center; gap: 8px; height: 30px; padding: 0 22px 0 10px; border-radius: 0; color: #10231c; background: #39b56a; clip-path: polygon(0 0, calc(100% - 15px) 0, 100% 50%, calc(100% - 15px) 100%, 0 100%); }
+.lx[data-design="enerji"] .lx-stats li:nth-child(1) { width: 58%; background: #39b56a; }
+.lx[data-design="enerji"] .lx-stats li:nth-child(2) { width: 70%; background: #bdd24c; }
+.lx[data-design="enerji"] .lx-stats li:nth-child(3) { width: 82%; background: #f8bb45; }
+.lx[data-design="enerji"] .lx-stats li:nth-child(4) { width: 94%; background: #f39352; }
+.lx[data-design="enerji"] .lx-stats b { color: #10231c; font: 800 15px/1 var(--disp); }
+.lx[data-design="enerji"] .lx-stats span { color: #10231c; font-weight: 700; font-size: 12.500px; }
+
+/* вкладки: шкала классов A-G */
+.lx[data-design="enerji"] .lx-tab:nth-child(1) { --c: #39b56a; }
+.lx[data-design="enerji"] .lx-tab:nth-child(2) { --c: #7cc35a; }
+.lx[data-design="enerji"] .lx-tab:nth-child(3) { --c: #bdd24c; }
+.lx[data-design="enerji"] .lx-tab:nth-child(4) { --c: #f2dc48; }
+.lx[data-design="enerji"] .lx-tab:nth-child(5) { --c: #f8bb45; }
+.lx[data-design="enerji"] .lx-tab:nth-child(6) { --c: #f39352; }
+.lx[data-design="enerji"] .lx-tab:nth-child(7) { --c: #f06f5c; }
+.lx[data-design="enerji"] .lx-tabs { counter-reset: cls; gap: 3px; margin-top: 8px !important; padding: 5px 6px; border-radius: 0; background: #fff; border-block: 2px solid #10231c; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="enerji"] .lx-tab { counter-increment: cls; grid-template-columns: 24px auto; gap: 0 7px; min-height: 48px; padding: 2px 24px 2px 8px; border-radius: 0; background: var(--c); color: #10231c; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); }
+.lx[data-design="enerji"] .lx-tab__ico { display: none; }
+.lx[data-design="enerji"] .lx-tab::before { content: counter(cls, upper-alpha); grid-row: span 2; color: #10231c; font: 800 19px/1 var(--disp); }
+.lx[data-design="enerji"] .lx-tab b { font: 800 14px/1.1 var(--ak-font); }
+.lx[data-design="enerji"] .lx-tab small { color: #10231c; font-weight: 600; font-size: 11px; }
+.lx[data-design="enerji"] .lx-tab[aria-selected="true"] { background: #10231c; color: #fff; box-shadow: none; }
+.lx[data-design="enerji"] .lx-tab[aria-selected="true"]::before { color: var(--c); }
+.lx[data-design="enerji"] .lx-tab[aria-selected="true"] small { color: #fff; }
+.lx[data-design="enerji"] .lx-tab:focus-visible { outline: 3px solid #0f4a7a; outline-offset: -5px; }
+.lx[data-design="enerji"] .lx-tabs__line { display: none; }
+@media (hover: hover) { .lx[data-design="enerji"] .lx-tab:not([aria-selected="true"]):hover { background: var(--c); filter: brightness(1.06); color: #10231c; } }
+
+/* панели */
+.lx[data-design="enerji"] .lx-ph { position: relative; padding-top: clamp(26px, 4vw, 38px); border-radius: 6px; background: #fff; box-shadow: var(--lx-shadow); overflow: hidden; }
+.lx[data-design="enerji"] .lx-ph::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 12px; background: var(--stripes); }
+.lx[data-design="enerji"] .lx-kicker { color: #0f4a7a; font: 800 .96em/1.2 var(--ak-font); }
+.lx[data-design="enerji"] .lx-panel h2 { color: #10231c; font: 800 clamp(25px, 6vw, 42px)/1.1 var(--disp); letter-spacing: -.035em; }
+.lx[data-design="enerji"] .lx-chip { border-radius: 6px; background: #fff; box-shadow: inset 0 0 0 1.500px #10231c; color: #10231c; font-weight: 800; }
+.lx[data-design="enerji"] .lx-chip[aria-pressed="true"] { background: #10231c; color: #fff; }
+.lx[data-design="enerji"] .lx-search { border-radius: 6px; border: 1.500px solid #10231c; font-weight: 600; }
+.lx[data-design="enerji"] .lx-search::placeholder { color: var(--lx-muted); }
+.lx[data-design="enerji"] .lx-learn { border-top: 1.500px dashed #9db2be; }
+
+/* группы */
+.lx[data-design="enerji"] .lx-panel[data-section="sozluk"] { counter-reset: lbl; }
+.lx[data-design="enerji"] .lx-group { margin: 34px 0 14px; color: #10231c; font: 800 clamp(18px, 4.600vw, 26px)/1.15 var(--disp); letter-spacing: -.03em; text-transform: none; }
+.lx[data-design="enerji"] .lx-group__ico { border-radius: 50%; background: #10231c; color: #fff; }
+
+/* карточка: энергетическая этикетка */
+.lx[data-design="enerji"] .lx-cards { gap: 16px; }
+.lx[data-design="enerji"] .lx-card { counter-increment: lbl; padding: 32px 12px 12px; border-radius: 6px; background: linear-gradient(#0f4a7a 0 24px, transparent 24px), #fff; box-shadow: var(--lx-shadow); transition: box-shadow .16s; }
+.lx[data-design="enerji"] .lx-card__face { position: static; }
+.lx[data-design="enerji"] .lx-card__face::before { content: 'ENERJİ · No ' counter(lbl, decimal-leading-zero) / ''; position: absolute; left: 12px; top: 7px; color: #fff; font: 600 9.500px/1.1 var(--disp); }
+.lx[data-design="enerji"] .lx-card__top { padding-right: 54px; }
+.lx[data-design="enerji"] .lx-card::before { content: ''; position: absolute; right: 12px; top: 30px; width: 50px; height: 56px; background: linear-gradient(#39b56a 0 0) 0 0px / 18px 7px no-repeat, linear-gradient(#7cc35a 0 0) 0 8px / 23px 7px no-repeat, linear-gradient(#bdd24c 0 0) 0 16px / 28px 7px no-repeat, linear-gradient(#f2dc48 0 0) 0 24px / 33px 7px no-repeat, linear-gradient(#f8bb45 0 0) 0 32px / 38px 7px no-repeat, linear-gradient(#f39352 0 0) 0 40px / 43px 7px no-repeat, linear-gradient(#f06f5c 0 0) 0 48px / 48px 7px no-repeat; }
+.lx[data-design="enerji"] .lx-card::after { position: absolute; right: 8px; min-width: 25px; height: 13px; padding: 0 2px 0 9px; display: block; background: #10231c; color: #fff; font: 800 10px/13px var(--disp); text-align: center; clip-path: polygon(0 50%, 7px 0, 100% 0, 100% 100%, 7px 100%); transition: top .3s; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n+1)::after { content: "A" / ""; top: 27px; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n+2)::after { content: "B" / ""; top: 35px; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n+3)::after { content: "C" / ""; top: 43px; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n+4)::after { content: "D" / ""; top: 51px; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n+5)::after { content: "E" / ""; top: 59px; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n+6)::after { content: "F" / ""; top: 67px; }
+.lx[data-design="enerji"] .lx-card:nth-child(7n)::after { content: "G" / ""; top: 75px; }
+.lx[data-design="enerji"] .lx-card[data-passive] { background: linear-gradient(#35688f 0 24px, transparent 24px), #f6f8fa; }
+.lx[data-design="enerji"] .lx-ico { width: 40px; height: 40px; border-radius: 8px; background: #e2eef8; color: #0f4a7a; }
+.lx[data-design="enerji"] .lx-ico svg { width: 20px; height: 20px; }
+.lx[data-design="enerji"] .lx-card__tr { color: #10231c; font: 700 1.04em/1.2 var(--disp); letter-spacing: -.03em; }
+.lx[data-design="enerji"] .lx-card__ru { color: var(--lx-muted); font-weight: 700; }
+.lx[data-design="enerji"] .lx-say { position: absolute; right: 12px; top: 94px; width: 44px; height: 44px; border-radius: 8px; background: #fff; color: #0f4a7a; box-shadow: inset 0 0 0 1.500px #0f4a7a; }
+.lx[data-design="enerji"] .lx-card__tags { min-height: 40px; align-items: flex-start; padding-right: 54px; padding-top: 4px; }
+.lx[data-design="enerji"] .lx-card__pos { padding: 0; border-radius: 0; background: none; color: var(--lx-muted); font-weight: 700; }
+.lx[data-design="enerji"] .lx-card__pos--passive { color: #0f4a7a; }
+.lx[data-design="enerji"] .lx-card__tx { color: var(--lx-muted); padding-right: 54px; min-height: 40px; }
+.lx[data-design="enerji"] .lx-card__gov { color: #0b6a3a; }
+.lx[data-design="enerji"] .lx-card.is-flipped { background: linear-gradient(#0f4a7a 0 24px, transparent 24px), #fbfdfe; }
+.lx[data-design="enerji"] .lx-ex { border-radius: 6px; background: #f6f8fa; }
+.lx[data-design="enerji"] .lx-ex__ru { color: var(--lx-muted); }
+.lx[data-design="enerji"] .lx-card__note { border: 0; border-radius: 6px; background: #eaf6d6; color: #1f3a0d; font-weight: 600; }
+.lx[data-design="enerji"] .lx-card__acts button { border-radius: 6px; border: 1.500px solid #10231c; background: #fff; color: #10231c; font-weight: 800; }
+.lx[data-design="enerji"] .lx-card__know[aria-pressed="true"] { border-color: #0b6a3a; background: #dcf3e5; color: #084f2b; }
+/* выучил: класс этикетки поднимается до A */
+.lx[data-design="enerji"] .lx-card.is-known { box-shadow: 0 0 0 2.500px #0b6a3a; background: linear-gradient(#0b6a3a 0 24px, transparent 24px), #fff; }
+.lx[data-design="enerji"] .lx-card.is-known::after { content: "A" / ""; top: 27px; background: #0b6a3a; }
+.lx[data-design="enerji"] .lx-card:hover { box-shadow: 0 0 0 2px #10231c, 5px 6px 0 #dbe6ec; }
+.lx[data-design="enerji"] .lx-card:focus-visible { outline: 3px solid #0f4a7a; outline-offset: 2px; }
+
+/* история: счёт за электричество */
+.lx[data-design="enerji"] .lx-story { position: relative; padding: 76px clamp(18px, 5vw, 44px) 26px; border-radius: 6px; background: #fff; box-shadow: var(--lx-shadow); overflow: hidden; }
+.lx[data-design="enerji"] .lx-story::before { content: 'ELEKTRİK FATURASI' / ''; position: absolute; left: 0; right: 0; top: 0; padding: 14px clamp(18px, 5vw, 44px); background: #eaf2f8; border-bottom: 1.500px solid #10231c; color: #0f4a7a; font: 700 clamp(12px, 3.400vw, 16px)/1.2 var(--disp); }
+.lx[data-design="enerji"] .lx-story::after { content: ''; position: absolute; right: clamp(14px, 4vw, 40px); top: 10px; width: 84px; height: 28px; background: linear-gradient(#39b56a 0 0) 0 100% / 10px 40% no-repeat, linear-gradient(#7cc35a 0 0) 14px 100% / 10px 55% no-repeat, linear-gradient(#f2dc48 0 0) 28px 100% / 10px 70% no-repeat, linear-gradient(#f8bb45 0 0) 42px 100% / 10px 60% no-repeat, linear-gradient(#f39352 0 0) 56px 100% / 10px 85% no-repeat, linear-gradient(#f06f5c 0 0) 70px 100% / 10px 100% no-repeat; }
+.lx[data-design="enerji"] .lx-story p { font-weight: 500; font-size: 1.04em; line-height: 1.78; }
+.lx[data-design="enerji"] .lx-tw { padding: 0 4px; border-radius: 3px; background: #dcefd0; color: #143108; font-weight: 800; }
+.lx[data-design="enerji"] .lx-tw.is-on { background: #0b6a3a; color: #fff; }
+.lx[data-design="enerji"] .lx-tw.is-on::after { border-radius: 4px; background: #10231c; color: #fff; }
+.lx[data-design="enerji"] .lx-chip--tr { background: #fff; box-shadow: inset 0 0 0 1.500px #9db2be; }
+.lx[data-design="enerji"] .lx-chip--tr.is-found { background: #dcefd0; color: #143108; box-shadow: inset 0 0 0 1.500px #0b6a3a; }
+.lx[data-design="enerji"] .lx-found__bar { background: #dbe6ec; }
+.lx[data-design="enerji"] .lx-found__bar i { background: var(--stripes); }
+
+/* диалоги: разговор у зарядки */
+.lx[data-design="enerji"] .lx-dlg { position: relative; padding-top: 26px; border-radius: 6px; background: #fff; box-shadow: var(--lx-shadow); overflow: hidden; }
+.lx[data-design="enerji"] .lx-dlg::before { content: ''; position: absolute; left: 0; right: 0; top: 0; height: 8px; background: var(--stripes); }
+.lx[data-design="enerji"] .lx-dlg__head h3 { color: #10231c; font: 700 1.04em/1.25 var(--disp); letter-spacing: -.03em; }
+.lx[data-design="enerji"] .lx-badge { border-radius: 4px; background: #eef3f7; color: #10231c; }
+.lx[data-design="enerji"] .lx-badge--short { background: #dcf3e5; color: #084f2b; }
+.lx[data-design="enerji"] .lx-badge--long { background: #fde3dc; color: #7c1f10; }
+.lx[data-design="enerji"] .lx-dots i { border-radius: 2px; background: #dbe6ec; }
+.lx[data-design="enerji"] .lx-dots i.is-on { background: #0b6a3a; }
+.lx[data-design="enerji"] .lx-place { color: var(--lx-muted); }
+.lx[data-design="enerji"] .lx-place .lx-ico { background: none; color: #0f4a7a; }
+.lx[data-design="enerji"] .lx-chat { border-radius: 6px; background: #f6f8fa; }
+.lx[data-design="enerji"] .lx-msg { border-radius: 4px 14px 14px 14px; box-shadow: 0 0 0 1px #c7d5dd; background: #fff; }
+.lx[data-design="enerji"] .lx-msg--me { border-radius: 14px 4px 14px 14px; background: #e6f4da; box-shadow: 0 0 0 1px #a8cf8e; }
+.lx[data-design="enerji"] .lx-msg__ava { background: #0f4a7a; }
+.lx[data-design="enerji"] .lx-msg--me .lx-msg__ava { background: #0b6a3a; }
+.lx[data-design="enerji"] .lx-msg__who { color: #0f4a7a; }
+.lx[data-design="enerji"] .lx-msg--me .lx-msg__who { color: #084f2b; }
+.lx[data-design="enerji"] .lx-msg__ru { color: var(--lx-muted); }
+.lx[data-design="enerji"] .lx-btn { border-radius: 6px; background: #10231c; font-weight: 800; }
+.lx[data-design="enerji"] .lx-btn--ghost { background: #fff; color: #10231c; box-shadow: inset 0 0 0 2px #10231c; }
+.lx[data-design="enerji"] .lx-next { border-radius: 6px; background: #10231c; font: 700 .9em/1.3 var(--disp); }
+
+/* практика и квест */
+.lx[data-design="enerji"] .lx-steps li { border-radius: 6px; background: #fff; box-shadow: inset 0 0 0 1.500px #10231c; }
+.lx[data-design="enerji"] .lx-steps li::before { border-radius: 4px; background: #eaf6d6; color: #10231c; }
+.lx[data-design="enerji"] .lx-steps li.is-done { background: #dcf3e5; color: #084f2b; }
+.lx[data-design="enerji"] .lx-panel a-exercise, .lx[data-design="enerji"] .lx-panel a-quiz { display: block; border-radius: 6px; box-shadow: none; }
+.lx[data-design="enerji"] .ak-ex { border: 1.500px solid #10231c; background: #fff; border-radius: 6px; }
+.lx[data-design="enerji"] .lx-sim__ava { border-radius: 8px; background: #10231c; font-family: var(--disp); }
+.lx[data-design="enerji"] .lx-sim__dots i { border-radius: 4px; background: #eef3f7; color: #10231c; }
+.lx[data-design="enerji"] .lx-sim__dots i.is-good { background: #0b6a3a; color: #fff; }
+.lx[data-design="enerji"] .lx-sim__dots i.is-ok { background: #f8e08a; color: #352a04; }
+.lx[data-design="enerji"] .lx-sim__dots i.is-cur { color: #0f4a7a; box-shadow: inset 0 0 0 2px #0f4a7a; }
+.lx[data-design="enerji"] .lx-sim__hint { color: #0b6a3a; }
+.lx[data-design="enerji"] .lx-sim__feed { border-radius: 6px; background: #f6f8fa; }
+.lx[data-design="enerji"] .lx-sim__msg { box-shadow: 0 0 0 1px #c7d5dd; background: #fff; }
+.lx[data-design="enerji"] .lx-sim__msg--me { background: #0f4a7a; color: #fff; box-shadow: none; }
+.lx[data-design="enerji"] .lx-sim__ru { opacity: 1; }
+.lx[data-design="enerji"] .lx-sim__opt { border-radius: 8px; border-color: #10231c; }
+.lx[data-design="enerji"] .lx-sim__n { border-radius: 4px; background: #eef3f7; color: #10231c; }
+.lx[data-design="enerji"] .lx-sim__done { border-radius: 6px; box-shadow: 0 0 0 1.500px #10231c; }
+.lx[data-design="enerji"] .lx-res { border-radius: 6px; }
+.lx[data-design="enerji"] .lx-donut__bg { stroke: #eef3f7; }
+
+/* шпаргалка: таблица классов */
+.lx[data-design="enerji"] .lx-table { border-radius: 6px; box-shadow: var(--lx-shadow); background: #fff; }
+.lx[data-design="enerji"] .lx-table td { border-bottom: 1px solid #dbe6ec; font-weight: 500; }
+.lx[data-design="enerji"] .lx-table td[lang="tr"] { position: relative; padding-left: 50px; color: #10231c; font-weight: 800; }
+.lx[data-design="enerji"] .lx-table td[lang="tr"]::before { position: absolute; left: 10px; top: 12px; width: 32px; height: 22px; padding-left: 6px; color: #10231c; font: 800 12px/22px var(--disp); clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%); }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n+1) td[lang="tr"]::before { background: #39b56a; content: "A" / ""; }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n+2) td[lang="tr"]::before { background: #7cc35a; content: "B" / ""; }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n+3) td[lang="tr"]::before { background: #bdd24c; content: "C" / ""; }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n+4) td[lang="tr"]::before { background: #f2dc48; content: "D" / ""; }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n+5) td[lang="tr"]::before { background: #f8bb45; content: "E" / ""; }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n+6) td[lang="tr"]::before { background: #f39352; content: "F" / ""; }
+.lx[data-design="enerji"] .lx-table tr:nth-child(7n) td[lang="tr"]::before { background: #f06f5c; content: "G" / ""; }
+.lx[data-design="enerji"] .lx-table small { color: var(--lx-muted); }
+
+/* движение */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="enerji"] .en-rot { animation: en-rot 7s linear infinite; }
+  .lx[data-design="enerji"] .en-rot--2 { animation-duration: 9.500s; animation-delay: -2s; }
+  .lx[data-design="enerji"] .en-rot--3 { animation-duration: 5.800s; animation-delay: -4s; }
+  .lx[data-design="enerji"] .en-power { stroke-dasharray: 18 110; animation: en-power 3s linear infinite; }
+  .lx[data-design="enerji"] .en-sm { transform-box: fill-box; transform-origin: center; animation: en-sm 5.600s ease-out infinite; }
+  .lx[data-design="enerji"] .en-sm--2 { animation-delay: -1.700s; }
+  .lx[data-design="enerji"] .en-sm--3 { animation-delay: -3s; }
+  .lx[data-design="enerji"] .en-sm--4 { animation-delay: -4.300s; }
+  .lx[data-design="enerji"] .en-fall { animation: en-fall 1.100s linear infinite; }
+  .lx[data-design="enerji"] .en-glint { animation: en-glint 5s ease-in-out infinite; }
+  .lx[data-design="enerji"] .en-plug { animation: en-plug 1.500s steps(1) infinite; }
+}
+@keyframes en-rot { to { transform: rotate(360deg); } }
+@keyframes en-power { to { stroke-dashoffset: -128; } }
+@keyframes en-sm { 0% { transform: translate(0, 0) scale(.5); opacity: 0; } 16% { opacity: .95; } 100% { transform: translate(44px, -58px) scale(2.100); opacity: 0; } }
+@keyframes en-fall { to { stroke-dashoffset: -20; } }
+@keyframes en-glint { 0%, 100% { transform: translateX(-90px); opacity: 0; } 40% { opacity: .85; } 70% { transform: translateX(120px); opacity: 0; } }
+@keyframes en-plug { 50% { opacity: .3; } }
+
+@media (max-width: 767px) {
+  .lx[data-design="enerji"] .lx-tabs { margin-inline: -16px !important; }
+}
+/* компьютер: заголовок на белой полосе поперёк полос, слева стрелки и описание на плашке */
+@media (min-width: 1024px) {
+  .lx[data-design="enerji"] .lx-hero { grid-template-columns: 400px minmax(0, 1fr); grid-template-rows: auto auto auto auto auto 1fr; min-height: max(600px, calc(100dvh - 142px)); padding: 44px 0 0; align-content: start; background: none; }
+  .lx[data-design="enerji"] .lx-scene { position: absolute; grid-area: auto; inset: 0; height: auto; }
+  .lx[data-design="enerji"] .lx-scene svg { width: 100%; margin: 0; }
+  .lx[data-design="enerji"] .en-sun { transform: none; }
+  .lx[data-design="enerji"] .lx-tag { grid-column: 1 / -1; grid-row: 1; margin: 0 max(24px, calc(50vw - 590px)) !important; }
+  .lx[data-design="enerji"] .lx-hero h1 { grid-column: 1 / -1; grid-row: 2; padding: 6px max(24px, calc(50vw - 590px)) 0; font-size: clamp(56px, 5.800vw, 84px); line-height: 1.06; white-space: nowrap; }
+  .lx[data-design="enerji"] .lx-hero__tr { grid-column: 1 / -1; grid-row: 3; margin: 0 0 18px !important; padding: 0 max(24px, calc(50vw - 590px)) 10px; font-size: 20px; }
+  .lx[data-design="enerji"] .lx-hero::after { content: ''; position: relative; grid-column: 1; grid-row: 4 / 7; align-self: start; height: 252px; margin-left: max(24px, calc(50vw - 590px)); background: #fff; box-shadow: 0 0 0 2px #10231c; border-radius: 4px; }
+  .lx[data-design="enerji"] .lx-hero__meta { grid-column: 1; grid-row: 4; z-index: 1; margin: 12px 14px 2px calc(max(24px, calc(50vw - 590px)) + 14px); }
+  .lx[data-design="enerji"] .lx-hero__intro { grid-column: 1; grid-row: 5; z-index: 1; margin: 0 14px 4px calc(max(24px, calc(50vw - 590px)) + 14px); font-size: 14.500px; line-height: 1.38; }
+  .lx[data-design="enerji"] .lx-stats { grid-column: 1; grid-row: 6; z-index: 1; align-self: start; margin: 4px 14px 12px calc(max(24px, calc(50vw - 590px)) + 14px); }
+  .lx[data-design="enerji"] .lx-stats li { height: 26px; }
+  .lx[data-design="enerji"] .lx-tabs { margin-top: 0 !important; }
+}
+@media print { .lx[data-design="enerji"] { background: #fff; } .lx[data-design="enerji"] .lx-scene { display: none; } }

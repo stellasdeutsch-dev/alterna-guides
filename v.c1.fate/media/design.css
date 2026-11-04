@@ -1,0 +1,218 @@
+/* felek */
+/* Общая механика: переменные и упражнения. Лицо темы ниже. */
+.lx[data-design="felek"] { --ak-font: var(--txt); --ak-font-display: var(--disp); --ak-bg: var(--lx-surf); --ak-surface: var(--lx-surf2); font-family: var(--txt); background: transparent; overflow-x: clip; }
+.lx[data-design="felek"] main { overflow-x: clip; }
+.lx[data-design="felek"] .lx-hero { position: relative; margin-top: 0 !important; background: none; box-shadow: none; border-radius: 0; padding: 0; }
+.lx[data-design="felek"] .lx-scene { position: relative; pointer-events: none; }
+.lx[data-design="felek"] .lx-scene svg { display: block; width: 100%; height: 100%; }
+.lx[data-design="felek"] .lx-tabs { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="felek"] .lx-panel a-exercise, .lx[data-design="felek"] .lx-panel a-quiz { display: block; box-shadow: none; }
+.lx[data-design="felek"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok, .lx-sim__opt) { color: var(--lx-ink); }
+.lx[data-design="felek"] .ak-gap--input { color: var(--lx-ink); }
+.lx[data-design="felek"] .lx-tab b { white-space: nowrap; }
+.lx[data-design="felek"] .lx-sim__ru { opacity: 1; color: var(--lx-muted); }
+.lx[data-design="felek"] .lx-sim__msg--me .lx-sim__ru { color: inherit; opacity: .92; }
+.lx[data-design="felek"] .lx-switch { color: var(--lx-muted); }
+html:has(.lx[data-design="felek"]) { background: #fff6d4; }
+.lx[data-design="felek"] {
+  --lx-accent: #5d1a78; --lx-accent-2: #a62d18; --lx-paper: #fff6d4; --lx-surf: #fffdf3; --lx-surf2: #fff4c9; --lx-card: #fffdf3;
+  --lx-ink: #2f1642; --lx-muted: #5d4a68; --lx-line: #d9c98f; --lx-soft: #f6e6ff; --lx-on: #fff; --lx-tabs-bg: #fffdf3; --lx-r: 10px; --lx-shadow: none;
+  --disp: 'LX Dela Gothic One', system-ui, sans-serif; --txt: 'LX Onest', system-ui, sans-serif; --num: 'LX Forum', serif; --sf: #f7bf2e; --cor: #d8452f; --tl: #0f6f73;
+  --ak-radius: 10px; --ak-radius-sm: 6px; --ak-good: #0c6a4a; --ak-good-soft: #d7f4e5; --ak-bad: #a62d18; --ak-bad-soft: #ffe5dc;
+  background-color: #fff6d4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cg fill='%23f6e4a2'%3E%3Cpath d='M30 20l3 8 8 3-8 3-3 8-3-8-8-3 8-3z'/%3E%3Ccircle cx='90' cy='80' r='3'/%3E%3Ccircle cx='96' cy='24' r='1.800'/%3E%3Ccircle cx='24' cy='92' r='1.800'/%3E%3C/g%3E%3C/svg%3E");
+}
+.lx[data-design="felek"] .lx-app { background: #2f1642; border-bottom: 0; color: #fff; }
+.lx[data-design="felek"] .lx-app { background: #fffdf3; color: var(--lx-ink); border-bottom: 3px solid #2f1642; }
+.lx[data-design="felek"] .lx-app__logo { border-radius: 50%; background: #d8452f; box-shadow: 0 0 0 3px #fffdf3, 0 0 0 5px #2f1642; }
+.lx[data-design="felek"] .lx-app__t b { font: 400 .98em/1.2 var(--disp); }
+.lx[data-design="felek"] .lx-lessons { background: #fff4c9; border-radius: 10px; box-shadow: inset 0 0 0 2px #2f1642; }
+.lx[data-design="felek"] .lx-lessons a { border-radius: 8px; color: #2f1642; font: 400 1em/1 var(--disp); }
+.lx[data-design="felek"] .lx-lessons a[aria-current] { background: #2f1642; color: #ffe99b; box-shadow: none; }
+.lx[data-design="felek"] .lx-lessons::before { color: #2f1642; }
+.lx[data-design="felek"] .lx-ring__bg { stroke: #efdb95; }
+.lx[data-design="felek"] .lx-ring__fg { stroke: #d8452f; }
+
+/* первый экран: палатка с колесом, заголовок на стойке */
+.lx[data-design="felek"] .lx-hero { display: grid; grid-template-columns: minmax(0, 1fr); margin-inline: calc(50% - 50vw) !important; max-width: none !important; }
+.lx[data-design="felek"] .lx-scene { grid-column: 1 / -1; grid-row: 1; height: clamp(296px, 78vw, 340px); border-bottom: 3px solid #2f1642; }
+.lx[data-design="felek"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 1; }
+.lx[data-design="felek"] .lx-hero::before { content: ''; grid-column: 1 / -1; grid-row: 2 / span 7; background: #bfeedd url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M0 0v40M20 0v40' stroke='%23a7e2cd' stroke-width='2'/%3E%3C/svg%3E"); }
+.lx[data-design="felek"] .lx-tag { grid-column: 1; grid-row: 2; justify-self: start; margin: 12px 16px 2px !important; padding: 2px 10px; border-radius: 3px; background: #fffdf3; box-shadow: 0 0 0 2px #2f1642; color: #2f1642; font: 600 11.5px/1.5 var(--txt); letter-spacing: .05em; }
+.lx[data-design="felek"] h1 { grid-column: 1; grid-row: 3; margin: 2px 16px; font: 400 clamp(38px, 11.4vw, 72px)/1.05 var(--disp); letter-spacing: -.01em; color: #2f1642; text-shadow: 3px 3px 0 #f7bf2e; hyphens: none; overflow-wrap: normal; }
+.lx[data-design="felek"] .lx-hero__tr { grid-column: 1; grid-row: 4; margin: 0 16px 8px !important; font: 700 1.14em/1.2 var(--txt); color: #084c50; }
+.lx[data-design="felek"] .lx-hero__meta { grid-column: 1; grid-row: 5; margin: 0 16px 4px; font: 600 .88em/1.3 var(--txt); color: #2f1642; }
+.lx[data-design="felek"] .lx-hero__intro { grid-column: 1; grid-row: 6; margin: 0 16px 10px; line-height: 1.45; color: #2f1642; max-width: 44em; }
+.lx[data-design="felek"] .lx-stats { grid-column: 1; grid-row: 7; display: flex; flex-wrap: wrap; gap: 6px; margin: 0 16px 8px; }
+.lx[data-design="felek"] .lx-stats li { flex: 1 1 0; min-width: 72px; padding: 6px 8px 6px 18px; border-radius: 3px; background: radial-gradient(circle at 0 50%, transparent 5px, #fffdf3 5.5px) ; box-shadow: none; filter: drop-shadow(0 0 0 #2f1642); outline: 2px solid #2f1642; outline-offset: -2px; }
+.lx[data-design="felek"] .lx-stats b { font: 400 1.3em/1 var(--disp); color: #a62d18; }
+.lx[data-design="felek"] .lx-stats span { font: 600 10.5px/1.15 var(--txt); color: #2f1642; }
+@media (min-width: 900px) {
+  .lx[data-design="felek"] .lx-hero { grid-template-columns: minmax(24px, 1fr) minmax(0, 660px) minmax(0, 480px) minmax(24px, 1fr); column-gap: 0; }
+  .lx[data-design="felek"] .lx-scene { height: clamp(330px, 27.5vw, 440px); }
+  .lx[data-design="felek"] .lx-tag { grid-column: 2; margin: 10px 0 0 !important; }
+  .lx[data-design="felek"] h1 { grid-column: 2 / 4; margin: 4px 0 2px; white-space: nowrap; font-size: clamp(56px, 5.6vw, 80px); }
+  .lx[data-design="felek"] .lx-hero__tr { grid-column: 2; grid-row: 5; margin: 2px 24px 2px 0 !important; font-size: 1.3em; }
+  .lx[data-design="felek"] .lx-hero__meta { grid-column: 2; grid-row: 6; margin: 0 24px 12px 0; align-self: start; }
+  .lx[data-design="felek"] .lx-hero__meta { margin-bottom: 2px; }
+  .lx[data-design="felek"] .lx-hero__intro { grid-column: 2; grid-row: 7; margin: 0 28px 12px 0; }
+  .lx[data-design="felek"] .lx-stats { grid-column: 3; grid-row: 5 / span 3; margin: 6px 0 12px; align-self: center; }
+  .lx[data-design="felek"] .lx-hero::before { grid-row: 2 / span 6; }
+}
+
+/* вкладки: мини-карты с римскими номерами */
+.lx[data-design="felek"] .lx-panel { counter-reset: arc; }
+.lx[data-design="felek"] .lx-tabs { counter-reset: tb; gap: 5px; margin-top: 0 !important; padding: 4px 8px 3px; border-radius: 0; background: #fffdf3; border-block: 3px solid #2f1642; }
+.lx[data-design="felek"] main > .lx-tabs { max-width: none; margin-inline: calc(50% - 50vw) !important; justify-content: safe center; }
+.lx[data-design="felek"] .lx-tab { counter-increment: tb; display: grid; grid-template-columns: auto auto; align-items: center; gap: 0 8px; min-height: 48px; padding: 3px 12px 2px 8px; border-radius: 16px 16px 3px 3px; background: #fff4c9; color: #2f1642; box-shadow: inset 0 0 0 2px #2f1642, inset 0 0 0 4px #fff4c9, inset 0 0 0 5px #c9860f; transition: translate .2s; }
+.lx[data-design="felek"] .lx-tab:nth-of-type(4n+2) { background: #d6eef8; box-shadow: inset 0 0 0 2px #2f1642, inset 0 0 0 4px #d6eef8, inset 0 0 0 5px #c9860f; }
+.lx[data-design="felek"] .lx-tab:nth-of-type(4n+3) { background: #fbdcd4; box-shadow: inset 0 0 0 2px #2f1642, inset 0 0 0 4px #fbdcd4, inset 0 0 0 5px #c9860f; }
+.lx[data-design="felek"] .lx-tab:nth-of-type(4n) { background: #d4f3e6; box-shadow: inset 0 0 0 2px #2f1642, inset 0 0 0 4px #d4f3e6, inset 0 0 0 5px #c9860f; }
+.lx[data-design="felek"] .lx-tab__ico { display: grid; place-items: center; grid-row: span 2; width: 26px; font: 400 15px/1 var(--num); }
+.lx[data-design="felek"] .lx-tab__ico svg { display: none; }
+.lx[data-design="felek"] .lx-tab__ico::before { content: counter(tb, upper-roman) / ''; }
+.lx[data-design="felek"] .lx-tab b { font: 700 13.5px/1.1 var(--txt); }
+.lx[data-design="felek"] .lx-tab small { font: 500 11px/1.1 var(--txt); }
+.lx[data-design="felek"] .lx-tab[aria-selected="true"] { translate: 0 -2px; background: #2f1642; color: #ffe99b; box-shadow: 0 3px 0 #d8452f; }
+.lx[data-design="felek"] .lx-tab:not([aria-selected="true"]):hover { translate: 0 -2px; background: #fffdf3; color: #2f1642; }
+.lx[data-design="felek"] .lx-tabs__line { display: none; }
+@media (min-width: 900px) { .lx[data-design="felek"] main > .lx-tabs { padding-inline: max(16px, calc(50vw - 560px)); } }
+
+.lx[data-design="felek"] .lx-ph { padding: 18px 18px; background: #fffdf3; border-radius: 10px; box-shadow: 0 0 0 2.5px #2f1642, 5px 5px 0 #f7bf2e; }
+.lx[data-design="felek"] .lx-kicker { color: #a62d18; font: 400 .95em/1 var(--disp); letter-spacing: 0; }
+.lx[data-design="felek"] .lx-panel h2 { font: 400 clamp(26px, 6.6vw, 42px)/1.1 var(--disp); }
+.lx[data-design="felek"] .lx-chip { border-radius: 6px; background: #fff4c9; box-shadow: inset 0 0 0 2px #2f1642; font: 700 .9em/1.1 var(--txt); }
+.lx[data-design="felek"] .lx-chip[aria-pressed="true"] { background: #2f1642; color: #ffe99b; }
+.lx[data-design="felek"] .lx-search { border-radius: 6px; border: 2px solid #2f1642; font-family: var(--txt); }
+.lx[data-design="felek"] .lx-search::placeholder { color: #5d4a68; }
+.lx[data-design="felek"] .lx-learn { border-top: 2px dotted #2f1642; }
+.lx[data-design="felek"] .lx-group { margin: 30px 0 14px; font: 400 clamp(20px, 5.4vw, 30px)/1.1 var(--disp); letter-spacing: 0; text-transform: none; color: #2f1642; }
+.lx[data-design="felek"] .lx-group__ico { border-radius: 50%; background: #d8452f; color: #fff; }
+
+/* карточка: таро */
+.lx[data-design="felek"] .lx-panel[data-section="sozluk"] { counter-reset: arc; }
+.lx[data-design="felek"] .lx-cards { gap: 14px 12px; grid-template-columns: repeat(auto-fill, minmax(min(46%, 158px), 1fr)); }
+@media (min-width: 900px) { .lx[data-design="felek"] .lx-cards { grid-template-columns: repeat(auto-fill, minmax(208px, 1fr)); } }
+.lx[data-design="felek"] .lx-card { --suit: #fff4c9; counter-increment: arc; display: flex; flex-direction: column; gap: 6px; padding: 34px 12px 12px; border-radius: 14px; background: linear-gradient(var(--suit) 0 86px, #fffdf3 86px); box-shadow: inset 0 0 0 2.5px #2f1642, inset 0 0 0 6px #fffdf3, inset 0 0 0 7px #c9860f; text-align: center; transition: translate .2s; }
+.lx[data-design="felek"] .lx-card:nth-child(4n+2) { --suit: #d6eef8; }
+.lx[data-design="felek"] .lx-card:nth-child(4n+3) { --suit: #fbdcd4; }
+.lx[data-design="felek"] .lx-card:nth-child(4n) { --suit: #d4f3e6; }
+.lx[data-design="felek"] .lx-card::before { content: counter(arc, upper-roman) / ''; position: absolute; left: 0; right: 0; top: 13px; text-align: center; font: 400 15px/1 var(--num); color: #2f1642; letter-spacing: .06em; }
+.lx[data-design="felek"] .lx-card[data-passive] { background: linear-gradient(var(--suit) 0 86px, #fffdf3 86px); }
+.lx[data-design="felek"] .lx-card:hover { translate: 0 -4px; box-shadow: inset 0 0 0 2.5px #2f1642, inset 0 0 0 6px #fffdf3, inset 0 0 0 7px #c9860f, 0 8px 0 -2px #f7bf2e; }
+.lx[data-design="felek"] .lx-card:focus-visible { outline: 3px solid #5d1a78; outline-offset: 2px; box-shadow: inset 0 0 0 2.5px #2f1642, inset 0 0 0 6px #fffdf3, inset 0 0 0 7px #c9860f; }
+.lx[data-design="felek"] .lx-card.is-flipped { grid-column: 1 / -1; text-align: left; padding: 34px 18px 16px; background: linear-gradient(var(--suit) 0 86px, #fffdf3 86px); }
+@media (min-width: 900px) { .lx[data-design="felek"] .lx-card.is-flipped { grid-column: span 2; } }
+.lx[data-design="felek"] .lx-card.is-known { box-shadow: inset 0 0 0 2.5px #2f1642, inset 0 0 0 6px #fff, inset 0 0 0 8px #f7bf2e, 0 0 0 3px #0c6a4a; }
+.lx[data-design="felek"] .lx-card.is-known::after { content: '★' / ''; position: absolute; left: 14px; top: 11px; color: #a62d18; font-size: 19px; line-height: 1; }
+.lx[data-design="felek"] .lx-card__top { flex-direction: column; align-items: center; gap: 6px; }
+.lx[data-design="felek"] .lx-card.is-flipped .lx-card__top { flex-direction: row; }
+.lx[data-design="felek"] .lx-ico { width: 58px; height: 58px; border-radius: 50%; background: repeating-conic-gradient(#f7bf2e 0 15deg, #fffdf3 15deg 30deg); color: #2f1642; box-shadow: 0 0 0 2px #2f1642; position: relative; }
+.lx[data-design="felek"] .lx-ico::before { content: ''; position: absolute; inset: 9px; border-radius: 50%; background: #fffdf3; box-shadow: 0 0 0 1.5px #2f1642; }
+.lx[data-design="felek"] .lx-ico svg { position: relative; width: 20px; height: 20px; }
+.lx[data-design="felek"] .lx-card__w { text-align: center; flex: none; width: 100%; }
+.lx[data-design="felek"] .lx-card.is-flipped .lx-card__w { text-align: left; flex: 1; width: auto; }
+.lx[data-design="felek"] .lx-card__tr { font: 400 1.04em/1.2 var(--disp); color: #2f1642; letter-spacing: 0; overflow-wrap: anywhere; }
+.lx[data-design="felek"] .lx-card__ru { color: #4b3a58; font-weight: 500; font-size: .92em; line-height: 1.25; }
+.lx[data-design="felek"] .lx-say { position: absolute; right: 9px; top: 9px; width: 44px; height: 44px; background: #fffdf3; color: #2f1642; box-shadow: inset 0 0 0 1.5px #2f1642; }
+.lx[data-design="felek"] .lx-say:hover { background: #f7bf2e; color: #2f1642; }
+.lx[data-design="felek"] .lx-card__tags { justify-content: center; }
+.lx[data-design="felek"] .lx-card.is-flipped .lx-card__tags { justify-content: flex-start; }
+.lx[data-design="felek"] .lx-card__pos { padding: 0; background: none; font: 500 11.5px/1.3 var(--txt); color: var(--lx-muted); }
+.lx[data-design="felek"] .lx-card__pos--passive { color: #a62d18; background: none; }
+.lx[data-design="felek"] .lx-card__face { flex: 1; }
+.lx[data-design="felek"] .lx-card__back { text-align: left; }
+.lx[data-design="felek"] .lx-card__gov { color: #a62d18; }
+.lx[data-design="felek"] .lx-ex { border-radius: 6px; background: var(--suit); }
+.lx[data-design="felek"] .ak-say__btn { background: #fffdf3; color: #2f1642; }
+.lx[data-design="felek"] .lx-ex__ru { color: #4b3a58; }
+.lx[data-design="felek"] .lx-card__note { border: 0; border-radius: 6px; background: #fff4c9; color: #2f1642; }
+.lx[data-design="felek"] .lx-card__acts { flex-wrap: wrap; }
+@media (max-width: 479px) { .lx[data-design="felek"] .lx-card:not(.is-flipped) .lx-card__acts { flex-direction: column; } .lx[data-design="felek"] .lx-card:not(.is-flipped) .lx-card__acts button { flex: none; } }
+.lx[data-design="felek"] .lx-card__acts button { flex: 1 1 62px; min-height: 44px; padding: 0 6px; border: 0; border-radius: 6px; background: #fffdf3; color: #2f1642; box-shadow: inset 0 0 0 1.5px #2f1642; font: 700 .86em/1 var(--txt); }
+.lx[data-design="felek"] .lx-card__acts button:hover { background: #f7bf2e; }
+.lx[data-design="felek"] .lx-card__know[aria-pressed="true"] { background: #d7f4e5; color: #0c6a4a; box-shadow: inset 0 0 0 1.5px #0c6a4a; }
+
+/* история: расклад, абзац за абзацем */
+.lx[data-design="felek"] .lx-story { counter-reset: fal; display: grid; gap: 14px; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="felek"] .lx-story p { counter-increment: fal; position: relative; margin: 0; padding: 40px 18px 18px; border-radius: 14px; background: #fffdf3; box-shadow: inset 0 0 0 2.5px #2f1642, inset 0 0 0 6px #fffdf3, inset 0 0 0 7px #c9860f; font-size: 1.04em; line-height: 1.68; max-width: none; }
+.lx[data-design="felek"] .lx-story p::before { content: counter(fal, upper-roman) / ''; position: absolute; left: 0; right: 0; top: 13px; text-align: center; font: 400 17px/1 var(--num); }
+.lx[data-design="felek"] .lx-story p:nth-child(4n+1) { background: linear-gradient(#fff4c9, #fffdf3 80px); }
+.lx[data-design="felek"] .lx-story p:nth-child(4n+2) { background: linear-gradient(#d6eef8, #fffdf3 80px); }
+.lx[data-design="felek"] .lx-story p:nth-child(4n+3) { background: linear-gradient(#fbdcd4, #fffdf3 80px); }
+.lx[data-design="felek"] .lx-story p:nth-child(4n) { background: linear-gradient(#d4f3e6, #fffdf3 80px); }
+@media (min-width: 900px) { .lx[data-design="felek"] .lx-story { grid-template-columns: 1fr 1fr; } }
+.lx[data-design="felek"] .lx-tw { border-radius: 4px; background: #ffe99b; color: #2f1642; font-weight: 700; }
+.lx[data-design="felek"] .lx-tw.is-on { background: #2f1642; color: #ffe99b; }
+.lx[data-design="felek"] .lx-tw.is-on::after { background: #d8452f; color: #fff; border-radius: 6px; }
+.lx[data-design="felek"] .lx-found__bar { background: #efdb95; }
+.lx[data-design="felek"] .lx-found__bar i { background: #d8452f; }
+.lx[data-design="felek"] .lx-chip--tr { background: #fffdf3; }
+.lx[data-design="felek"] .lx-chip--tr.is-found { background: #d7f4e5; color: #0c6a4a; box-shadow: inset 0 0 0 2px #0c6a4a; }
+
+/* диалоги: записки из клюва птицы счастья */
+.lx[data-design="felek"] .lx-dlg { background: #fffdf3; border-radius: 10px; box-shadow: 0 0 0 2.5px #2f1642, 5px 5px 0 #f7bf2e; }
+.lx[data-design="felek"] .lx-dlg__head h3 { font: 400 1.1em/1.2 var(--disp); }
+.lx[data-design="felek"] .lx-badge { border-radius: 4px; background: #fff4c9; color: #2f1642; }
+.lx[data-design="felek"] .lx-badge--short { background: #d7f4e5; color: #0c6a4a; }
+.lx[data-design="felek"] .lx-badge--long { background: #fbdcd4; color: #8a2412; }
+.lx[data-design="felek"] .lx-place .lx-ico { width: 30px; height: 30px; background: #fff4c9; color: #2f1642; box-shadow: none; }
+.lx[data-design="felek"] .lx-place .lx-ico::before { display: none; }
+.lx[data-design="felek"] .lx-chat { border-radius: 8px; background: #fff4c9; }
+.lx[data-design="felek"] .lx-msg { max-width: 94%; padding: 10px 22px 10px 52px; border-radius: 0; background: #fffdf3; box-shadow: none; clip-path: polygon(0 0, 100% 0, calc(100% - 9px) 12.5%, 100% 25%, calc(100% - 9px) 37.5%, 100% 50%, calc(100% - 9px) 62.5%, 100% 75%, calc(100% - 9px) 87.5%, 100% 100%, 0 100%); }
+.lx[data-design="felek"] .lx-msg__ava { width: 32px; height: 32px; border-radius: 8px; background: #2f1642; color: #ffe99b; font-family: var(--disp); font-weight: 400; }
+.lx[data-design="felek"] .lx-msg__who { color: #a62d18; font-weight: 700; letter-spacing: 0; }
+.lx[data-design="felek"] .lx-msg--me { padding: 10px 52px 10px 22px; border-radius: 0; background: #d4f3e6; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 9px 87.5%, 0 75%, 9px 62.5%, 0 50%, 9px 37.5%, 0 25%, 9px 12.5%); }
+.lx[data-design="felek"] .lx-msg--me .lx-msg__ava { left: auto; right: 10px; background: #fffdf3; color: #2f1642; box-shadow: inset 0 0 0 2px #2f1642; }
+.lx[data-design="felek"] .lx-msg--me .lx-msg__who { color: #084c50; }
+.lx[data-design="felek"] .lx-dots i { border-radius: 2px; background: #efdb95; }
+.lx[data-design="felek"] .lx-dots i.is-on { background: #d8452f; }
+.lx[data-design="felek"] .lx-typing { background: #fffdf3; }
+.lx[data-design="felek"] .lx-btn { border-radius: 8px; background: #2f1642; color: #ffe99b; font-weight: 700; }
+.lx[data-design="felek"] .lx-btn--ghost { background: #fffdf3; color: #2f1642; box-shadow: inset 0 0 0 2px #2f1642; }
+
+/* упражнения: билет с перфорацией */
+.lx[data-design="felek"] .lx-steps li { border-radius: 6px; background: #fffdf3; box-shadow: inset 0 0 0 2px #2f1642; }
+.lx[data-design="felek"] .lx-steps li::before { border-radius: 4px; background: #f7bf2e; color: #2f1642; }
+.lx[data-design="felek"] .ak-ex { border: 0; border-radius: 10px; background: #fffdf3; box-shadow: inset 0 0 0 2.5px #2f1642, inset 0 0 0 7px #fffdf3, inset 0 0 0 8px #c9860f, 5px 5px 0 #bfeedd; padding: 20px; }
+.lx[data-design="felek"] .ak-ex__title { font: 400 1em/1.25 var(--disp); }
+.lx[data-design="felek"] .ak-btn { border-radius: 8px; background: #2f1642; color: #ffe99b; }
+.lx[data-design="felek"] .ak-btn--ghost { background: #fffdf3; color: #2f1642; }
+.lx[data-design="felek"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { border-radius: 6px; background: #fff; border-color: #2f1642; }
+.lx[data-design="felek"] .ak-opt__n { border-radius: 4px; background: #fff4c9; color: #2f1642; }
+.lx[data-design="felek"] .ak-gap--input { background: #fff; }
+.lx[data-design="felek"] .lx-sim__ava { border-radius: 10px; background: #d8452f; font-family: var(--disp); font-weight: 400; }
+.lx[data-design="felek"] .lx-sim__dots i { border-radius: 6px; background: #fff4c9; color: #2f1642; }
+.lx[data-design="felek"] .lx-sim__dots i.is-cur { box-shadow: inset 0 0 0 2px #5d1a78; color: #2f1642; }
+.lx[data-design="felek"] .lx-sim__dots i.is-ok { background: #ffe99b; color: #2f1642; }
+.lx[data-design="felek"] .lx-sim__feed { border-radius: 8px; background: #fff4c9; }
+.lx[data-design="felek"] .lx-sim__msg { border-radius: 4px; }
+.lx[data-design="felek"] .lx-sim__msg--me { background: #d4f3e6; color: #2f1642; }
+.lx[data-design="felek"] .lx-sim__opt { border-radius: 8px; border-color: #2f1642; }
+.lx[data-design="felek"] .lx-sim__n { border-radius: 6px; background: #fff4c9; color: #2f1642; }
+.lx[data-design="felek"] .lx-res { border-radius: 10px; background: #fffdf3; box-shadow: 0 0 0 2.5px #2f1642, 5px 5px 0 #f7bf2e; }
+.lx[data-design="felek"] .lx-res__info b { font: 400 1.2em/1.1 var(--disp); }
+
+/* шпаргалка: большой лотерейный билет */
+.lx[data-design="felek"] .lx-table { position: relative; border-radius: 6px; background: linear-gradient(90deg, #ffe99b 0 18px, #fffdf3 18px); box-shadow: 0 0 0 2.5px #2f1642; }
+.lx[data-design="felek"] .lx-table td { border-bottom: 1.5px dashed #bfa75e; }
+.lx[data-design="felek"] .lx-table td[lang="tr"] { padding-left: 30px; font: 700 1em/1.25 var(--txt); }
+.lx[data-design="felek"] .lx-table td small { font-weight: 400; }
+.lx[data-design="felek"] .lx-next { border-radius: 8px; background: #2f1642; color: #ffe99b; font: 400 1em/1.2 var(--disp); }
+
+.lx[data-design="felek"] .fk-outer { transform: rotate(calc(var(--sp, 0) * 1deg)); }
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="felek"] .fk-wheel { animation: fk-spin 46s linear infinite; }
+  .lx[data-design="felek"] .fk-b { animation: fk-blink 1.8s steps(2, jump-none) infinite; }
+  .lx[data-design="felek"] .fk-b1 { animation-delay: .6s; } .lx[data-design="felek"] .fk-b2 { animation-delay: 1.2s; }
+  .lx[data-design="felek"] .fk-tk { animation: fk-sw 5s ease-in-out infinite; }
+  .lx[data-design="felek"] .fk-tk--2 { animation-direction: alternate-reverse; animation-duration: 6.4s; }
+  .lx[data-design="felek"] .fk-bird { transform-box: fill-box; transform-origin: 40% 100%; animation: fk-bob 3.4s ease-in-out infinite; }
+  .lx[data-design="felek"] .fk-d { animation: fk-roll 7s ease-in-out infinite; }
+  .lx[data-design="felek"] .fk-d--2 { animation-delay: .35s; }
+  @keyframes fk-spin { to { transform: rotate(360deg); } }
+  @keyframes fk-blink { from { fill: #fff; } to { fill: #ffd34d; } }
+  @keyframes fk-sw { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+  @keyframes fk-bob { 0%, 62%, 100% { transform: rotate(0); } 72%, 88% { transform: rotate(14deg); } 80% { transform: rotate(4deg); } }
+  @keyframes fk-roll { 0%, 80%, 100% { transform: none; } 84% { transform: translateY(-34px) rotate(120deg); } 90% { transform: translateY(-12px) rotate(240deg); } 95% { transform: translateY(-4px) rotate(330deg); } }
+}

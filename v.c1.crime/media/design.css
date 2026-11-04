@@ -1,0 +1,218 @@
+/* Dosya: дело в архивной папке на сером столе. Лента места преступления, фото и дактилокарта; вкладки это жёлтые маркеры, карточки это пакеты для улик */
+/* общее основание: сброс первого экрана и светлые упражнения; мир темы описан ниже */
+.lx[data-design="dosya"] { --ak-bg: var(--lx-surf); --ak-surface: var(--lx-surf2); --ak-accent-soft: var(--lx-soft); overflow-x: clip; font-family: var(--ak-font);}
+.lx[data-design="dosya"] main { overflow-x: clip;}
+.lx[data-design="dosya"] .lx-hero { position: relative; margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0;}
+.lx[data-design="dosya"] .lx-scene { position: relative; margin-inline: calc(50% - 50vw); overflow: hidden;}
+.lx[data-design="dosya"] .lx-scene svg { display: block; width: 100%; height: 100%;}
+.lx[data-design="dosya"] .lx-panel a-exercise, .lx[data-design="dosya"] .lx-panel a-quiz { display: block; box-shadow: none;}
+.lx[data-design="dosya"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { color: var(--lx-ink); border-color: var(--lx-line);}
+.lx[data-design="dosya"] .ak-gap--input { color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-table td small, .lx[data-design="dosya"] .lx-sim__opt small, .lx[data-design="dosya"] .lx-sim__name small { color: var(--lx-muted);}
+.lx[data-design="dosya"] .lx-sim__ru { opacity: 1;}
+.lx[data-design="dosya"] .lx-search::placeholder { color: var(--lx-muted);}
+.lx[data-design="dosya"] .lx-donut__bg { stroke: var(--lx-surf2);}
+.lx[data-design="dosya"] .lx-tab { min-height: 48px;}
+@media (max-width: 767px) {
+  .lx[data-design="dosya"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-radius: 0;}
+  .lx[data-design="dosya"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr));}
+}
+@media print { .lx[data-design="dosya"] { background: #fff;} .lx[data-design="dosya"] .lx-scene { display: none;} }
+html:has(.lx[data-design="dosya"]) { background: #e7eaed;}
+.lx[data-design="dosya"] {
+  --lx-accent: #1d3557; --lx-accent-2: #14532d; --lx-paper: #e7eaed; --lx-surf: #ffffff; --lx-surf2: #eef1f3; --lx-card: #f4f7f9;
+  --lx-ink: #1c2530; --lx-muted: #4b5763; --lx-line: #aeb7bf; --lx-soft: #fff4b8; --lx-on: #ffffff; --lx-tabs-bg: #f6f7f8; --lx-r: 2px; --lx-shadow: none;
+  --y: #ffd400; --manila: #efe2c2; --disp: 'LX IBM Plex Mono', ui-monospace, Menlo, monospace; --cap: 'LX Oswald', 'Arial Narrow', sans-serif;
+  --ak-font: 'LX Roboto Condensed', system-ui, sans-serif; --ak-font-display: var(--cap); --ak-radius: 2px; --ak-radius-sm: 2px; --ak-good: #14532d; --ak-good-soft: #dcf0e2; --ak-bad: #9f1d14; --ak-bad-soft: #f8e1dd;
+  background-color: #e7eaed;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='360'%3E%3Cg fill='none' stroke='%231d3557' stroke-opacity='.045' stroke-width='2'%3E%3Cellipse cx='180' cy='190' rx='30' ry='44'/%3E%3Cellipse cx='180' cy='190' rx='52' ry='72'/%3E%3Cellipse cx='180' cy='190' rx='74' ry='100'/%3E%3Cellipse cx='180' cy='190' rx='96' ry='128'/%3E%3Cellipse cx='180' cy='190' rx='118' ry='156'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 360px 360px;
+  font-size: 1.03em;
+}
+
+/* шапка: корешок архива */
+.lx[data-design="dosya"] .lx-app { background: #fff; border-bottom: 1px solid var(--lx-line);}
+.lx[data-design="dosya"] .lx-app__logo { border-radius: 2px; background: var(--y); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-app__t b { font: 600 1.06em/1.25 var(--cap); letter-spacing: .05em; text-transform: uppercase;}
+.lx[data-design="dosya"] .lx-app__ring .lx-ring__bg { stroke: var(--lx-line);}
+.lx[data-design="dosya"] .lx-app__ring .lx-ring__fg { stroke: var(--lx-accent);}
+.lx[data-design="dosya"] .lx-lessons { border-radius: 2px; background: var(--lx-surf2);}
+.lx[data-design="dosya"] .lx-lessons::before { content: 'cilt'; font-family: var(--cap); font-weight: 500; letter-spacing: .06em;}
+.lx[data-design="dosya"] .lx-lessons a { border-radius: 2px; font-family: var(--cap); font-weight: 600; color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-lessons a[aria-current] { background: var(--lx-accent); color: #fff; box-shadow: none;}
+
+/* первый экран: раскрытая папка */
+.lx[data-design="dosya"] .lx-hero { display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 0 !important;}
+.lx[data-design="dosya"] .lx-scene { height: 300px; background: #dfe3e7; overflow: visible; z-index: 0;}
+.lx[data-design="dosya"] .lx-scene svg { position: absolute;}
+.lx[data-design="dosya"] .cr-desk { inset: 0;}
+.lx[data-design="dosya"] .cr-tape { z-index: 3; left: -4%; width: 108% !important; top: 12px; height: 40px !important; transform: rotate(-2deg); filter: drop-shadow(0 3px 3px rgba(30, 40, 55, .3));}
+.lx[data-design="dosya"] .lx-scene { clip-path: inset(0 0 -40px 0);}
+.lx[data-design="dosya"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 1;}
+.lx[data-design="dosya"] .lx-tag { justify-self: start; margin: -22px 0 0 !important; padding: 4px 14px 3px; height: 26px; border-radius: 3px 3px 0 0; background: var(--manila); color: var(--lx-ink); box-shadow: inset 0 0 0 1px #b9a675; font: 500 11.5px/1.5 var(--disp); text-transform: none;}
+.lx[data-design="dosya"] h1 { margin: 0; padding: 16px 14px 4px; background: var(--manila); font: 500 clamp(32px, 9.4vw, 50px)/1.04 var(--disp); letter-spacing: -.055em; word-spacing: -.22em; color: var(--lx-ink); hyphens: manual; box-shadow: -1px 0 #b9a675, 1px 0 #b9a675;}
+.lx[data-design="dosya"] .lx-hero__tr { margin: 0 !important; padding: 0 14px 12px; background: var(--manila); font: 600 clamp(15px, 3.8vw, 19px)/1.3 var(--cap); letter-spacing: .08em; text-transform: uppercase; color: var(--lx-accent); box-shadow: -1px 0 #b9a675, 1px 0 #b9a675;}
+.lx[data-design="dosya"] .lx-hero__meta { margin: 0; padding: 10px 14px 2px; background: #fff; color: var(--lx-ink); font: 700 .98em/1.3 var(--ak-font); border-top: 1px solid #b9a675; box-shadow: -1px 0 var(--lx-line), 1px 0 var(--lx-line);}
+.lx[data-design="dosya"] .lx-hero__intro { margin: 0; padding: 2px 14px 10px; background: #fff; color: var(--lx-ink); box-shadow: -1px 0 var(--lx-line), 1px 0 var(--lx-line);}
+.lx[data-design="dosya"] .lx-stats { gap: 0; margin: 0; padding: 0 14px 10px; background: #fff; box-shadow: -1px 0 var(--lx-line), 1px 0 var(--lx-line);}
+.lx[data-design="dosya"] .lx-stats li { padding: 4px 8px 6px; border-radius: 0; background: none; border: 1px solid var(--lx-ink); margin-left: -1px;}
+.lx[data-design="dosya"] .lx-stats b { font: 500 clamp(19px, 5vw, 24px)/1.1 var(--disp); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-stats span { font: 400 11px/1.2 var(--ak-font); color: var(--lx-muted);}
+.lx[data-design="dosya"] .lx-gbar { height: 7px; gap: 0; background: repeating-linear-gradient(-45deg, var(--y) 0 8px, var(--lx-ink) 8px 16px);}
+.lx[data-design="dosya"] .lx-gbar__s { background: none !important;}
+
+/* вкладки: жёлтые маркеры улик с номерами */
+.lx[data-design="dosya"] .lx-tabs { counter-reset: mk; margin-top: 14px !important; padding: 6px 6px 0; gap: 3px; border-radius: 0; background: #f6f7f8; border-bottom: 3px solid var(--lx-ink); -webkit-backdrop-filter: none; backdrop-filter: none;}
+.lx[data-design="dosya"] .lx-tab { counter-increment: mk; grid-template-columns: auto auto; column-gap: 6px; align-content: center; min-height: 48px; padding: 2px 18px 2px 16px; border-radius: 0; background: var(--y); color: var(--lx-ink); clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 100%, 0 100%);}
+.lx[data-design="dosya"] .lx-tab::before { content: counter(mk) / ''; grid-row: span 2; font: 700 21px/1 var(--cap);}
+.lx[data-design="dosya"] .lx-tab__ico { display: none;}
+.lx[data-design="dosya"] .lx-tab b { font: 600 13.5px/1.1 var(--cap); letter-spacing: .03em;}
+.lx[data-design="dosya"] .lx-tab small { font: 400 10.5px/1.15 var(--ak-font); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-tab[aria-selected="true"] { background: var(--lx-ink); color: var(--y); box-shadow: none;}
+.lx[data-design="dosya"] .lx-tab[aria-selected="true"] small { color: #fff;}
+.lx[data-design="dosya"] .lx-tab__ok { top: 2px; right: 9px; background: #14532d;}
+.lx[data-design="dosya"] .lx-tabs__line { display: none;}
+
+/* заголовки разделов: штамп папки */
+.lx[data-design="dosya"] .lx-ph { padding: 0 0 14px; background: none; border-radius: 0;}
+.lx[data-design="dosya"] .lx-kicker { color: var(--lx-accent); font: 600 12.5px/1 var(--cap); letter-spacing: .14em; text-transform: uppercase;}
+.lx[data-design="dosya"] .lx-panel h2 { font: 500 clamp(27px, 7vw, 42px)/1.08 var(--disp); letter-spacing: -.05em;}
+.lx[data-design="dosya"] .lx-chip { border-radius: 2px; background: #fff; box-shadow: inset 0 0 0 1px var(--lx-ink); font: 500 .92em/1 var(--cap); letter-spacing: .03em;}
+.lx[data-design="dosya"] .lx-chip[aria-pressed="true"] { background: var(--lx-ink); color: var(--y);}
+.lx[data-design="dosya"] .lx-search { border-radius: 2px; border: 1px solid var(--lx-ink); font-family: var(--disp);}
+.lx[data-design="dosya"] .lx-learn { border-top: 1px solid var(--lx-line);}
+.lx[data-design="dosya"] .lx-learn__ring .lx-ring__bg { stroke: var(--lx-line);}
+.lx[data-design="dosya"] .lx-panel[data-section="sozluk"] { counter-reset: dl;}
+
+/* группа: закладка раздела дела */
+.lx[data-design="dosya"] .lx-group { margin: 30px 0 12px; padding: 6px 14px; width: fit-content; max-width: 100%; background: var(--manila); box-shadow: inset 0 0 0 1px #b9a675; border-radius: 3px 3px 0 0; color: var(--lx-ink); font: 600 clamp(17px, 4.2vw, 22px)/1.15 var(--cap); letter-spacing: .06em; text-transform: uppercase;}
+.lx[data-design="dosya"] .lx-group__ico { display: none;}
+
+/* карточка: прозрачный пакет с молнией и белой этикеткой */
+.lx[data-design="dosya"] .lx-cards { gap: 16px;}
+.lx[data-design="dosya"] .lx-card { counter-increment: dl; gap: 8px; padding: 22px 9px 9px; border-radius: 3px; overflow: hidden; background: linear-gradient(125deg, rgba(255, 255, 255, .85) 0 18%, rgba(255, 255, 255, .25) 30% 46%, rgba(255, 255, 255, .6) 58%, rgba(255, 255, 255, .25) 72%), #d6e0e6; box-shadow: inset 0 0 0 1.5px #7d8b97, 0 3px 7px -3px rgba(30, 40, 55, .35);}
+.lx[data-design="dosya"] .lx-card::before { content: '' / ''; position: absolute; left: 0; right: 0; top: 0; height: 14px; border-bottom: 1.5px solid #7d8b97; background: linear-gradient(#f4f7f9 0 4px, #7d8b97 4px 5.5px, #f4f7f9 5.5px 8px, #7d8b97 8px 9.5px, #f4f7f9 9.5px);}
+.lx[data-design="dosya"] .lx-card__face { padding: 0 10px 10px; background: #fff; box-shadow: 0 0 0 1px var(--lx-ink);}
+.lx[data-design="dosya"] .lx-card__face::before { content: 'DELİL No ' counter(dl, decimal-leading-zero) / ''; display: block; margin: 0 -10px 8px; padding: 2px 10px; background: var(--y); border-bottom: 1px solid var(--lx-ink); font: 600 12px/1.45 var(--cap); letter-spacing: .1em; color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-card[data-passive] { background: linear-gradient(125deg, rgba(255, 255, 255, .85) 0 18%, rgba(255, 255, 255, .25) 30% 46%), #e4e7ea;}
+.lx[data-design="dosya"] .lx-card[data-passive] .lx-card__face::before { background: #e4e7ea;}
+.lx[data-design="dosya"] .lx-card:hover { box-shadow: inset 0 0 0 2px var(--lx-accent), 0 4px 10px -3px rgba(30, 40, 55, .45);}
+.lx[data-design="dosya"] .lx-card:focus-visible { box-shadow: inset 0 0 0 3px var(--lx-accent);}
+.lx[data-design="dosya"] .lx-card.is-flipped { background: linear-gradient(125deg, rgba(255, 255, 255, .85) 0 18%, rgba(255, 255, 255, .25) 30% 46%, rgba(255, 255, 255, .6) 58%, rgba(255, 255, 255, .25) 72%), #d6e0e6;}
+.lx[data-design="dosya"] .lx-card.is-known { box-shadow: inset 0 0 0 2px #14532d;}
+.lx[data-design="dosya"] .lx-card.is-known::after { content: 'İNCELENDİ' / ''; position: absolute; right: 10px; top: 54px; padding: 1px 7px; border: 2px solid #14532d; background: #fff; color: #14532d; font: 600 12px/1.35 var(--cap); letter-spacing: .1em; rotate: -6deg; pointer-events: none;}
+.lx[data-design="dosya"] .lx-ico { width: 44px; height: 44px; border-radius: 2px; background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-ico svg { width: 20px; height: 20px; stroke-width: 1.6;}
+.lx[data-design="dosya"] .lx-card__tr { font: 500 1.12em/1.22 var(--disp); letter-spacing: -.04em;}
+.lx[data-design="dosya"] .lx-card__ru { color: var(--lx-muted); font-weight: 400;}
+.lx[data-design="dosya"] .lx-say { border-radius: 2px; background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-card__pos { padding: 0; border-radius: 0; background: none; color: var(--lx-muted); font: 400 11.5px/1.5 var(--disp);}
+.lx[data-design="dosya"] .lx-card__pos--passive { color: #9f1d14; background: none;}
+.lx[data-design="dosya"] .lx-card__back { padding: 8px 10px; background: #fff; box-shadow: 0 0 0 1px var(--lx-line);}
+.lx[data-design="dosya"] .lx-card__tx { color: var(--lx-muted); font: 400 .84em/1.4 var(--disp);}
+.lx[data-design="dosya"] .lx-card__gov { font-family: var(--disp); color: var(--lx-accent);}
+.lx[data-design="dosya"] .lx-ex { border-radius: 0; background: none; border-left: 2px solid var(--lx-ink); padding: 2px 0 2px 10px;}
+.lx[data-design="dosya"] .ak-say__btn { background: var(--lx-surf2); color: var(--lx-ink); border-radius: 2px;}
+.lx[data-design="dosya"] .lx-card__note { border-radius: 0; border: 0; background: var(--lx-soft); font-size: .92em;}
+.lx[data-design="dosya"] .lx-card__acts button { border: 1px solid var(--lx-ink); border-radius: 2px; background: #fff; color: var(--lx-ink); font: 600 .92em/1 var(--cap); letter-spacing: .04em;}
+.lx[data-design="dosya"] .lx-card__flip { background: var(--lx-ink) !important; color: var(--y) !important;}
+.lx[data-design="dosya"] .lx-card__know[aria-pressed="true"] { border-color: #14532d; background: var(--ak-good-soft); color: #14532d;}
+
+/* история: тутанак на машинке, дырки у поля */
+.lx[data-design="dosya"] .lx-found b { color: var(--lx-accent);}
+.lx[data-design="dosya"] .lx-found__bar { border-radius: 0; background: #fff; box-shadow: inset 0 0 0 1px var(--lx-ink);}
+.lx[data-design="dosya"] .lx-found__bar i { border-radius: 0; background: repeating-linear-gradient(-45deg, var(--y) 0 6px, var(--lx-ink) 6px 12px);}
+.lx[data-design="dosya"] .lx-story { position: relative; padding: 46px 14px 18px 46px; border-radius: 0; background: #fff radial-gradient(circle 7px at 20px 50%, #dfe3e7 96%, transparent) 0 0 / 40px 150px repeat-y; box-shadow: 0 0 0 1px var(--lx-line), 0 5px 10px -5px rgba(30, 40, 55, .3);}
+.lx[data-design="dosya"] .lx-story::before { content: 'TUTANAK' / ''; position: absolute; left: 46px; top: 12px; padding: 1px 10px; border: 2px solid var(--lx-accent); color: var(--lx-accent); font: 600 15px/1.35 var(--cap); letter-spacing: .18em; rotate: -2deg;}
+.lx[data-design="dosya"] .lx-story p { font: 400 .94em/1.82 var(--disp); letter-spacing: -.02em; max-width: 78ch;}
+.lx[data-design="dosya"] .lx-tw { padding: 0 3px; border-radius: 0; background: var(--lx-soft); color: var(--lx-ink); font-weight: 500; box-shadow: inset 0 -2px 0 var(--lx-ink);}
+.lx[data-design="dosya"] .lx-tw.is-on { background: var(--lx-ink); color: var(--y); box-shadow: none;}
+.lx[data-design="dosya"] .lx-tw.is-on::after { background: var(--lx-ink); color: #fff; border-radius: 0; font-family: var(--ak-font);}
+.lx[data-design="dosya"] .lx-chip--tr { background: #fff; box-shadow: inset 0 0 0 1px var(--lx-line); font-family: var(--ak-font);}
+.lx[data-design="dosya"] .lx-chip--tr.is-found { background: var(--lx-soft); color: var(--lx-ink); box-shadow: inset 0 0 0 1px var(--lx-ink);}
+
+/* диалоги: протокол допроса, строка за строкой */
+.lx[data-design="dosya"] .lx-dlg { padding: 16px; border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-line), 0 5px 10px -5px rgba(30, 40, 55, .3);}
+.lx[data-design="dosya"] .lx-dlg__head h3 { font: 600 1.25em/1.2 var(--cap); letter-spacing: .02em;}
+.lx[data-design="dosya"] .lx-badge { border-radius: 0; background: var(--lx-surf2); color: var(--lx-ink); font: 400 11.5px/1.5 var(--disp);}
+.lx[data-design="dosya"] .lx-badge--short { background: var(--ak-good-soft); color: var(--ak-good);}
+.lx[data-design="dosya"] .lx-badge--long { background: var(--lx-soft); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-place { font-family: var(--disp); font-size: .88em;}
+.lx[data-design="dosya"] .lx-place .lx-ico { background: none; color: var(--lx-accent);}
+.lx[data-design="dosya"] .lx-dots i { border-radius: 0; width: 10px; height: 10px; background: var(--lx-line);}
+.lx[data-design="dosya"] .lx-dots i.is-on { background: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-chat { gap: 0; padding: 0; margin: 14px 0; border-radius: 0; background: none; border-top: 1px solid var(--lx-ink);}
+.lx[data-design="dosya"] .lx-msg { max-width: 100%; width: 100%; padding: 10px 0 10px 46px; border-radius: 0; background: none; box-shadow: none; border-bottom: 1px solid var(--lx-line);}
+.lx[data-design="dosya"] .lx-msg--me { padding: 10px 0 10px 46px; background: var(--lx-surf2); justify-self: stretch;}
+.lx[data-design="dosya"] .lx-msg__ava { left: 4px; top: 11px; width: 32px; height: 32px; border-radius: 0; background: #fff; color: var(--lx-ink); box-shadow: inset 0 0 0 1px var(--lx-ink); font: 500 13px/1 var(--disp);}
+.lx[data-design="dosya"] .lx-msg--me .lx-msg__ava { left: 4px; right: auto; background: var(--y); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-msg__who { color: var(--lx-accent); font: 600 12px/1.3 var(--cap); letter-spacing: .08em; text-transform: uppercase;}
+.lx[data-design="dosya"] .lx-msg--me .lx-msg__who { color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-msg__tr { font-family: var(--disp); font-weight: 500; font-size: .94em; letter-spacing: -.02em;}
+.lx[data-design="dosya"] .lx-msg__ru { color: var(--lx-muted);}
+.lx[data-design="dosya"] .lx-typing { background: none;}
+
+/* кнопки, упражнения, квест: бланки */
+.lx[data-design="dosya"] .lx-btn { border-radius: 2px; background: var(--lx-ink); color: var(--y); font: 600 1em/1 var(--cap); letter-spacing: .05em;}
+.lx[data-design="dosya"] .lx-btn--ghost { background: #fff; color: var(--lx-ink); box-shadow: inset 0 0 0 1px var(--lx-ink);}
+.lx[data-design="dosya"] .lx-next { border-radius: 2px; background: var(--lx-ink); color: var(--y); font: 600 1.06em/1.2 var(--cap); letter-spacing: .05em;}
+.lx[data-design="dosya"] .lx-steps li { border-radius: 2px; background: #fff; box-shadow: inset 0 0 0 1px var(--lx-ink); font: 500 .92em/1 var(--cap); letter-spacing: .03em;}
+.lx[data-design="dosya"] .lx-steps li::before { border-radius: 2px; background: var(--y); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-steps li.is-done { background: var(--ak-good-soft); color: #14532d;}
+.lx[data-design="dosya"] .ak-ex { border: 1px solid var(--lx-ink); border-radius: 0; background: #fff; border-top: 7px solid var(--lx-ink);}
+.lx[data-design="dosya"] .ak-btn { border-radius: 2px; background: var(--lx-ink); color: var(--y); font-family: var(--cap); font-weight: 600; letter-spacing: .05em;}
+.lx[data-design="dosya"] .ak-btn--ghost { background: #fff; color: var(--lx-ink); box-shadow: inset 0 0 0 1px var(--lx-ink);}
+.lx[data-design="dosya"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { background: #fff; border: 1px solid var(--lx-ink); border-radius: 0;}
+.lx[data-design="dosya"] .ak-gap--input { background: #fff;}
+.lx[data-design="dosya"] .ak-opt__n { border-radius: 0; background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-sim { border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-line); padding: 14px; border-top: 7px solid var(--lx-ink);}
+.lx[data-design="dosya"] .lx-sim__ava { border-radius: 0; background: var(--manila); color: var(--lx-ink); box-shadow: inset 0 0 0 1px #8a7a4e; font-family: var(--disp); font-weight: 500;}
+.lx[data-design="dosya"] .lx-sim__dots i { border-radius: 0; background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-sim__feed { border-radius: 0; background: var(--lx-surf2);}
+.lx[data-design="dosya"] .lx-sim__msg { border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-line);}
+.lx[data-design="dosya"] .lx-sim__msg--me { background: var(--lx-ink); color: #fff;}
+.lx[data-design="dosya"] .lx-sim__opt { border: 1px solid var(--lx-ink); border-radius: 0; background: #fff;}
+.lx[data-design="dosya"] .lx-sim__n { border-radius: 0; background: var(--y); color: var(--lx-ink);}
+.lx[data-design="dosya"] .lx-sim__hint { color: var(--lx-accent);}
+.lx[data-design="dosya"] .lx-sim__done { border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-line);}
+.lx[data-design="dosya"] .lx-res { border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-line);}
+
+/* шпаргалка: опись изъятого */
+.lx[data-design="dosya"] .lx-panel[data-section="cheat"] { counter-reset: op;}
+.lx[data-design="dosya"] .lx-table { border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-ink); font-size: .98em;}
+.lx[data-design="dosya"] .lx-table tr { counter-increment: op;}
+.lx[data-design="dosya"] .lx-table td { border-bottom: 1px solid var(--lx-line); border-left: 1px solid var(--lx-line);}
+.lx[data-design="dosya"] .lx-table td[lang="tr"] { position: relative; padding-left: 50px; border-left: 0; font: 500 .92em/1.4 var(--disp); letter-spacing: -.03em;}
+.lx[data-design="dosya"] .lx-table td[lang="tr"]::before { content: counter(op, decimal-leading-zero) / ''; position: absolute; left: 12px; top: 12px; font: 600 14px/1.3 var(--cap); color: var(--lx-accent);}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="dosya"] .cr-scan { animation: cr-scan 5.2s ease-in-out infinite alternate;}
+  .lx[data-design="dosya"] .cr-lens { animation: cr-lens 16s ease-in-out infinite alternate;}
+  .lx[data-design="dosya"] .cr-ptape { transform-box: fill-box; transform-origin: 0 50%; animation: cr-pt 3.8s ease-in-out infinite alternate;}
+}
+@keyframes cr-scan { to { transform: translateY(116px);} }
+@keyframes cr-lens { 0% { transform: translate(0, 0);} 50% { transform: translate(-70px, 56px);} 100% { transform: translate(40px, -60px);} }
+@keyframes cr-pt { from { transform: rotate(-1deg);} to { transform: rotate(1.4deg);} }
+
+@media (max-width: 767px) {
+  .lx[data-design="dosya"] .lx-lessons::before { display: none;}
+  .lx[data-design="dosya"] .lx-tab { padding: 2px 16px 2px 14px;}
+}
+
+/* компьютер: папка раскрыта на весь экран. Слева фотографии и улики, справа лист с заголовком */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="dosya"] .lx-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 500px); grid-template-rows: auto auto auto auto auto auto 1fr; padding-block: 58px 22px;}
+  .lx[data-design="dosya"] .lx-hero::before { content: '' / ''; position: absolute; top: 0; bottom: 0; left: calc(50% - 50vw); right: calc(50% - 50vw); background: #dfe3e7;}
+  .lx[data-design="dosya"] .lx-scene { position: relative; grid-column: 1; grid-row: 1 / -1; height: auto; margin: 0; min-height: 470px; overflow: visible; clip-path: none; background: var(--manila); box-shadow: inset 0 0 0 1px #b9a675; border-radius: 3px 0 0 3px;}
+  .lx[data-design="dosya"] .cr-desk { inset: auto; left: 0; top: 50%; width: 100% !important; height: auto !important; aspect-ratio: 700 / 520; transform: translateY(-50%); overflow: hidden;}
+  .lx[data-design="dosya"] .cr-tape { left: calc((100% + 500px) / 2 - 50vw - 2vw); width: 104vw !important; top: -46px; transform: rotate(-.9deg);}
+  .lx[data-design="dosya"] .lx-tag { grid-column: 2; grid-row: 1; margin: 0 !important; padding: 12px 22px 0; height: auto; background: #fff; border-radius: 0 3px 0 0; box-shadow: inset 0 1px var(--lx-line), inset -1px 0 var(--lx-line); width: 100%;}
+  .lx[data-design="dosya"] h1 { grid-column: 2; grid-row: 2; padding: 10px 22px 4px; background: #fff; box-shadow: inset -1px 0 var(--lx-line); font-size: clamp(36px, 3.7vw, 48px);}
+  .lx[data-design="dosya"] .lx-hero__tr { grid-column: 2; grid-row: 3; padding: 0 22px 12px; background: #fff; box-shadow: inset -1px 0 var(--lx-line);}
+  .lx[data-design="dosya"] .lx-hero__meta { grid-column: 2; grid-row: 4; padding: 12px 22px 2px; border-top: 1px dashed var(--lx-line); box-shadow: inset -1px 0 var(--lx-line);}
+  .lx[data-design="dosya"] .lx-hero__intro { grid-column: 2; grid-row: 5; padding: 2px 22px 12px; font-size: .96em; line-height: 1.45; box-shadow: inset -1px 0 var(--lx-line);}
+  .lx[data-design="dosya"] .lx-stats { grid-column: 2; grid-row: 6; padding: 0 22px 14px; box-shadow: inset -1px 0 var(--lx-line);}
+  .lx[data-design="dosya"] .lx-gbar { grid-column: 2; grid-row: 7; height: auto; align-self: stretch; margin: 0 !important; background: #fff repeating-linear-gradient(-45deg, var(--y) 0 10px, var(--lx-ink) 10px 20px) bottom / 100% 10px no-repeat; box-shadow: inset -1px 0 var(--lx-line), inset 0 -1px var(--lx-line); min-height: 14px;}
+  .lx[data-design="dosya"] .lx-tabs { margin-top: 0 !important;}
+  .lx[data-design="dosya"] .lx-tab { flex: 1 1 0; justify-content: center;}
+}

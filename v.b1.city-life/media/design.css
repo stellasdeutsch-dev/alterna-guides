@@ -1,0 +1,251 @@
+/* Kavşak: окно автобуса днём в час пик. Запотевшая полоска с заголовком, за стеклом грибной дождь и пробка, внизу маршрутное табло. Карточки: светофоры. */
+html:has(.lx[data-design="kavsak"]) { background: #e8edf0; }
+.lx[data-design="kavsak"] {
+  --R: #d9352a; --A: #ffb820; --G: #14a35f; --At: #6e4b00; --Gt: #0a6638; --fog: #dbe5ea;
+  --lx-accent: #ffb820; --lx-accent-2: #0b6d9f; --lx-paper: #e8edf0; --lx-surf: #ffffff; --lx-surf2: #e6ebef; --lx-card: #ffffff;
+  --lx-ink: #10161d; --lx-muted: #47525e; --lx-line: #b8c2cb; --lx-soft: #ffeec2; --lx-on: #14100a; --lx-tabs-bg: #fbf8ec; --lx-r: 4px; --lx-shadow: none;
+  --disp: 'LX Oswald', 'Arial Narrow', sans-serif; --led: 'LX JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ak-font: 'LX Roboto Condensed', system-ui, sans-serif; --ak-font-display: var(--disp); --ak-bg: #ffffff; --ak-surface: #eef1f4; --ak-radius: 4px; --ak-radius-sm: 4px; --ak-good: #0a6638; --ak-good-soft: #d6f2e1; --ak-bad: #a82418; --ak-bad-soft: #fbe0dc;
+  font-family: var(--ak-font); font-size: 17px; overflow-x: clip;
+  background-color: #e8edf0;
+  background-image: repeating-linear-gradient(107deg, transparent 0 58px, rgba(90, 125, 160, .10) 58px 59px, transparent 59px 131px), radial-gradient(rgba(255, 255, 255, .7) 1px, transparent 1.4px), radial-gradient(rgba(70, 85, 100, .13) 1px, transparent 1.4px);
+  background-size: auto, 7px 7px, 5px 5px;
+}
+.lx[data-design="kavsak"] main { overflow-x: clip; }
+
+/* шапка: потолок салона */
+.lx[data-design="kavsak"] .lx-app { background: #fbf8ec; border-bottom: 1px solid #c3ccd4; }
+.lx[data-design="kavsak"] .lx-app__logo { background: #ffffff; color: var(--At); border-radius: 10px; box-shadow: inset 0 0 0 2px var(--A); }
+.lx[data-design="kavsak"] .lx-app__t b { font: 500 1.08em/1.15 var(--disp); letter-spacing: .03em; color: #10161d; }
+.lx[data-design="kavsak"] .lx-app__t small { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-app__ring .lx-ring__bg { stroke: #c3ccd4; }
+.lx[data-design="kavsak"] .lx-app__ring .lx-ring__fg { stroke: var(--G); }
+.lx[data-design="kavsak"] .lx-app__ring text { fill: #10161d; }
+.lx[data-design="kavsak"] .lx-lessons { background: #eef1e6; border-radius: 6px; }
+.lx[data-design="kavsak"] .lx-lessons::before { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-lessons a { border-radius: 4px; color: #10161d; font-family: var(--led); font-weight: 500; }
+.lx[data-design="kavsak"] .lx-lessons a[aria-current] { background: var(--A); color: #14100a; box-shadow: none; }
+
+/* первый экран: запотевшая фрамуга, окно, панель */
+.lx[data-design="kavsak"] .lx-hero { display: flex; flex-direction: column; max-width: none; margin: 0 calc(50% - 50vw) !important; padding: 0; border-radius: 0; background: #eef2f4; box-shadow: none; }
+.lx[data-design="kavsak"] .lx-hero > * { order: 9; margin-inline: 0; }
+.lx[data-design="kavsak"] .lx-hero > :not(.lx-scene) { padding-inline: max(16px, calc(50vw - 560px)); }
+.lx[data-design="kavsak"] .lx-hero > .lx-tag, .lx[data-design="kavsak"] .lx-hero > h1, .lx[data-design="kavsak"] .lx-hero > .lx-hero__tr { background-color: var(--fog); }
+.lx[data-design="kavsak"] .lx-hero > .lx-tag { order: 1; display: block; margin: 0 !important; padding-top: 12px; padding-bottom: 2px; border-radius: 0; color: #29323c; font: 500 12.5px/1.3 var(--led); letter-spacing: .02em; text-transform: none; }
+.lx[data-design="kavsak"] .lx-hero > h1 { order: 2; margin: 0; padding-top: 2px; padding-bottom: 0; color: #0b1016; font: 700 clamp(39px, 11.6vw, 72px)/1.02 var(--disp); letter-spacing: .005em; text-transform: uppercase; hyphens: manual; text-wrap: balance; }
+.lx[data-design="kavsak"] .lx-hero > .lx-hero__tr { order: 3; margin: 0 !important; padding-top: 4px; padding-bottom: 10px; color: #16324a; font: 500 clamp(19px, 5vw, 23px)/1.2 var(--led); }
+.lx[data-design="kavsak"] .lx-hero > .lx-scene { order: 4; flex: none; height: clamp(248px, 62vw, 430px); overflow: hidden; background: #eef2f4; border-bottom: 10px solid #8e99a4; }
+.lx[data-design="kavsak"] .lx-scene svg { display: block; }
+.lx[data-design="kavsak"] .lx-hero > .lx-hero__meta { order: 5; margin: 14px 0 4px; color: var(--At); font: 500 .95em/1.35 var(--led); }
+.lx[data-design="kavsak"] .lx-hero > .lx-hero__intro { order: 6; margin: 0; color: #1c242d; font-size: 1.03em; line-height: 1.5; max-width: none; }
+.lx[data-design="kavsak"] .lx-hero > .lx-stats { order: 7; gap: 0; margin: 12px 0 10px; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.lx[data-design="kavsak"] .lx-stats li { padding: 4px 6px; border-radius: 0; background: none; border-left: 1px solid #c9d2da; }
+.lx[data-design="kavsak"] .lx-stats li:first-child { border-left: 0; padding-left: 0; }
+.lx[data-design="kavsak"] .lx-stats b { color: var(--Gt); font: 500 clamp(26px, 7vw, 36px)/1 var(--led);  }
+.lx[data-design="kavsak"] .lx-stats li:nth-child(1) b { color: #b0241a;  }
+.lx[data-design="kavsak"] .lx-stats li:nth-child(2) b { color: var(--At);  }
+.lx[data-design="kavsak"] .lx-stats span { margin-top: 3px; color: var(--lx-muted); font-size: 12.5px; }
+.lx[data-design="kavsak"] .lx-hero > .lx-gbar { order: 8; height: 6px; gap: 4px; padding-inline: max(16px, calc(50vw - 560px)); margin-bottom: 14px !important; }
+.lx[data-design="kavsak"] .lx-gbar__s { border-radius: 0; background: var(--R) !important; }
+.lx[data-design="kavsak"] .lx-gbar__s:nth-child(2) { background: var(--A) !important; }
+.lx[data-design="kavsak"] .lx-gbar__s:nth-child(3) { background: var(--G) !important; }
+
+/* вкладки: светодиодное табло маршрута */
+.lx[data-design="kavsak"] .lx-tabs { margin: 0 calc(50% - 50vw) !important; max-width: none; padding: 5px clamp(6px, 2vw, 24px); gap: 2px; border-radius: 0; background: #fbf8ec; box-shadow: 0 -1px 0 #c3ccd4, 0 1px 0 #c3ccd4; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="kavsak"] .lx-tab { min-height: 48px; padding: 3px 11px; border-radius: 2px; color: var(--At); }
+.lx[data-design="kavsak"] .lx-tab__ico svg { width: 17px; height: 17px; }
+.lx[data-design="kavsak"] .lx-tab b { font: 500 13.5px/1.15 var(--led); letter-spacing: -.01em; }
+.lx[data-design="kavsak"] .lx-tab small { font-size: 12px; color: #5e4a1c; }
+.lx[data-design="kavsak"] .lx-tab[aria-selected="true"] { background-color: var(--A); background-image: radial-gradient(rgba(0, 0, 0, .13) 1px, transparent 1.3px); background-size: 3px 3px; color: #14100a; box-shadow: none; }
+.lx[data-design="kavsak"] .lx-tab[aria-selected="true"] small { color: #14100a; }
+.lx[data-design="kavsak"] .lx-tab:not([aria-selected="true"]):hover { background: #eef1e6; color: var(--At); }
+.lx[data-design="kavsak"] .lx-tab:focus-visible { outline: 2px solid #10161d; outline-offset: -2px; }
+.lx[data-design="kavsak"] .lx-tab__ok { background: var(--G); }
+.lx[data-design="kavsak"] .lx-tab__ok::after { border-color: #fbf8ec; }
+.lx[data-design="kavsak"] .lx-tabs__line { display: block; left: 0; right: 0; bottom: 0; height: 2px; border-radius: 0; background: repeating-linear-gradient(90deg, #c3ccd4 0 12px, transparent 12px 20px); }
+.lx[data-design="kavsak"] .lx-tabs__line::after { border-radius: 0; background: var(--A); }
+
+/* панели: мокрый асфальт, разметка по краю */
+.lx[data-design="kavsak"] :is(.lx-ph, .lx-dlg, .lx-res, .lx-empty) { position: relative; background: var(--lx-surf); box-shadow: inset 0 0 0 1px #c9d2da; }
+.lx[data-design="kavsak"] .lx-ph { border-left: 5px solid #8e99a4; }
+.lx[data-design="kavsak"] .lx-kicker { color: var(--At); font: 500 13px/1 var(--led); letter-spacing: .02em; }
+.lx[data-design="kavsak"] .lx-panel h2 { font: 700 clamp(31px, 7.6vw, 50px)/1.05 var(--disp); text-transform: uppercase; letter-spacing: .01em; color: #10161d; }
+.lx[data-design="kavsak"] .lx-hint { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-chip { border-radius: 3px; background: var(--lx-surf2); color: var(--lx-ink); font-weight: 500; }
+.lx[data-design="kavsak"] .lx-chip[aria-pressed="true"] { background: var(--A); color: #14100a; }
+.lx[data-design="kavsak"] .lx-search { border-color: #8592a0; border-radius: 3px; background: #ffffff; color: #10161d; }
+.lx[data-design="kavsak"] .lx-search::placeholder { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-search:focus { border-color: var(--A); }
+.lx[data-design="kavsak"] :is(.lx-learn p b, .lx-found b) { color: var(--At); }
+.lx[data-design="kavsak"] .lx-learn { border-top: 1px dashed #8592a0; }
+.lx[data-design="kavsak"] .lx-learn__ring .lx-ring__bg { stroke: #c3ccd4; }
+.lx[data-design="kavsak"] .lx-learn__ring .lx-ring__fg { stroke: var(--G); }
+.lx[data-design="kavsak"] .lx-switch { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-switch input { accent-color: var(--A); }
+
+/* группы: зелёный дорожный указатель */
+.lx[data-design="kavsak"] .lx-group { width: fit-content; max-width: 100%; margin: 32px 0 14px; padding: 8px 18px 8px 10px; border-radius: 8px; background: #0d6a42; color: #fff; font: 500 clamp(21px, 5.4vw, 28px)/1.15 var(--disp); letter-spacing: .02em; text-transform: none; box-shadow: inset 0 0 0 2px #0d6a42, inset 0 0 0 4px #fff; }
+.lx[data-design="kavsak"] .lx-group__ico { background: #fff; color: #0d6a42; border-radius: 4px; }
+
+/* карточка: светофор. Красный: новое слово. Жёлтый: перевёрнута. Зелёный: выучено. */
+.lx[data-design="kavsak"] .lx-cards { gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); }
+.lx[data-design="kavsak"] .lx-card { --r: #ff4a3d; --a: #5c4716; --g: #1f5238; --rg: rgba(255, 74, 61, .28); --ag: transparent; --gg: transparent; padding: 14px 14px 14px 66px; border-radius: 6px; background: #ffffff; box-shadow: inset 0 0 0 1px #c9d2da; min-height: 158px; }
+.lx[data-design="kavsak"] .lx-card::before { content: ''; position: absolute; left: 12px; top: 12px; z-index: 1; width: 42px; height: 112px; border-radius: 8px; box-shadow: inset 0 0 0 2px #ffc53a;
+  background: radial-gradient(circle 11px at 21px 22px, var(--r) 98%, transparent), radial-gradient(circle 11px at 21px 56px, var(--a) 98%, transparent), radial-gradient(circle 11px at 21px 90px, var(--g) 98%, transparent), radial-gradient(circle 20px at 21px 22px, var(--rg) 30%, transparent), radial-gradient(circle 20px at 21px 56px, var(--ag) 30%, transparent), radial-gradient(circle 20px at 21px 90px, var(--gg) 30%, transparent), #2a3038; }
+.lx[data-design="kavsak"] .lx-card::after { content: ''; position: absolute; left: 29px; top: 124px; bottom: 0; width: 8px; background: linear-gradient(90deg, #c3ccd4, #7a858f); }
+.lx[data-design="kavsak"] .lx-card.is-flipped { --r: #5a2622; --a: #ffb020; --rg: transparent; --ag: rgba(255, 176, 32, .3); background: #ffffff; box-shadow: inset 0 0 0 1px #c99a2e; }
+.lx[data-design="kavsak"] .lx-card.is-known { --r: #5a2622; --a: #5c4716; --g: #2fe07f; --rg: transparent; --ag: transparent; --gg: rgba(47, 224, 127, .3); box-shadow: inset 0 0 0 2px var(--G); }
+.lx[data-design="kavsak"] .lx-card.is-known.is-flipped { --a: #5c4716; }
+.lx[data-design="kavsak"] .lx-card[data-passive] { background: #ffffff; }
+.lx[data-design="kavsak"] .lx-card:hover { box-shadow: inset 0 0 0 1px #6a7684; }
+.lx[data-design="kavsak"] .lx-card.is-known:hover { box-shadow: inset 0 0 0 2px var(--G); }
+.lx[data-design="kavsak"] .lx-card:focus-visible { outline: 2px solid #10161d; outline-offset: 2px; }
+.lx[data-design="kavsak"] .lx-card .lx-ico { display: none; }
+.lx[data-design="kavsak"] .lx-card__top { align-items: flex-start; }
+.lx[data-design="kavsak"] .lx-card__tr { font: 500 1.42em/1.14 var(--disp); color: #10161d; letter-spacing: .01em; }
+.lx[data-design="kavsak"] .lx-card__ru { color: #2c3640; font-weight: 400; font-size: 1em; line-height: 1.3; }
+.lx[data-design="kavsak"] .lx-say { background: #e6ebef; color: var(--At); }
+.lx[data-design="kavsak"] .lx-card__pos { border-radius: 2px; background: #e6ebef; color: #2c3640; font-weight: 500; font-family: var(--led); }
+.lx[data-design="kavsak"] .lx-card__pos--passive { background: #ffeec2; color: #6e4b00; }
+.lx[data-design="kavsak"] .lx-card__acts button { border: 1.5px solid #8592a0; border-radius: 3px; background: none; color: #10161d; font-weight: 500; font-size: 1em; }
+.lx[data-design="kavsak"] .lx-card__flip[aria-expanded="true"] { border-color: var(--A); background: var(--A); color: #14100a; }
+.lx[data-design="kavsak"] .lx-card__know[aria-pressed="true"] { border-color: var(--G); background: var(--G); color: #04180d; }
+.lx[data-design="kavsak"] .lx-card__tx { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-card__gov { color: #0b5a86; font-family: var(--led); font-weight: 500; }
+.lx[data-design="kavsak"] .lx-ex { border-radius: 3px; background: #ffffff; }
+.lx[data-design="kavsak"] .lx-ex__ru { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-card__note { border-left: 3px solid var(--A); border-radius: 0; background: #fff3d0; color: #4a3606; }
+.lx[data-design="kavsak"] .ak-say__btn { background: #e6ebef; color: var(--At); }
+
+/* история: световой короб на остановке */
+.lx[data-design="kavsak"] .lx-found { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-found__bar { border-radius: 0; background: #c3ccd4; }
+.lx[data-design="kavsak"] .lx-found__bar i { border-radius: 0; background: var(--A); }
+.lx[data-design="kavsak"] .lx-story { position: relative; margin-bottom: 26px; padding: clamp(20px, 4vw, 38px); border-radius: 3px; background: linear-gradient(170deg, #fffef6, #eef2ee 60%, #dfe7e6); color: #10151b; box-shadow: 0 0 0 7px #c3ccd4, 0 0 0 9px #7a858f, 0 10px 26px rgba(60, 80, 100, .18); }
+.lx[data-design="kavsak"] .lx-story p { color: #10151b; font-size: 1.1em; line-height: 1.72; }
+.lx[data-design="kavsak"] .lx-tw { text-align: left; border-radius: 2px; background: #ffe39c; color: #10151b; }
+.lx[data-design="kavsak"] .lx-tw.is-on { background: #10151b; color: #ffe39c; }
+.lx[data-design="kavsak"] .lx-tw.is-on::after { background: #10151b; color: #10161d; }
+.lx[data-design="kavsak"] .lx-chip--tr { background: var(--lx-surf2); box-shadow: none; }
+.lx[data-design="kavsak"] .lx-chip--tr.is-found { background: var(--A); color: #14100a; }
+
+/* диалоги: окошки жёлтого и зелёного сигнала */
+.lx[data-design="kavsak"] .lx-dlg__head h3 { font: 500 1.5em/1.15 var(--disp); color: #10161d; }
+.lx[data-design="kavsak"] .lx-badge { border-radius: 2px; background: #e6ebef; color: #2c3640; font-family: var(--led); font-weight: 500; }
+.lx[data-design="kavsak"] .lx-badge--short { background: #d6f2e1; color: #0a5c33; }
+.lx[data-design="kavsak"] .lx-badge--long { background: #fbe0dc; color: #8e1f14; }
+.lx[data-design="kavsak"] .lx-dots i { background: #c3ccd4; }
+.lx[data-design="kavsak"] .lx-dots i.is-on { background: var(--A); }
+.lx[data-design="kavsak"] .lx-place { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-place .lx-ico { background: none; color: var(--At); }
+.lx[data-design="kavsak"] .lx-chat { border-radius: 3px; background: #f3f5f6; box-shadow: inset 0 0 0 1px #e6ebef; }
+.lx[data-design="kavsak"] .lx-msg { border-radius: 4px; background: #fff3d0; box-shadow: inset 3px 0 0 var(--A); color: #10161d; }
+.lx[data-design="kavsak"] .lx-msg--me { background: #e0f4e8; box-shadow: inset -3px 0 0 var(--G); }
+.lx[data-design="kavsak"] .lx-msg__ava { background: var(--A); color: #14100a; }
+.lx[data-design="kavsak"] .lx-msg--me .lx-msg__ava { background: var(--G); color: #04180d; }
+.lx[data-design="kavsak"] .lx-msg__who { color: #6e4b00; font-family: var(--led); font-weight: 500; }
+.lx[data-design="kavsak"] .lx-msg--me .lx-msg__who { color: #0a5c33; }
+.lx[data-design="kavsak"] .lx-msg__tr { font-weight: 500; font-size: 1.08em; }
+.lx[data-design="kavsak"] .lx-msg__ru { color: #39434e; }
+.lx[data-design="kavsak"] .lx-typing { background: #ffffff; }
+
+/* кнопки */
+.lx[data-design="kavsak"] .lx-btn { border-radius: 3px; background: var(--A); color: #14100a; font: 500 16px/1 var(--disp); letter-spacing: .04em; text-transform: uppercase; }
+.lx[data-design="kavsak"] .lx-btn--ghost { background: none; color: #10161d; box-shadow: inset 0 0 0 2px #10161d; }
+.lx[data-design="kavsak"] .lx-next { border-radius: 3px; background: #0d6a42; color: #fff; box-shadow: inset 0 0 0 2px #0d6a42, inset 0 0 0 4px #fff; font: 500 17px/1.2 var(--disp); letter-spacing: .03em; }
+
+/* практика, квест, тест */
+.lx[data-design="kavsak"] .lx-steps li { border-radius: 3px; background: var(--lx-surf2); color: #10161d; font-weight: 500; }
+.lx[data-design="kavsak"] .lx-steps li::before { background: #ffffff; color: var(--At); font-family: var(--led); }
+.lx[data-design="kavsak"] .lx-steps li.is-done { background: #d6f2e1; color: #0a5c33; }
+.lx[data-design="kavsak"] .lx-steps li.is-done::before { background: var(--G); color: #04180d; }
+.lx[data-design="kavsak"] .lx-panel a-exercise, .lx[data-design="kavsak"] .lx-panel a-quiz { display: block; border-radius: 4px; box-shadow: none; }
+.lx[data-design="kavsak"] .ak-ex { border: 0; border-radius: 4px; background: #ffffff; box-shadow: inset 0 0 0 1px #c9d2da, inset 0 5px 0 -1px var(--A); color: #10161d; }
+.lx[data-design="kavsak"] .ak-ex__bar { background: #c3ccd4; }
+.lx[data-design="kavsak"] .ak-ex__bar span { background: var(--A); }
+.lx[data-design="kavsak"] .ak-ex__count, .lx[data-design="kavsak"] .ak-hint { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .ak-btn { border-radius: 3px; background: var(--A); color: #14100a; }
+.lx[data-design="kavsak"] .ak-btn:disabled { opacity: .55; }
+.lx[data-design="kavsak"] .ak-btn--ghost { background: none; color: var(--At); }
+.lx[data-design="kavsak"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { border: 1.5px solid #8592a0; border-radius: 3px; background: #ffffff; color: #10161d; }
+.lx[data-design="kavsak"] :is(.ak-opt[aria-pressed="true"], .ak-match__l[aria-pressed="true"], .ak-tok[aria-pressed="true"], .ak-tile--in) { border-color: var(--A); background: #ffeec2; }
+.lx[data-design="kavsak"] .ak-opt__n { background: #e6ebef; color: #10161d; }
+.lx[data-design="kavsak"] .ak-gap--input { background: #ffffff; color: #10161d; border-color: #7a8693; }
+.lx[data-design="kavsak"] .ak-trkb__k { background: #e6ebef; color: #10161d; }
+.lx[data-design="kavsak"] .lx-sim__ava { background: var(--A); color: #14100a; }
+.lx[data-design="kavsak"] .lx-sim__name small, .lx[data-design="kavsak"] .lx-sim__place { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-sim__dots i { background: #e6ebef; color: #10161d; }
+.lx[data-design="kavsak"] .lx-sim__dots i.is-cur { color: var(--At); box-shadow: inset 0 0 0 2px var(--A); }
+.lx[data-design="kavsak"] .lx-sim__feed { border-radius: 3px; background: #f3f5f6; box-shadow: inset 0 0 0 1px #e6ebef; }
+.lx[data-design="kavsak"] .lx-sim__msg { border-radius: 4px; background: #fff3d0; box-shadow: none; color: #10161d; }
+.lx[data-design="kavsak"] .lx-sim__msg--me { background: #0d6a42; color: #fff; }
+.lx[data-design="kavsak"] .lx-sim__ru { opacity: 1; color: #39434e; }
+.lx[data-design="kavsak"] .lx-sim__done { background: #ffffff; color: #10161d; }
+.lx[data-design="kavsak"] .lx-sim__done span { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-sim__opt { border-color: #8592a0; border-radius: 3px; background: #ffffff; color: #10161d; }
+.lx[data-design="kavsak"] .lx-sim__opt small { color: var(--lx-muted); }
+.lx[data-design="kavsak"] .lx-sim__n { background: #e6ebef; color: #10161d; }
+.lx[data-design="kavsak"] .lx-sim__hint { color: #6e4b00; }
+.lx[data-design="kavsak"] .lx-donut__bg { stroke: #c3ccd4; }
+
+/* шпаргалка: схема линии метро, остановки сверху вниз */
+.lx[data-design="kavsak"] .lx-table { border-radius: 3px; background: #f1f4ef; color: #10151b; box-shadow: 0 0 0 5px #e6ebef; }
+.lx[data-design="kavsak"] .lx-table td { border-bottom: 0; padding-block: 12px; color: #10151b; }
+.lx[data-design="kavsak"] .lx-table td[lang="tr"] { position: relative; padding-left: 50px; font: 500 1.15em/1.2 var(--disp); letter-spacing: .01em; }
+.lx[data-design="kavsak"] .lx-table td[lang="tr"]::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 8px; background: #d4322a; }
+.lx[data-design="kavsak"] .lx-table td[lang="tr"]::after { content: ''; position: absolute; left: 14px; top: 13px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4px #10151b; }
+.lx[data-design="kavsak"] .lx-table tr:nth-child(3n) td[lang="tr"]::before { background: #0d6a42; }
+.lx[data-design="kavsak"] .lx-table tr:nth-child(3n+1) td[lang="tr"]::before { background: #1a54b8; }
+.lx[data-design="kavsak"] .lx-table td small { color: #3b4451; font-family: var(--ak-font); }
+.lx[data-design="kavsak"] .ak-voice__fab { background: #fbf8ec; color: var(--At); box-shadow: inset 0 0 0 1px #8592a0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="kavsak"] .ck-rain { animation: ck-rain .7s linear infinite; }
+  .lx[data-design="kavsak"] .ck-rain--2 { animation-duration: 1.05s; opacity: .7; }
+  .lx[data-design="kavsak"] .ck-l--r { animation: ck-r 14s steps(1) infinite; }
+  .lx[data-design="kavsak"] .ck-l--a { animation: ck-a 14s steps(1) infinite; }
+  .lx[data-design="kavsak"] .ck-l--g { animation: ck-g 14s steps(1) infinite; }
+  .lx[data-design="kavsak"] .ck-lane { animation: ck-lane 14s ease-in-out infinite; }
+  .lx[data-design="kavsak"] .ck-lane--b { animation-name: ck-lane2; }
+  .lx[data-design="kavsak"] .ck-hook { transform-box: fill-box; transform-origin: 50% 0; animation: ck-hook 5s ease-in-out infinite alternate; }
+  .lx[data-design="kavsak"] .ck-walk { animation: ck-walk 30s ease-in-out infinite alternate; }
+  .lx[data-design="kavsak"] .ck-walk--2 { animation-name: ck-walk2; animation-duration: 26s; }
+  .lx[data-design="kavsak"] .ck-tail { transform-box: fill-box; transform-origin: 0 100%; animation: ck-tail 2.2s ease-in-out infinite alternate; }
+  .lx[data-design="kavsak"] .ck-drip { animation: ck-drip 6s ease-in infinite; }
+  .lx[data-design="kavsak"] .ck-drip--2 { animation-delay: -2.2s; animation-duration: 8s; }
+  .lx[data-design="kavsak"] .ck-drip--3 { animation-delay: -4.2s; animation-duration: 7s; }
+  .lx[data-design="kavsak"] .lx-tab[aria-selected="true"] .lx-tab__ico { animation: ck-blink 2.4s steps(1) infinite; }
+}
+.lx[data-design="kavsak"] .ck-l--a, .lx[data-design="kavsak"] .ck-l--g { opacity: 0; }
+@keyframes ck-rain { to { transform: translate(-30px, 120px); } }
+@keyframes ck-r { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes ck-g { 0%, 49% { opacity: 0; } 50%, 84% { opacity: 1; } 85%, 100% { opacity: 0; } }
+@keyframes ck-a { 0%, 84% { opacity: 0; } 85%, 100% { opacity: 1; } }
+@keyframes ck-lane { 0%, 52% { transform: translateX(0); } 84%, 100% { transform: translateX(-120px); } }
+@keyframes ck-lane2 { 0%, 54% { transform: translateX(0); } 84%, 100% { transform: translateX(-70px); } }
+@keyframes ck-hook { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes ck-walk { to { transform: translateX(90px); } }
+@keyframes ck-walk2 { to { transform: translateX(-80px); } }
+@keyframes ck-tail { from { transform: rotate(-10deg); } to { transform: rotate(14deg); } }
+@keyframes ck-drip { 0%, 40% { transform: translateY(0); opacity: 0; } 45% { opacity: .9; } 100% { transform: translateY(240px); opacity: .1; } }
+@keyframes ck-blink { 50% { opacity: .45; } }
+
+@media (max-width: 767px) {
+  .lx[data-design="kavsak"] .lx-stats span { font-size: 11.5px; }
+  .lx[data-design="kavsak"] .lx-stats li { padding-inline: 5px; }
+}
+@media print { .lx[data-design="kavsak"] { background: #fff; color: #000; } .lx[data-design="kavsak"] .lx-scene { display: none; } }
+
+/* Компьютер: одна широкая строка заголовка на запотевшем стекле, панорама, ниже приборная панель в две колонки. */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="kavsak"] .lx-hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: 0; }
+  .lx[data-design="kavsak"] .lx-hero > .lx-tag { grid-column: 1 / -1; grid-row: 1; }
+  .lx[data-design="kavsak"] .lx-hero > h1 { grid-column: 1 / -1; grid-row: 2; font-size: clamp(48px, 5.2vw, 76px); text-wrap: nowrap; }
+  .lx[data-design="kavsak"] .lx-hero > .lx-hero__tr { grid-column: 1 / -1; grid-row: 3; padding-bottom: 12px; }
+  .lx[data-design="kavsak"] .lx-hero > .lx-scene { grid-column: 1 / -1; grid-row: 4; height: clamp(280px, calc(100vh - 460px), 34vw); }
+  .lx[data-design="kavsak"] .lx-hero > .lx-hero__meta { grid-column: 1; grid-row: 5; padding-right: 0; margin-top: 10px; }
+  .lx[data-design="kavsak"] .lx-hero > .lx-hero__intro { grid-column: 1; grid-row: 6 / span 2; padding-right: 0; font-size: 1em; line-height: 1.4; padding-bottom: 10px; }
+  .lx[data-design="kavsak"] .lx-hero > .lx-stats { grid-column: 2; grid-row: 5 / span 2; padding-left: 40px; margin: 12px 0 6px; align-self: start; }
+  .lx[data-design="kavsak"] .lx-hero > .lx-gbar { grid-column: 2; grid-row: 7; padding-left: 40px; margin: 0 0 10px !important; align-self: end; }
+  .lx[data-design="kavsak"] .lx-tab { flex: 1 1 0; }
+}

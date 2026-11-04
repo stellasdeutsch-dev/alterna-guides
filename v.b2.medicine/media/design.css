@@ -1,0 +1,217 @@
+/* Nabız: палата днём и лента ЭКГ. Страница это миллиметровка кардиограммы, вкладки это каналы монитора, карточка это рецепт с ампулой. */
+.lx[data-design="nabiz"] {
+  --lx-accent: #0a6a70; --lx-accent-2: #b3123a; --lx-paper: #fffdfc; --lx-surf: #ffffff; --lx-surf2: #eef8f6; --lx-card: #fff;
+  --lx-ink: #10303f; --lx-muted: #48626e; --lx-line: #c7dcdc; --lx-soft: #dff3f0; --lx-on: #fff; --lx-tabs-bg: #fff; --lx-r: 4px; --lx-shadow: 0 1px 0 #c7dcdc, 0 12px 22px -18px rgba(16, 48, 63, .55);
+  --disp: 'LX Inter Tight', system-ui, sans-serif; --mono: 'LX IBM Plex Mono', ui-monospace, Menlo, monospace; --cond: 'LX Roboto Condensed', 'Arial Narrow', sans-serif; --hand: 'LX Caveat', cursive;
+  --ak-font: 'LX Manrope', system-ui, sans-serif; --ak-font-display: var(--disp); --ak-radius: 4px; --ak-radius-sm: 3px; --ak-good: #0b6b3c; --ak-good-soft: #dff4e7; --ak-bad: #a8112f; --ak-bad-soft: #fce4e8;
+  font-family: var(--ak-font); overflow-x: clip;
+  background-color: #fffdfc;
+  background-image: linear-gradient(rgba(236, 143, 145, .34) 1px, transparent 1px), linear-gradient(90deg, rgba(236, 143, 145, .34) 1px, transparent 1px), linear-gradient(rgba(246, 188, 188, .3) 1px, transparent 1px), linear-gradient(90deg, rgba(246, 188, 188, .3) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+}
+.lx[data-design="nabiz"] main { overflow-x: clip; }
+
+/* шапка: планка монитора */
+.lx[data-design="nabiz"] .lx-app { background: #fff; border-bottom: 3px solid var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-app__logo { background: var(--lx-accent); border-radius: 50% 50% 8px 8px; color: #fff; }
+.lx[data-design="nabiz"] .lx-app__t b { font: 700 1em/1.2 var(--mono); letter-spacing: -.02em; font-weight: 500; }
+.lx[data-design="nabiz"] .lx-app__t small { color: var(--lx-muted); font-family: var(--cond); font-size: .88em; }
+.lx[data-design="nabiz"] .lx-lessons { background: #eef8f6; border-radius: 4px; }
+.lx[data-design="nabiz"] .lx-lessons::before { color: var(--lx-muted); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="nabiz"] .lx-lessons a { border-radius: 3px; font-family: var(--mono); font-weight: 500; color: var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-lessons a[aria-current] { background: var(--lx-accent); color: #fff; box-shadow: none; }
+.lx[data-design="nabiz"] .lx-app__ring .lx-ring__bg { stroke: #d6ece7; }
+.lx[data-design="nabiz"] .lx-app__ring .lx-ring__fg { stroke: var(--lx-accent-2); stroke-linecap: butt; }
+.lx[data-design="nabiz"] .lx-app__ring text { font-family: var(--mono); font-weight: 500; fill: var(--lx-ink); }
+
+/* первый экран: заголовок напечатан прямо на ленте, ниже палата во всю ширину */
+.lx[data-design="nabiz"] .lx-hero { display: flex; flex-direction: column; margin-top: 0 !important; padding: 16px 0 0; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="nabiz"] .lx-hero > * { order: 5; }
+.lx[data-design="nabiz"] .lx-tag { order: 1; align-self: flex-start; margin: 0 0 6px !important; padding: 2px 8px; border: 1.5px solid var(--lx-ink); border-radius: 0; background: #fff; color: var(--lx-ink); font: 500 12px/1.4 var(--mono); letter-spacing: 0; text-transform: none; }
+.lx[data-design="nabiz"] .lx-hero h1 { order: 2; margin: 0 0 2px; font: 800 clamp(42px, 12.4vw, 76px)/.96 var(--disp); letter-spacing: -.035em; color: var(--lx-ink); hyphens: manual; text-wrap: balance; }
+.lx[data-design="nabiz"] .lx-hero__tr { order: 3; margin: 2px 0 10px !important; font: 500 clamp(15px, 3.8vw, 18px)/1.3 var(--mono); color: var(--lx-accent-2); }
+.lx[data-design="nabiz"] .lx-scene { order: 4; margin-inline: calc(50% - 50vw); height: clamp(240px, 64vw, 300px); overflow: hidden; background: #fff; border-top: 3px solid var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-scene svg { display: block; }
+.lx[data-design="nabiz"] .lx-hero__meta { margin: 14px 0 4px; font: 500 13px/1.4 var(--mono); color: var(--lx-accent); }
+.lx[data-design="nabiz"] .lx-hero__intro { color: var(--lx-ink); background: #fff; }
+/* числа как показания монитора */
+.lx[data-design="nabiz"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 10px 0; border: 2px solid var(--lx-ink); background: #fff; }
+.lx[data-design="nabiz"] .lx-stats li { padding: 6px 8px; background: none; border-radius: 0; border-left: 1px solid var(--lx-line); }
+.lx[data-design="nabiz"] .lx-stats li:first-child { border-left: 0; }
+.lx[data-design="nabiz"] .lx-stats b { font: 800 clamp(24px, 6.4vw, 30px)/1.05 var(--cond); color: #0a7a4a; }
+.lx[data-design="nabiz"] .lx-stats li:nth-child(2) b { color: #0f6fb0; }
+.lx[data-design="nabiz"] .lx-stats li:nth-child(3) b { color: #7a2a6a; }
+.lx[data-design="nabiz"] .lx-stats li:nth-child(4) b { color: var(--lx-accent-2); }
+.lx[data-design="nabiz"] .lx-stats span { font: 500 11px/1.2 var(--cond); color: var(--lx-muted); }
+.lx[data-design="nabiz"] .lx-gbar { height: 6px; gap: 2px; }
+.lx[data-design="nabiz"] .lx-gbar__s { border-radius: 0; background: var(--lx-accent) !important; }
+.lx[data-design="nabiz"] .lx-gbar__s:nth-child(2) { background: var(--lx-accent-2) !important; }
+
+/* вкладки: каналы монитора, у выбранного бежит кардиограмма */
+.lx[data-design="nabiz"] .lx-tabs { margin-top: 14px !important; gap: 0; padding: 0; border-radius: 0; border: 2px solid var(--lx-ink); background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 8px 18px -14px rgba(16, 48, 63, .7); }
+.lx[data-design="nabiz"] .lx-tab { min-height: 48px; padding: 3px 12px 7px 11px; border-radius: 0; border-right: 1px solid var(--lx-line); color: var(--lx-muted); box-shadow: inset 4px 0 0 #bfd8d8; gap: 0 7px; }
+.lx[data-design="nabiz"] .lx-tab:nth-child(7n+2) { box-shadow: inset 4px 0 0 #9fc6e2; }
+.lx[data-design="nabiz"] .lx-tab:nth-child(7n+3) { box-shadow: inset 4px 0 0 #d2b4cc; }
+.lx[data-design="nabiz"] .lx-tab:nth-child(7n+4) { box-shadow: inset 4px 0 0 #efb1be; }
+.lx[data-design="nabiz"] .lx-tab__ico svg { width: 17px; height: 17px; }
+.lx[data-design="nabiz"] .lx-tab b { font: 700 14.5px/1.1 var(--cond); letter-spacing: .02em; }
+.lx[data-design="nabiz"] .lx-tab small { font: 400 11px/1.1 var(--cond); }
+.lx[data-design="nabiz"] .lx-tab[aria-selected="true"] { color: var(--lx-ink); background: #dff3f0 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='14' viewBox='0 0 80 14'%3E%3Cpath d='M0 10h18q3-3 6 0h4l2 2 3-11 3 13 2-4h12q4-3 8 0h22' fill='none' stroke='%230a7a4a' stroke-width='1.300'/%3E%3C/svg%3E") left bottom 1px / 80px 14px repeat-x; box-shadow: inset 4px 0 0 var(--lx-accent); }
+.lx[data-design="nabiz"] .lx-tabs__line { left: 0; right: 0; bottom: 0; height: 2px; border-radius: 0; background: none; }
+.lx[data-design="nabiz"] .lx-tabs__line::after { border-radius: 0; background: var(--lx-accent-2); }
+
+/* заголовки разделов: шапка истории болезни */
+.lx[data-design="nabiz"] .lx-ph { position: relative; background: #fff; border: 2px solid var(--lx-ink); border-radius: 0; box-shadow: 6px 6px 0 #dff3f0; }
+.lx[data-design="nabiz"] .lx-kicker { color: var(--lx-accent-2); font: 500 13px/1 var(--mono); letter-spacing: 0; }
+.lx[data-design="nabiz"] .lx-panel h2 { font: 800 clamp(30px, 7vw, 46px)/1 var(--disp); letter-spacing: -.03em; }
+.lx[data-design="nabiz"] .lx-chip { border-radius: 2px; background: #eef8f6; font: 700 14.5px/1 var(--cond); box-shadow: inset 0 0 0 1px var(--lx-line); }
+.lx[data-design="nabiz"] .lx-chip[aria-pressed="true"] { background: var(--lx-accent); color: #fff; box-shadow: none; }
+.lx[data-design="nabiz"] .lx-search { border-radius: 2px; border-color: var(--lx-ink); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="nabiz"] .lx-learn { border-top: 1px solid var(--lx-line); }
+.lx[data-design="nabiz"] .lx-learn__ring .lx-ring__bg { stroke: #eef8f6; }
+.lx[data-design="nabiz"] .lx-switch { font-family: var(--cond); }
+
+/* группа: табличка отделения */
+.lx[data-design="nabiz"] .lx-group { display: inline-flex; width: fit-content; max-width: 100%; margin: 28px 0 12px; padding: 7px 16px 7px 8px; background: var(--lx-accent); color: #fff; font: 700 17px/1.1 var(--cond); letter-spacing: .05em; text-transform: uppercase; }
+.lx[data-design="nabiz"] .lx-group:first-of-type { margin-top: 12px; }
+.lx[data-design="nabiz"] .lx-group[data-g="1"] { background: var(--lx-accent-2); }
+.lx[data-design="nabiz"] .lx-group__ico { border-radius: 2px; background: #fff; color: var(--lx-ink); }
+
+/* карточка: бланк рецепта и ампула */
+.lx[data-design="nabiz"] .lx-cards { counter-reset: rx; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
+.lx[data-design="nabiz"] .lx-card { counter-increment: rx; gap: 8px; padding: 34px 14px 12px; background: #fff; border-radius: 0; border: 1.5px solid var(--lx-ink); box-shadow: 4px 4px 0 rgba(16, 48, 63, .14); overflow: hidden; }
+.lx[data-design="nabiz"] .lx-card::before { content: 'REÇETE · No ' counter(rx, decimal-leading-zero) / ''; position: absolute; inset: 0 0 auto 0; height: 24px; padding: 0 12px; background: #dff3f0; border-bottom: 1.5px solid var(--lx-ink); color: var(--lx-ink); font: 500 11.5px/23px var(--mono); }
+.lx[data-design="nabiz"] .lx-card[data-g="1"]::before { background: #fce4e8; }
+.lx[data-design="nabiz"] .lx-card[data-passive] { background: #fff; }
+.lx[data-design="nabiz"] .lx-card:hover { box-shadow: 6px 6px 0 rgba(16, 48, 63, .2); }
+.lx[data-design="nabiz"] .lx-card:focus-visible { outline: 3px solid var(--lx-accent-2); outline-offset: 2px; }
+.lx[data-design="nabiz"] .lx-card.is-flipped { background: #fff; box-shadow: 4px 4px 0 var(--lx-accent); }
+.lx[data-design="nabiz"] .lx-card__top { align-items: stretch; }
+/* ампула: стекло, горлышко и жидкость; выучено значит заполнена до горлышка */
+.lx[data-design="nabiz"] .lx-card .lx-card__top .lx-ico { position: relative; align-self: center; width: 40px; height: 68px; padding-top: 26px; border-radius: 0; color: var(--lx-ink);
+  background: linear-gradient(90deg, rgba(255,255,255,.75) 0 16%, transparent 34%), linear-gradient(#7fd1c7, #7fd1c7) bottom / 100% var(--lvl, 58%) no-repeat, #eef8f6;
+  clip-path: path('M12 0h16l-3 7c-1 2-1 3 0 5l1 3c1 3 5 5 9 9 3 3 5 6 5 10v28c0 4-2 6-6 6H6c-4 0-6-2-6-6V34c0-4 2-7 5-10 4-4 8-6 9-9l1-3c1-2 1-3 0-5z'); transition: background-size .5s ease; }
+.lx[data-design="nabiz"] .lx-card[data-g="1"] .lx-card__top .lx-ico { background: linear-gradient(90deg, rgba(255,255,255,.75) 0 16%, transparent 34%), linear-gradient(#f4b6c1, #f4b6c1) bottom / 100% var(--lvl, 58%) no-repeat, #fff5f6; }
+.lx[data-design="nabiz"] .lx-card .lx-card__top .lx-ico svg { width: 19px; height: 19px; }
+.lx[data-design="nabiz"] .lx-card.is-flipped .lx-card__top .lx-ico { --lvl: 40%; }
+.lx[data-design="nabiz"] .lx-card.is-known .lx-card__top .lx-ico { --lvl: 90%; }
+.lx[data-design="nabiz"] .lx-card__w { align-self: center; }
+.lx[data-design="nabiz"] .lx-card__tr { font: 800 1.34em/1.12 var(--disp); letter-spacing: -.02em; }
+.lx[data-design="nabiz"] .lx-card__ru { font-weight: 500; color: var(--lx-muted); }
+.lx[data-design="nabiz"] .lx-say { align-self: center; border-radius: 2px; background: #eef8f6; color: var(--lx-accent); box-shadow: inset 0 0 0 1.5px var(--lx-line); }
+.lx[data-design="nabiz"] .lx-card__pos { padding: 0; border-radius: 0; background: none; font: 500 12px/1.4 var(--mono); color: var(--lx-muted); }
+.lx[data-design="nabiz"] .lx-card__pos--passive { color: var(--lx-accent-2); }
+.lx[data-design="nabiz"] .lx-card__tx { font: 500 13px/1.4 var(--mono); }
+.lx[data-design="nabiz"] .lx-card__gov { font: 500 13px/1.4 var(--mono); color: var(--lx-accent-2); }
+/* примеры: строки назначения */
+.lx[data-design="nabiz"] .lx-ex { position: relative; padding: 6px 0 8px 30px; border-radius: 0; background: none; border-bottom: 1px dashed var(--lx-line); }
+.lx[data-design="nabiz"] .lx-ex::before { content: 'Rp/' / ''; position: absolute; left: 0; top: 7px; color: var(--lx-accent-2); font: 500 12px/1.4 var(--mono); }
+.lx[data-design="nabiz"] .lx-ex__ru { font-size: .9em; }
+.lx[data-design="nabiz"] .lx-card__note { padding: 4px 0 0; border: 0; border-radius: 0; background: none; color: #16408a; font: 500 1.28em/1.2 var(--hand); }
+.lx[data-design="nabiz"] .lx-card__acts { gap: 0; margin: 2px -14px -12px; border-top: 1.5px solid var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-card__acts button { border: 0; border-radius: 0; background: #fff; color: var(--lx-ink); font: 700 14.5px/1 var(--cond); letter-spacing: .03em; }
+.lx[data-design="nabiz"] .lx-card__acts button + button { border-left: 1.5px solid var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-card__flip[aria-expanded="true"] { background: #dff3f0; }
+.lx[data-design="nabiz"] .lx-card__know[aria-pressed="true"] { background: var(--ak-good-soft); color: var(--ak-good); }
+.lx[data-design="nabiz"] .lx-card.is-known { box-shadow: 4px 4px 0 var(--ak-good); border-color: var(--ak-good); }
+.lx[data-design="nabiz"] .lx-card.is-known::after { content: 'ONAY' / ''; position: absolute; right: 8px; top: 3px; padding: 0 7px; border: 1.5px solid var(--ak-good); background: #fff; color: var(--ak-good); font: 500 11px/1.4 var(--mono); rotate: -4deg; }
+
+/* история: лист истории болезни с полем и дырками */
+.lx[data-design="nabiz"] .lx-found__bar { border-radius: 0; background: #eef8f6; box-shadow: inset 0 0 0 1px var(--lx-line); }
+.lx[data-design="nabiz"] .lx-found__bar i { border-radius: 0; background: var(--lx-accent-2); }
+.lx[data-design="nabiz"] .lx-story { position: relative; padding: 26px 20px 26px 54px; border: 1.5px solid var(--lx-ink); border-radius: 0; background: #fff radial-gradient(circle 7px at 22px 40px, #fff 96%, transparent) ; box-shadow: 4px 4px 0 rgba(16, 48, 63, .14); }
+.lx[data-design="nabiz"] .lx-story::before { content: ''; position: absolute; left: 40px; top: 0; bottom: 0; border-left: 2px solid #efb1be; }
+.lx[data-design="nabiz"] .lx-story::after { content: ''; position: absolute; left: 13px; top: 28px; width: 15px; height: 15px; border-radius: 50%; background: #dfe9ea; box-shadow: inset 1px 1px 2px rgba(16, 48, 63, .4), 0 110px 0 #dfe9ea, 0 220px 0 #dfe9ea; }
+.lx[data-design="nabiz"] .lx-story p { line-height: 1.8; }
+.lx[data-design="nabiz"] .lx-tw { border-radius: 0; background: linear-gradient(transparent 62%, #bfe9e2 62%); color: var(--lx-ink); padding: 0 2px; }
+.lx[data-design="nabiz"] .lx-tw.is-on { background: var(--lx-accent); color: #fff; }
+.lx[data-design="nabiz"] .lx-tw.is-on::after { border-radius: 0; background: var(--lx-ink); color: #fff; font-family: var(--cond); }
+.lx[data-design="nabiz"] .lx-chip--tr { background: #fff; box-shadow: inset 0 0 0 1.5px var(--lx-line); font-family: var(--mono); font-weight: 500; font-size: 13.5px; }
+.lx[data-design="nabiz"] .lx-chip--tr.is-found { background: #dff3f0; color: var(--lx-ink); box-shadow: inset 0 0 0 1.5px var(--lx-accent); }
+
+/* диалоги: журнал приёма, реплики как записи с временем */
+.lx[data-design="nabiz"] .lx-dlg { border: 1.5px solid var(--lx-ink); border-radius: 0; background: #fff; box-shadow: 4px 4px 0 rgba(16, 48, 63, .14); }
+.lx[data-design="nabiz"] .lx-dlg__head h3 { font: 800 1.35em/1.1 var(--disp); letter-spacing: -.02em; }
+.lx[data-design="nabiz"] .lx-badge { border-radius: 0; font: 500 12px/1.4 var(--mono); }
+.lx[data-design="nabiz"] .lx-place { font: 500 13px/1.4 var(--mono); }
+.lx[data-design="nabiz"] .lx-place .lx-ico { border-radius: 2px; }
+.lx[data-design="nabiz"] .lx-dots i { width: 14px; height: 4px; border-radius: 0; }
+.lx[data-design="nabiz"] .lx-chat { padding: 10px 0 10px 16px; gap: 0; border-radius: 0; background: none; border-left: 3px solid var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-msg { max-width: 100%; justify-self: stretch; padding: 10px 8px 10px 44px; border-radius: 0; background: none; box-shadow: none; border-bottom: 1px dashed var(--lx-line); }
+.lx[data-design="nabiz"] .lx-msg--me { padding: 10px 44px 10px 8px; background: #eef8f6; text-align: right; }
+.lx[data-design="nabiz"] .lx-msg__ava { left: 4px; top: 12px; border-radius: 2px; background: var(--lx-accent-2); color: #fff; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="nabiz"] .lx-msg--me .lx-msg__ava { left: auto; right: 6px; background: var(--lx-accent); }
+.lx[data-design="nabiz"] .lx-msg__who { font: 500 12px/1.4 var(--mono); letter-spacing: 0; color: var(--lx-accent); }
+.lx[data-design="nabiz"] .lx-msg__tr { font-weight: 700; }
+.lx[data-design="nabiz"] .lx-typing { background: none; }
+.lx[data-design="nabiz"] .lx-btn, .lx[data-design="nabiz"] .lx-next { border-radius: 2px; font: 700 15.5px/1 var(--cond); letter-spacing: .03em; }
+.lx[data-design="nabiz"] .lx-btn--ghost { background: #fff; }
+.lx[data-design="nabiz"] .lx-next { background: var(--lx-ink); color: #fff; }
+
+/* практика, квест, тест: анализы на планшете */
+.lx[data-design="nabiz"] .lx-steps li { border-radius: 0; background: #fff; box-shadow: inset 0 0 0 1.5px var(--lx-line); font: 700 14.5px/1.1 var(--cond); }
+.lx[data-design="nabiz"] .lx-steps li::before { border-radius: 2px; background: #eef8f6; font-family: var(--mono); font-weight: 500; color: var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-steps li.is-done { background: var(--ak-good-soft); color: var(--ak-good); }
+.lx[data-design="nabiz"] .lx-panel a-exercise, .lx[data-design="nabiz"] .lx-panel a-quiz { display: block; border-radius: 0; box-shadow: 4px 4px 0 rgba(16, 48, 63, .14); }
+.lx[data-design="nabiz"] .ak-ex { border: 1.5px solid var(--lx-ink); border-top: 6px solid var(--lx-accent); border-radius: 0; background: #fff; }
+.lx[data-design="nabiz"] .ak-btn { border-radius: 2px; }
+.lx[data-design="nabiz"] .lx-sim__ava { border-radius: 2px; background: var(--lx-accent); color: #fff; }
+.lx[data-design="nabiz"] .lx-sim__dots i { border-radius: 2px; background: #eef8f6; color: var(--lx-ink); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="nabiz"] .lx-sim__dots i.is-good { background: var(--ak-good); color: #fff; }
+.lx[data-design="nabiz"] .lx-sim__dots i.is-ok { background: #fbe2a6; color: var(--lx-ink); }
+.lx[data-design="nabiz"] .lx-sim__feed { border-radius: 0; background: #f6fbfa; box-shadow: inset 0 0 0 1px var(--lx-line); }
+.lx[data-design="nabiz"] .lx-sim__msg { border-radius: 0; box-shadow: inset 0 0 0 1px var(--lx-line); }
+.lx[data-design="nabiz"] .lx-sim__msg--me { background: #dff3f0; color: var(--lx-ink); box-shadow: inset 0 0 0 1px var(--lx-accent); }
+.lx[data-design="nabiz"] .lx-sim__opt { border-radius: 2px; border-color: var(--lx-ink); background: #fff; }
+.lx[data-design="nabiz"] .lx-sim__n { border-radius: 2px; background: #eef8f6; color: var(--lx-ink); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="nabiz"] .lx-sim__done { border-radius: 0; box-shadow: inset 0 0 0 1.5px var(--ak-good); }
+.lx[data-design="nabiz"] .lx-res { border: 1.5px solid var(--lx-ink); border-radius: 0; background: #fff; }
+.lx[data-design="nabiz"] .lx-res__info b { font-family: var(--disp); font-weight: 800; }
+
+/* шпаргалка: лист назначений с графами */
+.lx[data-design="nabiz"] .lx-table { border-radius: 0; border: 2px solid var(--lx-ink); box-shadow: 4px 4px 0 rgba(16, 48, 63, .14); }
+.lx[data-design="nabiz"] .lx-table td { border-bottom: 1px solid var(--lx-line); }
+.lx[data-design="nabiz"] .lx-table td[lang="tr"] { border-right: 2px solid #efb1be; font-family: var(--disp); font-weight: 700; }
+.lx[data-design="nabiz"] .lx-table td[lang="tr"] small { font: 500 12px/1.4 var(--mono); }
+.lx[data-design="nabiz"] .lx-table tr:nth-child(even) td { background: #f6fbfa; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="nabiz"] .sc-run { animation: nb-run 3.2s linear infinite; }
+  .lx[data-design="nabiz"] .sc-trace { stroke-dasharray: 34 66; animation: nb-trace 3.2s linear infinite; }
+  .lx[data-design="nabiz"] .sc-heart { transform-box: fill-box; transform-origin: center; animation: nb-beat 1.6s ease-in-out infinite; }
+  .lx[data-design="nabiz"] .sc-drop { animation: nb-drop 2.2s cubic-bezier(.5, 0, 1, .6) infinite; }
+  .lx[data-design="nabiz"] .sc-cloud { animation: nb-cloud 26s ease-in-out infinite alternate; }
+  .lx[data-design="nabiz"] .sc-cloud--2 { animation-duration: 34s; animation-direction: alternate-reverse; }
+  .lx[data-design="nabiz"] .sc-breath { transform-box: fill-box; transform-origin: 50% 100%; animation: nb-breath 4.6s ease-in-out infinite; }
+  .lx[data-design="nabiz"] .sc-hand { transform-box: view-box; transform-origin: 240px 74px; animation: nb-hand 60s linear infinite; }
+  .lx[data-design="nabiz"] .sc-curtain { transform-box: fill-box; transform-origin: 50% 0; animation: nb-cur 7s ease-in-out infinite alternate; }
+  .lx[data-design="nabiz"] .sc-curtain--r { animation-delay: -3s; }
+}
+@keyframes nb-run { to { transform: translateX(-160px); } }
+@keyframes nb-trace { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@keyframes nb-beat { 0%, 30%, 100% { transform: scale(1); } 12% { transform: scale(1.3); } }
+@keyframes nb-drop { 0%, 20% { transform: translateY(0); opacity: 0; } 30% { opacity: 1; } 80% { transform: translateY(11px); opacity: 1; } 100% { transform: translateY(13px); opacity: 0; } }
+@keyframes nb-cloud { to { transform: translateX(46px); } }
+@keyframes nb-breath { 0%, 100% { transform: scaleY(1); } 45% { transform: scaleY(1.05); } }
+@keyframes nb-hand { to { transform: rotate(360deg); } }
+@keyframes nb-cur { to { transform: skewX(1.2deg); } }
+
+@media (max-width: 767px) {
+  .lx[data-design="nabiz"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lx[data-design="nabiz"] .lx-stats span { font-size: 10.5px; }
+  .lx[data-design="nabiz"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-width: 2px 0; }
+}
+@media print { .lx[data-design="nabiz"] { background: #fff; } .lx[data-design="nabiz"] .lx-scene { display: none; } }
+
+/* Компьютер: заголовок и показания идут одной строкой по ленте, палата ниже широкой панорамой. */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="nabiz"] .lx-hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 40px; padding-top: 20px; }
+  .lx[data-design="nabiz"] .lx-tag { grid-column: 1; grid-row: 1; justify-self: start; }
+  .lx[data-design="nabiz"] .lx-hero h1 { grid-column: 1; grid-row: 2; font-size: clamp(56px, 5.6vw, 84px); }
+  .lx[data-design="nabiz"] .lx-hero__tr { grid-column: 1; grid-row: 3; margin-bottom: 14px !important; }
+  .lx[data-design="nabiz"] .lx-hero__meta { grid-column: 2; grid-row: 1; margin: 0 0 4px; }
+  .lx[data-design="nabiz"] .lx-hero__intro { grid-column: 2; grid-row: 2; align-self: start; font-size: 15.5px; line-height: 1.45; margin: 0 0 6px; padding: 6px 8px; }
+  .lx[data-design="nabiz"] .lx-stats { grid-column: 2; grid-row: 3; margin: 0 0 14px; }
+  .lx[data-design="nabiz"] .lx-scene { grid-column: 1 / -1; grid-row: 4; height: max(290px, calc(100vh - 430px)); }
+  .lx[data-design="nabiz"] .lx-tabs { margin-top: 0 !important; }
+}

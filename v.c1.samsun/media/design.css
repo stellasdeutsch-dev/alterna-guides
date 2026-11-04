@@ -1,0 +1,244 @@
+/* Bandırma: альбом марок. Весь первый экран это большая памятная марка с гравюрой парохода; вкладки и карточки это марки с перфорацией */
+/* общее основание: сброс первого экрана и светлые упражнения; мир темы описан ниже */
+.lx[data-design="bandirma"] { --ak-bg: var(--lx-surf); --ak-surface: var(--lx-surf2); --ak-accent-soft: var(--lx-soft); overflow-x: clip; font-family: var(--ak-font);}
+.lx[data-design="bandirma"] main { overflow-x: clip;}
+.lx[data-design="bandirma"] .lx-hero { position: relative; margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0;}
+.lx[data-design="bandirma"] .lx-scene { position: relative; margin-inline: calc(50% - 50vw); overflow: hidden;}
+.lx[data-design="bandirma"] .lx-scene svg { display: block; width: 100%; height: 100%;}
+.lx[data-design="bandirma"] .lx-panel a-exercise, .lx[data-design="bandirma"] .lx-panel a-quiz { display: block; box-shadow: none;}
+.lx[data-design="bandirma"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { color: var(--lx-ink); border-color: var(--lx-line);}
+.lx[data-design="bandirma"] .ak-gap--input { color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-table td small, .lx[data-design="bandirma"] .lx-sim__opt small, .lx[data-design="bandirma"] .lx-sim__name small { color: var(--lx-muted);}
+.lx[data-design="bandirma"] .lx-sim__ru { opacity: 1;}
+.lx[data-design="bandirma"] .lx-search::placeholder { color: var(--lx-muted);}
+.lx[data-design="bandirma"] .lx-donut__bg { stroke: var(--lx-surf2);}
+.lx[data-design="bandirma"] .lx-tab { min-height: 48px;}
+@media (max-width: 767px) {
+  .lx[data-design="bandirma"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-radius: 0;}
+  .lx[data-design="bandirma"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr));}
+}
+@media print { .lx[data-design="bandirma"] { background: #fff;} .lx[data-design="bandirma"] .lx-scene { display: none;} }
+html:has(.lx[data-design="bandirma"]) { background: #e4f2ee;}
+.lx[data-design="bandirma"] {
+  --lx-accent: #0e5a64; --lx-accent-2: #a30e27; --lx-paper: #e4f2ee; --lx-surf: #fffdf4; --lx-surf2: #eef6ef; --lx-card: #fffdf4;
+  --lx-ink: #0e3b43; --lx-muted: #3f636a; --lx-line: #a9cdc5; --lx-soft: #d9efe8; --lx-on: #ffffff; --lx-tabs-bg: #eaf5f1; --lx-r: 2px; --lx-shadow: none;
+  --disp: 'LX Forum', Georgia, serif; --lab: 'LX PT Serif', Georgia, serif;
+  --ak-font: 'LX Lora', Georgia, serif; --ak-font-display: var(--disp); --ak-radius: 2px; --ak-radius-sm: 2px; --ak-good: #0d6239; --ak-good-soft: #dbf1e1; --ak-bad: #a30e27; --ak-bad-soft: #fbe4e6;
+  background-color: #e4f2ee;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='48'%3E%3Cpath d='M0 16q20-10 40 0t40 0 40 0 40 0M0 40q20-10 40 0t40 0 40 0 40 0' fill='none' stroke='%230e5a64' stroke-opacity='.11'/%3E%3C/svg%3E");
+}
+
+/* шапка */
+.lx[data-design="bandirma"] .lx-app { background: #fffdf4; border-bottom: 1.5px solid var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-app__logo { border-radius: 2px; background: var(--lx-ink); color: #fffdf4;}
+.lx[data-design="bandirma"] .lx-app__t b { font: 400 1.26em/1.15 var(--disp); letter-spacing: .02em;}
+.lx[data-design="bandirma"] .lx-app__ring .lx-ring__bg { stroke: var(--lx-line);}
+.lx[data-design="bandirma"] .lx-app__ring .lx-ring__fg { stroke: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-lessons { border-radius: 2px; background: none;}
+.lx[data-design="bandirma"] .lx-lessons::before { content: 'cilt'; font-family: var(--lab);}
+.lx[data-design="bandirma"] .lx-lessons a { border-radius: 2px; color: var(--lx-ink); font: 400 1.24em/1 var(--disp); box-shadow: inset 0 0 0 1.5px var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-lessons a[aria-current] { background: var(--lx-ink); color: #fffdf4; box-shadow: none;}
+
+/* большая марка: ::before это бумага с перфорацией, ::after внутренняя рамка */
+.lx[data-design="bandirma"] .lx-hero { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto auto auto auto auto auto auto; padding: 12px 0 0;}
+.lx[data-design="bandirma"] .lx-hero::before { content: '' / ''; grid-column: 1; grid-row: 1 / 5; margin-inline: -8px; background: #fffdf4; --s: 16px; --h: 5.5px;
+  -webkit-mask: linear-gradient(#000 0 0) center / calc(100% - 2 * var(--h)) calc(100% - 2 * var(--h)) no-repeat, radial-gradient(circle var(--h) at 50% 0, transparent 96%, #000) top / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 50% 100%, transparent 96%, #000) bottom / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 0 50%, transparent 96%, #000) left / var(--h) var(--s) repeat-y, radial-gradient(circle var(--h) at 100% 50%, transparent 96%, #000) right / var(--h) var(--s) repeat-y;
+  mask: linear-gradient(#000 0 0) center / calc(100% - 2 * var(--h)) calc(100% - 2 * var(--h)) no-repeat, radial-gradient(circle var(--h) at 50% 0, transparent 96%, #000) top / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 50% 100%, transparent 96%, #000) bottom / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 0 50%, transparent 96%, #000) left / var(--h) var(--s) repeat-y, radial-gradient(circle var(--h) at 100% 50%, transparent 96%, #000) right / var(--h) var(--s) repeat-y;}
+.lx[data-design="bandirma"] .lx-hero::after { content: '' / ''; grid-column: 1; grid-row: 1 / 5; margin: 7px 6px; pointer-events: none; z-index: 2; box-shadow: inset 0 0 0 1.5px var(--lx-ink), inset 0 0 0 4px #fffdf4, inset 0 0 0 4.8px var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-tag { grid-column: 1; grid-row: 1; z-index: 1; justify-self: center; margin: 14px 0 6px !important; padding: 0; background: none; color: var(--lx-ink); font: 700 11px/1.3 var(--lab); letter-spacing: .24em;}
+.lx[data-design="bandirma"] .lx-scene { grid-column: 1; grid-row: 2; z-index: 1; margin: 0 6px; height: clamp(214px, 56vw, 300px); box-shadow: 0 0 0 1px var(--lx-ink);}
+.lx[data-design="bandirma"] h1 { grid-column: 1; grid-row: 3; z-index: 1; margin: 0; padding: 10px 10px 0; font: 400 clamp(29px, 8vw, 46px)/1.04 var(--disp); text-align: center; color: var(--lx-ink); hyphens: manual; letter-spacing: .005em;}
+.lx[data-design="bandirma"] .lx-hero__tr { grid-column: 1; grid-row: 4; z-index: 1; margin: 2px 0 18px !important; text-align: center; font: 700 clamp(12.5px, 3.3vw, 15px)/1.3 var(--lab); letter-spacing: .1em; text-transform: uppercase; color: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-hero__meta { grid-column: 1; grid-row: 5; margin: 12px 0 2px; color: var(--lx-ink); font: 700 .96em/1.3 var(--lab);}
+.lx[data-design="bandirma"] .lx-hero__intro { grid-column: 1; grid-row: 6; margin-bottom: 10px; color: var(--lx-ink); line-height: 1.55;}
+.lx[data-design="bandirma"] .lx-stats { grid-column: 1; grid-row: 7; gap: 0; margin: 0 0 10px; border-block: 1.5px solid var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-stats li { padding: 5px 2px; border-radius: 0; background: none; text-align: center; border-left: 1px solid var(--lx-line);}
+.lx[data-design="bandirma"] .lx-stats li:first-child { border-left: 0;}
+.lx[data-design="bandirma"] .lx-stats b { font: 400 clamp(26px, 6.8vw, 34px)/1 var(--disp); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-stats span { font: 400 10.5px/1.2 var(--ak-font); color: var(--lx-muted);}
+.lx[data-design="bandirma"] .lx-gbar { grid-column: 1; grid-row: 8; height: 6px; gap: 3px;}
+.lx[data-design="bandirma"] .lx-gbar__s { border-radius: 0; background: var(--lx-ink) !important;}
+.lx[data-design="bandirma"] .lx-gbar__s:nth-child(2) { background: var(--lx-accent-2) !important;}
+
+/* вкладки: маленькие марки */
+.lx[data-design="bandirma"] .lx-tabs { margin-top: 14px !important; padding: 6px 8px; gap: 5px; border-radius: 0; background: #d3e9e2; border-block: 1.5px solid var(--lx-ink); -webkit-backdrop-filter: none; backdrop-filter: none;}
+.lx[data-design="bandirma"] .lx-tab { --s: 8px; --h: 2.4px; grid-template-columns: 1fr; gap: 0; min-height: 48px; padding: 5px 14px; border-radius: 0; background: #fffdf4; color: var(--lx-ink); text-align: center; justify-items: center;
+  -webkit-mask: linear-gradient(#000 0 0) center / calc(100% - 2 * var(--h)) calc(100% - 2 * var(--h)) no-repeat, radial-gradient(circle var(--h) at 50% 0, transparent 96%, #000) top / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 50% 100%, transparent 96%, #000) bottom / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 0 50%, transparent 96%, #000) left / var(--h) var(--s) repeat-y, radial-gradient(circle var(--h) at 100% 50%, transparent 96%, #000) right / var(--h) var(--s) repeat-y;
+  mask: linear-gradient(#000 0 0) center / calc(100% - 2 * var(--h)) calc(100% - 2 * var(--h)) no-repeat, radial-gradient(circle var(--h) at 50% 0, transparent 96%, #000) top / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 50% 100%, transparent 96%, #000) bottom / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 0 50%, transparent 96%, #000) left / var(--h) var(--s) repeat-y, radial-gradient(circle var(--h) at 100% 50%, transparent 96%, #000) right / var(--h) var(--s) repeat-y;}
+.lx[data-design="bandirma"] .lx-tab__ico { display: none;}
+.lx[data-design="bandirma"] .lx-tab b { font: 400 16.5px/1.05 var(--disp);}
+.lx[data-design="bandirma"] .lx-tab small { font: 400 10.5px/1.1 var(--ak-font); color: var(--lx-muted);}
+.lx[data-design="bandirma"] .lx-tab[aria-selected="true"] { background: var(--lx-ink); color: #fffdf4; box-shadow: none;}
+.lx[data-design="bandirma"] .lx-tab[aria-selected="true"] small { color: #d9efe8;}
+.lx[data-design="bandirma"] .lx-tab__ok { top: 5px; right: 5px; background: #0d6239;}
+.lx[data-design="bandirma"] .lx-tabs__line { display: none;}
+
+/* разделы */
+.lx[data-design="bandirma"] .lx-ph { padding: 0 0 12px; background: none; border-radius: 0;}
+.lx[data-design="bandirma"] .lx-kicker { color: var(--lx-accent-2); font: 700 11.5px/1 var(--lab); letter-spacing: .2em; text-transform: uppercase;}
+.lx[data-design="bandirma"] .lx-kicker__ico { display: none;}
+.lx[data-design="bandirma"] .lx-panel h2 { font: 400 clamp(36px, 9vw, 58px)/1.02 var(--disp);}
+.lx[data-design="bandirma"] .lx-chip { border-radius: 2px; background: #fffdf4; box-shadow: inset 0 0 0 1.5px var(--lx-ink); font: 700 .84em/1 var(--lab);}
+.lx[data-design="bandirma"] .lx-chip[aria-pressed="true"] { background: var(--lx-ink); color: #fffdf4;}
+.lx[data-design="bandirma"] .lx-search { border-radius: 2px; border: 1.5px solid var(--lx-ink); background: #fffdf4;}
+.lx[data-design="bandirma"] .lx-learn { border-top: 1.5px solid var(--lx-line);}
+.lx[data-design="bandirma"] .lx-learn__ring .lx-ring__bg { stroke: var(--lx-line);}
+.lx[data-design="bandirma"] .lx-panel[data-section="sozluk"] { counter-reset: st;}
+.lx[data-design="bandirma"] .lx-group { margin: 34px 0 14px; color: var(--lx-ink); font: 400 clamp(26px, 6.4vw, 36px)/1.05 var(--disp); text-transform: none; letter-spacing: 0;}
+.lx[data-design="bandirma"] .lx-group__ico { display: none;}
+.lx[data-design="bandirma"] .lx-group::after { content: '' / ''; flex: 1; height: 4px; border-block: 1px solid var(--lx-ink);}
+
+/* карточка: памятная марка, цвет печати меняется, погашенная получает штемпель */
+.lx[data-design="bandirma"] .lx-cards { gap: 14px;}
+.lx[data-design="bandirma"] .lx-card { --s: 13px; --h: 4.2px; --pr: #0e5a64; counter-increment: st; gap: 8px; padding: 16px 16px 15px; border-radius: 0; background: #fffdf4; box-shadow: none;
+  -webkit-mask: linear-gradient(#000 0 0) center / calc(100% - 2 * var(--h)) calc(100% - 2 * var(--h)) no-repeat, radial-gradient(circle var(--h) at 50% 0, transparent 96%, #000) top / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 50% 100%, transparent 96%, #000) bottom / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 0 50%, transparent 96%, #000) left / var(--h) var(--s) repeat-y, radial-gradient(circle var(--h) at 100% 50%, transparent 96%, #000) right / var(--h) var(--s) repeat-y;
+  mask: linear-gradient(#000 0 0) center / calc(100% - 2 * var(--h)) calc(100% - 2 * var(--h)) no-repeat, radial-gradient(circle var(--h) at 50% 0, transparent 96%, #000) top / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 50% 100%, transparent 96%, #000) bottom / var(--s) var(--h) repeat-x, radial-gradient(circle var(--h) at 0 50%, transparent 96%, #000) left / var(--h) var(--s) repeat-y, radial-gradient(circle var(--h) at 100% 50%, transparent 96%, #000) right / var(--h) var(--s) repeat-y;}
+.lx[data-design="bandirma"] .lx-card:nth-child(4n+2) { --pr: #8a1f2d;}
+.lx[data-design="bandirma"] .lx-card:nth-child(4n+3) { --pr: #1f4e8a;}
+.lx[data-design="bandirma"] .lx-card:nth-child(4n) { --pr: #5a4a14;}
+.lx[data-design="bandirma"] .lx-card::before { content: '' / ''; position: absolute; inset: 9px; pointer-events: none; box-shadow: inset 0 0 0 1.5px var(--pr);}
+.lx[data-design="bandirma"] .lx-card__face { position: relative; padding-top: 16px;}
+.lx[data-design="bandirma"] .lx-card__face::before { content: 'TÜRKİYE · ' counter(st, decimal-leading-zero) ' KURUŞ' / ''; position: absolute; left: -7px; right: -7px; top: -7px; padding: 2px 8px; background: var(--pr); color: #fffdf4; font: 700 10.5px/1.5 var(--lab); letter-spacing: .14em; text-align: center;}
+.lx[data-design="bandirma"] .lx-card[data-passive] { background: #fffdf4;}
+.lx[data-design="bandirma"] .lx-card:hover { background: #fff;}
+.lx[data-design="bandirma"] .lx-card:focus-visible { outline: 3px solid var(--lx-accent-2); outline-offset: -12px;}
+.lx[data-design="bandirma"] .lx-card.is-flipped { background: #fffdf4;}
+.lx[data-design="bandirma"] .lx-card.is-known { background: #f3faf2;}
+.lx[data-design="bandirma"] .lx-card.is-known::after { content: 'SAMSUN' / ''; position: absolute; z-index: 3; right: 66px; top: 28px; display: grid; place-items: center; width: 84px; height: 84px; border-radius: 50%; border: 2.5px solid #0d6239; color: #0d6239; font: 700 11px/1 var(--lab); letter-spacing: .12em; rotate: -16deg; pointer-events: none; opacity: .92; background: repeating-linear-gradient(transparent 0 8px, rgba(13, 98, 57, .22) 8px 9px);}
+.lx[data-design="bandirma"] .lx-ico { width: 46px; height: 46px; border-radius: 50%; background: #fffdf4; color: var(--pr); box-shadow: inset 0 0 0 1.5px var(--pr);}
+.lx[data-design="bandirma"] .lx-ico svg { width: 21px; height: 21px; stroke-width: 1.5;}
+.lx[data-design="bandirma"] .lx-card__tr { font: 400 1.5em/1.08 var(--disp); color: var(--pr);}
+.lx[data-design="bandirma"] .lx-card__ru { color: var(--lx-ink); font-weight: 400;}
+.lx[data-design="bandirma"] .lx-say { background: var(--pr); color: #fffdf4;}
+.lx[data-design="bandirma"] .lx-card__pos { padding: 0; border-radius: 0; background: none; color: var(--lx-muted); font: 700 10.5px/1.5 var(--lab); letter-spacing: .08em;}
+.lx[data-design="bandirma"] .lx-card__pos--passive { color: var(--lx-accent-2); background: none;}
+.lx[data-design="bandirma"] .lx-card__back { position: relative; padding-top: 2px;}
+.lx[data-design="bandirma"] .lx-card__tx { color: var(--lx-muted);}
+.lx[data-design="bandirma"] .lx-card__gov { color: var(--lx-accent); font-family: var(--lab); font-weight: 700;}
+.lx[data-design="bandirma"] .lx-ex { border-radius: 0; background: none; padding: 5px 0 6px; border-top: 1px dashed var(--lx-line);}
+.lx[data-design="bandirma"] .ak-say__btn { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-card__note { border-radius: 0; border: 0; background: var(--lx-surf2); font-size: .9em;}
+.lx[data-design="bandirma"] .lx-card__acts { position: relative; z-index: 1;}
+.lx[data-design="bandirma"] .lx-card__acts button { border: 1.5px solid var(--lx-ink); border-radius: 2px; background: #fffdf4; color: var(--lx-ink); font: 700 .84em/1 var(--lab);}
+.lx[data-design="bandirma"] .lx-card__flip { background: var(--lx-ink) !important; color: #fffdf4 !important;}
+.lx[data-design="bandirma"] .lx-card__know[aria-pressed="true"] { border-color: #0d6239; background: var(--ak-good-soft); color: #0d6239;}
+
+/* история: судовой журнал */
+.lx[data-design="bandirma"] .lx-found b { color: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-found__bar { border-radius: 0; background: #fffdf4; box-shadow: inset 0 0 0 1.5px var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-found__bar i { border-radius: 0; background: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-story { position: relative; padding: 46px 16px 16px 48px; border-radius: 0; background-color: #fffdf4; background-image: linear-gradient(90deg, transparent 37px, #e5a3ad 37px 38.5px, transparent 38.5px), repeating-linear-gradient(transparent 0 31px, #cfe3dd 31px 32px); box-shadow: 0 0 0 1.5px var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-story::before { content: 'SEYİR DEFTERİ · 19 MAYIS 1919' / ''; position: absolute; left: 48px; top: 14px; font: 700 12px/1.3 var(--lab); letter-spacing: .14em; color: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-story p { font: 400 1.02em/32px var(--ak-font); margin-bottom: 0; max-width: 74ch;}
+.lx[data-design="bandirma"] .lx-tw { padding: 0 2px; border-radius: 0; background: var(--lx-soft); color: var(--lx-ink); font-weight: 600; box-shadow: inset 0 -2px 0 var(--lx-accent);}
+.lx[data-design="bandirma"] .lx-tw.is-on { background: var(--lx-ink); color: #fffdf4; box-shadow: none;}
+.lx[data-design="bandirma"] .lx-tw.is-on::after { background: var(--lx-ink); color: #fffdf4; border-radius: 0;}
+.lx[data-design="bandirma"] .lx-chip--tr { background: #fffdf4; box-shadow: inset 0 0 0 1px var(--lx-ink); font-family: var(--ak-font);}
+.lx[data-design="bandirma"] .lx-chip--tr.is-found { background: var(--lx-soft); color: var(--lx-ink); box-shadow: inset 0 0 0 1.5px var(--lx-accent);}
+
+/* диалоги: почтовая открытка */
+.lx[data-design="bandirma"] .lx-dlg { position: relative; padding: 16px; border-radius: 0; background: #fffdf4; box-shadow: 0 0 0 1.5px var(--lx-ink); }
+.lx[data-design="bandirma"] .lx-dlg::before { content: '' / ''; position: absolute; right: 12px; top: 12px; width: 44px; height: 54px; background: var(--lx-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 54'%3E%3Cpath d='M6 34h32l-4 8H10zM14 34V22h12v12M18 22v-8h5v8' fill='none' stroke='%23fffdf4' stroke-width='1.6'/%3E%3C/svg%3E") center no-repeat; outline: 2px dotted #fffdf4; outline-offset: -2px;}
+.lx[data-design="bandirma"] .lx-dlg__head { padding-right: 58px;}
+.lx[data-design="bandirma"] .lx-dlg__head h3 { font: 400 1.65em/1.05 var(--disp);}
+.lx[data-design="bandirma"] .lx-badge { border-radius: 0; background: var(--lx-surf2); color: var(--lx-ink); font: 700 11px/1.5 var(--lab);}
+.lx[data-design="bandirma"] .lx-badge--short { background: var(--ak-good-soft); color: var(--ak-good);}
+.lx[data-design="bandirma"] .lx-badge--long { background: var(--ak-bad-soft); color: #8a0c20;}
+.lx[data-design="bandirma"] .lx-place { padding-right: 58px;}
+.lx[data-design="bandirma"] .lx-place .lx-ico { background: none; box-shadow: none; color: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-dots { margin-left: 0 !important;}
+.lx[data-design="bandirma"] .lx-dots i { border-radius: 0; background: var(--lx-line);}
+.lx[data-design="bandirma"] .lx-dots i.is-on { background: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-chat { gap: 0; padding: 0; margin: 14px 0; border-radius: 0; background: none; border-top: 1.5px solid var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-msg { max-width: 100%; width: 100%; padding: 10px 2px 9px 42px; border-radius: 0; background: none; box-shadow: none; border-bottom: 1px solid var(--lx-line);}
+.lx[data-design="bandirma"] .lx-msg--me { padding: 10px 2px 9px 42px; background: none; justify-self: stretch;}
+.lx[data-design="bandirma"] .lx-msg__ava { left: 0; top: 11px; width: 32px; height: 32px; background: #fffdf4; color: var(--lx-accent); box-shadow: inset 0 0 0 1.5px var(--lx-accent); font: 400 16px/1 var(--disp);}
+.lx[data-design="bandirma"] .lx-msg--me .lx-msg__ava { left: 0; right: auto; background: #fffdf4; color: var(--lx-accent-2); box-shadow: inset 0 0 0 1.5px var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-msg__who { color: var(--lx-accent); font: 700 11px/1.3 var(--lab); letter-spacing: .06em;}
+.lx[data-design="bandirma"] .lx-msg--me .lx-msg__who { color: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-msg__tr { font-weight: 600;}
+.lx[data-design="bandirma"] .lx-msg__ru { color: var(--lx-muted);}
+.lx[data-design="bandirma"] .lx-typing { background: none;}
+
+/* кнопки, упражнения: лист альбома с кармашком */
+.lx[data-design="bandirma"] .lx-btn { border-radius: 2px; background: var(--lx-ink); color: #fffdf4; font: 700 .9em/1 var(--lab);}
+.lx[data-design="bandirma"] .lx-btn--ghost { background: #fffdf4; color: var(--lx-ink); box-shadow: inset 0 0 0 1.5px var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-next { border-radius: 2px; background: var(--lx-ink); color: #fffdf4; font: 700 1em/1.2 var(--lab);}
+.lx[data-design="bandirma"] .lx-steps li { border-radius: 2px; background: #fffdf4; box-shadow: inset 0 0 0 1.5px var(--lx-ink); font: 700 .84em/1 var(--lab);}
+.lx[data-design="bandirma"] .lx-steps li::before { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-steps li.is-done { background: var(--ak-good-soft); color: #0d6239;}
+.lx[data-design="bandirma"] .ak-ex { border: 1.5px solid var(--lx-ink); border-radius: 0; background: linear-gradient(rgba(14, 90, 100, .07) 0 34px, transparent 34px), #fffdf4;}
+.lx[data-design="bandirma"] .ak-btn { border-radius: 2px; background: var(--lx-ink); color: #fffdf4; font-family: var(--lab); font-weight: 700;}
+.lx[data-design="bandirma"] .ak-btn--ghost { background: #fffdf4; color: var(--lx-ink); box-shadow: inset 0 0 0 1.5px var(--lx-ink);}
+.lx[data-design="bandirma"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { background: #fffdf4; border: 1.5px solid var(--lx-ink); border-radius: 0;}
+.lx[data-design="bandirma"] .ak-gap--input { background: #fffdf4;}
+.lx[data-design="bandirma"] .ak-opt__n { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-sim { border-radius: 0; background: #fffdf4; box-shadow: 0 0 0 1.5px var(--lx-ink); padding: 14px;}
+.lx[data-design="bandirma"] .lx-sim__ava { background: var(--lx-ink); color: #fffdf4; font: 400 22px/1 var(--disp);}
+.lx[data-design="bandirma"] .lx-sim__dots i { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-sim__feed { border-radius: 0; background: var(--lx-surf2);}
+.lx[data-design="bandirma"] .lx-sim__msg { border-radius: 0; background: #fff; box-shadow: 0 0 0 1px var(--lx-line);}
+.lx[data-design="bandirma"] .lx-sim__msg--me { background: var(--lx-soft); color: var(--lx-ink); box-shadow: 0 0 0 1px var(--lx-accent);}
+.lx[data-design="bandirma"] .lx-sim__opt { border: 1.5px solid var(--lx-ink); border-radius: 0; background: #fffdf4;}
+.lx[data-design="bandirma"] .lx-sim__n { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-sim__hint { color: var(--lx-accent-2);}
+.lx[data-design="bandirma"] .lx-sim__done { background: #fffdf4; border-radius: 0; box-shadow: 0 0 0 1px var(--lx-line);}
+.lx[data-design="bandirma"] .lx-res { border-radius: 0; background: #fffdf4; box-shadow: 0 0 0 1.5px var(--lx-ink);}
+
+/* шпаргалка: каталог коллекционера */
+.lx[data-design="bandirma"] .lx-table { border-radius: 0; background: #fffdf4; box-shadow: 0 0 0 1.5px var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-table td { border-bottom: 1px dashed var(--lx-line);}
+.lx[data-design="bandirma"] .lx-table td[lang="tr"] { position: relative; padding-left: 40px; font: 400 1.22em/1.2 var(--disp); color: var(--lx-ink);}
+.lx[data-design="bandirma"] .lx-table td[lang="tr"] small { font-family: var(--ak-font);}
+.lx[data-design="bandirma"] .lx-table td[lang="tr"]::before { content: '' / ''; position: absolute; left: 12px; top: 13px; width: 17px; height: 21px; background: var(--lx-accent); outline: 2px dotted #fffdf4; outline-offset: -2px;}
+.lx[data-design="bandirma"] .lx-table tr:nth-child(3n) td[lang="tr"]::before { background: #8a1f2d;}
+.lx[data-design="bandirma"] .lx-table tr:nth-child(3n+1) td[lang="tr"]::before { background: #1f4e8a;}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="bandirma"] .bn-bob { transform-box: fill-box; transform-origin: 50% 80%; animation: bn-bob 4.4s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-sm { animation: bn-sm 4.5s ease-out infinite;}
+  .lx[data-design="bandirma"] .bn-wv { animation: bn-wv 5s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-w2 { animation-duration: 3.8s; animation-direction: alternate-reverse;}
+  .lx[data-design="bandirma"] .bn-gull { animation: bn-gull 7s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-wing { transform-box: fill-box; transform-origin: 50% 100%; animation: bn-wing .8s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-flag { animation: bn-flag 1.8s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-boat { animation: bn-boat 3.2s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-fish { animation: bn-fish 6s ease-in-out infinite;}
+  .lx[data-design="bandirma"] .bn-ray { animation: bn-ray 3.4s ease-in-out infinite alternate;}
+  .lx[data-design="bandirma"] .bn-cl { animation: bn-cl 40s linear infinite alternate;}
+}
+@keyframes bn-bob { from { transform: rotate(-.7deg) translateY(-1px);} to { transform: rotate(.7deg) translateY(2px);} }
+@keyframes bn-sm { 0% { transform: translate(0, 10px) scale(.6); opacity: 0;} 20% { opacity: 1;} 100% { transform: translate(-26px, -34px) scale(1.25); opacity: 0;} }
+@keyframes bn-wv { from { transform: translateX(-16px);} to { transform: translateX(16px);} }
+@keyframes bn-gull { from { transform: translate(-16px, 4px);} to { transform: translate(26px, -8px);} }
+@keyframes bn-wing { from { transform: scaleY(1);} to { transform: scaleY(.45);} }
+@keyframes bn-flag { from { transform: skewY(-3deg);} to { transform: skewY(3deg);} }
+@keyframes bn-boat { from { transform: translateY(-2px) rotate(-1deg);} to { transform: translateY(3px) rotate(1deg);} }
+@keyframes bn-fish { 0%, 72%, 100% { transform: translate(0, 40px); opacity: 0;} 78% { transform: translate(14px, -12px); opacity: 1;} 90% { transform: translate(44px, 26px); opacity: 1;} }
+@keyframes bn-ray { from { opacity: .4;} to { opacity: 1;} }
+@keyframes bn-cl { to { transform: translateX(46px);} }
+
+@media (max-width: 767px) {
+  .lx[data-design="bandirma"] .lx-lessons::before { display: none;}
+}
+
+/* компьютер: большая марка лежит на листе альбома чуть наискось, рядом подпись коллекционера */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="bandirma"] .lx-hero { grid-template-columns: minmax(0, 7fr) minmax(0, 3.2fr); column-gap: 34px; grid-template-rows: auto auto auto auto auto auto auto 1fr; padding-top: 14px;}
+  .lx[data-design="bandirma"] .lx-hero::before, .lx[data-design="bandirma"] .lx-hero::after { grid-column: 1; grid-row: 1 / -1;}
+  .lx[data-design="bandirma"] .lx-hero::before { margin-inline: 0;}
+  .lx[data-design="bandirma"] .lx-hero::after { margin: 7px;}
+  .lx[data-design="bandirma"] .lx-tag { grid-row: 1;}
+  .lx[data-design="bandirma"] .lx-scene { grid-row: 2 / span 4; margin: 0 8px; height: clamp(300px, calc(100vh - 300px), 460px);}
+  .lx[data-design="bandirma"] h1 { grid-row: 6; font-size: clamp(32px, 3.05vw, 46px); padding-top: 8px; white-space: nowrap;}
+  .lx[data-design="bandirma"] .lx-hero__tr { grid-row: 7; margin-bottom: 18px !important;}
+  .lx[data-design="bandirma"] .lx-hero__meta { grid-column: 2; grid-row: 2; margin: 0 0 6px; padding-top: 6px; border-top: 3px double var(--lx-ink); font: 400 1.5em/1.12 var(--disp);}
+  .lx[data-design="bandirma"] .lx-hero__intro { grid-column: 2; grid-row: 3; margin-bottom: 12px; font-size: .95em; line-height: 1.5;}
+  .lx[data-design="bandirma"] .lx-stats { grid-column: 2; grid-row: 4; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-bottom: 0; align-self: start;}
+  .lx[data-design="bandirma"] .lx-stats li { border-bottom: 1px solid var(--lx-line); padding: 6px 2px 8px;}
+  .lx[data-design="bandirma"] .lx-stats li:nth-child(3) { border-left: 0;}
+  .lx[data-design="bandirma"] .lx-gbar { grid-column: 2; grid-row: 5; align-self: start; margin-top: 10px !important;}
+  .lx[data-design="bandirma"] .lx-tab { flex: 1 1 0;}
+  .lx[data-design="bandirma"] .lx-chat { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 26px;}
+  .lx[data-design="bandirma"] .lx-chat.is-step { display: grid;}
+}

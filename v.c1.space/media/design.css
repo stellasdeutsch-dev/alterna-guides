@@ -1,0 +1,185 @@
+/* Akdağ: ночь над обсерваторией. Планета и орбиты в шапке, звёздное небо за всей страницей, карточки как таблички звёздного каталога */
+html:has(.lx[data-design="akdag"]) { background: #fdf8e9;}
+.lx[data-design="akdag"] {
+  --lx-accent: #27357e; --lx-accent-2: #a84a1f; --lx-paper: #f6efda; --lx-surf: #fdf8ea; --lx-surf2: #f1e8ce; --lx-card: #fdf8ea;
+  --lx-ink: #1a2348; --lx-muted: #4d5270; --lx-line: #c9bb91; --lx-soft: #e9dfc0; --lx-on: #ffffff; --lx-tabs-bg: #fdf8ea; --lx-r: 4px; --lx-shadow: none;
+  --disp: 'LX Unbounded', system-ui, sans-serif; --mono: 'LX JetBrains Mono', ui-monospace, Menlo, monospace; --serif: 'LX Cormorant Garamond', Georgia, serif;
+  --ak-font: 'LX Manrope', system-ui, sans-serif; --ak-font-display: var(--disp); --ak-bg: #fdf8ea; --ak-surface: #f6efda; --ak-radius: 4px; --ak-radius-sm: 4px; --ak-good: #0e6a3a; --ak-good-soft: #d6f3e0; --ak-bad: #ab2a08; --ak-bad-soft: #ffe4d8; font-family: var(--ak-font); overflow-x: clip; background: transparent;}
+.lx[data-design="akdag"] main { overflow-x: clip;}
+.lx[data-design="akdag"] .ak-sky { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none;}
+
+/* шапка: приборная строка */
+.lx[data-design="akdag"] .lx-app { background: rgba(253, 248, 234, 0.86); border-bottom: 1px solid var(--lx-line);}
+.lx[data-design="akdag"] .lx-app__logo { background: none; color: #993e00; border-radius: 50%; box-shadow: inset 0 0 0 1px #d65700;}
+.lx[data-design="akdag"] .lx-app__t b { font: 400 .92em/1.25 var(--disp); letter-spacing: .02em;}
+.lx[data-design="akdag"] .lx-ring__bg { stroke: rgba(26, 35, 72, 0.3);}
+.lx[data-design="akdag"] .lx-ring__fg { stroke: #d65700;}
+.lx[data-design="akdag"] .lx-lessons { background: rgba(255, 255, 255, .07);}
+.lx[data-design="akdag"] .lx-lessons a { font-family: var(--mono); font-weight: 500;}
+.lx[data-design="akdag"] .lx-lessons a[aria-current] { background: #ffb07a; color: #060919; box-shadow: none;}
+
+/* первый экран */
+.lx[data-design="akdag"] .lx-hero { position: relative; margin-top: 0 !important; padding: clamp(230px, 56vw, 400px) 0 0; background: none; box-shadow: none; border-radius: 0;}
+.lx[data-design="akdag"] .lx-scene { position: absolute; top: 0; left: 50%; width: 100vw; translate: -50% 0; height: clamp(360px, 74vw, 620px); -webkit-mask: linear-gradient(#000 74%, transparent); mask: linear-gradient(#000 74%, transparent);}
+.lx[data-design="akdag"] .lx-scene svg { display: block;}
+.lx[data-design="akdag"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 1;}
+.lx[data-design="akdag"] .lx-tag { padding: 0; background: none; color: #993e00; font: 500 12px/1.4 var(--mono); letter-spacing: .14em;}
+.lx[data-design="akdag"] .lx-tag::before { content: '◉ ' / '';}
+.lx[data-design="akdag"] h1 { font: 300 clamp(52px, 15.4vw, 124px)/1 var(--disp); letter-spacing: -.035em; color: #1a2348; text-shadow: none;}
+.lx[data-design="akdag"] .lx-hero__tr { margin: 8px 0 4px !important; font: 500 clamp(30px, 7.4vw, 50px)/1.05 var(--serif); color: #894d00;}
+.lx[data-design="akdag"] .lx-hero__meta { color: var(--lx-muted); font: 500 .86em/1.4 var(--mono);}
+.lx[data-design="akdag"] .lx-hero__intro { max-width: 60ch; color: #1a2348;}
+.lx[data-design="akdag"] .lx-stats { gap: 0; margin: 20px 0 14px; border-top: 1px solid var(--lx-line); border-bottom: 1px solid var(--lx-line);}
+.lx[data-design="akdag"] .lx-stats li { background: none; border-radius: 0; padding: 12px 8px;}
+.lx[data-design="akdag"] .lx-stats b { font: 200 clamp(26px, 7vw, 42px)/1 var(--disp); color: #1a2348; letter-spacing: -.03em;}
+.lx[data-design="akdag"] .lx-stats span { margin-top: 4px; font: 500 11px/1.3 var(--mono); color: var(--lx-muted);}
+.lx[data-design="akdag"] .lx-gbar { height: 3px; gap: 8px;}
+.lx[data-design="akdag"] .lx-gbar__s { border-radius: 0; background: #9fc2ff;}
+.lx[data-design="akdag"] .lx-gbar__s:nth-child(2) { background: #ffb07a;}
+.lx[data-design="akdag"] .lx-gbar__s:nth-child(3) { background: #d6b6ff;}
+.lx[data-design="akdag"] .lx-gbar__s:nth-child(4) { background: #7fe3d2;}
+
+/* вкладки: планеты на орбите */
+.lx[data-design="akdag"] .lx-tabs { margin-top: 22px !important; padding: 3px 6px 6px; border-radius: 0; background: rgba(253, 248, 234, 0.9); border-block: 1px solid var(--lx-line);}
+.lx[data-design="akdag"] .lx-tab { grid-template-columns: 1fr; justify-items: center; gap: 2px; min-height: 48px; padding: 2px 9px 2px; border-radius: 0; color: var(--lx-muted); text-align: center;}
+.lx[data-design="akdag"] .lx-tab__ico { grid-row: auto; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; color: #060919; background: radial-gradient(circle at 34% 30%, #eef2ff, #7c8ab9 70%, #f5edd7); transition: box-shadow .25s, scale .25s;}
+.lx[data-design="akdag"] .lx-tab:nth-child(2) .lx-tab__ico { background: radial-gradient(circle at 34% 30%, #ffe0bd, #d9713f 70%, #f8f1de);}
+.lx[data-design="akdag"] .lx-tab:nth-child(3) .lx-tab__ico { background: radial-gradient(circle at 34% 30%, #d9f7ff, #4aa2c9 70%, #f8f0dd);}
+.lx[data-design="akdag"] .lx-tab:nth-child(4) .lx-tab__ico { background: radial-gradient(circle at 34% 30%, #f7e9ff, #a77ddb 70%, #f9f2df);}
+.lx[data-design="akdag"] .lx-tab:nth-child(5) .lx-tab__ico { background: radial-gradient(circle at 34% 30%, #e7ffe2, #6fc28c 70%, #f6eed8);}
+.lx[data-design="akdag"] .lx-tab:nth-child(6) .lx-tab__ico { background: radial-gradient(circle at 34% 30%, #fff5c9, #e0b04a 70%, #f2e9d0);}
+.lx[data-design="akdag"] .lx-tab:nth-child(7) .lx-tab__ico { background: radial-gradient(circle at 34% 30%, #ffdbe2, #e0647e 70%, #f8f1dd);}
+.lx[data-design="akdag"] .lx-tab__ico svg { width: 13px; height: 13px;}
+.lx[data-design="akdag"] .lx-tab b { font: 500 11.5px/1.1 var(--mono);}
+.lx[data-design="akdag"] .lx-tab[aria-selected="true"] { background: none; color: #1a2348; box-shadow: none;}
+.lx[data-design="akdag"] .lx-tab[aria-selected="true"] .lx-tab__ico { box-shadow: 0 0 0 3px rgba(26, 35, 72, 0.3), 0 0 0 4px #c9bb91, 0 0 18px 3px rgba(26, 35, 72, 0.3);}
+.lx[data-design="akdag"] .lx-tabs__line { display: block; left: 6px; right: 6px; bottom: 1px; height: 2px; border-radius: 0; background: #faf4e3;}
+.lx[data-design="akdag"] .lx-tabs__line::after { border-radius: 0; background: linear-gradient(90deg, transparent, #ffd9a8 70%, #ffffff);}
+
+/* панели: стекло приборов с уголками прицела */
+.lx[data-design="akdag"] :is(.lx-ph, .lx-dlg, .lx-res) { position: relative; background: rgba(253, 248, 234, 0.88); border: 1px solid var(--lx-line);}
+.lx[data-design="akdag"] .lx-kicker { color: #993e00; font: 500 12px/1 var(--mono); letter-spacing: .12em; text-transform: uppercase;}
+.lx[data-design="akdag"] .lx-panel h2 { font: 300 clamp(28px, 7vw, 48px)/1.08 var(--disp); letter-spacing: -.03em; color: #1a2348;}
+.lx[data-design="akdag"] .lx-chip { border-radius: 2px; background: none; color: var(--lx-ink); box-shadow: inset 0 0 0 1px var(--lx-line); font: 500 .85em/1 var(--mono);}
+.lx[data-design="akdag"] .lx-chip[aria-pressed="true"] { background: #eef1ff; color: #060919; box-shadow: none;}
+.lx[data-design="akdag"] .lx-search { border-radius: 2px; background: #fdf7e9; border-color: var(--lx-line); font-family: var(--mono); font-size: 16px;}
+.lx[data-design="akdag"] .lx-search::placeholder { color: var(--lx-muted);}
+.lx[data-design="akdag"] .lx-learn { border-top: 1px solid var(--lx-line);}
+
+/* созвездия-группы */
+.lx[data-design="akdag"] .lx-panel[data-section="sozluk"] { counter-reset: obj;}
+.lx[data-design="akdag"] .lx-group { position: relative; margin: 34px 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--lx-line); color: #894d00; font: 500 clamp(26px, 6.4vw, 38px)/1.1 var(--serif); letter-spacing: 0; text-transform: none;}
+.lx[data-design="akdag"] .lx-group__ico { background: none; color: #993e00; box-shadow: inset 0 0 0 1px #d65700; border-radius: 50%;}
+
+/* карточки: таблички каталога */
+.lx[data-design="akdag"] .lx-cards { gap: 12px;}
+.lx[data-design="akdag"] .lx-card { counter-increment: obj; padding: 26px 16px 14px; border-radius: 2px; background: var(--lx-card); box-shadow: inset 0 0 0 1px var(--lx-line);}
+.lx[data-design="akdag"] .lx-card::before { content: 'OBJ-' counter(obj, decimal-leading-zero) / ''; position: absolute; left: 16px; top: 9px; font: 500 10.5px/1 var(--mono); letter-spacing: .1em; color: #993e00;}
+.lx[data-design="akdag"] .lx-card::after { content: ''; position: absolute; inset: 5px; pointer-events: none; opacity: .75;
+  background: linear-gradient(#9fc2ff 0 0) 0 0 / 10px 1px, linear-gradient(#9fc2ff 0 0) 0 0 / 1px 10px, linear-gradient(#9fc2ff 0 0) 100% 0 / 10px 1px, linear-gradient(#9fc2ff 0 0) 100% 0 / 1px 10px, linear-gradient(#9fc2ff 0 0) 0 100% / 10px 1px, linear-gradient(#9fc2ff 0 0) 0 100% / 1px 10px, linear-gradient(#9fc2ff 0 0) 100% 100% / 10px 1px, linear-gradient(#9fc2ff 0 0) 100% 100% / 1px 10px; background-repeat: no-repeat;}
+.lx[data-design="akdag"] .lx-card[data-passive] { background: rgba(253, 248, 234, 0.9);}
+.lx[data-design="akdag"] .lx-card.is-flipped { background: linear-gradient(180deg, rgba(253, 248, 234, 0.55), var(--lx-card) 50%);}
+.lx[data-design="akdag"] .lx-card:hover { box-shadow: inset 0 0 0 1px #2f7bff, 0 0 26px -12px #2f7bff;}
+.lx[data-design="akdag"] .lx-card:focus-visible { box-shadow: inset 0 0 0 2px #bc6a00;}
+.lx[data-design="akdag"] .lx-card.is-known { box-shadow: inset 0 0 0 1px #149543, 0 0 24px -10px #149543;}
+.lx[data-design="akdag"] .lx-ico { width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 34% 30%, #f6efda, #fcf7e8); color: #1a2348; box-shadow: 0 0 0 1px var(--lx-line);}
+.lx[data-design="akdag"] .lx-ico svg { width: 20px; height: 20px; stroke-width: 1.5;}
+.lx[data-design="akdag"] .lx-card__tr { font: 500 1.36em/1.2 var(--ak-font); letter-spacing: -.01em; color: #1a2348;}
+.lx[data-design="akdag"] .lx-card__ru { color: var(--lx-muted); font-weight: 500;}
+.lx[data-design="akdag"] .lx-say { background: none; color: #993e00; box-shadow: inset 0 0 0 1px var(--lx-line);}
+.lx[data-design="akdag"] .lx-card__pos { padding: 0; background: none; color: var(--lx-muted); font: 500 11.5px/1.5 var(--mono);}
+.lx[data-design="akdag"] .lx-card__pos--passive { color: #993e00;}
+.lx[data-design="akdag"] .lx-card__tx { color: var(--lx-muted); font-family: var(--mono); font-size: .85em;}
+.lx[data-design="akdag"] .lx-card__gov { font-family: var(--mono); color: #993e00;}
+.lx[data-design="akdag"] .lx-ex { border-radius: 0; background: none; border-left: 1px solid #2f7bff; padding: 2px 0 2px 12px;}
+.lx[data-design="akdag"] .ak-say__btn { background: #faf4e3; color: #1a2348;}
+.lx[data-design="akdag"] .lx-card__note { border-radius: 0; border-left: 1px solid #d65700; background: rgba(163, 66, 0, 0.08);}
+.lx[data-design="akdag"] .lx-card__acts button { border-radius: 2px; border: 1px solid var(--lx-line); background: none; color: var(--lx-ink); font: 500 .85em/1 var(--mono);}
+.lx[data-design="akdag"] .lx-card__know[aria-pressed="true"] { border-color: #149543; background: var(--ak-good-soft); color: #0e682f;}
+
+/* история: журнал наблюдений */
+.lx[data-design="akdag"] .lx-story { position: relative; padding-left: clamp(36px, 7vw, 64px); background: rgba(253, 248, 234, 0.9); border: 1px solid var(--lx-line); box-shadow: none;}
+.lx[data-design="akdag"] .lx-story::before { content: ''; position: absolute; left: clamp(14px, 3vw, 28px); top: 24px; bottom: 24px; width: 1px; background: repeating-linear-gradient(#9fc2ff 0 1px, transparent 1px 8px);}
+.lx[data-design="akdag"] .lx-story p { position: relative; font: 500 1.28em/1.55 var(--serif); color: #1a2348;}
+.lx[data-design="akdag"] .lx-story p::before { content: ''; position: absolute; left: calc(clamp(36px, 7vw, 64px) * -1 + clamp(14px, 3vw, 28px) - 3px); top: .62em; width: 7px; height: 7px; border-radius: 50%; background: #ffd9a8; box-shadow: 0 0 10px 2px rgba(137, 77, 0, 0.3);}
+.lx[data-design="akdag"] .lx-tw { padding: 0 3px; border-radius: 0; background: none; box-shadow: inset 0 -1px 0 #d65700; color: #894d00; font-family: var(--ak-font); font-size: .78em; font-weight: 600;}
+.lx[data-design="akdag"] .lx-tw.is-on { background: #ffd9a8; color: #060919;}
+.lx[data-design="akdag"] .lx-tw.is-on::after { background: #eef1ff; color: #060919; font-family: var(--ak-font);}
+.lx[data-design="akdag"] .lx-chip--tr { box-shadow: inset 0 0 0 1px var(--lx-line); background: rgba(253, 248, 234, 0.9);}
+.lx[data-design="akdag"] .lx-chip--tr.is-found { background: #ffd9a8; color: #060919; box-shadow: none;}
+.lx[data-design="akdag"] .lx-found__bar { border-radius: 0; height: 3px; background: var(--lx-line);}
+.lx[data-design="akdag"] .lx-found__bar i { border-radius: 0; background: #ffd9a8;}
+
+/* диалоги: радиосвязь */
+.lx[data-design="akdag"] .lx-dlg__head h3 { font: 300 1.2em/1.2 var(--disp); letter-spacing: -.02em;}
+.lx[data-design="akdag"] .lx-badge { border-radius: 2px; background: var(--lx-surf2); color: var(--lx-ink); font-family: var(--mono); font-weight: 500;}
+.lx[data-design="akdag"] .lx-badge--short { background: var(--ak-good-soft); color: var(--ak-good);}
+.lx[data-design="akdag"] .lx-badge--long { background: #36182a; color: #ffc0cb;}
+.lx[data-design="akdag"] .lx-place .lx-ico { background: none; box-shadow: none; color: #993e00;}
+.lx[data-design="akdag"] .lx-chat { border-radius: 0; background: #fdf7e9; padding: 12px;}
+.lx[data-design="akdag"] .lx-msg { border-radius: 0; background: none; box-shadow: none; max-width: 100%; padding: 6px 8px 8px 42px; border-left: 1px solid #2f7bff;}
+.lx[data-design="akdag"] .lx-msg--me { justify-self: stretch; padding: 6px 42px 8px 8px; text-align: right; background: none; border-left: 0; border-right: 1px solid #d65700;}
+.lx[data-design="akdag"] .lx-msg__ava { left: 6px; top: 7px; background: #1b2554; color: #dfe7ff; font-family: var(--mono);}
+.lx[data-design="akdag"] .lx-msg--me .lx-msg__ava { left: auto; right: 6px; background: #4a2a18; color: #ffd9a8;}
+.lx[data-design="akdag"] .lx-msg__who { color: #0050dc; font: 500 11px/1.3 var(--mono);}
+.lx[data-design="akdag"] .lx-msg--me .lx-msg__who { color: #993e00;}
+.lx[data-design="akdag"] .lx-dots i { border-radius: 0; background: var(--lx-line);}
+.lx[data-design="akdag"] .lx-typing { background: none;}
+
+/* кнопки, упражнения */
+.lx[data-design="akdag"] .lx-btn { border-radius: 2px; background: #eef1ff; color: #060919; font: 500 .9em/1 var(--mono);}
+.lx[data-design="akdag"] .lx-btn--ghost { background: none; color: #1a2348; box-shadow: inset 0 0 0 1px #c9bb91;}
+.lx[data-design="akdag"] .lx-next { border-radius: 2px; background: #ffd9a8; color: #060919; font: 500 1em/1.2 var(--mono);}
+.lx[data-design="akdag"] .lx-steps li { border-radius: 2px; background: none; box-shadow: inset 0 0 0 1px var(--lx-line); font: 500 .85em/1 var(--mono);}
+.lx[data-design="akdag"] .lx-steps li::before { border-radius: 2px; background: #faf4e3; color: #1a2348;}
+.lx[data-design="akdag"] .lx-panel a-exercise, .lx[data-design="akdag"] .lx-panel a-quiz { display: block; box-shadow: none;}
+.lx[data-design="akdag"] .ak-ex { border: 1px solid var(--lx-line); background: rgba(253, 248, 234, 0.94);}
+.lx[data-design="akdag"] .ak-btn { background: #eef1ff; color: #060919; border-radius: 2px;}
+.lx[data-design="akdag"] .ak-btn--ghost { background: none; color: #1a2348;}
+.lx[data-design="akdag"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { background: #fbf5e5; color: var(--lx-ink); border-color: var(--lx-line);}
+.lx[data-design="akdag"] .ak-gap--input { background: #fdf7e9; color: var(--lx-ink);}
+.lx[data-design="akdag"] .lx-sim__ava { background: radial-gradient(circle at 34% 30%, #ffe0bd, #d9713f 70%, #f8f1de); color: #060919;}
+.lx[data-design="akdag"] .lx-sim__dots i { border-radius: 50%; background: var(--lx-surf2);}
+.lx[data-design="akdag"] .lx-sim__feed { border-radius: 0; background: #fdf7e9;}
+.lx[data-design="akdag"] .lx-sim__msg { border-radius: 0; background: #fbf5e5; box-shadow: none;}
+.lx[data-design="akdag"] .lx-sim__msg--me { background: #eef1ff; color: #060919;}
+.lx[data-design="akdag"] .lx-sim__opt { border-radius: 2px; background: #fbf5e5; color: var(--lx-ink); border-color: var(--lx-line);}
+.lx[data-design="akdag"] .lx-sim__n { background: #060919; color: #ffd9a8;}
+.lx[data-design="akdag"] .lx-sim__done { background: #fbf5e5;}
+
+/* шпаргалка: звёздный каталог */
+.lx[data-design="akdag"] .lx-table { border-radius: 0; background: rgba(253, 248, 234, 0.94); box-shadow: inset 0 0 0 1px var(--lx-line); font-family: var(--mono); font-size: .92em;}
+.lx[data-design="akdag"] .lx-table td { border-bottom: 1px solid #c9bb91;}
+.lx[data-design="akdag"] .lx-table td[lang="tr"] { color: #894d00; font-weight: 500;}
+.lx[data-design="akdag"] .lx-table small { color: var(--lx-muted);}
+.lx[data-design="akdag"] .lx-donut__bg { stroke: var(--lx-surf2);}
+
+/* движение */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="akdag"] .ak-orbit { transform-box: view-box; transform-origin: 560px 180px; animation: ak-orbit 40s linear infinite;}
+  .lx[data-design="akdag"] .ak-band { animation: ak-band 22s linear infinite alternate;}
+  .lx[data-design="akdag"] .ak-sat { animation: ak-sat 11s ease-in-out infinite alternate;}
+  .lx[data-design="akdag"] .ak-blink { animation: ak-blink 1.6s steps(1) infinite;}
+  .lx[data-design="akdag"] .ak-cometg { animation: ak-comet 9s linear infinite;}
+}
+@keyframes ak-orbit { to { transform: rotate(360deg);} }
+@keyframes ak-band { to { transform: translateX(-46px);} }
+@keyframes ak-sat { from { transform: translate(180px, 96px) rotate(-6deg);} to { transform: translate(280px, 66px) rotate(6deg);} }
+@keyframes ak-blink { 50% { opacity: .15;} }
+@keyframes ak-comet { 0%, 70% { transform: translate(-200px, 30px) rotate(14deg); opacity: 0;} 72% { opacity: 1;} 88% { opacity: 1;} 92%, 100% { transform: translate(860px, 220px) rotate(14deg); opacity: 0;} }
+
+@media (max-width: 767px) {
+  .lx[data-design="akdag"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important;}
+  .lx[data-design="akdag"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr));}
+  .lx[data-design="akdag"] .lx-stats li { padding: 10px 4px;}
+}
+@media print { html:has(.lx[data-design="akdag"]) { background: #ffffff;} .lx[data-design="akdag"] { color: #000000;} .lx[data-design="akdag"] .lx-scene, .lx[data-design="akdag"] .ak-sky { display: none;} }
+
+/* подписи вкладок возвращены: держим полосу не толще 64 px на телефоне */
+@media (max-width: 767px) {
+  .lx[data-design="akdag"] .lx-tabs { padding-top: 1px !important; padding-bottom: 3px !important; }
+  .lx[data-design="akdag"] .lx-tab { min-height: 44px !important; padding-top: 1px !important; padding-bottom: 1px !important; gap: 0 6px !important; }
+  .lx[data-design="akdag"] .lx-tab__ico, .lx[data-design="akdag"] .lx-tab__ico svg { width: 16px !important; height: 16px !important; }
+  .lx[data-design="akdag"] .lx-tab b { font-size: 12.5px !important; line-height: 1.05 !important; }
+  .lx[data-design="akdag"] .lx-tab small { font-size: 10.5px !important; line-height: 1.05 !important; }
+}

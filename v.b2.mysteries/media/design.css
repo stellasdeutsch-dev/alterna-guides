@@ -1,0 +1,223 @@
+.lx[data-design="gizli"] { font-family: var(--ak-font); overflow-x: clip; --lx-card: transparent; }
+.lx[data-design="gizli"] main { overflow-x: clip; }
+.lx[data-design="gizli"] .lx-hero { position: relative; margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="gizli"] .lx-scene { position: relative; margin-inline: calc(50% - 50vw); overflow: hidden; }
+.lx[data-design="gizli"] .lx-scene svg { display: block; width: 100%; height: 100%; }
+.lx[data-design="gizli"] .lx-tabs { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="gizli"] .lx-tab b { white-space: nowrap; }
+.lx[data-design="gizli"] .lx-tab small { white-space: nowrap; }
+.lx[data-design="gizli"] .lx-panel a-exercise, .lx[data-design="gizli"] .lx-panel a-quiz { display: block; box-shadow: none; }
+.lx[data-design="gizli"] .lx-table { display: table; }
+@media (max-width: 767px) { .lx[data-design="gizli"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-radius: 0; } }
+@media print { .lx[data-design="gizli"] { background: #fff !important; } .lx[data-design="gizli"] .lx-scene { display: none; } }
+/* Gizli dosya: снимки наблюдения выезжают из бледно-зелёной папки. Заголовок напечатан на самой папке, вкладки это таблички улик, карточки это снимки в зелёном тоне прибора.
+   Тема светлая: тьмы нет, загадка держится на зелёном оттенке и прицеле. */
+html:has(.lx[data-design="gizli"]) { background: #e6efe0; }
+.lx[data-design="gizli"] {
+  --ink: #12302a; --rust: #8e4414; --mint: #dce9d2; --marker: #f2c14e;
+  --lx-accent: #12463a; --lx-accent-2: #8e4414; --lx-paper: #e6efe0; --lx-surf: #fbfdf7; --lx-surf2: #edf4e6; --lx-ink: #12302a; --lx-muted: #456056; --lx-line: #c7d7be; --lx-soft: #dce9d2; --lx-on: #fbfdf7; --lx-tabs-bg: #e6efe0; --lx-r: 2px;
+  --lx-shadow: 0 1px 0 #c7d7be, 5px 9px 16px -10px rgba(18, 48, 42, .45);
+  --big: 'LX Alumni Sans', 'Arial Narrow', sans-serif; --typed: 'LX JetBrains Mono', ui-monospace, monospace; --lab: 'LX Roboto Condensed', 'Arial Narrow', sans-serif; --txt: 'LX Spectral', Georgia, serif; --pen: 'LX Marck Script', cursive;
+  --ak-font: 'LX Roboto Condensed', system-ui, sans-serif; --ak-font-display: var(--big); --ak-radius: 2px; --ak-radius-sm: 2px; --ak-good: #0f6640; --ak-good-soft: #d8efdd; --ak-bad: #9e2a14; --ak-bad-soft: #f6e2d6; --ak-accent-soft: #dce9d2; --ak-surface: #edf4e6; --ak-bg: #fbfdf7; --ak-line: #b7c9ad;
+  font-size: 1.02em;
+  background-color: #e6efe0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='a' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .35 0 0 0 0 .28 0 0 0 .18 -.04'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23a)' opacity='.5'/%3E%3C/svg%3E");
+}
+.lx[data-design="gizli"] .lx-app { position: relative; z-index: 3; background: #fbfdf7; border-bottom: 0; box-shadow: 0 1px 0 #b7c9ad; }
+.lx[data-design="gizli"] .lx-app__logo { border-radius: 50%; background: none; color: #12302a; box-shadow: inset 0 0 0 2px #12302a; }
+.lx[data-design="gizli"] .lx-app__t b { font: 800 1.34em/1 var(--big); letter-spacing: .03em; text-transform: uppercase; }
+.lx[data-design="gizli"] .lx-app__t small { color: var(--lx-muted); font-family: var(--lab); }
+.lx[data-design="gizli"] .lx-lessons { background: none; padding: 0; gap: 3px; }
+.lx[data-design="gizli"] .lx-lessons::before { color: var(--lx-muted); font-family: var(--lab); }
+.lx[data-design="gizli"] .lx-lessons a { border-radius: 2px; background: #dce9d2; color: #12302a; font: 500 14px/1 var(--typed); }
+.lx[data-design="gizli"] .lx-lessons a[aria-current] { background: var(--marker); color: #17201c; box-shadow: none; }
+.lx[data-design="gizli"] .lx-app__ring .lx-ring__bg { stroke: #dce9d2; }
+.lx[data-design="gizli"] .lx-app__ring .lx-ring__fg { stroke: #8e4414; }
+
+/* первый экран: снимки торчат из папки, папка лежит поверх них */
+.lx[data-design="gizli"] .lx-hero { --sh: clamp(250px, 72vw, 460px); }
+.lx[data-design="gizli"] .lx-hero::before { content: ''; position: absolute; z-index: 1; left: 50%; top: calc(var(--sh) - 62px); bottom: 0; width: 100vw; margin-left: -50vw; background: linear-gradient(#cfe0bf, #dbe8cd 50%, #e6efe0); clip-path: polygon(0 34px, calc(50vw - 188px) 34px, calc(50vw - 176px) 0, calc(50vw + 164px) 0, calc(50vw + 176px) 34px, 100% 34px, 100% 100%, 0 100%); filter: none; }
+.lx[data-design="gizli"] .lx-scene { height: var(--sh); background: #e6efe0; }
+.lx[data-design="gizli"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 2; }
+.lx[data-design="gizli"] .lx-tag { position: absolute !important; top: calc(var(--sh) - 56px); left: 0; right: 0; margin: 0 !important; padding: 0; background: none; border-radius: 0; text-align: center; color: #12302a; font: 500 11px/2 var(--typed); letter-spacing: .03em; }
+.lx[data-design="gizli"] h1 { margin: -18px 0 0; padding-top: 0; font: 900 clamp(61px, 17vw, 110px)/.86 var(--big); letter-spacing: .005em; text-transform: uppercase; color: #12302a; hyphens: manual; }
+.lx[data-design="gizli"] .lx-hero__tr { margin: 6px 0 6px !important; font: 400 clamp(28px, 7vw, 38px)/1 var(--pen); color: #8e4414; }
+.lx[data-design="gizli"] .lx-hero__meta { margin-bottom: 6px; color: #12302a; font: 500 12px/1.4 var(--typed); }
+.lx[data-design="gizli"] .lx-hero__intro { margin-bottom: 8px; font: 400 1.02em/1.42 var(--txt); color: #1a3a32; max-width: 58ch; }
+.lx[data-design="gizli"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 4px 0 8px; border-top: 1.5px dashed #12302a; }
+.lx[data-design="gizli"] .lx-stats li { padding: 5px 4px 0; background: none; border-radius: 0; }
+.lx[data-design="gizli"] .lx-stats b { font: 900 clamp(30px, 8vw, 40px)/.95 var(--big); color: #12302a; }
+.lx[data-design="gizli"] .lx-stats span { font: 400 11.5px/1.15 var(--lab); color: #33514a; }
+.lx[data-design="gizli"] .lx-gbar { height: 5px; gap: 3px; }
+.lx[data-design="gizli"] .lx-gbar__s { border-radius: 0; background: #12463a !important; }
+.lx[data-design="gizli"] .lx-gbar__s:nth-child(2) { background: #8e4414 !important; }
+
+/* вкладки: таблички улик на полу */
+.lx[data-design="gizli"] .lx-tabs { counter-reset: e; margin-top: 12px !important; padding: 6px 8px 5px; gap: 3px; border-radius: 0; background: #e6efe0; box-shadow: 0 -1px 0 #b7c9ad, 0 8px 14px -12px rgba(18, 48, 42, .6); }
+.lx[data-design="gizli"] .lx-tab { counter-increment: e; min-height: 48px; padding: 4px 18px 3px; border-radius: 0; color: #12302a; background: #fbfdf7; grid-template-columns: auto auto; gap: 0 7px; clip-path: polygon(11px 0, calc(100% - 11px) 0, 100% 100%, 0 100%); }
+.lx[data-design="gizli"] .lx-tab::before { content: counter(e) / ''; grid-row: span 2; font: 900 29px/1 var(--big); }
+.lx[data-design="gizli"] .lx-tab__ico { display: none; }
+.lx[data-design="gizli"] .lx-tab b { font: 700 14px/1.1 var(--lab); }
+.lx[data-design="gizli"] .lx-tab small { font: 400 11px/1.15 var(--lab); color: #33514a; }
+.lx[data-design="gizli"] .lx-tab[aria-selected="true"] { background: var(--marker); color: #17201c; box-shadow: none; }
+.lx[data-design="gizli"] .lx-tab[aria-selected="true"] small { color: #17201c; }
+.lx[data-design="gizli"] .lx-tab__ok { top: 1px; right: 10px; background: #0f6640; }
+.lx[data-design="gizli"] .lx-tabs__line { left: 8px; right: 8px; bottom: 1px; height: 2px; border-radius: 0; background: #c7d7be; }
+.lx[data-design="gizli"] .lx-tabs__line::after { border-radius: 0; background: #8e4414; }
+
+.lx[data-design="gizli"] .lx-ph { padding: 18px 0 12px; background: none; box-shadow: none; }
+.lx[data-design="gizli"] .lx-kicker { color: #8e4414; font: 500 12px/1.2 var(--typed); }
+.lx[data-design="gizli"] .lx-kicker__ico { display: none; }
+.lx[data-design="gizli"] .lx-panel h2 { font: 900 clamp(46px, 9vw, 72px)/.9 var(--big); text-transform: uppercase; letter-spacing: .005em; }
+.lx[data-design="gizli"] .lx-hint { color: var(--lx-muted); }
+.lx[data-design="gizli"] .lx-chip { border-radius: 2px; background: #fbfdf7; box-shadow: inset 0 0 0 1px #12302a; font: 700 14.5px/1 var(--lab); }
+.lx[data-design="gizli"] .lx-chip[aria-pressed="true"] { background: #12302a; color: #fbfdf7; }
+.lx[data-design="gizli"] .lx-search { border-radius: 2px; border: 1px solid #12302a; background: #fbfdf7; }
+.lx[data-design="gizli"] .lx-learn { border-top: 1.5px dashed #7f9a88; }
+.lx[data-design="gizli"] .lx-learn p b { color: #8e4414; }
+.lx[data-design="gizli"] .lx-learn__ring .lx-ring__fg { stroke: #8e4414; }
+.lx[data-design="gizli"] .lx-switch input { accent-color: #12463a; }
+/* группа: разделитель папки */
+.lx[data-design="gizli"] .lx-group { width: max-content; max-width: 100%; margin: 34px 0 -2px; padding: 8px 26px 6px 14px; gap: 8px; border-radius: 0; color: #12302a; background: #cfe0bf; font: 800 clamp(25px, 5vw, 30px)/1 var(--big); letter-spacing: .03em; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 0 100%); }
+.lx[data-design="gizli"] .lx-group__ico { display: none; }
+
+/* карточка: снимок с кадровыми уголками на скрепке */
+.lx[data-design="gizli"] .lx-cards { gap: 22px 16px; padding: 18px 12px; background: #cfe0bf linear-gradient(#cfe0bf, #dbe8cd); }
+.lx[data-design="gizli"] .lx-card { padding: 10px 10px 12px; border-radius: 0; gap: 8px; background: #fbfdf7; box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-card[data-passive] { background: #f4f7ec; }
+.lx[data-design="gizli"] .lx-card:nth-child(3n+1) { rotate: -.5deg; }
+.lx[data-design="gizli"] .lx-card:nth-child(3n) { rotate: .5deg; }
+.lx[data-design="gizli"] .lx-card::before { content: ''; position: absolute; z-index: 2; left: 18px; top: -10px; width: 13px; height: 34px; border: 2px solid #7d8c84; border-radius: 7px; pointer-events: none; }
+.lx[data-design="gizli"] .lx-card__top { --pic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='90'%3E%3Cg fill='%23a9c4ad'%3E%3Cpath d='M20 90V40l26-18 26 18v50zM36 54h20v22H36zM100 90V58h40v32zM180 90V30h26v60zM206 90V46h34v44zM262 90V60h30v30z' fill-rule='evenodd'/%3E%3C/g%3E%3C/svg%3E"); position: relative; min-height: 94px; padding: 12px 10px 10px; align-items: flex-end; background: linear-gradient(transparent 0 0), repeating-linear-gradient(transparent 0 3px, rgba(47, 90, 75, .07) 3px 4px), var(--pic) right bottom / 240px auto no-repeat, linear-gradient(#e0ecd5, #eef5e6); box-shadow: inset 0 0 28px rgba(106, 145, 124, .35); }
+.lx[data-design="gizli"] .lx-card:nth-child(4n+2) .lx-card__top { --pic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='90'%3E%3Cg fill='%23a9c4ad'%3E%3Cellipse cx='250' cy='66' rx='13' ry='11'/%3E%3Ccircle cx='236' cy='50' r='5'/%3E%3Ccircle cx='246' cy='44' r='5'/%3E%3Ccircle cx='256' cy='44' r='5'/%3E%3Ccircle cx='266' cy='50' r='5'/%3E%3Cellipse cx='180' cy='40' rx='11' ry='9'/%3E%3Ccircle cx='168' cy='27' r='4'/%3E%3Ccircle cx='176' cy='22' r='4'/%3E%3Ccircle cx='185' cy='22' r='4'/%3E%3Ccircle cx='193' cy='27' r='4'/%3E%3C/g%3E%3C/svg%3E"); }
+.lx[data-design="gizli"] .lx-card:nth-child(4n+3) .lx-card__top { --pic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='90'%3E%3Cg fill='none' stroke='%23a9c4ad' stroke-width='4'%3E%3Ccircle cx='240' cy='45' r='30'/%3E%3Cpath d='M240 4v22M240 64v22M198 45h22M260 45h22'/%3E%3C/g%3E%3C/svg%3E"); }
+.lx[data-design="gizli"] .lx-card:nth-child(4n) .lx-card__top { --pic: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='90'%3E%3Cg fill='%23a9c4ad'%3E%3Cellipse cx='240' cy='26' rx='36' ry='7'/%3E%3Cpath d='M222 25c2-12 32-12 36 0z'/%3E%3Cpath d='M170 90c20-16 50-22 70-14s40 6 60-4v18z'/%3E%3C/g%3E%3C/svg%3E"); }
+.lx[data-design="gizli"] .lx-ico { width: 40px; height: 40px; border-radius: 0; background: #fbfdf7; color: #12302a; box-shadow: 0 0 0 1.5px #12302a; }
+.lx[data-design="gizli"] .lx-card__tr { font: 800 1.68em/.98 var(--big); letter-spacing: .012em; color: #12302a; }
+.lx[data-design="gizli"] .lx-card__ru { color: #1d3d35; font: 400 .98em/1.2 var(--lab); }
+.lx[data-design="gizli"] .lx-say { background: #fbfdf7; color: #12302a; border-radius: 0; box-shadow: 0 0 0 1.5px #12302a; }
+.lx[data-design="gizli"] .lx-card__pos { padding: 0; border-radius: 0; background: none; font: 500 11px/1.5 var(--typed); color: var(--lx-muted); }
+.lx[data-design="gizli"] .lx-card__pos--passive { background: none; color: #8e4414; }
+.lx[data-design="gizli"] .lx-card__tx { font-family: var(--typed); font-size: .82em; color: #3a554b; }
+.lx[data-design="gizli"] .lx-card__gov { font-family: var(--typed); color: #8e4414; }
+.lx[data-design="gizli"] .lx-ex { padding: 2px 0 6px; border-radius: 0; background: none; border-bottom: 1px dashed #a9bfa4; }
+.lx[data-design="gizli"] .lx-ex__tr { font-family: var(--lab); font-weight: 500; }
+.lx[data-design="gizli"] .lx-ex__ru { color: var(--lx-muted); }
+.lx[data-design="gizli"] .lx-card__note { padding: 2px 0; border: 0; border-radius: 0; background: none; font: 400 1.26em/1.2 var(--pen); color: #8e4414; }
+.lx[data-design="gizli"] .lx-card__acts { gap: 6px; }
+.lx[data-design="gizli"] .lx-card__acts button { border: 0; border-radius: 0; font: 700 14px/1 var(--lab); }
+.lx[data-design="gizli"] .lx-card__flip { background: #12302a !important; color: #fbfdf7 !important; }
+.lx[data-design="gizli"] .lx-card__know { background: #dce9d2 !important; color: #12302a !important; }
+.lx[data-design="gizli"] .lx-card__know[aria-pressed="true"] { background: #d8efdd !important; color: #0b5433 !important; box-shadow: inset 0 0 0 1.5px #0f6640; }
+.lx[data-design="gizli"] .lx-card:hover { box-shadow: 0 1px 0 #c7d7be, 7px 13px 22px -10px rgba(18, 48, 42, .6); }
+.lx[data-design="gizli"] .lx-card:focus-visible { outline: 3px solid #8e4414; outline-offset: 2px; box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-card.is-flipped { background: #fbfdf7; }
+.lx[data-design="gizli"] .lx-card.is-known { box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-card.is-known::after { content: 'ÇÖZÜLDÜ' / ''; position: absolute; left: 12px; top: 20px; padding: 0 7px; border: 2.5px solid #8e4414; color: #8e4414; font: 800 18px/1.2 var(--big); letter-spacing: .1em; rotate: -6deg; background: rgba(251, 253, 247, .85); pointer-events: none; }
+
+/* история: бланк протокола */
+.lx[data-design="gizli"] .lx-found { font-family: var(--lab); }
+.lx[data-design="gizli"] .lx-found b { color: #8e4414; }
+.lx[data-design="gizli"] .lx-found__bar { border-radius: 0; height: 6px; background: #cfe0bf; }
+.lx[data-design="gizli"] .lx-found__bar i { border-radius: 0; background: #12463a; }
+.lx[data-design="gizli"] .lx-story { position: relative; padding: 76px clamp(18px, 4vw, 44px) clamp(20px, 4vw, 36px); border-radius: 0; background: #fbfdf7; background-image: linear-gradient(#12302a 0 0), linear-gradient(#12302a 0 0); background-size: 100% 1px; background-position: 0 34px, 0 62px; background-repeat: no-repeat; box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-story::before { content: 'OLAY TUTANAĞI  ·  DOSYA 1187' / ''; position: absolute; left: clamp(18px, 4vw, 44px); top: 12px; font: 500 12px/1.4 var(--typed); white-space: pre; color: #12302a; }
+.lx[data-design="gizli"] .lx-story::after { content: 'GİZLİ' / ''; position: absolute; right: 14px; top: 34px; padding: 0 7px; border: 2.5px solid #8e4414; color: #8e4414; background: #fbfdf7; font: 900 22px/1.1 var(--big); letter-spacing: .1em; rotate: 5deg; pointer-events: none; }
+.lx[data-design="gizli"] .lx-story p { font: 400 1.1em/1.7 var(--txt); color: #12302a; max-width: 68ch; }
+.lx[data-design="gizli"] .lx-tw { padding: 0 2px; border-radius: 0; background: none; color: #12302a; font: 500 1em/inherit var(--txt); box-shadow: inset 0 -.42em 0 #dce9d2; text-decoration: underline wavy #8e4414 1px; text-underline-offset: 3px; }
+.lx[data-design="gizli"] .lx-tw.is-on { background: #12302a; color: #fbfdf7; box-shadow: none; text-decoration: none; }
+.lx[data-design="gizli"] .lx-tw.is-on::after { border-radius: 0; background: #12302a; color: #fbfdf7; font-family: var(--lab); }
+.lx[data-design="gizli"] .lx-chip--tr { background: #fbfdf7; box-shadow: inset 0 0 0 1px #9fb59a; }
+.lx[data-design="gizli"] .lx-chip--tr.is-found { background: #dce9d2; color: #12302a; box-shadow: inset 0 0 0 1.5px #12463a; }
+
+/* диалог: показания на карточках свидетелей */
+.lx[data-design="gizli"] .lx-dlg { padding: clamp(14px, 3vw, 26px); border-radius: 0; background: #cfe0bf linear-gradient(#cfe0bf, #dbe8cd); box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-dlg__head h3 { font: 900 2em/.95 var(--big); letter-spacing: .01em; text-transform: uppercase; }
+.lx[data-design="gizli"] .lx-badge, .lx[data-design="gizli"] .lx-badge--short, .lx[data-design="gizli"] .lx-badge--long { border-radius: 0; background: #fbfdf7; color: #12302a; font: 500 11px/1.6 var(--typed); }
+.lx[data-design="gizli"] .lx-place { color: #1d3d35; font-family: var(--lab); }
+.lx[data-design="gizli"] .lx-place .lx-ico { width: 26px; height: 26px; color: #12302a; background: none; box-shadow: none; }
+.lx[data-design="gizli"] .lx-dots i { border-radius: 0; background: #e6efe0; }
+.lx[data-design="gizli"] .lx-dots i.is-on { background: #8e4414; }
+.lx[data-design="gizli"] .lx-chat { gap: 12px; padding: 4px 0; background: none; border-radius: 0; }
+.lx[data-design="gizli"] .lx-msg { padding: 10px 14px 12px 60px; max-width: min(92%, 560px); border-radius: 0; background: #fbfdf7; box-shadow: 3px 5px 0 -1px rgba(18, 48, 42, .14); }
+.lx[data-design="gizli"] .lx-msg--me { padding: 10px 14px 12px 60px; border-radius: 0; background: #f6f3dc; }
+.lx[data-design="gizli"] .lx-msg__ava { left: 10px; top: 10px; right: auto !important; width: 40px; height: 48px; border-radius: 0; background: linear-gradient(#dce9d2, #a3bfa0); color: #12302a; box-shadow: 0 0 0 1px #12302a; font: 900 24px/1 var(--big); }
+.lx[data-design="gizli"] .lx-msg--me .lx-msg__ava { background: linear-gradient(#f6edc3, #e6d27e); }
+.lx[data-design="gizli"] .lx-msg__who { color: #33514a; font: 500 11px/1.4 var(--typed); text-transform: uppercase; }
+.lx[data-design="gizli"] .lx-msg__tr { font: 500 1.08em/1.3 var(--lab); }
+.lx[data-design="gizli"] .lx-msg__ru { color: var(--lx-muted); }
+.lx[data-design="gizli"] .lx-typing { background: #fbfdf7; }
+.lx[data-design="gizli"] .lx-switch { color: #1d3d35; }
+.lx[data-design="gizli"] .lx-btn { border-radius: 0; background: #12302a; font: 700 15px/1 var(--lab); }
+.lx[data-design="gizli"] .lx-btn--ghost { background: #fbfdf7; color: #12302a; box-shadow: inset 0 0 0 1.5px #12302a; }
+
+/* практика и квест: опросный лист и монитор */
+.lx[data-design="gizli"] .lx-steps li { border-radius: 0; background: #fbfdf7; box-shadow: inset 0 0 0 1px #9fb59a; font: 700 13.5px/1.3 var(--lab); }
+.lx[data-design="gizli"] .lx-steps li::before { border-radius: 0; background: var(--marker); color: #17201c; }
+.lx[data-design="gizli"] .lx-steps li.is-done { background: #d8efdd; color: #0b5433; }
+.lx[data-design="gizli"] .ak-ex { position: relative; border: 0; border-left: 8px solid #cfe0bf; box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .ak-ex__title { font: 800 1.5em/1 var(--big); letter-spacing: .02em; }
+.lx[data-design="gizli"] .ak-ex__count { font-family: var(--typed); }
+.lx[data-design="gizli"] .ak-ex__bar { border-radius: 0; }
+.lx[data-design="gizli"] .ak-btn { border-radius: 0; background: #12302a; color: #fbfdf7; }
+.lx[data-design="gizli"] .ak-btn--ghost { background: #fbfdf7; color: #12302a; }
+.lx[data-design="gizli"] .ak-opt__n { border-radius: 0; background: var(--marker); color: #17201c; font-family: var(--typed); }
+.lx[data-design="gizli"] .lx-sim__ava { border-radius: 0; background: #12302a; font-family: var(--big); }
+.lx[data-design="gizli"] .lx-sim__dots i { border-radius: 0; background: #dce9d2; color: #12302a; }
+.lx[data-design="gizli"] .lx-sim__dots i.is-cur { box-shadow: inset 0 0 0 2px #8e4414; color: #8e4414; }
+.lx[data-design="gizli"] .lx-sim__dots i.is-good { background: #0f6640; color: #fff; }
+.lx[data-design="gizli"] .lx-sim__dots i.is-ok { background: #8a5a00; color: #fff; }
+.lx[data-design="gizli"] .lx-sim__feed { position: relative; border-radius: 0; background-color: #eef5e6; background-image: repeating-linear-gradient(transparent 0 3px, rgba(47, 90, 75, .07) 3px 4px); box-shadow: inset 0 0 0 1px #9fb59a, inset 0 0 30px rgba(106, 145, 124, .28); }
+.lx[data-design="gizli"] .lx-sim__msg { border-radius: 0; background: #fbfdf7; box-shadow: 1px 2px 0 rgba(18, 48, 42, .14); }
+.lx[data-design="gizli"] .lx-sim__msg--me { background: #12302a; color: #fbfdf7; }
+.lx[data-design="gizli"] .lx-sim__opt { border-radius: 0; border: 1px solid #12302a; }
+.lx[data-design="gizli"] .lx-sim__n { border-radius: 0; background: var(--marker); color: #17201c; font-family: var(--typed); }
+.lx[data-design="gizli"] .lx-sim__hint { color: #8e4414; }
+.lx[data-design="gizli"] .lx-sim__done { border-radius: 0; }
+.lx[data-design="gizli"] .lx-res { border-radius: 0; box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-res__info b { font: 900 2em/1 var(--big); }
+
+/* шпаргалка: опись улик */
+.lx[data-design="gizli"] .lx-table { counter-reset: d; border-radius: 0; box-shadow: var(--lx-shadow); }
+.lx[data-design="gizli"] .lx-table tr { counter-increment: d; }
+.lx[data-design="gizli"] .lx-table tr:nth-child(even) td { background: #edf4e6; }
+.lx[data-design="gizli"] .lx-table td { border-bottom: 1px solid #d6e2cd; }
+.lx[data-design="gizli"] .lx-table td[lang="tr"] { position: relative; padding-left: 56px; font: 800 1.42em/1 var(--big); letter-spacing: .012em; }
+.lx[data-design="gizli"] .lx-table td[lang="tr"]::before { content: counter(d) / ''; position: absolute; left: 10px; top: 10px; display: grid; place-items: center; width: 30px; height: 24px; background: var(--marker); color: #17201c; font: 500 12px/1 var(--typed); clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 100%, 0 100%); }
+.lx[data-design="gizli"] .lx-table td small { margin-top: 2px; font: 400 .68em/1.3 var(--lab); letter-spacing: 0; color: var(--lx-muted); }
+.lx[data-design="gizli"] .lx-next { border-radius: 0; background: #12302a; font: 800 20px/1.2 var(--big); letter-spacing: .04em; }
+
+/* движение: окно мерцает, тень проходит, скан идёт, снимок дышит */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="gizli"] .gz-light { animation: gz-flick 7s steps(1) infinite; }
+  .lx[data-design="gizli"] .gz-shadow { animation: gz-pass 14s ease-in-out infinite; }
+  .lx[data-design="gizli"] .gz-sweep { animation: gz-sweep 7s linear infinite; }
+  .lx[data-design="gizli"] .gz-rec { animation: gz-rec 1.6s steps(1) infinite; }
+  .lx[data-design="gizli"] .gz-aim { animation: gz-aim 11s ease-in-out infinite alternate; }
+  .lx[data-design="gizli"] .gz-shutter { transform-box: fill-box; transform-origin: 0 50%; animation: gz-shut 4.6s ease-in-out infinite alternate; }
+  .lx[data-design="gizli"] .gz-disk { animation: gz-disk 6s ease-in-out infinite alternate; }
+  .lx[data-design="gizli"] .gz-cat { transform-box: fill-box; transform-origin: 50% 100%; animation: gz-cat 8s ease-in-out infinite; }
+}
+@keyframes gz-flick { 0%, 44%, 49%, 53%, 100% { opacity: 1; } 45%, 50% { opacity: .35; } 47% { opacity: .75; } }
+@keyframes gz-pass { 0%, 100% { transform: translateX(-34px); opacity: 0; } 18% { opacity: .5; } 52% { transform: translateX(10px); opacity: .55; } 70% { opacity: 0; } }
+@keyframes gz-sweep { from { transform: translateY(0); } to { transform: translateY(600px); } }
+@keyframes gz-rec { 0%, 55% { opacity: 1; } 56%, 100% { opacity: .15; } }
+@keyframes gz-aim { from { transform: translate(-90px, 18px); } to { transform: translate(8px, -10px); } }
+@keyframes gz-shut { from { transform: skewY(-3deg); } to { transform: skewY(4deg) scaleX(.86); } }
+@keyframes gz-disk { from { transform: translate(-16px, 4px); } to { transform: translate(18px, -10px); } }
+@keyframes gz-cat { 0%, 70%, 100% { transform: scaleY(1); } 80%, 90% { transform: scaleY(.84); } }
+
+@media screen and (min-width: 1024px) {
+  .lx[data-design="gizli"] .lx-hero { --sh: max(330px, calc(100vh - 322px)); display: grid; grid-template-columns: 1fr 1.25fr 1fr; column-gap: 28px; }
+  .lx[data-design="gizli"] .lx-hero::before { clip-path: polygon(0 34px, 70px 34px, 84px 0, 430px 0, 444px 34px, 100% 34px, 100% 100%, 0 100%); margin-left: -50vw; }
+  .lx[data-design="gizli"] .lx-scene { grid-column: 1 / -1; margin-inline: calc(50% - 50vw); }
+  .lx[data-design="gizli"] .lx-tag { left: calc(50% - 50vw + 84px); right: auto; width: 346px; font-size: 12px; }
+  .lx[data-design="gizli"] h1 { grid-column: 1 / -1; margin-top: -18px; font-size: clamp(90px, 9.2vw, 136px); white-space: nowrap; }
+  .lx[data-design="gizli"] .lx-hero__tr { grid-column: 1; grid-row: 3; margin: 4px 0 0 !important; }
+  .lx[data-design="gizli"] .lx-hero__meta { grid-column: 1; grid-row: 4; }
+  .lx[data-design="gizli"] .lx-hero__intro { grid-column: 2; grid-row: 3 / span 2; margin-top: 6px; font-size: 16px; }
+  .lx[data-design="gizli"] .lx-stats { grid-column: 3; grid-row: 3 / span 2; margin-top: 6px; align-self: start; }
+  .lx[data-design="gizli"] .lx-gbar { grid-column: 1 / -1; }
+  .lx[data-design="gizli"] .lx-tabs { margin-top: 10px !important; }
+  .lx[data-design="gizli"] .lx-tab { justify-content: center; }
+}

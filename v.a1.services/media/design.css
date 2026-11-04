@@ -1,0 +1,231 @@
+/* Sıra: зал ожидания в банке. Автомат талонов и табло в шапке, карточки как талоны очереди, первый экран как официальный бланк */
+html:has(.lx[data-design="sira"]) { background: #e3e0f3; }
+.lx[data-design="sira"] {
+  --lx-accent: #46379a; --lx-accent-2: #c81a2e; --lx-paper: #e3e0f3; --lx-surf: #fffefa; --lx-surf2: #f1eff9; --lx-card: #fffefa;
+  --lx-ink: #1c1636; --lx-muted: #514a72; --lx-line: #b7b0db; --lx-soft: #e6e2f8; --lx-on: #fff; --lx-tabs-bg: #120d10; --lx-r: 2px; --lx-shadow: 0 1px 0 #b7b0db, 0 12px 18px -14px rgba(40, 30, 100, .55);
+  --sans: 'LX Inter Tight', system-ui, sans-serif; --mono: 'LX IBM Plex Mono', ui-monospace, Menlo, monospace; --led: 'LX JetBrains Mono', ui-monospace, monospace;
+  --cell: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='26'%3E%3Crect x='.5' y='.5' width='15' height='25' fill='%23fff' stroke='%238a82c9'/%3E%3C/svg%3E");
+  --ak-font: var(--sans); --ak-font-display: var(--sans); --ak-radius: 2px; --ak-radius-sm: 2px; --ak-good: #0c6a47; --ak-good-soft: #dbf1e6; --ak-bad: #b0162a; --ak-bad-soft: #fbe2e5;
+  font-family: var(--sans); overflow-x: clip; counter-reset: sr-t;
+  background-color: #e3e0f3;
+  /* линолеум с крапом */
+  background-image: radial-gradient(circle 1.4px at 12px 18px, #8a82c9 96%, transparent), radial-gradient(circle 1px at 44px 8px, #fff 96%, transparent), radial-gradient(circle 1.8px at 66px 52px, #b7b0db 96%, transparent), radial-gradient(circle 1px at 30px 60px, #6b6494 96%, transparent), radial-gradient(circle 2px at 72px 22px, #fff 96%, transparent), radial-gradient(circle 1.2px at 8px 72px, #ef6a3f 96%, transparent);
+  background-size: 84px 84px;
+}
+.lx[data-design="sira"] main { overflow-x: clip; }
+
+/* шапка */
+.lx[data-design="sira"] .lx-app { background: #fffefa; border-bottom: 2px solid #1c1636; }
+.lx[data-design="sira"] .lx-app__logo { border-radius: 2px; background: #1c1636; color: #fff; }
+.lx[data-design="sira"] .lx-app__t b { font: 800 1.1em/1.2 var(--sans); letter-spacing: -.02em; }
+.lx[data-design="sira"] .lx-app__t small { font-family: var(--mono); font-size: .76em; }
+.lx[data-design="sira"] .lx-app__ring .lx-ring__fg { stroke: #c81a2e; }
+.lx[data-design="sira"] .lx-lessons { border-radius: 2px; background: #e3e0f3; }
+.lx[data-design="sira"] .lx-lessons a { border-radius: 2px; color: #1c1636; font-family: var(--mono); }
+.lx[data-design="sira"] .lx-lessons a[aria-current] { background: #1c1636; color: #fff; box-shadow: none; }
+
+/* первый экран: сцена, поверх неё заполненный бланк */
+.lx[data-design="sira"] .lx-hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); margin-top: 0 !important; padding: 0 0 6px; background: none; box-shadow: none; border-radius: 0; counter-reset: sr-f; }
+.lx[data-design="sira"] .lx-scene { grid-row: 1; margin-inline: calc(50% - 50vw); height: clamp(320px, 45vw, 620px); overflow: hidden; background: #e8e5f6; border-bottom: 3px solid #1c1636; }
+.lx[data-design="sira"] .lx-scene svg { display: block; }
+.lx[data-design="sira"] .lx-hero::before { content: ''; grid-row: 2 / 8; grid-column: 1; max-width: 820px; width: 100%; justify-self: center; margin-top: -18px; background: #fffefa; box-shadow: 0 0 0 1.5px #1c1636, 7px 7px 0 #46379a; z-index: 0; }
+.lx[data-design="sira"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 1; grid-column: 1; max-width: 820px; width: 100%; justify-self: center; padding-inline: clamp(14px, 3.6vw, 28px); }
+.lx[data-design="sira"] .lx-hero > :is(.lx-tag, h1, .lx-hero__tr, .lx-hero__meta, .lx-hero__intro)::before { display: block; margin-bottom: 3px; color: #514a72; font: 500 10.5px/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.lx[data-design="sira"] .lx-tag { grid-row: 2; display: block; margin: 0 !important; padding-block: 0 8px; border-radius: 0; background: none; color: #1c1636; font: 500 13px/1.3 var(--mono); letter-spacing: 0; text-transform: none; border-bottom: 1.5px solid #1c1636; }
+.lx[data-design="sira"] .lx-tag::before { content: '1. Seviye' / ''; padding-top: 2px; margin-top: 0; }
+.lx[data-design="sira"] h1 { grid-row: 3; margin: 0; padding-block: 8px 12px; font: 800 clamp(46px, 13vw, 94px)/.94 var(--sans); letter-spacing: -.035em; color: #1c1636; border-bottom: 1.5px solid #1c1636; hyphens: manual; }
+.lx[data-design="sira"] h1::before { content: '2. Konu' / ''; letter-spacing: .05em; }
+.lx[data-design="sira"] .lx-hero__tr { grid-row: 4; margin: 0 !important; padding-block: 8px; color: #c81a2e; font: 500 clamp(16px, 4vw, 21px)/1.25 var(--mono); border-bottom: 1.5px solid #1c1636; }
+.lx[data-design="sira"] .lx-hero__tr::before { content: '3. Türkçe' / ''; }
+.lx[data-design="sira"] .lx-hero__meta { grid-row: 5; margin: 0; padding-block: 8px; color: #1c1636; font-weight: 600; border-bottom: 1.5px solid #1c1636; }
+.lx[data-design="sira"] .lx-hero__meta::before { content: '4. Açıklama' / ''; font-weight: 500; }
+.lx[data-design="sira"] .lx-hero__intro { grid-row: 6; margin: 0; padding-block: 8px 12px; color: #1c1636; line-height: 1.5; }
+.lx[data-design="sira"] .lx-hero__intro::before { content: '5. Not' / ''; }
+/* показатели: клетки бланка */
+.lx[data-design="sira"] .lx-stats { grid-row: 7; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; padding-inline: 0 !important; border-top: 1.5px solid #1c1636; }
+.lx[data-design="sira"] .lx-stats li { padding: 8px 6px; border-radius: 0; background: none; border-left: 1.5px solid #1c1636; }
+.lx[data-design="sira"] .lx-stats li:first-child { border-left: 0; padding-left: clamp(14px, 3.6vw, 28px); }
+.lx[data-design="sira"] .lx-stats b { font: 500 clamp(26px, 7vw, 42px)/1.05 var(--led); color: #1c1636; letter-spacing: -.04em; }
+.lx[data-design="sira"] .lx-stats span { font: 500 10.5px/1.15 var(--mono); color: #514a72; }
+/* штамп */
+.lx[data-design="sira"] .lx-hero__intro::after { content: 'ONAY' / ''; position: absolute; right: 16px; top: -28px; display: grid; place-items: center; width: 74px; height: 74px; border: 3px double #c81a2e; border-radius: 50%; color: #c81a2e; font: 800 15px/1 var(--sans); letter-spacing: .12em; rotate: -14deg; opacity: .78; pointer-events: none; }
+.lx[data-design="sira"] .lx-gbar { grid-row: 8; height: 8px; gap: 2px; margin: 14px 0 0 !important; padding: 0 !important; }
+.lx[data-design="sira"] .lx-gbar__s { border-radius: 0; background: #46379a; }
+.lx[data-design="sira"] .lx-gbar__s:nth-child(2) { background: #ef6a3f; }
+.lx[data-design="sira"] .lx-gbar__s:nth-child(3) { background: #2f8d6d; }
+
+/* вкладки: светодиодное табло с номерами */
+.lx[data-design="sira"] .lx-tabs { margin-top: 26px !important; gap: 0; padding: 4px; border-radius: 3px; background: #120d10; background-image: radial-gradient(#2c1f22 .8px, transparent 1px); background-size: 4px 4px; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 0 0 3px #46379a, 0 10px 16px -10px rgba(40, 30, 100, .8); counter-reset: sr-tab; }
+.lx[data-design="sira"] .lx-tab { counter-increment: sr-tab; display: inline-grid; grid-template-columns: auto auto; gap: 0 7px; min-height: 44px; padding: 2px 11px; border-radius: 0; color: #d1cde9; border-right: 1px solid #3a3040; }
+.lx[data-design="sira"] .lx-tab::before { content: counter(sr-tab); grid-row: span 2; font: 500 25px/1 var(--led); color: #8f8aa9; }
+.lx[data-design="sira"] .lx-tab__ico { display: none; }
+.lx[data-design="sira"] .lx-tab b { font: 500 13.5px/1.15 var(--mono); }
+.lx[data-design="sira"] .lx-tab small { font: 400 10.5px/1.15 var(--mono); color: #b9b4d8; }
+.lx[data-design="sira"] .lx-tab[aria-selected="true"] { background: #2a1214; color: #ff8476; box-shadow: none; }
+.lx[data-design="sira"] .lx-tab[aria-selected="true"]::before { color: #ff5345; text-shadow: 0 0 10px rgba(255, 60, 45, .9); }
+.lx[data-design="sira"] .lx-tab[aria-selected="true"] small { color: #ffb4a9; }
+.lx[data-design="sira"] .lx-tab:focus-visible { outline: 2px solid #ffb13c; outline-offset: -2px; }
+.lx[data-design="sira"] .lx-tabs__line { left: 4px; right: 4px; bottom: 1px; height: 2px; border-radius: 0; background: #3a3040; }
+.lx[data-design="sira"] .lx-tabs__line::after { border-radius: 0; background: #ff5345; }
+@media (hover: hover) { .lx[data-design="sira"] .lx-tab:not([aria-selected="true"]):hover { background: #221c2c; color: #fff; } }
+
+/* заголовки разделов: шапка бланка */
+.lx[data-design="sira"] .lx-ph { background: #fffefa; box-shadow: 0 0 0 1.5px #1c1636, 5px 5px 0 #b7b0db; }
+.lx[data-design="sira"] .lx-kicker { color: #c81a2e; font: 500 13px/1 var(--mono); }
+.lx[data-design="sira"] .lx-panel h2 { font: 800 clamp(36px, 10vw, 64px)/.96 var(--sans); letter-spacing: -.035em; }
+.lx[data-design="sira"] .lx-chip { border-radius: 2px; background: #f1eff9; color: #1c1636; box-shadow: inset 0 0 0 1.5px #1c1636; font-weight: 600; }
+.lx[data-design="sira"] .lx-chip[aria-pressed="true"] { background: #46379a; color: #fff; box-shadow: none; }
+.lx[data-design="sira"] .lx-search { border: 1.5px solid #1c1636; border-radius: 0; background: #fff; font-family: var(--mono); }
+.lx[data-design="sira"] .lx-learn { border-top: 1.5px solid #1c1636; }
+.lx[data-design="sira"] .lx-learn p b { color: #c81a2e; }
+
+/* группы: выбор услуги в автомате */
+.lx[data-design="sira"] .lx-group { width: 100%; margin: 28px 0 14px; padding: 10px 14px; border-radius: 2px; background: #46379a; color: #fff; font: 800 clamp(22px, 5.6vw, 30px)/1.1 var(--sans); letter-spacing: -.02em; text-transform: none; box-shadow: 0 4px 0 #2c2070; }
+.lx[data-design="sira"] .lx-group[data-g="1"] { background: #1f7d5c; box-shadow: 0 4px 0 #115a41; }
+.lx[data-design="sira"] .lx-group[data-g="2"] { background: #b8421b; box-shadow: 0 4px 0 #862e10; }
+.lx[data-design="sira"] .lx-group__ico { border-radius: 2px; background: #fff; color: #1c1636; }
+
+/* карточка: талон из термопринтера */
+.lx[data-design="sira"] .lx-cards { gap: 16px; }
+.lx[data-design="sira"] .lx-card { counter-increment: sr-t; --zz: conic-gradient(from -45deg at 50% 100%, #000 90deg, transparent 0) 0 100% / 12px 6px repeat-x; gap: 8px; padding: 50px 18px 44px; border-radius: 0; background-color: #fffefa; background-image: repeating-linear-gradient(90deg, #1c1636 0 2px, transparent 2px 4px, #1c1636 4px 5px, transparent 5px 9px, #1c1636 9px 12px, transparent 12px 14px, #1c1636 14px 15px, transparent 15px 20px); background-size: 150px 18px; background-repeat: no-repeat; background-position: 50% calc(100% - 16px); box-shadow: none; filter: drop-shadow(0 1px 0 #b7b0db) drop-shadow(0 7px 6px rgba(40, 30, 100, .24));
+  -webkit-mask: conic-gradient(from 135deg at 50% 0, #000 90deg, transparent 0) 0 0 / 12px 6px repeat-x, linear-gradient(#000 0 0) 0 6px / 100% calc(100% - 12px) no-repeat, conic-gradient(from -45deg at 50% 100%, #000 90deg, transparent 0) 0 100% / 12px 6px repeat-x;
+  mask: conic-gradient(from 135deg at 50% 0, #000 90deg, transparent 0) 0 0 / 12px 6px repeat-x, linear-gradient(#000 0 0) 0 6px / 100% calc(100% - 12px) no-repeat, conic-gradient(from -45deg at 50% 100%, #000 90deg, transparent 0) 0 100% / 12px 6px repeat-x; }
+.lx[data-design="sira"] .lx-card::before { content: 'A' counter(sr-t, decimal-leading-zero) / ''; position: absolute; left: 18px; right: 18px; top: 13px; padding-bottom: 5px; border-bottom: 1.5px dashed #1c1636; color: #1c1636; font: 500 25px/1 var(--led); letter-spacing: .02em; }
+.lx[data-design="sira"] .lx-card[data-g="1"]::before { content: 'B' counter(sr-t, decimal-leading-zero) / ''; color: #115a41; }
+.lx[data-design="sira"] .lx-card[data-g="2"]::before { content: 'C' counter(sr-t, decimal-leading-zero) / ''; color: #862e10; }
+.lx[data-design="sira"] .lx-card[data-passive], .lx[data-design="sira"] .lx-card.is-flipped { background-color: #fffefa; }
+.lx[data-design="sira"] .lx-card:hover { box-shadow: none; filter: drop-shadow(0 1px 0 #1c1636) drop-shadow(0 9px 7px rgba(40, 30, 100, .3)); }
+.lx[data-design="sira"] .lx-card:focus-visible { box-shadow: inset 0 0 0 3px #c81a2e; }
+.lx[data-design="sira"] .lx-card.is-known { box-shadow: none; }
+.lx[data-design="sira"] .lx-card.is-known::after { content: 'TAMAM' / ''; position: absolute; right: 14px; top: 11px; padding: 3px 8px; border: 2.5px solid #0c6a47; border-radius: 3px; color: #0c6a47; font: 800 13px/1 var(--sans); letter-spacing: .1em; rotate: -6deg; background: #fffefa; }
+.lx[data-design="sira"] .lx-ico { width: 40px; height: 40px; border-radius: 2px; background: #1c1636; color: #fff; }
+.lx[data-design="sira"] .lx-card[data-g="1"] .lx-ico { background: #115a41; }
+.lx[data-design="sira"] .lx-card[data-g="2"] .lx-ico { background: #862e10; }
+.lx[data-design="sira"] .lx-ico svg { width: 20px; height: 20px; }
+.lx[data-design="sira"] .lx-card__tr { font: 800 1.48em/1.05 var(--sans); letter-spacing: -.03em; }
+.lx[data-design="sira"] .lx-card__ru { font: 500 .92em/1.3 var(--mono); }
+.lx[data-design="sira"] .lx-say { border-radius: 2px; background: #f1eff9; color: #1c1636; box-shadow: inset 0 0 0 1.5px #1c1636; }
+.lx[data-design="sira"] .lx-card__pos { border-radius: 0; background: none; padding: 0; color: #514a72; font: 500 11.5px/1.3 var(--mono); }
+.lx[data-design="sira"] .lx-card__pos::before { content: '# ' / ''; }
+.lx[data-design="sira"] .lx-card__pos--passive { color: #b0162a; background: none; }
+.lx[data-design="sira"] .lx-card__acts button { border: 1.5px solid #1c1636; border-radius: 0; background: #fff; color: #1c1636; font: 500 13px/1 var(--mono); }
+.lx[data-design="sira"] .lx-card__know[aria-pressed="true"] { border-color: #0c6a47; background: #0c6a47; color: #fff; }
+.lx[data-design="sira"] .lx-ex { border-radius: 0; padding: 7px 0 8px 10px; background: none; border-left: 3px solid #46379a; }
+.lx[data-design="sira"] .lx-card__note { border-radius: 0; border: 1.5px dashed #514a72; background: none; font: 400 .84em/1.45 var(--mono); }
+.lx[data-design="sira"] .lx-card__tx { font-family: var(--mono); }
+.lx[data-design="sira"] .lx-card__gov { color: #b0162a; font-family: var(--mono); }
+
+/* история: заполненный бланк с нумерованными полями */
+.lx[data-design="sira"] .lx-found__bar { border-radius: 0; background: #e3e0f3; box-shadow: inset 0 0 0 1px #1c1636; }
+.lx[data-design="sira"] .lx-found__bar i { border-radius: 0; background: #46379a; }
+.lx[data-design="sira"] .lx-found b { color: #c81a2e; }
+.lx[data-design="sira"] .lx-story { position: relative; padding: 0; border-radius: 0; background: #fffefa; box-shadow: 0 0 0 1.5px #1c1636, 6px 6px 0 #b7b0db; counter-reset: sr-p; }
+.lx[data-design="sira"] .lx-story p { counter-increment: sr-p; position: relative; max-width: none; margin: 0; padding: 14px 16px 14px 54px; border-bottom: 1.5px solid #1c1636; line-height: 1.8; }
+.lx[data-design="sira"] .lx-story p:last-child { border-bottom: 0; }
+.lx[data-design="sira"] .lx-story p::before { content: counter(sr-p, decimal-leading-zero) / ''; position: absolute; inset: 0 auto 0 0; display: block; width: 40px; padding-top: 14px; background: #e6e2f8; border-right: 1.5px solid #1c1636; color: #46379a; font: 500 15px/1.6 var(--led); text-align: center; }
+.lx[data-design="sira"] .lx-story::after { content: 'İMZA ~~~' / ''; position: absolute; right: 14px; bottom: -14px; padding: 2px 10px; background: #c81a2e; color: #fff; font: 800 12px/1.4 var(--sans); letter-spacing: .08em; rotate: -2deg; }
+.lx[data-design="sira"] .lx-tw { border-radius: 0; padding: 0 3px; background: #e6e2f8; color: #2c2070; box-shadow: inset 0 -2px 0 #46379a; font-family: var(--mono); font-weight: 500; font-size: .94em; }
+.lx[data-design="sira"] .lx-tw.is-on { background: #46379a; color: #fff; box-shadow: none; }
+.lx[data-design="sira"] .lx-tw.is-on::after { border-radius: 0; background: #120d10; color: #ff8476; font-family: var(--mono); }
+.lx[data-design="sira"] .lx-chips { margin-top: 26px !important; }
+.lx[data-design="sira"] .lx-chip--tr { background: #fffefa; box-shadow: inset 0 0 0 1.5px #1c1636; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="sira"] .lx-chip--tr.is-found { background: #46379a; color: #fff; box-shadow: none; }
+
+/* диалоги: окошко кассы со стеклом и стойкой */
+.lx[data-design="sira"] .lx-dlg { padding: 0; overflow: hidden; border-radius: 2px; background: #46379a; color: #fff; box-shadow: 0 8px 0 #2c2070, 0 22px 20px -14px rgba(40, 30, 100, .6); }
+.lx[data-design="sira"] .lx-dlg__head { padding: 14px 16px 2px; }
+.lx[data-design="sira"] .lx-dlg__head h3 { font: 800 1.45em/1.1 var(--sans); letter-spacing: -.03em; color: #fff; }
+.lx[data-design="sira"] .lx-badge { border-radius: 0; background: #fff !important; color: #1c1636 !important; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="sira"] .lx-dots i { border-radius: 0; background: rgba(255, 255, 255, .35); }
+.lx[data-design="sira"] .lx-dots i.is-on { background: #ffb13c; }
+.lx[data-design="sira"] .lx-place { margin: 4px 0 12px !important; padding-inline: 16px; color: #efedfb; font-family: var(--mono); font-weight: 500; font-size: .85em; }
+.lx[data-design="sira"] .lx-place .lx-ico { background: none; color: #ffb13c; }
+.lx[data-design="sira"] .lx-chat { position: relative; margin: 0; padding: 30px 12px 16px; border-radius: 0; background: linear-gradient(115deg, #eef7fc 0 34%, #fff 34% 42%, #dcedf6 42%); color: var(--lx-ink); }
+.lx[data-design="sira"] .lx-chat::before { content: ''; position: absolute; left: 50%; top: 8px; width: 74px; height: 14px; translate: -50% 0; background: radial-gradient(circle 2px, #46379a 96%, transparent) 0 0 / 9px 7px; }
+.lx[data-design="sira"] .lx-msg { border-radius: 0; background: #fffefa; box-shadow: 0 0 0 1px #8a82c9; }
+.lx[data-design="sira"] .lx-msg--me { background: #f6e9c8; box-shadow: 0 0 0 1px #a58b4c; }
+.lx[data-design="sira"] .lx-msg__ava { border-radius: 2px; background: #46379a; color: #fff; }
+.lx[data-design="sira"] .lx-msg--me .lx-msg__ava { background: #1c1636; }
+.lx[data-design="sira"] .lx-msg__who { color: #514a72; font: 500 11px/1.3 var(--mono); }
+.lx[data-design="sira"] .lx-msg__tr { font-weight: 700; }
+.lx[data-design="sira"] .lx-msg__ru { color: #514a72; }
+.lx[data-design="sira"] .lx-typing { border-radius: 0; }
+.lx[data-design="sira"] .lx-chat__ctrl { padding: 12px 16px 14px; background: #e9e6f8; color: var(--lx-ink); }
+.lx[data-design="sira"] .lx-chat__ctrl .lx-switch { color: #1c1636; }
+.lx[data-design="sira"] .lx-dlg > :last-child:not(.lx-chat__ctrl):not(.lx-chat) { padding-inline: 16px; }
+
+/* кнопки */
+.lx[data-design="sira"] .lx-btn { border-radius: 2px; background: #c81a2e; color: #fff; font-weight: 800; letter-spacing: -.01em; box-shadow: 0 3px 0 #8d0f20; }
+.lx[data-design="sira"] .lx-btn--ghost { background: #fff; color: #1c1636; box-shadow: inset 0 0 0 2px #1c1636; }
+.lx[data-design="sira"] .lx-next { border-radius: 2px; background: #46379a; box-shadow: 0 4px 0 #2c2070; }
+
+/* практика, тест */
+.lx[data-design="sira"] .lx-steps li { border-radius: 0; background: #fffefa; box-shadow: inset 0 0 0 1.5px #1c1636; font-weight: 600; }
+.lx[data-design="sira"] .lx-steps li::before { border-radius: 0; background: #1c1636; color: #fff; font-family: var(--led); }
+.lx[data-design="sira"] .lx-steps li.is-done { background: var(--ak-good-soft); }
+.lx[data-design="sira"] .lx-steps li.is-done::before { background: var(--ak-good); }
+.lx[data-design="sira"] .lx-panel a-exercise, .lx[data-design="sira"] .lx-panel a-quiz { display: block; border-radius: 0; box-shadow: none; }
+.lx[data-design="sira"] .ak-ex { border: 0; border-radius: 0; background: #fffefa; box-shadow: 0 0 0 1.5px #1c1636, 6px 6px 0 #b7b0db; }
+.lx[data-design="sira"] .ak-btn { border-radius: 2px; background: #46379a; color: #fff; font-weight: 700; }
+.lx[data-design="sira"] .ak-btn--ghost { background: none; color: #46379a; }
+.lx[data-design="sira"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok, .ak-gap--input) { border-radius: 0; border-color: #1c1636; }
+
+/* квест */
+.lx[data-design="sira"] .lx-sim__ava { border-radius: 2px; background: #1c1636; font-family: var(--led); }
+.lx[data-design="sira"] .lx-sim__dots i { border-radius: 0; background: #f1eff9; font-family: var(--led); }
+.lx[data-design="sira"] .lx-sim__feed { border-radius: 0; background: linear-gradient(115deg, #eef7fc 0 34%, #fff 34% 42%, #dcedf6 42%); box-shadow: inset 0 0 0 4px #46379a; padding: 16px; }
+.lx[data-design="sira"] .lx-sim__msg { border-radius: 0; background: #fffefa; box-shadow: 0 0 0 1px #8a82c9; }
+.lx[data-design="sira"] .lx-sim__msg--me { background: #46379a; color: #fff; box-shadow: none; }
+.lx[data-design="sira"] .lx-sim__opt { border-radius: 0; border-color: #1c1636; background: #fffefa; }
+.lx[data-design="sira"] .lx-sim__n { border-radius: 0; background: #1c1636; color: #fff; font-family: var(--led); }
+.lx[data-design="sira"] .lx-sim__hint { color: #b0162a; }
+
+/* итог: талон с результатом */
+.lx[data-design="sira"] .lx-res { background: #fffefa; box-shadow: 0 0 0 1.5px #1c1636, 6px 6px 0 #b7b0db; }
+.lx[data-design="sira"] .lx-res__info b { font-weight: 800; letter-spacing: -.03em; }
+
+/* шпаргалка: бланк с клетками для букв */
+.lx[data-design="sira"] .lx-table { display: block; max-width: 820px; margin: 0 auto; padding: 14px clamp(12px, 3vw, 26px) 16px; border-radius: 0; background: #fffefa; box-shadow: 0 0 0 1.5px #1c1636, 6px 6px 0 #b7b0db; }
+.lx[data-design="sira"] .lx-table tbody { display: block; }
+.lx[data-design="sira"] .lx-table tr { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; padding: 7px 0; border-bottom: 1px dashed #b7b0db; }
+.lx[data-design="sira"] .lx-table tr:last-child { border-bottom: 0; }
+.lx[data-design="sira"] .lx-table td { padding: 0; border: 0; }
+.lx[data-design="sira"] .lx-table td[lang="tr"] { flex: 0 0 auto; width: calc(14 * 15px + 1px); max-width: 62%; padding-left: 3.5px; background: var(--cell) 0 0 / 15px 26px repeat-x; color: #1c1636; font: 500 15px/26px var(--mono); letter-spacing: 6px; white-space: nowrap; overflow: hidden; text-transform: uppercase; }
+.lx[data-design="sira"] .lx-table td[lang="tr"] small { margin-left: -3.5px; padding-top: 2px; font: 400 12px/1.2 var(--mono); letter-spacing: 0; text-transform: none; color: #514a72; }
+.lx[data-design="sira"] .lx-table td:not([lang]) { flex: 1 1 0; min-width: 0; text-align: right; font-size: .94em; line-height: 1.25; }
+
+/* движение */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="sira"] .sr-hand { transform-box: view-box; transform-origin: 0 0; animation: sr-tick 60s steps(60) infinite; }
+  .lx[data-design="sira"] .sr-tick { animation: sr-out 4.6s cubic-bezier(.3, 0, .3, 1) infinite; }
+  .lx[data-design="sira"] .sr-btn { transform-box: fill-box; transform-origin: center; animation: sr-press 4.6s ease-in-out infinite; }
+  .lx[data-design="sira"] .sr-num { animation: sr-blink 4.6s steps(1) infinite; }
+  .lx[data-design="sira"] .sr-screen { animation: sr-blink 3s steps(1) infinite; }
+}
+@keyframes sr-tick { to { transform: rotate(360deg); } }
+@keyframes sr-out { 0%, 18% { transform: translateY(-46px); } 42%, 100% { transform: translateY(0); } }
+@keyframes sr-press { 0%, 8%, 20%, 100% { transform: scale(1); } 12% { transform: scale(.86); } }
+@keyframes sr-blink { 0%, 55%, 62%, 100% { opacity: 1; } 56%, 61% { opacity: .35; } }
+
+@media (max-width: 767px) {
+  .lx[data-design="sira"] .lx-tabs { margin-left: -12px !important; margin-right: -12px !important; }
+}
+@media print { .lx[data-design="sira"] { background: #fff; } .lx[data-design="sira"] .lx-scene { display: none; } }
+
+/* Первый экран на компьютере: бланк со всеми полями закрывает стенд тарифов слева, очередь и окошки открыты. */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="sira"] .lx-hero { grid-template-columns: 2vw 28vw minmax(0, 1fr); grid-template-rows: 2.6vh repeat(6, auto) 1fr; max-width: none; margin-inline: calc(50% - 50vw); padding: 0; }
+  .lx[data-design="sira"] .lx-scene { grid-column: 1 / -1; grid-row: 1 / -1; position: relative; z-index: 0; height: max(500px, calc(100vh - 135px)); margin-inline: 0; }
+  .lx[data-design="sira"] .lx-scene svg { position: absolute; left: 0; top: 0; width: auto; min-width: 100%; height: 100%; aspect-ratio: 1200 / 540; }
+  .lx[data-design="sira"] .lx-hero::before { grid-column: 2; grid-row: 2 / 8; margin-top: 0; max-width: none; rotate: -.5deg; z-index: 1; }
+  .lx[data-design="sira"] .lx-hero > :not(.lx-scene) { grid-column: 2; z-index: 2; max-width: none; rotate: -.5deg; padding-inline: 18px; }
+  .lx[data-design="sira"] .lx-tag { grid-row: 2; padding-block: 8px 6px; }
+  .lx[data-design="sira"] h1 { grid-row: 3; padding-block: 6px 8px; font-size: clamp(36px, 3.5vw, 66px); }
+  .lx[data-design="sira"] .lx-hero__tr { grid-row: 4; padding-block: 6px; }
+  .lx[data-design="sira"] .lx-hero__meta { grid-row: 5; padding-block: 6px; font-size: 15px; }
+  .lx[data-design="sira"] .lx-hero__intro { grid-row: 6; padding-block: 6px 8px; font-size: 14.5px; line-height: 1.4; }
+  .lx[data-design="sira"] .lx-stats { grid-row: 7; }
+  .lx[data-design="sira"] .lx-stats li:first-child { padding-left: 10px; }
+  .lx[data-design="sira"] .lx-stats b { font-size: clamp(22px, 2.5vw, 44px); }
+  .lx[data-design="sira"] .lx-hero__intro::after { top: -46px; right: 10px; width: 64px; height: 64px; font-size: 13px; }
+}

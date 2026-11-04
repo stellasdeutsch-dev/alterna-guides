@@ -1,0 +1,238 @@
+/* Ekran: светлая студия днём. Большой телевизор с настроечной таблицей, заголовок как плашка в эфире, вкладки это цветные полосы, карточки это кинескопы */
+/* общее основание: сброс первого экрана и светлые упражнения; мир темы описан ниже */
+.lx[data-design="ekran"] { --ak-bg: var(--lx-surf); --ak-surface: var(--lx-surf2); --ak-accent-soft: var(--lx-soft); overflow-x: clip; font-family: var(--ak-font);}
+.lx[data-design="ekran"] main { overflow-x: clip;}
+.lx[data-design="ekran"] .lx-hero { position: relative; margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0;}
+.lx[data-design="ekran"] .lx-scene { position: relative; margin-inline: calc(50% - 50vw); overflow: hidden;}
+.lx[data-design="ekran"] .lx-scene svg { display: block; width: 100%; height: 100%;}
+.lx[data-design="ekran"] .lx-panel a-exercise, .lx[data-design="ekran"] .lx-panel a-quiz { display: block; box-shadow: none;}
+.lx[data-design="ekran"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { color: var(--lx-ink); border-color: var(--lx-line);}
+.lx[data-design="ekran"] .ak-gap--input { color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-table td small, .lx[data-design="ekran"] .lx-sim__opt small, .lx[data-design="ekran"] .lx-sim__name small { color: var(--lx-muted);}
+.lx[data-design="ekran"] .lx-sim__ru { opacity: 1;}
+.lx[data-design="ekran"] .lx-search::placeholder { color: var(--lx-muted);}
+.lx[data-design="ekran"] .lx-donut__bg { stroke: var(--lx-surf2);}
+.lx[data-design="ekran"] .lx-tab { min-height: 48px;}
+@media (max-width: 767px) {
+  .lx[data-design="ekran"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-radius: 0;}
+  .lx[data-design="ekran"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr));}
+}
+@media print { .lx[data-design="ekran"] { background: #fff;} .lx[data-design="ekran"] .lx-scene { display: none;} }
+html:has(.lx[data-design="ekran"]) { background: #f1f3f6;}
+.lx[data-design="ekran"] {
+  --lx-accent: #2a44b0; --lx-accent-2: #b5281d; --lx-paper: #f1f3f6; --lx-surf: #ffffff; --lx-surf2: #edf0f4; --lx-card: #fffdf6;
+  --lx-ink: #1b2230; --lx-muted: #4d5666; --lx-line: #bcc4cf; --lx-soft: #e4e9fb; --lx-on: #ffffff; --lx-tabs-bg: #ffffff; --lx-r: 14px; --lx-shadow: none;
+  --disp: 'LX Rubik', system-ui, sans-serif; --tt: 'LX IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --ak-font: 'LX Manrope', system-ui, sans-serif; --ak-font-display: var(--disp); --ak-radius: 14px; --ak-radius-sm: 10px; --ak-good: #0d6b32; --ak-good-soft: #dbf5e2; --ak-bad: #b3241a; --ak-bad-soft: #fde5e1;
+  --bars: linear-gradient(90deg, #f7e23a 0 14.3%, #39d3dc 0 28.6%, #4ec95a 0 42.9%, #e86bd8 0 57.2%, #ee4b3e 0 71.5%, #3f63d8 0 85.8%, #2a2f3a 0);
+  background-color: #f1f3f6;
+  background-image: linear-gradient(#fff 2px, transparent 2px), linear-gradient(90deg, #fff 2px, transparent 2px);
+  background-size: 52px 52px;
+}
+
+/* шапка: корпус */
+.lx[data-design="ekran"] .lx-app { background: #fff; border-bottom: 0; box-shadow: none;}
+.lx[data-design="ekran"] .lx-app__logo { border-radius: 10px; background: var(--bars); color: var(--lx-ink); box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-app__logo .lx-app__ico { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff;}
+.lx[data-design="ekran"] .lx-app__ico svg { width: 18px; height: 18px;}
+.lx[data-design="ekran"] .lx-app__t b { font: 800 1.02em/1.2 var(--disp);}
+.lx[data-design="ekran"] .lx-app__ring .lx-ring__bg { stroke: var(--lx-line);}
+.lx[data-design="ekran"] .lx-app__ring .lx-ring__fg { stroke: #2a44b0;}
+.lx[data-design="ekran"] .lx-lessons { background: var(--lx-surf2); border-radius: 12px;}
+.lx[data-design="ekran"] .lx-lessons a { border-radius: 10px; color: var(--lx-ink); font-family: var(--disp); font-weight: 700;}
+.lx[data-design="ekran"] .lx-lessons a[aria-current] { background: var(--lx-ink); color: #fff; box-shadow: none;}
+.lx[data-design="ekran"] .lx-lessons::before { content: 'kanal'; font-family: var(--disp);}
+
+/* первый экран: плашка эфира наезжает на студию */
+.lx[data-design="ekran"] .lx-hero { display: grid; grid-template-columns: minmax(0, 1fr);}
+.lx[data-design="ekran"] .lx-scene { height: 300px; background: #eaf2f7;}
+.lx[data-design="ekran"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 1;}
+.lx[data-design="ekran"] .lx-tag { justify-self: start; margin: -46px 0 0 !important; padding: 6px 12px 6px 28px; border-radius: 6px 6px 0 0; background: #b5281d; color: #fff; font: 700 11.5px/1.3 var(--disp); letter-spacing: .06em;}
+.lx[data-design="ekran"] .lx-tag::before { content: '' / ''; position: absolute; left: 11px; top: 50%; margin-top: -4.5px; width: 9px; height: 9px; border-radius: 50%; background: #fff;}
+.lx[data-design="ekran"] h1 { margin: 0; padding: 12px 14px 12px 26px; background: #fff; box-shadow: 0 0 0 2.5px var(--lx-ink); font: 800 clamp(30px, 8.4vw, 52px)/1.06 var(--disp); letter-spacing: -.02em; color: var(--lx-ink); position: relative; z-index: 1; hyphens: manual;}
+.lx[data-design="ekran"] h1::before { content: '' / ''; position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: linear-gradient(#f7e23a 0 14.3%, #39d3dc 0 28.6%, #4ec95a 0 42.9%, #e86bd8 0 57.2%, #ee4b3e 0 71.5%, #3f63d8 0 85.8%, #2a2f3a 0);}
+.lx[data-design="ekran"] .lx-hero__tr { justify-self: start; margin: 0 0 12px !important; padding: 5px 14px; background: var(--lx-ink); color: #fff; font: 600 clamp(14px, 3.6vw, 18px)/1.3 var(--disp); max-width: 100%;}
+.lx[data-design="ekran"] .lx-hero__meta { margin-bottom: 4px; color: var(--lx-ink); font: 700 .98em/1.35 var(--disp);}
+.lx[data-design="ekran"] .lx-hero__intro { margin-bottom: 10px; color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-stats { gap: 6px; margin: 0 0 10px;}
+.lx[data-design="ekran"] .lx-stats li { padding: 6px 8px 7px; border-radius: 12px 12px 12px 12px / 16px; background: #fff; box-shadow: inset 0 0 0 2px var(--lx-ink); text-align: center;}
+.lx[data-design="ekran"] .lx-stats b { font: 800 clamp(21px, 5.4vw, 28px)/1.1 var(--disp); color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-stats span { font: 600 10.5px/1.2 var(--ak-font); color: var(--lx-muted);}
+.lx[data-design="ekran"] .lx-gbar { height: 10px; gap: 0; background: var(--bars); border: 2px solid var(--lx-ink); box-sizing: content-box;}
+.lx[data-design="ekran"] .lx-gbar__s { background: none !important;}
+
+/* вкладки: настроечные полосы */
+.lx[data-design="ekran"] .lx-tabs { margin-top: 16px !important; padding: 0; gap: 0; border-radius: 0; background: #fff; border: 2.5px solid var(--lx-ink); -webkit-backdrop-filter: none; backdrop-filter: none;}
+.lx[data-design="ekran"] .lx-tab { flex: 1 0 auto; grid-template-columns: 1fr; gap: 0; min-height: 54px; padding: 5px 12px 3px; border-radius: 0; color: var(--lx-ink); background: #f7e23a; text-align: center; justify-items: center; border-right: 2.5px solid var(--lx-ink);}
+.lx[data-design="ekran"] .lx-tab:last-of-type { border-right: 0;}
+.lx[data-design="ekran"] .lx-tab:nth-child(2) { background: #6fe0e6;}
+.lx[data-design="ekran"] .lx-tab:nth-child(3) { background: #7edb86;}
+.lx[data-design="ekran"] .lx-tab:nth-child(4) { background: #f29ae6;}
+.lx[data-design="ekran"] .lx-tab:nth-child(5) { background: #fa9a8e;}
+.lx[data-design="ekran"] .lx-tab:nth-child(6) { background: #a8bdf8;}
+.lx[data-design="ekran"] .lx-tab:nth-child(7) { background: #e4e6ea;}
+.lx[data-design="ekran"] .lx-tab__ico { display: none;}
+.lx[data-design="ekran"] .lx-tab b { font: 800 13.5px/1.15 var(--disp);}
+.lx[data-design="ekran"] .lx-tab small { font: 600 10.5px/1.15 var(--ak-font); color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-tab[aria-selected="true"] { color: #fff; background: var(--lx-ink); box-shadow: none;}
+.lx[data-design="ekran"] .lx-tab[aria-selected="true"] small { color: #fff;}
+.lx[data-design="ekran"] .lx-tab__ok { top: 3px; right: 3px; background: #0d6b32; box-shadow: 0 0 0 1.5px #fff;}
+.lx[data-design="ekran"] .lx-tabs__line { display: none;}
+
+/* заголовки разделов */
+.lx[data-design="ekran"] .lx-ph { padding: 0 0 14px; background: none; border-radius: 0;}
+.lx[data-design="ekran"] .lx-kicker { display: inline-flex; padding: 3px 10px; background: var(--lx-ink); color: #fff; font: 700 12px/1.3 var(--disp);}
+.lx[data-design="ekran"] .lx-kicker__ico svg { width: 15px; height: 15px;}
+.lx[data-design="ekran"] .lx-panel h2 { margin-top: 6px; font: 800 clamp(28px, 7vw, 44px)/1.08 var(--disp); letter-spacing: -.02em;}
+.lx[data-design="ekran"] .lx-chip { border-radius: 10px; background: #fff; box-shadow: inset 0 0 0 2px var(--lx-ink); font: 700 .86em/1 var(--disp);}
+.lx[data-design="ekran"] .lx-chip[aria-pressed="true"] { background: var(--lx-ink); color: #fff;}
+.lx[data-design="ekran"] .lx-search { border-radius: 10px; border: 2px solid var(--lx-ink);}
+.lx[data-design="ekran"] .lx-learn { border-top: 2px solid var(--lx-line);}
+.lx[data-design="ekran"] .lx-learn__ring .lx-ring__bg { stroke: var(--lx-line);}
+.lx[data-design="ekran"] .lx-panel[data-section="sozluk"] { counter-reset: ch;}
+
+/* группа: строка телегида */
+.lx[data-design="ekran"] .lx-group { margin: 34px 0 12px; padding: 0; color: var(--lx-ink); font: 800 clamp(20px, 5vw, 27px)/1.15 var(--disp); letter-spacing: -.01em; text-transform: none;}
+.lx[data-design="ekran"] .lx-group__ico { border-radius: 8px; background: var(--bars); color: var(--lx-ink); box-shadow: inset 0 0 0 2px var(--lx-ink); padding: 4px;}
+.lx[data-design="ekran"] .lx-group__ico svg { background: #fff; border-radius: 4px;}
+
+/* карточка: телевизор с кинескопом, антенной и ножками */
+.lx[data-design="ekran"] .lx-cards { gap: 34px 16px; padding-top: 18px;}
+.lx[data-design="ekran"] .lx-card { counter-increment: ch; gap: 10px; padding: 10px 10px 10px; border-radius: 22px; background: #fffdf6; box-shadow: 0 0 0 2.5px var(--lx-ink); overflow: visible;}
+.lx[data-design="ekran"] .lx-card::before { content: '' / ''; position: absolute; left: 50%; bottom: 100%; width: 74px; height: 20px; margin-left: -37px; pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 74 20'%3E%3Cpath d='M33 20L6 2M41 20L68 2' stroke='%231b2230' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;}
+.lx[data-design="ekran"] .lx-card__face { position: relative; padding: 14px 14px 14px; border-radius: 30px / 40px; background: #eef6f1; box-shadow: inset 0 0 0 2.5px var(--lx-ink), inset 0 0 0 7px #fff, inset 0 0 26px 6px rgba(120, 160, 150, .3);}
+.lx[data-design="ekran"] .lx-card__face::before { content: '' / ''; position: absolute; inset: 7px; border-radius: 24px / 34px; pointer-events: none; background: repeating-linear-gradient(transparent 0 3px, rgba(27, 34, 48, .05) 3px 4px);}
+.lx[data-design="ekran"] .lx-card__face::after { content: counter(ch, decimal-leading-zero) / ''; position: absolute; right: 26px; top: -4px; padding: 0 5px; background: #fffdf6; font: 500 11px/16px var(--tt); color: #0d6b32;}
+.lx[data-design="ekran"] .lx-card[data-passive] { background: #f6f6f1; box-shadow: 0 0 0 2.5px var(--lx-muted);}
+.lx[data-design="ekran"] .lx-card[data-passive] .lx-card__face { background: #f0f1f2;}
+.lx[data-design="ekran"] .lx-card:hover { box-shadow: 0 0 0 3.5px #2a44b0;}
+.lx[data-design="ekran"] .lx-card:focus-visible { box-shadow: 0 0 0 4px #b5281d;}
+.lx[data-design="ekran"] .lx-card.is-flipped { background: #fffdf6; box-shadow: 0 0 0 2.5px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-card.is-flipped .lx-card__face { background: #fff7c8;}
+.lx[data-design="ekran"] .lx-card.is-known { box-shadow: 0 0 0 3.5px #0d6b32;}
+.lx[data-design="ekran"] .lx-card.is-known .lx-card__face { background: #d6f5df;}
+.lx[data-design="ekran"] .lx-card__top { position: relative; z-index: 1;}
+.lx[data-design="ekran"] .lx-ico { width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--lx-ink); box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-ico svg { width: 20px; height: 20px;}
+.lx[data-design="ekran"] .lx-card__tr { font: 700 1.28em/1.15 var(--disp); letter-spacing: -.01em;}
+.lx[data-design="ekran"] .lx-card__ru { color: #3d4757; font-weight: 600;}
+.lx[data-design="ekran"] .lx-say { background: var(--lx-ink); color: #fff;}
+.lx[data-design="ekran"] .lx-card__tags { position: relative; z-index: 1;}
+.lx[data-design="ekran"] .lx-card__pos { padding: 1px 8px; border-radius: 4px; background: #fff; color: var(--lx-ink); font: 500 11px/1.5 var(--tt); box-shadow: inset 0 0 0 1px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-card__pos--passive { color: #8f1e15; background: #fff;}
+.lx[data-design="ekran"] .lx-card__back { position: relative; z-index: 1; padding: 0 2px;}
+.lx[data-design="ekran"] .lx-card__tx { color: var(--lx-muted); font: 500 .84em/1.4 var(--tt);}
+.lx[data-design="ekran"] .lx-card__gov { font-family: var(--tt); color: #2a44b0;}
+.lx[data-design="ekran"] .lx-ex { border-radius: 10px; background: #fff; box-shadow: inset 0 0 0 1.5px var(--lx-line);}
+.lx[data-design="ekran"] .ak-say__btn { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-card__note { border-radius: 8px; border: 0; background: #fff7c8; font-size: .9em;}
+.lx[data-design="ekran"] .lx-card__acts button { border: 2px solid var(--lx-ink); border-radius: 22px; background: #fff; color: var(--lx-ink); font: 700 .86em/1 var(--disp);}
+.lx[data-design="ekran"] .lx-card__flip { background: var(--lx-ink) !important; color: #fff !important;}
+.lx[data-design="ekran"] .lx-card__know[aria-pressed="true"] { border-color: #0d6b32; background: var(--ak-good-soft); color: #0d6b32;}
+
+/* история: телегид с часами в поле */
+.lx[data-design="ekran"] .lx-found b { color: #2a44b0;}
+.lx[data-design="ekran"] .lx-found__bar { border-radius: 0; background: #fff; box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-found__bar i { border-radius: 0; background: var(--bars); background-size: 260px 100%;}
+.lx[data-design="ekran"] .lx-story { position: relative; padding: 30px 14px 14px; border-radius: 0; background: #fff; box-shadow: 0 0 0 2.5px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-story::before { content: '' / ''; position: absolute; left: 0; right: 0; top: 0; height: 14px; background: var(--bars);}
+.lx[data-design="ekran"] .lx-story p { position: relative; padding: 0 0 12px 58px; border-bottom: 1.5px dashed var(--lx-line); line-height: 1.75; max-width: 80ch;}
+.lx[data-design="ekran"] .lx-story p:last-child { border-bottom: 0; padding-bottom: 0;}
+.lx[data-design="ekran"] .lx-story p::before { content: '19:00' / ''; position: absolute; left: 0; top: .2em; font: 800 15px/1.4 var(--disp); color: #2a44b0;}
+.lx[data-design="ekran"] .lx-story p:nth-child(2)::before { content: '20:00' / '';}
+.lx[data-design="ekran"] .lx-story p:nth-child(3)::before { content: '21:30' / '';}
+.lx[data-design="ekran"] .lx-story p:nth-child(4)::before { content: '23:00' / '';}
+.lx[data-design="ekran"] .lx-story p:nth-child(5)::before { content: '00:15' / '';}
+.lx[data-design="ekran"] .lx-tw { padding: 0 4px; border-radius: 3px; background: #dfe6fd; color: #203795; box-shadow: inset 0 -2px 0 #2a44b0;}
+.lx[data-design="ekran"] .lx-tw.is-on { background: #203795; color: #fff; box-shadow: none;}
+.lx[data-design="ekran"] .lx-tw.is-on::after { background: var(--lx-ink); color: #fff; border-radius: 4px; font-family: var(--ak-font);}
+.lx[data-design="ekran"] .lx-chip--tr { background: #fff; box-shadow: inset 0 0 0 2px var(--lx-line); font-family: var(--ak-font);}
+.lx[data-design="ekran"] .lx-chip--tr.is-found { background: #dfe6fd; color: #203795; box-shadow: inset 0 0 0 2px #2a44b0;}
+
+/* диалоги: субтитры на светлом экране */
+.lx[data-design="ekran"] .lx-dlg { padding: 14px; border-radius: 18px; background: #fffdf6; box-shadow: 0 0 0 2.5px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-dlg__head h3 { font: 800 1.2em/1.2 var(--disp);}
+.lx[data-design="ekran"] .lx-badge { border-radius: 4px; background: var(--lx-surf2); color: var(--lx-ink); font: 500 11.5px/1.5 var(--tt);}
+.lx[data-design="ekran"] .lx-badge--short { background: var(--ak-good-soft); color: var(--ak-good);}
+.lx[data-design="ekran"] .lx-badge--long { background: #fde5e1; color: #8f1e15;}
+.lx[data-design="ekran"] .lx-place .lx-ico { background: none; box-shadow: none; color: #b5281d;}
+.lx[data-design="ekran"] .lx-dots i { border-radius: 1px; background: var(--lx-line);}
+.lx[data-design="ekran"] .lx-dots i.is-on { background: #b5281d;}
+.lx[data-design="ekran"] .lx-chat { gap: 12px; padding: 14px 10px; border-radius: 26px / 36px; background: #eef6f1; box-shadow: inset 0 0 0 2.5px var(--lx-ink), inset 0 0 0 6px #fff;}
+.lx[data-design="ekran"] .lx-msg { max-width: 100%; padding: 0 6px 0 42px; border-radius: 0; background: none; box-shadow: none; text-align: left;}
+.lx[data-design="ekran"] .lx-msg--me { padding: 0 42px 0 6px; background: none; text-align: right; justify-self: end;}
+.lx[data-design="ekran"] .lx-msg__ava { left: 4px; top: 4px; width: 30px; height: 30px; background: #2a44b0; color: #fff; font-family: var(--disp);}
+.lx[data-design="ekran"] .lx-msg--me .lx-msg__ava { left: auto; right: 4px; background: #b5281d;}
+.lx[data-design="ekran"] .lx-msg__who { color: var(--lx-ink); font: 700 11px/1.3 var(--disp); margin-bottom: 3px;}
+.lx[data-design="ekran"] .lx-msg__tr { display: inline; padding: 2px 8px; background: #fff27a; color: var(--lx-ink); font-weight: 700; line-height: 1.75; -webkit-box-decoration-break: clone; box-decoration-break: clone;}
+.lx[data-design="ekran"] .lx-msg__ru { margin-top: 5px !important; color: #3d4757;}
+.lx[data-design="ekran"] .lx-typing { background: #fff; border-radius: 6px;}
+
+/* кнопки и упражнения: телевикторина */
+.lx[data-design="ekran"] .lx-btn { border-radius: 22px; background: var(--lx-ink); color: #fff; font: 700 .94em/1 var(--disp);}
+.lx[data-design="ekran"] .lx-btn--ghost { background: #fff; color: var(--lx-ink); box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-next { border-radius: 22px; background: var(--lx-ink); font: 700 1em/1.2 var(--disp);}
+.lx[data-design="ekran"] .lx-steps li { border-radius: 10px; background: #fff; box-shadow: inset 0 0 0 2px var(--lx-ink); font: 700 .84em/1 var(--disp);}
+.lx[data-design="ekran"] .lx-steps li::before { border-radius: 8px; background: #f7e23a; color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-steps li.is-done { background: var(--ak-good-soft); color: #0d6b32;}
+.lx[data-design="ekran"] .ak-ex { border: 2.5px solid var(--lx-ink); border-radius: 18px; background: #fff;}
+.lx[data-design="ekran"] .ak-btn { border-radius: 22px; background: var(--lx-ink); color: #fff; font-family: var(--disp); font-weight: 700;}
+.lx[data-design="ekran"] .ak-btn--ghost { background: #fff; color: var(--lx-ink); box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { background: #fff; border: 2px solid var(--lx-ink); border-radius: 26px 6px 26px 6px;}
+.lx[data-design="ekran"] .ak-gap--input { background: #fff;}
+.lx[data-design="ekran"] .ak-opt__n { background: #f7e23a; color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-sim { border-radius: 18px; background: #fff; box-shadow: 0 0 0 2.5px var(--lx-ink); padding: 14px;}
+.lx[data-design="ekran"] .lx-sim__ava { background: #f7e23a; color: var(--lx-ink); font-family: var(--disp); box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-sim__dots i { background: var(--lx-surf2); color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-sim__feed { border-radius: 22px / 30px; background: #eef6f1; box-shadow: inset 0 0 0 2px var(--lx-ink);}
+.lx[data-design="ekran"] .lx-sim__msg { border-radius: 4px; background: #fff; box-shadow: none;}
+.lx[data-design="ekran"] .lx-sim__msg--me { background: #fff27a; color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-sim__opt { border: 2px solid var(--lx-ink); border-radius: 26px 6px 26px 6px; background: #fff;}
+.lx[data-design="ekran"] .lx-sim__n { background: #f7e23a; color: var(--lx-ink);}
+.lx[data-design="ekran"] .lx-sim__hint { color: #8f1e15;}
+.lx[data-design="ekran"] .lx-sim__done { background: #fff; border-radius: 6px;}
+.lx[data-design="ekran"] .lx-res { border-radius: 18px; background: #fff; box-shadow: 0 0 0 2.5px var(--lx-ink);}
+
+/* шпаргалка: страница телетекста на светлом */
+.lx[data-design="ekran"] .lx-table { border-radius: 0; background: #fff; box-shadow: 0 0 0 2.5px var(--lx-ink); font: 500 .9em/1.4 var(--tt);}
+.lx[data-design="ekran"] .lx-table td { border-bottom: 0;}
+.lx[data-design="ekran"] .lx-table tr:nth-child(4n+1) td { background: #fff7b0;}
+.lx[data-design="ekran"] .lx-table tr:nth-child(4n+2) td { background: #fff;}
+.lx[data-design="ekran"] .lx-table tr:nth-child(4n+3) td { background: #c9f1f3;}
+.lx[data-design="ekran"] .lx-table tr:nth-child(4n) td { background: #fff;}
+.lx[data-design="ekran"] .lx-table td[lang="tr"] { font-weight: 500; color: var(--lx-ink);}
+
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="ekran"] .md-tally { animation: md-tally 1.5s steps(1) infinite;}
+  .lx[data-design="ekran"] .md-tick { animation: md-tick 60s linear infinite;}
+  .lx[data-design="ekran"] .md-roll { animation: md-roll 4.6s linear infinite;}
+  .lx[data-design="ekran"] .md-lamp { animation: md-lamp 7s ease-in-out infinite alternate;}
+  .lx[data-design="ekran"] .md-lamp:nth-of-type(even) { animation-delay: -3s;}
+  .lx[data-design="ekran"] .md-ant { transform-box: fill-box; transform-origin: 50% 100%; animation: md-ant 5s ease-in-out infinite alternate;}
+  .lx[data-design="ekran"] .md-beam { animation: md-beam 6s ease-in-out infinite alternate;}
+}
+@keyframes md-tally { 50% { opacity: .25;} }
+@keyframes md-tick { to { transform: translateX(-1240px);} }
+@keyframes md-roll { to { transform: translateY(320px);} }
+@keyframes md-lamp { from { transform: rotate(-2.5deg);} to { transform: rotate(2.5deg);} }
+@keyframes md-ant { from { transform: rotate(-1.6deg);} to { transform: rotate(1.6deg);} }
+@keyframes md-beam { from { opacity: .55;} to { opacity: 1;} }
+
+@media (max-width: 767px) {
+  .lx[data-design="ekran"] .lx-tab { padding-inline: 11px;}
+  .lx[data-design="ekran"] .lx-lessons::before { display: none;}
+}
+
+/* компьютер: студия во всю ширину, плашка с заголовком слева внизу, справа программа */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="ekran"] .lx-hero { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); column-gap: 30px;}
+  .lx[data-design="ekran"] .lx-scene { grid-column: 1 / -1; height: clamp(320px, calc(100vh - 372px), 520px);}
+  .lx[data-design="ekran"] .lx-tag { grid-column: 1; margin-top: -30px !important; align-self: start;}
+  .lx[data-design="ekran"] h1 { grid-column: 1 / -1; justify-self: start; max-width: 860px; padding-right: 26px; font-size: clamp(36px, 3.9vw, 54px); white-space: nowrap;}
+  .lx[data-design="ekran"] .lx-hero__tr { grid-column: 1; }
+  .lx[data-design="ekran"] .lx-hero__meta { grid-column: 1; grid-row: 5; margin: 0; }
+  .lx[data-design="ekran"] .lx-hero__intro { grid-column: 1; grid-row: 6; margin: 0; font-size: .94em; line-height: 1.45;}
+  .lx[data-design="ekran"] .lx-stats { grid-column: 2; grid-row: 4 / span 2; margin: 10px 0 0; align-self: start;}
+  .lx[data-design="ekran"] .lx-gbar { grid-column: 2; grid-row: 6; align-self: end; margin-bottom: 4px !important;}
+  .lx[data-design="ekran"] .lx-tab { flex: 1 1 0;}
+}

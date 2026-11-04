@@ -1,0 +1,227 @@
+/* Meteo: станция и синоптическая карта. Изобары над Турцией, барометр, круглые приборы-карточки, журнал наблюдений, телеграмма, лента барографа */
+html:has(.lx[data-design="meteo"]) { background: #e4ecdf; }
+.lx[data-design="meteo"] {
+  --lx-accent: #12343b; --lx-accent-2: #a8331f; --lx-paper: #e4ecdf; --lx-surf: #f7f6ea; --lx-surf2: #e9eadb; --lx-card: #f7f6ea;
+  --lx-ink: #12343b; --lx-muted: #3f5a5e; --lx-line: #a9b7a8; --lx-soft: #dce6d6; --lx-on: #f7f6ea; --lx-tabs-bg: #f3e9e6; --lx-r: 14px; --lx-shadow: 0 10px 20px -14px rgba(18, 52, 59, .55);
+  --cg: 'LX Cormorant Garamond', Georgia, serif; --mono: 'LX JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ak-font: 'LX Jost', system-ui, sans-serif; --ak-font-display: var(--cg); --ak-radius: 10px; --ak-radius-sm: 8px; --ak-good: #0f5f3a; --ak-good-soft: #d6efdc; --ak-bad: #a8331f; --ak-bad-soft: #fbe2da;
+  font-family: var(--ak-font); overflow-x: clip;
+  background-color: #e4ecdf;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='360' fill='none' stroke='%2312343b' stroke-opacity='.14' stroke-width='1.3'%3E%3Cpath d='M-20 60C90 10 180 120 300 70S460 20 540 60M-20 130C90 80 170 190 300 140S450 90 540 130M-20 200C90 150 180 260 300 210S470 160 540 200M-20 270C80 220 180 330 300 280S460 230 540 270M-20 340C90 290 180 400 300 350S460 300 540 340'/%3E%3C/svg%3E");
+}
+.lx[data-design="meteo"] main { overflow-x: clip; }
+
+/* шапка: латунная планка */
+.lx[data-design="meteo"] .lx-app { background: linear-gradient(#f6dd93, #b08a3c 55%, #d6b65f); color: #1a1505; border-bottom: 2px solid #5e4514; }
+.lx[data-design="meteo"] .lx-app__logo { border-radius: 50%; background: #fbf7e4; color: #12343b; box-shadow: inset 0 0 0 2px #5e4514, inset 0 0 0 4px #fbf7e4, inset 0 0 0 5px #5e4514; }
+.lx[data-design="meteo"] .lx-app__t b { font: 500 1.34em/1.05 var(--cg); }
+.lx[data-design="meteo"] .lx-app__t small { color: #1a1505; }
+.lx[data-design="meteo"] .lx-app__ring .lx-ring__bg { stroke: rgba(94, 69, 20, .35); }
+.lx[data-design="meteo"] .lx-app__ring .lx-ring__fg { stroke: #12343b; }
+.lx[data-design="meteo"] .lx-app__ring text { fill: #1a1505; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-lessons { background: rgba(94, 69, 20, .28); }
+.lx[data-design="meteo"] .lx-lessons::before { color: #1a1505; }
+.lx[data-design="meteo"] .lx-lessons a { color: #1a1505; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-lessons a[aria-current] { background: #12343b; color: #f6dd93; box-shadow: none; }
+
+/* первый экран: карта на весь экран, заголовок вверху слева, барометр срезан снизу справа */
+.lx[data-design="meteo"] .lx-hero { position: relative; isolation: isolate; display: grid; justify-items: start; margin-top: 0 !important; padding: 12px 0 0; background: none; border-radius: 0; box-shadow: none; }
+.lx[data-design="meteo"] .lx-scene { position: absolute; z-index: -1; top: 0; left: 50%; translate: -50% 0; width: 100vw; max-width: none; }
+.lx[data-design="meteo"] .lx-scene svg { display: block; width: 100%; height: auto; }
+.lx[data-design="meteo"] .lx-scene .mt-d { display: none; }
+.lx[data-design="meteo"] .lx-tag { margin: 0 0 2px !important; padding: 1px 6px; border-radius: 0; background: #e4ecdf; color: #a8331f; font: 500 11.5px/1.5 var(--mono); }
+.lx[data-design="meteo"] h1 { margin: 0; max-width: 92%; color: #12343b; font: 500 clamp(47px, 13.4vw, 66px)/.92 var(--cg); letter-spacing: -.025em; hyphens: manual; }
+.lx[data-design="meteo"] h1 { background: #e4ecdf; box-shadow: 0 0 0 4px #e4ecdf; width: fit-content; }
+.lx[data-design="meteo"] .lx-hero__tr { margin: 6px 0 0 !important; padding: 1px 6px; background: #12343b; color: #f6dd93; font: 500 clamp(13px, 3.5vw, 15px)/1.45 var(--mono); }
+.lx[data-design="meteo"] .lx-hero__meta { margin: clamp(430px, 116vw, 520px) 0 0 !important; width: 100%; padding: 8px 10px; background: #17646f; color: #fff; font: 500 13px/1.35 var(--mono); border-radius: 3px; }
+.lx[data-design="meteo"] .lx-hero__intro { margin: 12px 0 0; color: #12343b; }
+.lx[data-design="meteo"] .lx-stats { width: 100%; gap: 6px; margin: 12px 0 8px; }
+.lx[data-design="meteo"] .lx-stats li { aspect-ratio: 1; display: grid; place-content: center; padding: 2px; border-radius: 50%; text-align: center; background: radial-gradient(circle, #fffdf3 62%, transparent 63%), conic-gradient(#b08a3c, #f6dd93, #b08a3c, #7a5a1d, #b08a3c); }
+.lx[data-design="meteo"] .lx-stats b { font: 500 clamp(19px, 5.2vw, 25px)/1 var(--mono); color: #12343b; }
+.lx[data-design="meteo"] .lx-stats span { color: #12343b; font: 400 10px/1.05 var(--ak-font); max-width: 9ch; }
+.lx[data-design="meteo"] .lx-gbar { width: 100%; height: 6px; gap: 2px; }
+.lx[data-design="meteo"] .lx-gbar__s { background: #2a5fb0; }
+.lx[data-design="meteo"] .lx-gbar__s:nth-child(2) { background: #c43d2e; }
+
+/* вкладки: лента барографа, в миллиметровке */
+.lx[data-design="meteo"] .lx-tabs { margin-top: 16px !important; padding: 5px 5px 9px; gap: 4px; border-radius: 3px; background-color: #f8ecea; background-image: linear-gradient(rgba(196, 61, 46, .22) 1px, transparent 1px), linear-gradient(90deg, rgba(196, 61, 46, .22) 1px, transparent 1px); background-size: 8px 8px; box-shadow: inset 0 0 0 1px #c9a59d, 0 8px 14px -10px rgba(18, 52, 59, .7); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="meteo"] .lx-tab { grid-template-columns: 30px auto; gap: 0 6px; min-height: 46px; padding: 3px 11px 3px 4px; border-radius: 24px; background: #fffdf3; color: #12343b; box-shadow: inset 0 0 0 1.5px #7a5a1d; }
+.lx[data-design="meteo"] .lx-tab__ico { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #12343b; background: radial-gradient(circle, #fffdf3 58%, transparent 60%), repeating-conic-gradient(#12343b 0 3deg, transparent 3deg 30deg); box-shadow: inset 0 0 0 1px #7a5a1d; }
+.lx[data-design="meteo"] .lx-tab__ico svg { width: 14px; height: 14px; }
+.lx[data-design="meteo"] .lx-tab b { font: 500 13.5px/1.1 var(--ak-font); }
+.lx[data-design="meteo"] .lx-tab small { font: 500 10px/1.15 var(--mono); color: #12343b; }
+.lx[data-design="meteo"] .lx-tab[aria-selected="true"] { background: #12343b; color: #f6dd93; box-shadow: none; }
+.lx[data-design="meteo"] .lx-tab[aria-selected="true"] small { color: #f6dd93; }
+.lx[data-design="meteo"] .lx-tab[aria-selected="true"] .lx-tab__ico { background: linear-gradient(#f6dd93, #b08a3c); color: #12343b; box-shadow: none; }
+@media (hover: hover) { .lx[data-design="meteo"] .lx-tab:not([aria-selected="true"]):hover { background: #fff; color: #12343b; } }
+.lx[data-design="meteo"] .lx-tabs__line { left: 7px; right: 7px; bottom: 3px; height: 2px; border-radius: 0; background: rgba(196, 61, 46, .28); }
+.lx[data-design="meteo"] .lx-tabs__line::after { border-radius: 0; background: #a8331f; }
+
+/* заголовки разделов: табличка прибора */
+.lx[data-design="meteo"] .lx-ph { border-radius: 8px; background: #f7f6ea; box-shadow: 0 0 0 1.5px #7a5a1d, 0 0 0 5px #f7f6ea, 0 0 0 6px #7a5a1d, var(--lx-shadow); margin: 8px 6px 20px; }
+.lx[data-design="meteo"] .lx-kicker { color: #a8331f; font: 500 12.5px/1.2 var(--mono); }
+.lx[data-design="meteo"] .lx-panel h2 { font: 500 clamp(37px, 9.4vw, 58px)/.98 var(--cg); letter-spacing: -.02em; }
+.lx[data-design="meteo"] .lx-chip { border-radius: 22px; background: #fffdf3; color: #12343b; box-shadow: inset 0 0 0 1.5px #7a5a1d; font-weight: 500; }
+.lx[data-design="meteo"] .lx-chip[aria-pressed="true"] { background: #12343b; color: #f6dd93; box-shadow: none; }
+.lx[data-design="meteo"] .lx-search { border-radius: 22px; border-color: #7a5a1d; background: #fffdf3; }
+.lx[data-design="meteo"] .lx-learn { border-top: 1px solid #a9b7a8; }
+
+/* группы */
+.lx[data-design="meteo"] .lx-group { justify-content: center; margin: 30px 0 14px; color: #12343b; font: 500 clamp(30px, 7.6vw, 40px)/1.05 var(--cg); letter-spacing: -.01em; text-transform: none; }
+.lx[data-design="meteo"] .lx-group__ico { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(#f6dd93, #b08a3c); color: #12343b; box-shadow: inset 0 0 0 1px #5e4514; }
+
+/* карточки: круглые приборы */
+.lx[data-design="meteo"] .lx-cards { gap: 14px; justify-items: center; grid-template-columns: repeat(auto-fill, minmax(min(100%, 318px), 1fr)); }
+.lx[data-design="meteo"] .lx-card { --a: 40deg; width: min(100%, 346px); aspect-ratio: 1; align-content: center; gap: 6px; padding: 42px 34px 34px; border-radius: 50%; color: #12343b; text-align: center; background: radial-gradient(circle at 42% 36%, #fffdf3, #ece3c8); box-shadow: 0 0 0 3px #5e4514, 0 0 0 11px #c9a24f, 0 0 0 13px #5e4514, 0 14px 22px 10px rgba(18, 52, 59, .3); margin: 13px; }
+.lx[data-design="meteo"] .lx-card:nth-child(4n+2) { --a: 118deg; }
+.lx[data-design="meteo"] .lx-card:nth-child(4n+3) { --a: 205deg; }
+.lx[data-design="meteo"] .lx-card:nth-child(4n) { --a: 290deg; }
+.lx[data-design="meteo"] .lx-card::before { content: ''; position: absolute; inset: 7px; border-radius: 50%; pointer-events: none; background: repeating-conic-gradient(#12343b 0 1deg, transparent 1deg 10deg); -webkit-mask: radial-gradient(circle, transparent calc(70.71% - 12px), #000 calc(70.71% - 11px)); mask: radial-gradient(farthest-side, transparent calc(100% - 9px), #000 calc(100% - 9px)); }
+.lx[data-design="meteo"] .lx-card::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; pointer-events: none; background: conic-gradient(from var(--a), #c43d2e 0 7deg, transparent 7deg); mask: radial-gradient(farthest-side, transparent calc(100% - 15px), #000 calc(100% - 15px)); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 15px), #000 calc(100% - 15px)); }
+.lx[data-design="meteo"] .lx-card[data-passive] { background: radial-gradient(circle at 42% 36%, #f3f4ee, #d7ddd4); }
+.lx[data-design="meteo"] .lx-card:hover { box-shadow: 0 0 0 3px #5e4514, 0 0 0 11px #e7c870, 0 0 0 13px #5e4514, 0 14px 22px 10px rgba(18, 52, 59, .35); }
+.lx[data-design="meteo"] .lx-card:focus-visible { box-shadow: 0 0 0 3px #5e4514, 0 0 0 11px #2a5fb0, 0 0 0 13px #5e4514; }
+.lx[data-design="meteo"] .lx-card__face { gap: 4px; justify-items: center; }
+.lx[data-design="meteo"] .lx-card__top { flex-wrap: wrap; justify-content: center; gap: 2px 12px; }
+.lx[data-design="meteo"] .lx-card__w { order: 1; flex: 1 0 100%; }
+.lx[data-design="meteo"] .lx-card .lx-ico { width: 44px; height: 44px; border-radius: 50%; background: #12343b; color: #f6dd93; }
+.lx[data-design="meteo"] .lx-card .lx-ico svg { width: 21px; height: 21px; }
+.lx[data-design="meteo"] .lx-card__tr { font: 500 1.9em/1 var(--cg); letter-spacing: -.01em; color: #12343b; }
+.lx[data-design="meteo"] .lx-card__ru { color: #2c4a4f; font-size: .95em; font-weight: 400; line-height: 1.2; }
+.lx[data-design="meteo"] .lx-card .lx-say { background: #fffdf3; color: #12343b; box-shadow: inset 0 0 0 1.5px #7a5a1d; }
+@media (hover: hover) { .lx[data-design="meteo"] .lx-card .lx-say:hover { background: #12343b; color: #f6dd93; } }
+.lx[data-design="meteo"] .lx-card__tags { justify-content: center; }
+.lx[data-design="meteo"] .lx-card__pos { padding: 0; border-radius: 0; background: none; color: #2c4a4f; font: 500 11px/1.3 var(--mono); }
+.lx[data-design="meteo"] .lx-card__pos--passive { color: #8a2a18; }
+.lx[data-design="meteo"] .lx-card__acts { gap: 6px; justify-content: center; }
+.lx[data-design="meteo"] .lx-card__acts button { flex: 0 1 112px; padding: 0 4px; min-height: 44px; border: 0; border-radius: 22px; background: #12343b; color: #f6dd93; font: 500 13.5px/1 var(--ak-font); }
+.lx[data-design="meteo"] .lx-card__know { background: #fffdf3 !important; color: #12343b !important; box-shadow: inset 0 0 0 1.5px #12343b; }
+.lx[data-design="meteo"] .lx-card__know[aria-pressed="true"] { background: var(--ak-good-soft) !important; color: var(--ak-good) !important; box-shadow: inset 0 0 0 1.5px var(--ak-good); }
+/* знаю: стрелка на зелёном секторе */
+.lx[data-design="meteo"] .lx-card.is-known::after { background: conic-gradient(from 0deg, #1a8a57 0 100%); }
+.lx[data-design="meteo"] .lx-card.is-known { box-shadow: 0 0 0 3px #5e4514, 0 0 0 11px #c9a24f, 0 0 0 13px #5e4514, 0 14px 22px 10px rgba(18, 52, 59, .3); }
+/* оборот: прибор открывается и становится футляром с паспортом */
+.lx[data-design="meteo"] .lx-card.is-flipped { width: 100%; aspect-ratio: auto; padding: 26px 18px 18px; border-radius: 22px; text-align: left; background: #fffdf3; }
+.lx[data-design="meteo"] .lx-card.is-flipped::before, .lx[data-design="meteo"] .lx-card.is-flipped::after { display: none; }
+.lx[data-design="meteo"] .lx-card.is-flipped .lx-card__face { justify-items: stretch; }
+.lx[data-design="meteo"] .lx-card.is-flipped .lx-card__top { flex-wrap: nowrap; justify-content: flex-start; }
+.lx[data-design="meteo"] .lx-card.is-flipped .lx-card__w { order: 0; flex: 1; }
+.lx[data-design="meteo"] .lx-card__tx { color: #3f5a5e; font-family: var(--mono); font-size: .84em; }
+.lx[data-design="meteo"] .lx-card__gov { color: #8a2a18; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-ex { padding: 7px 10px; border-radius: 8px; background: #e9eadb; }
+.lx[data-design="meteo"] .lx-ex__ru { color: #3f5a5e; }
+.lx[data-design="meteo"] .lx-card__note { padding: 7px 10px; border-radius: 8px; border-left: 0; background: #fff0c7; color: #12343b; }
+
+/* история: журнал наблюдений, на полях показания */
+.lx[data-design="meteo"] .lx-story { position: relative; counter-reset: bar 1007; padding: 44px clamp(14px, 4vw, 30px) clamp(16px, 4vw, 26px) 84px; border-radius: 3px; background-color: #f7f6ea; background-image: linear-gradient(90deg, transparent 70px, #2a5fb0 70px, #2a5fb0 71px, transparent 71px), repeating-linear-gradient(transparent 0 31px, rgba(42, 95, 176, .2) 31px 32px); background-position: 0 0, 0 44px; box-shadow: var(--lx-shadow); }
+.lx[data-design="meteo"] .lx-story::before { content: 'GÖZLEM DEFTERİ · İZMİR İSTASYONU' / ''; position: absolute; top: 12px; left: 14px; right: 14px; padding-bottom: 6px; border-bottom: 1px solid #12343b; color: #12343b; font: 500 12px/1.2 var(--mono); }
+.lx[data-design="meteo"] .lx-story p { counter-increment: bar 3; position: relative; font-size: 1.04em; line-height: 32px; }
+.lx[data-design="meteo"] .lx-story p::before { content: counter(bar) '\A hPa'; white-space: pre; position: absolute; left: -76px; top: 4px; color: #8a2a18; font: 500 12px/1.2 var(--mono); }
+.lx[data-design="meteo"] .lx-tw { padding: 0 3px; border-radius: 3px; background: #cfe3f7; color: #0d2f66; font-weight: 500; line-height: 1; }
+.lx[data-design="meteo"] .lx-tw.is-on { background: #12343b; color: #f6dd93; }
+.lx[data-design="meteo"] .lx-tw.is-on::after { border-radius: 3px; background: #a8331f; color: #fff; }
+.lx[data-design="meteo"] .lx-chip--tr { background: #fffdf3; box-shadow: inset 0 0 0 1px #7a5a1d; }
+.lx[data-design="meteo"] .lx-chip--tr.is-found { background: #cfe3f7; color: #0d2f66; box-shadow: inset 0 0 0 1px #2a5fb0; }
+.lx[data-design="meteo"] .lx-found { color: #2c4a4f; }
+.lx[data-design="meteo"] .lx-found__bar { background: #d2dccd; }
+.lx[data-design="meteo"] .lx-found__bar i { background: #12343b; }
+
+/* диалоги: бланк телеграммы, реплики наклеены лентой */
+.lx[data-design="meteo"] .lx-dlg { position: relative; padding-top: 46px; border-radius: 2px; background: #efe6c9; box-shadow: var(--lx-shadow), inset 0 0 0 1px #a59367; }
+.lx[data-design="meteo"] .lx-dlg::before { content: 'TELGRAF · METEOROLOJİ' / ''; position: absolute; top: 12px; left: 16px; right: 16px; padding-bottom: 4px; border-bottom: 2px solid #12343b; color: #12343b; font: 500 13px/1.2 var(--mono); letter-spacing: .08em; }
+.lx[data-design="meteo"] .lx-dlg__head h3 { font: 500 1.9em/1 var(--cg); }
+.lx[data-design="meteo"] .lx-badge { border-radius: 2px; background: #12343b; color: #f6dd93; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-badge--short { background: var(--ak-good-soft); color: var(--ak-good); }
+.lx[data-design="meteo"] .lx-badge--long { background: #fbe2da; color: #8a2a18; }
+.lx[data-design="meteo"] .lx-place { color: #2c4a4f; }
+.lx[data-design="meteo"] .lx-place .lx-ico { background: #12343b; color: #f6dd93; }
+.lx[data-design="meteo"] .lx-dots i { border-radius: 0; background: #c4b48a; }
+.lx[data-design="meteo"] .lx-dots i.is-on { background: #a8331f; }
+.lx[data-design="meteo"] .lx-chat { gap: 8px; padding: 4px 0; border-radius: 0; background: none; }
+.lx[data-design="meteo"] .lx-msg { justify-self: stretch; max-width: 100%; padding: 6px 10px 7px 42px; border-radius: 0; background: #fbf8e8; box-shadow: 0 1px 2px rgba(0, 0, 0, .35); rotate: -.25deg; }
+.lx[data-design="meteo"] .lx-msg--me { justify-self: stretch; padding: 6px 10px 7px 42px; border-radius: 0; background: #e3edf3; rotate: .25deg; }
+.lx[data-design="meteo"] .lx-msg__ava { left: 6px; top: 8px; width: 28px; height: 28px; border-radius: 50%; background: #12343b; color: #f6dd93; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-msg--me .lx-msg__ava { left: 6px; right: auto; background: #a8331f; color: #fff; }
+.lx[data-design="meteo"] .lx-msg__who { color: #8a2a18; font: 500 11px/1.4 var(--mono); text-transform: uppercase; }
+.lx[data-design="meteo"] .lx-msg--me .lx-msg__who { color: #0d2f66; }
+.lx[data-design="meteo"] .lx-msg__tr { font: 500 .98em/1.35 var(--mono); }
+.lx[data-design="meteo"] .lx-msg__ru { color: #3f5a5e; }
+.lx[data-design="meteo"] .lx-typing { border-radius: 0; background: #fbf8e8; }
+.lx[data-design="meteo"] .lx-switch { color: #2c4a4f; }
+.lx[data-design="meteo"] .lx-btn { background: #12343b; color: #f6dd93; font: 500 15px/1 var(--ak-font); }
+.lx[data-design="meteo"] .lx-btn--ghost { background: transparent; color: #12343b; box-shadow: inset 0 0 0 2px #12343b; }
+.lx[data-design="meteo"] .lx-next { border-radius: 26px; background: #12343b; color: #f6dd93; font: 500 16px/1.2 var(--ak-font); }
+
+/* практика и квест */
+.lx[data-design="meteo"] .lx-steps li { background: #fffdf3; box-shadow: inset 0 0 0 1px #7a5a1d; font-weight: 500; }
+.lx[data-design="meteo"] .lx-steps li::before { background: #12343b; color: #f6dd93; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-panel a-exercise, .lx[data-design="meteo"] .lx-panel a-quiz { display: block; box-shadow: none; }
+.lx[data-design="meteo"] .ak-ex { border: 0; border-radius: 12px; background: #fffdf3; box-shadow: 0 0 0 1.5px #5e4514, 0 0 0 7px #c9a24f, 0 0 0 8.5px #5e4514; margin: 10px; }
+.lx[data-design="meteo"] .ak-ex__title { font: 500 1.5em/1 var(--cg); }
+.lx[data-design="meteo"] .ak-ex__count { font-family: var(--mono); color: #3f5a5e; }
+.lx[data-design="meteo"] .ak-ex__bar span { background: #a8331f; }
+.lx[data-design="meteo"] .ak-btn { background: #12343b; color: #f6dd93; }
+.lx[data-design="meteo"] .ak-btn--ghost { background: transparent; color: #12343b; box-shadow: inset 0 0 0 2px #12343b; }
+.lx[data-design="meteo"] .ak-opt__n { background: #12343b; color: #f6dd93; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-sim__ava { background: linear-gradient(#f6dd93, #b08a3c); color: #12343b; font-family: var(--mono); box-shadow: inset 0 0 0 1px #5e4514; }
+.lx[data-design="meteo"] .lx-sim__dots i { background: #e9eadb; color: #12343b; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="meteo"] .lx-sim__name small, .lx[data-design="meteo"] .lx-sim__place { color: #3f5a5e; }
+.lx[data-design="meteo"] .lx-sim__feed { border-radius: 8px; background-color: #e4ecdf; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='180' fill='none' stroke='%2312343b' stroke-opacity='.18' stroke-width='1.2'%3E%3Cpath d='M-10 40C60 0 110 80 170 40S240 10 280 40M-10 100C60 60 110 140 170 100S240 70 280 100M-10 160C60 120 110 200 170 160S240 130 280 160'/%3E%3C/svg%3E"); box-shadow: inset 0 0 0 1px #a9b7a8; }
+.lx[data-design="meteo"] .lx-sim__msg { border-radius: 10px 10px 10px 2px; background: #fffdf3; box-shadow: 0 1px 2px rgba(18, 52, 59, .3); }
+.lx[data-design="meteo"] .lx-sim__msg--me { border-radius: 10px 10px 2px 10px; background: #12343b; color: #f6dd93; }
+.lx[data-design="meteo"] .lx-sim__ru { opacity: 1; }
+.lx[data-design="meteo"] .lx-sim__hint { color: #a8331f; }
+.lx[data-design="meteo"] .lx-sim__opt { border-radius: 12px; background: #fffdf3; border-color: #7a5a1d; }
+.lx[data-design="meteo"] .lx-sim__n { background: #12343b; color: #f6dd93; font-family: var(--mono); font-weight: 500; }
+
+/* шпаргалка: барограмма на розовой миллиметровке */
+.lx[data-design="meteo"] .lx-table { display: block; padding: 8px clamp(10px, 3vw, 20px) 12px; border-radius: 2px; background-color: #fbf0ee; background-image: linear-gradient(rgba(196, 61, 46, .18) 1px, transparent 1px), linear-gradient(90deg, rgba(196, 61, 46, .18) 1px, transparent 1px); background-size: 12px 12px; box-shadow: var(--lx-shadow); }
+.lx[data-design="meteo"] .lx-table tbody { display: block; }
+.lx[data-design="meteo"] .lx-table tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; border-bottom: 1.5px solid #a8331f; }
+.lx[data-design="meteo"] .lx-table td { padding: 8px 2px; border: 0; }
+.lx[data-design="meteo"] .lx-table td[lang="tr"] { width: auto; font: 500 1.34em/1.05 var(--cg); }
+.lx[data-design="meteo"] .lx-table small { color: #3f5a5e; font: 500 11.5px/1.3 var(--mono); }
+.lx[data-design="meteo"] .lx-res { background: #f7f6ea; box-shadow: var(--lx-shadow); }
+.lx[data-design="meteo"] .lx-res__info b { font: 500 1.6em/1.1 var(--cg); }
+.lx[data-design="meteo"] .lx-donut__bg { stroke: #d2dccd; }
+
+/* движение */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="meteo"] .mt-needle { animation: mt-needle 7s ease-in-out infinite alternate; }
+  .lx[data-design="meteo"] .mt-cups { animation: mt-cups .7s linear infinite alternate; }
+  .lx[data-design="meteo"] .mt-vane { animation: mt-vane 6s ease-in-out infinite alternate; }
+  .lx[data-design="meteo"] .mt-ball { animation: mt-ball 14s ease-in-out infinite alternate; }
+  .lx[data-design="meteo"] .mt-rain { animation: mt-rain 1s linear infinite; }
+  .lx[data-design="meteo"] .mt-bolt { animation: mt-bolt 4.6s steps(1) infinite; }
+  .lx[data-design="meteo"] .mt-wave { animation: mt-wave 3s ease-in-out infinite alternate; }
+}
+@keyframes mt-needle { from { transform: rotate(-3deg); } to { transform: rotate(5deg); } }
+@keyframes mt-cups { from { transform: scaleX(1); } to { transform: scaleX(.2); } }
+@keyframes mt-vane { from { transform: scaleX(1); } to { transform: scaleX(.72); } }
+@keyframes mt-ball { from { transform: translate(0, 10px); } to { transform: translate(14px, -34px); } }
+@keyframes mt-rain { from { transform: translateY(-4px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(8px); opacity: 0; } }
+@keyframes mt-bolt { 0%, 88%, 92%, 100% { opacity: 0; } 89%, 91%, 94%, 96% { opacity: 1; } }
+@keyframes mt-wave { from { transform: translateX(-4px); } to { transform: translateX(5px); } }
+
+@media (max-width: 767px) {
+  .lx[data-design="meteo"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-radius: 0; }
+  .lx[data-design="meteo"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lx[data-design="meteo"] .lx-card { width: min(100% - 26px, 330px); }
+}
+@media (min-width: 680px) and (max-width: 1023px) { .lx[data-design="meteo"] .lx-hero__meta { margin-top: min(120vw, 760px) !important; } }
+/* широкий экран: текст столбцом на бумаге карты, справа станция и большой барометр */
+@media (min-width: 1024px) {
+  .lx[data-design="meteo"] .lx-scene { width: 100vw; height: 700px; }
+  .lx[data-design="meteo"] .lx-scene .mt-m { display: none; }
+  .lx[data-design="meteo"] .lx-scene .mt-d { display: block; height: 100%; }
+  .lx[data-design="meteo"] .lx-hero { padding-top: 22px; }
+  .lx[data-design="meteo"] .lx-tag, .lx[data-design="meteo"] h1, .lx[data-design="meteo"] .lx-hero__tr, .lx[data-design="meteo"] .lx-hero__meta, .lx[data-design="meteo"] .lx-hero__intro, .lx[data-design="meteo"] .lx-stats, .lx[data-design="meteo"] .lx-gbar { max-width: 460px; }
+  .lx[data-design="meteo"] h1 { font-size: 72px; }
+  .lx[data-design="meteo"] .lx-hero__meta { margin: 14px 0 0 !important; }
+  .lx[data-design="meteo"] .lx-hero__intro { margin: 0 !important; padding: 10px 8px 6px 0; background: #e4ecdf; box-shadow: 0 0 0 6px #e4ecdf; }
+  .lx[data-design="meteo"] .lx-stats { background: #e4ecdf; box-shadow: 0 0 0 6px #e4ecdf; margin-bottom: 0; padding-bottom: 8px; width: 400px; }
+  .lx[data-design="meteo"] .lx-gbar { margin-bottom: 100px !important; }
+  .lx[data-design="meteo"] .lx-cards { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lx[data-design="meteo"] .lx-tab { justify-content: start; }
+}
+@media print { .lx[data-design="meteo"] .lx-scene { display: none; } }

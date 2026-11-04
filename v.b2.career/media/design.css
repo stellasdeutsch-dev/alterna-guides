@@ -1,0 +1,241 @@
+.lx[data-design="merdiven"] { font-family: var(--ak-font); overflow-x: clip; --lx-card: transparent; }
+.lx[data-design="merdiven"] main { overflow-x: clip; }
+.lx[data-design="merdiven"] .lx-hero { position: relative; margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="merdiven"] .lx-scene { position: relative; margin-inline: calc(50% - 50vw); overflow: hidden; }
+.lx[data-design="merdiven"] .lx-scene svg { display: block; width: 100%; height: 100%; }
+.lx[data-design="merdiven"] .lx-tabs { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="merdiven"] .lx-tab b { white-space: nowrap; }
+.lx[data-design="merdiven"] .lx-tab small { white-space: nowrap; }
+.lx[data-design="merdiven"] .lx-panel a-exercise, .lx[data-design="merdiven"] .lx-panel a-quiz { display: block; box-shadow: none; }
+.lx[data-design="merdiven"] .lx-table { display: table; }
+@media (max-width: 767px) { .lx[data-design="merdiven"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; border-radius: 0; } }
+@media print { .lx[data-design="merdiven"] { background: #fff !important; } .lx[data-design="merdiven"] .lx-scene { display: none; } }
+/* Merdiven: настольная игра про карьеру. Заголовок лежит в середине поля, вокруг него идёт путь с лестницами и горками, пешки ходят, кубик катится.
+   Вкладки это клетки пути, слова это клетки поля, выученное занимает пешка, реплики диалога это карточки ŞANS и FIRSAT. */
+html:has(.lx[data-design="merdiven"]) { background: #f6f8ff; }
+.lx[data-design="merdiven"] {
+  --ink: #1c1a3a; --coral: #b23713; --cob: #1b47c4; --sun: #ffd166;
+  --lx-accent: #1b47c4; --lx-accent-2: #b23713; --lx-paper: #f6f8ff; --lx-surf: #fff; --lx-surf2: #eef1ff; --lx-ink: #1c1a3a; --lx-muted: #55537a; --lx-line: #d8dcf2; --lx-soft: #e4ebff; --lx-on: #fff; --lx-tabs-bg: #fff; --lx-r: 10px;
+  --lx-shadow: 0 0 0 2.4px #1c1a3a, 3px 4px 0 2.4px #1c1a3a;
+  --game: 'LX Dela Gothic One', 'Arial Black', sans-serif; --txt: 'LX Nunito', system-ui, sans-serif;
+  --ak-font: 'LX Nunito', system-ui, sans-serif; --ak-font-display: var(--game); --ak-radius: 10px; --ak-radius-sm: 8px; --ak-good: #0f6b3e; --ak-good-soft: #d7f4e1; --ak-bad: #a82a10; --ak-bad-soft: #ffe2d8; --ak-accent-soft: #e4ebff; --ak-surface: #eef1ff; --ak-bg: #fff; --ak-line: #1c1a3a;
+  background-color: #f6f8ff;
+  background-image: linear-gradient(#e9edfb 1.5px, transparent 1.5px), linear-gradient(90deg, #e9edfb 1.5px, transparent 1.5px);
+  background-size: 64px 64px;
+}
+.lx[data-design="merdiven"] .lx-app { background: #fff; border-bottom: 0; box-shadow: 0 2.4px 0 #1c1a3a; position: relative; z-index: 2; }
+.lx[data-design="merdiven"] .lx-app__logo { border-radius: 10px; background: var(--sun); color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-app__t b { font: 400 .96em/1.2 var(--game); }
+.lx[data-design="merdiven"] .lx-app__t small { color: var(--lx-muted); font-weight: 600; }
+.lx[data-design="merdiven"] .lx-lessons { background: none; padding: 0; gap: 4px; }
+.lx[data-design="merdiven"] .lx-lessons::before { color: var(--lx-muted); }
+.lx[data-design="merdiven"] .lx-lessons a { border-radius: 9px; background: #fff; color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; font: 400 15px/1 var(--game); }
+.lx[data-design="merdiven"] .lx-lessons a[aria-current] { background: var(--sun); color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-app__ring .lx-ring__bg { stroke: #e4e8f8; }
+.lx[data-design="merdiven"] .lx-app__ring .lx-ring__fg { stroke: #e4572e; }
+
+/* первый экран, телефон: кусок поля сверху, ниже коробка игры */
+.lx[data-design="merdiven"] .lx-scene { height: clamp(260px, 74vw, 440px); background: #fff; border-bottom: 2.4px solid #1c1a3a; }
+.lx[data-design="merdiven"] .ks-pawn--a { transform: translate(1550px, 676px); }
+.lx[data-design="merdiven"] .ks-pawn--b { transform: translate(1550px, 476px); }
+.lx[data-design="merdiven"] .lx-tag { display: inline-block; width: max-content; margin: 14px 0 6px !important; padding: 2px 9px; border-radius: 6px; background: var(--sun); color: var(--ink); box-shadow: 0 0 0 2px #1c1a3a; font: 800 11.5px/1.5 var(--txt); letter-spacing: .05em; }
+.lx[data-design="merdiven"] h1 { margin: 0 0 6px; font: 400 clamp(31px, 8.8vw, 52px)/1.08 var(--game); letter-spacing: -.01em; color: var(--ink); hyphens: manual; }
+.lx[data-design="merdiven"] .lx-hero__tr { margin-bottom: 6px !important; font: 800 clamp(16px, 4.2vw, 21px)/1.2 var(--txt); color: var(--coral); }
+.lx[data-design="merdiven"] .lx-hero__meta { margin-bottom: 5px; color: var(--lx-muted); font: 700 13px/1.35 var(--txt); }
+.lx[data-design="merdiven"] .lx-hero__intro { margin-bottom: 8px; font-size: 1em; line-height: 1.38; font-weight: 500; color: #2a2850; }
+.lx[data-design="merdiven"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 4px 0 8px; border-radius: 9px; background: #fff; box-shadow: 0 0 0 2.4px #1c1a3a; overflow: hidden; }
+.lx[data-design="merdiven"] .lx-stats li { padding: 5px 7px; background: #fff; border-radius: 0; border-left: 2.4px solid #1c1a3a; }
+.lx[data-design="merdiven"] .lx-stats li:first-child { border-left: 0; background: #bfe3ff; }
+.lx[data-design="merdiven"] .lx-stats li:nth-child(2) { background: #fff0a8; }
+.lx[data-design="merdiven"] .lx-stats li:nth-child(3) { background: #c7f0d2; }
+.lx[data-design="merdiven"] .lx-stats li:nth-child(4) { background: #ffcfc0; }
+.lx[data-design="merdiven"] .lx-stats b { font: 400 clamp(20px, 5.4vw, 26px)/1.1 var(--game); color: var(--ink); }
+.lx[data-design="merdiven"] .lx-stats span { font: 700 10.5px/1.15 var(--txt); color: #2a2850; }
+.lx[data-design="merdiven"] .lx-gbar { height: 8px; gap: 3px; }
+.lx[data-design="merdiven"] .lx-gbar__s { border-radius: 8px; background: #e4572e !important; box-shadow: 0 0 0 1.6px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-gbar__s:nth-child(2) { background: #3f83e8 !important; }
+
+/* вкладки: клетки пути со стрелкой к следующей */
+.lx[data-design="merdiven"] .lx-tabs { margin-top: 12px !important; padding: 5px 6px 6px; gap: 12px; border-radius: 0; background: #fff; box-shadow: 0 -2.4px 0 #1c1a3a, 0 2.4px 0 #1c1a3a; }
+.lx[data-design="merdiven"] .lx-tab { min-height: 48px; padding: 3px 12px; border-radius: 8px; color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; background: #bfe3ff; grid-template-columns: auto; overflow: visible; }
+.lx[data-design="merdiven"] .lx-tab:nth-of-type(5n+2) { background: #fff0a8; }
+.lx[data-design="merdiven"] .lx-tab:nth-of-type(5n+3) { background: #c7f0d2; }
+.lx[data-design="merdiven"] .lx-tab:nth-of-type(5n+4) { background: #ffcfc0; }
+.lx[data-design="merdiven"] .lx-tab:nth-of-type(5n) { background: #dccfff; }
+.lx[data-design="merdiven"] .lx-tab:not(:last-of-type)::after { content: ''; position: absolute; right: -10px; top: 50%; margin-top: -4px; border-left: 8px solid #1c1a3a; border-block: 4px solid transparent; }
+.lx[data-design="merdiven"] .lx-tab__ico { display: none; }
+.lx[data-design="merdiven"] .lx-tab b { font: 800 14.5px/1.1 var(--txt); }
+.lx[data-design="merdiven"] .lx-tab small { font: 700 11px/1.1 var(--txt); color: #2a2850; }
+.lx[data-design="merdiven"] .lx-tab[aria-selected="true"], .lx[data-design="merdiven"] .lx-tab[aria-selected="true"]:nth-of-type(n) { background: var(--ink); color: #fff; box-shadow: inset 0 0 0 2.4px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-tab[aria-selected="true"] small { color: #fff; }
+.lx[data-design="merdiven"] .lx-tab__ok { background: #0f6b3e; box-shadow: 0 0 0 1.6px #fff; }
+.lx[data-design="merdiven"] .lx-tabs__line { left: 6px; right: 6px; bottom: 0; height: 3px; border-radius: 0; background: none; }
+.lx[data-design="merdiven"] .lx-tabs__line::after { border-radius: 0; background: #e4572e; }
+
+.lx[data-design="merdiven"] .lx-ph { padding: 18px 0 12px; background: none; box-shadow: none; }
+.lx[data-design="merdiven"] .lx-kicker { color: var(--coral); font: 800 13.5px/1.2 var(--txt); }
+.lx[data-design="merdiven"] .lx-panel h2 { font: 400 clamp(28px, 5.8vw, 44px)/1.1 var(--game); }
+.lx[data-design="merdiven"] .lx-hint { font-weight: 500; }
+.lx[data-design="merdiven"] .lx-chip { border-radius: 8px; background: #fff; box-shadow: inset 0 0 0 2.4px #1c1a3a; font: 800 14px/1 var(--txt); }
+.lx[data-design="merdiven"] .lx-chip[aria-pressed="true"] { background: var(--sun); color: var(--ink); }
+.lx[data-design="merdiven"] .lx-search { border-radius: 8px; border: 2.4px solid #1c1a3a; background: #fff; }
+.lx[data-design="merdiven"] .lx-learn { border-top: 2.4px dotted #1c1a3a; }
+.lx[data-design="merdiven"] .lx-learn p { font-weight: 700; }
+.lx[data-design="merdiven"] .lx-learn p b { color: var(--coral); }
+.lx[data-design="merdiven"] .lx-learn__ring .lx-ring__bg { stroke: #e4e8f8; }
+.lx[data-design="merdiven"] .lx-learn__ring .lx-ring__fg { stroke: #e4572e; }
+.lx[data-design="merdiven"] .lx-switch input { accent-color: #1c1a3a; }
+.lx[data-design="merdiven"] .lx-group { width: max-content; max-width: 100%; margin: 34px 0 16px; padding: 8px 18px 8px 8px; gap: 10px; border-radius: 12px; background: var(--ink); color: #fff; font: 400 clamp(15px, 3.4vw, 18px)/1.2 var(--game); letter-spacing: 0; text-transform: none; }
+.lx[data-design="merdiven"] .lx-group__ico { border-radius: 8px; background: var(--sun); color: var(--ink); }
+
+/* карточка: клетка поля */
+.lx[data-design="merdiven"] #p-sozluk { counter-reset: cell; }
+.lx[data-design="merdiven"] .lx-cards { gap: 16px; }
+.lx[data-design="merdiven"] .lx-card { counter-increment: cell; padding: 0 0 10px; gap: 8px; border-radius: 12px; background: #fff; box-shadow: var(--lx-shadow); overflow: hidden; --band: #bfe3ff; }
+.lx[data-design="merdiven"] .lx-card[data-passive] { background: #fff; }
+.lx[data-design="merdiven"] .lx-card:nth-child(5n+2) { --band: #fff0a8; }
+.lx[data-design="merdiven"] .lx-card:nth-child(5n+3) { --band: #c7f0d2; }
+.lx[data-design="merdiven"] .lx-card:nth-child(5n+4) { --band: #ffcfc0; }
+.lx[data-design="merdiven"] .lx-card:nth-child(5n) { --band: #dccfff; }
+.lx[data-design="merdiven"] .lx-card::before { content: counter(cell) / ''; display: block; padding: 3px 12px 3px; border-bottom: 2.4px solid #1c1a3a; background: var(--band); font: 400 15px/1.4 var(--game); color: var(--ink); }
+.lx[data-design="merdiven"] .lx-card__face, .lx[data-design="merdiven"] .lx-card__back { padding: 0 12px; }
+.lx[data-design="merdiven"] .lx-card__acts { padding: 0 12px; }
+.lx[data-design="merdiven"] .lx-ico { width: 44px; height: 44px; border-radius: 10px; background: var(--band); color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-card__tr { font: 900 1.28em/1.15 var(--txt); letter-spacing: -.01em; }
+.lx[data-design="merdiven"] .lx-card__ru { color: var(--lx-muted); font-weight: 600; }
+.lx[data-design="merdiven"] .lx-say { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; border-radius: 10px; }
+.lx[data-design="merdiven"] .lx-card__pos { padding: 1px 8px; border-radius: 5px; background: #eef1ff; color: #2a2850; font: 800 11.5px/1.5 var(--txt); }
+.lx[data-design="merdiven"] .lx-card__pos--passive { background: #ffe2d8; color: #8a2a0c; }
+.lx[data-design="merdiven"] .lx-card__tx { color: var(--lx-muted); font-weight: 500; }
+.lx[data-design="merdiven"] .lx-card__gov { font: 800 .94em/1.4 var(--txt); color: var(--cob); }
+.lx[data-design="merdiven"] .lx-ex { padding: 7px 10px; border-radius: 8px; background: #f6f8ff; box-shadow: inset 0 0 0 1.6px #d8dcf2; }
+.lx[data-design="merdiven"] .lx-ex__tr { font-weight: 700; }
+.lx[data-design="merdiven"] .lx-ex__ru { color: var(--lx-muted); }
+.lx[data-design="merdiven"] .lx-card__note { border: 0; border-radius: 8px; background: #fff0a8; color: var(--ink); font-weight: 600; }
+.lx[data-design="merdiven"] .lx-card__acts { gap: 6px; }
+.lx[data-design="merdiven"] .lx-card__acts button { border: 0; border-radius: 8px; font: 800 13.5px/1 var(--txt); }
+.lx[data-design="merdiven"] .lx-card__flip { background: var(--ink) !important; color: #fff !important; }
+.lx[data-design="merdiven"] .lx-card__know { background: #fff !important; color: var(--ink) !important; box-shadow: inset 0 0 0 2.4px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-card__know[aria-pressed="true"] { background: #d7f4e1 !important; color: #0f6b3e !important; box-shadow: inset 0 0 0 2.4px #0f6b3e; }
+.lx[data-design="merdiven"] .lx-card:hover { box-shadow: 0 0 0 2.4px #1c1a3a, 5px 7px 0 2.4px #1c1a3a; translate: -1px -2px; }
+.lx[data-design="merdiven"] .lx-card:focus-visible { outline: 3px solid #e4572e; outline-offset: 3px; box-shadow: var(--lx-shadow); }
+.lx[data-design="merdiven"] .lx-card.is-flipped { background: #fff; }
+.lx[data-design="merdiven"] .lx-card.is-known { box-shadow: var(--lx-shadow); }
+.lx[data-design="merdiven"] .lx-card.is-known::after { content: ''; position: absolute; right: 12px; top: 3px; width: 18px; height: 24px; background: #e4572e; border: 2px solid #1c1a3a; border-radius: 50% 50% 22% 22% / 34% 34% 12% 12%; }
+.lx[data-design="merdiven"] .lx-card.is-known { --band: #c7f0d2; }
+
+/* история: лист правил игры с номерами ходов */
+.lx[data-design="merdiven"] .lx-found { font-weight: 700; }
+.lx[data-design="merdiven"] .lx-found b { color: var(--coral); }
+.lx[data-design="merdiven"] .lx-found__bar { border-radius: 8px; height: 10px; background: #fff; box-shadow: inset 0 0 0 2px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-found__bar i { border-radius: 8px; background: #e4572e; }
+.lx[data-design="merdiven"] .lx-story { counter-reset: hamle; padding: 56px clamp(16px, 4vw, 38px) clamp(18px, 4vw, 34px); border-radius: 12px; background: #fff; box-shadow: var(--lx-shadow); position: relative; }
+.lx[data-design="merdiven"] .lx-story::before { content: 'OYUN KURALLARI' / ''; position: absolute; left: 0; right: 0; top: 0; padding: 7px clamp(16px, 4vw, 38px); border-radius: 12px 12px 0 0; background: var(--sun); border-bottom: 2.4px solid #1c1a3a; font: 400 15px/1.5 var(--game); color: var(--ink); }
+.lx[data-design="merdiven"] .lx-story p { counter-increment: hamle; position: relative; padding-left: 46px; font-size: 1.04em; font-weight: 500; line-height: 1.72; max-width: 74ch; }
+.lx[data-design="merdiven"] .lx-story p::before { content: counter(hamle) / ''; position: absolute; left: 0; top: 2px; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; background: #bfe3ff; box-shadow: inset 0 0 0 2.4px #1c1a3a; font: 400 15px/1 var(--game); color: var(--ink); }
+.lx[data-design="merdiven"] .lx-story p:nth-child(2)::before { background: #fff0a8; }
+.lx[data-design="merdiven"] .lx-story p:nth-child(3)::before { background: #c7f0d2; }
+.lx[data-design="merdiven"] .lx-story p:nth-child(4)::before { background: #ffcfc0; }
+.lx[data-design="merdiven"] .lx-tw { padding: 0 5px; border-radius: 5px; background: #e4ebff; color: #173a9e; font-weight: 800; }
+.lx[data-design="merdiven"] .lx-tw.is-on { background: #1c1a3a; color: #fff; }
+.lx[data-design="merdiven"] .lx-tw.is-on::after { background: #1c1a3a; color: #fff; border-radius: 6px; }
+.lx[data-design="merdiven"] .lx-chip--tr { background: #fff; box-shadow: inset 0 0 0 2px #1c1a3a; font-weight: 800; }
+.lx[data-design="merdiven"] .lx-chip--tr.is-found { background: #c7f0d2; color: #0a5430; }
+
+/* диалог: карточки ŞANS и FIRSAT */
+.lx[data-design="merdiven"] .lx-dlg { padding: clamp(14px, 3vw, 26px); border-radius: 12px; background: #fff; box-shadow: var(--lx-shadow); }
+.lx[data-design="merdiven"] .lx-dlg__head h3 { font: 400 1.3em/1.15 var(--game); }
+.lx[data-design="merdiven"] .lx-badge, .lx[data-design="merdiven"] .lx-badge--short, .lx[data-design="merdiven"] .lx-badge--long { border-radius: 6px; background: var(--sun); color: var(--ink); font-weight: 800; }
+.lx[data-design="merdiven"] .lx-place { color: var(--lx-muted); }
+.lx[data-design="merdiven"] .lx-place .lx-ico { width: 28px; height: 28px; border-radius: 7px; color: var(--ink); background: #eef1ff; box-shadow: none; }
+.lx[data-design="merdiven"] .lx-dots i { border-radius: 3px; background: #e4e8f8; }
+.lx[data-design="merdiven"] .lx-dots i.is-on { background: #e4572e; }
+.lx[data-design="merdiven"] .lx-chat { gap: 12px; padding: 8px 4px; background: none; border-radius: 0; }
+.lx[data-design="merdiven"] .lx-msg { padding: 8px 14px 10px 14px; max-width: min(92%, 560px); border-radius: 12px; background: #ffe5dc; box-shadow: 0 0 0 2.4px #1c1a3a; rotate: -.5deg; }
+.lx[data-design="merdiven"] .lx-msg--me { padding: 8px 14px 10px 14px; border-radius: 12px; background: #d9edff; rotate: .5deg; box-shadow: 0 0 0 2.4px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-msg__ava { display: none; }
+.lx[data-design="merdiven"] .lx-msg__who { color: #8a2a0c; font: 400 12px/1.4 var(--game); letter-spacing: 0; }
+.lx[data-design="merdiven"] .lx-msg--me .lx-msg__who { color: #173a9e; }
+.lx[data-design="merdiven"] .lx-msg__tr { font-weight: 800; }
+.lx[data-design="merdiven"] .lx-msg__ru { color: #4a4870; font-weight: 500; }
+.lx[data-design="merdiven"] .lx-typing { background: #fff; box-shadow: 0 0 0 2px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-btn { border-radius: 10px; background: var(--ink); color: #fff; font: 800 15px/1 var(--txt); }
+.lx[data-design="merdiven"] .lx-btn--ghost { background: #fff; color: var(--ink); box-shadow: inset 0 0 0 2.4px #1c1a3a; }
+
+/* практика и квест: ходы по клеткам */
+.lx[data-design="merdiven"] .lx-steps { gap: 12px; }
+.lx[data-design="merdiven"] .lx-steps li { border-radius: 8px; background: #fff; box-shadow: inset 0 0 0 2.4px #1c1a3a; font-weight: 800; }
+.lx[data-design="merdiven"] .lx-steps li::before { border-radius: 6px; background: var(--sun); color: var(--ink); font-family: var(--game); font-weight: 400; }
+.lx[data-design="merdiven"] .lx-steps li.is-done { background: #d7f4e1; color: #0a5430; }
+.lx[data-design="merdiven"] .ak-ex { border: 0; border-radius: 12px; box-shadow: var(--lx-shadow); }
+.lx[data-design="merdiven"] .ak-ex__title { font: 400 1.1em/1.2 var(--game); }
+.lx[data-design="merdiven"] .ak-ex__bar { background: #e4e8f8; height: 6px; }
+.lx[data-design="merdiven"] .ak-btn { background: var(--ink); color: #fff; border-radius: 10px; }
+.lx[data-design="merdiven"] .ak-btn--ghost { background: #fff; color: var(--ink); }
+.lx[data-design="merdiven"] .ak-opt { border-width: 2px; font-weight: 600; }
+.lx[data-design="merdiven"] .ak-opt__n { border-radius: 6px; background: var(--sun); color: var(--ink); font-weight: 800; }
+.lx[data-design="merdiven"] .ak-opt[aria-pressed="true"] { background: #fff0a8; border-color: #1c1a3a; }
+.lx[data-design="merdiven"] .ak-tile, .lx[data-design="merdiven"] .ak-tok, .lx[data-design="merdiven"] .ak-match__l, .lx[data-design="merdiven"] .ak-match__r { border-width: 2px; font-weight: 600; }
+.lx[data-design="merdiven"] .lx-sim__ava { border-radius: 10px; background: var(--ink); font-family: var(--game); font-weight: 400; }
+.lx[data-design="merdiven"] .lx-sim__dots { gap: 8px; }
+.lx[data-design="merdiven"] .lx-sim__dots i { border-radius: 6px; background: #fff; color: var(--ink); box-shadow: inset 0 0 0 2px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-sim__dots i.is-cur { background: var(--sun); box-shadow: inset 0 0 0 2px #1c1a3a; color: var(--ink); }
+.lx[data-design="merdiven"] .lx-sim__dots i.is-good { background: #0f6b3e; color: #fff; box-shadow: none; }
+.lx[data-design="merdiven"] .lx-sim__dots i.is-ok { background: #7d5200; color: #fff; box-shadow: none; }
+.lx[data-design="merdiven"] .lx-sim__feed { border-radius: 10px; background-color: #f6f8ff; background-image: linear-gradient(#e4e8f8 1.5px, transparent 1.5px), linear-gradient(90deg, #e4e8f8 1.5px, transparent 1.5px); background-size: 44px 44px; box-shadow: inset 0 0 0 2px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-sim__msg { border-radius: 8px; background: #fff; box-shadow: 0 0 0 2px #1c1a3a; }
+.lx[data-design="merdiven"] .lx-sim__msg--me { background: #d9edff; color: var(--ink); }
+.lx[data-design="merdiven"] .lx-sim__opt { border: 2px solid #1c1a3a; border-radius: 10px; background: #fff; font-weight: 600; }
+.lx[data-design="merdiven"] .lx-sim__n { border-radius: 6px; background: var(--sun); color: var(--ink); }
+.lx[data-design="merdiven"] .lx-sim__hint { color: #a82a10; }
+.lx[data-design="merdiven"] .lx-res { border-radius: 12px; box-shadow: var(--lx-shadow); }
+.lx[data-design="merdiven"] .lx-res__info b { font: 400 1.3em/1.2 var(--game); }
+
+/* шпаргалка: лист подсчёта очков */
+.lx[data-design="merdiven"] .lx-table { border-radius: 12px; box-shadow: var(--lx-shadow); }
+.lx[data-design="merdiven"] .lx-table tr:nth-child(5n+1) td { background: #eaf5ff; }
+.lx[data-design="merdiven"] .lx-table tr:nth-child(5n+2) td { background: #fffbe0; }
+.lx[data-design="merdiven"] .lx-table tr:nth-child(5n+3) td { background: #ebfaf0; }
+.lx[data-design="merdiven"] .lx-table tr:nth-child(5n+4) td { background: #fff1ec; }
+.lx[data-design="merdiven"] .lx-table tr:nth-child(5n) td { background: #f3eeff; }
+.lx[data-design="merdiven"] .lx-table td { border-bottom: 2px solid #1c1a3a; }
+.lx[data-design="merdiven"] .lx-table td[lang="tr"] { border-right: 2px solid #1c1a3a; font: 900 1.05em/1.25 var(--txt); }
+.lx[data-design="merdiven"] .lx-table td small { color: #3f3d65; font-weight: 600; }
+.lx[data-design="merdiven"] .lx-table td:not([lang]) { font-weight: 600; }
+.lx[data-design="merdiven"] .lx-next { border-radius: 10px; background: #e4572e; color: #1c1a3a; box-shadow: 0 0 0 2.4px #1c1a3a; font: 400 15px/1.2 var(--game); }
+
+/* движение */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="merdiven"] .ks-pawn { transform-box: view-box; transform-origin: 0 0; }
+  .lx[data-design="merdiven"] .ks-pawn--a { animation: ks-a 30s linear infinite; }
+  .lx[data-design="merdiven"] .ks-pawn--b { animation: ks-b 36s linear infinite; }
+  .lx[data-design="merdiven"] .ks-die { transform-box: fill-box; transform-origin: 50% 50%; animation: ks-roll 6s cubic-bezier(.3, 0, .2, 1) infinite; }
+  .lx[data-design="merdiven"] .ks-die--b { animation-delay: -2.4s; animation-duration: 7.4s; }
+  .lx[data-design="merdiven"] .ks-p1 { animation: ks-p1 6s steps(1) infinite; }
+  .lx[data-design="merdiven"] .ks-p2 { animation: ks-p2 6s steps(1) infinite; }
+  .lx[data-design="merdiven"] .ks-p3 { animation: ks-p3 6s steps(1) infinite; }
+  .lx[data-design="merdiven"] .ks-card { animation: ks-card 8s ease-in-out infinite; }
+}
+.lx[data-design="merdiven"] .ks-p2, .lx[data-design="merdiven"] .ks-p3 { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) { .lx[data-design="merdiven"] .ks-p2, .lx[data-design="merdiven"] .ks-p3 { opacity: 1; } }
+@keyframes ks-roll { 0%, 70% { transform: rotate(0); } 90% { transform: rotate(360deg) scale(.92); } 100% { transform: rotate(720deg); } }
+@keyframes ks-p1 { 0%, 76% { opacity: 1; } 77%, 100% { opacity: 0; } }
+@keyframes ks-p2 { 0%, 76% { opacity: 0; } 77%, 88% { opacity: 1; } 89%, 100% { opacity: 0; } }
+@keyframes ks-p3 { 0%, 88% { opacity: 0; } 89%, 100% { opacity: 1; } }
+@keyframes ks-card { 0%, 60%, 100% { transform: translateY(0) rotate(0); } 72% { transform: translateY(-18px) rotate(-5deg); } }
+@keyframes ks-a { 0.00% { transform: translate(1550px, 676px); } 2.81% { transform: translate(1550px, 676px); } 4.53% { transform: translate(1500px, 650px); } 6.25% { transform: translate(1450px, 676px); } 9.06% { transform: translate(1450px, 676px); } 10.78% { transform: translate(1400px, 650px); } 12.50% { transform: translate(1350px, 676px); } 15.31% { transform: translate(1350px, 676px); } 17.03% { transform: translate(1300px, 650px); } 18.75% { transform: translate(1250px, 676px); } 21.56% { transform: translate(1250px, 676px); } 23.28% { transform: translate(1200px, 650px); } 25.00% { transform: translate(1150px, 676px); } 27.81% { transform: translate(1150px, 676px); } 29.53% { transform: translate(1100px, 650px); } 31.25% { transform: translate(1050px, 676px); } 34.06% { transform: translate(1050px, 676px); } 35.78% { transform: translate(1000px, 650px); } 37.50% { transform: translate(950px, 676px); } 40.31% { transform: translate(950px, 676px); } 42.03% { transform: translate(950px, 600px); } 43.75% { transform: translate(950px, 576px); } 46.56% { transform: translate(950px, 576px); } 48.28% { transform: translate(1000px, 550px); } 50.00% { transform: translate(1050px, 576px); } 52.81% { transform: translate(1050px, 576px); } 54.53% { transform: translate(1100px, 550px); } 56.25% { transform: translate(1150px, 576px); } 59.06% { transform: translate(1150px, 576px); } 60.78% { transform: translate(1200px, 550px); } 62.50% { transform: translate(1250px, 576px); } 65.31% { transform: translate(1250px, 576px); } 67.03% { transform: translate(1300px, 550px); } 68.75% { transform: translate(1350px, 576px); } 71.56% { transform: translate(1350px, 576px); } 73.28% { transform: translate(1400px, 550px); } 75.00% { transform: translate(1450px, 576px); } 77.81% { transform: translate(1450px, 576px); } 79.53% { transform: translate(1500px, 550px); } 81.25% { transform: translate(1550px, 576px); } 84.06% { transform: translate(1550px, 576px); } 85.78% { transform: translate(1550px, 500px); } 87.50% { transform: translate(1550px, 476px); } 90.31% { transform: translate(1550px, 476px); } 92.03% { transform: translate(1500px, 450px); } 93.75% { transform: translate(1450px, 476px); } 100% { transform: translate(1550px, 676px); }}
+@keyframes ks-b { 0.00% { transform: translate(1550px, 476px); } 2.50% { transform: translate(1550px, 476px); } 4.03% { transform: translate(1500px, 450px); } 5.56% { transform: translate(1450px, 476px); } 8.06% { transform: translate(1450px, 476px); } 9.58% { transform: translate(1400px, 450px); } 11.11% { transform: translate(1350px, 476px); } 13.61% { transform: translate(1350px, 476px); } 15.14% { transform: translate(1300px, 450px); } 16.67% { transform: translate(1250px, 476px); } 19.17% { transform: translate(1250px, 476px); } 20.69% { transform: translate(1200px, 450px); } 22.22% { transform: translate(1150px, 476px); } 24.72% { transform: translate(1150px, 476px); } 26.25% { transform: translate(1100px, 450px); } 27.78% { transform: translate(1050px, 476px); } 30.28% { transform: translate(1050px, 476px); } 31.81% { transform: translate(1000px, 450px); } 33.33% { transform: translate(950px, 476px); } 35.83% { transform: translate(950px, 476px); } 37.36% { transform: translate(950px, 400px); } 38.89% { transform: translate(950px, 376px); } 41.39% { transform: translate(950px, 376px); } 42.92% { transform: translate(1000px, 350px); } 44.44% { transform: translate(1050px, 376px); } 46.94% { transform: translate(1050px, 376px); } 48.47% { transform: translate(1100px, 350px); } 50.00% { transform: translate(1150px, 376px); } 52.50% { transform: translate(1150px, 376px); } 54.03% { transform: translate(1200px, 350px); } 55.56% { transform: translate(1250px, 376px); } 58.06% { transform: translate(1250px, 376px); } 59.58% { transform: translate(1300px, 350px); } 61.11% { transform: translate(1350px, 376px); } 63.61% { transform: translate(1350px, 376px); } 65.14% { transform: translate(1400px, 350px); } 66.67% { transform: translate(1450px, 376px); } 69.17% { transform: translate(1450px, 376px); } 70.69% { transform: translate(1500px, 350px); } 72.22% { transform: translate(1550px, 376px); } 74.72% { transform: translate(1550px, 376px); } 76.25% { transform: translate(1550px, 300px); } 77.78% { transform: translate(1550px, 276px); } 80.28% { transform: translate(1550px, 276px); } 81.81% { transform: translate(1500px, 250px); } 83.33% { transform: translate(1450px, 276px); } 85.83% { transform: translate(1450px, 276px); } 87.36% { transform: translate(1400px, 250px); } 88.89% { transform: translate(1350px, 276px); } 91.39% { transform: translate(1350px, 276px); } 92.92% { transform: translate(1300px, 250px); } 94.44% { transform: translate(1250px, 276px); } 100% { transform: translate(1550px, 476px); }}
+
+/* компьютер: поле на весь экран, заголовок в его пустой середине */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="merdiven"] .lx-hero { --cell: min(6.25vw, calc((100vh - 136px) / 8)); min-height: calc(var(--cell) * 8); padding: calc(var(--cell) * 1 + 8px) 0 0 calc(var(--cell) * 1 + 12px); }
+  .lx[data-design="merdiven"] main > .lx-hero { max-width: none; width: calc(var(--cell) * 16); margin-left: auto; margin-right: auto; }
+  .lx[data-design="merdiven"] .lx-scene { position: absolute; left: 0; top: 0; width: 100%; height: 100%; margin: 0; border-bottom: 0; }
+  .lx[data-design="merdiven"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 2; width: calc(var(--cell) * 6.1); }
+  .lx[data-design="merdiven"] .lx-hero > .lx-tag { width: max-content; margin-top: 0 !important; }
+  .lx[data-design="merdiven"] h1 { font-size: clamp(34px, 3.5vw, 58px); }
+  .lx[data-design="merdiven"] .lx-hero__intro { font-size: 15px; }
+  .lx[data-design="merdiven"] .lx-stats b { font-size: 24px; }
+  .lx[data-design="merdiven"] .lx-tabs { margin-top: 0 !important; justify-content: stretch; }
+  .lx[data-design="merdiven"] .lx-tab { flex: 1 1 0; justify-content: center; text-align: center; }
+}

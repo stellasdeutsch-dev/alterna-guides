@@ -1,0 +1,197 @@
+/* Otogar: утренний автовокзал, табло с перекидными буквами, маршрут вместо вкладок, билеты вместо карточек */
+.lx[data-design="otogar"] {
+  --lx-accent: #1b4fc4; --lx-accent-2: #b3162c; --lx-paper: #eaf4fb; --lx-surf: #ffffff; --lx-surf2: #dfecf6; --lx-card: #fffdf3;
+  --lx-ink: #12204a; --lx-muted: #44536f; --lx-line: #b4c8dc; --lx-soft: #d9e6fa; --lx-on: #ffffff; --lx-tabs-bg: #ffffff; --lx-r: 12px; --lx-shadow: none;
+  --caps: 'LX Oswald', 'Arial Narrow', sans-serif; --mono: 'LX JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ticket-ink: #1a2140; --ticket-muted: #55597a;
+  --ak-font: 'LX Onest', system-ui, sans-serif; --ak-font-display: var(--caps); --ak-bg: #ffffff; --ak-surface: #dfecf6; --ak-radius: 12px; --ak-radius-sm: 8px; --ak-good: #0c6b3c; --ak-good-soft: #d8f2e2; --ak-bad: #a3142a; --ak-bad-soft: #fbe1e4;
+  font-family: var(--ak-font); overflow-x: clip;
+  background-color: var(--lx-paper);
+  /* разметка дороги по левому краю страницы */
+  background-image: repeating-linear-gradient(#f5c21c 0 44px, transparent 44px 88px);
+  background-size: 4px 88px; background-position: 7px 0; background-repeat: repeat-y;
+}
+.lx[data-design="otogar"] main { overflow-x: clip; }
+
+/* шапка: как козырёк перрона */
+.lx[data-design="otogar"] .lx-app { background: #ffffff; border-bottom: 4px solid #f5c21c; }
+.lx[data-design="otogar"] .lx-app__logo { background: #ffd34d; color: #10162b; border-radius: 8px; }
+.lx[data-design="otogar"] .lx-app__t b { font: 600 1.2em/1.15 var(--caps); letter-spacing: .05em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-ring__bg { stroke: #dfecf6; }
+.lx[data-design="otogar"] .lx-lessons { background: #dfecf6; }
+.lx[data-design="otogar"] .lx-lessons a[aria-current] { background: #ffd34d; color: #10162b; }
+
+/* первый экран: табло и дорога */
+.lx[data-design="otogar"] .lx-hero { margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="otogar"] .lx-scene { margin-inline: calc(50% - 50vw); background: linear-gradient(#bfe3f7, #d7eefa); }
+.lx[data-design="otogar"] .ot-board { max-width: 760px; margin: 0 auto; padding: 16px 12px 14px; }
+.lx[data-design="otogar"] .ot-board__h { display: flex; justify-content: space-between; padding: 0 4px 8px; color: #12204a; font: 600 14px/1 var(--caps); letter-spacing: .24em; }
+.lx[data-design="otogar"] .ot-row { display: flex; gap: 2px; margin-bottom: 4px; font: 500 clamp(13px, 3.9vw, 24px)/1 var(--mono); justify-content: space-between; }
+.lx[data-design="otogar"] .ot-g { display: flex; gap: 2px; }
+.lx[data-design="otogar"] .ot-f { position: relative; display: grid; place-items: center; width: 1.34em; height: 1.72em; border-radius: 3px; background: linear-gradient(#ffffff 49%, #9fb2c8 49% 52%, #f1f6fb 52%); color: #12204a; box-shadow: 0 1px 0 #9fb2c8; }
+.lx[data-design="otogar"] .ot-g--t .ot-f { color: #1b4fc4; }
+.lx[data-design="otogar"] .ot-road { display: block; height: clamp(130px, 22vw, 210px); }
+.lx[data-design="otogar"] .lx-hero > :not(.lx-scene) { position: relative; }
+.lx[data-design="otogar"] .lx-tag { display: inline-block; margin: 20px 0 12px !important; padding: 6px 12px; border-radius: 3px; background: #2157c9; color: #fff; font: 500 13px/1.2 var(--caps); letter-spacing: .14em; }
+.lx[data-design="otogar"] h1 { font: 700 clamp(44px, 12.4vw, 92px)/.98 var(--caps); letter-spacing: -.005em; text-transform: uppercase; color: #12204a; }
+.lx[data-design="otogar"] .lx-hero__tr { margin: 10px 0 6px !important; color: #1b4fc4; font: 500 clamp(18px, 4.4vw, 26px)/1.2 var(--mono); }
+.lx[data-design="otogar"] .lx-hero__meta { color: var(--lx-muted); font-weight: 500; }
+.lx[data-design="otogar"] .lx-hero__intro { color: var(--lx-ink); font-size: 1.04em; }
+.lx[data-design="otogar"] .lx-stats { gap: 0; margin: 18px 0 14px; border-block: 2px solid #b4c8dc; }
+.lx[data-design="otogar"] .lx-stats li { background: none; border-radius: 0; padding: 10px 8px; border-left: 2px solid #b4c8dc; }
+.lx[data-design="otogar"] .lx-stats li:first-child { border-left: 0; padding-left: 0; }
+.lx[data-design="otogar"] .lx-stats b { color: #1b4fc4; font: 500 clamp(22px, 5.5vw, 30px)/1.1 var(--mono); }
+.lx[data-design="otogar"] .lx-stats span { color: var(--lx-muted); font-size: 12px; }
+.lx[data-design="otogar"] .lx-gbar { height: 6px; }
+.lx[data-design="otogar"] .lx-gbar__s { border-radius: 0; background: #f5c21c; }
+.lx[data-design="otogar"] .lx-gbar__s:nth-child(2) { background: #ff5a6e; }
+.lx[data-design="otogar"] .lx-gbar__s:nth-child(3) { background: #5a8dff; }
+
+/* вкладки: линия маршрута, остановки и автобус */
+.lx[data-design="otogar"] .lx-tabs { margin-top: 20px !important; border-radius: 0; background: #ffffff; padding: 2px 4px 8px; -webkit-backdrop-filter: none; backdrop-filter: none; border-block: 1px solid #b4c8dc; }
+.lx[data-design="otogar"] .lx-tab { display: grid; grid-template-columns: 1fr; justify-items: center; gap: 2px; min-height: 48px; padding: 2px 10px 4px; border-radius: 0; background: none; color: var(--lx-muted); text-align: center; }
+.lx[data-design="otogar"] .lx-tab__ico { grid-row: auto; position: relative; z-index: 1; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #ffffff; box-shadow: inset 0 0 0 3px #7f93ad; }
+.lx[data-design="otogar"] .lx-tab__ico svg { width: 12px; height: 12px; }
+.lx[data-design="otogar"] .lx-tab b { font: 500 13px/1.1 var(--caps); letter-spacing: .04em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-tab::before { content: ''; position: absolute; left: 0; right: 0; top: 13px; height: 4px; background: #b4c8dc; }
+.lx[data-design="otogar"] .lx-tab[aria-selected="true"] { background: none; color: #12204a; box-shadow: none; }
+.lx[data-design="otogar"] .lx-tab[aria-selected="true"] .lx-tab__ico { background: #ffd34d; color: #10162b; box-shadow: 0 0 0 4px rgba(245, 194, 28, .35); }
+.lx[data-design="otogar"] .lx-tab.is-done::before { background: #f5c21c; }
+.lx[data-design="otogar"] .lx-tab__ok { top: 0; right: 8px; z-index: 2; }
+.lx[data-design="otogar"] .lx-tabs__line { display: block; left: 6px; right: 6px; bottom: 2px; height: 3px; border-radius: 0; background: #dfecf6; }
+.lx[data-design="otogar"] .lx-tabs__line::after { border-radius: 0; background: #1b4fc4; }
+
+/* панели */
+.lx[data-design="otogar"] :is(.lx-ph, .lx-dlg, .lx-res) { background: var(--lx-surf); border: 1px solid var(--lx-line); }
+.lx[data-design="otogar"] .lx-kicker { color: #1b4fc4; font: 500 13px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-panel h2 { font: 700 clamp(30px, 7.4vw, 50px)/1.02 var(--caps); text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-chip { border-radius: 4px; background: var(--lx-surf2); color: var(--lx-ink); font-family: var(--caps); font-weight: 500; letter-spacing: .05em; }
+.lx[data-design="otogar"] .lx-chip[aria-pressed="true"] { background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-search { border-radius: 4px; background: #ffffff; border-color: var(--lx-line); }
+.lx[data-design="otogar"] .lx-search::placeholder { color: var(--lx-muted); }
+.lx[data-design="otogar"] .lx-learn { border-top: 1px dashed var(--lx-line); }
+
+/* группы как таблички перрона */
+.lx[data-design="otogar"] .lx-panel[data-section="sozluk"] { counter-reset: peron; }
+.lx[data-design="otogar"] .lx-group { counter-increment: peron; display: flex; gap: 10px; margin: 28px 0 14px; padding: 9px 12px; border-radius: 4px; background: #2157c9; color: #fff; font: 600 clamp(19px, 5vw, 26px)/1.1 var(--caps); letter-spacing: .03em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-group::before { content: counter(peron, decimal-leading-zero) / ''; display: grid; place-items: center; min-width: 38px; height: 34px; border-radius: 3px; background: #fff; color: #2157c9; font-family: var(--mono); font-size: .85em; }
+.lx[data-design="otogar"] .lx-group__ico { background: none; color: #fff; }
+
+/* карточки: билеты */
+.lx[data-design="otogar"] .lx-cards { gap: 16px; counter-reset: bilet; }
+.lx[data-design="otogar"] .lx-card { counter-increment: bilet; color: var(--ticket-ink); background: var(--lx-card); border-radius: 10px; padding: 14px 16px 12px 16px; box-shadow: 0 0 0 1px #d8d0b4, 0 8px 16px -12px rgba(18, 32, 74, .45); }
+.lx[data-design="otogar"] .lx-card[data-passive] { background: #f4efdd; }
+.lx[data-design="otogar"] .lx-card.is-flipped { background: var(--lx-card); }
+.lx[data-design="otogar"] .lx-card:hover { box-shadow: 0 0 0 2px #1b4fc4; }
+.lx[data-design="otogar"] .lx-card:focus-visible { box-shadow: 0 0 0 3px #1b4fc4; }
+.lx[data-design="otogar"] .lx-card__face { padding-right: 34px; background: repeating-linear-gradient(90deg, var(--ticket-ink) 0 2px, transparent 2px 4px, var(--ticket-ink) 4px 5px, transparent 5px 9px) right 0 top 0 / 22px 100% no-repeat; }
+.lx[data-design="otogar"] .lx-card__top { flex-wrap: wrap; }
+.lx[data-design="otogar"] .lx-ico { width: 40px; height: 40px; border-radius: 8px; background: var(--ticket-ink); color: #ffd34d; }
+.lx[data-design="otogar"] .lx-ico svg { width: 20px; height: 20px; }
+.lx[data-design="otogar"] .lx-card__tr { font: 600 1.4em/1.15 var(--caps); letter-spacing: .01em; color: var(--ticket-ink); }
+.lx[data-design="otogar"] .lx-card__ru { color: var(--ticket-muted); }
+.lx[data-design="otogar"] .lx-say { background: #e6dfc9; color: var(--ticket-ink); width: 44px; height: 44px; }
+.lx[data-design="otogar"] .lx-card__tags::before { content: 'BİLET ' counter(bilet, decimal-leading-zero) / ''; font: 500 11.5px/1.7 var(--mono); color: var(--ticket-muted); }
+.lx[data-design="otogar"] .lx-card__pos { padding: 1px 8px; border-radius: 3px; background: #e6dfc9; color: var(--ticket-ink); font: 500 11.5px/1.6 var(--mono); }
+.lx[data-design="otogar"] .lx-card__pos--passive { background: #f7d6db; color: #8a1a2c; }
+.lx[data-design="otogar"] .lx-card__back { color: var(--ticket-ink); }
+.lx[data-design="otogar"] .lx-card__tx { color: var(--ticket-muted); font-family: var(--mono); font-size: .85em; }
+.lx[data-design="otogar"] .lx-card__gov { color: #8a1a2c; }
+.lx[data-design="otogar"] .lx-ex { border-radius: 4px; background: #ece6d3; }
+.lx[data-design="otogar"] .lx-ex__ru { color: var(--ticket-muted); }
+.lx[data-design="otogar"] .lx-card .ak-say__btn { background: #d9d1b8; color: var(--ticket-ink); }
+.lx[data-design="otogar"] .lx-card__note { border-left-color: #2157c9; border-radius: 0 4px 4px 0; background: #dfe6f7; color: var(--ticket-ink); }
+.lx[data-design="otogar"] .lx-card__acts { margin: 2px -16px 0; padding: 12px 16px 0; border-top: 2px dashed #b4ad96; position: relative; }
+.lx[data-design="otogar"] .lx-card__acts::before, .lx[data-design="otogar"] .lx-card__acts::after { content: ''; position: absolute; top: -10px; width: 18px; height: 18px; border-radius: 50%; background: var(--lx-paper); }
+.lx[data-design="otogar"] .lx-card__acts::before { left: -9px; }
+.lx[data-design="otogar"] .lx-card__acts::after { right: -9px; }
+.lx[data-design="otogar"] .lx-card__acts button { border-radius: 4px; border: 2px solid var(--ticket-ink); background: none; color: var(--ticket-ink); font: 500 14px/1 var(--caps); letter-spacing: .06em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-card__know[aria-pressed="true"] { border-color: #15693a; background: #15693a; color: #fff; }
+.lx[data-design="otogar"] .lx-card.is-known { box-shadow: 0 0 0 3px #15803d; }
+
+/* история: окно дневного автобуса, за стеклом плывут облака */
+.lx[data-design="otogar"] .lx-story { position: relative; overflow: hidden; border-radius: 30px; border: 10px solid #9db4cf; background: linear-gradient(#d3ecfa, #f2fafe); box-shadow: inset 0 0 0 2px #ffffff; }
+.lx[data-design="otogar"] .lx-story::before { content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .85; background: radial-gradient(ellipse 54px 16px at 50% 9%, #ffffff 92%, transparent), radial-gradient(ellipse 34px 12px at 22% 92%, #ffffff 92%, transparent); background-size: 240px 100%; }
+.lx[data-design="otogar"] .lx-story p { position: relative; z-index: 1; color: #12204a; }
+.lx[data-design="otogar"] .lx-tw { border-radius: 3px; background: #ffffff; color: #1743a8; box-shadow: inset 0 0 0 1px #a9c0e2; }
+.lx[data-design="otogar"] .lx-tw.is-on { background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-tw.is-on::after { background: #12204a; color: #ffffff; }
+.lx[data-design="otogar"] .lx-chip--tr { background: var(--lx-surf2); box-shadow: none; }
+.lx[data-design="otogar"] .lx-chip--tr.is-found { background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-found__bar { background: var(--lx-surf2); border-radius: 0; }
+.lx[data-design="otogar"] .lx-found__bar i { border-radius: 0; background: #1b4fc4; }
+
+/* диалоги: объявления по громкой связи */
+.lx[data-design="otogar"] .lx-dlg__head h3 { font: 600 1.5em/1.15 var(--caps); letter-spacing: .02em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-badge { border-radius: 3px; background: var(--lx-surf2); color: var(--lx-ink); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="otogar"] .lx-badge--short { background: var(--ak-good-soft); color: var(--ak-good); }
+.lx[data-design="otogar"] .lx-badge--long { background: #fbe1e4; color: #a3142a; }
+.lx[data-design="otogar"] .lx-place .lx-ico { background: none; color: #1b4fc4; }
+.lx[data-design="otogar"] .lx-chat { border-radius: 8px; background: #eef5fb; }
+.lx[data-design="otogar"] .lx-msg { background: #ffffff; box-shadow: 0 0 0 1px #cfdeec; border-radius: 6px; border-left: 4px solid #1b4fc4; }
+.lx[data-design="otogar"] .lx-msg--me { background: #fff6cf; border-left: 0; border-right: 4px solid #f5c21c; border-radius: 6px; }
+.lx[data-design="otogar"] .lx-msg__ava { border-radius: 4px; background: #1b4fc4; color: #ffffff; }
+.lx[data-design="otogar"] .lx-msg--me .lx-msg__ava { background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-msg__who { color: #1b4fc4; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="otogar"] .lx-msg--me .lx-msg__who { color: #6a4d00; }
+.lx[data-design="otogar"] .lx-dots i { background: #b4c8dc; }
+.lx[data-design="otogar"] .lx-typing { background: #ffffff; }
+
+/* кнопки: кассовый автомат */
+.lx[data-design="otogar"] .lx-btn { border-radius: 6px; font: 600 15px/1 var(--caps); letter-spacing: .07em; text-transform: uppercase; box-shadow: 0 4px 0 #a9841a; background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-btn--ghost { background: none; color: #1b4fc4; box-shadow: inset 0 0 0 2px #1b4fc4; }
+.lx[data-design="otogar"] .lx-next { border-radius: 6px; background: #ffd34d; color: #10162b; font: 600 17px/1.2 var(--caps); letter-spacing: .04em; text-transform: uppercase; }
+.lx[data-design="otogar"] .lx-steps li { border-radius: 4px; background: var(--lx-surf2); font-family: var(--caps); font-weight: 500; }
+.lx[data-design="otogar"] .lx-steps li::before { background: #ffd34d; color: #10162b; border-radius: 3px; }
+.lx[data-design="otogar"] .lx-panel a-exercise, .lx[data-design="otogar"] .lx-panel a-quiz { display: block; box-shadow: none; }
+.lx[data-design="otogar"] .ak-ex { border: 1px solid var(--lx-line); background: var(--lx-surf); }
+.lx[data-design="otogar"] .ak-btn { background: #ffd34d; color: #10162b; border-radius: 6px; }
+.lx[data-design="otogar"] .ak-btn--ghost { background: none; color: #1b4fc4; }
+.lx[data-design="otogar"] :is(.ak-opt, .ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { background: #ffffff; color: var(--lx-ink); border-color: var(--lx-line); }
+.lx[data-design="otogar"] .ak-gap--input { background: #ffffff; color: var(--lx-ink); }
+.lx[data-design="otogar"] .lx-sim__feed { border-radius: 8px; background: #eef5fb; }
+.lx[data-design="otogar"] .lx-sim__msg { background: #ffffff; box-shadow: 0 0 0 1px #cfdeec; border-radius: 6px; }
+.lx[data-design="otogar"] .lx-sim__msg--me { background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-sim__ava { border-radius: 8px; background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-sim__dots i { border-radius: 3px; background: var(--lx-surf2); }
+.lx[data-design="otogar"] .lx-sim__opt { border-radius: 6px; background: #ffffff; color: var(--lx-ink); border-color: var(--lx-line); }
+.lx[data-design="otogar"] .lx-sim__n { border-radius: 3px; background: #ffd34d; color: #10162b; }
+.lx[data-design="otogar"] .lx-sim__done { background: #ffffff; }
+
+/* шпаргалка: расписание на белой эмалевой доске */
+.lx[data-design="otogar"] .lx-table { border-radius: 8px; background: #ffffff; border: 4px solid #1b4fc4; font-family: var(--mono); }
+.lx[data-design="otogar"] .lx-table td { border-bottom: 1px solid #d5e0ec; color: #12204a; }
+.lx[data-design="otogar"] .lx-table td[lang="tr"] { color: #1b4fc4; font-weight: 500; }
+.lx[data-design="otogar"] .lx-table small { color: #44536f; }
+.lx[data-design="otogar"] .lx-donut__bg { stroke: var(--lx-surf2); }
+.lx[data-design="otogar"] .lx-res__info p, .lx[data-design="otogar"] .lx-res__list span { color: var(--lx-muted); }
+
+/* движение */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="otogar"] .ot-dash { animation: ot-dash 1s linear infinite; }
+  .lx[data-design="otogar"] .ot-city { animation: ot-city 40s linear infinite alternate; }
+  .lx[data-design="otogar"] .ot-cloud { animation: ot-city 26s linear infinite alternate; }
+  .lx[data-design="otogar"] .ot-bus { animation: ot-bump .7s ease-in-out infinite alternate; }
+  .lx[data-design="otogar"] .lx-story::before { animation: ot-lamps 3.4s linear infinite; }
+}
+@keyframes ot-dash { to { stroke-dashoffset: 60; } }
+@keyframes ot-city { to { transform: translateX(-60px); } }
+@keyframes ot-bump { to { transform: translateY(-1.5px); } }
+@keyframes ot-lamps { to { background-position: -240px 0; } }
+
+@media (max-width: 767px) {
+  .lx[data-design="otogar"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; }
+  .lx[data-design="otogar"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lx[data-design="otogar"] .lx-stats li { padding: 8px 4px 8px 6px; }
+  .lx[data-design="otogar"] .lx-stats span { font-size: 11px; }
+}
+@media print { .lx[data-design="otogar"] { background: #fff; color: #000; } .lx[data-design="otogar"] .lx-scene { display: none; } }
+
+/* подписи вкладок возвращены: держим полосу не толще 64 px на телефоне */
+@media (max-width: 767px) {
+  .lx[data-design="otogar"] .lx-tabs { padding-top: 1px !important; padding-bottom: 3px !important; }
+  .lx[data-design="otogar"] .lx-tab { min-height: 44px !important; padding-top: 1px !important; padding-bottom: 1px !important; gap: 0 6px !important; }
+  .lx[data-design="otogar"] .lx-tab__ico, .lx[data-design="otogar"] .lx-tab__ico svg { width: 16px !important; height: 16px !important; }
+  .lx[data-design="otogar"] .lx-tab b { font-size: 12.5px !important; line-height: 1.05 !important; }
+  .lx[data-design="otogar"] .lx-tab small { font-size: 10.5px !important; line-height: 1.05 !important; }
+}

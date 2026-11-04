@@ -1,0 +1,234 @@
+/* Optik: оптический бланк экзамена на столе. Заголовок вписан в клетки, вкладки это кружки ответов, карточки это строки
+   бланка с кружками A-E, история это текст из книжки заданий, диалог это стикеры на столе, шпаргалка это распечатка результатов. */
+.lx[data-design="optik"] {
+  --lx-accent: #b3205f; --lx-accent-2: #1a5a5f; --lx-paper: #fff; --lx-surf: #fff; --lx-surf2: #ffeaf1; --lx-card: #fff;
+  --lx-ink: #26262e; --lx-muted: #5e4d56; --lx-line: #e6a9c1; --lx-soft: #ffe0ea; --lx-on: #fff; --lx-tabs-bg: #fff; --lx-r: 0px; --lx-shadow: none;
+  --print: #b3205f; --graph: #26262e; --cond: 'LX Roboto Condensed', 'Arial Narrow', sans-serif; --mono: 'LX JetBrains Mono', ui-monospace, Menlo, monospace; --text: 'LX Spectral', Georgia, serif; --hand: 'LX Caveat', cursive;
+  --ak-font: 'LX Inter Tight', system-ui, sans-serif; --ak-font-display: var(--cond); --ak-radius: 0px; --ak-radius-sm: 0px; --ak-good: #0f6b4a; --ak-good-soft: #d6f2e3; --ak-bad: #a81c23; --ak-bad-soft: #fde2df;
+  font-family: var(--ak-font); overflow-x: clip;
+  background-color: #fff; background-image: linear-gradient(#26262e 0 7px, transparent 7px); background-size: 9px 30px; background-repeat: repeat-y; background-position: 0 0;
+}
+.lx[data-design="optik"] main { overflow-x: clip; }
+
+/* шапка: графа наверху бланка */
+.lx[data-design="optik"] .lx-app { background: #fff; border-bottom: 3px solid var(--print); color: var(--graph); }
+.lx[data-design="optik"] .lx-app__logo { border-radius: 50%; background: var(--graph); color: #fff; }
+.lx[data-design="optik"] .lx-app__t b { font: 800 1.2em/1.1 var(--cond); letter-spacing: .04em; text-transform: uppercase; color: var(--print); }
+.lx[data-design="optik"] .lx-app__t small { color: var(--lx-muted); }
+.lx[data-design="optik"] .lx-lessons { background: none; border-radius: 0; gap: 6px; }
+.lx[data-design="optik"] .lx-lessons::before { color: var(--print); font-family: var(--cond); }
+.lx[data-design="optik"] .lx-lessons a { border-radius: 50%; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-lessons a[aria-current] { background: var(--graph); color: #fff; box-shadow: none; }
+.lx[data-design="optik"] .lx-app__ring .lx-ring__bg { stroke: var(--lx-soft); }
+.lx[data-design="optik"] .lx-app__ring .lx-ring__fg { stroke: var(--print); stroke-linecap: butt; }
+.lx[data-design="optik"] .lx-ring text { font-family: var(--mono); font-weight: 500; }
+
+/* первый экран: стол во всю ширину, на нём лежат листки */
+.lx[data-design="optik"] .lx-hero { position: relative; display: block; margin-top: 0 !important; padding: 12px 0 18px; border-radius: 0; background: #d6ece6; box-shadow: 0 0 0 100vmax #d6ece6; clip-path: inset(0 -100vmax); }
+.lx[data-design="optik"] .lx-scene { position: absolute; top: 96px; left: 50%; width: 100vw; translate: -50% 0; height: 520px; overflow: hidden; -webkit-mask: linear-gradient(#000 88%, transparent); mask: linear-gradient(#000 88%, transparent); }
+.lx[data-design="optik"] .lx-scene svg { display: block; }
+.lx[data-design="optik"] .lx-hero > :not(.lx-scene) { position: relative; z-index: 1; margin-inline: 0; background: #fff; padding-inline: 11px; }
+.lx[data-design="optik"] .lx-tag { display: flex; justify-content: space-between; align-items: center; margin: 0 !important; padding-block: 9px 7px; border-radius: 0; color: var(--print); font: 700 12.5px/1.2 var(--cond); letter-spacing: .1em; }
+.lx[data-design="optik"] .lx-tag::after { content: 'ADI SOYADI' / ''; color: var(--lx-muted); font-weight: 500; letter-spacing: .14em; }
+.lx[data-design="optik"] .lx-hero > h1 { isolation: isolate; margin: 0; padding: 0 11px 2px calc(11px + .2ch); font: 500 min(9vw, 36px)/1.5 var(--mono); text-transform: uppercase; letter-spacing: .4ch; color: var(--graph); hyphens: manual; overflow-wrap: normal; text-wrap: wrap; }
+.lx[data-design="optik"] .lx-hero > h1::before { content: ''; position: absolute; z-index: -1; left: 11px; top: 0; bottom: 2px; width: calc(var(--cells, 11) * 1.4ch + 1.5px); background-image: linear-gradient(90deg, var(--print) 1.5px, transparent 1.5px), linear-gradient(var(--print) 1.5px, transparent 1.5px), linear-gradient(0deg, var(--print) 1.5px, transparent 1.5px); background-size: 1.4ch 100%, 100% 1.5em, 100% 100%; }
+.lx[data-design="optik"] .lx-hero__tr { margin: 0 !important; padding-block: 7px 11px; color: var(--print); font: 700 20px/1.15 var(--cond); box-shadow: 0 16px 16px -14px rgba(30, 80, 84, .45); }
+.lx[data-design="optik"] .lx-hero__meta { margin: 372px 0 0; padding-block: 12px 2px; color: var(--print); font: 700 15px/1.2 var(--cond); letter-spacing: .04em; text-transform: uppercase; }
+.lx[data-design="optik"] .lx-hero__intro { margin: 0; padding-block: 2px 10px; color: var(--graph); }
+.lx[data-design="optik"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; padding-block: 2px 11px; }
+.lx[data-design="optik"] .lx-stats li { padding: 0; border-radius: 0; background: none; }
+.lx[data-design="optik"] .lx-stats b { display: block; width: fit-content; padding-left: .2ch; font: 500 24px/1.4 var(--mono); letter-spacing: .4ch; color: var(--graph); background-image: linear-gradient(90deg, var(--print) 1.5px, transparent 1.5px), linear-gradient(var(--print) 1.5px, transparent 1.5px), linear-gradient(0deg, var(--print) 1.5px, transparent 1.5px); background-size: 1.4ch 100%, 100% 100%, 100% 100%; box-shadow: inset -1.5px 0 0 var(--print); }
+.lx[data-design="optik"] .lx-stats span { margin-top: 3px; color: var(--lx-muted); font: 500 11.5px/1.2 var(--cond); }
+.lx[data-design="optik"] .lx-gbar { height: 8px; gap: 2px; padding-bottom: 10px; box-sizing: content-box; box-shadow: 0 16px 16px -14px rgba(30, 80, 84, .45); }
+.lx[data-design="optik"] .lx-gbar__s { border-radius: 0; background: var(--print); }
+.lx[data-design="optik"] .lx-gbar__s:nth-child(2) { background: var(--graph); }
+
+/* вкладки: ряд кружков ответа с буквами, нижний край в метках считывания */
+.lx[data-design="optik"] .lx-tabs { gap: 0; margin-top: 0 !important; padding: 4px 6px 9px; border-radius: 0; border-top: 3px solid var(--print); background: linear-gradient(90deg, #26262e 0 12px, transparent 12px) 0 100% / 26px 5px repeat-x, #fff; -webkit-backdrop-filter: none; backdrop-filter: none; counter-reset: tabb; }
+.lx[data-design="optik"] .lx-tab { counter-increment: tabb; grid-template-columns: 30px auto; gap: 0 6px; min-height: 44px; padding: 2px 10px 2px 4px; border-radius: 0; color: var(--graph); }
+.lx[data-design="optik"] .lx-tab::before { content: counter(tabb, upper-alpha) / ''; grid-row: span 2; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--print); color: var(--print); font: 500 13px/1 var(--mono); }
+.lx[data-design="optik"] .lx-tab__ico { display: none; }
+.lx[data-design="optik"] .lx-tab b { font: 800 14.5px/1.1 var(--cond); letter-spacing: .02em; }
+.lx[data-design="optik"] .lx-tab small { color: var(--lx-muted); font: 400 11.5px/1.1 var(--cond); }
+.lx[data-design="optik"] .lx-tab[aria-selected="true"] { background: none; color: var(--graph); box-shadow: none; }
+.lx[data-design="optik"] .lx-tab[aria-selected="true"]::before { background: var(--graph); box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--graph); color: #fff; }
+.lx[data-design="optik"] .lx-tab:focus-visible { outline: 2px solid var(--print); outline-offset: -2px; }
+.lx[data-design="optik"] .lx-tab__ok { top: 1px; left: 26px; right: auto; }
+.lx[data-design="optik"] .lx-tabs__line { display: none; }
+
+/* заголовки */
+.lx[data-design="optik"] .lx-ph { padding: 18px 0 14px; background: none; border-bottom: 3px solid var(--print); }
+.lx[data-design="optik"] .lx-kicker { color: var(--print); font: 800 14px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; }
+.lx[data-design="optik"] .lx-panel h2 { font: 800 clamp(34px, 9vw, 54px)/1 var(--cond); letter-spacing: -.005em; color: var(--graph); text-transform: uppercase; }
+.lx[data-design="optik"] .lx-chip { border-radius: 999px; background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font: 700 15px/1 var(--cond); }
+.lx[data-design="optik"] .lx-chip[aria-pressed="true"] { background: var(--graph); color: #fff; box-shadow: none; }
+.lx[data-design="optik"] .lx-search { border-radius: 0; border: 1.5px solid var(--print); background: #fff; font-family: var(--mono); font-weight: 500; font-size: 16px; }
+.lx[data-design="optik"] .lx-search::placeholder { color: var(--lx-muted); }
+.lx[data-design="optik"] .lx-learn { border-top: 1.5px solid var(--print); }
+.lx[data-design="optik"] .lx-ring__bg { stroke: var(--lx-soft); }
+.lx[data-design="optik"] .lx-learn p b { color: var(--graph); }
+
+/* группы: раздел бланка */
+.lx[data-design="optik"] .lx-panel[data-section="sozluk"] { counter-reset: qq; }
+.lx[data-design="optik"] .lx-group { margin: 30px 0 0; padding: 7px 12px; background: var(--lx-surf2); color: #8c1749; border: 1.5px solid var(--print); border-bottom: 3px solid var(--print); font: 800 clamp(19px, 5vw, 24px)/1.1 var(--cond); letter-spacing: .05em; text-transform: uppercase; }
+.lx[data-design="optik"] .lx-group__ico { width: 26px; height: 26px; border-radius: 50%; background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); }
+.lx[data-design="optik"] .lx-group__ico svg { width: 15px; height: 15px; }
+
+/* карточка: строка бланка. Номер в полосе слева, метка считывания справа, кружки A-E закрашиваются, когда слово выучено */
+.lx[data-design="optik"] .lx-cards { gap: 0; border-left: 1.5px solid var(--print); grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.lx[data-design="optik"] .lx-card { counter-increment: qq; gap: 6px; padding: 8px 18px 10px 44px; border-radius: 0; background: #fff linear-gradient(#26262e 0 0) right 0 top 14px / 11px 7px no-repeat; border-right: 1.5px solid var(--print); border-bottom: 1.5px solid var(--print); box-shadow: none; }
+.lx[data-design="optik"] .lx-card:nth-child(5n+1) { --pick: 26px; }
+.lx[data-design="optik"] .lx-card:nth-child(5n+2) { --pick: 78px; }
+.lx[data-design="optik"] .lx-card:nth-child(5n+3) { --pick: 0px; }
+.lx[data-design="optik"] .lx-card:nth-child(5n+4) { --pick: 104px; }
+.lx[data-design="optik"] .lx-card:nth-child(5n) { --pick: 52px; background-color: #fff3f7; }
+.lx[data-design="optik"] .lx-card::before { content: counter(qq) / ''; position: absolute; left: 0; top: 0; bottom: 0; width: 34px; padding-top: 12px; background: var(--lx-surf2); border-right: 1.5px solid var(--print); color: var(--print); font: 500 14px/1 var(--mono); text-align: center; }
+.lx[data-design="optik"] .lx-card::after { content: 'ABCDE' / ''; order: 2; justify-self: end; width: 130px; height: 24px; padding-left: 8.7px; color: var(--print); font: 500 11px/24px var(--mono); letter-spacing: 19.4px; white-space: nowrap; overflow: hidden; background: radial-gradient(circle at 12px 12px, transparent 9.6px, var(--print) 10px 11px, transparent 11.4px) 0 0 / 26px 24px repeat-x; }
+.lx[data-design="optik"] .lx-card:not(.is-flipped)::after { margin-top: -30px; }
+.lx[data-design="optik"] .lx-card__face { order: 1; gap: 6px; }
+.lx[data-design="optik"] .lx-card__back { order: 3; gap: 6px; }
+.lx[data-design="optik"] .lx-card__acts { order: 4; gap: 6px; }
+.lx[data-design="optik"] .lx-card[data-passive] { background-image: linear-gradient(#26262e 0 0); background-color: #fbf7f9; }
+.lx[data-design="optik"] .lx-card__top { gap: 8px; }
+.lx[data-design="optik"] .lx-ico { width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); }
+.lx[data-design="optik"] .lx-ico svg { width: 20px; height: 20px; }
+.lx[data-design="optik"] .lx-card__tr { font: 800 1.42em/1.08 var(--cond); letter-spacing: 0; color: var(--graph); }
+.lx[data-design="optik"] .lx-card__ru { color: var(--lx-muted); font-weight: 500; font-size: .96em; }
+.lx[data-design="optik"] .lx-say { background: #fff; color: var(--graph); box-shadow: inset 0 0 0 1.5px var(--graph); }
+.lx[data-design="optik"] .lx-card__tags { min-height: 24px; align-items: center; }
+.lx[data-design="optik"] .lx-card__pos { padding: 0; border-radius: 0; background: none; color: var(--lx-muted); font: 500 13px/1.2 var(--cond); }
+.lx[data-design="optik"] .lx-card__pos--passive { color: var(--print); }
+.lx[data-design="optik"] .lx-card__tx { color: var(--lx-muted); font: 500 .82em/1.4 var(--mono); }
+.lx[data-design="optik"] .lx-card__gov { color: var(--print); font: 500 .82em/1.4 var(--mono); }
+.lx[data-design="optik"] .lx-ex { padding: 6px 0 7px 10px; border-radius: 0; background: none; border-left: 3px solid var(--graph); }
+.lx[data-design="optik"] .ak-say__btn { background: #fff; color: var(--graph); box-shadow: inset 0 0 0 1.5px var(--graph); }
+.lx[data-design="optik"] .lx-card__note { padding: 4px 8px; border: 0; border-radius: 0; background: #ffe56b; color: var(--graph); font: 600 1.28em/1.15 var(--hand); }
+.lx[data-design="optik"] .lx-card__acts button { min-height: 44px; border: 1.5px solid var(--print); border-radius: 999px; background: #fff; color: var(--print); font: 700 14.5px/1 var(--cond); letter-spacing: .03em; }
+.lx[data-design="optik"] .lx-card.is-flipped { background-color: #fff6f9; }
+.lx[data-design="optik"] .lx-card.is-flipped::after { background: repeating-linear-gradient(55deg, var(--graph) 0 1.4px, transparent 1.4px 3.5px) var(--pick, 0px) 0 / 24px 24px no-repeat, radial-gradient(circle at 12px 12px, transparent 9.6px, var(--print) 10px 11px, transparent 11.4px) 0 0 / 26px 24px repeat-x; }
+.lx[data-design="optik"] .lx-card.is-flipped .lx-card__flip { background: var(--graph); border-color: var(--graph); color: #fff; }
+.lx[data-design="optik"] .lx-card:hover { box-shadow: inset 0 0 0 1px var(--print); }
+.lx[data-design="optik"] .lx-card:focus-visible { outline: 2px solid var(--graph); outline-offset: -2px; box-shadow: none; }
+.lx[data-design="optik"] .lx-card.is-known { box-shadow: none; }
+.lx[data-design="optik"] .lx-card.is-known::before { background: var(--graph); color: #fff; }
+.lx[data-design="optik"] .lx-card.is-known::after { background: radial-gradient(circle at 12px 12px, var(--graph) 10.4px, transparent 10.8px) var(--pick, 0px) 0 / 26px 24px no-repeat, radial-gradient(circle at 12px 12px, transparent 9.6px, var(--print) 10px 11px, transparent 11.4px) 0 0 / 26px 24px repeat-x; }
+.lx[data-design="optik"] .lx-card__know[aria-pressed="true"] { border-color: var(--ak-good); background: var(--ak-good-soft); color: #0a4d35; }
+
+/* история: текст из книжки заданий, абзацы с номерами на полях */
+.lx[data-design="optik"] .lx-found__bar { border-radius: 0; background: var(--lx-soft); }
+.lx[data-design="optik"] .lx-found__bar i { border-radius: 0; background: var(--print); }
+.lx[data-design="optik"] .lx-story { position: relative; counter-reset: pg; padding: 44px 16px 20px 40px; background: #fbfbf8; border: 1.5px solid var(--graph); }
+.lx[data-design="optik"] .lx-story::before { content: 'OKUMA PARÇASI · SORU 1–5 İÇİN' / ''; position: absolute; left: 0; right: 0; top: 0; padding: 8px 12px; background: var(--lx-surf2); border-bottom: 1.5px solid var(--graph); color: var(--graph); font: 700 13px/1.2 var(--cond); letter-spacing: .12em; }
+.lx[data-design="optik"] .lx-story p { position: relative; counter-increment: pg; font: 400 1.1em/1.68 var(--text); }
+.lx[data-design="optik"] .lx-story p::before { content: '(' counter(pg) ')' / ''; position: absolute; left: -30px; top: 3px; color: var(--print); font: 500 12.5px/1.4 var(--mono); }
+.lx[data-design="optik"] .lx-tw { padding: 0 2px; border-radius: 0; background: none; color: var(--print); font: inherit; font-weight: 500; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.lx[data-design="optik"] .lx-tw.is-on { background: var(--graph); color: #fff; text-decoration: none; }
+.lx[data-design="optik"] .lx-tw.is-on::after { border-radius: 0; background: var(--graph); color: #fff; font-family: var(--ak-font); }
+.lx[data-design="optik"] .lx-chip--tr { background: #fff; color: var(--graph); box-shadow: inset 0 0 0 1.5px #8a7a82; font-family: var(--ak-font); font-weight: 500; font-size: .94em; }
+.lx[data-design="optik"] .lx-chip--tr.is-found { background: var(--graph); color: #fff; box-shadow: none; }
+
+/* диалоги: стол и стикеры, реплики слегка вразнобой */
+.lx[data-design="optik"] .lx-dlg { padding: 16px 12px; border-radius: 0; background: #d6ece6 repeating-linear-gradient(177deg, rgba(26, 90, 95, .05) 0 3px, transparent 3px 11px); color: var(--graph); }
+.lx[data-design="optik"] .lx-dlg__head h3 { color: var(--graph); font: 800 1.5em/1.1 var(--cond); }
+.lx[data-design="optik"] .lx-badge, .lx[data-design="optik"] .lx-badge--short, .lx[data-design="optik"] .lx-badge--long { border-radius: 0; background: #fff; color: #174a4e; font-family: var(--cond); }
+.lx[data-design="optik"] .lx-place { color: #1a4a4e; }
+.lx[data-design="optik"] .lx-place .lx-ico { background: none; box-shadow: none; color: #1a4a4e; }
+.lx[data-design="optik"] .lx-dots i { border-radius: 50%; background: rgba(26, 90, 95, .25); }
+.lx[data-design="optik"] .lx-dots i.is-on { background: var(--print); }
+.lx[data-design="optik"] .lx-chat { padding: 4px 2px; border-radius: 0; background: none; }
+.lx[data-design="optik"] .lx-msg { padding: 10px 14px 12px 48px; border-radius: 0; background: #ffe56b; color: var(--graph); box-shadow: 0 7px 10px -6px rgba(26, 80, 84, .5); rotate: -.5deg; }
+.lx[data-design="optik"] .lx-msg:nth-child(3n+2) { rotate: .5deg; }
+.lx[data-design="optik"] .lx-msg--me { padding: 10px 48px 12px 14px; background: #ffc3d6; rotate: .6deg; }
+.lx[data-design="optik"] .lx-msg__ava { left: 10px; top: 11px; background: var(--graph); color: #fff; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-msg--me .lx-msg__ava { right: 10px; left: auto; background: var(--print); }
+.lx[data-design="optik"] .lx-msg__who { color: var(--graph); font: 700 1.25em/1 var(--hand); letter-spacing: 0; }
+.lx[data-design="optik"] .lx-msg__ru { color: #41383d; }
+.lx[data-design="optik"] .lx-typing { border-radius: 0; background: #ffe56b; }
+.lx[data-design="optik"] .lx-dlg .lx-switch { color: var(--graph); }
+.lx[data-design="optik"] .lx-dlg .lx-btn { background: var(--graph); color: #fff; }
+.lx[data-design="optik"] .lx-dlg .lx-btn--ghost { background: transparent; color: var(--graph); box-shadow: inset 0 0 0 2px var(--graph); }
+
+/* упражнения: те же кружки */
+.lx[data-design="optik"] .lx-btn { border-radius: 999px; background: var(--graph); color: #fff; font: 700 16px/1 var(--cond); letter-spacing: .03em; }
+.lx[data-design="optik"] .lx-btn--ghost { background: transparent; color: var(--graph); box-shadow: inset 0 0 0 2px var(--graph); }
+.lx[data-design="optik"] .lx-next { border-radius: 0; background: var(--print); color: #fff; font: 800 18px/1.2 var(--cond); }
+.lx[data-design="optik"] .lx-steps li { border-radius: 999px; background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font: 700 14.5px/1.1 var(--cond); }
+.lx[data-design="optik"] .lx-steps li::before { background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-steps li.is-done { background: var(--ak-good-soft); color: #0a4d35; box-shadow: none; }
+.lx[data-design="optik"] .lx-steps li.is-done::before { background: var(--ak-good); color: #fff; box-shadow: none; }
+.lx[data-design="optik"] .lx-panel a-exercise, .lx[data-design="optik"] .lx-panel a-quiz { display: block; box-shadow: none; }
+.lx[data-design="optik"] .ak-ex { position: relative; border: 1.5px solid var(--print); background: #fff; }
+.lx[data-design="optik"] .ak-btn { border-radius: 999px; background: var(--graph); color: #fff; }
+.lx[data-design="optik"] .ak-btn--ghost { background: transparent; color: var(--graph); box-shadow: inset 0 0 0 2px var(--graph); }
+.lx[data-design="optik"] :is(.ak-match__l, .ak-match__r, .ak-tile, .ak-tok) { border-radius: 0; background: #fff; border-color: #a08b95; color: var(--graph); }
+.lx[data-design="optik"] .ak-opt { border-radius: 999px; background: #fff; border-color: #a08b95; color: var(--graph); }
+.lx[data-design="optik"] .ak-opt__n { border-radius: 50%; background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .ak-opt[aria-pressed="true"] { background: #fff3f7; border-color: var(--graph); }
+.lx[data-design="optik"] .ak-opt[aria-pressed="true"] .ak-opt__n { background: var(--graph); color: #fff; box-shadow: none; }
+.lx[data-design="optik"] .ak-gap--input { border-radius: 0; background: #fff; color: var(--graph); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-sim__ava { background: var(--graph); color: #fff; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-sim__dots i { background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-sim__dots i.is-good { background: var(--graph); color: #fff; box-shadow: none; }
+.lx[data-design="optik"] .lx-sim__dots i.is-cur { box-shadow: inset 0 0 0 2.5px var(--graph); color: var(--graph); }
+.lx[data-design="optik"] .lx-sim__feed { border-radius: 0; background: #d6ece6; }
+.lx[data-design="optik"] .lx-sim__msg { border-radius: 0; background: #ffe56b; box-shadow: none; color: var(--graph); }
+.lx[data-design="optik"] .lx-sim__msg--me { background: #ffc3d6; color: var(--graph); }
+.lx[data-design="optik"] .lx-sim__opt { border-radius: 999px; border-color: #a08b95; padding-inline: 12px 22px; }
+.lx[data-design="optik"] .lx-sim__n { background: #fff; color: var(--print); box-shadow: inset 0 0 0 1.5px var(--print); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="optik"] .lx-sim__done { border-radius: 0; background: #fff; }
+
+/* шпаргалка: перфорированная распечатка результатов с полосами */
+.lx[data-design="optik"] .lx-table { display: table; padding-inline: 0; border-radius: 0; box-shadow: 0 10px 18px -12px rgba(38, 38, 46, .5); font: 500 .88em/1.35 var(--mono); border-inline: 22px solid transparent; background-color: #fff;
+  background-image: radial-gradient(circle 4.5px at 11px 12px, #cfd4d4 96%, transparent), radial-gradient(circle 4.5px at 11px 12px, #cfd4d4 96%, transparent); background-repeat: repeat-y; background-size: 22px 24px; background-position: -22px 0, right -22px top 0; background-origin: padding-box; background-clip: border-box; }
+.lx[data-design="optik"] .lx-table tr:nth-child(6n+1) td, .lx[data-design="optik"] .lx-table tr:nth-child(6n+2) td, .lx[data-design="optik"] .lx-table tr:nth-child(6n+3) td { background: #ffeaf1; }
+.lx[data-design="optik"] .lx-table td { padding: 8px 10px; border: 0; }
+.lx[data-design="optik"] .lx-table td[lang="tr"] { font-weight: 500; color: var(--graph); }
+.lx[data-design="optik"] .lx-table td small { color: var(--lx-muted); font: 400 .9em/1.3 var(--ak-font); }
+.lx[data-design="optik"] .lx-res { border-radius: 0; background: #fff; border: 1.5px solid var(--print); }
+.lx[data-design="optik"] .lx-res__info b { font: 800 1.6em/1.1 var(--cond); }
+.lx[data-design="optik"] .lx-donut__bg { stroke: var(--lx-soft); }
+
+/* движение: карандаш закрашивает кружки, секундная стрелка идёт */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="optik"] .op-pencil { animation: op-pencil 24s cubic-bezier(.5, 0, .3, 1) infinite; }
+  .lx[data-design="optik"] .op-mark--1 { animation: op-m1 24s linear infinite; }
+  .lx[data-design="optik"] .op-mark--2 { animation: op-m2 24s linear infinite; }
+  .lx[data-design="optik"] .op-mark--3 { animation: op-m3 24s linear infinite; }
+  .lx[data-design="optik"] .op-mark--4 { animation: op-m4 24s linear infinite; }
+  .lx[data-design="optik"] .op-mark--5 { animation: op-m5 24s linear infinite; }
+  .lx[data-design="optik"] .op-mark--6 { animation: op-m6 24s linear infinite; }
+  .lx[data-design="optik"] .op-sec { animation: op-sec 60s steps(60) infinite; }
+}
+@keyframes op-pencil { 0%, 12% { transform: translate(475px, 330px); } 15%, 27% { transform: translate(533px, 360px); } 30%, 42% { transform: translate(446px, 390px); } 45%, 57% { transform: translate(504px, 420px); } 60%, 72% { transform: translate(562px, 450px); } 75%, 90% { transform: translate(475px, 480px); } 100% { transform: translate(475px, 330px); } }
+@keyframes op-m1 { 0%, 5% { opacity: 0; } 8%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes op-m2 { 0%, 20% { opacity: 0; } 23%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes op-m3 { 0%, 35% { opacity: 0; } 38%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes op-m4 { 0%, 50% { opacity: 0; } 53%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes op-m5 { 0%, 65% { opacity: 0; } 68%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes op-m6 { 0%, 80% { opacity: 0; } 83%, 92% { opacity: 1; } 97%, 100% { opacity: 0; } }
+@keyframes op-sec { to { transform: rotate(360deg); } }
+
+@media (max-width: 767px) {
+  .lx[data-design="optik"] .lx-tabs { margin-left: -16px !important; margin-right: -16px !important; }
+}
+
+/* компьютер: длинная графа с заголовком на всю ширину, ниже стол с бланком, книгой и часами, справочные листки лежат по углам */
+@media screen and (min-width: 1024px) {
+  .lx[data-design="optik"] .lx-hero { display: grid; grid-template-columns: 326px minmax(0, 1fr) 326px; grid-template-rows: auto auto auto 1fr auto auto auto; min-height: max(560px, calc(100vh - 150px)); padding: 12px 0 16px; }
+  .lx[data-design="optik"] .lx-scene { top: 0; height: 100%; -webkit-mask: none; mask: none; }
+  .lx[data-design="optik"] .lx-tag, .lx[data-design="optik"] h1, .lx[data-design="optik"] .lx-hero__tr { grid-column: 1 / -1; }
+  .lx[data-design="optik"] .lx-hero > h1 { --cells: 26; font-size: 44px; white-space: nowrap; }
+  .lx[data-design="optik"] .lx-hero__tr { font-size: 19px; padding-block: 5px 9px; }
+  .lx[data-design="optik"] .lx-hero__meta { grid-column: 1; grid-row: 5; margin: 0; }
+  .lx[data-design="optik"] .lx-hero__intro { grid-column: 1; grid-row: 6 / 8; margin: 0; padding-bottom: 12px; font-size: 15px; line-height: 1.42; box-shadow: 0 16px 16px -14px rgba(30, 80, 84, .45); }
+  .lx[data-design="optik"] .lx-stats { grid-column: 3; grid-row: 5 / 7; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 10px; padding-block: 12px 6px; align-self: end; }
+  .lx[data-design="optik"] .lx-stats li { display: grid; grid-template-columns: auto 1fr; gap: 6px; align-items: center; }
+  .lx[data-design="optik"] .lx-stats span { margin: 0; }
+  .lx[data-design="optik"] .lx-gbar { grid-column: 3; grid-row: 7; align-self: stretch; }
+  .lx[data-design="optik"] .lx-tabs { max-width: none; margin-inline: calc(50% - 50vw) !important; padding-inline: max(6px, calc(50vw - 550px)) max(6px, calc(50vw - 550px)); }
+  .lx[data-design="optik"] .lx-tab { flex: 1 1 0; justify-content: start; }
+  .lx[data-design="optik"] .lx-story { columns: 2; column-gap: 54px; padding-top: 54px; }
+  .lx[data-design="optik"] .lx-story p { break-inside: avoid; }
+}
+@media screen and (min-width: 1200px) { .lx[data-design="optik"] .lx-hero > h1 { --cells: 29; } }
+@media print { .lx[data-design="optik"] { background: #fff; } .lx[data-design="optik"] .lx-scene { display: none; } }
