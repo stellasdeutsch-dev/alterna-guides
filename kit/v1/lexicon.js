@@ -131,7 +131,9 @@
   function initProgress() {
     done.forEach((k) => renderDone(k, false));
     ring();
-    addEventListener('alterna:read', (e) => { if (['sozluk', 'tarih', 'diyalog', 'cheat'].includes(e.detail?.key)) mark(e.detail.key); });
+    /* какие вкладки засчитываются чтением: у лексики — словарь, история, диалоги, шпаргалка; урок маршрута задаёт свои в body[data-read] */
+    const readKeys = (document.body.dataset.read || 'sozluk tarih diyalog cheat').split(/\s+/);
+    addEventListener('alterna:read', (e) => { if (readKeys.includes(e.detail?.key)) mark(e.detail.key); });
     const practiceIds = $$('[data-section="practice"] a-exercise').map((x) => x.getAttribute('ref'));
     const simId = $('a-exercise[data-sim]')?.getAttribute('ref');
     const quizId = $('a-quiz')?.getAttribute('ref');

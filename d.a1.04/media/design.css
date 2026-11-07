@@ -1,0 +1,120 @@
+/* Aktarma: такси или метро. Сцена в разрезе — улица с жёлтым такси и счётчиком, под землёй поезд M11.
+   Страница — метро: кафельный фон, вкладки — станции на линии, фразы — схема линии, слова — проездные карты,
+   шпаргалка — таблица тарифов. */
+.lx[data-design="aktarma"] {
+  --lx-accent: #66527a; --lx-accent-2: #e2c27a; --lx-paper: #f6f3ec; --lx-surf: #ffffff; --lx-surf2: #f7f2f7;
+  --lx-ink: #1f2229; --lx-muted: #575d68; --lx-line: #e4dfd3; --lx-soft: #efe8f1; --lx-on: #ffffff; --lx-tabs-bg: #fff; --lx-r: 16px;
+  --lx-shadow: 0 1px 0 #e1dbcd, 0 14px 26px -18px rgba(60, 20, 60, .45);
+  --line: #8a7196;
+  --ak-font: 'LX Jost', system-ui, sans-serif; --ak-font-display: 'LX Jost', sans-serif; --ak-radius: 14px; --ak-radius-sm: 10px;
+  --ak-good: #3f7a5a; --ak-good-soft: #e5efe8; --ak-bad: #a5574c; --ak-bad-soft: #f6e6e2;
+  font-family: var(--ak-font);
+  background-color: #f6f3ec;
+  background-image: linear-gradient(#e6e0d2 1px, transparent 1px), linear-gradient(90deg, #e6e0d2 1px, transparent 1px);
+  background-size: 48px 24px;
+  background-position: 0 0, 24px 0;
+  overflow-x: clip;
+}
+.lx[data-design="aktarma"] main { overflow-x: clip; }
+
+/* шапка: табличка станции с фиолетовой полосой линии */
+.lx[data-design="aktarma"] .lx-app { background: #fff; border-bottom: 8px solid var(--line); }
+.lx[data-design="aktarma"] .lx-app__logo { border-radius: 12px; background: var(--line); color: #fff; }
+.lx[data-design="aktarma"] .lx-app__t b { font-weight: 700; letter-spacing: .02em; }
+.lx[data-design="aktarma"] .lx-app__ring .lx-ring__fg { stroke: var(--line); }
+
+/* первый экран: заголовок на табличке «станции», под ним сцена в разрезе */
+.lx[data-design="aktarma"] .lx-hero { margin-top: 0 !important; padding: 0 0 6px; background: none; box-shadow: none; border-radius: 0; display: flex; flex-direction: column; }
+.lx[data-design="aktarma"] .lx-scene { order: 3; margin: 14px calc(50% - 50vw) 0; height: clamp(200px, 38vw, 400px); overflow: hidden; border-block: 4px solid #d9d2c3; background: #e3edf2; }
+.lx[data-design="aktarma"] .lx-scene svg { display: block; }
+.lx[data-design="aktarma"] .lx-tag { order: 0; align-self: flex-start; margin: 20px 0 0 !important; padding: 6px 14px 6px 6px; border-radius: 999px; background: #fff !important; color: var(--lx-ink); font-weight: 700; letter-spacing: .06em; box-shadow: var(--lx-shadow); display: inline-flex; align-items: center; gap: 8px; }
+.lx[data-design="aktarma"] .lx-tag::before { content: 'M11'; padding: 4px 9px; border-radius: 999px; background: var(--lx-accent); color: #fff; font-weight: 800; letter-spacing: 0; }
+.lx[data-design="aktarma"] h1 { order: 1; margin: 14px 0 0; font: 800 clamp(34px, 8.4vw, 64px)/1 'LX Jost', sans-serif; letter-spacing: -.02em; }
+.lx[data-design="aktarma"] .lx-hero__tr { order: 2; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 10px 0 0 !important; font: 700 clamp(19px, 4vw, 26px)/1.2 'LX Jost', sans-serif; color: var(--lx-accent); }
+.lx[data-design="aktarma"] .lx-hero__meta { order: 4; margin: 16px 0 0; color: var(--lx-muted); font-weight: 600; }
+.lx[data-design="aktarma"] .lx-hero__intro { order: 5; margin: 6px 0 0; max-width: 62ch; }
+.lx[data-design="aktarma"] .lx-stats { order: 6; margin-top: 16px; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.lx[data-design="aktarma"] .lx-stats li { border-radius: 14px; background: #fff; box-shadow: var(--lx-shadow); border-top: 5px solid var(--line); text-align: center; padding: 10px 4px; }
+.lx[data-design="aktarma"] .lx-stats li:nth-child(2) { border-top-color: #e2c27a; }
+.lx[data-design="aktarma"] .lx-stats b { font: 800 clamp(22px, 5vw, 32px)/1 'LX Jost', sans-serif; color: var(--lx-ink); }
+.lx[data-design="aktarma"] .lx-stats span { font-size: 12px; color: var(--lx-muted); }
+
+/* вкладки: станции на линии метро */
+.lx[data-design="aktarma"] .lx-tabs { margin-top: 18px !important; border-radius: 18px; background: #fff; padding: 6px; box-shadow: var(--lx-shadow); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="aktarma"] .lx-tabs::before { content: ''; position: absolute; left: 12px; right: 12px; top: 50%; height: 4px; margin-top: -2px; border-radius: 2px; background: color-mix(in srgb, var(--line) 22%, #fff); pointer-events: none; }
+.lx[data-design="aktarma"] .lx-tab { position: relative; border-radius: 14px; color: var(--lx-ink); background: transparent; }
+.lx[data-design="aktarma"] .lx-tab .lx-tab__ico { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 3px var(--line); color: var(--line); }
+.lx[data-design="aktarma"] .lx-tab .lx-tab__ico svg { width: 16px; height: 16px; }
+.lx[data-design="aktarma"] .lx-tab b { font-weight: 700; }
+.lx[data-design="aktarma"] .lx-tab[aria-selected="true"] { background: var(--lx-soft); box-shadow: none; color: var(--lx-accent); }
+.lx[data-design="aktarma"] .lx-tab[aria-selected="true"] .lx-tab__ico { background: var(--line); color: #fff; }
+.lx[data-design="aktarma"] .lx-tabs__line { background: transparent; }
+.lx[data-design="aktarma"] .lx-tabs__line::after { background: var(--line); }
+
+/* панели: эмалевые таблички */
+.lx[data-design="aktarma"] :is(.lx-ph, .lx-dlg, .lx-res, .dy-read, .dy-you, .dy-speak) { border-radius: 18px; background: #fff; box-shadow: var(--lx-shadow); }
+.lx[data-design="aktarma"] .lx-kicker { color: var(--lx-accent); font-weight: 800; letter-spacing: .16em; text-transform: uppercase; font-size: 13px; }
+.lx[data-design="aktarma"] .lx-panel h2 { font: 800 clamp(26px, 5.6vw, 40px)/1.05 'LX Jost', sans-serif; letter-spacing: -.01em; }
+
+/* цель дня: схема линии — станции сверху вниз */
+.lx[data-design="aktarma"] .dy-goal { position: relative; gap: 0; padding: 8px 0; }
+.lx[data-design="aktarma"] .dy-goal::before { content: ''; position: absolute; left: 31px; top: 30px; bottom: 30px; width: 8px; border-radius: 4px; background: var(--line); }
+.lx[data-design="aktarma"] .dy-goal__i { position: relative; margin: 6px 0; background: #fff; border-radius: 16px; box-shadow: var(--lx-shadow); }
+.lx[data-design="aktarma"] .dy-goal__n { width: 38px; height: 38px; border: 6px solid var(--line); background: #fff; color: var(--lx-ink); font-weight: 800; }
+.lx[data-design="aktarma"] .dy-goal__w b { font-weight: 700; font-size: 1.18em; }
+.lx[data-design="aktarma"] .dy-prep { border-radius: 18px; background: #faf3e1; border: 2px solid #e2c27a; }
+.lx[data-design="aktarma"] .dy-prep__h { color: #7a6230; }
+.lx[data-design="aktarma"] .lx-chip { border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 2px #e4dfd3; font-weight: 700; }
+.lx[data-design="aktarma"] .dy-prep__chip.is-heard { box-shadow: inset 0 0 0 2px var(--line); color: var(--lx-accent); }
+
+/* аудио: объявления на платформе */
+.lx[data-design="aktarma"] .lx-dlg { border-top: 6px solid #d9cfe0; }
+.lx[data-design="aktarma"] .lx-dlg__head h3 { font-weight: 800; }
+.lx[data-design="aktarma"] .lx-badge { background: var(--lx-accent); color: #fff; }
+.lx[data-design="aktarma"] .lx-chat { background: #f7f4ec; border-radius: 14px; }
+.lx[data-design="aktarma"] .lx-msg__tr { background: #fff; border-radius: 4px 16px 16px 16px; box-shadow: 0 1px 0 #e1dbcd; }
+.lx[data-design="aktarma"] .lx-msg--me .lx-msg__tr { background: var(--lx-accent); color: #fff; border-radius: 16px 4px 16px 16px; }
+.lx[data-design="aktarma"] .lx-msg--me .lx-msg__ru { color: var(--lx-muted); }
+.lx[data-design="aktarma"] .lx-msg__ava { background: #e2c27a; color: #4a5160; }
+.lx[data-design="aktarma"] .lx-btn { border-radius: 999px; background: var(--lx-accent); }
+.lx[data-design="aktarma"] .lx-btn--ghost { background: #fff; color: var(--lx-accent); box-shadow: inset 0 0 0 2px var(--lx-accent); }
+
+/* слова: проездные карты с чипом и полосой */
+.lx[data-design="aktarma"] .lx-cards { gap: 16px; }
+.lx[data-design="aktarma"] .lx-card { position: relative; overflow: hidden; padding: 16px 16px 14px; border-radius: 16px; background: linear-gradient(135deg, #ffffff 0 58%, #f4eff5 58% 100%); box-shadow: 0 1px 0 #e1dbcd, 0 14px 24px -16px rgba(60, 20, 60, .5); border-left: 10px solid #c48c84; }
+.lx[data-design="aktarma"] .lx-card::after { content: ''; position: absolute; right: 16px; bottom: 58px; width: 30px; height: 22px; border-radius: 5px; background: linear-gradient(90deg, transparent 45%, #b59b5e 45% 55%, transparent 55%), linear-gradient(transparent 45%, #b59b5e 45% 55%, transparent 55%), #e6cf8f; opacity: .9; pointer-events: none; }
+.lx[data-design="aktarma"] .lx-card:hover { box-shadow: 0 1px 0 #e1dbcd, 0 20px 30px -16px rgba(60, 20, 60, .6); }
+.lx[data-design="aktarma"] .lx-card:focus-visible { outline: 3px solid var(--line); outline-offset: 2px; }
+.lx[data-design="aktarma"] .lx-card.is-known { border-left-color: #3f7a5a; }
+.lx[data-design="aktarma"] .lx-card.is-flipped { background: #fff; }
+.lx[data-design="aktarma"] .lx-ico { border-radius: 50%; background: var(--line); color: #fff; }
+.lx[data-design="aktarma"] .lx-card__tr { font-weight: 800; font-size: 1.32em; }
+.lx[data-design="aktarma"] .lx-say { background: var(--lx-soft); color: var(--lx-accent); }
+
+/* «а у тебя?», культура */
+.lx[data-design="aktarma"] .dy-you { border-left: 10px solid #e2c27a; }
+.lx[data-design="aktarma"] .dy-you__q { font-weight: 800; }
+.lx[data-design="aktarma"] .dy-you__model { border-left-color: var(--line); }
+.lx[data-design="aktarma"] .dy-culture { border-radius: 18px; background: #faf3e1; }
+
+/* практика */
+.lx[data-design="aktarma"] .dy-rubric { color: var(--lx-accent); }
+.lx[data-design="aktarma"] .dy-rubric::before { content: ''; display: inline-block; width: 12px; height: 12px; margin-right: 8px; border-radius: 50%; box-shadow: inset 0 0 0 3px var(--line); vertical-align: -1px; }
+.lx[data-design="aktarma"] .lx-panel :is(a-exercise, a-quiz) { border-radius: 18px; }
+.lx[data-design="aktarma"] .lx-steps li { border-radius: 999px; }
+
+/* шпаргалка: таблица тарифов */
+.lx[data-design="aktarma"] .lx-table { border-radius: 18px; }
+.lx[data-design="aktarma"] .lx-table td:first-child { font-weight: 700; border-left: 8px solid var(--line); }
+.lx[data-design="aktarma"] .lx-table tr:nth-child(even) td { background: #faf8f3; }
+
+/* сцена: поезд проезжает под улицей, лампа турникета мигает, ценники покачиваются */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="aktarma"] .ak4-train { animation: ak4-ride 9s cubic-bezier(.45, 0, .55, 1) infinite; }
+  .lx[data-design="aktarma"] .ak4-led { animation: ak4-led 2.4s steps(1) infinite; }
+  .lx[data-design="aktarma"] .ak4-tag { animation: ak4-bob 3.6s ease-in-out infinite; }
+  .lx[data-design="aktarma"] .ak4-tag--metro { animation-delay: -1.8s; }
+}
+@keyframes ak4-ride { 0% { transform: translateX(-620px); } 38%, 62% { transform: translateX(120px); } 100% { transform: translateX(900px); } }
+@keyframes ak4-led { 0%, 70% { opacity: 1; } 71%, 100% { opacity: .2; } }
+@keyframes ak4-bob { 50% { transform: translateY(-6px); } }

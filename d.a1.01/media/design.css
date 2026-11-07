@@ -1,0 +1,123 @@
+/* Pist: прилёт в Стамбул. Сцена — посадка на полосу, страница — навигация аэропорта: жёлтые указатели,
+   номера выходов, бирки багажа вместо карточек, экран прилёта вместо шпаргалки, пол-терраццо. */
+.lx[data-design="pist"] {
+  --lx-accent: #3a4150; --lx-accent-2: #ead9a0; --lx-paper: #f1f0ea; --lx-surf: #ffffff; --lx-surf2: #f6f5ef;
+  --lx-ink: #3a4150; --lx-muted: #545b63; --lx-line: #dcd9cc; --lx-soft: #f6efd6; --lx-on: #ead9a0; --lx-tabs-bg: #ead9a0; --lx-r: 6px;
+  --lx-shadow: 0 1px 0 #d6d2c2, 0 14px 24px -18px rgba(22, 24, 29, .45);
+  --sign: 'LX Roboto Condensed', 'Arial Narrow', sans-serif; --mono: 'LX JetBrains Mono', ui-monospace, Menlo, monospace;
+  --ak-font: 'LX Inter Tight', system-ui, sans-serif; --ak-font-display: var(--sign); --ak-radius: 6px; --ak-radius-sm: 4px;
+  --ak-good: #3f7a5a; --ak-good-soft: #e5efe8; --ak-bad: #a3463c; --ak-bad-soft: #f6e6e2; --ak-accent-ink: #ead9a0;
+  font-family: var(--ak-font);
+  background-color: #f1f0ea;
+  background-image:
+    radial-gradient(circle at 20% 30%, #d9d5c6 0 1.5px, transparent 2px), radial-gradient(circle at 70% 60%, #c9d3d8 0 2px, transparent 2.5px),
+    radial-gradient(circle at 45% 85%, #e2cfb1 0 1.5px, transparent 2px), radial-gradient(circle at 85% 15%, #d9d5c6 0 1px, transparent 1.5px);
+  background-size: 46px 46px, 61px 61px, 37px 37px, 29px 29px;
+  overflow-x: clip;
+}
+.lx[data-design="pist"] main { overflow-x: clip; }
+
+/* шапка: табло терминала, жёлтая полоса снизу */
+.lx[data-design="pist"] .lx-app { background: #fff; border-bottom: 4px solid #ead9a0; }
+.lx[data-design="pist"] .lx-app__logo { background: #3a4150; color: #ead9a0; border-radius: 6px; }
+.lx[data-design="pist"] .lx-app__t b { font: 800 1.15em/1.1 var(--sign); text-transform: uppercase; letter-spacing: .04em; }
+.lx[data-design="pist"] .lx-app__ring .lx-ring__bg { stroke: #ece7cf; }
+.lx[data-design="pist"] .lx-app__ring .lx-ring__fg { stroke: #3a4150; }
+
+/* первый экран: сцена посадки во всю ширину, заголовок на табличке-указателе */
+.lx[data-design="pist"] .lx-hero { margin-top: 0 !important; padding: 0 0 2px; background: linear-gradient(#fff, #fff) 50% 0 / min(760px, 100%) 100% no-repeat; box-shadow: none; border-radius: 0; gap: 0; }
+.lx[data-design="pist"] .lx-scene { margin-inline: calc(50% - 50vw); height: clamp(200px, 40vw, 430px); overflow: hidden; background: #dde9ef; border-bottom: 3px solid #ead9a0; }
+.lx[data-design="pist"] .lx-scene svg { display: block; }
+.lx[data-design="pist"] .lx-hero > :not(.lx-scene) { position: relative; max-width: 760px; margin-inline: auto; padding-inline: clamp(18px, 4vw, 34px); background: #fff; }
+.lx[data-design="pist"] .lx-tag {
+  display: flex; align-items: center; gap: 10px; width: fit-content; margin: -22px 0 0 clamp(0px, 3vw, 24px) !important; padding: 9px 16px; border: 0; border-radius: 6px;
+  background: #ead9a0 !important; color: #3a4150; font: 800 14px/1 var(--sign); letter-spacing: .12em; box-shadow: 0 6px 16px -10px rgba(58, 65, 80, .45);
+}
+.lx[data-design="pist"] .lx-tag::after { content: '→'; font: 800 18px/1 var(--ak-font); letter-spacing: 0; }
+.lx[data-design="pist"] h1 { margin-block: 0; padding-top: 18px; font: 800 clamp(32px, 7.6vw, 58px)/1.02 var(--sign); text-transform: uppercase; letter-spacing: -.005em; hyphens: manual; }
+.lx[data-design="pist"] .lx-hero__tr { margin-block: 6px 0 !important; padding-bottom: 6px; font: 600 clamp(18px, 3.6vw, 24px)/1.25 var(--ak-font); color: #545b63; }
+.lx[data-design="pist"] .lx-hero__tr::before { content: '✈ '; color: #b46a5c; }
+.lx[data-design="pist"] .lx-hero__meta { margin-block: 0; padding-bottom: 10px; color: #3a4150; font: 700 14px/1.3 var(--sign); text-transform: uppercase; letter-spacing: .1em; }
+.lx[data-design="pist"] .lx-hero__intro { margin-block: 0; padding-bottom: 16px; }
+.lx[data-design="pist"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-block: 0; padding-block: 0 !important; border-top: 1px solid #dcd9cc; border-bottom: 4px solid #ead9a0; }
+.lx[data-design="pist"] .lx-stats li { padding: 10px 6px; border-radius: 0; background: none; border-left: 1px solid #dcd9cc; }
+.lx[data-design="pist"] .lx-stats li:first-child { border-left: 0; }
+.lx[data-design="pist"] .lx-stats b { font: 700 clamp(22px, 5vw, 32px)/1 var(--mono); color: #3a4150; }
+.lx[data-design="pist"] .lx-stats span { font: 700 11px/1.2 var(--sign); text-transform: uppercase; letter-spacing: .08em; color: #545b63; }
+
+/* вкладки: жёлтая полоса указателей, выбранный — чёрная табличка */
+.lx[data-design="pist"] .lx-tabs { margin-top: 20px !important; border-radius: 4px; background: #ead9a0; padding: 4px; border: 0; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 10px 18px -14px rgba(22, 24, 29, .7); }
+.lx[data-design="pist"] .lx-tab { border-radius: 3px; color: #3a4150; }
+.lx[data-design="pist"] .lx-tab b { font: 800 14px/1.1 var(--sign); text-transform: uppercase; letter-spacing: .02em; }
+.lx[data-design="pist"] .lx-tab small { color: #4a505a; }
+.lx[data-design="pist"] .lx-tab[aria-selected="true"] { background: #3a4150; color: #ead9a0; box-shadow: none; }
+.lx[data-design="pist"] .lx-tab[aria-selected="true"] small { color: #e9e1c4; }
+.lx[data-design="pist"] .lx-tabs__line { background: rgba(22, 24, 29, .18); }
+.lx[data-design="pist"] .lx-tabs__line::after { background: #3a4150; }
+
+/* панели: белые таблички на стойках */
+.lx[data-design="pist"] :is(.lx-ph, .lx-dlg, .lx-res, .dy-read, .dy-you, .dy-speak) { background: #fff; border-radius: 6px; box-shadow: var(--lx-shadow); border-top: 4px solid #ead9a0; }
+.lx[data-design="pist"] .lx-kicker { color: #3a4150; font: 800 13px/1 var(--sign); letter-spacing: .2em; text-transform: uppercase; }
+.lx[data-design="pist"] .lx-kicker__ico { color: #b46a5c; }
+.lx[data-design="pist"] .lx-panel h2 { font: 800 clamp(26px, 5.4vw, 40px)/1.05 var(--sign); text-transform: uppercase; }
+
+/* цель дня: выходы на посадку — номер в чёрном квадрате */
+.lx[data-design="pist"] .dy-goal__i { border-radius: 4px; border-left: 8px solid #ead9a0; }
+.lx[data-design="pist"] .dy-goal__n { border-radius: 4px; background: #3a4150; color: #ead9a0; font: 700 16px/1 var(--mono); width: 48px; display: flex; align-items: center; justify-content: center; }
+.lx[data-design="pist"] .dy-goal__n::before { content: 'A'; }
+.lx[data-design="pist"] .dy-goal__w b { font: 800 1.2em/1.2 var(--sign); letter-spacing: .01em; }
+.lx[data-design="pist"] .dy-prep { background: #f6efd6; border: 1px dashed #c9b98a; border-radius: 6px; }
+.lx[data-design="pist"] .dy-prep__h { color: #3a4150; font-family: var(--sign); text-transform: uppercase; }
+.lx[data-design="pist"] .lx-chip { border-radius: 3px; background: #fff; border: 1px solid #cfc6a8; color: #3a4150; font: 700 15px/1 var(--sign); letter-spacing: .04em; }
+.lx[data-design="pist"] .dy-prep__chip.is-heard { background: #3a4150; color: #ead9a0; }
+
+/* диалог: экран в зале прилёта */
+.lx[data-design="pist"] .lx-dlg__head h3 { font: 800 1.3em/1.1 var(--sign); text-transform: uppercase; }
+.lx[data-design="pist"] .lx-badge { border-radius: 3px; background: #ead9a0; color: #3a4150; font-family: var(--sign); }
+.lx[data-design="pist"] .lx-msg__tr { border-radius: 4px 14px 14px 14px; background: #eef1f3; }
+.lx[data-design="pist"] .lx-msg--me .lx-msg__tr { border-radius: 14px 4px 14px 14px; background: #ead9a0; color: #3a4150; }
+.lx[data-design="pist"] .lx-msg__ava { border-radius: 4px; background: #3a4150; color: #ead9a0; font-family: var(--sign); }
+.lx[data-design="pist"] .lx-btn { border-radius: 4px; background: #3a4150; color: #ead9a0; font-family: var(--sign); text-transform: uppercase; letter-spacing: .06em; }
+.lx[data-design="pist"] .lx-btn--ghost { background: #fff; color: #3a4150; box-shadow: inset 0 0 0 2px #3a4150; }
+
+/* слова: бирки багажа с отверстием и шнурком */
+.lx[data-design="pist"] .lx-cards { gap: 18px; }
+.lx[data-design="pist"] .lx-card { position: relative; padding: 16px 16px 14px 34px; border-radius: 6px 18px 18px 6px; background: #fffaf0; box-shadow: 0 1px 0 #d6c9a3, 0 12px 20px -16px rgba(60, 40, 0, .6); border-top: 10px solid #ead9a0; }
+.lx[data-design="pist"] .lx-card::before { content: ''; position: absolute; left: 10px; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: #f1f0ea; box-shadow: inset 0 0 0 2px #b8a676; }
+.lx[data-design="pist"] .lx-card:hover { box-shadow: 0 1px 0 #d6c9a3, 0 18px 26px -16px rgba(60, 40, 0, .7); }
+.lx[data-design="pist"] .lx-card:focus-visible { outline: 3px solid #3a4150; outline-offset: 2px; }
+.lx[data-design="pist"] .lx-card.is-known { border-top-color: #3f7a5a; }
+.lx[data-design="pist"] .lx-card.is-flipped { background: #fff; }
+.lx[data-design="pist"] .lx-ico { border-radius: 4px; background: #3a4150; color: #ead9a0; }
+.lx[data-design="pist"] .lx-card__tr { font: 800 1.3em/1.15 var(--sign); }
+.lx[data-design="pist"] .lx-say { background: #ead9a0; color: #3a4150; }
+.lx[data-design="pist"] :is(.lx-card__flip, .lx-card__know) { font-family: var(--sign); text-transform: uppercase; letter-spacing: .05em; }
+
+/* «а у тебя?»: стойка паспортного контроля */
+.lx[data-design="pist"] .dy-you__q { font: 800 1.5em/1.15 var(--sign); }
+.lx[data-design="pist"] .dy-you__model { border-left-color: #ead9a0; background: #faf5e4; }
+.lx[data-design="pist"] .dy-culture { background: #faf5e4; border: 0; border-radius: 6px; }
+
+/* практика и квест */
+.lx[data-design="pist"] .dy-rubric { color: #3a4150; font-family: var(--sign); text-transform: uppercase; letter-spacing: .04em; }
+.lx[data-design="pist"] .lx-panel :is(a-exercise, a-quiz) { border-radius: 6px; border-top: 6px solid #ead9a0; }
+.lx[data-design="pist"] .lx-steps li { border-radius: 3px; font-family: var(--sign); text-transform: uppercase; }
+
+/* шпаргалка: табло прилёта */
+.lx[data-design="pist"] .lx-table { border-radius: 6px; }
+.lx[data-design="pist"] .lx-table tr:nth-child(odd) td { background: #fbfaf4; }
+.lx[data-design="pist"] .lx-table td:first-child { font: 500 1em/1.35 var(--mono); color: #3a4150; border-left: 6px solid #ead9a0; }
+
+/* сцена: облака плывут, огни полосы мигают, маяк вышки, колдунчик колышется */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="pist"] .pi-cloud--a { animation: pi-drift 38s linear infinite alternate; }
+  .lx[data-design="pist"] .pi-cloud--b { animation: pi-drift 52s linear infinite alternate-reverse; }
+  .lx[data-design="pist"] .pi-lights circle { animation: pi-blink 1.8s ease-in-out infinite; }
+  .lx[data-design="pist"] .pi-lights circle:nth-child(2n) { animation-delay: .45s; }
+  .lx[data-design="pist"] .pi-lights circle:nth-child(3n) { animation-delay: .9s; }
+  .lx[data-design="pist"] .pi-beacon { animation: pi-blink 1.2s steps(2) infinite; }
+  .lx[data-design="pist"] .pi-sock__bag { transform-box: fill-box; transform-origin: 0 50%; animation: pi-sock 3.2s ease-in-out infinite; }
+}
+@keyframes pi-drift { to { transform: translateX(70px); } }
+@keyframes pi-blink { 50% { opacity: .25; } }
+@keyframes pi-sock { 50% { transform: rotate(7deg) scaleX(.94); } }
