@@ -1,0 +1,94 @@
+/* Alterna kit v1: урок маршрута в виде мини-истории поверх lexicon.css и day.css. Цвета и шрифты — переменные --lx-*,
+   своё оформление дня — в media/design.css гайда (docs/day/DESIGN.md). Только светлая тема. */
+.st-sec { padding-top: 22px; scroll-margin-top: 76px; }
+.st-sec a-exercise, .st-sec a-quiz { margin-top: 14px; border-radius: var(--lx-r); box-shadow: var(--lx-shadow); }
+
+/* оглавление: плавающая полоса внизу экрана — главы и разделы, полоса прочитанного (свой скроллбар) */
+.st-toc { position: fixed; z-index: 40; left: 50%; bottom: calc(12px + env(safe-area-inset-bottom)); width: max-content; max-width: calc(100% - 24px); padding: 6px; border-radius: 999px; background: color-mix(in srgb, var(--lx-surf) 90%, transparent); box-shadow: var(--lx-shadow), 0 8px 28px rgba(40, 46, 60, .14); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); transform: translateX(-50%); }
+.st-toc__l { display: flex; gap: 4px; margin: 0; padding: 0; overflow-x: auto; overscroll-behavior-x: contain; list-style: none; scrollbar-width: none; }
+.st-toc__l::-webkit-scrollbar { display: none; }
+.st-toc__l li { flex: none; }
+.st-toc__l a { display: grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0 14px; border-radius: 999px; color: var(--lx-ink); font-weight: 700; text-decoration: none; white-space: nowrap; transition: background-color .2s, color .2s; }
+.st-toc__l a:hover { background: var(--lx-soft); }
+.st-toc__l a.is-cur { background: var(--lx-accent); color: var(--lx-on); }
+.st-toc__l a:focus-visible { outline: 3px solid var(--lx-accent); outline-offset: -3px; }
+.st-toc__bar { position: absolute; left: 22px; right: 22px; bottom: 2px; height: 3px; border-radius: 3px; background: var(--lx-accent); opacity: .55; transform: scaleX(var(--p, 0)); transform-origin: left center; pointer-events: none; }
+
+/* герой урока */
+.st-hook { font-style: italic; }
+.st-cast { margin-block: 6px 0 !important; color: var(--lx-muted); }
+.st-cast span { font-weight: 700; }
+
+/* главы: рельс слева, номер главы — кружок */
+.st-chs { display: grid; gap: 18px; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+.st-ch { position: relative; min-width: 0; padding: clamp(18px, 4vw, 32px); padding-left: clamp(22px, 5vw, 40px); border-radius: var(--lx-r); background: var(--lx-surf); box-shadow: var(--lx-shadow); scroll-margin-top: 80px; }
+.st-ch::before { content: ''; position: absolute; left: clamp(8px, 2vw, 14px); top: 24px; bottom: 24px; width: 3px; border-radius: 3px; background: var(--lx-soft); }
+.st-ch__k { display: flex; align-items: center; gap: 10px; margin: 0 0 4px !important; color: var(--lx-accent); font-weight: 800; letter-spacing: .03em; }
+.st-ch__n { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--lx-accent); color: var(--lx-on); }
+.st-ch__h { margin: 0 0 12px; font-size: clamp(1.25em, 3vw, 1.5em); line-height: 1.2; }
+.st-ch > * + * { margin-top: 12px; }
+.st-p { max-width: 68ch; font-size: 1.06em; line-height: 1.7; }
+.st-p em { font-style: italic; }
+.st-end { max-width: 68ch; margin: 20px auto 0 !important; padding: 0 4px; font-size: 1.08em; font-style: italic; line-height: 1.7; text-align: center; }
+
+/* слово в рассказе: звучит по нажатию, перевод раскрывается под ним */
+.st-w { display: inline; margin: 0; padding: 1px 4px; border: 0; border-radius: 6px; background: var(--lx-soft); color: var(--lx-ink); font: inherit; font-weight: 700; line-height: inherit; text-align: left; cursor: pointer; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.st-w > span[lang] { border-bottom: 2px dotted var(--lx-accent); overflow-wrap: anywhere; }
+.st-w__ru { display: none; color: var(--lx-muted); font-weight: 500; }
+.st-w__ru::before { content: ' · '; }
+.st-w.is-open .st-w__ru { display: inline; }
+.st-w:focus-visible { outline: 3px solid var(--lx-accent); outline-offset: 2px; }
+
+/* реплики */
+.st-b { display: flex; align-items: flex-start; gap: 10px; max-width: min(100%, 560px); }
+.st-b--me { flex-direction: row-reverse; margin-left: auto; }
+.st-b__ava { display: grid; place-items: center; flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--lx-soft); color: var(--lx-ink); font-weight: 800; font-size: .9em; }
+.st-b--me .st-b__ava { background: var(--lx-accent); color: var(--lx-on); }
+.st-b__body { min-width: 0; padding: 10px 14px; border-radius: 18px; border-top-left-radius: 6px; background: var(--lx-paper, var(--lx-bg)); box-shadow: var(--lx-shadow); }
+.st-b--me .st-b__body { border-top-left-radius: 18px; border-top-right-radius: 6px; }
+.st-b__who { display: block; color: var(--lx-muted); font-size: .85em; font-weight: 700; }
+.st-b__tr { margin: 2px 0 0 !important; font-size: 1.1em; font-weight: 700; overflow-wrap: anywhere; cursor: pointer; }
+.st-b__ru { margin: 2px 0 0 !important; color: var(--lx-muted); overflow-wrap: anywhere; }
+
+/* тонкость языка: правило, которое родилось из сцены */
+.st-note { padding: clamp(14px, 3vw, 20px); border-radius: var(--lx-r); background: var(--lx-soft); }
+.st-note__h, .st-quirk__h { display: flex; align-items: center; gap: 8px; margin: 0 0 6px !important; color: var(--lx-accent); font-weight: 800; }
+.st-note__ico svg, .st-quirk__ico svg, .st-choice__ico svg { display: block; width: 20px; height: 20px; }
+.st-note__ex { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+.st-note__ex li { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 8px 12px; border-radius: 10px; background: var(--lx-surf); }
+.st-note__ex b { cursor: pointer; overflow-wrap: anywhere; }
+.st-note__ex span { color: var(--lx-muted); }
+
+/* «кстати»: местная особенность или шутка */
+.st-quirk { padding: clamp(14px, 3vw, 20px); border: 2px dashed var(--lx-accent); border-radius: var(--lx-r); background: var(--lx-surf); }
+
+/* выбор героя */
+.st-choice { padding: clamp(14px, 3vw, 20px); border-radius: var(--lx-r); background: var(--lx-paper, var(--lx-bg)); box-shadow: inset 0 0 0 2px var(--lx-soft); }
+.st-choice__q { display: flex; align-items: flex-start; gap: 8px; margin: 0 0 10px !important; font-weight: 800; }
+.st-choice__opts { display: grid; gap: 8px; }
+.st-opt { display: grid; gap: 2px; min-height: 48px; padding: 10px 14px; border: 2px solid var(--lx-soft); border-radius: 14px; background: var(--lx-surf); color: var(--lx-ink); font: inherit; text-align: left; cursor: pointer; transition: border-color .2s, background-color .2s; }
+.st-opt b { font-size: 1.05em; overflow-wrap: anywhere; }
+.st-opt span { color: var(--lx-muted); font-size: .92em; }
+.st-opt:hover:not(:disabled) { border-color: var(--lx-accent); }
+.st-opt:focus-visible { outline: 3px solid var(--lx-accent); outline-offset: 2px; }
+.st-opt:disabled { cursor: default; }
+.st-opt.is-miss { opacity: .62; text-decoration: line-through; text-decoration-thickness: 1px; }
+.st-opt.is-ok { border-color: var(--lx-accent); background: var(--lx-soft); }
+.st-choice__then { margin: 10px 0 0 !important; padding: 10px 14px; border-radius: 12px; background: var(--lx-surf); line-height: 1.55; }
+.st-choice__then.is-ok { box-shadow: inset 4px 0 0 var(--lx-accent); }
+.st-choice__then.is-miss { box-shadow: inset 4px 0 0 var(--lx-muted); }
+
+/* итог: слова истории */
+.st-sub { margin: 20px 0 10px; font-size: 1.15em; }
+.st-words { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.st-words li { display: grid; gap: 2px; min-width: 0; padding: 10px 14px; border-radius: 12px; background: var(--lx-surf); box-shadow: var(--lx-shadow); }
+.st-words b { overflow-wrap: anywhere; cursor: pointer; }
+.st-words span { color: var(--lx-muted); overflow-wrap: anywhere; }
+
+@media print {
+  .st-toc { display: none; }
+  .st-w__ru { display: inline; margin-left: 4px; }
+}
+
+/* общее правило ширины детей main (lexicon.css) не должно растягивать плавающее оглавление */
+.lx main > .st-toc { max-width: calc(100% - 24px); margin: 0; }
