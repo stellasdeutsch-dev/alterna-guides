@@ -1,0 +1,149 @@
+/* Pasaport: паспортный контроль в аэропорту. Сцена — зал с кабинками, очередь между лентами, крупно — раскрытый паспорт,
+   на который опускается штамп. Страница — паспорт: фон с гильошем, первый экран — страница данных с фото и машинной строкой,
+   вкладки — разделители страниц, слова — страницы со штампами, диалог — окно кабинки, шпаргалка — миграционная карта. */
+.lx[data-design="pasaport"] {
+  --lx-accent: #7d3f4a; --lx-accent-2: #4f6b60; --lx-paper: #f7f3e8; --lx-surf: #fffdf6; --lx-surf2: #faf6ec;
+  --lx-ink: #33393f; --lx-muted: #5b6460; --lx-line: #e2dccb; --lx-soft: #f1e6e3; --lx-on: #ffffff; --lx-tabs-bg: #ebe5d3; --lx-r: 8px;
+  --lx-shadow: 0 1px 0 #e0d9c4, 0 14px 24px -18px rgba(60, 50, 40, .45);
+  --cover: #9b5a63; --sage: #b7c6b8; --sage-soft: #eef2ec; --ivory: #f4eedc;
+  --official: 'LX Forum', Georgia, serif; --mono: 'LX IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --ak-font: 'LX Onest', system-ui, sans-serif; --ak-font-display: var(--official); --ak-radius: 8px; --ak-radius-sm: 6px;
+  --ak-good: #3f7a5a; --ak-good-soft: #e5efe8; --ak-bad: #a3463c; --ak-bad-soft: #f6e6e2;
+  font-family: var(--ak-font);
+  background-color: #f7f3e8;
+  background-image:
+    repeating-radial-gradient(circle at 0 0, transparent 0 22px, rgba(79, 107, 96, .07) 22px 23px),
+    repeating-radial-gradient(circle at 100% 100%, transparent 0 22px, rgba(125, 63, 74, .05) 22px 23px);
+  background-size: 92px 92px;
+  overflow-x: clip;
+}
+.lx[data-design="pasaport"] main { overflow-x: clip; }
+
+/* шапка: обрез обложки паспорта */
+.lx[data-design="pasaport"] .lx-app { background: var(--lx-surf); border-bottom: 0; box-shadow: 0 5px 0 var(--cover), 0 8px 0 #e8d9c6; position: relative; z-index: 2; }
+.lx[data-design="pasaport"] .lx-app__logo { border-radius: 8px; background: var(--cover); color: #f6eedf; box-shadow: inset 0 0 0 2px #c9a99f; }
+.lx[data-design="pasaport"] .lx-app__t b { font: 400 1.2em/1.1 var(--official); letter-spacing: .08em; text-transform: uppercase; }
+.lx[data-design="pasaport"] .lx-app__ring .lx-ring__bg { stroke: #ece2de; }
+.lx[data-design="pasaport"] .lx-app__ring .lx-ring__fg { stroke: var(--lx-accent); }
+
+/* первый экран: сцена зала, под ней — страница данных паспорта */
+.lx[data-design="pasaport"] .lx-hero { position: relative; margin-top: 0 !important; padding: 0 0 4px; background: none; box-shadow: none; border-radius: 0; gap: 0; }
+.lx[data-design="pasaport"] .lx-scene { margin-inline: calc(50% - 50vw); height: clamp(200px, 38vw, 380px); overflow: hidden; background: #eef0e6; border-bottom: 4px solid #e2dccb; }
+.lx[data-design="pasaport"] .lx-scene svg { display: block; }
+.lx[data-design="pasaport"] .lx-hero > :not(.lx-scene) { position: relative; max-width: 780px; margin-inline: auto; padding-inline: clamp(18px, 4vw, 34px);
+  background: repeating-radial-gradient(circle at 100% 0, transparent 0 14px, rgba(79, 107, 96, .06) 14px 15px) 0 0 / 60px 60px, var(--lx-surf); }
+.lx[data-design="pasaport"] .lx-tag { z-index: 1; display: flex; align-items: center; gap: 10px; margin-block: -24px 0 !important; padding-block: 22px 0 !important; border-radius: 10px 10px 0 0; background: var(--lx-surf); color: var(--lx-accent-2); font: 500 12px/1 var(--mono); letter-spacing: .14em; box-shadow: 0 -12px 22px -18px rgba(60, 50, 40, .6); }
+.lx[data-design="pasaport"] .lx-tag::after { content: ''; flex: 1; height: 1px; background: repeating-linear-gradient(90deg, #c9cfc4 0 6px, transparent 6px 10px); }
+.lx[data-design="pasaport"] h1 { margin-block: 0; padding-top: 12px; font: 400 clamp(32px, 7.2vw, 56px)/1.05 var(--official); text-transform: uppercase; letter-spacing: .03em; color: var(--lx-ink); hyphens: manual; }
+.lx[data-design="pasaport"] .lx-hero__tr { margin-block: 0 !important; padding-top: 8px; color: var(--lx-accent); font: 600 clamp(18px, 3.8vw, 24px)/1.25 var(--ak-font); }
+.lx[data-design="pasaport"] .lx-hero__meta { margin-block: 0; padding-top: 10px; color: var(--lx-muted); font: 500 13px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+.lx[data-design="pasaport"] .lx-hero__intro { margin-block: 0; padding-block: 8px 14px; }
+.lx[data-design="pasaport"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-block: 0; padding-block: 10px 46px !important; border-top: 1px solid var(--lx-line); border-radius: 0 0 10px 10px; box-shadow: var(--lx-shadow); }
+.lx[data-design="pasaport"] .lx-stats::after { content: 'P<TUR<<ALTERNA<<GÜN<03<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<' / ''; position: absolute; left: clamp(18px, 4vw, 34px); right: clamp(18px, 4vw, 34px); bottom: 14px; overflow: hidden; white-space: nowrap; color: #8b8a7e; font: 500 13px/1 var(--mono); letter-spacing: .12em; }
+.lx[data-design="pasaport"] .lx-stats li { padding: 4px; border-radius: 0; background: none; text-align: left; }
+.lx[data-design="pasaport"] .lx-stats b { font: 500 clamp(22px, 5vw, 30px)/1 var(--mono); color: var(--lx-accent); }
+.lx[data-design="pasaport"] .lx-stats span { font-size: 12px; color: var(--lx-muted); }
+@media (min-width: 860px) {
+  .lx[data-design="pasaport"] .lx-hero > :not(.lx-scene) { padding-left: 214px; }
+  .lx[data-design="pasaport"] .lx-tag::before { content: ''; position: absolute; left: 34px; top: 30px; width: 150px; height: 186px; border-radius: 6px;
+    background: radial-gradient(circle at 50% 38%, #c6d0c8 0 34px, transparent 35px), radial-gradient(ellipse 62px 50px at 50% 108%, #c6d0c8 0 98%, transparent 100%), repeating-linear-gradient(45deg, #e6ece5 0 6px, #edf1ea 6px 12px);
+    box-shadow: inset 0 0 0 1px #c9d1c6, 3px 4px 0 -1px rgba(125, 63, 74, .12); }
+  .lx[data-design="pasaport"] .lx-stats::after { left: 34px; }
+}
+
+/* вкладки: разделители страниц — корешки с цветной кромкой */
+.lx[data-design="pasaport"] .lx-tabs { margin-top: 20px !important; padding: 6px 6px 4px; border-radius: 8px; -webkit-backdrop-filter: none; backdrop-filter: none; background: #ebe5d3; box-shadow: inset 0 -3px 0 #ddd5bf, 0 12px 20px -14px rgba(60, 50, 40, .6); }
+.lx[data-design="pasaport"] .lx-tab { border-radius: 10px 10px 3px 3px; background: #f6f1e3; color: var(--lx-ink); box-shadow: inset 0 4px 0 var(--sage); }
+.lx[data-design="pasaport"] .lx-tab:nth-of-type(3n+2) { box-shadow: inset 0 4px 0 #dcc3c3; }
+.lx[data-design="pasaport"] .lx-tab:nth-of-type(3n) { box-shadow: inset 0 4px 0 #dccfb2; }
+.lx[data-design="pasaport"] .lx-tab b { font-weight: 700; letter-spacing: .01em; }
+.lx[data-design="pasaport"] .lx-tab small { color: #555e5a; }
+.lx[data-design="pasaport"] .lx-tab[aria-selected="true"] { background: var(--lx-accent); color: #fff; box-shadow: inset 0 4px 0 #c9a99f, 0 6px 12px -8px rgba(90, 40, 50, .8); }
+.lx[data-design="pasaport"] .lx-tab[aria-selected="true"] small { color: #f3e6e6; }
+.lx[data-design="pasaport"] .lx-tabs__line { background: rgba(125, 63, 74, .12); }
+.lx[data-design="pasaport"] .lx-tabs__line::after { background: var(--lx-accent); }
+
+/* панели: листы паспорта */
+.lx[data-design="pasaport"] :is(.lx-ph, .lx-dlg, .lx-res, .dy-read, .dy-you, .dy-speak) { background: var(--lx-surf); border-radius: 8px; box-shadow: var(--lx-shadow); }
+.lx[data-design="pasaport"] .lx-ph { border-left: 6px solid var(--cover); }
+.lx[data-design="pasaport"] .lx-kicker { color: var(--lx-accent-2); font: 500 13px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase; }
+.lx[data-design="pasaport"] .lx-panel h2 { font: 400 clamp(26px, 5.4vw, 40px)/1.08 var(--official); text-transform: uppercase; letter-spacing: .02em; }
+
+/* цель дня: визовые штампы с номером */
+.lx[data-design="pasaport"] .dy-goal__i { border-radius: 8px; border-left: 1px dashed #cfc7b0; background: var(--lx-surf); }
+.lx[data-design="pasaport"] .dy-goal__n { width: 44px; height: 44px; border-radius: 50%; background: transparent; color: var(--lx-accent); font: 500 17px/1 var(--mono); box-shadow: inset 0 0 0 2px var(--lx-accent), inset 0 0 0 5px var(--lx-surf), inset 0 0 0 6px rgba(125, 63, 74, .6); rotate: -10deg; }
+.lx[data-design="pasaport"] .dy-goal__i:nth-child(2n) .dy-goal__n { color: var(--lx-accent-2); border-radius: 8px; box-shadow: inset 0 0 0 2px var(--lx-accent-2), inset 0 0 0 5px var(--lx-surf), inset 0 0 0 6px rgba(79, 107, 96, .6); rotate: 6deg; }
+.lx[data-design="pasaport"] .dy-goal__w b { font-weight: 700; font-size: 1.2em; }
+.lx[data-design="pasaport"] .lx-say { background: var(--sage-soft); color: var(--lx-accent-2); }
+
+/* подготовка: бланк с полями */
+.lx[data-design="pasaport"] .dy-prep { border-radius: 8px; background: var(--lx-surf) repeating-linear-gradient(transparent 0 33px, #ece6d4 33px 34px); border: 1px solid #d9d1ba; border-top: 10px solid var(--sage); }
+.lx[data-design="pasaport"] .dy-prep__h { color: var(--lx-accent-2); font: 500 13px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.lx[data-design="pasaport"] .lx-chip { border-radius: 6px; background: var(--lx-surf); box-shadow: inset 0 0 0 1.5px #c8c0a8; color: var(--lx-ink); font-weight: 700; }
+.lx[data-design="pasaport"] .dy-prep__chip.is-heard { background: var(--lx-accent-2); color: #fff; box-shadow: none; }
+
+/* диалог: окно кабинки контроля */
+.lx[data-design="pasaport"] .lx-dlg { border-top: 10px solid var(--sage); }
+.lx[data-design="pasaport"] .lx-dlg__head h3 { font: 400 1.4em/1.1 var(--official); text-transform: uppercase; letter-spacing: .03em; }
+.lx[data-design="pasaport"] .lx-badge { border-radius: 4px; background: var(--sage-soft); color: var(--lx-accent-2); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="pasaport"] .lx-chat { border-radius: 8px; background: linear-gradient(115deg, transparent 0 40%, rgba(255, 255, 255, .55) 40% 46%, transparent 46%), var(--sage-soft); }
+.lx[data-design="pasaport"] .lx-msg { border-radius: 4px 14px 14px 14px; background: var(--lx-surf); box-shadow: 0 1px 0 #d9dfd6; }
+.lx[data-design="pasaport"] .lx-msg--me { border-radius: 14px 4px 14px 14px; background: var(--lx-soft); }
+.lx[data-design="pasaport"] .lx-msg__ava { border-radius: 6px; background: var(--lx-accent-2); color: #fff; }
+.lx[data-design="pasaport"] .lx-msg--me .lx-msg__ava { background: var(--lx-accent); }
+.lx[data-design="pasaport"] .lx-btn { border-radius: 6px; background: var(--lx-accent); color: #fff; }
+.lx[data-design="pasaport"] .lx-btn--ghost { background: var(--lx-surf); color: var(--lx-accent); box-shadow: inset 0 0 0 2px var(--lx-accent); }
+
+/* слова: страницы паспорта с номером и штампом */
+.lx[data-design="pasaport"] .lx-cards { gap: 18px; }
+.lx[data-design="pasaport"] .lx-card { position: relative; isolation: isolate; overflow: hidden; padding: 18px 16px 14px 18px; border-radius: 4px 10px 10px 4px;
+  background: repeating-radial-gradient(circle at 100% 100%, transparent 0 10px, rgba(79, 107, 96, .07) 10px 11px) 0 0 / 44px 44px, var(--lx-surf);
+  box-shadow: inset 6px 0 0 #ece4cf, 0 1px 0 #e0d9c4, 0 14px 22px -16px rgba(60, 50, 40, .55); }
+.lx[data-design="pasaport"] .lx-card::after { content: ''; position: absolute; z-index: -1; right: 54px; top: 8px; width: 64px; height: 64px; border-radius: 50%; box-shadow: inset 0 0 0 2px rgba(125, 63, 74, .28), inset 0 0 0 7px transparent, inset 0 0 0 8px rgba(125, 63, 74, .2); rotate: -14deg; pointer-events: none; }
+.lx[data-design="pasaport"] .lx-card:nth-child(2n)::after { border-radius: 8px; width: 74px; height: 46px; top: 14px; box-shadow: inset 0 0 0 2px rgba(79, 107, 96, .3), inset 0 0 0 6px transparent, inset 0 0 0 7px rgba(79, 107, 96, .22); rotate: 9deg; }
+.lx[data-design="pasaport"] .lx-card:hover { box-shadow: inset 6px 0 0 #ece4cf, 0 1px 0 #e0d9c4, 0 20px 28px -16px rgba(60, 50, 40, .65); }
+.lx[data-design="pasaport"] .lx-card:focus-visible { outline: 3px solid var(--lx-accent); outline-offset: 2px; }
+.lx[data-design="pasaport"] .lx-card.is-known { box-shadow: inset 6px 0 0 #3f7a5a, inset 0 0 0 2px #3f7a5a, 0 14px 22px -16px rgba(60, 50, 40, .55); }
+.lx[data-design="pasaport"] .lx-card.is-known::after { box-shadow: inset 0 0 0 3px rgba(63, 122, 90, .45), inset 0 0 0 7px transparent, inset 0 0 0 8px rgba(63, 122, 90, .3); }
+.lx[data-design="pasaport"] .lx-card.is-flipped { background: var(--ivory); }
+.lx[data-design="pasaport"] .lx-ico { border-radius: 6px; background: var(--sage-soft); color: var(--lx-accent-2); }
+.lx[data-design="pasaport"] .lx-card__tr { font: 700 1.32em/1.15 var(--ak-font); color: var(--lx-ink); }
+.lx[data-design="pasaport"] .lx-card__ru { font-family: var(--ak-font); }
+.lx[data-design="pasaport"] .lx-card__acts button { border-radius: 6px; font-family: var(--mono); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; font-size: 13px; }
+
+/* «а у тебя?», говорение */
+.lx[data-design="pasaport"] .dy-you { border-left: 6px solid var(--sage); }
+.lx[data-design="pasaport"] .dy-you__q { font: 700 1.4em/1.2 var(--ak-font); }
+.lx[data-design="pasaport"] .dy-you__model { border-left-color: var(--lx-accent); background: var(--lx-soft); }
+.lx[data-design="pasaport"] .dy-speak { border-top: 6px solid #dcc3c3; }
+.lx[data-design="pasaport"] .dy-culture { border-radius: 8px; background: var(--sage-soft); }
+
+/* практика и квест */
+.lx[data-design="pasaport"] .dy-rubric { color: var(--lx-accent-2); font: 500 14px/1.3 var(--mono); letter-spacing: .06em; }
+.lx[data-design="pasaport"] .lx-panel :is(a-exercise, a-quiz) { border-radius: 8px; border-left: 6px solid #ece4cf; }
+.lx[data-design="pasaport"] .lx-steps li { border-radius: 6px; background: var(--lx-surf); font-family: var(--mono); font-weight: 500; }
+.lx[data-design="pasaport"] .lx-sim__ava { border-radius: 8px; background: var(--lx-accent-2); color: #fff; }
+.lx[data-design="pasaport"] .lx-sim__feed { border-radius: 8px; background: var(--sage-soft); }
+.lx[data-design="pasaport"] .lx-sim__msg--me { background: var(--lx-accent); color: #fff; }
+.lx[data-design="pasaport"] .lx-sim__hint { color: var(--lx-accent-2); }
+.lx[data-design="pasaport"] .lx-sim__opt { border-radius: 8px; }
+
+/* шпаргалка: миграционная карта */
+.lx[data-design="pasaport"] .lx-table { border-radius: 8px; border: 1px solid #d9d1ba; border-top: 10px solid var(--cover); }
+.lx[data-design="pasaport"] .lx-table td { border-bottom: 1px dashed #ddd5bf; }
+.lx[data-design="pasaport"] .lx-table td:first-child { color: var(--lx-ink); font-weight: 700; }
+.lx[data-design="pasaport"] .lx-table tr:nth-child(even) td { background: #faf7ee; }
+.lx[data-design="pasaport"] .lx-next { border-radius: 8px; background: var(--lx-accent); color: #fff; }
+
+/* сцена: лампы кабинок мигают, очередь переминается, лента чуть провисает */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="pasaport"] .d03-lamp { animation: d03-blink 2.6s steps(1) infinite; }
+  .lx[data-design="pasaport"] .d03-lamp--b { animation-delay: -1.3s; }
+  .lx[data-design="pasaport"] .d03-pax { animation: d03-shift 3.4s ease-in-out infinite; }
+  .lx[data-design="pasaport"] .d03-pax--b { animation-delay: -1.1s; animation-duration: 4s; }
+  .lx[data-design="pasaport"] .d03-pax--c { animation-delay: -2.2s; }
+  .lx[data-design="pasaport"] .d03-belt { animation: d03-belt 5s ease-in-out infinite; }
+}
+@keyframes d03-blink { 0%, 64% { opacity: 1; } 65%, 100% { opacity: .35; } }
+@keyframes d03-shift { 50% { transform: translateY(-3px); } }
+@keyframes d03-belt { 50% { transform: translateY(1.5px); } }

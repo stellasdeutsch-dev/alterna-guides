@@ -1,0 +1,146 @@
+/* Takvim: «день за днём». Сцена — стол у окна на Бахарие: за окном солнце идёт по небу и проезжает трамвайчик,
+   на стене отрывной календарь, листок «6» отрывается и открывает «7». Страница — календарь и блокнот недели:
+   заголовок на листке с кольцами, вкладки — корешки календаря, слова — листки календаря, текст — дневник в линейку. */
+.lx[data-design="takvim"] {
+  --lx-accent: #4b6650; --lx-accent-2: #9c4f43; --lx-paper: #f3ece0; --lx-surf: #fffdf8; --lx-surf2: #f8f3ea;
+  --lx-ink: #3a4150; --lx-muted: #5d6360; --lx-line: #e4dccd; --lx-soft: #e6ede1; --lx-on: #ffffff; --lx-tabs-bg: #fbf7f0; --lx-r: 8px;
+  --lx-shadow: 0 1px 0 #e1d4c2, 0 14px 24px -18px rgba(70, 60, 50, .5);
+  --cal: 'LX Alumni Sans', 'Arial Narrow', sans-serif; --hand: 'LX Caveat', cursive;
+  --ak-font: 'LX Rubik', system-ui, sans-serif; --ak-font-display: var(--cal); --ak-radius: 8px; --ak-radius-sm: 6px;
+  --ak-good: #3f7a5a; --ak-good-soft: #e5efe8; --ak-bad: #a3463c; --ak-bad-soft: #f6e6e2;
+  font-family: var(--ak-font);
+  background-color: #f3ece0;
+  background-image: linear-gradient(90deg, rgba(127, 154, 124, .07) 50%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(201, 138, 116, .12) 0 1.5px, transparent 2px);
+  background-size: 72px 100%, 36px 36px;
+  overflow-x: clip;
+}
+.lx[data-design="takvim"] main { overflow-x: clip; }
+
+/* шапка: верх календаря с кольцами */
+.lx[data-design="takvim"] .lx-app { position: relative; background: #fffdf8; border-bottom: 0; box-shadow: 0 8px 0 -2px #a35d50; }
+.lx[data-design="takvim"] .lx-app::after { content: ''; position: absolute; left: 0; right: 0; bottom: -8px; height: 6px; background: radial-gradient(circle at 15px 3px, #f3ece0 0 2.5px, transparent 3px) 0 0 / 30px 6px repeat-x; pointer-events: none; }
+.lx[data-design="takvim"] .lx-app__logo { border-radius: 8px; background: #a35d50; color: #fff; }
+.lx[data-design="takvim"] .lx-app__t b { font: 900 1.45em/1 var(--cal); letter-spacing: .03em; text-transform: uppercase; }
+.lx[data-design="takvim"] .lx-app__ring .lx-ring__bg { stroke: #ece2d3; }
+.lx[data-design="takvim"] .lx-app__ring .lx-ring__fg { stroke: #4b6650; }
+
+/* первый экран: сверху листок календаря с заголовком, потом окно со столом, ниже — запись в блокноте */
+.lx[data-design="takvim"] .lx-hero { display: flex; flex-direction: column; margin-top: 0 !important; padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="takvim"] .lx-hero > :not(.lx-scene) { width: 100%; max-width: 900px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 44px); background: #fffdf8; }
+.lx[data-design="takvim"] .lx-tag {
+  order: 0; display: block; margin-block: 22px 0 !important; padding-block: 30px 10px !important; border-radius: 8px 8px 0 0; color: #fff; font: 800 18px/1 var(--cal); letter-spacing: .18em; text-transform: uppercase;
+  background: radial-gradient(circle at 50% 9px, #f3ece0 0 5px, transparent 5.5px) 50% 0 / 44px 20px repeat-x, #a35d50 !important;
+}
+.lx[data-design="takvim"] h1 { order: 1; margin-block: 0; padding-top: 14px; font: 900 clamp(48px, 12vw, 96px)/.92 var(--cal); letter-spacing: .01em; text-transform: uppercase; color: #3a4150; hyphens: manual; }
+.lx[data-design="takvim"] .lx-hero__tr { order: 2; margin-block: 0 !important; padding-block: 6px 18px; color: #4b6650; font: 700 clamp(24px, 5.4vw, 34px)/1.1 var(--hand); border-radius: 0 0 8px 8px; box-shadow: 0 18px 24px -22px rgba(70, 60, 50, .7); }
+.lx[data-design="takvim"] .lx-scene { order: 3; margin: 18px calc(50% - 50vw) 0; height: clamp(200px, 40vw, 400px); overflow: hidden; background: #f1e8da; border-bottom: 5px solid #c9b08f; }
+.lx[data-design="takvim"] .lx-scene svg { display: block; }
+.lx[data-design="takvim"] .lx-hero__meta { order: 4; margin-block: 18px 0; padding-top: 16px; border-radius: 8px 8px 0 0; color: #9c4f43; font: 800 18px/1.2 var(--cal); letter-spacing: .12em; text-transform: uppercase; }
+.lx[data-design="takvim"] .lx-hero__intro { order: 5; margin-block: 0; padding-block: 6px 12px; line-height: 32px; background: repeating-linear-gradient(transparent 0 31px, #dfe7da 31px 32px) #fffdf8 !important; }
+.lx[data-design="takvim"] .lx-stats { order: 6; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-block: 0; padding-block: 6px 18px !important; border-radius: 0 0 8px 8px; box-shadow: 0 18px 24px -22px rgba(70, 60, 50, .7); }
+.lx[data-design="takvim"] .lx-stats li { padding: 0 0 8px; border-radius: 6px; background: #f8f3ea; text-align: center; overflow: hidden; box-shadow: inset 0 0 0 1.5px #e4dccd; }
+.lx[data-design="takvim"] .lx-stats li::before { content: ''; display: block; height: 10px; margin-bottom: 6px; background: #c98a74; }
+.lx[data-design="takvim"] .lx-stats li:nth-child(2n)::before { background: #8fa58b; }
+.lx[data-design="takvim"] .lx-stats b { font: 900 clamp(30px, 7vw, 44px)/1 var(--cal); color: #3a4150; }
+.lx[data-design="takvim"] .lx-stats span { font-size: 12px; color: #5d6360; }
+
+/* вкладки: корешки календаря — пружина колец сверху, выбранный листок — шалфейный */
+.lx[data-design="takvim"] .lx-tabs {
+  margin-top: 22px !important; padding: 12px 4px 4px; border-radius: 8px; -webkit-backdrop-filter: none; backdrop-filter: none;
+  background: radial-gradient(circle at 50% 6px, #8fa58b 0 3px, transparent 3.5px) 0 0 / 24px 12px repeat-x, #fbf7f0;
+  box-shadow: 0 0 0 1px #e1d4c2, 0 12px 20px -16px rgba(70, 60, 50, .6);
+}
+.lx[data-design="takvim"] .lx-tab { border-radius: 2px 2px 10px 10px; color: #3a4150; }
+.lx[data-design="takvim"] .lx-tab b { font: 900 17px/1 var(--cal); letter-spacing: .05em; text-transform: uppercase; }
+.lx[data-design="takvim"] .lx-tab small { color: #5d6360; }
+.lx[data-design="takvim"] .lx-tab[aria-selected="true"] { background: #4b6650; color: #fff; box-shadow: inset 0 4px 0 #d29484; }
+.lx[data-design="takvim"] .lx-tab[aria-selected="true"] small { color: #f3ede2; }
+.lx[data-design="takvim"] .lx-tabs__line { bottom: 1px; background: transparent; }
+.lx[data-design="takvim"] .lx-tabs__line::after { background: #c98a74; }
+
+/* панели: страницы блокнота с полями */
+.lx[data-design="takvim"] :is(.lx-ph, .lx-dlg, .lx-res, .dy-you, .dy-speak) {
+  border-radius: 8px; box-shadow: var(--lx-shadow);
+  background: linear-gradient(90deg, transparent 18px, #e7b8ab 18px 20px, transparent 20px), #fffdf8;
+}
+.lx[data-design="takvim"] .lx-ph { padding-left: clamp(30px, 5vw, 40px); }
+.lx[data-design="takvim"] .lx-kicker { color: #9c4f43; font: 800 18px/1 var(--cal); letter-spacing: .16em; text-transform: uppercase; }
+.lx[data-design="takvim"] .lx-panel h2 { font: 900 clamp(34px, 7.4vw, 54px)/.95 var(--cal); text-transform: uppercase; letter-spacing: .01em; }
+
+/* цель дня: дни недели — номер на маленьком листке */
+.lx[data-design="takvim"] .dy-goal__i { border-radius: 8px; background: #fffdf8; padding-left: 10px; }
+.lx[data-design="takvim"] .dy-goal__n { width: 42px; height: 46px; border-radius: 4px; background: linear-gradient(#a35d50 0 12px, #fbf6ec 12px); color: #3a4150; font: 900 24px/1 var(--cal); padding-top: 10px; box-shadow: inset 0 0 0 1.5px #e1d4c2; }
+.lx[data-design="takvim"] .dy-goal__w b { font-weight: 600; font-size: 1.2em; color: #3a4150; }
+.lx[data-design="takvim"] .dy-prep { border-radius: 8px; background: #e6ede1; border-top: 6px solid #8fa58b; }
+.lx[data-design="takvim"] .dy-prep__h { color: #4b6650; font: 800 18px/1.2 var(--cal); letter-spacing: .1em; text-transform: uppercase; }
+.lx[data-design="takvim"] .lx-chip { border-radius: 6px; background: #fffdf8; box-shadow: inset 0 0 0 1.5px #c9b9a3; color: #3a4150; font-weight: 600; }
+.lx[data-design="takvim"] .dy-prep__chip.is-heard { background: #4b6650; color: #fff; box-shadow: none; }
+
+/* текст: дневник в линейку, рукописный заголовок */
+.lx[data-design="takvim"] .dy-read {
+  position: relative; padding: clamp(22px, 5vw, 38px) clamp(20px, 5vw, 38px) clamp(20px, 4vw, 30px) clamp(40px, 7vw, 60px); border-radius: 8px; box-shadow: var(--lx-shadow);
+  background: linear-gradient(90deg, transparent 26px, #e7b8ab 26px 28px, transparent 28px), #fffdf8;
+}
+.lx[data-design="takvim"] .dy-read::before { content: ''; position: absolute; left: 8px; top: 24px; bottom: 24px; width: 10px; background: radial-gradient(circle, #e9e0d1 0 4px, transparent 4.5px) 0 0 / 10px 34px repeat-y; }
+.lx[data-design="takvim"] .dy-read h3 { font: 700 2em/1.1 var(--hand); color: #9c4f43; }
+.lx[data-design="takvim"] .dy-read__tr { font: 400 1.14em/34px var(--ak-font); background: repeating-linear-gradient(transparent 0 33px, #dfe7da 33px 34px); }
+.lx[data-design="takvim"] .dy-read__s.is-on { background: #e6ede1; box-shadow: 0 2px 0 #4b6650; }
+.lx[data-design="takvim"] .dy-read__ru summary { color: #4b6650; }
+
+/* слова: листки отрывного календаря — кирпичная полоса с отверстиями и номер дня */
+.lx[data-design="takvim"] .lx-cards { gap: 18px; counter-reset: d10; }
+.lx[data-design="takvim"] .lx-card {
+  counter-increment: d10; padding: 44px 16px 14px; border-radius: 4px 4px 10px 10px; box-shadow: 0 0 0 1px #e1d4c2, 0 14px 22px -18px rgba(70, 60, 50, .65);
+  background: radial-gradient(circle at 26px 15px, #f3ece0 0 5px, transparent 5.5px), radial-gradient(circle at 50px 15px, #f3ece0 0 5px, transparent 5.5px), linear-gradient(#a35d50 0 30px, #fffdf8 30px);
+}
+.lx[data-design="takvim"] .lx-card::after { content: counter(d10); position: absolute; right: 14px; top: 4px; color: #fff; font: 900 24px/1 var(--cal); pointer-events: none; }
+.lx[data-design="takvim"] .lx-card:nth-child(3n+2) { background: radial-gradient(circle at 26px 15px, #f3ece0 0 5px, transparent 5.5px), radial-gradient(circle at 50px 15px, #f3ece0 0 5px, transparent 5.5px), linear-gradient(#4b6650 0 30px, #fffdf8 30px); }
+.lx[data-design="takvim"] .lx-card:hover { box-shadow: 0 0 0 1px #c9b9a3, 0 18px 28px -18px rgba(70, 60, 50, .7); }
+.lx[data-design="takvim"] .lx-card:focus-visible { outline: 3px solid #4b6650; outline-offset: 3px; }
+.lx[data-design="takvim"] .lx-card.is-known { box-shadow: 0 0 0 2.5px #3f7a5a, 0 14px 22px -18px rgba(70, 60, 50, .65); }
+.lx[data-design="takvim"] .lx-card.is-flipped { background-color: #f8f3ea; }
+.lx[data-design="takvim"] .lx-ico { border-radius: 8px; background: #e6ede1; color: #4b6650; }
+.lx[data-design="takvim"] .lx-card__tr { font: 900 1.7em/1 var(--cal); letter-spacing: .02em; color: #3a4150; }
+.lx[data-design="takvim"] .lx-say { background: #f6e3dc; color: #9c4f43; }
+.lx[data-design="takvim"] .lx-card__acts button { border-radius: 8px; }
+
+/* «а у тебя?», письмо, культура */
+.lx[data-design="takvim"] .dy-you__q { font: 700 1.9em/1.05 var(--hand); color: #4b6650; }
+.lx[data-design="takvim"] .dy-you__model { border-left-color: #c98a74; background: #f6e3dc; color: #3a4150; }
+.lx[data-design="takvim"] .dy-culture { border-radius: 8px; background: #e6ede1; }
+.lx[data-design="takvim"] .lx-btn { border-radius: 8px; background: #4b6650; color: #fff; }
+.lx[data-design="takvim"] .lx-btn--ghost { background: #fffdf8; color: #4b6650; box-shadow: inset 0 0 0 2px #4b6650; }
+.lx[data-design="takvim"] .dy-free__in { border-radius: 6px; line-height: 32px; background: repeating-linear-gradient(transparent 0 31px, #dfe7da 31px 32px) 0 10px, #fffdf8; }
+
+/* практика и тест */
+.lx[data-design="takvim"] .dy-rubric { color: #9c4f43; font: 700 22px/1.1 var(--hand); }
+.lx[data-design="takvim"] .lx-panel :is(a-exercise, a-quiz) { border-radius: 8px; border-top: 8px solid #c98a74; }
+.lx[data-design="takvim"] .lx-steps li { border-radius: 6px; }
+
+/* шпаргалка: план недели — строки как дни в ежедневнике */
+.lx[data-design="takvim"] .lx-table { border-radius: 8px; border-top: 8px solid #4b6650; }
+.lx[data-design="takvim"] .lx-table td { border-bottom: 1px solid #e4dccd; }
+.lx[data-design="takvim"] .lx-table td:first-child { font-weight: 600; color: #4b6650; border-left: 6px solid #d29484; }
+.lx[data-design="takvim"] .lx-table tr:nth-child(even) td:first-child { border-left-color: #8fa58b; }
+
+/* сцена: солнце идёт по небу, трамвай едет, листок «6» отрывается, пар над чашкой, растение качается */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="takvim"] .d10-arc { animation: d10-day 28s linear infinite; }
+  .lx[data-design="takvim"] .d10-tram { animation: d10-tram 16s linear infinite; }
+  .lx[data-design="takvim"] .d10-cloud { animation: d10-cloud 30s ease-in-out infinite alternate; }
+  .lx[data-design="takvim"] .d10-leaf { transform-box: fill-box; transform-origin: 50% 0; animation: d10-tear 9s ease-in infinite; }
+  .lx[data-design="takvim"] .d10-steam path { animation: d10-steam 3.4s ease-out infinite; }
+  .lx[data-design="takvim"] .d10-steam__b { animation-delay: -1.7s !important; }
+  .lx[data-design="takvim"] .d10-plant { transform-box: fill-box; transform-origin: 50% 100%; animation: d10-sway 5s ease-in-out infinite; }
+}
+@keyframes d10-day { 0% { transform: rotate(-36deg); opacity: 0; } 8%, 92% { opacity: 1; } 100% { transform: rotate(36deg); opacity: 0; } }
+@keyframes d10-tram { 0% { transform: translateX(-80px); } 100% { transform: translateX(360px); } }
+@keyframes d10-cloud { to { transform: translateX(160px); } }
+@keyframes d10-tear {
+  0%, 30% { transform: none; opacity: 1; }
+  38% { transform: rotate(-4deg) translateY(4px); opacity: 1; }
+  60% { transform: translate(40px, 150px) rotate(24deg); opacity: 0; }
+  84% { transform: none; opacity: 0; } 100% { transform: none; opacity: 1; }
+}
+@keyframes d10-steam { 0% { opacity: 0; transform: translateY(8px) scaleX(.8); } 30% { opacity: .9; } 100% { opacity: 0; transform: translateY(-16px) scaleX(1.2); } }
+@keyframes d10-sway { 50% { transform: rotate(5deg); } }

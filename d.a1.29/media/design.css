@@ -1,0 +1,155 @@
+/* Kambiyo: банкомат и обменник на улице Бахарие. Сцена — светлое табло курсов (цифры перелистываются) и банкомат,
+   который печатает чек. Страница — светлый металл: заголовок на чеке, выползающем из щели, вкладки — кнопки банкомата,
+   слова — квитанции с зубчатым краем, фразы — строки табло, шпаргалка — таблица курсов. */
+.lx[data-design="kambiyo"] {
+  --lx-accent: #4b7560; --lx-accent-2: #50698a; --lx-paper: #eef0ee; --lx-surf: #fcfcfa; --lx-surf2: #f2f4f2;
+  --lx-ink: #333d48; --lx-muted: #56616c; --lx-line: #d8dde0; --lx-soft: #e4eee7; --lx-on: #ffffff; --lx-tabs-bg: #dde2e6; --lx-r: 8px;
+  --lx-card: #fffffd;
+  --lx-shadow: 0 1px 0 #d3d9dd, 0 14px 24px -18px rgba(51, 61, 72, .5);
+  --head: 'LX Oswald', 'Arial Narrow', sans-serif; --mono: 'LX IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --ak-font: 'LX Onest', system-ui, sans-serif; --ak-font-display: var(--head); --ak-radius: 8px; --ak-radius-sm: 6px;
+  --ak-good: #3f7a5a; --ak-good-soft: #e5efe8; --ak-bad: #a3463c; --ak-bad-soft: #f6e6e2;
+  font-family: var(--ak-font);
+  background-color: #eef0ee;
+  background-image:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .55) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(160, 172, 182, .09) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, #f4f5f3, #e9ecea);
+  overflow-x: clip;
+}
+.lx[data-design="kambiyo"] main { overflow-x: clip; }
+
+/* шапка: металлическая панель банкомата */
+.lx[data-design="kambiyo"] .lx-app { background: linear-gradient(#f7f8f8, #e4e8eb); border-bottom: 3px solid #c5ccd2; box-shadow: inset 0 -1px 0 #fff; }
+.lx[data-design="kambiyo"] .lx-app__logo { border-radius: 10px; background: #4b7560; color: #fff; box-shadow: inset 0 -3px 0 #3d6150; }
+.lx[data-design="kambiyo"] .lx-app__t b { font: 600 1.15em/1.1 var(--head); text-transform: uppercase; letter-spacing: .05em; }
+.lx[data-design="kambiyo"] .lx-app__ring .lx-ring__bg { stroke: #d5dbe0; }
+.lx[data-design="kambiyo"] .lx-app__ring .lx-ring__fg { stroke: #4b7560; }
+
+/* первый экран: сцена улицы, под ней — чек, который выходит из щели банкомата */
+.lx[data-design="kambiyo"] .lx-hero { margin-top: 0 !important; padding: 0 0 18px; background: none; box-shadow: none; border-radius: 0; gap: 0; }
+.lx[data-design="kambiyo"] .lx-scene { margin-inline: calc(50% - 50vw); height: clamp(200px, 38vw, 380px); overflow: hidden; background: #e6edf2; border-bottom: 10px solid #c9d0d6; box-shadow: inset 0 -2px 0 #b3bcc4; }
+.lx[data-design="kambiyo"] .lx-scene svg { display: block; }
+.lx[data-design="kambiyo"] .lx-hero > :not(.lx-scene) { position: relative; max-width: 680px; margin-inline: auto; padding-inline: clamp(20px, 5vw, 40px); background: #fffffd; }
+.lx[data-design="kambiyo"] .lx-tag {
+  display: block; margin-block: 0 !important; padding-block: 26px 10px; padding-right: calc(clamp(20px, 5vw, 40px) + 44px) !important; border-bottom: 2px dashed #c9d0d6;
+  color: #56616c; font: 500 13px/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+}
+.lx[data-design="kambiyo"] .lx-tag::before { content: ''; position: absolute; left: -16px; right: -16px; top: -6px; height: 14px; border-radius: 7px; background: #4a5560; box-shadow: inset 0 3px 0 #333d48; }
+.lx[data-design="kambiyo"] .lx-tag::after { content: 'FİŞ'; position: absolute; right: clamp(20px, 5vw, 40px); top: 26px; color: #4b7560; font: 500 13px/1.2 var(--mono); letter-spacing: .1em; white-space: pre; }
+.lx[data-design="kambiyo"] h1 { margin-block: 0; padding-top: 14px; font: 600 clamp(36px, 8.4vw, 64px)/1 var(--head); text-transform: uppercase; letter-spacing: .01em; color: #333d48; hyphens: manual; }
+.lx[data-design="kambiyo"] .lx-hero__tr { margin-block: 0 !important; padding-top: 10px; color: #4b7560; font: 500 clamp(17px, 3.6vw, 22px)/1.3 var(--mono); }
+.lx[data-design="kambiyo"] .lx-hero__meta { margin-block: 0; padding-top: 10px; color: #56616c; font: 500 13px/1.3 var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+.lx[data-design="kambiyo"] .lx-hero__intro { margin-block: 0; padding-block: 8px 14px; border-bottom: 2px dashed #c9d0d6; }
+.lx[data-design="kambiyo"] .lx-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin-block: 0; padding-block: 8px 20px !important; }
+.lx[data-design="kambiyo"] .lx-stats::after { content: ''; position: absolute; left: 0; right: 0; bottom: -10px; height: 10px; background: conic-gradient(from 135deg at 50% 0, #fffffd 90deg, transparent 0) 0 0 / 18px 10px repeat-x; }
+.lx[data-design="kambiyo"] .lx-stats li { padding: 6px 4px; border-radius: 0; background: none; text-align: center; }
+.lx[data-design="kambiyo"] .lx-stats b { font: 500 clamp(22px, 5vw, 30px)/1 var(--mono); color: #333d48; }
+.lx[data-design="kambiyo"] .lx-stats span { font: 500 11px/1.2 var(--mono); color: #56616c; text-transform: uppercase; letter-spacing: .04em; }
+
+/* вкладки: ряд металлических кнопок банкомата, выбранная — нажатая зелёная */
+.lx[data-design="kambiyo"] .lx-tabs { margin-top: 26px !important; padding: 7px; gap: 7px; border-radius: 12px; -webkit-backdrop-filter: none; backdrop-filter: none;
+  background: linear-gradient(#e5e9ec, #d2d8dd); box-shadow: inset 0 1px 0 #fff, 0 12px 20px -14px rgba(51, 61, 72, .6); }
+.lx[data-design="kambiyo"] .lx-tab { border-radius: 8px; color: #333d48; background: linear-gradient(#fdfdfd, #e9ecee); box-shadow: inset 0 -3px 0 #c3cad0, 0 1px 0 #b7c0c8; }
+.lx[data-design="kambiyo"] .lx-tab b { font: 600 14px/1.1 var(--head); text-transform: uppercase; letter-spacing: .05em; }
+.lx[data-design="kambiyo"] .lx-tab small { color: #4f5a65; }
+.lx[data-design="kambiyo"] .lx-tab .lx-tab__ico { color: #4b7560; }
+.lx[data-design="kambiyo"] .lx-tab[aria-selected="true"] { background: #4b7560; color: #fff; box-shadow: inset 0 3px 0 #3c6150, 0 1px 0 #fff; translate: 0 1px; }
+.lx[data-design="kambiyo"] .lx-tab[aria-selected="true"] :is(small, .lx-tab__ico) { color: #f3f8f4; }
+.lx[data-design="kambiyo"] .lx-tabs__line { left: 10px; right: 10px; bottom: 2px; background: rgba(51, 61, 72, .12); }
+.lx[data-design="kambiyo"] .lx-tabs__line::after { background: #50698a; }
+@media (hover: hover) { .lx[data-design="kambiyo"] .lx-tab:not([aria-selected="true"]):hover { background: linear-gradient(#ffffff, #f0f3f1); color: #333d48; } }
+
+/* панели: пластины из светлого металла с винтами по углам */
+.lx[data-design="kambiyo"] :is(.lx-ph, .lx-dlg, .lx-res, .dy-you, .dy-speak) {
+  border-radius: 10px; box-shadow: var(--lx-shadow), inset 0 0 0 1px #dfe4e7;
+  background: radial-gradient(circle at 12px 12px, #b9c2c9 0 3px, transparent 3.5px), radial-gradient(circle at calc(100% - 12px) 12px, #b9c2c9 0 3px, transparent 3.5px),
+    radial-gradient(circle at 12px calc(100% - 12px), #b9c2c9 0 3px, transparent 3.5px), radial-gradient(circle at calc(100% - 12px) calc(100% - 12px), #b9c2c9 0 3px, transparent 3.5px),
+    linear-gradient(170deg, #fdfdfc, #f1f3f2);
+}
+.lx[data-design="kambiyo"] .lx-kicker { color: #4b7560; font: 500 13px/1 var(--mono); letter-spacing: .18em; text-transform: uppercase; }
+.lx[data-design="kambiyo"] .lx-kicker__ico { color: #50698a; }
+.lx[data-design="kambiyo"] .lx-panel h2 { font: 600 clamp(28px, 6vw, 42px)/1.02 var(--head); text-transform: uppercase; letter-spacing: .01em; }
+
+/* цель дня: строки табло курсов, номер — перекидная табличка */
+.lx[data-design="kambiyo"] .dy-goal { gap: 0; padding: 8px; border-radius: 10px; background: #fbfcfa; box-shadow: var(--lx-shadow), inset 0 0 0 2px #c9d0d6; }
+.lx[data-design="kambiyo"] .dy-goal__i { border-radius: 0; background: none; box-shadow: none; border-bottom: 1.5px dashed #d3d9dd; }
+.lx[data-design="kambiyo"] .dy-goal__i:last-child { border-bottom: 0; }
+.lx[data-design="kambiyo"] .dy-goal__n { position: relative; width: 38px; height: 44px; border-radius: 5px; background: linear-gradient(#f4f6f4 0 49%, #e1e6e3 51%); color: #333d48; font: 500 20px/1 var(--mono); box-shadow: inset 0 0 0 1px #c3cbc6, 0 2px 0 #c3cbc6; }
+.lx[data-design="kambiyo"] .dy-goal__w b { font: 600 1.12em/1.25 var(--ak-font); color: #333d48; }
+.lx[data-design="kambiyo"] .dy-prep { border-radius: 10px; background: #e7edf3; border: 2px dashed #a9b9cf; }
+.lx[data-design="kambiyo"] .dy-prep__h { color: #45597a; font: 500 14px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.lx[data-design="kambiyo"] .lx-chip { border-radius: 6px; background: #fffffd; box-shadow: inset 0 -2px 0 #c3cad0, inset 0 0 0 1px #c3cad0; color: #333d48; font: 500 15px/1 var(--mono); }
+.lx[data-design="kambiyo"] .dy-prep__chip.is-heard { background: #4b7560; color: #fff; box-shadow: inset 0 2px 0 #3c6150; }
+
+/* диалог: окошко кассы обменника за стеклом */
+.lx[data-design="kambiyo"] .lx-dlg { border-top: 8px solid #50698a; }
+.lx[data-design="kambiyo"] .lx-dlg__head h3 { font: 600 1.35em/1.1 var(--head); text-transform: uppercase; letter-spacing: .02em; }
+.lx[data-design="kambiyo"] .lx-badge { border-radius: 4px; background: #50698a; color: #fff; font-family: var(--mono); }
+.lx[data-design="kambiyo"] .lx-chat { border-radius: 10px; background: linear-gradient(115deg, #eef3f5 0 40%, #f6f9fa 40% 46%, #eef3f5 46%); box-shadow: inset 0 0 0 2px #d6dee3; }
+.lx[data-design="kambiyo"] .lx-msg { border-radius: 4px 12px 12px 12px; background: #fffffd; box-shadow: 0 1px 0 #d3d9dd; }
+.lx[data-design="kambiyo"] .lx-msg--me { border-radius: 12px 4px 12px 12px; background: #e6efe9; }
+.lx[data-design="kambiyo"] .lx-msg__ava { border-radius: 6px; background: #50698a; color: #fff; font-family: var(--mono); }
+.lx[data-design="kambiyo"] .lx-msg--me .lx-msg__ava { background: #4b7560; }
+.lx[data-design="kambiyo"] .lx-msg__who { color: #45597a; font-family: var(--mono); }
+.lx[data-design="kambiyo"] .lx-msg--me .lx-msg__who { color: #3d6150; }
+.lx[data-design="kambiyo"] .lx-btn { border-radius: 8px; background: #4b7560; color: #fff; box-shadow: inset 0 -3px 0 #3c6150; font-family: var(--head); text-transform: uppercase; letter-spacing: .06em; font-weight: 500; }
+.lx[data-design="kambiyo"] .lx-btn--ghost { background: #fffffd; color: #3d6150; box-shadow: inset 0 0 0 2px #4b7560, inset 0 -3px 0 #c3cad0; }
+
+/* слова: квитанции банкомата — моноширинный шрифт, пунктир и зубчатый край */
+.lx[data-design="kambiyo"] .lx-cards { gap: 26px 18px; }
+.lx[data-design="kambiyo"] .lx-card { padding: 22px 16px 16px; border-radius: 2px 2px 0 0; background: #fffffd; box-shadow: none; filter: drop-shadow(0 8px 10px rgba(51, 61, 72, .16)); border-top: 3px solid #d3d9dd; }
+.lx[data-design="kambiyo"] .lx-card::before { content: '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -'; position: absolute; left: 12px; right: 12px; top: 4px; overflow: hidden; white-space: nowrap; color: #aab3bb; font: 500 11px/1 var(--mono); }
+.lx[data-design="kambiyo"] .lx-card::after { content: ''; position: absolute; left: 0; right: 0; bottom: -9px; height: 9px; background: conic-gradient(from 135deg at 50% 0, #fffffd 90deg, transparent 0) 0 0 / 14px 9px repeat-x; }
+.lx[data-design="kambiyo"] .lx-card:nth-child(3n+2) { border-top-color: #a9c6b3; }
+.lx[data-design="kambiyo"] .lx-card:nth-child(3n) { border-top-color: #a9b9cf; }
+.lx[data-design="kambiyo"] .lx-card:focus-visible { outline: 3px solid #50698a; outline-offset: 4px; box-shadow: none; }
+.lx[data-design="kambiyo"] .lx-card.is-known { box-shadow: none; border-top-color: #3f7a5a; background: #f6faf7; }
+.lx[data-design="kambiyo"] .lx-card.is-known::after { background-image: conic-gradient(from 135deg at 50% 0, #f6faf7 90deg, transparent 0); }
+.lx[data-design="kambiyo"] .lx-card.is-flipped { background: #fbfcfd; }
+.lx[data-design="kambiyo"] .lx-card.is-flipped::after { background-image: conic-gradient(from 135deg at 50% 0, #fbfcfd 90deg, transparent 0); }
+.lx[data-design="kambiyo"] .lx-ico { border-radius: 6px; background: #e4eee7; color: #3d6150; box-shadow: inset 0 0 0 1px #c6d8cc; }
+.lx[data-design="kambiyo"] .lx-card__tr { font: 500 1.24em/1.2 var(--mono); color: #333d48; }
+.lx[data-design="kambiyo"] .lx-card__tags { padding-top: 8px; border-top: 1.5px dashed #d3d9dd; }
+.lx[data-design="kambiyo"] .lx-card__pos { border-radius: 3px; font-family: var(--mono); }
+.lx[data-design="kambiyo"] .lx-say { background: #e7edf3; color: #45597a; }
+.lx[data-design="kambiyo"] :is(.lx-card__flip, .lx-card__know) { border-radius: 6px; font-family: var(--mono); font-weight: 500; }
+@media (hover: hover) { .lx[data-design="kambiyo"] .lx-card:hover { box-shadow: none; filter: drop-shadow(0 12px 14px rgba(51, 61, 72, .22)); } }
+
+/* «а у тебя?», говорение, культура */
+.lx[data-design="kambiyo"] .dy-you__q { font: 600 1.55em/1.1 var(--head); color: #333d48; }
+.lx[data-design="kambiyo"] .dy-you__model { border-left: 6px solid #4b7560; border-radius: 4px; background: #e9f0eb; font-family: var(--mono); font-weight: 500; }
+.lx[data-design="kambiyo"] .dy-culture { border-radius: 10px; background: #e7edf3; box-shadow: inset 0 0 0 2px #cfd9e5; }
+.lx[data-design="kambiyo"] .dy-speak__h, .lx[data-design="kambiyo"] .dy-culture__h { font-family: var(--head); text-transform: uppercase; letter-spacing: .04em; font-weight: 600; }
+
+/* практика и тест: стойки банкомата */
+.lx[data-design="kambiyo"] .dy-rubric { color: #3d6150; font: 500 15px/1.3 var(--mono); }
+.lx[data-design="kambiyo"] .dy-rubric::before { content: '› '; color: #50698a; }
+.lx[data-design="kambiyo"] .lx-panel :is(a-exercise, a-quiz) { border-radius: 10px; border-top: 6px solid #a9c6b3; }
+.lx[data-design="kambiyo"] .lx-steps li { border-radius: 6px; font-family: var(--mono); }
+.lx[data-design="kambiyo"] .dy-free__in { border-radius: 8px; border-color: #c3cad0; font-family: var(--mono); }
+
+/* шпаргалка: таблица курсов обменника */
+.lx[data-design="kambiyo"] .lx-table { border-radius: 10px; background: #fbfcfa; box-shadow: var(--lx-shadow), inset 0 0 0 2px #c9d0d6; }
+.lx[data-design="kambiyo"] .lx-table td { border-bottom: 1.5px dashed #d3d9dd; }
+.lx[data-design="kambiyo"] .lx-table td:first-child { font: 500 1em/1.35 var(--mono); color: #333d48; border-left: 6px solid #a9c6b3; }
+.lx[data-design="kambiyo"] .lx-table tr:nth-child(even) td:first-child { border-left-color: #a9b9cf; }
+
+/* сцена: облака плывут, лампочка картоприёмника мигает, чек печатается, купюра выглядывает, голубь клюёт, дерево качается */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="kambiyo"] .d29-cloud--a { animation: d29-drift 40s linear infinite alternate; }
+  .lx[data-design="kambiyo"] .d29-cloud--b { animation: d29-drift 55s linear infinite alternate-reverse; }
+  .lx[data-design="kambiyo"] .d29-led { animation: d29-blink 1.6s steps(1) infinite; }
+  .lx[data-design="kambiyo"] .d29-receipt { animation: d29-print 6s ease-in-out infinite; }
+  .lx[data-design="kambiyo"] .d29-cash { animation: d29-cash 6s ease-in-out infinite 3s; }
+  .lx[data-design="kambiyo"] .d29-pigeon__head { transform-box: fill-box; transform-origin: 20% 80%; animation: d29-peck 2.4s ease-in-out infinite; }
+  .lx[data-design="kambiyo"] .d29-tree { transform-box: fill-box; transform-origin: 50% 100%; animation: d29-sway 5s ease-in-out infinite; }
+  .lx[data-design="kambiyo"] .d29-glow { animation: d29-glow 3s ease-in-out infinite; }
+}
+@keyframes d29-drift { to { transform: translateX(70px); } }
+@keyframes d29-blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: .25; } }
+@keyframes d29-print { 0%, 12% { transform: translateY(0); opacity: 1; } 45%, 80% { transform: translateY(36px); opacity: 1; } 92% { transform: translateY(36px); opacity: 0; } 100% { transform: translateY(0); opacity: 0; } }
+@keyframes d29-cash { 0%, 20% { transform: translateY(8px); } 40%, 70% { transform: translateY(-2px); } 90%, 100% { transform: translateY(8px); } }
+@keyframes d29-peck { 0%, 40%, 100% { transform: rotate(0); } 55% { transform: rotate(38deg) translate(2px, 4px); } 70% { transform: rotate(0); } }
+@keyframes d29-sway { 50% { transform: rotate(2.5deg); } }
+@keyframes d29-glow { 50% { opacity: .55; } }

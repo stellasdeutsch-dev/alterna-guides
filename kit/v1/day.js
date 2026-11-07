@@ -29,6 +29,7 @@
       gsap.from($$('.dy-goal__n', p), { scale: 0, rotation: -90, duration: 0.5, stagger: 0.09, ease: 'back.out(3)', delay: 0.1, clearProps: 'transform' });
       gsap.from($$('.dy-prep__chip', p), { y: 10, opacity: 0, duration: 0.3, stagger: 0.05, delay: 0.35, clearProps: 'transform,opacity' });
     });
+    onShow('oyun', (p) => { if (anim()) gsap.from($$('.dy-pairs__i', p), { scale: 0.9, opacity: 0, duration: 0.35, stagger: 0.06, ease: 'back.out(2)', clearProps: 'transform,opacity' }); });
     document.addEventListener('click', (e) => {
       const c = e.target.closest('.dy-prep__chip, .dy-goal__w b');
       if (!c) return;

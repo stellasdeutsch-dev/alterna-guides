@@ -1,0 +1,155 @@
+/* Galata: как дойти до башни. Сцена — крутая улица Бейоглу: ступени вверх к Галатской башне, вагончик
+   фуникулёра ездит по склону, столб с указателями, кот на ступеньке, компас. Страница — городская навигация:
+   заголовок на синей табличке улицы, вкладки — каменные ступени, слова — указатели-стрелки, фразы — пролёт лестницы. */
+.lx[data-design="galata"] {
+  --lx-accent: #4a6274; --lx-accent-2: #9a5a43; --lx-paper: #f3f1ec; --lx-surf: #fffefb; --lx-surf2: #f6f4ef;
+  --lx-ink: #3a4150; --lx-muted: #5a606b; --lx-line: #e2ddd3; --lx-soft: #e5ebef; --lx-on: #ffffff; --lx-tabs-bg: #e8e3da; --lx-r: 8px;
+  --lx-shadow: 0 1px 0 #d8d2c6, 0 14px 24px -20px rgba(50, 60, 75, .55);
+  --stone: #d8d2c6; --stone-d: #b8ae9d; --tile: #cf9479; --gblue: #8fa5b5;
+  --sign: 'LX Oswald', 'Arial Narrow', sans-serif;
+  --ak-font: 'LX Onest', system-ui, sans-serif; --ak-font-display: var(--sign); --ak-radius: 8px; --ak-radius-sm: 6px;
+  --ak-good: #3f7350; --ak-good-soft: #e3efe5; --ak-bad: #9a4a3c; --ak-bad-soft: #f6e5e0;
+  font-family: var(--ak-font);
+  background-color: #f3f1ec;
+  background-image:
+    radial-gradient(ellipse 14px 8px at 11px 7px, #ebe7df 0 96%, transparent),
+    radial-gradient(ellipse 14px 8px at 33px 21px, #eeeae2 0 96%, transparent);
+  background-size: 44px 28px;
+  overflow-x: clip;
+}
+.lx[data-design="galata"] main { overflow-x: clip; }
+
+/* шапка: камень, полоса как бордюр */
+.lx[data-design="galata"] .lx-app { background: #fffefb; border-bottom: 6px solid var(--stone); }
+.lx[data-design="galata"] .lx-app__logo { border-radius: 8px; background: var(--lx-accent); color: #fff; box-shadow: inset 0 0 0 3px #4a6274, inset 0 0 0 4.5px #fff; }
+.lx[data-design="galata"] .lx-app__t b { font: 600 1.15em/1.15 var(--sign); text-transform: uppercase; letter-spacing: .04em; }
+.lx[data-design="galata"] .lx-app__ring .lx-ring__bg { stroke: #e5e0d6; }
+.lx[data-design="galata"] .lx-app__ring .lx-ring__fg { stroke: var(--lx-accent-2); }
+
+/* первый экран: улица во всю ширину, заголовок на табличке с названием улицы */
+.lx[data-design="galata"] .lx-hero { margin-top: 0 !important; padding: 0 0 4px; background: none; box-shadow: none; border-radius: 0; }
+.lx[data-design="galata"] .lx-scene { margin-inline: calc(50% - 50vw); height: clamp(220px, 40vw, 400px); overflow: hidden; background: #e8edf0; border-bottom: 6px solid var(--stone-d); }
+.lx[data-design="galata"] .lx-scene svg { display: block; }
+.lx[data-design="galata"] .lx-tag {
+  position: relative; display: inline-block; margin-block: -30px 0 !important; margin-left: clamp(0px, 2vw, 16px); padding: 12px 18px 0 !important;
+  border-radius: 10px 10px 0 0; background: var(--lx-accent) !important; color: #e8eef2; font: 500 13px/1.2 var(--sign); letter-spacing: .16em;
+}
+.lx[data-design="galata"] h1 {
+  position: relative; width: fit-content; max-width: 100%; margin-block: 0; margin-left: clamp(0px, 2vw, 16px); padding: 4px 22px 16px; border-radius: 0 10px 10px 10px;
+  background: var(--lx-accent); color: #fff; box-shadow: inset 0 0 0 5px var(--lx-accent), inset 0 0 0 6.5px rgba(255, 255, 255, .7), 0 16px 24px -16px rgba(50, 60, 75, .7);
+  font: 600 clamp(32px, 7.6vw, 58px)/1.06 var(--sign); text-transform: uppercase; letter-spacing: .01em; hyphens: manual;
+}
+.lx[data-design="galata"] .lx-hero__tr { margin-block: 14px 0 !important; display: flex; align-items: center; gap: 10px; color: var(--lx-accent-2); font: 600 clamp(19px, 4vw, 26px)/1.2 var(--ak-font); }
+.lx[data-design="galata"] .lx-hero__tr::before { content: '↗'; display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: #f6e5dc; color: var(--lx-accent-2); font-size: 18px; }
+.lx[data-design="galata"] .lx-hero__meta { margin-block: 12px 0; color: var(--lx-muted); font: 500 14px/1.3 var(--sign); text-transform: uppercase; letter-spacing: .12em; }
+.lx[data-design="galata"] .lx-hero__intro { margin-block: 6px 0; max-width: 62ch; }
+/* статистика — четыре ступени */
+.lx[data-design="galata"] .lx-stats { margin-block: 18px 0; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; align-items: end; }
+.lx[data-design="galata"] .lx-stats li { padding: 10px 6px; border-radius: 6px 6px 0 0; background: #e8e3da; box-shadow: inset 0 3px 0 #f5f2ec, inset 0 -6px 0 #d3ccbf; text-align: center; }
+.lx[data-design="galata"] .lx-stats li:nth-child(2) { padding-top: 22px; }
+.lx[data-design="galata"] .lx-stats li:nth-child(3) { padding-top: 34px; }
+.lx[data-design="galata"] .lx-stats li:nth-child(4) { padding-top: 46px; }
+.lx[data-design="galata"] .lx-stats b { font: 600 clamp(22px, 5vw, 32px)/1 var(--sign); color: var(--lx-accent); }
+.lx[data-design="galata"] .lx-stats span { font-size: 12px; color: var(--lx-muted); }
+
+/* вкладки: каменные ступени — светлая проступь и тёмный подступёнок, выбранная — поднятая черепичная */
+.lx[data-design="galata"] .lx-tabs { margin-top: 20px !important; border-radius: 10px; padding: 5px 5px 9px; gap: 5px; background: #e8e3da; box-shadow: inset 0 -4px 0 #d3ccbf, 0 12px 20px -14px rgba(50, 60, 75, .6); -webkit-backdrop-filter: none; backdrop-filter: none; }
+.lx[data-design="galata"] .lx-tab { border-radius: 6px; background: #f6f3ee; color: var(--lx-ink); box-shadow: 0 4px 0 #cbc3b4; }
+.lx[data-design="galata"] .lx-tab b { font: 600 15px/1.1 var(--sign); text-transform: uppercase; letter-spacing: .03em; }
+.lx[data-design="galata"] .lx-tab small { color: var(--lx-muted); }
+.lx[data-design="galata"] .lx-tab .lx-tab__ico { color: var(--lx-accent); }
+.lx[data-design="galata"] .lx-tab[aria-selected="true"] { background: var(--lx-accent-2); color: #fff; box-shadow: 0 4px 0 #7a4434; translate: 0 -2px; }
+.lx[data-design="galata"] .lx-tab[aria-selected="true"] small, .lx[data-design="galata"] .lx-tab[aria-selected="true"] .lx-tab__ico { color: #fff; }
+@media (hover: hover) { .lx[data-design="galata"] .lx-tab:not([aria-selected="true"]):hover { background: #fffefb; color: var(--lx-ink); } }
+.lx[data-design="galata"] .lx-tabs__line { bottom: 2px; background: rgba(74, 98, 116, .15); }
+.lx[data-design="galata"] .lx-tabs__line::after { background: var(--lx-accent); }
+
+/* панели: эмалевые таблички с кромкой */
+.lx[data-design="galata"] :is(.lx-ph, .lx-dlg, .lx-res, .dy-read, .dy-you, .dy-speak) { border-radius: 10px; background: #fffefb; box-shadow: var(--lx-shadow), inset 0 0 0 1px #e2ddd3; }
+.lx[data-design="galata"] .lx-ph { border-left: 8px solid var(--lx-accent); }
+.lx[data-design="galata"] .lx-kicker { color: var(--lx-accent-2); font: 600 14px/1 var(--sign); letter-spacing: .18em; text-transform: uppercase; }
+.lx[data-design="galata"] .lx-panel h2 { font: 600 clamp(26px, 5.4vw, 40px)/1.08 var(--sign); text-transform: uppercase; letter-spacing: .01em; }
+
+/* цель дня: пролёт лестницы — каждая фраза на ступень выше */
+.lx[data-design="galata"] .dy-goal { --st: 8px; gap: 8px; }
+.lx[data-design="galata"] .dy-goal__i { border-radius: 6px; background: #fffefb; box-shadow: 0 5px 0 #d3ccbf, 0 14px 20px -18px rgba(50, 60, 75, .6); }
+.lx[data-design="galata"] .dy-goal__i:nth-child(1) { margin-right: calc(var(--st) * 5); }
+.lx[data-design="galata"] .dy-goal__i:nth-child(2) { margin-inline: var(--st) calc(var(--st) * 4); }
+.lx[data-design="galata"] .dy-goal__i:nth-child(3) { margin-inline: calc(var(--st) * 2) calc(var(--st) * 3); }
+.lx[data-design="galata"] .dy-goal__i:nth-child(4) { margin-inline: calc(var(--st) * 3) calc(var(--st) * 2); }
+.lx[data-design="galata"] .dy-goal__i:nth-child(5) { margin-inline: calc(var(--st) * 4) var(--st); }
+.lx[data-design="galata"] .dy-goal__i:nth-child(n+6) { margin-left: calc(var(--st) * 5); }
+.lx[data-design="galata"] .dy-goal__n { border-radius: 6px; background: var(--lx-accent); color: #fff; font: 600 18px/1 var(--sign); box-shadow: inset 0 0 0 2px var(--lx-accent), inset 0 0 0 3px rgba(255, 255, 255, .7); }
+.lx[data-design="galata"] .dy-goal__w b { font: 600 1.16em/1.25 var(--ak-font); }
+@media (min-width: 768px) { .lx[data-design="galata"] .dy-goal { --st: 22px; } }
+.lx[data-design="galata"] .dy-prep { margin-top: 22px; border-radius: 10px; background: #f6e9e1; border-left: 8px solid var(--tile); }
+.lx[data-design="galata"] .dy-prep__h { color: #8a4f3b; font-family: var(--sign); font-weight: 600; text-transform: uppercase; }
+.lx[data-design="galata"] .lx-chip { border-radius: 6px; background: #fffefb; box-shadow: inset 0 0 0 2px #d8d2c6, 0 3px 0 #d8d2c6; color: var(--lx-ink); font-weight: 600; }
+.lx[data-design="galata"] .dy-prep__chip.is-heard { background: var(--lx-accent); color: #fff; box-shadow: 0 3px 0 #354756; }
+
+/* диалог: разговор на перекрёстке */
+.lx[data-design="galata"] .lx-dlg { border-top: 6px solid var(--gblue); }
+.lx[data-design="galata"] .lx-dlg__head h3 { font: 600 1.35em/1.1 var(--sign); text-transform: uppercase; }
+.lx[data-design="galata"] .lx-badge { background: var(--lx-soft); color: var(--lx-accent); }
+.lx[data-design="galata"] .lx-chat { border-radius: 10px; background: #f0ece5; }
+.lx[data-design="galata"] .lx-msg { border-radius: 4px 14px 14px 14px; background: #fffefb; box-shadow: 0 2px 0 #ddd6ca; }
+.lx[data-design="galata"] .lx-msg--me { border-radius: 14px 4px 14px 14px; background: #e5ebef; box-shadow: 0 2px 0 #c9d4dc; }
+.lx[data-design="galata"] .lx-msg__ava { border-radius: 6px; background: var(--lx-accent-2); color: #fff; font-family: var(--sign); }
+.lx[data-design="galata"] .lx-msg--me .lx-msg__ava { background: var(--lx-accent); }
+.lx[data-design="galata"] .lx-btn { border-radius: 6px; background: var(--lx-accent); color: #fff; font-family: var(--sign); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; box-shadow: 0 3px 0 #354756; }
+.lx[data-design="galata"] .lx-btn--ghost { background: #fffefb; color: var(--lx-accent); box-shadow: inset 0 0 0 2px var(--lx-accent), 0 3px 0 #c9d4dc; }
+
+/* слова: указатели-стрелки на столбе, через один смотрят в разные стороны */
+.lx[data-design="galata"] .lx-cards { gap: 16px; filter: drop-shadow(0 10px 10px rgba(50, 60, 75, .18)); }
+.lx[data-design="galata"] .lx-card {
+  padding: 16px 44px 14px 18px; border-radius: 6px; background: #fffefb; box-shadow: inset 6px 0 0 var(--lx-accent), inset 0 -4px 0 #e5e0d6;
+  clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 50%, calc(100% - 28px) 100%, 0 100%);
+}
+.lx[data-design="galata"] .lx-card:nth-child(even) { padding: 16px 18px 14px 44px; box-shadow: inset -6px 0 0 var(--tile), inset 0 -4px 0 #e5e0d6; clip-path: polygon(28px 0, 100% 0, 100% 100%, 28px 100%, 0 50%); }
+.lx[data-design="galata"] .lx-card::before, .lx[data-design="galata"] .lx-card::after { content: ''; position: absolute; left: 13px; width: 8px; height: 8px; border-radius: 50%; background: #c4baa9; pointer-events: none; }
+.lx[data-design="galata"] .lx-card::before { top: 9px; }
+.lx[data-design="galata"] .lx-card::after { bottom: 11px; }
+.lx[data-design="galata"] .lx-card:nth-child(even)::before, .lx[data-design="galata"] .lx-card:nth-child(even)::after { left: auto; right: 13px; }
+.lx[data-design="galata"] .lx-card:focus-visible { box-shadow: inset 0 0 0 4px var(--lx-accent-2); outline: none; }
+.lx[data-design="galata"] .lx-card.is-known { box-shadow: inset 6px 0 0 var(--ak-good), inset 0 0 0 2px var(--ak-good); }
+.lx[data-design="galata"] .lx-card:nth-child(even).is-known { box-shadow: inset -6px 0 0 var(--ak-good), inset 0 0 0 2px var(--ak-good); }
+.lx[data-design="galata"] .lx-card.is-flipped { background: #f7f5f0; }
+.lx[data-design="galata"] .lx-ico { border-radius: 8px; background: var(--lx-soft); color: var(--lx-accent); }
+.lx[data-design="galata"] .lx-card__tr { font: 600 1.4em/1.1 var(--sign); text-transform: uppercase; letter-spacing: .01em; }
+.lx[data-design="galata"] .lx-say { background: #f6e9e1; color: #8a4f3b; }
+.lx[data-design="galata"] .lx-card__acts button { border-radius: 6px; border-color: #ddd6ca; background: #fffefb; color: var(--lx-accent); font-family: var(--sign); text-transform: uppercase; letter-spacing: .04em; }
+.lx[data-design="galata"] .lx-ex { border-radius: 6px; background: #f3f1ec; }
+
+/* «а у тебя?», говорение, культура */
+.lx[data-design="galata"] .dy-you { border-left: 8px solid var(--tile); }
+.lx[data-design="galata"] .dy-you__q { font: 600 1.45em/1.15 var(--sign); text-transform: uppercase; }
+.lx[data-design="galata"] .dy-you__model { border-left-color: var(--lx-accent); background: var(--lx-soft); }
+.lx[data-design="galata"] .dy-speak { border-left: 8px solid var(--gblue); }
+.lx[data-design="galata"] .dy-culture { border-radius: 10px; background: #f6e9e1; }
+
+/* практика и квест */
+.lx[data-design="galata"] .dy-rubric { color: var(--lx-accent); font-family: var(--sign); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+.lx[data-design="galata"] .dy-rubric::before { content: '→ '; color: var(--lx-accent-2); }
+.lx[data-design="galata"] .lx-panel :is(a-exercise, a-quiz) { border-radius: 10px; border-bottom: 5px solid #d3ccbf; }
+.lx[data-design="galata"] .lx-steps li { border-radius: 6px; background: #e8e3da; font-family: var(--sign); font-weight: 600; text-transform: uppercase; }
+.lx[data-design="galata"] .lx-sim__feed { border-radius: 10px; background: #f0ece5; }
+.lx[data-design="galata"] .lx-sim__opt { border-radius: 8px; box-shadow: 0 3px 0 #ddd6ca; }
+
+/* шпаргалка: карта-схема — синие таблички улиц */
+.lx[data-design="galata"] .lx-table { border-radius: 10px; }
+.lx[data-design="galata"] .lx-table td:first-child { font: 600 1.05em/1.3 var(--sign); color: var(--lx-accent); border-left: 8px solid var(--lx-accent); }
+.lx[data-design="galata"] .lx-table tr:nth-child(even) td { background: #f8f6f2; }
+.lx[data-design="galata"] .lx-next { border-radius: 8px; background: var(--lx-accent); color: #fff; font-family: var(--sign); text-transform: uppercase; letter-spacing: .05em; }
+
+/* сцена: вагончик ездит по склону, стрелка компаса ищет север, кот машет хвостом, чайки летят */
+@media (prefers-reduced-motion: no-preference) {
+  .lx[data-design="galata"] .d21-tram { animation: d21-tram 12s ease-in-out infinite; }
+  .lx[data-design="galata"] .d21-needle { animation: d21-needle 3.6s ease-in-out infinite; }
+  .lx[data-design="galata"] .d21-tail { animation: d21-tail 2.4s ease-in-out infinite; }
+  .lx[data-design="galata"] .d21-bird { animation: d21-bird 18s ease-in-out infinite; }
+  .lx[data-design="galata"] .d21-bird--b { animation-duration: 23s; animation-direction: reverse; }
+}
+@keyframes d21-tram { 0%, 12% { transform: translate(0, 0); } 50%, 62% { transform: translate(190px, -25px); } 100% { transform: translate(0, 0); } }
+@keyframes d21-needle { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(10deg); } }
+@keyframes d21-tail { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-24deg); } }
+@keyframes d21-bird { 50% { transform: translate(70px, -12px); } }
