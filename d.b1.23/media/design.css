@@ -1,0 +1,83 @@
+/* Antalya B1, общий спокойный вид (docs/day/DESIGN.md, раздел «Анталья»): одна картинка дня в стиле картинок городов,
+   светлый известняк, графитовый текст, один акцентный цвет дня. Без надписей над заголовками, капса, полосок слева,
+   стекла, градиентов, фактур и декоративных анимаций. От дня к дню меняются картинка и --b1-accent. */
+.lx[data-design="b1-duden"] {
+  --b1-accent: #a5502f;
+  --lx-bg: #faf6f1; --lx-paper: #faf6f1; --lx-surf: #ffffff; --lx-surf2: #f6f1ea;
+  --lx-soft: color-mix(in srgb, var(--b1-accent) 9%, #ffffff);
+  --lx-ink: #2e3440; --lx-muted: #5c6370; --lx-line: #e8e1d6;
+  --lx-accent: var(--b1-accent); --lx-accent-2: var(--b1-accent); --lx-on: #ffffff; --lx-tabs-bg: #ffffff;
+  --lx-r: 14px; --lx-shadow: 0 1px 2px rgba(46, 52, 64, .06), 0 6px 18px -12px rgba(46, 52, 64, .18);
+  --ak-font: 'LX Manrope', system-ui, sans-serif; --ak-font-display: var(--ak-font);
+  --ak-bg: #ffffff; --ak-surface: #f6f1ea; --ak-line: #e8e1d6; --ak-accent: var(--b1-accent);
+  --ak-accent-soft: var(--lx-soft); --ak-accent-ink: #ffffff; --ak-ink: #2e3440; --ak-muted: #5c6370;
+  --ak-radius: 12px; --ak-radius-sm: 8px;
+  --ak-good: #3f6b4a; --ak-good-soft: #e5efe6; --ak-bad: #a24f42; --ak-bad-soft: #f6e5e1;
+  font-family: var(--ak-font);
+  background: var(--lx-bg);
+  overflow-x: clip;
+}
+.lx[data-design="b1-duden"] main { overflow-x: clip; }
+
+/* шапка приложения: просто белая полоса */
+.lx[data-design="b1-duden"] .lx-app { background: #ffffff; box-shadow: 0 1px 0 var(--lx-line); }
+.lx[data-design="b1-duden"] .lx-app__logo { border-radius: 8px; background: var(--b1-accent); color: #ffffff; box-shadow: none; }
+.lx[data-design="b1-duden"] .lx-app__t b { font-weight: 700; letter-spacing: 0; text-transform: none; }
+
+/* картинка дня: на всю ширину колонки, текст на неё не кладём */
+.lx[data-design="b1-duden"] .lx-scene { position: relative; height: auto; margin: 0 0 4px; overflow: hidden; border-radius: var(--lx-r); background: var(--lx-surf2); }
+.lx[data-design="b1-duden"] .b1-pic { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: clamp(200px, 42vh, 400px); object-fit: cover; object-position: 50% 60%; }
+
+/* заголовок урока: строчные, крупно и спокойно; подпись уровня и места — под заголовком, не над ним */
+.lx[data-design="b1-duden"] .lx-hero { display: flex; flex-direction: column; gap: 10px; background: none; box-shadow: none; }
+.lx[data-design="b1-duden"] .lx-hero > * { margin-block: 0; }
+.lx[data-design="b1-duden"] .lx-hero h1 { order: 1; font: 800 clamp(30px, 5vw, 46px)/1.1 var(--ak-font); letter-spacing: -.01em; text-transform: none; color: var(--lx-ink); hyphens: auto; }
+.lx[data-design="b1-duden"] .lx-hero__tr { order: 2; color: var(--b1-accent); font-weight: 700; font-size: 1.15em; }
+.lx[data-design="b1-duden"] .lx-tag { order: 3; margin: 0 !important; padding: 0; border-radius: 0; background: none; color: var(--lx-muted); font-size: .95em; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.lx[data-design="b1-duden"] .lx-hero__meta { order: 3; color: var(--lx-muted); font-size: .95em; letter-spacing: 0; text-transform: none; }
+.lx[data-design="b1-duden"] .lx-hero__intro { order: 4; }
+.lx[data-design="b1-duden"] .lx-hero .lx-scene { order: 0; }
+.lx[data-design="b1-duden"] .lx-hero > :not(h1, .lx-hero__tr, .lx-tag, .lx-hero__meta, .lx-hero__intro, .lx-scene) { order: 5; }
+.lx[data-design="b1-duden"] .lx-stamp { display: none; }
+.lx[data-design="b1-duden"] .lx-stats { gap: 8px 28px; }
+.lx[data-design="b1-duden"] .lx-stats b, .lx[data-design="b1-duden"] .lx-stats strong { color: var(--lx-ink); }
+
+/* заголовки разделов: турецкое название раздела стоит под заголовком, а не надписью над ним */
+.lx[data-design="b1-duden"] .lx-ph { display: flex; flex-direction: column; gap: 4px; }
+.lx[data-design="b1-duden"] .lx-ph h2 { order: 1; margin: 0; font: 800 clamp(24px, 3.4vw, 32px)/1.15 var(--ak-font); text-transform: none; letter-spacing: -.005em; }
+.lx[data-design="b1-duden"] .lx-kicker { order: 2; margin: 0 !important; color: var(--lx-muted); font-size: .95em; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.lx[data-design="b1-duden"] .lx-kicker__ico { display: none; }
+.lx[data-design="b1-duden"] .lx-hint { order: 3; }
+
+/* главы: белая карточка без рельса слева */
+.lx[data-design="b1-duden"] .st-ch { padding: clamp(18px, 4vw, 32px); }
+.lx[data-design="b1-duden"] .st-ch::before { content: none; }
+.lx[data-design="b1-duden"] .st-ch__k { color: var(--lx-muted); font-weight: 600; letter-spacing: 0; }
+.lx[data-design="b1-duden"] .st-ch__n { width: 30px; height: 30px; background: var(--lx-soft); color: var(--b1-accent); font-weight: 800; }
+.lx[data-design="b1-duden"] .st-ch__h { font-weight: 800; text-transform: none; }
+
+/* тонкость, «кстати», выбор: спокойные подложки, без пунктира и полосок */
+.lx[data-design="b1-duden"] .st-note { background: var(--lx-soft); }
+.lx[data-design="b1-duden"] .st-quirk { border: 0; background: var(--lx-surf2); }
+.lx[data-design="b1-duden"] .st-note__h, .lx[data-design="b1-duden"] .st-quirk__h { color: var(--lx-ink); }
+.lx[data-design="b1-duden"] .st-note__ico, .lx[data-design="b1-duden"] .st-quirk__ico { color: var(--b1-accent); }
+.lx[data-design="b1-duden"] .st-choice { background: var(--lx-surf); box-shadow: inset 0 0 0 1px var(--lx-line); }
+.lx[data-design="b1-duden"] .st-opt { border: 1px solid var(--lx-line); transition: border-color .15s, background-color .15s; }
+.lx[data-design="b1-duden"] .st-opt:hover:not(:disabled) { border-color: var(--b1-accent); background: var(--lx-soft); }
+.lx[data-design="b1-duden"] .st-choice__then, .lx[data-design="b1-duden"] .st-choice__then.is-ok, .lx[data-design="b1-duden"] .st-choice__then.is-miss { box-shadow: none; background: var(--lx-surf2); }
+.lx[data-design="b1-duden"] .st-choice__then.is-ok { background: var(--lx-soft); }
+
+/* реплики */
+.lx[data-design="b1-duden"] .st-b__body { background: var(--lx-surf2); box-shadow: none; }
+.lx[data-design="b1-duden"] .st-b--me .st-b__body { background: var(--lx-soft); }
+.lx[data-design="b1-duden"] .st-w { background: var(--lx-soft); }
+
+/* оглавление внизу: сплошная белая полоса вместо стекла */
+.lx[data-design="b1-duden"] .st-toc { background: #ffffff; -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: 0 1px 2px rgba(46, 52, 64, .08), 0 8px 24px -10px rgba(46, 52, 64, .22); }
+
+/* итог и слова */
+.lx[data-design="b1-duden"] .st-words li { box-shadow: none; background: var(--lx-surf); border: 1px solid var(--lx-line); }
+.lx[data-design="b1-duden"] .st-end { font-style: normal; color: var(--lx-ink); }
+
+/* без анимации появления: текст глав виден сразу (анимации kit ставят inline-стили, поэтому !important) */
+.lx[data-design="b1-duden"] :is(.st-ch__k, .st-ch__h, .st-p, .st-b, .st-note, .st-quirk, .st-choice, .st-ch__n, .st-toc__l li) { opacity: 1 !important; transform: none !important; }
