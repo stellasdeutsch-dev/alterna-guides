@@ -3,6 +3,19 @@
 .dy .lx-hero__meta { display: flex; flex-wrap: wrap; align-items: center; justify-content: inherit; gap: 6px; }
 .dy .lx-hero__pin svg { display: block; width: 16px; height: 16px; }
 
+/* вкладки дня: без бокового скролла. Не помещаются в ряд — переносятся (до 1024: по четыре в ряд, 7–8 вкладок → два ровных ряда).
+   Телефон: липкая полоса [data-scrollbar] — один ряд не выше 64 px, все вкладки по ширине экрана: видны иконки,
+   названия читает экранный диктор, заголовок раздела — в самой панели. */
+.dy .lx-tabs { flex-wrap: wrap; overflow-x: visible; }
+.dy .lx-tab { flex: 1 1 calc(25% - 16px); justify-content: center; }
+@media (min-width: 1024px) { .dy .lx-tab { flex: 1 1 0; } }
+@media (max-width: 767px) {
+  .dy .lx-tabs { flex-wrap: nowrap; gap: 2px; }
+  .dy .lx-tab { flex: 1 1 0; min-width: 0; grid-template-columns: auto; justify-items: center; padding: 4px 2px; }
+  .dy .lx-tab__ico { grid-row: auto; }
+  .dy .lx-tab :is(b, small) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
 /* цель дня: пронумерованные фразы */
 .dy-goal { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
 .dy-goal__i { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 12px 14px; border-radius: var(--lx-r); background: var(--lx-surf); box-shadow: var(--lx-shadow); }
